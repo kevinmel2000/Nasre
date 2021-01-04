@@ -55,6 +55,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapMediaRoutes();
         $this->mapReminderRoutes();
         $this->mapUserRoutes();
+        $this->mapMasterRoutes();
+
 
         // Client Route Files Mapping
         $this->mapClientAuthRoutes();
@@ -179,6 +181,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/client/client.php'));
+    }
+
+    protected function mapMasterRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/crm/masterRoutes.php'));
     }
 
     protected function mapApiRoutes()

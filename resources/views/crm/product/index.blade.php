@@ -26,7 +26,7 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                   <div class="table-responsive">
-                  <table id="productsTable" class="table table-bordered table-striped">
+                  <table id="countryTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                       <th>{{__('ID')}}</th>

@@ -709,6 +709,56 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="nav-item has-treeview {{ @$finance_menu_open }}">
+                        <a href="#" class="nav-link {{@$finance_dd}}">
+                            <i class="nav-icon fas fa-laptop"></i>
+                            <p>
+                                {{__('MASTER DATA')}}
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+
+                        <ul class="nav nav-treeview">
+
+                            @if($route_active == 'country_master')
+                            @php
+                                $countryform = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/country')}}" class="nav-link {{@$countryform}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('COUNTRY FORM')}}</p>
+                                </a>
+                            </li>
+
+
+                            @if($route_active == 'Create Form')
+                            @php
+                                $create_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/office/create_form')}}" class="nav-link {{@$create_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('KIND OF CONTRACT')}}</p>
+                                </a>
+                            </li>
+
+                            @if($route_active == 'Web to Lead Form')
+                            @php
+                                $web_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/office/web_forms')}}" class="nav-link {{@$web_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('COB FORM')}}</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 @endcan
               </ul>
           </nav>
