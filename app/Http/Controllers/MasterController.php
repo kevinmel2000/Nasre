@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Country;
 use PHPUnit\Framework\Constraint\Count;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class MasterController extends Controller
@@ -20,9 +21,10 @@ class MasterController extends Controller
         $route_active = 'country_master';
         $user = Auth::user();
         $country = Country::orderby('id','asc')->get();
+        $country_ids = response()->json($country->modelKeys());
 
         // dd($country);
-        return view('crm.master.country', compact(['route_active', 'country']));        
+        return view('crm.master.country', compact(['route_active', 'country','country_ids']));        
 
     }
 
@@ -95,9 +97,26 @@ class MasterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updatecountry(Request $request, Country $country)
     {
-        //
+        $validator = $request->validate([
+            'countryname'=>'required',
+            'countrycode'=>'required|max:3',
+            'continent'=>'required'
+        ]);
+        if($validator){
+            $country->name = $request->countryname;
+            $country->code = $request->countrycode;
+            $country->continent = $request->continent;
+            $country->save();
+            $notification = array(
+                'message' => 'Country updated successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
     }
 
     /**
@@ -106,8 +125,20 @@ class MasterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroycountry(Country $country)
     {
-        //
+        if($country->delete()){
+            $notification = array(
+                'message' => 'Country deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
     }
 }

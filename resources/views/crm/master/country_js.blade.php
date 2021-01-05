@@ -2,8 +2,8 @@
     $(function () {
       "use strict";
   
-      var country = <?php echo(($country)) ?>;
-      for(const id of country) {
+      var countries = <?php echo(($country_ids->content())) ?>;
+      for(const id of countries) {
           var btn = `
               <a href="#" onclick="confirmDelete('${id}')">
                   <i class="fas fa-trash text-danger"></i>
