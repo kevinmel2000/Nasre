@@ -9,7 +9,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::get('/country', [MasterController::class, 'indexcountry']);
     Route::post('/country/store', [MasterController::class, 'storecountry']);
     Route::put('/country/{country}', [MasterController::class, 'updatecountry'])->middleware(['can:update-country']);
-    Route::delete('/country/destroy/{country}', [MasterController::class, 'destroycountry'])->middleware(['can:delete-country']);
+    Route::delete('/country/destroy/{country}', [MasterController::class, 'destroycountry']);
     // !SECTION Product Group Routes
 
     // SECTION Product Routes
