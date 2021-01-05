@@ -15,6 +15,15 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::get('/felookuplocation', 'FeLookupLocationController@index');
     Route::post('/felookuplocation/create', 'FeLookupLocationController@create');
 
+    Route::get('/koc', 'KocController@index');
+    Route::post('/koc/create', 'KocController@create');
+
+    Route::get('/golffieldhole', 'GolfFieldHoleController@index');
+    Route::post('/golffieldhole/create', 'GolfFieldHoleController@create');
+
+    Route::get('/cedingbroker', 'CedingBrokerController@index');
+    Route::post('/cedingbroker/create', 'CedingBrokerController@create');
+
     // SECTION Product Routes
     // Route::get('/', [ProductController::class, 'index'])->middleware(['can:view-product']);
     // Route::get('/create', [ProductController::class, 'create'])->middleware(['can:create-product']);
