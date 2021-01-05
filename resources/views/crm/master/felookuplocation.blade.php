@@ -100,38 +100,36 @@
                     <tbody>
                         @foreach (@$felookuplocation as $location)
                             <tr>
-                              <td>{{@$cty->id}}</td>
-                              <td>{{@$cty->name}}</td>
-                              <td>{{@$cty->code}}</td>
-                              <td>@if(@$cty->continent == "AF")Africa 
-                                  @elseif(@$cty->continent == "AN")Antartica
-                                  @elseif(@$cty->continent == "AS")Asia
-                                  @elseif(@$cty->continent == "EU")Europa
-                                  @elseif(@$cty->continent == "NA")North America
-                                  @elseif(@$cty->continent == "OC")Oceania
-                                  @elseif(@$cty->continent == "SA")South America
-                                  @endif
-                              </td>
+                              <td>{{@$location->loc_code}}</td>
+                              <td>{{@$location->address}}</td>
+                              <td>{{@$location->city_id}}</td>
+                              <td>{{@$location->province_id}}</td>
+                              <td>{{@$location->postal_code }}</td>
+                              <td>{{@$location->insured}}</td>
+                              <td>{{@$location->eq_zone}}</td>
+                              <td>{{@$location->flood_zone}}</td>
+                              <td>{{@$location->latitude}}</td>
+                              <td>{{@$location->longtitude}}</td>
                               <td>
-                                {{-- <a href="#" data-toggle="tooltip" data-title="{{$cty->created_at->toDayDateTimeString()}}" class="mr-3">
+                                <a href="#" data-toggle="tooltip" data-title="{{$location->created_at}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>
                                 </a>
-                                <a href="#" data-toggle="tooltip" data-title="{{$cty->updated_at->toDayDateTimeString()}}" class="mr-3">
+                                <a href="#" data-toggle="tooltip" data-title="{{$location->updated_at}}" class="mr-3">
                                   <i class="fas fa-history text-primary"></i>
-                                </a> --}}
+                                </a>
                                 <span>
                                   @can('update-country', User::class)
-                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit', $cty)}}">
+                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit',$location->id)}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                   @endcan
 
                                   @can('delete-country', User::class)
 
-                                  <span id="delbtn{{@$cty->id}}"></span>
+                                  <span id="delbtn{{@$location->id}}"></span>
                                 
-                                    <form id="delete-product-{{$cty->id}}"
-                                        action="{{ url('master-data/country/destroy', $cty) }}"
+                                    <form id="delete-product-{{$location->id}}"
+                                        action="{{ url('master-data/country/destroy', $location->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf

@@ -2,7 +2,7 @@
     $(function () {
       "use strict";
   
-      var felookuplocation = <?php echo(($felookuplocation)) ?>;
+      var felookuplocation = <?php echo(($felookuplocation_ids->content())) ?>;
       for(const id of felookuplocation) {
           var btn = `
               <a href="#" onclick="confirmDelete('${id}')">

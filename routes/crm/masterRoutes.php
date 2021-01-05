@@ -12,6 +12,9 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::delete('/country/destroy/{country}', [MasterController::class, 'destroycountry'])->middleware(['can:delete-country']);
     // !SECTION Product Group Routes
 
+    Route::get('/felookuplocation', 'FeLookupLocationController@index');
+    Route::post('/felookuplocation/create', 'FeLookupLocationController@create');
+
     // SECTION Product Routes
     // Route::get('/', [ProductController::class, 'index'])->middleware(['can:view-product']);
     // Route::get('/create', [ProductController::class, 'create'])->middleware(['can:create-product']);
