@@ -84,15 +84,21 @@
                   <table id="countryTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th>{{__('ID')}}</th>
-                      <th>{{__('Name')}}</th>
-                      <th>{{__('Code')}}</th>
-                      <th>{{__('Continent')}}</th>
+                      <th>{{__('Location Code')}}</th>
+                      <th>{{__('Address')}}</th>
+                      <th>{{__('City')}}</th>
+                      <th>{{__('Province')}}</th>
+                      <th>{{__('Postal Code')}}</th>
+                      <th>{{__('Insured')}}</th>
+                      <th>{{__('EQ Zone')}}</th>
+                      <th>{{__('Flood Zone')}}</th>
+                      <th>{{__('Latitude')}}</th>
+                      <th>{{__('Longitude')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach (@$country as $cty)
+                        @foreach (@$felookuplocation as $location)
                             <tr>
                               <td>{{@$cty->id}}</td>
                               <td>{{@$cty->name}}</td>
@@ -107,15 +113,15 @@
                                   @endif
                               </td>
                               <td>
-                                <a href="#" data-toggle="tooltip" data-title="{{$cty->created_at->toDayDateTimeString()}}" class="mr-3">
+                                {{-- <a href="#" data-toggle="tooltip" data-title="{{$cty->created_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>
                                 </a>
                                 <a href="#" data-toggle="tooltip" data-title="{{$cty->updated_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-history text-primary"></i>
-                                </a>
+                                </a> --}}
                                 <span>
                                   @can('update-country', User::class)
-                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit',$cty->id)}}">
+                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit', $cty)}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                   @endcan
@@ -125,7 +131,7 @@
                                   <span id="delbtn{{@$cty->id}}"></span>
                                 
                                     <form id="delete-product-{{$cty->id}}"
-                                        action="{{ url('master-data/country/destroy', $cty->id) }}"
+                                        action="{{ url('master-data/country/destroy', $cty) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
@@ -150,5 +156,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.master.country_js')
+@include('crm.master.felookuplocation_js')
 @endsection

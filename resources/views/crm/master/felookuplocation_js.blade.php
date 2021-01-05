@@ -2,8 +2,8 @@
     $(function () {
       "use strict";
   
-      var countries = <?php echo(($country_ids->content())) ?>;
-      for(const id of countries) {
+      var felookuplocation = <?php echo(($felookuplocation)) ?>;
+      for(const id of felookuplocation) {
           var btn = `
               <a href="#" onclick="confirmDelete('${id}')">
                   <i class="fas fa-trash text-danger"></i>
