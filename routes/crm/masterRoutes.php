@@ -6,8 +6,14 @@ use App\Http\Controllers\ProductGroupController;
 Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
 
     // SECTION Product Group Routes
+    
     Route::get('/country', [MasterController::class, 'indexcountry']);
     Route::post('/country/store', [MasterController::class, 'storecountry']);
+
+
+    Route::get('/felookuplocation', 'FeLookupLocationController@index');
+    Route::post('/felookuplocation/create', 'FeLookupLocationController@create');
+
     // Route::put('/productgroup/{productGroup}', [ProductGroupController::class, 'update']);
     // Route::delete('/productgroup/destroy/{productGroup}', [ProductGroupController::class, 'destroy']);
     // !SECTION Product Group Routes

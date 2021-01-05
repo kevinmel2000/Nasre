@@ -733,6 +733,18 @@
                                 </a>
                             </li>
 
+                            @if($route_active == 'felookuplocation_master')
+                            @php
+                                $felookuplocationform = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/felookuplocation')}}" class="nav-link {{@$felookuplocationform}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('Fire & Engineering - Lookup Location')}}</p>
+                                </a>
+                            </li>
+
 
                             @if($route_active == 'Create Form')
                             @php
