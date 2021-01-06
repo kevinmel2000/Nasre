@@ -85,27 +85,25 @@
                     <thead>
                     <tr>
                       <th>{{__('ID')}}</th>
-                      <th>{{__('Name')}}</th>
                       <th>{{__('Code')}}</th>
-                      <th>{{__('Continent')}}</th>
+                      <th>{{__('Name')}}</th>
+                      <th>{{__('Company')}}</th>
+                      <th>{{__('Address')}}</th>
+                      <th>{{__('Country')}}</th>
+                      <th>{{__('Type')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach (@$country as $cty)
+                        @foreach (@$cedingbroker as $ceding)
                             <tr>
-                              <td>{{@$cty->id}}</td>
-                              <td>{{@$cty->name}}</td>
-                              <td>{{@$cty->code}}</td>
-                              <td>@if(@$cty->continent == "AF")Africa 
-                                  @elseif(@$cty->continent == "AN")Antartica
-                                  @elseif(@$cty->continent == "AS")Asia
-                                  @elseif(@$cty->continent == "EU")Europa
-                                  @elseif(@$cty->continent == "NA")North America
-                                  @elseif(@$cty->continent == "OC")Oceania
-                                  @elseif(@$cty->continent == "SA")South America
-                                  @endif
-                              </td>
+                              <td>{{@$ceding->id}}</td>
+                              <td>{{@$ceding->code}}</td>
+                              <td>{{@$ceding->name}}</td>
+                              <td>{{@$ceding->company_name}}</td>
+                              <td>{{@$ceding->address}}</td>
+                              <td>{{@$ceding->country}}</td>
+                              <td>{{@$ceding->type}}</td>
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$cty->created_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>
@@ -150,5 +148,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.master.country_js')
+@include('crm.master.cedingbroker_js')
 @endsection

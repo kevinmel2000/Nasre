@@ -22,16 +22,16 @@ class CedingBrokerController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $felookuplocation = FeLookupLocation::orderby('id','desc')->get();
-          $felookuplocation_ids = response()->json($felookuplocation->modelKeys());
-          return view('crm.master.felookuplocation', compact('user','felookuplocation','route_active','felookuplocation_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $cedingbroker = CedingBroker::orderby('id','desc')->get();
+          $cedingbroker_ids = response()->json($cedingbroker->modelKeys());
+          return view('crm.master.cedingbroker', compact('user','cedingbroker','route_active','cedingbroker_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
-          $felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
-          $felookuplocation_ids = response()->json($felookuplocation->modelKeys());
-          return view('crm.master.felookuplocation', compact('user','felookuplocation','route_active','felookuplocation_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $cedingbroker=CedingBroker::where('code', 'LIKE', '%' . $search . '%')->orWhere('name', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $cedingbroker_ids = response()->json($cedingbroker->modelKeys());
+          return view('crm.master.cedingbroker', compact('user','cedingbroker','route_active','cedingbroker_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }
 

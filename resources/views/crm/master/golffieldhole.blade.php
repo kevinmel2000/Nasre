@@ -85,27 +85,19 @@
                     <thead>
                     <tr>
                       <th>{{__('ID')}}</th>
-                      <th>{{__('Name')}}</th>
                       <th>{{__('Code')}}</th>
-                      <th>{{__('Continent')}}</th>
+                      <th>{{__('Golf field')}}</th>
+                      <th>{{__('Hole Number')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach (@$country as $cty)
+                        @foreach (@$golffieldhole as $golf)
                             <tr>
-                              <td>{{@$cty->id}}</td>
-                              <td>{{@$cty->name}}</td>
-                              <td>{{@$cty->code}}</td>
-                              <td>@if(@$cty->continent == "AF")Africa 
-                                  @elseif(@$cty->continent == "AN")Antartica
-                                  @elseif(@$cty->continent == "AS")Asia
-                                  @elseif(@$cty->continent == "EU")Europa
-                                  @elseif(@$cty->continent == "NA")North America
-                                  @elseif(@$cty->continent == "OC")Oceania
-                                  @elseif(@$cty->continent == "SA")South America
-                                  @endif
-                              </td>
+                              <td>{{@$golf->id}}</td>
+                              <td>{{@$golf->code}}</td>
+                              <td>{{@$golf->golf_field}}</td>
+                              <td>{{@$golf->hole_number}}</td>
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$cty->created_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>
@@ -150,5 +142,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.master.country_js')
+@include('crm.master.golffieldhole_js')
 @endsection
