@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\ProductGroupController;
+
 Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
 
     // SECTION Product Group Routes

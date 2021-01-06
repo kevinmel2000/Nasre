@@ -745,6 +745,18 @@
                                 </a>
                             </li>
 
+                            @if($route_active == 'koc_master')
+                            @php
+                                $kocform = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/koc')}}" class="nav-link {{@$kocform}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('Koc Form')}}</p>
+                                </a>
+                            </li>
+
 
                             @if($route_active == 'Create Form')
                             @php

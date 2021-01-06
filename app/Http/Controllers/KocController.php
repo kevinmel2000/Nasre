@@ -34,6 +34,5 @@ class KocController extends Controller
           return view('crm.master.koc', compact('user','koc','route_active','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }
-
     
 }
