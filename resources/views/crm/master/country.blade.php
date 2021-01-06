@@ -120,7 +120,7 @@
                                     </a>
                                   {{-- @endcan --}}
 
-                                  <div class="modal fade" id="updatecountry{{$cty->id}}" tabindex="-1" user="dialog" aria-labelledby="updatecountry{{$user->id}}Label" aria-hidden="true">
+                                  <div class="modal fade" id="updatecountry{{$cty->id}}" tabindex="-1" user="dialog" aria-labelledby="updatecountry{{$cty->id}}Label" aria-hidden="true">
                                     <div class="modal-dialog" user="document">
                                       <div class="modal-content bg-light-gray">
                                         <div class="modal-header bg-gray">
@@ -129,7 +129,7 @@
                                             <span aria-hidden="true">&times;</span>
                                           </button>
                                         </div>
-                                        <form action="{{url('user',$user)}}" method="POST">
+                                        <form action="{{url('user',$cty)}}" method="POST">
                                             <div class="modal-body">
                                                 @csrf
                                                 @method('PUT')
@@ -152,14 +152,14 @@
                                                     <div class="form-group">
                                                       <label for="">{{__('Continent')}}</label>
                                                       <select name="continentcountry" class="form-control">
-                                                        @foreach ($roles as $role)
+                                                        {{-- @foreach ($roles as $role)
                                                             @if ($role->id == $user->role_id)
                                                               <option value="{{$role->id}}" selected>{{$role->name}}</option>
                                                             @else 
                                                               <option value="{{$role->id}}">{{$role->name}}</option>  
                                                             @endif
                                                               
-                                                        @endforeach
+                                                        @endforeach --}}
                                                       </select>
                                                     </div>
                                                   </div>
