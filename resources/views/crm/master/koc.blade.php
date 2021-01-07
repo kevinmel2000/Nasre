@@ -108,16 +108,16 @@
                                 </a>
                                 <span>
                                   @can('update-country', User::class)
-                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit',$cty->id)}}">
+                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit',$kocdata->id)}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                   @endcan
 
                                   @can('delete-country', User::class)
 
-                                  <span id="delbtn{{@$cty->id}}"></span>
+                                  <span id="delbtn{{@$kocdata->id}}"></span>
                                 
-                                    <form id="delete-product-{{$cty->id}}"
+                                    <form id="delete-product-{{$kocdata->id}}"
                                         action="{{ url('master-data/country/destroy', $cty->id) }}"
                                         method="POST">
                                         @method('DELETE')

@@ -99,25 +99,25 @@
                               <td>{{@$golf->golf_field}}</td>
                               <td>{{@$golf->hole_number}}</td>
                               <td>
-                                <a href="#" data-toggle="tooltip" data-title="{{$cty->created_at->toDayDateTimeString()}}" class="mr-3">
+                                <a href="#" data-toggle="tooltip" data-title="{{$golf->created_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>
                                 </a>
-                                <a href="#" data-toggle="tooltip" data-title="{{$cty->updated_at->toDayDateTimeString()}}" class="mr-3">
+                                <a href="#" data-toggle="tooltip" data-title="{{$golf->updated_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
                                   @can('update-country', User::class)
-                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit',$cty->id)}}">
+                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit',$golf->id)}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                   @endcan
 
                                   @can('delete-country', User::class)
 
-                                  <span id="delbtn{{@$cty->id}}"></span>
+                                  <span id="delbtn{{@$golf->id}}"></span>
                                 
-                                    <form id="delete-product-{{$cty->id}}"
-                                        action="{{ url('master-data/country/destroy', $cty->id) }}"
+                                    <form id="delete-product-{{$golf->id}}"
+                                        action="{{ url('master-data/country/destroy', $golf->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf

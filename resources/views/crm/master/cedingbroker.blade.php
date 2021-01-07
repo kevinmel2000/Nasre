@@ -105,10 +105,10 @@
                               <td>{{@$ceding->country}}</td>
                               <td>{{@$ceding->type}}</td>
                               <td>
-                                <a href="#" data-toggle="tooltip" data-title="{{$cty->created_at->toDayDateTimeString()}}" class="mr-3">
+                                <a href="#" data-toggle="tooltip" data-title="{{$ceding->created_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>
                                 </a>
-                                <a href="#" data-toggle="tooltip" data-title="{{$cty->updated_at->toDayDateTimeString()}}" class="mr-3">
+                                <a href="#" data-toggle="tooltip" data-title="{{$ceding->updated_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
@@ -120,10 +120,10 @@
 
                                   @can('delete-country', User::class)
 
-                                  <span id="delbtn{{@$cty->id}}"></span>
+                                  <span id="delbtn{{@$ceding->id}}"></span>
                                 
-                                    <form id="delete-product-{{$cty->id}}"
-                                        action="{{ url('master-data/country/destroy', $cty->id) }}"
+                                    <form id="delete-product-{{$ceding->id}}"
+                                        action="{{ url('master-data/country/destroy', $ceding->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
