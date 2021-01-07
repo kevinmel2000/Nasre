@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Country;
+use App\Models\COB;
+use App\Models\Currency;
+use App\Models\CurrencyExchange;
+use App\Models\Occupation;
 use PHPUnit\Framework\Constraint\Count;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -25,6 +29,18 @@ class MasterController extends Controller
 
         // dd($country);
         return view('crm.master.country', compact(['route_active', 'country','country_ids']));        
+
+    }
+
+    public function indexcob()
+    {
+        $route_active = 'cob_master';
+        $user = Auth::user();
+        $cob = COB::orderby('id','asc')->get();
+        $cob_ids = response()->json($cob->modelKeys());
+
+        // dd($country);
+        return view('crm.master.cob', compact(['route_active', 'cob','cob_ids']));        
 
     }
 
@@ -68,6 +84,32 @@ class MasterController extends Controller
         }
     }
 
+    public function storecob(Request $request)
+    {
+        $validator = $request->validate([
+            'cobcode'=>'required|max:5',
+            'cobdescription'=>'required',
+            'cobabbreviation'=>'required',
+            'cobremarks'=>'required'
+        ]);
+        if($validator){
+            $user = Auth::user();
+            COB::create([
+                'code'=>$request->cobcode,
+                'description'=>$request->cobdescription,
+                'abbreviation'=>$request->cobabbreviation,
+                'remarks'=>$request->cobremarks
+            ]);
+            $notification = array(
+                'message' => 'COB added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
     /**
      * Display the specified resource.
      *
@@ -100,17 +142,41 @@ class MasterController extends Controller
     public function updatecountry(Request $request, Country $country)
     {
         $validator = $request->validate([
-            'countryname'=>'required',
-            'countrycode'=>'required|max:3',
-            'continent'=>'required'
+            'namecountry'=>'required',
+            'codecountry'=>'required|max:3',
+            'continentcountry'=>'required'
         ]);
         if($validator){
-            $country->name = $request->countryname;
-            $country->code = $request->countrycode;
-            $country->continent = $request->continent;
+            $country->name = $request->namecountry;
+            $country->code = $request->codecountry;
+            $country->continent = $request->continentcountry;
             $country->save();
             $notification = array(
                 'message' => 'Country updated successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
+    public function updatecob(Request $request, COB $cob)
+    {
+        $validator = $request->validate([
+            'codecob'=>'required|max:5',
+            'descriptioncob'=>'required',
+            'abbreviationcob'=>'required',
+            'remarkscob'=>'required'
+        ]);
+        if($validator){
+            $cob->code = $request->codecob;
+            $cob->description = $request->descriptioncob;
+            $cob->abbreviation = $request->abbreviationcob;
+            $cob->remarks = $request->remarkscob;
+            $cob->save();
+            $notification = array(
+                'message' => 'COB updated successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);
@@ -141,4 +207,23 @@ class MasterController extends Controller
             return back()->with($notification);
         }
     }
+
+
+    public function destroycob(COB $cob)
+    {
+        if($cob->delete()){
+            $notification = array(
+                'message' => 'COB deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
 }
