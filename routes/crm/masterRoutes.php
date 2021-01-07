@@ -5,13 +5,17 @@ use App\Http\Controllers\MasterController;
 use App\Http\Controllers\ProductGroupController;
 Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
 
-    // SECTION Product Group Routes
+    // SECTION Country Group Routes
     Route::get('/country', [MasterController::class, 'indexcountry']);
     Route::post('/country/store', [MasterController::class, 'storecountry']);
-    Route::put('/country/{country}', [MasterController::class, 'updatecountry'])->middleware(['can:update-country']);
+    Route::put('country/{country}', [MasterController::class, 'updatecountry']);
     Route::delete('/country/destroy/{country}', [MasterController::class, 'destroycountry']);
-    // !SECTION Product Group Routes
-
+    
+    // SECTION COB Group Routes
+    Route::get('/cob', [MasterController::class, 'indexcob']);
+    Route::post('/cob/store', [MasterController::class, 'storecob']);
+    Route::put('cob/{cob}', [MasterController::class, 'updatecob']);
+    Route::delete('/cob/destroy/{cob}', [MasterController::class, 'destroycob']);
     // SECTION Product Routes
     // Route::get('/', [ProductController::class, 'index'])->middleware(['can:view-product']);
     // Route::get('/create', [ProductController::class, 'create'])->middleware(['can:create-product']);

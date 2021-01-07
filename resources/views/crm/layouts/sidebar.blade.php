@@ -710,8 +710,22 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item has-treeview {{ @$finance_menu_open }}">
-                        <a href="#" class="nav-link {{@$finance_dd}}">
+                    @if(
+                    @$route_active == 'country_master' 
+                    || @$route_active == 'cob_master' 
+                    || @$route_active == 'felookuplocation_master' 
+                    )
+                        @php
+                        $master_dd = 'active';
+                        $master_menu_open = 'menu-open';
+                        @endphp
+                    @else
+                        @php
+                        $master_menu_open = 'menu-close';
+                        @endphp
+                    @endif
+                    <li class="nav-item has-treeview {{ @$master_menu_open }}">
+                        <a href="#" class="nav-link {{@$master_dd}}">
                             <i class="nav-icon fas fa-laptop"></i>
                             <p>
                                 {{__('MASTER DATA')}}
@@ -733,6 +747,30 @@
                                 </a>
                             </li>
 
+                            @if($route_active == 'Create Form')
+                            @php
+                                $create_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/office/create_form')}}" class="nav-link {{@$create_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('CURRENCY')}}</p>
+                                </a>
+                            </li>
+
+                            @if($route_active == 'Create Form')
+                            @php
+                                $create_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/office/create_form')}}" class="nav-link {{@$create_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('CURRENCY EXCHANGE')}}</p>
+                                </a>
+                            </li>
+
                             @if($route_active == 'felookuplocation_master')
                             @php
                                 $felookuplocationform = 'active';
@@ -741,7 +779,19 @@
                             <li class="nav-item">
                                 <a href="{{url('/master-data/felookuplocation')}}" class="nav-link {{@$felookuplocationform}}">
                                         <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('Fire & Engineering - Lookup Location')}}</p>
+                                    <p>{{__('FIRE & ENGINEERING -')}} <br> {{__('LOOKUP LOCATION')}}</p>
+                                </a>
+                            </li>
+
+                            @if($route_active == 'Web to Lead Form')
+                            @php
+                                $web_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/office/web_forms')}}" class="nav-link {{@$web_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('GOLF FIELD HOLE')}}</p>
                                 </a>
                             </li>
 
@@ -766,9 +816,34 @@
                             <li class="nav-item">
                                 <a href="{{url('/office/web_forms')}}" class="nav-link {{@$web_form}}">
                                         <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('CEDING/BROKER FORM')}}</p>
+                                </a>
+                            </li>
+
+                            @if($route_active == 'cob_master')
+                            @php
+                                $cob_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/cob')}}" class="nav-link {{@$cob_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
                                     <p>{{__('COB FORM')}}</p>
                                 </a>
                             </li>
+
+                            @if($route_active == 'Web to Lead Form')
+                            @php
+                                $web_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/office/web_forms')}}" class="nav-link {{@$web_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('OCCUPATION FORM')}}</p>
+                                </a>
+                            </li>
+
                         </ul>
                     </li>
                 @endcan

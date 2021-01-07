@@ -115,7 +115,7 @@
                                 </a>
                                 <span>
                                   {{-- @can('update-country', User::class) --}}
-                                    <a class="text-primary mr-3" data-toggle="modal" data-target="#updateuser{{$cty->id}}">
+                                    <a class="text-primary mr-3" data-toggle="modal" data-target="#updatecountry{{$cty->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                   {{-- @endcan --}}
@@ -129,7 +129,7 @@
                                             <span aria-hidden="true">&times;</span>
                                           </button>
                                         </div>
-                                        <form action="{{url('user',$cty)}}" method="POST">
+                                        <form action="{{url('master-data/country',$cty)}}" method="POST">
                                             <div class="modal-body">
                                                 @csrf
                                                 @method('PUT')
@@ -145,21 +145,79 @@
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Code')}}</label>
-                                                      <input type="text" name="codecountry" class="form-control" value="{{$cty->code}}"/>
+                                                      <input type="text" name="codecountry" class="form-control" value="{{$cty->code}}" data-validation="length" data-validation-length="3" required/>
                                                     </div>
                                                   </div>
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Continent')}}</label>
                                                       <select name="continentcountry" class="form-control">
-                                                        {{-- @foreach ($roles as $role)
-                                                            @if ($role->id == $user->role_id)
-                                                              <option value="{{$role->id}}" selected>{{$role->name}}</option>
-                                                            @else 
-                                                              <option value="{{$role->id}}">{{$role->name}}</option>  
-                                                            @endif
-                                                              
-                                                        @endforeach --}}
+                                                        @if(@$cty->continent == "AF")Africa 
+                                                        <option value="AF" selected>Africa</option>
+                                                        <option value="AN">Antartica</option>
+                                                        <option value="AS">Asia</option>
+                                                        <option value="EU">Europa</option>
+                                                        <option value="NA">North America </option>
+                                                        <option value="OC">Oceania</option>
+                                                        <option value="SA">South America</option>
+                                                        @elseif(@$cty->continent == "AN")Antartica
+                                                        <option value="AF" >Africa</option>
+                                                        <option value="AN" selected>Antartica</option>
+                                                        <option value="AS">Asia</option>
+                                                        <option value="EU">Europa</option>
+                                                        <option value="NA">North America </option>
+                                                        <option value="OC">Oceania</option>
+                                                        <option value="SA">South America</option>
+                                                        @elseif(@$cty->continent == "AS")Asia
+                                                        <option value="AF" >Africa</option>
+                                                        <option value="AN" >Antartica</option>
+                                                        <option value="AS" selected>Asia</option>
+                                                        <option value="EU">Europa</option>
+                                                        <option value="NA">North America </option>
+                                                        <option value="OC">Oceania</option>
+                                                        <option value="SA">South America</option>
+                                                        @elseif(@$cty->continent == "EU")Europa
+                                                        <option value="AF" >Africa</option>
+                                                        <option value="AN" >Antartica</option>
+                                                        <option value="AS" >Asia</option>
+                                                        <option value="EU" selected>Europa</option>
+                                                        <option value="NA">North America </option>
+                                                        <option value="OC">Oceania</option>
+                                                        <option value="SA">South America</option>
+                                                        @elseif(@$cty->continent == "NA")North America
+                                                        <option value="AF">Africa</option>
+                                                        <option value="AN">Antartica</option>
+                                                        <option value="AS">Asia</option>
+                                                        <option value="EU">Europa</option>
+                                                        <option value="NA" selected>North America </option>
+                                                        <option value="OC">Oceania</option>
+                                                        <option value="SA">South America</option>
+                                                        @elseif(@$cty->continent == "OC")Oceania
+                                                        <option value="AF">Africa</option>
+                                                        <option value="AN">Antartica</option>
+                                                        <option value="AS">Asia</option>
+                                                        <option value="EU">Europa</option>
+                                                        <option value="NA">North America </option>
+                                                        <option value="OC" selected>Oceania</option>
+                                                        <option value="SA">South America</option>
+                                                        @elseif(@$cty->continent == "SA")South America
+                                                        <option value="AF">Africa</option>
+                                                        <option value="AN">Antartica</option>
+                                                        <option value="AS">Asia</option>
+                                                        <option value="EU">Europa</option>
+                                                        <option value="NA">North America </option>
+                                                        <option value="OC">Oceania</option>
+                                                        <option value="SA" selected>South America</option>
+                                                        @else
+                                                        <option selected disabled>{{__('Select Continent')}}</option>
+                                                        <option value="AF">Africa</option>
+                                                        <option value="AN">Antartica</option>
+                                                        <option value="AS">Asia</option>
+                                                        <option value="EU">Europa</option>
+                                                        <option value="NA">North America </option>
+                                                        <option value="OC">Oceania</option>
+                                                        <option value="SA">South America</option>
+                                                        @endif
                                                       </select>
                                                     </div>
                                                   </div>
