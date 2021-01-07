@@ -10,4 +10,9 @@ class Occupation extends Model
     protected $guarded = [];
 
     protected $table = 'occupation';
+
+    public function cobs()
+    {
+        return $this->belongsTo('App\Models\COB', 'cob');
+    }
 }

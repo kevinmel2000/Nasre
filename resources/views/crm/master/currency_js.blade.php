@@ -2,8 +2,8 @@
     $(function () {
       "use strict";
   
-      var ocp = <?php echo(($ocp_ids->content())) ?>;
-      for(const id of ocp) {
+      var crc = <?php echo(($crc_ids->content())) ?>;
+      for(const id of crc) {
           var btn = `
               <a href="#" onclick="confirmDelete('${id}')">
                   <i class="fas fa-trash text-danger"></i>
@@ -13,7 +13,7 @@
       }
   
   
-      $("#ocpTable").DataTable({
+      $("#crcTable").DataTable({
         "order": [[ 0, "desc" ]],
         dom: '<"top"Bf>rt<"bottom"lip><"clear">',
         lengthMenu: [
@@ -57,9 +57,9 @@
     });
   
     function confirmDelete(id){
-        let choice = confirm("{{__('Are you sure, you want to delete this Occupation and related data?')}}")
+        let choice = confirm("{{__('Are you sure, you want to delete this Currency and related data?')}}")
         if(choice){
-            document.getElementById('delete-ocp-'+id).submit();
+            document.getElementById('delete-crc-'+id).submit();
         }
     }
   

@@ -16,34 +16,29 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::post('/cob/store', [MasterController::class, 'storecob']);
     Route::put('cob/{cob}', [MasterController::class, 'updatecob']);
     Route::delete('/cob/destroy/{cob}', [MasterController::class, 'destroycob']);
-    
 
-    Route::get('/felookuplocation', 'FeLookupLocationController@index');
-    Route::post('/felookuplocation/create', 'FeLookupLocationController@create');
+    // SECTION Occupation Routes
+    Route::get('/occupation', [MasterController::class, 'indexoccupation']);
+    Route::post('/occupation/store', [MasterController::class, 'storeoccupation']);
+    Route::put('occupation/{ocp}', [MasterController::class, 'updateoccupation']);
+    Route::delete('/occupation/destroy/{ocp}', [MasterController::class, 'destroyoccupation']);
 
-    Route::get('/koc', 'KocController@index');
-    Route::post('/koc/create', 'KocController@create');
+    // SECTION currency Routes
+    Route::get('/currency', [MasterController::class, 'indexcurrency']);
+    Route::post('/currency/store', [MasterController::class, 'storecurrency']);
+    Route::put('currency/{crc}', [MasterController::class, 'updatecurrency']);
+    Route::delete('/currency/destroy/{crc}', [MasterController::class, 'destroycurrency']);
 
-    Route::get('/golffieldhole', 'GolfFieldHoleController@index');
-    Route::post('/golffieldhole/create', 'GolfFieldHoleController@create');
-
-    Route::get('/cedingbroker', 'CedingBrokerController@index');
-    Route::post('/cedingbroker/create', 'CedingBrokerController@create');
-
-
-    // SECTION Product Routes
-    // Route::get('/', [ProductController::class, 'index'])->middleware(['can:view-product']);
-    // Route::get('/create', [ProductController::class, 'create'])->middleware(['can:create-product']);
-    // Route::post('/store', [ProductController::class, 'store'])->middleware(['can:create-product']);
-    // Route::get('/edit/{product}', [ProductController::class, 'edit'])->middleware(['can:view-product']);
-    // Route::put('/update/{product}', [ProductController::class, 'update'])->middleware(['can:update-product']);
-    // Route::delete('/destroy/{product}', [ProductController::class, 'destroy'])->middleware(['can:delete-product']);
-    
+    // SECTION currency Exchange Routes
+    Route::get('/exchange', [MasterController::class, 'indexexchange']);
+    Route::post('/exchange/store', [MasterController::class, 'storeexchange']);
+    Route::put('exchange/{exc}', [MasterController::class, 'updateexchange']);
+    Route::delete('/exchange/destroy/{exc}', [MasterController::class, 'destroyexchange']);
     
     // Bulk Excel Import Users
     // Route::get('/import', [ ProductController::class, 'import'])->middleware(['can:create-product']);
     // Route::post('/import', [ ProductController::class, 'importStore'])->middleware(['can:create-product']);
-    // !SECTION Product Routes
+    
 
 
 });

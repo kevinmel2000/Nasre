@@ -714,6 +714,8 @@
                     @$route_active == 'country_master' 
                     || @$route_active == 'cob_master' 
                     || @$route_active == 'felookuplocation_master' 
+                    || @$route_active == 'ocp_master' 
+                    || @$route_active == 'currency_master' 
                     )
                         @php
                         $master_dd = 'active';
@@ -747,25 +749,25 @@
                                 </a>
                             </li>
 
-                            @if($route_active == 'Create Form')
+                            @if($route_active == 'currency_master')
                             @php
-                                $create_form = 'active';
+                                $crc_form = 'active';
                             @endphp
                             @endif
                             <li class="nav-item">
-                                <a href="{{url('/office/create_form')}}" class="nav-link {{@$create_form}}">
+                                <a href="{{url('/master-data/currency')}}" class="nav-link {{@$crc_form}}">
                                         <i class="far fa-folder nav-icon text-secondary"></i>
                                     <p>{{__('CURRENCY')}}</p>
                                 </a>
                             </li>
 
-                            @if($route_active == 'Create Form')
+                            @if($route_active == 'currency_exchange')
                             @php
-                                $create_form = 'active';
+                                $exchange_form = 'active';
                             @endphp
                             @endif
                             <li class="nav-item">
-                                <a href="{{url('/office/create_form')}}" class="nav-link {{@$create_form}}">
+                                <a href="{{url('/master-data/exchange')}}" class="nav-link {{@$exchange_form}}">
                                         <i class="far fa-folder nav-icon text-secondary"></i>
                                     <p>{{__('CURRENCY EXCHANGE')}}</p>
                                 </a>
@@ -844,13 +846,13 @@
                                 </a>
                             </li>
 
-                            @if($route_active == 'Web to Lead Form')
+                            @if($route_active == 'ocp_master')
                             @php
-                                $web_form = 'active';
+                                $ocp_form = 'active';
                             @endphp
                             @endif
                             <li class="nav-item">
-                                <a href="{{url('/office/web_forms')}}" class="nav-link {{@$web_form}}">
+                                <a href="{{url('/master-data/occupation')}}" class="nav-link {{@$ocp_form}}">
                                         <i class="far fa-folder nav-icon text-secondary"></i>
                                     <p>{{__('OCCUPATION FORM')}}</p>
                                 </a>

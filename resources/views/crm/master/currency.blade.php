@@ -10,11 +10,11 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('master-data/cob/store')}}>
+        <form method="POST" action={{url('master-data/currency/store')}}>
           @csrf
         <div class="card">
           <div class="card-header bg-gray">
-            {{__('New COB Data')}}
+            {{__('New Currency Data')}}
           </div>
           
           <div class="card-body bg-light-gray ">
@@ -23,8 +23,8 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="cobcode" class="form-control form-control-sm" data-validation="length" data-validation-length="1-5" required/>
+                          <label for="">{{__('Code')}} </label>
+                          <input type="text" name="crccode" class="form-control form-control-sm" data-validation="length" data-validation-length="2-3" required/>
                         </div>
                     </div>
                 </div>
@@ -32,8 +32,8 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Description')}}</label>
-                          <input type="text" name="cobdescription" class="form-control form-control-sm " data-validation="length" data-validation-length="2-150" required/>
+                          <label for="">{{__('Symbol/Name')}}</label>
+                          <input type="text" name="crcsymbolname" class="form-control form-control-sm " data-validation="length" data-validation-length="2-150" required/>
                       </div>
                     </div>
                 </div>
@@ -41,18 +41,14 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Abbreviation')}}</label>
-                          <input type="text" name="cobabbreviation" class="form-control form-control-sm " data-validation="length" data-validation-length="2-20" required/>
-                      </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                          <label for="">{{__('Remarks')}}</label>
-                          <textarea name="cobremarks" class="form-control form-control-sm " rows="3" data-validation="length" data-validation-length="2-350" required></textarea>
-                      </div>
+                          <label for="">{{__('Country')}}</label>
+                          <select name="crccountry" class="form-control form-control-sm ">
+                              <option selected disabled>{{__('Select Country')}}</option>
+                              @foreach($country as $cty)
+                              <option value="{{ $cty->id }}">{{ $cty->id }} - {{ $cty->name }}</option>
+                              @endforeach
+                          </select>
+                      </div>    
                     </div>
                 </div>
                 
@@ -66,7 +62,7 @@
                 <div class="row">
                     <div class="col-md-12 com-sm-12 mt-3">
                         <button class="btn btn-primary btn-block ">
-                            {{__('Save COB')}}
+                            {{__('Save Currency')}}
                         </button>
                     </div>
                    
@@ -81,47 +77,45 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12 com-sm-12 mt-3">
-                  <table id="cobTable" class="table table-bordered table-striped">
+                  <table id="crcTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                       <th>{{__('Code')}}</th>
-                      <th>{{__('Description')}}</th>
-                      <th>{{__('Abbreviation')}}</th>
-                      <th>{{__('Remarks')}}</th>
+                      <th>{{__('Symbol/Name')}}</th>
+                      <th>{{__('Country')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach (@$cob as $boc)
+                        @foreach (@$currency as $crc)
                             <tr>
-                              <td>{{@$boc->code}}</td>
-                              <td>{{@$boc->description}}</td>
-                              <td>{{@$boc->abbreviation}}</td>
-                              <td>{{@$boc->remarks}}</td>
+                              <td>{{@$crc->code}}</td>
+                              <td>{{@$crc->symbol_name}}</td>
+                              <td>{{@$crc->countryside->id}} - {{@$crc->countryside->name}}</td>
                               <td>
-                                <a href="#" data-toggle="tooltip" data-title="{{$boc->created_at->toDayDateTimeString()}}" class="mr-3">
+                                <a href="#" data-toggle="tooltip" data-title="{{$crc->created_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>
                                 </a>
-                                <a href="#" data-toggle="tooltip" data-title="{{$boc->updated_at->toDayDateTimeString()}}" class="mr-3">
+                                <a href="#" data-toggle="tooltip" data-title="{{$crc->updated_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
                                   {{-- @can('update-country', User::class) --}}
-                                    <a class="text-primary mr-3" data-toggle="modal" data-target="#updatecob{{$boc->id}}">
+                                    <a class="text-primary mr-3" data-toggle="modal" data-target="#updatecrc{{$crc->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                   {{-- @endcan --}}
 
-                                  <div class="modal fade" id="updatecob{{$boc->id}}" tabindex="-1" user="dialog" aria-labelledby="updatecob{{$boc->id}}Label" aria-hidden="true">
+                                  <div class="modal fade" id="updatecrc{{$crc->id}}" tabindex="-1" user="dialog" aria-labelledby="updatecrc{{$crc->id}}Label" aria-hidden="true">
                                     <div class="modal-dialog" user="document">
                                       <div class="modal-content bg-light-gray">
                                         <div class="modal-header bg-gray">
-                                          <h5 class="modal-title" id="updatecob{{$boc->id}}Label">{{__('Update COB')}}</h5>
+                                          <h5 class="modal-title" id="updatecrc{{$crc->id}}Label">{{__('Update Currency')}}</h5>
                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>
                                         </div>
-                                        <form action="{{url('master-data/cob',$boc)}}" method="POST">
+                                        <form action="{{url('master-data/currency',$crc)}}" method="POST">
                                             <div class="modal-body">
                                                 @csrf
                                                 @method('PUT')
@@ -129,27 +123,30 @@
                                                   <div class="col-md-6 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Code')}}</label>
-                                                      <input type="text" name="codecob" class="form-control" value="{{$boc->code}}" data-validation="length" data-validation-length="1-5" required disabled/>
+                                                      <input type="text" name="codecrc"  class="form-control" value="{{$crc->code}}" data-validation="length" data-validation-length="2-3" required />
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
-                                                      <label for="">{{__('Description')}}</label>
-                                                      <input type="text" name="descriptioncob" class="form-control" value="{{$boc->description}}" data-validation="length" data-validation-length="2-150" required/>
+                                                      <label for="">{{__('Symbol/Name')}}</label>
+                                                      <input type="text" name="symbolnamecrc" class="form-control" value="{{$crc->symbol_name}}" data-validation="length" data-validation-length="2-150" required/>
                                                     </div>
                                                   </div>
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
-                                                      <label for="">{{__('Abbreviation')}}</label>
-                                                      <input type="text" name="abbreviationcob" class="form-control" value="{{$boc->abbreviation}}" data-validation="length" data-validation-length="2-150" required/>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-4 col-md-12">
-                                                    <div class="form-group">
-                                                      <label for="">{{__('Remarks')}}</label>
-                                                      <textarea name="remarkscob" class="form-control" value="{{$boc->remarks}}" data-validation="length" data-validation-length="2-350" required>{{$boc->remarks}}</textarea>
+                                                        <label for="">{{__('Country')}}</label>
+                                                        <select name="countrycrc" class="form-control form-control-sm ">
+                                                            <option selected disabled>{{__('Select Country')}}</option>
+                                                            @foreach($country as $cty)
+                                                            @if($crc->country  == $cty->id)
+                                                            <option value="{{ $cty->id }}" selected>{{ $cty->id }} - {{ $cty->name }}</option>
+                                                            @else
+                                                            <option value="{{  $cty->id }}">{{  $cty->id  }} - {{ $cty->name }}</option>
+                                                            @endif
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                   </div>
                                               
@@ -167,10 +164,10 @@
 
                                   {{-- @can('delete-country', User::class) --}}
 
-                                  <span id="delbtn{{@$boc->id}}"></span>
+                                  <span id="delbtn{{@$crc->id}}"></span>
                                 
-                                    <form id="delete-cob-{{$boc->id}}"
-                                        action="{{ url('master-data/cob/destroy', $boc->id) }}"
+                                    <form id="delete-crc-{{$crc->id}}"
+                                        action="{{ url('master-data/currency/destroy', $crc->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
@@ -195,5 +192,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.master.cob_js')
+@include('crm.master.currency_js')
 @endsection
