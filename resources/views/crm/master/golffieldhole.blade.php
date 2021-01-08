@@ -84,52 +84,40 @@
                   <table id="countryTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th>{{__('Location Code')}}</th>
-                      <th>{{__('Address')}}</th>
-                      <th>{{__('City')}}</th>
-                      <th>{{__('Province')}}</th>
-                      <th>{{__('Postal Code')}}</th>
-                      <th>{{__('Insured')}}</th>
-                      <th>{{__('EQ Zone')}}</th>
-                      <th>{{__('Flood Zone')}}</th>
-                      <th>{{__('Latitude')}}</th>
-                      <th>{{__('Longitude')}}</th>
+                      <th>{{__('ID')}}</th>
+                      <th>{{__('Code')}}</th>
+                      <th>{{__('Golf field')}}</th>
+                      <th>{{__('Hole Number')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach (@$felookuplocation as $location)
+                        @foreach (@$golffieldhole as $golf)
                             <tr>
-                              <td>{{@$location->loc_code}}</td>
-                              <td>{{@$location->address}}</td>
-                              <td>{{@$location->city_id}}</td>
-                              <td>{{@$location->province_id}}</td>
-                              <td>{{@$location->postal_code }}</td>
-                              <td>{{@$location->insured}}</td>
-                              <td>{{@$location->eq_zone}}</td>
-                              <td>{{@$location->flood_zone}}</td>
-                              <td>{{@$location->latitude}}</td>
-                              <td>{{@$location->longtitude}}</td>
+                              <td>{{@$golf->id}}</td>
+                              <td>{{@$golf->code}}</td>
+                              <td>{{@$golf->golf_field}}</td>
+                              <td>{{@$golf->hole_number}}</td>
                               <td>
-                                <a href="#" data-toggle="tooltip" data-title="{{$location->created_at}}" class="mr-3">
+                                <a href="#" data-toggle="tooltip" data-title="{{$golf->created_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>
                                 </a>
-                                <a href="#" data-toggle="tooltip" data-title="{{$location->updated_at}}" class="mr-3">
+                                <a href="#" data-toggle="tooltip" data-title="{{$golf->updated_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
                                   @can('update-country', User::class)
-                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit',$location->id)}}">
+                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit',$golf->id)}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                   @endcan
 
                                   @can('delete-country', User::class)
 
-                                  <span id="delbtn{{@$location->id}}"></span>
+                                  <span id="delbtn{{@$golf->id}}"></span>
                                 
-                                    <form id="delete-product-{{$location->id}}"
-                                        action="{{ url('master-data/country/destroy', $location->id) }}"
+                                    <form id="delete-product-{{$golf->id}}"
+                                        action="{{ url('master-data/country/destroy', $golf->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
@@ -154,5 +142,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.master.felookuplocation_js')
+@include('crm.master.golffieldhole_js')
 @endsection

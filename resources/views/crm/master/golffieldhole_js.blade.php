@@ -2,8 +2,8 @@
     $(function () {
       "use strict";
   
-      var felookuplocation = <?php echo(($felookuplocation_ids->content())) ?>;
-      for(const id of felookuplocation) {
+      var golffieldholes = <?php echo(($golffieldhole_ids->content())) ?>;
+      for(const id of golffieldholes) {
           var btn = `
               <a href="#" onclick="confirmDelete('${id}')">
                   <i class="fas fa-trash text-danger"></i>

@@ -2,8 +2,8 @@
     $(function () {
       "use strict";
   
-      var felookuplocation = <?php echo(($felookuplocation_ids->content())) ?>;
-      for(const id of felookuplocation) {
+      var cedingbrokers = <?php echo(($cedingbroker_ids->content())) ?>;
+      for(const id of cedingbrokers) {
           var btn = `
               <a href="#" onclick="confirmDelete('${id}')">
                   <i class="fas fa-trash text-danger"></i>

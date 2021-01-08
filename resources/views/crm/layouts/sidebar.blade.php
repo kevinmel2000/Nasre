@@ -785,15 +785,27 @@
                                 </a>
                             </li>
 
-                            @if($route_active == 'Web to Lead Form')
+                            @if($route_active == 'golffieldhole_master')
                             @php
                                 $web_form = 'active';
                             @endphp
                             @endif
                             <li class="nav-item">
-                                <a href="{{url('/office/web_forms')}}" class="nav-link {{@$web_form}}">
+                                <a href="{{url('/master-data/golffieldhole')}}" class="nav-link {{@$web_form}}">
                                         <i class="far fa-folder nav-icon text-secondary"></i>
                                     <p>{{__('GOLF FIELD HOLE')}}</p>
+                                </a>
+                            </li>
+
+                            @if($route_active == 'koc_master')
+                            @php
+                                $kocform = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/koc')}}" class="nav-link {{@$kocform}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('KOC FORM')}}</p>
                                 </a>
                             </li>
 
@@ -810,13 +822,13 @@
                                 </a>
                             </li>
 
-                            @if($route_active == 'Web to Lead Form')
+                            @if($route_active == 'cedingbroker_master')
                             @php
-                                $web_form = 'active';
+                                $cedingform = 'active';
                             @endphp
                             @endif
                             <li class="nav-item">
-                                <a href="{{url('/office/web_forms')}}" class="nav-link {{@$web_form}}">
+                                <a href="{{url('/master-data/cedingbroker')}}" class="nav-link {{@$cedingform}}">
                                         <i class="far fa-folder nav-icon text-secondary"></i>
                                     <p>{{__('CEDING/BROKER FORM')}}</p>
                                 </a>

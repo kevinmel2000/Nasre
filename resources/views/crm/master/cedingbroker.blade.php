@@ -84,52 +84,46 @@
                   <table id="countryTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th>{{__('Location Code')}}</th>
+                      <th>{{__('ID')}}</th>
+                      <th>{{__('Code')}}</th>
+                      <th>{{__('Name')}}</th>
+                      <th>{{__('Company')}}</th>
                       <th>{{__('Address')}}</th>
-                      <th>{{__('City')}}</th>
-                      <th>{{__('Province')}}</th>
-                      <th>{{__('Postal Code')}}</th>
-                      <th>{{__('Insured')}}</th>
-                      <th>{{__('EQ Zone')}}</th>
-                      <th>{{__('Flood Zone')}}</th>
-                      <th>{{__('Latitude')}}</th>
-                      <th>{{__('Longitude')}}</th>
+                      <th>{{__('Country')}}</th>
+                      <th>{{__('Type')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach (@$felookuplocation as $location)
+                        @foreach (@$cedingbroker as $ceding)
                             <tr>
-                              <td>{{@$location->loc_code}}</td>
-                              <td>{{@$location->address}}</td>
-                              <td>{{@$location->city_id}}</td>
-                              <td>{{@$location->province_id}}</td>
-                              <td>{{@$location->postal_code }}</td>
-                              <td>{{@$location->insured}}</td>
-                              <td>{{@$location->eq_zone}}</td>
-                              <td>{{@$location->flood_zone}}</td>
-                              <td>{{@$location->latitude}}</td>
-                              <td>{{@$location->longtitude}}</td>
+                              <td>{{@$ceding->id}}</td>
+                              <td>{{@$ceding->code}}</td>
+                              <td>{{@$ceding->name}}</td>
+                              <td>{{@$ceding->company_name}}</td>
+                              <td>{{@$ceding->address}}</td>
+                              <td>{{@$ceding->country}}</td>
+                              <td>{{@$ceding->type}}</td>
                               <td>
-                                <a href="#" data-toggle="tooltip" data-title="{{$location->created_at}}" class="mr-3">
+                                <a href="#" data-toggle="tooltip" data-title="{{$ceding->created_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>
                                 </a>
-                                <a href="#" data-toggle="tooltip" data-title="{{$location->updated_at}}" class="mr-3">
+                                <a href="#" data-toggle="tooltip" data-title="{{$ceding->updated_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
                                   @can('update-country', User::class)
-                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit',$location->id)}}">
+                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit',$cty->id)}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                   @endcan
 
                                   @can('delete-country', User::class)
 
-                                  <span id="delbtn{{@$location->id}}"></span>
+                                  <span id="delbtn{{@$ceding->id}}"></span>
                                 
-                                    <form id="delete-product-{{$location->id}}"
-                                        action="{{ url('master-data/country/destroy', $location->id) }}"
+                                    <form id="delete-product-{{$ceding->id}}"
+                                        action="{{ url('master-data/country/destroy', $ceding->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
@@ -154,5 +148,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.master.felookuplocation_js')
+@include('crm.master.cedingbroker_js')
 @endsection
