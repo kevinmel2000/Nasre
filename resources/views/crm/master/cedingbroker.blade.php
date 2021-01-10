@@ -10,11 +10,11 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('master-data/country/store')}}>
+        <form method="POST" action={{url('master-data/cedingbroker/store')}}>
           @csrf
         <div class="card">
           <div class="card-header bg-gray">
-            {{__('New Country Data')}}
+            {{__('New Ceding Broker Data')}}
           </div>
           
           <div class="card-body bg-light-gray ">
@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="countrycode" class="form-control form-control-sm" data-validation="length" data-validation-length="3" required/>
+                          <input type="text" name="code" class="form-control form-control-sm" data-validation="length" data-validation-length="3" required/>
                         </div>
                     </div>
                 </div>
@@ -32,8 +32,8 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Country Name')}}</label>
-                          <input type="text" name="countryname" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <label for="">{{__('Name')}}</label>
+                          <input type="text" name="name" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                       </div>
                     </div>
                 </div>
@@ -41,20 +41,22 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Continent')}}</label>
-                          <select name="continent" class="form-control form-control-sm ">
-                              <option selected disabled>{{__('Select Continent')}}</option>
-                              <option value="AF">Africa</option>
-                              <option value="AN">Antartica</option>
-                              <option value="AS">Asia</option>
-                              <option value="EU">Europa</option>
-                              <option value="NA">North America </option>
-                              <option value="OC">Oceania</option>
-                              <option value="SA">South America</option>
-                          </select>
-                      </div>    
+                          <label for="">{{__('Company Name')}}</label>
+                          <input type="text" name="companyname" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                      </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                          <label for="">{{__('Address')}}</label>
+                          <textarea name="address" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/></textarea>
+                      </div>
+                    </div>
+                </div>
+
+               
                 
               </div>
             </div>
@@ -66,7 +68,7 @@
                 <div class="row">
                     <div class="col-md-12 com-sm-12 mt-3">
                         <button class="btn btn-primary btn-block ">
-                            {{__('Save Country')}}
+                            {{__('Save Ceding Broker')}}
                         </button>
                     </div>
                    

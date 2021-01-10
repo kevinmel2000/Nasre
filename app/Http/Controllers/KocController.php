@@ -34,5 +34,55 @@ class KocController extends Controller
           return view('crm.master.koc', compact('user','koc','route_active','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }
+
+    public function store(Request $request)
+    {
+        $validator = $request->validate([
+            'crccode'=>'required|max:5|unique:currencies,code',
+            'crcsymbolname'=>'required',
+            'crccountry'=>'required'
+        ]);
+        
+        if($validator)
+        {
+            $user = Auth::user();
+            Currency::create([
+                'symbol_name'=>$request->crcsymbolname,
+                'is_base_currency' => '',
+                'code'=>$request->crccode,
+                'country'=>$request->crccountry
+            ]);
+            $notification = array(
+                'message' => 'Koc added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }
+        else
+        {
+            return back()->with($validator)->withInput();
+        }
+    }
     
+
+    public function destroy(Country $country)
+    {
+        if($country->delete())
+        {
+            $notification = array(
+                'message' => 'Koc deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }
+        else
+        {
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
 }

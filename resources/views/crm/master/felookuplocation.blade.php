@@ -14,7 +14,7 @@
           @csrf
         <div class="card">
           <div class="card-header bg-gray">
-            {{__('New Country Data')}}
+            {{__('New FIRE & ENGINEERING LOOKUP - LOCATION Data')}}
           </div>
           
           <div class="card-body bg-light-gray ">
