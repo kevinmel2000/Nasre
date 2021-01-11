@@ -10,7 +10,11 @@ class CedingBroker extends Model
 
     protected $table = 'ceding_broker';
 
-    protected $fillable = ['code'];
+    protected $fillable = ['code','name','company_name','address','country','type'];
+
+    public function countryside(){
+        return $this->belongsTo('App\Models\Country', 'country');
+    }
 
 }
 

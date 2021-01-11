@@ -56,6 +56,32 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                          <label for="">{{__('Country')}}</label>
+                          <select name="crccountry" class="form-control form-control-sm ">
+                              <option selected disabled>{{__('Select Country')}}</option>
+                              @foreach($country as $cty)
+                              <option value="{{ $cty->id }}">{{ $cty->id }} - {{ $cty->name }}</option>
+                              @endforeach
+                          </select>
+                      </div>    
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                          <label for="">{{__('Type')}}</label>
+                          <select name="type" class="form-control form-control-sm ">
+                              <option selected disabled>{{__('Select Type')}}</option>
+                              <option value="Ceding">Ceding</option>
+                              <option value="Broker">Broker</option>
+                          </select>
+                      </div>    
+                    </div>
+                </div>
                
                 
               </div>
@@ -104,7 +130,7 @@
                               <td>{{@$ceding->name}}</td>
                               <td>{{@$ceding->company_name}}</td>
                               <td>{{@$ceding->address}}</td>
-                              <td>{{@$ceding->country}}</td>
+                              <td>{{@$ceding->countryside->id}} - {{@$ceding->countryside->name}}</td>
                               <td>{{@$ceding->type}}</td>
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$ceding->created_at->toDayDateTimeString()}}" class="mr-3">
@@ -114,23 +140,24 @@
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
-                                  @can('update-country', User::class)
-                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit',$cty->id)}}">
+                                 {{-- @can('update-cedingbroker', User::class) --}}
+                                    <a class="text-primary mr-3" href="{{url('master-data/cedingbroker/edit',$ceding->id)}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
-                                  @endcan
+                                    {{-- @endcan --}}
 
-                                  @can('delete-country', User::class)
+                                {{-- @can('delete-cedingbroker', User::class) --}}
 
                                   <span id="delbtn{{@$ceding->id}}"></span>
                                 
-                                    <form id="delete-product-{{$ceding->id}}"
-                                        action="{{ url('master-data/country/destroy', $ceding->id) }}"
+                                    <form id="delete-ceding-{{$ceding->id}}"
+                                        action="{{ url('master-data/cedingbroker/destroy', $ceding->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
                                     </form>
-                                  @endcan  
+                                    {{-- @endcan --}}
+
                                 </span>
                               </td>
 

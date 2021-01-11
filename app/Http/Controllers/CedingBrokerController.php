@@ -24,33 +24,43 @@ class CedingBrokerController extends Controller
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $cedingbroker = CedingBroker::orderby('id','desc')->get();
           $cedingbroker_ids = response()->json($cedingbroker->modelKeys());
-          return view('crm.master.cedingbroker', compact('user','cedingbroker','route_active','cedingbroker_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $country = Country::orderby('id','asc')->get();
+
+          return view('crm.master.cedingbroker', compact('user','cedingbroker','route_active','cedingbroker_ids','country'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
           $cedingbroker=CedingBroker::where('code', 'LIKE', '%' . $search . '%')->orWhere('name', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
           $cedingbroker_ids = response()->json($cedingbroker->modelKeys());
-          return view('crm.master.cedingbroker', compact('user','cedingbroker','route_active','cedingbroker_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $country = Country::orderby('id','asc')->get();
+
+          return view('crm.master.cedingbroker', compact('user','cedingbroker','route_active','cedingbroker_ids','country'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }
+
 
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'crccode'=>'required|max:5|unique:currencies,code',
-            'crcsymbolname'=>'required',
-            'crccountry'=>'required'
+            'code'=>'required|max:5|unique:currencies,code',
+            'name'=>'required',
+            'companyname'=>'required',
+            'address'=>'required',
+            'crccountry'=>'required',
+            'type'=>'required'
         ]);
         
         if($validator)
         {
             $user = Auth::user();
-            Currency::create([
-                'symbol_name'=>$request->crcsymbolname,
-                'is_base_currency' => '',
-                'code'=>$request->crccode,
-                'country'=>$request->crccountry
+            CedingBroker::create([
+                'code'=>$request->code,
+                'name' => $request->name,
+                'company_name'=>$request->companyname,
+                'address'=>$request->address,
+                'country'=>$request->crccountry,
+                'type'=>$request->type
             ]);
             $notification = array(
                 'message' => 'Ceding broker added successfully!',
@@ -64,9 +74,10 @@ class CedingBrokerController extends Controller
         }
     }
 
-    public function destroy(Country $country)
+
+    public function destroy(CedingBroker $cedingbroker)
     {
-        if($country->delete())
+        if($cedingbroker->delete())
         {
             $notification = array(
                 'message' => 'Ceding Broker deleted successfully!',
