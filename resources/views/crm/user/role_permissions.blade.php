@@ -58,7 +58,7 @@
                
                   @foreach ($modules as $module)
                    
-                    @if ($$module == NULL)
+                    @if ($module == NULL)
                       <div class="input-group">
                         <span class="minWidth">{{underscoreToCamelCase($module)}}</span>
                         <form method="post" action="{{route('post_role_permissions')}}" >

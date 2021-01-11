@@ -114,11 +114,11 @@
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
-                                  {{-- @can('update-country', User::class) --}}
+                                  @can('update-country', User::class)
                                     <a class="text-primary mr-3" data-toggle="modal" data-target="#updatecountry{{$cty->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
-                                  {{-- @endcan --}}
+                                  @endcan
 
                                   <div class="modal fade" id="updatecountry{{$cty->id}}" tabindex="-1" user="dialog" aria-labelledby="updatecountry{{$cty->id}}Label" aria-hidden="true">
                                     <div class="modal-dialog" user="document">
@@ -234,7 +234,7 @@
                                 </div>
                                 {{-- Edit Modal Ends --}}
 
-                                  {{-- @can('delete-country', User::class) --}}
+                                  @can('delete-country', User::class)
 
                                   <span id="delbtn{{@$cty->id}}"></span>
                                 
@@ -244,7 +244,7 @@
                                         @method('DELETE')
                                         @csrf
                                     </form>
-                                  {{-- @endcan   --}}
+                                  @endcan  
                                 </span>
                               </td>
 

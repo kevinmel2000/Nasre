@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Code')}} </label>
-                          <input type="text" name="ocpcode" class="form-control form-control-sm" data-validation="length" data-validation-length="1-5" required/>
+                          <input type="text" name="ocpcode" class="form-control form-control-sm" data-validation="length" value="{{ $code_ocp }}" data-validation-length="1-7" disabled required/>
                         </div>
                     </div>
                 </div>
@@ -122,11 +122,11 @@
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
-                                  {{-- @can('update-country', User::class) --}}
+                                  @can('update-occupation', User::class)
                                     <a class="text-primary mr-3" data-toggle="modal" data-target="#updateocp{{$ocp->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
-                                  {{-- @endcan --}}
+                                  @endcan
 
                                   <div class="modal fade" id="updateocp{{$ocp->id}}" tabindex="-1" user="dialog" aria-labelledby="updateocp{{$ocp->id}}Label" aria-hidden="true">
                                     <div class="modal-dialog" user="document">
@@ -196,7 +196,7 @@
                                 </div>
                                 {{-- Edit Modal Ends --}}
 
-                                  {{-- @can('delete-country', User::class) --}}
+                                  @can('delete-occupation', User::class)
 
                                   <span id="delbtn{{@$ocp->id}}"></span>
                                 
@@ -206,7 +206,7 @@
                                         @method('DELETE')
                                         @csrf
                                     </form>
-                                  {{-- @endcan   --}}
+                                  @endcan  
                                 </span>
                               </td>
 

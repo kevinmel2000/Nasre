@@ -35,6 +35,15 @@ class PermissionsController extends Controller
         $media_module =  Module::where(['module_name'=>'media_module','role_id'=>$selected_role_id])->first();
         $reminder_module =  Module::where(['module_name'=>'reminder_module','role_id'=>$selected_role_id])->first();
         $office_module =  Module::where(['module_name'=>'office_module','role_id'=>$selected_role_id])->first();
+        $country_module =  Module::where(['module_name'=>'country_module','role_id'=>$selected_role_id])->first();
+        $occupation_module =  Module::where(['module_name'=>'occupation_module','role_id'=>$selected_role_id])->first();
+        $cob_module =  Module::where(['module_name'=>'cob_module','role_id'=>$selected_role_id])->first();
+        $currency_module =  Module::where(['module_name'=>'currency_module','role_id'=>$selected_role_id])->first();
+        $exchange_module =  Module::where(['module_name'=>'exchange_module','role_id'=>$selected_role_id])->first();
+        $koc_module =  Module::where(['module_name'=>'koc_module','role_id'=>$selected_role_id])->first();
+        $felookup_module =  Module::where(['module_name'=>'fe_lookup_module','role_id'=>$selected_role_id])->first();
+        $cedingbroker_module =  Module::where(['module_name'=>'cedingbroker_module','role_id'=>$selected_role_id])->first();
+        $gfh_module =  Module::where(['module_name'=>'gfh_module','role_id'=>$selected_role_id])->first();
         
         $route_active = 'permissions';
         return view('crm.user.role_permissions', 
@@ -56,6 +65,15 @@ class PermissionsController extends Controller
                     'media_module',
                     'reminder_module',
                     'office_module',
+                    'country_module',
+                    'occupation_module',
+                    'cob_module',
+                    'currency_module',
+                    'exchange_module',
+                    'koc_module',
+                    'gfh_module',
+                    'cedingbroker_module',
+                    'felookup_module',
                 ]));
     }
 
@@ -87,6 +105,15 @@ class PermissionsController extends Controller
         $media_module =  Module::where(['module_name'=>'media_module','role_id'=>$selected_role_id])->first();
         $reminder_module =  Module::where(['module_name'=>'reminder_module','role_id'=>$selected_role_id])->first();
         $office_module =  Module::where(['module_name'=>'office_module','role_id'=>$selected_role_id])->first();
+        $country_module =  Module::where(['module_name'=>'country_module','role_id'=>$selected_role_id])->first();
+        $occupation_module =  Module::where(['module_name'=>'occupation_module','role_id'=>$selected_role_id])->first();
+        $cob_module =  Module::where(['module_name'=>'cob_module','role_id'=>$selected_role_id])->first();
+        $currency_module =  Module::where(['module_name'=>'currency_module','role_id'=>$selected_role_id])->first();
+        $exchange_module =  Module::where(['module_name'=>'exchange_module','role_id'=>$selected_role_id])->first();
+        $koc_module =  Module::where(['module_name'=>'koc_module','role_id'=>$selected_role_id])->first();
+        $felookup_module =  Module::where(['module_name'=>'fe_lookup_module','role_id'=>$selected_role_id])->first();
+        $cedingbroker_module =  Module::where(['module_name'=>'cedingbroker_module','role_id'=>$selected_role_id])->first();
+        $gfh_module =  Module::where(['module_name'=>'gfh_module','role_id'=>$selected_role_id])->first();
         
         $route_active = 'permissions';
         return view('crm.user.role_permissions', 
@@ -108,6 +135,15 @@ class PermissionsController extends Controller
                     'media_module',
                     'reminder_module',
                     'office_module',
+                    'country_module',
+                    'occupation_module',
+                    'cob_module',
+                    'currency_module',
+                    'exchange_module',
+                    'koc_module',
+                    'gfh_module',
+                    'cedingbroker_module',
+                    'felookup_module',
                 ]));
 
     }
@@ -140,7 +176,16 @@ class PermissionsController extends Controller
         $media_module =  Module::where(['module_name'=>'media_module','role_id'=>$selected_role_id])->first();
         $reminder_module =  Module::where(['module_name'=>'reminder_module','role_id'=>$selected_role_id])->first();
         $office_module =  Module::where(['module_name'=>'office_module','role_id'=>$selected_role_id])->first();
-        
+        $country_module =  Module::where(['module_name'=>'country_module','role_id'=>$selected_role_id])->first();
+        $occupation_module =  Module::where(['module_name'=>'occupation_module','role_id'=>$selected_role_id])->first();
+        $cob_module =  Module::where(['module_name'=>'cob_module','role_id'=>$selected_role_id])->first();
+        $currency_module =  Module::where(['module_name'=>'currency_module','role_id'=>$selected_role_id])->first();
+        $exchange_module =  Module::where(['module_name'=>'exchange_module','role_id'=>$selected_role_id])->first();
+        $koc_module =  Module::where(['module_name'=>'koc_module','role_id'=>$selected_role_id])->first();
+        $felookup_module =  Module::where(['module_name'=>'fe_lookup_module','role_id'=>$selected_role_id])->first();
+        $cedingbroker_module =  Module::where(['module_name'=>'cedingbroker_module','role_id'=>$selected_role_id])->first();
+        $gfh_module =  Module::where(['module_name'=>'gfh_module','role_id'=>$selected_role_id])->first();
+
         $route_active = 'permissions';
         return view('crm.user.role_permissions', 
         compact([   'route_active',
@@ -161,6 +206,15 @@ class PermissionsController extends Controller
                     'media_module',
                     'reminder_module',
                     'office_module',
+                    'country_module',
+                    'occupation_module',
+                    'cob_module',
+                    'currency_module',
+                    'exchange_module',
+                    'koc_module',
+                    'gfh_module',
+                    'cedingbroker_module',
+                    'felookup_module',
                 ]));
     }
 
