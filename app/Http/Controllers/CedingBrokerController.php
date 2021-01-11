@@ -75,7 +75,30 @@ class CedingBrokerController extends Controller
     }
 
 
-    public function destroy(CedingBroker $cedingbroker)
+    public function destroy($id)
+    {
+      $cedingbrokers = CedingBroker::find($id);
+      
+      if($cedingbrokers->delete())
+      {
+          $notification = array(
+              'message' => 'Ceding Broker deleted successfully!',
+              'alert-type' => 'success'
+          );
+          return back()->with($notification);
+      }
+      else
+      {
+          $notification = array(
+              'message' => 'Contact admin!',
+              'alert-type' => 'error'
+          );
+          return back()->with($notification);
+      }
+      
+    }
+
+    public function destroy2(CedingBroker $cedingbroker)
     {
         if($cedingbroker->delete())
         {
