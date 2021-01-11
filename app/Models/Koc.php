@@ -10,7 +10,7 @@ class Koc extends Model
 
     protected $table = 'koc';
 
-    protected $fillable = ['code'];
+    protected $fillable = ['code','description','abbreviation'];
     
  
 }

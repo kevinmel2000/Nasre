@@ -10,7 +10,7 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('master-data/koc/create')}}>
+        <form method="POST" action={{url('master-data/koc/store')}}>
           @csrf
         <div class="card">
           <div class="card-header bg-gray">

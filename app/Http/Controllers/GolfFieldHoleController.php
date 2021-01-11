@@ -38,19 +38,18 @@ class GolfFieldHoleController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'crccode'=>'required|max:5|unique:currencies,code',
-            'crcsymbolname'=>'required',
-            'crccountry'=>'required'
+            'code'=>'required|max:5|unique:currencies,code',
+            'golffield'=>'required',
+            'holenumber'=>'required'
         ]);
 
         if($validator)
         {
             $user = Auth::user();
-            Currency::create([
-                'symbol_name'=>$request->crcsymbolname,
-                'is_base_currency' => '',
-                'code'=>$request->crccode,
-                'country'=>$request->crccountry
+            GolfFieldHole::create([
+                'code'=>$request->code,
+                'golf_field'=>$request->golffield,
+                'hole_number'=>$request->holenumber
             ]);
             $notification = array(
                 'message' => 'Golf Field Hole  added successfully!',

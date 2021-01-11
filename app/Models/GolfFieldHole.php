@@ -10,7 +10,7 @@ class GolfFieldHole extends Model
 
     protected $table = 'golf_field_hole';
 
-    protected $fillable = ['code'];
+    protected $fillable = ['code','golf_field','hole_number'];
 
 }
 

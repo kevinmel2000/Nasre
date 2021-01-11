@@ -38,19 +38,20 @@ class KocController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'crccode'=>'required|max:5|unique:currencies,code',
-            'crcsymbolname'=>'required',
-            'crccountry'=>'required'
+            'code'=>'required|max:5|unique:currencies,code',
+            'description'=>'required',
+            'abbreviation'=>'required'
         ]);
         
         if($validator)
         {
+            //print_r($request);
+            //exit();
             $user = Auth::user();
-            Currency::create([
-                'symbol_name'=>$request->crcsymbolname,
-                'is_base_currency' => '',
-                'code'=>$request->crccode,
-                'country'=>$request->crccountry
+            Koc::create([
+                'code'=>$request->code,
+                'description'=>$request->description,
+                'abbreviation'=>$request->abbreviation
             ]);
             $notification = array(
                 'message' => 'Koc added successfully!',
@@ -65,9 +66,9 @@ class KocController extends Controller
     }
     
 
-    public function destroy(Country $country)
+    public function destroy(Koc $koc)
     {
-        if($country->delete())
+        if($koc->delete())
         {
             $notification = array(
                 'message' => 'Koc deleted successfully!',
