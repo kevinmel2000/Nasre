@@ -7,6 +7,8 @@ use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
 use App\Models\FeLookupLocation;
+use App\Models\EarthQuakeZone;
+use App\Models\FloodZone;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,8 +55,10 @@ class FeLookupLocationController extends Controller
           $country = Country::orderby('id','asc')->get();
           $city = City::orderby('id','asc')->get();
           $state = State::orderby('id','asc')->get();
+          $earthquakezone = EarthQuakeZone::orderby('id','asc')->get();
+          $floodzone = FloodZone::orderby('id','asc')->get();
 
-          return view('crm.master.felookuplocation', compact('user','felookuplocation','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.master.felookuplocation', compact('user','earthquakezone','floodzone','felookuplocation','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
@@ -64,8 +68,10 @@ class FeLookupLocationController extends Controller
           $country = Country::orderby('id','asc')->get();
           $city = City::orderby('id','asc')->get();
           $state = State::orderby('id','asc')->get();
+          $earthquakezone = EarthQuakeZone::orderby('id','asc')->get();
+          $floodzone = FloodZone::orderby('id','asc')->get();
 
-          return view('crm.master.felookuplocation', compact('user','felookuplocation','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.master.felookuplocation', compact('user','earthquakezone','floodzone','felookuplocation','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }
 

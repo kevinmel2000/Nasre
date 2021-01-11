@@ -101,6 +101,41 @@
                       </div>     
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                      <label for="">{{__('EQ Zone')}}</label>
+                            <select name="eqzone" class="form-control form-control-sm ">
+                              <option selected disabled>{{__('Select EQ Zone')}}</option>
+                              @foreach($earthquakezone as $earthquakezonedata)
+                              <option value="{{ $earthquakezonedata->id }}">{{ $earthquakezonedata->id }} - {{ $earthquakezonedata->name }}</option>
+                              @endforeach
+                          </select>
+                      </div>    
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                      <label for="">{{__('Flood Zone')}}</label>
+                            <select name="floodzone" class="form-control form-control-sm ">
+                              <option selected disabled>{{__('Select Flood Zone')}}</option>
+                              @foreach($floodzone as $floodzonedata)
+                              <option value="{{ $floodzonedata->id }}">{{ $floodzonedata->id }} - {{ $floodzonedata->name }}</option>
+                              @endforeach
+                          </select>
+                      </div>     
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                          <label for="">{{__('Insured')}}</label>
+                          <input type="text" name="insured" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                      </div>
+                    </div>
+                </div>
                 
               </div>
             </div>
