@@ -10,7 +10,7 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('master-data/country/store')}}>
+        <form method="POST" action={{url('master-data/felookuplocation/store')}}>
           @csrf
         <div class="card">
           <div class="card-header bg-gray">
@@ -23,8 +23,8 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="countrycode" class="form-control form-control-sm" data-validation="length" data-validation-length="3" required/>
+                          <label for="">{{__('Loc Code')}} </label>
+                          <input type="text" name="code" class="form-control form-control-sm" data-validation="length" data-validation-length="3" required/>
                         </div>
                     </div>
                 </div>
@@ -32,27 +32,73 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Country Name')}}</label>
-                          <input type="text" name="countryname" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <label for="">{{__('Address')}}</label>
+                          <input type="text" name="Address" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                       </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                       <div class="form-group">
-                          <label for="">{{__('Continent')}}</label>
-                          <select name="continent" class="form-control form-control-sm ">
-                              <option selected disabled>{{__('Select Continent')}}</option>
-                              <option value="AF">Africa</option>
-                              <option value="AN">Antartica</option>
-                              <option value="AS">Asia</option>
-                              <option value="EU">Europa</option>
-                              <option value="NA">North America </option>
-                              <option value="OC">Oceania</option>
-                              <option value="SA">South America</option>
+                      <label for="">{{__('Longitude')}}</label>
+                          <input type="text" name="longitude" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                  
+                      </div>    
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                      <label for="">{{__('Latitude')}}</label>
+                          <input type="text" name="latitude" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                      </div>    
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                      <label for="">{{__('Country')}}</label>
+                            <select name="crccountry" class="form-control form-control-sm ">
+                              <option selected disabled>{{__('Select Country')}}</option>
+                              @foreach($country as $cty)
+                              <option value="{{ $cty->id }}">{{ $cty->id }} - {{ $cty->name }}</option>
+                              @endforeach
                           </select>
                       </div>    
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                      <label for="">{{__('Postal Code')}}</label>
+                          <input type="text" name="postal_code" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                      </div>    
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                      <label for="">{{__('Province')}}</label>
+                            <select name="province" class="form-control form-control-sm ">
+                              <option selected disabled>{{__('Select Province')}}</option>
+                              @foreach($country as $statedata)
+                              <option value="{{ $statedata->id }}">{{ $statedata->id }} - {{ $statedata->name }}</option>
+                              @endforeach
+                          </select>
+                      </div>    
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                      <label for="">{{__('Cities')}}</label>
+                            <select name="city" class="form-control form-control-sm ">
+                              <option selected disabled>{{__('Select Cities')}}</option>
+                              @foreach($country as $citydata)
+                              <option value="{{ $citydata->id }}">{{ $citydata->id }} - {{ $citydata->name }}</option>
+                              @endforeach
+                          </select>
+                      </div>     
                     </div>
                 </div>
                 
@@ -66,7 +112,7 @@
                 <div class="row">
                     <div class="col-md-12 com-sm-12 mt-3">
                         <button class="btn btn-primary btn-block ">
-                            {{__('Save Country')}}
+                            {{__('SAVE FIRE & ENGINEERING LOOKUP LOCATION')}}
                         </button>
                     </div>
                    
@@ -118,8 +164,9 @@
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
+
                                   @can('update-country', User::class)
-                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit',$location->id)}}">
+                                    <a class="text-primary mr-3" href="{{url('master-data/felookuplocation/edit',$location->id)}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                   @endcan
@@ -128,8 +175,8 @@
 
                                   <span id="delbtn{{@$location->id}}"></span>
                                 
-                                    <form id="delete-product-{{$location->id}}"
-                                        action="{{ url('master-data/country/destroy', $location->id) }}"
+                                    <form id="delete-felookuplocation-{{$location->id}}"
+                                        action="{{ url('master-data/felookuplocation/destroy', $location->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf

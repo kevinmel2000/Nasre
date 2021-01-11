@@ -50,14 +50,22 @@ class FeLookupLocationController extends Controller
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $felookuplocation = FeLookupLocation::orderby('id','desc')->get();
           $felookuplocation_ids = response()->json($felookuplocation->modelKeys());
-          return view('crm.master.felookuplocation', compact('user','felookuplocation','route_active','felookuplocation_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $country = Country::orderby('id','asc')->get();
+          $city = City::orderby('id','asc')->get();
+          $state = State::orderby('id','asc')->get();
+
+          return view('crm.master.felookuplocation', compact('user','felookuplocation','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
           $felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
           $felookuplocation_ids = response()->json($felookuplocation->modelKeys());
-          return view('crm.master.felookuplocation', compact('user','felookuplocation','route_active','felookuplocation_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $country = Country::orderby('id','asc')->get();
+          $city = City::orderby('id','asc')->get();
+          $state = State::orderby('id','asc')->get();
+
+          return view('crm.master.felookuplocation', compact('user','felookuplocation','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }
 
