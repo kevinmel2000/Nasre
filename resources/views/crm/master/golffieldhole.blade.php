@@ -99,23 +99,24 @@
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
-                                  @can('update-country', User::class)
-                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit',$golf->id)}}">
+                                {{-- @can('update-golffieldhole', User::class) --}}
+
+                                    <a class="text-primary mr-3" href="{{url('master-data/golffieldhole/edit',$golf->id)}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
-                                  @endcan
+                                    {{-- @endcan   --}}
 
-                                  @can('delete-country', User::class)
+                                  {{-- @can('delete-golffieldhole', User::class) --}}
 
                                   <span id="delbtn{{@$golf->id}}"></span>
                                 
-                                    <form id="delete-product-{{$golf->id}}"
-                                        action="{{ url('master-data/country/destroy', $golf->id) }}"
+                                    <form id="delete-golf-{{$golf->id}}"
+                                        action="{{ url('master-data/golffieldhole/destroy', $golf->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
                                     </form>
-                                  @endcan  
+                                 {{-- @endcan   --}}
                                 </span>
                               </td>
 

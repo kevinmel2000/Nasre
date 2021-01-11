@@ -98,23 +98,24 @@
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
-                                  @can('update-country', User::class)
-                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit',$kocdata->id)}}">
+                                   {{-- @can('update-koc', User::class) --}}
+                                    <a class="text-primary mr-3" href="{{url('master-data/koc/edit',$kocdata->id)}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
-                                  @endcan
+                                    {{-- @endcan   --}}
 
-                                  @can('delete-country', User::class)
+                                  {{-- @can('delete-koc', User::class) --}}
 
                                   <span id="delbtn{{@$kocdata->id}}"></span>
                                 
-                                    <form id="delete-product-{{$kocdata->id}}"
-                                        action="{{ url('master-data/country/destroy', $cty->id) }}"
+                                    <form id="delete-koc-{{$kocdata->id}}"
+                                        action="{{ url('master-data/koc/destroy', $kocdata->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
                                     </form>
-                                  @endcan  
+
+                                   {{-- @endcan   --}}
                                 </span>
                               </td>
 

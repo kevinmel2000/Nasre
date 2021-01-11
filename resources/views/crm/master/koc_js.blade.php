@@ -57,9 +57,9 @@
     });
   
     function confirmDelete(id){
-        let choice = confirm("{{__('Are you sure, you want to delete this product and related data?')}}")
+        let choice = confirm("{{__('Are you sure, you want to delete this Koc data and related data?')}}")
         if(choice){
-            document.getElementById('delete-country-'+id).submit();
+            document.getElementById('delete-koc-'+id).submit();
         }
     }
   

@@ -63,9 +63,9 @@ class GolfFieldHoleController extends Controller
         }
     }
 
-    public function destroy(Country $country)
+    public function destroy(GolfFieldHole $golf)
     {
-        if($country->delete())
+        if($golf->delete())
         {
             $notification = array(
                 'message' => 'Golf Field Hole deleted successfully!',

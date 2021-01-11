@@ -59,7 +59,7 @@
     function confirmDelete(id){
         let choice = confirm("{{__('Are you sure, you want to delete this product and related data?')}}")
         if(choice){
-            document.getElementById('delete-country-'+id).submit();
+            document.getElementById('delete-golf-'+id).submit();
         }
     }
   
