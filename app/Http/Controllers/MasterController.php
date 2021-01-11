@@ -49,12 +49,31 @@ class MasterController extends Controller
         $route_active = 'ocp_master';
         $user = Auth::user();
         $occupation = Occupation::orderby('id','asc')->get();
+        $lastid = Occupation::select('id')->latest()->first();
         $ocp_ids = response()->json($occupation->modelKeys());
         $cob = COB::orderby('id','asc')->get();
+        if($lastid != null){
+            if($lastid->id == 9){
+                $code_ocp = "OCP00" . strval($lastid->id + 1);
+            }elseif($lastid->id >= 10){
+                $code_ocp = "OCP00" . strval($lastid->id + 1);
+            }elseif($lastid->id >= 100){
+                $code_ocp = "OCP0" . strval($lastid->id + 1);
+            }elseif($lastid->id >= 1000){
+                $code_ocp = "OCP" . strval($lastid->id + 1);
+            }else{
+                $code_ocp = "OCP000" . strval($lastid->id + 1);
+            }
+        }
+        else{
+            $code_ocp = "OCP000" . strval($lastid->id + 1);
+        }
+
+        
 
 
-        // dd($country);
-        return view('crm.master.occupation', compact(['route_active', 'occupation','cob','ocp_ids']));        
+        // dd($lastid);
+        return view('crm.master.occupation', compact(['route_active', 'occupation','cob','ocp_ids','code_ocp']));        
 
     }
 

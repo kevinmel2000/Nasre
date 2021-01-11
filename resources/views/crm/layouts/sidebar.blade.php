@@ -787,36 +787,25 @@
 
                             @if($route_active == 'golffieldhole_master')
                             @php
-                                $web_form = 'active';
+                                $gfh_form = 'active';
                             @endphp
                             @endif
                             <li class="nav-item">
-                                <a href="{{url('/master-data/golffieldhole')}}" class="nav-link {{@$web_form}}">
+                                <a href="{{url('/master-data/golfhole')}}" class="nav-link {{@$gfh_form}}">
                                         <i class="far fa-folder nav-icon text-secondary"></i>
                                     <p>{{__('GOLF FIELD HOLE')}}</p>
                                 </a>
                             </li>
 
+                        
+
                             @if($route_active == 'koc_master')
                             @php
-                                $kocform = 'active';
+                                $koc_form = 'active';
                             @endphp
                             @endif
                             <li class="nav-item">
-                                <a href="{{url('/master-data/koc')}}" class="nav-link {{@$kocform}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('KOC FORM')}}</p>
-                                </a>
-                            </li>
-
-
-                            @if($route_active == 'Create Form')
-                            @php
-                                $create_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/office/create_form')}}" class="nav-link {{@$create_form}}">
+                                <a href="{{url('/master-data/koc')}}" class="nav-link {{@$koc_form}}">
                                         <i class="far fa-folder nav-icon text-secondary"></i>
                                     <p>{{__('KIND OF CONTRACT')}}</p>
                                 </a>
