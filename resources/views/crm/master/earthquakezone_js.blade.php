@@ -2,8 +2,8 @@
     $(function () {
       "use strict";
   
-      var states = <?php echo(($state_ids->content())) ?>;
-      for(const id of states) {
+      var earthquakezones = <?php echo(($earthquakezone_ids->content())) ?>;
+      for(const id of earthquakezones) {
           var btn = `
               <a href="#" onclick="confirmDelete('${id}')">
                   <i class="fas fa-trash text-danger"></i>

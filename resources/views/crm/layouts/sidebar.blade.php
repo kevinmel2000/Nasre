@@ -872,6 +872,31 @@
                                 </a>
                             </li>
 
+                            @if($route_active == 'earthquakezone_master')
+                            @php
+                                $earthquakezone_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/earthquakezone')}}" class="nav-link {{@$earthquakezone_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('EarthQuake Zone FORM')}}</p>
+                                </a>
+                            </li>
+
+                            @if($route_active == 'flood_master')
+                            @php
+                                $flood_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/floodzone')}}" class="nav-link {{@$flood_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('Flood Zone FORM')}}</p>
+                                </a>
+                            </li>
+
+
                         </ul>
                     </li>
                 @endcan

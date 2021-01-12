@@ -9,6 +9,8 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\FeLookupLocationController;
 use App\Http\Controllers\ProductGroupController;
+use App\Http\Controllers\EarthQuakeZoneController;
+use App\Http\Controllers\FloodZoneController;
 Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
 
     // SECTION Country Group Routes
@@ -65,6 +67,14 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::get('/cedingbroker', [CedingBrokerController::class, 'index']);
     Route::post('/cedingbroker/store',  [CedingBrokerController::class, 'store']);
     Route::delete('/cedingbroker/destroy/{ceding}',  [CedingBrokerController::class, 'destroy']);
+
+    Route::get('/earthquakezone', [EarthQuakeZoneController::class, 'index']);
+    Route::post('/earthquakezone/store',  [EarthQuakeZoneController::class, 'store']);
+    Route::delete('/earthquakezone/destroy/{ceding}',  [EarthQuakeZoneController::class, 'destroy']);
+
+    Route::get('/floodzone', [FloodZoneController::class, 'index']);
+    Route::post('/floodzone/store',  [FloodZoneController::class, 'store']);
+    Route::delete('/floodzone/destroy/{ceding}',  [FloodZoneController::class, 'destroy']);
     
     // Bulk Excel Import Users
     // Route::get('/import', [ ProductController::class, 'import'])->middleware(['can:create-product']);

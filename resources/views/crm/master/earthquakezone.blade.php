@@ -10,11 +10,11 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('master-data/city/store')}}>
+        <form method="POST" action={{url('master-data/earthquakezone/store')}}>
           @csrf
         <div class="card">
           <div class="card-header bg-gray">
-            {{__('New Master City Data')}}
+            {{__('New Master State/Province Data')}}
           </div>
           
           <div class="card-body bg-light-gray ">
@@ -57,7 +57,7 @@
                 <div class="row">
                     <div class="col-md-12 com-sm-12 mt-3">
                         <button class="btn btn-primary btn-block ">
-                            {{__('Save City')}}
+                            {{__('Save EarthQuake Zone')}}
                         </button>
                     </div>
                    
@@ -76,33 +76,33 @@
                     <thead>
                     <tr>
                       <th>{{__('ID')}}</th>
-                      <th>{{__('State')}}</th>
-                      <th>{{__('City Name')}}</th>
+                      <th>{{__('EarthQuake Zone ')}}</th>
+                      <th>{{__('Flag Delete ')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach (@$city as $citydata)
+                        @foreach (@$earthquakezone as $earthquakezonedata)
                             <tr>
-                              <td>{{@$citydata->id}}</td>
-                              <td>{{@$citydata->state->id}} - {{@$citydata->state->name}}</td>
-                              <td>{{@$citydata->name}}</td>
+                              <td>{{@$earthquakezonedata->id}}</td>
+                              <td>{{@$earthquakezonedata->name}}</td>
+                              <td>{{@$earthquakezonedata->flag_delete}}</td>
                              
                               <td>
                                
                                 <span>
-                                   {{-- @can('update-city', User::class) --}}
-                                    <a class="text-primary mr-3" href="{{url('master-data/city/edit',$citydata->id)}}">
+                                   {{-- @can('update-state', User::class) --}}
+                                    <a class="text-primary mr-3" href="{{url('master-data/earthquakezone/edit',$earthquakezonedata->id)}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                     {{-- @endcan   --}}
 
-                                  {{-- @can('delete-city', User::class) --}}
+                                  {{-- @can('delete-state', User::class) --}}
 
-                                  <span id="delbtn{{@$citydata->id}}"></span>
+                                  <span id="delbtn{{@$earthquakezonedata->id}}"></span>
                                 
-                                    <form id="delete-city-{{$citydata->id}}"
-                                        action="{{ url('master-data/city/destroy', $citydata->id) }}"
+                                    <form id="delete-state-{{$earthquakezonedata->id}}"
+                                        action="{{ url('master-data/earthquakezone/destroy', $earthquakezonedata->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
@@ -118,7 +118,7 @@
                     
                   </table>
 
-                  {!! $city->render() !!}
+                  {!! $earthquakezone->render() !!}
 
                 </div>
                
@@ -131,5 +131,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.master.city_js')
+@include('crm.master.earthquakezone_js')
 @endsection

@@ -23,14 +23,14 @@ class EarthQuakeZoneController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $earthquakezone = EarthQuakeZone::orderby('id','desc')->get();
+          $earthquakezone = EarthQuakeZone::orderby('id','desc')->paginate(10);
           $earthquakezone_ids = response()->json($earthquakezone->modelKeys());
           return view('crm.master.earthquakezone', compact('user','earthquakezone','route_active','earthquakezone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
-          $earthquakezone=EarthQuakeZone::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $earthquakezone=EarthQuakeZone::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->paginate(10);
           $earthquakezone_ids = response()->json($earthquakezone->modelKeys());
           return view('crm.master.earthquakezone', compact('user','earthquakezone','route_active','earthquakezone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
