@@ -17,6 +17,10 @@ class FeLookupLocation extends Model
 		return $this->belongsTo('App\Models\Country','country_id'); 
     }
 
+    public function countryside(){
+      return $this->belongsTo('App\Models\Country', 'country_id');
+    }
+
     public function state() 
     {
 		return $this->belongsTo('App\Models\State','province_id'); 

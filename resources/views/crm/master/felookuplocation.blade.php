@@ -171,8 +171,9 @@
                     <tr>
                       <th>{{__('Location Code')}}</th>
                       <th>{{__('Address')}}</th>
-                      <th>{{__('City')}}</th>
+                      <th>{{__('Country')}}</th>
                       <th>{{__('Province')}}</th>
+                      <th>{{__('City')}}</th>
                       <th>{{__('Postal Code')}}</th>
                       <th>{{__('Insured')}}</th>
                       <th>{{__('EQ Zone')}}</th>
@@ -187,8 +188,9 @@
                             <tr>
                               <td>{{@$location->loc_code}}</td>
                               <td>{{@$location->address}}</td>
-                              <td>{{@$location->city_id}}</td>
-                              <td>{{@$location->province_id}}</td>
+                              <td>{{@$location->countryside->id}} - {{@$location->countryside->name}}</td>
+                              <td>{{@$location->state->id}} - {{@$location->state->name}}</td>
+                              <td>{{@$location->city->id}} - {{@$location->city->name}}</td>
                               <td>{{@$location->postal_code }}</td>
                               <td>{{@$location->insured}}</td>
                               <td>{{@$location->eq_zone}}</td>
