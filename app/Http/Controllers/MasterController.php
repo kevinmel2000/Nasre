@@ -51,6 +51,7 @@ class MasterController extends Controller
         $route_active = 'cob_master';
         $user = Auth::user();
         $search = @$request->input('search');
+        $mydate = date("Y").date("m").date("d");
 
         
 
@@ -63,23 +64,23 @@ class MasterController extends Controller
 
             if($lastid != null){
                 if($lastid->id == 9){
-                    $code_cob = "COB00" . strval($lastid->id + 1);
+                    $code_cob = $mydate . strval($lastid->id + 1);
                 }elseif($lastid->id >= 10){
-                    $code_cob = "COB00" . strval($lastid->id + 1);
+                    $code_cob = $mydate . strval($lastid->id + 1);
                 }elseif($lastid->id == 99){
-                    $code_cob = "COB0" . strval($lastid->id + 1);
+                    $code_cob = $mydate . strval($lastid->id + 1);
                 }elseif($lastid->id >= 100){
-                    $code_cob = "COB0" . strval($lastid->id + 1);
+                    $code_cob = $mydate . strval($lastid->id + 1);
                 }elseif($lastid->id == 999){
-                    $code_cob = "COB" . strval($lastid->id + 1);
+                    $code_cob = $mydate . strval($lastid->id + 1);
                 }elseif($lastid->id >= 1000){
-                    $code_cob = "COB" . strval($lastid->id + 1);
+                    $code_cob = $mydate . strval($lastid->id + 1);
                 }else{
-                    $code_cob = "COB000" . strval($lastid->id + 1);
+                    $code_cob = $mydate . strval($lastid->id + 1);
                 }
             }
             else{
-                $code_cob = "OCP000" . strval($lastid->id + 1);
+                $code_cob = $mydate . strval($lastid->id + 1);
             }
 
             // dd($country);
@@ -105,6 +106,7 @@ class MasterController extends Controller
         $route_active = 'ocp_master';
         $user = Auth::user();
         $search = @$request->input('search');
+        $mydate = date("Y").date("m").date("d");
 
         
 
@@ -118,23 +120,23 @@ class MasterController extends Controller
 
             if($lastid != null){
                 if($lastid->id == 9){
-                    $code_ocp = "OCP00" . strval($lastid->id + 1);
+                    $code_ocp = $mydate . strval($lastid->id + 1);
                 }elseif($lastid->id >= 10){
-                    $code_ocp = "OCP00" . strval($lastid->id + 1);
+                    $code_ocp = $mydate . strval($lastid->id + 1);
                 }elseif($lastid->id == 99){
-                    $code_ocp = "OCP0" . strval($lastid->id + 1);
+                    $code_ocp = $mydate . strval($lastid->id + 1);
                 }elseif($lastid->id >= 100){
-                    $code_ocp = "OCP0" . strval($lastid->id + 1);
+                    $code_ocp = $mydate . strval($lastid->id + 1);
                 }elseif($lastid->id == 999){
-                    $code_ocp = "OCP" . strval($lastid->id + 1);
+                    $code_ocp = $mydate . strval($lastid->id + 1);
                 }elseif($lastid->id >= 1000){
-                    $code_ocp = "OCP" . strval($lastid->id + 1);
+                    $code_ocp = $mydate . strval($lastid->id + 1);
                 }else{
-                    $code_ocp = "OCP000" . strval($lastid->id + 1);
+                    $code_ocp = $mydate . strval($lastid->id + 1);
                 }
             }
             else{
-                $code_ocp = "OCP000" . strval($lastid->id + 1);
+                $code_ocp = $mydate . strval($lastid->id + 1);
             }
 
         return view('crm.master.occupation', compact(['route_active', 'occupation','cob','ocp_ids','code_ocp']));        

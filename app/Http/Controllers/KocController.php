@@ -16,7 +16,7 @@ class KocController extends Controller
     {
          $user = Auth::user();
          $route_active = 'koc_master';   
-
+         $mydate = date("Y").date("m").date("d");
          $search = @$request->input('search');
 
          if(empty($search))
@@ -24,7 +24,31 @@ class KocController extends Controller
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $koc = Koc::orderby('id','desc')->get();
           $koc_ids = response()->json($koc->modelKeys());
-          return view('crm.master.koc', compact('user','koc','route_active','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $lastid = Koc::select('id')->latest()->first();
+
+          if($lastid != null){
+            if($lastid->id == 9){
+                $code_koc = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 10){
+                $code_koc = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 99){
+                $code_koc = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 100){
+                $code_koc = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 999){
+                $code_koc = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 1000){
+                $code_koc = $mydate . strval($lastid->id + 1);
+            }else{
+                $code_koc = $mydate . strval($lastid->id + 1);
+            }
+        }
+        else{
+            $code_koc = $mydate . strval($lastid->id + 1);
+        }
+
+
+          return view('crm.master.koc', compact('user','koc','route_active','koc_ids','code_koc'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
