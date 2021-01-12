@@ -709,6 +709,7 @@
                             </li>
                         </ul>
                     </li>
+                @endcan
 
                     @if(
                     @$route_active == 'country_master' 
@@ -757,7 +758,7 @@
                             <li class="nav-item">
                                 <a href="{{url('/master-data/currency')}}" class="nav-link {{@$crc_form}}">
                                         <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('CURRENCY')}}</p>
+                                    <p>{{__('CURRENCY FORM')}}</p>
                                 </a>
                             </li>
 
@@ -849,7 +850,131 @@
 
                         </ul>
                     </li>
-                @endcan
+
+
+                        @if(
+                            @$route_active == 'Marine - Lookup Ship' 
+                            || @$route_active == 'Marine - Slip Entry'
+                            )
+                            @php
+                            $trF_dd = 'active';
+                            $transaction_menu_open = 'menu-open';
+                            @endphp
+                        @else
+                            @php
+                            $transaction_menu_open = 'menu-close';
+                            @endphp
+                        @endif
+                        <li class="nav-item has-treeview {{ @$transaction_menu_open }}">
+                            <a href="#" class="nav-link {{@$trF_dd}}">
+                                <i class="nav-icon fas fa-industry"></i>
+                                <p>
+                                    {{__('TRANSACTION DATA')}}
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+    
+                            <ul class="nav nav-treeview">
+    
+                                @if($route_active == 'Marine - Lookup Ship')
+                                @php
+                                    $marinelookupform = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/transaction-data/marine-lookup')}}" class="nav-link {{@$marinelookupform}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('MARINE - LOOKUP FORM')}}</p>
+                                    </a>
+                                </li>
+    
+                                @if($route_active == 'Marine - Slip Entry')
+                                @php
+                                    $marine_slip = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/transaction-data/marine-slip')}}" class="nav-link {{@$marine_slip}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('MARINE - SLIP ENTRY')}}</p>
+                                    </a>
+                                </li>
+    
+                                @if($route_active == 'currency_exchange')
+                                @php
+                                    $exchange_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/exchange')}}" class="nav-link {{@$exchange_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('FIRE & ENGINEERING -')}} <br> {{__(' SLIP ENTRY')}}</p>
+                                    </a>
+                                </li>
+    
+                                @if($route_active == 'felookuplocation_master')
+                                @php
+                                    $felookuplocationform = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/felookuplocation')}}" class="nav-link {{@$felookuplocationform}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('FINANCIAL LINES -')}} <br> {{__('SLIP ENTRY')}}</p>
+                                    </a>
+                                </li>
+                            
+    
+                                @if($route_active == 'koc_master')
+                                @php
+                                    $koc_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/koc')}}" class="nav-link {{@$koc_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('MOVEABLE PROPERTY -')}} <br> {{__('SLIP ENTRY')}}</p>
+                                    </a>
+                                </li>
+    
+                                @if($route_active == 'cedingbroker_master')
+                                @php
+                                    $cedingform = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/cedingbroker')}}" class="nav-link {{@$cedingform}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('HOLE IN ONES - SLIP ENTRY')}}</p>
+                                    </a>
+                                </li>
+    
+                                @if($route_active == 'cob_master')
+                                @php
+                                    $cob_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/cob')}}" class="nav-link {{@$cob_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('PERSONAL ACCIDENT - ')}} <br> {{__('SLIP ENTRY')}}</p>
+                                    </a>
+                                </li>
+    
+                                @if($route_active == 'ocp_master')
+                                @php
+                                    $ocp_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/occupation')}}" class="nav-link {{@$ocp_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('HE & MOTOR - SLIP ENTRY')}}</p>
+                                    </a>
+                                </li>
+    
+                            </ul>
+                        </li>
               </ul>
           </nav>
       </div>

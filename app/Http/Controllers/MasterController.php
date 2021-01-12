@@ -20,90 +20,191 @@ class MasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexcountry()
+    public function indexcountry(Request $request)
     {
-        $route_active = 'country_master';
         $user = Auth::user();
-        $country = Country::orderby('id','asc')->get();
-        $country_ids = response()->json($country->modelKeys());
+        $route_active = 'country_master';
+        $search = @$request->input('search');
+        
 
         // dd($country);
+        if(empty($search))
+         {
+            $country = Country::orderby('id','asc')->get();
+            $country_ids = response()->json($country->modelKeys());
+            return view('crm.master.country', compact(['route_active', 'country','country_ids']));   
         return view('crm.master.country', compact(['route_active', 'country','country_ids']));        
+            return view('crm.master.country', compact(['route_active', 'country','country_ids']));   
+         }
+        else
+        {
+          $country = Country::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $country_ids = response()->json($country->modelKeys());
+          return view('crm.master.country', compact('user','country','route_active','country_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
+
 
     }
 
-    public function indexcob()
+    public function indexcob(Request $request)
     {
         $route_active = 'cob_master';
         $user = Auth::user();
-        $cob = COB::orderby('id','asc')->get();
-        $cob_ids = response()->json($cob->modelKeys());
-
-        // dd($country);
-        return view('crm.master.cob', compact(['route_active', 'cob','cob_ids']));        
-
-    }
-
-    public function indexoccupation()
-    {
-        $route_active = 'ocp_master';
-        $user = Auth::user();
-        $occupation = Occupation::orderby('id','asc')->get();
-        $lastid = Occupation::select('id')->latest()->first();
-        $ocp_ids = response()->json($occupation->modelKeys());
-        $cob = COB::orderby('id','asc')->get();
-        if($lastid != null){
-            if($lastid->id == 9){
-                $code_ocp = "OCP00" . strval($lastid->id + 1);
-            }elseif($lastid->id >= 10){
-                $code_ocp = "OCP00" . strval($lastid->id + 1);
-            }elseif($lastid->id >= 100){
-                $code_ocp = "OCP0" . strval($lastid->id + 1);
-            }elseif($lastid->id >= 1000){
-                $code_ocp = "OCP" . strval($lastid->id + 1);
-            }else{
-                $code_ocp = "OCP000" . strval($lastid->id + 1);
-            }
-        }
-        else{
-            $code_ocp = "OCP000" . strval($lastid->id + 1);
-        }
+        $search = @$request->input('search');
 
         
 
+        if(empty($search))
+         {
 
-        // dd($lastid);
-        return view('crm.master.occupation', compact(['route_active', 'occupation','cob','ocp_ids','code_ocp']));        
+            $cob = COB::orderby('id','asc')->get();
+            $lastid = COB::select('id')->latest()->first();
+            $cob_ids = response()->json($cob->modelKeys());
+
+            if($lastid != null){
+                if($lastid->id == 9){
+                    $code_cob = "COB00" . strval($lastid->id + 1);
+                }elseif($lastid->id >= 10){
+                    $code_cob = "COB00" . strval($lastid->id + 1);
+                }elseif($lastid->id == 99){
+                    $code_cob = "COB0" . strval($lastid->id + 1);
+                }elseif($lastid->id >= 100){
+                    $code_cob = "COB0" . strval($lastid->id + 1);
+                }elseif($lastid->id == 999){
+                    $code_cob = "COB" . strval($lastid->id + 1);
+                }elseif($lastid->id >= 1000){
+                    $code_cob = "COB" . strval($lastid->id + 1);
+                }else{
+                    $code_cob = "COB000" . strval($lastid->id + 1);
+                }
+            }
+            else{
+                $code_cob = "OCP000" . strval($lastid->id + 1);
+            }
+
+            // dd($country);
+        return view('crm.master.cob', compact(['route_active', 'cob','cob_ids','code_cob'])); 
+
+        }
+        else
+        {
+            $cob = COB::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+            $lastid = COB::select('id')->latest()->first();
+            $cob_ids = response()->json($cob->modelKeys());
+
+          return view('crm.master.cob', compact('user','cob','route_active','cob_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+
+        }
+
+               
 
     }
 
-    public function indexcurrency()
+    public function indexoccupation(Request $request)
+    {
+        $route_active = 'ocp_master';
+        $user = Auth::user();
+        $search = @$request->input('search');
+
+        
+
+        if(empty($search))
+         {
+            $occupation = Occupation::orderby('id','asc')->get();
+            $lastid = Occupation::select('id')->latest()->first();
+            $ocp_ids = response()->json($occupation->modelKeys());
+            $cob = COB::orderby('id','asc')->get();
+
+
+            if($lastid != null){
+                if($lastid->id == 9){
+                    $code_ocp = "OCP00" . strval($lastid->id + 1);
+                }elseif($lastid->id >= 10){
+                    $code_ocp = "OCP00" . strval($lastid->id + 1);
+                }elseif($lastid->id == 99){
+                    $code_ocp = "OCP0" . strval($lastid->id + 1);
+                }elseif($lastid->id >= 100){
+                    $code_ocp = "OCP0" . strval($lastid->id + 1);
+                }elseif($lastid->id == 999){
+                    $code_ocp = "OCP" . strval($lastid->id + 1);
+                }elseif($lastid->id >= 1000){
+                    $code_ocp = "OCP" . strval($lastid->id + 1);
+                }else{
+                    $code_ocp = "OCP000" . strval($lastid->id + 1);
+                }
+            }
+            else{
+                $code_ocp = "OCP000" . strval($lastid->id + 1);
+            }
+
+        return view('crm.master.occupation', compact(['route_active', 'occupation','cob','ocp_ids','code_ocp']));        
+
+        }
+        else
+        {
+            $occupation =Occupation::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+            $ocp_ids = response()->json($occupation->modelKeys());
+            $cob = COB::orderby('id','asc')->get();
+
+
+            return view('crm.master.occupation', compact('user','occupation','cob','route_active','ocp_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
+
+
+        // dd($lastid);
+        // return view('crm.master.occupation', compact(['route_active', 'occupation','cob','ocp_ids','code_ocp']));        
+
+    }
+
+    public function indexcurrency(Request $request)
     {
         $route_active = 'currency_master';
         $user = Auth::user();
-        $currency = Currency::orderby('id','asc')->get();
-        $crc_ids = response()->json($currency->modelKeys());
-        $country = Country::orderby('id','asc')->get();
+        $search = @$request->input('search');
 
+        if(empty($search))
+         {
+            $currency = Currency::orderby('id','asc')->get();
+            $crc_ids = response()->json($currency->modelKeys());
+            $country = Country::orderby('id','asc')->get();
 
+            // dd($country);
+            return view('crm.master.currency', compact(['route_active', 'currency','crc_ids','country']));        
+        }
+        else
+        {
+            $currency = Currency::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+            $crc_ids = response()->json($currency->modelKeys());
+            $country = Country::orderby('id','asc')->get();
 
-        // dd($country);
-        return view('crm.master.currency', compact(['route_active', 'currency','crc_ids','country']));        
-
+            return view('crm.master.currency', compact('user','currency','country','route_active','crc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
     }
 
-    public function indexexchange()
+    public function indexexchange(Request $request)
     {
         $route_active = 'currency_exchange';
         $user = Auth::user();
-        $currency_exchange = CurrencyExchange::orderby('id','asc')->get();
-        $exc_ids = response()->json($currency_exchange->modelKeys());
-        $currency = Currency::orderby('id','asc')->get();
+        $search = @$request->input('search');
 
+        if(empty($search))
+         {
+            $currency_exchange = CurrencyExchange::orderby('id','asc')->get();
+            $exc_ids = response()->json($currency_exchange->modelKeys());
+            $currency = Currency::orderby('id','asc')->get();
 
+            // dd($country);
+            return view('crm.master.exchange', compact(['route_active','exc_ids','currency','currency_exchange']));        
+        }
+        else
+        {
+            $currency_exchange = CurrencyExchange::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+            $exc_ids = response()->json($currency_exchange->modelKeys());
+            $currency = Currency::orderby('id','asc')->get();
 
-        // dd($country);
-        return view('crm.master.exchange', compact(['route_active','exc_ids','currency','currency_exchange']));        
+            return view('crm.master.currency', compact('user','currency_exchange','currency','route_active','exc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+
+        }
 
     }
 

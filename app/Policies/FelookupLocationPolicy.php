@@ -7,7 +7,7 @@ use App\MOdels\FeLookupLocation;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class FelookupBrokerPolicy
+class FelookupLocationPolicy
 {
     use HandlesAuthorization;
 
