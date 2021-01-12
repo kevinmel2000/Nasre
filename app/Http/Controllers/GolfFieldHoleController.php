@@ -16,7 +16,7 @@ class GolfFieldHoleController extends Controller
     {
          $user = Auth::user();
          $route_active = 'golffieldhole_master';   
-
+         $mydate = date("Y").date("m").date("d");
          $search = @$request->input('search');
 
          if(empty($search))
@@ -24,7 +24,31 @@ class GolfFieldHoleController extends Controller
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $golffieldhole = GolfFieldHole::orderby('id','desc')->get();
           $golffieldhole_ids = response()->json($golffieldhole->modelKeys());
-          return view('crm.master.golffieldhole', compact('user','golffieldhole','route_active','golffieldhole_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $lastid = GolfFieldHole::select('id')->latest()->first();
+
+          if($lastid != null){
+            if($lastid->id == 9){
+                $code_gfh = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 10){
+                $code_gfh = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 99){
+                $code_gfh = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 100){
+                $code_gfh = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 999){
+                $code_gfh = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 1000){
+                $code_gfh = $mydate . strval($lastid->id + 1);
+            }else{
+                $code_gfh = $mydate . strval($lastid->id + 1);
+            }
+        }
+        else{
+            $code_gfh = $mydate . strval($lastid->id + 1);
+        }
+
+
+          return view('crm.master.golffieldhole', compact('user','golffieldhole','route_active','golffieldhole_ids','code_gfh'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {

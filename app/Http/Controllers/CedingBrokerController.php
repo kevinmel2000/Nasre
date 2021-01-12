@@ -16,7 +16,7 @@ class CedingBrokerController extends Controller
     {
          $user = Auth::user();
          $route_active = 'cedingbroker_master';   
-
+         $mydate = date("Y").date("m").date("d");
          $search = @$request->input('search');
 
          if(empty($search))
@@ -25,8 +25,30 @@ class CedingBrokerController extends Controller
           $cedingbroker = CedingBroker::orderby('id','desc')->get();
           $cedingbroker_ids = response()->json($cedingbroker->modelKeys());
           $country = Country::orderby('id','asc')->get();
+          $lastid = CedingBroker::select('id')->latest()->first();
 
-          return view('crm.master.cedingbroker', compact('user','cedingbroker','route_active','cedingbroker_ids','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+          if($lastid != null){
+            if($lastid->id == 9){
+                $code_ceding = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 10){
+                $code_ceding = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 99){
+                $code_ceding = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 100){
+                $code_ceding = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 999){
+                $code_ceding = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 1000){
+                $code_ceding = $mydate . strval($lastid->id + 1);
+            }else{
+                $code_ceding = $mydate . strval($lastid->id + 1);
+            }
+        }
+        else{
+            $code_ceding = $mydate . strval($lastid->id + 1);
+        }
+
+          return view('crm.master.cedingbroker', compact('user','cedingbroker','route_active','cedingbroker_ids','country','code_ceding'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {

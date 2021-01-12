@@ -96,52 +96,52 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('delete-occupation', 'App\Policies\OccupationPolicy@delete');
 
         // ANCHOR COB Gates
-        Gate::define('viewany-occupation', 'App\Policies\OccupationPolicy@viewany');
-        Gate::define('view-occupation', 'App\Policies\OccupationPolicy@view');
-        Gate::define('create-occupation', 'App\Policies\OccupationPolicy@create');
-        Gate::define('update-occupation', 'App\Policies\OccupationPolicy@update');
-        Gate::define('delete-occupation', 'App\Policies\OccupationPolicy@delete');
+        Gate::define('viewany-cob', 'App\Policies\COBPolicy@viewany');
+        Gate::define('view-cob', 'App\Policies\COBPolicy@view');
+        Gate::define('create-cob', 'App\Policies\COBPolicy@create');
+        Gate::define('update-cob', 'App\Policies\COBPolicy@update');
+        Gate::define('delete-cob', 'App\Policies\COBPolicy@delete');
                 
         // ANCHOR Currency Gates
-        Gate::define('viewany-occupation', 'App\Policies\OccupationPolicy@viewany');
-        Gate::define('view-occupation', 'App\Policies\OccupationPolicy@view');
-        Gate::define('create-occupation', 'App\Policies\OccupationPolicy@create');
-        Gate::define('update-occupation', 'App\Policies\OccupationPolicy@update');
-        Gate::define('delete-occupation', 'App\Policies\OccupationPolicy@delete');
+        Gate::define('viewany-currency', 'App\Policies\CurrencyPolicy@viewany');
+        Gate::define('view-currency', 'App\Policies\CurrencyPolicy@view');
+        Gate::define('create-currency', 'App\Policies\CurrencyPolicy@create');
+        Gate::define('update-currency', 'App\Policies\CurrencyPolicy@update');
+        Gate::define('delete-currency', 'App\Policies\CurrencyPolicy@delete');
 
         // ANCHOR Exchange Gates
-        Gate::define('viewany-occupation', 'App\Policies\OccupationPolicy@viewany');
-        Gate::define('view-occupation', 'App\Policies\OccupationPolicy@view');
-        Gate::define('create-occupation', 'App\Policies\OccupationPolicy@create');
-        Gate::define('update-occupation', 'App\Policies\OccupationPolicy@update');
-        Gate::define('delete-occupation', 'App\Policies\OccupationPolicy@delete');
+        Gate::define('viewany-exchange', 'App\Policies\CurrencyExchangePolicy@viewany');
+        Gate::define('view-exchange', 'App\Policies\CurrencyExchangePolicy@view');
+        Gate::define('create-exchange', 'App\Policies\CurrencyExchangePolicy@create');
+        Gate::define('update-exchange', 'App\Policies\CurrencyExchangePolicy@update');
+        Gate::define('delete-exchange', 'App\Policies\CurrencyExchangePolicy@delete');
     
         // ANCHOR KOC Gates
-        Gate::define('viewany-occupation', 'App\Policies\OccupationPolicy@viewany');
-        Gate::define('view-occupation', 'App\Policies\OccupationPolicy@view');
-        Gate::define('create-occupation', 'App\Policies\OccupationPolicy@create');
-        Gate::define('update-occupation', 'App\Policies\OccupationPolicy@update');
-        Gate::define('delete-occupation', 'App\Policies\OccupationPolicy@delete');
+        Gate::define('viewany-koc', 'App\Policies\KOCPolicy@viewany');
+        Gate::define('view-koc', 'App\Policies\KOCPolicy@view');
+        Gate::define('create-koc', 'App\Policies\KOCPolicy@create');
+        Gate::define('update-koc', 'App\Policies\KOCPolicy@update');
+        Gate::define('delete-koc', 'App\Policies\KOCPolicy@delete');
 
         // ANCHOR GFH Gates
-        Gate::define('viewany-occupation', 'App\Policies\OccupationPolicy@viewany');
-        Gate::define('view-occupation', 'App\Policies\OccupationPolicy@view');
-        Gate::define('create-occupation', 'App\Policies\OccupationPolicy@create');
-        Gate::define('update-occupation', 'App\Policies\OccupationPolicy@update');
-        Gate::define('delete-occupation', 'App\Policies\OccupationPolicy@delete');
+        Gate::define('viewany-gfh', 'App\Policies\GFHPolicy@viewany');
+        Gate::define('view-gfh', 'App\Policies\GFHPolicy@view');
+        Gate::define('create-gfh', 'App\Policies\GFHPolicy@create');
+        Gate::define('update-gfh', 'App\Policies\GFHPolicy@update');
+        Gate::define('delete-gfh', 'App\Policies\GFHPolicy@delete');
 
         // ANCHOR CedingBroker Gates
-        Gate::define('viewany-occupation', 'App\Policies\OccupationPolicy@viewany');
-        Gate::define('view-occupation', 'App\Policies\OccupationPolicy@view');
-        Gate::define('create-occupation', 'App\Policies\OccupationPolicy@create');
-        Gate::define('update-occupation', 'App\Policies\OccupationPolicy@update');
-        Gate::define('delete-occupation', 'App\Policies\OccupationPolicy@delete');
+        Gate::define('viewany-cedingbroker', 'App\Policies\CedingBrokerPolicy@viewany');
+        Gate::define('view-cedingbroker', 'App\Policies\CedingBrokerPolicy@view');
+        Gate::define('create-cedingbroker', 'App\Policies\CedingBrokerPolicy@create');
+        Gate::define('update-cedingbroker', 'App\Policies\CedingBrokerPolicy@update');
+        Gate::define('delete-cedingbroker', 'App\Policies\CedingBrokerPolicy@delete');
 
         // ANCHOR FELookup Gates
-        Gate::define('viewany-occupation', 'App\Policies\OccupationPolicy@viewany');
-        Gate::define('view-occupation', 'App\Policies\OccupationPolicy@view');
-        Gate::define('create-occupation', 'App\Policies\OccupationPolicy@create');
-        Gate::define('update-occupation', 'App\Policies\OccupationPolicy@update');
-        Gate::define('delete-occupation', 'App\Policies\OccupationPolicy@delete');
+        Gate::define('viewany-felookup', 'App\Policies\FelookupLocationPolicy@viewany');
+        Gate::define('view-felookup', 'App\Policies\FelookupLocationPolicy@view');
+        Gate::define('create-felookup', 'App\Policies\FelookupLocationPolicy@create');
+        Gate::define('update-felookup', 'App\Policies\FelookupLocationPolicy@update');
+        Gate::define('delete-felookup', 'App\Policies\FelookupLocationPolicy@delete');
     }
 }
