@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
+use App\Models\Customer\Customer;
 use App\Models\FeLookupLocation;
 use App\Models\EarthQuakeZone;
 use App\Models\FloodZone;
@@ -50,28 +51,30 @@ class FeLookupLocationController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $felookuplocation = FeLookupLocation::orderby('id','desc')->get();
+          $felookuplocation = FeLookupLocation::orderby('id','desc')->paginate(10);
           $felookuplocation_ids = response()->json($felookuplocation->modelKeys());
           $country = Country::orderby('id','asc')->get();
           $city = City::orderby('id','asc')->get();
           $state = State::orderby('id','asc')->get();
           $earthquakezone = EarthQuakeZone::orderby('id','asc')->get();
           $floodzone = FloodZone::orderby('id','asc')->get();
+          $costumer=Customer::orderby('id','asc')->get();
 
-          return view('crm.master.felookuplocation', compact('user','earthquakezone','floodzone','felookuplocation','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.master.felookuplocation', compact('user','earthquakezone','floodzone','felookuplocation','costumer','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
-          $felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->paginate(10);
           $felookuplocation_ids = response()->json($felookuplocation->modelKeys());
           $country = Country::orderby('id','asc')->get();
           $city = City::orderby('id','asc')->get();
           $state = State::orderby('id','asc')->get();
           $earthquakezone = EarthQuakeZone::orderby('id','asc')->get();
           $floodzone = FloodZone::orderby('id','asc')->get();
+          $costumer=Customer::orderby('id','asc')->get();
 
-          return view('crm.master.felookuplocation', compact('user','earthquakezone','floodzone','felookuplocation','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.master.felookuplocation', compact('user','earthquakezone','floodzone','felookuplocation','costumer','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }
 
@@ -79,19 +82,29 @@ class FeLookupLocationController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'crccode'=>'required|max:5|unique:currencies,code',
-            'crcsymbolname'=>'required',
-            'crccountry'=>'required'
+            'code'=>'required|max:5|unique:currencies,code',
+            'address'=>'required',
+            'crccountry'=>'required',
+            'postal_code'=>'required',
+            'eqzone'=>'required',
+            'floodzone'=>'required'
         ]);
         
         if($validator)
         {
             $user = Auth::user();
-            Currency::create([
-                'symbol_name'=>$request->crcsymbolname,
-                'is_base_currency' => '',
-                'code'=>$request->crccode,
-                'country'=>$request->crccountry
+            FeLookupLocation::create([
+                'loc_code'=>$request->code,
+                'address' => $request->address,
+                'longtitude'=>$request->longtitude,
+                'latitude'=>$request->latitude,
+                'postal_code'=>$request->postal_code,
+                'country_id'=>$request->crccountry,
+                'city_id'=>$request->cityinsert,
+                'province_id'=>$request->province,
+                'eq_zone'=>$request->eqzone,
+                'flood_zone'=>$request->floodzone,
+                'insured'=>$request->insured
             ]);
             $notification = array(
                 'message' => 'Fire & Engginering Lookup Location added successfully!',
@@ -105,9 +118,10 @@ class FeLookupLocationController extends Controller
         }
     }
 
-    public function destroy(Country $country)
+    public function destroy($id)
     {
-        if($country->delete())
+        $felookuplocation = FeLookupLocation::find($id);
+        if($felookuplocation->delete())
         {
             $notification = array(
                 'message' => 'Fire & Engginering Lookup Location deleted successfully!',

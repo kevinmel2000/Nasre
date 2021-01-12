@@ -10,7 +10,7 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('master-data/state/store')}}>
+        <form method="POST" action={{url('master-data/floodzone/store')}}>
           @csrf
         <div class="card">
           <div class="card-header bg-gray">
@@ -20,20 +20,13 @@
           <div class="card-body bg-light-gray ">
             <div class="tab-content" id="custom-tabs-three-tabContent">
               <div class="tab-pane fade show active" id="lead-details-id" role="tabpanel" aria-labelledby="lead-details">
-                <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                          <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="code" class="form-control form-control-sm" data-validation="length" data-validation-length="3" required/>
-                        </div>
-                    </div>
-                </div>
+               
                 
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Description')}}</label>
-                          <input type="text" name="description" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <label for="">{{__('Flood Zone Name')}}</label>
+                          <input type="text" name="name" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                       </div>
                     </div>
                 </div>
@@ -41,8 +34,8 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Abbreviation')}}</label>
-                          <input type="text" name="abbreviation" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <label for="">{{__('Flag Delete')}}</label>
+                          <input type="text" name="flagdelete" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                       </div>
                     </div>
                 </div>
@@ -57,7 +50,7 @@
                 <div class="row">
                     <div class="col-md-12 com-sm-12 mt-3">
                         <button class="btn btn-primary btn-block ">
-                            {{__('Save State/Province')}}
+                            {{__('Save Flood Zone')}}
                         </button>
                     </div>
                    
@@ -82,27 +75,28 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach (@$state as $statedata)
+                        @foreach (@$floodzone as $floodzonedata)
                             <tr>
-                              <td>{{@$statedata->id}}</td>
-                              <td>{{@$statedata->country->id}} - {{@$statedata->country->name}}</td>
-                              <td>{{@$statedata->name}}</td>
+                              <td>{{@$floodzonedata->id}}</td>
+                              <td>{{@$floodzonedata->name}}</td>
+                              <td>{{@$floodzonedata->flag_delete}}</td>
+                             
                              
                               <td>
                                
                                 <span>
-                                   {{-- @can('update-state', User::class) --}}
-                                    <a class="text-primary mr-3" href="{{url('master-data/state/edit',$statedata->id)}}">
+                                   {{-- @can('update-floodzone', User::class) --}}
+                                    <a class="text-primary mr-3" href="{{url('master-data/floodzone/edit',$floodzonedata->id)}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                     {{-- @endcan   --}}
 
-                                  {{-- @can('delete-state', User::class) --}}
+                                  {{-- @can('delete-floodzone', User::class) --}}
 
-                                  <span id="delbtn{{@$statedata->id}}"></span>
+                                  <span id="delbtn{{@$floodzonedata->id}}"></span>
                                 
-                                    <form id="delete-state-{{$statedata->id}}"
-                                        action="{{ url('master-data/state/destroy', $statedata->id) }}"
+                                    <form id="delete-floodzone-{{$floodzonedata->id}}"
+                                        action="{{ url('master-data/floodzone/destroy', $floodzonedata->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
@@ -118,7 +112,7 @@
                     
                   </table>
 
-                  {!! $state->render() !!}
+                  {!! $floodzone->render() !!}
 
                 </div>
                
@@ -131,5 +125,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.master.state_js')
+@include('crm.master.floodzone_js')
 @endsection

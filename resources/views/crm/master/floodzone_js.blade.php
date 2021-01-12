@@ -2,8 +2,8 @@
     $(function () {
       "use strict";
   
-      var states = <?php echo(($state_ids->content())) ?>;
-      for(const id of states) {
+      var floodzones = <?php echo(($floodzone_ids->content())) ?>;
+      for(const id of floodzones) {
           var btn = `
               <a href="#" onclick="confirmDelete('${id}')">
                   <i class="fas fa-trash text-danger"></i>
@@ -17,9 +17,9 @@
   
   
     function confirmDelete(id){
-        let choice = confirm("{{__('Are you sure, you want to delete this State data and related data?')}}")
+        let choice = confirm("{{__('Are you sure, you want to delete this Flood zone data and related data?')}}")
         if(choice){
-            document.getElementById('delete-state-'+id).submit();
+            document.getElementById('delete-floodzone-'+id).submit();
         }
     }
   

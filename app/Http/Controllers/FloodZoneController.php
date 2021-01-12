@@ -39,9 +39,8 @@ class FloodZoneController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'code'=>'required|max:5|unique:currencies,code',
-            'description'=>'required',
-            'abbreviation'=>'required'
+            'name'=>'required',
+            'flagdelete'=>'required'
         ]);
         
         if($validator)
@@ -50,9 +49,8 @@ class FloodZoneController extends Controller
             //exit();
             $user = Auth::user();
             FloodZone::create([
-                'code'=>$request->code,
-                'description'=>$request->description,
-                'abbreviation'=>$request->abbreviation
+                'name'=>$request->name,
+                'flag_delete'=>$request->flagdelete
             ]);
             $notification = array(
                 'message' => 'Flood Zone added successfully!',
@@ -67,8 +65,10 @@ class FloodZoneController extends Controller
     }
     
 
-    public function destroy(FloodZone $floodzone)
+    
+    public function destroy($id)
     {
+        $floodzone = FloodZone::find($id);
         if($floodzone->delete())
         {
             $notification = array(

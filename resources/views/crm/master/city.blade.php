@@ -23,8 +23,8 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="code" class="form-control form-control-sm" data-validation="length" data-validation-length="3" required/>
+                          <label for="">{{__('Enter Name')}} </label>
+                          <input type="text" name="name" class="form-control form-control-sm" required/>
                         </div>
                     </div>
                 </div>
@@ -32,20 +32,16 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Description')}}</label>
-                          <input type="text" name="description" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                      </div>
+                          <label for="">{{__('State')}} </label>
+                          <select name="state" class="form-control form-control-sm ">
+                              <option selected disabled>{{__('Select State')}}</option>
+                              @foreach($state as $statedata)
+                              <option value="{{ $statedata->id }}">{{ $statedata->id }} - {{ $statedata->name }}</option>
+                              @endforeach
+                          </select> </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                          <label for="">{{__('Abbreviation')}}</label>
-                          <input type="text" name="abbreviation" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                      </div>
-                    </div>
-                </div>
                 
               </div>
             </div>
