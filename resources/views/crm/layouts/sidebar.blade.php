@@ -750,6 +750,30 @@
                                 </a>
                             </li>
 
+                            @if($route_active == 'state_master')
+                            @php
+                                $state_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/state')}}" class="nav-link {{@$state_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('PROVINCE FORM')}}</p>
+                                </a>
+                            </li>
+
+                            @if($route_active == 'city_master')
+                            @php
+                                $city_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/city')}}" class="nav-link {{@$city_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('CITY FORM')}}</p>
+                                </a>
+                            </li>
+
                             @if($route_active == 'currency_master')
                             @php
                                 $crc_form = 'active';
@@ -792,7 +816,7 @@
                             @endphp
                             @endif
                             <li class="nav-item">
-                                <a href="{{url('/master-data/golfhole')}}" class="nav-link {{@$gfh_form}}">
+                                <a href="{{url('/master-data/golffieldhole')}}" class="nav-link {{@$gfh_form}}">
                                         <i class="far fa-folder nav-icon text-secondary"></i>
                                     <p>{{__('GOLF FIELD HOLE')}}</p>
                                 </a>
@@ -811,6 +835,7 @@
                                     <p>{{__('KIND OF CONTRACT')}}</p>
                                 </a>
                             </li>
+                            
 
                             @if($route_active == 'cedingbroker_master')
                             @php

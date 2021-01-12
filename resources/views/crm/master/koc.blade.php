@@ -10,11 +10,11 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('master-data/country/store')}}>
+        <form method="POST" action={{url('master-data/koc/store')}}>
           @csrf
         <div class="card">
           <div class="card-header bg-gray">
-            {{__('New Kind of Contract Data')}}
+            {{__('New Master Koc Data')}}
           </div>
           
           <div class="card-body bg-light-gray ">
@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="countrycode" class="form-control form-control-sm" data-validation="length" data-validation-length="3" required/>
+                          <input type="text" name="code" class="form-control form-control-sm" data-validation="length" data-validation-length="3" required/>
                         </div>
                     </div>
                 </div>
@@ -32,8 +32,8 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Country Name')}}</label>
-                          <input type="text" name="countryname" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <label for="">{{__('Description')}}</label>
+                          <input type="text" name="description" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                       </div>
                     </div>
                 </div>
@@ -41,18 +41,9 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Continent')}}</label>
-                          <select name="continent" class="form-control form-control-sm ">
-                              <option selected disabled>{{__('Select Continent')}}</option>
-                              <option value="AF">Africa</option>
-                              <option value="AN">Antartica</option>
-                              <option value="AS">Asia</option>
-                              <option value="EU">Europa</option>
-                              <option value="NA">North America </option>
-                              <option value="OC">Oceania</option>
-                              <option value="SA">South America</option>
-                          </select>
-                      </div>    
+                          <label for="">{{__('Abbreviation')}}</label>
+                          <input type="text" name="abbreviation" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                      </div>
                     </div>
                 </div>
                 
@@ -66,7 +57,7 @@
                 <div class="row">
                     <div class="col-md-12 com-sm-12 mt-3">
                         <button class="btn btn-primary btn-block ">
-                            {{__('Save Country')}}
+                            {{__('Save Koc')}}
                         </button>
                     </div>
                    
@@ -107,23 +98,24 @@
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
-                                  @can('update-country', User::class)
-                                    <a class="text-primary mr-3" href="{{url('master-data/country/edit',$kocdata->id)}}">
+                                   {{-- @can('update-koc', User::class) --}}
+                                    <a class="text-primary mr-3" href="{{url('master-data/koc/edit',$kocdata->id)}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
-                                  @endcan
+                                    {{-- @endcan   --}}
 
-                                  @can('delete-country', User::class)
+                                  {{-- @can('delete-koc', User::class) --}}
 
                                   <span id="delbtn{{@$kocdata->id}}"></span>
                                 
-                                    <form id="delete-product-{{$kocdata->id}}"
-                                        action="{{ url('master-data/country/destroy', $cty->id) }}"
+                                    <form id="delete-koc-{{$kocdata->id}}"
+                                        action="{{ url('master-data/koc/destroy', $kocdata->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
                                     </form>
-                                  @endcan  
+
+                                   {{-- @endcan   --}}
                                 </span>
                               </td>
 

@@ -2,8 +2,8 @@
     $(function () {
       "use strict";
   
-      var cedingbrokers = <?php echo(($cedingbroker_ids->content())) ?>;
-      for(const id of cedingbrokers) {
+      var states = <?php echo(($state_ids->content())) ?>;
+      for(const id of states) {
           var btn = `
               <a href="#" onclick="confirmDelete('${id}')">
                   <i class="fas fa-trash text-danger"></i>
@@ -57,9 +57,9 @@
     });
   
     function confirmDelete(id){
-        let choice = confirm("{{__('Are you sure, you want to delete this Ceding Broker Data and related data?')}}")
+        let choice = confirm("{{__('Are you sure, you want to delete this City data and related data?')}}")
         if(choice){
-            document.getElementById('delete-ceding-'+id).submit();
+            document.getElementById('delete-city-'+id).submit();
         }
     }
   

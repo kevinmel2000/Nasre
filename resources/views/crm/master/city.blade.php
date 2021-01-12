@@ -10,11 +10,11 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('master-data/golffieldhole/store')}}>
+        <form method="POST" action={{url('master-data/city/store')}}>
           @csrf
         <div class="card">
           <div class="card-header bg-gray">
-            {{__('New Golf Field Data')}}
+            {{__('New Master City Data')}}
           </div>
           
           <div class="card-body bg-light-gray ">
@@ -32,8 +32,8 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Golf Field')}}</label>
-                          <input type="text" name="golffield" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <label for="">{{__('Description')}}</label>
+                          <input type="text" name="description" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                       </div>
                     </div>
                 </div>
@@ -41,13 +41,11 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Hole Number')}}</label>
-                          <input type="text" name="holenumber" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <label for="">{{__('Abbreviation')}}</label>
+                          <input type="text" name="abbreviation" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                       </div>
                     </div>
                 </div>
-
-                
                 
               </div>
             </div>
@@ -59,7 +57,7 @@
                 <div class="row">
                     <div class="col-md-12 com-sm-12 mt-3">
                         <button class="btn btn-primary btn-block ">
-                            {{__('Save Golf Field')}}
+                            {{__('Save City')}}
                         </button>
                     </div>
                    
@@ -78,45 +76,39 @@
                     <thead>
                     <tr>
                       <th>{{__('ID')}}</th>
-                      <th>{{__('Code')}}</th>
-                      <th>{{__('Golf field')}}</th>
-                      <th>{{__('Hole Number')}}</th>
+                      <th>{{__('State')}}</th>
+                      <th>{{__('City Name')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach (@$golffieldhole as $golf)
+                        @foreach (@$city as $citydata)
                             <tr>
-                              <td>{{@$golf->id}}</td>
-                              <td>{{@$golf->code}}</td>
-                              <td>{{@$golf->golf_field}}</td>
-                              <td>{{@$golf->hole_number}}</td>
+                              <td>{{@$citydata->id}}</td>
+                              <td>{{@$citydata->state_id}}</td>
+                              <td>{{@$citydata->name}}</td>
+                             
                               <td>
-                                <a href="#" data-toggle="tooltip" data-title="{{$golf->created_at->toDayDateTimeString()}}" class="mr-3">
-                                  <i class="fas fa-clock text-info"></i>
-                                </a>
-                                <a href="#" data-toggle="tooltip" data-title="{{$golf->updated_at->toDayDateTimeString()}}" class="mr-3">
-                                  <i class="fas fa-history text-primary"></i>
-                                </a>
+                               
                                 <span>
-                                {{-- @can('update-golffieldhole', User::class) --}}
-
-                                    <a class="text-primary mr-3" href="{{url('master-data/golffieldhole/edit',$golf->id)}}">
+                                   {{-- @can('update-city', User::class) --}}
+                                    <a class="text-primary mr-3" href="{{url('master-data/city/edit',$citydata->id)}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                     {{-- @endcan   --}}
 
-                                  {{-- @can('delete-golffieldhole', User::class) --}}
+                                  {{-- @can('delete-city', User::class) --}}
 
-                                  <span id="delbtn{{@$golf->id}}"></span>
+                                  <span id="delbtn{{@$citydata->id}}"></span>
                                 
-                                    <form id="delete-golf-{{$golf->id}}"
-                                        action="{{ url('master-data/golffieldhole/destroy', $golf->id) }}"
+                                    <form id="delete-city-{{$citydata->id}}"
+                                        action="{{ url('master-data/city/destroy', $citydata->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
                                     </form>
-                                 {{-- @endcan   --}}
+
+                                   {{-- @endcan   --}}
                                 </span>
                               </td>
 
@@ -136,5 +128,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.master.golffieldhole_js')
+@include('crm.master.city_js')
 @endsection

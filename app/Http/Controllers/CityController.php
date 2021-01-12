@@ -10,28 +10,28 @@ use App\Models\Koc;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class KocController extends Controller
+class CityController extends Controller
 {   
     public function index(Request $request)
     {
          $user = Auth::user();
-         $route_active = 'koc_master';   
+         $route_active = 'city_master';   
 
          $search = @$request->input('search');
 
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $koc = Koc::orderby('id','desc')->get();
-          $koc_ids = response()->json($koc->modelKeys());
-          return view('crm.master.koc', compact('user','koc','route_active','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $city = City::orderby('id','desc')->paginate(10);
+          $city_ids = response()->json($city->modelKeys());
+          return view('crm.master.city', compact('user','city','route_active','city_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
-          $koc=Koc::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
-          $koc_ids = response()->json($koc->modelKeys());
-          return view('crm.master.koc', compact('user','koc','route_active','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $city=City::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->paginate(10);
+          $city_ids = response()->json($city->modelKeys());
+          return view('crm.master.city', compact('user','city','route_active','city_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }
 
@@ -48,13 +48,13 @@ class KocController extends Controller
             //print_r($request);
             //exit();
             $user = Auth::user();
-            Koc::create([
+            City::create([
                 'code'=>$request->code,
                 'description'=>$request->description,
                 'abbreviation'=>$request->abbreviation
             ]);
             $notification = array(
-                'message' => 'Koc added successfully!',
+                'message' => 'City added successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);
@@ -66,12 +66,12 @@ class KocController extends Controller
     }
     
 
-    public function destroy(Koc $koc)
+    public function destroy(City $city)
     {
-        if($koc->delete())
+        if($city->delete())
         {
             $notification = array(
-                'message' => 'Koc deleted successfully!',
+                'message' => 'City deleted successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);

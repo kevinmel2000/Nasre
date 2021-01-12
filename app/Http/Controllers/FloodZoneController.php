@@ -7,31 +7,32 @@ use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
 use App\Models\Koc;
+use App\Models\FloodZone;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class KocController extends Controller
+class FloodZoneController extends Controller
 {   
     public function index(Request $request)
     {
          $user = Auth::user();
-         $route_active = 'koc_master';   
+         $route_active = 'floodzone_master';   
 
          $search = @$request->input('search');
 
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $koc = Koc::orderby('id','desc')->get();
-          $koc_ids = response()->json($koc->modelKeys());
-          return view('crm.master.koc', compact('user','koc','route_active','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $floodzone = FloodZone::orderby('id','desc')->get();
+          $floodzone_ids = response()->json($floodzone->modelKeys());
+          return view('crm.master.floodzone', compact('user','floodzone','route_active','floodzone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
-          $koc=Koc::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
-          $koc_ids = response()->json($koc->modelKeys());
-          return view('crm.master.koc', compact('user','koc','route_active','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $floodzone=FloodZone::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $floodzone_ids = response()->json($floodzone->modelKeys());
+          return view('crm.master.floodzone', compact('user','floodzone','route_active','floodzone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }
 
@@ -48,13 +49,13 @@ class KocController extends Controller
             //print_r($request);
             //exit();
             $user = Auth::user();
-            Koc::create([
+            FloodZone::create([
                 'code'=>$request->code,
                 'description'=>$request->description,
                 'abbreviation'=>$request->abbreviation
             ]);
             $notification = array(
-                'message' => 'Koc added successfully!',
+                'message' => 'Flood Zone added successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);
@@ -66,12 +67,12 @@ class KocController extends Controller
     }
     
 
-    public function destroy(Koc $koc)
+    public function destroy(FloodZone $floodzone)
     {
-        if($koc->delete())
+        if($floodzone->delete())
         {
             $notification = array(
-                'message' => 'Koc deleted successfully!',
+                'message' => 'Flood Zone deleted successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);

@@ -35,5 +35,53 @@ class GolfFieldHoleController extends Controller
          }
     }
 
+    public function store(Request $request)
+    {
+        $validator = $request->validate([
+            'code'=>'required|max:5|unique:currencies,code',
+            'golffield'=>'required',
+            'holenumber'=>'required'
+        ]);
+
+        if($validator)
+        {
+            $user = Auth::user();
+            GolfFieldHole::create([
+                'code'=>$request->code,
+                'golf_field'=>$request->golffield,
+                'hole_number'=>$request->holenumber
+            ]);
+            $notification = array(
+                'message' => 'Golf Field Hole  added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }
+        else
+        {
+            return back()->with($validator)->withInput();
+        }
+    }
+
+    public function destroy(GolfFieldHole $golf)
+    {
+        if($golf->delete())
+        {
+            $notification = array(
+                'message' => 'Golf Field Hole deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }
+        else
+        {
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
     
 }
