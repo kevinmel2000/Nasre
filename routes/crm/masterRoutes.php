@@ -5,6 +5,8 @@ use App\Http\Controllers\MasterController;
 use App\Http\Controllers\CedingBrokerController;
 use App\Http\Controllers\KocController;
 use App\Http\Controllers\GolfFieldHoleController;
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\StateController;
 use App\Http\Controllers\FeLookupLocationController;
 use App\Http\Controllers\ProductGroupController;
 Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
@@ -47,6 +49,14 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::get('/koc',  [KocController::class, 'index']);
     Route::post('/koc/store', [KocController::class, 'store']);
     Route::delete('/koc/destroy/{koc}', [KocController::class, 'destroy']);
+
+    Route::get('/city',  [CityController::class, 'index']);
+    Route::post('/city/store', [CityController::class, 'store']);
+    Route::delete('/city/destroy/{city}', [CityController::class, 'destroy']);
+
+    Route::get('/state',  [StateController::class, 'index']);
+    Route::post('/state/store', [StateController::class, 'store']);
+    Route::delete('/state/destroy/{city}', [StateController::class, 'destroy']);
 
     Route::get('/golffieldhole', [GolfFieldHoleController::class, 'index']);
     Route::post('/golffieldhole/store', [GolfFieldHoleController::class, 'store']);

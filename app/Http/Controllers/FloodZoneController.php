@@ -24,14 +24,14 @@ class FloodZoneController extends Controller
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $floodzone = FloodZone::orderby('id','desc')->get();
-          $floodzone_ids = response()->json($koc->modelKeys());
+          $floodzone_ids = response()->json($floodzone->modelKeys());
           return view('crm.master.floodzone', compact('user','floodzone','route_active','floodzone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
           $floodzone=FloodZone::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
-          $floodzone_ids = response()->json($koc->modelKeys());
+          $floodzone_ids = response()->json($floodzone->modelKeys());
           return view('crm.master.floodzone', compact('user','floodzone','route_active','floodzone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }

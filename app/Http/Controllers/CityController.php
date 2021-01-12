@@ -22,15 +22,15 @@ class CityController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $city = City::orderby('id','desc')->get();
-          $city_ids = response()->json($koc->modelKeys());
+          $city = City::orderby('id','desc')->paginate(10);
+          $city_ids = response()->json($city->modelKeys());
           return view('crm.master.city', compact('user','city','route_active','city_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
-          $city=City::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
-          $city_ids = response()->json($koc->modelKeys());
+          $city=City::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->paginate(10);
+          $city_ids = response()->json($city->modelKeys());
           return view('crm.master.city', compact('user','city','route_active','city_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }
