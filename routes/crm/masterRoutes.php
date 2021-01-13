@@ -50,6 +50,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
 
     Route::get('/koc',  [KocController::class, 'index']);
     Route::post('/koc/store', [KocController::class, 'store']);
+    Route::put('/koc/update/{koc}', [KocController::class, 'update']);
     Route::delete('/koc/destroy/{koc}', [KocController::class, 'destroy']);
 
     Route::get('/city',  [CityController::class, 'index']);
@@ -62,6 +63,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
 
     Route::get('/golffieldhole', [GolfFieldHoleController::class, 'index']);
     Route::post('/golffieldhole/store', [GolfFieldHoleController::class, 'store']);
+    Route::put('/golffieldhole/update/{golf}', [GolfFieldHoleController::class, 'update']);
     Route::delete('/golffieldhole/destroy/{golf}', [GolfFieldHoleController::class, 'destroy']);
 
     Route::get('/cedingbroker', [CedingBrokerController::class, 'index']);

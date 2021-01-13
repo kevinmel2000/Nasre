@@ -62,7 +62,7 @@ class GolfFieldHoleController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'code'=>'required|max:5|unique:currencies,code',
+            'code'=>'required|unique:currencies,code',
             'golffield'=>'required',
             'holenumber'=>'required'
         ]);
@@ -83,6 +83,30 @@ class GolfFieldHoleController extends Controller
         }
         else
         {
+            return back()->with($validator)->withInput();
+        }
+    }
+
+
+    public function update(Request $request, GolfFieldHole $golf)
+    {
+        $validator = $request->validate([
+            'codegolf'=>'required|unique:currencies,code',
+            'golffieldgolf'=>'required',
+            'holenumbergolf'=>'required'
+        ]);
+
+        if($validator){
+            $golf->code = $request->codegolf;
+            $golf->golf_field = $request->golffieldgolf;
+            $golf->hole_number = $request->holenumbergolf;
+            $golf->save();
+            $notification = array(
+                'message' => 'Golf Field Hole updated successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
             return back()->with($validator)->withInput();
         }
     }
