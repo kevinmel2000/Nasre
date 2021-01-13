@@ -50,31 +50,39 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
 
     Route::get('/koc',  [KocController::class, 'index']);
     Route::post('/koc/store', [KocController::class, 'store']);
+    Route::put('/koc/update/{koc}', [KocController::class, 'update']);
     Route::delete('/koc/destroy/{koc}', [KocController::class, 'destroy']);
 
     Route::get('/city',  [CityController::class, 'index']);
     Route::post('/city/store', [CityController::class, 'store']);
+    Route::put('/city/update/{city}', [CityController::class, 'update']);
     Route::delete('/city/destroy/{city}', [CityController::class, 'destroy']);
 
     Route::get('/state',  [StateController::class, 'index']);
     Route::post('/state/store', [StateController::class, 'store']);
-    Route::delete('/state/destroy/{city}', [StateController::class, 'destroy']);
+    Route::put('/state/update/{state}', [StateController::class, 'update']);
+    Route::delete('/state/destroy/{state}', [StateController::class, 'destroy']);
 
     Route::get('/golffieldhole', [GolfFieldHoleController::class, 'index']);
     Route::post('/golffieldhole/store', [GolfFieldHoleController::class, 'store']);
+    Route::put('/golffieldhole/update/{golf}', [GolfFieldHoleController::class, 'update']);
     Route::delete('/golffieldhole/destroy/{golf}', [GolfFieldHoleController::class, 'destroy']);
 
     Route::get('/cedingbroker', [CedingBrokerController::class, 'index']);
     Route::post('/cedingbroker/store',  [CedingBrokerController::class, 'store']);
+    Route::put('/cedingbroker/update/{cedingbroker}', [CedingBrokerController::class, 'update']);
     Route::delete('/cedingbroker/destroy/{ceding}',  [CedingBrokerController::class, 'destroy']);
+    
 
     Route::get('/earthquakezone', [EarthQuakeZoneController::class, 'index']);
     Route::post('/earthquakezone/store',  [EarthQuakeZoneController::class, 'store']);
-    Route::delete('/earthquakezone/destroy/{ceding}',  [EarthQuakeZoneController::class, 'destroy']);
+    Route::put('/earthquakezone/update/{eq}', [EarthQuakeZoneController::class, 'update']);
+    Route::delete('/earthquakezone/destroy/{eq}',  [EarthQuakeZoneController::class, 'destroy']);
 
     Route::get('/floodzone', [FloodZoneController::class, 'index']);
     Route::post('/floodzone/store',  [FloodZoneController::class, 'store']);
-    Route::delete('/floodzone/destroy/{ceding}',  [FloodZoneController::class, 'destroy']);
+    Route::put('/floodzone/update/{flood}', [FloodZoneController::class, 'update']);
+    Route::delete('/floodzone/destroy/{flood}',  [FloodZoneController::class, 'destroy']);
     
     // Bulk Excel Import Users
     // Route::get('/import', [ ProductController::class, 'import'])->middleware(['can:create-product']);

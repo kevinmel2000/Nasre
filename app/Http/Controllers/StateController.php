@@ -64,6 +64,27 @@ class StateController extends Controller
             return back()->with($validator)->withInput();
         }
     }
+
+
+    public function update(Request $request, State $state)
+    {
+        $validator = $request->validate([
+            'namestate'=>'required|unique:currencies,code',
+            'crccountrystate'=>'required'
+        ]);
+        if($validator){
+            $state->name = $request->namestate;
+            $state->country_id = $request->crccountrystate;
+            $state->save();
+            $notification = array(
+                'message' => 'State Province updated successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
     
     public function destroy($id)
     {

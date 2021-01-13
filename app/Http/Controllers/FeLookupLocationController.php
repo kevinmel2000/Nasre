@@ -118,6 +118,28 @@ class FeLookupLocationController extends Controller
         }
     }
 
+    public function update(Request $request, FeLookupLocation $felookuplocation)
+    {
+        $validator = $request->validate([
+            'codekoc'=>'required|unique:currencies,code',
+            'descriptionkoc'=>'required',
+            'abbreviationkoc'=>'required'
+        ]);
+        if($validator){
+            $felookuplocation->code = $request->codekoc;
+            $felookuplocation->description = $request->descriptionkoc;
+            $felookuplocation->abbreviation = $request->abbreviationkoc;
+            $felookuplocation->save();
+            $notification = array(
+                'message' => 'Koc updated successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
     public function destroy($id)
     {
         $felookuplocation = FeLookupLocation::find($id);

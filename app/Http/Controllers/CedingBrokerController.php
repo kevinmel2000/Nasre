@@ -97,6 +97,33 @@ class CedingBrokerController extends Controller
     }
 
 
+    public function update(Request $request, CedingBroker $broker)
+    {
+        $validator = $request->validate([
+            'codebroker'=>'required|max:12|unique:currencies,code',
+            'namebroker'=>'required',
+            'companynamebroker'=>'required',
+            'addressbroker'=>'required',
+            'crccountrybroker'=>'required',
+            'typebroker'=>'required'
+        ]);
+        if($validator){
+            $cedingbrokers = CedingBroker::find($broker->id);
+            $cedingbrokers->code = $request->codekoc;
+            $cedingbrokers->description = $request->descriptionkoc;
+            $cedingbrokers->abbreviation = $request->abbreviationkoc;
+            $cedingbrokers->save();
+            $notification = array(
+                'message' => 'Koc updated successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
+
     public function destroy($id)
     {
       $cedingbrokers = CedingBroker::find($id);

@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="code" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_gfh }}" readonly="readonly" required/>
+                          <input type="text" name="code" class="form-control form-control-sm" value="{{ $code_gfh }}" readonly required/>
                         </div>
                     </div>
                 </div>
@@ -99,12 +99,64 @@
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
-                                {{-- @can('update-golffieldhole', User::class) --}}
-
-                                    <a class="text-primary mr-3" href="{{url('master-data/golffieldhole/edit',$golf->id)}}">
+                                   
+                                   
+                                    {{-- @can('update-golffieldhole', User::class) --}}
+                                    <a class="text-primary mr-3" data-toggle="modal" data-target="#updategolffieldhole{{$golf->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                     {{-- @endcan   --}}
+
+                                    <div class="modal fade" id="updategolffieldhole{{$golf->id}}" tabindex="-1" user="dialog" aria-labelledby="updategolffieldhole{{$golf->id}}Label" aria-hidden="true">
+                                    <div class="modal-dialog" user="document">
+                                      <div class="modal-content bg-light-gray">
+                                        <div class="modal-header bg-gray">
+                                          <h5 class="modal-title" id="updategolffieldhole{{$golf->id}}Label">{{__('Update Golf Field Hole')}}</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <form action="{{url('master-data/golffieldhole/update',$golf)}}" method="POST">
+                                            <div class="modal-body">
+                                                @csrf
+                                                @method('PUT')
+
+                                                <div class="row">
+                                                  <div class="col-md-6 col-md-12">
+                                                    <div class="form-group">
+                                                      <label for="">{{__('Code')}}</label>
+                                                      <input type="text" name="codegolf" class="form-control" value="{{$golf->code}}" required readonly/>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                                <div class="row">
+                                                  <div class="col-md-4 col-md-12">
+                                                    <div class="form-group">
+                                                      <label for="">{{__('Golf Field')}}</label>
+                                                      <input type="text" name="golffieldgolf" class="form-control" value="{{$golf->golf_field}}" data-validation="length" data-validation-length="2-150" required/>
+                                                    </div>
+                                                  </div>
+
+                                                  <div class="col-md-4 col-md-12">
+                                                    <div class="form-group">
+                                                      <label for="">{{__('Hole Number ')}}</label>
+                                                      <input type="text" name="holenumbergolf" class="form-control" value="{{$golf->hole_number}}" data-validation="length" data-validation-length="2-150" required/>
+                                                    </div>
+                                                  </div>
+                                                 
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                                <input type="submit" class="btn btn-info" value="Update">
+                                            </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                </div>
+                                {{-- Edit Modal Ends --}}
+
 
                                   {{-- @can('delete-golffieldhole', User::class) --}}
 

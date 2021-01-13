@@ -19,7 +19,7 @@
     function confirmDelete(id){
         let choice = confirm("{{__('Are you sure, you want to delete this State data and related data?')}}")
         if(choice){
-            document.getElementById('delete-state-'+id).submit();
+            document.getElementById('delete-earthquakezone-'+id).submit();
         }
     }
   

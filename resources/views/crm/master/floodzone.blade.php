@@ -84,14 +84,64 @@
                              
                               <td>
                                
+  
+                                  
                                 <span>
-                                   {{-- @can('update-floodzone', User::class) --}}
-                                    <a class="text-primary mr-3" href="{{url('master-data/floodzone/edit',$floodzonedata->id)}}">
-                                      <i class="fas fa-edit"></i>
-                                    </a>
-                                    {{-- @endcan   --}}
+                                 
+                                    {{-- @can('update-floodzone', User::class) --}}
+                                      <a class="text-primary mr-3" data-toggle="modal" data-target="#updatefloodzone{{$floodzonedata->id}}">
+                                        <i class="fas fa-edit"></i>
+                                      </a>
+                                      {{-- @endcan   --}}
+
+                                      <div class="modal fade" id="updatefloodzone{{$floodzonedata->id}}" tabindex="-1" user="dialog" aria-labelledby="updatefloodzone{{$floodzonedata->id}}Label" aria-hidden="true">
+                                      <div class="modal-dialog" user="document">
+                                        <div class="modal-content bg-light-gray">
+                                          <div class="modal-header bg-gray">
+                                            <h5 class="modal-title" id="updatefloodzone{{$floodzonedata->id}}Label">{{__('Update Flood Zone')}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <form action="{{url('master-data/floodzone/update',$floodzonedata->id)}}" method="POST">
+                                              <div class="modal-body">
+                                                  @csrf
+                                                  @method('PUT')
+
+                                                  <div class="row">
+                                                    <div class="col-md-6 col-md-12">
+                                                      <div class="form-group">
+                                                        <label for="">{{__('name')}}</label>
+                                                        <input type="text" name="name" class="form-control" value="{{$floodzonedata->name}}" required/>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+
+                                                  
+                                                  <div class="row">
+                                                    <div class="col-md-6 col-md-12">
+                                                      <div class="form-group">
+                                                        <label for="">{{__('Flag Delete')}}</label>
+                                                        <input type="text" name="flag_delete" class="form-control" value="{{$floodzonedata->flag_delete}}" required/>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+
+                                              </div>
+
+                                              <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                                  <input type="submit" class="btn btn-info" value="Update">
+                                              </div>
+                                          </form>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  {{-- Edit Modal Ends --}}
+
 
                                   {{-- @can('delete-floodzone', User::class) --}}
+                                  
 
                                   <span id="delbtn{{@$floodzonedata->id}}"></span>
                                 

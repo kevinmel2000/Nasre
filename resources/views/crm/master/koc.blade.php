@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="code" class="form-control form-control-sm" data-validation="length" data-validation-length="1 - 12" value="{{ $code_koc }}" readonly="readonly" required/>
+                          <input type="text" name="code" class="form-control form-control-sm" value="{{ $code_koc }}" readonly required/>
                         </div>
                     </div>
                 </div>
@@ -99,10 +99,60 @@
                                 </a>
                                 <span>
                                    {{-- @can('update-koc', User::class) --}}
-                                    <a class="text-primary mr-3" href="{{url('master-data/koc/edit',$kocdata->id)}}">
+                                    <a class="text-primary mr-3" data-toggle="modal" data-target="#updatekoc{{$kocdata->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                     {{-- @endcan   --}}
+
+                                    <div class="modal fade" id="updatekoc{{$kocdata->id}}" tabindex="-1" user="dialog" aria-labelledby="updatekoc{{$kocdata->id}}Label" aria-hidden="true">
+                                    <div class="modal-dialog" user="document">
+                                      <div class="modal-content bg-light-gray">
+                                        <div class="modal-header bg-gray">
+                                          <h5 class="modal-title" id="updatekoc{{$kocdata->id}}Label">{{__('Update Koc')}}</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <form action="{{url('master-data/koc/update',$kocdata)}}" method="POST">
+                                            <div class="modal-body">
+                                                @csrf
+                                                @method('PUT')
+
+                                                <div class="row">
+                                                  <div class="col-md-6 col-md-12">
+                                                    <div class="form-group">
+                                                      <label for="">{{__('Code')}}</label>
+                                                      <input type="text" name="codekoc" class="form-control" value="{{$kocdata->code}}" required readonly/>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                                <div class="row">
+                                                  <div class="col-md-4 col-md-12">
+                                                    <div class="form-group">
+                                                      <label for="">{{__('Description')}}</label>
+                                                      <input type="text" name="descriptionkoc" class="form-control" value="{{$kocdata->description}}" data-validation="length" data-validation-length="2-150" required/>
+                                                    </div>
+                                                  </div>
+
+                                                  <div class="col-md-4 col-md-12">
+                                                    <div class="form-group">
+                                                      <label for="">{{__('Abbreviation')}}</label>
+                                                      <input type="text" name="abbreviationkoc" class="form-control" value="{{$kocdata->abbreviation}}" data-validation="length" data-validation-length="2-150" required/>
+                                                    </div>
+                                                  </div>
+                                                 
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                                <input type="submit" class="btn btn-info" value="Update">
+                                            </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                </div>
+                                {{-- Edit Modal Ends --}}
 
                                   {{-- @can('delete-koc', User::class) --}}
 
