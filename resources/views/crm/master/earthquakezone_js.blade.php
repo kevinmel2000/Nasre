@@ -2,8 +2,8 @@
     $(function () {
       "use strict";
   
-      var felookuplocation = <?php echo(($felookuplocation_ids->content())) ?>;
-      for(const id of felookuplocation) {
+      var earthquakezones = <?php echo(($earthquakezone_ids->content())) ?>;
+      for(const id of earthquakezones) {
           var btn = `
               <a href="#" onclick="confirmDelete('${id}')">
                   <i class="fas fa-trash text-danger"></i>
@@ -15,10 +15,11 @@
   
     });
   
+  
     function confirmDelete(id){
-        let choice = confirm("{{__('Are you sure, you want to delete this Fe Lookup Location and related data?')}}")
+        let choice = confirm("{{__('Are you sure, you want to delete this State data and related data?')}}")
         if(choice){
-            document.getElementById('delete-felookuplocation-'+id).submit();
+            document.getElementById('delete-state-'+id).submit();
         }
     }
   

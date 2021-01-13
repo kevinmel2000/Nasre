@@ -10,7 +10,7 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('master-data/state/store')}}>
+        <form method="POST" action={{url('master-data/earthquakezone/store')}}>
           @csrf
         <div class="card">
           <div class="card-header bg-gray">
@@ -20,31 +20,24 @@
           <div class="card-body bg-light-gray ">
             <div class="tab-content" id="custom-tabs-three-tabContent">
               <div class="tab-pane fade show active" id="lead-details-id" role="tabpanel" aria-labelledby="lead-details">
-                <div class="row">
+              
+              <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Enter State Name')}} </label>
-                          <input type="text" name="name" class="form-control form-control-sm" required/>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                          <label for="">{{__('Country')}}</label>
-                          <select name="crccountry" class="form-control form-control-sm ">
-                              <option selected disabled>{{__('Select Country')}}</option>
-                              @foreach($country as $cty)
-                              <option value="{{ $cty->id }}">{{ $cty->id }} - {{ $cty->name }}</option>
-                              @endforeach
-                          </select>
-
+                          <label for="">{{__('Flood Zone Name')}}</label>
+                          <input type="text" name="name" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                       </div>
                     </div>
                 </div>
 
-              
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                          <label for="">{{__('Flag Delete')}}</label>
+                          <input type="text" name="flagdelete" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                      </div>
+                    </div>
+                </div>
                 
               </div>
             </div>
@@ -56,7 +49,7 @@
                 <div class="row">
                     <div class="col-md-12 com-sm-12 mt-3">
                         <button class="btn btn-primary btn-block ">
-                            {{__('Save State/Province')}}
+                            {{__('Save EarthQuake Zone')}}
                         </button>
                     </div>
                    
@@ -75,33 +68,33 @@
                     <thead>
                     <tr>
                       <th>{{__('ID')}}</th>
-                      <th>{{__('Country')}}</th>
-                      <th>{{__('State/Province Name')}}</th>
+                      <th>{{__('EarthQuake Zone ')}}</th>
+                      <th>{{__('Flag Delete ')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach (@$state as $statedata)
+                        @foreach (@$earthquakezone as $earthquakezonedata)
                             <tr>
-                              <td>{{@$statedata->id}}</td>
-                              <td>{{@$statedata->country->id}} - {{@$statedata->country->name}}</td>
-                              <td>{{@$statedata->name}}</td>
+                              <td>{{@$earthquakezonedata->id}}</td>
+                              <td>{{@$earthquakezonedata->name}}</td>
+                              <td>{{@$earthquakezonedata->flag_delete}}</td>
                              
                               <td>
                                
                                 <span>
                                    {{-- @can('update-state', User::class) --}}
-                                    <a class="text-primary mr-3" href="{{url('master-data/state/edit',$statedata->id)}}">
+                                    <a class="text-primary mr-3" href="{{url('master-data/earthquakezone/edit',$earthquakezonedata->id)}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                     {{-- @endcan   --}}
 
                                   {{-- @can('delete-state', User::class) --}}
 
-                                  <span id="delbtn{{@$statedata->id}}"></span>
+                                  <span id="delbtn{{@$earthquakezonedata->id}}"></span>
                                 
-                                    <form id="delete-state-{{$statedata->id}}"
-                                        action="{{ url('master-data/state/destroy', $statedata->id) }}"
+                                    <form id="delete-state-{{$earthquakezonedata->id}}"
+                                        action="{{ url('master-data/earthquakezone/destroy', $earthquakezonedata->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
@@ -117,7 +110,7 @@
                     
                   </table>
 
-                  {!! $state->render() !!}
+                  {!! $earthquakezone->render() !!}
 
                 </div>
                
@@ -130,5 +123,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.master.state_js')
+@include('crm.master.earthquakezone_js')
 @endsection

@@ -33,7 +33,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Address')}}</label>
-                          <input type="text" name="Address" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <input type="text" name="address" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                       </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                       <label for="">{{__('Longitude')}}</label>
-                          <input type="text" name="longitude" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <input type="text" name="longtitude" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                   
                       </div>    
                     </div>
@@ -92,7 +92,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                       <label for="">{{__('Cities')}}</label>
-                            <select name="city" class="form-control form-control-sm ">
+                            <select name="cityinsert" class="form-control form-control-sm ">
                               <option selected disabled>{{__('Select Cities')}}</option>
                               @foreach($country as $citydata)
                               <option value="{{ $citydata->id }}">{{ $citydata->id }} - {{ $citydata->name }}</option>
@@ -132,8 +132,12 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Insured')}}</label>
-                          <input type="text" name="insured" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                      </div>
+                          <select name="insured" class="form-control form-control-sm ">
+                              <option selected disabled>{{__('Select  Insure Costumer')}}</option>
+                              @foreach($costumer as $costumerdata)
+                              <option value="{{ $costumerdata->id }}">{{ $costumerdata->id }} - {{ $costumerdata->username }} - {{ $costumerdata->company_name }}</option>
+                              @endforeach
+                          </select></div>
                     </div>
                 </div>
                 
@@ -167,8 +171,9 @@
                     <tr>
                       <th>{{__('Location Code')}}</th>
                       <th>{{__('Address')}}</th>
-                      <th>{{__('City')}}</th>
+                      <th>{{__('Country')}}</th>
                       <th>{{__('Province')}}</th>
+                      <th>{{__('City')}}</th>
                       <th>{{__('Postal Code')}}</th>
                       <th>{{__('Insured')}}</th>
                       <th>{{__('EQ Zone')}}</th>
@@ -183,8 +188,9 @@
                             <tr>
                               <td>{{@$location->loc_code}}</td>
                               <td>{{@$location->address}}</td>
-                              <td>{{@$location->city_id}}</td>
-                              <td>{{@$location->province_id}}</td>
+                              <td>{{@$location->countryside->id}} - {{@$location->countryside->name}}</td>
+                              <td>{{@$location->state->id}} - {{@$location->state->name}}</td>
+                              <td>{{@$location->city->id}} - {{@$location->city->name}}</td>
                               <td>{{@$location->postal_code }}</td>
                               <td>{{@$location->insured}}</td>
                               <td>{{@$location->eq_zone}}</td>
@@ -225,6 +231,9 @@
                     </tbody>
                     
                   </table>
+
+                  {!! $felookuplocation->render() !!}
+
                 </div>
                
             </div>

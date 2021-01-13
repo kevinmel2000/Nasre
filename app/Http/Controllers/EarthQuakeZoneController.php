@@ -23,14 +23,14 @@ class EarthQuakeZoneController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $earthquakezone = EarthQuakeZone::orderby('id','desc')->get();
+          $earthquakezone = EarthQuakeZone::orderby('id','desc')->paginate(10);
           $earthquakezone_ids = response()->json($earthquakezone->modelKeys());
           return view('crm.master.earthquakezone', compact('user','earthquakezone','route_active','earthquakezone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
-          $earthquakezone=EarthQuakeZone::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $earthquakezone=EarthQuakeZone::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->paginate(10);
           $earthquakezone_ids = response()->json($earthquakezone->modelKeys());
           return view('crm.master.earthquakezone', compact('user','earthquakezone','route_active','earthquakezone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
@@ -39,9 +39,8 @@ class EarthQuakeZoneController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'code'=>'required|max:5|unique:currencies,code',
-            'description'=>'required',
-            'abbreviation'=>'required'
+            'name'=>'required',
+            'flagdelete'=>'required'
         ]);
         
         if($validator)
@@ -50,9 +49,8 @@ class EarthQuakeZoneController extends Controller
             //exit();
             $user = Auth::user();
             EarthQuakeZone::create([
-                'code'=>$request->code,
-                'description'=>$request->description,
-                'abbreviation'=>$request->abbreviation
+                'name'=>$request->name,
+                'flag_delete'=>$request->flagdelete
             ]);
             $notification = array(
                 'message' => 'Earth Quake Zone added successfully!',
@@ -67,8 +65,9 @@ class EarthQuakeZoneController extends Controller
     }
     
 
-    public function destroy(EarthQuakeZone $earthquakezone)
+    public function destroy($id)
     {
+        $earthquakezone = EarthQuakeZone::find($id);
         if($earthquakezone->delete())
         {
             $notification = array(

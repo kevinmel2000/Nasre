@@ -24,23 +24,24 @@ class CityController extends Controller
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $city = City::orderby('id','desc')->paginate(10);
           $city_ids = response()->json($city->modelKeys());
-          return view('crm.master.city', compact('user','city','route_active','city_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $state = State::orderby('id','asc')->get();
+          return view('crm.master.city', compact('user','city','route_active','city_ids','state'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
           $city=City::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->paginate(10);
           $city_ids = response()->json($city->modelKeys());
-          return view('crm.master.city', compact('user','city','route_active','city_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $state = State::orderby('id','asc')->get();
+          return view('crm.master.city', compact('user','city','route_active','city_ids','state'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }
 
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'code'=>'required|max:5|unique:currencies,code',
-            'description'=>'required',
-            'abbreviation'=>'required'
+            'name'=>'required',
+            'state'=>'required'
         ]);
         
         if($validator)
@@ -49,9 +50,8 @@ class CityController extends Controller
             //exit();
             $user = Auth::user();
             City::create([
-                'code'=>$request->code,
-                'description'=>$request->description,
-                'abbreviation'=>$request->abbreviation
+                'name'=>$request->name,
+                'state_id'=>$request->state,
             ]);
             $notification = array(
                 'message' => 'City added successfully!',

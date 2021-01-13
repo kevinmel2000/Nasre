@@ -23,14 +23,14 @@ class FloodZoneController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $floodzone = FloodZone::orderby('id','desc')->get();
+          $floodzone = FloodZone::orderby('id','desc')->paginate(10);
           $floodzone_ids = response()->json($floodzone->modelKeys());
           return view('crm.master.floodzone', compact('user','floodzone','route_active','floodzone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
-          $floodzone=FloodZone::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $floodzone=FloodZone::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->paginate(10);
           $floodzone_ids = response()->json($floodzone->modelKeys());
           return view('crm.master.floodzone', compact('user','floodzone','route_active','floodzone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
@@ -39,9 +39,8 @@ class FloodZoneController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'code'=>'required|max:5|unique:currencies,code',
-            'description'=>'required',
-            'abbreviation'=>'required'
+            'name'=>'required',
+            'flagdelete'=>'required'
         ]);
         
         if($validator)
@@ -50,9 +49,8 @@ class FloodZoneController extends Controller
             //exit();
             $user = Auth::user();
             FloodZone::create([
-                'code'=>$request->code,
-                'description'=>$request->description,
-                'abbreviation'=>$request->abbreviation
+                'name'=>$request->name,
+                'flag_delete'=>$request->flagdelete
             ]);
             $notification = array(
                 'message' => 'Flood Zone added successfully!',
@@ -67,8 +65,10 @@ class FloodZoneController extends Controller
     }
     
 
-    public function destroy(FloodZone $floodzone)
+    
+    public function destroy($id)
     {
+        $floodzone = FloodZone::find($id);
         if($floodzone->delete())
         {
             $notification = array(
