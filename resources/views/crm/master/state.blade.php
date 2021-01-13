@@ -90,11 +90,64 @@
                               <td>
                                
                                 <span>
-                                   {{-- @can('update-state', User::class) --}}
-                                    <a class="text-primary mr-3" href="{{url('master-data/state/edit',$statedata->id)}}">
+                                    {{-- @can('update-state', User::class) --}}
+                                    <a class="text-primary mr-3" data-toggle="modal" data-target="#updatestate{{$statedata->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                     {{-- @endcan   --}}
+
+                                    <div class="modal fade" id="updatestate{{$statedata->id}}" tabindex="-1" user="dialog" aria-labelledby="updatestate{{$statedata->id}}Label" aria-hidden="true">
+                                    <div class="modal-dialog" user="document">
+                                      <div class="modal-content bg-light-gray">
+                                        <div class="modal-header bg-gray">
+                                          <h5 class="modal-title" id="updatestate{{$statedata->id}}Label">{{__('Update State')}}</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <form action="{{url('master-data/state/update',$statedata)}}" method="POST">
+                                            <div class="modal-body">
+                                                @csrf
+                                                @method('PUT')
+
+                                                <div class="row">
+                                                  <div class="col-md-6 col-md-12">
+                                                    <div class="form-group">
+                                                      <label for="">{{__('name')}}</label>
+                                                      <input type="text" name="namestate" class="form-control" value="{{$statedata->name}}" required/>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                                
+                                                <div class="col-md-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('State')}}</label>
+                                                        <select name="crccountrystate" class="form-control form-control-sm ">
+                                                            <option selected disabled>{{__('Select State')}}</option>
+                                                            @foreach($country as $cty)
+                                                            @if($statedata->country_id  == $cty->id)
+                                                            <option value="{{ $cty->id }}" selected>{{ $cty->id }} - {{ $cty->name }}</option>
+                                                            @else
+                                                            <option value="{{  $cty->id }}">{{  $cty->id  }} - {{ $cty->name }}</option>
+                                                            @endif
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                  </div>
+
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                                <input type="submit" class="btn btn-info" value="Update">
+                                            </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                </div>
+                                {{-- Edit Modal Ends --}}
+
 
                                   {{-- @can('delete-state', User::class) --}}
 

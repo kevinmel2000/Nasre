@@ -99,7 +99,7 @@
                                 </a>
                                 <span>
                                    {{-- @can('update-koc', User::class) --}}
-                                   <a class="text-primary mr-3" data-toggle="modal" data-target="#updatekoc{{$kocdata->id}}">
+                                    <a class="text-primary mr-3" data-toggle="modal" data-target="#updatekoc{{$kocdata->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
                                     {{-- @endcan   --}}

@@ -66,6 +66,27 @@ class CityController extends Controller
     }
     
 
+    public function update(Request $request, City $city)
+    {
+        $validator = $request->validate([
+            'namecity'=>'required|unique:currencies,code',
+            'statecity'=>'required'
+        ]);
+        if($validator){
+            $city->name = $request->namecity;
+            $city->state_id = $request->statecity;
+            $city->save();
+            $notification = array(
+                'message' => 'City updated successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
+    
     public function destroy(City $city)
     {
         if($city->delete())

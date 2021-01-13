@@ -55,11 +55,13 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
 
     Route::get('/city',  [CityController::class, 'index']);
     Route::post('/city/store', [CityController::class, 'store']);
+    Route::put('/city/update/{city}', [CityController::class, 'update']);
     Route::delete('/city/destroy/{city}', [CityController::class, 'destroy']);
 
     Route::get('/state',  [StateController::class, 'index']);
     Route::post('/state/store', [StateController::class, 'store']);
-    Route::delete('/state/destroy/{city}', [StateController::class, 'destroy']);
+    Route::put('/state/update/{state}', [StateController::class, 'update']);
+    Route::delete('/state/destroy/{state}', [StateController::class, 'destroy']);
 
     Route::get('/golffieldhole', [GolfFieldHoleController::class, 'index']);
     Route::post('/golffieldhole/store', [GolfFieldHoleController::class, 'store']);
