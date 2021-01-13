@@ -15,7 +15,23 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     // SECTION Marine Slip Group Routes
     Route::get('/marine-slip', [TransactionController::class, 'indexmarineslip']);
 
+    // SECTION Fire Engineering Slip Group Routes
+    Route::get('/fe-slip', [TransactionController::class, 'indexfeslip']);
 
+    // SECTION Financial Lines Slip Group Routes
+    Route::get('/fl-slip', [TransactionController::class, 'indexflslip']);
+
+    // SECTION Moveable Property Slip Group Routes
+    Route::get('/mp-slip', [TransactionController::class, 'indexmpslip']);
+
+    // SECTION Hole in Ones Slip Group Routes
+    Route::get('/hio-slip', [TransactionController::class, 'indexhioslip']);
+
+    // SECTION Personal Accident Slip Group Routes
+    Route::get('/pa-slip', [TransactionController::class, 'indexpaslip']);
+
+    // SECTION HE & Motor Slip Group Routes
+    Route::get('/hem-slip', [TransactionController::class, 'indexhemslip']);
 
 
     // Route::get('/country', [MasterController::class, 'indexcountry'])->middleware(['can:view-country']);

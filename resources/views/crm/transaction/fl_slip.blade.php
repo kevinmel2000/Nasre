@@ -10,7 +10,7 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('transaction-data/marine-slip/store')}}>
+        <form method="POST" action={{url('transaction-data/fl-slip/store')}}>
           @csrf
             <div class="card">
                 <div class="card-header bg-gray">
@@ -24,7 +24,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="msnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
+                                            <input type="text" name="flnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
                                         </div>
                                     </div>
                                 </div>
@@ -35,7 +35,7 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="">{{__('Insured')}}</label>
-                                                    <select name="msinsured" class="form-control form-control-sm ">
+                                                    <select name="flinsured" class="form-control form-control-sm ">
                                                         <option selected disabled>{{__('Select Continent')}}</option>
                                                         <option value="AF">Africa</option>
                                                         <option value="AN">Antartica</option>
@@ -48,45 +48,11 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 1')}}</label>
-                                                    <input type="text" name="mssuggestinsured" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
+                                                    <input type="text" name="flsuggestinsured" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 2')}}</label>
-                                                    <input type="text" name="mssuffix" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="suffix: QQ or TBk" required/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="">{{__('Route')}}</label>
-                                                    <select name="msroute" class="form-control form-control-sm ">
-                                                        <option selected disabled>{{__('Select Continent')}}</option>
-                                                        <option value="AF">Africa</option>
-                                                        <option value="AN">Antartica</option>
-                                                        <option value="AS">Asia</option>
-                                                        <option value="EU">Europa</option>
-                                                        <option value="NA">North America </option>
-                                                        <option value="OC">Oceania</option>
-                                                        <option value="SA">South America</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="" style="opacity: 0">{{__('b')}}</label>
-                                                    <input type="text" name="msroutefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="*from" required/>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="" style="opacity: 0">{{__('a')}}</label>
-                                                    <input type="text" name="msrouteto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="*to" required/>
+                                                    <input type="text" name="flsuffix" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="suffix: QQ or TBk" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -102,7 +68,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                                <input type="text" name="msshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                <input type="text" name="flshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -116,13 +82,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('From')}}</label>
-                                                    <input type="text" name="mssharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="text" name="flsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input type="text" name="msshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="text" name="flshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -135,29 +101,31 @@
                                             <div class="card-header bg-gray">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        {{__('Ship Detail')}}
-                                                        <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addship">{{__('Add Ship')}}</button>
+                                                        {{__('Location')}}
+                                                        <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocr">{{__('Add Risk Location')}}</button>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="card-body">
                                                 <div class="col-md-12 com-sm-12 mt-3">
-                                                    <table id="shipdetailTable" class="table table-bordered table-striped">
+                                                    <table id="locRiskTable" class="table table-bordered table-striped">
                                                     <thead>
                                                     <tr>
-                                                        <th>{{__('ID')}}</th>
-                                                        <th>{{__('Name')}}</th>
-                                                        <th>{{__('Code')}}</th>
-                                                        <th>{{__('Continent')}}</th>
+                                                        <th>{{__('Loc Code')}}</th>
+                                                        <th>{{__('Address')}}</th>
+                                                        <th>{{__('City')}}</th>
+                                                        <th>{{__('Province')}}</th>
+                                                        <th>{{__('LatLong')}}</th>
                                                         <th width="20%">{{__('Actions')}}</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <td>{{__('Code')}}</td>
-                                                        <td>{{__('Ship Name')}}</td>
-                                                        <td>{{__('Owner')}}</td>
-                                                        <td>{{__('Continent')}}</td>
-                                                        <td width="20%">{{__('Actions')}}</td>
+                                                        <th>{{__('Loc Code')}}</th>
+                                                        <th>{{__('Address')}}</th>
+                                                        <th>{{__('City')}}</th>
+                                                        <th>{{__('Province')}}</th>
+                                                        <th>{{__('LatLong')}}</th>
+                                                        <th width="20%">{{__('Actions')}}</th>
                                                     </tbody>
                                                     
                                                     </table>
@@ -170,8 +138,26 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <label for="">{{__('Principal')}}</label>
+                                            <input type="text" name="flprincipal" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">{{__('Obligee')}}</label>
+                                            <input type="text" name="flobligee" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
                                             <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" name="mscoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                            <input type="text" name="flcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -1174,5 +1160,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.transaction.marine_slip_js')
+@include('crm.transaction.fl_slip_js')
 @endsection
