@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Code')}} </label>
-                          <input type="text" name="ocpcode" class="form-control form-control-sm" data-validation="length" value="{{ $code_ocp }}" data-validation-length="1-7" disabled required/>
+                          <input type="text" name="ocpcode" class="form-control form-control-sm" data-validation="length" value="{{ $code_ocp }}" data-validation-length="1 - 12" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>
