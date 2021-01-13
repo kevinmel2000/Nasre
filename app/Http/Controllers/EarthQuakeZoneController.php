@@ -65,6 +65,29 @@ class EarthQuakeZoneController extends Controller
     }
     
 
+    public function update(Request $request, $eqzone)
+    {
+        $validator = $request->validate([
+            'name'=>'required',
+            'flag_delete'=>'required'
+        ]);
+
+        if($validator){
+            
+            $data=$request->all();
+            $eqzones = EarthQuakeZone::find($eqzone);
+            $eqzones->update($data);
+
+            $notification = array(
+                'message' => 'Earth QuakeZone updated successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
     public function destroy($id)
     {
         $earthquakezone = EarthQuakeZone::find($id);

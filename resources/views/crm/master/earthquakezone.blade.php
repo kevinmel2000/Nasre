@@ -83,11 +83,58 @@
                               <td>
                                
                                 <span>
-                                   {{-- @can('update-state', User::class) --}}
-                                    <a class="text-primary mr-3" href="{{url('master-data/earthquakezone/edit',$earthquakezonedata->id)}}">
-                                      <i class="fas fa-edit"></i>
-                                    </a>
-                                    {{-- @endcan   --}}
+                                    
+
+                                      {{-- @can('update-earthquakezone', User::class) --}}
+                                      <a class="text-primary mr-3" data-toggle="modal" data-target="#updateearthquakezone{{$earthquakezonedata->id}}">
+                                        <i class="fas fa-edit"></i>
+                                      </a>
+                                      {{-- @endcan   --}}
+
+                                      <div class="modal fade" id="updateearthquakezone{{$earthquakezonedata->id}}" tabindex="-1" user="dialog" aria-labelledby="updateearthquakezone{{$earthquakezonedata->id}}Label" aria-hidden="true">
+                                      <div class="modal-dialog" user="document">
+                                        <div class="modal-content bg-light-gray">
+                                          <div class="modal-header bg-gray">
+                                            <h5 class="modal-title" id="updateearthquakezone{{$earthquakezonedata->id}}Label">{{__('Update EarthQuake')}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <form action="{{url('master-data/earthquakezone/update',$earthquakezonedata->id)}}" method="POST">
+                                              <div class="modal-body">
+                                                  @csrf
+                                                  @method('PUT')
+
+                                                  <div class="row">
+                                                    <div class="col-md-6 col-md-12">
+                                                      <div class="form-group">
+                                                        <label for="">{{__('name')}}</label>
+                                                        <input type="text" name="name" class="form-control" value="{{$earthquakezonedata->name}}" required/>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+
+                                                  
+                                                  <div class="row">
+                                                    <div class="col-md-6 col-md-12">
+                                                      <div class="form-group">
+                                                        <label for="">{{__('Flag Delete')}}</label>
+                                                        <input type="text" name="flag_delete" class="form-control" value="{{$earthquakezonedata->flag_delete}}" required/>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+
+                                              </div>
+
+                                              <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                                  <input type="submit" class="btn btn-info" value="Update">
+                                              </div>
+                                          </form>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  {{-- Edit Modal Ends --}}
 
                                   {{-- @can('delete-state', User::class) --}}
 

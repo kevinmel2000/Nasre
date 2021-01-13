@@ -64,6 +64,31 @@ class FloodZoneController extends Controller
         }
     }
     
+    public function update(Request $request, $floodzone)
+    {
+        $validator = $request->validate([
+            'name'=>'required',
+            'flag_delete'=>'required'
+        ]);
+        if($validator){
+            
+            //$floodzone->name = $request->nameflood;
+            //$floodzone->flag_delete = $request->flagdeleteflood;
+            //$floodzone->save();
+
+            $data=$request->all();
+            $floodzones = FloodZone::find($floodzone);
+            $floodzones->update($data);
+
+            $notification = array(
+                'message' => 'FloodZone updated successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
 
     
     public function destroy($id)
