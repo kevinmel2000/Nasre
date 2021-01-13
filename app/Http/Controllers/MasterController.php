@@ -253,7 +253,7 @@ class MasterController extends Controller
     public function storecob(Request $request)
     {
         $validator = $request->validate([
-            'cobcode'=>'required|max:5|unique:cob,code',
+            'cobcode'=>'required|max:20|unique:cob,code',
             'cobdescription'=>'required',
             'cobabbreviation'=>'required',
             'cobremarks'=>'required'
@@ -279,7 +279,7 @@ class MasterController extends Controller
     public function storeoccupation(Request $request)
     {
         $validator = $request->validate([
-            'ocpcode'=>'required|max:5|unique:occupation,code',
+            'ocpcode'=>'required|max:20|unique:occupation,code',
             'ocpdescription'=>'required',
             'ocpabbreviation'=>'required',
             'ocpgrouptype'=>'required',
@@ -409,7 +409,7 @@ class MasterController extends Controller
     public function updatecob(Request $request, COB $cob)
     {
         $validator = $request->validate([
-            'codecob'=>'required|max:5',
+            'codecob'=>'required|max:20',
             'descriptioncob'=>'required',
             'abbreviationcob'=>'required',
             'remarkscob'=>'required'
@@ -433,7 +433,7 @@ class MasterController extends Controller
     public function updateoccupation(Request $request, Occupation $ocp)
     {
         $validator = $request->validate([
-            'codeocp'=>'required|max:5',
+            'codeocp'=>'required|max:20',
             'descriptionocp'=>'required',
             'abbreviationocp'=>'required',
             'grouptypeocp'=>'required',

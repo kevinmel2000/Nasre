@@ -47,7 +47,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="" style="opacity: 0">{{__('inseured 1')}}</label>
+                                            <label for="" style="opacity: 0">{{__('insured 1')}}</label>
                                             <input type="text" name="owner" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
                                         </div>
                                         <div class="col-md-4">
@@ -474,7 +474,7 @@
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="card-header bg-gray">
-                                                    {{__('Interes Insured')}}
+                                                    {{__('Interest Insured')}}
                                                 </div>
                                                 <div class="card-body bg-light-gray ">
                                                     <div class="row">
@@ -757,7 +757,7 @@
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label style="opacity: 0;">{{__('p')}}:</label>
-                                                    <p>to</p>
+                                                    <p class="d-flex justify-content-center">to</p>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="form-group">
@@ -785,7 +785,7 @@
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label style="opacity: 0;">{{__('p')}}:</label>
-                                                    <p>to</p>
+                                                    <p class="d-flex justify-content-center">to</p>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="form-group">
@@ -802,11 +802,138 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        
+                                    <div class="row d-flex justify-content-start">
+                                        <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> non proportional panel</i>
+                                    </div>
+                                    <div class="row d-flex justify-content-end">
+                                        <div class="col-md-4">
+                                            <label class="cl-switch cl-switch-green">
+                                                <span for="switch-proportional" class="label"> {{__('Proportional')}} </span>
+                                                <input type="checkbox" name="delete[]" id="switch-proportional"
+                                                class="submit"
+                                                
+                                                    checked
+                                                >
+                                                <span class="switcher"></span>
+                                                <span  class="label"> {{__('Non Proportional')}} </span>
+                                              </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group d-flex justify-content-end">
+                                                <label style="opacity: 0;">{{__('p')}}:</label>
+                                                <button type="button" class="btn plus-button" data-toggle="modal" data-target="#addSourceModal">
+                                                    <span data-toggle="tooltip" data-placement="top" title="{{__('Add New layer')}}"> + add layer </span>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
-                                        
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">{{__('Layer for non proportional')}}</label>
+                                                <select name="continent" class="form-control form-control-sm ">
+                                                    <option selected disabled>{{__('Choose layer')}}</option>
+                                                    <option value="AF">Africa</option>
+                                                    <option value="AN">Antartica</option>
+                                                    <option value="AS">Asia</option>
+                                                    <option value="EU">Europa</option>
+                                                    <option value="NA">North America </option>
+                                                    <option value="OC">Oceania</option>
+                                                    <option value="SA">South America</option>
+                                                </select>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 d-flex justify-content-start">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="">{{__('Rate (permil.. %)')}}</label>
+                                                    <input type="text" name="rate" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Share')}}</label>
+                                                        <div class="row">
+                                                            <div class="col-md-10">
+                                                                <div class="input-group">
+                                                                    <input type="text" name="share" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="input-group-append">
+                                                                    <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" name="installmentamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="">{{__('Basic Premium')}}</label>
+                                                    <input type="text" name="basicpremium" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="">{{__('Gross Prm to NR')}}</label>
+                                                    <input type="text" name="grossprmtonr" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Commission')}}</label>
+                                                        <div class="row">
+                                                            <div class="col-md-10">
+                                                                <div class="input-group">
+                                                                    <input type="text" name="commission" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="input-group-append">
+                                                                    <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="form-group">
+                                                        <label for="" style="opacity: 0;">{{__('Gross Prm to NR')}}</label>
+                                                        <input type="text" name="commisiondiss" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="">{{__('Net Prm to NR')}}</label>
+                                                    <input type="text" name="netprmtonr" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                </div>
+                                              </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="installment-details-id" role="tabpanel" aria-labelledby="installment-details">
