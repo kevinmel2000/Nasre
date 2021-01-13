@@ -33,7 +33,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('State')}} </label>
-                          <select name="state" class="form-control form-control-sm ">
+                          <select name="state" class="e1 form-control form-control-sm ">
                               <option selected disabled>{{__('Select State')}}</option>
                               @foreach($state as $statedata)
                               <option value="{{ $statedata->id }}">{{ $statedata->id }} - {{ $statedata->name }}</option>
@@ -120,8 +120,8 @@
                                                 
                                                 <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
-                                                        <label for="">{{__('State')}}</label>
-                                                        <select name="statecity" class="form-control form-control-sm ">
+                                                        <label for="">{{__('State')}}</label><br>
+                                                        <select name="statecity" class="form-control form-control-sm e1">
                                                             <option selected disabled>{{__('Select State')}}</option>
                                                             @foreach($state as $statedata)
                                                             @if($citydata->state_id  == $statedata->id)

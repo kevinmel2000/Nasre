@@ -25,7 +25,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Currency')}}</label>
-                          <select name="exccurrency" class="form-control form-control-sm ">
+                          <select name="exccurrency" class="e1 form-control form-control-sm ">
                               <option selected disabled>{{__('Select Currency')}}</option>
                               @foreach($currency as $crc)
                               <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
@@ -163,8 +163,8 @@
                                                 <div class="row">
                                                     <div class="col-md-6 col-md-12">
                                                         <div class="form-group">
-                                                            <label for="">{{__('Currency')}}</label>
-                                                            <select name="currencyexc" class="form-control form-control-sm ">
+                                                            <label for="">{{__('Currency')}}</label><br>
+                                                            <select name="currencyexc" class="e1 form-control form-control-sm ">
                                                                 <option selected disabled>{{__('Select Currency')}}</option>
                                                                 @foreach($currency as $crc)
                                                                 @if($exc->currency  == $crc->id)

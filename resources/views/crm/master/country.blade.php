@@ -42,7 +42,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Continent')}}</label>
-                          <select name="continent" class="form-control form-control-sm ">
+                          <select name="continent" class="form-control form-control-sm e1">
                               <option selected disabled>{{__('Select Continent')}}</option>
                               <option value="AF">Africa</option>
                               <option value="AN">Antartica</option>
@@ -150,8 +150,8 @@
                                                   </div>
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
-                                                      <label for="">{{__('Continent')}}</label>
-                                                      <select name="continentcountry" class="form-control">
+                                                      <label for="">{{__('Continent')}}</label><br>
+                                                      <select name="continentcountry" class="form-control e1">
                                                         @if(@$cty->continent == "AF")Africa 
                                                         <option value="AF" selected>Africa</option>
                                                         <option value="AN">Antartica</option>

@@ -59,7 +59,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                       <label for="">{{__('Country')}}</label>
-                            <select name="crccountry" class="form-control form-control-sm ">
+                            <select name="crccountry" class="e1 form-control form-control-sm ">
                               <option selected disabled>{{__('Select Country')}}</option>
                               @foreach($country as $cty)
                               <option value="{{ $cty->id }}">{{ $cty->id }} - {{ $cty->name }}</option>
@@ -80,7 +80,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                       <label for="">{{__('Province')}}</label>
-                            <select name="province" class="form-control form-control-sm ">
+                            <select name="province"  class="e1 form-control form-control-sm ">
                               <option selected disabled>{{__('Select Province')}}</option>
                               @foreach($country as $statedata)
                               <option value="{{ $statedata->id }}">{{ $statedata->id }} - {{ $statedata->name }}</option>
@@ -92,7 +92,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                       <label for="">{{__('Cities')}}</label>
-                            <select name="cityinsert" class="form-control form-control-sm ">
+                            <select name="cityinsert" class="e1 form-control form-control-sm ">
                               <option selected disabled>{{__('Select Cities')}}</option>
                               @foreach($country as $citydata)
                               <option value="{{ $citydata->id }}">{{ $citydata->id }} - {{ $citydata->name }}</option>
@@ -106,7 +106,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                       <label for="">{{__('EQ Zone')}}</label>
-                            <select name="eqzone" class="form-control form-control-sm ">
+                            <select name="eqzone"  class="e1 form-control form-control-sm ">
                               <option selected disabled>{{__('Select EQ Zone')}}</option>
                               @foreach($earthquakezone as $earthquakezonedata)
                               <option value="{{ $earthquakezonedata->id }}">{{ $earthquakezonedata->id }} - {{ $earthquakezonedata->name }}</option>
@@ -118,7 +118,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                       <label for="">{{__('Flood Zone')}}</label>
-                            <select name="floodzone" class="form-control form-control-sm ">
+                            <select name="floodzone"  class="e1 form-control form-control-sm ">
                               <option selected disabled>{{__('Select Flood Zone')}}</option>
                               @foreach($floodzone as $floodzonedata)
                               <option value="{{ $floodzonedata->id }}">{{ $floodzonedata->id }} - {{ $floodzonedata->name }}</option>
@@ -132,7 +132,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Insured')}}</label>
-                          <select name="insured" class="form-control form-control-sm ">
+                          <select name="insured" class="e1 form-control form-control-sm ">
                               <option selected disabled>{{__('Select  Insure Costumer')}}</option>
                               @foreach($costumer as $costumerdata)
                               <option value="{{ $costumerdata->id }}">{{ $costumerdata->id }} - {{ $costumerdata->username }} - {{ $costumerdata->company_name }}</option>

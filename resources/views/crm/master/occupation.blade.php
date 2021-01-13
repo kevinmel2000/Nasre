@@ -60,7 +60,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('COB')}}</label>
-                          <select name="ocpcob" class="form-control form-control-sm ">
+                          <select name="ocpcob" class="e1 form-control form-control-sm ">
                               <option selected disabled>{{__('Select COB')}}</option>
                               @foreach($cob as $cco)
                               <option value="{{ $cco->id }}">{{ $cco->code }} - {{ $cco->description }}</option>
@@ -170,8 +170,8 @@
                                                   </div>
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
-                                                        <label for="">{{__('COB')}}</label>
-                                                        <select name="cobocp" class="form-control form-control-sm ">
+                                                        <label for="">{{__('COB')}}</label><br>
+                                                        <select name="cobocp" class="e1 form-control form-control-sm ">
                                                             <option selected disabled>{{__('Select COB')}}</option>
                                                             @foreach($cob as $cco)
                                                             @if($ocp->cob  == $cco->id)

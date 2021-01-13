@@ -33,7 +33,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Country')}}</label>
-                          <select name="crccountry" class="form-control form-control-sm ">
+                          <select name="crccountry" id="e1" class="form-control form-control-sm ">
                               <option selected disabled>{{__('Select Country')}}</option>
                               @foreach($country as $cty)
                               <option value="{{ $cty->id }}">{{ $cty->id }} - {{ $cty->name }}</option>
@@ -122,8 +122,8 @@
                                                 
                                                 <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
-                                                        <label for="">{{__('State')}}</label>
-                                                        <select name="crccountrystate" class="form-control form-control-sm ">
+                                                        <label for="">{{__('State')}}</label><br>
+                                                        <select name="crccountrystate" class="form-control form-control-sm e1">
                                                             <option selected disabled>{{__('Select State')}}</option>
                                                             @foreach($country as $cty)
                                                             @if($statedata->country_id  == $cty->id)
