@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Loc Code')}} </label>
-                          <input type="text" name="code" class="form-control form-control-sm" data-validation="length" data-validation-length="3" required/>
+                          <input type="text" name="code" class="form-control form-control-sm" value="{{ $code_felookuplocation }}" readonly required/>
                         </div>
                     </div>
                 </div>

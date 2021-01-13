@@ -45,7 +45,7 @@ class FeLookupLocationController extends Controller
     {
          $user = Auth::user();
          $route_active = 'felookuplocation_master';   
-
+         $mydate = date("Y").date("m").date("d");
          $search = @$request->input('search');
 
          if(empty($search))
@@ -60,7 +60,30 @@ class FeLookupLocationController extends Controller
           $floodzone = FloodZone::orderby('id','asc')->get();
           $costumer=Customer::orderby('id','asc')->get();
 
-          return view('crm.master.felookuplocation', compact('user','earthquakezone','floodzone','felookuplocation','costumer','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
+                $lastid = FeLookupLocation::select('id')->latest()->first();
+
+                if($lastid != null){
+                    if($lastid->id == 9){
+                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                    }elseif($lastid->id >= 10){
+                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                    }elseif($lastid->id == 99){
+                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                    }elseif($lastid->id >= 100){
+                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                    }elseif($lastid->id == 999){
+                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                    }elseif($lastid->id >= 1000){
+                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                    }else{
+                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                    }
+                }
+                else{
+                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                }
+
+          return view('crm.master.felookuplocation', compact('user','code_felookuplocation','earthquakezone','floodzone','felookuplocation','costumer','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
@@ -74,7 +97,30 @@ class FeLookupLocationController extends Controller
           $floodzone = FloodZone::orderby('id','asc')->get();
           $costumer=Customer::orderby('id','asc')->get();
 
-          return view('crm.master.felookuplocation', compact('user','earthquakezone','floodzone','felookuplocation','costumer','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
+            $lastid = FeLookupLocation::select('id')->latest()->first();
+
+            if($lastid != null){
+                if($lastid->id == 9){
+                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                }elseif($lastid->id >= 10){
+                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                }elseif($lastid->id == 99){
+                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                }elseif($lastid->id >= 100){
+                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                }elseif($lastid->id == 999){
+                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                }elseif($lastid->id >= 1000){
+                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                }else{
+                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                }
+            }
+            else{
+                $code_felookuplocation = $mydate . strval($lastid->id + 1);
+            }
+
+          return view('crm.master.felookuplocation', compact('user','code_felookuplocation','earthquakezone','floodzone','felookuplocation','costumer','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }
 
@@ -82,7 +128,7 @@ class FeLookupLocationController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'code'=>'required|max:5|unique:currencies,code',
+            'code'=>'required|max:15,code',
             'address'=>'required',
             'crccountry'=>'required',
             'postal_code'=>'required',
