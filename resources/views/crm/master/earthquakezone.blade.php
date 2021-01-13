@@ -24,7 +24,7 @@
               <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Flood Zone Name')}}</label>
+                          <label for="">{{__('Earthquake Zone Name')}}</label>
                           <input type="text" name="name" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                       </div>
                     </div>

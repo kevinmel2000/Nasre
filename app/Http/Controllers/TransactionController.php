@@ -34,6 +34,66 @@ class TransactionController extends Controller
         return view('crm.transaction.marine_slip', compact(['user','route_active','ms_ids']));
     }
 
+    public function indexfeslip()
+    {
+        $user = Auth::user();
+        $country = User::orderby('id','asc')->get();
+        $route_active = 'Fire Engineering - Slip Entry';
+        $fe_ids = response()->json($country->modelKeys());
+
+        return view('crm.transaction.fe_slip', compact(['user','route_active','fe_ids']));
+    }
+
+    public function indexflslip()
+    {
+        $user = Auth::user();
+        $country = User::orderby('id','asc')->get();
+        $route_active = 'Financial Lines - Slip Entry';
+        $fl_ids = response()->json($country->modelKeys());
+
+        return view('crm.transaction.fl_slip', compact(['user','route_active','fl_ids']));
+    }
+
+    public function indexmpslip()
+    {
+        $user = Auth::user();
+        $country = User::orderby('id','asc')->get();
+        $route_active = 'Moveable Property - Slip Entry';
+        $mp_ids = response()->json($country->modelKeys());
+
+        return view('crm.transaction.mp_slip', compact(['user','route_active','mp_ids']));
+    }
+
+    public function indexhioslip()
+    {
+        $user = Auth::user();
+        $country = User::orderby('id','asc')->get();
+        $route_active = 'Hole In One - Slip Entry';
+        $hio_ids = response()->json($country->modelKeys());
+
+        return view('crm.transaction.hio_slip', compact(['user','route_active','hio_ids']));
+    }
+
+    public function indexpaslip()
+    {
+        $user = Auth::user();
+        $country = User::orderby('id','asc')->get();
+        $route_active = 'Personal Accident - Slip Entry';
+        $pa_ids = response()->json($country->modelKeys());
+
+        return view('crm.transaction.pa_slip', compact(['user','route_active','pa_ids']));
+    }
+
+    public function indexhemslip()
+    {
+        $user = Auth::user();
+        $country = User::orderby('id','asc')->get();
+        $route_active = 'HE & Motor - Slip Entry';
+        $hem_ids = response()->json($country->modelKeys());
+
+        return view('crm.transaction.hem_slip', compact(['user','route_active','hem_ids']));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
