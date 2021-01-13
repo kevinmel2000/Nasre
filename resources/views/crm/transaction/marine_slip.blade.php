@@ -901,10 +901,10 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="">{{__('Commission')}}</label>
-                                                        <div class="row">
+                                                        <div class="row d-flex flex-wrap">
                                                             <div class="col-md-10">
                                                                 <div class="input-group">
                                                                     <input type="text" name="commission" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
@@ -918,7 +918,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-8">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="" style="opacity: 0;">{{__('Gross Prm to NR')}}</label>
                                                         <input type="text" name="commisiondiss" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>

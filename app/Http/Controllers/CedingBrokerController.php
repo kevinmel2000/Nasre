@@ -65,7 +65,7 @@ class CedingBrokerController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'code'=>'required|max:5|unique:currencies,code',
+            'code'=>'required|max:12|unique:currencies,code',
             'name'=>'required',
             'companyname'=>'required',
             'address'=>'required',

@@ -62,7 +62,7 @@ class KocController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'code'=>'required|max:5|unique:currencies,code',
+            'code'=>'required|max:12|unique:currencies,code',
             'description'=>'required',
             'abbreviation'=>'required'
         ]);

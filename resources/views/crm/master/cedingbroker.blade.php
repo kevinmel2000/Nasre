@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="code" class="form-control form-control-sm" data-validation="length" data-validation-length="3" value="{{ $code_ceding }}" disabled required/>
+                          <input type="text" name="code" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_ceding }}" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>

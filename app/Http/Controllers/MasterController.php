@@ -253,7 +253,7 @@ class MasterController extends Controller
     public function storecob(Request $request)
     {
         $validator = $request->validate([
-            'cobcode'=>'required|max:20|unique:cob,code',
+            'cobcode'=>'required|max:15|unique:cob,code',
             'cobdescription'=>'required',
             'cobabbreviation'=>'required',
             'cobremarks'=>'required'
@@ -279,7 +279,7 @@ class MasterController extends Controller
     public function storeoccupation(Request $request)
     {
         $validator = $request->validate([
-            'ocpcode'=>'required|max:20|unique:occupation,code',
+            'ocpcode'=>'required|max:15|unique:occupation,code',
             'ocpdescription'=>'required',
             'ocpabbreviation'=>'required',
             'ocpgrouptype'=>'required',
