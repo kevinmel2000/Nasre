@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="code" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_ceding }}" readonly="readonly" required/>
+                          <input type="text" name="codebroker" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_ceding }}" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>
@@ -140,11 +140,119 @@
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
-                                 {{-- @can('update-cedingbroker', User::class) --}}
-                                    <a class="text-primary mr-3" href="{{url('master-data/cedingbroker/edit',$ceding->id)}}">
-                                      <i class="fas fa-edit"></i>
-                                    </a>
-                                    {{-- @endcan --}}
+                                 
+                                    {{-- @can('update-cedingbroker', User::class) --}}
+                                      <a class="text-primary mr-3" data-toggle="modal" data-target="#updatecedingbroker{{$ceding->id}}">
+                                        <i class="fas fa-edit"></i>
+                                      </a>
+                                      {{-- @endcan   --}}
+
+                                      <div class="modal fade" id="updatecedingbroker{{$ceding->id}}" tabindex="-1" user="dialog" aria-labelledby="updatecedingbroker{{$ceding->id}}Label" aria-hidden="true">
+                                      <div class="modal-dialog" user="document">
+                                        <div class="modal-content bg-light-gray">
+                                          <div class="modal-header bg-gray">
+                                            <h5 class="modal-title" id="updatecedingbroker{{$ceding->id}}Label">{{__('Update Ceding Broker')}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <form action="{{url('master-data/cedingbroker/update',$ceding->id)}}" method="POST">
+                                              <div class="modal-body">
+                                                  @csrf
+                                                  @method('PUT')
+
+                                                  <div class="row">
+                                                  <div class="col-md-6 col-md-12">
+                                                    <div class="form-group">
+                                                      <label for="">{{__('Code')}}</label>
+                                                      <input type="text" name="codebroker" class="form-control" value="{{$ceding->code}}" required readonly/>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                                  <div class="row">
+                                                    <div class="col-md-6 col-md-12">
+                                                      <div class="form-group">
+                                                        <label for="">{{__('name')}}</label>
+                                                        <input type="text" name="namebroker" class="form-control" value="{{$ceding->name}}" required/>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+
+                                                  
+                                                  <div class="row">
+                                                    <div class="col-md-6 col-md-12">
+                                                      <div class="form-group">
+                                                        <label for="">{{__('Company Name')}}</label>
+                                                        <input type="text" name="companynamebroker" class="form-control" value="{{$ceding->company_name}}" required/>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+
+                                                  <div class="row">
+                                                    <div class="col-md-6 col-md-12">
+                                                      <div class="form-group">
+                                                        <label for="">{{__('Address')}}</label>
+                                                        <textarea name="addressbroker" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>{{$ceding->address}}</textarea>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+
+                                                  <div class="row">
+                                                    <div class="col-md-6 col-md-12">
+                                                      <div class="form-group">
+                                                         <label for="">{{__('Country')}}</label>
+                                                          <select name="crccountrybroker" class="form-control form-control-sm ">
+                                                              <option selected disabled>{{__('Select Country')}}</option>
+                                                              @foreach($country as $cty)
+                                                              @if($ceding->country  == $cty->id)
+                                                              <option value="{{ $cty->id }}" selected>{{ $cty->id }} - {{ $cty->name }}</option>
+                                                              @else
+                                                              <option value="{{  $cty->id }}">{{  $cty->id  }} - {{ $cty->name }}</option>
+                                                              @endif
+                                                              @endforeach
+                                                          </select>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+
+                                                  <div class="row">
+                                                    <div class="col-md-6 col-md-12">
+                                                      <div class="form-group">
+                                                         <label for="">{{__('Type')}}</label>
+                                                          <select name="typebroker" class="form-control form-control-sm ">
+                                                              @if($ceding->type  == 'Ceding')
+                                                              <option value="Ceding" selected>Ceding</option>
+                                                              @else
+                                                              <option value="Broker" >Broker</option>
+                                                              @endif
+
+                                                              @if($ceding->type  == 'Broker')
+                                                              <option value="Broker" selected>Broker</option>
+                                                              @else
+                                                              <option value="Ceding" >Ceding</option>
+                                                              @endif
+                                                              
+                                                          </select> 
+                                                        </div>
+                                                    </div>
+                                                  </div>
+
+                                                 
+
+                                              </div>
+
+                                              <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                                  <input type="submit" class="btn btn-info" value="Update">
+                                              </div>
+                                          </form>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  {{-- Edit Modal Ends --}}
+
+
 
                                 {{-- @can('delete-cedingbroker', User::class) --}}
 
@@ -166,6 +274,8 @@
                     </tbody>
                     
                   </table>
+                   {!! $cedingbroker->render() !!}
+
                 </div>
                
             </div>

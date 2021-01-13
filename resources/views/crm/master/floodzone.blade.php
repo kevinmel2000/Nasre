@@ -88,7 +88,7 @@
                                   
                                 <span>
                                  
-                                    {{-- @can('update-floodzone', User::class) --}}
+                                     {{-- @can('update-floodzone', User::class) --}}
                                       <a class="text-primary mr-3" data-toggle="modal" data-target="#updatefloodzone{{$floodzonedata->id}}">
                                         <i class="fas fa-edit"></i>
                                       </a>

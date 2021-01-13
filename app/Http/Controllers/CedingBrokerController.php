@@ -22,7 +22,7 @@ class CedingBrokerController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $cedingbroker = CedingBroker::orderby('id','desc')->get();
+          $cedingbroker = CedingBroker::orderby('id','desc')->paginate(10);
           $cedingbroker_ids = response()->json($cedingbroker->modelKeys());
           $country = Country::orderby('id','asc')->get();
           $lastid = CedingBroker::select('id')->latest()->first();
@@ -53,11 +53,34 @@ class CedingBrokerController extends Controller
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
-          $cedingbroker=CedingBroker::where('code', 'LIKE', '%' . $search . '%')->orWhere('name', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $cedingbroker=CedingBroker::where('code', 'LIKE', '%' . $search . '%')->orWhere('name', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->paginate(10);
           $cedingbroker_ids = response()->json($cedingbroker->modelKeys());
           $country = Country::orderby('id','asc')->get();
 
-          return view('crm.master.cedingbroker', compact('user','cedingbroker','route_active','cedingbroker_ids','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $lastid = CedingBroker::select('id')->latest()->first();
+
+          if($lastid != null){
+            if($lastid->id == 9){
+                $code_ceding = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 10){
+                $code_ceding = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 99){
+                $code_ceding = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 100){
+                $code_ceding = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 999){
+                $code_ceding = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 1000){
+                $code_ceding = $mydate . strval($lastid->id + 1);
+            }else{
+                $code_ceding = $mydate . strval($lastid->id + 1);
+            }
+        }
+        else{
+            $code_ceding = $mydate . strval($lastid->id + 1);
+        }
+
+          return view('crm.master.cedingbroker', compact('user','cedingbroker','route_active','cedingbroker_ids','country','code_ceding'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }
 
@@ -65,7 +88,7 @@ class CedingBrokerController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'code'=>'required|max:12|unique:currencies,code',
+            'codebroker'=>'required|max:12',
             'name'=>'required',
             'companyname'=>'required',
             'address'=>'required',
@@ -77,7 +100,7 @@ class CedingBrokerController extends Controller
         {
             $user = Auth::user();
             CedingBroker::create([
-                'code'=>$request->code,
+                'code'=>$request->codebroker,
                 'name' => $request->name,
                 'company_name'=>$request->companyname,
                 'address'=>$request->address,
@@ -108,13 +131,15 @@ class CedingBrokerController extends Controller
             'typebroker'=>'required'
         ]);
         if($validator){
-            $cedingbrokers = CedingBroker::find($broker->id);
-            $cedingbrokers->code = $request->codekoc;
-            $cedingbrokers->description = $request->descriptionkoc;
-            $cedingbrokers->abbreviation = $request->abbreviationkoc;
-            $cedingbrokers->save();
+            $broker->code = $request->codebroker;
+            $broker->name = $request->namebroker;
+            $broker->company_name = $request->companynamebroker;
+            $broker->address = $request->addressbroker;
+            $broker->country = $request->crccountrybroker;
+            $broker->type = $request->typebroker;
+            $broker->save();
             $notification = array(
-                'message' => 'Koc updated successfully!',
+                'message' => 'Ceding Broker updated successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);
