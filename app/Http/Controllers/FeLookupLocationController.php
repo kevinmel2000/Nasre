@@ -164,20 +164,20 @@ class FeLookupLocationController extends Controller
         }
     }
 
-    public function update(Request $request, FeLookupLocation $felookuplocation)
+    public function update(Request $request, $felookuplocation)
     {
         $validator = $request->validate([
-            'loccodefe'=>'required|max:15,code',
-            'addressfe'=>'required',
-            'countryfe'=>'required',
-            'postal_codefe'=>'required',
-            'eqzonefe'=>'required',
-            'floodzonefe'=>'required'
+            'loc_code'=>'required|max:15,code',
+            'address'=>'required',
+            'country_id'=>'required',
+            'postal_code'=>'required',
+            'eq_zone'=>'required',
+            'flood_zone'=>'required'
         ]);
 
         if($validator){
             
-          
+            /*
             $felookuplocation->loc_code = $request->loccodefe;
             $felookuplocation->address = $request->addressfe;
             $felookuplocation->longtitude = $request->longtitudefe;
@@ -189,8 +189,13 @@ class FeLookupLocationController extends Controller
             $felookuplocation->eq_zone = $request->eqzonefe;
             $felookuplocation->flood_zone = $request->floodzonefe;
             $felookuplocation->insured = $request->insuredfe;
-
             $felookuplocation->save();
+            */
+
+            $data=$request->all();
+            $felookuplocations = FeLookupLocation::find($felookuplocation);
+            $felookuplocations->update($data);
+
             $notification = array(
                 'message' => 'Fire & Engineering Lookup Location updated successfully!',
                 'alert-type' => 'success'

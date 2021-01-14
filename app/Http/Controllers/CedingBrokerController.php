@@ -123,12 +123,12 @@ class CedingBrokerController extends Controller
     public function update(Request $request, $broker)
     {
         $validator = $request->validate([
-            'codebroker'=>'required|max:12|unique:currencies,code',
-            'namebroker'=>'required',
-            'companynamebroker'=>'required',
-            'addressbroker'=>'required',
-            'crccountrybroker'=>'required',
-            'typebroker'=>'required'
+            'code'=>'required|max:12|unique:currencies,code',
+            'name'=>'required',
+            'company_name'=>'required',
+            'address'=>'required',
+            'country'=>'required',
+            'type'=>'required'
         ]);
         if($validator){
 

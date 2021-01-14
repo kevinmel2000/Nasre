@@ -262,7 +262,7 @@
                                                   <div class="col-md-6 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Loc Code')}}</label>
-                                                      <input type="text" name="loccodefe" class="form-control" value="{{$location->loc_code}}" readonly required/>
+                                                      <input type="text" name="loc_code" class="form-control" value="{{$location->loc_code}}" readonly required/>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -271,7 +271,7 @@
                                                   <div class="col-md-6 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Address')}}</label>
-                                                      <input type="text" name="addressfe" class="form-control" value="{{$location->address}}" required/>
+                                                      <input type="text" name="address" class="form-control" value="{{$location->address}}" required/>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -281,14 +281,14 @@
                                                   <div class="col-md-6 col-md-6">
                                                     <div class="form-group">
                                                       <label for="">{{__('Longtitude')}}</label>
-                                                      <input type="text" name="longtitudefe" class="form-control" value="{{$location->longtitude}}" required/>
+                                                      <input type="text" name="longtitude" class="form-control" value="{{$location->longtitude}}" required/>
                                                     </div>
                                                   </div>
                                                   
                                                   <div class="col-md-6 col-md-6">
                                                     <div class="form-group">
                                                       <label for="">{{__('Latitude')}}</label>
-                                                      <input type="text" name="latitudefe" class="form-control" value="{{$location->latitude}}" required/>
+                                                      <input type="text" name="latitude" class="form-control" value="{{$location->latitude}}" required/>
                                                     </div>
                                                   </div>
 
@@ -300,7 +300,7 @@
                                                   <div class="col-md-6 col-md-6">
                                                     <div class="form-group">
                                                         <label for="">{{__('Country')}}</label><br>
-                                                        <select name="countryfe" class="form-control form-control-sm e1">
+                                                        <select name="country_id" class="form-control form-control-sm e1">
                                                             <option selected disabled>{{__('Select State')}}</option>
                                                             @foreach($country as $cty)
                                                             @if($location->country_id  == $cty->id)
@@ -316,7 +316,7 @@
                                                   <div class="col-md-6 col-md-6">
                                                     <div class="form-group">
                                                       <label for="">{{__('Postal Code')}}</label>
-                                                      <input type="text" name="postal_codefe" class="form-control" value="{{$location->postal_code}}" required/>
+                                                      <input type="text" name="postal_code" class="form-control" value="{{$location->postal_code}}" required/>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -326,7 +326,7 @@
                                                   <div class="col-md-6 col-md-6">
                                                       <div class="form-group">
                                                           <label for="">{{__('State/Province')}}</label><br>
-                                                          <select name="statefe" class="form-control form-control-sm e1">
+                                                          <select name="province_id" class="form-control form-control-sm e1">
                                                               <option selected disabled>{{__('Select State')}}</option>
                                                               @foreach($country as $statedata)
                                                               @if($location->province_id  == $statedata->id)
@@ -342,7 +342,7 @@
                                                   <div class="col-md-6 col-md-6">
                                                       <div class="form-group">
                                                           <label for="">{{__('City ')}}</label><br>
-                                                          <select name="cityfe" class="form-control form-control-sm e1">
+                                                          <select name="city_id" class="form-control form-control-sm e1">
                                                               <option selected disabled>{{__('Select City')}}</option>
                                                               @foreach($country as $citydata)
                                                               @if($location->city_id  == $citydata->id)
@@ -360,7 +360,7 @@
                                                   <div class="col-md-6 col-md-6">
                                                       <div class="form-group">
                                                           <label for="">{{__('EQ ZONE')}}</label><br>
-                                                          <select name="eqzonefe" class="form-control form-control-sm e1">
+                                                          <select name="eq_zone" class="form-control form-control-sm e1">
                                                               <option selected disabled>{{__('Select EarthQuake Zone')}}</option>
                                                               @foreach($earthquakezone as $zone)
                                                               @if($location->eq_zone  == $zone->id)
@@ -376,7 +376,7 @@
                                                   <div class="col-md-6 col-md-6">
                                                       <div class="form-group">
                                                           <label for="">{{__('FLOOD ZONE ')}}</label><br>
-                                                          <select name="floodzonefe" class="form-control form-control-sm e1">
+                                                          <select name="flood_zone" class="form-control form-control-sm e1">
                                                               <option selected disabled>{{__('Select Flood Zone')}}</option>
                                                               @foreach($floodzone as $zone)
                                                               @if($location->flood_zone  == $zone->id)
@@ -394,7 +394,7 @@
                                                   <div class="col-md-6 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Insured')}}</label><br>
-                                                      <select name="insuredfe" class="form-control form-control-sm e1">
+                                                      <select name="insured" class="form-control form-control-sm e1">
                                                               <option selected disabled>{{__('Select Insured')}}</option>
                                                               @foreach($costumer as $zone)
                                                               @if($location->insured  == $zone->id)
