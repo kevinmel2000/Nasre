@@ -51,14 +51,14 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     
     Route::get('/felookuplocation', [FeLookupLocationController::class, 'index'])->middleware(['can:view-felookup']);
     Route::post('/felookuplocation/store', [FeLookupLocationController::class, 'store'])->middleware(['can:create-felookup']);
-    Route::put('felookuplocation/{fl}', [FeLookupLocationController::class, 'update'])->middleware(['can:update-felookup']);
+    Route::put('/felookuplocation/update/{fl}', [FeLookupLocationController::class, 'update'])->middleware(['can:update-felookup']);
     Route::delete('/felookuplocation/destroy/{fl}', [FeLookupLocationController::class, 'destroy'])->middleware(['can:delete-felookup']);
 
 
     // SECTION KOC Exchange Routes
     Route::get('/koc', [KocController::class, 'index'])->middleware(['can:view-koc']);
     Route::post('/koc/store', [KocController::class, 'store'])->middleware(['can:create-koc']);
-    Route::put('koc/{exc}', [KocController::class, 'update'])->middleware(['can:update-koc']);
+    Route::put('/koc/update/{exc}', [KocController::class, 'update'])->middleware(['can:update-koc']);
     Route::delete('/koc/destroy/{exc}', [KocController::class, 'destroy'])->middleware(['can:delete-koc']);
 
 
@@ -74,13 +74,13 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
 
     Route::get('/golfhole', [GolfFieldHoleController::class, 'index'])->middleware(['can:view-gfh']);
     Route::post('/golfhole/store', [GolfFieldHoleController::class, 'store'])->middleware(['can:create-gfh']);
-    Route::put('golfhole/{gfh}', [GolfFieldHoleontroller::class, 'update'])->middleware(['can:update-gfh']);
+    Route::put('/golfhole/update/{gfh}', [GolfFieldHoleontroller::class, 'update'])->middleware(['can:update-gfh']);
     Route::delete('/golfhole/destroy/{gfh}', [GolfFieldHoleController::class, 'destroy'])->middleware(['can:delete-gfh']);
 
 
     Route::get('/cedingbroker', [CedingBrokerController::class, 'index'])->middleware(['can:view-cedingbroker']);
     Route::post('/cedingbroker/store', [CedingBrokerController::class, 'store'])->middleware(['can:create-cedingbroker']);
-    Route::put('cedingbroker/{cb}', [CedingBrokerController::class, 'update'])->middleware(['can:update-cedingbroker']);
+    Route::put('/cedingbroker/update/{cb}', [CedingBrokerController::class, 'update'])->middleware(['can:update-cedingbroker']);
     Route::delete('/cedingbroker/destroy/{cb}', [CedingBrokerController::class, 'destroy'])->middleware(['can:delete-cedingbroker']);
 
     Route::get('/earthquakezone', [EarthQuakeZoneController::class, 'index'])->middleware(['can:view-eqz']);
