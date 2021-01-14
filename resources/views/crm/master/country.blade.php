@@ -148,10 +148,12 @@
                                                       <input type="text" name="codecountry" class="form-control" value="{{$cty->code}}" data-validation="length" data-validation-length="3" required/>
                                                     </div>
                                                   </div>
+                                                </div>
+                                                <div class="row">
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Continent')}}</label><br>
-                                                      <select name="continentcountry" class="form-control e1">
+                                                      <select name="continentcountry" class="form-control form-control-sm e1">
                                                         @if(@$cty->continent == "AF")Africa 
                                                         <option value="AF" selected>Africa</option>
                                                         <option value="AN">Antartica</option>
@@ -221,7 +223,6 @@
                                                       </select>
                                                     </div>
                                                   </div>
-                                              
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
