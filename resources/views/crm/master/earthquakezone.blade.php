@@ -64,6 +64,11 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12 com-sm-12 mt-3">
+                   <hr>
+                    {!! Form::open(array('url'=>'master-data/earthquakezone')) !!}
+                    {!! Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari EearthQuake Zone, ketik lalu tekan enter']) !!}
+                    {!! Form::close() !!}
+                    <hr>
                   <table id="countryTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>

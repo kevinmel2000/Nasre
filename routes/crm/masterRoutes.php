@@ -11,6 +11,10 @@ use App\Http\Controllers\FeLookupLocationController;
 use App\Http\Controllers\ProductGroupController;
 use App\Http\Controllers\EarthQuakeZoneController;
 use App\Http\Controllers\FloodZoneController;
+
+Route::get('get-state-list','FeLookupLocationController@getStateList');
+Route::get('get-city-list','FeLookupLocationController@getCityList');
+
 Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
 
     // SECTION Country Group Routes
@@ -50,6 +54,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
 
     
     Route::get('/felookuplocation', [FeLookupLocationController::class, 'index'])->middleware(['can:view-felookup']);
+    Route::post('/felookuplocation', [FeLookupLocationController::class, 'index'])->middleware(['can:view-felookup']);
     Route::post('/felookuplocation/store', [FeLookupLocationController::class, 'store'])->middleware(['can:create-felookup']);
     Route::put('/felookuplocation/update/{fl}', [FeLookupLocationController::class, 'update'])->middleware(['can:update-felookup']);
     Route::delete('/felookuplocation/destroy/{fl}', [FeLookupLocationController::class, 'destroy'])->middleware(['can:delete-felookup']);
@@ -63,11 +68,13 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
 
 
     Route::get('/city',  [CityController::class, 'index'])->middleware(['can:view-city']);
+    Route::post('/city',  [CityController::class, 'index'])->middleware(['can:view-city']);
     Route::post('/city/store', [CityController::class, 'store'])->middleware(['can:create-city']);
     Route::put('/city/update/{city}', [CityController::class, 'update'])->middleware(['can:update-city']);
     Route::delete('/city/destroy/{city}', [CityController::class, 'destroy'])->middleware(['can:delete-city']);
 
     Route::get('/state',  [StateController::class, 'index'])->middleware(['can:view-state']);
+    Route::post('/state',  [StateController::class, 'index'])->middleware(['can:view-state']);
     Route::post('/state/store', [StateController::class, 'store'])->middleware(['can:create-state']);
     Route::put('/state/update/{state}', [StateController::class, 'update'])->middleware(['can:update-state']);
     Route::delete('/state/destroy/{state}', [StateController::class, 'destroy'])->middleware(['can:delete-state']);
@@ -79,16 +86,19 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
 
 
     Route::get('/cedingbroker', [CedingBrokerController::class, 'index'])->middleware(['can:view-cedingbroker']);
+    Route::post('/cedingbroker', [CedingBrokerController::class, 'index'])->middleware(['can:view-cedingbroker']);
     Route::post('/cedingbroker/store', [CedingBrokerController::class, 'store'])->middleware(['can:create-cedingbroker']);
     Route::put('/cedingbroker/update/{cb}', [CedingBrokerController::class, 'update'])->middleware(['can:update-cedingbroker']);
     Route::delete('/cedingbroker/destroy/{cb}', [CedingBrokerController::class, 'destroy'])->middleware(['can:delete-cedingbroker']);
 
     Route::get('/earthquakezone', [EarthQuakeZoneController::class, 'index'])->middleware(['can:view-eqz']);
+    Route::post('/earthquakezone', [EarthQuakeZoneController::class, 'index'])->middleware(['can:view-eqz']);
     Route::post('/earthquakezone/store',  [EarthQuakeZoneController::class, 'store'])->middleware(['can:create-eqz']);
     Route::put('/earthquakezone/update/{eq}', [EarthQuakeZoneController::class, 'update'])->middleware(['can:update-eqz']);
     Route::delete('/earthquakezone/destroy/{eq}',  [EarthQuakeZoneController::class, 'destroy'])->middleware(['can:delete-eqz']);
 
     Route::get('/floodzone', [FloodZoneController::class, 'index'])->middleware(['can:view-fz']);
+    Route::post('/floodzone', [FloodZoneController::class, 'index'])->middleware(['can:view-fz']);
     Route::post('/floodzone/store',  [FloodZoneController::class, 'store'])->middleware(['can:create-fz']);
     Route::put('/floodzone/update/{flood}', [FloodZoneController::class, 'update'])->middleware(['can:update-fz']);
     Route::delete('/floodzone/destroy/{flood}',  [FloodZoneController::class, 'destroy'])->middleware(['can:delete-fz']);

@@ -1,3 +1,118 @@
+<script type=text/javascript>
+
+  $('#country').change(function(){
+  var countryID = $(this).val();  
+  //alert(countryID);
+  if(countryID){
+    $.ajax({
+      type:"GET",
+      url:"{{url('get-state-list')}}?country_id="+countryID,
+      success:function(res){        
+      if(res){
+        $("#state").empty();
+        $("#state").append('<option>Select</option>');
+        $.each(res,function(key,value){
+          $("#state").append('<option value="'+key+'">'+value+'</option>');
+        });
+      
+      }else{
+        $("#state").empty();
+      }
+      }
+    });
+  }else{
+    $("#state").empty();
+    $("#city").empty();
+  }   
+  });
+
+
+  $('#state').on('change',function(){
+  var stateID = $(this).val();  
+  //alert(stateID);
+  if(stateID){
+    $.ajax({
+      type:"GET",
+      url:"{{url('get-city-list')}}?state_id="+stateID,
+      success:function(res){        
+      if(res){
+        $("#city").empty();
+        $.each(res,function(key,value){
+          $("#city").append('<option value="'+key+'">'+value+'</option>');
+        });
+      
+      }else{
+        $("#city").empty();
+      }
+      }
+    });
+  }else{
+    $("#city").empty();
+  }
+    
+  });
+
+</script>
+
+
+<script type=text/javascript>
+
+  $('#country2').change(function(){
+  var countryID = $(this).val();  
+  //alert(countryID);
+  if(countryID){
+    $.ajax({
+      type:"GET",
+      url:"{{url('get-state-list')}}?country_id="+countryID,
+      success:function(res){        
+      if(res){
+        $("#state2").empty();
+        $("#state2").append('<option>Select</option>');
+        $.each(res,function(key,value){
+          $("#state2").append('<option value="'+key+'">'+value+'</option>');
+        });
+      
+      }else{
+        $("#state2").empty();
+      }
+      }
+    });
+  }else{
+    $("#state2").empty();
+    $("#city2").empty();
+  }   
+  });
+
+
+  $('#state2').on('change',function(){
+  var stateID = $(this).val();  
+  //alert(stateID);
+  if(stateID){
+    $.ajax({
+      type:"GET",
+      url:"{{url('get-city-list')}}?state_id="+stateID,
+      success:function(res){        
+      if(res){
+        $("#city2").empty();
+        $.each(res,function(key,value){
+          $("#city2").append('<option value="'+key+'">'+value+'</option>');
+        });
+      
+      }else{
+        $("#city2").empty();
+      }
+      }
+    });
+  }else{
+    $("#city2").empty();
+  }
+    
+  });
+
+</script>
+
+
+
 <script src="http://maps.google.com/maps/api/js?sensor=false&amp;key=AIzaSyD4yhKiCvJpWtee_7Bobk_9qjDUAZTTOKE" type="text/javascript"></script>
 
 <link href="{{url('/')}}/css/select2.css" rel="stylesheet"/>

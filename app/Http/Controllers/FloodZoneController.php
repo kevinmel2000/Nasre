@@ -30,7 +30,7 @@ class FloodZoneController extends Controller
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
-          $floodzone=FloodZone::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->paginate(10);
+          $floodzone=FloodZone::where('name', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->paginate(10);
           $floodzone_ids = response()->json($floodzone->modelKeys());
           return view('crm.master.floodzone', compact('user','floodzone','route_active','floodzone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }

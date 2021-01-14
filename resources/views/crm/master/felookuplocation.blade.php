@@ -73,7 +73,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                               <label for="">{{__('Country')}}</label>
-                                    <select name="crccountry" class="e1 form-control form-control-sm ">
+                                    <select name="crccountry" id="country" class="e1 form-control form-control-sm ">
                                       <option selected disabled>{{__('Select Country')}}</option>
                                       @foreach($country as $cty)
                                       <option value="{{ $cty->id }}">{{ $cty->id }} - {{ $cty->name }}</option>
@@ -94,7 +94,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                               <label for="">{{__('Province')}}</label>
-                                    <select name="province"  class="e1 form-control form-control-sm ">
+                                    <select name="province" id="state"  class="e1 form-control form-control-sm ">
                                       <option selected disabled>{{__('Select Province')}}</option>
                                       @foreach($country as $statedata)
                                       <option value="{{ $statedata->id }}">{{ $statedata->id }} - {{ $statedata->name }}</option>
@@ -106,7 +106,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                               <label for="">{{__('Cities')}}</label>
-                                    <select name="cityinsert" class="e1 form-control form-control-sm ">
+                                    <select name="cityinsert" id="city" class="e1 form-control form-control-sm ">
                                       <option selected disabled>{{__('Select Cities')}}</option>
                                       @foreach($country as $citydata)
                                       <option value="{{ $citydata->id }}">{{ $citydata->id }} - {{ $citydata->name }}</option>
@@ -197,6 +197,11 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12 com-sm-12 mt-3">
+                    <hr>
+                    {!! Form::open(array('url'=>'master-data/felookuplocation')) !!}
+                    {!! Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari Fire & Engineering Lookup Location, ketik lalu tekan enter']) !!}
+                    {!! Form::close() !!}
+                    <hr>
                   <table id="countryTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -300,7 +305,7 @@
                                                   <div class="col-md-6 col-md-6">
                                                     <div class="form-group">
                                                         <label for="">{{__('Country')}}</label><br>
-                                                        <select name="country_id" class="form-control form-control-sm e1">
+                                                        <select name="country_id" id="country2" class="form-control form-control-sm e1">
                                                             <option selected disabled>{{__('Select State')}}</option>
                                                             @foreach($country as $cty)
                                                             @if($location->country_id  == $cty->id)
@@ -326,9 +331,9 @@
                                                   <div class="col-md-6 col-md-6">
                                                       <div class="form-group">
                                                           <label for="">{{__('State/Province')}}</label><br>
-                                                          <select name="province_id" class="form-control form-control-sm e1">
+                                                          <select name="province_id" id="state2" class="form-control form-control-sm e1">
                                                               <option selected disabled>{{__('Select State')}}</option>
-                                                              @foreach($country as $statedata)
+                                                              @foreach($state as $statedata)
                                                               @if($location->province_id  == $statedata->id)
                                                               <option value="{{ $statedata->id }}" selected>{{ $statedata->id }} - {{ $statedata->name }}</option>
                                                               @else
@@ -342,7 +347,7 @@
                                                   <div class="col-md-6 col-md-6">
                                                       <div class="form-group">
                                                           <label for="">{{__('City ')}}</label><br>
-                                                          <select name="city_id" class="form-control form-control-sm e1">
+                                                          <select name="city_id" id="city2" class="form-control form-control-sm e1">
                                                               <option selected disabled>{{__('Select City')}}</option>
                                                               @foreach($country as $citydata)
                                                               @if($location->city_id  == $citydata->id)

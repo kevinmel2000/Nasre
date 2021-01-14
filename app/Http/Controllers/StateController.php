@@ -30,7 +30,7 @@ class StateController extends Controller
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
-          $state=State::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->paginate(10);
+          $state=State::where('code', 'LIKE', '%' . $search . '%')->orWhere('name', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->paginate(10);
           $state_ids = response()->json($state->modelKeys());
           $country = Country::orderby('id','asc')->get();
           return view('crm.master.state', compact('user','state','route_active','state_ids','country'))->with('i', ($request->input('page', 1) - 1) * 10);
