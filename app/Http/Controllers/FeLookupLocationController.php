@@ -167,17 +167,32 @@ class FeLookupLocationController extends Controller
     public function update(Request $request, FeLookupLocation $felookuplocation)
     {
         $validator = $request->validate([
-            'codekoc'=>'required|unique:currencies,code',
-            'descriptionkoc'=>'required',
-            'abbreviationkoc'=>'required'
+            'loccodefe'=>'required|max:15,code',
+            'addressfe'=>'required',
+            'countryfe'=>'required',
+            'postal_codefe'=>'required',
+            'eqzonefe'=>'required',
+            'floodzonefe'=>'required'
         ]);
+
         if($validator){
-            $felookuplocation->code = $request->codekoc;
-            $felookuplocation->description = $request->descriptionkoc;
-            $felookuplocation->abbreviation = $request->abbreviationkoc;
+            
+          
+            $felookuplocation->loc_code = $request->loccodefe;
+            $felookuplocation->address = $request->addressfe;
+            $felookuplocation->longtitude = $request->longtitudefe;
+            $felookuplocation->latitude = $request->latitudefe;
+            $felookuplocation->postal_code = $request->postal_codefe;
+            $felookuplocation->country_id = $request->countryfe;
+            $felookuplocation->province_id = $request->statefe;
+            $felookuplocation->city_id = $request->cityfe;
+            $felookuplocation->eq_zone = $request->eqzonefe;
+            $felookuplocation->flood_zone = $request->floodzonefe;
+            $felookuplocation->insured = $request->insuredfe;
+
             $felookuplocation->save();
             $notification = array(
-                'message' => 'Koc updated successfully!',
+                'message' => 'Fire & Engineering Lookup Location updated successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);

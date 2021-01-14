@@ -46,6 +46,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     
     Route::get('/felookuplocation', [FeLookupLocationController::class, 'index']);
     Route::post('/felookuplocation/store', [FeLookupLocationController::class, 'store']);
+    Route::put('/felookuplocation/update/{felookuplocation}', [FeLookupLocationController::class, 'update']);
     Route::delete('/felookuplocation/destroy/{felookuplocation}', [FeLookupLocationController::class, 'destroy']);
 
     Route::get('/koc',  [KocController::class, 'index']);
