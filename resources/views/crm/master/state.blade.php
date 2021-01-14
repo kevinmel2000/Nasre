@@ -90,11 +90,11 @@
                               <td>
                                
                                 <span>
-                                    {{-- @can('update-state', User::class) --}}
+                                    @can('update-state', User::class)
                                     <a class="text-primary mr-3" data-toggle="modal" data-target="#updatestate{{$statedata->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
-                                    {{-- @endcan   --}}
+                                    @endcan  
 
                                     <div class="modal fade" id="updatestate{{$statedata->id}}" tabindex="-1" user="dialog" aria-labelledby="updatestate{{$statedata->id}}Label" aria-hidden="true">
                                     <div class="modal-dialog" user="document">
@@ -149,7 +149,7 @@
                                 {{-- Edit Modal Ends --}}
 
 
-                                  {{-- @can('delete-state', User::class) --}}
+                                  @can('delete-state', User::class)
 
                                   <span id="delbtn{{@$statedata->id}}"></span>
                                 
@@ -160,7 +160,7 @@
                                         @csrf
                                     </form>
 
-                                   {{-- @endcan   --}}
+                                   @endcan  
                                 </span>
                               </td>
 

@@ -15,7 +15,7 @@ class KocController extends Controller
     public function index(Request $request)
     {
          $user = Auth::user();
-         $route_active = 'koc_master';   
+         $route_active = 'KOC Data Master';   
          $mydate = date("Y").date("m").date("d");
          $search = @$request->input('search');
 

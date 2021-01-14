@@ -65,7 +65,7 @@ class KOCPolicy
      */
     public function update(User $user)
     {
-        $module = Module::select(['update'])->where(['module_name'=>'occupation_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['update'])->where(['module_name'=>'koc_module', 'role_id'=>$user->role->id])->first();
         return $module->update == 'on';
     }
 
@@ -78,7 +78,7 @@ class KOCPolicy
      */
     public function delete(User $user)
     {
-        $module = Module::select(['delete'])->where(['module_name'=>'occupation_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['delete'])->where(['module_name'=>'koc_module', 'role_id'=>$user->role->id])->first();
         return $module->delete == 'on';
     }
 

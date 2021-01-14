@@ -101,11 +101,11 @@
                                 <span>
                                    
                                    
-                                    {{-- @can('update-golffieldhole', User::class) --}}
+                                    @can('update-gfh', User::class)
                                     <a class="text-primary mr-3" data-toggle="modal" data-target="#updategolffieldhole{{$golf->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
-                                    {{-- @endcan   --}}
+                                    @endcan  
 
                                     <div class="modal fade" id="updategolffieldhole{{$golf->id}}" tabindex="-1" user="dialog" aria-labelledby="updategolffieldhole{{$golf->id}}Label" aria-hidden="true">
                                     <div class="modal-dialog" user="document">
@@ -158,7 +158,7 @@
                                 {{-- Edit Modal Ends --}}
 
 
-                                  {{-- @can('delete-golffieldhole', User::class) --}}
+                                  @can('delete-gfh', User::class)
 
                                   <span id="delbtn{{@$golf->id}}"></span>
                                 
@@ -168,7 +168,7 @@
                                         @method('DELETE')
                                         @csrf
                                     </form>
-                                 {{-- @endcan   --}}
+                                 @endcan  
                                 </span>
                               </td>
 

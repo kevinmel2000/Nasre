@@ -16,7 +16,7 @@ class EarthQuakeZoneController extends Controller
     public function index(Request $request)
     {
          $user = Auth::user();
-         $route_active = 'earthquakezone_master';   
+         $route_active = 'Earthquake Zone';   
 
          $search = @$request->input('search');
 

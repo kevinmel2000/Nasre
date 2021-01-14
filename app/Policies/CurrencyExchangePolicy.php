@@ -36,7 +36,7 @@ class CurrencyExchangePolicy
      */
     public function view(User $user)
     {
-        $module = Module::select(['read'])->where(['module_name'=>'occupation_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['read'])->where(['module_name'=>'exchange_module', 'role_id'=>$user->role->id])->first();
         return $module->read == 'on';
     }
 
@@ -48,7 +48,7 @@ class CurrencyExchangePolicy
      */
     public function create(User $user)
     {
-        $module = Module::select(['create'])->where(['module_name'=>'occupation_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['create'])->where(['module_name'=>'exchange_module', 'role_id'=>$user->role->id])->first();
         return $module->create == 'on';
     }
 
@@ -61,7 +61,7 @@ class CurrencyExchangePolicy
      */
     public function update(User $user)
     {
-        $module = Module::select(['update'])->where(['module_name'=>'occupation_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['update'])->where(['module_name'=>'exchange_module', 'role_id'=>$user->role->id])->first();
         return $module->update == 'on';
     }
 
@@ -74,7 +74,7 @@ class CurrencyExchangePolicy
      */
     public function delete(User $user)
     {
-        $module = Module::select(['delete'])->where(['module_name'=>'occupation_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['delete'])->where(['module_name'=>'exchange_module', 'role_id'=>$user->role->id])->first();
         return $module->delete == 'on';
     }
 

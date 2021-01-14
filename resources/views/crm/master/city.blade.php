@@ -88,11 +88,11 @@
                                
                                 <span>
 
-                                    {{-- @can('update-city', User::class) --}}
+                                    @can('update-city', User::class)
                                     <a class="text-primary mr-3" data-toggle="modal" data-target="#updatecity{{$citydata->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
-                                    {{-- @endcan   --}}
+                                    @endcan  
 
                                     <div class="modal fade" id="updatecity{{$citydata->id}}" tabindex="-1" user="dialog" aria-labelledby="updatekoc{{$citydata->id}}Label" aria-hidden="true">
                                     <div class="modal-dialog" user="document">
@@ -146,7 +146,7 @@
                                 </div>
                                 {{-- Edit Modal Ends --}}
 
-                                  {{-- @can('delete-city', User::class) --}}
+                                  @can('delete-city', User::class)
 
                                   <span id="delbtn{{@$citydata->id}}"></span>
                                 
@@ -157,7 +157,7 @@
                                         @csrf
                                     </form>
 
-                                   {{-- @endcan   --}}
+                                   @endcan  
                                 </span>
                               </td>
 

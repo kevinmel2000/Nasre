@@ -44,7 +44,7 @@ class FeLookupLocationController extends Controller
     public function index(Request $request)
     {
          $user = Auth::user();
-         $route_active = 'felookuplocation_master';   
+         $route_active = 'Fire & Engineering Lookup Location';   
          $mydate = date("Y").date("m").date("d");
          $search = @$request->input('search');
 

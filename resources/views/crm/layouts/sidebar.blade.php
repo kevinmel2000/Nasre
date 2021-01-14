@@ -714,11 +714,19 @@
                 @endcan
 
                     @if(
-                    @$route_active == 'country_master' 
-                    || @$route_active == 'cob_master' 
-                    || @$route_active == 'felookuplocation_master' 
-                    || @$route_active == 'ocp_master' 
-                    || @$route_active == 'currency_master' 
+                    @$route_active == 'Country Data Master' 
+                    || @$route_active == 'State Data Master' 
+                    || @$route_active == 'City Data Master' 
+                    || @$route_active == 'Currency Data Master' 
+                    || @$route_active == 'Currency Exchange Data Master' 
+                    || @$route_active == 'Fire & Engineering Lookup Location' 
+                    || @$route_active == 'Golf Field Hole' 
+                    || @$route_active == 'KOC Data Master' 
+                    || @$route_active == 'Ceding / Broker' 
+                    || @$route_active == 'COB Data Master' 
+                    || @$route_active == 'Occupation Data Master' 
+                    || @$route_active == 'Earthquake Zone' 
+                    || @$route_active == 'Flood Zone Data Master' 
                     )
                         @php
                         $master_dd = 'active';
@@ -740,7 +748,7 @@
 
                         <ul class="nav nav-treeview">
 
-                            @if($route_active == 'country_master')
+                            @if($route_active == 'Country Data Master')
                             @php
                                 $countryform = 'active';
                             @endphp
@@ -752,7 +760,7 @@
                                 </a>
                             </li>
 
-                            @if($route_active == 'state_master')
+                            @if($route_active == 'State Data Master')
                             @php
                                 $state_form = 'active';
                             @endphp
@@ -764,7 +772,7 @@
                                 </a>
                             </li>
 
-                            @if($route_active == 'city_master')
+                            @if($route_active == 'City Data Master')
                             @php
                                 $city_form = 'active';
                             @endphp
@@ -776,7 +784,7 @@
                                 </a>
                             </li>
 
-                            @if($route_active == 'currency_master')
+                            @if($route_active == 'Currency Data Master')
                             @php
                                 $crc_form = 'active';
                             @endphp
@@ -788,7 +796,7 @@
                                 </a>
                             </li>
 
-                            @if($route_active == 'currency_exchange')
+                            @if($route_active == 'Currency Exchange Data Master')
                             @php
                                 $exchange_form = 'active';
                             @endphp
@@ -800,7 +808,7 @@
                                 </a>
                             </li>
 
-                            @if($route_active == 'felookuplocation_master')
+                            @if($route_active == 'Fire & Engineering Lookup Location')
                             @php
                                 $felookuplocationform = 'active';
                             @endphp
@@ -812,7 +820,7 @@
                                 </a>
                             </li>
 
-                            @if($route_active == 'golffieldhole_master')
+                            @if($route_active == 'Golf Field Hole')
                             @php
                                 $gfh_form = 'active';
                             @endphp
@@ -826,7 +834,7 @@
 
                         
 
-                            @if($route_active == 'koc_master')
+                            @if($route_active == 'KOC Data Master')
                             @php
                                 $koc_form = 'active';
                             @endphp
@@ -839,7 +847,7 @@
                             </li>
                             
 
-                            @if($route_active == 'cedingbroker_master')
+                            @if($route_active == 'Ceding / Broker')
                             @php
                                 $cedingform = 'active';
                             @endphp
@@ -851,7 +859,7 @@
                                 </a>
                             </li>
 
-                            @if($route_active == 'cob_master')
+                            @if($route_active == 'COB Data Master')
                             @php
                                 $cob_form = 'active';
                             @endphp
@@ -863,7 +871,7 @@
                                 </a>
                             </li>
 
-                            @if($route_active == 'ocp_master')
+                            @if($route_active == 'Occupation Data Master')
                             @php
                                 $ocp_form = 'active';
                             @endphp
@@ -875,7 +883,7 @@
                                 </a>
                             </li>
 
-                            @if($route_active == 'earthquakezone_master')
+                            @if($route_active == 'Earthquake Zone')
                             @php
                                 $earthquakezone_form = 'active';
                             @endphp
@@ -887,7 +895,7 @@
                                 </a>
                             </li>
 
-                            @if($route_active == 'flood_master')
+                            @if($route_active == 'Flood Zone Data Master')
                             @php
                                 $flood_form = 'active';
                             @endphp
