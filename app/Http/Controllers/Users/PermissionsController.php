@@ -44,6 +44,10 @@ class PermissionsController extends Controller
         $felookup_module =  Module::where(['module_name'=>'fe_lookup_module','role_id'=>$selected_role_id])->first();
         $cedingbroker_module =  Module::where(['module_name'=>'cedingbroker_module','role_id'=>$selected_role_id])->first();
         $gfh_module =  Module::where(['module_name'=>'gfh_module','role_id'=>$selected_role_id])->first();
+        $city_module =  Module::where(['module_name'=>'city_module','role_id'=>$selected_role_id])->first();
+        $state_module =  Module::where(['module_name'=>'state_module','role_id'=>$selected_role_id])->first();
+        $eqz_module =  Module::where(['module_name'=>'eqz_module','role_id'=>$selected_role_id])->first();
+        $fz_module =  Module::where(['module_name'=>'fz_module','role_id'=>$selected_role_id])->first();
         
         $route_active = 'permissions';
         return view('crm.user.role_permissions', 
@@ -74,6 +78,10 @@ class PermissionsController extends Controller
                     'gfh_module',
                     'cedingbroker_module',
                     'felookup_module',
+                    'city_module',
+                    'state_module',
+                    'eqz_module',
+                    'fz_module',
                 ]));
     }
 
@@ -114,6 +122,10 @@ class PermissionsController extends Controller
         $felookup_module =  Module::where(['module_name'=>'fe_lookup_module','role_id'=>$selected_role_id])->first();
         $cedingbroker_module =  Module::where(['module_name'=>'cedingbroker_module','role_id'=>$selected_role_id])->first();
         $gfh_module =  Module::where(['module_name'=>'gfh_module','role_id'=>$selected_role_id])->first();
+        $city_module =  Module::where(['module_name'=>'city_module','role_id'=>$selected_role_id])->first();
+        $state_module =  Module::where(['module_name'=>'state_module','role_id'=>$selected_role_id])->first();
+        $eqz_module =  Module::where(['module_name'=>'eqz_module','role_id'=>$selected_role_id])->first();
+        $fz_module =  Module::where(['module_name'=>'fz_module','role_id'=>$selected_role_id])->first();
         
         $route_active = 'permissions';
         return view('crm.user.role_permissions', 
@@ -144,6 +156,10 @@ class PermissionsController extends Controller
                     'gfh_module',
                     'cedingbroker_module',
                     'felookup_module',
+                    'city_module',
+                    'state_module',
+                    'eqz_module',
+                    'fz_module',
                 ]));
 
     }
@@ -185,6 +201,10 @@ class PermissionsController extends Controller
         $felookup_module =  Module::where(['module_name'=>'fe_lookup_module','role_id'=>$selected_role_id])->first();
         $cedingbroker_module =  Module::where(['module_name'=>'cedingbroker_module','role_id'=>$selected_role_id])->first();
         $gfh_module =  Module::where(['module_name'=>'gfh_module','role_id'=>$selected_role_id])->first();
+        $city_module =  Module::where(['module_name'=>'city_module','role_id'=>$selected_role_id])->first();
+        $state_module =  Module::where(['module_name'=>'state_module','role_id'=>$selected_role_id])->first();
+        $eqz_module =  Module::where(['module_name'=>'eqz_module','role_id'=>$selected_role_id])->first();
+        $fz_module =  Module::where(['module_name'=>'fz_module','role_id'=>$selected_role_id])->first();
 
         $route_active = 'permissions';
         return view('crm.user.role_permissions', 
@@ -215,6 +235,10 @@ class PermissionsController extends Controller
                     'gfh_module',
                     'cedingbroker_module',
                     'felookup_module',
+                    'city_module',
+                    'state_module',
+                    'eqz_module',
+                    'fz_module',
                 ]));
     }
 

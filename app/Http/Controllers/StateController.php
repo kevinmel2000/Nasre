@@ -15,7 +15,7 @@ class StateController extends Controller
     public function index(Request $request)
     {
          $user = Auth::user();
-         $route_active = 'state_master';   
+         $route_active = 'State Data Master';   
 
          $search = @$request->input('search');
 

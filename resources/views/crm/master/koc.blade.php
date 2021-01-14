@@ -98,11 +98,11 @@
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
-                                   {{-- @can('update-koc', User::class) --}}
+                                   @can('update-koc', User::class)
                                     <a class="text-primary mr-3" data-toggle="modal" data-target="#updatekoc{{$kocdata->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
-                                    {{-- @endcan   --}}
+                                    @endcan  
 
                                     <div class="modal fade" id="updatekoc{{$kocdata->id}}" tabindex="-1" user="dialog" aria-labelledby="updatekoc{{$kocdata->id}}Label" aria-hidden="true">
                                     <div class="modal-dialog" user="document">
@@ -154,7 +154,7 @@
                                 </div>
                                 {{-- Edit Modal Ends --}}
 
-                                  {{-- @can('delete-koc', User::class) --}}
+                                  @can('delete-koc', User::class)
 
                                   <span id="delbtn{{@$kocdata->id}}"></span>
                                 
@@ -165,7 +165,7 @@
                                         @csrf
                                     </form>
 
-                                   {{-- @endcan   --}}
+                                   @endcan  
                                 </span>
                               </td>
 

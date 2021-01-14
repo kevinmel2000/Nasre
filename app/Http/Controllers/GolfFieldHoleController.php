@@ -15,7 +15,7 @@ class GolfFieldHoleController extends Controller
     public function index(Request $request)
     {
          $user = Auth::user();
-         $route_active = 'golffieldhole_master';   
+         $route_active = 'Golf Field Hole';   
          $mydate = date("Y").date("m").date("d");
          $search = @$request->input('search');
 

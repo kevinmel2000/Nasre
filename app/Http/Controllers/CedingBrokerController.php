@@ -15,7 +15,7 @@ class CedingBrokerController extends Controller
     public function index(Request $request)
     {
          $user = Auth::user();
-         $route_active = 'cedingbroker_master';   
+         $route_active = 'Ceding / Broker';   
          $mydate = date("Y").date("m").date("d");
          $search = @$request->input('search');
 

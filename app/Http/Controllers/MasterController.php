@@ -23,7 +23,7 @@ class MasterController extends Controller
     public function indexcountry(Request $request)
     {
         $user = Auth::user();
-        $route_active = 'country_master';
+        $route_active = 'Country Data Master';
         $search = @$request->input('search');
         
 
@@ -48,7 +48,7 @@ class MasterController extends Controller
 
     public function indexcob(Request $request)
     {
-        $route_active = 'cob_master';
+        $route_active = 'COB Data Master';
         $user = Auth::user();
         $search = @$request->input('search');
         $mydate = date("Y").date("m").date("d");
@@ -103,7 +103,7 @@ class MasterController extends Controller
 
     public function indexoccupation(Request $request)
     {
-        $route_active = 'ocp_master';
+        $route_active = 'Occupation Data Master';
         $user = Auth::user();
         $search = @$request->input('search');
         $mydate = date("Y").date("m").date("d");
@@ -160,7 +160,7 @@ class MasterController extends Controller
 
     public function indexcurrency(Request $request)
     {
-        $route_active = 'currency_master';
+        $route_active = 'Currency Data Master';
         $user = Auth::user();
         $search = @$request->input('search');
 
@@ -185,7 +185,7 @@ class MasterController extends Controller
 
     public function indexexchange(Request $request)
     {
-        $route_active = 'currency_exchange';
+        $route_active = 'Currency Exchange Data Master';
         $user = Auth::user();
         $search = @$request->input('search');
 

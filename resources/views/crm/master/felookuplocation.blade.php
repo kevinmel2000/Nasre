@@ -238,11 +238,11 @@
                                 <span>
 
                                 
-                                  {{-- @can('update-felookuplocation', User::class) --}}
+                                  @can('update-felookup', User::class)
                                     <a class="text-primary mr-3" data-toggle="modal" data-target="#updatefelookuplocation{{$location->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
-                                    {{-- @endcan   --}}
+                                    @endcan  
 
                                     <div class="modal fade" id="updatefelookuplocation{{$location->id}}" tabindex="-1" user="dialog" aria-labelledby="updatefelookuplocation{{$location->id}}Label" aria-hidden="true">
                                     <div class="modal-dialog" user="document">
@@ -420,7 +420,7 @@
                                 </div>
                                 {{-- Edit Modal Ends --}}
 
-                                {{-- @can('delete-felookuplocation', User::class) --}}
+                                @can('delete-felookup', User::class)
 
                                   <span id="delbtn{{@$location->id}}"></span>
                                 
@@ -430,7 +430,7 @@
                                         @method('DELETE')
                                         @csrf
                                     </form>
-                                    {{-- @endcan   --}}
+                                    @endcan  
                                 </span>
                               </td>
 

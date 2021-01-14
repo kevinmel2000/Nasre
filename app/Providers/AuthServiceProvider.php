@@ -143,5 +143,33 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-felookup', 'App\Policies\FelookupLocationPolicy@create');
         Gate::define('update-felookup', 'App\Policies\FelookupLocationPolicy@update');
         Gate::define('delete-felookup', 'App\Policies\FelookupLocationPolicy@delete');
+
+        // ANCHOR City Gates
+        Gate::define('viewany-city', 'App\Policies\CityPolicy@viewany');
+        Gate::define('view-city', 'App\Policies\CityPolicy@view');
+        Gate::define('create-city', 'App\Policies\CityPolicy@create');
+        Gate::define('update-city', 'App\Policies\CityPolicy@update');
+        Gate::define('delete-city', 'App\Policies\CityPolicy@delete');
+
+        // ANCHOR State Gates
+        Gate::define('viewany-state', 'App\Policies\StatePolicy@viewany');
+        Gate::define('view-state', 'App\Policies\StatePolicy@view');
+        Gate::define('create-state', 'App\Policies\StatePolicy@create');
+        Gate::define('update-state', 'App\Policies\StatePolicy@update');
+        Gate::define('delete-state', 'App\Policies\StatePolicy@delete');
+
+        // ANCHOR Eqrthquake Zone Gates
+        Gate::define('viewany-eqz', 'App\Policies\EQZPolicy@viewany');
+        Gate::define('view-eqz', 'App\Policies\FelookupLocationPolicy@view');
+        Gate::define('create-eqz', 'App\Policies\FelookupLocationPolicy@create');
+        Gate::define('update-eqz', 'App\Policies\FelookupLocationPolicy@update');
+        Gate::define('delete-eqz', 'App\Policies\FelookupLocationPolicy@delete');
+
+        // ANCHOR Flood Zone Gates
+        Gate::define('viewany-fz', 'App\Policies\FZPolicy@viewany');
+        Gate::define('view-fz', 'App\Policies\FZPolicy@view');
+        Gate::define('create-fz', 'App\Policies\FZPolicy@create');
+        Gate::define('update-fz', 'App\Policies\FZPolicy@update');
+        Gate::define('delete-fz', 'App\Policies\FZPolicy@delete');
     }
 }
