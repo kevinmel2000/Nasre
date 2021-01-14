@@ -145,19 +145,22 @@
                                                     <table id="shipdetailTable" class="table table-bordered table-striped">
                                                     <thead>
                                                     <tr>
-                                                        <th>{{__('ID')}}</th>
-                                                        <th>{{__('Name')}}</th>
-                                                        <th>{{__('Code')}}</th>
-                                                        <th>{{__('Continent')}}</th>
+                                                        <th>{{__('Ship Code')}}</th>
+                                                        <th>{{__('Ship Name')}}</th>
                                                         <th width="20%">{{__('Actions')}}</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <td>{{__('Code')}}</td>
-                                                        <td>{{__('Ship Name')}}</td>
-                                                        <td>{{__('Owner')}}</td>
-                                                        <td>{{__('Continent')}}</td>
-                                                        <td width="20%">{{__('Actions')}}</td>
+                                                        <tr>
+                                                            <td>{{__('CODE0001')}}</td>
+                                                            <td>{{__('Reliance I')}}</td>
+                                                            <td width="20%"><input class="form-check-input" style="margin-left: 30;" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{{__('CODE0002')}}</td>
+                                                            <td>{{__('Sabuk Nusantara IV')}}</td>
+                                                            <td width="20%"><input style="margin-left: 30;" class="form-check-input" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
+                                                        </tr>
                                                     </tbody>
                                                     
                                                     </table>
@@ -295,20 +298,28 @@
                                                     <div class="col-md-12 com-sm-12 mt-3">
                                                         <table id="slipStatusTable" class="table table-bordered table-striped">
                                                         <thead>
-                                                        <tr>
-                                                            <th>{{__('ID')}}</th>
-                                                            <th>{{__('Name')}}</th>
-                                                            <th>{{__('Code')}}</th>
-                                                            <th>{{__('Continent')}}</th>
-                                                            <th width="20%">{{__('Actions')}}</th>
-                                                        </tr>
+                                                            <tr>
+                                                                <th>{{__('Status')}}</th>
+                                                                <th>{{__('Datetime')}}</th>
+                                                                <th>{{__('User')}}</th>]
+                                                            </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <td>{{__('Code')}}</td>
-                                                            <td>{{__('Ship Name')}}</td>
-                                                            <td>{{__('Owner')}}</td>
-                                                            <td>{{__('Continent')}}</td>
-                                                            <td width="20%">{{__('Actions')}}</td>
+                                                            <tr>
+                                                                <td>{{__('Offer')}}</td>
+                                                                <td>{{__('01/10/2020 09:00:00')}}</td>
+                                                                <td>{{__('User A')}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>{{__('Binding')}}</td>
+                                                                <td>{{__('01/10/2020 14:15:00')}}</td>
+                                                                <td>{{__('User A')}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>{{__('Slip')}}</td>
+                                                                <td>{{__('01/10/2020 11:20:00')}}</td>
+                                                                <td>{{__('User B')}}</td>
+                                                            </tr>
                                                         </tbody>
                                                         
                                                         </table>
@@ -879,6 +890,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
                                                             <input type="text" name="slipsumshare" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
                                                         </div>
                                                     </div>

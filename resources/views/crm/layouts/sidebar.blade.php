@@ -8,9 +8,7 @@
       <!-- Sidebar -->
       <div class="sidebar">
           <nav class="mt-2">
-              <ul class="nav nav-pills nav-sidebar flex-column
-        nav-flat
-        " data-widget="treeview" role="menu" data-accordion="false">
+              <ul class="nav nav-pills nav-sidebar flex-column nav-flat" data-widget="treeview" role="menu" data-accordion="false">
                   {{-- ANCHOR Dashboard Starts here --}}
                   @if($route_active == 'home')
                     @php
@@ -23,9 +21,7 @@
                     @endphp
                   @endif
 
-                  <li class="nav-item 
-                  
-                  ">
+                  <li class="nav-item">
                       <a href="{{url('home')}}" class="nav-link {{@$home}}">
                           <i class="nav-icon fas fa-tachometer-alt"></i>
                           <p>
@@ -49,9 +45,9 @@
                         @endphp
                     @endif
 
-                    <li class="nav-item has-treeview {{@$users_menu_open }}">
+                    {{-- <li class="nav-item has-treeview {{@$users_menu_open }}"> --}}
                        
-                        <a href="#" class="nav-link {{@$users}}">
+                        {{-- <a href="#" class="nav-link {{@$users}}">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                                 
@@ -59,11 +55,11 @@
                                 {{__('STAFF MAMAGEMENT')}}
                                 <span class="badge badge-primary">{{session('total_users')}}</span>
                             </p>
-                        </a>
+                        </a> --}}
                         
-                        <ul class="nav nav-treeview">
+                        {{-- <ul class="nav nav-treeview"> --}}
                             @can('view-user', User::class)
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 @if($route_active == 'users')
                                     @php $manage_users = 'active'; @endphp
                                 @endif
@@ -71,10 +67,10 @@
                                     <i class="far fa-folder nav-icon text-secondary"></i>
                                     <p>{{__('STAFF USERS')}}</p>
                                 </a>
-                            </li>
+                            </li> --}}
                             @endcan
                             @can('view-role', User::class)
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     @if($route_active == 'roles')
                                     @php $manage_roles = 'active'; @endphp
                                     @endif
@@ -82,11 +78,11 @@
                                         <i class="far fa-folder nav-icon text-secondary"></i>
                                         <p>{{__('ROLES')}}</p>
                                     </a>
-                                </li>
+                                </li> --}}
                             @endcan      
                             {{-- Only Admin can access --}}
                             @if (Auth::user()->role_id == '1')  
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     @if($route_active == 'permissions')
                                     @php $manage_permissions = 'active'; @endphp
                                     @endif
@@ -94,94 +90,94 @@
                                         <i class="far fa-folder nav-icon text-secondary"></i>
                                         <p>{{__('PERMISSIONS')}}</p>
                                     </a>
-                                </li>
+                                </li> --}}
                             @endif
 
-                        </ul>
-                    </li>
+                        {{-- </ul>
+                    </li> --}}
                   @endcan
 
-                                   {{-- ANCHOR Leads Menu Starts here --}}
-                                   @can('viewany-lead', User::class)
-                                   @if(@$route_active == 'add_lead' || @$route_active == 'manage_lead' || @$route_active == 'lead_title'
-                                   || @$route_active == 'show_lead' || @$route_active == 'lead_source' || @$route_active == 'lead_status'
-                                   )
-                                       @php
-                                           $lead_dd = 'active';
-                                           $lead_menu_open = 'menu-open';
-                                       @endphp
-                                   @else
-                                       @php
-                                           $lead_menu_open = 'menu-close';
-                                       @endphp
-                                   @endif
-                                   <li class="nav-item has-treeview {{ @$lead_menu_open }}">
-                                       <a href="#" class="nav-link {{@$lead_dd}}">
-                                           <i class="nav-icon fas fa-user-clock"></i>
-                                           <p>
-                                            {{__('LEADS')}}
-                                               <i class="right fas fa-angle-left"></i>
-                                               <span class="badge badge-primary">{{session('total_leads')}}</span>
-                                           </p>
-                                       </a>
-               
-                                       <ul class="nav nav-treeview">
-               
-                                           @can('create-lead', Auth::user())
-                                           @if($route_active == 'add_lead')
-                                           @php
-                                           $add_lead = 'active';
-                                           @endphp
-                                           @endif
-                                           <li class="nav-item">
-                                               <a href="{{url('lead/create')}}" class="nav-link {{@$add_lead}}">
-                                                   <i class="far fa-folder nav-icon text-secondary"></i>
-                                                   <p>{{__('NEW LEAD')}}</p>
-                                               </a>
-                                           </li>
-                                           @endcan
-               
-                                           @can('view-lead', Auth::user())
-                                           @if($route_active == 'manage_lead' || $route_active == 'show_lead')
-                                           @php
-                                           $manage_lead = 'active';
-                                           @endphp
-                                           @endif
-                                           <li class="nav-item">
-                                               <a href="{{url('lead')}}" class="nav-link {{@$manage_lead}}">
-                                                   <i class="far fa-folder nav-icon text-secondary"></i>
-                                                   <p>{{__('MANAGE LEADS')}}</p>
-                                               </a>
-                                           </li>
-               
-               
-                                           @if($route_active == 'lead_source')
-                                           @php
-                                           $lead_source = 'active';
-                                           @endphp
-                                           @endif
-                                           <li class="nav-item">
-                                               <a href="{{url('lead/source')}}" class="nav-link {{@$lead_source}}">
-                                                   <i class="far fa-folder nav-icon text-secondary"></i>
-                                                   <p>{{__('LEAD SOURCES')}}</p>
-                                               </a>
-                                           </li>
-               
-                                           @if($route_active == 'lead_status')
-                                           @php
-                                           $lead_status = 'active';
-                                           @endphp
-                                           @endif
-                                           <li class="nav-item">
-                                               <a href="{{url('lead/status')}}" class="nav-link {{@$lead_status}}">
-                                                   <i class="far fa-folder nav-icon text-secondary"></i>
-                                                   <p>{{__('LEAD STATUSESS')}}</p>
-                                               </a>
-                                           </li>
-                                           @endcan
-                                       </ul>
-                                   </li>
-                                 @endcan
+                    {{-- ANCHOR Leads Menu Starts here --}}
+                    @can('viewany-lead', User::class)
+                    @if(@$route_active == 'add_lead' || @$route_active == 'manage_lead' || @$route_active == 'lead_title'
+                    || @$route_active == 'show_lead' || @$route_active == 'lead_source' || @$route_active == 'lead_status'
+                    )
+                        @php
+                            $lead_dd = 'active';
+                            $lead_menu_open = 'menu-open';
+                        @endphp
+                    @else
+                        @php
+                            $lead_menu_open = 'menu-close';
+                        @endphp
+                    @endif
+                    {{-- <li class="nav-item has-treeview {{ @$lead_menu_open }}">
+                        <a href="#" class="nav-link {{@$lead_dd}}">
+                            <i class="nav-icon fas fa-user-clock"></i>
+                            <p>
+                            {{__('LEADS')}}
+                                <i class="right fas fa-angle-left"></i>
+                                <span class="badge badge-primary">{{session('total_leads')}}</span>
+                            </p>
+                        </a>
+
+                        <ul class="nav nav-treeview">
+
+                            @can('create-lead', Auth::user())
+                            @if($route_active == 'add_lead')
+                            @php
+                            $add_lead = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('lead/create')}}" class="nav-link {{@$add_lead}}">
+                                    <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('NEW LEAD')}}</p>
+                                </a>
+                            </li>
+                            @endcan
+
+                            @can('view-lead', Auth::user())
+                            @if($route_active == 'manage_lead' || $route_active == 'show_lead')
+                            @php
+                            $manage_lead = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('lead')}}" class="nav-link {{@$manage_lead}}">
+                                    <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('MANAGE LEADS')}}</p>
+                                </a>
+                            </li>
+
+
+                            @if($route_active == 'lead_source')
+                            @php
+                            $lead_source = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('lead/source')}}" class="nav-link {{@$lead_source}}">
+                                    <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('LEAD SOURCES')}}</p>
+                                </a>
+                            </li>
+
+                            @if($route_active == 'lead_status')
+                            @php
+                            $lead_status = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('lead/status')}}" class="nav-link {{@$lead_status}}">
+                                    <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('LEAD STATUSESS')}}</p>
+                                </a>
+                            </li>
+                            @endcan
+                        </ul>
+                    </li> --}}
+                    @endcan
 
                   {{-- SECTION Product Menu  --}}
                   @can('viewany-product', User::class)
@@ -196,7 +192,7 @@
                         $product_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    <li class="nav-item has-treeview {{ @$product_menu_open }}">
+                    {{-- <li class="nav-item has-treeview {{ @$product_menu_open }}">
                         <a href="#" class="nav-link {{@$product_dd}}">
                             <i class="nav-icon fas fa-store"></i>
                             <p>
@@ -250,9 +246,10 @@
 
                             @endcan
                         </ul>
-                    </li>
+                    </li> --}}
                   @endcan
 
+                  {{-- proposal --}}
                   @can('viewany-lead', User::class)
                     @if(@$route_active == 'proposal' || @$route_active == 'proposalCreate')
                         @php
@@ -264,7 +261,7 @@
                         $proposal_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    <li class="nav-item has-treeview {{ @$proposal_menu_open }}">
+                    {{-- <li class="nav-item has-treeview {{ @$proposal_menu_open }}">
                         <a href="#" class="nav-link {{@$proposal_dd}}">
                             <i class="nav-icon fas fa-business-time"></i>
                             <p>
@@ -305,9 +302,10 @@
                             @endcan
 
                         </ul>
-                    </li>
+                    </li> --}}
                   @endcan
 
+                  {{-- contact --}}
                   @can('viewany-contact', User::class)
                     @if(@$route_active == 'add_contact' || @$route_active == 'manage_contact' || @$route_active ==
                     'contact_title' || @$route_active == 'show_contact' )
@@ -320,7 +318,7 @@
                             $contact_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    <li class="nav-item has-treeview {{ @$contact_menu_open }}">
+                    {{-- <li class="nav-item has-treeview {{ @$contact_menu_open }}">
                         <a href="#" class="nav-link {{@$contact_dd}}">
                             <i class="nav-icon fas fa-user-shield"></i>
                             <p>
@@ -373,7 +371,7 @@
                             </li>
                             @endcan
                         </ul>
-                    </li>
+                    </li> --}}
                   @endcan
 
                   {{-- SECTION ESTIMATES Menu  --}}
@@ -388,7 +386,7 @@
                         $estimate_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    <li class="nav-item has-treeview {{ @$estimate_menu_open }}">
+                    {{-- <li class="nav-item has-treeview {{ @$estimate_menu_open }}">
                         <a href="#" class="nav-link {{@$estimate_dd}}">
                             <i class="nav-icon fas fa-columns"></i>
                             <p>
@@ -427,7 +425,7 @@
                                 </li>
                             @endcan
                         </ul>
-                    </li>
+                    </li> --}}
                   @endcan
                   {{-- !SECTION ESTIMATES menu --}}
 
@@ -443,7 +441,7 @@
                         $invoice_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    <li class="nav-item has-treeview {{ @$invoice_menu_open }}">
+                    {{-- <li class="nav-item has-treeview {{ @$invoice_menu_open }}">
                         <a href="#" class="nav-link {{@$invoice_dd}}">
                             <i class="nav-icon fas fa-money-check"></i>
                             <p>
@@ -483,9 +481,10 @@
                                 </li>
                             @endcan
                         </ul>
-                    </li>
+                    </li> --}}
                   @endcan
 
+                  {{-- task --}}
                   @can('viewany-lead', User::class)
                     @if(@$route_active == 'task')
                     @php
@@ -497,16 +496,17 @@
                     $task_menu_open = 'menu-close';
                     @endphp
                     @endif
-                    <li class="nav-item has-treeview {{ @$task_menu_open }}">
+                    {{-- <li class="nav-item has-treeview {{ @$task_menu_open }}">
                         <a href="{{url('task/')}}"  class="nav-link {{@$task_dd}}">
                             <i class="nav-icon fas fa-tasks"></i>
                             <p>
                                 {{__('TASKS')}}
                             </p>
                         </a>
-                    </li>
+                    </li> --}}
                   @endcan
 
+                  {{-- media --}}
                     @can('viewany-lead', User::class)
                         @if(@$route_active == 'media')
                             @php
@@ -518,16 +518,17 @@
                             $media_menu_open = 'menu-close';
                             @endphp
                         @endif
-                        <li class="nav-item has-treeview {{ @$media_menu_open }}">
+                        {{-- <li class="nav-item has-treeview {{ @$media_menu_open }}">
                             <a href="{{url('media/')}}"  class="nav-link {{@$media_dd}}">
                                 <i class="nav-icon fas fa-folder-open"></i>
                                 <p>
                                     {{__('MEDIA FILES')}}
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
                     @endcan
 
+                    {{-- reminders --}}
                     @can('viewany-lead', User::class)
                         @if(@$route_active == 'reminder')
                             @php
@@ -539,15 +540,15 @@
                             $reminder_menu_open = 'menu-close';
                             @endphp
                         @endif
-                        <li class="nav-item has-treeview {{ @$reminder_menu_open }}">
+                        {{-- <li class="nav-item has-treeview {{ @$reminder_menu_open }}">
                             <a href="{{url('reminder/')}}"  class="nav-link {{@$reminder_dd}}">
                                 <i class="nav-icon fas fa-business-time"></i>
                                 <p>{{__('REMINDERS')}}</p>
                             </a>
-                        </li>
+                        </li> --}}
                     @endcan
 
-
+                    {{--  Office Setting --}}
                 @can('viewany-office', User::class)
                     @if(
                     @$route_active == 'taxrate' || 
@@ -565,7 +566,7 @@
                         $finance_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    <li class="nav-item has-treeview {{ @$finance_menu_open }}">
+                    {{-- <li class="nav-item has-treeview {{ @$finance_menu_open }}">
                         <a href="#" class="nav-link {{@$finance_dd}}">
                             <i class="nav-icon fas fa-money-check-alt"></i>
                             <p>
@@ -642,9 +643,10 @@
                             
                             
                         </ul>
-                    </li>
+                    </li> --}}
                 @endcan
 
+                {{-- web to lead --}}
                 @can('viewany-office', User::class)
                     @if(
                     @$route_active == 'Web to Lead Form' 
@@ -660,7 +662,7 @@
                         $finance_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    <li class="nav-item has-treeview {{ @$finance_menu_open }}">
+                    {{-- <li class="nav-item has-treeview {{ @$finance_menu_open }}">
                         <a href="#" class="nav-link {{@$finance_dd}}">
                             <i class="nav-icon fas fa-network-wired"></i>
                             <p>
@@ -708,7 +710,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
                 @endcan
 
                     @if(
@@ -881,7 +883,7 @@
                             <li class="nav-item">
                                 <a href="{{url('/master-data/earthquakezone')}}" class="nav-link {{@$earthquakezone_form}}">
                                         <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('EarthQuake Zone FORM')}}</p>
+                                    <p>{{__('EARTHQUAKE ZONE FORM')}}</p>
                                 </a>
                             </li>
 
@@ -893,7 +895,7 @@
                             <li class="nav-item">
                                 <a href="{{url('/master-data/floodzone')}}" class="nav-link {{@$flood_form}}">
                                         <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('Flood Zone FORM')}}</p>
+                                    <p>{{__('FLOOD ZONE FORM')}}</p>
                                 </a>
                             </li>
 
@@ -993,7 +995,7 @@
                                     </a>
                                 </li>
     
-                                @if($route_active == 'Hole in Ones - Slip Entry')
+                                @if($route_active == 'Hole In One - Slip Entry')
                                 @php
                                     $hioform = 'active';
                                 @endphp
@@ -1001,7 +1003,7 @@
                                 <li class="nav-item">
                                     <a href="{{url('/transaction-data/hio-slip')}}" class="nav-link {{@$hioform}}">
                                             <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('HOLE IN ONES - SLIP ENTRY')}}</p>
+                                        <p>{{__('HOLE IN ONE - SLIP ENTRY')}}</p>
                                     </a>
                                 </li>
     

@@ -213,16 +213,55 @@
                       <th>{{__('Code')}}</th>
                       <th>{{__('Ship Name')}}</th>
                       <th>{{__('Owner')}}</th>
-                      <th>{{__('Continent')}}</th>
-                      <th width="20%">{{__('Actions')}}</th>
+                      <th>{{__('GRT')}}</th>
+                      <th>{{__('DWT')}}</th>
+                      <th>{{__('NRT')}}</th>
+                      <th>{{__('Power')}}</th>
+                      <th>{{__('Country')}}</th>
+                      <th>{{__('Type')}}</th>
+                      <th>{{__('Classification')}}</th>
+                      <th>{{__('Construction')}}</th>
+                      <th>{{__('Ship Year')}}</th>
+                      <th>{{__('Repair Year')}}</th>
+                      <th>{{__('Golongan')}}</th>
+                      <th >{{__('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <td>{{__('Code')}}</td>
-                        <td>{{__('Ship Name')}}</td>
-                        <td>{{__('Owner')}}</td>
-                        <td>{{__('Continent')}}</td>
-                        <td width="20%">{{__('Actions')}}</td>
+                        <tr>
+                            <td>{{__('R01335')}}</td>
+                            <td>{{__('Reliance I')}}</td>
+                            <td>{{__('Kota Halus')}}</td>
+                            <td>{{__('196')}}</td>
+                            <td>{{__('0')}}</td>
+                            <td>{{__('0')}}</td>
+                            <td>{{__('0')}}</td>
+                            <td>{{__('1 - Indonesia')}}</td>
+                            <td>{{__('I01 - Iron')}}</td>
+                            <td>{{__('B01 - Bulk Carrier')}}</td>
+                            <td>{{__('A01 - American Bereau oh shipping')}}</td>
+                            <td>{{__('1994')}}</td>
+                            <td>{{__('1999')}}</td>
+                            <td>{{__('BSAM')}}</td>
+                            <td ><input class="form-check-input" style="margin-left: 30;" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
+                        </tr>
+                        <tr>
+                            <td>{{__('S00553')}}</td>
+                            <td>{{__('Sabuk Nusantara V')}}</td>
+                            <td>{{__('Gemalindo V. K.')}}</td>
+                            <td>{{__('384')}}</td>
+                            <td>{{__('307')}}</td>
+                            <td>{{__('0')}}</td>
+                            <td>{{__('0')}}</td>
+                            <td>{{__('1 - Indonesia')}}</td>
+                            <td>{{__('F01 - Fiber')}}</td>
+                            <td>{{__('B02 - Barge')}}</td>
+                            <td>{{__('G01 - Germanisher Lloyd')}}</td>
+                            <td>{{__('1980')}}</td>
+                            <td>{{__('1990')}}</td>
+                            <td>{{__('SSMP')}}</td>
+                            <td ><input class="form-check-input" style="margin-left: 30;" type="radio" name="locOption" id="locOption" value="locOption" ></td>
+                        </tr> 
                     </tbody>
                     
                   </table>

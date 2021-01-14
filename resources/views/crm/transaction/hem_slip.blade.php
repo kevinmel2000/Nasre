@@ -120,12 +120,22 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <th>{{__('Loc Code')}}</th>
-                                                        <th>{{__('Address')}}</th>
-                                                        <th>{{__('City')}}</th>
-                                                        <th>{{__('Province')}}</th>
-                                                        <th>{{__('LatLong')}}</th>
-                                                        <th width="20%">{{__('Actions')}}</th>
+                                                        <tr>
+                                                            <td>{{__('CODE0001')}}</td>
+                                                            <td>{{__('Jl cikini Raya no 99 Jakarta Pusat')}}</td>
+                                                            <td>{{__('Jakarta Pusat')}}</td>
+                                                            <td>{{__('Jakarta')}}</td>
+                                                            <td>{{__('-6.25625:106.877481')}}</td>
+                                                            <td width="20%"><input class="form-check-input" style="margin-left: 30;" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{{__('CODE0002')}}</td>
+                                                            <td>{{__('Jl Raya Panjang Lebar no 66 Jakarta Timur')}}</td>
+                                                            <td>{{__('Jakarta Timur')}}</td>
+                                                            <td>{{__('Jakarta')}}</td>
+                                                            <td>{{__('-6.25625:106.877481')}}</td>
+                                                            <td width="20%"><input class="form-check-input" style="margin-left: 30;" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
+                                                        </tr>
                                                     </tbody>
                                                     
                                                     </table>
@@ -302,22 +312,30 @@
                                                 <div class="row">
                                                     <div class="col-md-12 com-sm-12 mt-3">
                                                         <table id="slipStatusTable" class="table table-bordered table-striped">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>{{__('ID')}}</th>
-                                                            <th>{{__('Name')}}</th>
-                                                            <th>{{__('Code')}}</th>
-                                                            <th>{{__('Continent')}}</th>
-                                                            <th width="20%">{{__('Actions')}}</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <td>{{__('Code')}}</td>
-                                                            <td>{{__('Ship Name')}}</td>
-                                                            <td>{{__('Owner')}}</td>
-                                                            <td>{{__('Continent')}}</td>
-                                                            <td width="20%">{{__('Actions')}}</td>
-                                                        </tbody>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>{{__('Status')}}</th>
+                                                                    <th>{{__('Datetime')}}</th>
+                                                                    <th>{{__('User')}}</th>]
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>{{__('Offer')}}</td>
+                                                                    <td>{{__('01/10/2020 09:00:00')}}</td>
+                                                                    <td>{{__('User A')}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{__('Binding')}}</td>
+                                                                    <td>{{__('01/10/2020 14:15:00')}}</td>
+                                                                    <td>{{__('User A')}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{__('Slip')}}</td>
+                                                                    <td>{{__('01/10/2020 11:20:00')}}</td>
+                                                                    <td>{{__('User B')}}</td>
+                                                                </tr>
+                                                            </tbody>
                                                         
                                                         </table>
                                                         <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> Data is Transferred!</i>
@@ -887,6 +905,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
                                                             <input type="text" name="slipsumshare" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
                                                         </div>
                                                     </div>
