@@ -120,7 +120,7 @@ class CedingBrokerController extends Controller
     }
 
 
-    public function update(Request $request, CedingBroker $broker)
+    public function update(Request $request, $broker)
     {
         $validator = $request->validate([
             'codebroker'=>'required|max:12|unique:currencies,code',
@@ -131,6 +131,8 @@ class CedingBrokerController extends Controller
             'typebroker'=>'required'
         ]);
         if($validator){
+
+            /*
             $broker->code = $request->codebroker;
             $broker->name = $request->namebroker;
             $broker->company_name = $request->companynamebroker;
@@ -138,6 +140,13 @@ class CedingBrokerController extends Controller
             $broker->country = $request->crccountrybroker;
             $broker->type = $request->typebroker;
             $broker->save();
+            */
+
+            $data=$request->all();
+            $brokers = CedingBroker::find($broker);
+            $brokers->update($data);
+
+
             $notification = array(
                 'message' => 'Ceding Broker updated successfully!',
                 'alert-type' => 'success'

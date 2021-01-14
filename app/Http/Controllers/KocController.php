@@ -90,24 +90,29 @@ class KocController extends Controller
     }
     
 
-    public function update(Request $request, Koc $koc)
+    public function update(Request $request, $koc)
     {
         $validator = $request->validate([
-            'codekoc'=>'required|unique:currencies,code',
-            'descriptionkoc'=>'required',
-            'abbreviationkoc'=>'required'
+            'code'=>'required|unique:currencies,code',
+            'description'=>'required',
+            'abbreviation'=>'required'
         ]);
+
         if($validator){
-            $koc->code = $request->codekoc;
-            $koc->description = $request->descriptionkoc;
-            $koc->abbreviation = $request->abbreviationkoc;
-            $koc->save();
+            
+            $data=$request->all();
+            $kocs = Koc::find($koc);
+            $kocs->update($data);
+
             $notification = array(
                 'message' => 'Koc updated successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);
-        }else{
+
+        }
+        else
+        {
             return back()->with($validator)->withInput();
         }
     }

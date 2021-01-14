@@ -122,7 +122,7 @@
                                                   <div class="col-md-6 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Code')}}</label>
-                                                      <input type="text" name="codekoc" class="form-control" value="{{$kocdata->code}}" required readonly/>
+                                                      <input type="text" name="code" class="form-control" value="{{$kocdata->code}}" required readonly/>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -131,14 +131,14 @@
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Description')}}</label>
-                                                      <input type="text" name="descriptionkoc" class="form-control" value="{{$kocdata->description}}" data-validation="length" data-validation-length="2-150" required/>
+                                                      <input type="text" name="description" class="form-control" value="{{$kocdata->description}}" data-validation="length" data-validation-length="2-150" required/>
                                                     </div>
                                                   </div>
 
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Abbreviation')}}</label>
-                                                      <input type="text" name="abbreviationkoc" class="form-control" value="{{$kocdata->abbreviation}}" data-validation="length" data-validation-length="2-150" required/>
+                                                      <input type="text" name="abbreviation" class="form-control" value="{{$kocdata->abbreviation}}" data-validation="length" data-validation-length="2-150" required/>
                                                     </div>
                                                   </div>
                                                  

@@ -165,7 +165,7 @@
                                                   <div class="col-md-6 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Code')}}</label>
-                                                      <input type="text" name="codebroker" class="form-control" value="{{$ceding->code}}" required readonly/>
+                                                      <input type="text" name="code" class="form-control" value="{{$ceding->code}}" required readonly/>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -174,7 +174,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('name')}}</label>
-                                                        <input type="text" name="namebroker" class="form-control" value="{{$ceding->name}}" required/>
+                                                        <input type="text" name="name" class="form-control" value="{{$ceding->name}}" required/>
                                                       </div>
                                                     </div>
                                                   </div>
@@ -184,7 +184,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Company Name')}}</label>
-                                                        <input type="text" name="companynamebroker" class="form-control" value="{{$ceding->company_name}}" required/>
+                                                        <input type="text" name="company_name" class="form-control" value="{{$ceding->company_name}}" required/>
                                                       </div>
                                                     </div>
                                                   </div>
@@ -193,7 +193,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Address')}}</label>
-                                                        <textarea name="addressbroker" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>{{$ceding->address}}</textarea>
+                                                        <textarea name="address" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>{{$ceding->address}}</textarea>
                                                       </div>
                                                     </div>
                                                   </div>
@@ -202,7 +202,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                          <label for="">{{__('Country')}}</label><br>
-                                                          <select name="crccountrybroker"  class="e1 form-control form-control-sm ">
+                                                          <select name="country"  class="e1 form-control form-control-sm ">
                                                               <option selected disabled>{{__('Select Country')}}</option>
                                                               @foreach($country as $cty)
                                                               @if($ceding->country  == $cty->id)
@@ -220,7 +220,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                          <label for="">{{__('Type')}}</label>
-                                                          <select name="typebroker" class="form-control form-control-sm ">
+                                                          <select name="type" class="form-control form-control-sm ">
                                                               @if($ceding->type  == 'Ceding')
                                                               <option value="Ceding" selected>Ceding</option>
                                                               @else
