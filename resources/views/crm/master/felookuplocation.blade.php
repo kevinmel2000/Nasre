@@ -206,13 +206,190 @@
                                 </a>
                                 <span>
 
-                                  @can('update-country', User::class)
-                                    <a class="text-primary mr-3" href="{{url('master-data/felookuplocation/edit',$location->id)}}">
+                                
+                                  {{-- @can('update-felookuplocation', User::class) --}}
+                                    <a class="text-primary mr-3" data-toggle="modal" data-target="#updatefelookuplocation{{$location->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
-                                  @endcan
+                                    {{-- @endcan   --}}
 
-                                  @can('delete-country', User::class)
+                                    <div class="modal fade" id="updatefelookuplocation{{$location->id}}" tabindex="-1" user="dialog" aria-labelledby="updatefelookuplocation{{$location->id}}Label" aria-hidden="true">
+                                    <div class="modal-dialog" user="document">
+                                      <div class="modal-content bg-light-gray">
+                                        <div class="modal-header bg-gray">
+                                          <h5 class="modal-title" id="updatefelookuplocation{{$location->id}}Label">{{__('Update Fe Lookup Location')}}</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <form action="{{url('master-data/felookuplocation/update',$location)}}" method="POST">
+                                            <div class="modal-body">
+                                                @csrf
+                                                @method('PUT')
+
+                                                <div class="row">
+                                                  <div class="col-md-6 col-md-12">
+                                                    <div class="form-group">
+                                                      <label for="">{{__('Loc Code')}}</label>
+                                                      <input type="text" name="loccodefe" class="form-control" value="{{$location->loc_code}}" readonly required/>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                                <div class="row">
+                                                  <div class="col-md-6 col-md-12">
+                                                    <div class="form-group">
+                                                      <label for="">{{__('Address')}}</label>
+                                                      <input type="text" name="addressfe" class="form-control" value="{{$location->address}}" required/>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                                <div class="row">
+                                                  
+                                                  <div class="col-md-6 col-md-6">
+                                                    <div class="form-group">
+                                                      <label for="">{{__('Longtitude')}}</label>
+                                                      <input type="text" name="longtitudefe" class="form-control" value="{{$location->longtitude}}" required/>
+                                                    </div>
+                                                  </div>
+                                                  
+                                                  <div class="col-md-6 col-md-6">
+                                                    <div class="form-group">
+                                                      <label for="">{{__('Latitude')}}</label>
+                                                      <input type="text" name="latitudefe" class="form-control" value="{{$location->latitude}}" required/>
+                                                    </div>
+                                                  </div>
+
+                                                </div>
+
+                                                
+
+                                                <div class="row">
+                                                  <div class="col-md-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Country')}}</label><br>
+                                                        <select name="countryfe" class="form-control form-control-sm e1">
+                                                            <option selected disabled>{{__('Select State')}}</option>
+                                                            @foreach($country as $cty)
+                                                            @if($location->country_id  == $cty->id)
+                                                            <option value="{{ $cty->id }}" selected>{{ $cty->id }} - {{ $cty->name }}</option>
+                                                            @else
+                                                            <option value="{{  $cty->id }}">{{  $cty->id  }} - {{ $cty->name }}</option>
+                                                            @endif
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                  </div>
+                                                  
+                                                  <div class="col-md-6 col-md-6">
+                                                    <div class="form-group">
+                                                      <label for="">{{__('Postal Code')}}</label>
+                                                      <input type="text" name="postal_codefe" class="form-control" value="{{$location->postal_code}}" required/>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                                
+                                                <div class="row">
+                                                  <div class="col-md-6 col-md-6">
+                                                      <div class="form-group">
+                                                          <label for="">{{__('State/Province')}}</label><br>
+                                                          <select name="statefe" class="form-control form-control-sm e1">
+                                                              <option selected disabled>{{__('Select State')}}</option>
+                                                              @foreach($country as $statedata)
+                                                              @if($location->province_id  == $statedata->id)
+                                                              <option value="{{ $statedata->id }}" selected>{{ $statedata->id }} - {{ $statedata->name }}</option>
+                                                              @else
+                                                              <option value="{{  $statedata->id }}">{{  $statedata->id  }} - {{ $statedata->name }}</option>
+                                                              @endif
+                                                              @endforeach
+                                                          </select>
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="col-md-6 col-md-6">
+                                                      <div class="form-group">
+                                                          <label for="">{{__('City ')}}</label><br>
+                                                          <select name="cityfe" class="form-control form-control-sm e1">
+                                                              <option selected disabled>{{__('Select City')}}</option>
+                                                              @foreach($country as $citydata)
+                                                              @if($location->city_id  == $citydata->id)
+                                                              <option value="{{ $citydata->id }}" selected>{{ $citydata->id }} - {{ $citydata->name }}</option>
+                                                              @else
+                                                              <option value="{{  $citydata->id }}">{{  $citydata->id  }} - {{ $citydata->name }}</option>
+                                                              @endif
+                                                              @endforeach
+                                                          </select>
+                                                      </div>
+                                                  </div>
+                                                </div>
+
+                                                <div class="row">
+                                                  <div class="col-md-6 col-md-6">
+                                                      <div class="form-group">
+                                                          <label for="">{{__('EQ ZONE')}}</label><br>
+                                                          <select name="eqzonefe" class="form-control form-control-sm e1">
+                                                              <option selected disabled>{{__('Select EarthQuake Zone')}}</option>
+                                                              @foreach($earthquakezone as $zone)
+                                                              @if($location->eq_zone  == $zone->id)
+                                                              <option value="{{ $zone->id }}" selected>{{ $zone->id }} - {{ $zone->name }}</option>
+                                                              @else
+                                                              <option value="{{  $zone->id }}">{{  $zone->id  }} - {{ $zone->name }}</option>
+                                                              @endif
+                                                              @endforeach
+                                                          </select>
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="col-md-6 col-md-6">
+                                                      <div class="form-group">
+                                                          <label for="">{{__('FLOOD ZONE ')}}</label><br>
+                                                          <select name="floodzonefe" class="form-control form-control-sm e1">
+                                                              <option selected disabled>{{__('Select Flood Zone')}}</option>
+                                                              @foreach($floodzone as $zone)
+                                                              @if($location->flood_zone  == $zone->id)
+                                                              <option value="{{ $zone->id }}" selected>{{ $zone->id }} - {{ $zone->name }}</option>
+                                                              @else
+                                                              <option value="{{  $zone->id }}">{{  $zone->id  }} - {{ $zone->name }}</option>
+                                                              @endif
+                                                              @endforeach
+                                                          </select>
+                                                      </div>
+                                                  </div>
+                                                </div>
+
+                                                <div class="row">
+                                                  <div class="col-md-6 col-md-12">
+                                                    <div class="form-group">
+                                                      <label for="">{{__('Insured')}}</label><br>
+                                                      <select name="insuredfe" class="form-control form-control-sm e1">
+                                                              <option selected disabled>{{__('Select Insured')}}</option>
+                                                              @foreach($costumer as $zone)
+                                                              @if($location->insured  == $zone->id)
+                                                              <option value="{{ $zone->id }}" selected>{{ $zone->id }} - {{ $zone->username }}  - {{ $zone->company_name }}</option>
+                                                              @else
+                                                              <option value="{{  $zone->id }}">{{  $zone->id  }}  - {{ $zone->username }}  - {{ $zone->company_name }}</option>
+                                                              @endif
+                                                              @endforeach
+                                                          </select>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                                <input type="submit" class="btn btn-info" value="Update">
+                                            </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                </div>
+                                {{-- Edit Modal Ends --}}
+
+                                {{-- @can('delete-felookuplocation', User::class) --}}
 
                                   <span id="delbtn{{@$location->id}}"></span>
                                 
@@ -222,7 +399,7 @@
                                         @method('DELETE')
                                         @csrf
                                     </form>
-                                  @endcan  
+                                    {{-- @endcan   --}}
                                 </span>
                               </td>
 
