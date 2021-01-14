@@ -10,6 +10,17 @@
       'PDF' => 'Barryvdh\\DomPDF\\Facade',
     ),
   ),
+  'cornford/googlmapper' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Cornford\\Googlmapper\\MapperServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Mapper' => 'Cornford\\Googlmapper\\Facades\\MapperFacade',
+    ),
+  ),
   'facade/ignition' => 
   array (
     'providers' => 
