@@ -60,7 +60,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('COB')}}</label>
-                          <select name="ocpcob" class="e1 form-control form-control-sm ">
+                          <select name="ocpcob" class="form-control form-control-sm e1">
                               <option selected disabled>{{__('Select COB')}}</option>
                               @foreach($cob as $cco)
                               <option value="{{ $cco->id }}">{{ $cco->code }} - {{ $cco->description }}</option>
@@ -168,10 +168,10 @@
                                                       <input type="text" name="grouptypeocp" class="form-control" value="{{$ocp->group_type}}" data-validation="length" data-validation-length="2-350" required/>
                                                     </div>
                                                   </div>
-                                                  <div class="col-md-4 col-md-12">
+                                                  <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('COB')}}</label><br>
-                                                        <select name="cobocp" class="e1 form-control form-control-sm ">
+                                                        <select name="cobocp" class="form-control form-control-sm e1">
                                                             <option selected disabled>{{__('Select COB')}}</option>
                                                             @foreach($cob as $cco)
                                                             @if($ocp->cob  == $cco->id)

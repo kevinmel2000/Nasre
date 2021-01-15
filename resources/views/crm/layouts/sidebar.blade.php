@@ -45,9 +45,9 @@
                         @endphp
                     @endif
 
-                    {{-- <li class="nav-item has-treeview {{@$users_menu_open }}"> --}}
+                    <li class="nav-item has-treeview {{@$users_menu_open }}">
                        
-                        {{-- <a href="#" class="nav-link {{@$users}}">
+                        <a href="#" class="nav-link {{@$users}}">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                                 
@@ -55,11 +55,11 @@
                                 {{__('STAFF MAMAGEMENT')}}
                                 <span class="badge badge-primary">{{session('total_users')}}</span>
                             </p>
-                        </a> --}}
+                        </a>
                         
-                        {{-- <ul class="nav nav-treeview"> --}}
+                        <ul class="nav nav-treeview">
                             @can('view-user', User::class)
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                 @if($route_active == 'users')
                                     @php $manage_users = 'active'; @endphp
                                 @endif
@@ -67,10 +67,10 @@
                                     <i class="far fa-folder nav-icon text-secondary"></i>
                                     <p>{{__('STAFF USERS')}}</p>
                                 </a>
-                            </li> --}}
+                            </li>
                             @endcan
                             @can('view-role', User::class)
-                                {{-- <li class="nav-item">
+                                <li class="nav-item">
                                     @if($route_active == 'roles')
                                     @php $manage_roles = 'active'; @endphp
                                     @endif
@@ -78,11 +78,11 @@
                                         <i class="far fa-folder nav-icon text-secondary"></i>
                                         <p>{{__('ROLES')}}</p>
                                     </a>
-                                </li> --}}
+                                </li>
                             @endcan      
                             {{-- Only Admin can access --}}
                             @if (Auth::user()->role_id == '1')  
-                                {{-- <li class="nav-item">
+                                <li class="nav-item">
                                     @if($route_active == 'permissions')
                                     @php $manage_permissions = 'active'; @endphp
                                     @endif
@@ -90,11 +90,11 @@
                                         <i class="far fa-folder nav-icon text-secondary"></i>
                                         <p>{{__('PERMISSIONS')}}</p>
                                     </a>
-                                </li> --}}
+                                </li>
                             @endif
 
-                        {{-- </ul>
-                    </li> --}}
+                        </ul>
+                    </li>
                   @endcan
 
                     {{-- ANCHOR Leads Menu Starts here --}}
@@ -111,7 +111,7 @@
                             $lead_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    {{-- <li class="nav-item has-treeview {{ @$lead_menu_open }}">
+                    <li class="nav-item has-treeview {{ @$lead_menu_open }}">
                         <a href="#" class="nav-link {{@$lead_dd}}">
                             <i class="nav-icon fas fa-user-clock"></i>
                             <p>
@@ -176,7 +176,7 @@
                             </li>
                             @endcan
                         </ul>
-                    </li> --}}
+                    </li>
                     @endcan
 
                   {{-- SECTION Product Menu  --}}
@@ -192,7 +192,7 @@
                         $product_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    {{-- <li class="nav-item has-treeview {{ @$product_menu_open }}">
+                    <li class="nav-item has-treeview {{ @$product_menu_open }}">
                         <a href="#" class="nav-link {{@$product_dd}}">
                             <i class="nav-icon fas fa-store"></i>
                             <p>
@@ -246,7 +246,7 @@
 
                             @endcan
                         </ul>
-                    </li> --}}
+                    </li>
                   @endcan
 
                   {{-- proposal --}}
@@ -261,7 +261,7 @@
                         $proposal_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    {{-- <li class="nav-item has-treeview {{ @$proposal_menu_open }}">
+                    <li class="nav-item has-treeview {{ @$proposal_menu_open }}">
                         <a href="#" class="nav-link {{@$proposal_dd}}">
                             <i class="nav-icon fas fa-business-time"></i>
                             <p>
@@ -302,11 +302,11 @@
                             @endcan
 
                         </ul>
-                    </li> --}}
+                    </li>
                   @endcan
 
                   {{-- contact --}}
-                  @can('viewany-contact', User::class)
+                  @can('viewany-user', User::class)
                     @if(@$route_active == 'add_contact' || @$route_active == 'manage_contact' || @$route_active ==
                     'contact_title' || @$route_active == 'show_contact' )
                         @php
@@ -318,7 +318,7 @@
                             $contact_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    {{-- <li class="nav-item has-treeview {{ @$contact_menu_open }}">
+                    <li class="nav-item has-treeview {{ @$contact_menu_open }}">
                         <a href="#" class="nav-link {{@$contact_dd}}">
                             <i class="nav-icon fas fa-user-shield"></i>
                             <p>
@@ -330,7 +330,7 @@
 
                         <ul class="nav nav-treeview">
 
-                            @can('create-contact', Auth::user())
+                            @can('create-user', Auth::user())
                             @if($route_active == 'add_contact')
                             @php
                             $add_contact = 'active';
@@ -344,7 +344,7 @@
                             </li>
                             @endcan
 
-                            @can('view-contact', Auth::user())
+                            @can('view-user', Auth::user())
                             @if($route_active == 'manage_contact' || $route_active == 'show_contact')
                             @php
                             $manage_contact = 'active';
@@ -371,7 +371,7 @@
                             </li>
                             @endcan
                         </ul>
-                    </li> --}}
+                    </li>
                   @endcan
 
                   {{-- SECTION ESTIMATES Menu  --}}
@@ -386,7 +386,7 @@
                         $estimate_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    {{-- <li class="nav-item has-treeview {{ @$estimate_menu_open }}">
+                    <li class="nav-item has-treeview {{ @$estimate_menu_open }}">
                         <a href="#" class="nav-link {{@$estimate_dd}}">
                             <i class="nav-icon fas fa-columns"></i>
                             <p>
@@ -425,7 +425,7 @@
                                 </li>
                             @endcan
                         </ul>
-                    </li> --}}
+                    </li>
                   @endcan
                   {{-- !SECTION ESTIMATES menu --}}
 
@@ -441,7 +441,7 @@
                         $invoice_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    {{-- <li class="nav-item has-treeview {{ @$invoice_menu_open }}">
+                    <li class="nav-item has-treeview {{ @$invoice_menu_open }}">
                         <a href="#" class="nav-link {{@$invoice_dd}}">
                             <i class="nav-icon fas fa-money-check"></i>
                             <p>
@@ -481,7 +481,7 @@
                                 </li>
                             @endcan
                         </ul>
-                    </li> --}}
+                    </li>
                   @endcan
 
                   {{-- task --}}
@@ -496,14 +496,14 @@
                     $task_menu_open = 'menu-close';
                     @endphp
                     @endif
-                    {{-- <li class="nav-item has-treeview {{ @$task_menu_open }}">
+                    <li class="nav-item has-treeview {{ @$task_menu_open }}">
                         <a href="{{url('task/')}}"  class="nav-link {{@$task_dd}}">
                             <i class="nav-icon fas fa-tasks"></i>
                             <p>
                                 {{__('TASKS')}}
                             </p>
                         </a>
-                    </li> --}}
+                    </li>
                   @endcan
 
                   {{-- media --}}
@@ -518,14 +518,14 @@
                             $media_menu_open = 'menu-close';
                             @endphp
                         @endif
-                        {{-- <li class="nav-item has-treeview {{ @$media_menu_open }}">
+                        <li class="nav-item has-treeview {{ @$media_menu_open }}">
                             <a href="{{url('media/')}}"  class="nav-link {{@$media_dd}}">
                                 <i class="nav-icon fas fa-folder-open"></i>
                                 <p>
                                     {{__('MEDIA FILES')}}
                                 </p>
                             </a>
-                        </li> --}}
+                        </li>
                     @endcan
 
                     {{-- reminders --}}
@@ -540,12 +540,12 @@
                             $reminder_menu_open = 'menu-close';
                             @endphp
                         @endif
-                        {{-- <li class="nav-item has-treeview {{ @$reminder_menu_open }}">
+                        <li class="nav-item has-treeview {{ @$reminder_menu_open }}">
                             <a href="{{url('reminder/')}}"  class="nav-link {{@$reminder_dd}}">
                                 <i class="nav-icon fas fa-business-time"></i>
                                 <p>{{__('REMINDERS')}}</p>
                             </a>
-                        </li> --}}
+                        </li>
                     @endcan
 
                     {{--  Office Setting --}}
@@ -566,7 +566,7 @@
                         $finance_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    {{-- <li class="nav-item has-treeview {{ @$finance_menu_open }}">
+                    <li class="nav-item has-treeview {{ @$finance_menu_open }}">
                         <a href="#" class="nav-link {{@$finance_dd}}">
                             <i class="nav-icon fas fa-money-check-alt"></i>
                             <p>
@@ -643,7 +643,7 @@
                             
                             
                         </ul>
-                    </li> --}}
+                    </li>
                 @endcan
 
                 {{-- web to lead --}}
@@ -662,7 +662,7 @@
                         $finance_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    {{-- <li class="nav-item has-treeview {{ @$finance_menu_open }}">
+                    <li class="nav-item has-treeview {{ @$finance_menu_open }}">
                         <a href="#" class="nav-link {{@$finance_dd}}">
                             <i class="nav-icon fas fa-network-wired"></i>
                             <p>
@@ -710,9 +710,10 @@
                                 </a>
                             </li>
                         </ul>
-                    </li> --}}
+                    </li>
                 @endcan
 
+                @can('viewany-country', User::class)
                     @if(
                     @$route_active == 'Country Data Master' 
                     || @$route_active == 'State Data Master' 
@@ -748,169 +749,220 @@
 
                         <ul class="nav nav-treeview">
 
-                            @if($route_active == 'Country Data Master')
-                            @php
-                                $countryform = 'active';
-                            @endphp
+                            @if(
+                                @$route_active == 'Country Data Master' 
+                                || @$route_active == 'State Data Master' 
+                                || @$route_active == 'City Data Master' 
+                                )
+                                    @php
+                                    $location_dd = 'active';
+                                    $location_menu_open = 'menu-open';
+                                    @endphp
+                            @else
+                                @php
+                                $location_menu_open = 'menu-close';
+                                @endphp
                             @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/country')}}" class="nav-link {{@$countryform}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('COUNTRY FORM')}}</p>
+                            <li class="nav-item has-treeview {{ @$location_menu_open }}">
+                                <a href="#" class="nav-link {{@$location_dd}}">
+                                    <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>
+                                        {{__('LOCATION DATA')}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
                                 </a>
+
+                                <ul class="nav nav-treeview">
+
+                                    @can('viewany-country', User::class)
+                                        @if($route_active == 'Country Data Master')
+                                        @php
+                                            $countryform = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/master-data/country')}}" class="nav-link {{@$countryform}}">
+                                                    <i class="far fa-folder nav-icon text-secondary"></i>
+                                                <p>{{__('COUNTRY FORM')}}</p>
+                                            </a>
+                                        </li>
+                                    @endcan
+                                        
+                                    @can('viewany-state', User::class)
+                                        @if($route_active == 'State Data Master')
+                                        @php
+                                            $state_form = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/master-data/state')}}" class="nav-link {{@$state_form}}">
+                                                    <i class="far fa-folder nav-icon text-secondary"></i>
+                                                <p>{{__('PROVINCE FORM')}}</p>
+                                            </a>
+                                        </li>
+                                    @endcan
+        
+                                    @can('viewany-city', User::class)
+                                        @if($route_active == 'City Data Master')
+                                        @php
+                                            $city_form = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/master-data/city')}}" class="nav-link {{@$city_form}}">
+                                                    <i class="far fa-folder nav-icon text-secondary"></i>
+                                                <p>{{__('CITY FORM')}}</p>
+                                            </a>
+                                        </li>
+                                    @endcan
+                                </ul>
                             </li>
 
-                            @if($route_active == 'State Data Master')
-                            @php
-                                $state_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/state')}}" class="nav-link {{@$state_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('PROVINCE FORM')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-currency', User::class)
+                                @if($route_active == 'Currency Data Master')
+                                @php
+                                    $crc_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/currency')}}" class="nav-link {{@$crc_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('CURRENCY FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            @if($route_active == 'City Data Master')
-                            @php
-                                $city_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/city')}}" class="nav-link {{@$city_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('CITY FORM')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-exchange', User::class)
+                                @if($route_active == 'Currency Exchange Data Master')
+                                @php
+                                    $exchange_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/exchange')}}" class="nav-link {{@$exchange_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('CURRENCY EXCHANGE')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            @if($route_active == 'Currency Data Master')
-                            @php
-                                $crc_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/currency')}}" class="nav-link {{@$crc_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('CURRENCY FORM')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-felookup', User::class)
+                                @if($route_active == 'Fire & Engineering Lookup Location')
+                                @php
+                                    $felookuplocationform = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/felookuplocation')}}" class="nav-link {{@$felookuplocationform}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('FIRE & ENGINEERING -')}} <br> {{__('LOOKUP LOCATION')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            @if($route_active == 'Currency Exchange Data Master')
-                            @php
-                                $exchange_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/exchange')}}" class="nav-link {{@$exchange_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('CURRENCY EXCHANGE')}}</p>
-                                </a>
-                            </li>
-
-                            @if($route_active == 'Fire & Engineering Lookup Location')
-                            @php
-                                $felookuplocationform = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/felookuplocation')}}" class="nav-link {{@$felookuplocationform}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('FIRE & ENGINEERING -')}} <br> {{__('LOOKUP LOCATION')}}</p>
-                                </a>
-                            </li>
-
-                            @if($route_active == 'Golf Field Hole')
-                            @php
-                                $gfh_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/golfhole')}}" class="nav-link {{@$gfh_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('GOLF FIELD HOLE')}}</p>
-                                </a>
-                            </li>
-
+                            @can('viewany-gfh', User::class)
+                                @if($route_active == 'Golf Field Hole')
+                                @php
+                                    $gfh_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/golfhole')}}" class="nav-link {{@$gfh_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('GOLF FIELD HOLE')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
                         
 
-                            @if($route_active == 'KOC Data Master')
-                            @php
-                                $koc_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/koc')}}" class="nav-link {{@$koc_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('KIND OF CONTRACT')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-koc', User::class)
+                                @if($route_active == 'KOC Data Master')
+                                @php
+                                    $koc_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/koc')}}" class="nav-link {{@$koc_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('KIND OF CONTRACT')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
                             
+                            @can('viewany-cedingbroker', User::class)
+                                @if($route_active == 'Ceding / Broker')
+                                @php
+                                    $cedingform = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/cedingbroker')}}" class="nav-link {{@$cedingform}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('CEDING/BROKER FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            @if($route_active == 'Ceding / Broker')
-                            @php
-                                $cedingform = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/cedingbroker')}}" class="nav-link {{@$cedingform}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('CEDING/BROKER FORM')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-cob', User::class)
+                                @if($route_active == 'COB Data Master')
+                                @php
+                                    $cob_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/cob')}}" class="nav-link {{@$cob_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('COB FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            @if($route_active == 'COB Data Master')
-                            @php
-                                $cob_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/cob')}}" class="nav-link {{@$cob_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('COB FORM')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-ocp', User::class)
+                                @if($route_active == 'Occupation Data Master')
+                                @php
+                                    $ocp_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/occupation')}}" class="nav-link {{@$ocp_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('OCCUPATION FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            @if($route_active == 'Occupation Data Master')
-                            @php
-                                $ocp_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/occupation')}}" class="nav-link {{@$ocp_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('OCCUPATION FORM')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-eqz', User::class)
+                                @if($route_active == 'Earthquake Zone')
+                                @php
+                                    $earthquakezone_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/earthquakezone')}}" class="nav-link {{@$earthquakezone_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('EARTHQUAKE ZONE FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            @if($route_active == 'Earthquake Zone')
-                            @php
-                                $earthquakezone_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/earthquakezone')}}" class="nav-link {{@$earthquakezone_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('EARTHQUAKE ZONE FORM')}}</p>
-                                </a>
-                            </li>
-
-                            @if($route_active == 'Flood Zone Data Master')
-                            @php
-                                $flood_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/floodzone')}}" class="nav-link {{@$flood_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('FLOOD ZONE FORM')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-fz', User::class)
+                                @if($route_active == 'Flood Zone Data Master')
+                                @php
+                                    $flood_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/floodzone')}}" class="nav-link {{@$flood_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('FLOOD ZONE FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
 
                         </ul>
                     </li>
-
+                @endcan
 
                         @if(
                             @$route_active == 'Marine - Lookup Ship' 
