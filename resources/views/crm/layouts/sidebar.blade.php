@@ -306,7 +306,7 @@
                   @endcan
 
                   {{-- contact --}}
-                  @can('viewany-contact', User::class)
+                  @can('viewany-user', User::class)
                     @if(@$route_active == 'add_contact' || @$route_active == 'manage_contact' || @$route_active ==
                     'contact_title' || @$route_active == 'show_contact' )
                         @php
