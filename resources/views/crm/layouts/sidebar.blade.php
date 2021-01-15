@@ -713,6 +713,7 @@
                     </li>
                 @endcan
 
+                @can('viewany-country', User::class)
                     @if(
                     @$route_active == 'Country Data Master' 
                     || @$route_active == 'State Data Master' 
@@ -773,171 +774,195 @@
 
                                 <ul class="nav nav-treeview">
 
-                                    @if($route_active == 'Country Data Master')
-                                    @php
-                                        $countryform = 'active';
-                                    @endphp
-                                    @endif
-                                    <li class="nav-item">
-                                        <a href="{{url('/master-data/country')}}" class="nav-link {{@$countryform}}">
-                                                <i class="far fa-folder nav-icon text-secondary"></i>
-                                            <p>{{__('COUNTRY FORM')}}</p>
-                                        </a>
-                                    </li>
-
-                                    @if($route_active == 'State Data Master')
-                                    @php
-                                        $state_form = 'active';
-                                    @endphp
-                                    @endif
-                                    <li class="nav-item">
-                                        <a href="{{url('/master-data/state')}}" class="nav-link {{@$state_form}}">
-                                                <i class="far fa-folder nav-icon text-secondary"></i>
-                                            <p>{{__('PROVINCE FORM')}}</p>
-                                        </a>
-                                    </li>
+                                    @can('viewany-country', User::class)
+                                        @if($route_active == 'Country Data Master')
+                                        @php
+                                            $countryform = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/master-data/country')}}" class="nav-link {{@$countryform}}">
+                                                    <i class="far fa-folder nav-icon text-secondary"></i>
+                                                <p>{{__('COUNTRY FORM')}}</p>
+                                            </a>
+                                        </li>
+                                    @endcan
+                                        
+                                    @can('viewany-state', User::class)
+                                        @if($route_active == 'State Data Master')
+                                        @php
+                                            $state_form = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/master-data/state')}}" class="nav-link {{@$state_form}}">
+                                                    <i class="far fa-folder nav-icon text-secondary"></i>
+                                                <p>{{__('PROVINCE FORM')}}</p>
+                                            </a>
+                                        </li>
+                                    @endcan
         
-                                    @if($route_active == 'City Data Master')
-                                    @php
-                                        $city_form = 'active';
-                                    @endphp
-                                    @endif
-                                    <li class="nav-item">
-                                        <a href="{{url('/master-data/city')}}" class="nav-link {{@$city_form}}">
-                                                <i class="far fa-folder nav-icon text-secondary"></i>
-                                            <p>{{__('CITY FORM')}}</p>
-                                        </a>
-                                    </li>
+                                    @can('viewany-office', User::class)
+                                        @if($route_active == 'City Data Master')
+                                        @php
+                                            $city_form = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/master-data/city')}}" class="nav-link {{@$city_form}}">
+                                                    <i class="far fa-folder nav-icon text-secondary"></i>
+                                                <p>{{__('CITY FORM')}}</p>
+                                            </a>
+                                        </li>
+                                    @endcan
                                 </ul>
                             </li>
 
-                            @if($route_active == 'Currency Data Master')
-                            @php
-                                $crc_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/currency')}}" class="nav-link {{@$crc_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('CURRENCY FORM')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-currency', User::class)
+                                @if($route_active == 'Currency Data Master')
+                                @php
+                                    $crc_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/currency')}}" class="nav-link {{@$crc_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('CURRENCY FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            @if($route_active == 'Currency Exchange Data Master')
-                            @php
-                                $exchange_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/exchange')}}" class="nav-link {{@$exchange_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('CURRENCY EXCHANGE')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-exchange', User::class)
+                                @if($route_active == 'Currency Exchange Data Master')
+                                @php
+                                    $exchange_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/exchange')}}" class="nav-link {{@$exchange_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('CURRENCY EXCHANGE')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            @if($route_active == 'Fire & Engineering Lookup Location')
-                            @php
-                                $felookuplocationform = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/felookuplocation')}}" class="nav-link {{@$felookuplocationform}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('FIRE & ENGINEERING -')}} <br> {{__('LOOKUP LOCATION')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-felookup', User::class)
+                                @if($route_active == 'Fire & Engineering Lookup Location')
+                                @php
+                                    $felookuplocationform = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/felookuplocation')}}" class="nav-link {{@$felookuplocationform}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('FIRE & ENGINEERING -')}} <br> {{__('LOOKUP LOCATION')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            @if($route_active == 'Golf Field Hole')
-                            @php
-                                $gfh_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/golfhole')}}" class="nav-link {{@$gfh_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('GOLF FIELD HOLE')}}</p>
-                                </a>
-                            </li>
-
+                            @can('viewany-gfh', User::class)
+                                @if($route_active == 'Golf Field Hole')
+                                @php
+                                    $gfh_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/golfhole')}}" class="nav-link {{@$gfh_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('GOLF FIELD HOLE')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
                         
 
-                            @if($route_active == 'KOC Data Master')
-                            @php
-                                $koc_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/koc')}}" class="nav-link {{@$koc_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('KIND OF CONTRACT')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-koc', User::class)
+                                @if($route_active == 'KOC Data Master')
+                                @php
+                                    $koc_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/koc')}}" class="nav-link {{@$koc_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('KIND OF CONTRACT')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
                             
+                            @can('viewany-cedingbroker', User::class)
+                                @if($route_active == 'Ceding / Broker')
+                                @php
+                                    $cedingform = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/cedingbroker')}}" class="nav-link {{@$cedingform}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('CEDING/BROKER FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            @if($route_active == 'Ceding / Broker')
-                            @php
-                                $cedingform = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/cedingbroker')}}" class="nav-link {{@$cedingform}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('CEDING/BROKER FORM')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-cob', User::class)
+                                @if($route_active == 'COB Data Master')
+                                @php
+                                    $cob_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/cob')}}" class="nav-link {{@$cob_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('COB FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            @if($route_active == 'COB Data Master')
-                            @php
-                                $cob_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/cob')}}" class="nav-link {{@$cob_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('COB FORM')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-ocp', User::class)
+                                @if($route_active == 'Occupation Data Master')
+                                @php
+                                    $ocp_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/occupation')}}" class="nav-link {{@$ocp_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('OCCUPATION FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            @if($route_active == 'Occupation Data Master')
-                            @php
-                                $ocp_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/occupation')}}" class="nav-link {{@$ocp_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('OCCUPATION FORM')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-eqz', User::class)
+                                @if($route_active == 'Earthquake Zone')
+                                @php
+                                    $earthquakezone_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/earthquakezone')}}" class="nav-link {{@$earthquakezone_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('EARTHQUAKE ZONE FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
-                            @if($route_active == 'Earthquake Zone')
-                            @php
-                                $earthquakezone_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/earthquakezone')}}" class="nav-link {{@$earthquakezone_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('EARTHQUAKE ZONE FORM')}}</p>
-                                </a>
-                            </li>
-
-                            @if($route_active == 'Flood Zone Data Master')
-                            @php
-                                $flood_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/floodzone')}}" class="nav-link {{@$flood_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('FLOOD ZONE FORM')}}</p>
-                                </a>
-                            </li>
+                            @can('viewany-fz', User::class)
+                                @if($route_active == 'Flood Zone Data Master')
+                                @php
+                                    $flood_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/floodzone')}}" class="nav-link {{@$flood_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('FLOOD ZONE FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
 
 
                         </ul>
                     </li>
-
+                @endcan
 
                         @if(
                             @$route_active == 'Marine - Lookup Ship' 

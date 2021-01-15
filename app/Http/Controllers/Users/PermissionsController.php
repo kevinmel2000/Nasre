@@ -41,7 +41,7 @@ class PermissionsController extends Controller
         $currency_module =  Module::where(['module_name'=>'currency_module','role_id'=>$selected_role_id])->first();
         $exchange_module =  Module::where(['module_name'=>'exchange_module','role_id'=>$selected_role_id])->first();
         $koc_module =  Module::where(['module_name'=>'koc_module','role_id'=>$selected_role_id])->first();
-        $felookup_module =  Module::where(['module_name'=>'fe_lookup_module','role_id'=>$selected_role_id])->first();
+        $felookup_module =  Module::where(['module_name'=>'felookup_module','role_id'=>$selected_role_id])->first();
         $cedingbroker_module =  Module::where(['module_name'=>'cedingbroker_module','role_id'=>$selected_role_id])->first();
         $gfh_module =  Module::where(['module_name'=>'gfh_module','role_id'=>$selected_role_id])->first();
         $city_module =  Module::where(['module_name'=>'city_module','role_id'=>$selected_role_id])->first();
@@ -119,7 +119,7 @@ class PermissionsController extends Controller
         $currency_module =  Module::where(['module_name'=>'currency_module','role_id'=>$selected_role_id])->first();
         $exchange_module =  Module::where(['module_name'=>'exchange_module','role_id'=>$selected_role_id])->first();
         $koc_module =  Module::where(['module_name'=>'koc_module','role_id'=>$selected_role_id])->first();
-        $felookup_module =  Module::where(['module_name'=>'fe_lookup_module','role_id'=>$selected_role_id])->first();
+        $felookup_module =  Module::where(['module_name'=>'felookup_module','role_id'=>$selected_role_id])->first();
         $cedingbroker_module =  Module::where(['module_name'=>'cedingbroker_module','role_id'=>$selected_role_id])->first();
         $gfh_module =  Module::where(['module_name'=>'gfh_module','role_id'=>$selected_role_id])->first();
         $city_module =  Module::where(['module_name'=>'city_module','role_id'=>$selected_role_id])->first();
@@ -198,7 +198,7 @@ class PermissionsController extends Controller
         $currency_module =  Module::where(['module_name'=>'currency_module','role_id'=>$selected_role_id])->first();
         $exchange_module =  Module::where(['module_name'=>'exchange_module','role_id'=>$selected_role_id])->first();
         $koc_module =  Module::where(['module_name'=>'koc_module','role_id'=>$selected_role_id])->first();
-        $felookup_module =  Module::where(['module_name'=>'fe_lookup_module','role_id'=>$selected_role_id])->first();
+        $felookup_module =  Module::where(['module_name'=>'felookup_module','role_id'=>$selected_role_id])->first();
         $cedingbroker_module =  Module::where(['module_name'=>'cedingbroker_module','role_id'=>$selected_role_id])->first();
         $gfh_module =  Module::where(['module_name'=>'gfh_module','role_id'=>$selected_role_id])->first();
         $city_module =  Module::where(['module_name'=>'city_module','role_id'=>$selected_role_id])->first();
