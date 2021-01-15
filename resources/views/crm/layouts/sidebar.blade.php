@@ -330,7 +330,7 @@
 
                         <ul class="nav nav-treeview">
 
-                            @can('create-contact', Auth::user())
+                            @can('create-user', Auth::user())
                             @if($route_active == 'add_contact')
                             @php
                             $add_contact = 'active';
@@ -344,7 +344,7 @@
                             </li>
                             @endcan
 
-                            @can('view-contact', Auth::user())
+                            @can('view-user', Auth::user())
                             @if($route_active == 'manage_contact' || $route_active == 'show_contact')
                             @php
                             $manage_contact = 'active';
