@@ -802,7 +802,7 @@
                                         </li>
                                     @endcan
         
-                                    @can('viewany-office', User::class)
+                                    @can('viewany-city', User::class)
                                         @if($route_active == 'City Data Master')
                                         @php
                                             $city_form = 'active';
