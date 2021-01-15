@@ -13,7 +13,7 @@
       }
   
   
-      $("#countryTable").DataTable({
+      $("#marineLookup").DataTable({
         "order": [[ 0, "desc" ]],
         dom: '<"top"Bf>rt<"bottom"lip><"clear">',
         lengthMenu: [
