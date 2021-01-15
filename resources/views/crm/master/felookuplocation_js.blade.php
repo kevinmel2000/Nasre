@@ -148,11 +148,22 @@
 
 
 <script type="text/javascript">
+var geocoder = geocoder = new google.maps.Geocoder();
+
     //* Fungsi untuk mendapatkan nilai latitude longitude
 function updateMarkerPosition(latLng) 
 {
   document.getElementById('latitude').value = [latLng.lat()]
   document.getElementById('longitude').value = [latLng.lng()]
+
+  geocoder.geocode({
+        'latLng': latLng
+    }, function(results, status) {
+      //alert('masuk1');
+      //alert(results[4].formatted_address);
+      document.getElementById('address').value=results[4].formatted_address;
+});
+
 }
        
 var map = new google.maps.Map(document.getElementById('map'), {
@@ -162,7 +173,8 @@ center: new google.maps.LatLng(-7.781921,110.364678),
   });
 //posisi awal marker   
 var latLng = new google.maps.LatLng(-7.781921,110.364678);
- 
+
+
 /* buat marker yang bisa di drag lalu 
   panggil fungsi updateMarkerPosition(latLng)
  dan letakan posisi terakhir di id=latitude dan id=longitude
@@ -175,6 +187,15 @@ var marker = new google.maps.Marker({
   });
    
 updateMarkerPosition(latLng);
+
+geocoder.geocode({
+        'latLng': latLng
+    }, function(results, status) {
+      //alert('masuk1');
+      //alert(results[4].formatted_address);
+      document.getElementById('address').value=results[4].formatted_address;
+});
+
 google.maps.event.addListener(marker, 'drag', function() {
  // ketika marker di drag, otomatis nilai latitude dan longitude
  //menyesuaikan dengan posisi marker 
