@@ -721,6 +721,7 @@
                     || @$route_active == 'Currency Data Master' 
                     || @$route_active == 'Currency Exchange Data Master' 
                     || @$route_active == 'Fire & Engineering Lookup Location' 
+                    || @$route_active == 'Marine - Lookup Ship' 
                     || @$route_active == 'Golf Field Hole' 
                     || @$route_active == 'KOC Data Master' 
                     || @$route_active == 'Ceding / Broker' 
@@ -860,6 +861,18 @@
                                 </li>
                             @endcan
 
+                            @if($route_active == 'Marine - Lookup Ship')
+                                @php
+                                    $marinelookupform = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/transaction-data/marine-lookup')}}" class="nav-link {{@$marinelookupform}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('MARINE - LOOKUP FORM')}}</p>
+                                    </a>
+                                </li>
+
                             @can('viewany-gfh', User::class)
                                 @if($route_active == 'Golf Field Hole')
                                 @php
@@ -965,8 +978,7 @@
                 @endcan
 
                         @if(
-                            @$route_active == 'Marine - Lookup Ship' 
-                            || @$route_active == 'Marine - Slip Entry'
+                            @$route_active == 'Marine - Slip Entry'
                             || @$route_active == 'Fire Engineering - Slip Entry'
                             || @$route_active == 'Financial Lines - Slip Entry'
                             || @$route_active == 'Moveable Property - Slip Entry'
@@ -993,18 +1005,6 @@
                             </a>
     
                             <ul class="nav nav-treeview">
-    
-                                @if($route_active == 'Marine - Lookup Ship')
-                                @php
-                                    $marinelookupform = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/transaction-data/marine-lookup')}}" class="nav-link {{@$marinelookupform}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('MARINE - LOOKUP FORM')}}</p>
-                                    </a>
-                                </li>
     
                                 @if($route_active == 'Marine - Slip Entry')
                                 @php
