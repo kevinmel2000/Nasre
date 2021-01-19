@@ -74,7 +74,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Type')}}</label>
-                          <select name="type" class="form-control form-control-sm ">
+                          <select name="type" class="form-control form-control-sm e1">
                               <option selected disabled>{{__('Select Type')}}</option>
                               <option value="Ceding">Ceding</option>
                               <option value="Broker">Broker</option>
@@ -224,20 +224,15 @@
                                                   <div class="row">
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
-                                                         <label for="">{{__('Type')}}</label>
-                                                          <select name="type" class="form-control form-control-sm ">
+                                                         <label for="">{{__('Type')}}</label><br>
+                                                          <select name="type" class="e1 form-control form-control-sm ">
                                                               @if($ceding->type  == 'Ceding')
                                                               <option value="Ceding" selected>Ceding</option>
-                                                              @else
                                                               <option value="Broker" >Broker</option>
-                                                              @endif
-
-                                                              @if($ceding->type  == 'Broker')
+                                                              @elseif($ceding->type  == 'Broker')
                                                               <option value="Broker" selected>Broker</option>
-                                                              @else
                                                               <option value="Ceding" >Ceding</option>
                                                               @endif
-                                                              
                                                           </select> 
                                                         </div>
                                                     </div>

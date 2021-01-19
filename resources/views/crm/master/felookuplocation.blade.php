@@ -347,7 +347,7 @@
                                                   <div class="col-md-6 col-md-6">
                                                       <div class="form-group">
                                                           <label for="">{{__('City ')}}</label><br>
-                                                          <select name="city_id" id="city2" class="form-control form-control-sm e1">
+                                                          <select name="city_id" id="city2" class="e1 form-control form-control-sm ">
                                                               <option selected disabled>{{__('Select City')}}</option>
                                                               @foreach($country as $citydata)
                                                               @if($location->city_id  == $citydata->id)

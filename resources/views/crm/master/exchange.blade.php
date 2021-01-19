@@ -39,7 +39,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Month')}}</label>
-                          <select name="excmonth" class="form-control form-control-sm ">
+                          <select name="excmonth" class="e1 form-control form-control-sm ">
                               <option selected disabled>{{__('Select Month')}}</option>
                               <option value="1">1 - January</option>
                               <option value="2">2 - February</option>
@@ -181,8 +181,8 @@
                                                 <div class="row">
                                                     <div class="col-md-6 col-md-12">
                                                         <div class="form-group">
-                                                          <label for="">{{__('Month')}}</label>
-                                                          <select name="monthexc" class="form-control form-control-sm">
+                                                          <label for="">{{__('Month')}}</label><br>
+                                                          <select name="monthexc" class="e1 form-control form-control-sm">
                                                             @if(@$exc->month == "1")
                                                             <option value="1" selected>1 - January</option>
                                                             <option value="2">2 - February</option>
