@@ -10,6 +10,7 @@ use App\Models\Currency;
 use App\Models\CurrencyExchange;
 use App\Models\Occupation;
 use App\Models\ShipType;
+use App\Models\PropertyType;
 use App\Models\Collection;
 use App\Models\Construction;
 use App\Models\MarineLookup;
@@ -408,6 +409,53 @@ class MasterController extends Controller
         }
     }
 
+    public function indexpropertytype(Request $request)
+    {
+        $user = Auth::user();
+        $route_active = 'Property Type Data Master';
+        $search = @$request->input('search');
+        $mydate = date("Y").date("m").date("d");
+
+        // dd($country);
+        if(empty($search))
+         {
+            $propertytype = PropertyType::orderby('id','asc')->get();
+            $propertytype_ids = response()->json($propertytype->modelKeys());
+            $lastid = count($propertytype);
+
+            if($lastid != null){
+                $code_pt = $mydate . strval($lastid + 1);
+
+                // if($lastid->id == 9){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 10){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 99){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 100){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 999){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 1000){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }else{
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }
+            }
+            else{
+                $code_pt = $mydate . strval(1);
+            }
+
+            return view('crm.master.property_type', compact(['route_active', 'propertytype','propertytype_ids','code_pt']));  
+         }
+        else
+        {
+          $propertytype = PropertyType::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $propertytype_ids = response()->json($propertytype->modelKeys());
+          return view('crm.master.property_type', compact('user','propertytype','route_active','propertytype_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -654,6 +702,28 @@ class MasterController extends Controller
         }
     }
 
+    public function storepropertytype(Request $request)
+    {
+        $validator = $request->validate([
+            'ptcode'=>'required|max:12|unique:property_type,code',
+            'ptname'=>'required'
+        ]);
+        if($validator){
+            $user = Auth::user();
+            PropertyType::create([
+                'code'=>$request->ptcode,
+                'name' => $request->ptname
+            ]);
+            $notification = array(
+                'message' => 'Property Type added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
 
 
     /**
@@ -810,23 +880,23 @@ class MasterController extends Controller
    public function updateshiptype(Request $request, ShipType $st)
    {
     
-    $validator = $request->validate([
-        'codest'=>'required|max:12',
-            'namest'=>'required'
-    ]);
-    
-    if($validator){
-        $st->code = $request->codest;
-        $st->name = $request->namest;
-        $st->save();
-        $notification = array(
-            'message' => 'Ship Type updated successfully!',
-            'alert-type' => 'success'
-        );
-        return back()->with($notification);
-    }else{
-        return back()->with($validator)->withInput();
-    }
+        $validator = $request->validate([
+            'codest'=>'required|max:12',
+                'namest'=>'required'
+        ]);
+        
+        if($validator){
+            $st->code = $request->codest;
+            $st->name = $request->namest;
+            $st->save();
+            $notification = array(
+                'message' => 'Ship Type updated successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
 
    }
 
@@ -908,6 +978,30 @@ class MasterController extends Controller
         return back()->with($validator)->withInput();
     }
     
+   }
+
+
+   public function updatepropertytype(Request $request, PropertyType $pt)
+   {
+    
+        $validator = $request->validate([
+            'codept'=>'required|max:12,unique:property_type,code',
+                'namept'=>'required'
+        ]);
+        
+        if($validator){
+            $pt->code = $request->codept;
+            $pt->name = $request->namept;
+            $pt->save();
+            $notification = array(
+                'message' => 'Property Type Data updated successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+
    }
 
     /**
@@ -1058,6 +1152,23 @@ class MasterController extends Controller
         if($mlu->delete()){
             $notification = array(
                 'message' => 'Marine Lookup Data deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
+    public function destroypropertytype(PropertyType $pt)
+    {
+        if($pt->delete()){
+            $notification = array(
+                'message' => 'Property Type Data deleted successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);

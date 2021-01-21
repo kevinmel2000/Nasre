@@ -132,7 +132,13 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::post('/marine-lookup/store', [MasterController::class, 'storemarinelookup'])->middleware(['can:create-marinelookup']);
     Route::put('marine-lookup/{mlu}', [MasterController::class, 'updatemarinelookup'])->middleware(['can:update-marinelookup']);
     Route::delete('/marine-lookup/destroy/{mlu}', [MasterController::class, 'destroymarinelookup'])->middleware(['can:delete-marinelookup']);
-    
+   
+    // SECTION property Type Routes
+    Route::get('/propertytype', [MasterController::class, 'indexpropertytype'])->middleware(['can:view-property_type']);
+    Route::post('/propertytype/store', [MasterController::class, 'storepropertytype'])->middleware(['can:create-property_type']);
+    Route::put('propertytype/{pt}', [MasterController::class, 'updatepropertytype'])->middleware(['can:update-property_type']);
+    Route::delete('/propertytype/destroy/{pt}', [MasterController::class, 'destroypropertytype'])->middleware(['can:delete-property_type']);
+
     // Bulk Excel Import Users
     // Route::get('/import', [ ProductController::class, 'import'])->middleware(['can:create-product']);
     // Route::post('/import', [ ProductController::class, 'importStore'])->middleware(['can:create-product']);

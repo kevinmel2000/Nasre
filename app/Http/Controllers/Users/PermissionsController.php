@@ -52,6 +52,7 @@ class PermissionsController extends Controller
         $classification_module =  Module::where(['module_name'=>'classification_module','role_id'=>$selected_role_id])->first();
         $construction_module =  Module::where(['module_name'=>'construction_module','role_id'=>$selected_role_id])->first();
         $marinelookup_module =  Module::where(['module_name'=>'marinelookup_module','role_id'=>$selected_role_id])->first();
+        $propertytype_module =  Module::where(['module_name'=>'propertytype_module','role_id'=>$selected_role_id])->first();
 
         
         $route_active = 'permissions';
@@ -91,6 +92,7 @@ class PermissionsController extends Controller
                     'classification_module',
                     'construction_module',
                     'marinelookup_module',
+                    'propertytype_module',
                     
                 ]));
     }
@@ -140,7 +142,9 @@ class PermissionsController extends Controller
         $classification_module =  Module::where(['module_name'=>'classification_module','role_id'=>$selected_role_id])->first();
         $construction_module =  Module::where(['module_name'=>'construction_module','role_id'=>$selected_role_id])->first();
         $marinelookup_module =  Module::where(['module_name'=>'marinelookup_module','role_id'=>$selected_role_id])->first();
+        $propertytype_module =  Module::where(['module_name'=>'propertytype_module','role_id'=>$selected_role_id])->first();
         
+
         $route_active = 'permissions';
         return view('crm.user.role_permissions', 
         compact([   'route_active',
@@ -178,6 +182,7 @@ class PermissionsController extends Controller
                     'classification_module',
                     'construction_module',
                     'marinelookup_module',
+                    'propertytype_module',
                 ]));
 
     }
@@ -227,6 +232,8 @@ class PermissionsController extends Controller
         $classification_module =  Module::where(['module_name'=>'classification_module','role_id'=>$selected_role_id])->first();
         $construction_module =  Module::where(['module_name'=>'construction_module','role_id'=>$selected_role_id])->first();
         $marinelookup_module =  Module::where(['module_name'=>'marinelookup_module','role_id'=>$selected_role_id])->first();
+        $propertytype_module =  Module::where(['module_name'=>'propertytype_module','role_id'=>$selected_role_id])->first();
+
 
         $route_active = 'permissions';
         return view('crm.user.role_permissions', 
@@ -265,6 +272,7 @@ class PermissionsController extends Controller
                     'classification_module',
                     'construction_module',
                     'marinelookup_module',
+                    'propertytype_module',
                 ]));
     }
 

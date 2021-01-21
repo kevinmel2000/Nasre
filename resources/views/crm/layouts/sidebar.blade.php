@@ -1051,6 +1051,20 @@
                                 </li>
                             @endcan
 
+                            @can('viewany-property_type', User::class)
+                                @if($route_active == 'Property Type Data Master')
+                                @php
+                                    $property_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/propertytype')}}" class="nav-link {{@$property_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('PROPERTY TYPE FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
+
 
                         </ul>
                     </li>

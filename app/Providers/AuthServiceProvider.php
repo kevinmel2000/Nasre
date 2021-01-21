@@ -199,5 +199,12 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-marinelookup', 'App\Policies\MarineLookupPolicy@create');
         Gate::define('update-marinelookup', 'App\Policies\MarineLookupPolicy@update');
         Gate::define('delete-marinelookup', 'App\Policies\MarineLookupPolicy@delete');
+
+        // ANCHOR Ship Type Gates
+        Gate::define('viewany-property_type', 'App\Policies\PropertyTypePolicy@viewany');
+        Gate::define('view-property_type', 'App\Policies\PropertyTypePolicy@view');
+        Gate::define('create-property_type', 'App\Policies\PropertyTypePolicy@create');
+        Gate::define('update-property_type', 'App\Policies\PropertyTypePolicy@update');
+        Gate::define('delete-property_type', 'App\Policies\PropertyTypePolicy@delete');
     }
 }
