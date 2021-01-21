@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classification;
 use Illuminate\Http\Request;
 use App\Models\Country;
 use App\Models\COB;
 use App\Models\Currency;
 use App\Models\CurrencyExchange;
 use App\Models\Occupation;
+use App\Models\ShipType;
+use App\Models\Collection;
+use App\Models\Construction;
+use App\Models\MarineLookup;
 use PHPUnit\Framework\Constraint\Count;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -59,28 +64,30 @@ class MasterController extends Controller
          {
 
             $cob = COB::orderby('id','asc')->get();
-            $lastid = COB::select('id')->latest()->first();
+            $lastid = count($cob);
             $cob_ids = response()->json($cob->modelKeys());
 
             if($lastid != null){
-                if($lastid->id == 9){
-                    $code_cob = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id >= 10){
-                    $code_cob = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id == 99){
-                    $code_cob = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id >= 100){
-                    $code_cob = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id == 999){
-                    $code_cob = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id >= 1000){
-                    $code_cob = $mydate . strval($lastid->id + 1);
-                }else{
-                    $code_cob = $mydate . strval($lastid->id + 1);
-                }
+                $code_cob = $mydate . strval($lastid + 1);
+
+                // if($lastid->id == 9){
+                //     $code_cob = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 10){
+                //     $code_cob = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 99){
+                //     $code_cob = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 100){
+                //     $code_cob = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 999){
+                //     $code_cob = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 1000){
+                //     $code_cob = $mydate . strval($lastid->id + 1);
+                // }else{
+                //     $code_cob = $mydate . strval($lastid->id + 1);
+                // }
             }
             else{
-                $code_cob = $mydate . strval($lastid->id + 1);
+                $code_cob = $mydate . strval(1);
             }
 
             // dd($country);
@@ -113,30 +120,32 @@ class MasterController extends Controller
         if(empty($search))
          {
             $occupation = Occupation::orderby('id','asc')->get();
-            $lastid = Occupation::select('id')->latest()->first();
+            $lastid = count($occupation);
             $ocp_ids = response()->json($occupation->modelKeys());
             $cob = COB::orderby('id','asc')->get();
 
 
             if($lastid != null){
-                if($lastid->id == 9){
-                    $code_ocp = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id >= 10){
-                    $code_ocp = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id == 99){
-                    $code_ocp = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id >= 100){
-                    $code_ocp = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id == 999){
-                    $code_ocp = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id >= 1000){
-                    $code_ocp = $mydate . strval($lastid->id + 1);
-                }else{
-                    $code_ocp = $mydate . strval($lastid->id + 1);
-                }
+                $code_ocp = $mydate . strval($lastid + 1);
+                
+                // if($lastid->id == 9){
+                //     $code_ocp = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 10){
+                //     $code_ocp = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 99){
+                //     $code_ocp = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 100){
+                //     $code_ocp = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 999){
+                //     $code_ocp = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 1000){
+                //     $code_ocp = $mydate . strval($lastid->id + 1);
+                // }else{
+                //     $code_ocp = $mydate . strval($lastid->id + 1);
+                // }
             }
             else{
-                $code_ocp = $mydate . strval($lastid->id + 1);
+                $code_ocp = $mydate . strval(1);
             }
 
         return view('crm.master.occupation', compact(['route_active', 'occupation','cob','ocp_ids','code_ocp']));        
@@ -208,6 +217,195 @@ class MasterController extends Controller
 
         }
 
+    }
+
+    public function indexshiptype(Request $request)
+    {
+        $user = Auth::user();
+        $route_active = 'Ship Type Data Master';
+        $search = @$request->input('search');
+        $mydate = date("Y").date("m").date("d");
+
+        // dd($country);
+        if(empty($search))
+         {
+            $shiptype = ShipType::orderby('id','asc')->get();
+            $shiptype_ids = response()->json($shiptype->modelKeys());
+            $lastid = count($shiptype);
+
+            if($lastid != null){
+                $code_st = $mydate . strval($lastid + 1);
+
+                // if($lastid->id == 9){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 10){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 99){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 100){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 999){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 1000){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }else{
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }
+            }
+            else{
+                $code_st = $mydate . strval(1);
+            }
+
+            return view('crm.master.ship_type', compact(['route_active', 'shiptype','shiptype_ids','code_st']));  
+         }
+        else
+        {
+          $shiptype = ShipType::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $shiptype_ids = response()->json($shiptype->modelKeys());
+          return view('crm.master.ship_type', compact('user','shiptype','route_active','shiptype_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
+    }
+
+    public function indexclassification(Request $request)
+    {
+        $user = Auth::user();
+        $route_active = 'Classification Data Master';
+        $search = @$request->input('search');
+        $mydate = date("Y").date("m").date("d");
+        // dd($country);
+        if(empty($search))
+         {
+            $classification = Classification::orderby('id','asc')->get();
+            $classification_ids = response()->json($classification->modelKeys());
+            $lastid = count($classification);
+
+            if($lastid != null){
+                $code_cs = $mydate . strval($lastid + 1);
+                
+                // if($lastid->id == 9){
+                //     $code_cs = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 10){
+                //     $code_cs = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 99){
+                //     $code_cs = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 100){
+                //     $code_cs = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 999){
+                //     $code_cs = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 1000){
+                //     $code_cs = $mydate . strval($lastid->id + 1);
+                // }else{
+                //     $code_cs = $mydate . strval($lastid->id + 1);
+                // }
+            }
+            else{
+                $code_cs = $mydate . strval(1);
+            }
+
+            return view('crm.master.classification', compact(['route_active', 'code_cs','classification','classification_ids']));   
+         }
+        else
+        {
+          $classification = Classification::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $classification_ids = response()->json($classification->modelKeys());
+          return view('crm.master.classification', compact('user','classification','route_active','classification_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
+    }
+
+    public function indexconstruction(Request $request)
+    {
+        $user = Auth::user();
+        $route_active = 'Construction Data Master';
+        $search = @$request->input('search');
+        $mydate = date("Y").date("m").date("d");
+
+        // dd($country);
+        if(empty($search))
+         {
+            $construction = Construction::orderby('id','asc')->get();
+            $construction_ids = response()->json($construction->modelKeys());
+            $lastid = count($construction);
+
+            if($lastid != null){
+                $code_cr = $mydate . strval($lastid + 1);
+                // if($lastid->id == 9){
+                //     $code_cr = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 10){
+                //     $code_cr = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 99){
+                //     $code_cr = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 100){
+                //     $code_cr = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 999){
+                //     $code_cr = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 1000){
+                //     $code_cr = $mydate . strval($lastid->id + 1);
+                // }else{
+                //     $code_cr = $mydate . strval($lastid->id + 1);
+                // }
+            }
+            else{
+                $code_cr = $mydate . strval(1);
+            }
+            return view('crm.master.construction', compact(['route_active','code_cr','construction','construction_ids']));   
+         }
+        else
+        {
+          $construction = Construction::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $construction_ids = response()->json($construction->modelKeys());
+          return view('crm.master.construction', compact('user','construction','route_active','construction_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
+    }
+
+    public function indexmarinelookup(Request $request)
+    {
+        $user = Auth::user();
+        $route_active = 'Marine - Lookup Ship';
+        $search = @$request->input('search');
+        $mydate = date("Y").date("m").date("d");
+        $country = Country::orderby('id','asc')->get();
+        $shiptype = ShipType::orderby('id','asc')->get();
+        $classification = Classification::orderby('id','asc')->get();
+        $construction = Construction::orderby('id','asc')->get();
+
+
+        // dd($country);
+        if(empty($search))
+         {
+            $mlu = MarineLookup::orderby('id','asc')->get();
+            $mlu_ids = response()->json($mlu->modelKeys());
+            $lastid = count($mlu);
+
+            if($lastid != null){
+                $code_mlu = $mydate . strval($lastid + 1);
+
+                // if($lastid->id == 9){
+                //     $code_mlu = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 10){
+                //     $code_mlu = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 99){
+                //     $code_mlu = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 100){
+                //     $code_mlu = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 999){
+                //     $code_mlu = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 1000){
+                //     $code_mlu = $mydate . strval($lastid->id + 1);
+                // }else{
+                //     $code_mlu = $mydate . strval($lastid->id + 1);
+                // }
+            }
+            else{
+                $code_mlu = $mydate . strval(1);
+            }
+            return view('crm.master.marine_lookup', compact(['user','country','shiptype','classification','construction','code_mlu','mlu','route_active','mlu_ids']));     
+         }
+        else
+        {
+          $mlu = MarineLookup::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $mlu_ids = response()->json($mlu->modelKeys());
+          return view('crm.master.marine_lookup', compact('user','country','shiptype','classification','construction','mlu','route_active','mlu_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
     }
 
     /**
@@ -354,6 +552,109 @@ class MasterController extends Controller
             return back()->with($validator)->withInput();
         }
     }
+
+    public function storeshiptype(Request $request)
+    {
+        $validator = $request->validate([
+            'stcode'=>'required|max:12|unique:ship_type,code',
+            'stname'=>'required'
+        ]);
+        if($validator){
+            $user = Auth::user();
+            ShipType::create([
+                'code'=>$request->stcode,
+                'name' => $request->stname
+            ]);
+            $notification = array(
+                'message' => 'Ship Type added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
+    public function storeclassification(Request $request)
+    {
+        $validator = $request->validate([
+            'cscode'=>'required|max:12|unique:classification,code',
+            'csname'=>'required'
+        ]);
+        if($validator){
+            $user = Auth::user();
+            Classification::create([
+                'code'=>$request->cscode,
+                'name' => $request->csname
+            ]);
+            $notification = array(
+                'message' => 'Classification data added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
+    public function storeconstruction(Request $request)
+    {
+        $validator = $request->validate([
+            'crcode'=>'required|max:12|unique:construction,code',
+            'crname'=>'required'
+        ]);
+        if($validator){
+            $user = Auth::user();
+            Construction::create([
+                'code'=>$request->crcode,
+                'name' => $request->crname
+            ]);
+            $notification = array(
+                'message' => 'Construction Data added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
+    public function storemarinelookup(Request $request)
+    {
+        $validator = $request->validate([
+            'mlucode'=>'required|max:12|unique:marine_lookup,code',
+            'mlushipname'=>'required'
+        ]);
+        if($validator){
+            $user = Auth::user();
+            MarineLookup::create([
+                'code'=>$request->mlucode,
+                'shipname' => $request->mlushipname,
+                'owner' => $request->mluowner,
+                'grt' => $request->mlugrt,
+                'dwt' => $request->mludwt,
+                'nrt' => $request->mlunrt,
+                'power' => $request->mlupower,
+                'ship_year' => $request->mlushipyear,
+                'repair_year' => $request->mlurepairyear,
+                'galangan' => $request->mlugalangan,
+                'ship_type' => $request->mlushiptype,
+                'classification' => $request->mluclassification,
+                'construction' => $request->mluconstruction,
+                'country' => $request->mlucountry,
+
+            ]);
+            $notification = array(
+                'message' => 'Marine Lookup added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
+
 
     /**
      * Display the specified resource.
@@ -506,6 +807,109 @@ class MasterController extends Controller
     }
    }
 
+   public function updateshiptype(Request $request, ShipType $st)
+   {
+    
+    $validator = $request->validate([
+        'codest'=>'required|max:12',
+            'namest'=>'required'
+    ]);
+    
+    if($validator){
+        $st->code = $request->codest;
+        $st->name = $request->namest;
+        $st->save();
+        $notification = array(
+            'message' => 'Ship Type updated successfully!',
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
+    }else{
+        return back()->with($validator)->withInput();
+    }
+
+   }
+
+   public function updateclassification(Request $request, Classification $cs)
+   {
+    
+    $validator = $request->validate([
+        'codecs'=>'required|max:12',
+            'namecs'=>'required'
+    ]);
+    
+    if($validator){
+        $cs->code = $request->codecs;
+        $cs->name = $request->namecs;
+        $cs->save();
+        $notification = array(
+            'message' => 'Classification updated successfully!',
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
+    }else{
+        return back()->with($validator)->withInput();
+    }
+    
+   }
+
+   public function updateconstruction(Request $request, Construction $cr)
+   {
+    
+    $validator = $request->validate([
+        'codecr'=>'required|max:12',
+            'namecr'=>'required'
+    ]);
+    
+    if($validator){
+        $cr->code = $request->codecr;
+        $cr->name = $request->namecr;
+        $cr->save();
+        $notification = array(
+            'message' => 'Construction updated successfully!',
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
+    }else{
+        return back()->with($validator)->withInput();
+    }
+    
+   }
+
+   public function updatemarinelookup(Request $request, MarineLookup $mlu)
+   {
+    
+    $validator = $request->validate([
+        'codemlu'=>'required|max:5',
+            'shipnamemlu'=>'required'
+    ]);
+    
+    if($validator){
+        $mlu->code = $request->codemlu;
+        $mlu->shipname = $request->shipnamemlu;
+        $mlu->owner = $request->ownermlu;
+        $mlu->grt = $request->grtmlu;
+        $mlu->dwt = $request->dwtmlu;
+        $mlu->nrt = $request->nrtmlu;
+        $mlu->power = $request->powermlu;
+        $mlu->ship_year = $request->ship_yearmlu;
+        $mlu->repair_year = $request->repair_yearmlu;
+        $mlu->galangan = $request->galanganmlu;
+        $mlu->ship_type = $request->ship_typemlu;
+        $mlu->classification = $request->classificationmlu;
+        $mlu->construction = $request->constructionmlu;
+        $mlu->save();
+        $notification = array(
+            'message' => 'Marine lookup data updated successfully!',
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
+    }else{
+        return back()->with($validator)->withInput();
+    }
+    
+   }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -586,6 +990,74 @@ class MasterController extends Controller
         if($exc->delete()){
             $notification = array(
                 'message' => 'Currency Exchange deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
+    public function destroyshiptype(ShipType $st)
+    {
+        if($st->delete()){
+            $notification = array(
+                'message' => 'Ship Type deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
+    public function destroyclassification(Classification $cs)
+    {
+        if($cs->delete()){
+            $notification = array(
+                'message' => 'Classification Data deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
+    public function destroyconstruction(Construction $cr)
+    {
+        if($cr->delete()){
+            $notification = array(
+                'message' => 'Construction deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
+    public function destroymarinelookup(MarineLookup $mlu)
+    {
+        if($mlu->delete()){
+            $notification = array(
+                'message' => 'Marine Lookup Data deleted successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);

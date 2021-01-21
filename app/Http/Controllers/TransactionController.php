@@ -14,16 +14,6 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexmarinelookup()
-    {
-        $user = Auth::user();
-        $route_active = 'Marine - Lookup Ship';
-        $country = User::orderby('id','asc')->get();
-        $mlu_ids = response()->json($country->modelKeys());
-
-        return view('crm.transaction.marine_lookup', compact(['user','route_active','mlu_ids']));
-    }
-
     public function indexmarineslip()
     {
         $user = Auth::user();

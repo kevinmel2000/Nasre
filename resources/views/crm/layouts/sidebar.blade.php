@@ -729,6 +729,12 @@
                     || @$route_active == 'Occupation Data Master' 
                     || @$route_active == 'Earthquake Zone' 
                     || @$route_active == 'Flood Zone Data Master' 
+                    || @$route_active == 'Country Data Master' 
+                    || @$route_active == 'State Data Master' 
+                    || @$route_active == 'City Data Master' 
+                    || @$route_active == 'Ship Type Data Master' 
+                    || @$route_active == 'Classification Data Master' 
+                    || @$route_active == 'Construction Data Master' 
                     )
                         @php
                         $master_dd = 'active';
@@ -861,17 +867,88 @@
                                 </li>
                             @endcan
 
-                            @if($route_active == 'Marine - Lookup Ship')
-                                @php
-                                    $marinelookupform = 'active';
-                                @endphp
+                                @if($route_active == 'Marine - Lookup Ship')
+                                    @php
+                                        $marinelookupform = 'active';
+                                    @endphp
                                 @endif
                                 <li class="nav-item">
-                                    <a href="{{url('/transaction-data/marine-lookup')}}" class="nav-link {{@$marinelookupform}}">
+                                    <a href="{{url('/master-data/marine-lookup')}}" class="nav-link {{@$marinelookupform}}">
                                             <i class="far fa-folder nav-icon text-secondary"></i>
                                         <p>{{__('MARINE - LOOKUP FORM')}}</p>
                                     </a>
                                 </li>
+
+                                @if(
+                                    @$route_active == 'Ship Type Data Master' 
+                                    || @$route_active == 'Classification Data Master' 
+                                    || @$route_active == 'Construction Data Master' 
+                                    )
+                                        @php
+                                        $marine_dd = 'active';
+                                        $marine_menu_open = 'menu-open';
+                                        @endphp
+                                @else
+                                    @php
+                                    $location_menu_open = 'menu-close';
+                                    @endphp
+                                @endif
+                                <li class="nav-item has-treeview {{ @$marine_menu_open }}">
+                                    <a href="#" class="nav-link {{@$marine_dd}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>
+                                            {{__('MARINE MASTER DATA')}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+    
+                                    <ul class="nav nav-treeview">
+    
+                                        {{-- @can('viewany-shiptype', User::class) --}}
+                                            @if($route_active == 'Ship Type Data Master')
+                                            @php
+                                                $shiptypeform = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/master-data/shiptype')}}" class="nav-link {{@$shiptypeform}}">
+                                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                                    <p>{{__('SHIP TYPE FORM')}}</p>
+                                                </a>
+                                            </li>
+                                        {{-- @endcan --}}
+                                            
+                                        {{-- @can('viewany-classification', User::class) --}}
+                                            @if($route_active == 'Classification Data Master')
+                                            @php
+                                                $classification_form = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/master-data/classification')}}" class="nav-link {{@$classification_form}}">
+                                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                                    <p>{{__('CLASSIFICATION FORM')}}</p>
+                                                </a>
+                                            </li>
+                                        {{-- @endcan --}}
+            
+                                        {{-- @can('viewany-construction', User::class) --}}
+                                            @if($route_active == 'Construction Data Master')
+                                            @php
+                                                $construction_form = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/master-data/construction')}}" class="nav-link {{@$construction_form}}">
+                                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                                    <p>{{__('CONSTRUCTION FORM')}}</p>
+                                                </a>
+                                            </li>
+                                        {{-- @endcan --}}
+                                    </ul>
+                                </li>
+
+                            
 
                             @can('viewany-gfh', User::class)
                                 @if($route_active == 'Golf Field Hole')

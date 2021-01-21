@@ -10,11 +10,11 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('transaction-data/marine-lookup/store')}}>
+        <form method="POST" action={{url('master-data/marine-lookup/store')}}>
           @csrf
         <div class="card">
           <div class="card-header bg-gray">
-            {{__('Ship Detail Data')}}
+            {{__('Marine Lookup Data')}}
           </div>
           
           <div class="card-body bg-light-gray ">
@@ -23,14 +23,14 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">{{__('Ship Code')}} </label>
-                                    <input type="text" name="shipcode" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
+                                    <label for="">{{__('Code')}} </label>
+                                    <input type="text" name="mlucode" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_mlu }}" readonly="readonly" required/>
                                 </div>
                             </div>
                             <div class="col-md-8">
                             <div class="form-group">
                                 <label for="">{{__('Ship Name')}} </label>
-                                <input type="text" name="shipname" placeholder="enter ship name" class="form-control form-control-sm" data-validation="length" data-validation-length="3" required/>
+                                <input type="text" name="mlushipname" placeholder="enter ship name" class="form-control form-control-sm" data-validation="length" data-validation-length="2-50" required/>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                             <div class="col-md-12">
                             <div class="form-group">
                                 <label for="">{{__('Owner')}}</label>
-                                <input type="text" name="owner" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                <input type="text" name="mluowner" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                             </div>
                             </div>
                         </div>
@@ -55,13 +55,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">{{__('GRT')}}</label>
-                                                    <input type="text" name="grt" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="text" name="mlugrt" class="form-control form-control-sm " data-validation="length" data-validation-length="1-10" value="0" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">{{__('NRT')}}</label>
-                                                    <input type="text" name="nrt" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="text" name="mlunrt" class="form-control form-control-sm " data-validation="length" data-validation-length="1-10" value="0" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -69,13 +69,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">{{__('DWT')}}</label>
-                                                    <input type="text" name="dwt" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="text" name="mludwt" class="form-control form-control-sm " data-validation="length" data-validation-length="1-10" value="0" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">{{__('Power')}}</label>
-                                                    <input type="text" name="power" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="text" name="mlupower" class="form-control form-control-sm " data-validation="length" data-validation-length="1-10" value="0" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -87,7 +87,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Ship Year')}}</label>
-                                            <input type="text" name="shipyear" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                            <input type="text" name="mlushipyear" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -95,15 +95,15 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Repair Year')}}</label>
-                                            <input type="text" name="repairyear" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                            <input type="text" name="mlurepairyear" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="">{{__('Golongan')}}</label>
-                                            <input type="text" name="golongan" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                            <label for="">{{__('Galangan')}}</label>
+                                            <input type="text" name="mlugalangan" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -114,15 +114,11 @@
                             <div class="col-md-12">
                               <div class="form-group">
                                   <label for="">{{__('Country')}}</label>
-                                  <select name="continent" class="form-control form-control-sm ">
+                                  <select name="mlucountry" class="form-control form-control-sm ">
                                       <option selected disabled>{{__('Select Country')}}</option>
-                                      <option value="AF">Africa</option>
-                                      <option value="AN">Antartica</option>
-                                      <option value="AS">Asia</option>
-                                      <option value="EU">Europa</option>
-                                      <option value="NA">North America </option>
-                                      <option value="OC">Oceania</option>
-                                      <option value="SA">South America</option>
+                                      @foreach($country as $cty)
+                                        <option value="{{ $cty->id }}">{{ $cty->code }} - {{ $cty->name }}</option>
+                                      @endforeach
                                   </select>
                               </div>    
                             </div>
@@ -132,15 +128,11 @@
                             <div class="col-md-12">
                               <div class="form-group">
                                   <label for="">{{__('Ship Type')}}</label>
-                                  <select name="continent" class="form-control form-control-sm ">
+                                  <select name="mlushiptype" class="form-control form-control-sm ">
                                       <option selected disabled>{{__('Select Ship Type')}}</option>
-                                      <option value="AF">Africa</option>
-                                      <option value="AN">Antartica</option>
-                                      <option value="AS">Asia</option>
-                                      <option value="EU">Europa</option>
-                                      <option value="NA">North America </option>
-                                      <option value="OC">Oceania</option>
-                                      <option value="SA">South America</option>
+                                      @foreach($shiptype as $stp)
+                                        <option value="{{ $stp->id }}">{{ $stp->code }} - {{ $stp->name }}</option>
+                                      @endforeach
                                   </select>
                               </div>    
                             </div>
@@ -150,15 +142,11 @@
                             <div class="col-md-12">
                               <div class="form-group">
                                   <label for="">{{__('Classification')}}</label>
-                                  <select name="continent" class="form-control form-control-sm ">
+                                  <select name="mluclassification" class="form-control form-control-sm ">
                                       <option selected disabled>{{__('Select Classification')}}</option>
-                                      <option value="AF">Africa</option>
-                                      <option value="AN">Antartica</option>
-                                      <option value="AS">Asia</option>
-                                      <option value="EU">Europa</option>
-                                      <option value="NA">North America </option>
-                                      <option value="OC">Oceania</option>
-                                      <option value="SA">South America</option>
+                                      @foreach($classification as $cs)
+                                        <option value="{{ $cs->id }}">{{ $cs->code }} - {{ $cs->name }}</option>
+                                      @endforeach
                                   </select>
                               </div>    
                             </div>
@@ -168,15 +156,11 @@
                             <div class="col-md-12">
                               <div class="form-group">
                                   <label for="">{{__('Construction')}}</label>
-                                  <select name="continent" class="form-control form-control-sm ">
+                                  <select name="mluconstruction" class="form-control form-control-sm ">
                                       <option selected disabled>{{__('Select Construction')}}</option>
-                                      <option value="AF">Africa</option>
-                                      <option value="AN">Antartica</option>
-                                      <option value="AS">Asia</option>
-                                      <option value="EU">Europa</option>
-                                      <option value="NA">North America </option>
-                                      <option value="OC">Oceania</option>
-                                      <option value="SA">South America</option>
+                                      @foreach($construction as $cr)
+                                        <option value="{{ $cr->id }}">{{ $cr->code }} - {{ $cr->name }}</option>
+                                      @endforeach
                                   </select>
                               </div>    
                             </div>
@@ -207,7 +191,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12 com-sm-12 mt-3">
-                  <table id="countryTable" class="table table-bordered table-striped">
+                  <table id="mluTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                       <th>{{__('Code')}}</th>
@@ -223,45 +207,30 @@
                       <th>{{__('Construction')}}</th>
                       <th>{{__('Ship Year')}}</th>
                       <th>{{__('Repair Year')}}</th>
-                      <th>{{__('Golongan')}}</th>
+                      <th>{{__('Galangan')}}</th>
                       <th >{{__('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>{{__('R01335')}}</td>
-                            <td>{{__('Reliance I')}}</td>
-                            <td>{{__('Kota Halus')}}</td>
-                            <td>{{__('196')}}</td>
-                            <td>{{__('0')}}</td>
-                            <td>{{__('0')}}</td>
-                            <td>{{__('0')}}</td>
-                            <td>{{__('1 - Indonesia')}}</td>
-                            <td>{{__('I01 - Iron')}}</td>
-                            <td>{{__('B01 - Bulk Carrier')}}</td>
-                            <td>{{__('A01 - American Bereau oh shipping')}}</td>
-                            <td>{{__('1994')}}</td>
-                            <td>{{__('1999')}}</td>
-                            <td>{{__('BSAM')}}</td>
-                            <td ><input class="form-check-input" style="margin-left: 30;" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
-                        </tr>
-                        <tr>
-                            <td>{{__('S00553')}}</td>
-                            <td>{{__('Sabuk Nusantara V')}}</td>
-                            <td>{{__('Gemalindo V. K.')}}</td>
-                            <td>{{__('384')}}</td>
-                            <td>{{__('307')}}</td>
-                            <td>{{__('0')}}</td>
-                            <td>{{__('0')}}</td>
-                            <td>{{__('1 - Indonesia')}}</td>
-                            <td>{{__('F01 - Fiber')}}</td>
-                            <td>{{__('B02 - Barge')}}</td>
-                            <td>{{__('G01 - Germanisher Lloyd')}}</td>
-                            <td>{{__('1980')}}</td>
-                            <td>{{__('1990')}}</td>
-                            <td>{{__('SSMP')}}</td>
-                            <td ><input class="form-check-input" style="margin-left: 30;" type="radio" name="locOption" id="locOption" value="locOption" ></td>
-                        </tr> 
+                        @foreach (@$mlu as $mlp)
+                            <tr>
+                                <td>{{@$mlp->code}}</td>
+                                <td>{{@$mlp->shipname}}</td>
+                                <td>{{@$mlp->owner}}</td>
+                                <td>{{@$mlp->grt}}</td>
+                                <td>{{@$mlp->dwt}}</td>
+                                <td>{{@$mlp->nrt}}</td>
+                                <td>{{@$mlp->power}}</td>
+                                <td>{{@$mlp->countryside->code}} - {{@$mlp->countryside->name}}</td>
+                                <td>{{@$mlp->shiptype->code}} - {{@$mlp->shiptype->name}}</td>
+                                <td>{{@$mlp->classify->code}} - {{@$mlp->classify->name}}</td>
+                                <td>{{@$mlp->construct->code}} - {{@$mlp->construct->name}}</td>
+                                <td>{{@$mlp->ship_year}}</td>
+                                <td>{{@$mlp->repair_year}}</td>
+                                <td>{{@$mlp->galangan}}</td>
+                                <td ><input class="form-check-input" style="margin-left: 30;" type="radio" name="mluOption" id="mluOption" value="mluOption" checked></td>
+                            </tr>
+                        @endforeach
                     </tbody>
                     
                   </table>
@@ -276,5 +245,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.transaction.marine_lookup_js')
+@include('crm.master.marine_lookup_js')
 @endsection
