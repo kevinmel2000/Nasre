@@ -8,12 +8,11 @@ use App\Http\Controllers\CedingBrokerController;
 use App\Http\Controllers\TransactionController;
 
 Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
-
-    // SECTION Marine Lookup Group Routes
-    Route::get('/marine-lookup', [TransactionController::class, 'indexmarinelookup']);
     
     // SECTION Marine Slip Group Routes
     Route::get('/marine-slip', [TransactionController::class, 'indexmarineslip']);
+    Route::post('/marine-insured', [TransactionController::class, 'storemarineinsured']);
+    Route::post('/marine-slip', [TransactionController::class, 'storemarineslip']);
 
     // SECTION Fire Engineering Slip Group Routes
     Route::get('/fe-slip', [TransactionController::class, 'indexfeslip']);

@@ -24,7 +24,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="msnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
+                                            <input type="text" name="msnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" value="{{ $code_ms }}" readonly="readonly" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -35,15 +35,10 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="">{{__('Insured')}}</label>
-                                                    <select name="msinsured" class="form-control form-control-sm ">
-                                                        <option selected disabled>{{__('Select Continent')}}</option>
-                                                        <option value="AF">Africa</option>
-                                                        <option value="AN">Antartica</option>
-                                                        <option value="AS">Asia</option>
-                                                        <option value="EU">Europa</option>
-                                                        <option value="NA">North America </option>
-                                                        <option value="OC">Oceania</option>
-                                                        <option value="SA">South America</option>
+                                                    <select name="msprefix" class="e1 form-control form-control-sm ">
+                                                        <option selected disabled>{{__('Select Prefix')}}</option>
+                                                        <option value="PT">PT</option>
+                                                        <option value="CV">CV</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4">
@@ -65,8 +60,8 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Route')}}</label>
-                                                    <select name="msroute" class="form-control form-control-sm ">
-                                                        <option selected disabled>{{__('Select Continent')}}</option>
+                                                    <select name="msroute" class="e1 form-control form-control-sm ">
+                                                        <option selected disabled>{{__('Select Route')}}</option>
                                                         <option value="AF">Africa</option>
                                                         <option value="AN">Antartica</option>
                                                         <option value="AS">Asia</option>
@@ -116,13 +111,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('From')}}</label>
-                                                    <input type="text" name="mssharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="text" name="mssharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly="readonly" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input type="text" name="msshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="text" name="msshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly="readonly" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -301,7 +296,7 @@
                                                             <tr>
                                                                 <th>{{__('Status')}}</th>
                                                                 <th>{{__('Datetime')}}</th>
-                                                                <th>{{__('User')}}</th>]
+                                                                <th>{{__('User')}}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>

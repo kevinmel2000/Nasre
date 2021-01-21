@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Insured;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,14 +15,52 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexmarineslip()
+    public function indexmarineslip(Request $request)
     {
         $user = Auth::user();
-        $country = User::orderby('id','asc')->get();
         $route_active = 'Marine - Slip Entry';
-        $ms_ids = response()->json($country->modelKeys());
+        $search = @$request->input('search');
+        $mydate = date("Y").date("m").date("d");
+        
 
-        return view('crm.transaction.marine_slip', compact(['user','route_active','ms_ids']));
+        if(empty($search))
+         {
+            $insured = Insured::orderby('id','asc')->get();
+            $ms_ids = response()->json($insured->modelKeys());
+            $lastid = count($insured);
+
+            if($lastid != null){
+                $code_ms = $mydate . strval($lastid + 1);
+
+                // if($lastid->id == 9){
+                //     $code_mlu = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 10){
+                //     $code_mlu = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 99){
+                //     $code_mlu = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 100){
+                //     $code_mlu = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 999){
+                //     $code_mlu = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 1000){
+                //     $code_mlu = $mydate . strval($lastid->id + 1);
+                // }else{
+                //     $code_mlu = $mydate . strval($lastid->id + 1);
+                // }
+            }
+            else{
+                $code_ms = $mydate . strval(1);
+            }
+            return view('crm.transaction.marine_slip', compact(['user','insured','route_active','ms_ids','code_ms']));     
+         }
+        else
+        {
+          $ms = Insured::where('number', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $ms_ids = response()->json($ms->modelKeys());
+          return view('crm.transaction.marine_slip', compact('user','insured','route_active','ms_ids','code_ms'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
+
+        
     }
 
     public function indexfeslip()
@@ -100,7 +139,7 @@ class TransactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storemarineinsured(Request $request)
     {
         //
     }
@@ -134,7 +173,7 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function storemarineslip(Request $request)
     {
         //
     }
