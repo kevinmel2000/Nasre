@@ -171,5 +171,33 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-fz', 'App\Policies\FZPolicy@create');
         Gate::define('update-fz', 'App\Policies\FZPolicy@update');
         Gate::define('delete-fz', 'App\Policies\FZPolicy@delete');
+
+        // ANCHOR Ship Type Gates
+        Gate::define('viewany-shiptype', 'App\Policies\ShipTypePolicy@viewany');
+        Gate::define('view-shiptype', 'App\Policies\ShipTypePolicy@view');
+        Gate::define('create-shiptype', 'App\Policies\ShipTypePolicy@create');
+        Gate::define('update-shiptype', 'App\Policies\ShipTypePolicy@update');
+        Gate::define('delete-shiptype', 'App\Policies\ShipTypePolicy@delete');
+
+        // ANCHOR Classification Gates
+        Gate::define('viewany-classification', 'App\Policies\ClassificationPolicy@viewany');
+        Gate::define('view-classification', 'App\Policies\ClassificationPolicy@view');
+        Gate::define('create-classification', 'App\Policies\ClassificationPolicy@create');
+        Gate::define('update-classification', 'App\Policies\ClassificationPolicy@update');
+        Gate::define('delete-classification', 'App\Policies\ClassificationPolicy@delete');
+
+        // ANCHOR Construction Gates
+        Gate::define('viewany-construction', 'App\Policies\ConstructionPolicy@viewany');
+        Gate::define('view-construction', 'App\Policies\ConstructionPolicy@view');
+        Gate::define('create-construction', 'App\Policies\ConstructionPolicy@create');
+        Gate::define('update-construction', 'App\Policies\ConstructionPolicy@update');
+        Gate::define('delete-construction', 'App\Policies\ConstructionPolicy@delete');
+
+        // ANCHOR Marine Lookup Gates
+        Gate::define('viewany-marinelookup', 'App\Policies\MarineLookupPolicy@viewany');
+        Gate::define('view-marinelookup', 'App\Policies\MarineLookupPolicy@view');
+        Gate::define('create-marinelookup', 'App\Policies\MarineLookupPolicy@create');
+        Gate::define('update-marinelookup', 'App\Policies\MarineLookupPolicy@update');
+        Gate::define('delete-marinelookup', 'App\Policies\MarineLookupPolicy@delete');
     }
 }

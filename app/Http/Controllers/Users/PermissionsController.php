@@ -48,6 +48,11 @@ class PermissionsController extends Controller
         $state_module =  Module::where(['module_name'=>'state_module','role_id'=>$selected_role_id])->first();
         $eqz_module =  Module::where(['module_name'=>'eqz_module','role_id'=>$selected_role_id])->first();
         $fz_module =  Module::where(['module_name'=>'fz_module','role_id'=>$selected_role_id])->first();
+        $shiptype_module =  Module::where(['module_name'=>'shiptype_module','role_id'=>$selected_role_id])->first();
+        $classification_module =  Module::where(['module_name'=>'classification_module','role_id'=>$selected_role_id])->first();
+        $construction_module =  Module::where(['module_name'=>'construction_module','role_id'=>$selected_role_id])->first();
+        $marinelookup_module =  Module::where(['module_name'=>'marinelookup_module','role_id'=>$selected_role_id])->first();
+
         
         $route_active = 'permissions';
         return view('crm.user.role_permissions', 
@@ -82,6 +87,11 @@ class PermissionsController extends Controller
                     'state_module',
                     'eqz_module',
                     'fz_module',
+                    'shiptype_module',
+                    'classification_module',
+                    'construction_module',
+                    'marinelookup_module',
+                    
                 ]));
     }
 
@@ -126,6 +136,10 @@ class PermissionsController extends Controller
         $state_module =  Module::where(['module_name'=>'state_module','role_id'=>$selected_role_id])->first();
         $eqz_module =  Module::where(['module_name'=>'eqz_module','role_id'=>$selected_role_id])->first();
         $fz_module =  Module::where(['module_name'=>'fz_module','role_id'=>$selected_role_id])->first();
+        $shiptype_module =  Module::where(['module_name'=>'shiptype_module','role_id'=>$selected_role_id])->first();
+        $classification_module =  Module::where(['module_name'=>'classification_module','role_id'=>$selected_role_id])->first();
+        $construction_module =  Module::where(['module_name'=>'construction_module','role_id'=>$selected_role_id])->first();
+        $marinelookup_module =  Module::where(['module_name'=>'marinelookup_module','role_id'=>$selected_role_id])->first();
         
         $route_active = 'permissions';
         return view('crm.user.role_permissions', 
@@ -160,6 +174,10 @@ class PermissionsController extends Controller
                     'state_module',
                     'eqz_module',
                     'fz_module',
+                    'shiptype_module',
+                    'classification_module',
+                    'construction_module',
+                    'marinelookup_module',
                 ]));
 
     }
@@ -205,6 +223,10 @@ class PermissionsController extends Controller
         $state_module =  Module::where(['module_name'=>'state_module','role_id'=>$selected_role_id])->first();
         $eqz_module =  Module::where(['module_name'=>'eqz_module','role_id'=>$selected_role_id])->first();
         $fz_module =  Module::where(['module_name'=>'fz_module','role_id'=>$selected_role_id])->first();
+        $shiptype_module =  Module::where(['module_name'=>'shiptype_module','role_id'=>$selected_role_id])->first();
+        $classification_module =  Module::where(['module_name'=>'classification_module','role_id'=>$selected_role_id])->first();
+        $construction_module =  Module::where(['module_name'=>'construction_module','role_id'=>$selected_role_id])->first();
+        $marinelookup_module =  Module::where(['module_name'=>'marinelookup_module','role_id'=>$selected_role_id])->first();
 
         $route_active = 'permissions';
         return view('crm.user.role_permissions', 
@@ -239,6 +261,10 @@ class PermissionsController extends Controller
                     'state_module',
                     'eqz_module',
                     'fz_module',
+                    'shiptype_module',
+                    'classification_module',
+                    'construction_module',
+                    'marinelookup_module',
                 ]));
     }
 

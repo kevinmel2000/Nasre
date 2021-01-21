@@ -87,11 +87,11 @@
                                     <i class="fas fa-history text-primary"></i>
                                   </a>
                                   <span>
-                                    {{-- @can('update-country', User::class) --}}
+                                    @can('update-shiptype', User::class)
                                       <a class="text-primary mr-3" data-toggle="modal" data-target="#updateshiptype{{$stp->id}}">
                                         <i class="fas fa-edit"></i>
                                       </a>
-                                    {{-- @endcan --}}
+                                    @endcan
   
                                     <div class="modal fade" id="updateshiptype{{$stp->id}}" tabindex="-1" user="dialog" aria-labelledby="updateshiptype{{$stp->id}}Label" aria-hidden="true">
                                       <div class="modal-dialog" user="document">
@@ -133,18 +133,16 @@
                                   </div>
                                   {{-- Edit Modal Ends --}}
   
-                                    {{-- @can('delete-country', User::class) --}}
-  
-                                    <span id="delbtn{{@$stp->id}}"></span>
-                                  
-                                      <form id="delete-shiptype-{{$stp->id}}"
-                                          action="{{ url('master-data/shiptype/destroy', $stp->id) }}"
-                                          method="POST">
-                                          @method('DELETE')
-                                          @csrf
-                                      </form>
-                                    {{-- @endcan   --}}
-                                  </span>
+                                    @can('delete-shiptype', User::class)
+                                      <span id="delbtn{{@$stp->id}}"></span>
+                                        <form id="delete-shiptype-{{$stp->id}}"
+                                            action="{{ url('master-data/shiptype/destroy', $stp->id) }}"
+                                            method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                        </form>
+                                      </span>
+                                  @endcan  
                                 </td>
   
                               </tr>

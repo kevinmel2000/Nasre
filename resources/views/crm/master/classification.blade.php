@@ -87,11 +87,11 @@
                                     <i class="fas fa-history text-primary"></i>
                                   </a>
                                   <span>
-                                    {{-- @can('update-country', User::class) --}}
+                                    @can('update-classification', User::class)
                                       <a class="text-primary mr-3" data-toggle="modal" data-target="#updateclassification{{$cs->id}}">
                                         <i class="fas fa-edit"></i>
                                       </a>
-                                    {{-- @endcan --}}
+                                    @endcan
   
                                     <div class="modal fade" id="updateclassification{{$cs->id}}" tabindex="-1" user="dialog" aria-labelledby="updateclassification{{$cs->id}}Label" aria-hidden="true">
                                       <div class="modal-dialog" user="document">
@@ -133,18 +133,16 @@
                                   </div>
                                   {{-- Edit Modal Ends --}}
   
-                                    {{-- @can('delete-country', User::class) --}}
-  
-                                    <span id="delbtn{{@$cs->id}}"></span>
-                                  
-                                      <form id="delete-classification-{{$cs->id}}"
-                                          action="{{ url('master-data/classification/destroy', $cs->id) }}"
-                                          method="POST">
-                                          @method('DELETE')
-                                          @csrf
-                                      </form>
-                                    {{-- @endcan   --}}
-                                  </span>
+                                    @can('delete-classification', User::class)
+                                      <span id="delbtn{{@$cs->id}}"></span>
+                                        <form id="delete-classification-{{$cs->id}}"
+                                            action="{{ url('master-data/classification/destroy', $cs->id) }}"
+                                            method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                        </form>
+                                      </span>
+                                    @endcan  
                                 </td>
   
                               </tr>

@@ -173,14 +173,15 @@
 
         <div class="card card-primary">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12 com-sm-12 mt-3">
-                        <button class="btn btn-primary btn-block ">
-                            {{__('Create New')}}
-                        </button>
+                @can('create-marinelookup', User::class)
+                    <div class="row">
+                        <div class="col-md-12 com-sm-12 mt-3">
+                            <button class="btn btn-primary btn-block ">
+                                {{__('Create New')}}
+                            </button>
+                        </div>
                     </div>
-                   
-                </div>
+                @endcan
             </div>
         </div> 
         
@@ -191,25 +192,25 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12 com-sm-12 mt-3">
-                  <table id="mluTable" class="table table-bordered table-striped">
+                  <table id="mluTable" class="table table-bordered display nowrap" style="width:100%;white-space: nowrap;">
                     <thead>
-                    <tr>
-                      <th>{{__('Code')}}</th>
-                      <th>{{__('Ship Name')}}</th>
-                      <th>{{__('Owner')}}</th>
-                      <th>{{__('GRT')}}</th>
-                      <th>{{__('DWT')}}</th>
-                      <th>{{__('NRT')}}</th>
-                      <th>{{__('Power')}}</th>
-                      <th>{{__('Country')}}</th>
-                      <th>{{__('Type')}}</th>
-                      <th>{{__('Classification')}}</th>
-                      <th>{{__('Construction')}}</th>
-                      <th>{{__('Ship Year')}}</th>
-                      <th>{{__('Repair Year')}}</th>
-                      <th>{{__('Galangan')}}</th>
-                      <th >{{__('Actions')}}</th>
-                    </tr>
+                        <tr>
+                            <th>{{__('Code')}}</th>
+                            <th>{{__('Ship Name')}}</th>
+                            <th>{{__('Owner')}}</th>
+                            <th>{{__('GRT')}}</th>
+                            <th>{{__('DWT')}}</th>
+                            <th>{{__('NRT')}}</th>
+                            <th>{{__('Power')}}</th>
+                            <th>{{__('Country')}}</th>
+                            <th>{{__('Type')}}</th>
+                            <th>{{__('Classification')}}</th>
+                            <th>{{__('Construction')}}</th>
+                            <th>{{__('Ship Year')}}</th>
+                            <th>{{__('Repair Year')}}</th>
+                            <th>{{__('Galangan')}}</th>
+                            <th >{{__('Actions')}}</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach (@$mlu as $mlp)

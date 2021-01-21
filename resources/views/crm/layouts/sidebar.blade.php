@@ -867,6 +867,7 @@
                                 </li>
                             @endcan
 
+                            @can('viewany-marinelookup', User::class)
                                 @if($route_active == 'Marine - Lookup Ship')
                                     @php
                                         $marinelookupform = 'active';
@@ -878,6 +879,7 @@
                                         <p>{{__('MARINE - LOOKUP FORM')}}</p>
                                     </a>
                                 </li>
+                            @endcan
 
                                 @if(
                                     @$route_active == 'Ship Type Data Master' 
@@ -904,7 +906,7 @@
     
                                     <ul class="nav nav-treeview">
     
-                                        {{-- @can('viewany-shiptype', User::class) --}}
+                                        @can('viewany-shiptype', User::class)
                                             @if($route_active == 'Ship Type Data Master')
                                             @php
                                                 $shiptypeform = 'active';
@@ -916,9 +918,9 @@
                                                     <p>{{__('SHIP TYPE FORM')}}</p>
                                                 </a>
                                             </li>
-                                        {{-- @endcan --}}
+                                        @endcan
                                             
-                                        {{-- @can('viewany-classification', User::class) --}}
+                                        @can('viewany-classification', User::class)
                                             @if($route_active == 'Classification Data Master')
                                             @php
                                                 $classification_form = 'active';
@@ -930,9 +932,9 @@
                                                     <p>{{__('CLASSIFICATION FORM')}}</p>
                                                 </a>
                                             </li>
-                                        {{-- @endcan --}}
+                                        @endcan
             
-                                        {{-- @can('viewany-construction', User::class) --}}
+                                        @can('viewany-construction', User::class)
                                             @if($route_active == 'Construction Data Master')
                                             @php
                                                 $construction_form = 'active';
@@ -944,7 +946,7 @@
                                                     <p>{{__('CONSTRUCTION FORM')}}</p>
                                                 </a>
                                             </li>
-                                        {{-- @endcan --}}
+                                        @endcan
                                     </ul>
                                 </li>
 
