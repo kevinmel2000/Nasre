@@ -139,6 +139,12 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::put('propertytype/{pt}', [MasterController::class, 'updatepropertytype'])->middleware(['can:update-property_type']);
     Route::delete('/propertytype/destroy/{pt}', [MasterController::class, 'destroypropertytype'])->middleware(['can:delete-property_type']);
 
+    // SECTION property Type Routes
+    Route::get('/conditionneeded', [MasterController::class, 'indexconditionneeded'])->middleware(['can:view-condition_needed']);
+    Route::post('/conditionneeded/store', [MasterController::class, 'storeconditionneeded'])->middleware(['can:create-condition_needed']);
+    Route::put('conditionneeded/{cdn}', [MasterController::class, 'updateconditionneeded'])->middleware(['can:update-condition_needed']);
+    Route::delete('/conditionneeded/destroy/{cdn}', [MasterController::class, 'destroyconditionneeded'])->middleware(['can:delete-condition_needed']);
+
     // Bulk Excel Import Users
     // Route::get('/import', [ ProductController::class, 'import'])->middleware(['can:create-product']);
     // Route::post('/import', [ ProductController::class, 'importStore'])->middleware(['can:create-product']);

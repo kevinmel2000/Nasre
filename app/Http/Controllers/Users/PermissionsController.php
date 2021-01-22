@@ -53,6 +53,7 @@ class PermissionsController extends Controller
         $construction_module =  Module::where(['module_name'=>'construction_module','role_id'=>$selected_role_id])->first();
         $marinelookup_module =  Module::where(['module_name'=>'marinelookup_module','role_id'=>$selected_role_id])->first();
         $propertytype_module =  Module::where(['module_name'=>'propertytype_module','role_id'=>$selected_role_id])->first();
+        $condition_needed_module =  Module::where(['module_name'=>'condition_needed_module','role_id'=>$selected_role_id])->first();
 
         
         $route_active = 'permissions';
@@ -93,6 +94,7 @@ class PermissionsController extends Controller
                     'construction_module',
                     'marinelookup_module',
                     'propertytype_module',
+                    'condition_needed_module',
                     
                 ]));
     }
@@ -143,6 +145,7 @@ class PermissionsController extends Controller
         $construction_module =  Module::where(['module_name'=>'construction_module','role_id'=>$selected_role_id])->first();
         $marinelookup_module =  Module::where(['module_name'=>'marinelookup_module','role_id'=>$selected_role_id])->first();
         $propertytype_module =  Module::where(['module_name'=>'propertytype_module','role_id'=>$selected_role_id])->first();
+        $condition_needed_module =  Module::where(['module_name'=>'condition_needed_module','role_id'=>$selected_role_id])->first();
         
 
         $route_active = 'permissions';
@@ -183,6 +186,7 @@ class PermissionsController extends Controller
                     'construction_module',
                     'marinelookup_module',
                     'propertytype_module',
+                    'condition_needed_module',
                 ]));
 
     }
@@ -233,6 +237,7 @@ class PermissionsController extends Controller
         $construction_module =  Module::where(['module_name'=>'construction_module','role_id'=>$selected_role_id])->first();
         $marinelookup_module =  Module::where(['module_name'=>'marinelookup_module','role_id'=>$selected_role_id])->first();
         $propertytype_module =  Module::where(['module_name'=>'propertytype_module','role_id'=>$selected_role_id])->first();
+        $condition_needed_module =  Module::where(['module_name'=>'condition_needed_module','role_id'=>$selected_role_id])->first();
 
 
         $route_active = 'permissions';
@@ -273,6 +278,7 @@ class PermissionsController extends Controller
                     'construction_module',
                     'marinelookup_module',
                     'propertytype_module',
+                    'condition_needed_module',
                 ]));
     }
 

@@ -30,5 +30,10 @@ class FeLookupLocation extends Model
     {
 		return $this->belongsTo('App\Models\City','city_id'); 
     }
+
+    public function cityname() 
+    {
+		return $this->belongsTo('App\Models\City','city_id'); 
+    }
 }
 

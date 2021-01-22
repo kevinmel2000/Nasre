@@ -28,6 +28,7 @@ return [
                     'construction_module',
 					'marinelookup_module',
 					'propertytype_module',
+					'condition_needed_module',
 				],
 	'CONTACT_TYPES' => ['Customer','Past-Customer','Non-Customer'],
 	'PROSPECTS' => ['Prospect','Lost-Prospect','Non-Prospect'],

@@ -4,6 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Insured;
+use App\Models\SlipTable;
+use App\Models\Currency;
+use App\Models\COB;
+use App\Models\Occupation;
+use App\Models\KOC;
+use App\Models\CedingBroker;
+use App\Models\FeLookupLocation;
+use App\Policies\FelookupLocationPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,43 +29,40 @@ class TransactionController extends Controller
         $route_active = 'Marine - Slip Entry';
         $search = @$request->input('search');
         $mydate = date("Y").date("m").date("d");
+        $currdate = date("Y/m/d");
         
 
         if(empty($search))
          {
             $insured = Insured::orderby('id','asc')->get();
+            $slip = SlipTable::orderby('id','asc')->get();
+            $currency = Currency::orderby('id','asc')->get();
+            $cob = COB::orderby('id','asc')->get();
+            $koc = KOC::orderby('id','asc')->get();
+            $ocp = Occupation::orderby('id','asc')->get();
+            $cedingbroker = CedingBroker::orderby('id','asc')->get();
+            $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
+            $felookup = FelookupLocation::orderby('id','asc')->get();
             $ms_ids = response()->json($insured->modelKeys());
             $lastid = count($insured);
+            $sliplastid = count($slip);
 
             if($lastid != null){
                 $code_ms = $mydate . strval($lastid + 1);
+                $code_sl = $mydate . strval($sliplastid + 1);
 
-                // if($lastid->id == 9){
-                //     $code_mlu = $mydate . strval($lastid->id + 1);
-                // }elseif($lastid->id >= 10){
-                //     $code_mlu = $mydate . strval($lastid->id + 1);
-                // }elseif($lastid->id == 99){
-                //     $code_mlu = $mydate . strval($lastid->id + 1);
-                // }elseif($lastid->id >= 100){
-                //     $code_mlu = $mydate . strval($lastid->id + 1);
-                // }elseif($lastid->id == 999){
-                //     $code_mlu = $mydate . strval($lastid->id + 1);
-                // }elseif($lastid->id >= 1000){
-                //     $code_mlu = $mydate . strval($lastid->id + 1);
-                // }else{
-                //     $code_mlu = $mydate . strval($lastid->id + 1);
-                // }
             }
             else{
+                $code_sl = $mydate . strval($sliplastid + 1);
                 $code_ms = $mydate . strval(1);
             }
-            return view('crm.transaction.marine_slip', compact(['user','insured','route_active','ms_ids','code_ms']));     
+            return view('crm.transaction.marine_slip', compact(['user','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
          }
         else
         {
-          $ms = Insured::where('number', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
-          $ms_ids = response()->json($ms->modelKeys());
-          return view('crm.transaction.marine_slip', compact('user','insured','route_active','ms_ids','code_ms'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $insured = Insured::where('number', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $ms_ids = response()->json($insured->modelKeys());
+          return view('crm.transaction.marine_slip', compact('user','slip','insured','route_active','ms_ids','code_ms'))->with('i', ($request->input('page', 1) - 1) * 10);
         }
 
         

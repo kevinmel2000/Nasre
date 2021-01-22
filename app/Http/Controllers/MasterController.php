@@ -11,6 +11,7 @@ use App\Models\CurrencyExchange;
 use App\Models\Occupation;
 use App\Models\ShipType;
 use App\Models\PropertyType;
+use App\Models\ConditionNeeded;
 use App\Models\Collection;
 use App\Models\Construction;
 use App\Models\MarineLookup;
@@ -456,6 +457,53 @@ class MasterController extends Controller
         }
     }
 
+    public function indexconditionneeded(Request $request)
+    {
+        $user = Auth::user();
+        $route_active = 'Condition Needed Data Master';
+        $search = @$request->input('search');
+        $mydate = date("Y").date("m").date("d");
+
+        // dd($country);
+        if(empty($search))
+         {
+            $cdn = ConditionNeeded::orderby('id','asc')->get();
+            $cdn_ids = response()->json($cdn->modelKeys());
+            $lastid = count($cdn);
+
+            if($lastid != null){
+                $code_cdn = $mydate . strval($lastid + 1);
+
+                // if($lastid->id == 9){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 10){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 99){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 100){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 999){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 1000){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }else{
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }
+            }
+            else{
+                $code_cdn = $mydate . strval(1);
+            }
+
+            return view('crm.master.condition_needed', compact(['route_active', 'cdn','cdn_ids','code_cdn']));  
+         }
+        else
+        {
+          $cdn = PropertyType::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $cdn_ids = response()->json($cdn->modelKeys());
+          return view('crm.master.condition_needed', compact('user','cdn','route_active','cdn_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -724,6 +772,28 @@ class MasterController extends Controller
         }
     }
 
+    public function storeconditionneeded(Request $request)
+    {
+        $validator = $request->validate([
+            'cdncode'=>'required|max:12|unique:property_type,code',
+            'cdnname'=>'required'
+        ]);
+        if($validator){
+            $user = Auth::user();
+            ConditionNeeded::create([
+                'code'=>$request->cdncode,
+                'name' => $request->cdnname,
+                'information' => $request->cdninfo
+            ]);
+            $notification = array(
+                'message' => 'Condition Needed Data added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
 
 
     /**
@@ -1004,6 +1074,30 @@ class MasterController extends Controller
 
    }
 
+   public function updateconditionneeded(Request $request, ConditionNeeded $cdn)
+   {
+    
+        $validator = $request->validate([
+            'codecdn'=>'required|max:12,unique:condition_needed,code',
+                'namecdn'=>'required'
+        ]);
+        
+        if($validator){
+            $cdn->code = $request->codecdn;
+            $cdn->name = $request->namecdn;
+            $cdn->information = $request->infocdn;
+            $cdn->save();
+            $notification = array(
+                'message' => 'Condition Needed Data updated successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+
+   }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -1169,6 +1263,23 @@ class MasterController extends Controller
         if($pt->delete()){
             $notification = array(
                 'message' => 'Property Type Data deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
+    public function destroyconditionneeded(ConditionNeeded $cdn)
+    {
+        if($cdn->delete()){
+            $notification = array(
+                'message' => 'Condition Needed Data deleted successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);

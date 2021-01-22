@@ -862,7 +862,7 @@
                                 <li class="nav-item">
                                     <a href="{{url('/master-data/felookuplocation')}}" class="nav-link {{@$felookuplocationform}}">
                                             <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('FIRE & ENGINEERING -')}} <br> {{__('LOOKUP LOCATION')}}</p>
+                                        <p>{{__('LOOKUP LOCATION')}}</p>
                                     </a>
                                 </li>
                             @endcan
@@ -1061,6 +1061,20 @@
                                     <a href="{{url('/master-data/propertytype')}}" class="nav-link {{@$property_form}}">
                                             <i class="far fa-folder nav-icon text-secondary"></i>
                                         <p>{{__('PROPERTY TYPE FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('viewany-condition_needed', User::class)
+                                @if($route_active == 'Condition Needed Data Master')
+                                @php
+                                    $cdn_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/conditionneeded')}}" class="nav-link {{@$cdn_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('CONDITION NEEDED FORM')}}</p>
                                     </a>
                                 </li>
                             @endcan
