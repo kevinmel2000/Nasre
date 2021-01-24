@@ -9,6 +9,9 @@ use App\Models\Currency;
 use App\Models\COB;
 use App\Models\Occupation;
 use App\Models\KOC;
+use App\Models\SlipTable;
+use App\Models\SlipTableFile;
+use App\Models\SlipTableFileTemp;
 use App\Models\CedingBroker;
 use App\Models\FeLookupLocation;
 use App\Policies\FelookupLocationPolicy;
@@ -74,6 +77,7 @@ class TransactionController extends Controller
         $country = User::orderby('id','asc')->get();
         $route_active = 'Fire Engineering - Slip Entry';
         $fe_ids = response()->json($country->modelKeys());
+
 
         return view('crm.transaction.fe_slip', compact(['user','route_active','fe_ids']));
     }

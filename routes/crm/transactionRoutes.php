@@ -5,10 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FeLookupLocationController;
 use App\Http\Controllers\GolfFieldHoleController;
 use App\Http\Controllers\CedingBrokerController;
+use App\Http\Controllers\FeSlipController;
 use App\Http\Controllers\TransactionController;
 
 Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     
+
     // SECTION Marine Slip Group Routes
     Route::get('/marine-slip', [TransactionController::class, 'indexmarineslip']);
     Route::post('/marine-insured', [TransactionController::class, 'storemarineinsured']);

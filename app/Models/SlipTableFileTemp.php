@@ -4,7 +4,7 @@ namespace App\MOdels;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SlipTable extends Model
+class SlipTableFileTemp extends Model
 {
     //
     protected $guarded = [];
