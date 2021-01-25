@@ -6,6 +6,9 @@ use App\Http\Controllers\FeLookupLocationController;
 use App\Http\Controllers\GolfFieldHoleController;
 use App\Http\Controllers\CedingBrokerController;
 use App\Http\Controllers\FeSlipController;
+use App\Http\Controllers\FinancialLineSlipController;
+use App\Http\Controllers\HeMotorSlipController;
+use App\Http\Controllers\MovePropSlipController;
 use App\Http\Controllers\TransactionController;
 
 Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
@@ -17,13 +20,21 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::post('/marine-slip', [TransactionController::class, 'storemarineslip']);
 
     // SECTION Fire Engineering Slip Group Routes
-    Route::get('/fe-slip', [TransactionController::class, 'indexfeslip']);
+    Route::get('/fe-slip', [FeSlipController::class, 'indexfeslip']);
+    Route::get('/fe-slipindex', [FeSlipController::class, 'index']);
 
     // SECTION Financial Lines Slip Group Routes
-    Route::get('/fl-slip', [TransactionController::class, 'indexflslip']);
+    Route::get('/fl-slip', [FinancialLineSlipController::class, 'indexflslip']);
+    Route::get('/fl-slipindex', [FinancialLineSlipController::class, 'index']);
 
     // SECTION Moveable Property Slip Group Routes
-    Route::get('/mp-slip', [TransactionController::class, 'indexmpslip']);
+    Route::get('/mp-slip', [MovePropSlipController::class, 'indexmpslip']);
+    Route::get('/mp-slipindex', [MovePropSlipController::class, 'index']);
+    
+
+    // SECTION HE & Motor Slip Group Routes
+    Route::get('/hem-slip', [MovePropSlipController::class, 'indexhemslip']);
+    Route::get('/hem-slipindex', [MovePropSlipController::class, 'index']);
 
     // SECTION Hole in Ones Slip Group Routes
     Route::get('/hio-slip', [TransactionController::class, 'indexhioslip']);
@@ -31,8 +42,7 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     // SECTION Personal Accident Slip Group Routes
     Route::get('/pa-slip', [TransactionController::class, 'indexpaslip']);
 
-    // SECTION HE & Motor Slip Group Routes
-    Route::get('/hem-slip', [TransactionController::class, 'indexhemslip']);
+ 
 
 
     // Route::get('/country', [MasterController::class, 'indexcountry'])->middleware(['can:view-country']);
