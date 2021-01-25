@@ -13,6 +13,7 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
 
     // SECTION Marine Slip Group Routes
     Route::get('/marine-slip', [TransactionController::class, 'indexmarineslip']);
+    Route::get('/marine-slip/{id}', [TransactionController::class, 'showshipdetails'])->name('shipDetails');
     Route::post('/marine-insured', [TransactionController::class, 'storemarineinsured']);
     Route::post('/marine-slip', [TransactionController::class, 'storemarineslip']);
 

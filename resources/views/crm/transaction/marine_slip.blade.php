@@ -138,33 +138,32 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         {{__('Ship Detail')}}
-                                                        <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addship">{{__('Add Ship')}}</button>
+                                                        <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalAddShip">{{__('Add Ship')}}</button>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="card-body">
                                                 <div class="col-md-12 com-sm-12 mt-3">
                                                     <table id="shipdetailTable" class="table table-bordered table-striped">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>{{__('Ship Code')}}</th>
-                                                        <th>{{__('Ship Name')}}</th>
-                                                        <th width="20%">{{__('Actions')}}</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>{{__('CODE0001')}}</td>
-                                                            <td>{{__('Reliance I')}}</td>
-                                                            <td width="20%"><input class="form-check-input" style="margin-left: 30;" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>{{__('CODE0002')}}</td>
-                                                            <td>{{__('Sabuk Nusantara IV')}}</td>
-                                                            <td width="20%"><input style="margin-left: 30;" class="form-check-input" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
-                                                        </tr>
-                                                    </tbody>
-                                                    
+                                                        <thead>
+                                                            <tr>
+                                                                <th>{{__('Ship Code')}}</th>
+                                                                <th>{{__('Ship Name')}}</th>
+                                                                <th width="20%">{{__('Actions')}}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>{{__('CODE0001')}}</td>
+                                                                <td>{{__('Reliance I')}}</td>
+                                                                <td width="20%"><input class="form-check-input" style="margin-left: 30;" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>{{__('CODE0002')}}</td>
+                                                                <td>{{__('Sabuk Nusantara IV')}}</td>
+                                                                <td width="20%"><input style="margin-left: 30;" class="form-check-input" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
+                                                            </tr>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             </div>
@@ -172,11 +171,63 @@
                                     </div>
                                 </div>
 
+                                <div class="modal fade" id="ModalAddShip" tabindex="-1" user="dialog" aria-hidden="true">
+                                    <div class="modal-dialog" user="document">
+                                      <div class="modal-content bg-light-gray">
+                                        <div class="modal-header bg-gray">
+                                          <h5 class="modal-title">{{__('Ship Detail')}}</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <form action="" method="POST">
+                                            <div class="modal-body">
+                                                @csrf
+                                                @method('POST')
+
+                                                <div class="row">
+                                                  <div class="col-md-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Ship Code')}}</label><br>
+                                                        <select name="shipcode" id="shipcode" class="form-control form-control-sm e1">
+                                                            <option selected disabled>{{__('Select Ship Code')}}</option>
+                                                            @foreach($mlu as $mrnlu)
+                                                                <option value="{{  $mrnlu->id }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
+                                                                {{-- @if($location->country_id  == $cty->id)
+                                                                <option value="{{ $mrnlu->id }}" selected>{{ $mrnlu->code }} - {{ $mrnlu->shipname }}</option>
+                                                                @else
+                                                                <option value="{{  $mrnlu->id }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
+                                                                @endif --}}
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                  </div>
+                                                  
+                                                  <div class="row">
+                                                    <div class="col-md-12 col-md-12">
+                                                      <div class="form-group">
+                                                        <label for="">{{__('Ship Name')}}</label>
+                                                        <input type="text" name="shipname" id="shipname" class="form-control" value="" required/>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                                <input type="submit" class="btn btn-info" value="Update">
+                                            </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" name="mscoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                            <input type="text" name="mscoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
                                         </div>
                                     </div>
                                 </div>

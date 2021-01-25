@@ -51,7 +51,9 @@
         <script src="{{asset('js/app.js')}}"></script>
         <script src="{{asset('theme/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('js/datatable.js')}}"></script> 
-        
+        <script src="https://unpkg.com/jquery@2.2.4/dist/jquery.js"></script>
+        <script src="https://unpkg.com/jquery@2.2.4/dist/jquery.js"></script>
+
         <script src="{{asset('theme/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
         <script src="{{asset('theme/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('js/popper.min.js')}}" ></script>

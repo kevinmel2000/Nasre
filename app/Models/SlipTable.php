@@ -10,4 +10,6 @@ class SlipTable extends Model
     protected $guarded = [];
 
     protected $table = 'slip_table';
+
+    public $timestamps = false;
 }

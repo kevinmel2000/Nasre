@@ -1,3 +1,22 @@
+<script type="text/javascript">
+     $('#shipcode').change(function(){
+        var id = $(this).val();
+        var url = '{{ route("shipDetails", ":id") }}';
+        url = url.replace(':id', id);
+
+        $.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'json',
+            success: function(response){
+                if(response != null){
+                    $('#shipname').val(response.shipname);
+                }
+            }
+        });
+    });
+</script>
+
 <script>
     $(function () {
       "use strict";
@@ -63,4 +82,4 @@
         }
     }
   
-  </script>
+</script>
