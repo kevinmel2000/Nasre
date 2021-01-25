@@ -8,6 +8,7 @@ use App\Models\Currency;
 use App\Models\COB;
 use App\Models\Occupation;
 use App\Models\KOC;
+use App\Models\SlipTable;
 use App\Models\SlipTableFile;
 use App\Models\SlipTableFileTemp;
 use App\Models\CedingBroker;
