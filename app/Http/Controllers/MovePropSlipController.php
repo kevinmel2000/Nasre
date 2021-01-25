@@ -75,21 +75,21 @@ class MovePropSlipController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $insured = Insured::where('slip_type', 'LIKE', 'mp%')->orderby('id','desc')->paginate(10);
+          $insured = Insured::where('slip_type', '=', 'mp')->orderby('id','desc')->paginate(10);
           $insured_ids = response()->json($insured->modelKeys());
 
-          return view('crm.transaction.mp_slipindex', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.transaction.mp_slip_index', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
         
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
           
-          $insured = Insured::where('slip_type', 'LIKE', 'mp%')->orWhere('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
+          $insured = Insured::where('slip_type', '=', 'mp')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
           $insured_ids = response()->json($insured->modelKeys());
 
         
-          return view('crm.transaction.mp_slipindex', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.transaction.mp_slip_index', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
         
         }
     }

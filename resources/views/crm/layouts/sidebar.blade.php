@@ -1144,7 +1144,7 @@
                                         <li class="nav-item">
                                             <a href="{{url('/transaction-data/fe-slipindex')}}" class="nav-link {{@$fes_formindex}}">
                                                     <i class="far fa-folder nav-icon text-secondary"></i>
-                                                <p>{{__('FIRE & ENGINEERING Index -')}} <br> {{__('Index')}}</p>
+                                                <p>{{__('FIRE & ENGINEERING -')}} <br> {{__('INDEX')}}</p>
                                             </a>
                                         </li>
 

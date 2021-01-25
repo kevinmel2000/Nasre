@@ -22,16 +22,16 @@
       
     <div class="card card-primary">
         <div class="card-header bg-gray">
-            {{__('FIRE & ENGINEERING INDEX')}}
+            {{__('HE & MOTOR INDEX')}}
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12 com-sm-12 mt-3">
                 
-                  {!! link_to('transaction-data/fe-slip','Tambah FIRE & ENGINEERING Insured Slip',['class'=>'btn btn-primary']) !!}
+                  {!! link_to('transaction-data/hem-slip','Tambah HE & MOTOR Insured Slip',['class'=>'btn btn-primary']) !!}
                   <hr>
-                  {!! Form::open(array('url'=>'transaction-data/fe-slipindex')) !!}
-                  {!! Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari FIRE & ENGINEERING Number, ketik lalu tekan enter']) !!}
+                  {!! Form::open(array('url'=>'transaction-data/hem-slipindex')) !!}
+                  {!! Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari HE & MOTOR Number, ketik lalu tekan enter']) !!}
                   {!! Form::close() !!}
                   <hr>
                   <table id="felookupTable2" class="table table-bordered table-striped">
@@ -141,5 +141,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.transaction.fe_slip_index_js')
+@include('crm.transaction.hem_slip_index_js')
 @endsection

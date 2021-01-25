@@ -22,19 +22,23 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     // SECTION Fire Engineering Slip Group Routes
     Route::get('/fe-slip', [FeSlipController::class, 'indexfeslip']);
     Route::get('/fe-slipindex', [FeSlipController::class, 'index']);
+    Route::post('/fe-slipindex', [FeSlipController::class, 'index']);
 
     // SECTION Financial Lines Slip Group Routes
     Route::get('/fl-slip', [FinancialLineSlipController::class, 'indexflslip']);
     Route::get('/fl-slipindex', [FinancialLineSlipController::class, 'index']);
-
+    Route::post('/fl-slipindex', [FinancialLineSlipController::class, 'index']);
+    
     // SECTION Moveable Property Slip Group Routes
     Route::get('/mp-slip', [MovePropSlipController::class, 'indexmpslip']);
     Route::get('/mp-slipindex', [MovePropSlipController::class, 'index']);
+    Route::post('/mp-slipindex', [MovePropSlipController::class, 'index']);
     
 
     // SECTION HE & Motor Slip Group Routes
-    Route::get('/hem-slip', [MovePropSlipController::class, 'indexhemslip']);
-    Route::get('/hem-slipindex', [MovePropSlipController::class, 'index']);
+    Route::get('/hem-slip', [HeMotorSlipController::class, 'indexhemslip']);
+    Route::get('/hem-slipindex', [HeMotorSlipController::class, 'index']);
+    Route::post('/hem-slipindex', [HeMotorSlipController::class, 'index']);
 
     // SECTION Hole in Ones Slip Group Routes
     Route::get('/hio-slip', [TransactionController::class, 'indexhioslip']);
