@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
+use App\Models\User;
 use App\Models\Customer\Customer;
 use App\Models\FeLookupLocation;
 use App\Models\SlipTable;
@@ -13,6 +14,7 @@ use App\Models\SlipTableFile;
 use App\Models\SlipTableFileTemp;
 use App\Models\EarthQuakeZone;
 use App\Models\FloodZone;
+use App\Models\Insured;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,7 +66,7 @@ class FinancialLineSlipController extends Controller
     {
          $user = Auth::user();
          $country = User::orderby('id','asc')->get();
-        $route_active = 'Fire & Engineering Lookup Location';   
+         $route_active = 'Financial Lines Index';   
          $mydate = date("Y").date("m").date("d");
          $fe_ids = response()->json($country->modelKeys());
 
@@ -73,77 +75,34 @@ class FinancialLineSlipController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $felookuplocation = FeLookupLocation::orderby('id','desc')->paginate(10);
-          $felookuplocation_ids = response()->json($felookuplocation->modelKeys());
-          $country = Country::orderby('id','asc')->get();
-          $city = City::orderby('id','asc')->get();
-          $state = State::orderby('id','asc')->get();
-          $earthquakezone = EarthQuakeZone::orderby('id','asc')->get();
-          $floodzone = FloodZone::orderby('id','asc')->get();
-          $costumer=Customer::orderby('id','asc')->get();
+          $insured = Insured::where('slip_type', '=', 'fl')->orderby('id','desc')->paginate(10);
+          $insured_ids = response()->json($insured->modelKeys());
 
-                $lastid = FeLookupLocation::select('id')->latest()->first();
-
-                if($lastid != null){
-                    if($lastid->id == 9){
-                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                    }elseif($lastid->id >= 10){
-                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                    }elseif($lastid->id == 99){
-                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                    }elseif($lastid->id >= 100){
-                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                    }elseif($lastid->id == 999){
-                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                    }elseif($lastid->id >= 1000){
-                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                    }else{
-                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                    }
-                }
-                else{
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                }
-
-          return view('crm.master.felookuplocation', compact('user','code_felookuplocation','earthquakezone','floodzone','felookuplocation','costumer','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.transaction.fl_slip_index', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+        
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
-          $felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->paginate(10);
-          $felookuplocation_ids = response()->json($felookuplocation->modelKeys());
-          $country = Country::orderby('id','asc')->get();
-          $city = City::orderby('id','asc')->get();
-          $state = State::orderby('id','asc')->get();
-          $earthquakezone = EarthQuakeZone::orderby('id','asc')->get();
-          $floodzone = FloodZone::orderby('id','asc')->get();
-          $costumer=Customer::orderby('id','asc')->get();
+          
+          $insured = Insured::where('slip_type', '=', 'fl')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
+          $insured_ids = response()->json($insured->modelKeys());
 
-            $lastid = FeLookupLocation::select('id')->latest()->first();
+        
+          return view('crm.transaction.fl_slip_index', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+        
+        }
+    }
 
-            if($lastid != null){
-                if($lastid->id == 9){
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id >= 10){
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id == 99){
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id >= 100){
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id == 999){
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id >= 1000){
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                }else{
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                }
-            }
-            else{
-                $code_felookuplocation = $mydate . strval($lastid->id + 1);
-            }
 
-          return view('crm.master.felookuplocation', compact('user','code_felookuplocation','earthquakezone','floodzone','felookuplocation','costumer','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
-         }
+    public function indexflslip()
+    {
+        $user = Auth::user();
+        $country = User::orderby('id','asc')->get();
+        $route_active = 'Financial Lines - Slip Entry';
+        $fl_ids = response()->json($country->modelKeys());
+
+        return view('crm.transaction.fl_slip', compact(['user','route_active','fl_ids']));
     }
 
 
