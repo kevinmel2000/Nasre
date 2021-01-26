@@ -25,7 +25,7 @@
         @yield('styles')
     </head>
         {{-- if you want to make left side auto collape, add this class to the body - "sidebar-collapse" --}}
-        <body class="hold-transition text-sm sidebar-mini  bg-light-blue">
+        <body class="hold-transition text-sm sidebar-mini sidebar-collapse  bg-light-blue">
         <div class="wrapper">
             @include('crm.layouts.navbar')
             @include('crm.layouts.sidebar')
