@@ -8,7 +8,7 @@ use App\Models\Currency;
 use Illuminate\Support\Facades\DB;
 use App\Models\COB;
 use App\Models\Occupation;
-use App\Models\KOC;
+use App\Models\Koc;
 use App\Models\SlipTable;
 use App\Models\SlipTableFile;
 use App\Models\SlipTableFileTemp;
@@ -44,7 +44,7 @@ class TransactionController extends Controller
             $slip = SlipTable::orderby('id','asc')->get();
             $currency = Currency::orderby('id','asc')->get();
             $cob = COB::orderby('id','asc')->get();
-            $koc = KOC::orderby('id','asc')->get();
+            $koc = Koc::orderby('id','asc')->get();
             $ocp = Occupation::orderby('id','asc')->get();
             $cedingbroker = CedingBroker::orderby('id','asc')->get();
             $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
