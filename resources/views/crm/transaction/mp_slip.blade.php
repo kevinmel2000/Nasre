@@ -24,7 +24,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="mpnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
+                                            <input type="text" name="mpnumber" value="{{$code_insured}}"  class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
                                         </div>
                                     </div>
                                 </div>
@@ -49,6 +49,7 @@
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 1')}}</label>
                                                     <input type="text" name="mpsuggestinsured" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
+
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 2')}}</label>
@@ -68,7 +69,13 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                                <input type="text" name="mpshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+
+                                                                <select name="mpshare" class="form-control form-control-sm ">
+                                                                        @for ($i=0; $i<=50; $i++)
+                                                                            <option value="{{ $i }}">{{ $i }}</option>
+                                                                        @endfor
+                                                                </select>
+                                                                
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -102,7 +109,56 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         {{__('Location')}}
+                                                        
+                                                        <a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#addlocation">
                                                         <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocr">{{__('Add Risk Location')}}</button>
+                                                        </a>
+
+                                                        
+                                                        <div class="modal fade" id="addlocation" tabindex="-1" user="dialog" aria-labelledby="addlocationLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" user="document">
+                                                        <div class="modal-content bg-light-gray">
+                                                            <div class="modal-header bg-gray">
+                                                            <h5 class="modal-title" id="addlocationLabel">{{__('Add Lookup Location')}}</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            </div>
+                                                            <form action="{{url('master-data/felookuplocation/update')}}" method="POST">
+                                                                <div class="modal-body">
+                                                                    @csrf
+                                                                    @method('PUT')
+
+                                                                    <div class="row">
+                                                                    
+                                                                    <div class="col-md-6 col-md-12">
+                                                                        <div class="form-group">
+                                                                        <label for="">{{__('Lookup Location')}}</label>
+                                                                        <select name="lookup_location_id" id="lookup_location" class="e1 form-control form-control-sm " required>
+                                                                            <option selected disabled>{{__('Select Lookup Location ')}}</option>
+                                                                            @foreach($felookuplocation as $felookuplocationdata)
+                                                                            <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->postal_code }}</option>
+                                                                            @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    </div>
+                                                                
+                                                                
+                                                                </div>
+
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                                                    <input type="submit" class="btn btn-info" value="Update">
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    {{-- Edit Modal Ends --}}
+
+                                                   
                                                     </div>
                                                 </div>
                                             </div>
@@ -160,6 +216,34 @@
                                     <div class="col-md-6 d-flex justify-content-start">
                                         <div class="col-md-12 com-sm-12 mt-3">
                                             <label for="">{{__('Property Type')}}</label>
+
+
+                                            <form method="post" id="dynamic_form">
+                                                <span id="result"></span>
+                                                <table class="table table-bordered table-striped" id="user_table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="35%">First Name</th>
+                                                            <th width="35%">Last Name</th>
+                                                            <th width="30%">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                        <td colspan="2" align="right">&nbsp;</td>
+                                                        <td>
+                                                        @csrf
+                                                        <input type="submit" name="save" id="save" class="btn btn-primary" value="Save" />
+                                                        </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </form>
+
+
                                             <table id="propertyType" class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
@@ -200,6 +284,8 @@
                                                 </tr>
                                             </tbody>
                                             </table>
+
+
                                         </div>
                                     </div>
                                 </div>

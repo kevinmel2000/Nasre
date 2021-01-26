@@ -12,6 +12,10 @@ use App\Models\FeLookupLocation;
 use App\Models\SlipTable;
 use App\Models\SlipTableFile;
 use App\Models\SlipTableFileTemp;
+use App\Models\InsuredTableFile;
+use App\Models\InsuredTableFileTemp;
+use App\Models\InsuredTableFormat;
+use App\Models\InsuredTableFormatTemp;
 use App\Models\TransLocation;
 use App\Models\TransLocationTemp;
 use App\Models\User;
@@ -103,8 +107,39 @@ class HeMotorSlipController extends Controller
         $country = User::orderby('id','asc')->get();
         $route_active = 'HE & Motor - Slip Entry';
         $hem_ids = response()->json($country->modelKeys());
+        $mydate = date("Y").date("m").date("d");
 
-        return view('crm.transaction.hem_slip', compact(['user','route_active','hem_ids']));
+        $felookuplocation = FeLookupLocation::orderby('id','asc')->get();
+        $country = Country::orderby('id','asc')->get();
+        $city = City::orderby('id','asc')->get();
+        $state = State::orderby('id','asc')->get();
+        $costumer=Customer::orderby('id','asc')->get();
+
+        $lastid = Insured::select('id')->latest()->first();
+
+        if($lastid != null){
+            if($lastid->id == 9){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 10){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 99){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 100){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 999){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 1000){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }else{
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }
+        }
+        else{
+            $code_insured = $mydate . strval($lastid->id + 1);
+        }
+
+
+        return view('crm.transaction.hem_slip', compact(['user','route_active','hem_ids','code_insured','felookuplocation','costumer']));
     }
 
     public function store(Request $request)

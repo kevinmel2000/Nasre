@@ -10,12 +10,15 @@ use App\Models\Customer\Customer;
 use App\Models\FeLookupLocation;
 use App\Models\SlipTable;
 use App\Models\SlipTableFile;
+use App\Models\PropertyType;
 use App\Models\SlipTableFileTemp;
 use App\Models\User;
 use App\Models\EarthQuakeZone;
 use App\Models\FloodZone;
 use App\Models\TransLocation;
 use App\Models\TransLocationTemp;
+use App\Models\TransProperty;
+use App\Models\TransPropertyTemp;
 use App\Models\Insured;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -104,7 +107,40 @@ class MovePropSlipController extends Controller
         $route_active = 'Moveable Property - Slip Entry';
         $mp_ids = response()->json($country->modelKeys());
 
-        return view('crm.transaction.mp_slip', compact(['user','route_active','mp_ids']));
+        
+        $felookuplocation = FeLookupLocation::orderby('id','asc')->get();
+        $country = Country::orderby('id','asc')->get();
+        $city = City::orderby('id','asc')->get();
+        $state = State::orderby('id','asc')->get();
+        $costumer=Customer::orderby('id','asc')->get();
+        $propertytype=PropertyType::orderby('id','asc')->get();
+
+        $mydate = date("Y").date("m").date("d");
+        $lastid = Insured::select('id')->latest()->first();
+
+        if($lastid != null){
+            if($lastid->id == 9){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 10){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 99){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 100){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 999){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 1000){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }else{
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }
+        }
+        else{
+            $code_insured = $mydate . strval($lastid->id + 1);
+        }
+
+
+        return view('crm.transaction.mp_slip', compact(['user','route_active','mp_ids','code_insured','propertytype','felookuplocation','costumer']));
     }
 
     public function store(Request $request)

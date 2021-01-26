@@ -111,7 +111,7 @@
                                       @foreach($country as $citydata)
                                       <option value="{{ $citydata->id }}">{{ $citydata->id }} - {{ $citydata->name }}</option>
                                       @endforeach
-                                  </select>
+                                    </select>
                               </div>     
                             </div>
                         </div>
@@ -243,7 +243,7 @@
                                 <span>
 
                                 
-                                  @can('update-felookup', User::class)
+                                    @can('update-felookup', User::class)
                                     <a class="text-primary mr-3" data-toggle="modal" data-target="#updatefelookuplocation{{$location->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>

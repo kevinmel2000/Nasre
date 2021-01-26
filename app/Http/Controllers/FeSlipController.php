@@ -103,9 +103,40 @@ class FeSlipController extends Controller
         $country = User::orderby('id','asc')->get();
         $route_active = 'Fire Engineering - Slip Entry';
         $fe_ids = response()->json($country->modelKeys());
+        $mydate = date("Y").date("m").date("d");
+
+        $felookuplocation = FeLookupLocation::orderby('id','asc')->get();
+        $country = Country::orderby('id','asc')->get();
+        $city = City::orderby('id','asc')->get();
+        $state = State::orderby('id','asc')->get();
+        $costumer=Customer::orderby('id','asc')->get();
+
+        $lastid = Insured::select('id')->latest()->first();
+
+        if($lastid != null){
+            if($lastid->id == 9){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 10){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 99){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 100){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 999){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 1000){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }else{
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }
+        }
+        else{
+            $code_insured = $mydate . strval($lastid->id + 1);
+        }
 
 
-        return view('crm.transaction.fe_slip', compact(['user','route_active','fe_ids']));
+        return view('crm.transaction.fe_slip', compact(['user','route_active','fe_ids','code_insured','felookuplocation','costumer']));
+    
     }
 
 
@@ -190,7 +221,7 @@ class FeSlipController extends Controller
         }
     }
 
-    
+
     public function destroy($id)
     {
         $insured = Insured::find($id);
