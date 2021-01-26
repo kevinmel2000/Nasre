@@ -116,31 +116,28 @@ class MovePropSlipController extends Controller
         $propertytype=PropertyType::orderby('id','asc')->get();
 
         $mydate = date("Y").date("m").date("d");
+        
         $lastid = Insured::select('id')->latest()->first();
 
         if($lastid != null){
-            if($lastid->id == 9){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 10){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 99){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 100){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 999){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 1000){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }else{
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }
+            $code_insured = $mydate . strval($lastid + 1);
         }
         else{
-            $code_insured = $mydate . strval($lastid->id + 1);
+            $code_insured = $mydate . strval(1);
+            //$code_insured = $mydate . strval($lastid->id + 1);
+        }
+
+        $lastidslip = SlipTable::select('id')->latest()->first();
+        if($lastidslip != null){
+            $code_slip = $mydate . strval($lastidslip + 1);
+        }
+        else{
+            $code_slip = $mydate . strval(1);
+            //$code_insured = $mydate . strval($lastid->id + 1);
         }
 
 
-        return view('crm.transaction.mp_slip', compact(['user','route_active','mp_ids','code_insured','propertytype','felookuplocation','costumer']));
+        return view('crm.transaction.mp_slip', compact(['user','route_active','mp_ids','code_insured','code_slip','propertytype','felookuplocation','costumer']));
     }
 
     public function store(Request $request)

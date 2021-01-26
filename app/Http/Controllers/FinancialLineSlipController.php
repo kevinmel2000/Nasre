@@ -115,28 +115,24 @@ class FinancialLineSlipController extends Controller
         $lastid = Insured::select('id')->latest()->first();
 
         if($lastid != null){
-            if($lastid->id == 9){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 10){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 99){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 100){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 999){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 1000){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }else{
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }
+            $code_insured = $mydate . strval($lastid + 1);
         }
         else{
-            $code_insured = $mydate . strval($lastid->id + 1);
+            $code_insured = $mydate . strval(1);
+            //$code_insured = $mydate . strval($lastid->id + 1);
+        }
+
+        $lastidslip = SlipTable::select('id')->latest()->first();
+        if($lastidslip != null){
+            $code_slip = $mydate . strval($lastidslip + 1);
+        }
+        else{
+            $code_slip = $mydate . strval(1);
+            //$code_insured = $mydate . strval($lastid->id + 1);
         }
 
 
-        return view('crm.transaction.fl_slip', compact(['user','route_active','fl_ids','code_insured','felookuplocation','costumer']));
+        return view('crm.transaction.fl_slip', compact(['user','route_active','fl_ids','code_slip','code_insured','felookuplocation','costumer']));
     
     }
 

@@ -116,30 +116,26 @@ class HeMotorSlipController extends Controller
         $costumer=Customer::orderby('id','asc')->get();
 
         $lastid = Insured::select('id')->latest()->first();
-
         if($lastid != null){
-            if($lastid->id == 9){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 10){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 99){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 100){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 999){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 1000){
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }else{
-                $code_insured = $mydate . strval($lastid->id + 1);
-            }
+            $code_insured = $mydate . strval($lastid + 1);
         }
         else{
-            $code_insured = $mydate . strval($lastid->id + 1);
+            $code_insured = $mydate . strval(1);
+            //$code_insured = $mydate . strval($lastid->id + 1);
         }
 
 
-        return view('crm.transaction.hem_slip', compact(['user','route_active','hem_ids','code_insured','felookuplocation','costumer']));
+        $lastidslip = SlipTable::select('id')->latest()->first();
+        if($lastidslip != null){
+            $code_slip = $mydate . strval($lastidslip + 1);
+        }
+        else{
+            $code_slip = $mydate . strval(1);
+            //$code_insured = $mydate . strval($lastid->id + 1);
+        }
+
+
+        return view('crm.transaction.hem_slip', compact(['user','route_active','hem_ids','code_insured','code_slip','felookuplocation','costumer']));
     }
 
     public function store(Request $request)
