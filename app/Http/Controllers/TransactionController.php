@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Insured;
 use App\Models\Currency;
+use Illuminate\Support\Facades\DB;
 use App\Models\COB;
 use App\Models\Occupation;
 use App\Models\KOC;
@@ -14,6 +15,8 @@ use App\Models\SlipTableFileTemp;
 use App\Models\CedingBroker;
 use App\Models\FeLookupLocation;
 use App\Models\MarineLookup;
+use App\Models\ConditionNeeded;
+use App\Models\ShipListTemp;
 use App\Policies\FelookupLocationPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +49,7 @@ class TransactionController extends Controller
             $cedingbroker = CedingBroker::orderby('id','asc')->get();
             $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
             $felookup = FelookupLocation::orderby('id','asc')->get();
+            $cnd = ConditionNeeded::orderby('id','asc')->get();
             $mlu = MarineLookup::orderby('id','asc')->get();
             $ms_ids = response()->json($insured->modelKeys());
             $lastid = count($insured);
@@ -60,7 +64,7 @@ class TransactionController extends Controller
                 $code_sl = $mydate . strval($sliplastid + 1);
                 $code_ms = $mydate . strval(1);
             }
-            return view('crm.transaction.marine_slip', compact(['user','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
+            return view('crm.transaction.marine_slip', compact(['user','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
          }
         else
         {
@@ -149,9 +153,34 @@ class TransactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeshipinsured(Request $request)
+    public function storemarineinsured(Request $request)
     {
         //
+    }
+
+    public function storeshiplist(Request $request)
+    {
+
+            $shipcode = $request->input('ship_code');
+            $shipname = $request->input('ship_name');
+            $insured_id = $request->input('insured_id');
+        
+            if($shipcode !='' && $shipname !='' && $insured_id != ''){
+              $data = array("insured_id"=>$insured_id,'ship_code'=>$shipcode,"ship_name"=>$shipname);
+        
+              // Call insertData() method of Page Model
+              $value = ShipListTemp::insertData($data);
+              if($value){
+                echo $value;
+              }else{
+                echo 0;
+              }
+        
+            }else{
+               echo 'Fill all fields.';
+            }
+        
+            exit; 
     }
 
     /**
@@ -160,9 +189,12 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showshipdetails($id)
+    public function showShipList(Request $request)
     {
-        //
+        $ship = DB::table("marine_lookup")
+        ->where("code",$request->ship_code)
+        ->first();
+        return response()->json($ship);
     }
 
     /**

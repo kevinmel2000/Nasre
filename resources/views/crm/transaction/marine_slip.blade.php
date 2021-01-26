@@ -24,7 +24,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="msnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" value="{{ $code_ms }}" readonly="readonly" required/>
+                                            <input type="text" name="msnumber" id="insuredID" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" value="{{ $code_ms }}" readonly="readonly" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -153,16 +153,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>{{__('CODE0001')}}</td>
-                                                                <td>{{__('Reliance I')}}</td>
-                                                                <td width="20%"><input class="form-check-input" style="margin-left: 30;" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>{{__('CODE0002')}}</td>
-                                                                <td>{{__('Sabuk Nusantara IV')}}</td>
-                                                                <td width="20%"><input style="margin-left: 30;" class="form-check-input" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
-                                                            </tr>
+                                                            
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -195,6 +186,57 @@
                     </div>
                 </div>
             </form>
+
+            <div class="modal fade" id="ModalAddShip" tabindex="-1" user="dialog" aria-hidden="true">
+                <div class="modal-dialog" user="document">
+                    <div class="modal-content bg-light-gray">
+                    <div class="modal-header bg-gray">
+                        <h5 class="modal-title">{{__('Ship Detail')}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="" method="POST">
+                        <div class="modal-body">
+                            @csrf
+                            @method('POST')
+            
+                            <div class="row">
+                                <div class="col-md-12 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Ship Code')}}</label><br>
+                                        <select name="insshipcode" id="shipcode" class="form-control form-control-sm e1">
+                                            <option selected disabled>{{__('Select Ship Code')}}</option>
+                                            @foreach($mlu as $mrnlu)
+                                                <option value="{{  $mrnlu->code }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
+                                                {{-- @if($location->country_id  == $cty->id)
+                                                <option value="{{ $mrnlu->id }}" selected>{{ $mrnlu->code }} - {{ $mrnlu->shipname }}</option>
+                                                @else
+                                                <option value="{{  $mrnlu->id }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
+                                                @endif --}}
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-md-12">
+                                    <div class="form-group">
+                                    <label for="">{{__('Ship Name')}}</label>
+                                    <input type="text" name="insshipname" id="shipname" class="form-control" value="" required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                            <input type="submit" class="btn btn-info" id="addship" value="Add Ship">
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
 
         <div class="card ">
             <div class="card-header bg-gray">
@@ -254,7 +296,7 @@
                                                             <label>{{__('Prod Year')}}:</label>
                                                                 <div class="input-group date" id="date" data-target-input="nearest">
                                                                         <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipprodyear" value="{{ $currdate }}" readonly="readonly">
-                                                                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
+                                                                        <div class="input-group-append" >
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
                                                                 </div>
@@ -517,13 +559,8 @@
                                                                                 <div class="form-group">
                                                                                     <select name="slipinterestlist" class="form-control form-control-sm ">
                                                                                         <option selected disabled>{{__('Interest list')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
+                                                                                        <option value="036 - Heavy Equipment">036 - Heavy Equipment</option>
+                                                                                        <option value="450 - Bensin">450 - Bensin</option>
                                                                                     </select>
                                                                                 </div>  
                                                                                 </td>
@@ -551,7 +588,7 @@
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured')}}</label>
-                                                    <input type="text" name="sliptotalsum" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="text" name="sliptotalsum" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -576,7 +613,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-10">
                                                                     <div class="input-group">
-                                                                        <input type="text" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                        <input type="text" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" required/>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-2">
@@ -590,7 +627,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for=""style="opacity: 0;">{{__('Type')}}</label>
-                                                            <input type="text" name="sliptotalsumpct" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                            <input type="text" name="sliptotalsumpct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -639,13 +676,8 @@
                                                                                 <div class="form-group">
                                                                                     <select name="slipdptype" class="form-control form-control-sm ">
                                                                                         <option selected disabled>{{__('Type')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
+                                                                                        <option value="MD">MD</option>
+                                                                                        <option value="TPL">TPL</option>
                                                                                     </select>
                                                                                 </div>  
                                                                             </td>
@@ -653,13 +685,9 @@
                                                                                 <div class="form-group">
                                                                                     <select name="slipdpcurrency" class="form-control form-control-sm ">
                                                                                         <option selected disabled>{{__('Currency')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
+                                                                                        @foreach($currency as $crc)
+                                                                                            <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name}}</option>
+                                                                                        @endforeach
                                                                                     </select>
                                                                                 </div>  
                                                                             </td>
@@ -727,13 +755,9 @@
                                                                                 <div class="form-group">
                                                                                     <select name="slipcncode" class="form-control form-control-sm ">
                                                                                         <option selected disabled>{{__('Condition Needed Code - Name - Information List')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
+                                                                                       @foreach($cnd as $ncd)
+                                                                                        <option value="{{ $ncd->id }}">{{ $ncd->code }} - {{ $ncd->name }} - {{ $ncd->information }}</option>
+                                                                                        @endforeach
                                                                                     </select>
                                                                                 </div>  
                                                                             </td>
@@ -760,9 +784,9 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Insurance Periode')}}:</label>
-                                                                <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipfrom">
-                                                                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
+                                                                <div class="input-group date" id="dateinfrom" data-target-input="nearest">
+                                                                        <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipfrom">
+                                                                        <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
                                                                 </div>
@@ -775,9 +799,9 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                                <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipto">
-                                                                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
+                                                                <div class="input-group date" id="dateinto" data-target-input="nearest">
+                                                                        <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipto">
+                                                                        <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
                                                                 </div>
@@ -788,9 +812,9 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Reinsurance Periode')}}:</label>
-                                                                <div class="input-group date" id="date" data-target-input="nearest">
+                                                                <div class="input-group date" id="daterefrom" data-target-input="nearest">
                                                                         <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpfrom">
-                                                                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
+                                                                        <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
                                                                 </div>
@@ -803,10 +827,10 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                                <div class="input-group date" id="date" data-target-input="nearest">
+                                                                <div class="input-group date" id="datereto" data-target-input="nearest">
                                                                         
                                                                         <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpto">
-                                                                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
+                                                                        <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
                                                                 </div>
@@ -843,13 +867,11 @@
                                                     <label for="">{{__('Layer for non proportional')}}</label>
                                                     <select name="sliplayerproportional" class="form-control form-control-sm ">
                                                         <option selected disabled>{{__('Choose layer')}}</option>
-                                                        <option value="AF">Africa</option>
-                                                        <option value="AN">Antartica</option>
-                                                        <option value="AS">Asia</option>
-                                                        <option value="EU">Europa</option>
-                                                        <option value="NA">North America </option>
-                                                        <option value="OC">Oceania</option>
-                                                        <option value="SA">South America</option>
+                                                        <option value="Layer 1">Layer 1</option>
+                                                        <option value="Layer 2">Layer 2</option>
+                                                        <option value="Layer 3">Layer 3</option>
+                                                        <option value="Layer 4">Layer 4</option>
+                                                        <option value="Layer 5">Layer 5</option>
                                                     </select>
                                                 </div>  
                                             </div>
@@ -859,7 +881,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Rate (permil.. %)')}}</label>
-                                                        <input type="text" name="sliprate" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                        <input type="text" name="sliprate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" required/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -871,7 +893,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-10">
                                                                     <div class="input-group">
-                                                                        <input type="text" name="slipshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                        <input type="text" name="slipshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="b" required/>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-2">
@@ -885,7 +907,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
-                                                            <input type="text" name="slipsumshare" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                            <input type="text" name="slipsumshare" placeholder="= b% * tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -896,7 +918,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Basic Premium')}}</label>
-                                                        <input type="text" name="slipbasicpremium" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                        <input type="text" name="slipbasicpremium" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a% * tsi" required/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -904,7 +926,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Gross Prm to NR')}}</label>
-                                                        <input type="text" name="slipgrossprmtonr" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                        <input type="text" name="slipgrossprmtonr" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a% * b% * tsi" readonly="readonly" required/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -918,7 +940,7 @@
                                                             <div class="row d-flex flex-wrap">
                                                                 <div class="col-md-10">
                                                                     <div class="input-group">
-                                                                        <input type="text" name="slipcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                        <input type="text" name="slipcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="d" required/>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-2">
@@ -932,7 +954,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="" style="opacity: 0;">{{__('Gross Prm to NR')}}</label>
-                                                            <input type="text" name="slipsumcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                            <input type="text" name="slipsumcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -983,9 +1005,9 @@
                                                                         <tr>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                        <div class="input-group date" id="date" data-target-input="nearest">
+                                                                                        <div class="input-group date" id="dateinstallment" data-target-input="nearest">
                                                                                                 <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdate">
-                                                                                                <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
+                                                                                                <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
                                                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                                                 </div>
                                                                                         </div>
@@ -1044,7 +1066,7 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <input type="text" name="slipsumor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                                    <input type="text" name="slipsumor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="= x% * b% * tsi" readonly="readonly" required/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1092,13 +1114,7 @@
                                                                                 <div class="form-group">
                                                                                     <select name="sliprptype" class="form-control form-control-sm ">
                                                                                         <option selected disabled>{{__('Type list')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
+                                                                                        <option value="NM XOL">NM XOL</option>
                                                                                     </select>
                                                                                 </div>  
                                                                             </td>
@@ -1106,13 +1122,8 @@
                                                                                 <div class="form-group">
                                                                                     <select name="sliprpcontract" class="form-control form-control-sm ">
                                                                                         <option selected disabled>{{__('Contract list')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
+                                                                                        <option value="20NM11110">20NM11110</option>
+                                                                                        <option value="20ABC">20ABC</option>
                                                                                     </select>
                                                                                 </div>  
                                                                             </td>
@@ -1121,7 +1132,7 @@
                                                                                     <div class="row">
                                                                                         <div class="col-md-8">
                                                                                             <div class="input-group">
-                                                                                                <input type="text" name="sliprppercentage" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                                                <input type="text" name="sliprppercentage" class="form-control form-control-sm " data-validation="length" placeholder="z" data-validation-length="0-50" required/>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="col-md-2">
@@ -1134,7 +1145,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="sliprpamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                                                    <input type="text" name="sliprpamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=z * b% * tsi" readonly="readonly" required/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>

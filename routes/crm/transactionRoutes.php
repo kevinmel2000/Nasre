@@ -11,6 +11,9 @@ use App\Http\Controllers\HeMotorSlipController;
 use App\Http\Controllers\MovePropSlipController;
 use App\Http\Controllers\TransactionController;
 
+
+Route::get('get-ship-list','TransactionController@showShipList');
+Route::get('store-ship-list','TransactionController@storeshiplist');
 Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     
 

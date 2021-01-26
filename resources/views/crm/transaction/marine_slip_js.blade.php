@@ -5,23 +5,147 @@
 </script>
 
 <script type="text/javascript">
-     $('#shipcode').change(function(){
-        var id = $(this).val();
-        var url = '{{ route("shipDetails", ":id") }}';
-        url = url.replace(':id', id);
+    
+</script>
 
-        $.ajax({
-            url: url,
-            type: 'get',
-            dataType: 'json',
-            success: function(response){
-                if(response != null){
-                    $('#shipname').val(response.shipname);
+<script type="text/javascript">
+     $('#shipcode').change(function(){
+        var shipcode = $(this).val();
+
+        if(shipcode){
+            $.ajax({
+                type:"GET",
+                dataType: 'json',
+                url:"{{url('get-ship-list')}}?ship_code="+shipcode,
+                success:function(response){        
+                    if(response){
+                        $("#shipname").val(response.shipname);
+                    }else{
+                        $("#shipname").empty();
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            $("#shipname").empty();
+        }
     });
 </script>
+
+<script type='text/javascript'>
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    
+    $(document).ready(function(){
+    
+      // Fetch records
+      fetchRecords();
+    
+      // Add record
+      $('#addship').click(function(){
+    
+        var shipcode = $('#shipcode').val();
+        var shipname = $('#shipname').val();
+        var insured_id = $('#insuredID').val();
+    
+        if(shipcode != '' && shipname != '' && insured_id != ''){
+          $.ajax({
+            url: "{{url('post-ship-list')}}",
+            type: 'post',
+            data: {_token: CSRF_TOKEN,insured_id: insured_id,ship_code: shipcode,ship_name: shipname},
+            success: function(response){
+    
+              if(response > 0){
+                var id = response;
+                var findnorecord = $('#shipdetailTable tr.norecord').length;
+    
+                // if(findnorecord > 0){
+                //   $('#shipdetailTable tr.norecord').remove();
+                // }
+                var tr_str = "<tr>"+
+                "<td align='center'>" + shipcode + "</td>" +
+                "<td align='center'>" + shipname + "</td>" +
+                "<td align='center'><a href='#' onclick='"+ deleteRecords()+"'><i class='fas fa-trash text-danger'></i></a></td>"+
+                "</tr>";
+    
+                $("#userTable tbody").append(tr_str);
+              }else if(response == 0){
+                alert('shipname already in use.');
+              }else{
+                alert(response);
+              }
+    
+              // Empty the input fields
+            //   $('#shipcode').val('');
+            //   $('#shipname').val('');
+            //   $('#insured_id').val('');
+            }
+          });
+        }else{
+          alert('Fill all fields');
+        }
+      });
+    
+    });
+    
+    
+    // Delete record
+    function deleteRecords() {
+      var delete_id = $(this).data('id');
+      var el = this;
+      $.ajax({
+        url: 'deleteUser/'+delete_id,
+        type: 'get',
+        success: function(response){
+          $(el).closest( "tr" ).remove();
+          alert(response);
+        }
+      });
+    } 
+    
+    // Fetch records
+    function fetchRecords(){
+      $.ajax({
+        url: 'getUsers',
+        type: 'get',
+        dataType: 'json',
+        success: function(response){
+    
+          var len = 0;
+          $('#userTable tbody tr:not(:first)').empty(); // Empty <tbody>
+          if(response['data'] != null){
+            len = response['data'].length;
+          }
+    
+          if(len > 0){
+            for(var i=0; i<len; i++){
+    
+              var id = response['data'][i].id;
+              var username = response['data'][i].username;
+              var name = response['data'][i].name;
+              var email = response['data'][i].email;
+    
+              var tr_str = "<tr>" +
+              "<td align='center'><input type='text' value='" + username + "' id='username_"+id+"' disabled></td>" +
+              "<td align='center'><input type='text' value='" + name + "' id='name_"+id+"'></td>" + 
+              "<td align='center'><input type='email' value='" + email + "' id='email_"+id+"'></td>" +
+              "<td align='center'><input type='button' value='Update' class='update' data-id='"+id+"' ><input type='button' value='Delete' class='delete' data-id='"+id+"' ></td>"+
+              "</tr>";
+    
+              $("#userTable tbody").append(tr_str);
+    
+            }
+          }else{
+            var tr_str = "<tr class='norecord'>" +
+            "<td align='center' colspan='4'>No record found.</td>" +
+            "</tr>";
+    
+            $("#userTable tbody").append(tr_str);
+          }
+    
+        }
+      });
+    }
+</script>
+
 
 <script>
     $(function () {
@@ -44,38 +168,6 @@
         lengthMenu: [
             [ 10, 25, 50,100, -1 ],
             [ '10 rows', '25 rows', '50 rows','100 rows', 'Show all' ]
-        ],
-        buttons: [
-            {
-                extend: 'copyHtml5',
-                exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6]
-                }
-            },
-            {
-                extend: 'csv',
-                exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6]
-                }
-            },
-            {
-                extend: 'excel',
-                exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6]
-                }
-            },
-            {
-                extend: 'pdf',
-                exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6]
-                }
-            },
-            {
-                extend: 'print',
-                exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6]
-                }
-            },
         ]
       });
   
@@ -90,53 +182,3 @@
   
 </script>
 
-<div class="modal fade" id="ModalAddShip" tabindex="-1" user="dialog" aria-hidden="true">
-    <div class="modal-dialog" user="document">
-        <div class="modal-content bg-light-gray">
-        <div class="modal-header bg-gray">
-            <h5 class="modal-title">{{__('Ship Detail')}}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <form action="" method="POST">
-            <div class="modal-body">
-                @csrf
-                @method('POST')
-
-                <div class="row">
-                    <div class="col-md-12 col-md-12">
-                        <div class="form-group">
-                            <label for="">{{__('Ship Code')}}</label><br>
-                            <select name="shipcode" id="shipcode" class="form-control form-control-sm e1">
-                                <option selected disabled>{{__('Select Ship Code')}}</option>
-                                @foreach($mlu as $mrnlu)
-                                    <option value="{{  $mrnlu->id }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
-                                    {{-- @if($location->country_id  == $cty->id)
-                                    <option value="{{ $mrnlu->id }}" selected>{{ $mrnlu->code }} - {{ $mrnlu->shipname }}</option>
-                                    @else
-                                    <option value="{{  $mrnlu->id }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
-                                    @endif --}}
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 col-md-12">
-                        <div class="form-group">
-                        <label for="">{{__('Ship Name')}}</label>
-                        <input type="text" name="shipname" id="shipname" class="form-control" value="" required/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                <input type="submit" class="btn btn-info" value="Add Ship">
-            </div>
-        </form>
-        </div>
-    </div>
-</div>
