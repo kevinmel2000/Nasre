@@ -36,14 +36,10 @@
                                                 <div class="col-md-4">
                                                     <label for="">{{__('Insured')}}</label>
                                                     <select name="fesinsured" class="form-control form-control-sm ">
-                                                        <option selected disabled>{{__('Select Continent')}}</option>
-                                                        <option value="AF">Africa</option>
-                                                        <option value="AN">Antartica</option>
-                                                        <option value="AS">Asia</option>
-                                                        <option value="EU">Europa</option>
-                                                        <option value="NA">North America </option>
-                                                        <option value="OC">Oceania</option>
-                                                        <option value="SA">South America</option>
+                                                        <option selected disabled>{{__('Select  Insure Costumer')}}</option>
+                                                        @foreach($costumer as $costumerdata)
+                                                        <option value="{{ $costumerdata->id }}">{{ $costumerdata->id }} - {{ $costumerdata->username }} - {{ $costumerdata->company_name }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4">
@@ -69,11 +65,7 @@
                                                         <div class="col-md-10">
                                                             <div class="input-group">
                                                                 
-                                                                <select name="fesshare" class="form-control form-control-sm ">
-                                                                        @for ($i=0; $i<=50; $i++)
-                                                                            <option value="{{ $i }}">{{ $i }}</option>
-                                                                        @endfor
-                                                                </select>
+                                                                <input type="number" min="0" value="0" step=".01" name="fesshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
 
                                                             </div>
                                                         </div>
