@@ -104,7 +104,32 @@ class MovePropSlipController extends Controller
         $route_active = 'Moveable Property - Slip Entry';
         $mp_ids = response()->json($country->modelKeys());
 
-        return view('crm.transaction.mp_slip', compact(['user','route_active','mp_ids']));
+        $mydate = date("Y").date("m").date("d");
+        $lastid = Insured::select('id')->latest()->first();
+
+        if($lastid != null){
+            if($lastid->id == 9){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 10){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 99){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 100){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id == 999){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }elseif($lastid->id >= 1000){
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }else{
+                $code_insured = $mydate . strval($lastid->id + 1);
+            }
+        }
+        else{
+            $code_insured = $mydate . strval($lastid->id + 1);
+        }
+
+
+        return view('crm.transaction.mp_slip', compact(['user','route_active','mp_ids','code_insured']));
     }
 
     public function store(Request $request)

@@ -24,7 +24,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="hemnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
+                                            <input type="text" name="hemnumber" value="{{$code_insured}}" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +68,13 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                                <input type="text" name="hemshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                
+                                                                <select name="hemshare" class="form-control form-control-sm ">
+                                                                        @for ($i=0; $i<=50; $i++)
+                                                                            <option value="{{ $i }}">{{ $i }}</option>
+                                                                        @endfor
+                                                                </select>
+
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">

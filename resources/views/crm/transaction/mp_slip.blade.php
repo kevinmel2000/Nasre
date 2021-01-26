@@ -24,7 +24,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="mpnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
+                                            <input type="text" name="mpnumber" value="{{$code_insured}}"  class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
                                         </div>
                                     </div>
                                 </div>
@@ -49,6 +49,7 @@
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 1')}}</label>
                                                     <input type="text" name="mpsuggestinsured" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
+
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 2')}}</label>
@@ -68,7 +69,13 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                                <input type="text" name="mpshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+
+                                                                <select name="mpshare" class="form-control form-control-sm ">
+                                                                        @for ($i=0; $i<=50; $i++)
+                                                                            <option value="{{ $i }}">{{ $i }}</option>
+                                                                        @endfor
+                                                                </select>
+                                                                
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
