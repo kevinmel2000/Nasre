@@ -216,6 +216,34 @@
                                     <div class="col-md-6 d-flex justify-content-start">
                                         <div class="col-md-12 com-sm-12 mt-3">
                                             <label for="">{{__('Property Type')}}</label>
+
+
+                                            <form method="post" id="dynamic_form">
+                                                <span id="result"></span>
+                                                <table class="table table-bordered table-striped" id="user_table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="35%">First Name</th>
+                                                            <th width="35%">Last Name</th>
+                                                            <th width="30%">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                        <td colspan="2" align="right">&nbsp;</td>
+                                                        <td>
+                                                        @csrf
+                                                        <input type="submit" name="save" id="save" class="btn btn-primary" value="Save" />
+                                                        </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </form>
+
+
                                             <table id="propertyType" class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
@@ -256,6 +284,8 @@
                                                 </tr>
                                             </tbody>
                                             </table>
+
+
                                         </div>
                                     </div>
                                 </div>
