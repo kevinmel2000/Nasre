@@ -104,6 +104,13 @@ class MovePropSlipController extends Controller
         $route_active = 'Moveable Property - Slip Entry';
         $mp_ids = response()->json($country->modelKeys());
 
+        
+        $felookuplocation = FeLookupLocation::orderby('id','asc')->get();
+        $country = Country::orderby('id','asc')->get();
+        $city = City::orderby('id','asc')->get();
+        $state = State::orderby('id','asc')->get();
+        $costumer=Customer::orderby('id','asc')->get();
+
         $mydate = date("Y").date("m").date("d");
         $lastid = Insured::select('id')->latest()->first();
 
@@ -129,7 +136,7 @@ class MovePropSlipController extends Controller
         }
 
 
-        return view('crm.transaction.mp_slip', compact(['user','route_active','mp_ids','code_insured']));
+        return view('crm.transaction.mp_slip', compact(['user','route_active','mp_ids','code_insured','felookuplocation','costumer']));
     }
 
     public function store(Request $request)

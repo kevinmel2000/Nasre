@@ -103,8 +103,14 @@ class HeMotorSlipController extends Controller
         $country = User::orderby('id','asc')->get();
         $route_active = 'HE & Motor - Slip Entry';
         $hem_ids = response()->json($country->modelKeys());
-
         $mydate = date("Y").date("m").date("d");
+
+        $felookuplocation = FeLookupLocation::orderby('id','asc')->get();
+        $country = Country::orderby('id','asc')->get();
+        $city = City::orderby('id','asc')->get();
+        $state = State::orderby('id','asc')->get();
+        $costumer=Customer::orderby('id','asc')->get();
+
         $lastid = Insured::select('id')->latest()->first();
 
         if($lastid != null){
@@ -129,7 +135,7 @@ class HeMotorSlipController extends Controller
         }
 
 
-        return view('crm.transaction.hem_slip', compact(['user','route_active','hem_ids','code_insured']));
+        return view('crm.transaction.hem_slip', compact(['user','route_active','hem_ids','code_insured','felookuplocation','costumer']));
     }
 
     public function store(Request $request)

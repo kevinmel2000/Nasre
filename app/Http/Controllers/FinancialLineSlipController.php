@@ -105,6 +105,13 @@ class FinancialLineSlipController extends Controller
         $fl_ids = response()->json($country->modelKeys());
 
         $mydate = date("Y").date("m").date("d");
+       
+        $felookuplocation = FeLookupLocation::orderby('id','asc')->get();
+        $country = Country::orderby('id','asc')->get();
+        $city = City::orderby('id','asc')->get();
+        $state = State::orderby('id','asc')->get();
+        $costumer=Customer::orderby('id','asc')->get();
+
         $lastid = Insured::select('id')->latest()->first();
 
         if($lastid != null){
@@ -129,7 +136,8 @@ class FinancialLineSlipController extends Controller
         }
 
 
-        return view('crm.transaction.fl_slip', compact(['user','route_active','fl_ids','code_insured']));
+        return view('crm.transaction.fl_slip', compact(['user','route_active','fl_ids','code_insured','felookuplocation','costumer']));
+    
     }
 
 
