@@ -120,7 +120,7 @@ class MovePropSlipController extends Controller
         $lastid = Insured::select('id')->latest()->first();
 
         if($lastid != null){
-            $code_insured = $mydate . strval($lastid + 1);
+            $code_insured = $mydate . strval($lastid->id + 1);
         }
         else{
             $code_insured = $mydate . strval(1);
@@ -129,12 +129,13 @@ class MovePropSlipController extends Controller
 
         $lastidslip = SlipTable::select('id')->latest()->first();
         if($lastidslip != null){
-            $code_slip = $mydate . strval($lastidslip + 1);
+            $code_slip = $mydate . strval($lastidslip->id + 1);
         }
         else{
             $code_slip = $mydate . strval(1);
             //$code_insured = $mydate . strval($lastid->id + 1);
         }
+
 
 
         return view('crm.transaction.mp_slip', compact(['user','route_active','mp_ids','code_insured','code_slip','propertytype','felookuplocation','costumer']));

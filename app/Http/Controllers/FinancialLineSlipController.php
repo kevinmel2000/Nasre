@@ -115,7 +115,7 @@ class FinancialLineSlipController extends Controller
         $lastid = Insured::select('id')->latest()->first();
 
         if($lastid != null){
-            $code_insured = $mydate . strval($lastid + 1);
+            $code_insured = $mydate . strval($lastid->id + 1);
         }
         else{
             $code_insured = $mydate . strval(1);
@@ -124,7 +124,7 @@ class FinancialLineSlipController extends Controller
 
         $lastidslip = SlipTable::select('id')->latest()->first();
         if($lastidslip != null){
-            $code_slip = $mydate . strval($lastidslip + 1);
+            $code_slip = $mydate . strval($lastidslip->id + 1);
         }
         else{
             $code_slip = $mydate . strval(1);
