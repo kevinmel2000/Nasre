@@ -31,7 +31,7 @@
     });
   
     function confirmDelete(id){
-        let choice = confirm("{{__('Are you sure, you want to delete this Fe Lookup Location and related data?')}}")
+        let choice = confirm("{{__('Are you sure, you want to delete this Financial Line Insured and Slip related data?')}}")
         if(choice){
             document.getElementById('delete-felookuplocation-'+id).submit();
         }

@@ -113,7 +113,7 @@
                                   <span id="delbtn{{@$insureddata->id}}"></span>
                                 
                                     <form id="delete-felookuplocation-{{$insureddata->id}}"
-                                        action="{{ url('master-data/felookuplocation/destroy', $insureddata->id) }}"
+                                        action="{{ url('transaction-data/fe-slip/destroy', $insureddata->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf

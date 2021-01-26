@@ -12,6 +12,8 @@ use App\Models\FeLookupLocation;
 use App\Models\SlipTable;
 use App\Models\SlipTableFile;
 use App\Models\SlipTableFileTemp;
+use App\Models\TransLocation;
+use App\Models\TransLocationTemp;
 use App\Models\User;
 use App\Models\EarthQuakeZone;
 use App\Models\FloodZone;
@@ -188,11 +190,14 @@ class HeMotorSlipController extends Controller
 
     public function destroy($id)
     {
-        $felookuplocation = FeLookupLocation::find($id);
-        if($felookuplocation->delete())
+        $insured = Insured::find($id);
+        if($insured->delete())
         {
+            $slip = SlipTable::where('insured_id', '=', $id);
+            $slip->delete();
+
             $notification = array(
-                'message' => 'Fire & Engginering Lookup Location deleted successfully!',
+                'message' => 'He & Motor Insured & Slip deleted successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);
