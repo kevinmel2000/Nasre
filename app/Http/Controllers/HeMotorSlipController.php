@@ -116,16 +116,6 @@ class HeMotorSlipController extends Controller
         $costumer=Customer::orderby('id','asc')->get();
 
         $lastid = Insured::select('id')->latest()->first();
-        if($lastid != null){
-            $code_insured = $mydate . strval($lastid + 1);
-        }
-        else{
-            $code_insured = $mydate . strval(1);
-            //$code_insured = $mydate . strval($lastid->id + 1);
-        }
-
-
-        $lastid = Insured::select('id')->latest()->first();
 
         if($lastid != null){
             $code_insured = $mydate . strval($lastid->id + 1);
