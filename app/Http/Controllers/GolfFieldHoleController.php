@@ -24,27 +24,29 @@ class GolfFieldHoleController extends Controller
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $golffieldhole = GolfFieldHole::orderby('id','desc')->get();
           $golffieldhole_ids = response()->json($golffieldhole->modelKeys());
-          $lastid = GolfFieldHole::select('id')->latest()->first();
+          $lastid = count($golffieldhole);
 
           if($lastid != null){
-            if($lastid->id == 9){
-                $code_gfh = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 10){
-                $code_gfh = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 99){
-                $code_gfh = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 100){
-                $code_gfh = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 999){
-                $code_gfh = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 1000){
-                $code_gfh = $mydate . strval($lastid->id + 1);
-            }else{
-                $code_gfh = $mydate . strval($lastid->id + 1);
-            }
+            $code_gfh = $mydate . strval($lastid + 1);
+            // if($lastid->id == 9){
+            //     $code_gfh = $mydate . strval($lastid->id + 1);
+            // }elseif($lastid->id >= 10){
+            //     $code_gfh = $mydate . strval($lastid->id + 1);
+            // }elseif($lastid->id == 99){
+            //     $code_gfh = $mydate . strval($lastid->id + 1);
+            // }elseif($lastid->id >= 100){
+            //     $code_gfh = $mydate . strval($lastid->id + 1);
+            // }elseif($lastid->id == 999){
+            //     $code_gfh = $mydate . strval($lastid->id + 1);
+            // }elseif($lastid->id >= 1000){
+            //     $code_gfh = $mydate . strval($lastid->id + 1);
+            // }else{
+            //     $code_gfh = $mydate . strval($lastid->id + 1);
+            // }
         }
         else{
-            $code_gfh = $mydate . strval($lastid->id + 1);
+            $code_gfh = $mydate . strval(1);
+            // $code_gfh = $mydate . strval($lastid->id + 1);
         }
 
 

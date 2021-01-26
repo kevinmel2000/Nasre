@@ -149,7 +149,7 @@ class TransactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storemarineinsured(Request $request)
+    public function storeshipinsured(Request $request)
     {
         //
     }

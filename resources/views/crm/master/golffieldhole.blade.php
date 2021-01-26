@@ -74,7 +74,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12 com-sm-12 mt-3">
-                  <table id="gfhTable" class="table table-bordered table-striped">
+                  <table id="golffieldholeTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                       <th>{{__('ID')}}</th>

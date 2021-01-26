@@ -42,7 +42,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Abbreviation')}}</label>
-                          <input type="text" name="ocpabbreviation" class="form-control form-control-sm " data-validation="length" data-validation-length="2-20" required/>
+                          <input type="text" name="ocpabbreviation" class="form-control form-control-sm " data-validation="length" data-validation-length="1-20" required/>
                       </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Group Type')}}</label>
-                          <input type="text" name="ocpgrouptype" class="form-control form-control-sm " rows="3" data-validation="length" data-validation-length="2-350" required/>
+                          <input type="text" name="ocpgrouptype" class="form-control form-control-sm " rows="3" data-validation="length" data-validation-length="0-350" required/>
                       </div>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
                                                   <div class="col-md-6 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Code')}}</label>
-                                                      <input type="text" name="codeocp" class="form-control" value="{{$ocp->code}}" data-validation="length" data-validation-length="1-5" required disabled/>
+                                                      <input type="text" name="codeocp" class="form-control" value="{{$ocp->code}}" data-validation="length" data-validation-length="1-13" required disabled/>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -153,19 +153,19 @@
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Description')}}</label>
-                                                      <input type="text" name="descriptionocp" class="form-control" value="{{$ocp->description}}" data-validation="length" data-validation-length="2-150" required/>
+                                                      <input type="text" name="descriptionocp" class="form-control" value="{{$ocp->description}}" data-validation="length" data-validation-length="1-150" required/>
                                                     </div>
                                                   </div>
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Abbreviation')}}</label>
-                                                      <input type="text" name="abbreviationocp" class="form-control" value="{{$ocp->abbreviation}}" data-validation="length" data-validation-length="2-150" required/>
+                                                      <input type="text" name="abbreviationocp" class="form-control" value="{{$ocp->abbreviation}}" data-validation="length" data-validation-length="1-150" required/>
                                                     </div>
                                                   </div>
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Group Type')}}</label>
-                                                      <input type="text" name="grouptypeocp" class="form-control" value="{{$ocp->group_type}}" data-validation="length" data-validation-length="2-350" required/>
+                                                      <input type="text" name="grouptypeocp" class="form-control" value="{{$ocp->group_type}}" data-validation="length" data-validation-length="0-350" required/>
                                                     </div>
                                                   </div>
                                                   <div class="col-md-12">

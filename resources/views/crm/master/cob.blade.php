@@ -42,7 +42,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Abbreviation')}}</label>
-                          <input type="text" name="cobabbreviation" class="form-control form-control-sm " data-validation="length" data-validation-length="2-20" required/>
+                          <input type="text" name="cobabbreviation" class="form-control form-control-sm " data-validation="length" data-validation-length="1-20" required/>
                       </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Remarks')}}</label>
-                          <textarea name="cobremarks" class="form-control form-control-sm " rows="3" data-validation="length" data-validation-length="2-350" required></textarea>
+                          <textarea name="cobremarks" class="form-control form-control-sm " rows="3" data-validation="length" data-validation-length="0-350" required></textarea>
                       </div>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
                                                 <div class="col-md-6 col-md-12">
                                                   <div class="form-group">
                                                     <label for="">{{__('Code')}}</label>
-                                                    <input type="text" name="codecob" class="form-control" value="{{$boc->code}}" data-validation="length" data-validation-length="1-5" required disabled/>
+                                                    <input type="text" name="codecob" class="form-control" value="{{$boc->code}}" data-validation="length" data-validation-length="1-12" required disabled/>
                                                   </div>
                                                 </div>
                                               </div>
@@ -143,13 +143,13 @@
                                                 <div class="col-md-4 col-md-12">
                                                   <div class="form-group">
                                                     <label for="">{{__('Abbreviation')}}</label>
-                                                    <input type="text" name="abbreviationcob" class="form-control" value="{{$boc->abbreviation}}" data-validation="length" data-validation-length="2-150" required/>
+                                                    <input type="text" name="abbreviationcob" class="form-control" value="{{$boc->abbreviation}}" data-validation="length" data-validation-length="1-150" required/>
                                                   </div>
                                                 </div>
                                                 <div class="col-md-4 col-md-12">
                                                   <div class="form-group">
                                                     <label for="">{{__('Remarks')}}</label>
-                                                    <textarea name="remarkscob" class="form-control" value="{{$boc->remarks}}" data-validation="length" data-validation-length="2-350" required>{{$boc->remarks}}</textarea>
+                                                    <textarea name="remarkscob" class="form-control" value="{{$boc->remarks}}" data-validation="length" data-validation-length="0-350" required>{{$boc->remarks}}</textarea>
                                                   </div>
                                                 </div>
                                             

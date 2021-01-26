@@ -959,7 +959,7 @@
                                 @endphp
                                 @endif
                                 <li class="nav-item">
-                                    <a href="{{url('/master-data/golfhole')}}" class="nav-link {{@$gfh_form}}">
+                                    <a href="{{url('/master-data/golffieldhole')}}" class="nav-link {{@$gfh_form}}">
                                             <i class="far fa-folder nav-icon text-secondary"></i>
                                         <p>{{__('GOLF FIELD HOLE')}}</p>
                                     </a>
@@ -1009,7 +1009,7 @@
                                 </li>
                             @endcan
 
-                            @can('viewany-ocp', User::class)
+                            @can('viewany-occupation', User::class)
                                 @if($route_active == 'Occupation Data Master')
                                 @php
                                     $ocp_form = 'active';

@@ -24,27 +24,29 @@ class KocController extends Controller
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $koc = Koc::orderby('id','desc')->get();
           $koc_ids = response()->json($koc->modelKeys());
-          $lastid = Koc::select('id')->latest()->first();
+          $lastid = count($koc);
 
           if($lastid != null){
-            if($lastid->id == 9){
-                $code_koc = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 10){
-                $code_koc = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 99){
-                $code_koc = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 100){
-                $code_koc = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 999){
-                $code_koc = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 1000){
-                $code_koc = $mydate . strval($lastid->id + 1);
-            }else{
-                $code_koc = $mydate . strval($lastid->id + 1);
-            }
+            $code_koc = $mydate . strval($lastid + 1);
+            // if($lastid->id == 9){
+            //     $code_koc = $mydate . strval($lastid->id + 1);
+            // }elseif($lastid->id >= 10){
+            //     $code_koc = $mydate . strval($lastid->id + 1);
+            // }elseif($lastid->id == 99){
+            //     $code_koc = $mydate . strval($lastid->id + 1);
+            // }elseif($lastid->id >= 100){
+            //     $code_koc = $mydate . strval($lastid->id + 1);
+            // }elseif($lastid->id == 999){
+            //     $code_koc = $mydate . strval($lastid->id + 1);
+            // }elseif($lastid->id >= 1000){
+            //     $code_koc = $mydate . strval($lastid->id + 1);
+            // }else{
+            //     $code_koc = $mydate . strval($lastid->id + 1);
+            // }
         }
         else{
-            $code_koc = $mydate . strval($lastid->id + 1);
+            $code_koc = $mydate . strval(1);
+            // $code_koc = $mydate . strval($lastid->id + 1);
         }
 
 
