@@ -23,8 +23,9 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="msnumber" id="insuredID" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" value="{{ $code_ms }}" readonly="readonly" required/>
+                                            <input type="text" name="msnumber" id="insuredIDtxt" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" value="{{ $code_ms }}" readonly="readonly" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -153,7 +154,13 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            
+                                                            @foreach($shiplist as $slt)
+                                                             <tr id="sid{{ $slt->id }}">
+                                                                    <td>{{ $slt->ship_code }}</td>
+                                                                    <td>{{ $slt->ship_name }}</td>
+                                                                    <td><a href="" onclick="deleteshipdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
+                                                             </tr>   
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -196,20 +203,18 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form class="form-addship" action="" method="POST">
+                    <form id="form-addship" >
+                        @csrf
                         <div class="modal-body">
                                 <div class="col-md-12 col-md-12">
                                     <div class="form-group">
+                                        
                                         <label for="">{{__('Ship Code')}}</label><br>
-                                        <select name="insshipcode" id="shipcode" class="form-control form-control-sm e1">
+                                        <select name="insshipcode" id="shipcodetxt" class="form-control form-control-sm e1">
                                             <option selected disabled>{{__('Select Ship Code')}}</option>
                                             @foreach($mlu as $mrnlu)
                                                 <option value="{{  $mrnlu->code }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
-                                                {{-- @if($location->country_id  == $cty->id)
-                                                <option value="{{ $mrnlu->id }}" selected>{{ $mrnlu->code }} - {{ $mrnlu->shipname }}</option>
-                                                @else
-                                                <option value="{{  $mrnlu->id }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
-                                                @endif --}}
+                                                
                                             @endforeach
                                         </select>
                                     </div>
@@ -218,7 +223,7 @@
                                 <div class="col-md-12 col-md-12">
                                     <div class="form-group">
                                     <label for="">{{__('Ship Name')}}</label>
-                                    <input type="text" name="insshipname" id="shipname" class="form-control" value="" required/>
+                                    <input type="text" name="insshipname" id="shipnametxt" class="form-control" value="" required/>
                                     </div>
                                 </div>
                             </div>
@@ -226,7 +231,7 @@
             
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                            <button class="btn btn-info" id="addship">Add Ship</button>
+                            <button type="submit" class="btn btn-info" id="addship-btn">Add Ship</button>
                         </div>
                     </form>
                     </div>

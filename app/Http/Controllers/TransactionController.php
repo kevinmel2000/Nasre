@@ -51,6 +51,7 @@ class TransactionController extends Controller
             $felookup = FelookupLocation::orderby('id','asc')->get();
             $cnd = ConditionNeeded::orderby('id','asc')->get();
             $mlu = MarineLookup::orderby('id','asc')->get();
+            $shiplist= ShipListTemp::orderby('id','desc')->get();
             $ms_ids = response()->json($insured->modelKeys());
             $lastid = count($insured);
             $sliplastid = count($slip);
@@ -64,7 +65,7 @@ class TransactionController extends Controller
                 $code_sl = $mydate . strval($sliplastid + 1);
                 $code_ms = $mydate . strval(1);
             }
-            return view('crm.transaction.marine_slip', compact(['user','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
+            return view('crm.transaction.marine_slip', compact(['user','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
          }
         else
         {
@@ -166,18 +167,13 @@ class TransactionController extends Controller
             $insured_id = $request->insuredID;
         
             if($shipcode !='' && $shipname !='' && $insured_id != ''){
-                DB::table('shiplist_temp')->insert([
-                    'insured_id' => $insured_id, 
-                    'ship_code' => $shipcode, 
-                    'ship_name' => $shipname, 
-                ]);
-        
-                return response()->json(
-                    [
-                        'success' => true,
-                        'message' => 'Data inserted successfully'
-                    ]
-                );
+                $shiplist = new ShipListTemp();
+                $shiplist->insured_id = $insured_id;
+                $shiplist->ship_code = $shipcode;
+                $shiplist->ship_name = $shipname; 
+                $shiplist->save();
+
+                return response()->json($shiplist);
         
             }else{
                 return response()->json(
@@ -233,8 +229,11 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyshiplist($id)
     {
-        //
+        $shiplist = ShipListTemp::find($id);
+        $shiplist->delete();
+        
+        return response()->json(['success'=>'Data has been deleted']);
     }
 }

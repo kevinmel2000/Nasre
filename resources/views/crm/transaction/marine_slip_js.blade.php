@@ -9,7 +9,7 @@
 </script>
 
 <script type="text/javascript">
-     $('#shipcode').change(function(){
+     $('#shipcodetxt').change(function(){
         var shipcode = $(this).val();
 
         if(shipcode){
@@ -19,129 +19,113 @@
                 url:"{{url('get-ship-list')}}?ship_code="+shipcode,
                 success:function(response){        
                     if(response){
-                        $("#shipname").val(response.shipname);
+                        $("#shipnametxt").val(response.shipname);
                     }else{
-                        $("#shipname").empty();
+                        $("#shipnametxt").empty();
                     }
                 }
             });
         }else{
-            $("#shipname").empty();
+            $("#shipnametxt").empty();
         }
     });
 </script>
 
 <script type='text/javascript'>
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    $(".form-addship").click(function(e){
-
+     $('#form-addship').submit(function(e){
         e.preventDefault();
 
-        var shipcode = $('#shipcode').val();
-        var shipname = $('#shipname').val();
-        var insured_id = $('#insuredID').val();
-        var url = '{{url('store-ship-list')}}';
-
+        var shipcode = $('#shipcodetxt').val();
+        var shipname = $('#shipnametxt').val();
+        var insured_id = $('#insuredIDtxt').val();
+        var token = $('input[name=_token]').val();
+        
         $.ajax({
-           url:url,
-           method:'POST',
-           data:{
-                  insuredID:insured_id, 
-                  ship_code:shipcode,
-                  ship_name:shipname
-                },
-           success:function(response){
-              if(response.success){
-                var tr_str = "<tr>"+
-                "<td align='center'>" + shipcode + "</td>" +
-                "<td align='center'>" + shipname + "</td>" +
-                "<td align='center'><a href='#' onclick='"+ deleteRecords()+"'><i class='fas fa-trash text-danger'></i></a></td>"+
-                "</tr>";
-    
-                $("#shipdetailTable tbody").append(tr_str);
-                  alert(response.message) //Message come from controller
-              }else{
-                  alert("Error")
-              }
-           },
-           error:function(error){
-              console.log(error)
-           }
-        });
-	});
-
-    
-    $(document).ready(function(){
-    
-      // Fetch records
-    //   fetchRecords();
-    
-    
-    
-        // Delete record
-        function deleteRecords() {
-        var delete_id = $(this).data('id');
-        var el = this;
-        $.ajax({
-            url: 'deleteUser/'+delete_id,
-            type: 'get',
-            success: function(response){
-            $(el).closest( "tr" ).remove();
-            alert(response);
+            url:"{{ route('shiplist.store') }}",
+            type:"POST",
+            data:{
+                ship_code:shipcode,
+                ship_name:shipname,
+                insuredID:insured_id,
+                _token:token
+            },
+            success:function(response){
+                console.log(response)
+                $('#shipdetailTable tbody').prepend('<tr id="sid'+response.id+'"><td>'+shipcode+'</td><td>'+shipname+'</td><td><a href="javascript:void(0)" onclick="deleteshipdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
+                $('#ModalAddShip').modal('toggle');
+                $('#form-addship')[0].reset();
             }
         });
-        } 
+
+    });
+
     
-        // Fetch records
-        // function fetchRecords(){
-        //     $.ajax({
-        //         url: 'getUsers',
-        //         type: 'get',
-        //         dataType: 'json',
-        //         success: function(response){
-            
-        //         var len = 0;
-        //         $('#userTable tbody tr:not(:first)').empty(); // Empty <tbody>
-        //         if(response['data'] != null){
-        //             len = response['data'].length;
-        //         }
-            
-        //         if(len > 0){
-        //             for(var i=0; i<len; i++){
-            
-        //             var id = response['data'][i].id;
-        //             var username = response['data'][i].username;
-        //             var name = response['data'][i].name;
-        //             var email = response['data'][i].email;
-            
-        //             var tr_str = "<tr>" +
-        //             "<td align='center'><input type='text' value='" + username + "' id='username_"+id+"' disabled></td>" +
-        //             "<td align='center'><input type='text' value='" + name + "' id='name_"+id+"'></td>" + 
-        //             "<td align='center'><input type='email' value='" + email + "' id='email_"+id+"'></td>" +
-        //             "<td align='center'><input type='button' value='Update' class='update' data-id='"+id+"' ><input type='button' value='Delete' class='delete' data-id='"+id+"' ></td>"+
-        //             "</tr>";
-            
-        //             $("#userTable tbody").append(tr_str);
-            
-        //             }
-        //         }else{
-        //             var tr_str = "<tr class='norecord'>" +
-        //             "<td align='center' colspan='4'>No record found.</td>" +
-        //             "</tr>";
-            
-        //             $("#userTable tbody").append(tr_str);
-        //         }
-            
-        //         }
-        //     });
-        // }
+
+</script>
+
+<script type='text/javascript'>
+
+    function deleteshipdetail(id){
+        var token = $('input[name=_token]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-ship-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token
+            },
+            success:function(response){
+                
+                $('#sid'+id).remove();
+                console.log(response);
+            }
+        });
     }
+
+    // $.ajaxSetup({
+    //     headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //     }
+    // });
+
+    // $("#addship-btn").click(function(e){
+
+    //     e.preventDefault();
+
+    //     var shipcode = $('#shipcodetxt').val();
+    //     var shipname = $('#shipnametxt').val();
+    //     var insured_id = $('#insuredIDtxt').val();
+    //     var url = '{{url('store-ship-list')}}';
+
+    //     $.ajax({
+    //        url:url,
+    //        method:'POST',
+    //        data:{
+    //               _token": $('#token').val(),
+    //               insuredID:insured_id, 
+    //               ship_code:shipcode,
+    //               ship_name:shipname
+    //             },
+    //        success:function(response){
+    //           if(response.success){
+    //             var tr_str = "<tr>"+
+    //             "<td align='center'>" + shipcode + "</td>" +
+    //             "<td align='center'>" + shipname + "</td>" +
+    //             "<td align='center'><a href='#' onclick='"++"'><i class='fas fa-trash text-danger'></i></a></td>"+
+    //             "</tr>";
+    
+    //             $("#shipdetailTable tbody").append(tr_str);
+    //               alert(response.message) //Message come from controller
+    //           }else{
+    //               alert("Error")
+    //           }
+    //        },
+    //        error:function(error){
+    //           console.log(error)
+    //        }
+    //     });
+	// });
+
 </script>
 
 

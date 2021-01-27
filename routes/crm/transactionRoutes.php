@@ -13,7 +13,8 @@ use App\Http\Controllers\TransactionController;
 
 
 Route::get('get-ship-list','TransactionController@showShipList');
-Route::get('store-ship-list','TransactionController@storeshiplist');
+Route::post('/store-ship-list','TransactionController@storeshiplist')->name('shiplist.store');
+Route::delete('/delete-ship-list/{id}','TransactionController@destroyshiplist')->name('shiplist.delete');
 Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     
 
