@@ -74,6 +74,24 @@ class MovePropSlipController extends Controller
         return response()->json($cities);
     }
 
+
+    public function getCostumers(Request $request){
+
+        $search = $request->search;
+  
+        if($search == ''){
+           $costumers = Customer::orderby('company_name','asc')->select('id','company_name')->limit(10)->get();
+        }else{
+           $costumers = Customer::orderby('company_name','asc')->select('id','company_name')->where('company_name', 'like', '%' .$search . '%')->limit(10)->get();
+        }
+  
+        $response = array();
+        foreach($costumers as $costumer){
+           $response[] = array("value"=>$costumer->id,"label"=>$costumer->company_name);
+        }
+  
+        return response()->json($response);
+     }
     
     public function index(Request $request)
     {
