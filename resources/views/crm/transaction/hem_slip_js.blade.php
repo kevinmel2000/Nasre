@@ -14,13 +14,22 @@ $(document).ready(function(){
  $(".e1").select2({ width: '100%' });
 
 
-$(".btn-success").click(function(){ 
+$("#btn-success").click(function(){ 
    var html = $(".clone").html();
    $(".increment").after(html);
 });
 
-$("body").on("click",".btn-danger",function(){ 
-   $(this).parents(".control-group").remove();
+$("body").on("click","#btn-danger",function(){ 
+   $(this).parents("#control-group").remove();
+});
+
+$("#btn-success2").click(function(){ 
+   var html = $(".clone2").html();
+   $(".increment2").after(html);
+});
+
+$("body").on("click","#btn-danger2",function(){ 
+   $(this).parents("#control-group2").remove();
 });
 
 });

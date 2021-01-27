@@ -207,16 +207,16 @@
                                                 <input type="file" name="hemfile_att" id="attachment" required>
                                             
                                                 <div class="input-group control-group increment" >
-                                                <input type="file" name="filename[]" class="form-control">
+                                                <input type="file" name="hemfile_att[]" class="form-control">
                                                 <div class="input-group-btn"> 
-                                                    <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
+                                                    <button class="btn btn-success" id="btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
                                                 </div>
                                                 </div>
                                                 <div class="clone hide">
-                                                <div class="control-group input-group" style="margin-top:10px">
-                                                    <input type="file" name="filename[]" class="form-control">
+                                                <div class="control-group input-group" id="control-group" style="margin-top:10px">
+                                                    <input type="file" name="hemfile_att[]" class="form-control">
                                                     <div class="input-group-btn"> 
-                                                    <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+                                                    <button class="btn btn-danger" id="btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
                                                     </div>
                                                 </div>
                                                 </div>
@@ -552,6 +552,22 @@
                                                     <label>{{__('Attachment')}} </label>
                                                     <div class="input-group">
                                                         <input type="file" name="slipfile_att" id="attachment" required>
+
+                                                        <div class="input-group control-group increment2" >
+                                                        <input type="file" name="slipfile_att[]" id="attachment" class="form-control" required>
+                                                        <div class="input-group-btn"> 
+                                                            <button class="btn btn-success" id="btn-success2" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
+                                                        </div>
+                                                        </div>
+                                                        <div class="clone2 hide">
+                                                        <div class="control-group input-group" id="control-group2" style="margin-top:10px">
+                                                            <input type="file" name="slipfile_att[]" class="form-control">
+                                                            <div class="input-group-btn"> 
+                                                            <button class="btn btn-danger" id="btn-danger2" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
