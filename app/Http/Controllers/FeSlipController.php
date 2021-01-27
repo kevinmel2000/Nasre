@@ -141,6 +141,7 @@ class FeSlipController extends Controller
         $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
         $felookup = FelookupLocation::orderby('id','asc')->get();
         $cnd = ConditionNeeded::orderby('id','asc')->get();
+        
         $fe_ids = response()->json($insured->modelKeys());
         $lastid = count($insured);
         $sliplastid = count($slip);
@@ -155,8 +156,9 @@ class FeSlipController extends Controller
             $code_ms = $mydate . strval(1);
         }
 
+        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
 
-        return view('crm.transaction.fe_slip', compact(['user','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.fe_slip', compact(['user','cnd','locationlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
     }
 
@@ -198,6 +200,35 @@ class FeSlipController extends Controller
         {
             return back()->with($validator)->withInput();
         }
+    }
+
+    
+    public function storelocationlist(Request $request)
+    {
+
+            $lookuplocation = $request->lookupcode;
+            $insured_id = $request->insuredID;
+        
+            if($lookuplocation !='' && $insured_id != '')
+            {    
+                $locationlist = new TransLocationTemp();
+                $locationlist->insured_id = $insured_id;
+                $locationlist->lookup_location_id = $lookuplocation;
+                $locationlist->save();
+
+                $felookuplocations = FeLookupLocation::find($lookuplocation);
+
+                return response()->json($felookuplocations);
+            }
+            else
+            {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Fill all fields'
+                    ]
+                );
+            }
     }
 
     public function update(Request $request, $felookuplocation)
@@ -265,6 +296,15 @@ class FeSlipController extends Controller
             );
             return back()->with($notification);
         }
+    }
+
+    
+    public function destroysliplocationlist($id)
+    {
+        $sliplistlocation = TransLocationTemp::find($id);
+        $sliplistlocation->delete();
+        
+        return response()->json(['success'=>'Data has been deleted']);
     }
 
     

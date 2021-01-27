@@ -160,7 +160,10 @@ class FinancialLineSlipController extends Controller
         }
 
 
-        return view('crm.transaction.fl_slip', compact(['user','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fl_ids','code_ms','code_sl','costumer']));
+        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+
+        return view('crm.transaction.fl_slip', compact(['user','cnd','locationlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fl_ids','code_ms','code_sl','costumer']));
     
     }
 

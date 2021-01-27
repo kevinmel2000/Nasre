@@ -214,7 +214,7 @@
                                             <option selected disabled>{{__('Select Ship Code')}}</option>
                                             @foreach($mlu as $mrnlu)
                                                 <option value="{{  $mrnlu->code }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
-                                                
+        
                                             @endforeach
                                         </select>
                                     </div>

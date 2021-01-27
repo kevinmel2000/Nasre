@@ -159,6 +159,7 @@ class TransactionController extends Controller
         //
     }
 
+
     public function storeshiplist(Request $request)
     {
 
@@ -236,4 +237,5 @@ class TransactionController extends Controller
         
         return response()->json(['success'=>'Data has been deleted']);
     }
+
 }

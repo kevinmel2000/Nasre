@@ -24,7 +24,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="mpnumber" value="{{$code_ms}}"  class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
+                                            <input type="text" name="mpnumber" id="insuredIDtxt" value="{{$code_ms}}"  class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
                                         </div>
                                     </div>
                                 </div>
@@ -103,50 +103,6 @@
                                                         <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocr">{{__('Add Risk Location')}}</button>
                                                         </a>
 
-                                                        
-                                                        <div class="modal fade" id="addlocation" tabindex="-1" user="dialog" aria-labelledby="addlocationLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" user="document">
-                                                        <div class="modal-content bg-light-gray">
-                                                            <div class="modal-header bg-gray">
-                                                            <h5 class="modal-title" id="addlocationLabel">{{__('Add Lookup Location')}}</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                            </div>
-                                                            <form action="{{url('master-data/felookuplocation/update')}}" method="POST">
-                                                                <div class="modal-body">
-                                                                    @csrf
-                                                                    @method('PUT')
-
-                                                                    <div class="row">
-                                                                    
-                                                                    <div class="col-md-6 col-md-12">
-                                                                        <div class="form-group">
-                                                                        <label for="">{{__('Lookup Location')}}</label>
-                                                                        <select name="lookup_location_id" id="lookup_location" class="e1 form-control form-control-sm " required>
-                                                                            <option selected disabled>{{__('Select Lookup Location ')}}</option>
-                                                                            @foreach($felookup as $felookuplocationdata)
-                                                                            <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->postal_code }}</option>
-                                                                            @endforeach
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    </div>
-                                                                
-                                                                
-                                                                </div>
-
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                                                                    <input type="submit" class="btn btn-info" value="Update">
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                    {{-- Edit Modal Ends --}}
-
                                                    
                                                     </div>
                                                 </div>
@@ -165,22 +121,16 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>{{__('CODE0001')}}</td>
-                                                            <td>{{__('Jl cikini Raya no 99 Jakarta Pusat')}}</td>
-                                                            <td>{{__('Jakarta Pusat')}}</td>
-                                                            <td>{{__('Jakarta')}}</td>
-                                                            <td>{{__('-6.25625:106.877481')}}</td>
-                                                            <td width="20%"><input class="form-check-input" style="margin-left: 30;" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>{{__('CODE0002')}}</td>
-                                                            <td>{{__('Jl Raya Panjang Lebar no 66 Jakarta Timur')}}</td>
-                                                            <td>{{__('Jakarta Timur')}}</td>
-                                                            <td>{{__('Jakarta')}}</td>
-                                                            <td>{{__('-6.25625:106.877481')}}</td>
-                                                            <td width="20%"><input class="form-check-input" style="margin-left: 30;" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
-                                                        </tr>
+                                                             @foreach($locationlist as $slt)
+                                                             <tr id="sid{{ $slt->id }}">
+                                                                    <td>{{ $slt->felookuplocation->loc_code }}</td>
+                                                                    <td>{{ $slt->felookuplocation->address }}</td>
+                                                                    <td>{{@$slt->felookuplocation->state->id}} - {{@$slt->felookuplocation->state->name}}</td>
+                                                                    <td>{{@$slt->felookuplocation->city->id}} - {{@$slt->felookuplocation->city->name}}</td>
+                                                                    <td>{{ $slt->felookuplocation->latitude , $slt->felookuplocation->longtitude  }}</td>
+                                                                    <td><a href="" onclick="deletelocationdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
+                                                             </tr>   
+                                                            @endforeach
                                                     </tbody>
                                                     
                                                     </table>
@@ -292,6 +242,45 @@
                     </div>
                 </div>
             </form>
+
+            <div class="modal fade" id="addlocation" tabindex="-1" user="dialog" aria-labelledby="addlocationLabel" aria-hidden="true">
+                <div class="modal-dialog" user="document">
+                <div class="modal-content bg-light-gray">
+                    <div class="modal-header bg-gray">
+                    <h5 class="modal-title" id="addlocationLabel">{{__('Add Lookup Location')}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+
+                    <form id="form-addlocation">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                            
+                            <div class="col-md-6 col-md-12">
+                                <div class="form-group">
+                                <label for="">{{__('Lookup Location')}}</label>
+                                    <select name="lookup_location_id" id="lookup_location" class="e1 form-control form-control-sm " required>
+                                    <option selected disabled>{{__('Select Lookup Location ')}}</option>
+                                    @foreach($felookup as $felookuplocationdata)
+                                    <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->postal_code }}</option>
+                                    @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                            <button type="submit" class="btn btn-info" id="addship-btn">Add Risk Location</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+            {{-- Edit Modal Ends --}}
 
         <div class="card ">
             <div class="card-header bg-gray">
