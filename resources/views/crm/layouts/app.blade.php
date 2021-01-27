@@ -22,6 +22,9 @@
         <link rel="stylesheet" href="{{asset('css/buttons.dataTables.min.css')}}">
         <link rel="stylesheet" href="{{asset('css/theme-default.min.css')}}">
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="{{asset('jqueryui/jquery-ui.min.css')}}">
+
         @yield('styles')
     </head>
         {{-- if you want to make left side auto collape, add this class to the body - "sidebar-collapse" --}}
@@ -48,14 +51,18 @@
             </aside>
         </div>
 
-        <script src="https://unpkg.com/jquery@2.2.4/dist/jquery.js"></script>
-        <script src="https://unpkg.com/jquery@2.2.4/dist/jquery.js"></script>
+        
+        <!-- Script -->
+        
+        <script src="{{asset('js/jquery.js')}}" type="text/javascript"></script>
+
         <script src="{{asset('js/app.js')}}"></script>
         <script src="{{asset('theme/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('js/datatable.js')}}"></script> 
         
 
         <script src="{{asset('theme/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+
         <script src="{{asset('theme/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('js/popper.min.js')}}" ></script>
         <script src="{{asset('theme/plugins/moment/moment.min.js')}}"></script>

@@ -97,7 +97,6 @@ class FeSlipController extends Controller
          $route_active = 'Fire & Engineering Lookup Location';   
          $mydate = date("Y").date("m").date("d");
          $fe_ids = response()->json($country->modelKeys());
-
          $search = @$request->input('search');
 
          if(empty($search))

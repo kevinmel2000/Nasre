@@ -43,7 +43,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 1')}}</label>
-                                                    <input type="text" name="flsuggestinsured" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
+                                                    <input type="text" name="flsuggestinsured" id='autocomplete'  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 2')}}</label>

@@ -8,6 +8,16 @@
 </style>
 
 <script>
+$( "#autocomplete" ).autocomplete({
+  source: [
+  @foreach (@$costumer as $costumerdata)
+   "{{@$costumerdata->company_name }}",
+  @endforeach
+  ]
+});
+</script>
+
+<script>
 $(document).ready(function(){
 
  var count = 1;
