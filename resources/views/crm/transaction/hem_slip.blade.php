@@ -24,7 +24,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="hemnumber" value="{{$code_insured}}" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
+                                            <input type="text" name="hemnumber" value="{{$code_ms}}" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
                                         </div>
                                     </div>
                                 </div>
@@ -36,10 +36,9 @@
                                                 <div class="col-md-4">
                                                     <label for="">{{__('Insured')}}</label>
                                                     <select name="heminsured" class="form-control form-control-sm ">
-                                                        <option selected disabled>{{__('Select  Insure Costumer')}}</option>
-                                                        @foreach($costumer as $costumerdata)
-                                                        <option value="{{ $costumerdata->id }}">{{ $costumerdata->id }} - {{ $costumerdata->username }} - {{ $costumerdata->company_name }}</option>
-                                                        @endforeach
+                                                        <option selected disabled>{{__('Select Prefix')}}</option>
+                                                        <option value="PT">PT</option>
+                                                        <option value="CV">CV</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4">
@@ -64,9 +63,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                                
-                                                                <input type="number" min="0" value="0" step=".01" name="hemshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                            
+                                                               <input type="number" min="0" value="0" step=".01" name="hemshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -80,13 +77,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('From')}}</label>
-                                                    <input type="text" name="hemsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="number" min="0" value="0" step=".01" name="hemsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input type="text" name="hemhareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="number" min="0" value="0" step=".01" name="hemhareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -127,7 +124,7 @@
                                                                                 <label for="">{{__('Lookup Location')}}</label>
                                                                                 <select name="lookup_location_id" id="lookup_location" class="e1 form-control form-control-sm " required>
                                                                                     <option selected disabled>{{__('Select Lookup Location ')}}</option>
-                                                                                    @foreach($felookuplocation as $felookuplocationdata)
+                                                                                    @foreach($felookup as $felookuplocationdata)
                                                                                     <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->postal_code }}</option>
                                                                                     @endforeach
                                                                                     </select>
@@ -235,32 +232,6 @@
                                         <div class="col-md-12 com-sm-12 mt-3">
                                             <label for="">{{__('Format')}}</label>
 
-                                            <form method="post" id="dynamic_form">
-                                                <span id="result"></span>
-                                                <table class="table table-bordered table-striped" id="user_table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th width="35%">First Name</th>
-                                                            <th width="35%">Last Name</th>
-                                                            <th width="30%">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                    <tfoot>
-                                                        <tr>
-                                                        <td colspan="2" align="right">&nbsp;</td>
-                                                        <td>
-                                                        @csrf
-                                                        <input type="submit" name="save" id="save" class="btn btn-primary" value="Save" />
-                                                        </td>
-                                                        </tr>
-                                                    </tfoot>
-                                                </table>
-                                            </form>
-
-
                                             <table id="hemFormat" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
@@ -336,11 +307,11 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <div class="row">
+                                            <div class="row">
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Number')}} </label>
-                                                        <input type="text" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="3" required/>
+                                                        <input type="text" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="3" value="{{ $code_sl }}" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -348,7 +319,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Username')}}</label>
-                                                            <input type="text" name="slipusername" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                            <input type="text" name="slipusername" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" value="{{Auth::user()->name}}" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -357,8 +328,8 @@
                                                         <div class="form-group">
                                                             <label>{{__('Prod Year')}}:</label>
                                                                 <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipprodyear">
-                                                                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
+                                                                        <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipprodyear" value="{{ $currdate }}" readonly="readonly">
+                                                                        <div class="input-group-append" >
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
                                                                 </div>
@@ -391,43 +362,52 @@
                                             <div class="col-md-6">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="" class="d-flex justify-content-center">{{__('Endorsement / Selisih')}}</label>
-                                                        <br>
-                                                        <div class="form-check form-check-inline d-flex justify-content-around">
-                                                                <input class="form-check-input" type="checkbox" id="slipedselisih" name="slipedselisih" value="Endorsement">
-                                                                <input class="form-check-input" type="checkbox" id="slipedselisih" name="slipedselisih" value="Selisih">
+                                                        <div class="form-group">
+                                                            
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
+                                                                    <label for="" class="d-flex justify-content-center">{{__('Endorsement / Selisih')}}</label>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
+                                                                    <input type="text" name="sliped" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50"/>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
+                                                                    <input type="text" name="slipsls" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50"/>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 com-sm-12 mt-3">
                                                         <table id="slipStatusTable" class="table table-bordered table-striped">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>{{__('Status')}}</th>
-                                                                    <th>{{__('Datetime')}}</th>
-                                                                    <th>{{__('User')}}</th>]
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>{{__('Offer')}}</td>
-                                                                    <td>{{__('01/10/2020 09:00:00')}}</td>
-                                                                    <td>{{__('User A')}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{__('Binding')}}</td>
-                                                                    <td>{{__('01/10/2020 14:15:00')}}</td>
-                                                                    <td>{{__('User A')}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{__('Slip')}}</td>
-                                                                    <td>{{__('01/10/2020 11:20:00')}}</td>
-                                                                    <td>{{__('User B')}}</td>
-                                                                </tr>
-                                                            </tbody>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>{{__('Status')}}</th>
+                                                                <th>{{__('Datetime')}}</th>
+                                                                <th>{{__('User')}}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>{{__('Offer')}}</td>
+                                                                <td>{{__('01/10/2020 09:00:00')}}</td>
+                                                                <td>{{__('User A')}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>{{__('Binding')}}</td>
+                                                                <td>{{__('01/10/2020 14:15:00')}}</td>
+                                                                <td>{{__('User A')}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>{{__('Slip')}}</td>
+                                                                <td>{{__('01/10/2020 11:20:00')}}</td>
+                                                                <td>{{__('User B')}}</td>
+                                                            </tr>
+                                                        </tbody>
                                                         
                                                         </table>
                                                         <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> Data is Transferred!</i>
@@ -439,21 +419,19 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="">{{__('Source')}}</label>
-                                                    <select name="slipcedingbroker" class="form-control form-control-sm ">
-                                                        {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
-                                                        <option value="AF" selected>Ceding or Broker</option>
-                                                        <option value="AN">Binding</option>
-                                                        <option value="AS">Slip</option>
-                                                        <option value="EU">Endorsement</option>
+                                                    <select name="slipcedingbroker" class="e1 form-control form-control-sm ">
+                                                        <option value="" disabled selected>Ceding or Broker</option>
+                                                        @foreach($cedingbroker as $cb)
+                                                            <option value="{{ $cb->id }}">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>    
                                                 <div class="form-group">
-                                                    <select name="slipceding" class="form-control form-control-sm ">
-                                                        {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
-                                                        <option value="AF" selected>Ceding </option>
-                                                        <option value="AN">Binding</option>
-                                                        <option value="AS">Slip</option>
-                                                        <option value="EU">Endorsement</option>
+                                                    <select name="slipceding" class="e1 form-control form-control-sm ">
+                                                        <option value="" disabled selected>Ceding </option>
+                                                        @foreach($ceding as $cd)
+                                                            <option value="{{ $cd->id }}">{{ $cd->code }} - {{ $cd->name }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>  
                                             </div>
@@ -464,15 +442,11 @@
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Currency')}}</label>
-                                                        <select name="slipcurrency" class="form-control form-control-sm ">
+                                                        <select name="slipcurrency" class="e1 form-control form-control-sm ">
                                                             <option selected disabled>{{__('Select Currency')}}</option>
-                                                            <option value="AF">Africa</option>
-                                                            <option value="AN">Antartica</option>
-                                                            <option value="AS">Asia</option>
-                                                            <option value="EU">Europa</option>
-                                                            <option value="NA">North America </option>
-                                                            <option value="OC">Oceania</option>
-                                                            <option value="SA">South America</option>
+                                                            @foreach($currency as $crc)
+                                                                <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>    
                                                     </div>
@@ -482,15 +456,11 @@
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('COB')}}</label>
-                                                        <select name="slipcob" class="form-control form-control-sm ">
+                                                        <select name="slipcob" class="e1 form-control form-control-sm ">
                                                             <option selected disabled>{{__('COB list')}}</option>
-                                                            <option value="AF">Africa</option>
-                                                            <option value="AN">Antartica</option>
-                                                            <option value="AS">Asia</option>
-                                                            <option value="EU">Europa</option>
-                                                            <option value="NA">North America </option>
-                                                            <option value="OC">Oceania</option>
-                                                            <option value="SA">South America</option>
+                                                            @foreach($cob as $boc)
+                                                                <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>    
                                                     </div>
@@ -500,15 +470,11 @@
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('KOC')}}</label>
-                                                        <select name="slipkoc" class="form-control form-control-sm ">
+                                                        <select name="slipkoc" class="e1 form-control form-control-sm ">
                                                             <option selected disabled>{{__('KOC list')}}</option>
-                                                            <option value="AF">Africa</option>
-                                                            <option value="AN">Antartica</option>
-                                                            <option value="AS">Asia</option>
-                                                            <option value="EU">Europa</option>
-                                                            <option value="NA">North America </option>
-                                                            <option value="OC">Oceania</option>
-                                                            <option value="SA">South America</option>
+                                                            @foreach($koc as $cok)
+                                                                <option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>    
                                                     </div>
@@ -518,15 +484,11 @@
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Occupacy')}}</label>
-                                                        <select name="slipoccupacy" class="form-control form-control-sm ">
+                                                        <select name="slipoccupacy" class="e1 form-control form-control-sm ">
                                                             <option selected disabled>{{__('Occupation list')}}</option>
-                                                            <option value="AF">Africa</option>
-                                                            <option value="AN">Antartica</option>
-                                                            <option value="AS">Asia</option>
-                                                            <option value="EU">Europa</option>
-                                                            <option value="NA">North America </option>
-                                                            <option value="OC">Oceania</option>
-                                                            <option value="SA">South America</option>
+                                                            @foreach($ocp as $ocpy)
+                                                                <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>    
                                                     </div>
@@ -536,15 +498,15 @@
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Building Const')}}</label>
-                                                        <select name="slipbld_const" class="form-control form-control-sm ">
+                                                        <select name="slipbld_const" class="e1 form-control form-control-sm ">
                                                             <option selected disabled>{{__('Building Const list')}}</option>
-                                                            <option value="AF">Africa</option>
-                                                            <option value="AN">Antartica</option>
-                                                            <option value="AS">Asia</option>
-                                                            <option value="EU">Europa</option>
-                                                            <option value="NA">North America </option>
-                                                            <option value="OC">Oceania</option>
-                                                            <option value="SA">South America</option>
+                                                            <option value="Buliding 1">Buliding 1</option>
+                                                            <option value="Buliding 2">Buliding 2</option>
+                                                            <option value="Buliding 3">Buliding 3</option>
+                                                            <option value="Buliding 4">Buliding 4</option>
+                                                            <option value="Buliding 5">Buliding 5 </option>
+                                                            <option value="Buliding 6">Buliding 6</option>
+                                                            <option value="Buliding 7">Buliding 7</option>
                                                         </select>
                                                     </div>    
                                                     </div>
@@ -589,7 +551,7 @@
                                                 <div class="form-group">
                                                     <label>{{__('Attachment')}} </label>
                                                     <div class="input-group">
-                                                        <input type="file" name="file_att" id="attachment" required>
+                                                        <input type="file" name="slipfile_att" id="attachment" required>
                                                     </div>
                                                 </div>
                                             </div>
