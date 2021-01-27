@@ -196,12 +196,8 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="" method="POST">
+                    <form class="form-addship" action="" method="POST">
                         <div class="modal-body">
-                            @csrf
-                            @method('POST')
-            
-                            <div class="row">
                                 <div class="col-md-12 col-md-12">
                                     <div class="form-group">
                                         <label for="">{{__('Ship Code')}}</label><br>
@@ -218,7 +214,6 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-12 col-md-12">
                                     <div class="form-group">
@@ -231,7 +226,7 @@
             
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                            <input type="submit" class="btn btn-info" id="addship" value="Add Ship">
+                            <button class="btn btn-info" id="addship">Add Ship</button>
                         </div>
                     </form>
                     </div>

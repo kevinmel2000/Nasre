@@ -161,26 +161,33 @@ class TransactionController extends Controller
     public function storeshiplist(Request $request)
     {
 
-            $shipcode = $request->input('ship_code');
-            $shipname = $request->input('ship_name');
-            $insured_id = $request->input('insured_id');
+            $shipcode = $request->ship_code;
+            $shipname = $request->ship_name;
+            $insured_id = $request->insuredID;
         
             if($shipcode !='' && $shipname !='' && $insured_id != ''){
-              $data = array("insured_id"=>$insured_id,'ship_code'=>$shipcode,"ship_name"=>$shipname);
+                DB::table('shiplist_temp')->insert([
+                    'insured_id' => $insured_id, 
+                    'ship_code' => $shipcode, 
+                    'ship_name' => $shipname, 
+                ]);
         
-              // Call insertData() method of Page Model
-              $value = ShipListTemp::insertData($data);
-              if($value){
-                echo $value;
-              }else{
-                echo 0;
-              }
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => 'Data inserted successfully'
+                    ]
+                );
         
             }else{
-               echo 'Fill all fields.';
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Fill all fields'
+                    ]
+                );
             }
         
-            exit; 
     }
 
     /**
