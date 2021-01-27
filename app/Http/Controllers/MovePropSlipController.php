@@ -16,6 +16,14 @@ use App\Models\User;
 use App\Models\EarthQuakeZone;
 use App\Models\FloodZone;
 use App\Models\TransLocation;
+use App\Models\Currency;
+use App\Models\COB;
+use App\Models\Occupation;
+use App\Models\KOC;
+use App\Models\CedingBroker;
+use App\Models\ConditionNeeded;
+use App\Models\ShipListTemp;
+use App\Policies\FelookupLocationPolicy;
 use App\Models\TransLocationTemp;
 use App\Models\TransProperty;
 use App\Models\TransPropertyTemp;
@@ -103,42 +111,42 @@ class MovePropSlipController extends Controller
     public function indexmpslip()
     {
         $user = Auth::user();
-        $country = User::orderby('id','asc')->get();
         $route_active = 'Moveable Property - Slip Entry';
-        $mp_ids = response()->json($country->modelKeys());
-
+        $mydate = date("Y").date("m").date("d");
         
-        $felookuplocation = FeLookupLocation::orderby('id','asc')->get();
         $country = Country::orderby('id','asc')->get();
         $city = City::orderby('id','asc')->get();
         $state = State::orderby('id','asc')->get();
         $costumer=Customer::orderby('id','asc')->get();
-        $propertytype=PropertyType::orderby('id','asc')->get();
 
-        $mydate = date("Y").date("m").date("d");
         
-        $lastid = Insured::select('id')->latest()->first();
+        $currdate = date("Y/m/d");
+        $insured = Insured::orderby('id','asc')->get();
+        $slip = SlipTable::orderby('id','asc')->get();
+        $currency = Currency::orderby('id','asc')->get();
+        $cob = COB::orderby('id','asc')->get();
+        $koc = KOC::orderby('id','asc')->get();
+        $ocp = Occupation::orderby('id','asc')->get();
+        $cedingbroker = CedingBroker::orderby('id','asc')->get();
+        $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
+        $felookup = FelookupLocation::orderby('id','asc')->get();
+        $cnd = ConditionNeeded::orderby('id','asc')->get();
+        $mp_ids = response()->json($insured->modelKeys());
+        $lastid = count($insured);
+        $sliplastid = count($slip);
 
         if($lastid != null){
-            $code_insured = $mydate . strval($lastid->id + 1);
+            $code_ms = $mydate . strval($lastid + 1);
+            $code_sl = $mydate . strval($sliplastid + 1);
+
         }
         else{
-            $code_insured = $mydate . strval(1);
-            //$code_insured = $mydate . strval($lastid->id + 1);
-        }
-
-        $lastidslip = SlipTable::select('id')->latest()->first();
-        if($lastidslip != null){
-            $code_slip = $mydate . strval($lastidslip->id + 1);
-        }
-        else{
-            $code_slip = $mydate . strval(1);
-            //$code_insured = $mydate . strval($lastid->id + 1);
+            $code_sl = $mydate . strval($sliplastid + 1);
+            $code_ms = $mydate . strval(1);
         }
 
 
-
-        return view('crm.transaction.mp_slip', compact(['user','route_active','mp_ids','code_insured','code_slip','propertytype','felookuplocation','costumer']));
+        return view('crm.transaction.mp_slip', compact(['user','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','mp_ids','code_ms','code_sl','costumer']));
     }
 
     public function store(Request $request)

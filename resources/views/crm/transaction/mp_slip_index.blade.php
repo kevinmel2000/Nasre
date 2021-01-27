@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-md-12 com-sm-12 mt-3">
                 
-                  {!! link_to('transaction-data/mp-slip','Tambah MOVEABLE PROPERTY Insured Slip',['class'=>'btn btn-primary']) !!}
+                  {!! link_to('transaction-data/mp-slip','Add Data',['class'=>'btn btn-primary']) !!}
                   <hr>
                   {!! Form::open(array('url'=>'transaction-data/mp-slipindex')) !!}
                   {!! Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari MOVEABLE PROPERTY Number, ketik lalu tekan enter']) !!}

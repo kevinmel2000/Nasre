@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-md-12 com-sm-12 mt-3">
                 
-                  {!! link_to('transaction-data/hem-slip','Tambah HE & MOTOR Insured Slip',['class'=>'btn btn-primary']) !!}
+                  {!! link_to('transaction-data/hem-slip','Add Data',['class'=>'btn btn-primary']) !!}
                   <hr>
                   {!! Form::open(array('url'=>'transaction-data/hem-slipindex')) !!}
                   {!! Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari HE & MOTOR Number, ketik lalu tekan enter']) !!}
