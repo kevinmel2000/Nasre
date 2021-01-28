@@ -111,40 +111,40 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     
 
     // SECTION Ship Type Routes
-    Route::get('/shiptype', [MasterController::class, 'indexshiptype'])->middleware(['can:view-shiptype']);
-    Route::post('/shiptype/store', [MasterController::class, 'storeshiptype'])->middleware(['can:create-shiptype']);
-    Route::put('shiptype/{st}', [MasterController::class, 'updateshiptype'])->middleware(['can:update-shiptype']);
-    Route::delete('/shiptype/destroy/{st}', [MasterController::class, 'destroyshiptype'])->middleware(['can:delete-shiptype']);
+    Route::get('/shiptype', [MasterController::class, 'indexshiptype']);
+    Route::post('/shiptype/store', [MasterController::class, 'storeshiptype']);
+    Route::put('shiptype/{st}', [MasterController::class, 'updateshiptype']);
+    Route::delete('/shiptype/destroy/{st}', [MasterController::class, 'destroyshiptype']);
 
     // SECTION Classification Routes
-    Route::get('/classification', [MasterController::class, 'indexclassification'])->middleware(['can:view-classification']);
-    Route::post('/classification/store', [MasterController::class, 'storeclassification'])->middleware(['can:create-classification']);
-    Route::put('classification/{cs}', [MasterController::class, 'updateclassification'])->middleware(['can:update-classification']);
-    Route::delete('/classification/destroy/{cs}', [MasterController::class, 'destroyclassification'])->middleware(['can:delete-classification']);
+    Route::get('/classification', [MasterController::class, 'indexclassification']);
+    Route::post('/classification/store', [MasterController::class, 'storeclassification']);
+    Route::put('classification/{cs}', [MasterController::class, 'updateclassification']);
+    Route::delete('/classification/destroy/{cs}', [MasterController::class, 'destroyclassification']);
 
     // SECTION Construction Routes
-    Route::get('/construction', [MasterController::class, 'indexconstruction'])->middleware(['can:view-construction']);
-    Route::post('/construction/store', [MasterController::class, 'storeconstruction'])->middleware(['can:create-construction']);
-    Route::put('construction/{cr}', [MasterController::class, 'updateconstruction'])->middleware(['can:update-construction']);
-    Route::delete('/construction/destroy/{cr}', [MasterController::class, 'destroyconstruction'])->middleware(['can:delete-construction']);
+    Route::get('/construction', [MasterController::class, 'indexconstruction']);
+    Route::post('/construction/store', [MasterController::class, 'storeconstruction']);
+    Route::put('construction/{cr}', [MasterController::class, 'updateconstruction']);
+    Route::delete('/construction/destroy/{cr}', [MasterController::class, 'destroyconstruction']);
 
     // SECTION Marine Lookup Routes
-    Route::get('/marine-lookup', [MasterController::class, 'indexmarinelookup'])->middleware(['can:view-marinelookup']);
-    Route::post('/marine-lookup/store', [MasterController::class, 'storemarinelookup'])->middleware(['can:create-marinelookup']);
-    Route::put('marine-lookup/{mlu}', [MasterController::class, 'updatemarinelookup'])->middleware(['can:update-marinelookup']);
-    Route::delete('/marine-lookup/destroy/{mlu}', [MasterController::class, 'destroymarinelookup'])->middleware(['can:delete-marinelookup']);
+    Route::get('/marine-lookup', [MasterController::class, 'indexmarinelookup']);
+    Route::post('/marine-lookup/store', [MasterController::class, 'storemarinelookup']);
+    Route::put('marine-lookup/{mlu}', [MasterController::class, 'updatemarinelookup']);
+    Route::delete('/marine-lookup/destroy/{mlu}', [MasterController::class, 'destroymarinelookup']);
    
     // SECTION property Type Routes
-    Route::get('/propertytype', [MasterController::class, 'indexpropertytype'])->middleware(['can:view-property_type']);
-    Route::post('/propertytype/store', [MasterController::class, 'storepropertytype'])->middleware(['can:create-property_type']);
-    Route::put('propertytype/{pt}', [MasterController::class, 'updatepropertytype'])->middleware(['can:update-property_type']);
-    Route::delete('/propertytype/destroy/{pt}', [MasterController::class, 'destroypropertytype'])->middleware(['can:delete-property_type']);
+    Route::get('/propertytype', [MasterController::class, 'indexpropertytype']);
+    Route::post('/propertytype/store', [MasterController::class, 'storepropertytype']);
+    Route::put('propertytype/{pt}', [MasterController::class, 'updatepropertytype']);
+    Route::delete('/propertytype/destroy/{pt}', [MasterController::class, 'destroypropertytype']);
 
     // SECTION property Type Routes
-    Route::get('/conditionneeded', [MasterController::class, 'indexconditionneeded'])->middleware(['can:view-condition_needed']);
-    Route::post('/conditionneeded/store', [MasterController::class, 'storeconditionneeded'])->middleware(['can:create-condition_needed']);
-    Route::put('conditionneeded/{cdn}', [MasterController::class, 'updateconditionneeded'])->middleware(['can:update-condition_needed']);
-    Route::delete('/conditionneeded/destroy/{cdn}', [MasterController::class, 'destroyconditionneeded'])->middleware(['can:delete-condition_needed']);
+    Route::get('/conditionneeded', [MasterController::class, 'indexconditionneeded']);
+    Route::post('/conditionneeded/store', [MasterController::class, 'storeconditionneeded']);
+    Route::put('conditionneeded/{cdn}', [MasterController::class, 'updateconditionneeded']);
+    Route::delete('/conditionneeded/destroy/{cdn}', [MasterController::class, 'destroyconditionneeded']);
 
     // Bulk Excel Import Users
     // Route::get('/import', [ ProductController::class, 'import'])->middleware(['can:create-product']);
