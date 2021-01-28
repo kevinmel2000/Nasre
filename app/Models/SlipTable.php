@@ -12,4 +12,6 @@ class SlipTable extends Model
     protected $table = 'slip_table';
 
     public $timestamps = false;
+
+    
 }

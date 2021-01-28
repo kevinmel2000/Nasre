@@ -163,8 +163,10 @@ class MovePropSlipController extends Controller
             $code_ms = $mydate . strval(1);
         }
 
+        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
 
-        return view('crm.transaction.mp_slip', compact(['user','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','mp_ids','code_ms','code_sl','costumer']));
+
+        return view('crm.transaction.mp_slip', compact(['user','cnd','locationlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','mp_ids','code_ms','code_sl','costumer']));
     }
 
     public function store(Request $request)
