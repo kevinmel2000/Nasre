@@ -94,7 +94,7 @@ class FinancialLineSlipController extends Controller
     {
          $user = Auth::user();
          $country = User::orderby('id','asc')->get();
-         $route_active = 'Financial Lines Index';   
+         $route_active = 'Financial Lines - Index';   
          $mydate = date("Y").date("m").date("d");
          $fe_ids = response()->json($country->modelKeys());
 

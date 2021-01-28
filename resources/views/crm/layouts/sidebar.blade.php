@@ -375,7 +375,7 @@
                   @endcan
 
                   {{-- SECTION ESTIMATES Menu  --}}
-                  @can('viewany-contact', User::class)
+                  @can('viewany-lead', User::class)
                     @if(@$route_active == 'estimate' || @$route_active == 'estimateCreate')
                         @php
                         $estimate_dd = 'active';
@@ -397,7 +397,7 @@
 
                         <ul class="nav nav-treeview">
 
-                            @can('create-contact', Auth::user())
+                            @can('viewany-lead', Auth::user())
                                 @if($route_active == 'estimateCreate')
                                 @php
                                 $estimateCreate = 'active';
@@ -411,7 +411,7 @@
                                 </li>
                             @endcan
 
-                            @can('view-contact', Auth::user())
+                            @can('view-lead', Auth::user())
                                 @if($route_active == 'estimate')
                                 @php
                                 $estimate = 'active';
@@ -430,7 +430,7 @@
                   {{-- !SECTION ESTIMATES menu --}}
 
                   {{-- SECTION INVOICES Menu  --}}
-                  @can('viewany-contact', User::class)
+                  @can('viewany-lead', User::class)
                     @if(@$route_active == 'invoice' || @$route_active == 'invoiceCreate')
                         @php
                         $invoice_dd = 'active';
@@ -453,7 +453,7 @@
 
                         <ul class="nav nav-treeview">
 
-                            @can('create-contact', Auth::user())
+                            @can('viewany-lead', Auth::user())
                                 @if($route_active == 'invoiceCreate')
                                 @php
                                 $invoiceCreate = 'active';
@@ -467,7 +467,7 @@
                                 </li>
                             @endcan
 
-                            @can('view-contact', Auth::user())
+                            @can('viewany-lead', Auth::user())
                                 @if($route_active == 'invoice')
                                 @php
                                 $invoice = 'active';
@@ -867,7 +867,7 @@
                                 </li>
                             @endcan
 
-                            @can('viewany-marinelookup', User::class)
+                            {{-- @can('viewany-marinelookup', User::class) --}}
                                 @if($route_active == 'Marine - Lookup Ship')
                                     @php
                                         $marinelookupform = 'active';
@@ -879,7 +879,7 @@
                                         <p>{{__('MARINE - LOOKUP FORM')}}</p>
                                     </a>
                                 </li>
-                            @endcan
+                            {{-- @endcan --}}
 
                                 @if(
                                     @$route_active == 'Ship Type Data Master' 
@@ -906,7 +906,7 @@
     
                                     <ul class="nav nav-treeview">
     
-                                        @can('viewany-shiptype', User::class)
+                                        {{-- @can('viewany-shiptype', User::class) --}}
                                             @if($route_active == 'Ship Type Data Master')
                                             @php
                                                 $shiptypeform = 'active';
@@ -918,9 +918,9 @@
                                                     <p>{{__('SHIP TYPE FORM')}}</p>
                                                 </a>
                                             </li>
-                                        @endcan
+                                        {{-- @endcan --}}
                                             
-                                        @can('viewany-classification', User::class)
+                                        {{-- @can('viewany-classification', User::class) --}}
                                             @if($route_active == 'Classification Data Master')
                                             @php
                                                 $classification_form = 'active';
@@ -932,9 +932,9 @@
                                                     <p>{{__('CLASSIFICATION FORM')}}</p>
                                                 </a>
                                             </li>
-                                        @endcan
+                                        {{-- @endcan --}}
             
-                                        @can('viewany-construction', User::class)
+                                        {{-- @can('viewany-construction', User::class) --}}
                                             @if($route_active == 'Construction Data Master')
                                             @php
                                                 $construction_form = 'active';
@@ -946,13 +946,13 @@
                                                     <p>{{__('CONSTRUCTION FORM')}}</p>
                                                 </a>
                                             </li>
-                                        @endcan
+                                        {{-- @endcan --}}
                                     </ul>
                                 </li>
 
                             
 
-                            @can('viewany-gfh', User::class)
+                            {{-- @can('viewany-gfh', User::class) --}}
                                 @if($route_active == 'Golf Field Hole')
                                 @php
                                     $gfh_form = 'active';
@@ -964,10 +964,10 @@
                                         <p>{{__('GOLF FIELD HOLE')}}</p>
                                     </a>
                                 </li>
-                            @endcan
+                            {{-- @endcan --}}
                         
 
-                            @can('viewany-koc', User::class)
+                            {{-- @can('viewany-koc', User::class) --}}
                                 @if($route_active == 'KOC Data Master')
                                 @php
                                     $koc_form = 'active';
@@ -979,7 +979,7 @@
                                         <p>{{__('KIND OF CONTRACT')}}</p>
                                     </a>
                                 </li>
-                            @endcan
+                            {{-- @endcan --}}
                             
                             @can('viewany-cedingbroker', User::class)
                                 @if($route_active == 'Ceding / Broker')
@@ -995,7 +995,7 @@
                                 </li>
                             @endcan
 
-                            @can('viewany-cob', User::class)
+                            {{-- @can('viewany-cob', User::class) --}}
                                 @if($route_active == 'COB Data Master')
                                 @php
                                     $cob_form = 'active';
@@ -1007,9 +1007,9 @@
                                         <p>{{__('COB FORM')}}</p>
                                     </a>
                                 </li>
-                            @endcan
+                            {{-- @endcan --}}
 
-                            @can('viewany-occupation', User::class)
+                            {{-- @can('viewany-occupation', User::class) --}}
                                 @if($route_active == 'Occupation Data Master')
                                 @php
                                     $ocp_form = 'active';
@@ -1021,9 +1021,9 @@
                                         <p>{{__('OCCUPATION FORM')}}</p>
                                     </a>
                                 </li>
-                            @endcan
+                            {{-- @endcan --}}
 
-                            @can('viewany-eqz', User::class)
+                            {{-- @can('viewany-eqz', User::class) --}}
                                 @if($route_active == 'Earthquake Zone')
                                 @php
                                     $earthquakezone_form = 'active';
@@ -1035,9 +1035,9 @@
                                         <p>{{__('EARTHQUAKE ZONE FORM')}}</p>
                                     </a>
                                 </li>
-                            @endcan
+                            {{-- @endcan --}}
 
-                            @can('viewany-fz', User::class)
+                            {{-- @can('viewany-fz', User::class) --}}
                                 @if($route_active == 'Flood Zone Data Master')
                                 @php
                                     $flood_form = 'active';
@@ -1049,9 +1049,9 @@
                                         <p>{{__('FLOOD ZONE FORM')}}</p>
                                     </a>
                                 </li>
-                            @endcan
+                            {{-- @endcan --}}
 
-                            @can('viewany-property_type', User::class)
+                            {{-- @can('viewany-property_type', User::class) --}}
                                 @if($route_active == 'Property Type Data Master')
                                 @php
                                     $property_form = 'active';
@@ -1063,9 +1063,9 @@
                                         <p>{{__('PROPERTY TYPE FORM')}}</p>
                                     </a>
                                 </li>
-                            @endcan
+                            {{-- @endcan --}}
 
-                            @can('viewany-condition_needed', User::class)
+                            {{-- @can('viewany-condition_needed', User::class) --}}
                                 @if($route_active == 'Condition Needed Data Master')
                                 @php
                                     $cdn_form = 'active';
@@ -1077,7 +1077,7 @@
                                         <p>{{__('CONDITION NEEDED FORM')}}</p>
                                     </a>
                                 </li>
-                            @endcan
+                            {{-- @endcan --}}
 
 
                         </ul>
@@ -1125,8 +1125,21 @@
                                     </a>
                                 </li>
     
-                                <li class="nav-item has-treeview {{ @$location_menu_open }}">
-                                <a href="#" class="nav-link {{@$location_dd}}">
+                                @if(
+                                    @$route_active == 'Fire Engineering - Slip Entry' 
+                                    || @$route_active == 'Fire Engineering - Index'  
+                                    )
+                                        @php
+                                        $fed_dd = 'active';
+                                        $fed_menu_open = 'menu-open';
+                                        @endphp
+                                @else
+                                    @php
+                                    $fed_menu_open = 'menu-close';
+                                    @endphp
+                                @endif
+                                <li class="nav-item has-treeview {{ @$fed_menu_open }}">
+                                <a href="#" class="nav-link {{@$fed_dd}}">
                                     <i class="far fa-folder nav-icon text-secondary"></i>
                                     <p>
                                         {{__('FIRE & ENGINEERING DATA')}}
@@ -1136,7 +1149,7 @@
 
                                 <ul class="nav nav-treeview">
 
-                                        @if($route_active == 'Fire Engineering - Slip Entry')
+                                        @if($route_active == 'Fire Engineering - Index')
                                         @php
                                             $fes_formindex = 'active';
                                         @endphp
@@ -1165,8 +1178,21 @@
                                 </ul>
                                 </li>
 
-                                <li class="nav-item has-treeview {{ @$location_menu_open }}">
-                                <a href="#" class="nav-link {{@$location_dd}}">
+                                @if(
+                                    @$route_active == 'Financial Lines - Slip Entry' 
+                                    || @$route_active == 'Financial Lines - Index'  
+                                    )
+                                        @php
+                                        $fld_dd = 'active';
+                                        $fld_menu_open = 'menu-open';
+                                        @endphp
+                                @else
+                                    @php
+                                    $fld_menu_open = 'menu-close';
+                                    @endphp
+                                @endif
+                                <li class="nav-item has-treeview {{ @$fld_menu_open }}">
+                                <a href="#" class="nav-link {{@$fld_dd}}">
                                     <i class="far fa-folder nav-icon text-secondary"></i>
                                     <p>
                                         {{__('FINANCIAL LINES DATA')}}
@@ -1204,8 +1230,21 @@
                                 </li>
 
                                 
-                                <li class="nav-item has-treeview {{ @$location_menu_open }}">
-                                <a href="#" class="nav-link {{@$location_dd}}">
+                                @if(
+                                    @$route_active == 'Moveable Property - Slip Entry' 
+                                    || @$route_active == 'Moveable Property - Index'  
+                                    )
+                                        @php
+                                        $mpd_dd = 'active';
+                                        $mpd_menu_open = 'menu-open';
+                                        @endphp
+                                @else
+                                    @php
+                                    $mpd_menu_open = 'menu-close';
+                                    @endphp
+                                @endif
+                                <li class="nav-item has-treeview {{ @$mpd_menu_open }}">
+                                <a href="#" class="nav-link {{@$mpd_dd}}">
                                     <i class="far fa-folder nav-icon text-secondary"></i>
                                     <p>
                                         {{__('MOVEABLE PROPERTY DATA')}}
@@ -1267,9 +1306,21 @@
                                     </a>
                                 </li>
     
-
-                                <li class="nav-item has-treeview {{ @$location_menu_open }}">
-                                <a href="#" class="nav-link {{@$location_dd}}">
+                                @if(
+                                    @$route_active == 'HE & Motor - Slip Entry' 
+                                    || @$route_active == 'HE & Motor - Index'  
+                                    )
+                                        @php
+                                        $hem_dd = 'active';
+                                        $hem_menu_open = 'menu-open';
+                                        @endphp
+                                @else
+                                    @php
+                                    $hem_menu_open = 'menu-close';
+                                    @endphp
+                                @endif
+                                <li class="nav-item has-treeview {{ @$hem_menu_open }}">
+                                <a href="#" class="nav-link {{@$hem_dd}}">
                                     <i class="far fa-folder nav-icon text-secondary"></i>
                                     <p>
                                         {{__('HE & MOTOR DATA')}}

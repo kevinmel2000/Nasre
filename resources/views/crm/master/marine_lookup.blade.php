@@ -173,7 +173,7 @@
 
         <div class="card card-primary">
             <div class="card-body">
-                @can('create-marinelookup', User::class)
+                {{-- @can('create-marinelookup', User::class) --}}
                     <div class="row">
                         <div class="col-md-12 com-sm-12 mt-3">
                             <button class="btn btn-primary btn-block ">
@@ -181,7 +181,7 @@
                             </button>
                         </div>
                     </div>
-                @endcan
+                {{-- @endcan --}}
             </div>
         </div> 
         
