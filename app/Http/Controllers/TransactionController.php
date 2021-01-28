@@ -17,6 +17,7 @@ use App\Models\FeLookupLocation;
 use App\Models\MarineLookup;
 use App\Models\ConditionNeeded;
 use App\Models\ShipListTemp;
+use App\Models\InterestInsured;
 use App\Policies\FelookupLocationPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +53,7 @@ class TransactionController extends Controller
             $cnd = ConditionNeeded::orderby('id','asc')->get();
             $mlu = MarineLookup::orderby('id','asc')->get();
             $shiplist= ShipListTemp::orderby('id','desc')->get();
+            $interestlist= InterestInsured::orderby('id','desc')->get();
             $ms_ids = response()->json($insured->modelKeys());
             $lastid = count($insured);
             $sliplastid = count($slip);
@@ -65,7 +67,7 @@ class TransactionController extends Controller
                 $code_sl = $mydate . strval($sliplastid + 1);
                 $code_ms = $mydate . strval(1);
             }
-            return view('crm.transaction.marine_slip', compact(['user','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
+            return view('crm.transaction.marine_slip', compact(['user','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
          }
         else
         {
@@ -187,6 +189,33 @@ class TransactionController extends Controller
         
     }
 
+    public function storeinterestlist(Request $request)
+    {
+
+            $interest = $request->interest_insured;
+            $amount = $request->slipamount;
+            $slip_id = $request->id_slip;
+        
+            if($interest !='' && $amount !='' && $slip_id != ''){
+                $interestlist = new InterestInsured();
+                $interestlist->interest  = $interest;
+                $interestlist->amount = $amount;
+                $interestlist->slip_id = $slip_id; 
+                $interestlist->save();
+
+                return response()->json($interestlist);
+        
+            }else{
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Fill all fields'
+                    ]
+                );
+            }
+        
+    }
+
     /**
      * Display the specified resource.
      *
@@ -234,6 +263,14 @@ class TransactionController extends Controller
     {
         $shiplist = ShipListTemp::find($id);
         $shiplist->delete();
+        
+        return response()->json(['success'=>'Data has been deleted']);
+    }
+
+    public function destroyinterestlist($id)
+    {
+        $interestlist = InterestInsured::find($id);
+        $interestlist->delete();
         
         return response()->json(['success'=>'Data has been deleted']);
     }

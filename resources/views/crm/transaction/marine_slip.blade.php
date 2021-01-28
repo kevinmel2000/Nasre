@@ -119,13 +119,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('From')}}</label>
-                                                    <input type="text" name="mssharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
+                                                    <input type="text" name="mssharefrom" class="form-control form-control-sm " placeholder="total nasre share" data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input type="text" name="msshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
+                                                    <input type="text" name="msshareto" class="form-control form-control-sm " placeholder="total sum insured" data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -158,7 +158,7 @@
                                                              <tr id="sid{{ $slt->id }}">
                                                                     <td>{{ $slt->ship_code }}</td>
                                                                     <td>{{ $slt->ship_name }}</td>
-                                                                    <td><a href="" onclick="deleteshipdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
+                                                                    <td><a href="#" onclick="deleteshipdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
                                                              </tr>   
                                                             @endforeach
                                                         </tbody>
@@ -277,8 +277,9 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                     <div class="form-group">
+                                                        <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
                                                         <label for="">{{__('Number')}} </label>
-                                                        <input type="text" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="3" value="{{ $code_sl }}" readonly="readonly" required/>
+                                                        <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="3" value="{{ $code_sl }}" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -535,7 +536,7 @@
                                                         <div class="row">
                                                             <div class="col-md-8">
                                                                 <div class="col-md-12 com-sm-12 mt-3">
-                                                                    <table id="interestInsured" class="table table-bordered table-striped">
+                                                                    <table id="interestInsuredTable" class="table table-bordered table-striped">
                                                                         <thead>
                                                                         <tr>
                                                                         <th>{{__('Interest ID - Name')}}</th>
@@ -545,35 +546,39 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             <tr>
-                                                                            <td>{{__('036 - Heavy Equipment')}}</td>
-                                                                            <td>{{__('100.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
+                                                                                @foreach($interestlist as $isl)
+                                                                                    <tr id="iid{{ $isl->id }}">
+                                                                                            <td>{{ $isl->interest }}</td>
+                                                                                            <td>{{ $isl->amount }}</td>
+                                                                                            <td><a href="#" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
+                                                                                    </tr>   
+                                                                                @endforeach
                                                                             </tr>
                                                                             <tr>
-                                                                            <td>{{__('450 - Bensin')}}</td>
-                                                                            <td>{{__('100.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                <div class="form-group">
-                                                                                    <select name="slipinterestlist" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Interest list')}}</option>
-                                                                                        <option value="036 - Heavy Equipment">036 - Heavy Equipment</option>
-                                                                                        <option value="450 - Bensin">450 - Bensin</option>
-                                                                                    </select>
-                                                                                </div>  
-                                                                                </td>
-                                                                                <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="text" name="slipamount" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                                </div>
-                                                                                </td>
-                                                                                <td>
-                                                                                <div class="form-group">
-                                                                                    <button type="button" class="btn btn-md btn-primary " data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
-                                                                                </div>
-                                                                                </td>
+                                                                                <form id="addinterestinsured">
+                                                                                    @csrf
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <select id="slipinterestlist" name="slipinterestlist" class="form-control form-control-sm ">
+                                                                                                <option selected disabled>{{__('Interest list')}}</option>
+                                                                                                <option value="036 - Heavy Equipment">036 - Heavy Equipment</option>
+                                                                                                <option value="450 - Bensin">450 - Bensin</option>
+                                                                                            </select>
+                                                                                        </div>  
+                                                                                    </td>
+
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <input type="number" min="0" value="" step=".01" id="slipamount" name="slipamount" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                                        </div>
+                                                                                    </td>
+
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <button type="button" id="addinterestinsured-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </form>
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
@@ -588,7 +593,7 @@
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured')}}</label>
-                                                    <input type="text" name="sliptotalsum" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" required/>
+                                                    <input type="number" min="0" value="" step=".01" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
                                                 </div>
                                             </div>
                                         </div>
@@ -613,7 +618,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-10">
                                                                     <div class="input-group">
-                                                                        <input type="text" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" required/>
+                                                                        <input type="text" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-2">

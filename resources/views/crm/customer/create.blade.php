@@ -96,47 +96,46 @@
                             />
                           </div>
                           <span class="text text-danger"></span>
-                        </div>
-                          </div>
-                          <span class="text text-danger"></span>
                       </div>
+
       
-                      <div class="col-md-4 col-sm-12">
-                          <span ><span class="text-danger"></span> {{__('Prospect Type')}}</span>
+                        <div class="col-md-4 col-sm-12">
+                            <span ><span class="text-danger"></span> {{__('Prospect Type')}}</span>
+                            <div class="form-group">
+                                <select name="prospect_status" id="prospect_status" class="form-control form-control-sm">
+                                    <option selected disabled>{{__('Select an option')}}</option>
+                                    @foreach (config('constants.PROSPECTS') as $item)
+                                        <option defaultValue="{{$item}}">{{$item}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <span class="text text-danger"></span>
+                        </div>
+
+                        <div class="col-md-4 col-sm-12">  
                           <div class="form-group">
-                              <select name="prospect_status" id="prospect_status" class="form-control form-control-sm">
+                            <span>{{__('Industry')}}</span>  
+                            <select name="industry_id" id="industries" class="form-control form-control-sm">
+                              <option selected disabled>{{__('Select an industry')}}</option>
+                              @foreach ($industries as $industry)
+                                  <option value="{{$industry->id}}">{{$industry->name}}</option>
+                              @endforeach
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-12">
+                          <span ><span class="text-danger"></span> {{__('Customer Type')}}</span>
+                          <div class="form-group">
+                              <select name="customer_type" id="type" class="form-control form-control-sm " >
                                   <option selected disabled>{{__('Select an option')}}</option>
-                                  @foreach (config('constants.PROSPECTS') as $item)
+                                  @foreach (config('constants.CONTACT_TYPES') as $item)
                                       <option defaultValue="{{$item}}">{{$item}}</option>
-                                  @endforeach
+                                  @endforeach 
                               </select>
                           </div>
                           <span class="text text-danger"></span>
-                      </div>
-                      <div class="col-md-4 col-sm-12">  
-                        <div class="form-group">
-                          <span>{{__('Industry')}}</span>  
-                          <select name="industry_id" id="industries" class="form-control form-control-sm">
-                            <option selected disabled>{{__('Select an industry')}}</option>
-                            @foreach ($industries as $industry)
-                                <option value="{{$industry->id}}">{{$industry->name}}</option>
-                            @endforeach
-                          </select>
                         </div>
-                      </div>
-                      <div class="col-md-4 col-sm-12">
-                        <span ><span class="text-danger"></span> {{__('Customer Type')}}</span>
-                        <div class="form-group">
-                            <select name="customer_type" id="type" class="form-control form-control-sm " >
-                                <option selected disabled>{{__('Select an option')}}</option>
-                                @foreach (config('constants.CONTACT_TYPES') as $item)
-                                    <option defaultValue="{{$item}}">{{$item}}</option>
-                                @endforeach 
-                            </select>
-                        </div>
-                        <span class="text text-danger"></span>
-                    </div>
-      
       
                       <div class="col-md-8 col-sm-12">  
                         <span>{{__('Notes')}}</span>
@@ -144,6 +143,7 @@
                           <textarea class="form-control form-control-sm" rows="4" name="note"></textarea>
                         </div>
                       </div>
+
                       <div class="col-md-4 col-sm-12">  
                         <div class="form-group">
                           <span ><span class="text-danger"></span> {{__('VAT Number')}}</span>
