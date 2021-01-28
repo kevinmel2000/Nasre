@@ -37,7 +37,7 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::get('/fe-slipindex', [FeSlipController::class, 'index']);
     Route::post('/fe-slipindex', [FeSlipController::class, 'index']);
 
-   
+    Route::post('/fe-insured', [TransactionController::class, 'storefeinsured']);
     Route::delete('/fe-slip/destroy/{fe}', [FeSlipController::class, 'destroy']);
     Route::post('/fe-slip/getCostumers/','FeSlipController@getCostumers')->name('customer.getCostumers');
 
