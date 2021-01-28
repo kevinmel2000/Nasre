@@ -295,7 +295,9 @@ class ContactController extends Controller
             'vat_number'=> $request->vat_number,
             'website'=> $request->website,
             'industry_id'=> $request->industry_id,
+            'company_prefix' => $request->company_prefix,
             'company_name'=> $request->company_name,
+            'company_suffix'=> $request->company_suffix,
         ]); 
 
         $contact = Contact::create([
@@ -556,6 +558,8 @@ class ContactController extends Controller
         $customer->website = $request->website;
         $customer->vat_number = $request->vat_number;
         $customer->industry_id = $request->industry_id;
+        $customer->company_prefix = $request->company_prefix;
+        $customer->company_suffix = $request->company_suffix;
         $customer->save();
 
         $note = Note::where(['customer_id'=>$customer->id])->first();

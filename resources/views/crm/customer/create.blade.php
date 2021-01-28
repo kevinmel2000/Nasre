@@ -17,12 +17,12 @@
               <li class="nav-item">
                 <a class="nav-link active" id="contact-details" data-toggle="pill" href="#contact-details-id" role="tab" aria-controls="contact-details-id" aria-selected="true">{{__('Contact Card')}}</a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a class="nav-link" id="address-details" data-toggle="pill" href="#address-details-id" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Address Card')}}</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" id="social-media-details" data-toggle="pill" href="#social-media-details-id" role="tab" aria-controls="social-media-details-id" aria-selected="false">{{__('Social Media Card')}}</a>
-              </li>
+              </li> --}}
      
             </ul>
           </div>
@@ -66,38 +66,37 @@
                       </div>
                       <div class="col-md-4 col-sm-12">
                         <div class="form-group">
-                            <span ><span class="text-danger"></span> {{__('Company Name')}}</span>
-                            <input type="text" autocomplete="off" name="company_name" class="form-control form-control-sm "  value="{{ old('company_name') }}"
-                            />
-                        </div>
-                        <span class="text text-danger"></span>
+                          <span ><span class="text-danger"></span> {{__('Website')}}</span>
+                          <input type="text" name="website" class="form-control form-control-sm "  value="{{ old('website') }}" />
+                      </div>
+                      <span class="text text-danger"></span>
                       </div>
                           
                       <div class="col-md-4 col-sm-12">
                           <div class="form-group">
-                              <span ><span class="text-danger"></span> {{__('Website')}}</span>
-                              <input type="text" name="website" class="form-control form-control-sm "  value="{{ old('website') }}" />
+                              <span ><span class="text-danger"></span> {{__('Company Prefix')}}</span>
+                              <input type="text" name="company_prefix" class="form-control form-control-sm "  value="{{ old('company_prefix') }}" />
                           </div>
                           <span class="text text-danger"></span>
                       </div>
       
                       <div class="col-md-4 col-sm-12">
-                          <div class="form-group">
-                              <span ><span class="text-danger"></span> {{__('VAT Number')}}</span>
-                              <input type="text" name="vat_number" class="form-control form-control-sm "  value="{{ old('vat_number') }}" />
-                          </div>
-                          <span class="text text-danger"></span>
+                        <div class="form-group">
+                          <span ><span class="text-danger"></span> {{__('Company Name')}}</span>
+                          <input type="text" autocomplete="off" name="company_name" class="form-control form-control-sm "  value="{{ old('company_name') }}"
+                          />
+                        </div>
+                        <span class="text text-danger"></span>
                       </div>
       
                       <div class="col-md-4 col-sm-12">
-                          <span ><span class="text-danger"></span> {{__('Customer Type')}}</span>
+                          <span ><span class="text-danger"></span> {{__('Company Suffix')}}</span>
                           <div class="form-group">
-                              <select name="customer_type" id="type" class="form-control form-control-sm " >
-                                  <option selected disabled>{{__('Select an option')}}</option>
-                                  @foreach (config('constants.CONTACT_TYPES') as $item)
-                                      <option defaultValue="{{$item}}">{{$item}}</option>
-                                  @endforeach 
-                              </select>
+                            <input type="text" autocomplete="off" name="company_suffix" class="form-control form-control-sm "  value="{{ old('company_suffix') }}"
+                            />
+                          </div>
+                          <span class="text text-danger"></span>
+                        </div>
                           </div>
                           <span class="text text-danger"></span>
                       </div>
@@ -125,13 +124,32 @@
                           </select>
                         </div>
                       </div>
+                      <div class="col-md-4 col-sm-12">
+                        <span ><span class="text-danger"></span> {{__('Customer Type')}}</span>
+                        <div class="form-group">
+                            <select name="customer_type" id="type" class="form-control form-control-sm " >
+                                <option selected disabled>{{__('Select an option')}}</option>
+                                @foreach (config('constants.CONTACT_TYPES') as $item)
+                                    <option defaultValue="{{$item}}">{{$item}}</option>
+                                @endforeach 
+                            </select>
+                        </div>
+                        <span class="text text-danger"></span>
+                    </div>
       
       
-                      <div class="col-md-12 col-sm-12">  
+                      <div class="col-md-8 col-sm-12">  
                         <span>{{__('Notes')}}</span>
                         <div class="input-group">
                           <textarea class="form-control form-control-sm" rows="4" name="note"></textarea>
                         </div>
+                      </div>
+                      <div class="col-md-4 col-sm-12">  
+                        <div class="form-group">
+                          <span ><span class="text-danger"></span> {{__('VAT Number')}}</span>
+                          <input type="text" name="vat_number" class="form-control form-control-sm "  value="{{ old('vat_number') }}" />
+                      </div>
+                      <span class="text text-danger"></span>
                       </div>
 
 

@@ -46,7 +46,7 @@
                         @foreach (@$customers as $customer)
                             <tr>
                                 <td>{{@$customer->id}}</td>
-                                <td>{{@$customer->company_name}}</td>
+                                <td>{{@$customer->company_prefix}} {{@$customer->company_name}} {{@$customer->company_suffix}}</td>
                                 <td>
                                   
 
