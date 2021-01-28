@@ -87,11 +87,11 @@
                                     <i class="fas fa-history text-primary"></i>
                                   </a>
                                   <span>
-                                    @can('update-property_type', User::class)
+                                    {{-- @can('update-property_type', User::class) --}}
                                       <a class="text-primary mr-3" data-toggle="modal" data-target="#updatepropertytype{{$pt->id}}">
                                         <i class="fas fa-edit"></i>
                                       </a>
-                                    @endcan
+                                    {{-- @endcan --}}
   
                                     <div class="modal fade" id="updatepropertytype{{$pt->id}}" tabindex="-1" user="dialog" aria-labelledby="updatepropertytype{{$pt->id}}Label" aria-hidden="true">
                                       <div class="modal-dialog" user="document">
@@ -133,7 +133,7 @@
                                   </div>
                                   {{-- Edit Modal Ends --}}
   
-                                    @can('delete-property_type', User::class)
+                                    {{-- @can('delete-property_type', User::class) --}}
                                       <span id="delbtn{{@$pt->id}}"></span>
                                         <form id="delete-propertytype-{{$pt->id}}"
                                             action="{{ url('master-data/propertytype/destroy', $pt->id) }}"
@@ -142,7 +142,7 @@
                                             @csrf
                                         </form>
                                       </span>
-                                  @endcan  
+                                  {{-- @endcan   --}}
                                 </td>
   
                               </tr>

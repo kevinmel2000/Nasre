@@ -146,11 +146,11 @@
                                 </a>
                                 <span>
                                  
-                                    @can('update-cedingbroker', User::class)
+                                    {{-- @can('update-cedingbroker', User::class) --}}
                                       <a class="text-primary mr-3" data-toggle="modal" data-target="#updatecedingbroker{{$ceding->id}}">
                                         <i class="fas fa-edit"></i>
                                       </a>
-                                      @endcan  
+                                      {{-- @endcan   --}}
 
                                       <div class="modal fade" id="updatecedingbroker{{$ceding->id}}" tabindex="-1" user="dialog" aria-labelledby="updatecedingbroker{{$ceding->id}}Label" aria-hidden="true">
                                       <div class="modal-dialog" user="document">
@@ -254,7 +254,7 @@
 
 
 
-                                @can('delete-cedingbroker', User::class)
+                                {{-- @can('delete-cedingbroker', User::class) --}}
 
                                   <span id="delbtn{{@$ceding->id}}"></span>
                                 
@@ -264,7 +264,7 @@
                                         @method('DELETE')
                                         @csrf
                                     </form>
-                                    @endcan
+                                    {{-- @endcan --}}
 
                                 </span>
                               </td>

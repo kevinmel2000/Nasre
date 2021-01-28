@@ -94,7 +94,7 @@ class FeSlipController extends Controller
     {
          $user = Auth::user();
          $country = User::orderby('id','asc')->get();
-         $route_active = 'Fire & Engineering Lookup Location';   
+         $route_active = 'Fire Engineering - Index';   
          $mydate = date("Y").date("m").date("d");
          $fe_ids = response()->json($country->modelKeys());
          $search = @$request->input('search');

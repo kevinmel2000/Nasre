@@ -93,11 +93,11 @@
                                   
                                 <span>
                                  
-                                     @can('update-fz', User::class)
+                                     {{-- @can('update-fz', User::class) --}}
                                       <a class="text-primary mr-3" data-toggle="modal" data-target="#updatefloodzone{{$floodzonedata->id}}">
                                         <i class="fas fa-edit"></i>
                                       </a>
-                                      @endcan  
+                                      {{-- @endcan   --}}
 
                                       <div class="modal fade" id="updatefloodzone{{$floodzonedata->id}}" tabindex="-1" user="dialog" aria-labelledby="updatefloodzone{{$floodzonedata->id}}Label" aria-hidden="true">
                                       <div class="modal-dialog" user="document">
@@ -145,7 +145,7 @@
                                   {{-- Edit Modal Ends --}}
 
 
-                                  @can('delete-fz', User::class)
+                                  {{-- @can('delete-fz', User::class) --}}
                                   
 
                                   <span id="delbtn{{@$floodzonedata->id}}"></span>
@@ -157,7 +157,7 @@
                                         @csrf
                                     </form>
 
-                                   @endcan  
+                                   {{-- @endcan   --}}
                                 </span>
                               </td>
 

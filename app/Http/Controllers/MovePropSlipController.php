@@ -97,7 +97,7 @@ class MovePropSlipController extends Controller
     {
          $user = Auth::user();
          $country = User::orderby('id','asc')->get();
-         $route_active = 'Moveable Property Index';   
+         $route_active = 'Moveable Property - Index';   
          $mydate = date("Y").date("m").date("d");
          $fe_ids = response()->json($country->modelKeys());
 

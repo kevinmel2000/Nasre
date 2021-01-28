@@ -99,7 +99,7 @@ class HeMotorSlipController extends Controller
     {
          $user = Auth::user();
          $country = User::orderby('id','asc')->get();
-         $route_active = 'HE & Motor Index';   
+         $route_active = 'HE & Motor - Index';   
          $mydate = date("Y").date("m").date("d");
          $fe_ids = response()->json($country->modelKeys());
 

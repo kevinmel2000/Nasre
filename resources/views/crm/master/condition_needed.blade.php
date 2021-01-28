@@ -98,11 +98,11 @@
                                     <i class="fas fa-history text-primary"></i>
                                   </a>
                                   <span>
-                                    @can('update-condition_needed', User::class)
+                                    {{-- @can('update-condition_needed', User::class) --}}
                                       <a class="text-primary mr-3" data-toggle="modal" data-target="#updateconditionneeded{{$ndc->id}}">
                                         <i class="fas fa-edit"></i>
                                       </a>
-                                    @endcan
+                                    {{-- @endcan --}}
   
                                     <div class="modal fade" id="updateconditionneeded{{$ndc->id}}" tabindex="-1" user="dialog" aria-labelledby="updateconditionneeded{{$ndc->id}}Label" aria-hidden="true">
                                       <div class="modal-dialog" user="document">
@@ -152,7 +152,7 @@
                                   </div>
                                   {{-- Edit Modal Ends --}}
   
-                                    @can('delete-condition_needed', User::class)
+                                    {{-- @can('delete-condition_needed', User::class) --}}
                                       <span id="delbtn{{@$ndc->id}}"></span>
                                         <form id="delete-conditionneeded-{{$ndc->id}}"
                                             action="{{ url('master-data/conditionneeded/destroy', $ndc->id) }}"
@@ -161,7 +161,7 @@
                                             @csrf
                                         </form>
                                       </span>
-                                  @endcan  
+                                  {{-- @endcan   --}}
                                 </td>
   
                               </tr>

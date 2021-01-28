@@ -90,11 +90,11 @@
                                 <span>
                                     
 
-                                      @can('update-eqz', User::class)
+                                      {{-- @can('update-eqz', User::class) --}}
                                       <a class="text-primary mr-3" data-toggle="modal" data-target="#updateearthquakezone{{$earthquakezonedata->id}}">
                                         <i class="fas fa-edit"></i>
                                       </a>
-                                      @endcan  
+                                      {{-- @endcan   --}}
 
                                       <div class="modal fade" id="updateearthquakezone{{$earthquakezonedata->id}}" tabindex="-1" user="dialog" aria-labelledby="updateearthquakezone{{$earthquakezonedata->id}}Label" aria-hidden="true">
                                       <div class="modal-dialog" user="document">
@@ -141,7 +141,7 @@
                                   </div>
                                   {{-- Edit Modal Ends --}}
 
-                                  @can('delete-eqz', User::class)
+                                  {{-- @can('delete-eqz', User::class) --}}
 
                                   <span id="delbtn{{@$earthquakezonedata->id}}"></span>
                                 
@@ -152,7 +152,7 @@
                                         @csrf
                                     </form>
 
-                                   @endcan  
+                                   {{-- @endcan   --}}
                                 </span>
                               </td>
 
