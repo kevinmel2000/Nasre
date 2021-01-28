@@ -167,7 +167,7 @@ class HeMotorSlipController extends Controller
         }
 
 
-        $locationlist= TransLocationTemp::where('lookup_location_id','=',$code_ms)->orderby('id','desc')->get();
+        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
 
 
         return view('crm.transaction.hem_slip', compact(['user','cnd','locationlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','hem_ids','code_ms','code_sl','costumer']));
