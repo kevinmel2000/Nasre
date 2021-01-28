@@ -799,45 +799,53 @@
                                             <div class="col-md-12">
                                                 <div class="card">
                                                     <div class="card-header bg-gray">
-                                                        {{__('Condition Needed')}}
+                                                        {{__('Extend Coverage')}}
                                                     </div>
                                                     <div class="card-body bg-light-gray ">
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="col-md-12 com-sm-12 mt-3">
-                                                                    <table id="conditionNeeded" class="table table-bordered table-striped">
+                                                                    <table id="ExtendCoverage" class="table table-bordered table-striped">
                                                                     <thead>
                                                                     <tr>
-                                                                        <th>{{__('Condition Needed Code - Name')}}</th>
-                                                                        <th>{{__('Information')}}</th>
+                                                                        <th>{{__('Peril Code - Name')}}</th>
+                                                                        <th>{{__('Nilai (permil %.)')}}</th>
+                                                                        <th>{{__('Amount')}}</th>
                                                                         <th width="20%">{{__('Actions')}}</th>
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr>
-                                                                            <td>{{__('028 - RSMD 4.1A + TERRORISM')}}</td>
-                                                                            <td>{{__('RSMD 4.1A + TERRORISM')}}</td>
+                                                                            <td>{{__('001 - R.S.M.D')}}</td>
+                                                                            <td>{{__('y%.')}}</td>
+                                                                            <td>{{__('= y * tsi')}}</td>
                                                                             <td width="20%">{{__('delete')}}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td>{{__('028 - RSMD 4.1 AAA')}}</td>
-                                                                            <td>{{__('TERRORISM, SABOTAGE AND CIVIL COMMOTION')}}</td>
+                                                                            <td>{{__('005 - Earthquake')}}</td>
+                                                                            <td>{{__('0.1%.')}}</td>
+                                                                            <td>{{__('1.000.000')}}</td>
                                                                             <td width="20%">{{__('delete')}}</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td colspan="2">
                                                                                 <div class="form-group">
                                                                                     <select name="slipcncode" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Condition Needed Code - Name - Information List')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
+                                                                                        <option selected disabled>{{__('Peril List')}}</option>
+                                                                                        <option value="001 - R.S.M.D">001 - R.S.M.D</option>
+                                                                                        <option value="005 - Earthquake">005 - Earthquake</option>
                                                                                     </select>
                                                                                 </div>  
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="text" name="slipnilaiec" placeholder="y" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="text" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly="readonly" required/>
+                                                                                </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">

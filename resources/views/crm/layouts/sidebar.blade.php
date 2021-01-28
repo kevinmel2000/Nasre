@@ -1330,7 +1330,7 @@
 
                                 <ul class="nav nav-treeview">\
 
-                                    @if($route_active == 'HE & Motor - Slip Entry')
+                                    @if($route_active == 'HE & Motor - Index')
                                     @php
                                         $hem_form = 'active';
                                     @endphp
