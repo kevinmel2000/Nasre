@@ -1092,6 +1092,10 @@
                             || @$route_active == 'Hole In One - Slip Entry'
                             || @$route_active == 'Personal Accident - Slip Entry'
                             || @$route_active == 'HE & Motor - Slip Entry'
+                            || @$route_active == 'Fire Engineering - Index'
+                            || @$route_active == 'Financial Lines - Index'
+                            || @$route_active == 'HE & Motor - Index'
+                            || @$route_active == 'Moveable Property - Index'
                             )
                             @php
                             $trF_dd = 'active';
@@ -1203,7 +1207,7 @@
                                 <ul class="nav nav-treeview">
 
                                        
-                                        @if($route_active == 'Financial Lines - index')
+                                        @if($route_active == 'Financial Lines - Index')
                                         @php
                                             $flform = 'active';
                                         @endphp
@@ -1217,11 +1221,11 @@
             
                                         @if($route_active == 'Financial Lines - Slip Entry')
                                         @php
-                                            $flform = 'active';
+                                            $fleform = 'active';
                                         @endphp
                                         @endif
                                         <li class="nav-item">
-                                            <a href="{{url('/transaction-data/fl-slip')}}" class="nav-link {{@$flform}}">
+                                            <a href="{{url('/transaction-data/fl-slip')}}" class="nav-link {{@$fleform}}">
                                                     <i class="far fa-folder nav-icon text-secondary"></i>
                                                 <p>{{__('FINANCIAL LINES -')}} <br> {{__('SLIP ENTRY')}}</p>
                                             </a>
@@ -1254,13 +1258,13 @@
 
                                 <ul class="nav nav-treeview">
 
-                                        @if($route_active == 'Moveable Property - Slip Entry')
+                                        @if($route_active == 'Moveable Property - Index')
                                         @php
-                                            $mp_form = 'active';
+                                            $mpe_form = 'active';
                                         @endphp
                                         @endif
                                         <li class="nav-item">
-                                            <a href="{{url('/transaction-data/mp-slipindex')}}" class="nav-link {{@$mp_form}}">
+                                            <a href="{{url('/transaction-data/mp-slipindex')}}" class="nav-link {{@$mpe_form}}">
                                                     <i class="far fa-folder nav-icon text-secondary"></i>
                                                 <p>{{__('MOVEABLE PROPERTY -')}} <br> {{__('INDEX')}}</p>
                                             </a>
@@ -1328,7 +1332,7 @@
                                     </p>
                                 </a>
 
-                                <ul class="nav nav-treeview">\
+                                <ul class="nav nav-treeview">
 
                                     @if($route_active == 'HE & Motor - Index')
                                     @php
@@ -1344,11 +1348,11 @@
 
                                     @if($route_active == 'HE & Motor - Slip Entry')
                                     @php
-                                        $hem_form = 'active';
+                                        $heme_form = 'active';
                                     @endphp
                                     @endif
                                     <li class="nav-item">
-                                        <a href="{{url('/transaction-data/hem-slip')}}" class="nav-link {{@$hem_form}}">
+                                        <a href="{{url('/transaction-data/hem-slip')}}" class="nav-link {{@$heme_form}}">
                                                 <i class="far fa-folder nav-icon text-secondary"></i>
                                             <p>{{__('HE & MOTOR - SLIP ENTRY')}}</p>
                                         </a>

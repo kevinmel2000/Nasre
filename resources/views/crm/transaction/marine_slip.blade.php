@@ -308,7 +308,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('UY')}}</label>
-                                                            <input type="text" name="slipuy" class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" required/>
+                                                            <input type="number" name="slipuy" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-4" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -318,10 +318,12 @@
                                                         <label for="">{{__('Status')}}</label>
                                                         <select name="slipstatus" class="form-control form-control-sm ">
                                                             {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
-                                                            <option value="AF" selected>Offer</option>
-                                                            <option value="AN">Binding</option>
-                                                            <option value="AS">Slip</option>
-                                                            <option value="EU">Endorsement</option>
+                                                            <option value="offer" selected>Offer</option>
+                                                            <option value="binding">Binding</option>
+                                                            <option value="slip">Slip</option>
+                                                            <option value="endorsement">Endorsement</option>
+                                                            <option value="decline">Decline</option>
+                                                            <option value="cancel">Cancel</option>
                                                         </select>
                                                     </div>    
                                                     </div>
@@ -519,7 +521,21 @@
                                                 <div class="form-group">
                                                     <label>{{__('Attachment')}} </label>
                                                     <div class="input-group">
-                                                        <input type="file" name="slipfile_att" id="attachment" required>
+                                                        <div class="input-group control-group increment2" >
+                                                            <input type="file" name="slipfile_att[]" id="attachment" class="form-control" required>
+                                                            <div class="input-group-btn"> 
+                                                                <button class="btn btn-success" id="btn-success2" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clone2 hide">
+                                                            <div class="control-group input-group" id="control-group2" style="margin-top:10px">
+                                                                <input type="file" name="slipfile_att[]" class="form-control">
+                                                                <div class="input-group-btn"> 
+                                                                    <button class="btn btn-danger" id="btn-danger2" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -593,7 +609,7 @@
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured')}}</label>
-                                                    <input type="number" min="0" value="" step=".01" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
+                                                    <input type="number" min="0" value="" step=".0001" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
                                                 </div>
                                             </div>
                                         </div>
