@@ -13,5 +13,9 @@ class Koc extends Model
     protected $fillable = ['code','description','abbreviation'];
     
  
+    public function koc()
+    {
+        return $this->belongsTo('App\Models\Koc', 'parent_id');
+    }
 }
 

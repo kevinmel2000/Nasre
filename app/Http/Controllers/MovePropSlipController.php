@@ -154,13 +154,13 @@ class MovePropSlipController extends Controller
         $sliplastid = count($slip);
 
         if($lastid != null){
-            $code_ms = 'mp'.$mydate . strval($lastid + 1);
+            $code_ms = 'IN'.$mydate . strval($lastid + 1);
             $code_sl = 'mp'.$mydate . strval($sliplastid + 1);
 
         }
         else{
             $code_sl = 'mp'.$mydate . strval($sliplastid + 1);
-            $code_ms = 'mp'.$mydate . strval(1);
+            $code_ms = 'IN'.$mydate . strval(1);
         }
 
         $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();

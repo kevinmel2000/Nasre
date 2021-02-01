@@ -147,13 +147,13 @@ class FeSlipController extends Controller
         $sliplastid = count($slip);
 
         if($lastid != null){
-            $code_ms = 'fe'.$mydate . strval($lastid + 1);
+            $code_ms = 'IN'.$mydate . strval($lastid + 1);
             $code_sl = 'fe'.$mydate . strval($sliplastid + 1);
 
         }
         else{
             $code_sl = 'fe'.$mydate . strval($sliplastid + 1);
-            $code_ms = 'fe'.$mydate . strval(1);
+            $code_ms = 'IN'.$mydate . strval(1);
         }
 
         $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();

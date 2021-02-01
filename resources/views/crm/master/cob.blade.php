@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="cobcode" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_cob }}" readonly="readonly" required/>
+                          <input type="text" name="cobcode" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_cob }}" required/>
                         </div>
                     </div>
                 </div>
@@ -34,6 +34,20 @@
                       <div class="form-group">
                           <label for="">{{__('Description')}}</label>
                           <input type="text" name="cobdescription" class="form-control form-control-sm " data-validation="length" data-validation-length="2-150" required/>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                          <label for="">{{__('Parent')}}</label>
+                          <select name="parent_id" id="e1" class="form-control form-control-sm ">
+                              <option selected disabled>{{__('Select Parent')}}</option>
+                              @foreach (@$cob as $boc)
+                              <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
+                              @endforeach
+                          </select>
                       </div>
                     </div>
                 </div>
@@ -87,6 +101,7 @@
                     <th>{{__('Code')}}</th>
                     <th>{{__('Description')}}</th>
                     <th>{{__('Abbreviation')}}</th>
+                    <th>{{__('Parent')}}</th>
                     <th>{{__('Remarks')}}</th>
                     <th width="20%">{{__('Actions')}}</th>
                   </tr>
@@ -97,6 +112,7 @@
                             <td>{{@$boc->code}}</td>
                             <td>{{@$boc->description}}</td>
                             <td>{{@$boc->abbreviation}}</td>
+                            <td>{{@$boc->cob->code}} - {{@$boc->cob->description}}</td>
                             <td>{{@$boc->remarks}}</td>
                             <td>
                               <a href="#" data-toggle="tooltip" data-title="{{$boc->created_at->toDayDateTimeString()}}" class="mr-3">
@@ -146,6 +162,23 @@
                                                     <input type="text" name="abbreviationcob" class="form-control" value="{{$boc->abbreviation}}" data-validation="length" data-validation-length="1-150" required/>
                                                   </div>
                                                 </div>
+
+                                                <div class="col-md-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Parent')}}</label><br>
+                                                        <select name="parent_id" class="form-control form-control-sm e1">
+                                                            <option selected disabled>{{__('Select Parent')}}</option>
+                                                            @foreach (@$cob as $boc2)
+                                                            @if($boc->parent_id  == $boc2->id)
+                                                            <option value="{{ $boc2->id }}" selected>{{ $boc2->code }} - {{ $boc2->description }}></option>
+                                                            @else
+                                                            <option value="{{ $boc2->id }}">{{ $boc2->code }} - {{ $boc2->description }}</option>
+                                                             @endif
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-md-4 col-md-12">
                                                   <div class="form-group">
                                                     <label for="">{{__('Remarks')}}</label>

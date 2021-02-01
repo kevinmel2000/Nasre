@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="code" class="form-control form-control-sm" value="{{ $code_koc }}" readonly required/>
+                          <input type="text" name="code" class="form-control form-control-sm" value="{{ $code_koc }}"  data-validation="length" data-validation-length="1-12" required/>
                         </div>
                     </div>
                 </div>
@@ -34,6 +34,20 @@
                       <div class="form-group">
                           <label for="">{{__('Description')}}</label>
                           <input type="text" name="description" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                          <label for="">{{__('Parent')}}</label>
+                          <select name="parent_id" id="e1" class="form-control form-control-sm ">
+                              <option selected disabled>{{__('Select Parent')}}</option>
+                              @foreach (@$koc as $kocdata)
+                              <option value="{{ $kocdata->id }}">{{ $kocdata->code }} - {{ $kocdata->description }}</option>
+                              @endforeach
+                          </select>
                       </div>
                     </div>
                 </div>
@@ -79,6 +93,7 @@
                       <th>{{__('Code')}}</th>
                       <th>{{__('Description')}}</th>
                       <th>{{__('Abbreviation')}}</th>
+                      <th>{{__('Parent')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
@@ -89,6 +104,7 @@
                               <td>{{@$kocdata->code}}</td>
                               <td>{{@$kocdata->description}}</td>
                               <td>{{@$kocdata->abbreviation}}</td>
+                              <td>{{@$kocdata->koc->code}} - {{@$kocdata->koc->description}}</td>
                           
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$kocdata->created_at->toDayDateTimeString()}}" class="mr-3">
@@ -139,6 +155,22 @@
                                                     <div class="form-group">
                                                       <label for="">{{__('Abbreviation')}}</label>
                                                       <input type="text" name="abbreviation" class="form-control" value="{{$kocdata->abbreviation}}" data-validation="length" data-validation-length="2-150" required/>
+                                                    </div>
+                                                  </div>
+
+                                                  <div class="col-md-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Parent')}}</label><br>
+                                                        <select name="parent_id" class="form-control form-control-sm e1">
+                                                            <option selected disabled>{{__('Select Parent')}}</option>
+                                                            @foreach (@$koc as $kocdata2)
+                                                            @if($kocdata->parent_id  == $kocdata2->id)
+                                                            <option value="{{ $kocdata2->id }}" selected>{{ $kocdata2->code }} - {{ $kocdata2->description }}></option>
+                                                            @else
+                                                            <option value="{{ $kocdata2->id }}">{{ $kocdata2->code }} - {{ $kocdata2->description }}</option>
+                                                             @endif
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                   </div>
                                                  

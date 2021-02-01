@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Code')}} </label>
-                          <input type="text" name="ocpcode" class="form-control form-control-sm" data-validation="length" value="{{ $code_ocp }}" data-validation-length="1 - 12" readonly="readonly" required/>
+                          <input type="text" name="ocpcode" class="form-control form-control-sm" data-validation="length" value="{{ $code_ocp }}" data-validation-length="1-12" required/>
                         </div>
                     </div>
                 </div>
@@ -34,6 +34,20 @@
                       <div class="form-group">
                           <label for="">{{__('Description')}}</label>
                           <input type="text" name="ocpdescription" class="form-control form-control-sm " data-validation="length" data-validation-length="2-150" required/>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                          <label for="">{{__('Parent')}}</label>
+                          <select name="parent_id" id="e1" class="form-control form-control-sm ">
+                              <option selected disabled>{{__('Select Parent')}}</option>
+                              @foreach (@$occupation as $ocp)
+                              <option value="{{ $ocp->id }}">{{ $ocp->code }} - {{ $ocp->description }}</option>
+                              @endforeach
+                          </select>
                       </div>
                     </div>
                 </div>
@@ -102,6 +116,7 @@
                       <th>{{__('Description')}}</th>
                       <th>{{__('Abbreviation')}}</th>
                       <th>{{__('Group Type')}}</th>
+                      <th>{{__('Parent')}}</th>
                       <th>{{__('COB')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
@@ -113,6 +128,7 @@
                               <td>{{@$ocp->description}}</td>
                               <td>{{@$ocp->abbreviation}}</td>
                               <td>{{@$ocp->group_type}}</td>
+                              <td>{{@$ocp->occupation->code}} - {{@$ocp->occupation->description}}</td>
                               <td>{{@$ocp->cobs->code}} - {{@$ocp->cobs->description}}</td>
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$ocp->created_at->toDayDateTimeString()}}" class="mr-3">
@@ -183,6 +199,24 @@
                                                         </select>
                                                     </div>
                                                   </div>
+
+                                                  <div class="col-md-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Parent')}}</label><br>
+                                                        <select name="parent_id" class="form-control form-control-sm e1">
+                                                            <option selected disabled>{{__('Select Parent')}}</option>
+                                                            @foreach(@$occupation as $ocp2)
+                                                            @if($ocp->parent_id  == $ocp2->id)
+                                                            <option value="{{ $ocp2->id }}" selected>{{ $ocp2->code }} - {{ $ocp2->description }}></option>
+                                                            @else
+                                                            <option value="{{ $ocp2->id }}">{{ $ocp2->code }} - {{ $ocp2->description }}</option>
+                                                             @endif
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                  </div>
+
+                                                  
                                               
                                                 </div>
                                             </div>

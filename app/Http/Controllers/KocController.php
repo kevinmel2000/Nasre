@@ -27,7 +27,9 @@ class KocController extends Controller
           $lastid = count($koc);
 
           if($lastid != null){
-            $code_koc = $mydate . strval($lastid + 1);
+            
+            //$code_koc = $mydate . strval($lastid + 1);
+            $code_koc = strval($lastid + 1);
             // if($lastid->id == 9){
             //     $code_koc = $mydate . strval($lastid->id + 1);
             // }elseif($lastid->id >= 10){
@@ -45,7 +47,8 @@ class KocController extends Controller
             // }
         }
         else{
-            $code_koc = $mydate . strval(1);
+            //$code_koc = $mydate . strval(1);
+            $code_koc = strval($lastid + 1);
             // $code_koc = $mydate . strval($lastid->id + 1);
         }
 
@@ -76,7 +79,8 @@ class KocController extends Controller
             $user = Auth::user();
             Koc::create([
                 'code'=>$request->code,
-                'description'=>$request->description,
+                'description'=> $request->description,
+                'parent_id'=> $request->parent_id,
                 'abbreviation'=>$request->abbreviation
             ]);
             $notification = array(

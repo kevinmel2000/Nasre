@@ -150,13 +150,13 @@ class FinancialLineSlipController extends Controller
         $sliplastid = count($slip);
 
         if($lastid != null){
-            $code_ms = 'fl'.$mydate . strval($lastid + 1);
+            $code_ms = 'IN'.$mydate . strval($lastid + 1);
             $code_sl = 'fl'.$mydate . strval($sliplastid + 1);
 
         }
         else{
             $code_sl = 'fl'.$mydate . strval($sliplastid + 1);
-            $code_ms = 'fl'.$mydate . strval(1);
+            $code_ms = 'IN'.$mydate . strval(1);
         }
 
 

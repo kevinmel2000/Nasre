@@ -61,7 +61,8 @@ class CedingBrokerController extends Controller
 
           if($lastid != null){
             if($lastid->id == 9){
-                $code_ceding = $mydate . strval($lastid->id + 1);
+                //$code_ceding = $mydate . strval($lastid->id + 1);
+                $code_ceding = strval($lastid->id + 1);
             }elseif($lastid->id >= 10){
                 $code_ceding = $mydate . strval($lastid->id + 1);
             }elseif($lastid->id == 99){

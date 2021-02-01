@@ -70,8 +70,9 @@ class MasterController extends Controller
             $cob_ids = response()->json($cob->modelKeys());
 
             if($lastid != null){
-                $code_cob = $mydate . strval($lastid + 1);
-
+                $code_cob = strval($lastid + 1);
+                //$code_cob = $mydate . strval($lastid + 1);
+                
                 // if($lastid->id == 9){
                 //     $code_cob = $mydate . strval($lastid->id + 1);
                 // }elseif($lastid->id >= 10){
@@ -89,7 +90,8 @@ class MasterController extends Controller
                 // }
             }
             else{
-                $code_cob = $mydate . strval(1);
+                $code_cob = strval($lastid + 1);
+                //$code_cob = $mydate . strval(1);
             }
 
             // dd($country);
@@ -128,7 +130,8 @@ class MasterController extends Controller
 
 
             if($lastid != null){
-                $code_ocp = $mydate . strval($lastid + 1);
+                //$code_ocp = $mydate . strval($lastid + 1);
+                $code_ocp = strval($lastid + 1);
                 
                 // if($lastid->id == 9){
                 //     $code_ocp = $mydate . strval($lastid->id + 1);
@@ -147,7 +150,8 @@ class MasterController extends Controller
                 // }
             }
             else{
-                $code_ocp = $mydate . strval(1);
+                $code_ocp = strval($lastid + 1);
+                //$code_ocp = $mydate . strval(1);
             }
 
         return view('crm.master.occupation', compact(['route_active', 'occupation','cob','ocp_ids','code_ocp']));        
@@ -558,6 +562,7 @@ class MasterController extends Controller
                 'code'=>$request->cobcode,
                 'description'=>$request->cobdescription,
                 'abbreviation'=>$request->cobabbreviation,
+                'parent_id'=>$request->parent_id,
                 'remarks'=>$request->cobremarks
             ]);
             $notification = array(
@@ -586,6 +591,7 @@ class MasterController extends Controller
                 'description'=>$request->ocpdescription,
                 'abbreviation'=>$request->ocpabbreviation,
                 'group_type'=>$request->ocpgrouptype,
+                'parent_id'=>$request->parent_id,
                 'cob'=>$request->ocpcob,
             ]);
             $notification = array(
@@ -859,6 +865,7 @@ class MasterController extends Controller
             $cob->code = $request->codecob;
             $cob->description = $request->descriptioncob;
             $cob->abbreviation = $request->abbreviationcob;
+            $cob->parent_id = $request->parent_id;
             $cob->remarks = $request->remarkscob;
             $cob->save();
             $notification = array(
@@ -885,6 +892,7 @@ class MasterController extends Controller
             $ocp->description = $request->descriptionocp;
             $ocp->abbreviation = $request->abbreviationocp;
             $ocp->group_type = $request->grouptypeocp;
+            $ocp->parent_id = $request->parent_id;
             $ocp->cob = $request->cobocp;
             $ocp->save();
             $notification = array(
