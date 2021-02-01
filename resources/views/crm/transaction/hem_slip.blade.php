@@ -10,7 +10,7 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('transaction-data/hem-slip/store')}}>
+        <form method="POST" action={{url('transaction-data/hem-insured/store')}}>
           @csrf
             <div class="card">
                 <div class="card-header bg-gray">
@@ -24,7 +24,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="hemnumber"  id="insuredIDtxt"  value="{{$code_ms}}" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
+                                            <input type="text" name="hemnumber"  id="insuredIDtxt"  value="{{$code_ms}}" class="form-control form-control-sm" readonly required/>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                               <input type="number" min="0" value="0" step=".01" name="hemshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                               <input type="number" min="0" value="0" step=".01" name="hemshare" class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -83,7 +83,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01" name="hemhareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="number" min="0" value="0" step=".01" name="hemshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -152,7 +152,7 @@
                                         <div class="form-group">
                                             <label>{{__('Attachment')}} </label>
                                             <div class="input-group">
-                                                <input type="file" name="hemfile_att" id="attachment" required>
+                                                <input type="file" name="hemfile_att" id="attachment">
                                             
                                                 <div class="input-group control-group increment" >
                                                 <input type="file" name="hemfile_att[]" class="form-control">

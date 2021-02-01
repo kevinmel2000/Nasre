@@ -150,13 +150,13 @@ class FinancialLineSlipController extends Controller
         $sliplastid = count($slip);
 
         if($lastid != null){
-            $code_ms = $mydate . strval($lastid + 1);
-            $code_sl = $mydate . strval($sliplastid + 1);
+            $code_ms = 'fl'.$mydate . strval($lastid + 1);
+            $code_sl = 'fl'.$mydate . strval($sliplastid + 1);
 
         }
         else{
-            $code_sl = $mydate . strval($sliplastid + 1);
-            $code_ms = $mydate . strval(1);
+            $code_sl = 'fl'.$mydate . strval($sliplastid + 1);
+            $code_ms = 'fl'.$mydate . strval(1);
         }
 
 
@@ -171,38 +171,38 @@ class FinancialLineSlipController extends Controller
     public function storeflinsured(Request $request)
     {
         $validator = $request->validate([
-            'fesnumber'=>'required',
-            'fesinsured'=>'required',
-            'fessuggestinsured'=>'required',
-            'fessuffix'=>'required',
-            'fesshare'=>'required',
-            'fessharefrom'=>'required',
-            'fesshareto'=>'required',
-            'fescoinsurance'=>'required'
+            'flnumber'=>'required',
+            'flinsured'=>'required',
+            'flsuggestinsured'=>'required',
+            'flsuffix'=>'required',
+            'flshare'=>'required',
+            'flsharefrom'=>'required',
+            'flshareto'=>'required',
+            'flcoinsurance'=>'required'
         ]);
         
         if($validator)
         {
             $user = Auth::user();
             
-            $insureddata= Insured::where('number','=',$fesnumber)->first();
+            $insureddata= Insured::where('number','=',$request->flnumber)->first();
 
             if($insureddata==null)
             {
                 Insured::create([
-                    'number'=>$request->fesnumber,
+                    'number'=>$request->flnumber,
                     'slip_type'=>'fl',
-                    'insured_prefix' => $request->fesinsured,
-                    'insured_name'=>$request->fessuggestinsured,
-                    'insured_suffix'=>$request->fessuffix,
-                    'share'=>$request->fesshare,
-                    'share_from'=>$request->fessharefrom,
-                    'share_to'=>$request->fesshareto,
-                    'coincurance'=>$request->coincurance
+                    'insured_prefix' => $request->flinsured,
+                    'insured_name'=>$request->flsuggestinsured,
+                    'insured_suffix'=>$request->flsuffix,
+                    'share'=>$request->flshare,
+                    'share_from'=>$request->flsharefrom,
+                    'share_to'=>$request->flshareto,
+                    'coincurance'=>$request->flcoincurance
                 ]);
 
                 $notification = array(
-                    'message' => 'Fire & Engginering Insured added successfully!',
+                    'message' => 'Financial Line  Insured added successfully!',
                     'alert-type' => 'success'
                 );
             }
@@ -210,18 +210,18 @@ class FinancialLineSlipController extends Controller
             {
                 $insureddataid=$insureddata->id;
                 $insureddataup = Insured::findOrFail($insureddataid);
-                $insureddataup->insured_prefix=$request->fesinsured;
-                $insureddataup->insured_name=$request->fessuggestinsured;
-                $insureddataup->insured_suffix=$request->fessuffix;
-                $insureddataup->share=$request->fesshare;
-                $insureddataup->share_from=$request->fessharefrom;
-                $insureddataup->share_to=$request->fesshareto;
-                $insureddataup->coincurance=$request->coincurance;
+                $insureddataup->insured_prefix=$request->flinsured;
+                $insureddataup->insured_name=$request->flsuggestinsured;
+                $insureddataup->insured_suffix=$request->flsuffix;
+                $insureddataup->share=$request->flshare;
+                $insureddataup->share_from=$request->flsharefrom;
+                $insureddataup->share_to=$request->flshareto;
+                $insureddataup->coincurance=$request->flcoincurance;
                 $insureddataup->save();
 
 
                 $notification = array(
-                    'message' => 'Fire & Engginering Insured Update successfully!',
+                    'message' => 'Financial Line Insured Update successfully!',
                     'alert-type' => 'success'
                 );
             }
@@ -237,7 +237,7 @@ class FinancialLineSlipController extends Controller
         {
 
             $notification = array(
-                'message' => 'Fire & Engginering Insured added Failed!',
+                'message' => 'Financial Line Insured added Failed!',
                 'alert-type' => 'success'
             );
 

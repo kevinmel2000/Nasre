@@ -10,7 +10,7 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('transaction-data/fe-slip/store')}}>
+        <form method="POST" action={{url('transaction-data/fe-insured/store')}}>
           @csrf
             <div class="card">
                 <div class="card-header bg-gray">
@@ -24,7 +24,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="fesnumber" id="insuredIDtxt" value="{{$code_ms}}" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
+                                            <input type="text" name="fesnumber" id="insuredIDtxt" value="{{$code_ms}}" class="form-control form-control-sm" readonly required/>
                                         </div>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                                                         <div class="col-md-10">
                                                             <div class="input-group">
                                                                 
-                                                                <input type="number" min="0" value="0" step=".01" name="fesshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                <input type="number" min="0" value="0" step=".01" name="fesshare" class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" required/>
 
                                                             </div>
                                                         </div>

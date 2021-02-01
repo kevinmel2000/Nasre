@@ -154,13 +154,13 @@ class MovePropSlipController extends Controller
         $sliplastid = count($slip);
 
         if($lastid != null){
-            $code_ms = $mydate . strval($lastid + 1);
-            $code_sl = $mydate . strval($sliplastid + 1);
+            $code_ms = 'mp'.$mydate . strval($lastid + 1);
+            $code_sl = 'mp'.$mydate . strval($sliplastid + 1);
 
         }
         else{
-            $code_sl = $mydate . strval($sliplastid + 1);
-            $code_ms = $mydate . strval(1);
+            $code_sl = 'mp'.$mydate . strval($sliplastid + 1);
+            $code_ms = 'mp'.$mydate . strval(1);
         }
 
         $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
@@ -174,38 +174,38 @@ class MovePropSlipController extends Controller
     public function storempinsured(Request $request)
     {
         $validator = $request->validate([
-            'fesnumber'=>'required',
-            'fesinsured'=>'required',
-            'fessuggestinsured'=>'required',
-            'fessuffix'=>'required',
-            'fesshare'=>'required',
-            'fessharefrom'=>'required',
-            'fesshareto'=>'required',
-            'fescoinsurance'=>'required'
+            'mpnumber'=>'required',
+            'mpinsured'=>'required',
+            'mpsuggestinsured'=>'required',
+            'mpsuffix'=>'required',
+            'mpshare'=>'required',
+            'mpsharefrom'=>'required',
+            'mpshareto'=>'required',
+            'mpcoinsurance'=>'required'
         ]);
         
         if($validator)
         {
             $user = Auth::user();
             
-            $insureddata= Insured::where('number','=',$fesnumber)->first();
+            $insureddata= Insured::where('number','=',$request->mpnumber)->first();
 
             if($insureddata==null)
             {
                 Insured::create([
-                    'number'=>$request->fesnumber,
+                    'number'=>$request->mpnumber,
                     'slip_type'=>'mp',
-                    'insured_prefix' => $request->fesinsured,
-                    'insured_name'=>$request->fessuggestinsured,
-                    'insured_suffix'=>$request->fessuffix,
-                    'share'=>$request->fesshare,
-                    'share_from'=>$request->fessharefrom,
-                    'share_to'=>$request->fesshareto,
-                    'coincurance'=>$request->coincurance
+                    'insured_prefix' => $request->mpinsured,
+                    'insured_name'=>$request->mpsuggestinsured,
+                    'insured_suffix'=>$request->mpsuffix,
+                    'share'=>$request->mpshare,
+                    'share_from'=>$request->mpsharefrom,
+                    'share_to'=>$request->mpshareto,
+                    'coincurance'=>$request->mpcoinsurance
                 ]);
 
                 $notification = array(
-                    'message' => 'Fire & Engginering Insured added successfully!',
+                    'message' => 'Moveable Property Insured added successfully!',
                     'alert-type' => 'success'
                 );
             }
@@ -213,18 +213,18 @@ class MovePropSlipController extends Controller
             {
                 $insureddataid=$insureddata->id;
                 $insureddataup = Insured::findOrFail($insureddataid);
-                $insureddataup->insured_prefix=$request->fesinsured;
-                $insureddataup->insured_name=$request->fessuggestinsured;
-                $insureddataup->insured_suffix=$request->fessuffix;
-                $insureddataup->share=$request->fesshare;
-                $insureddataup->share_from=$request->fessharefrom;
-                $insureddataup->share_to=$request->fesshareto;
-                $insureddataup->coincurance=$request->coincurance;
+                $insureddataup->insured_prefix=$request->mpinsured;
+                $insureddataup->insured_name=$request->mpsuggestinsured;
+                $insureddataup->insured_suffix=$request->mpsuffix;
+                $insureddataup->share=$request->mpshare;
+                $insureddataup->share_from=$request->mpsharefrom;
+                $insureddataup->share_to=$request->mpshareto;
+                $insureddataup->coincurance=$request->mpcoinsurance;
                 $insureddataup->save();
 
 
                 $notification = array(
-                    'message' => 'Fire & Engginering Insured Update successfully!',
+                    'message' => 'Moveable Property Insured Update successfully!',
                     'alert-type' => 'success'
                 );
             }

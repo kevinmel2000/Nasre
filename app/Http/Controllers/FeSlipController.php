@@ -147,13 +147,13 @@ class FeSlipController extends Controller
         $sliplastid = count($slip);
 
         if($lastid != null){
-            $code_ms = $mydate . strval($lastid + 1);
-            $code_sl = $mydate . strval($sliplastid + 1);
+            $code_ms = 'fe'.$mydate . strval($lastid + 1);
+            $code_sl = 'fe'.$mydate . strval($sliplastid + 1);
 
         }
         else{
-            $code_sl = $mydate . strval($sliplastid + 1);
-            $code_ms = $mydate . strval(1);
+            $code_sl = 'fe'.$mydate . strval($sliplastid + 1);
+            $code_ms = 'fe'.$mydate . strval(1);
         }
 
         $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
@@ -180,7 +180,7 @@ class FeSlipController extends Controller
         {
             $user = Auth::user();
             
-            $insureddata= Insured::where('number','=',$fesnumber)->first();
+            $insureddata= Insured::where('number','=',$request->fesnumber)->first();
 
             if($insureddata==null)
             {
@@ -205,6 +205,7 @@ class FeSlipController extends Controller
             {
                 $insureddataid=$insureddata->id;
                 $insureddataup = Insured::findOrFail($insureddataid);
+
                 $insureddataup->insured_prefix=$request->fesinsured;
                 $insureddataup->insured_name=$request->fessuggestinsured;
                 $insureddataup->insured_suffix=$request->fessuffix;
