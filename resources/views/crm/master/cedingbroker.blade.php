@@ -28,6 +28,19 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">{{__('Type')}}</label>
+                        <select name="type" class="form-control form-control-sm e1">
+                            <option selected disabled>{{__('Select Type')}}</option>
+                            <option value="Ceding">Ceding</option>
+                            <option value="Broker">Broker</option>
+                        </select>
+                    </div>    
+                  </div>
+                </div>
                 
                 <div class="row">
                     <div class="col-md-12">
@@ -70,20 +83,6 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                          <label for="">{{__('Type')}}</label>
-                          <select name="type" class="form-control form-control-sm e1">
-                              <option selected disabled>{{__('Select Type')}}</option>
-                              <option value="Ceding">Ceding</option>
-                              <option value="Broker">Broker</option>
-                          </select>
-                      </div>    
-                    </div>
-                </div>
-               
-                
               </div>
             </div>
           </div>
@@ -167,13 +166,30 @@
                                                   @method('PUT')
 
                                                   <div class="row">
-                                                  <div class="col-md-6 col-md-12">
-                                                    <div class="form-group">
-                                                      <label for="">{{__('Code')}}</label>
-                                                      <input type="text" name="code" class="form-control" value="{{$ceding->code}}" required readonly/>
+                                                    <div class="col-md-6 col-md-12">
+                                                      <div class="form-group">
+                                                        <label for="">{{__('Code')}}</label>
+                                                        <input type="text" name="code" class="form-control" value="{{$ceding->code}}" required readonly/>
+                                                      </div>
                                                     </div>
                                                   </div>
-                                                </div>
+
+                                                  <div class="row">
+                                                    <div class="col-md-6 col-md-12">
+                                                      <div class="form-group">
+                                                         <label for="">{{__('Type')}}</label><br>
+                                                          <select name="type" class="e1 form-control form-control-sm ">
+                                                              @if($ceding->type  == 'Ceding')
+                                                              <option value="Ceding" selected>Ceding</option>
+                                                              <option value="Broker" >Broker</option>
+                                                              @elseif($ceding->type  == 'Broker')
+                                                              <option value="Broker" selected>Broker</option>
+                                                              <option value="Ceding" >Ceding</option>
+                                                              @endif
+                                                          </select> 
+                                                        </div>
+                                                    </div>
+                                                  </div>
 
                                                   <div class="row">
                                                     <div class="col-md-6 col-md-12">
@@ -220,25 +236,6 @@
                                                         </div>
                                                     </div>
                                                   </div>
-
-                                                  <div class="row">
-                                                    <div class="col-md-6 col-md-12">
-                                                      <div class="form-group">
-                                                         <label for="">{{__('Type')}}</label><br>
-                                                          <select name="type" class="e1 form-control form-control-sm ">
-                                                              @if($ceding->type  == 'Ceding')
-                                                              <option value="Ceding" selected>Ceding</option>
-                                                              <option value="Broker" >Broker</option>
-                                                              @elseif($ceding->type  == 'Broker')
-                                                              <option value="Broker" selected>Broker</option>
-                                                              <option value="Ceding" >Ceding</option>
-                                                              @endif
-                                                          </select> 
-                                                        </div>
-                                                    </div>
-                                                  </div>
-
-                                                 
 
                                               </div>
 

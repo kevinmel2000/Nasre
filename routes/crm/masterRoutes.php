@@ -140,7 +140,13 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::put('propertytype/{pt}', [MasterController::class, 'updatepropertytype']);
     Route::delete('/propertytype/destroy/{pt}', [MasterController::class, 'destroypropertytype']);
 
-    // SECTION property Type Routes
+     // SECTION property Type Routes
+     Route::get('/companytype', [MasterController::class, 'indexcompanytype']);
+     Route::post('/companytype/store', [MasterController::class, 'storecompanytype']);
+     Route::put('companytype/{ct}', [MasterController::class, 'updatecompanytype']);
+     Route::delete('/companytype/destroy/{ct}', [MasterController::class, 'destroycompanytype']);
+
+    // SECTION condition Needed Routes
     Route::get('/conditionneeded', [MasterController::class, 'indexconditionneeded']);
     Route::post('/conditionneeded/store', [MasterController::class, 'storeconditionneeded']);
     Route::put('conditionneeded/{cdn}', [MasterController::class, 'updateconditionneeded']);

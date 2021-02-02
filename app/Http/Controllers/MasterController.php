@@ -14,6 +14,7 @@ use App\Models\PropertyType;
 use App\Models\ConditionNeeded;
 use App\Models\Collection;
 use App\Models\Construction;
+use App\Models\CompanyType;
 use App\Models\MarineLookup;
 use PHPUnit\Framework\Constraint\Count;
 use Illuminate\Support\Facades\Auth;
@@ -504,6 +505,53 @@ class MasterController extends Controller
         }
     }
 
+    public function indexcompanytype(Request $request)
+    {
+        $user = Auth::user();
+        $route_active = 'Company Type Data Master';
+        $search = @$request->input('search');
+        $mydate = date("Y").date("m").date("d");
+
+        // dd($country);
+        if(empty($search))
+         {
+            $companytype = CompanyType::orderby('id','asc')->get();
+            $companytype_ids = response()->json($companytype->modelKeys());
+            $lastid = count($companytype);
+
+            if($lastid != null){
+                $code_ct = $mydate . strval($lastid + 1);
+
+                // if($lastid->id == 9){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 10){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 99){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 100){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id == 999){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }elseif($lastid->id >= 1000){
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }else{
+                //     $code_st = $mydate . strval($lastid->id + 1);
+                // }
+            }
+            else{
+                $code_ct = $mydate . strval(1);
+            }
+
+            return view('crm.master.companytype', compact(['route_active', 'companytype','companytype_ids','code_ct']));  
+         }
+        else
+        {
+          $companytype = CompanyType::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $companytype_ids = response()->json($companytype->modelKeys());
+          return view('crm.master.companytype', compact('user','companytype','route_active','companytype_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -787,6 +835,28 @@ class MasterController extends Controller
             ]);
             $notification = array(
                 'message' => 'Condition Needed Data added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
+    public function storecompanytype(Request $request)
+    {
+        $validator = $request->validate([
+            'ctcode'=>'required|max:12|unique:company_type,code',
+            'ctname'=>'required'
+        ]);
+        if($validator){
+            $user = Auth::user();
+            CompanyType::create([
+                'code'=>$request->ctcode,
+                'name' => $request->ctname
+            ]);
+            $notification = array(
+                'message' => 'Company Type added successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);
@@ -1098,6 +1168,29 @@ class MasterController extends Controller
 
    }
 
+   public function updatecompanytype(Request $request, CompanyType $ct)
+   {
+    
+        $validator = $request->validate([
+            'codect'=>'required|max:12,unique:company_type,code',
+                'namect'=>'required'
+        ]);
+        
+        if($validator){
+            $ct->code = $request->codect;
+            $ct->name = $request->namect;
+            $ct->save();
+            $notification = array(
+                'message' => 'Company Type Data updated successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+
+   }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -1291,5 +1384,23 @@ class MasterController extends Controller
             return back()->with($notification);
         }
     }
+
+    public function destroycompanytype(CompanyType $ct)
+    {
+        if($ct->delete()){
+            $notification = array(
+                'message' => 'Company Type Data deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
 
 }

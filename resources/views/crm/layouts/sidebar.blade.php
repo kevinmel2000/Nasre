@@ -995,6 +995,20 @@
                                 </li>
                             @endcan
 
+                            {{-- @can('viewany-cedingbroker', User::class) --}}
+                                @if($route_active == 'Company Type Data Master')
+                                @php
+                                    $ctform = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/companytype')}}" class="nav-link {{@$ctform}}">
+                                            <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>{{__('COMPANY TYPE FORM')}}</p>
+                                    </a>
+                                </li>
+                            {{-- @endcan --}}
+
                             {{-- @can('viewany-cob', User::class) --}}
                                 @if($route_active == 'COB Data Master')
                                 @php
