@@ -16,7 +16,7 @@ class Occupation extends Model
         return $this->belongsTo('App\Models\COB', 'cob');
     }
 
-    public function occupation()
+    public function occupationparent()
     {
         return $this->belongsTo('App\Models\Occupation', 'parent_id');
     }

@@ -15,6 +15,9 @@ use App\Http\Controllers\FloodZoneController;
 Route::get('get-state-list','FeLookupLocationController@getStateList');
 Route::get('get-city-list','FeLookupLocationController@getCityList');
 Route::get('get-cedingbroker-autocode','CedingBrokerController@generatecode')->name('cedingbroker.getcode');
+Route::get('get-koc-autocode','KocController@generatecode')->name('koc.getcode');
+Route::get('get-cob-autocode','MasterController@generatecodecob')->name('cob.getcode');
+Route::get('get-occ-autocode','MasterController@generatecodeocc')->name('occ.getcode');
 
 
 Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
@@ -65,8 +68,8 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // SECTION KOC Routes
     Route::get('/koc', [KocController::class, 'index'])->middleware(['can:view-koc']);
     Route::post('/koc/store', [KocController::class, 'store'])->middleware(['can:create-koc']);
-    Route::put('/koc/update/{exc}', [KocController::class, 'update'])->middleware(['can:update-koc']);
-    Route::delete('/koc/destroy/{exc}', [KocController::class, 'destroy'])->middleware(['can:delete-koc']);
+    Route::put('/koc/update/{koc}', [KocController::class, 'update'])->middleware(['can:update-koc']);
+    Route::delete('/koc/destroy/{koc}', [KocController::class, 'destroy'])->middleware(['can:delete-koc']);
 
 
     // SECTION City Routes

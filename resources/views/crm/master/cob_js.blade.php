@@ -3,6 +3,34 @@
 <script>
         $(document).ready(function() { $(".e1").select2({ width: '100%' }); });
 </script>
+
+<script>
+    $('#cobparentdd').change(function(){
+        var parentcob = $(this).val();
+
+        if(parentcob){
+            $.ajax({
+                type:"GET",
+                dataType: 'json',
+                url:"{{url('get-cob-autocode')}}?cob_code="+parentcob,
+                success:function(response){        
+                    if(response){
+                        console.log(response);
+                        $("#cobcode").val(response.autocode);
+                        $("#cobcode").attr('readonly',true);
+                    }else{
+                        console.log("data gak ada");
+                    }
+                }
+            });
+        }else{
+            $("#cobcode").val(" ");
+            $("#cobcode").attr('readonly',false);
+        }
+    });
+
+</script>
+
 <script>
     $(function () {
       "use strict";

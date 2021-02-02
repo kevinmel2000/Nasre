@@ -24,9 +24,23 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="cobcode" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_cob }}" required/>
+                          <input type="text" id="cobcode" name="cobcode" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_cob }}" required/>
                         </div>
                     </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">{{__('Parent')}}</label>
+                        <select name="parent_id" id="cobparentdd" class="form-control form-control-sm ">
+                            <option selected disabled>{{__('Select Parent')}}</option>
+                            @foreach (@$cob as $boc)
+                            <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                  </div>
                 </div>
                 
                 <div class="row">
@@ -38,19 +52,7 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                          <label for="">{{__('Parent')}}</label>
-                          <select name="parent_id" id="e1" class="form-control form-control-sm ">
-                              <option selected disabled>{{__('Select Parent')}}</option>
-                              @foreach (@$cob as $boc)
-                              <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
-                              @endforeach
-                          </select>
-                      </div>
-                    </div>
-                </div>
+                
 
                 <div class="row">
                     <div class="col-md-12">

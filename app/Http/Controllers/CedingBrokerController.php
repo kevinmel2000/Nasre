@@ -40,35 +40,7 @@ class CedingBrokerController extends Controller
           $companytype = CompanyType::orderby('id','asc')->get();
          
 
-<<<<<<< HEAD
           return view('crm.master.cedingbroker', compact('user','companytype','cedingbroker','route_active','cedingbroker_ids','country'))->with('i', ($request->input('page', 1) - 1) * 10);
-=======
-          $lastid = CedingBroker::select('id')->latest()->first();
-
-          if($lastid != null){
-            if($lastid->id == 9){
-                //$code_ceding = $mydate . strval($lastid->id + 1);
-                $code_ceding = strval($lastid->id + 1);
-            }elseif($lastid->id >= 10){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 99){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 100){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 999){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 1000){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }else{
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }
-        }
-        else{
-            $code_ceding = $mydate . strval($lastid->id + 1);
-        }
-
-          return view('crm.master.cedingbroker', compact('user','cedingbroker','route_active','cedingbroker_ids','country','code_ceding'))->with('i', ($request->input('page', 1) - 1) * 10);
->>>>>>> 40562efd319b0465341d20f93918a0fc9ca8c638
          }
     }
 
@@ -94,6 +66,8 @@ class CedingBrokerController extends Controller
           else{
               $code_ceding = '0000' . strval(1);
           }
+
+          
 
           return response()->json(
             [

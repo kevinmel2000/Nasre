@@ -1,4 +1,31 @@
 <script>
+    $('#kocparentdd').change(function(){
+        var parentkoc = $(this).val();
+
+        if(parentkoc){
+            $.ajax({
+                type:"GET",
+                dataType: 'json',
+                url:"{{url('get-koc-autocode')}}?koc_code="+parentkoc,
+                success:function(response){        
+                    if(response){
+                        console.log(response);
+                        $("#koccode").val(response.autocode);
+                        $("#koccode").attr('readonly',true);
+                    }else{
+                        console.log("data gak ada");
+                    }
+                }
+            });
+        }else{
+            $("#koccode").val(" ");
+            $("#koccode").attr('readonly',false);
+        }
+    });
+
+</script>
+
+<script>
     $(function () {
       "use strict";
   

@@ -4,6 +4,33 @@
         $(document).ready(function() { $(".e1").select2({ width: '100%' }); });
 </script>
 <script>
+    $('#ocpparentdd').change(function(){
+        var parentocp = $(this).val();
+
+        if(parentocp){
+            $.ajax({
+                type:"GET",
+                dataType: 'json',
+                url:"{{url('get-koc-autocode')}}?ocp_code="+parentocp,
+                success:function(response){        
+                    if(response){
+                        console.log(response);
+                        $("#ocpcode").val(response.autocode);
+                        $("#ocpcode").attr('readonly',true);
+                    }else{
+                        console.log("data gak ada");
+                    }
+                }
+            });
+        }else{
+            $("#ocpcode").val(" ");
+            $("#ocpcode").attr('readonly',false);
+        }
+    });
+
+</script>
+
+<script>
     $(function () {
       "use strict";
   

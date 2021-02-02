@@ -31,6 +31,7 @@
 
 <script>
     var CSRF_TOKEN = $('meta[name="_token2"]').attr('content');
+    
    $(document).ready(function() { 
            
            $(".e1").select2({ width: '100%' }); 
@@ -162,7 +163,7 @@
        var interest = $('#slipinterestlist').val();
        var amount = $('#slipamount').val();
        var slip_id = $('#slipnumber').val();
-       var token = $('input[name=_token]').val();
+       var token2 = $('input[name=_token2]').val();
        
        
        $.ajax({
@@ -172,7 +173,7 @@
                interest_insured:interest,
                slipamount:amount,
                id_slip:slip_id,
-               _token:token
+               _token:token2
            },
            success:function(response){
             
@@ -195,7 +196,7 @@
                 
             //    }
            }
-       })
+       });
 
    });
 </script>

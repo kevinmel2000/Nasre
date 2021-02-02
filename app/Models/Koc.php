@@ -10,10 +10,10 @@ class Koc extends Model
 
     protected $table = 'koc';
 
-    protected $fillable = ['code','description','abbreviation'];
+    protected $fillable = ['code','description','abbreviation','parent_id'];
     
  
-    public function koc()
+    public function kocparent()
     {
         return $this->belongsTo('App\Models\Koc', 'parent_id');
     }

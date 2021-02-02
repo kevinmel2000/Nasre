@@ -23,45 +23,40 @@ class KocController extends Controller
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $koc = Koc::orderby('id','desc')->get();
+          $kocparent = Koc::where('code','<',100)->orderby('code','desc')->get();
           $koc_ids = response()->json($koc->modelKeys());
-          $lastid = count($koc);
-
-          if($lastid != null){
-            
-            //$code_koc = $mydate . strval($lastid + 1);
-            $code_koc = strval($lastid + 1);
-            // if($lastid->id == 9){
-            //     $code_koc = $mydate . strval($lastid->id + 1);
-            // }elseif($lastid->id >= 10){
-            //     $code_koc = $mydate . strval($lastid->id + 1);
-            // }elseif($lastid->id == 99){
-            //     $code_koc = $mydate . strval($lastid->id + 1);
-            // }elseif($lastid->id >= 100){
-            //     $code_koc = $mydate . strval($lastid->id + 1);
-            // }elseif($lastid->id == 999){
-            //     $code_koc = $mydate . strval($lastid->id + 1);
-            // }elseif($lastid->id >= 1000){
-            //     $code_koc = $mydate . strval($lastid->id + 1);
-            // }else{
-            //     $code_koc = $mydate . strval($lastid->id + 1);
-            // }
-        }
-        else{
-            //$code_koc = $mydate . strval(1);
-            $code_koc = strval($lastid + 1);
-            // $code_koc = $mydate . strval($lastid->id + 1);
-        }
-
-
-          return view('crm.master.koc', compact('user','koc','route_active','koc_ids','code_koc'))->with('i', ($request->input('page', 1) - 1) * 10);
+          
+          return view('crm.master.koc', compact('user','koc','kocparent','route_active','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
           $koc=Koc::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $kocparent = Koc::where('parent_id','')->orderby('code','desc')->get();
           $koc_ids = response()->json($koc->modelKeys());
-          return view('crm.master.koc', compact('user','koc','route_active','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.master.koc', compact('user','koc','kocparent','route_active','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
+    }
+
+    public function generatecode(request $request)
+    {
+        $koc_parent = Koc::where('id',$request->koc_code)->first();
+        $koc = Koc::where('parent_id',$request->koc_code)->orderby('id','desc')->get();
+        $lastid = count($koc);
+        
+        if($lastid > 0){
+                $code_koc = $koc_parent->code . strval($lastid + 1);
+        }
+        elseif($lastid == 0){
+            $code_koc =  $koc_parent->code  . strval(1);
+        }
+       
+
+          return response()->json(
+            [
+                'autocode' => $code_koc
+            ]
+        );
     }
 
     public function store(Request $request)
@@ -74,7 +69,7 @@ class KocController extends Controller
         
         if($validator)
         {
-            //print_r($request);
+            // dd($request);
             //exit();
             $user = Auth::user();
             Koc::create([
@@ -107,6 +102,8 @@ class KocController extends Controller
         if($validator){
             
             $data=$request->all();
+
+            // dd($data);
             $kocs = Koc::find($koc);
             $kocs->update($data);
 

@@ -11,7 +11,7 @@ class COB extends Model
 
     protected $table = 'cob';
 
-    public function cob()
+    public function cobparent()
     {
         return $this->belongsTo('App\Models\COB', 'parent_id');
     }

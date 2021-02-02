@@ -24,10 +24,24 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Code')}} </label>
-                          <input type="text" name="ocpcode" class="form-control form-control-sm" data-validation="length" value="{{ $code_ocp }}" data-validation-length="1-12" required/>
+                          <input type="text" id="ocpcode" name="ocpcode" class="form-control form-control-sm" data-validation="length" value="{{ $code_ocp }}" data-validation-length="1-12" required/>
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">{{__('Parent')}}</label>
+                        <select name="parent_id" id="ocpparentdd" class="form-control form-control-sm ">
+                            <option selected disabled>{{__('Select Parent')}}</option>
+                            @foreach (@$occupation as $ocp)
+                            <option value="{{ $ocp->id }}">{{ $ocp->code }} - {{ $ocp->description }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                  </div>
+                </div>  
                 
                 <div class="row">
                     <div class="col-md-12">
@@ -38,19 +52,7 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                          <label for="">{{__('Parent')}}</label>
-                          <select name="parent_id" id="e1" class="form-control form-control-sm ">
-                              <option selected disabled>{{__('Select Parent')}}</option>
-                              @foreach (@$occupation as $ocp)
-                              <option value="{{ $ocp->id }}">{{ $ocp->code }} - {{ $ocp->description }}</option>
-                              @endforeach
-                          </select>
-                      </div>
-                    </div>
-                </div>
+                
 
                 <div class="row">
                     <div class="col-md-12">

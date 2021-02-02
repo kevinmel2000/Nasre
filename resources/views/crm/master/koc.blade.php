@@ -24,9 +24,24 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="code" class="form-control form-control-sm" value="{{ $code_koc }}"  data-validation="length" data-validation-length="1-12" required/>
+                          <input type="text" id="koccode" name="code" class="form-control form-control-sm" value="" placeholder="enter code manually if not have parent data" data-validation="length" data-validation-length="1-12" required/>
                         </div>
                     </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">{{__('Parent')}}</label>
+                        <select name="parent_id" id="kocparentdd" class="form-control form-control-sm ">
+                            <option selected disabled>{{__('Select Parent')}}</option>
+                            <option  value=""> </option>
+                            @foreach (@$kocparent as $parentdata)
+                            <option value="{{ $parentdata->id }}">{{ $parentdata->code }} - {{ $parentdata->description }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                  </div>
                 </div>
                 
                 <div class="row">
@@ -38,19 +53,7 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                          <label for="">{{__('Parent')}}</label>
-                          <select name="parent_id" id="e1" class="form-control form-control-sm ">
-                              <option selected disabled>{{__('Select Parent')}}</option>
-                              @foreach (@$koc as $kocdata)
-                              <option value="{{ $kocdata->id }}">{{ $kocdata->code }} - {{ $kocdata->description }}</option>
-                              @endforeach
-                          </select>
-                      </div>
-                    </div>
-                </div>
+                
 
                 <div class="row">
                     <div class="col-md-12">
@@ -104,7 +107,7 @@
                               <td>{{@$kocdata->code}}</td>
                               <td>{{@$kocdata->description}}</td>
                               <td>{{@$kocdata->abbreviation}}</td>
-                              <td>{{@$kocdata->koc->code}} - {{@$kocdata->koc->description}}</td>
+                              <td>{{@$kocdata->kocparent->code}} - {{@$kocdata->kocparent->description}}</td>
                           
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$kocdata->created_at->toDayDateTimeString()}}" class="mr-3">
@@ -114,11 +117,11 @@
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
-                                   @can('update-koc', User::class)
+                                   {{-- @can('update-koc', User::class) --}}
                                     <a class="text-primary mr-3" data-toggle="modal" data-target="#updatekoc{{$kocdata->id}}">
                                       <i class="fas fa-edit"></i>
                                     </a>
-                                    @endcan  
+                                    {{-- @endcan   --}}
 
                                     <div class="modal fade" id="updatekoc{{$kocdata->id}}" tabindex="-1" user="dialog" aria-labelledby="updatekoc{{$kocdata->id}}Label" aria-hidden="true">
                                     <div class="modal-dialog" user="document">
@@ -165,7 +168,7 @@
                                                             <option selected disabled>{{__('Select Parent')}}</option>
                                                             @foreach (@$koc as $kocdata2)
                                                             @if($kocdata->parent_id  == $kocdata2->id)
-                                                            <option value="{{ $kocdata2->id }}" selected>{{ $kocdata2->code }} - {{ $kocdata2->description }}></option>
+                                                            <option value="{{ $kocdata2->id }}" selected>{{ $kocdata2->code }} - {{ $kocdata2->description }}</option>
                                                             @else
                                                             <option value="{{ $kocdata2->id }}">{{ $kocdata2->code }} - {{ $kocdata2->description }}</option>
                                                              @endif
@@ -186,7 +189,7 @@
                                 </div>
                                 {{-- Edit Modal Ends --}}
 
-                                  @can('delete-koc', User::class)
+                                  {{-- @can('delete-koc', User::class) --}}
 
                                   <span id="delbtn{{@$kocdata->id}}"></span>
                                 
@@ -197,7 +200,7 @@
                                         @csrf
                                     </form>
 
-                                   @endcan  
+                                   {{-- @endcan   --}}
                                 </span>
                               </td>
 

@@ -67,6 +67,7 @@ class MasterController extends Controller
          {
 
             $cob = COB::orderby('id','asc')->get();
+            $cobparent = COB::where('code','<',100)->orderby('code','desc')->get();
             $lastid = count($cob);
             $cob_ids = response()->json($cob->modelKeys());
 
@@ -96,7 +97,7 @@ class MasterController extends Controller
             }
 
             // dd($country);
-        return view('crm.master.cob', compact(['route_active', 'cob','cob_ids','code_cob'])); 
+        return view('crm.master.cob', compact(['route_active','cobparent', 'cob','cob_ids','code_cob'])); 
 
         }
         else
@@ -125,6 +126,7 @@ class MasterController extends Controller
         if(empty($search))
          {
             $occupation = Occupation::orderby('id','asc')->get();
+            $ocpparent = Occupation::where('code','<',100)->orderby('code','desc')->get();
             $lastid = count($occupation);
             $ocp_ids = response()->json($occupation->modelKeys());
             $cob = COB::orderby('id','asc')->get();
@@ -155,7 +157,7 @@ class MasterController extends Controller
                 //$code_ocp = $mydate . strval(1);
             }
 
-        return view('crm.master.occupation', compact(['route_active', 'occupation','cob','ocp_ids','code_ocp']));        
+        return view('crm.master.occupation', compact(['route_active', 'ocpparent','occupation','cob','ocp_ids','code_ocp']));        
 
         }
         else
@@ -522,6 +524,48 @@ class MasterController extends Controller
           $companytype_ids = response()->json($companytype->modelKeys());
           return view('crm.master.companytype', compact('user','companytype','route_active','companytype_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
         }
+    }
+
+    public function generatecodecob(request $request)
+    {
+        $cob_parent = COB::where('id',$request->cob_code)->first();
+        $cob = COB::where('parent_id',$request->cob_code)->orderby('id','desc')->get();
+        $lastid = count($cob);
+        
+        if($lastid > 0){
+                $code_cob = $cob_parent->code . strval($lastid + 1);
+        }
+        elseif($lastid == 0){
+            $code_cob =  $cob_parent->code  . strval(1);
+        }
+       
+
+          return response()->json(
+            [
+                'autocode' => $code_cob
+            ]
+        );
+    }
+
+    public function generatecodeocp(request $request)
+    {
+        $ocp_parent = Occupation::where('id',$request->ocp_code)->first();
+        $ocp = Occupation::where('parent_id',$request->ocp_code)->orderby('id','desc')->get();
+        $lastid = count($ocp);
+        
+        if($lastid > 0){
+                $code_ocp = $ocp_parent->code . strval($lastid + 1);
+        }
+        elseif($lastid == 0){
+            $code_ocp =  $ocp_parent->code  . strval(1);
+        }
+       
+
+          return response()->json(
+            [
+                'autocode' => $code_ocp
+            ]
+        );
     }
 
     /**
