@@ -317,7 +317,7 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Status')}}</label>
                                                         <select name="slipstatus" class="form-control form-control-sm ">
-                                                            {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
+                                                            {{-- <option selected disabled>{{__('Select Status')}}</option> --}}
                                                             <option value="offer" selected>Offer</option>
                                                             <option value="binding">Binding</option>
                                                             <option value="slip">Slip</option>
