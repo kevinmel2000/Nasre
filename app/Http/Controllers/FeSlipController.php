@@ -147,14 +147,61 @@ class FeSlipController extends Controller
         $sliplastid = count($slip);
 
         if($lastid != null){
-            $code_ms = $mydate . strval($lastid + 1);
-            $code_sl = $mydate . strval($sliplastid + 1);
+            if($lastid < 10)
+            {
+                $code_ms = "IN" . $mydate . "0000" . strval($lastid + 1);
+            }   
+            elseif($lastid > 9 && $lastid < 100)
+            {
+                $code_ms = "IN" . $mydate . "000" . strval($lastid + 1);
+            }
+            elseif($lastid > 99 && $lastid < 1000)
+            {
+                $code_ms = "IN" . $mydate . "00" . strval($lastid + 1);
+            }
+            elseif($lastid > 999 && $lastid < 10000)
+            {
+                $code_ms = "IN" . $mydate . "0" . strval($lastid + 1);
+            }
+            elseif($lastid > 9999 && $lastid < 100000)
+            {
+                $code_ms = "IN" . $mydate  . strval($lastid + 1);
+            }
+
 
         }
         else{
-            $code_sl = $mydate . strval($sliplastid + 1);
-            $code_ms = $mydate . strval(1);
+            $code_ms = "IN" . $mydate . "0000" . strval(1);
         }
+
+        if($sliplastid != null){
+            if($lastid < 10)
+            {
+                $code_sl = "FE". $mydate . "0000" . strval($sliplastid + 1);
+            }   
+            elseif($lastid > 9 && $lastid < 100)
+            {
+                $code_sl = "FE". $mydate . "000" . strval($sliplastid + 1);
+            }
+            elseif($lastid > 99 && $lastid < 1000)
+            {
+                $code_sl = "FE". $mydate . "00" . strval($sliplastid + 1);
+            }
+            elseif($lastid > 999 && $lastid < 10000)
+            {
+                $code_sl = "FE". $mydate . "0" . strval($sliplastid + 1);
+            }
+            elseif($lastid > 9999 && $lastid < 100000)
+            {
+                $code_sl = "FE". $mydate . strval($sliplastid + 1);
+            }
+
+            
+        }
+        else{
+            $code_sl = "FE" . $mydate . "0000" . strval(1);
+        }
+
 
         $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
 
@@ -180,7 +227,7 @@ class FeSlipController extends Controller
         {
             $user = Auth::user();
             
-            $insureddata= Insured::where('number','=',$fesnumber)->first();
+            $insureddata= Insured::where('number','=',$request->fesnumber)->first();
 
             if($insureddata==null)
             {
@@ -205,6 +252,7 @@ class FeSlipController extends Controller
             {
                 $insureddataid=$insureddata->id;
                 $insureddataup = Insured::findOrFail($insureddataid);
+
                 $insureddataup->insured_prefix=$request->fesinsured;
                 $insureddataup->insured_name=$request->fessuggestinsured;
                 $insureddataup->insured_suffix=$request->fessuffix;

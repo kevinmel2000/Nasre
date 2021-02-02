@@ -155,11 +155,79 @@
   
   </script>
 
+<script type="text/javascript">
+
+function GoogleGeocode() {
+  geocoder = new google.maps.Geocoder();
+  this.geocode = function(address, callbackFunction) {
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          var result = {};
+          result.latitude = results[0].geometry.location.lat();
+          result.longitude = results[0].geometry.location.lng();
+          callbackFunction(result);
+        } else {
+          alert("Geocode was not successful for the following reason: " + status);
+          callbackFunction(null);
+        }
+      });
+  };
+}
+
+
+function GoogleGeocode2() {
+  geocoder = new google.maps.Geocoder();
+  this.geocode = function(address, callbackFunction) {
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          var result = {};
+          result.latitude = results[0].geometry.location.lat();
+          result.longitude = results[0].geometry.location.lng();
+          callbackFunction(result);
+        } else {
+          alert("Geocode was not successful for the following reason: " + status);
+          callbackFunction(null);
+        }
+      });
+  };
+}
+
+//Process form input
+$('input[name=address]').on('input',function(e){
+ //alert('Changed!');
+ e.preventDefault();
+    //Get the user input and use it
+    var userinput = $('form #address').val();
+      if (userinput == "")
+      {
+        alert("The input box is blank.");
+        return false;
+      }
+      var g = new GoogleGeocode2();
+      var address = userinput;
+      g.geocode(address, function(data) {
+        if(data != null) {
+          olat = data.latitude;
+          olng = data.longitude;
+          //$('#result').append("<p><strong>"+userinput+" -> </strong> Latitude: " + olat + " , " + "Longitude: " + olng + "</p>")
+          //alert(olat);
+          var latLng2 = new google.maps.LatLng(olat,olng);
+          updateMarkerPosition(latLng2); 
+        } else {
+          //Unable to geocode
+          alert('ERROR! Unable to geocode address');
+        }
+      });  
+
+});
+
+</script>
+
 
 <script type="text/javascript">
 var geocoder = geocoder = new google.maps.Geocoder();
 
-    //* Fungsi untuk mendapatkan nilai latitude longitude
+//* Fungsi untuk mendapatkan nilai latitude longitude
 function updateMarkerPosition(latLng) 
 {
   document.getElementById('latitude').value = [latLng.lat()]
@@ -171,18 +239,21 @@ function updateMarkerPosition(latLng)
       //alert('masuk1');
       //alert(results[4].formatted_address);
       document.getElementById('address').value=results[4].formatted_address;
-});
+  });
+
+   
+  var position = new google.maps.LatLng(latLng.lat(), latLng.lng());
+  marker.setPosition(position);
 
 }
        
 var map = new google.maps.Map(document.getElementById('map'), {
 zoom: 12,
-center: new google.maps.LatLng(-7.781921,110.364678),
+center: new google.maps.LatLng(-6.175392,106.827153),
  mapTypeId: google.maps.MapTypeId.ROADMAP
   });
 //posisi awal marker   
-var latLng = new google.maps.LatLng(-7.781921,110.364678);
-
+var latLng = new google.maps.LatLng(-6.175392,106.827153);
 
 /* buat marker yang bisa di drag lalu 
   panggil fungsi updateMarkerPosition(latLng)
@@ -195,7 +266,7 @@ var marker = new google.maps.Marker({
     draggable : true
   });
    
-updateMarkerPosition(latLng);
+//updateMarkerPosition(latLng);
 
 geocoder.geocode({
         'latLng': latLng
@@ -209,5 +280,8 @@ google.maps.event.addListener(marker, 'drag', function() {
  // ketika marker di drag, otomatis nilai latitude dan longitude
  //menyesuaikan dengan posisi marker 
     updateMarkerPosition(marker.getPosition());
-  });
+});
+
+
+
 </script>

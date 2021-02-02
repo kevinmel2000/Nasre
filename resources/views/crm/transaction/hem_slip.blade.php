@@ -10,7 +10,7 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('transaction-data/hem-slip/store')}}>
+        <form method="POST" action={{url('transaction-data/hem-insured/store')}}>
           @csrf
             <div class="card">
                 <div class="card-header bg-gray">
@@ -24,7 +24,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="hemnumber"  id="insuredIDtxt"  value="{{$code_ms}}" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
+                                            <input type="text" name="hemnumber"  id="insuredIDtxt"  value="{{$code_ms}}" class="form-control form-control-sm" readonly required/>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                               <input type="number" min="0" value="0" step=".01" name="hemshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                               <input type="number" min="0" value="0" step=".01" name="hemshare" class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -83,7 +83,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01" name="hemhareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="number" min="0" value="0" step=".01" name="hemshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -152,7 +152,7 @@
                                         <div class="form-group">
                                             <label>{{__('Attachment')}} </label>
                                             <div class="input-group">
-                                                <input type="file" name="hemfile_att" id="attachment" required>
+                                                <input type="file" name="hemfile_att" id="attachment">
                                             
                                                 <div class="input-group control-group increment" >
                                                 <input type="file" name="hemfile_att[]" class="form-control">
@@ -327,7 +327,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('UY')}}</label>
-                                                            <input type="text" name="slipuy" class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" required/>
+                                                            <input type="number" name="slipuy" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-4" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -336,11 +336,13 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Status')}}</label>
                                                         <select name="slipstatus" class="form-control form-control-sm ">
-                                                            {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
-                                                            <option value="AF" selected>Offer</option>
-                                                            <option value="AN">Binding</option>
-                                                            <option value="AS">Slip</option>
-                                                            <option value="EU">Endorsement</option>
+                                                           {{-- <option selected disabled>{{__('Select Status')}}</option> --}}
+                                                            <option value="offer" selected>Offer</option>
+                                                            <option value="binding">Binding</option>
+                                                            <option value="slip">Slip</option>
+                                                            <option value="endorsement">Endorsement</option>
+                                                            <option value="decline">Decline</option>
+                                                            <option value="cancel">Cancel</option>
                                                         </select>
                                                     </div>    
                                                     </div>

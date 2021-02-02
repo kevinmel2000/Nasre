@@ -16,6 +16,11 @@ class Occupation extends Model
         return $this->belongsTo('App\Models\COB', 'cob');
     }
 
+    public function occupation()
+    {
+        return $this->belongsTo('App\Models\Occupation', 'parent_id');
+    }
+
     public function latest($column = 'created_at')
     {
         return $this->orderBy($column, 'desc');

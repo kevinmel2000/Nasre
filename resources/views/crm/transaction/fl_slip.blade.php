@@ -10,7 +10,7 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('transaction-data/fl-slip/store')}}>
+        <form method="POST" action={{url('transaction-data/fe-insured/store')}}>
           @csrf
             <div class="card">
                 <div class="card-header bg-gray">
@@ -24,7 +24,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="flnumber"  id="insuredIDtxt"  value="{{$code_ms}}" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" disabled required/>
+                                            <input type="text" name="flnumber"  id="insuredIDtxt"  value="{{$code_ms}}" class="form-control form-control-sm" readonly required/>
                                         </div>
                                     </div>
                                 </div>
@@ -288,7 +288,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('UY')}}</label>
-                                                            <input type="text" name="slipuy" class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" required/>
+                                                            <input type="number" name="slipuy" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-4" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -297,11 +297,13 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Status')}}</label>
                                                         <select name="slipstatus" class="form-control form-control-sm ">
-                                                            {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
-                                                            <option value="AF" selected>Offer</option>
-                                                            <option value="AN">Binding</option>
-                                                            <option value="AS">Slip</option>
-                                                            <option value="EU">Endorsement</option>
+                                                            {{-- <option selected disabled>{{__('Select Status')}}</option> --}}
+                                                            <option value="offer" selected>Offer</option>
+                                                            <option value="binding">Binding</option>
+                                                            <option value="slip">Slip</option>
+                                                            <option value="endorsement">Endorsement</option>
+                                                            <option value="decline">Decline</option>
+                                                            <option value="cancel">Cancel</option>
                                                         </select>
                                                     </div>    
                                                     </div>
