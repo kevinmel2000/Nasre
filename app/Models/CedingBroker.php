@@ -16,5 +16,9 @@ class CedingBroker extends Model
         return $this->belongsTo('App\Models\Country', 'country');
     }
 
+    public function companytype(){
+        return $this->belongsTo('App\Models\CompanyType', 'type');
+    }
+
 }
 

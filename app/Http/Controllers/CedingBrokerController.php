@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
 use App\Models\CedingBroker;
+use App\Models\CompanyType;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,30 +26,10 @@ class CedingBrokerController extends Controller
           $cedingbroker = CedingBroker::orderby('id','desc')->paginate(10);
           $cedingbroker_ids = response()->json($cedingbroker->modelKeys());
           $country = Country::orderby('id','asc')->get();
-          $lastid = CedingBroker::select('id')->latest()->first();
+          $companytype = CompanyType::orderby('id','asc')->get();
+         
 
-          if($lastid != null){
-            if($lastid->id == 9){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 10){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 99){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 100){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 999){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 1000){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }else{
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }
-        }
-        else{
-            $code_ceding = $mydate . strval($lastid->id + 1);
-        }
-
-          return view('crm.master.cedingbroker', compact('user','cedingbroker','route_active','cedingbroker_ids','country','code_ceding'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.master.cedingbroker', compact('user','companytype','cedingbroker','route_active','cedingbroker_ids','country'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
@@ -56,32 +37,42 @@ class CedingBrokerController extends Controller
           $cedingbroker=CedingBroker::where('code', 'LIKE', '%' . $search . '%')->orWhere('name', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->paginate(10);
           $cedingbroker_ids = response()->json($cedingbroker->modelKeys());
           $country = Country::orderby('id','asc')->get();
+          $companytype = CompanyType::orderby('id','asc')->get();
+         
 
-          $lastid = CedingBroker::select('id')->latest()->first();
-
-          if($lastid != null){
-            if($lastid->id == 9){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 10){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 99){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 100){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id == 999){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }elseif($lastid->id >= 1000){
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }else{
-                $code_ceding = $mydate . strval($lastid->id + 1);
-            }
-        }
-        else{
-            $code_ceding = $mydate . strval($lastid->id + 1);
-        }
-
-          return view('crm.master.cedingbroker', compact('user','cedingbroker','route_active','cedingbroker_ids','country','code_ceding'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.master.cedingbroker', compact('user','companytype','cedingbroker','route_active','cedingbroker_ids','country'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
+    }
+
+    public function generatecode()
+    {
+        $cedingbroker = CedingBroker::orderby('id','desc')->get();
+
+        $lastid = count($cedingbroker);
+
+        if($lastid != null){
+              if($lastid < 10){
+                  $code_ceding = '0000' . strval($lastid + 1);
+              }elseif($lastid > 9 && $lastid < 100){
+                  $code_ceding = '000' . strval($lastid + 1);
+              }elseif($lastid > 99 && $lastid < 1000){
+                  $code_ceding = '00' . strval($lastid + 1);
+              }elseif($lastid > 999 && $lastid < 10000){
+                  $code_ceding = '0' . strval($lastid + 1);
+              }elseif($lastid > 9999){
+                  $code_ceding =  strval($lastid + 1);
+              }
+          }
+          else{
+              $code_ceding = '0000' . strval(1);
+          }
+
+          return response()->json(
+            [
+                'autocode' => $code_ceding
+            ]
+        );
+
     }
 
 

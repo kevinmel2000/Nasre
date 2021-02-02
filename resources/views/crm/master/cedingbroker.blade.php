@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="codebroker" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_ceding }}" readonly="readonly" required/>
+                          <input type="text" id="codecedbrok" name="codebroker" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>
@@ -35,8 +35,9 @@
                         <label for="">{{__('Type')}}</label>
                         <select name="type" class="form-control form-control-sm e1">
                             <option selected disabled>{{__('Select Type')}}</option>
-                            <option value="Ceding">Ceding</option>
-                            <option value="Broker">Broker</option>
+                            @foreach($companytype as $ct)
+                              <option value="{{ $ct->id }}">{{ $ct->name }}</option>
+                            @endforeach
                         </select>
                     </div>    
                   </div>
@@ -55,7 +56,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Company Name')}}</label>
-                          <input type="text" name="companyname" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <input type="text" id="companynamefield" name="companyname" class="form-control form-control-sm " placeholder="please input with Uppercase letter in the beginning" data-validation="length" data-validation-length="2-50" required/>
                       </div>
                     </div>
                 </div>
@@ -119,7 +120,7 @@
                       <th>{{__('ID')}}</th>
                       <th>{{__('Code')}}</th>
                       <th>{{__('Name')}}</th>
-                      <th>{{__('Company')}}</th>
+                      <th>{{__('Company Name')}}</th>
                       <th>{{__('Address')}}</th>
                       <th>{{__('Country')}}</th>
                       <th>{{__('Type')}}</th>
@@ -135,7 +136,7 @@
                               <td>{{@$ceding->company_name}}</td>
                               <td>{{@$ceding->address}}</td>
                               <td>{{@$ceding->countryside->id}} - {{@$ceding->countryside->name}}</td>
-                              <td>{{@$ceding->type}}</td>
+                              <td>{{@$ceding->companytype->name}}</td>
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$ceding->created_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>
@@ -179,13 +180,13 @@
                                                       <div class="form-group">
                                                          <label for="">{{__('Type')}}</label><br>
                                                           <select name="type" class="e1 form-control form-control-sm ">
-                                                              @if($ceding->type  == 'Ceding')
-                                                              <option value="Ceding" selected>Ceding</option>
-                                                              <option value="Broker" >Broker</option>
-                                                              @elseif($ceding->type  == 'Broker')
-                                                              <option value="Broker" selected>Broker</option>
-                                                              <option value="Ceding" >Ceding</option>
+                                                            @foreach($companytype as $ct)
+                                                              @if($ceding->type  == $ct->id)
+                                                                <option value="{{ $ct->id }}" selected>{{ $ct->name }}</option>
+                                                              @else
+                                                                <option value="{{  $ct->id }}">{{ $ct->name }}</option>
                                                               @endif
+                                                          @endforeach
                                                           </select> 
                                                         </div>
                                                     </div>
@@ -226,11 +227,11 @@
                                                           <select name="country"  class="e1 form-control form-control-sm ">
                                                               <option selected disabled>{{__('Select Country')}}</option>
                                                               @foreach($country as $cty)
-                                                              @if($ceding->country  == $cty->id)
-                                                              <option value="{{ $cty->id }}" selected>{{ $cty->id }} - {{ $cty->name }}</option>
-                                                              @else
-                                                              <option value="{{  $cty->id }}">{{  $cty->id  }} - {{ $cty->name }}</option>
-                                                              @endif
+                                                                @if($ceding->country  == $cty->id)
+                                                                  <option value="{{ $cty->id }}" selected>{{ $cty->id }} - {{ $cty->name }}</option>
+                                                                @else
+                                                                  <option value="{{  $cty->id }}">{{  $cty->id  }} - {{ $cty->name }}</option>
+                                                                @endif
                                                               @endforeach
                                                           </select>
                                                         </div>

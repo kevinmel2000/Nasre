@@ -44,11 +44,11 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 1')}}</label>
-                                                    <input type="text" name="mssuggestinsured" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
+                                                    <input type="text" id="autocomplete" name="mssuggestinsured" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 2')}}</label>
-                                                    <input type="text" name="mssuffix" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="suffix: QQ or TBk" required/>
+                                                    <input type="text" name="mssuffix" id="autocomplete2" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="suffix: QQ or TBk" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -71,23 +71,14 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="" style="opacity: 0">{{__('b')}}</label>
-                                                    <select name="msroutefrom" class="e1 form-control form-control-sm ">
-                                                        <option selected disabled>{{__('*from')}}</option>
-                                                        @foreach($felookup as $flu)
-                                                            <option value="{{ $flu->id }}">{{ $flu->loc_code }} - {{ $flu->address }} - {{ $flu->City->name}}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <input type="text" name="msroutefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="*from" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="" style="opacity: 0">{{__('a')}}</label>
-                                                    <select name="msrouteto" class="e1 form-control form-control-sm ">
-                                                        <option selected disabled>{{__('*to')}}</option>
-                                                        @foreach($felookup as $flu)
-                                                            <option value="{{ $flu->id }}">{{ $flu->loc_code }} - {{ $flu->address }} - {{ $flu->City->name}}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <input type="text" name="msrouteto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="*to" required/>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -585,7 +576,7 @@
 
                                                                                     <td>
                                                                                         <div class="form-group">
-                                                                                            <input type="number" min="0" value="" step=".01" id="slipamount" name="slipamount" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                                            <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipamount" name="slipamount" class="form-control form-control-sm " data-validation="length" data-validation-length="0-15" required/>
                                                                                         </div>
                                                                                     </td>
 

@@ -3,6 +3,31 @@
 <script>
         $(document).ready(function() { $(".e1").select2({ width: '100%' }); });
 </script>
+<script type="text/javascript">
+    $('#companynamefield').change(function(){
+        var str = $(this).val();
+        var ret = str.split(" ");
+        var str1 = ret[0];
+        var res = str1.substr(0,2).toUpperCase();
+        
+        if(str){
+        $.ajax({
+                type:"GET",
+                url:"{{route('cedingbroker.getcode')}},
+                dataType: 'jsonp',
+                success:function(response){        
+                    if(response){
+                        console.log(res + response.autocode);
+                        $('#codecedbrok').val(res + response.autocode);     
+                    }else{
+                        console.log(res + response.autocode);
+                    }
+                }
+            });
+        }
+    });
+</script>
+
 <script>
     $(function () {
       "use strict";

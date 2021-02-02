@@ -15,7 +15,9 @@ use App\Models\SlipTableFileTemp;
 use App\Models\CedingBroker;
 use App\Models\FeLookupLocation;
 use App\Models\MarineLookup;
+use App\Models\Customer;
 use App\Models\ConditionNeeded;
+use App\Models\Customer\Customer as CustomerCustomer;
 use App\Models\ShipListTemp;
 use App\Models\InterestInsured;
 use App\Policies\FelookupLocationPolicy;
@@ -54,6 +56,7 @@ class TransactionController extends Controller
             $mlu = MarineLookup::orderby('id','asc')->get();
             $shiplist= ShipListTemp::orderby('id','desc')->get();
             $interestlist= InterestInsured::orderby('id','desc')->get();
+            $customer= CustomerCustomer::orderby('id','asc')->get();
             $ms_ids = response()->json($insured->modelKeys());
             $lastid = count($insured);
             $sliplastid = count($slip);
@@ -115,13 +118,13 @@ class TransactionController extends Controller
             }
 
 
-            return view('crm.transaction.marine_slip', compact(['user','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
+            return view('crm.transaction.marine_slip', compact(['user','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
          }
         else
         {
           $insured = Insured::where('number', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
           $ms_ids = response()->json($insured->modelKeys());
-          return view('crm.transaction.marine_slip', compact('user','slip','insured','route_active','ms_ids','code_ms'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.transaction.marine_slip', compact('user','customer','slip','insured','route_active','ms_ids','code_ms'))->with('i', ($request->input('page', 1) - 1) * 10);
         }
 
         

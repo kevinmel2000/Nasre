@@ -19,6 +19,16 @@ $( "#autocomplete" ).autocomplete({
 </script>
 
 <script>
+    $( "#autocomplete2" ).autocomplete({
+      source: [
+      @foreach (@$costumer as $costumerdata)
+       "{{@$costumerdata->company_name }}",
+      @endforeach
+      ]
+    });
+</script>
+
+<script>
  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 $(document).ready(function() { 
         
