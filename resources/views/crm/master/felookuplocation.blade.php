@@ -47,8 +47,8 @@
                             <div class="col-md-12">
                               <div class="form-group">
                                   <label for="">{{__('Address')}}</label>
-                                  <input type="text" name="address" id='address' class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                              </div>
+                                  <input type="text" name="address" id='address' class="form-control form-control-sm " required/>
+                                </div>
                             </div>
                         </div>
 
