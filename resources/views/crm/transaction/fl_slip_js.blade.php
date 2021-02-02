@@ -18,6 +18,16 @@ $( "#autocomplete" ).autocomplete({
 </script>
 
 <script>
+    $( "#autocomplete2" ).autocomplete({
+      source: [
+      @foreach (@$costumer as $costumerdata)
+       "{{@$costumerdata->company_name }}",
+      @endforeach
+      ]
+    });
+</script>
+
+<script>
 $(document).ready(function() { 
         
         $(".e1").select2({ width: '100%' }); 

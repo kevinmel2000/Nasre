@@ -48,7 +48,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 2')}}</label>
-                                                    <input type="text" name="mpsuffix" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="suffix: QQ or TBk" required/>
+                                                     <input type="text" name="mpsuffix" id='autocomplete2' class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="suffix: QQ or TBk" required/>
                                                 </div>
                                             </div>
                                         </div>
