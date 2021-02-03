@@ -294,6 +294,88 @@ class FinancialLineSlipController extends Controller
     }
 
 
+    public function storeflslip(Request $request,$code_ms)
+    {
+        $validator = $request->validate([
+            'fesnumber'=>'required',
+            'fesinsured'=>'required',
+            'fessuggestinsured'=>'required',
+            'fessuffix'=>'required',
+            'fesshare'=>'required',
+            'fessharefrom'=>'required',
+            'fesshareto'=>'required',
+            'fescoinsurance'=>'required'
+        ]);
+        
+        if($validator)
+        {
+            $user = Auth::user();
+            
+            $slipdata= SlipTable::where('number','=',$request->fesnumber)->first();
+
+            if($slipdata==null)
+            {
+                Insured::create([
+                    'number'=>$request->fesnumber,
+                    'slip_type'=>'fe',
+                    'insured_prefix' => $request->fesinsured,
+                    'insured_name'=>$request->fessuggestinsured,
+                    'insured_suffix'=>$request->fessuffix,
+                    'share'=>$request->fesshare,
+                    'share_from'=>$request->fessharefrom,
+                    'share_to'=>$request->fesshareto,
+                    'coincurance'=>$request->coincurance
+                ]);
+
+                $notification = array(
+                    'message' => 'Fire & Engginering Insured added successfully!',
+                    'alert-type' => 'success'
+                );
+            }
+            else
+            {
+                $insureddataid=$insureddata->id;
+                $insureddataup = Insured::findOrFail($insureddataid);
+
+                $insureddataup->insured_prefix=$request->fesinsured;
+                $insureddataup->insured_name=$request->fessuggestinsured;
+                $insureddataup->insured_suffix=$request->fessuffix;
+                $insureddataup->share=$request->fesshare;
+                $insureddataup->share_from=$request->fessharefrom;
+                $insureddataup->share_to=$request->fesshareto;
+                $insureddataup->coincurance=$request->coincurance;
+                $insureddataup->save();
+
+
+                $notification = array(
+                    'message' => 'Fire & Engginering Insured Update successfully!',
+                    'alert-type' => 'success'
+                );
+            }
+
+           
+
+            return back()->with($notification);
+            //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
+            //return redirect()->route('liniusaha.index');
+        
+        }
+        else
+        {
+
+            $notification = array(
+                'message' => 'Fire & Engginering Insured added Failed!',
+                'alert-type' => 'success'
+            );
+
+            return back()->with($validator)->withInput();
+            //Session::flash('Failed', 'Fire & Engginering Insured Failed added', 'danger');
+            //return redirect()->route('liniusaha.index');
+        }
+    }
+
+
+
     public function update(Request $request, $felookuplocation)
     {
         $validator = $request->validate([
