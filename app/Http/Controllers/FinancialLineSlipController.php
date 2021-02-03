@@ -297,7 +297,7 @@ class FinancialLineSlipController extends Controller
     public function storeflslip(Request $request,$code_ms)
     {
         $validator = $request->validate([
-            'fesnumber'=>'required',
+            'slipnumber'=>'required',
             'fesinsured'=>'required',
             'fessuggestinsured'=>'required',
             'fessuffix'=>'required',
@@ -311,12 +311,12 @@ class FinancialLineSlipController extends Controller
         {
             $user = Auth::user();
             
-            $slipdata= SlipTable::where('number','=',$request->fesnumber)->first();
+            $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
 
             if($slipdata==null)
             {
                 Insured::create([
-                    'number'=>$request->fesnumber,
+                    'number'=>$request->slipnumber,
                     'slip_type'=>'fe',
                     'insured_prefix' => $request->fesinsured,
                     'insured_name'=>$request->fessuggestinsured,
@@ -328,7 +328,7 @@ class FinancialLineSlipController extends Controller
                 ]);
 
                 $notification = array(
-                    'message' => 'Fire & Engginering Insured added successfully!',
+                    'message' => 'Financial Line Slip added successfully!',
                     'alert-type' => 'success'
                 );
             }
@@ -348,7 +348,7 @@ class FinancialLineSlipController extends Controller
 
 
                 $notification = array(
-                    'message' => 'Fire & Engginering Insured Update successfully!',
+                    'message' => 'Financial Line Slip Update successfully!',
                     'alert-type' => 'success'
                 );
             }
@@ -364,7 +364,7 @@ class FinancialLineSlipController extends Controller
         {
 
             $notification = array(
-                'message' => 'Fire & Engginering Insured added Failed!',
+                'message' => 'Financial Line Slip added Failed!',
                 'alert-type' => 'success'
             );
 

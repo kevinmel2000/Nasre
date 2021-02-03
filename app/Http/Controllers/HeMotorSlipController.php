@@ -304,7 +304,7 @@ class HeMotorSlipController extends Controller
     public function storehemslip(Request $request,$code_ms)
     {
         $validator = $request->validate([
-            'fesnumber'=>'required',
+            'slipnumber'=>'required',
             'fesinsured'=>'required',
             'fessuggestinsured'=>'required',
             'fessuffix'=>'required',
@@ -318,12 +318,12 @@ class HeMotorSlipController extends Controller
         {
             $user = Auth::user();
             
-            $slipdata= SlipTable::where('number','=',$request->fesnumber)->first();
+            $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
 
             if($slipdata==null)
             {
                 Insured::create([
-                    'number'=>$request->fesnumber,
+                    'number'=>$request->slipnumber,
                     'slip_type'=>'fe',
                     'insured_prefix' => $request->fesinsured,
                     'insured_name'=>$request->fessuggestinsured,
@@ -335,7 +335,7 @@ class HeMotorSlipController extends Controller
                 ]);
 
                 $notification = array(
-                    'message' => 'Fire & Engginering Insured added successfully!',
+                    'message' => 'Hem Motor Slip added successfully!',
                     'alert-type' => 'success'
                 );
             }
@@ -355,7 +355,7 @@ class HeMotorSlipController extends Controller
 
 
                 $notification = array(
-                    'message' => 'Fire & Engginering Insured Update successfully!',
+                    'message' => 'Hem & Motor Slip Update successfully!',
                     'alert-type' => 'success'
                 );
             }
@@ -371,7 +371,7 @@ class HeMotorSlipController extends Controller
         {
 
             $notification = array(
-                'message' => 'Fire & Engginering Insured added Failed!',
+                'message' => 'Hem & Motor Slip added Failed!',
                 'alert-type' => 'success'
             );
 

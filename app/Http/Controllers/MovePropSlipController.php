@@ -301,7 +301,7 @@ class MovePropSlipController extends Controller
     public function storempslip(Request $request,$code_ms)
     {
         $validator = $request->validate([
-            'fesnumber'=>'required',
+            'slipnumber'=>'required',
             'fesinsured'=>'required',
             'fessuggestinsured'=>'required',
             'fessuffix'=>'required',
@@ -315,12 +315,12 @@ class MovePropSlipController extends Controller
         {
             $user = Auth::user();
             
-            $slipdata= SlipTable::where('number','=',$request->fesnumber)->first();
+            $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
 
             if($slipdata==null)
             {
                 Insured::create([
-                    'number'=>$request->fesnumber,
+                    'number'=>$request->slipnumber,
                     'slip_type'=>'fe',
                     'insured_prefix' => $request->fesinsured,
                     'insured_name'=>$request->fessuggestinsured,
@@ -332,7 +332,7 @@ class MovePropSlipController extends Controller
                 ]);
 
                 $notification = array(
-                    'message' => 'Fire & Engginering Insured added successfully!',
+                    'message' => 'Moveable Property Slip added successfully!',
                     'alert-type' => 'success'
                 );
             }
@@ -352,7 +352,7 @@ class MovePropSlipController extends Controller
 
 
                 $notification = array(
-                    'message' => 'Fire & Engginering Insured Update successfully!',
+                    'message' => 'Moveable Property Slip Update successfully!',
                     'alert-type' => 'success'
                 );
             }
@@ -368,7 +368,7 @@ class MovePropSlipController extends Controller
         {
 
             $notification = array(
-                'message' => 'Fire & Engginering Insured added Failed!',
+                'message' => 'Moveable Property Slip added Failed!',
                 'alert-type' => 'success'
             );
 

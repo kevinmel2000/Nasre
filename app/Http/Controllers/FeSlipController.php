@@ -295,7 +295,7 @@ class FeSlipController extends Controller
     public function storefeslip(Request $request,$code_ms)
     {
         $validator = $request->validate([
-            'fesnumber'=>'required',
+            'slipnumber'=>'required',
             'fesinsured'=>'required',
             'fessuggestinsured'=>'required',
             'fessuffix'=>'required',
@@ -309,7 +309,7 @@ class FeSlipController extends Controller
         {
             $user = Auth::user();
             
-            $slipdata= SlipTable::where('number','=',$request->fesnumber)->first();
+            $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
 
             if($slipdata==null)
             {
@@ -326,7 +326,7 @@ class FeSlipController extends Controller
                 ]);
 
                 $notification = array(
-                    'message' => 'Fire & Engginering Insured added successfully!',
+                    'message' => 'Fire & Engginering Slip added successfully!',
                     'alert-type' => 'success'
                 );
             }
@@ -346,7 +346,7 @@ class FeSlipController extends Controller
 
 
                 $notification = array(
-                    'message' => 'Fire & Engginering Insured Update successfully!',
+                    'message' => 'Fire & Engginering Slip Update successfully!',
                     'alert-type' => 'success'
                 );
             }
@@ -362,7 +362,7 @@ class FeSlipController extends Controller
         {
 
             $notification = array(
-                'message' => 'Fire & Engginering Insured added Failed!',
+                'message' => 'Fire & Engginering Slip added Failed!',
                 'alert-type' => 'success'
             );
 
