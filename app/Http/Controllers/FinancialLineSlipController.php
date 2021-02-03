@@ -294,6 +294,112 @@ class FinancialLineSlipController extends Controller
     }
 
 
+    public function storeflslip(Request $request,$code_ms)
+    {
+        $validator = $request->validate([
+            'slipnumber'=>'required',
+            'fesinsured'=>'required',
+            'fessuggestinsured'=>'required',
+            'fessuffix'=>'required',
+            'fesshare'=>'required',
+            'fessharefrom'=>'required',
+            'fesshareto'=>'required',
+            'fescoinsurance'=>'required'
+        ]);
+        
+        if($validator)
+        {
+            $user = Auth::user();
+            
+            $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
+
+            if($slipdata==null)
+            {
+                $currdate = date("Y/m/d");
+
+                SlipTable::create([
+                    'number'=>$request->slipnumber,
+                    'username'=>Auth::user()->name,
+                    'slip_type'=>'fl',
+                    'prod_year' => $currdate,
+                    'uy'=>$request->slipuy,
+                    'status'=>$request->slipstatus,
+                    'endorsment'=>$request->sliped,
+                    'selisih'=>$request->slipsls,
+                    'source'=>$request->slipcedingbroker,
+                    'source_2'=>$request->slipceding,
+                    'currency'=>$request->slipcurrency,
+                    'cob'=>$request->slipcob,
+                    'koc'=>$request->slipkoc,
+                    'occupacy'=>$request->slipoccupacy,
+                    'build_cost'=>$request->slipbld_const,
+                    'slip_no'=>$request->slipno,
+                    'cn_dn'=>$request->slipcndn,
+                    'policy_no'=>$request->slippolicy_no
+                ]);
+
+                $notification = array(
+                    'message' => 'Financial Line Slip added successfully!',
+                    'alert-type' => 'success'
+                );
+            }
+            else
+            {
+                $currdate = date("Y/m/d");
+
+                $slipdataid=$slipdata->id;
+                $slipdataup = SlipTable::findOrFail($slipdataid);
+                
+                $slipdataup->number=$request->slipnumber;
+                $slipdataup->username=Auth::user()->name;
+                $slipdataup->prod_year=$currdate;
+                $slipdataup->uy=$request->slipuy;
+                $slipdataup->status=$request->slipstatus;
+                $slipdataup->endorsment=$request->sliped;
+                $slipdataup->selisih=$request->slipsls;
+                $slipdataup->source=$request->slipcedingbroker;
+                $slipdataup->source_2=$request->slipceding;
+                $slipdataup->currency=$request->slipcurrency;
+                $slipdataup->cob=$request->slipcob;
+                $slipdataup->koc=$request->slipkoc;
+                $slipdataup->occupacy=$request->slipoccupacy;
+                $slipdataup->build_cost=$request->slipbld_const;
+                $slipdataup->slip_no=$request->slipno; 
+                $slipdataup->cn_dn=$request->slipcndn; 
+                $slipdataup->policy_no=$request->slippolicy_no; 
+                
+                $slipdataup->save();
+
+
+                $notification = array(
+                    'message' => 'Financial Line Slip Update successfully!',
+                    'alert-type' => 'success'
+                );
+            
+            }
+
+
+            return back()->with($notification);
+            //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
+            //return redirect()->route('liniusaha.index');
+        
+        }
+        else
+        {
+
+            $notification = array(
+                'message' => 'Financial Line Slip added Failed!',
+                'alert-type' => 'success'
+            );
+
+            return back()->with($validator)->withInput();
+            //Session::flash('Failed', 'Fire & Engginering Insured Failed added', 'danger');
+            //return redirect()->route('liniusaha.index');
+        }
+    }
+
+
+
     public function update(Request $request, $felookuplocation)
     {
         $validator = $request->validate([

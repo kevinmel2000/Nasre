@@ -10,7 +10,7 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('transaction-data/fe-insured/store')}}>
+        <form method="POST" action={{url('transaction-data/fl-insured/store')}}>
           @csrf
             <div class="card">
                 <div class="card-header bg-gray">
@@ -36,7 +36,7 @@
                                                 <div class="col-md-4">
                                                     <label for="">{{__('Insured')}}</label>
                                                     <select name="flinsured" class="form-control form-control-sm ">
-                                                        <option selected disabled>{{__('Select Prefix')}}</option>
+                                                        <option selected readonly>{{__('Select Prefix')}}</option>
                                                         <option value="PT">PT</option>
                                                         <option value="CV">CV</option>
                                                     </select>
@@ -200,7 +200,7 @@
                                 <div class="form-group">
                                 <label for="">{{__('Lookup Location')}}</label>
                                     <select name="lookup_location_id" id="lookup_location" class="e1 form-control form-control-sm " required>
-                                    <option selected disabled>{{__('Select Lookup Location ')}}</option>
+                                    <option selected readonly>{{__('Select Lookup Location ')}}</option>
                                     @foreach($felookup as $felookuplocationdata)
                                     <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->postal_code }}</option>
                                     @endforeach
@@ -227,7 +227,8 @@
             <div class="card-body bg-light-gray">
                 
                 <div class="container-fluid p-3">
-                    <form>
+                   <form method="POST" action={{url('transaction-data/fl-slip/store/'.$code_ms)}}>
+                    @csrf
                         <div class="card card-tabs">
                             <div class="card-header p-0 pt-1 border-bottom-0">
                                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -298,7 +299,7 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Status')}}</label>
                                                         <select name="slipstatus" class="form-control form-control-sm ">
-                                                            {{-- <option selected disabled>{{__('Select Status')}}</option> --}}
+                                                            {{-- <option selected readonly>{{__('Select Status')}}</option> --}}
                                                             <option value="offer" selected>Offer</option>
                                                             <option value="binding">Binding</option>
                                                             <option value="slip">Slip</option>
@@ -371,7 +372,7 @@
                                                 <div class="form-group">
                                                     <label for="">{{__('Source')}}</label>
                                                     <select name="slipcedingbroker" class="e1 form-control form-control-sm ">
-                                                        <option value="" disabled selected>Ceding or Broker</option>
+                                                        <option value="" readonly selected>Ceding or Broker</option>
                                                         @foreach($cedingbroker as $cb)
                                                             <option value="{{ $cb->id }}">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
                                                         @endforeach
@@ -379,7 +380,7 @@
                                                 </div>    
                                                 <div class="form-group">
                                                     <select name="slipceding" class="e1 form-control form-control-sm ">
-                                                        <option value="" disabled selected>Ceding </option>
+                                                        <option value="" readonly selected>Ceding </option>
                                                         @foreach($ceding as $cd)
                                                             <option value="{{ $cd->id }}">{{ $cd->code }} - {{ $cd->name }}</option>
                                                         @endforeach
@@ -394,7 +395,7 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Currency')}}</label>
                                                         <select name="slipcurrency" class="e1 form-control form-control-sm ">
-                                                            <option selected disabled>{{__('Select Currency')}}</option>
+                                                            <option selected readonly>{{__('Select Currency')}}</option>
                                                             @foreach($currency as $crc)
                                                                 <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
                                                             @endforeach
@@ -408,7 +409,7 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('COB')}}</label>
                                                         <select name="slipcob" class="e1 form-control form-control-sm ">
-                                                            <option selected disabled>{{__('COB list')}}</option>
+                                                            <option selected readonly>{{__('COB list')}}</option>
                                                             @foreach($cob as $boc)
                                                                 <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
                                                             @endforeach
@@ -422,7 +423,7 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('KOC')}}</label>
                                                         <select name="slipkoc" class="e1 form-control form-control-sm ">
-                                                            <option selected disabled>{{__('KOC list')}}</option>
+                                                            <option selected readonly>{{__('KOC list')}}</option>
                                                             @foreach($koc as $cok)
                                                                 <option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
                                                             @endforeach
@@ -436,7 +437,7 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Occupacy')}}</label>
                                                         <select name="slipoccupacy" class="e1 form-control form-control-sm ">
-                                                            <option selected disabled>{{__('Occupation list')}}</option>
+                                                            <option selected readonly>{{__('Occupation list')}}</option>
                                                             @foreach($ocp as $ocpy)
                                                                 <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
                                                             @endforeach
@@ -450,7 +451,7 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Building Const')}}</label>
                                                         <select name="slipbld_const" class="e1 form-control form-control-sm ">
-                                                            <option selected disabled>{{__('Building Const list')}}</option>
+                                                            <option selected readonly>{{__('Building Const list')}}</option>
                                                             <option value="Buliding 1">Buliding 1</option>
                                                             <option value="Buliding 2">Buliding 2</option>
                                                             <option value="Buliding 3">Buliding 3</option>
@@ -502,10 +503,9 @@
                                                 <div class="form-group">
                                                     <label>{{__('Attachment')}} </label>
                                                     <div class="input-group">
-                                                        <input type="file" name="slipfile_att" id="attachment" required>
-
+                                                    
                                                         <div class="input-group control-group increment2" >
-                                                        <input type="file" name="slipfile_att[]" id="attachment" class="form-control" required>
+                                                        <input type="file" name="slipfile_att[]" id="attachment" class="form-control">
                                                         <div class="input-group-btn"> 
                                                             <button class="btn btn-success" id="btn-success2" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
                                                         </div>
@@ -558,7 +558,7 @@
                                                                                 <td>
                                                                                 <div class="form-group">
                                                                                     <select name="slipinterestlist" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Interest list')}}</option>
+                                                                                        <option selected readonly>{{__('Interest list')}}</option>
                                                                                         <option value="AF">Africa</option>
                                                                                         <option value="AN">Antartica</option>
                                                                                         <option value="AS">Asia</option>
@@ -606,7 +606,7 @@
                                                         <div class="form-group">
                                                             <label for="">{{__('Type')}}</label>
                                                             <select name="sliptype" class="form-control form-control-sm ">
-                                                                {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
+                                                                {{-- <option selected readonly>{{__('Select Continent')}}</option> --}}
                                                                 <option value="PML" selected >PML</option>
                                                                 <option value="LOL">LOL</option>
                                                             </select>
@@ -680,7 +680,7 @@
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                     <select name="slipdptype" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Type')}}</option>
+                                                                                        <option selected readonly>{{__('Type')}}</option>
                                                                                         <option value="AF">Africa</option>
                                                                                         <option value="AN">Antartica</option>
                                                                                         <option value="AS">Asia</option>
@@ -694,7 +694,7 @@
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                     <select name="slipdpcurrency" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Currency')}}</option>
+                                                                                        <option selected readonly>{{__('Currency')}}</option>
                                                                                         <option value="AF">Africa</option>
                                                                                         <option value="AN">Antartica</option>
                                                                                         <option value="AS">Asia</option>
@@ -712,7 +712,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                                                    <input type="text" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly required/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -771,7 +771,7 @@
                                                                             <td colspan="2">
                                                                                 <div class="form-group">
                                                                                     <select name="slipcncode" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Peril List')}}</option>
+                                                                                        <option selected readonly>{{__('Peril List')}}</option>
                                                                                         <option value="001 - R.S.M.D">001 - R.S.M.D</option>
                                                                                         <option value="005 - Earthquake">005 - Earthquake</option>
                                                                                     </select>
@@ -892,7 +892,7 @@
                                                 <div class="form-group">
                                                     <label for="">{{__('Layer for non proportional')}}</label>
                                                     <select name="sliplayerproportional" class="form-control form-control-sm ">
-                                                        <option selected disabled>{{__('Choose layer')}}</option>
+                                                        <option selected readonly>{{__('Choose layer')}}</option>
                                                         <option value="AF">Africa</option>
                                                         <option value="AN">Antartica</option>
                                                         <option value="AS">Asia</option>
@@ -935,7 +935,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
-                                                            <input type="text" name="slipsumshare" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                            <input type="text" name="slipsumshare" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -954,7 +954,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Gross Prm to NR')}}</label>
-                                                        <input type="text" name="slipgrossprmtonr" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                        <input type="text" name="slipgrossprmtonr" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly required/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -982,7 +982,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="" style="opacity: 0;">{{__('Gross Prm to NR')}}</label>
-                                                            <input type="text" name="slipsumcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                            <input type="text" name="slipsumcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1048,7 +1048,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                                                    <input type="text" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly required/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -1071,7 +1071,7 @@
                                                 <div class="form-group">
                                                     <label for="">{{__('Retro Backup?')}}</label>
                                                     <select name="sliprb" class="form-control form-control-sm ">
-                                                        {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
+                                                        {{-- <option selected readonly>{{__('Select Continent')}}</option> --}}
                                                         <option value="AF" selected>YES</option>
                                                         <option value="AN">NO</option>
                                                     </select>
@@ -1094,7 +1094,7 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <input type="text" name="slipsumor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                                    <input type="text" name="slipsumor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly required/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1141,7 +1141,7 @@
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                     <select name="sliprptype" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Type list')}}</option>
+                                                                                        <option selected readonly>{{__('Type list')}}</option>
                                                                                         <option value="AF">Africa</option>
                                                                                         <option value="AN">Antartica</option>
                                                                                         <option value="AS">Asia</option>
@@ -1155,7 +1155,7 @@
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                     <select name="sliprpcontract" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Contract list')}}</option>
+                                                                                        <option selected readonly>{{__('Contract list')}}</option>
                                                                                         <option value="AF">Africa</option>
                                                                                         <option value="AN">Antartica</option>
                                                                                         <option value="AS">Asia</option>
@@ -1184,7 +1184,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="sliprpamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                                                    <input type="text" name="sliprpamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly required/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
