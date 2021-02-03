@@ -503,10 +503,9 @@
                                                 <div class="form-group">
                                                     <label>{{__('Attachment')}} </label>
                                                     <div class="input-group">
-                                                        <input type="file" name="slipfile_att" id="attachment" required>
-
+                                                    
                                                         <div class="input-group control-group increment2" >
-                                                        <input type="file" name="slipfile_att[]" id="attachment" class="form-control" required>
+                                                        <input type="file" name="slipfile_att[]" id="attachment" class="form-control">
                                                         <div class="input-group-btn"> 
                                                             <button class="btn btn-success" id="btn-success2" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
                                                         </div>

@@ -319,37 +319,61 @@ class MovePropSlipController extends Controller
 
             if($slipdata==null)
             {
-                Insured::create([
+                $currdate = date("Y/m/d");
+
+                SlipTable::create([
                     'number'=>$request->slipnumber,
+                    'username'=>Auth::user()->name,
                     'slip_type'=>'fe',
-                    'insured_prefix' => $request->fesinsured,
-                    'insured_name'=>$request->fessuggestinsured,
-                    'insured_suffix'=>$request->fessuffix,
-                    'share'=>$request->fesshare,
-                    'share_from'=>$request->fessharefrom,
-                    'share_to'=>$request->fesshareto,
-                    'coincurance'=>$request->coincurance
+                    'prod_year' => $currdate,
+                    'uy'=>$request->slipuy,
+                    'status'=>$request->slipstatus,
+                    'endorsment'=>$request->sliped,
+                    'selisih'=>$request->slipsls,
+                    'source'=>$request->slipcedingbroker,
+                    'source_2'=>$request->slipceding,
+                    'currency'=>$request->slipcurrency,
+                    'cob'=>$request->slipcob,
+                    'koc'=>$request->slipkoc,
+                    'occupacy'=>$request->slipoccupacy,
+                    'build_cost'=>$request->slipbld_const,
+                    'slip_no'=>$request->slipno,
+                    'cn_dn'=>$request->slipcndn,
+                    'policy_no'=>$request->slippolicy_no
                 ]);
 
                 $notification = array(
                     'message' => 'Moveable Property Slip added successfully!',
                     'alert-type' => 'success'
                 );
+            
             }
             else
             {
-                $insureddataid=$insureddata->id;
-                $insureddataup = Insured::findOrFail($insureddataid);
+                $currdate = date("Y/m/d");
 
-                $insureddataup->insured_prefix=$request->fesinsured;
-                $insureddataup->insured_name=$request->fessuggestinsured;
-                $insureddataup->insured_suffix=$request->fessuffix;
-                $insureddataup->share=$request->fesshare;
-                $insureddataup->share_from=$request->fessharefrom;
-                $insureddataup->share_to=$request->fesshareto;
-                $insureddataup->coincurance=$request->coincurance;
-                $insureddataup->save();
-
+                $slipdataid=$slipdata->id;
+                $slipdataup = SlipTable::findOrFail($slipdataid);
+                
+                $slipdataup->number=$request->slipnumber;
+                $slipdataup->username=Auth::user()->name;
+                $slipdataup->prod_year=$currdate;
+                $slipdataup->uy=$request->slipuy;
+                $slipdataup->status=$request->slipstatus;
+                $slipdataup->endorsment=$request->sliped;
+                $slipdataup->selisih=$request->slipsls;
+                $slipdataup->source=$request->slipcedingbroker;
+                $slipdataup->source_2=$request->slipceding;
+                $slipdataup->currency=$request->slipcurrency;
+                $slipdataup->cob=$request->slipcob;
+                $slipdataup->koc=$request->slipkoc;
+                $slipdataup->occupacy=$request->slipoccupacy;
+                $slipdataup->build_cost=$request->slipbld_const;
+                $slipdataup->slip_no=$request->slipno; 
+                $slipdataup->cn_dn=$request->slipcndn; 
+                $slipdataup->policy_no=$request->slippolicy_no; 
+                
+                $slipdataup->save();
 
                 $notification = array(
                     'message' => 'Moveable Property Slip Update successfully!',
