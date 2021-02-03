@@ -294,15 +294,6 @@ class FeSlipController extends Controller
 
     public function storefeslip(Request $request,$code_ms)
     {
-        echo $code_ms;
-        $notification = array(
-            'message' => 'Fire & Engginering Insured Update successfully!',
-            'alert-type' => 'success'
-        );
-
-
-        return back()->with($notification);
-
         $validator = $request->validate([
             'fesnumber'=>'required',
             'fesinsured'=>'required',
