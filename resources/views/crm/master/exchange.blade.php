@@ -167,11 +167,11 @@
                                                             <select name="currencyexc" class="e1 form-control form-control-sm ">
                                                                 <option selected disabled>{{__('Select Currency')}}</option>
                                                                 @foreach($currency as $crc)
-                                                                @if($exc->currency  == $crc->id)
-                                                                <option value="{{ $crc->id }}" selected>{{ $crc->code }} - {{ $crc->symbol_name }}</option>
-                                                                @else
-                                                                <option value="{{  $crc->id }}">{{  $crc->code  }} - {{ $crc->symbol_name }}</option>
-                                                                @endif
+                                                                  @if($exc->currency  == $crc->id)
+                                                                    <option value="{{ $crc->id }}" selected>{{ $crc->code }} - {{ $crc->symbol_name }}</option>
+                                                                  @else
+                                                                    <option value="{{  $crc->id }}">{{  $crc->code  }} - {{ $crc->symbol_name }}</option>
+                                                                  @endif
                                                                 @endforeach
                                                             </select>
                                                         </div>

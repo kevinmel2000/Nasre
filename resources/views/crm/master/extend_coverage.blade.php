@@ -10,11 +10,11 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('master-data/conditionneeded/store')}}>
+        <form method="POST" action={{url('master-data/extendedcoverage/store')}}>
           @csrf
         <div class="card">
           <div class="card-header bg-gray">
-            {{__('Condition Needed Data')}}
+            {{__('Extend Coverage Data')}}
           </div>
           
           <div class="card-body bg-light-gray ">
@@ -23,8 +23,8 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="cdncode" class="form-control form-control-sm" data-validation="length" data-validation-length="2-12" value="{{ $code_cdn }}" readonly="readonly" required/>
+                          <label for="">{{__('Code')}} </label>
+                          <input type="text" name="eccode" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_ec }}" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>
@@ -32,17 +32,8 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Enter Name')}}</label>
-                          <input type="text" name="cdnname" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                      </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                          <label for="">{{__('Enter Description')}}</label>
-                          <input type="text" name="cdndescription" class="form-control form-control-sm " data-validation="length" data-validation-length="0-100"/>
+                          <label for="">{{__('Name')}}</label>
+                          <input type="text" name="ecname" class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" required/>
                       </div>
                     </div>
                 </div>
@@ -50,8 +41,17 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
+                        <label for="">{{__('Description')}}</label>
+                        <input type="text" name="ecdescription" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
                         <label for="">{{__('COB')}}</label>
-                        <select name="cdncob" class="e1 form-control form-control-sm ">
+                        <select name="eccob" class="e1 form-control form-control-sm ">
                             <option selected disabled>{{__('Select COB')}}</option>
                             @foreach($cob as $cob_data)
                             <option value="{{ $cob_data->id }}">{{ $cob_data->code }} - {{ $cob_data->description }}</option>
@@ -60,6 +60,7 @@
                     </div>    
                   </div>
                 </div>
+
                 
               </div>
             </div>
@@ -71,7 +72,7 @@
                 <div class="row">
                     <div class="col-md-12 com-sm-12 mt-3">
                         <button class="btn btn-primary btn-block ">
-                            {{__('Save Condition Needed')}}
+                            {{__('Save Extend Coverage')}}
                         </button>
                     </div>
                    
@@ -87,10 +88,9 @@
             <div class="row">
                 <div class="col-md-12 com-sm-12 mt-3">
                   <div class="table-responsive">
-                    <table id="cdnTable" class="table table-bordered table-striped">
+                    <table id="exendedcoverageTable" class="table table-bordered table-striped">
                       <thead>
                       <tr>
-                        <th>{{__('ID')}}</th>
                         <th>{{__('Code')}}</th>
                         <th>{{__('Name')}}</th>
                         <th>{{__('Description')}}</th>
@@ -99,37 +99,36 @@
                       </tr>
                       </thead>
                       <tbody>
-                          @foreach (@$cdn as $ndc)
+                          @foreach (@$extendcoverage as $ec)
                               <tr>
-                                <td>{{@$ndc->id}}</td>
-                                <td>{{@$ndc->code}}</td>
-                                <td>{{@$ndc->name}}</td>
-                                <td>{{@$ndc->description}}</td>
-                                <td>{{@$ndc->cob->code}} - {{@$ndc->cob->description}}</td>
+                                <td>{{@$ec->code}}</td>
+                                <td>{{@$ec->name}}</td>
+                                <td>{{@$ec->description}}</td>
+                                <td>{{@$ec->cob->code}} - {{@$ec->cob->description}}</td>
                                 <td>
-                                  <a href="#" data-toggle="tooltip" data-title="{{$ndc->created_at->toDayDateTimeString()}}" class="mr-3">
+                                  <a href="#" data-toggle="tooltip" data-title="{{$ec->created_at->toDayDateTimeString()}}" class="mr-3">
                                     <i class="fas fa-clock text-info"></i>
                                   </a>
-                                  <a href="#" data-toggle="tooltip" data-title="{{$ndc->updated_at->toDayDateTimeString()}}" class="mr-3">
+                                  <a href="#" data-toggle="tooltip" data-title="{{$ec->updated_at->toDayDateTimeString()}}" class="mr-3">
                                     <i class="fas fa-history text-primary"></i>
                                   </a>
                                   <span>
-                                    {{-- @can('update-condition_needed', User::class) --}}
-                                      <a class="text-primary mr-3" data-toggle="modal" data-target="#updateconditionneeded{{$ndc->id}}">
+                                    {{-- @can('update-construction', User::class) --}}
+                                      <a class="text-primary mr-3" data-toggle="modal" data-target="#updateextendedcoverage{{$ec->id}}">
                                         <i class="fas fa-edit"></i>
                                       </a>
                                     {{-- @endcan --}}
   
-                                    <div class="modal fade" id="updateconditionneeded{{$ndc->id}}" tabindex="-1" user="dialog" aria-labelledby="updateconditionneeded{{$ndc->id}}Label" aria-hidden="true">
+                                    <div class="modal fade" id="updatecextendedcoverage{{$ec->id}}" tabindex="-1" user="dialog" aria-labelledby="updateextendedcoverage{{$ec->id}}Label" aria-hidden="true">
                                       <div class="modal-dialog" user="document">
                                         <div class="modal-content bg-light-gray">
                                           <div class="modal-header bg-gray">
-                                            <h5 class="modal-title" id="updateconditionneeded{{$ndc->id}}Label">{{__('Update Condition Needed')}}</h5>
+                                            <h5 class="modal-title" id="updateextendedcoverage{{$ec->id}}Label">{{__('Update Extend Coverage')}}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                               <span aria-hidden="true">&times;</span>
                                             </button>
                                           </div>
-                                          <form action="{{url('master-data/conditionneeded',$ndc)}}" method="POST">
+                                          <form action="{{url('master-data/extendedcoverage',$ec)}}" method="POST">
                                               <div class="modal-body">
                                                   @csrf
                                                   @method('PUT')
@@ -137,7 +136,7 @@
                                                     <div class="col-md-4 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Code')}}</label>
-                                                        <input type="text" name="codecdn" class="form-control" value="{{$ndc->code}}" data-validation="length" data-validation-length="2-12" readonly="readonly" required/>
+                                                        <input type="text" name="codeec" class="form-control" value="{{$ec->code}}" data-validation="length" data-validation-length="1-12" readonly="readonly" required/>
                                                       </div>
                                                     </div>
                                                   </div>
@@ -145,7 +144,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Name')}}</label>
-                                                        <input type="text" name="namecdn" class="form-control" value="{{$ndc->name}}" data-validation="length" data-validation-length="2-50" required />
+                                                        <input type="text" name="nameec" class="form-control" value="{{$ec->name}}" data-validation="length" data-validation-length="1-50" required />
                                                       </div>
                                                     </div>
                                                   </div>
@@ -153,19 +152,18 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Description')}}</label>
-                                                        <input type="text" name="descriptioncdn" class="form-control" value="{{$ndc->description}}" data-validation="length" data-validation-length="0-100"  />
+                                                        <input type="text" name="descriptionec" class="form-control" value="{{$ec->description}}" data-validation="length" data-validation-length="0-50"  />
                                                       </div>
                                                     </div>
                                                   </div>
-
                                                   <div class="row">
                                                     <div class="col-md-6 col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('COB')}}</label><br>
-                                                            <select name="cobcdn" class="e1 form-control form-control-sm ">
+                                                            <select name="cobec" class="e1 form-control form-control-sm ">
                                                                 <option selected disabled>{{__('Select COB')}}</option>
                                                                 @foreach($cob as $cob_data)
-                                                                  @if($ndc->cob_id  == $cob_data->id)
+                                                                  @if($ec->cob_id  == $cob_data->id)
                                                                     <option value="{{ $cob_data->id }}" selected>{{ $cob_data->code }} - {{ $cob_data->description }}</option>
                                                                   @else
                                                                     <option value="{{  $cob_data->id }}">{{  $cob_data->code  }} - {{ $cob_data->description }}</option>
@@ -175,7 +173,6 @@
                                                         </div>
                                                     </div>
                                                   </div>
-
                                               </div>
                                               <div class="modal-footer">
                                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
@@ -187,10 +184,10 @@
                                   </div>
                                   {{-- Edit Modal Ends --}}
   
-                                    {{-- @can('delete-condition_needed', User::class) --}}
-                                      <span id="delbtn{{@$ndc->id}}"></span>
-                                        <form id="delete-conditionneeded-{{$ndc->id}}"
-                                            action="{{ url('master-data/conditionneeded/destroy', $ndc->id) }}"
+                                    {{-- @can('delete-country', User::class) --}}
+                                      <span id="delbtn{{@$ec->id}}"></span>
+                                        <form id="delete-extendedcoverage-{{$ec->id}}"
+                                            action="{{ url('master-data/extendedcoverage/destroy', $ec->id) }}"
                                             method="POST">
                                             @method('DELETE')
                                             @csrf
@@ -216,5 +213,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.master.condition_needed_js')
+@include('crm.master.extend_coverage_js')
 @endsection

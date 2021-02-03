@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ConditionNeeded extends Model
+class ExtendedCoverage extends Model
 {
-    protected $guarded = [];
-    protected $table = 'condition_needed';
-    
+    protected $table = "extended_coverage";
+    protected $guarded =[];
+
     public function cob()
     {
         return $this->belongsTo('App\Models\COB', 'cob_id');

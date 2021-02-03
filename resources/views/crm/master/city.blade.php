@@ -36,9 +36,10 @@
                           <select name="state" class="e1 form-control form-control-sm ">
                               <option selected disabled>{{__('Select State')}}</option>
                               @foreach($state as $statedata)
-                              <option value="{{ $statedata->id }}">{{ $statedata->id }} - {{ $statedata->name }}</option>
+                                <option value="{{ $statedata->id }}">{{ $statedata->id }} - {{ $statedata->name }}</option>
                               @endforeach
-                          </select> </div>
+                          </select> 
+                      </div>
                     </div>
                 </div>
 
@@ -129,15 +130,15 @@
                                                         <select name="statecity" class="form-control form-control-sm e1">
                                                             <option selected disabled>{{__('Select State')}}</option>
                                                             @foreach($state as $statedata)
-                                                            @if($citydata->state_id  == $statedata->id)
-                                                            <option value="{{ $statedata->id }}" selected>{{ $statedata->id }} - {{ $statedata->name }}</option>
-                                                            @else
-                                                            <option value="{{  $statedata->id }}">{{  $statedata->id  }} - {{ $statedata->name }}</option>
-                                                            @endif
+                                                              @if($citydata->state_id  == $statedata->id)
+                                                                <option value="{{ $statedata->id }}" selected>{{ $statedata->id }} - {{ $statedata->name }}</option>
+                                                              @else
+                                                                <option value="{{  $statedata->id }}">{{  $statedata->id  }} - {{ $statedata->name }}</option>
+                                                              @endif
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                  </div>
+                                                </div>
 
                                             </div>
 

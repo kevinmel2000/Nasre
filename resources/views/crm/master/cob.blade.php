@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" id="cobcode" name="cobcode" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_cob }}" required/>
+                          <input type="text" id="cobcode" name="cobcode" class="form-control form-control-sm" data-validation="length" placeholder="enter code manually if not have parent data" data-validation-length="1-12" value="" required/>
                         </div>
                     </div>
                 </div>
@@ -35,6 +35,7 @@
                         <label for="">{{__('Parent')}}</label>
                         <select name="parent_id" id="cobparentdd" class="form-control form-control-sm ">
                             <option selected disabled>{{__('Select Parent')}}</option>
+                            <option ></option>
                             @foreach (@$cob as $boc)
                             <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
                             @endforeach
@@ -67,7 +68,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Remarks')}}</label>
-                          <textarea name="cobremarks" class="form-control form-control-sm " rows="3" data-validation="length" data-validation-length="0-350" required></textarea>
+                          <textarea name="cobremarks" class="form-control form-control-sm " rows="3" data-validation="length" data-validation-length="0-350" ></textarea>
                       </div>
                     </div>
                 </div>
@@ -114,8 +115,13 @@
                             <td>{{@$boc->code}}</td>
                             <td>{{@$boc->description}}</td>
                             <td>{{@$boc->abbreviation}}</td>
-                            <td>{{@$boc->cob->code}} - {{@$boc->cob->description}}</td>
-                            <td>{{@$boc->remarks}}</td>
+                            <td>{{@$boc->cobparent->code}} - {{@$boc->cobparent->description}}</td>
+                            <td>@if($boc->remarks == null)
+                                  -
+                                @else
+                                  {{@$boc->remarks}}
+                                @endif
+                            </td>
                             <td>
                               <a href="#" data-toggle="tooltip" data-title="{{$boc->created_at->toDayDateTimeString()}}" class="mr-3">
                                 <i class="fas fa-clock text-info"></i>
@@ -170,6 +176,7 @@
                                                         <label for="">{{__('Parent')}}</label><br>
                                                         <select name="parent_id" class="form-control form-control-sm e1">
                                                             <option selected disabled>{{__('Select Parent')}}</option>
+                                                            <option value=""></option>
                                                             @foreach (@$cob as $boc2)
                                                             @if($boc->parent_id  == $boc2->id)
                                                             <option value="{{ $boc2->id }}" selected>{{ $boc2->code }} - {{ $boc2->description }}></option>

@@ -10,11 +10,11 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('master-data/conditionneeded/store')}}>
+        <form method="POST" action={{url('master-data/shipport/store')}}>
           @csrf
         <div class="card">
           <div class="card-header bg-gray">
-            {{__('Condition Needed Data')}}
+            {{__('Ship Port Data')}}
           </div>
           
           <div class="card-body bg-light-gray ">
@@ -23,8 +23,8 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="cdncode" class="form-control form-control-sm" data-validation="length" data-validation-length="2-12" value="{{ $code_cdn }}" readonly="readonly" required/>
+                          <label for="">{{__('Code')}} </label>
+                          <input type="text" name="spcode" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_sp }}" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>
@@ -32,17 +32,8 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                          <label for="">{{__('Enter Name')}}</label>
-                          <input type="text" name="cdnname" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                      </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                          <label for="">{{__('Enter Description')}}</label>
-                          <input type="text" name="cdndescription" class="form-control form-control-sm " data-validation="length" data-validation-length="0-100"/>
+                          <label for="">{{__('Name')}}</label>
+                          <input type="text" name="spname" class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" required/>
                       </div>
                     </div>
                 </div>
@@ -50,14 +41,23 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                        <label for="">{{__('COB')}}</label>
-                        <select name="cdncob" class="e1 form-control form-control-sm ">
-                            <option selected disabled>{{__('Select COB')}}</option>
-                            @foreach($cob as $cob_data)
-                            <option value="{{ $cob_data->id }}">{{ $cob_data->code }} - {{ $cob_data->description }}</option>
+                        <label for="">{{__('Description')}}</label>
+                        <input type="text" name="spdescription" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">{{__('City')}} </label>
+                        <select name="spcity" class="e1 form-control form-control-sm ">
+                            <option selected disabled>{{__('Select City')}}</option>
+                            @foreach($city as $citydata)
+                              <option value="{{ $citydata->id }}">{{ $citydata->id }} - {{ $citydata->name }}</option>
                             @endforeach
-                        </select>
-                    </div>    
+                        </select> 
+                    </div>
                   </div>
                 </div>
                 
@@ -71,7 +71,7 @@
                 <div class="row">
                     <div class="col-md-12 com-sm-12 mt-3">
                         <button class="btn btn-primary btn-block ">
-                            {{__('Save Condition Needed')}}
+                            {{__('Save Ship Port')}}
                         </button>
                     </div>
                    
@@ -87,49 +87,47 @@
             <div class="row">
                 <div class="col-md-12 com-sm-12 mt-3">
                   <div class="table-responsive">
-                    <table id="cdnTable" class="table table-bordered table-striped">
+                    <table id="shipportTable" class="table table-bordered table-striped">
                       <thead>
                       <tr>
-                        <th>{{__('ID')}}</th>
                         <th>{{__('Code')}}</th>
                         <th>{{__('Name')}}</th>
                         <th>{{__('Description')}}</th>
-                        <th>{{__('COB')}}</th>
+                        <th>{{__('City')}}</th>
                         <th width="20%">{{__('Actions')}}</th>
                       </tr>
                       </thead>
                       <tbody>
-                          @foreach (@$cdn as $ndc)
+                          @foreach (@$shipport as $sp)
                               <tr>
-                                <td>{{@$ndc->id}}</td>
-                                <td>{{@$ndc->code}}</td>
-                                <td>{{@$ndc->name}}</td>
-                                <td>{{@$ndc->description}}</td>
-                                <td>{{@$ndc->cob->code}} - {{@$ndc->cob->description}}</td>
+                                <td>{{@$sp->code}}</td>
+                                <td>{{@$sp->name}}</td>
+                                <td>{{@$sp->description}}</td>
+                                <td>{{@$sp->city->name}}</td>
                                 <td>
-                                  <a href="#" data-toggle="tooltip" data-title="{{$ndc->created_at->toDayDateTimeString()}}" class="mr-3">
+                                  <a href="#" data-toggle="tooltip" data-title="{{$sp->created_at->toDayDateTimeString()}}" class="mr-3">
                                     <i class="fas fa-clock text-info"></i>
                                   </a>
-                                  <a href="#" data-toggle="tooltip" data-title="{{$ndc->updated_at->toDayDateTimeString()}}" class="mr-3">
+                                  <a href="#" data-toggle="tooltip" data-title="{{$sp->updated_at->toDayDateTimeString()}}" class="mr-3">
                                     <i class="fas fa-history text-primary"></i>
                                   </a>
                                   <span>
-                                    {{-- @can('update-condition_needed', User::class) --}}
-                                      <a class="text-primary mr-3" data-toggle="modal" data-target="#updateconditionneeded{{$ndc->id}}">
+                                    {{-- @can('update-construction', User::class) --}}
+                                      <a class="text-primary mr-3" data-toggle="modal" data-target="#updateshipport{{$sp->id}}">
                                         <i class="fas fa-edit"></i>
                                       </a>
                                     {{-- @endcan --}}
   
-                                    <div class="modal fade" id="updateconditionneeded{{$ndc->id}}" tabindex="-1" user="dialog" aria-labelledby="updateconditionneeded{{$ndc->id}}Label" aria-hidden="true">
+                                    <div class="modal fade" id="updateshipport{{$sp->id}}" tabindex="-1" user="dialog" aria-labelledby="updateshipport{{$sp->id}}Label" aria-hidden="true">
                                       <div class="modal-dialog" user="document">
                                         <div class="modal-content bg-light-gray">
                                           <div class="modal-header bg-gray">
-                                            <h5 class="modal-title" id="updateconditionneeded{{$ndc->id}}Label">{{__('Update Condition Needed')}}</h5>
+                                            <h5 class="modal-title" id="updateshipport{{$sp->id}}Label">{{__('Update Ship Port')}}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                               <span aria-hidden="true">&times;</span>
                                             </button>
                                           </div>
-                                          <form action="{{url('master-data/conditionneeded',$ndc)}}" method="POST">
+                                          <form action="{{url('master-data/shipport',$sp)}}" method="POST">
                                               <div class="modal-body">
                                                   @csrf
                                                   @method('PUT')
@@ -137,7 +135,7 @@
                                                     <div class="col-md-4 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Code')}}</label>
-                                                        <input type="text" name="codecdn" class="form-control" value="{{$ndc->code}}" data-validation="length" data-validation-length="2-12" readonly="readonly" required/>
+                                                        <input type="text" name="codesp" class="form-control" value="{{$sp->code}}" data-validation="length" data-validation-length="1-12" readonly="readonly" required/>
                                                       </div>
                                                     </div>
                                                   </div>
@@ -145,7 +143,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Name')}}</label>
-                                                        <input type="text" name="namecdn" class="form-control" value="{{$ndc->name}}" data-validation="length" data-validation-length="2-50" required />
+                                                        <input type="text" name="namesp" class="form-control" value="{{$sp->name}}" data-validation="length" data-validation-length="1-50" required />
                                                       </div>
                                                     </div>
                                                   </div>
@@ -153,29 +151,27 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Description')}}</label>
-                                                        <input type="text" name="descriptioncdn" class="form-control" value="{{$ndc->description}}" data-validation="length" data-validation-length="0-100"  />
+                                                        <input type="text" name="descriptionsp" class="form-control" value="{{$sp->description}}" data-validation="length" data-validation-length="0-50"  />
                                                       </div>
                                                     </div>
                                                   </div>
-
                                                   <div class="row">
-                                                    <div class="col-md-6 col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="">{{__('COB')}}</label><br>
-                                                            <select name="cobcdn" class="e1 form-control form-control-sm ">
-                                                                <option selected disabled>{{__('Select COB')}}</option>
-                                                                @foreach($cob as $cob_data)
-                                                                  @if($ndc->cob_id  == $cob_data->id)
-                                                                    <option value="{{ $cob_data->id }}" selected>{{ $cob_data->code }} - {{ $cob_data->description }}</option>
-                                                                  @else
-                                                                    <option value="{{  $cob_data->id }}">{{  $cob_data->code  }} - {{ $cob_data->description }}</option>
-                                                                  @endif
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
+                                                    <div class="col-md-4 col-md-12">
+                                                      <div class="form-group">
+                                                          <label for="">{{__('City')}}</label><br>
+                                                          <select name="citysp" class="form-control form-control-sm e1">
+                                                              <option selected disabled>{{__('Select State')}}</option>
+                                                              @foreach($city as $citydata)
+                                                                @if($sp->city_id  == $citydata->id)
+                                                                  <option value="{{ $citydata->id }}" selected>{{ $citydata->id }} - {{ $citydata->name }}</option>
+                                                                @else
+                                                                  <option value="{{  $citydata->id }}">{{  $citydata->id  }} - {{ $citydata->name }}</option>
+                                                                @endif
+                                                              @endforeach
+                                                          </select>
+                                                      </div>
                                                     </div>
                                                   </div>
-
                                               </div>
                                               <div class="modal-footer">
                                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
@@ -187,10 +183,10 @@
                                   </div>
                                   {{-- Edit Modal Ends --}}
   
-                                    {{-- @can('delete-condition_needed', User::class) --}}
-                                      <span id="delbtn{{@$ndc->id}}"></span>
-                                        <form id="delete-conditionneeded-{{$ndc->id}}"
-                                            action="{{ url('master-data/conditionneeded/destroy', $ndc->id) }}"
+                                    {{-- @can('delete-country', User::class) --}}
+                                      <span id="delbtn{{@$sp->id}}"></span>
+                                        <form id="delete-shipport-{{$sp->id}}"
+                                            action="{{ url('master-data/shipport/destroy', $sp->id) }}"
                                             method="POST">
                                             @method('DELETE')
                                             @csrf
@@ -216,5 +212,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.master.condition_needed_js')
+@include('crm.master.ship_port_js')
 @endsection

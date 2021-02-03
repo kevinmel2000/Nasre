@@ -11,7 +11,7 @@
                     if(response){
                         console.log(response);
                         $("#koccode").val(response.autocode);
-                        $("#koccode").attr('readonly',true);
+                        $("#koccode").attr('readonly',false);
                     }else{
                         console.log("data gak ada");
                     }

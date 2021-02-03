@@ -12,6 +12,12 @@ use App\Models\Occupation;
 use App\Models\ShipType;
 use App\Models\PropertyType;
 use App\Models\ConditionNeeded;
+use App\Models\InterestINsured;
+use App\Models\DeductibleType;
+use App\Models\ExtendedCoverage;
+use App\Models\ShipPort;
+use App\Models\RouteShip;
+use App\Models\City;
 use App\Models\Collection;
 use App\Models\Construction;
 use App\Models\CompanyType;
@@ -453,6 +459,7 @@ class MasterController extends Controller
         if(empty($search))
          {
             $cdn = ConditionNeeded::orderby('id','asc')->get();
+            $cob = COB::orderby('id','asc')->get();
             $cdn_ids = response()->json($cdn->modelKeys());
             $lastid = count($cdn);
 
@@ -475,7 +482,7 @@ class MasterController extends Controller
                 $code_cdn = '000' . strval(1);
             }
 
-            return view('crm.master.condition_needed', compact(['route_active', 'cdn','cdn_ids','code_cdn']));  
+            return view('crm.master.condition_needed', compact(['route_active', 'cob','cdn','cdn_ids','code_cdn']));  
          }
         else
         {
@@ -526,6 +533,221 @@ class MasterController extends Controller
         }
     }
 
+    public function indexinterestinsured(Request $request)
+    {
+        $user = Auth::user();
+        $route_active = 'Interest Insured Data Master';
+        $search = @$request->input('search');
+        // $mydate = date("Y").date("m").date("d");
+
+        // dd($country);
+        if(empty($search))
+         {
+            $interestinsured = InterestInsured::orderby('id','asc')->get();
+            $cob = COB::orderby('id','asc')->get();
+            $interestinsured_ids = response()->json($interestinsured->modelKeys());
+            $lastid = count($interestinsured);
+
+            if($lastid != null){
+                // $code_cr = $mydate . strval($lastid + 1);
+
+                if($lastid < 10){
+                    $code_ii = '000' . strval($lastid + 1);
+                }elseif($lastid > 9 && $lastid < 100){
+                    $code_ii = '00' . strval($lastid- + 1);
+                }elseif($lastid > 99 && $lastid < 1000){
+                    $code_ii = '0' . strval($lastid + 1);
+                }elseif($lastid > 999 && $lastid < 10000){
+                    $code_ii =  strval($lastid + 1);
+                }
+
+                
+            }
+            else{
+                $code_ii = '000' . strval(1);
+            }
+            return view('crm.master.interest_insured', compact(['route_active','cob','code_ii','interestinsured','interestinsured_ids']));   
+         }
+        else
+        {
+          $interestinsured = InterestInsured::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $interestinsured_ids = response()->json($interestinsured->modelKeys());
+          return view('crm.master.interest_insured', compact('user','interestinsured','route_active','interestinsured_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
+    }
+
+    public function indexdeductibletype(Request $request)
+    {
+        $user = Auth::user();
+        $route_active = 'Deductible Type Data Master';
+        $search = @$request->input('search');
+        // $mydate = date("Y").date("m").date("d");
+
+        // dd($country);
+        if(empty($search))
+         {
+            $deductibletype = DeductibleType::orderby('id','asc')->get();
+            $deductibletype_ids = response()->json($deductibletype->modelKeys());
+            $lastid = count($deductibletype);
+
+            if($lastid != null){
+                // $code_cr = $mydate . strval($lastid + 1);
+
+                if($lastid < 10){
+                    $code_dt = '000' . strval($lastid + 1);
+                }elseif($lastid > 9 && $lastid < 100){
+                    $code_dt = '00' . strval($lastid- + 1);
+                }elseif($lastid > 99 && $lastid < 1000){
+                    $code_dt = '0' . strval($lastid + 1);
+                }elseif($lastid > 999 && $lastid < 10000){
+                    $code_dt =  strval($lastid + 1);
+                }
+
+                
+            }
+            else{
+                $code_dt = '000' . strval(1);
+            }
+            return view('crm.master.deductible_type', compact(['route_active','code_dt','deductibletype','deductibletype_ids']));   
+         }
+        else
+        {
+          $deductibletype = DeductibleType::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $deductibletype_ids = response()->json($deductibletype->modelKeys());
+          return view('crm.master.deductible_type', compact('user','deductibletype','route_active','deductibletype_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
+    }
+
+    public function indexextendedcoverage(Request $request)
+    {
+        $user = Auth::user();
+        $route_active = 'Extend Coverage Data Master';
+        $search = @$request->input('search');
+        // $mydate = date("Y").date("m").date("d");
+
+        // dd($country);
+        if(empty($search))
+         {
+            $extendcoverage = ExtendedCoverage::orderby('id','asc')->get();
+            $cob = COB::orderby('id','asc')->get();
+            $extendcoverage_ids = response()->json($extendcoverage->modelKeys());
+            $lastid = count($extendcoverage);
+
+            if($lastid != null){
+                // $code_cr = $mydate . strval($lastid + 1);
+
+                if($lastid < 10){
+                    $code_ec = '000' . strval($lastid + 1);
+                }elseif($lastid > 9 && $lastid < 100){
+                    $code_ec = '00' . strval($lastid- + 1);
+                }elseif($lastid > 99 && $lastid < 1000){
+                    $code_ec = '0' . strval($lastid + 1);
+                }elseif($lastid > 999 && $lastid < 10000){
+                    $code_ec =  strval($lastid + 1);
+                }
+
+                
+            }
+            else{
+                $code_ec = '000' . strval(1);
+            }
+            return view('crm.master.extend_coverage', compact(['route_active','cob','code_ec','extendcoverage','extendcoverage_ids']));   
+         }
+        else
+        {
+          $extendcoverage = Construction::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $extendcoverage_ids = response()->json($extendcoverage->modelKeys());
+          return view('crm.master.extend_coverage', compact('user','extendcoverage','route_active','extendcoverage_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
+    }
+
+    public function indexshipport(Request $request)
+    {
+        $user = Auth::user();
+        $route_active = 'Ship Port Data Master';
+        $search = @$request->input('search');
+        // $mydate = date("Y").date("m").date("d");
+
+        // dd($country);
+        if(empty($search))
+         {
+            $shipport = ShipPort::orderby('id','asc')->get();
+            $city = City::orderby('id','asc')->get();
+            $shipport_ids = response()->json($shipport->modelKeys());
+            $lastid = count($shipport);
+
+            if($lastid != null){
+                // $code_cr = $mydate . strval($lastid + 1);
+
+                if($lastid < 10){
+                    $code_sp = '000' . strval($lastid + 1);
+                }elseif($lastid > 9 && $lastid < 100){
+                    $code_sp = '00' . strval($lastid- + 1);
+                }elseif($lastid > 99 && $lastid < 1000){
+                    $code_sp = '0' . strval($lastid + 1);
+                }elseif($lastid > 999 && $lastid < 10000){
+                    $code_sp =  strval($lastid + 1);
+                }
+
+                
+            }
+            else{
+                $code_sp = '000' . strval(1);
+            }
+            return view('crm.master.ship_port', compact(['route_active','city','code_sp','shipport','shipport_ids']));   
+         }
+        else
+        {
+          $shipport = ShipPort::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $shipport_ids = response()->json($shipport->modelKeys());
+          return view('crm.master.ship_port', compact('user','shipport','route_active','shipport_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
+    }
+
+    public function indexrouteform(Request $request)
+    {
+        $user = Auth::user();
+        $route_active = 'Route Form Data Master';
+        $search = @$request->input('search');
+        // $mydate = date("Y").date("m").date("d");
+
+        // dd($country);
+        if(empty($search))
+         {
+            $routeform = RouteShip::orderby('id','asc')->get();
+            $shipport = RouteShip::orderby('id','asc')->get();
+            $routeform_ids = response()->json($routeform->modelKeys());
+            $lastid = count($routeform);
+
+            if($lastid != null){
+                // $code_cr = $mydate . strval($lastid + 1);
+
+                if($lastid < 10){
+                    $code_rf = '000' . strval($lastid + 1);
+                }elseif($lastid > 9 && $lastid < 100){
+                    $code_rf = '00' . strval($lastid- + 1);
+                }elseif($lastid > 99 && $lastid < 1000){
+                    $code_rf = '0' . strval($lastid + 1);
+                }elseif($lastid > 999 && $lastid < 10000){
+                    $code_rf =  strval($lastid + 1);
+                }
+
+                
+            }
+            else{
+                $code_rf = '000' . strval(1);
+            }
+            return view('crm.master.route_form', compact(['route_active','shipport','code_rf','routeform','routeform_ids']));   
+         }
+        else
+        {
+          $routeform = RouteShip::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $routeform_ids = response()->json($routeform->modelKeys());
+          return view('crm.master.route_form', compact('user','routeform','route_active','routeform_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
+    }
+
+
     public function generatecodecob(request $request)
     {
         $cob_parent = COB::where('id',$request->cob_code)->first();
@@ -536,7 +758,7 @@ class MasterController extends Controller
                 $code_cob = $cob_parent->code . strval($lastid + 1);
         }
         elseif($lastid == 0){
-            $code_cob =  $cob_parent->code  . strval(1);
+            $code_cob =  $cob_parent->code  . strval(0);
         }
        
 
@@ -554,10 +776,10 @@ class MasterController extends Controller
         $lastid = count($ocp);
         
         if($lastid > 0){
-                $code_ocp = $ocp_parent->code . strval($lastid + 1);
+                $code_ocp = $ocp_parent->code . strval($lastid);
         }
         elseif($lastid == 0){
-            $code_ocp =  $ocp_parent->code  . strval(1);
+            $code_ocp =  $ocp_parent->code  . strval(0);
         }
        
 
@@ -613,8 +835,7 @@ class MasterController extends Controller
         $validator = $request->validate([
             'cobcode'=>'required|max:15|unique:cob,code',
             'cobdescription'=>'required',
-            'cobabbreviation'=>'required',
-            'cobremarks'=>'required'
+            'cobabbreviation'=>'required'
         ]);
         if($validator){
             $user = Auth::user();
@@ -641,7 +862,6 @@ class MasterController extends Controller
             'ocpcode'=>'required|max:15|unique:occupation,code',
             'ocpdescription'=>'required',
             'ocpabbreviation'=>'required',
-            'ocpgrouptype'=>'required',
             'ocpcob'=>'required'
         ]);
         if($validator){
@@ -841,15 +1061,17 @@ class MasterController extends Controller
     public function storeconditionneeded(Request $request)
     {
         $validator = $request->validate([
-            'cdncode'=>'required|max:12|unique:property_type,code',
-            'cdnname'=>'required'
+            'cdncode'=>'required|max:12|unique:condition_needed,code',
+            'cdnname'=>'required',
+            'cdncob'=>'required'
         ]);
         if($validator){
             $user = Auth::user();
             ConditionNeeded::create([
                 'code'=>$request->cdncode,
                 'name' => $request->cdnname,
-                'information' => $request->cdninfo
+                'description' => $request->cdndescription,
+                'cob_id' => $request->cdncob
             ]);
             $notification = array(
                 'message' => 'Condition Needed Data added successfully!',
@@ -875,6 +1097,132 @@ class MasterController extends Controller
             ]);
             $notification = array(
                 'message' => 'Company Type added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
+    public function storeinterestinsured(Request $request)
+    {
+        $validator = $request->validate([
+            'iicode'=>'required|max:12|unique:interest_insured,code',
+            'iidescription'=>'required',
+            'iicob'=>'required',
+        ]);
+        if($validator){
+            $user = Auth::user();
+            InterestInsured::create([
+                'code'=>$request->iicode,
+                'description' => $request->iidescription,
+                'cob_id' => $request->iicob
+            ]);
+            $notification = array(
+                'message' => 'Interest Insured Data added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
+    public function storedeductibletype(Request $request)
+    {
+        $validator = $request->validate([
+            'dtcode'=>'required|max:12|unique:deductible_type,code',
+            'dtabbreviation'=>'required'
+        ]);
+        if($validator){
+            $user = Auth::user();
+            DeductibleType::create([
+                'code'=>$request->dtcode,
+                'abbreviation' => $request->dtabbreviation,
+                'description' => $request->dtdescription
+            ]);
+            $notification = array(
+                'message' => 'Deductible Type Data added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
+    public function storeextendedcoverage(Request $request)
+    {
+        $validator = $request->validate([
+            'eccode'=>'required|max:12|unique:extended_coverage,code',
+            'ecname'=>'required',
+            'eccob'=>'required',
+        ]);
+        if($validator){
+            $user = Auth::user();
+            ExtendedCoverage::create([
+                'code'=>$request->eccode,
+                'name' => $request->ecname,
+                'description' => $request->ecdescription,
+                'cob_id' => $request->eccob
+            ]);
+            $notification = array(
+                'message' => 'Extend Coverage Data added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
+    public function storeshipport(Request $request)
+    {
+        $validator = $request->validate([
+            'spcode'=>'required|max:12|unique:ship_port,code',
+            'spname'=>'required',
+            'spcity'=>'required'
+        ]);
+        if($validator){
+            $user = Auth::user();
+            ShipPort::create([
+                'code'=>$request->spcode,
+                'name' => $request->spname,
+                'description' => $request->spdescription,
+                'city_id' => $request->spcity
+            ]);
+            $notification = array(
+                'message' => 'Ship Port Data added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
+    public function storerouteform(Request $request)
+    {
+        $validator = $request->validate([
+            'rfcode'=>'required|max:12|unique:route,code',
+            'rfname'=>'required',
+            'rffrom'=>'required',
+            'rfto'=>'required'
+        ]);
+        if($validator){
+            $user = Auth::user();
+            RouteShip::create([
+                'code'=>$request->rfcode,
+                'name' => $request->rfname,
+                'description' => $request->rfdescription,
+                'from' => $request->rffrom,
+                'to' => $request->rfto,
+                'transit_1' => $request->rftransit,
+                'transit_2' => $request->rftransit2,
+            ]);
+            $notification = array(
+                'message' => 'Route Data added successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);
@@ -940,8 +1288,7 @@ class MasterController extends Controller
         $validator = $request->validate([
             'codecob'=>'required|max:20',
             'descriptioncob'=>'required',
-            'abbreviationcob'=>'required',
-            'remarkscob'=>'required'
+            'abbreviationcob'=>'required'
         ]);
         if($validator){
             $cob->code = $request->codecob;
@@ -966,7 +1313,6 @@ class MasterController extends Controller
             'codeocp'=>'required|max:20',
             'descriptionocp'=>'required',
             'abbreviationocp'=>'required',
-            'grouptypeocp'=>'required',
             'cobocp'=>'required'
         ]);
         if($validator){
@@ -1169,13 +1515,15 @@ class MasterController extends Controller
     
         $validator = $request->validate([
             'codecdn'=>'required|max:12,unique:condition_needed,code',
-                'namecdn'=>'required'
+            'namecdn'=>'required',
+            'cobcdn'=>'required',
         ]);
         
         if($validator){
             $cdn->code = $request->codecdn;
             $cdn->name = $request->namecdn;
-            $cdn->information = $request->infocdn;
+            $cdn->description = $request->descriptioncdn;
+            $cdn->cob_id = $request->cobcdn;
             $cdn->save();
             $notification = array(
                 'message' => 'Condition Needed Data updated successfully!',
@@ -1209,6 +1557,138 @@ class MasterController extends Controller
             return back()->with($validator)->withInput();
         }
 
+   }
+
+   public function updateinterestinsured(Request $request, InterestInsured $ii)
+   {
+    
+    $validator = $request->validate([
+        'codeii'=>'required|max:12',
+            'descriptionii'=>'required',
+            'cobii'=>'required'
+
+    ]);
+    
+    if($validator){
+        $ii->code = $request->codeii;
+        $ii->description = $request->descriptionii;
+        $ii->cob_id = $request->cobii;
+        $ii->save();
+        $notification = array(
+            'message' => 'Interest Insured updated successfully!',
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
+    }else{
+        return back()->with($validator)->withInput();
+    }
+    
+   }
+
+   public function updatedeductibletype(Request $request, DeductibleType $dt)
+   {
+    
+    $validator = $request->validate([
+        'codedt'=>'required|max:12',
+        'abbreviationdt'=>'required'
+    ]);
+    
+    if($validator){
+        $dt->code = $request->codedt;
+        $dt->abbreviation = $request->abbreviationdt;
+        $dt->description = $request->descriptiondt;
+        $dt->save();
+        $notification = array(
+            'message' => 'Deductible Type updated successfully!',
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
+    }else{
+        return back()->with($validator)->withInput();
+    }
+    
+   }
+
+   public function updateextendedcoverage(Request $request, ExtendedCoverage $ec)
+   {
+    
+    $validator = $request->validate([
+        'codeec'=>'required|max:12',
+        'nameec'=>'required',
+        'cobec'=>'required'
+    ]);
+    
+    if($validator){
+        $ec->code = $request->codeec;
+        $ec->name = $request->nameec;
+        $ec->description = $request->descriptionec;
+        $ec->cob = $request->cobec;
+        $ec->save();
+        $notification = array(
+            'message' => 'Extend Coverage updated successfully!',
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
+    }else{
+        return back()->with($validator)->withInput();
+    }
+    
+   }
+
+   public function updateshipport(Request $request, ShipPort $sp)
+   {
+    
+    $validator = $request->validate([
+        'codesp'=>'required|max:12',
+        'namesp'=>'required',
+        'citysp'=>'required'
+    ]);
+    
+    if($validator){
+        $sp->code = $request->codesp;
+        $sp->name = $request->namesp;
+        $sp->description = $request->descriptionsp;
+        $sp->city_id = $request->citysp;
+        $sp->save();
+        $notification = array(
+            'message' => 'Ship Port updated successfully!',
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
+    }else{
+        return back()->with($validator)->withInput();
+    }
+    
+   }
+
+   public function updaterouteform(Request $request, RouteShip $rf)
+   {
+    
+    $validator = $request->validate([
+        'coderf'=>'required|max:12',
+        'namerf'=>'required',
+        'fromrf'=>'required',
+        'torf'=>'required',
+    ]);
+    
+    if($validator){
+        $rf->code = $request->coderf;
+        $rf->name = $request->namerf;
+        $rf->description = $request->descriptionrf;
+        $rf->from = $request->fromrf;
+        $rf->to = $request->torf;
+        $rf->transit_1 = $request->transitrf;
+        $rf->transit_2 = $request->transit2rf;
+        $rf->save();
+        $notification = array(
+            'message' => 'Route updated successfully!',
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
+    }else{
+        return back()->with($validator)->withInput();
+    }
+    
    }
 
     /**
@@ -1421,6 +1901,92 @@ class MasterController extends Controller
             return back()->with($notification);
         }
     }
+
+    public function destroyinterestinsured(InterestInsured $ii)
+    {
+        if($ii->delete()){
+            $notification = array(
+                'message' => 'Interest Insured Data deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
+    public function destroydeductibletype(Construction $dt)
+    {
+        if($dt->delete()){
+            $notification = array(
+                'message' => 'Deductible Type deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
+    public function destroyextendedcoverage(ExtendedCoverage $ec)
+    {
+        if($ec->delete()){
+            $notification = array(
+                'message' => 'Extend Coverage Data deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
+    public function destroyshipport(ShipPort $sp)
+    {
+        if($sp->delete()){
+            $notification = array(
+                'message' => 'Ship Port deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
+    public function destroyrouteform(RouteShip $rf)
+    {
+        if($rf->delete()){
+            $notification = array(
+                'message' => 'Route Data deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
 
 
 }

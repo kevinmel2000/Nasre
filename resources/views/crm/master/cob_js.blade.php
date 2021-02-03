@@ -17,7 +17,7 @@
                     if(response){
                         console.log(response);
                         $("#cobcode").val(response.autocode);
-                        $("#cobcode").attr('readonly',true);
+                        $("#cobcode").attr('readonly',false);
                     }else{
                         console.log("data gak ada");
                     }

@@ -1093,6 +1093,75 @@
                                 </li>
                             {{-- @endcan --}}
 
+                            {{-- @can('viewany-condition_needed', User::class) --}}
+                            @if($route_active == 'Interest Insured Data Master')
+                            @php
+                                $ii_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/interestinsured')}}" class="nav-link {{@$ii_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('INTEREST INSURED FORM')}}</p>
+                                </a>
+                            </li>
+                            {{-- @endcan --}}
+
+                            {{-- @can('viewany-condition_needed', User::class) --}}
+                            @if($route_active == 'Extend Coverage Data Master')
+                            @php
+                                $ec_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/extendedcoverage')}}" class="nav-link {{@$ec_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('EXTEND COVERAGE FORM')}}</p>
+                                </a>
+                            </li>
+                            {{-- @endcan --}}
+
+                            {{-- @can('viewany-condition_needed', User::class) --}}
+                            @if($route_active == 'Deductible Type Data Master')
+                            @php
+                                $dt_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/deductibletype')}}" class="nav-link {{@$dt_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('DEDUCTIBLE TYPE FORM')}}</p>
+                                </a>
+                            </li>
+                            {{-- @endcan --}}
+
+                            {{-- @can('viewany-condition_needed', User::class) --}}
+                            @if($route_active == 'Ship Port Data Master')
+                            @php
+                                $sp_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/shipport')}}" class="nav-link {{@$sp_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('SHIP PORT FORM')}}</p>
+                                </a>
+                            </li>
+                            {{-- @endcan --}}
+
+                            {{-- @can('viewany-condition_needed', User::class) --}}
+                            @if($route_active == 'Route Data Master')
+                            @php
+                                $rf_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/routeform')}}" class="nav-link {{@$rf_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                    <p>{{__('ROUTE FORM')}}</p>
+                                </a>
+                            </li>
+                        {{-- @endcan --}}
 
                         </ul>
                     </li>

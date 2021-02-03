@@ -48,7 +48,7 @@ class KocController extends Controller
                 $code_koc = $koc_parent->code . strval($lastid + 1);
         }
         elseif($lastid == 0){
-            $code_koc =  $koc_parent->code  . strval(1);
+            $code_koc =  $koc_parent->code  . strval(0);
         }
        
 

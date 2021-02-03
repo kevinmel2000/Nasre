@@ -11,12 +11,12 @@
             $.ajax({
                 type:"GET",
                 dataType: 'json',
-                url:"{{url('get-koc-autocode')}}?ocp_code="+parentocp,
+                url:"{{url('get-ocp-autocode')}}?ocp_code="+parentocp,
                 success:function(response){        
                     if(response){
                         console.log(response);
                         $("#ocpcode").val(response.autocode);
-                        $("#ocpcode").attr('readonly',true);
+                        $("#ocpcode").attr('readonly',false);
                     }else{
                         console.log("data gak ada");
                     }

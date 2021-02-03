@@ -24,17 +24,18 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Code')}} </label>
-                          <input type="text" id="ocpcode" name="ocpcode" class="form-control form-control-sm" data-validation="length" value="{{ $code_ocp }}" data-validation-length="1-12" required/>
+                          <input type="text" id="ocpcode" name="ocpcode" class="form-control form-control-sm" data-validation="length" placeholder="enter code manually if not have parent data" value="" data-validation-length="1-12" required/>
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
                         <label for="">{{__('Parent')}}</label>
                         <select name="parent_id" id="ocpparentdd" class="form-control form-control-sm ">
                             <option selected disabled>{{__('Select Parent')}}</option>
+                            <option ></option>
                             @foreach (@$occupation as $ocp)
                             <option value="{{ $ocp->id }}">{{ $ocp->code }} - {{ $ocp->description }}</option>
                             @endforeach
@@ -67,7 +68,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Group Type')}}</label>
-                          <input type="text" name="ocpgrouptype" class="form-control form-control-sm " rows="3" data-validation="length" data-validation-length="0-350" required/>
+                          <input type="text" name="ocpgrouptype" class="form-control form-control-sm " rows="3" data-validation="length" data-validation-length="0-350" />
                       </div>
                     </div>
                 </div>
@@ -130,7 +131,7 @@
                               <td>{{@$ocp->description}}</td>
                               <td>{{@$ocp->abbreviation}}</td>
                               <td>{{@$ocp->group_type}}</td>
-                              <td>{{@$ocp->occupation->code}} - {{@$ocp->occupation->description}}</td>
+                              <td>{{@$ocp->occupationparent->code}} - {{@$ocp->occupationparent->description}}</td>
                               <td>{{@$ocp->cobs->code}} - {{@$ocp->cobs->description}}</td>
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$ocp->created_at->toDayDateTimeString()}}" class="mr-3">
@@ -191,6 +192,7 @@
                                                         <label for="">{{__('COB')}}</label><br>
                                                         <select name="cobocp" class="form-control form-control-sm e1">
                                                             <option selected disabled>{{__('Select COB')}}</option>
+                                                            <option ></option>
                                                             @foreach($cob as $cco)
                                                             @if($ocp->cob  == $cco->id)
                                                             <option value="{{ $cco->id }}" selected>{{ $cco->code }} - {{ $cco->description }}</option>

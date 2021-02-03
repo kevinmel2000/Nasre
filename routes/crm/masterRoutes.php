@@ -17,7 +17,7 @@ Route::get('get-city-list','FeLookupLocationController@getCityList');
 Route::get('get-cedingbroker-autocode','CedingBrokerController@generatecode')->name('cedingbroker.getcode');
 Route::get('get-koc-autocode','KocController@generatecode')->name('koc.getcode');
 Route::get('get-cob-autocode','MasterController@generatecodecob')->name('cob.getcode');
-Route::get('get-occ-autocode','MasterController@generatecodeocc')->name('occ.getcode');
+Route::get('get-ocp-autocode','MasterController@generatecodeocp')->name('ocp.getcode');
 
 
 Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
@@ -155,6 +155,36 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::post('/conditionneeded/store', [MasterController::class, 'storeconditionneeded']);
     Route::put('conditionneeded/{cdn}', [MasterController::class, 'updateconditionneeded']);
     Route::delete('/conditionneeded/destroy/{cdn}', [MasterController::class, 'destroyconditionneeded']);
+
+    // SECTION Interest Insured Routes
+    Route::get('/interestinsured', [MasterController::class, 'indexinterestinsured']);
+    Route::post('/interestinsured/store', [MasterController::class, 'storeinterestinsured']);
+    Route::put('interestinsured/{ii}', [MasterController::class, 'updateinterestinsured']);
+    Route::delete('/interestinsured/destroy/{ii}', [MasterController::class, 'destroyinterestinsured']);
+
+    // SECTION Deductible Type  Routes
+    Route::get('/deductibletype', [MasterController::class, 'indexdeductibletype']);
+    Route::post('/deductibletype/store', [MasterController::class, 'storedeductibletype']);
+    Route::put('deductibletype/{dt}', [MasterController::class, 'updatedeductibletype']);
+    Route::delete('/deductibletype/destroy/{dt}', [MasterController::class, 'destroydeductibletype']);
+
+    // SECTION Extended Coverage Routes
+    Route::get('/extendedcoverage', [MasterController::class, 'indexextendedcoverage']);
+    Route::post('/extendedcoverage/store', [MasterController::class, 'storeextendedcoverage']);
+    Route::put('extendedcoverage/{ec}', [MasterController::class, 'updateextendedcoverage']);
+    Route::delete('/extendedcoverage/destroy/{ec}', [MasterController::class, 'destroyextendedcoverage']);
+
+    // SECTION Ship Port Routes
+    Route::get('/shipport', [MasterController::class, 'indexshipport']);
+    Route::post('/shipport/store', [MasterController::class, 'storeshipport']);
+    Route::put('shipport/{sp}', [MasterController::class, 'updateshipport']);
+    Route::delete('/shipport/destroy/{sp}', [MasterController::class, 'destroyshipport']);
+
+    // SECTION Route Form Routes
+    Route::get('/routeform', [MasterController::class, 'indexrouteform']);
+    Route::post('/routeform/store', [MasterController::class, 'storerouteform']);
+    Route::put('routeform/{rf}', [MasterController::class, 'updaterouteform']);
+    Route::delete('/routeform/destroy/{rf}', [MasterController::class, 'destroyrouteform']);
 
     // Bulk Excel Import Users
     // Route::get('/import', [ ProductController::class, 'import'])->middleware(['can:create-product']);
