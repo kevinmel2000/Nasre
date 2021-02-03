@@ -17,6 +17,7 @@ use App\Models\FeLookupLocation;
 use App\Models\MarineLookup;
 use App\Models\Customer;
 use App\Models\ConditionNeeded;
+use App\Models\RouteShip;
 use App\Models\Customer\Customer as CustomerCustomer;
 use App\Models\ShipListTemp;
 use App\Models\InterestInsured;
@@ -57,6 +58,7 @@ class TransactionController extends Controller
             $shiplist= ShipListTemp::orderby('id','desc')->get();
             $interestlist= InterestInsured::orderby('id','desc')->get();
             $customer= CustomerCustomer::orderby('id','asc')->get();
+            $routeship= RouteShip::orderby('id','asc')->get();
             $ms_ids = response()->json($insured->modelKeys());
             $lastid = count($insured);
             $sliplastid = count($slip);
@@ -118,7 +120,7 @@ class TransactionController extends Controller
             }
 
 
-            return view('crm.transaction.marine_slip', compact(['user','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
+            return view('crm.transaction.marine_slip', compact(['user','routeship','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
          }
         else
         {
@@ -207,9 +209,81 @@ class TransactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+ 
     public function storemarineinsured(Request $request)
     {
-        //
+        $validator = $request->validate([
+            'msinumber'=>'required',
+            'msiinsured'=>'required',
+            'msisuggestinsured'=>'required',
+            'msiprefix'=>'required',
+            'msisuffix'=>'required'
+        ]);
+        
+        if($validator)
+        {
+            $user = Auth::user();
+            
+            $insureddata= Insured::where('number','=',$request->fesnumber)->first();
+
+            if($insureddata==null)
+            {
+                Insured::create([
+                    'number'=>$request->fesnumber,
+                    'slip_type'=>'marine',
+                    'insured_prefix' => $request->fesinsured,
+                    'insured_name'=>$request->fessuggestinsured,
+                    'insured_suffix'=>$request->fessuffix,
+                    'share'=>$request->fesshare,
+                    'share_from'=>$request->fessharefrom,
+                    'share_to'=>$request->fesshareto,
+                    'coincurance'=>$request->coincurance
+                ]);
+
+                $notification = array(
+                    'message' => 'Fire & Engginering Insured added successfully!',
+                    'alert-type' => 'success'
+                );
+            }
+            else
+            {
+                $insureddataid=$insureddata->id;
+                $insureddataup = Insured::findOrFail($insureddataid);
+                $insureddataup->insured_prefix=$request->fesinsured;
+                $insureddataup->insured_name=$request->fessuggestinsured;
+                $insureddataup->insured_suffix=$request->fessuffix;
+                $insureddataup->share=$request->fesshare;
+                $insureddataup->share_from=$request->fessharefrom;
+                $insureddataup->share_to=$request->fesshareto;
+                $insureddataup->coincurance=$request->coincurance;
+                $insureddataup->save();
+
+
+                $notification = array(
+                    'message' => 'Fire & Engginering Insured Update successfully!',
+                    'alert-type' => 'success'
+                );
+            }
+
+           
+
+            return back()->with($notification);
+            //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
+            //return redirect()->route('liniusaha.index');
+        
+        }
+        else
+        {
+
+            $notification = array(
+                'message' => 'Fire & Engginering Insured added Failed!',
+                'alert-type' => 'success'
+            );
+
+            return back()->with($validator)->withInput();
+            //Session::flash('Failed', 'Fire & Engginering Insured Failed added', 'danger');
+            //return redirect()->route('liniusaha.index');
+        }
     }
 
 

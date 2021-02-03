@@ -25,7 +25,7 @@
                                         <div class="form-group">
                                             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="msnumber" id="insuredIDtxt" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" value="{{ $code_ms }}" readonly="readonly" required/>
+                                            <input type="text" name="msinumber" id="insuredIDtxt" class="form-control form-control-sm" data-validation="length" data-validation-length="1-7" value="{{ $code_ms }}" readonly="readonly" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -36,7 +36,7 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="">{{__('Insured')}}</label>
-                                                    <select name="msprefix" class="e1 form-control form-control-sm ">
+                                                    <select name="msiprefix" class="e1 form-control form-control-sm ">
                                                         <option selected disabled>{{__('Select Prefix')}}</option>
                                                         <option value="PT">PT</option>
                                                         <option value="CV">CV</option>
@@ -44,11 +44,11 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 1')}}</label>
-                                                    <input type="text" id="autocomplete" name="mssuggestinsured" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
+                                                    <input type="text" id="autocomplete" name="msisuggestinsured" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 2')}}</label>
-                                                    <input type="text" name="mssuffix" id="autocomplete2" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="suffix: QQ or TBk" required/>
+                                                    <input type="text" name="msisuffix" id="autocomplete2" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="suffix: QQ or TBk" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -61,23 +61,25 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Route')}}</label>
-                                                    <select name="msroute" class="e1 form-control form-control-sm ">
+                                                    <select name="msiroute" class="e1 form-control form-control-sm ">
                                                         <option selected disabled>{{__('Select Route')}}</option>
-                                                        <option value="route">Route</option>
-                                                        <option value="shipping">Shipping</option>
+                                                        @foreach($routeship as $rs)
+                                                            <option value="{{ $rs->id }}">{{ $rs->name }} - {{ $rs->description }}</option>
+                                                        @endforeach
+                                                        
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="" style="opacity: 0">{{__('b')}}</label>
-                                                    <input type="text" name="msroutefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="*from" required/>
+                                                    <input type="text" name="msiroutefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="*from" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="" style="opacity: 0">{{__('a')}}</label>
-                                                    <input type="text" name="msrouteto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="*to" required/>
+                                                    <input type="text" name="msirouteto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="*to" required/>
 
                                                 </div>
                                             </div>
@@ -94,7 +96,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                                <input type="text" name="msshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
+                                                                <input type="text" name="msishare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -110,13 +112,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('From')}}</label>
-                                                    <input type="text" name="mssharefrom" class="form-control form-control-sm " placeholder="total nasre share" data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
+                                                    <input type="text" name="msisharefrom" class="form-control form-control-sm " placeholder="total nasre share" data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input type="text" name="msshareto" class="form-control form-control-sm " placeholder="total sum insured" data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
+                                                    <input type="text" name="msishareto" class="form-control form-control-sm " placeholder="total sum insured" data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -166,7 +168,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" name="mscoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
+                                            <input type="text" name="msicoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
                                         </div>
                                     </div>
                                 </div>

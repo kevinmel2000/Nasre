@@ -252,7 +252,6 @@ class FeSlipController extends Controller
             {
                 $insureddataid=$insureddata->id;
                 $insureddataup = Insured::findOrFail($insureddataid);
-
                 $insureddataup->insured_prefix=$request->fesinsured;
                 $insureddataup->insured_name=$request->fessuggestinsured;
                 $insureddataup->insured_suffix=$request->fessuffix;

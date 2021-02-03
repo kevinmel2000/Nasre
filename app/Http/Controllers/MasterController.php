@@ -23,6 +23,7 @@ use App\Models\Construction;
 use App\Models\CompanyType;
 use App\Models\MarineLookup;
 use PHPUnit\Framework\Constraint\Count;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -672,7 +673,7 @@ class MasterController extends Controller
         if(empty($search))
          {
             $shipport = ShipPort::orderby('id','asc')->get();
-            $city = City::orderby('id','asc')->get();
+            $city = DB::table('cities')->whereBetween('state_id', [4121, 4154])->get();
             $shipport_ids = response()->json($shipport->modelKeys());
             $lastid = count($shipport);
 
@@ -715,7 +716,7 @@ class MasterController extends Controller
         if(empty($search))
          {
             $routeform = RouteShip::orderby('id','asc')->get();
-            $shipport = RouteShip::orderby('id','asc')->get();
+            $shipport = ShipPort::orderby('id','asc')->get();
             $routeform_ids = response()->json($routeform->modelKeys());
             $lastid = count($routeform);
 

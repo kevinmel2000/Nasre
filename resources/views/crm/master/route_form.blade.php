@@ -148,10 +148,10 @@
                                 <td>{{@$rf->code}}</td>
                                 <td>{{@$rf->name}}</td>
                                 <td>{{@$rf->description}}</td>
-                                <td>{{@$rf->from}}</td>
-                                <td>{{@$rf->to}}</td>
-                                <td>{{@$rf->transit_1}}</td>
-                                <td>{{@$rf->transit_2}}</td>
+                                <td>{{@$rf->route_from->name}}</td>
+                                <td>{{@$rf->route_to->name}}</td>
+                                <td>{{@$rf->route_transit->name}}</td>
+                                <td>{{@$rf->route_transit_2->name}}</td>
                                 <td>
                                   <a href="#" data-toggle="tooltip" data-title="{{$rf->created_at->toDayDateTimeString()}}" class="mr-3">
                                     <i class="fas fa-clock text-info"></i>
@@ -175,7 +175,7 @@
                                               <span aria-hidden="true">&times;</span>
                                             </button>
                                           </div>
-                                          <form action="{{url('master-data/routeform',$cr)}}" method="POST">
+                                          <form action="{{url('master-data/routeform',$rf)}}" method="POST">
                                               <div class="modal-body">
                                                   @csrf
                                                   @method('PUT')
@@ -210,7 +210,7 @@
                                                           <select name="fromrf" class="e1 form-control form-control-sm ">
                                                               <option selected disabled>{{__('Select City')}}</option>
                                                               @foreach($shipport as $sp)
-                                                                @if($rf->ship_port  == $sp->id)
+                                                                @if($rf->from  == $sp->id)
                                                                   <option value="{{ $sp->id }}" selected>{{ $sp->code }} - {{ $sp->name }}</option>
                                                                 @else
                                                                   <option value="{{  $sp->id }}">{{  $sp->code  }} - {{ $sp->name }}</option>
@@ -226,7 +226,7 @@
                                                           <select name="torf" class="e1 form-control form-control-sm ">
                                                               <option selected disabled>{{__('Select City')}}</option>
                                                               @foreach($shipport as $sp)
-                                                                @if($rf->ship_port  == $sp->id)
+                                                                @if($rf->to  == $sp->id)
                                                                   <option value="{{ $sp->id }}" selected>{{ $sp->code }} - {{ $sp->name }}</option>
                                                                 @else
                                                                   <option value="{{  $sp->id }}">{{  $sp->code  }} - {{ $sp->name }}</option>
@@ -242,7 +242,7 @@
                                                           <select name="transitrf" class="e1 form-control form-control-sm ">
                                                               <option selected disabled>{{__('Select City')}}</option>
                                                               @foreach($shipport as $sp)
-                                                                @if($rf->ship_port  == $sp->id)
+                                                                @if($rf->transit_1  == $sp->id)
                                                                   <option value="{{ $sp->id }}" selected>{{ $sp->code }} - {{ $sp->name }}</option>
                                                                 @else
                                                                   <option value="{{  $sp->id }}">{{  $sp->code  }} - {{ $sp->name }}</option>
@@ -259,7 +259,7 @@
                                                           <select name="transit2rf" class="e1 form-control form-control-sm ">
                                                               <option selected disabled>{{__('Select City')}}</option>
                                                               @foreach($shipport as $sp)
-                                                                @if($rf->ship_port  == $sp->id)
+                                                                @if($rf->transit_2  == $sp->id)
                                                                   <option value="{{ $sp->id }}" selected>{{ $sp->code }} - {{ $sp->name }}</option>
                                                                 @else
                                                                   <option value="{{  $sp->id }}">{{  $sp->code  }} - {{ $sp->name }}</option>
