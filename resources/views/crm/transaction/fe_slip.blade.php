@@ -23,6 +23,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                                             <label for="">{{__('Number')}} </label>
                                             <input type="text" name="fesnumber" id="insuredIDtxt" value="{{$code_ms}}" class="form-control form-control-sm" readonly required/>
                                         </div>
@@ -243,8 +244,9 @@
                                             <div class="row">
                                                     <div class="col-md-12">
                                                     <div class="form-group">
+                                                        <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
                                                         <label for="">{{__('Number')}} </label>
-                                                        <input type="text" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="3" value="{{ $code_sl }}" readonly="readonly" required/>
+                                                        <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="3" value="{{ $code_sl }}" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -517,7 +519,7 @@
                                                         <div class="row">
                                                             <div class="col-md-8">
                                                                 <div class="col-md-12 com-sm-12 mt-3">
-                                                                    <table id="interestInsured" class="table table-bordered table-striped">
+                                                                    <table id="interestInsuredTable" class="table table-bordered table-striped">
                                                                         <thead>
                                                                         <tr>
                                                                         <th>{{__('Interest ID - Name')}}</th>
@@ -527,40 +529,39 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             <tr>
-                                                                            <td>{{__('036 - Heavy Equipment')}}</td>
-                                                                            <td>{{__('100.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
+                                                                                @foreach($interestlist as $isl)
+                                                                                    <tr id="iid{{ $isl->id }}">
+                                                                                            <td>{{ $isl->interest }}</td>
+                                                                                            <td>{{ $isl->amount }}</td>
+                                                                                            <td><a href="#" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
+                                                                                    </tr>   
+                                                                                @endforeach
                                                                             </tr>
                                                                             <tr>
-                                                                            <td>{{__('450 - Bensin')}}</td>
-                                                                            <td>{{__('100.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                <div class="form-group">
-                                                                                    <select name="slipinterestlist" class="form-control form-control-sm ">
-                                                                                        <option selected readonly>{{__('Interest list')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
-                                                                                    </select>
-                                                                                </div>  
-                                                                                </td>
-                                                                                <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="text" name="slipamount" class="form-control form-control-sm "/>
-                                                                                </div>
-                                                                                </td>
-                                                                                <td>
-                                                                                <div class="form-group">
-                                                                                    <button type="button" class="btn btn-md btn-primary " data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
-                                                                                </div>
-                                                                                </td>
+                                                                                <form id="addinterestinsured">
+                                                                                    @csrf
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <select id="slipinterestlist" name="slipinterestlist" class="form-control form-control-sm ">
+                                                                                                <option selected disabled>{{__('Interest list')}}</option>
+                                                                                                <option value="036 - Heavy Equipment">036 - Heavy Equipment</option>
+                                                                                                <option value="450 - Bensin">450 - Bensin</option>
+                                                                                            </select>
+                                                                                        </div>  
+                                                                                    </td>
+
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipamount" name="slipamount" class="form-control form-control-sm " data-validation="length" data-validation-length="0-15" required/>
+                                                                                        </div>
+                                                                                    </td>
+
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <button type="button" id="addinterestinsured-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </form>
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
@@ -792,9 +793,9 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Insurance Periode')}}:</label>
-                                                                <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipfrom">
-                                                                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
+                                                                <div class="input-group date" id="dateinfrom" data-target-input="nearest">
+                                                                        <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipfrom">
+                                                                        <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
                                                                 </div>
@@ -807,9 +808,9 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                                <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipto">
-                                                                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
+                                                                <div class="input-group date" id="dateinto" data-target-input="nearest">
+                                                                        <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipto">
+                                                                        <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
                                                                 </div>
@@ -820,9 +821,9 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Reinsurance Periode')}}:</label>
-                                                                <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpfrom">
-                                                                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
+                                                                <div class="input-group date" id="daterefrom" data-target-input="nearest">
+                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpfrom">
+                                                                        <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
                                                                 </div>
@@ -835,10 +836,9 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                                <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        
-                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpto">
-                                                                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
+                                                                <div class="input-group date" id="datereto" data-target-input="nearest">
+                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpto">
+                                                                        <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
                                                                 </div>
@@ -874,14 +874,12 @@
                                                 <div class="form-group">
                                                     <label for="">{{__('Layer for non proportional')}}</label>
                                                     <select name="sliplayerproportional" class="form-control form-control-sm ">
-                                                        <option selected readonly>{{__('Choose layer')}}</option>
-                                                        <option value="AF">Africa</option>
-                                                        <option value="AN">Antartica</option>
-                                                        <option value="AS">Asia</option>
-                                                        <option value="EU">Europa</option>
-                                                        <option value="NA">North America </option>
-                                                        <option value="OC">Oceania</option>
-                                                        <option value="SA">South America</option>
+                                                        <option selected disabled>{{__('Choose layer')}}</option>
+                                                        <option value="Layer 1">Layer 1</option>
+                                                        <option value="Layer 2">Layer 2</option>
+                                                        <option value="Layer 3">Layer 3</option>
+                                                        <option value="Layer 4">Layer 4</option>
+                                                        <option value="Layer 5">Layer 5</option>
                                                     </select>
                                                 </div>  
                                             </div>

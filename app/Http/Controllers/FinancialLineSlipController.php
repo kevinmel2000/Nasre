@@ -25,6 +25,7 @@ use App\Models\TransLocationTemp;
 use App\Models\EarthQuakeZone;
 use App\Models\FloodZone;
 use App\Models\Insured;
+use App\Models\InterestInsured;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -132,7 +133,6 @@ class FinancialLineSlipController extends Controller
         $city = City::orderby('id','asc')->get();
         $state = State::orderby('id','asc')->get();
         $costumer=Customer::orderby('id','asc')->get();
-
         
         $currdate = date("Y/m/d");
         $insured = Insured::orderby('id','asc')->get();
@@ -206,10 +206,11 @@ class FinancialLineSlipController extends Controller
         }
 
 
+        $interestlist= InterestInsured::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
 
 
-        return view('crm.transaction.fl_slip', compact(['user','cnd','locationlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fl_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.fl_slip', compact(['user','cnd','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fl_ids','code_ms','code_sl','costumer']));
     
     }
 
@@ -244,7 +245,9 @@ class FinancialLineSlipController extends Controller
                     'share'=>$request->flshare,
                     'share_from'=>$request->flsharefrom,
                     'share_to'=>$request->flshareto,
-                    'coincurance'=>$request->flcoincurance
+                    'coincurance'=>$request->flcoincurance,
+                    'obligee'=>$request->flobligee,
+                    'principal'=>$request->flprincipal
                 ]);
 
                 $notification = array(
@@ -263,6 +266,9 @@ class FinancialLineSlipController extends Controller
                 $insureddataup->share_from=$request->flsharefrom;
                 $insureddataup->share_to=$request->flshareto;
                 $insureddataup->coincurance=$request->flcoincurance;
+                $insureddataup->obligee=$request->flobligee;
+                $insureddataup->principal=$request->flprincipal;
+                
                 $insureddataup->save();
 
 
