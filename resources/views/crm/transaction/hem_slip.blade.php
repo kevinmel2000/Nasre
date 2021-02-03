@@ -850,7 +850,7 @@
                                                         <div class="form-group">
                                                             <label>{{__('Insurance Periode')}}:</label>
                                                                 <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipfrom">
+                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipfrom">
                                                                         <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
@@ -865,7 +865,7 @@
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
                                                                 <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipto">
+                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipto">
                                                                         <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
@@ -878,7 +878,7 @@
                                                         <div class="form-group">
                                                             <label>{{__('Reinsurance Periode')}}:</label>
                                                                 <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpfrom">
+                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpfrom">
                                                                         <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
@@ -894,7 +894,7 @@
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
                                                                 <div class="input-group date" id="date" data-target-input="nearest">
                                                                         
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpto">
+                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpto">
                                                                         <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
