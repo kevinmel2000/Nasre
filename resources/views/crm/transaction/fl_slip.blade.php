@@ -1034,7 +1034,7 @@
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                         <div class="input-group date" id="date" data-target-input="nearest">
-                                                                                                <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdate">
+                                                                                                <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdate">
                                                                                                 <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
                                                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                                                 </div>
@@ -1043,12 +1043,12 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipippercentage" placeholder="w" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                                    <input type="text" name="slipippercentage" placeholder="w" class="form-control form-control-sm " />
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly required/>
+                                                                                    <input type="text" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm" readonly/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -1171,7 +1171,7 @@
                                                                                     <div class="row">
                                                                                         <div class="col-md-8">
                                                                                             <div class="input-group">
-                                                                                                <input type="text" name="sliprppercentage" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                                                <input type="text" name="sliprppercentage" class="form-control form-control-sm " />
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="col-md-2">
@@ -1184,7 +1184,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="sliprpamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly required/>
+                                                                                    <input type="text" name="sliprpamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " readonly/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>

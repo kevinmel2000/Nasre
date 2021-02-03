@@ -360,6 +360,12 @@ class FeSlipController extends Controller
                     'grossprm_to_nr'=>$request->slipgrossprmtonr,
                     'netprm_to_nr'=>$request->slipnetprmtonr,
                     'sum_commission'=>$request->slipsumcommission,
+                    'installment_panel'=>'',
+                    'retrocession_panel'=>'',
+                    'retro_backup'=>$request->sliprb,
+                    'own_retention'=>$request->slipor,
+                    'sum_own_retention'=>$request->slipsumor
+                    
 
                 ]);
 
@@ -413,7 +419,12 @@ class FeSlipController extends Controller
                 $slipdataup->commission=$request->slipcommission; 
                 $slipdataup->grossprm_to_nr=$request->slipgrossprmtonr; 
                 $slipdataup->netprm_to_nr=$request->slipnetprmtonr; 
-                $slipdataup->sum_commission=$request->slipsumcommission;  
+                $slipdataup->sum_commission=$request->slipsumcommission; 
+                $slipdataup->installment_panel='';   
+                $slipdataup->retrocession_panel='';  
+                $slipdataup->retro_backup=$request->sliprb;
+                $slipdataup->own_retention=$request->slipor;
+                $slipdataup->sum_own_retention=$request->slipsumor;
 
                 $slipdataup->save();
 
