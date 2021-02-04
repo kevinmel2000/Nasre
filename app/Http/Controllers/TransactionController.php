@@ -28,6 +28,8 @@ use App\Models\InterestInsuredTemp;
 use App\Policies\FelookupLocationPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ExtendCoverageTemp;
+use App\Models\DeductibleTemp;
 
 
 class TransactionController extends Controller
@@ -395,6 +397,99 @@ class TransactionController extends Controller
             }
         
     }
+
+    public function storedeductiblelist(Request $request)
+    {
+
+            $percentage = $request->slipdppercentage;
+            $deductibletype_id = $request->slipdptype;
+            $currency = $request->slipdpcurrency;
+            $amount = $request->slipdpamount;
+            $minamount = $request->slipdpminamount;
+            $slip_id = $request->id_slip;
+        
+            if($percentage !='' && $amount !='' && $slip_id != '')
+            {
+                
+                $deductiblelist = new DeductibleTemp();
+                $deductiblelist->deductibletype_id  = $deductibletype_id;
+                $deductiblelist->currency_id  = $currency;
+                $deductiblelist->percentage  = $percentage;
+                $deductiblelist->amount = $amount;
+                $deductiblelist->min_claimamount = $minamount;
+                $deductiblelist->slip_id = $slip_id; 
+                $deductiblelist->save();
+
+                return response()->json(
+                    [
+                        'id' => $deductiblelist->id,
+                        'deductibletype_id' => $deductiblelist->deductibletype_id,
+                        'percentage' => $deductiblelist->percentage,
+                        'currency_id' => $deductiblelist->currency_id,
+                        'amount' => $deductiblelist->amount,
+                        'min_claimamount' => $deductiblelist->min_claimamount,
+                        'slip_id' => $deductiblelist->slip_id
+                    ]
+                );
+        
+            }
+            else
+            {
+
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Fill all fields'
+                    ]
+                );
+
+            }
+        
+    }
+
+
+    public function storeextendcoveragelist(Request $request)
+    {
+
+            $percentage = $request->slipnilaiec;
+            $extendcoverage_id = $request->slipcncode;
+            $amount = $request->slipamountec;
+            $slip_id = $request->id_slip;
+        
+            if($percentage !='' && $amount !='' && $slip_id != '')
+            {
+            
+                $extendcoveragelist = new ExtendCoverageTemp();
+                $extendcoveragelist->extendcoverage_id  = $extendcoverage_id;
+                $extendcoveragelist->percentage  = $percentage;
+                $extendcoveragelist->amount = $amount;
+                $extendcoveragelist->slip_id = $slip_id; 
+                $extendcoveragelist->save();
+
+                return response()->json(
+                    [
+                        'id' => $extendcoveragelist->id,
+                        'percentage' => $extendcoveragelist->percentage,
+                        'extendcoverage_id' => $extendcoveragelist->extendcoverage_id,
+                        'amount' => $extendcoveragelist->amount,
+                        'slip_id' => $extendcoveragelist->slip_id
+                    ]
+                );
+        
+            }
+            else
+            {
+
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Fill all fields'
+                    ]
+                );
+
+            }
+        
+    }
     /**
      * Display the specified resource.
      *
@@ -467,5 +562,26 @@ class TransactionController extends Controller
         
         return response()->json(['success'=>'Data has been deleted','amount'=>$installmentamount]);
     }
+
+
+    public function destroyextendcoveragelist($id)
+    {
+        $extendcoveragelist = ExtendCoverageTemp::find($id);
+        
+        $extendcoveragelist->delete();
+        
+        return response()->json(['success'=>'Data has been deleted']);
+    }
+
+
+    public function destroydeductiblelist($id)
+    {
+        $deductiblelist = DeductibleTemp::find($id);
+        
+        $deductiblelist->delete();
+        
+        return response()->json(['success'=>'Data has been deleted']);
+    }
+    
 
 }

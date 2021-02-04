@@ -35,6 +35,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\DeductibleType;
 use App\Models\ExtendedCoverage;
+use App\Models\ExtendCoverageTemp;
+use App\Models\DeductibleTemp;
 
 class HeMotorSlipController extends Controller
 {

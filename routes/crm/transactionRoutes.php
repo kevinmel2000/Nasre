@@ -25,6 +25,13 @@ Route::delete('/delete-interest-list/{id}','TransactionController@destroyinteres
 Route::post('/store-installment-list','TransactionController@storeinstallmentlist')->name('installment.store');
 Route::delete('/delete-installment-list/{id}','TransactionController@destroyinstallmentlist')->name('installment.delete');
 
+Route::post('/store-extendcoverage-list','TransactionController@storeextendcoveragelist')->name('extendcoverage.store');
+Route::delete('/delete-extendcoverage-list/{id}','TransactionController@destroyextendcoveragelist')->name('extendcoverage.delete');
+
+Route::post('/store-deductible-list','TransactionController@storedeductiblelist')->name('deductible.store');
+Route::delete('/delete-deductible-list/{id}','TransactionController@destroydeductiblelist')->name('deductible.delete');
+
+
 Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     
 

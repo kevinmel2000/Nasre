@@ -654,7 +654,7 @@
                                                                     <tr>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <select name="slipdptype" class="form-control form-control-sm ">
+                                                                                    <select id="slipdptype" name="slipdptype" class="form-control form-control-sm ">
                                                                                         <option selected disabled>{{__('Type')}}</option>
                                                                                         @foreach($deductibletype as $dt)
                                                                                             <option value="{{ $dt->id }}">{{ $dt->abbreviation }} - {{ $dt->description }}</option>
@@ -664,7 +664,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <select name="slipdpcurrency" class="form-control form-control-sm ">
+                                                                                    <select  id="slipdpcurrency" name="slipdpcurrency" class="form-control form-control-sm ">
                                                                                         <option selected disabled>{{__('Currency')}}</option>
                                                                                         @foreach($currency as $crc)
                                                                                             <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name}}</option>
@@ -684,7 +684,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" value="0" step=".0001" name="slipdpminamount" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                                    <input type="number" value="0" step=".0001" id="slipdpminamount" name="slipdpminamount" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                                                 </div>
                                                                             </td> 
                                                                             <td>
