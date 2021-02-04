@@ -496,3 +496,27 @@ $(document).ready(function() {
         });
     }
 </script>
+
+<script type='text/javascript'>
+    
+     $('#sliprppercentage').keyup(function () {
+        var persentage =  parseFloat($('#sliprppercentage').val());
+        var slipnetprmtonr =  parseFloat($('#slipnetprmtonr').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(slipnetprmtonr * persentage/100) ? 0 :(slipnetprmtonr * persentage/100) ;
+        //alert(sum);
+        $('#sliprpamount').val(sum);
+     });
+
+     $('#sliprppercentage').change(function () {
+        var persentage =  parseFloat($('#sliprppercentage').val());
+        var slipnetprmtonr =  parseFloat($('#slipnetprmtonr').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(slipnetprmtonr * persentage/100) ? 0 :(slipnetprmtonr * persentage/100) ;
+        //alert(sum);
+        $('#sliprpamount').val(sum);
+     });
+
+</script>

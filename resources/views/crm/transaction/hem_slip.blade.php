@@ -1148,46 +1148,22 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr>
-                                                                            <td>{{__('NM XOL')}}</td>
-                                                                            <td>{{__('20NM11110')}}</td>
-                                                                            <td>{{__('80%')}}</td>
-                                                                            <td>{{__('160.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>{{__('NM XOL')}}</td>
-                                                                            <td>{{__('20ABC')}}</td>
-                                                                            <td>{{__('80%')}}</td>
-                                                                            <td>{{__('40.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
+                                                                        
                                                                         <tr>
                                                                             <td>
-                                                                                <div class="form-group">
-                                                                                    <select name="sliprptype" class="form-control form-control-sm ">
-                                                                                        <option selected readonly>{{__('Type list')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
+                                                                            <div class="form-group">
+                                                                                    <select id="sliprptype" name="sliprptype" class="form-control form-control-sm ">
+                                                                                        <option selected disabled>{{__('Type list')}}</option>
+                                                                                        <option value="NM XOL">NM XOL</option>
                                                                                     </select>
                                                                                 </div>  
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <select name="sliprpcontract" class="form-control form-control-sm ">
-                                                                                        <option selected readonly>{{__('Contract list')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
+                                                                                    <select id="sliprpcontract" name="sliprpcontract" class="form-control form-control-sm ">
+                                                                                        <option selected disabled>{{__('Contract list')}}</option>
+                                                                                        <option value="20NM11110">20NM11110</option>
+                                                                                        <option value="20ABC">20ABC</option>
                                                                                     </select>
                                                                                 </div>  
                                                                             </td>
@@ -1196,7 +1172,7 @@
                                                                                     <div class="row">
                                                                                         <div class="col-md-8">
                                                                                             <div class="input-group">
-                                                                                                <input type="text" name="sliprppercentage" class="form-control form-control-sm "/>
+                                                                                                <input type="number" min="0" max="100" value="" step=".01" id="sliprppercentage" name="sliprppercentage" class="form-control form-control-sm " />
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="col-md-2">
@@ -1209,12 +1185,12 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="sliprpamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " readonly/>
+                                                                                    <input type="text" id="sliprpamount" name="sliprpamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " readonly/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                    <button type="button" id="addretrocessioninsured-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
