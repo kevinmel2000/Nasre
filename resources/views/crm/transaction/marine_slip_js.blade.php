@@ -227,6 +227,7 @@
         var tsi = parseFloat($("#sliptotalsum").val());
         var sum = isNaN(shareslip * tsi/100) ? 0 :(shareslip * tsi/100) ;
         $('#slipsumshare').val(sum);
+        $('#msisharefrom').val(shareslip);
      });
 
      $('#sliprate').keyup(function () {

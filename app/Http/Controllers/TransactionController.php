@@ -57,7 +57,7 @@ class TransactionController extends Controller
             $felookup = FelookupLocation::orderby('id','asc')->get();
             $cnd = ConditionNeeded::orderby('id','asc')->get();
             $mlu = MarineLookup::orderby('id','asc')->get();
-            $shiplist= ShipListTemp::orderby('id','desc')->get();
+            
             $interestlist= InterestInsuredTemp::orderby('id','desc')->get();
             $customer= CustomerCustomer::orderby('id','asc')->get();
             $routeship= RouteShip::orderby('id','asc')->get();
@@ -122,6 +122,8 @@ class TransactionController extends Controller
             else{
                 $code_sl = "M" . $mydate . "0000" . strval(1);
             }
+
+            $shiplist= ShipListTemp::where('insured_id',$code_ms)->orderby('id','desc')->get();
 
 
             return view('crm.transaction.marine_slip', compact(['user','deductibletype','interestinsured','routeship','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
