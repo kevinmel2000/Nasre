@@ -22,6 +22,7 @@ use App\Models\DeductibleType;
 use App\Models\Customer\Customer as CustomerCustomer;
 use App\Models\ShipListTemp;
 use App\Models\InterestInsured;
+use App\Models\InstallmentTemp;
 use App\Models\InterestInsuredTemp;
 use App\Policies\FelookupLocationPolicy;
 use Illuminate\Http\Request;
@@ -346,6 +347,51 @@ class TransactionController extends Controller
         
     }
 
+
+    public function storeinstallmentlist(Request $request)
+    {
+
+            $percentage = $request->percentage;
+            $installmentdate = $request->installmentdate;
+            $amount = $request->slipamount;
+            $slip_id = $request->id_slip;
+        
+            if($percentage !='' && $amount !='' && $slip_id != '')
+            {
+                $old_date_timestamp = strtotime($installmentdate);
+                $new_date = date('Y-m-d H:i:s', $old_date_timestamp); 
+
+                $installmentlist = new InstallmentTemp();
+                $installmentlist->installment_date  = $new_date;
+                $installmentlist->percentage  = $percentage;
+                $installmentlist->amount = $amount;
+                $installmentlist->slip_id = $slip_id; 
+                $installmentlist->save();
+
+                return response()->json(
+                    [
+                        'id' => $installmentlist->id,
+                        'percentage' => $installmentlist->percentage,
+                        'installment_date' => $installmentlist->installment_date,
+                        'amount' => $installmentlist->amount,
+                        'slip_id' => $installmentlist->slip_id
+                    ]
+                );
+        
+            }
+            else
+            {
+
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Fill all fields'
+                    ]
+                );
+
+            }
+        
+    }
     /**
      * Display the specified resource.
      *
@@ -406,6 +452,17 @@ class TransactionController extends Controller
         $interestlist->delete();
         
         return response()->json(['success'=>'Data has been deleted','amount'=>$amountinterest]);
+    }
+
+    public function destroyinstallmentlist($id)
+    {
+        $installmentlist = InstallmentTemp::find($id);
+        
+        $installmentamount = $installmentlist->amount;
+        
+        $installmentlist->delete();
+        
+        return response()->json(['success'=>'Data has been deleted','amount'=>$installmentamount]);
     }
 
 }

@@ -286,10 +286,13 @@ $(document).ready(function() {
 
 <script type='text/javascript'>
     $('#addinstallmentinsured-btn').click(function(e){
+       //alert('masuk');
        e.preventDefault();
 
-       var interest = $('#slipinterestlist').val();
-       var amount = $('#slipamount').val();
+       var installmentdate = $('#dateinstallmentdata').val();
+       
+       var percentage = $('#slipippercentage').val();
+       var amount = $('#slipipamount').val();
        var slip_id = $('#slipnumber').val();
        var token2 = $('input[name=_token2]').val();
        
@@ -300,30 +303,54 @@ $(document).ready(function() {
             });
 
        $.ajax({
-           url:"{{ route('interestlist.store') }}",
+           url:"{{ route('installment.store') }}",
            type:"POST",
            data:{
-               interest_insured:interest,
+               installmentdate:installmentdate,
+               percentage:percentage,
                slipamount:amount,
                id_slip:slip_id
            },
-           success:function(response){
+           success:function(response)
+           {
             
                console.log(response)
-               $('#installmentPanel tbody').prepend('<tr id="iid'+response.id+'" data-name="interestvalue[]"><td data-name="'+response.interest_id+'">'+response.interest_id+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestdetail('+response.id+')">delete</a></td></tr>')
-               $('#slipamount').val('');
-               $('#slipinterestlist').val('');
-               var total =  parseFloat($("#sliptotalsum").val());
-               var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
-               $("#sliptotalsum").val(sum);
-
+               $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
+               $('#dateinstallment').val('');
+               $('#slipippercentage').val('');
+               $('#slipipamount').val('');
                
+               //var total =  parseFloat($("#sliptotalsum").val());
+               //var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
+               //$("#sliptotalsum").val(sum);
+
            }
        });
 
    });
 </script>
-    
+
+<script type='text/javascript'>
+    function deleteinstallmentdetail(id)
+    {
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-installment-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            success:function(response){
+                
+                $('#iidinstallment'+id).remove();
+                console.log(response);
+            }
+        });
+    }
+</script>
+
+
 <script  type='text/javascript'>
     
 </script>

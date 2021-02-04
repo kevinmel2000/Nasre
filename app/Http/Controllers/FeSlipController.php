@@ -26,6 +26,7 @@ use App\Models\EarthQuakeZone;
 use App\Models\FloodZone;
 use App\Models\Insured;
 use App\Models\InterestInsured;
+use App\Models\InstallmentTemp;
 use App\Models\InterestInsuredTemp;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;

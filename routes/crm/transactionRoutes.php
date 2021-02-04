@@ -22,6 +22,8 @@ Route::delete('/delete-sliplocation-list/{id}','FeSlipController@destroysliploca
 Route::post('/store-interest-list','TransactionController@storeinterestlist')->name('interestlist.store');
 Route::delete('/delete-interest-list/{id}','TransactionController@destroyinterestlist')->name('interestlist.delete');
 
+Route::post('/store-installment-list','TransactionController@storeinstallmentlist')->name('installment.store');
+Route::delete('/delete-installment-list/{id}','TransactionController@destroyinstallmentlist')->name('installment.delete');
 
 Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     
