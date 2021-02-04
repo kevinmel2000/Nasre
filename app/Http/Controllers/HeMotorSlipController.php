@@ -33,6 +33,8 @@ use App\Models\InterestInsuredTemp;
 use App\Models\FloodZone;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\DeductibleType;
+use App\Models\ExtendedCoverage;
 
 class HeMotorSlipController extends Controller
 {
@@ -155,6 +157,9 @@ class HeMotorSlipController extends Controller
         $felookup = FelookupLocation::orderby('id','asc')->get();
         $cnd = ConditionNeeded::orderby('id','asc')->get();
         $hem_ids = response()->json($insured->modelKeys());
+        $deductibletype= DeductibleType::orderby('id','asc')->get();
+        $extendedcoverage= ExtendedCoverage::orderby('id','asc')->get();
+
         $lastid = count($insured);
         $sliplastid = count($slip);
 
@@ -220,7 +225,7 @@ class HeMotorSlipController extends Controller
         $interestinsured= InterestInsured::orderby('id','asc')->get();
 
         
-        return view('crm.transaction.hem_slip', compact(['user','cnd','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','hem_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.hem_slip', compact(['user','cnd','deductibletype','extendedcoverage','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','hem_ids','code_ms','code_sl','costumer']));
     }
 
     

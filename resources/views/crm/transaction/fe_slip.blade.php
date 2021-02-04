@@ -605,7 +605,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                         <div class="row">
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <div class="row">
                                                     <div class="col-md-2">
@@ -614,7 +614,7 @@
                                                         <div class="form-group">
                                                             <label for="">{{__('Type')}}</label>
                                                             <select name="sliptype" class="form-control form-control-sm ">
-                                                                {{-- <option selected readonly>{{__('Select Continent')}}</option> --}}
+                                                                {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
                                                                 <option value="PML" selected >PML</option>
                                                                 <option value="LOL">LOL</option>
                                                             </select>
@@ -626,7 +626,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-10">
                                                                     <div class="input-group">
-                                                                        <input type="text" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                        <input type="number" value="0" step=".0001" id="slippct" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-2">
@@ -640,7 +640,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for=""style="opacity: 0;">{{__('Type')}}</label>
-                                                            <input type="text" name="sliptotalsumpct" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                            <input type="number" value="0" step=".0001" id="sliptotalsumpct" name="sliptotalsumpct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -668,64 +668,40 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr>
-                                                                            <td>{{__('MD')}}</td>
-                                                                            <td>{{__('IDR')}}</td>
-                                                                            <td>{{__('x %')}}</td>
-                                                                            <td>{{__('= x * tsi')}}</td>
-                                                                            <td>{{__('10.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>{{__('TPL')}}</td>
-                                                                            <td>{{__('USD')}}</td>
-                                                                            <td>{{__('0,001 %')}}</td>
-                                                                            <td>{{__('= x * tsi')}}</td>
-                                                                            <td>{{__('100.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
+                                                                    <tr>
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                     <select name="slipdptype" class="form-control form-control-sm ">
-                                                                                        <option selected readonly>{{__('Type')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
+                                                                                        <option selected disabled>{{__('Type')}}</option>
+                                                                                        @foreach($deductibletype as $dt)
+                                                                                            <option value="{{ $dt->id }}">{{ $dt->abbreviation }} - {{ $dt->description }}</option>
+                                                                                        @endforeach
                                                                                     </select>
                                                                                 </div>  
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                     <select name="slipdpcurrency" class="form-control form-control-sm ">
-                                                                                        <option selected readonly>{{__('Currency')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
+                                                                                        <option selected disabled>{{__('Currency')}}</option>
+                                                                                        @foreach($currency as $crc)
+                                                                                            <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name}}</option>
+                                                                                        @endforeach
                                                                                     </select>
                                                                                 </div>  
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipdppercentage" placeholder="x" class="form-control form-control-sm "/>
+                                                                                    <input type="number" value="0" step=".0001" id="slipdppercentage" name="slipdppercentage" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm " readonly/>
+                                                                                    <input type="number" value="0" step=".0001" id="slipdpamount" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipdpminamount" class="form-control form-control-sm "/>
+                                                                                    <input type="number" value="0" step=".0001" name="slipdpminamount" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                                                 </div>
                                                                             </td> 
                                                                             <td>
@@ -780,8 +756,9 @@
                                                                                 <div class="form-group">
                                                                                     <select name="slipcncode" class="form-control form-control-sm ">
                                                                                         <option selected readonly>{{__('Peril List')}}</option>
-                                                                                        <option value="001 - R.S.M.D">001 - R.S.M.D</option>
-                                                                                        <option value="005 - Earthquake">005 - Earthquake</option>
+                                                                                        @foreach($extendedcoverage as $ncd)
+                                                                                        <option value="{{ $ncd->id }}">{{ $ncd->code }} - {{ $ncd->name }} - {{ $ncd->description }}</option>
+                                                                                        @endforeach
                                                                                     </select>
                                                                                 </div>  
                                                                             </td>

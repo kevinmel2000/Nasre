@@ -30,6 +30,8 @@ use App\Models\InstallmentTemp;
 use App\Models\InterestInsuredTemp;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\DeductibleType;
+use App\Models\ExtendedCoverage;
 
 class FeSlipController extends Controller
 {
@@ -144,7 +146,9 @@ class FeSlipController extends Controller
         $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
         $felookup = FelookupLocation::orderby('id','asc')->get();
         $cnd = ConditionNeeded::orderby('id','asc')->get();
-        
+        $deductibletype= DeductibleType::orderby('id','asc')->get();
+        $extendedcoverage= ExtendedCoverage::orderby('id','asc')->get();
+
         $fe_ids = response()->json($insured->modelKeys());
         $lastid = count($insured);
         $sliplastid = count($slip);
@@ -209,7 +213,7 @@ class FeSlipController extends Controller
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
 
-        return view('crm.transaction.fe_slip', compact(['user','cnd','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.fe_slip', compact(['user','cnd','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
     }
 

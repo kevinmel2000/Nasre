@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Insured;
-use App\Models\Currency;
+
 use Illuminate\Support\Facades\DB;
 use App\Models\COB;
 use App\Models\Occupation;
@@ -18,6 +18,7 @@ use App\Models\MarineLookup;
 use App\Models\Customer;
 use App\Models\ConditionNeeded;
 use App\Models\RouteShip;
+use App\Models\Currency;
 use App\Models\DeductibleType;
 use App\Models\Customer\Customer as CustomerCustomer;
 use App\Models\ShipListTemp;

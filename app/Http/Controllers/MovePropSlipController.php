@@ -32,6 +32,8 @@ use App\Models\InterestInsured;
 use App\Models\InterestInsuredTemp;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\DeductibleType;
+use App\Models\ExtendedCoverage;
 
 class MovePropSlipController extends Controller
 {
@@ -151,6 +153,9 @@ class MovePropSlipController extends Controller
         $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
         $felookup = FelookupLocation::orderby('id','asc')->get();
         $cnd = ConditionNeeded::orderby('id','asc')->get();
+        $deductibletype= DeductibleType::orderby('id','asc')->get();
+        $extendedcoverage= ExtendedCoverage::orderby('id','asc')->get();
+
         $mp_ids = response()->json($insured->modelKeys());
         $lastid = count($insured);
         $sliplastid = count($slip);
@@ -216,7 +221,7 @@ class MovePropSlipController extends Controller
         $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
         $interestinsured= InterestInsured::orderby('id','asc')->get();
 
-        return view('crm.transaction.mp_slip', compact(['user','interestinsured','cnd','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','mp_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.mp_slip', compact(['user','interestinsured','extendedcoverage','deductibletype','cnd','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','mp_ids','code_ms','code_sl','costumer']));
     }
 
   

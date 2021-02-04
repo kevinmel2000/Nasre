@@ -771,7 +771,7 @@
                                                                                 <div class="form-group">
                                                                                     <select name="slipcncode" class="form-control form-control-sm ">
                                                                                         <option selected disabled>{{__('Condition Needed Code - Name - Information List')}}</option>
-                                                                                       @foreach($cnd as $ncd)
+                                                                                        @foreach($cnd as $ncd)
                                                                                         <option value="{{ $ncd->id }}">{{ $ncd->code }} - {{ $ncd->name }} - {{ $ncd->information }}</option>
                                                                                         @endforeach
                                                                                     </select>
