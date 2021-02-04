@@ -29,6 +29,7 @@ use App\Models\TransLocationTemp;
 use App\Models\User;
 use App\Models\EarthQuakeZone;
 use App\Models\InterestInsured;
+use App\Models\InterestInsuredTemp;
 use App\Models\FloodZone;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -214,11 +215,12 @@ class HeMotorSlipController extends Controller
         }
 
 
-        $interestlist= InterestInsured::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        $interestinsured= InterestInsured::orderby('id','asc')->get();
 
-
-        return view('crm.transaction.hem_slip', compact(['user','cnd','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','hem_ids','code_ms','code_sl','costumer']));
+        
+        return view('crm.transaction.hem_slip', compact(['user','cnd','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','hem_ids','code_ms','code_sl','costumer']));
     }
 
     

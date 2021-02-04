@@ -609,23 +609,30 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             <tr>
+                                                                                @php 
+                                                                                $totalamount=0;
+                                                                                @endphp
                                                                                 @foreach($interestlist as $isl)
                                                                                     <tr id="iid{{ $isl->id }}">
-                                                                                            <td>{{ $isl->interest }}</td>
+                                                                                            <td>{{ $isl->interestinsured->description }}</td>
                                                                                             <td>{{ $isl->amount }}</td>
+                                                                                            @php 
+                                                                                            $totalamount=$totalamount+$isl->amount;
+                                                                                            @endphp
                                                                                             <td><a href="#" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
                                                                                     </tr>   
                                                                                 @endforeach
                                                                             </tr>
                                                                             <tr>
                                                                                 <form id="addinterestinsured">
-                                                                                    @csrf
+                                                                                @csrf
                                                                                     <td>
                                                                                         <div class="form-group">
                                                                                             <select id="slipinterestlist" name="slipinterestlist" class="form-control form-control-sm ">
                                                                                                 <option selected disabled>{{__('Interest list')}}</option>
-                                                                                                <option value="036 - Heavy Equipment">036 - Heavy Equipment</option>
-                                                                                                <option value="450 - Bensin">450 - Bensin</option>
+                                                                                                @foreach($interestinsured as $ii)
+                                                                                                    <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
+                                                                                                @endforeach
                                                                                             </select>
                                                                                         </div>  
                                                                                     </td>
@@ -656,7 +663,7 @@
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured')}}</label>
-                                                    <input type="text" name="sliptotalsum" class="form-control form-control-sm"/>
+                                                    <input type="number" min="0" value="" step=".0001" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm " readonly="readonly"  data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -1093,9 +1100,9 @@
                                                                         <tr>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                        <div class="input-group date" id="date" data-target-input="nearest">
-                                                                                                <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdate">
-                                                                                                <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
+                                                                                        <div class="input-group date" id="dateinstallment" data-target-input="nearest">
+                                                                                                <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdate">
+                                                                                                <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
                                                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                                                 </div>
                                                                                         </div>

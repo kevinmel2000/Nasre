@@ -134,7 +134,7 @@ $(document).ready(function() {
        var interest = $('#slipinterestlist').val();
        var amount = $('#slipamount').val();
        var slip_id = $('#slipnumber').val();
-       var token2 = $('input[name=_token2]').val();
+       var token2 = $('input[name=_token]').val();
        
        $.ajax({
            url:"{{ route('interestlist.store') }}",

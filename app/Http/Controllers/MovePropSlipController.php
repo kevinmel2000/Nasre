@@ -29,6 +29,7 @@ use App\Models\TransProperty;
 use App\Models\TransPropertyTemp;
 use App\Models\Insured;
 use App\Models\InterestInsured;
+use App\Models\InterestInsuredTemp;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -211,11 +212,11 @@ class MovePropSlipController extends Controller
         }
 
         
-        $interestlist= InterestInsured::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        $interestinsured= InterestInsured::orderby('id','asc')->get();
 
-
-        return view('crm.transaction.mp_slip', compact(['user','cnd','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','mp_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.mp_slip', compact(['user','interestinsured','cnd','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','mp_ids','code_ms','code_sl','costumer']));
     }
 
   
