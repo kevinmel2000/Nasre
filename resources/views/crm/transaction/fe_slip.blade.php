@@ -754,7 +754,7 @@
                                                                         <tr>
                                                                             <td colspan="2">
                                                                                 <div class="form-group">
-                                                                                    <select name="slipcncode" class="form-control form-control-sm ">
+                                                                                    <select id="slipcncode" name="slipcncode" class="form-control form-control-sm ">
                                                                                         <option selected readonly>{{__('Peril List')}}</option>
                                                                                         @foreach($extendedcoverage as $ncd)
                                                                                         <option value="{{ $ncd->id }}">{{ $ncd->code }} - {{ $ncd->name }} - {{ $ncd->description }}</option>
@@ -764,12 +764,12 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipnilaiec" placeholder="y" class="form-control form-control-sm "/>
+                                                                                    <input type="number" value="0" step=".0001" id="slipnilaiec" name="slipnilaiec" placeholder="y" class="form-control form-control-sm "/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm " readonly="readonly"/>
+                                                                                    <input type="number" value="0" step=".0001" id="slipamountec" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm " readonly="readonly"/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>

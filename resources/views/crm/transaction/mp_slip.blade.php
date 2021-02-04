@@ -834,12 +834,12 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipnilaiec" placeholder="y" class="form-control form-control-sm "/>
+                                                                                    <input type="number" value="0" step=".0001" id="slipnilaiec" name="slipnilaiec" placeholder="y" class="form-control form-control-sm "/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm " readonly="readonly"/>
+                                                                                    <input type="number" value="0" step=".0001" id="slipamountec" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm " readonly="readonly"/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>

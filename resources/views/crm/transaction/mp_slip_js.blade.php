@@ -247,6 +247,55 @@ $(document).ready(function(){
 
 </script>
 
+<script type='text/javascript'>
+    
+     $('#slipdppercentage').keyup(function () {
+        var persentage =  parseFloat($('#slipdppercentage').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * persentage/100) ? 0 :(sliptotalsum * persentage/100) ;
+        //alert(sum);
+        $('#slipdpamount').val(sum);
+     });
+
+     $('#slipdppercentage').change(function () {
+        var persentage =  parseFloat($('#slipdppercentage').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * persentage/100) ? 0 :(sliptotalsum * persentage/100) ;
+        //alert(sum);
+        $('#slipdpamount').val(sum);
+     });
+
+</script>
+
+
+<script type='text/javascript'>
+    
+     $('#slipnilaiec').keyup(function () {
+        var persentage =  parseFloat($('#slipnilaiec').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * persentage/100) ? 0 :(sliptotalsum * persentage/100) ;
+        //alert(sum);
+        $('#slipamountec').val(sum);
+     });
+
+     $('#slipnilaiec').change(function () {
+        var persentage =  parseFloat($('#slipnilaiec').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * persentage/100) ? 0 :(sliptotalsum * persentage/100) ;
+        //alert(sum);
+        $('#slipamountec').val(sum);
+     });
+
+</script>
+
 
 <script type='text/javascript'>
     $('#addinstallmentinsured-btn').click(function(e){
