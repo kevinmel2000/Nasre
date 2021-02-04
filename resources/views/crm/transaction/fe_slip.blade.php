@@ -531,14 +531,14 @@
                                                                         <tbody>
                                                                             <tr>
                                                                                 @php 
-                                                                                $totalamount=0;
+                                                                                $totalamountdata=0;
                                                                                 @endphp
                                                                                 @foreach($interestlist as $isl)
                                                                                     <tr id="iid{{ $isl->id }}">
                                                                                             <td>{{ $isl->interestinsured->description }}</td>
                                                                                             <td>{{ $isl->amount }}</td>
                                                                                             @php 
-                                                                                            $totalamount=$totalamount+$isl->amount;
+                                                                                            $totalamountdata=$totalamountdata+$isl->amount;
                                                                                             @endphp
                                                                                             <td><a href="#" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
                                                                                     </tr>   
@@ -584,7 +584,7 @@
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured') }}</label>
-                                                    <input type="number" min="0" value="{{$totalamount}}" step=".0001" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
+                                                    <input type="number" min="0" value="{{$totalamountdata}}" step=".0001" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
                                                 </div>
                                             </div>
                                         </div>
@@ -651,6 +651,16 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
+                                                                        @foreach($deductiblelist as $isl)
+                                                                            <tr id="iiddeductible{{ $isl->id }}">
+                                                                                    <td>{{ $isl->DeductibleType->description }}</td>
+                                                                                    <td>{{ @$isl->currency->code}} - {{@$isl->currency->symbol_name }}</td>
+                                                                                    <td>{{ $isl->percentage }}</td>
+                                                                                    <td>{{ $isl->amount }}</td>
+                                                                                    <td>{{ $isl->min_claimamount }}</td>
+                                                                                    <td><a href="#" onclick="deletedeductibledetail({{ $isl->id }})">delete</i></a></td>
+                                                                            </tr>   
+                                                                        @endforeach
                                                                          <tr>
                                                                             <td>
                                                                                 <div class="form-group">
@@ -722,6 +732,14 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
+                                                                        @foreach($extendcoveragelist as $isl)
+                                                                            <tr id="iidextendcoverage{{ $isl->id }}">
+                                                                                    <td>{{ @$isl->extendcoveragedata->code}} - {{ @$isl->extendcoveragedata->name}} - {{@$isl->extendcoveragedata->description }}</td>
+                                                                                    <td>{{ $isl->percentage }}</td>
+                                                                                    <td>{{ $isl->amount }}</td>
+                                                                                    <td><a href="#" onclick="deleteextendcoveragedetail({{ $isl->id }})">delete</i></a></td>
+                                                                            </tr>   
+                                                                        @endforeach
                                                                         <tr>
                                                                             <td colspan="2">
                                                                                 <div class="form-group">
@@ -972,6 +990,14 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
+                                                                        @foreach($installmentlist as $isl)
+                                                                            <tr id="iidinstallment{{ $isl->id }}">
+                                                                                    <td>{{ $isl->installment_date }}</td>
+                                                                                    <td>{{ $isl->percentage }}</td>
+                                                                                    <td>{{ $isl->amount }}</td>
+                                                                                    <td><a href="#" onclick="deleteinstallmentdetail({{ $isl->id }})">delete</i></a></td>
+                                                                            </tr>   
+                                                                        @endforeach
                                                                         <tr>
                                                                             <form id="addinstallmentinsured">
                                                                             @csrf

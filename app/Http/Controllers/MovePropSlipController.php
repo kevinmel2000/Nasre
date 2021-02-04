@@ -30,6 +30,7 @@ use App\Models\TransPropertyTemp;
 use App\Models\Insured;
 use App\Models\InterestInsured;
 use App\Models\InterestInsuredTemp;
+use App\Models\InstallmentTemp;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\DeductibleType;
