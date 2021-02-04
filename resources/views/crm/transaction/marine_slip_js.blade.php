@@ -182,15 +182,16 @@
            success:function(response){
             
                console.log(response)
-               $('#interestInsuredTable tbody').prepend('<tr id="iid'+response.id+'" data-name="interestvalue[]"><td data-name="'+response.interest_id+'">'+response.interest_id+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestdetail('+response.id+')">delete</a></td></tr>')
+               $('#interestInsuredTable tbody').prepend('<tr id="iid'+response.id+'" data-name="interestvalue[]"><td data-name="'+response.interest_id+'">'+response.description+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestdetail('+response.id+')">delete</a></td></tr>')
                $('#slipamount').val('');
                $('#slipinterestlist').val('');
+               
+               
                var total =  parseFloat($("#sliptotalsum").val());
                var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
                $("#sliptotalsum").val(sum);
-
+               $("#msishareto").val(sum);
                
-
             //    if($('#sliptotalsum').val(''))
             //         $("#sliptotalsum").val(parseFloat(response.amount));
             //    else
@@ -206,8 +207,71 @@
 </script>
     
 <script  type='text/javascript'>
+    $('#slippct').keyup(function () {
+        var pct =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsum").val());
+        var sum = isNaN(pct * tsi/100) ? 0 :(pct * tsi/100) ;
+         $('#sliptotalsumpct').val(sum);
+         $('#msishare').val(pct);
+     });
+
+     $('#slipdppercentage').keyup(function () {
+        var percent =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsum").val());
+        var sum = isNaN(percent * tsi/100) ? 0 :(percent * tsi/100) ;
+        $('#slipdpamount').val(sum);
+     });
+
+     $('#slipshare').keyup(function () {
+        var shareslip =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsum").val());
+        var sum = isNaN(shareslip * tsi/100) ? 0 :(shareslip * tsi/100) ;
+        $('#slipsumshare').val(sum);
+     });
+
+     $('#sliprate').keyup(function () {
+        var rateslip =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsum").val());
+        var sum = isNaN(rateslip * tsi/100) ? 0 :(rateslip * tsi/100) ;
+        $('#slipbasicpremium').val(sum);
+     });
+
+     $('#slipshare').change(function () {
+        var rateslip =  parseFloat($('#sliprate').val()) / 100 ;
+        var shareslip =  parseFloat($('#slipshare').val()) / 100 ;
+        var tsi = parseFloat($("#sliptotalsum").val());
+        var sum = isNaN(rateslip * shareslip * tsi/100) ? 0 :(rateslip * shareslip * tsi/100) ;
+        $('#slipgrossprmtonr').val(sum);
+     });
+
+     $('#slipcommission').keyup(function () {
+        var commision =  parseFloat($(this).val()) / 100;
+        var sumgrossprmtonr = parseFloat($("#slipgrossprmtonr").val());
+        var sum = isNaN(commision * sumgrossprmtonr/100) ? 0 :(commision * sumgrossprmtonr/100);
+        var sumnetprmtonr = isNaN( sumgrossprmtonr * (100/100 - commision)) ? 0 :(sumgrossprmtonr * (100/100 - commision));
+        $('#slipsumcommission').val(sum);
+        $('#slipnetprmtonr').val(sumnetprmtonr);
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() { 
+        
+        if(($('#sliprate').val() != 0) && ($('#slipshare').val() != 0) )
+        {
+            
+        }
+        
+
+     });
+   
+    
+
+    
+
     
 </script>
+
 
 <script type='text/javascript'>
     function deleteinterestdetail(id){
@@ -223,6 +287,11 @@
                 
                 $('#iid'+id).remove();
                 console.log(response);
+                var total =  parseFloat($("#sliptotalsum").val());
+                var sum = isNaN(total - parseFloat(response.amount)) ? 0 :(total - parseFloat(response.amount)) ;
+                $("#sliptotalsum").val(sum);
+                $("#msishareto").val(sum);
+                
             }
         });
     }

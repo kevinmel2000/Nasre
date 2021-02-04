@@ -735,6 +735,14 @@
                     || @$route_active == 'Ship Type Data Master' 
                     || @$route_active == 'Classification Data Master' 
                     || @$route_active == 'Construction Data Master' 
+                    || @$route_active == 'Company Type Data Master' 
+                    || @$route_active == 'Property Type Data Master' 
+                    || @$route_active == 'Condition Needed Data Master' 
+                    || @$route_active == 'Interest Insured Data Master' 
+                    || @$route_active == 'Extend Coverage Data Master' 
+                    || @$route_active == 'Deductible Type Data Master' 
+                    || @$route_active == 'Ship Port Data Master' 
+                    || @$route_active == 'Route Data Master' 
                     )
                         @php
                         $master_dd = 'active';
