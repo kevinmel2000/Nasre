@@ -10,7 +10,7 @@ class ExtendCoverageTemp extends Model
 
     protected $guarded = [];
 
-    public function extendcoverage()
+    public function extendcoveragedata()
     {
         return $this->belongsTo('App\Models\ExtendedCoverage', 'extendcoverage_id');
     }

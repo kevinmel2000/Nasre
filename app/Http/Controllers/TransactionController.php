@@ -454,16 +454,16 @@ class TransactionController extends Controller
     public function storeextendcoveragelist(Request $request)
     {
 
-            $percentage = $request->slipnilaiec;
-            $extendcoverage_id = $request->slipcncode;
-            $amount = $request->slipamountec;
+            $percentage = $request->percentage;
+            $slipcncode = $request->slipcncode;
+            $amount = $request->amount;
             $slip_id = $request->id_slip;
         
             if($percentage !='' && $amount !='' && $slip_id != '')
             {
             
                 $extendcoveragelist = new ExtendCoverageTemp();
-                $extendcoveragelist->extendcoverage_id  = $extendcoverage_id;
+                $extendcoveragelist->extendcoverage_id  = $slipcncode;
                 $extendcoveragelist->percentage  = $percentage;
                 $extendcoveragelist->amount = $amount;
                 $extendcoveragelist->slip_id = $slip_id; 
@@ -474,6 +474,7 @@ class TransactionController extends Controller
                         'id' => $extendcoveragelist->id,
                         'percentage' => $extendcoveragelist->percentage,
                         'extendcoverage_id' => $extendcoveragelist->extendcoverage_id,
+                        'coveragetype' => $extendcoveragelist->extendcoveragedata->description,
                         'amount' => $extendcoveragelist->amount,
                         'slip_id' => $extendcoveragelist->slip_id
                     ]

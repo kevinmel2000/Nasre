@@ -10,7 +10,7 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form method="POST" action={{url('transaction-data/fl-insured/store')}}>
+        <form method="POST" action={{url('transaction-data/fe-insured/store')}}>
           @csrf
             <div class="card">
                 <div class="card-header bg-gray">
@@ -211,7 +211,7 @@
             <div class="card-body bg-light-gray">
                 
                 <div class="container-fluid p-3">
-                   <form method="POST" action={{url('transaction-data/fl-slip/store/'.$code_ms)}}>
+                   <form method="POST" action={{url('transaction-data/fe-slip/store/'.$code_ms)}}>
                     @csrf
                         <div class="card card-tabs">
                             <div class="card-header p-0 pt-1 border-bottom-0">
@@ -712,7 +712,7 @@
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="col-md-12 com-sm-12 mt-3">
-                                                                    <table id="ExtendCoverage" class="table table-bordered table-striped">
+                                                                    <table id="ExtendCoveragePanel" class="table table-bordered table-striped">
                                                                     <thead>
                                                                     <tr>
                                                                         <th>{{__('Peril Code - Name')}}</th>
@@ -722,18 +722,6 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr>
-                                                                            <td>{{__('001 - R.S.M.D')}}</td>
-                                                                            <td>{{__('y%.')}}</td>
-                                                                            <td>{{__('= y * tsi')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>{{__('005 - Earthquake')}}</td>
-                                                                            <td>{{__('0.1%.')}}</td>
-                                                                            <td>{{__('1.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
                                                                         <tr>
                                                                             <td colspan="2">
                                                                                 <div class="form-group">
@@ -757,7 +745,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                    <button type="button" id="addextendcoverageinsured-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>
                                                                         </tr>

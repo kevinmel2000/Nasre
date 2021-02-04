@@ -791,7 +791,7 @@
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="col-md-12 com-sm-12 mt-3">
-                                                                    <table id="ExtendCoverage" class="table table-bordered table-striped">
+                                                                    <table id="ExtendCoveragePanel" class="table table-bordered table-striped">
                                                                     <thead>
                                                                     <tr>
                                                                         <th>{{__('Peril Code - Name')}}</th>
@@ -802,21 +802,9 @@
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr>
-                                                                            <td>{{__('001 - R.S.M.D')}}</td>
-                                                                            <td>{{__('y%.')}}</td>
-                                                                            <td>{{__('= y * tsi')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>{{__('005 - Earthquake')}}</td>
-                                                                            <td>{{__('0.1%.')}}</td>
-                                                                            <td>{{__('1.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
                                                                             <td colspan="2">
                                                                                 <div class="form-group">
-                                                                                    <select name="slipcncode" class="form-control form-control-sm ">
+                                                                                    <select id="slipcncode" name="slipcncode" class="form-control form-control-sm ">
                                                                                         <option selected readonly>{{__('Peril List')}}</option>
                                                                                         @foreach($extendedcoverage as $ncd)
                                                                                         <option value="{{ $ncd->id }}">{{ $ncd->code }} - {{ $ncd->name }} - {{ $ncd->description }}</option>
@@ -836,7 +824,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                    <button type="button" id="addextendcoverageinsured-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>
                                                                         </tr>

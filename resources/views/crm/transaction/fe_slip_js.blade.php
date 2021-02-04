@@ -471,3 +471,65 @@ $(document).ready(function() {
         });
     }
 </script>
+
+
+<script type='text/javascript'>
+    $('#addextendcoverageinsured-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var slipcncode = $('#slipcncode').val();
+       var percentage = $('#slipnilaiec').val();
+       var amount = $('#slipamountec').val();
+       
+       var slip_id = $('#slipnumber').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('extendcoverage.store') }}",
+           type:"POST",
+           data:{
+               slipcncode:slipcncode,
+               percentage:percentage,
+               amount:amount,
+               id_slip:slip_id
+           },
+           success:function(response)
+           {
+            
+               console.log(response)
+               $('#ExtendCoveragePanel tbody').prepend('<tr id="iidextendcoverage'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoveragedetail('+response.id+')">delete</a></td></tr>');
+               $('#slipnilaiec').val('');
+               $('#slipamountec').val('');
+               
+           }
+       });
+
+   });
+</script>
+
+<script type='text/javascript'>
+    function deleteextendcoveragedetail(id)
+    {
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-extendcoverage-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            success:function(response){
+                
+                $('#iidextendcoverage'+id).remove();
+                console.log(response);
+            }
+        });
+    }
+</script>
