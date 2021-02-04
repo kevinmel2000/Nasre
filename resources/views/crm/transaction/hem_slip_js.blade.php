@@ -381,6 +381,70 @@ $("body").on("click","#btn-danger2",function(){
 </script>
 
 
-<script  type='text/javascript'>
-    
+
+<script type='text/javascript'>
+    $('#adddeductibleinsured-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var slipdptype = $('#slipdptype').val();
+       var slipdpcurrency = $('#slipdpcurrency').val();
+       
+       var percentage = $('#slipdppercentage').val();
+       var amount = $('#slipdpamount').val();
+       var minamount = $('#slipdpminamount').val();
+       
+       var slip_id = $('#slipnumber').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('deductible.store') }}",
+           type:"POST",
+           data:{
+               slipdptype:slipdptype,
+               slipdpcurrency:slipdpcurrency,
+               percentage:percentage,
+               amount:amount,
+               minamount:minamount,
+               id_slip:slip_id
+           },
+           success:function(response)
+           {
+            
+               console.log(response)
+               $('#deductiblePanel tbody').prepend('<tr id="iiddeductible'+response.id+'" data-name="deductiblevalue[]"><td data-name="'+response.deductibletype+'">'+response.deductibletype+'</td><td data-name="'+response.currencydata+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibledetail('+response.id+')">delete</a></td></tr>');
+               $('#slipdppercentage').val('');
+               $('#slipdpamount').val('');
+               $('#slipdpminamount').val('');
+               
+           }
+       });
+
+   });
+</script>
+
+<script type='text/javascript'>
+    function deletedeductibledetail(id)
+    {
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-deductible-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            success:function(response){
+                
+                $('#iiddeductible'+id).remove();
+                console.log(response);
+            }
+        });
+    }
 </script>

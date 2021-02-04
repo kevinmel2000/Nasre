@@ -401,11 +401,12 @@ class TransactionController extends Controller
     public function storedeductiblelist(Request $request)
     {
 
-            $percentage = $request->slipdppercentage;
             $deductibletype_id = $request->slipdptype;
             $currency = $request->slipdpcurrency;
-            $amount = $request->slipdpamount;
-            $minamount = $request->slipdpminamount;
+            
+            $minamount = $request->minamount;
+            $amount = $request->amount;
+            $percentage = $request->percentage;
             $slip_id = $request->id_slip;
         
             if($percentage !='' && $amount !='' && $slip_id != '')
@@ -424,8 +425,10 @@ class TransactionController extends Controller
                     [
                         'id' => $deductiblelist->id,
                         'deductibletype_id' => $deductiblelist->deductibletype_id,
+                        'deductibletype' => $deductiblelist->DeductibleType->description,
                         'percentage' => $deductiblelist->percentage,
                         'currency_id' => $deductiblelist->currency_id,
+                        'currencydata' => $deductiblelist->currency->code.'-'.$deductiblelist->currency->symbol_name,
                         'amount' => $deductiblelist->amount,
                         'min_claimamount' => $deductiblelist->min_claimamount,
                         'slip_id' => $deductiblelist->slip_id
