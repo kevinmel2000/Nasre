@@ -297,11 +297,15 @@ class FeSlipController extends Controller
             'slipnumber'=>'required',
             'slipuy'=>'required',
             'slipstatus'=>'required',
-            'fessuffix'=>'required',
-            'fesshare'=>'required',
-            'fessharefrom'=>'required',
-            'fesshareto'=>'required',
-            'fescoinsurance'=>'required'
+            'slippolicy_no'=>'required',
+            'slipno'=>'required',
+            'slipcndn'=>'required',
+            'sliptotalsum'=>'required',
+            'sliptotalsum'=>'required',
+            'slippct'=>'required',
+            'sliptype'=>'required',
+            'sliptotalsumpct'=>'required'
+
         ]);
         
         if($validator)
@@ -332,7 +336,15 @@ class FeSlipController extends Controller
                     'build_cost'=>$request->slipbld_const,
                     'slip_no'=>$request->slipno,
                     'cn_dn'=>$request->slipcndn,
-                    'policy_no'=>$request->slippolicy_no
+                    'policy_no'=>$request->slippolicy_no,
+                    'attacment_file'=>'',
+                    'interest_insured'=>'',
+                    'total_sum_insured'=>$request->sliptotalsum,
+                    'insured_type'=>$request->sliptype,
+                    'insured_pct'=>$request->slippct,
+                    'total_sum_pct'=>$request->sliptotalsumpct,
+                    'deductible_panel'=>'',
+                    'extend_coverage'=>'',
                 ]);
 
                 $notification = array(
@@ -364,7 +376,15 @@ class FeSlipController extends Controller
                 $slipdataup->slip_no=$request->slipno; 
                 $slipdataup->cn_dn=$request->slipcndn; 
                 $slipdataup->policy_no=$request->slippolicy_no; 
-                
+                $slipdataup->attacment_file=''; 
+                $slipdataup->interest_insured='';
+                $slipdataup->total_sum_insured=$request->sliptotalsum; 
+                $slipdataup->insured_type=$request->sliptype; 
+                $slipdataup->insured_pct=$request->slippct; 
+                $slipdataup->total_sum_pct=$request->sliptotalsumpct; 
+                $slipdataup->deductible_panel=''; 
+                $slipdataup->extend_coverage='';  
+
                 $slipdataup->save();
 
 

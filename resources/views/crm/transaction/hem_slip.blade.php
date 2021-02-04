@@ -610,7 +610,7 @@
                                                                                 </td>
                                                                                 <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipamount" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                                    <input type="text" name="slipamount" class="form-control form-control-sm "/>
                                                                                 </div>
                                                                                 </td>
                                                                                 <td>
@@ -746,17 +746,17 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipdppercentage" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                                    <input type="text" name="slipdppercentage" placeholder="x" class="form-control form-control-sm "/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly required/>
+                                                                                    <input type="text" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm " readonly/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipdpminamount" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                                    <input type="text" name="slipdpminamount" class="form-control form-control-sm "/>
                                                                                 </div>
                                                                             </td> 
                                                                             <td>
@@ -818,12 +818,12 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipnilaiec" placeholder="y" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                                    <input type="text" name="slipnilaiec" placeholder="y" class="form-control form-control-sm " />
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly="readonly" required/>
+                                                                                    <input type="text" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm" readonly="readonly"/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
