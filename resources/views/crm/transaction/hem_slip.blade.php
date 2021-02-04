@@ -298,7 +298,7 @@
                                             <div class="row">
                                                     <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                                                        <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
                                                         <label for="">{{__('Number')}} </label>
                                                         <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="3" value="{{ $code_sl }}" readonly="readonly" required/>
                                                         </div>
