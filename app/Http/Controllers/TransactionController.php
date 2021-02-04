@@ -18,9 +18,11 @@ use App\Models\MarineLookup;
 use App\Models\Customer;
 use App\Models\ConditionNeeded;
 use App\Models\RouteShip;
+use App\Models\DeductibleType;
 use App\Models\Customer\Customer as CustomerCustomer;
 use App\Models\ShipListTemp;
 use App\Models\InterestInsured;
+use App\Models\InterestInsuredTemp;
 use App\Policies\FelookupLocationPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,9 +58,11 @@ class TransactionController extends Controller
             $cnd = ConditionNeeded::orderby('id','asc')->get();
             $mlu = MarineLookup::orderby('id','asc')->get();
             $shiplist= ShipListTemp::orderby('id','desc')->get();
-            $interestlist= InterestInsured::orderby('id','desc')->get();
+            $interestlist= InterestInsuredTemp::orderby('id','desc')->get();
             $customer= CustomerCustomer::orderby('id','asc')->get();
             $routeship= RouteShip::orderby('id','asc')->get();
+            $interestinsured= InterestInsured::orderby('id','asc')->get();
+            $deductibletype= DeductibleType::orderby('id','asc')->get();
             $ms_ids = response()->json($insured->modelKeys());
             $lastid = count($insured);
             $sliplastid = count($slip);
@@ -120,7 +124,7 @@ class TransactionController extends Controller
             }
 
 
-            return view('crm.transaction.marine_slip', compact(['user','routeship','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
+            return view('crm.transaction.marine_slip', compact(['user','deductibletype','interestinsured','routeship','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
          }
         else
         {
@@ -322,8 +326,8 @@ class TransactionController extends Controller
             $slip_id = $request->id_slip;
         
             if($interest !='' && $amount !='' && $slip_id != ''){
-                $interestlist = new InterestInsured();
-                $interestlist->interest  = $interest;
+                $interestlist = new InterestInsuredTemp();
+                $interestlist->interest_id  = $interest;
                 $interestlist->amount = $amount;
                 $interestlist->slip_id = $slip_id; 
                 $interestlist->save();

@@ -246,11 +246,7 @@
                                                     <div class="form-group">
                                                         <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
                                                         <label for="">{{__('Number')}} </label>
-<<<<<<< HEAD
                                                         <input type="text" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="1-25" value="{{ $code_sl }}" readonly="readonly" required/>
-=======
-                                                        <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="3" value="{{ $code_sl }}" readonly="readonly" required/>
->>>>>>> e6ac4a6a6fedbd9f428dbf17023c7b73c41ff993
                                                         </div>
                                                     </div>
                                                 </div>

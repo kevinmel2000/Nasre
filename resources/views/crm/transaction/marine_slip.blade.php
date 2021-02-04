@@ -557,7 +557,7 @@
                                                                             <tr>
                                                                                 @foreach($interestlist as $isl)
                                                                                     <tr id="iid{{ $isl->id }}">
-                                                                                            <td>{{ $isl->interest }}</td>
+                                                                                            <td>{{ $isl->interestinsured->description }}</td>
                                                                                             <td>{{ $isl->amount }}</td>
                                                                                             <td><a href="#" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
                                                                                     </tr>   
@@ -570,8 +570,9 @@
                                                                                         <div class="form-group">
                                                                                             <select id="slipinterestlist" name="slipinterestlist" class="form-control form-control-sm ">
                                                                                                 <option selected disabled>{{__('Interest list')}}</option>
-                                                                                                <option value="036 - Heavy Equipment">036 - Heavy Equipment</option>
-                                                                                                <option value="450 - Bensin">450 - Bensin</option>
+                                                                                                @foreach($interestinsured as $ii)
+                                                                                                    <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
+                                                                                                @endforeach
                                                                                             </select>
                                                                                         </div>  
                                                                                     </td>
@@ -690,8 +691,9 @@
                                                                                 <div class="form-group">
                                                                                     <select name="slipdptype" class="form-control form-control-sm ">
                                                                                         <option selected disabled>{{__('Type')}}</option>
-                                                                                        <option value="MD">MD</option>
-                                                                                        <option value="TPL">TPL</option>
+                                                                                        @foreach($deductibletype as $dt)
+                                                                                            <option value="{{ $dt->id }}">{{ $dt->abbreviation }} - {{ $dt->description }}</option>
+                                                                                        @endforeach
                                                                                     </select>
                                                                                 </div>  
                                                                             </td>
