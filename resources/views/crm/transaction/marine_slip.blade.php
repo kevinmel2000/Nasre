@@ -979,7 +979,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Net Prm to NR')}}</label>
-                                                        <input type="text" name="slipnetprmtonr" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                        <input type="text" name="slipnetprmtonr" value='1' class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                     </div>
                                                 </div>
                                             </div>
