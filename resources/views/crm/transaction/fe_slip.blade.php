@@ -651,7 +651,7 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                    <tr>
+                                                                         <tr>
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                     <select id="slipdptype" name="slipdptype" class="form-control form-control-sm ">
