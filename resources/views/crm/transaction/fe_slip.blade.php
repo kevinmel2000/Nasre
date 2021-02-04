@@ -1039,12 +1039,12 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" min="0" max="100" value="" step=".01" name="slipippercentage" placeholder="w" class="form-control form-control-sm " />
+                                                                                    <input type="number" min="0" max="100" value="" step=".01"  id="slipippercentage" name="slipippercentage" placeholder="w" class="form-control form-control-sm " />
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" min="0" max="999999999,9999" value="" step=".01" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm" readonly/>
+                                                                                    <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm" readonly/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -1227,5 +1227,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.transaction.fl_slip_js')
+@include('crm.transaction.fe_slip_js')
 @endsection

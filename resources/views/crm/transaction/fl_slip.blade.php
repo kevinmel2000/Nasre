@@ -1023,19 +1023,9 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr>
-                                                                            <td>{{__('20/09/2020')}}</td>
-                                                                            <td>{{__('50%')}}</td>
-                                                                            <td>{{__('100.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>{{__('20/10/2020')}}</td>
-                                                                            <td>{{__('50%')}}</td>
-                                                                            <td>{{__('100.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
+                                                                    <tr>
+                                                                            <form id="addinstallmentinsured">
+                                                                            @csrf
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                         <div class="input-group date" id="dateinstallment" data-target-input="nearest">
@@ -1048,19 +1038,20 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipippercentage" placeholder="w" class="form-control form-control-sm " />
+                                                                                    <input type="number" min="0" max="100" value="" step=".01"  id="slipippercentage" name="slipippercentage" placeholder="w" class="form-control form-control-sm " />
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm" readonly/>
+                                                                                    <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm" readonly/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                    <button type="button" id="addinstallmentinsured-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>
+                                                                            </form>
                                                                         </tr>
                                                                     </tbody>
                                                                     </table>

@@ -260,6 +260,29 @@ $(document).ready(function() {
     
 </script>
 
+<script type='text/javascript'>
+    
+     $('#slipippercentage').keyup(function () {
+        var persentage =  parseFloat($('#slipippercentage').val());
+        var premiumnr =  parseFloat($('#slipnetprmtonr').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(premiumnr * persentage/100) ? 0 :(premiumnr * persentage/100) ;
+        //alert(sum);
+        $('#slipipamount').val(sum);
+     });
+
+     $('#slipippercentage').change(function () {
+        var persentage =  parseFloat($('#slipippercentage').val());
+        var premiumnr =  parseFloat($('#slipnetprmtonr').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(premiumnr * persentage/100) ? 0 :(premiumnr * persentage/100) ;
+        //alert(sum);
+        $('#slipipamount').val(sum);
+     });
+
+</script>
 
 <script type='text/javascript'>
     $('#addinstallmentinsured-btn').click(function(e){
