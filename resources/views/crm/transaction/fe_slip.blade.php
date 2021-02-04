@@ -129,7 +129,7 @@
                                                                     <td>{{@$slt->felookuplocation->state->id}} - {{@$slt->felookuplocation->state->name}}</td>
                                                                     <td>{{@$slt->felookuplocation->city->id}} - {{@$slt->felookuplocation->city->name}}</td>
                                                                     <td>{{ $slt->felookuplocation->latitude , $slt->felookuplocation->longtitude  }}</td>
-                                                                    <td><a href="" onclick="deletelocationdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
+                                                                    <td><a href="javascript:void(0)" onclick="deletelocationdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
                                                              </tr>   
                                                             @endforeach
                                                     </tbody>
@@ -186,7 +186,7 @@
                                     <select name="lookup_location_id" id="lookup_location" class="e1 form-control form-control-sm " required>
                                     <option selected readonly>{{__('Select Lookup Location ')}}</option>
                                     @foreach($felookup as $felookuplocationdata)
-                                    <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->postal_code }}</option>
+                                    <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->address }}</option>
                                     @endforeach
                                     </select>
                                 </div>

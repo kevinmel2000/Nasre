@@ -136,37 +136,6 @@ class TransactionController extends Controller
         
     }
 
-    public function indexfeslip()
-    {
-        $user = Auth::user();
-        $country = User::orderby('id','asc')->get();
-        $route_active = 'Fire Engineering - Slip Entry';
-        $fe_ids = response()->json($country->modelKeys());
-
-
-        return view('crm.transaction.fe_slip', compact(['user','route_active','fe_ids']));
-    }
-
-    public function indexflslip()
-    {
-        $user = Auth::user();
-        $country = User::orderby('id','asc')->get();
-        $route_active = 'Financial Lines - Slip Entry';
-        $fl_ids = response()->json($country->modelKeys());
-
-        return view('crm.transaction.fl_slip', compact(['user','route_active','fl_ids']));
-    }
-
-    public function indexmpslip()
-    {
-        $user = Auth::user();
-        $country = User::orderby('id','asc')->get();
-        $route_active = 'Moveable Property - Slip Entry';
-        $mp_ids = response()->json($country->modelKeys());
-
-        return view('crm.transaction.mp_slip', compact(['user','route_active','mp_ids']));
-    }
-
     public function indexhioslip()
     {
         $user = Auth::user();
@@ -187,14 +156,36 @@ class TransactionController extends Controller
         return view('crm.transaction.pa_slip', compact(['user','route_active','pa_ids']));
     }
 
-    public function indexhemslip()
+    public function indexmarine(Request $request)
     {
-        $user = Auth::user();
-        $country = User::orderby('id','asc')->get();
-        $route_active = 'HE & Motor - Slip Entry';
-        $hem_ids = response()->json($country->modelKeys());
+         $user = Auth::user();
+         $country = User::orderby('id','asc')->get();
+         $route_active = 'Marine Slip - Index';   
+         $mydate = date("Y").date("m").date("d");
+         $ms_ids = response()->json($country->modelKeys());
 
-        return view('crm.transaction.hem_slip', compact(['user','route_active','hem_ids']));
+         $search = @$request->input('search');
+
+         if(empty($search))
+         {
+          //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
+          $insured = Insured::where('slip_type', '=', 'ms')->orderby('id','desc')->paginate(10);
+          $insured_ids = response()->json($insured->modelKeys());
+
+          return view('crm.transaction.marine_index', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+        
+         }
+         else
+         {
+          //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
+          
+          $insured = Insured::where('slip_type', '=', 'ms')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
+          $insured_ids = response()->json($insured->modelKeys());
+
+        
+          return view('crm.transaction.marine_index', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+        
+        }
     }
 
     /**
@@ -332,7 +323,15 @@ class TransactionController extends Controller
                 $interestlist->slip_id = $slip_id; 
                 $interestlist->save();
 
-                return response()->json($interestlist);
+                return response()->json(
+                    [
+                        'id' => $interestlist->id,
+                        'interest_id' => $interestlist->interest_id,
+                        'amount' => $interestlist->amount,
+                        'slip_id' => $interestlist->slip_id,
+                        'description' => $interestlist->interestinsured->description
+                    ]
+                );
         
             }
             else
@@ -400,10 +399,13 @@ class TransactionController extends Controller
 
     public function destroyinterestlist($id)
     {
-        $interestlist = InterestInsured::find($id);
+        $interestlist = InterestInsuredTemp::find($id);
+        
+        $amountinterest = $interestlist->amount;
+        
         $interestlist->delete();
         
-        return response()->json(['success'=>'Data has been deleted']);
+        return response()->json(['success'=>'Data has been deleted','amount'=>$amountinterest]);
     }
 
 }
