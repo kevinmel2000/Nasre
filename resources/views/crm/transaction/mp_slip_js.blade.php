@@ -154,3 +154,71 @@ $(document).ready(function(){
         });
     }
 </script>
+
+
+<script type='text/javascript'>
+    $('#addinterestinsured-btn').click(function(e){
+       e.preventDefault();
+
+       var interest = $('#slipinterestlist').val();
+       var amount = $('#slipamount').val();
+       var slip_id = $('#slipnumber').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajax({
+           url:"{{ route('interestlist.store') }}",
+           type:"POST",
+           data:{
+               interest_insured:interest,
+               slipamount:amount,
+               id_slip:slip_id,
+               _token:token2
+           },
+           success:function(response){
+            
+               console.log(response)
+               $('#interestInsuredTable tbody').prepend('<tr id="iid'+response.id+'" data-name="interestvalue[]"><td data-name="'+response.interest+'">'+response.interest+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestdetail('+response.id+')">delete</a></td></tr>')
+               $('#slipamount').val('');
+               $('#slipinterestlist').val('');
+               var total =  parseFloat($("#sliptotalsum").val());
+               var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
+               $("#sliptotalsum").val(sum);
+
+               
+
+            //    if($('#sliptotalsum').val(''))
+            //         $("#sliptotalsum").val(parseFloat(response.amount));
+            //    else
+            //    {
+            //     var total=isNaN(parseInt($("#sliptotalsum").val() + $("#slipamount").val())) ? 0 :($("#sliptotalsum").val() + $("#slipamount").val());
+            //      $("#sliptotalsum").val(total);
+                
+            //    }
+           }
+       });
+
+   });
+</script>
+    
+<script  type='text/javascript'>
+    
+</script>
+
+<script type='text/javascript'>
+    function deleteinterestdetail(id){
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-interest-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            success:function(response){
+                
+                $('#iid'+id).remove();
+                console.log(response);
+            }
+        });
+    }
+</script>

@@ -330,7 +330,9 @@ class TransactionController extends Controller
 
                 return response()->json($interestlist);
         
-            }else{
+            }
+            else
+            {
                 return response()->json(
                     [
                         'success' => false,

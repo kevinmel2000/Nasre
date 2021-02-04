@@ -28,6 +28,7 @@ use App\Policies\FelookupLocationPolicy;
 use App\Models\TransLocationTemp;
 use App\Models\User;
 use App\Models\EarthQuakeZone;
+use App\Models\InterestInsured;
 use App\Models\FloodZone;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -213,11 +214,11 @@ class HeMotorSlipController extends Controller
         }
 
 
-
+        $interestlist= InterestInsured::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
 
 
-        return view('crm.transaction.hem_slip', compact(['user','cnd','locationlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','hem_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.hem_slip', compact(['user','cnd','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','hem_ids','code_ms','code_sl','costumer']));
     }
 
     
@@ -353,6 +354,25 @@ class HeMotorSlipController extends Controller
                     'total_sum_pct'=>$request->sliptotalsumpct,
                     'deductible_panel'=>'',
                     'extend_coverage'=>'',
+                    'insurance_period_from'=>$request->slipipfrom,
+                    'insurance_perido_to'=>$request->slipipto,
+                    'reinsurance_period_from'=>$request->sliprpfrom,
+                    'reinsurance_period_to'=>$request->sliprpto,
+                    'proportional'=>$request->slipproportional,
+                    'layer_non_proportional'=>$request->sliplayerproportional,
+                    'rate'=>$request->sliprate,
+                    'share'=>$request->slipshare,
+                    'sum_share'=>$request->slipsumshare,
+                    'basic_premium'=>$request->slipbasicpremium,
+                    'commission'=>$request->slipcommission,
+                    'grossprm_to_nr'=>$request->slipgrossprmtonr,
+                    'netprm_to_nr'=>$request->slipnetprmtonr,
+                    'sum_commission'=>$request->slipsumcommission,
+                    'installment_panel'=>'',
+                    'retrocession_panel'=>'',
+                    'retro_backup'=>$request->sliprb,
+                    'own_retention'=>$request->slipor,
+                    'sum_own_retention'=>$request->slipsumor
                 ]);
 
                 $notification = array(
@@ -391,7 +411,26 @@ class HeMotorSlipController extends Controller
                 $slipdataup->insured_pct=$request->slippct; 
                 $slipdataup->total_sum_pct=$request->sliptotalsumpct; 
                 $slipdataup->deductible_panel=''; 
-                $slipdataup->extend_coverage='';  
+                $slipdataup->extend_coverage=''; 
+                $slipdataup->insurance_period_from=$request->slipipfrom;  
+                $slipdataup->insurance_perido_to=$request->slipipto;  
+                $slipdataup->reinsurance_period_from=$request->sliprpfrom;  
+                $slipdataup->reinsurance_period_to=$request->sliprpto;
+                $slipdataup->proportional=$request->slipproportional;
+                $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
+                $slipdataup->rate=$request->sliprate;  
+                $slipdataup->share=$request->slipshare;
+                $slipdataup->sum_share=$request->slipsumshare;
+                $slipdataup->basic_premium=$request->slipbasicpremium;
+                $slipdataup->commission=$request->slipcommission; 
+                $slipdataup->grossprm_to_nr=$request->slipgrossprmtonr; 
+                $slipdataup->netprm_to_nr=$request->slipnetprmtonr; 
+                $slipdataup->sum_commission=$request->slipsumcommission;  
+                $slipdataup->installment_panel='';   
+                $slipdataup->retrocession_panel='';  
+                $slipdataup->retro_backup=$request->sliprb;
+                $slipdataup->own_retention=$request->slipor;
+                $slipdataup->sum_own_retention=$request->slipsumor;
                 
                 $slipdataup->save();
 
