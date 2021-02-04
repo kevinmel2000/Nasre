@@ -31,6 +31,9 @@ Route::delete('/delete-extendcoverage-list/{id}','TransactionController@destroye
 Route::post('/store-deductible-list','TransactionController@storedeductiblelist')->name('deductible.store');
 Route::delete('/delete-deductible-list/{id}','TransactionController@destroydeductiblelist')->name('deductible.delete');
 
+Route::post('/store-retrocession-list','TransactionController@storeretrocessionlist')->name('retrocession.store');
+Route::delete('/delete-retrocession-list/{id}','TransactionController@destroyretrocessionlist')->name('retrocession.delete');
+
 
 Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     

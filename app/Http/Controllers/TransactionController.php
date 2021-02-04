@@ -30,6 +30,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ExtendCoverageTemp;
 use App\Models\DeductibleTemp;
+use App\Models\RetrocessionTemp;
 
 
 class TransactionController extends Controller
@@ -494,6 +495,52 @@ class TransactionController extends Controller
             }
         
     }
+
+    public function storeretrocessionlist(Request $request)
+    {
+
+            $percentage = $request->percentage;
+            $contract = $request->contract;
+            $type = $request->type;
+            $amount = $request->amount;
+            $slip_id = $request->id_slip;
+        
+            if($percentage !='' && $amount !='' && $slip_id != '')
+            {
+            
+                $retrocessionlist = new RetrocessionTemp();
+                $retrocessionlist->type  = $type;
+                $retrocessionlist->contract  = $contract;
+                $retrocessionlist->percentage  = $percentage;
+                $retrocessionlist->amount = $amount;
+                $retrocessionlist->slip_id = $slip_id; 
+                $retrocessionlist->save();
+
+                return response()->json(
+                    [
+                        'id' => $retrocessionlist->id,
+                        'percentage' => $retrocessionlist->percentage,
+                        'contract' => $retrocessionlist->contract,
+                        'type' => $retrocessionlist->type,
+                        'amount' => $retrocessionlist->amount,
+                        'slip_id' => $retrocessionlist->slip_id
+                    ]
+                );
+        
+            }
+            else
+            {
+
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Fill all fields'
+                    ]
+                );
+
+            }
+        
+    }
     /**
      * Display the specified resource.
      *
@@ -583,6 +630,15 @@ class TransactionController extends Controller
         $deductiblelist = DeductibleTemp::find($id);
         
         $deductiblelist->delete();
+        
+        return response()->json(['success'=>'Data has been deleted']);
+    }
+
+    public function destroyretrocessionlist($id)
+    {
+        $retrocessionTemplist = RetrocessionTemp::find($id);
+        
+        $retrocessionTemplist->delete();
         
         return response()->json(['success'=>'Data has been deleted']);
     }
