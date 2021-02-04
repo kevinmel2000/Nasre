@@ -193,3 +193,137 @@ $(document).ready(function() {
         });
     }
 </script>
+
+<script  type='text/javascript'>
+    $('#slippct').keyup(function () {
+        var pct =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsum").val());
+        var sum = isNaN(pct * tsi/100) ? 0 :(pct * tsi/100) ;
+         $('#sliptotalsumpct').val(sum);
+         $('#msishare').val(pct);
+     });
+
+     $('#slipdppercentage').keyup(function () {
+        var percent =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsum").val());
+        var sum = isNaN(percent * tsi/100) ? 0 :(percent * tsi/100) ;
+        $('#slipdpamount').val(sum);
+     });
+
+     $('#slipshare').keyup(function () {
+        var shareslip =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsum").val());
+        var sum = isNaN(shareslip * tsi/100) ? 0 :(shareslip * tsi/100) ;
+        $('#slipsumshare').val(sum);
+     });
+
+     $('#sliprate').keyup(function () {
+        var rateslip =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsum").val());
+        var sum = isNaN(rateslip * tsi/100) ? 0 :(rateslip * tsi/100) ;
+        $('#slipbasicpremium').val(sum);
+     });
+
+     $('#slipshare').change(function () {
+        var rateslip =  parseFloat($('#sliprate').val()) / 100 ;
+        var shareslip =  parseFloat($('#slipshare').val()) / 100 ;
+        var tsi = parseFloat($("#sliptotalsum").val());
+        var sum = isNaN(rateslip * shareslip * tsi/100) ? 0 :(rateslip * shareslip * tsi/100) ;
+        $('#slipgrossprmtonr').val(sum);
+     });
+
+     $('#slipcommission').keyup(function () {
+        var commision =  parseFloat($(this).val()) / 100;
+        var sumgrossprmtonr = parseFloat($("#slipgrossprmtonr").val());
+        var sum = isNaN(commision * sumgrossprmtonr/100) ? 0 :(commision * sumgrossprmtonr/100);
+        var sumnetprmtonr = isNaN( sumgrossprmtonr * (100/100 - commision)) ? 0 :(sumgrossprmtonr * (100/100 - commision));
+        $('#slipsumcommission').val(sum);
+        $('#slipnetprmtonr').val(sumnetprmtonr);
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() { 
+        
+        if(($('#sliprate').val() != 0) && ($('#slipshare').val() != 0) )
+        {
+            
+        }
+        
+
+     });
+   
+    
+
+    
+
+    
+</script>
+
+<script type='text/javascript'>
+    
+     $('#slipippercentage').keyup(function () {
+        var persentage =  parseFloat($('#slipippercentage').val());
+        var premiumnr =  parseFloat($('#slipnetprmtonr').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(premiumnr * persentage/100) ? 0 :(premiumnr * persentage/100) ;
+        //alert(sum);
+        $('#slipipamount').val(sum);
+     });
+
+     $('#slipippercentage').change(function () {
+        var persentage =  parseFloat($('#slipippercentage').val());
+        var premiumnr =  parseFloat($('#slipnetprmtonr').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(premiumnr * persentage/100) ? 0 :(premiumnr * persentage/100) ;
+        //alert(sum);
+        $('#slipipamount').val(sum);
+     });
+
+</script>
+
+<script type='text/javascript'>
+    $('#addinstallmentinsured-btn').click(function(e){
+       e.preventDefault();
+
+       var interest = $('#slipinterestlist').val();
+       var amount = $('#slipamount').val();
+       var slip_id = $('#slipnumber').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('interestlist.store') }}",
+           type:"POST",
+           data:{
+               interest_insured:interest,
+               slipamount:amount,
+               id_slip:slip_id
+           },
+           success:function(response){
+            
+               console.log(response)
+               $('#installmentPanel tbody').prepend('<tr id="iid'+response.id+'" data-name="interestvalue[]"><td data-name="'+response.interest_id+'">'+response.interest_id+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestdetail('+response.id+')">delete</a></td></tr>')
+               $('#slipamount').val('');
+               $('#slipinterestlist').val('');
+               var total =  parseFloat($("#sliptotalsum").val());
+               var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
+               $("#sliptotalsum").val(sum);
+
+               
+           }
+       });
+
+   });
+</script>
+    
+<script  type='text/javascript'>
+    
+</script>
