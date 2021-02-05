@@ -671,8 +671,8 @@
                                                                         <tr>
                                                                             @foreach($deductibletemp as $dtt)
                                                                                 <tr id="ddtid{{ $dtt->id }}">
-                                                                                        <td> {{ $dtt->deductibletype_id }}</td>
-                                                                                        <td>{{ $dtt->currency_id }}</td>
+                                                                                        <td> {{ $dtt->DeductibleType->abbreviation }} - {{ $dtt->DeductibleType->description }}</td>
+                                                                                        <td>{{ $dtt->currency->symbol_name }}</td>
                                                                                         <td>{{ $dtt->percentage }}</td>
                                                                                         <td>{{ $dtt->amount }}</td>
                                                                                         <td>{{ $dtt->min_claimamount }}</td>
@@ -756,8 +756,13 @@
                                                                         @foreach($conditionneededtemp as $cnt)
                                                                             <tr id="cnid{{ $cnt->id }}">
                                                                                     <td>{{ $cnt->conditionneeded->name }} - {{ $cnt->conditionneeded->description }}</td>
-                                                                                    <td>{{ $cnt->information }}</td>
-                                                                                    <td><a href="javascript:void(0)" onclick="deleteconditionneeded({{ $isl->id }})">delete</i></a></td>
+                                                                                    <td>@if($cnt->information == null)
+                                                                                            - 
+                                                                                        @else
+                                                                                            {{ $cnt->information }}
+                                                                                        @endif
+                                                                                    </td>
+                                                                                    <td><a href="javascript:void(0)" onclick="deleteconditionneeded({{ $cnt->id }})">delete</i></a></td>
                                                                             </tr>   
                                                                         @endforeach
                                                                         <tr>
@@ -768,7 +773,7 @@
                                                                                         <select id="slipcncode" name="slipcncode" class="form-control form-control-sm ">
                                                                                             <option selected disabled>{{__('Condition Needed Code - Name - Information List')}}</option>
                                                                                             @foreach($cnd as $ncd)
-                                                                                            <option value="{{ $ncd->id }}">{{ $ncd->code }} - {{ $ncd->name }} - {{ $ncd->information }}</option>
+                                                                                            <option value="{{ $ncd->id }}">{{ $ncd->code }} - {{ $ncd->name }} - {{ $ncd->description }}</option>
                                                                                             @endforeach
                                                                                         </select>
                                                                                     </div>  
@@ -859,7 +864,7 @@
                                             <div class="col-md-4">
                                                 <label class="cl-switch cl-switch-green">
                                                     <span for="switch-proportional" class="label"> {{__('Proportional')}} </span>
-                                                    <input type="checkbox" name="slipproportional[]" id="switch-proportional"
+                                                    <input type="checkbox" name="slipproportional[]" value="1" id="switch-proportional"
                                                     class="submit" checked>
                                                     <span class="switcher"></span>
                                                     <span  class="label"> {{__('Non Proportional')}} </span>
@@ -1003,44 +1008,43 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
+                                                                        @foreach($installmentpanel as $isp)
+                                                                            <tr id="ispid{{ $isp->id }}">
+                                                                                    <td>{{ $isp->installment_date }}</td>
+                                                                                    <td>{{ $isp->percentage }}</td>
+                                                                                    <td>{{ $isp->amount }}</td>
+                                                                                    <td><a href="javascript:void(0)" onclick="deleteinstallmentpanel({{ $isp->id }})">delete</i></a></td>
+                                                                            </tr>   
+                                                                        @endforeach
                                                                         <tr>
-                                                                            <td>{{__('20/09/2020')}}</td>
-                                                                            <td>{{__('50%')}}</td>
-                                                                            <td>{{__('100.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>{{__('20/10/2020')}}</td>
-                                                                            <td>{{__('50%')}}</td>
-                                                                            <td>{{__('100.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                        <div class="input-group date" id="dateinstallment" data-target-input="nearest">
-                                                                                                <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#dateinstallment" name="slipipdate">
-                                                                                                <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
-                                                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                                                </div>
-                                                                                        </div>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="number" value="0" step=".0001" id="slipippercentage" name="slipippercentage" placeholder="w" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="number" value="0" step=".0001" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
-                                                                                </div>
-                                                                            </td>
+                                                                            <form id="addinstallmentpanel">
+                                                                                @csrf
+                                                                                <td>
+                                                                                    <div class="form-group">
+                                                                                            <div class="input-group date" id="dateinstallment" data-target-input="nearest">
+                                                                                                    <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#dateinstallment" id="slipipdate" name="slipipdate">
+                                                                                                    <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
+                                                                                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="form-group">
+                                                                                        <input type="number" value="0" step=".0001" id="slipippercentage" name="slipippercentage" placeholder="w" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="form-group">
+                                                                                        <input type="number" value="0" step=".0001" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="form-group">
+                                                                                        <button type="button" class="btn btn-md btn-primary" id="addinstallmentpanel-btn">{{__('Add')}}</button>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </form>
                                                                         </tr>
                                                                     </tbody>
                                                                     </table>
@@ -1108,64 +1112,63 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
+                                                                        @foreach($retrocessiontemp as $rsc)
+                                                                            <tr id="rscid{{ $rsc->id }}">
+                                                                                    <td>{{ $rsc->type }}</td>
+                                                                                    <td>{{ $rsc->contract }}</td>
+                                                                                    <td>{{ $rsc->percentage }}</td>
+                                                                                    <td>{{ $rsc->amount }}</td>
+                                                                                    <td><a href="javascript:void(0)" onclick="deleteretrocessiontemp({{ $rsc->id }})">delete</i></a></td>
+                                                                            </tr>   
+                                                                        @endforeach
+                                                                        
                                                                         <tr>
-                                                                            <td>{{__('NM XOL')}}</td>
-                                                                            <td>{{__('20NM11110')}}</td>
-                                                                            <td>{{__('80%')}}</td>
-                                                                            <td>{{__('160.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>{{__('NM XOL')}}</td>
-                                                                            <td>{{__('20ABC')}}</td>
-                                                                            <td>{{__('80%')}}</td>
-                                                                            <td>{{__('40.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <select name="sliprptype" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Type list')}}</option>
-                                                                                        <option value="NM XOL">NM XOL</option>
-                                                                                    </select>
-                                                                                </div>  
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <select name="sliprpcontract" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Contract list')}}</option>
-                                                                                        <option value="20NM11110">20NM11110</option>
-                                                                                        <option value="20ABC">20ABC</option>
-                                                                                    </select>
-                                                                                </div>  
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-8">
-                                                                                            <div class="input-group">
-                                                                                                <input type="number" value="0" step=".0001" id="sliprppercentage" name="sliprppercentage" class="form-control form-control-sm " data-validation="length" placeholder="z" data-validation-length="0-50" required/>
+                                                                            <form id="addretrocessiontemp">
+                                                                                @csrf
+                                                                                <td>
+                                                                                    <div class="form-group">
+                                                                                        <select id="sliprptype" name="sliprptype" class="form-control form-control-sm ">
+                                                                                            <option selected disabled>{{__('Type list')}}</option>
+                                                                                            <option value="NM XOL">NM XOL</option>
+                                                                                        </select>
+                                                                                    </div>  
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="form-group">
+                                                                                        <select id="sliprpcontract" name="sliprpcontract" class="form-control form-control-sm ">
+                                                                                            <option selected disabled>{{__('Contract list')}}</option>
+                                                                                            <option value="20NM11110">20NM11110</option>
+                                                                                            <option value="20ABC">20ABC</option>
+                                                                                        </select>
+                                                                                    </div>  
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="form-group">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-8">
+                                                                                                <div class="input-group">
+                                                                                                    <input type="number" value="0" step=".0001" id="sliprppercentage" name="sliprppercentage" class="form-control form-control-sm " data-validation="length" placeholder="z" data-validation-length="0-50" required/>
+                                                                                                </div>
                                                                                             </div>
-                                                                                        </div>
-                                                                                        <div class="col-md-2">
-                                                                                            <div class="input-group-append">
-                                                                                                <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                                            <div class="col-md-2">
+                                                                                                <div class="input-group-append">
+                                                                                                    <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="number" value="0" step=".0001" id="sliprpamount" name="sliprpamount" placeholder="= z% * b% * tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=z * b% * tsi" readonly="readonly" required/>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
-                                                                                </div>
-                                                                            </td>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="form-group">
+                                                                                        <input type="number" value="0" step=".0001" id="sliprpamount" name="sliprpamount" placeholder="= z% * b% * tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=z * b% * tsi" readonly="readonly" required/>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="form-group">
+                                                                                        <button type="button" class="btn btn-md btn-primary" id="addretrocessiontemp-btn">{{__('Add')}}</button>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </form>
                                                                         </tr>
                                                                     </tbody>
                                                                     </table>

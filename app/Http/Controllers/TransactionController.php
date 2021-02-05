@@ -134,9 +134,11 @@ class TransactionController extends Controller
             $shiplist= ShipListTemp::where('insured_id',$code_ms)->orderby('id','desc')->get();
             $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
             $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+            $installmentpanel= InstallmentTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+            $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
 
 
-            return view('crm.transaction.marine_slip', compact(['user','conditionneededtemp','deductibletemp','deductibletype','interestinsured','routeship','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
+            return view('crm.transaction.marine_slip', compact(['user','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestinsured','routeship','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
          }
         else
         {
@@ -409,7 +411,6 @@ class TransactionController extends Controller
 
             $deductibletype_id = $request->slipdptype;
             $currency = $request->slipdpcurrency;
-            
             $minamount = $request->minamount;
             $amount = $request->amount;
             $percentage = $request->percentage;
@@ -507,7 +508,7 @@ class TransactionController extends Controller
             
             $slipcncode = $request->slipcncode;
             $cn = ConditionNeeded::where('id',$slipcncode)->first();
-            $information = $cn->information;
+            $information = $cn->description;
             $slip_id = $request->id_slip;
         
             if($slipcncode !='' && $slip_id != '')

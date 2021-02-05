@@ -175,7 +175,7 @@
         var tsi = parseFloat($("#sliptotalsum").val());
         var sum = isNaN(pct * tsi/100) ? 0 :(pct * tsi/100) ;
          $('#sliptotalsumpct').val(sum);
-         $('#msishare').val(pct);
+         
      });
 
      $('#slipdppercentage').keyup(function () {
@@ -190,7 +190,7 @@
         var tsi = parseFloat($("#sliptotalsum").val());
         var sum = isNaN(shareslip * tsi/100) ? 0 :(shareslip * tsi/100) ;
         $('#slipsumshare').val(sum);
-        $('#msisharefrom').val(shareslip);
+        $('#msishare').val(shareslip);
      });
 
      $('#sliprate').keyup(function () {
@@ -203,9 +203,12 @@
      $('#slipshare').change(function () {
         var rateslip =  parseFloat($('#sliprate').val()) / 100 ;
         var shareslip =  parseFloat($('#slipshare').val()) / 100 ;
+        var ourshare =  parseFloat($('#msishare').val()) / 100 ;
         var tsi = parseFloat($("#sliptotalsum").val());
         var sum = isNaN(rateslip * shareslip * tsi/100) ? 0 :(rateslip * shareslip * tsi/100) ;
+        var sumourshare = isNaN(ourshare * tsi ) ? 0 :(ourshare * tsi) ;
         $('#slipgrossprmtonr').val(sum);
+        $('#msisharefrom').val(sumourshare);
      });
 
      $('#slipcommission').keyup(function () {
@@ -296,7 +299,12 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-
+            console.log(dptype)
+            console.log(dpcurrency)
+            console.log(dpminamount)
+            console.log(dpamount)
+            console.log(dppercentage)
+            console.log(dpslip_id)
        $.ajax({
            url:"{{ route('deductible.store') }}",
            type:"POST",
@@ -315,7 +323,6 @@
                 $('#slipdpminamount').val('');
                 $('#slipdpamount').val('');
                 $('#slipdppercentage').val('');
-                $('#slipnumber').val('');
                
            }
        });
@@ -344,7 +351,91 @@
            success:function(response){
             
                console.log(response)
-               $('#conditionNeeded tbody').prepend('<tr id="iid'+response.id+'" data-name="conditionneededvalue[]"><td data-name="'+response.conditionneeded_id+'">'+response.condition+'</td><td data-name="'+response.information+'">'+response.information+'</td><td><a href="javascript:void(0)" onclick="deleteconditionneededdetail('+response.id+')">delete</a></td></tr>')
+               if(response.information == null){
+                $('#conditionNeeded tbody').prepend('<tr id="cnid'+response.id+'" data-name="conditionneededvalue[]"><td data-name="'+response.conditionneeded_id+'">'+response.condition+'</td><td data-name="'+response.information+'">-</td><td><a href="javascript:void(0)" onclick="deleteconditionneeded('+response.id+')">delete</a></td></tr>')
+               
+               }else{
+                $('#conditionNeeded tbody').prepend('<tr id="cnid'+response.id+'" data-name="conditionneededvalue[]"><td data-name="'+response.conditionneeded_id+'">'+response.condition+'</td><td data-name="'+response.information+'">'+response.information+'</td><td><a href="javascript:void(0)" onclick="deleteconditionneeded('+response.id+')">delete</a></td></tr>')
+               
+               }
+               
+               
+            
+           }
+       });
+
+    });
+
+    $('#addinstallmentpanel-btn').click(function(e){
+       e.preventDefault();
+
+       var ipdate = $('#slipipdate').val();
+       var ippercentage = $('#slipippercentage').val();
+       var ipamount = $('#slipipamount').val();
+       var slip_id = $('#slipnumber').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('installment.store') }}",
+           type:"POST",
+           data:{
+                installmentdate:ipdate,
+                percentage:ippercentage,
+                slipamount:ipamount,
+                id_slip:slip_id
+           },
+           success:function(response){
+            
+               console.log(response)
+               $('#installmentPanel tbody').prepend('<tr id="ispid'+response.id+'" data-name="interestvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentpanel('+response.id+')">delete</a></td></tr>')
+               $('#slipipdate').val('');
+               $('#slipippercentage').val('');
+               $('#slipipamount').val('');
+               
+               
+            
+           }
+       });
+
+    });
+
+    $('#addretrocessiontemp-btn').click(function(e){
+       e.preventDefault();
+
+       var rptype = $('#sliprptype').val();
+       var rpcontract = $('#sliprpcontract').val();
+       var rppercentage = $('#sliprppercentage').val();
+       var rpamount = $('#sliprpamount').val();
+       var slip_id = $('#slipnumber').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('retrocession.store') }}",
+           type:"POST",
+           data:{
+                type:rptype,
+                contract:rpcontract,
+                percentage:rppercentage,
+                amount:rpamount,
+                id_slip:slip_id
+           },
+           success:function(response){
+            
+               console.log(response)
+               $('#retrocessionPanel tbody').prepend('<tr id="rscid'+response.id+'" data-name="retrocessionvalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessiontemp('+response.id+')">delete</a></td></tr>')
+               
+               $('#sliprppercentage').val('');
+               $('#sliprpamount').val('');
                
                
             
@@ -355,18 +446,18 @@
 </script>
 
 <script type='text/javascript'>
-    function deleteinterestdetail(ii){
+    function deleteinterestdetail(id){
         var token2 = $('input[name=_token2]').val();
 
         $.ajax({
-            url:'{{ url("/") }}/delete-interest-list/'+ii,
+            url:'{{ url("/") }}/delete-interest-list/'+id,
             type:"DELETE",
             data:{
                 _token:token2
             },
             success:function(response){
                 
-                $('#iid'+ii).remove();
+                $('#iid'+id).remove();
                 console.log(response);
                 
                 var total =  parseFloat($("#sliptotalsum").val());
@@ -377,36 +468,72 @@
         });
     }
 
-    function deletedeductibletype(dt){
+    function deletedeductibletype(id){
         var token2 = $('input[name=_token2]').val();
 
         $.ajax({
-            url:'{{ url("/") }}/delete-deductible-list/'+dt,
+            url:'{{ url("/") }}/delete-deductible-list/'+id,
             type:"DELETE",
             data:{
                 _token:token2
             },
             success:function(response){
                 
-                $('#dttid'+dt).remove();
+                $('#ddtid'+id).remove();
                 console.log(response);
                 
             }
         });
     }
 
-    function deleteconditionneededdetail(cn){
+    function deleteconditionneeded(id){
         var token2 = $('input[name=_token2]').val();
 
         $.ajax({
-            url:'{{ url("/") }}/delete-conditionneeded-list/'+cn,
+            url:'{{ url("/") }}/delete-conditionneeded-list/'+id,
             type:"DELETE",
             data:{
                 _token:token2
             },
             success:function(response){
                 
-                $('#cnid'+cn).remove();
+                $('#cnid'+id).remove();
+                console.log(response);
+                
+            }
+        });
+    }
+
+    function deleteinstallmentpanel(id){
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-installment-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            success:function(response){
+                
+                $('#ispid'+id).remove();
+                console.log(response);
+                
+            }
+        });
+    }
+
+    function deleteretrocessiontemp(id){
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-retrocession-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            success:function(response){
+                
+                $('#rscid'+id).remove();
                 console.log(response);
                 
             }
