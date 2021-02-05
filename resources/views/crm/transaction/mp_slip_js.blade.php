@@ -1,6 +1,10 @@
 <link href="{{url('/')}}/css/select2.css" rel="stylesheet"/>
 <script src="{{url('/')}}/js/select2.js"></script>
 
+<link rel="stylesheet" href="{{url('/')}}/css/sweetalert2.min.css">
+<script src="{{url('/')}}/js/sweetalert2.all.min.js"></script>
+
+
 <style>
 .hide {
     display: none;
@@ -126,6 +130,8 @@ $(document).ready(function(){
             beforeSend:function(){
                 $('#save').attr('disabled','disabled');
             },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
             success:function(data)
             {
                 if(data.error)
@@ -169,6 +175,8 @@ $(document).ready(function(){
                 insuredID:insured_id,
                 _token:token
             },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 console.log(response)
                 //alert(response);
@@ -192,6 +200,8 @@ $(document).ready(function(){
             data:{
                 _token:token
             },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
                 $('#sid'+id).remove();
@@ -220,6 +230,8 @@ $(document).ready(function(){
                id_slip:slip_id,
                _token:token2
            },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
            success:function(response){
             
                console.log(response)
@@ -260,6 +272,8 @@ $(document).ready(function(){
             data:{
                 _token:token2
             },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
                 $('#iid'+id).remove();
@@ -370,6 +384,8 @@ $(document).ready(function(){
                slipamount:amount,
                id_slip:slip_id
            },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
            success:function(response)
            {
             
@@ -400,6 +416,8 @@ $(document).ready(function(){
             data:{
                 _token:token2
             },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
                 $('#iidinstallment'+id).remove();
@@ -443,6 +461,8 @@ $(document).ready(function(){
                minamount:minamount,
                id_slip:slip_id
            },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
            success:function(response)
            {
             
@@ -469,6 +489,8 @@ $(document).ready(function(){
             data:{
                 _token:token2
             },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
                 $('#iiddeductible'+id).remove();
@@ -506,6 +528,8 @@ $(document).ready(function(){
                amount:amount,
                id_slip:slip_id
            },
+           beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
            success:function(response)
            {
             
@@ -531,6 +555,8 @@ $(document).ready(function(){
             data:{
                 _token:token2
             },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
                 $('#iidextendcoverage'+id).remove();
@@ -594,6 +620,8 @@ $(document).ready(function(){
                amount:amount,
                id_slip:slip_id
            },
+           beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
            success:function(response)
            {
             
@@ -619,6 +647,8 @@ $(document).ready(function(){
             data:{
                 _token:token2
             },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
                 $('#iidretrocession'+id).remove();
@@ -626,4 +656,79 @@ $(document).ready(function(){
             }
         });
     }
+</script>
+
+<style>
+    .overlay{
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        background: rgba(255,255,255,0.8) url("{{url('/')}}/loader.gif") center no-repeat;
+    }
+    /* Turn off scrollbar when body element has the loading class */
+    body.loading{
+        overflow: hidden;   
+    }
+    /* Make spinner image visible when body element has the loading class */
+    body.loading .overlay{
+        display: block;
+    }
+</style>
+
+
+<script type='text/javascript'>
+    $('#addinsuredsave-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var fesnumber = $('#insuredIDtxt').val();
+       var fesinsured = $('#feinsured').val();
+       var fessuggestinsured = $('#autocomplete').val();
+       var fessuffix = $('#autocomplete2').val();
+       var fesshare = $('#feshare').val();
+       var fessharefrom  = $('#fesharefrom').val();
+       var fesshareto = $('#feshareto').val();
+       var fescoinsurance = $('#fecoinsurance').val();
+       
+       
+       var token2 = $('input[name=_token]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ url('transaction-data/fe-insured/store') }}",
+           type:"POST",
+           data:{
+               fesnumber:fesnumber,
+               fesinsured:fesinsured,
+               fessuggestinsured:fessuggestinsured,
+               fessuffix:fessuffix,
+               fesshare:fesshare,
+               fessharefrom:fessharefrom,
+               fesshareto:fesshareto,
+               fescoinsurance:fescoinsurance
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                swal("Good job!", "Insured Fire & Engineering Insert Success", "success")
+                console.log(response)
+
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", request.responseText, "Insert Error");
+           }
+       });
+
+   });
 </script>
