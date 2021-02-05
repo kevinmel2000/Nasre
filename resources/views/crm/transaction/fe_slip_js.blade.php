@@ -558,3 +558,67 @@ $(document).ready(function() {
      });
 
 </script>
+
+
+<script type='text/javascript'>
+    $('#addretrocessioninsured-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var type = $('#sliprptype').val();
+       var contract = $('#sliprpcontract').val();
+       var percentage = $('#sliprppercentage').val();
+       var amount = $('#sliprpamount').val();
+       
+       var slip_id = $('#slipnumber').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('retrocession.store') }}",
+           type:"POST",
+           data:{
+               type:type,
+               contract:contract,
+               percentage:percentage,
+               amount:amount,
+               id_slip:slip_id
+           },
+           success:function(response)
+           {
+            
+               console.log(response)
+               $('#retrocessionPanel tbody').prepend('<tr id="iidretrocession'+response.id+'" data-name="retrocessionvalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessiondetail('+response.id+')">delete</a></td></tr>');
+               $('#sliprppercentage').val('');
+               $('#sliprpamount').val('');
+               
+           }
+       });
+
+   });
+</script>
+
+<script type='text/javascript'>
+    function deleteretrocessiondetail(id)
+    {
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-retrocession-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            success:function(response){
+                
+                $('#iidretrocession'+id).remove();
+                console.log(response);
+            }
+        });
+    }
+</script>
