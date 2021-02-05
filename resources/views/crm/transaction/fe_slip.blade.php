@@ -9,8 +9,8 @@
          
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
-        
-        <form method="POST" action={{url('transaction-data/fe-insured/store')}}>
+        {{ -- action={{url('transaction-data/fe-insured/store') --}}
+         <form method="POST">
           @csrf
             <div class="card">
                 <div class="card-header bg-gray">
@@ -36,7 +36,7 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="">{{__('Insured')}}</label>
-                                                    <select name="feinsured" class="form-control form-control-sm ">
+                                                    <select id="feinsured" name="feinsured" class="form-control form-control-sm ">
                                                         <option selected readonly>{{__('Select Prefix')}}</option>
                                                         <option value="PT">PT</option>
                                                         <option value="CV">CV</option>
@@ -44,7 +44,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 1')}}</label>
-                                                    <input type="text" name="fesuggestinsured" id='autocomplete'  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
+                                                    <input type="text"name="fesuggestinsured" id='autocomplete'  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 2')}}</label>
@@ -65,7 +65,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                             <input type="number" min="0" value="0" step=".01" name="feshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                             <input type="number" id="feshare" min="0" value="0" step=".01" name="feshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -79,13 +79,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('From')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01"  name="fesharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input id="fesharefrom" type="number" min="0" value="0" step=".01"  name="fesharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01"  name="feshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input id="feshareto" type="number" min="0" value="0" step=".01"  name="feshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -145,14 +145,14 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" name="fecoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                            <input type="text" id="fecoinsurance" name="fecoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
-                                        <button class="btn btn-primary btn-block ">
+                                        <button type="button" id="addinsuredsave-btn" class="btn btn-primary btn-block ">
                                             {{__('Save')}}
                                         </button>
                                     </div>
@@ -1174,6 +1174,7 @@
     </div>
 </div>
 @endsection
+
 
 @section('scripts')
 @include('crm.transaction.fe_slip_js')

@@ -36,7 +36,7 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="">{{__('Insured')}}</label>
-                                                    <select name="mpinsured" class="form-control form-control-sm ">
+                                                    <select id="mpinsured" name="mpinsured" class="form-control form-control-sm ">
                                                         <option selected readonly>{{__('Select Prefix')}}</option>
                                                         <option value="PT">PT</option>
                                                         <option value="CV">CV</option>
@@ -65,7 +65,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                                <input type="number" min="0" value="0" step=".01" name="mpshare" class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" required/>
+                                                                <input type="number" min="0" value="0" step=".01" id="mpshare" name="mpshare" class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -79,13 +79,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('From')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01" name="mpsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="number" min="0" value="0" step=".01" id="mpsharefrom" name="mpsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01" name="mpshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="number" min="0" value="0" step=".01" id="mpshareto" name="mpshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -145,7 +145,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" name="mpcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                            <input type="text" id="mpcoinsurance" name="mpcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -232,7 +232,7 @@
 
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
-                                        <button class="btn btn-primary btn-block ">
+                                        <button  type="button" id="addinsuredsave-btn"  class="btn btn-primary btn-block ">
                                             {{__('Save')}}
                                         </button>
                                     </div>

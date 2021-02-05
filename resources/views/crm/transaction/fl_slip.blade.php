@@ -36,7 +36,7 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="">{{__('Insured')}}</label>
-                                                    <select name="flinsured" class="form-control form-control-sm ">
+                                                    <select id="flinsured" name="flinsured" class="form-control form-control-sm ">
                                                         <option selected readonly>{{__('Select Prefix')}}</option>
                                                         <option value="PT">PT</option>
                                                         <option value="CV">CV</option>
@@ -65,7 +65,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                             <input type="number" min="0" value="0" step=".01" name="flshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                             <input type="number" min="0" value="0" step=".01" id="flshare" name="flshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -79,13 +79,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('From')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01"  name="flsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="number" min="0" value="0" step=".01"  id="flsharefrom" name="flsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01"  name="flshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="number" min="0" value="0" step=".01"  id="flshareto" name="flshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -144,7 +144,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Principal')}}</label>
-                                            <input type="text" name="flprincipal" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                            <input type="text" id="flprincipal" name="flprincipal" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -153,7 +153,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Obligee')}}</label>
-                                            <input type="text" name="flobligee" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                            <input type="text"  id="flobligee" name="flobligee" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -162,14 +162,14 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" name="flcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                            <input type="text" id="flcoinsurance" name="flcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
-                                        <button class="btn btn-primary btn-block ">
+                                        <button type="button" id="addinsuredsave-btn" class="btn btn-primary btn-block ">
                                             {{__('Save')}}
                                         </button>
                                     </div>
