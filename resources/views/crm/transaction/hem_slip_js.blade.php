@@ -702,14 +702,14 @@ $("body").on("click","#btn-danger2",function(){
        //alert('masuk');
        e.preventDefault();
 
-       var fesnumber = $('#insuredIDtxt').val();
-       var fesinsured = $('#feinsured').val();
-       var fessuggestinsured = $('#autocomplete').val();
-       var fessuffix = $('#autocomplete2').val();
-       var fesshare = $('#feshare').val();
-       var fessharefrom  = $('#fesharefrom').val();
-       var fesshareto = $('#feshareto').val();
-       var fescoinsurance = $('#fecoinsurance').val();
+       var hemnumber = $('#insuredIDtxt').val();
+       var heminsured = $('#heminsured').val();
+       var hemsuggestinsured = $('#autocomplete').val();
+       var hemsuffix = $('#autocomplete2').val();
+       var hemshare = $('#hemshare').val();
+       var hemsharefrom  = $('#hemsharefrom').val();
+       var hemshareto = $('#hemshareto').val();
+       var hemcoinsurance = $('#hemcoinsurance').val();
        
        
        var token2 = $('input[name=_token]').val();
@@ -721,23 +721,23 @@ $("body").on("click","#btn-danger2",function(){
             });
 
        $.ajax({
-           url:"{{ url('transaction-data/fe-insured/store') }}",
+           url:"{{ url('transaction-data/hem-insured/store') }}",
            type:"POST",
            data:{
-               fesnumber:fesnumber,
-               fesinsured:fesinsured,
-               fessuggestinsured:fessuggestinsured,
-               fessuffix:fessuffix,
-               fesshare:fesshare,
-               fessharefrom:fessharefrom,
-               fesshareto:fesshareto,
-               fescoinsurance:fescoinsurance
+               hemnumber:hemnumber,
+               heminsured:heminsured,
+               hemsuggestinsured:hemsuggestinsured,
+               hemsuffix:hemsuffix,
+               hemshare:hemshare,
+               hemsharefrom:hemsharefrom,
+               hemshareto:hemshareto,
+               hemcoinsurance:hemcoinsurance
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },
            success:function(response)
            {
-                swal("Good job!", "Insured Fire & Engineering Insert Success", "success")
+                swal("Good job!", "HE & Motor Insert Success", "success")
                 console.log(response)
 
            },

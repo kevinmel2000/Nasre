@@ -79,13 +79,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('From')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01" id="hemcoinsurance" name="hemsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="number" min="0" value="0" step=".01" id="hemsharefrom" name="hemsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01" id="hemcoinsurance" name="hemshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="number" min="0" value="0" step=".01" id="hemshareto" name="hemshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                         </div>

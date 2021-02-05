@@ -687,14 +687,16 @@ $(document).ready(function() {
        //alert('masuk');
        e.preventDefault();
 
-       var fesnumber = $('#insuredIDtxt').val();
-       var fesinsured = $('#feinsured').val();
-       var fessuggestinsured = $('#autocomplete').val();
-       var fessuffix = $('#autocomplete2').val();
-       var fesshare = $('#feshare').val();
-       var fessharefrom  = $('#fesharefrom').val();
-       var fesshareto = $('#feshareto').val();
-       var fescoinsurance = $('#fecoinsurance').val();
+       var flnumber = $('#insuredIDtxt').val();
+       var flinsured = $('#flinsured').val();
+       var flsuggestinsured = $('#autocomplete').val();
+       var flsuffix = $('#autocomplete2').val();
+       var flshare = $('#flshare').val();
+       var flsharefrom  = $('#flsharefrom').val();
+       var flshareto = $('#flshareto').val();
+       var flcoinsurance = $('#flcoinsurance').val();
+       var flobligee = $('#flobligee').val();
+       var flprincipal = $('#flprincipal').val();
        
        
        var token2 = $('input[name=_token]').val();
@@ -706,23 +708,25 @@ $(document).ready(function() {
             });
 
        $.ajax({
-           url:"{{ url('transaction-data/fe-insured/store') }}",
+           url:"{{ url('transaction-data/fl-insured/store') }}",
            type:"POST",
            data:{
-               fesnumber:fesnumber,
-               fesinsured:fesinsured,
-               fessuggestinsured:fessuggestinsured,
-               fessuffix:fessuffix,
-               fesshare:fesshare,
-               fessharefrom:fessharefrom,
-               fesshareto:fesshareto,
-               fescoinsurance:fescoinsurance
+               flnumber:flnumber,
+               flinsured:flinsured,
+               flsuggestinsured:flsuggestinsured,
+               flsuffix:flsuffix,
+               flshare:flshare,
+               flsharefrom:flsharefrom,
+               flshareto:flshareto,
+               flcoinsurance:flcoinsurance,
+               flobligee:flobligee,
+               flprincipal:flprincipal
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },
            success:function(response)
            {
-                swal("Good job!", "Insured Fire & Engineering Insert Success", "success")
+                swal("Good job!", "Financial Line Insert Success", "success")
                 console.log(response)
 
            },
