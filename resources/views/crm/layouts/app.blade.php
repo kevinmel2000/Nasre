@@ -78,6 +78,6 @@
  
         @include('crm.layouts.app_js')
         @yield('scripts')
-
+        <div class="overlay"></div>
     </body>
 </html>

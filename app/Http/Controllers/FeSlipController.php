@@ -228,7 +228,8 @@ class FeSlipController extends Controller
 
 
     public function storefeinsured(Request $request)
-    {
+    {   
+        
         $validator = $request->validate([
             'fesnumber'=>'required',
             'fesinsured'=>'required',

@@ -9,8 +9,7 @@
          
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
-        {{ -- action={{url('transaction-data/fe-insured/store') --}}
-         <form method="POST">
+         <form>
           @csrf
             <div class="card">
                 <div class="card-header bg-gray">
