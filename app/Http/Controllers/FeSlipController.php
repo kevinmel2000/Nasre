@@ -246,7 +246,8 @@ class FeSlipController extends Controller
             $user = Auth::user();
             
             $insureddata= Insured::where('number','=',$request->fesnumber)->first();
-
+            $locationlist= TransLocationTemp::where('insured_id','=',$request->fesnumber)->orderby('id','desc')->get();
+            
             if($insureddata==null)
             {
                 Insured::create([
@@ -258,7 +259,8 @@ class FeSlipController extends Controller
                     'share'=>$request->fesshare,
                     'share_from'=>$request->fessharefrom,
                     'share_to'=>$request->fesshareto,
-                    'coincurance'=>$request->coincurance
+                    'coincurance'=>$request->coincurance,
+                    'location'=>$locationlist->toJson()
                 ]);
 
                 $notification = array(
@@ -277,6 +279,7 @@ class FeSlipController extends Controller
                 $insureddataup->share_from=$request->fessharefrom;
                 $insureddataup->share_to=$request->fesshareto;
                 $insureddataup->coincurance=$request->coincurance;
+                $insureddataup->location=$locationlist->toJson();
                 $insureddataup->save();
 
 

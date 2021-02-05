@@ -250,6 +250,7 @@ class FinancialLineSlipController extends Controller
             $user = Auth::user();
             
             $insureddata= Insured::where('number','=',$request->flnumber)->first();
+            $locationlist= TransLocationTemp::where('insured_id','=',$request->flnumber)->orderby('id','desc')->get();
 
             if($insureddata==null)
             {
@@ -264,7 +265,8 @@ class FinancialLineSlipController extends Controller
                     'share_to'=>$request->flshareto,
                     'coincurance'=>$request->flcoincurance,
                     'obligee'=>$request->flobligee,
-                    'principal'=>$request->flprincipal
+                    'principal'=>$request->flprincipal,
+                    'location'=>$locationlist->toJson()
                 ]);
 
                 $notification = array(
@@ -285,7 +287,7 @@ class FinancialLineSlipController extends Controller
                 $insureddataup->coincurance=$request->flcoincurance;
                 $insureddataup->obligee=$request->flobligee;
                 $insureddataup->principal=$request->flprincipal;
-                
+                $insureddataup->location=$locationlist->toJson();
                 $insureddataup->save();
 
 

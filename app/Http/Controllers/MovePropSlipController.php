@@ -252,6 +252,7 @@ class MovePropSlipController extends Controller
             $user = Auth::user();
             
             $insureddata= Insured::where('number','=',$request->mpnumber)->first();
+            $locationlist= TransLocationTemp::where('insured_id','=',$request->flnumber)->orderby('id','desc')->get();
 
             if($insureddata==null)
             {
@@ -264,7 +265,8 @@ class MovePropSlipController extends Controller
                     'share'=>$request->mpshare,
                     'share_from'=>$request->mpsharefrom,
                     'share_to'=>$request->mpshareto,
-                    'coincurance'=>$request->mpcoinsurance
+                    'coincurance'=>$request->mpcoinsurance,
+                    'location'=>$locationlist->toJson()
                 ]);
 
                 $notification = array(
@@ -283,6 +285,7 @@ class MovePropSlipController extends Controller
                 $insureddataup->share_from=$request->mpsharefrom;
                 $insureddataup->share_to=$request->mpshareto;
                 $insureddataup->coincurance=$request->mpcoinsurance;
+                $insureddataup->location=$locationlist->toJson();
                 $insureddataup->save();
 
 

@@ -255,6 +255,7 @@ class HeMotorSlipController extends Controller
             $user = Auth::user();
             
             $insureddata= Insured::where('number','=',$request->hemnumber)->first();
+            $locationlist= TransLocationTemp::where('insured_id','=',$request->flnumber)->orderby('id','desc')->get();
 
             if($insureddata==null)
             {
@@ -267,7 +268,8 @@ class HeMotorSlipController extends Controller
                     'share'=>$request->hemshare,
                     'share_from'=>$request->hemsharefrom,
                     'share_to'=>$request->hemshareto,
-                    'coincurance'=>$request->hemcoinsurance
+                    'coincurance'=>$request->hemcoinsurance,
+                    'location'=>$locationlist->toJson()
                 ]);
 
                 $notification = array(
@@ -286,6 +288,7 @@ class HeMotorSlipController extends Controller
                 $insureddataup->share_from=$request->hemsharefrom;
                 $insureddataup->share_to=$request->hemshareto;
                 $insureddataup->coincurance=$request->hemcoinsurance;
+                $insureddataup->location=$locationlist->toJson();
                 $insureddataup->save();
 
 
