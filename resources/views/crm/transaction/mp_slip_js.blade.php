@@ -7,6 +7,52 @@
 }
 </style>
 
+
+<script type="text/javascript">
+    $(function() {              
+       // Bootstrap DateTimePicker v4
+       $('#dateinstallment').datetimepicker({
+             format: 'YYYY-MM-DD'
+       });
+    });      
+</script>
+
+<script type="text/javascript">
+    $(function() {              
+       // Bootstrap DateTimePicker v4
+       $('#dateinstallment').datetimepicker({
+             format: 'YYYY-MM-DD'
+       });
+    });      
+</script>
+
+<script type="text/javascript">
+    $(function() {              
+       // Bootstrap DateTimePicker v4
+       $('#dateinstallment').datetimepicker({
+             format: 'YYYY-MM-DD'
+       });
+
+       $('#dateinfrom').datetimepicker({
+             format: 'YYYY-MM-DD'
+       });
+
+       $('#dateinto').datetimepicker({
+             format: 'YYYY-MM-DD'
+       });
+
+       $('#daterefrom').datetimepicker({
+             format: 'YYYY-MM-DD'
+       });
+
+       $('#datereto').datetimepicker({
+             format: 'YYYY-MM-DD'
+       });
+    });      
+
+</script>
+
+
 <script>
 $( "#autocomplete" ).autocomplete({
   source: [
