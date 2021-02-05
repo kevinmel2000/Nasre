@@ -38,6 +38,7 @@ use App\Models\ExtendedCoverage;
 use App\Models\ExtendCoverageTemp;
 use App\Models\DeductibleTemp;
 use App\Models\InstallmentTemp;
+use App\Models\StatusLog;
 
 class HeMotorSlipController extends Controller
 {

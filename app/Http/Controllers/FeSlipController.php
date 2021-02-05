@@ -34,6 +34,7 @@ use App\Models\DeductibleType;
 use App\Models\ExtendedCoverage;
 use App\Models\ExtendCoverageTemp;
 use App\Models\DeductibleTemp;
+use App\Models\StatusLog;
 
 
 class FeSlipController extends Controller

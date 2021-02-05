@@ -156,35 +156,7 @@
                                     <div class="col-md-6 d-flex justify-content-start">
                                         <div class="col-md-12 com-sm-12 mt-3">
                                             <label for="">{{__('Property Type')}}</label>
-
-
-                                            <form method="post" id="dynamic_form">
-                                                <span id="result"></span>
-                                                <table class="table table-bordered table-striped" id="user_table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th width="35%">First Name</th>
-                                                            <th width="35%">Last Name</th>
-                                                            <th width="30%">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                    <tfoot>
-                                                        <tr>
-                                                        <td colspan="2" align="right">&nbsp;</td>
-                                                        <td>
-                                                        @csrf
-                                                        <input type="submit" name="save" id="save" class="btn btn-primary" value="Save" />
-                                                        </td>
-                                                        </tr>
-                                                    </tfoot>
-                                                </table>
-                                            </form>
-
-
-                                            <table id="propertyType" class="table table-bordered table-striped">
+                                            <table id="propertyTypePanel" class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
                                                 <th>{{__('Code - Name')}}</th>
@@ -197,22 +169,14 @@
                                                     <td width="20%">{{__('delete')}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{__('005 - Laptop')}}</td>
-                                                    <td width="20%">{{__('delete')}}</td>
-                                                </tr>
-                                                <tr>
                                                     <td>
                                                         <div class="form-group">
                                                             {{-- <label for="">{{__('Layer for non proportional')}}</label> --}}
                                                             <select name="mppropertytypelist" class="form-control form-control-sm ">
                                                                 <option selected readonly>{{__('PropertyType List')}}</option>
-                                                                <option value="AF">Africa</option>
-                                                                <option value="AN">Antartica</option>
-                                                                <option value="AS">Asia</option>
-                                                                <option value="EU">Europa</option>
-                                                                <option value="NA">North America </option>
-                                                                <option value="OC">Oceania</option>
-                                                                <option value="SA">South America</option>
+                                                                @foreach($propertytype as $propertytypedata)
+                                                                <option value="{{ $propertytypedata->id }}">{{ $propertytypedata->code }} - {{ $propertytypedata->name }}</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>  
                                                     </td>

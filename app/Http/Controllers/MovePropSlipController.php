@@ -10,7 +10,6 @@ use App\Models\Customer\Customer;
 use App\Models\FeLookupLocation;
 use App\Models\SlipTable;
 use App\Models\SlipTableFile;
-use App\Models\PropertyType;
 use App\Models\SlipTableFileTemp;
 use App\Models\User;
 use App\Models\EarthQuakeZone;
@@ -37,6 +36,9 @@ use App\Models\DeductibleType;
 use App\Models\ExtendedCoverage;
 use App\Models\ExtendCoverageTemp;
 use App\Models\DeductibleTemp;
+use App\Models\PropertyType;
+use App\Models\PropertyTypeTemp;
+use App\Models\StatusLog;
 
 class MovePropSlipController extends Controller
 {
@@ -158,7 +160,8 @@ class MovePropSlipController extends Controller
         $cnd = ConditionNeeded::orderby('id','asc')->get();
         $deductibletype= DeductibleType::orderby('id','asc')->get();
         $extendedcoverage= ExtendedCoverage::orderby('id','asc')->get();
-
+        $propertytype= PropertyType::orderby('id','asc')->get();
+        
         $mp_ids = response()->json($insured->modelKeys());
         $lastid = count($insured);
         $sliplastid = count($slip);
@@ -229,7 +232,7 @@ class MovePropSlipController extends Controller
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         
 
-        return view('crm.transaction.mp_slip', compact(['user','interestinsured','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','deductibletype','cnd','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','mp_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.mp_slip', compact(['user','propertytype','interestinsured','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','deductibletype','cnd','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','mp_ids','code_ms','code_sl','costumer']));
     }
 
   
