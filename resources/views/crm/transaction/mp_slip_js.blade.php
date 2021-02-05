@@ -685,14 +685,14 @@ $(document).ready(function(){
        //alert('masuk');
        e.preventDefault();
 
-       var fesnumber = $('#insuredIDtxt').val();
-       var fesinsured = $('#feinsured').val();
-       var fessuggestinsured = $('#autocomplete').val();
-       var fessuffix = $('#autocomplete2').val();
-       var fesshare = $('#feshare').val();
-       var fessharefrom  = $('#fesharefrom').val();
-       var fesshareto = $('#feshareto').val();
-       var fescoinsurance = $('#fecoinsurance').val();
+       var mpnumber = $('#insuredIDtxt').val();
+       var mpinsured = $('#mpinsured').val();
+       var mpsuggestinsured = $('#autocomplete').val();
+       var mpsuffix = $('#autocomplete2').val();
+       var mpshare = $('#mpshare').val();
+       var mpsharefrom  = $('#mpsharefrom').val();
+       var mpshareto = $('#mpshareto').val();
+       var mpcoinsurance = $('#mpcoinsurance').val();
        
        
        var token2 = $('input[name=_token]').val();
@@ -704,23 +704,23 @@ $(document).ready(function(){
             });
 
        $.ajax({
-           url:"{{ url('transaction-data/fe-insured/store') }}",
+           url:"{{ url('transaction-data/mp-insured/store') }}",
            type:"POST",
            data:{
-               fesnumber:fesnumber,
-               fesinsured:fesinsured,
-               fessuggestinsured:fessuggestinsured,
-               fessuffix:fessuffix,
-               fesshare:fesshare,
-               fessharefrom:fessharefrom,
-               fesshareto:fesshareto,
-               fescoinsurance:fescoinsurance
+               mpnumber:mpnumber,
+               mpinsured:mpinsured,
+               mpsuggestinsured:mpsuggestinsured,
+               mpsuffix:mpsuffix,
+               mpshare:mpshare,
+               mpsharefrom:mpsharefrom,
+               mpshareto:mpshareto,
+               mpcoinsurance:mpcoinsurance
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },
            success:function(response)
            {
-                swal("Good job!", "Insured Fire & Engineering Insert Success", "success")
+                swal("Good job!", "Moveable Property Insert Success", "success")
                 console.log(response)
 
            },
