@@ -17,11 +17,13 @@ use App\Models\FeLookupLocation;
 use App\Models\MarineLookup;
 use App\Models\Customer;
 use App\Models\ConditionNeeded;
+use App\Models\ConditionNeededTemp;
 use App\Models\RouteShip;
 use App\Models\Currency;
 use App\Models\DeductibleType;
 use App\Models\Customer\Customer as CustomerCustomer;
 use App\Models\ShipListTemp;
+use App\Models\StatusLog;
 use App\Models\InterestInsured;
 use App\Models\InstallmentTemp;
 use App\Models\InterestInsuredTemp;
@@ -46,7 +48,7 @@ class TransactionController extends Controller
         $route_active = 'Marine - Slip Entry';
         $search = @$request->input('search');
         $mydate = date("Y").date("m").date("d");
-        $currdate = date("Y/m/d");
+        $currdate = date("Y-m-d");
         
 
         if(empty($search))
@@ -63,7 +65,7 @@ class TransactionController extends Controller
             $cnd = ConditionNeeded::orderby('id','asc')->get();
             $mlu = MarineLookup::orderby('id','asc')->get();
             
-            $interestlist= InterestInsuredTemp::orderby('id','desc')->get();
+            
             $customer= CustomerCustomer::orderby('id','asc')->get();
             $routeship= RouteShip::orderby('id','asc')->get();
             $interestinsured= InterestInsured::orderby('id','asc')->get();
@@ -128,10 +130,13 @@ class TransactionController extends Controller
                 $code_sl = "M" . $mydate . "0000" . strval(1);
             }
 
+            $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
             $shiplist= ShipListTemp::where('insured_id',$code_ms)->orderby('id','desc')->get();
+            $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+            $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
 
 
-            return view('crm.transaction.marine_slip', compact(['user','deductibletype','interestinsured','routeship','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
+            return view('crm.transaction.marine_slip', compact(['user','conditionneededtemp','deductibletemp','deductibletype','interestinsured','routeship','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
          }
         else
         {
@@ -426,7 +431,8 @@ class TransactionController extends Controller
                     [
                         'id' => $deductiblelist->id,
                         'deductibletype_id' => $deductiblelist->deductibletype_id,
-                        'deductibletype' => $deductiblelist->DeductibleType->description,
+                        'dtdescript' => $deductiblelist->DeductibleType->description,
+                        'dtabbrev' => $deductiblelist->DeductibleType->abbreviation,
                         'percentage' => $deductiblelist->percentage,
                         'currency_id' => $deductiblelist->currency_id,
                         'currencydata' => $deductiblelist->currency->code.'-'.$deductiblelist->currency->symbol_name,
@@ -478,6 +484,48 @@ class TransactionController extends Controller
                         'coveragetype' => $extendcoveragelist->extendcoveragedata->description,
                         'amount' => $extendcoveragelist->amount,
                         'slip_id' => $extendcoveragelist->slip_id
+                    ]
+                );
+        
+            }
+            else
+            {
+
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Fill all fields'
+                    ]
+                );
+
+            }
+        
+    }
+
+    public function storeconditionneededlist(Request $request)
+    {
+            
+            $slipcncode = $request->slipcncode;
+            $cn = ConditionNeeded::where('id',$slipcncode)->first();
+            $information = $cn->information;
+            $slip_id = $request->id_slip;
+        
+            if($slipcncode !='' && $slip_id != '')
+            {
+            
+                $conditionneededlist = new ConditionNeededTemp();
+                $conditionneededlist->condition_id  = $slipcncode;
+                $conditionneededlist->information  = $information;
+                $conditionneededlist->slip_id = $slip_id; 
+                $conditionneededlist->save();
+
+                return response()->json(
+                    [
+                        'id' => $conditionneededlist->id,
+                        'conditionneeded_id' => $conditionneededlist->condition_id,
+                        'condition' => $conditionneededlist->conditionneeded->name,
+                        'information' => $conditionneededlist->information,
+                        'slip_id' => $conditionneededlist->slip_id
                     ]
                 );
         
@@ -618,6 +666,15 @@ class TransactionController extends Controller
     public function destroyextendcoveragelist($id)
     {
         $extendcoveragelist = ExtendCoverageTemp::find($id);
+        
+        $extendcoveragelist->delete();
+        
+        return response()->json(['success'=>'Data has been deleted']);
+    }
+
+    public function destroyconditionneededlist($id)
+    {
+        $extendcoveragelist = ConditionNeededTemp::find($id);
         
         $extendcoveragelist->delete();
         

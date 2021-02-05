@@ -28,6 +28,9 @@ Route::delete('/delete-installment-list/{id}','TransactionController@destroyinst
 Route::post('/store-extendcoverage-list','TransactionController@storeextendcoveragelist')->name('extendcoverage.store');
 Route::delete('/delete-extendcoverage-list/{id}','TransactionController@destroyextendcoveragelist')->name('extendcoverage.delete');
 
+Route::post('/store-conditionneeded-list','TransactionController@storeconditionneededlist')->name('conditionneeded.store');
+Route::delete('/delete-conditionneeded-list/{id}','TransactionController@destroyconditionneededlist')->name('conditionneeded.delete');
+
 Route::post('/store-deductible-list','TransactionController@storedeductiblelist')->name('deductible.store');
 Route::delete('/delete-deductible-list/{id}','TransactionController@destroydeductiblelist')->name('deductible.delete');
 

@@ -19,4 +19,6 @@ class DeductibleTemp extends Model
     {
         return $this->belongsTo('App\Models\DeductibleType', 'deductibletype_id');
     }
+
+    
 }

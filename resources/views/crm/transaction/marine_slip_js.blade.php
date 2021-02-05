@@ -9,6 +9,51 @@
     }
 </style>
 
+<script type="text/javascript">
+    $(function() {              
+       // Bootstrap DateTimePicker v4
+       $('#dateinstallment').datetimepicker({
+             format: 'YYYY-MM-DD'
+       });
+    });      
+</script>
+
+<script type="text/javascript">
+    $(function() {              
+       // Bootstrap DateTimePicker v4
+       $('#dateinstallment').datetimepicker({
+             format: 'YYYY-MM-DD'
+       });
+    });      
+</script>
+
+<script type="text/javascript">
+    $(function() {              
+       // Bootstrap DateTimePicker v4
+       $('#dateinstallment').datetimepicker({
+             format: 'YYYY-MM-DD'
+       });
+
+       $('#dateinfrom').datetimepicker({
+             format: 'YYYY-MM-DD'
+       });
+
+       $('#dateinto').datetimepicker({
+             format: 'YYYY-MM-DD'
+       });
+
+       $('#daterefrom').datetimepicker({
+             format: 'YYYY-MM-DD'
+       });
+
+       $('#datereto').datetimepicker({
+             format: 'YYYY-MM-DD'
+       });
+    });      
+
+</script>
+
+
 <script>
     $( "#autocomplete" ).autocomplete({
       source: [
@@ -45,38 +90,6 @@
            $(this).parents("#control-group2").remove();
            });
    
-   
-        //    $( "#employee_search" ).autocomplete({
-        //    source: function( request, response ) {
-             // Fetch data
-            //  $.ajax({
-            //    url:"{{route('customer.getCostumers')}}",
-            //    type: 'post',
-            //    dataType: "json",
-            //    data: {
-            //       _token: CSRF_TOKEN,
-            //       search: request.term
-            //    },
-            //    success: function( data ) {
-            //       response( data );
-            //      // alert(data[0].label);
-            //    },
-            //    fail : function ( jqXHR, textStatus, errorThrown ) {
-            //        console.log(jqXHR);
-            //        console.log(textStatus);
-            //        console.log(errorThrown);
-            //    }
-            //  });
-        //    },
-        //    select: function (event, ui) {
-        //       // Set selection
-        //       //alert(ui.item.label);
-   
-        //       $('#employee_search').val(ui.item.label); // display the selected text
-        //       //$('#employeeid').val(ui.item.value); // save selected id to input
-        //       return false;
-        //    }
-        //  });
            
    });
    </script>
@@ -156,56 +169,6 @@
     }
 </script>
 
-<script type='text/javascript'>
-    $('#addinterestinsured-btn').click(function(e){
-       e.preventDefault();
-
-       var interest = $('#slipinterestlist').val();
-       var amount = $('#slipamount').val();
-       var slip_id = $('#slipnumber').val();
-       var token2 = $('input[name=_token2]').val();
-       
-       $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-       $.ajax({
-           url:"{{ route('interestlist.store') }}",
-           type:"POST",
-           data:{
-               interest_insured:interest,
-               slipamount:amount,
-               id_slip:slip_id
-           },
-           success:function(response){
-            
-               console.log(response)
-               $('#interestInsuredTable tbody').prepend('<tr id="iid'+response.id+'" data-name="interestvalue[]"><td data-name="'+response.interest_id+'">'+response.description+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestdetail('+response.id+')">delete</a></td></tr>')
-               $('#slipamount').val('');
-               $('#slipinterestlist').val('');
-               
-               
-               var total =  parseFloat($("#sliptotalsum").val());
-               var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
-               $("#sliptotalsum").val(sum);
-               $("#msishareto").val(sum);
-               
-            //    if($('#sliptotalsum').val(''))
-            //         $("#sliptotalsum").val(parseFloat(response.amount));
-            //    else
-            //    {
-            //     var total=isNaN(parseInt($("#sliptotalsum").val() + $("#slipamount").val())) ? 0 :($("#sliptotalsum").val() + $("#slipamount").val());
-            //      $("#sliptotalsum").val(total);
-                
-            //    }
-           }
-       });
-
-   });
-</script>
-    
 <script  type='text/javascript'>
     $('#slippct').keyup(function () {
         var pct =  parseFloat($(this).val());
@@ -253,49 +216,206 @@
         $('#slipsumcommission').val(sum);
         $('#slipnetprmtonr').val(sumnetprmtonr);
     });
+
+    $('#slipippercentage').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumnetprtonr = parseFloat($("#slipnetprmtonr").val());
+        var sum = isNaN(percent * sumnetprtonr) ? 0 :(percent * sumnetprtonr);
+        $('#slipipamount').val(sum);
+    });
+
+    $('#slipor').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumshare = parseFloat($("#slipsumshare").val());
+        var sum = isNaN(percent * sumshare) ? 0 :(percent * sumshare);
+        $('#slipsumor').val(sum);
+    });
+
+    $('#sliprppercentage').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumshare = parseFloat($("#slipsumshare").val());
+        var sum = isNaN(percent * sumshare) ? 0 :(percent * sumshare);
+        $('#sliprpamount').val(sum);
+    });
 </script>
-
-<script type="text/javascript">
-    $(document).ready(function() { 
-        
-        if(($('#sliprate').val() != 0) && ($('#slipshare').val() != 0) )
-        {
-            
-        }
-        
-
-     });
-   
-    
-
-    
-
-    
-</script>
-
 
 <script type='text/javascript'>
-    function deleteinterestdetail(id){
+    $('#addinterestinsured-btn').click(function(e){
+       e.preventDefault();
+
+       var interest = $('#slipinterestlist').val();
+       var amount = $('#slipamount').val();
+       var slip_id = $('#slipnumber').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('interestlist.store') }}",
+           type:"POST",
+           data:{
+               interest_insured:interest,
+               slipamount:amount,
+               id_slip:slip_id
+           },
+           success:function(response){
+            
+               console.log(response)
+               $('#interestInsuredTable tbody').prepend('<tr id="iid'+response.id+'" data-name="interestvalue[]"><td data-name="'+response.interest_id+'">'+response.description+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestdetail('+response.id+')">delete</a></td></tr>')
+               $('#slipamount').val('');
+               $('#slipinterestlist').val('');
+               
+               
+               var total =  parseFloat($("#sliptotalsum").val());
+               var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
+               $("#sliptotalsum").val(sum);
+               $("#msishareto").val(sum);
+               
+            
+           }
+       });
+
+    });
+
+    $('#adddeductibletype-btn').click(function(e){
+       e.preventDefault();
+
+       var dptype = $('#slipdptype').val();
+       var dpcurrency = $('#slipdpcurrency').val();
+       var dpminamount = $('#slipdpminamount').val();
+       var dpamount = $('#slipdpamount').val();
+       var dppercentage = $('#slipdppercentage').val();
+       var dpslip_id = $('#slipnumber').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('deductible.store') }}",
+           type:"POST",
+           data:{
+                slipdptype:dptype,
+                slipdpcurrency:dpcurrency,
+                minamount:dpminamount,
+                amount:dpamount,
+                percentage:dppercentage,
+                id_slip:dpslip_id
+           },
+           success:function(response){
+            
+                console.log(response)
+                $('#deductiblePanel tbody').prepend('<tr id="ddtid'+response.id+'" data-name="deductiblevalue[]"><td data-name="'+response.deductibletype_id+'">'+ response.dtabbrev +' - '+ response.dtdescript+'</td><td data-name="'+response.currency_id+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibletype('+response.id+')">delete</a></td></tr>')
+                $('#slipdpminamount').val('');
+                $('#slipdpamount').val('');
+                $('#slipdppercentage').val('');
+                $('#slipnumber').val('');
+               
+           }
+       });
+
+    });
+
+    $('#addconditionneeded-btn').click(function(e){
+       e.preventDefault();
+
+       var cncode = $('#slipcncode').val();
+       var slip_id = $('#slipnumber').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('conditionneeded.store') }}",
+           type:"POST",
+           data:{
+                slipcncode:cncode,
+                id_slip:slip_id
+           },
+           success:function(response){
+            
+               console.log(response)
+               $('#conditionNeeded tbody').prepend('<tr id="iid'+response.id+'" data-name="conditionneededvalue[]"><td data-name="'+response.conditionneeded_id+'">'+response.condition+'</td><td data-name="'+response.information+'">'+response.information+'</td><td><a href="javascript:void(0)" onclick="deleteconditionneededdetail('+response.id+')">delete</a></td></tr>')
+               
+               
+            
+           }
+       });
+
+    });
+</script>
+
+<script type='text/javascript'>
+    function deleteinterestdetail(ii){
         var token2 = $('input[name=_token2]').val();
 
         $.ajax({
-            url:'{{ url("/") }}/delete-interest-list/'+id,
+            url:'{{ url("/") }}/delete-interest-list/'+ii,
             type:"DELETE",
             data:{
                 _token:token2
             },
             success:function(response){
                 
-                $('#iid'+id).remove();
+                $('#iid'+ii).remove();
                 console.log(response);
+                
                 var total =  parseFloat($("#sliptotalsum").val());
                 var sum = isNaN(total - parseFloat(response.amount)) ? 0 :(total - parseFloat(response.amount)) ;
                 $("#sliptotalsum").val(sum);
                 $("#msishareto").val(sum);
+            }
+        });
+    }
+
+    function deletedeductibletype(dt){
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-deductible-list/'+dt,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            success:function(response){
+                
+                $('#dttid'+dt).remove();
+                console.log(response);
                 
             }
         });
     }
+
+    function deleteconditionneededdetail(cn){
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-conditionneeded-list/'+cn,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            success:function(response){
+                
+                $('#cnid'+cn).remove();
+                console.log(response);
+                
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    
 </script>
 
 <script>
@@ -334,69 +454,3 @@
 </script>
 
 
-
-<script  type='text/javascript'>
-    $('#slippct').keyup(function () {
-        var pct =  parseFloat($(this).val());
-        var tsi = parseFloat($("#sliptotalsum").val());
-        var sum = isNaN(pct * tsi/100) ? 0 :(pct * tsi/100) ;
-         $('#sliptotalsumpct').val(sum);
-         $('#msishare').val(pct);
-     });
-
-     $('#slipdppercentage').keyup(function () {
-        var percent =  parseFloat($(this).val());
-        var tsi = parseFloat($("#sliptotalsum").val());
-        var sum = isNaN(percent * tsi/100) ? 0 :(percent * tsi/100) ;
-        $('#slipdpamount').val(sum);
-     });
-
-     $('#slipshare').keyup(function () {
-        var shareslip =  parseFloat($(this).val());
-        var tsi = parseFloat($("#sliptotalsum").val());
-        var sum = isNaN(shareslip * tsi/100) ? 0 :(shareslip * tsi/100) ;
-        $('#slipsumshare').val(sum);
-     });
-
-     $('#sliprate').keyup(function () {
-        var rateslip =  parseFloat($(this).val());
-        var tsi = parseFloat($("#sliptotalsum").val());
-        var sum = isNaN(rateslip * tsi/100) ? 0 :(rateslip * tsi/100) ;
-        $('#slipbasicpremium').val(sum);
-     });
-
-     $('#slipshare').change(function () {
-        var rateslip =  parseFloat($('#sliprate').val()) / 100 ;
-        var shareslip =  parseFloat($('#slipshare').val()) / 100 ;
-        var tsi = parseFloat($("#sliptotalsum").val());
-        var sum = isNaN(rateslip * shareslip * tsi/100) ? 0 :(rateslip * shareslip * tsi/100) ;
-        $('#slipgrossprmtonr').val(sum);
-     });
-
-     $('#slipcommission').keyup(function () {
-        var commision =  parseFloat($(this).val()) / 100;
-        var sumgrossprmtonr = parseFloat($("#slipgrossprmtonr").val());
-        var sum = isNaN(commision * sumgrossprmtonr/100) ? 0 :(commision * sumgrossprmtonr/100);
-        var sumnetprmtonr = isNaN( sumgrossprmtonr * (100/100 - commision)) ? 0 :(sumgrossprmtonr * (100/100 - commision));
-        $('#slipsumcommission').val(sum);
-        $('#slipnetprmtonr').val(sumnetprmtonr);
-    });
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function() { 
-        
-        if(($('#sliprate').val() != 0) && ($('#slipshare').val() != 0) )
-        {
-            
-        }
-        
-
-     });
-   
-    
-
-    
-
-    
-</script>
