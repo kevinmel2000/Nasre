@@ -1064,7 +1064,7 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <input type="text" id="slipsumor" name="slipsumor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly required/>
+                                                                    <input type="text" id="slipsumor"  name="slipsumor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly required/>
                                                                 </div>
                                                             </div>
                                                         </div>
