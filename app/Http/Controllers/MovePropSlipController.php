@@ -232,9 +232,10 @@ class MovePropSlipController extends Controller
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $propertytypelist=PropertyTypeTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         
-
-        return view('crm.transaction.mp_slip', compact(['user','propertytype','retrocessionlist','interestinsured','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','deductibletype','cnd','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','mp_ids','code_ms','code_sl','costumer']));
+        
+        return view('crm.transaction.mp_slip', compact(['user','propertytypelist','propertytype','retrocessionlist','interestinsured','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','deductibletype','cnd','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','mp_ids','code_ms','code_sl','costumer']));
     }
 
   
@@ -258,6 +259,7 @@ class MovePropSlipController extends Controller
             
             $insureddata= Insured::where('number','=',$request->mpnumber)->first();
             $locationlist= TransLocationTemp::where('insured_id','=',$request->flnumber)->orderby('id','desc')->get();
+            $propertytypelist= PropertyTypeTemp::where('insured_id','=',$request->flnumber)->orderby('id','desc')->get();
 
             if($insureddata==null)
             {
@@ -271,7 +273,8 @@ class MovePropSlipController extends Controller
                     'share_from'=>$request->mpsharefrom,
                     'share_to'=>$request->mpshareto,
                     'coincurance'=>$request->mpcoinsurance,
-                    'location'=>$locationlist->toJson()
+                    'location'=>$locationlist->toJson(),
+                    'property_type'=>$propertytypelist->->toJson()
                 ]);
 
                 $notification = array(
@@ -291,6 +294,7 @@ class MovePropSlipController extends Controller
                 $insureddataup->share_to=$request->mpshareto;
                 $insureddataup->coincurance=$request->mpcoinsurance;
                 $insureddataup->location=$locationlist->toJson();
+                $insureddataup->property_type=$propertytypelist->toJson();
                 $insureddataup->save();
 
 

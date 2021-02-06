@@ -164,15 +164,17 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>{{__('001 -Phone')}}</td>
-                                                    <td width="20%">{{__('delete')}}</td>
-                                                </tr>
+                                                @foreach($propertytypelist as $isl)
+                                                    <tr id="iidproperty{{ $isl->id }}">
+                                                            <td>{{ $isl->propertytypedata->name }}</td>
+                                                            <td><a href="#" onclick="deletepropertytypedetail({{ $isl->id }})">delete</i></a></td>
+                                                    </tr>   
+                                                @endforeach
                                                 <tr>
                                                     <td>
                                                         <div class="form-group">
                                                             {{-- <label for="">{{__('Layer for non proportional')}}</label> --}}
-                                                            <select name="mppropertytypelist" class="form-control form-control-sm ">
+                                                            <select id="mppropertytypelist" name="mppropertytypelist" class="form-control form-control-sm ">
                                                                 <option selected readonly>{{__('PropertyType List')}}</option>
                                                                 @foreach($propertytype as $propertytypedata)
                                                                 <option value="{{ $propertytypedata->id }}">{{ $propertytypedata->code }} - {{ $propertytypedata->name }}</option>
@@ -182,7 +184,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                            <button type="button" id="addpropertyinsured-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                         </div>
                                                     </td>
                                                 </tr>

@@ -37,6 +37,9 @@ Route::delete('/delete-deductible-list/{id}','TransactionController@destroydeduc
 Route::post('/store-retrocession-list','TransactionController@storeretrocessionlist')->name('retrocession.store');
 Route::delete('/delete-retrocession-list/{id}','TransactionController@destroyretrocessionlist')->name('retrocession.delete');
 
+Route::post('/store-propertytype-list','TransactionController@storepropertytypelist')->name('propertytype.store');
+Route::delete('/delete-propertytype-list/{id}','TransactionController@destroypropertytypelist')->name('propertytype.delete');
+
 
 Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     

@@ -33,7 +33,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\ExtendCoverageTemp;
 use App\Models\DeductibleTemp;
 use App\Models\RetrocessionTemp;
-
+use App\Models\PropertyType;
+use App\Models\PropertyTypeTemp;
 
 class TransactionController extends Controller
 {
@@ -590,6 +591,45 @@ class TransactionController extends Controller
             }
         
     }
+
+    public function storepropertytypelist(Request $request)
+    {
+        
+            $property_type_id = $request->property_type_id;
+            $slip_id = $request->id_slip;
+        
+            if($property_type_id !='' && $slip_id != '')
+            {
+            
+                $retrocessionlist = new PropertyTypeTemp();
+                $retrocessionlist->property_type_id  = $property_type_id;
+                $retrocessionlist->slip_id = $slip_id; 
+                $retrocessionlist->save();
+
+                return response()->json(
+                    [
+                        'id' => $retrocessionlist->id,
+                        'propertydata' => $retrocessionlist->propertytypedata->name,
+                        'property_type_id' => $retrocessionlist->property_type_id,
+                        'slip_id' => $retrocessionlist->slip_id
+                    ]
+                );
+        
+            }
+            else
+            {
+
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Fill all fields'
+                    ]
+                );
+
+            }
+        
+    }
+
     /**
      * Display the specified resource.
      *
@@ -697,6 +737,16 @@ class TransactionController extends Controller
         $retrocessionTemplist = RetrocessionTemp::find($id);
         
         $retrocessionTemplist->delete();
+        
+        return response()->json(['success'=>'Data has been deleted']);
+    }
+    
+
+    public function destroypropertytypelist($id)
+    {
+        $propertytypeTemplist = PropertyTypeTemp::find($id);
+        
+        $propertytypeTemplist->delete();
         
         return response()->json(['success'=>'Data has been deleted']);
     }

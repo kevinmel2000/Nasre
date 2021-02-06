@@ -658,6 +658,67 @@ $(document).ready(function(){
     }
 </script>
 
+
+<script type='text/javascript'>
+    $('#addpropertyinsured-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var property_type_id = $('#mppropertytypelist').val();
+       
+       var slip_id = $('#slipnumber').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('propertytype.store') }}",
+           type:"POST",
+           data:{
+               property_type_id:property_type_id,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               $('#propertyTypePanel tbody').prepend('<tr id="iidproperty'+response.id+'" data-name="propertytypevalue[]"><td data-name="'+response.propertydata+'">'+response.propertydata+'</td><td><a href="javascript:void(0)" onclick="deletepropertytypedetail('+response.id+')">delete</a></td></tr>');
+              
+           }
+       });
+
+   });
+</script>
+
+<script type='text/javascript'>
+    function deletepropertytypedetail(id)
+    {
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-propertytype-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response){
+                
+                $('#iidproperty'+id).remove();
+                console.log(response);
+            }
+        });
+    }
+</script>
+
+
 <style>
     .overlay{
         display: none;
