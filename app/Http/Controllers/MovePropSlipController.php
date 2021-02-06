@@ -274,7 +274,7 @@ class MovePropSlipController extends Controller
                     'share_to'=>$request->mpshareto,
                     'coincurance'=>$request->mpcoinsurance,
                     'location'=>$locationlist->toJson(),
-                    'property_type'=>$propertytypelist->->toJson()
+                    'property_type'=>$propertytypelist->toJson()
                 ]);
 
                 $notification = array(
