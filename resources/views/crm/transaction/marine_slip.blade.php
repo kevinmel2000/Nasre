@@ -148,9 +148,9 @@
                                                         </thead>
                                                         <tbody>
                                                             @foreach($shiplist as $slt)
-                                                             <tr id="sid{{ $slt->id }}">
-                                                                    <td>{{ $slt->ship_code }}</td>
-                                                                    <td>{{ $slt->ship_name }}</td>
+                                                             <tr id="sid{{ $slt->id }}" data-name="shiplistvalue[]">
+                                                                    <td data-name="{{ $slt->ship_code }}">{{ $slt->ship_code }}</td>
+                                                                    <td data-name="{{ $slt->ship_name }}">{{ $slt->ship_name }}</td>
                                                                     <td><a href="#" onclick="deleteshipdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
                                                              </tr>   
                                                             @endforeach
@@ -555,9 +555,9 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             @foreach($interestlist as $isl)
-                                                                                <tr id="iid{{ $isl->id }}">
-                                                                                        <td>{{ $isl->interestinsured->description }}</td>
-                                                                                        <td>{{ $isl->amount }}</td>
+                                                                                <tr id="iid{{ $isl->id }}" data-name="interestvalue[]">
+                                                                                        <td data-name="{{ $isl->interest_id }}">{{ $isl->interestinsured->description }}</td>
+                                                                                        <td data-name="{{ $isl->amount }}">{{ $isl->amount }}</td>
                                                                                         <td><a href="javascript:void(0)" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
                                                                                 </tr>   
                                                                             @endforeach
@@ -671,11 +671,11 @@
                                                                         <tr>
                                                                             @foreach($deductibletemp as $dtt)
                                                                                 <tr id="ddtid{{ $dtt->id }}">
-                                                                                        <td> {{ $dtt->DeductibleType->abbreviation }} - {{ $dtt->DeductibleType->description }}</td>
-                                                                                        <td>{{ $dtt->currency->symbol_name }}</td>
-                                                                                        <td>{{ $dtt->percentage }}</td>
-                                                                                        <td>{{ $dtt->amount }}</td>
-                                                                                        <td>{{ $dtt->min_claimamount }}</td>
+                                                                                        <td data-name="{{ $dtt->deductible_id }}">{{ $dtt->DeductibleType->abbreviation }} - {{ $dtt->DeductibleType->description }}</td>
+                                                                                        <td data-name="{{ $dtt->currency_id }}">{{ $dtt->currency->symbol_name }}</td>
+                                                                                        <td data-name="{{ $dtt->percentage }}">{{ $dtt->percentage }}</td>
+                                                                                        <td data-name="{{ $dtt->amount }}">{{ $dtt->amount }}</td>
+                                                                                        <td data-name="{{ $dtt->min_claimamount }}">{{ $dtt->min_claimamount }}</td>
                                                                                         <td><a href="javascript:void(0)" onclick="deletedeductibletype({{ $dtt->id }})">delete</i></a></td>
                                                                                 </tr>   
                                                                             @endforeach
@@ -755,8 +755,8 @@
                                                                     <tbody>
                                                                         @foreach($conditionneededtemp as $cnt)
                                                                             <tr id="cnid{{ $cnt->id }}">
-                                                                                    <td>{{ $cnt->conditionneeded->name }} - {{ $cnt->conditionneeded->description }}</td>
-                                                                                    <td>@if($cnt->information == null)
+                                                                                    <td data-name="{{ $cnt->condition_id }}">{{ $cnt->conditionneeded->name }} - {{ $cnt->conditionneeded->description }}</td>
+                                                                                    <td data-name="{{ $cnt->information }}">@if($cnt->information == null)
                                                                                             - 
                                                                                         @else
                                                                                             {{ $cnt->information }}
@@ -1010,9 +1010,9 @@
                                                                     <tbody>
                                                                         @foreach($installmentpanel as $isp)
                                                                             <tr id="ispid{{ $isp->id }}">
-                                                                                    <td>{{ $isp->installment_date }}</td>
-                                                                                    <td>{{ $isp->percentage }}</td>
-                                                                                    <td>{{ $isp->amount }}</td>
+                                                                                    <td data-name="{{ $isp->installment_date }}">{{ $isp->installment_date }}</td>
+                                                                                    <td data-name="{{ $isp->percentage }}">{{ $isp->percentage }}</td>
+                                                                                    <td data-name="{{ $isp->amount }}">{{ $isp->amount }}</td>
                                                                                     <td><a href="javascript:void(0)" onclick="deleteinstallmentpanel({{ $isp->id }})">delete</i></a></td>
                                                                             </tr>   
                                                                         @endforeach
@@ -1114,10 +1114,10 @@
                                                                     <tbody>
                                                                         @foreach($retrocessiontemp as $rsc)
                                                                             <tr id="rscid{{ $rsc->id }}">
-                                                                                    <td>{{ $rsc->type }}</td>
-                                                                                    <td>{{ $rsc->contract }}</td>
-                                                                                    <td>{{ $rsc->percentage }}</td>
-                                                                                    <td>{{ $rsc->amount }}</td>
+                                                                                    <td data-name="{{ $rsc->type }}">{{ $rsc->type }}</td>
+                                                                                    <td data-name="{{ $rsc->contract }}">{{ $rsc->contract }}</td>
+                                                                                    <td data-name="{{ $rsc->percentage }}">{{ $rsc->percentage }}</td>
+                                                                                    <td data-name="{{ $rsc->amount }}">{{ $rsc->amount }}</td>
                                                                                     <td><a href="javascript:void(0)" onclick="deleteretrocessiontemp({{ $rsc->id }})">delete</i></a></td>
                                                                             </tr>   
                                                                         @endforeach
