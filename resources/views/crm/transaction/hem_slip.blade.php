@@ -1220,7 +1220,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
-                                        <button class="btn btn-primary btn-block ">
+                                        <button  type="button" id="addslipinsured-btn" class="btn btn-primary btn-block ">
                                             {{__('Save')}}
                                         </button>
                                     </div>

@@ -763,7 +763,62 @@ $(document).ready(function() {
            },
            error: function (request, status, error) {
                 //alert(request.responseText);
-                swal("Error!", request.responseText, "Insert Error");
+                swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
+           }
+       });
+
+   });
+</script>
+
+
+
+<script type='text/javascript'>
+    $('#addslipinsured-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var fesnumber = $('#insuredIDtxt').val();
+       var fesinsured = $('#feinsured').val();
+       var fessuggestinsured = $('#autocomplete').val();
+       var fessuffix = $('#autocomplete2').val();
+       var fesshare = $('#feshare').val();
+       var fessharefrom  = $('#fesharefrom').val();
+       var fesshareto = $('#feshareto').val();
+       var fescoinsurance = $('#fecoinsurance').val();
+       
+       
+       var token2 = $('input[name=_token]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{url('transaction-data/fe-slip/store/'.$code_ms)}}",
+           type:"POST",
+           data:{
+               fesnumber:fesnumber,
+               fesinsured:fesinsured,
+               fessuggestinsured:fessuggestinsured,
+               fessuffix:fessuffix,
+               fesshare:fesshare,
+               fessharefrom:fessharefrom,
+               fesshareto:fesshareto,
+               fescoinsurance:fescoinsurance
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                swal("Good job!", "Insured Fire & Engineering Slip Insert Success", "success")
+                console.log(response)
+
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", "Insured Fire & Engineering Slip Insert Error", "Insert Error");
            }
        });
 
