@@ -1093,6 +1093,15 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
+                                                                        @foreach($retrocessionlist as $isl)
+                                                                            <tr id="iidretrocession{{ $isl->id }}">
+                                                                                    <td>{{ $isl->type }}</td>
+                                                                                    <td>{{ $isl->contract }}</td>
+                                                                                    <td>{{ $isl->percentage }}</td>
+                                                                                    <td>{{ $isl->amount }}</td>
+                                                                                    <td><a href="#" onclick="deleteretrocessiondetail({{ $isl->id }})">delete</i></a></td>
+                                                                            </tr>   
+                                                                        @endforeach
                                                                         <tr>
                                                                             <td>
                                                                                 <div class="form-group">

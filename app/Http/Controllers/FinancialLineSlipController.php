@@ -35,6 +35,7 @@ use App\Models\ExtendCoverageTemp;
 use App\Models\DeductibleTemp;
 use App\Models\InstallmentTemp;
 use App\Models\StatusLog;
+use App\Models\RetrocessionTemp;
 
 class FinancialLineSlipController extends Controller
 {
@@ -226,9 +227,10 @@ class FinancialLineSlipController extends Controller
         $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         
 
-        return view('crm.transaction.fl_slip', compact(['user','cnd','installmentlist','deductibletype','extendcoveragelist','deductiblelist','extendedcoverage','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fl_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.fl_slip', compact(['user','cnd','retrocessionlist','installmentlist','deductibletype','extendcoveragelist','deductiblelist','extendedcoverage','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fl_ids','code_ms','code_sl','costumer']));
     
     }
 
