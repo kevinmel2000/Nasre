@@ -39,7 +39,8 @@ Route::delete('/delete-retrocession-list/{id}','TransactionController@destroyret
 
 Route::post('/store-propertytype-list','TransactionController@storepropertytypelist')->name('propertytype.store');
 Route::delete('/delete-propertytype-list/{id}','TransactionController@destroypropertytypelist')->name('propertytype.delete');
-
+Route::post('store-multi-file-ajax', [FeSlipController::class, 'storeMultiFile']);
+    
 
 Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     
@@ -62,7 +63,7 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::delete('/fe-slip/destroy/{fe}', [FeSlipController::class, 'destroy']);
     Route::post('/fe-slip/getCostumers/','FeSlipController@getCostumers')->name('customer.getCostumers');
 
-
+    
     // SECTION Financial Lines Slip Group Routes
     Route::get('/fl-slip', [FinancialLineSlipController::class, 'indexflslip']);
     Route::get('/fl-slipindex', [FinancialLineSlipController::class, 'index']);

@@ -256,8 +256,8 @@
             <div class="card-body bg-light-gray">
                 
                 <div class="container-fluid p-3">
-                <form method="POST" action={{url('transaction-data/mp-slip/store/'.$code_ms)}}>
-                    @csrf
+                <form id="multi-file-upload-ajax" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
+                   @csrf
                         <div class="card card-tabs">
                             <div class="card-header p-0 pt-1 border-bottom-0">
                                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -374,21 +374,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>{{__('Offer')}}</td>
-                                                                <td>{{__('01/10/2020 09:00:00')}}</td>
-                                                                <td>{{__('User A')}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>{{__('Binding')}}</td>
-                                                                <td>{{__('01/10/2020 14:15:00')}}</td>
-                                                                <td>{{__('User A')}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>{{__('Slip')}}</td>
-                                                                <td>{{__('01/10/2020 11:20:00')}}</td>
-                                                                <td>{{__('User B')}}</td>
-                                                            </tr>
+                                                            
                                                         </tbody>
                                                         
                                                         </table>
@@ -605,7 +591,7 @@
 
                                                                                     <td>
                                                                                         <div class="form-group">
-                                                                                            <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipamount" name="slipamount" class="form-control form-control-sm " data-validation="length" data-validation-length="0-15" required/>
+                                                                                            <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipamount" name="slipamount" class="form-control form-control-sm " data-validation="length" data-validation-length="0-15"/>
                                                                                         </div>
                                                                                     </td>
 
@@ -1110,7 +1096,7 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <input type="text" id="slipsumor" name="slipsumor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly required/>
+                                                                    <input type="text" id="slipsumor" name="slipsumor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1211,7 +1197,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
-                                        <button  type="button" id="addslipinsured-btn" class="btn btn-primary btn-block ">
+                                        <button type="submit" id="addslipinsured-btn" class="btn btn-primary btn-block ">
                                             {{__('Save')}}
                                         </button>
                                     </div>

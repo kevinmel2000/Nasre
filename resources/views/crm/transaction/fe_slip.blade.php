@@ -208,10 +208,9 @@
                 {{__('Slip Detail')}}
             </div>
             <div class="card-body bg-light-gray">
-                
                 <div class="container-fluid p-3">
-                   <form>
-                    @csrf
+                <form id="multi-file-upload-ajax" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
+                @csrf
                         <div class="card card-tabs">
                             <div class="card-header p-0 pt-1 border-bottom-0">
                                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -245,7 +244,7 @@
                                                     <div class="form-group">
                                                         <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
                                                         <label for="">{{__('Number')}} </label>
-                                                        <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="3" value="{{ $code_sl }}" readonly="readonly" required/>
+                                                        <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" value="{{ $code_sl }}" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -328,21 +327,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>{{__('Offer')}}</td>
-                                                                <td>{{__('01/10/2020 09:00:00')}}</td>
-                                                                <td>{{__('User A')}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>{{__('Binding')}}</td>
-                                                                <td>{{__('01/10/2020 14:15:00')}}</td>
-                                                                <td>{{__('User A')}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>{{__('Slip')}}</td>
-                                                                <td>{{__('01/10/2020 11:20:00')}}</td>
-                                                                <td>{{__('User B')}}</td>
-                                                            </tr>
+                                                            
                                                         </tbody>
                                                         
                                                         </table>
@@ -489,14 +474,14 @@
                                                     <div class="input-group">
                                                     
                                                         <div class="input-group control-group increment2" >
-                                                        <input type="file" name="slipfile_att[]" id="attachment" class="form-control">
+                                                        <input type="file" name="files[]" id="attachment" class="form-control">
                                                         <div class="input-group-btn"> 
                                                             <button class="btn btn-success" id="btn-success2" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
                                                         </div>
                                                         </div>
                                                         <div class="clone2 hide">
                                                         <div class="control-group input-group" id="control-group2" style="margin-top:10px">
-                                                            <input type="file" name="slipfile_att[]" class="form-control">
+                                                            <input type="file" name="files[]" id="attachment" class="form-control">
                                                             <div class="input-group-btn"> 
                                                             <button class="btn btn-danger" id="btn-danger2" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
                                                             </div>
@@ -559,7 +544,7 @@
 
                                                                                     <td>
                                                                                         <div class="form-group">
-                                                                                            <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipamount" name="slipamount" class="form-control form-control-sm " data-validation="length" data-validation-length="0-15" required/>
+                                                                                            <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipamount" name="slipamount" class="form-control form-control-sm " data-validation="length" data-validation-length="0-15"/>
                                                                                         </div>
                                                                                     </td>
 
@@ -1064,7 +1049,7 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <input type="text" id="slipsumor"  name="slipsumor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly required/>
+                                                                    <input type="text" id="slipsumor"  name="slipsumor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1165,7 +1150,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
-                                        <button type="button" id="addslipinsured-btn" class="btn btn-primary btn-block ">
+                                        <button type="submit" id="addslipinsured-btn" class="btn btn-primary btn-block ">
                                             {{__('Save')}}
                                         </button>
                                     </div>

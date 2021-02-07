@@ -773,7 +773,7 @@ $(document).ready(function() {
 
 
 <script type='text/javascript'>
-    $('#addslipinsured-btn').click(function(e){
+    $('#multi-file-upload-ajax').submit(function(e){
        //alert('masuk');
        e.preventDefault();
 
@@ -816,6 +816,8 @@ $(document).ready(function() {
 
        var token2 = $('input[name=_token]').val();
        
+       //ajaxfilefunction(e);
+
        $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -861,7 +863,8 @@ $(document).ready(function() {
                slipnetprmtonr:slipnetprmtonr,
                sliprb:sliprb,
                slipor:slipor,
-               slipsumor:slipsumor
+               slipsumor:slipsumor,
+               formData:formData
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },
@@ -876,6 +879,39 @@ $(document).ready(function() {
                 swal("Error!", "Insured Fire & Engineering Slip Insert Error", "Insert Error");
            }
        });
+
+       var formData = new FormData(this);
+       let TotalFiles = $('#attachment')[0].files.length; //Total files
+       let files = $('#attachment')[0];
+       var slip_id = $('#slipnumber').val();
+
+       for (let i = 0; i < TotalFiles; i++) 
+       {
+        formData.append('files' + i, files.files[i]);
+       }
+       
+       formData.append('TotalFiles', TotalFiles);
+       formData.append('slip_id', slip_id);
+     
+       $.ajax({
+                    type:'POST',
+                    url: "{{ url('store-multi-file-ajax')}}",
+                    data: formData,
+                    cache:false,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    success: (data) => {
+                    //this.reset();
+                    //alert('Files has been uploaded using jQuery ajax');
+                      swal("Good job!", "Files has been uploaded", "success")
+                    },
+                    error: function(data){
+                     //alert(data.responseJSON.errors.files[0]);
+                     swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
+                     console.log(data.responseJSON.errors);
+                    }
+        });
 
    });
 </script>

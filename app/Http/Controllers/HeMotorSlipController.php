@@ -234,9 +234,10 @@ class HeMotorSlipController extends Controller
         $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
+        $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+       
         
-        return view('crm.transaction.hem_slip', compact(['user','cnd','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','deductibletype','extendedcoverage','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','hem_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.hem_slip', compact(['user','cnd','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','deductibletype','extendedcoverage','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','hem_ids','code_ms','code_sl','costumer']));
     }
 
     

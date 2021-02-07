@@ -221,11 +221,12 @@ class FeSlipController extends Controller
         $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();             
-
+        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();       
         $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+            
 
-        return view('crm.transaction.fe_slip', compact(['user','cnd','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.fe_slip', compact(['user','cnd','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
     }
 
@@ -314,6 +315,54 @@ class FeSlipController extends Controller
     }
 
 
+    public function storeMultiFile(Request $request)
+    {
+         
+       $validatedData = $request->validate([
+        'files' => 'required'
+        ]);
+ 
+        if($request->TotalFiles > 0)
+        { 
+                for ($x = 0; $x < $request->TotalFiles; $x++) 
+                {
+        
+                    if ($request->hasFile('files'.$x)) 
+                        {
+                            $file = $request->file('files'.$x);
+        
+                            $path = 'public/files';
+                            //$file->move(base_path('\public\files'), $file->getClientOriginalName());
+                            //$name = $file->getClientOriginalName();
+
+                            $extension = $file->getClientOriginalExtension(); 
+                            
+                            if($extension=="csv" || $extension=="txt" || $extension=="xlx" || $extension=="xls" || $extension=="pdf")
+                            {  
+                                $name =  time() . rand(11111,99999).''.$file->getClientOriginalName();
+                                $file->move(base_path('\public\files'),$name);
+                                
+                                $insert[$x]['filename'] = $name;
+                                $insert[$x]['path'] = $path;
+                                $insert[$x]['user_id'] = Auth::user()->name;
+                                $insert[$x]['slip_id'] = $request->slip_id;
+                                SlipTableFile::insert($insert);
+                            }
+                        }
+                }
+        
+               
+    
+           return response()->json(['success'=>'Ajax Multiple fIle has been uploaded']);
+ 
+        }
+        else
+        {
+           return response()->json(["message" => "Please try again."]);
+        }
+ 
+    }
+
 
     public function storefeslip(Request $request)
     {
@@ -329,10 +378,10 @@ class FeSlipController extends Controller
             'sliptotalsum'=>'required',
             'slippct'=>'required',
             'sliptype'=>'required',
-            'sliptotalsumpct'=>'required'
-
+            'sliptotalsumpct'=>'required',
         ]);
         
+
         if($validator)
         {
             $user = Auth::user();
