@@ -361,6 +361,7 @@ class MovePropSlipController extends Controller
                 SlipTable::create([
                     'number'=>$request->slipnumber,
                     'username'=>Auth::user()->name,
+                    'insured_id'=>$request->code_ms,
                     'slip_type'=>'fe',
                     'prod_year' => $currdate,
                     'uy'=>$request->slipuy,
@@ -410,7 +411,7 @@ class MovePropSlipController extends Controller
                     'message' => 'Moveable Property Slip added successfully!',
                     'alert-type' => 'success'
                 );
-            
+
             }
             else
             {
@@ -421,6 +422,7 @@ class MovePropSlipController extends Controller
                 
                 $slipdataup->number=$request->slipnumber;
                 $slipdataup->username=Auth::user()->name;
+                $slipdataup->insured_id=$request->code_ms;
                 $slipdataup->prod_year=$currdate;
                 $slipdataup->uy=$request->slipuy;
                 $slipdataup->status=$request->slipstatus;
@@ -473,6 +475,12 @@ class MovePropSlipController extends Controller
             }
 
            
+            StatusLog::create([
+                'status'=>$request->slipstatus,
+                'user'=>Auth::user()->name,
+                'insured_id'=>$request->code_ms,
+                'slip_id'=>$request->slipnumber,
+            ]);
 
             return back()->with($notification);
             //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');

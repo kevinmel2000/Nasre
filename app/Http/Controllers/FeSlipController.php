@@ -414,7 +414,7 @@ class FeSlipController extends Controller
                 
                 $slipdataup->number=$request->slipnumber;
                 $slipdataup->username=Auth::user()->name;
-                $slipdataup->insured_id=$request->insured_id;
+                $slipdataup->insured_id=$request->code_ms;
                 $slipdataup->prod_year=$currdate;
                 $slipdataup->uy=$request->slipuy;
                 $slipdataup->status=$request->slipstatus;
@@ -466,6 +466,13 @@ class FeSlipController extends Controller
                     'alert-type' => 'success'
                 );
             }
+
+            StatusLog::create([
+                'status'=>$request->slipstatus,
+                'user'=>Auth::user()->name,
+                'insured_id'=>$request->code_ms,
+                'slip_id'=>$request->slipnumber,
+            ]);
 
            
 
