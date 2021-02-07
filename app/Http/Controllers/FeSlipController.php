@@ -315,9 +315,10 @@ class FeSlipController extends Controller
 
 
 
-    public function storefeslip(Request $request,$code_ms)
+    public function storefeslip(Request $request)
     {
         $validator = $request->validate([
+            'code_ms'=>'required',
             'slipnumber'=>'required',
             'slipuy'=>'required',
             'slipstatus'=>'required',
@@ -337,6 +338,12 @@ class FeSlipController extends Controller
             $user = Auth::user();
             
             $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
+            
+            $interestlist= InterestInsuredTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $deductiblelist= DeductibleTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();             
 
             if($slipdata==null)
             {
@@ -345,6 +352,7 @@ class FeSlipController extends Controller
                 SlipTable::create([
                     'number'=>$request->slipnumber,
                     'username'=>Auth::user()->name,
+                    'insured_id'=>$request->code_ms,
                     'slip_type'=>'fe',
                     'prod_year' => $currdate,
                     'uy'=>$request->slipuy,
@@ -362,13 +370,13 @@ class FeSlipController extends Controller
                     'cn_dn'=>$request->slipcndn,
                     'policy_no'=>$request->slippolicy_no,
                     'attacment_file'=>'',
-                    'interest_insured'=>'',
+                    'interest_insured'=>$interestlist->toJSon(),
                     'total_sum_insured'=>$request->sliptotalsum,
                     'insured_type'=>$request->sliptype,
                     'insured_pct'=>$request->slippct,
                     'total_sum_pct'=>$request->sliptotalsumpct,
-                    'deductible_panel'=>'',
-                    'extend_coverage'=>'',
+                    'deductible_panel'=>$deductiblelist->toJson(),
+                    'extend_coverage'=>$extendcoveragelist->toJson(),
                     'insurance_period_from'=>$request->slipipfrom,
                     'insurance_perido_to'=>$request->slipipto,
                     'reinsurance_period_from'=>$request->sliprpfrom,
@@ -383,8 +391,8 @@ class FeSlipController extends Controller
                     'grossprm_to_nr'=>$request->slipgrossprmtonr,
                     'netprm_to_nr'=>$request->slipnetprmtonr,
                     'sum_commission'=>$request->slipsumcommission,
-                    'installment_panel'=>'',
-                    'retrocession_panel'=>'',
+                    'installment_panel'=>$installmentlist->toJson(),
+                    'retrocession_panel'=>$retrocessionlist->toJson(),
                     'retro_backup'=>$request->sliprb,
                     'own_retention'=>$request->slipor,
                     'sum_own_retention'=>$request->slipsumor
@@ -406,6 +414,7 @@ class FeSlipController extends Controller
                 
                 $slipdataup->number=$request->slipnumber;
                 $slipdataup->username=Auth::user()->name;
+                $slipdataup->insured_id=$request->insured_id;
                 $slipdataup->prod_year=$currdate;
                 $slipdataup->uy=$request->slipuy;
                 $slipdataup->status=$request->slipstatus;
@@ -422,13 +431,13 @@ class FeSlipController extends Controller
                 $slipdataup->cn_dn=$request->slipcndn; 
                 $slipdataup->policy_no=$request->slippolicy_no; 
                 $slipdataup->attacment_file=''; 
-                $slipdataup->interest_insured='';
+                $slipdataup->interest_insured=$interestlist->toJSon();
                 $slipdataup->total_sum_insured=$request->sliptotalsum; 
                 $slipdataup->insured_type=$request->sliptype; 
                 $slipdataup->insured_pct=$request->slippct; 
                 $slipdataup->total_sum_pct=$request->sliptotalsumpct; 
-                $slipdataup->deductible_panel=''; 
-                $slipdataup->extend_coverage='';  
+                $slipdataup->deductible_panel=$deductiblelist->toJson(); 
+                $slipdataup->extend_coverage=$extendcoveragelist->toJson();  
                 $slipdataup->insurance_period_from=$request->slipipfrom;  
                 $slipdataup->insurance_perido_to=$request->slipipto;  
                 $slipdataup->reinsurance_period_from=$request->sliprpfrom;  
@@ -443,8 +452,8 @@ class FeSlipController extends Controller
                 $slipdataup->grossprm_to_nr=$request->slipgrossprmtonr; 
                 $slipdataup->netprm_to_nr=$request->slipnetprmtonr; 
                 $slipdataup->sum_commission=$request->slipsumcommission; 
-                $slipdataup->installment_panel='';   
-                $slipdataup->retrocession_panel='';  
+                $slipdataup->installment_panel=$installmentlist->toJson();   
+                $slipdataup->retrocession_panel=$retrocessionlist->toJson();  
                 $slipdataup->retro_backup=$request->sliprb;
                 $slipdataup->own_retention=$request->slipor;
                 $slipdataup->sum_own_retention=$request->slipsumor;
