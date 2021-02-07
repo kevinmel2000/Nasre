@@ -3,6 +3,9 @@
 <script>
         $(document).ready(function() { $(".e1").select2({ width: '100%' }); });
 </script>
+<link rel="stylesheet" href="{{url('/')}}/css/sweetalert2.min.css">
+<script src="{{url('/')}}/js/sweetalert2.all.min.js"></script>
+
 <style>
     .hide {
         display: none;
@@ -137,6 +140,8 @@
                 insuredID:insured_id,
                 _token:token
             },
+        //     beforeSend: function() { $(".modal-content").attr("class"," loading");  },
+        //    complete: function() {  $(".modal-content").removeAttr("class"," loading"); },
             success:function(response){
                 console.log(response)
                 $('#shipdetailTable tbody').prepend('<tr id="sid'+response.id+'"  data-name="shiplistvalue[]"><td data-name="'+shipcode+'">'+shipcode+'</td><td data-name="'+shipname+'">'+shipname+'</td><td><a href="javascript:void(0)" onclick="deleteshipdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
@@ -160,6 +165,8 @@
             data:{
                 _token:token
             },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
                 $('#sid'+id).remove();
@@ -265,6 +272,8 @@
                slipamount:amount,
                id_slip:slip_id
            },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
            success:function(response){
             
                console.log(response)
@@ -316,6 +325,8 @@
                 percentage:dppercentage,
                 id_slip:dpslip_id
            },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
            success:function(response){
             
                 console.log(response)
@@ -348,6 +359,8 @@
                 slipcncode:cncode,
                 id_slip:slip_id
            },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
            success:function(response){
             
                console.log(response)
@@ -389,6 +402,8 @@
                 slipamount:ipamount,
                 id_slip:slip_id
            },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
            success:function(response){
             
                console.log(response)
@@ -429,6 +444,8 @@
                 amount:rpamount,
                 id_slip:slip_id
            },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
            success:function(response){
             
                console.log(response)
@@ -455,6 +472,8 @@
             data:{
                 _token:token2
             },
+            beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
                 $('#iid'+id).remove();
@@ -477,6 +496,8 @@
             data:{
                 _token:token2
             },
+            beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
                 $('#ddtid'+id).remove();
@@ -495,6 +516,8 @@
             data:{
                 _token:token2
             },
+            beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
                 $('#cnid'+id).remove();
@@ -513,6 +536,8 @@
             data:{
                 _token:token2
             },
+            beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
                 $('#ispid'+id).remove();
@@ -531,6 +556,8 @@
             data:{
                 _token:token2
             },
+            beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
                 $('#rscid'+id).remove();
@@ -544,6 +571,27 @@
 <script type="text/javascript">
     
 </script>
+
+<style>
+    .overlay{
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        background: rgba(255,255,255,0.8) url("{{url('/')}}/loader.gif") center no-repeat;
+    }
+    /* Turn off scrollbar when body element has the loading class */
+    body.loading{
+        overflow: hidden;   
+    }
+    /* Make spinner image visible when body element has the loading class */
+    body.loading .overlay{
+        display: block;
+    }
+</style>
 
 <script>
     $(function () {
