@@ -114,8 +114,10 @@ class FeSlipController extends Controller
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $insured = Insured::where('slip_type', '=', 'fe')->orderby('id','desc')->paginate(10);
           $insured_ids = response()->json($insured->modelKeys());
+          $slip = SlipTable::where('slip_type', '=', 'fe')->orderby('id','desc')->paginate(10);
+          $slip_ids = response()->json($insured->modelKeys());
 
-          return view('crm.transaction.fe_slip_index', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.transaction.fe_slip_index', compact('user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
         
          }
          else
@@ -124,9 +126,10 @@ class FeSlipController extends Controller
           
           $insured = Insured::where('slip_type', '=', 'fe')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
           $insured_ids = response()->json($insured->modelKeys());
-
+          $slip = SlipTable::where('slip_type', '=', 'fe')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
+          $slip_ids = response()->json($insured->modelKeys());
         
-          return view('crm.transaction.fe_slip_index', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.transaction.fe_slip_index', compact('user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
         
         }
     }
@@ -187,23 +190,23 @@ class FeSlipController extends Controller
         }
 
         if($sliplastid != null){
-            if($lastid < 10)
+            if($sliplastid < 10)
             {
                 $code_sl = "FE". $mydate . "0000" . strval($sliplastid + 1);
             }   
-            elseif($lastid > 9 && $lastid < 100)
+            elseif($sliplastid > 9 && $sliplastid < 100)
             {
                 $code_sl = "FE". $mydate . "000" . strval($sliplastid + 1);
             }
-            elseif($lastid > 99 && $lastid < 1000)
+            elseif($sliplastid > 99 && $sliplastid < 1000)
             {
                 $code_sl = "FE". $mydate . "00" . strval($sliplastid + 1);
             }
-            elseif($lastid > 999 && $lastid < 10000)
+            elseif($sliplastid > 999 && $sliplastid < 10000)
             {
                 $code_sl = "FE". $mydate . "0" . strval($sliplastid + 1);
             }
-            elseif($lastid > 9999 && $lastid < 100000)
+            elseif($sliplastid > 9999 && $sliplastid < 100000)
             {
                 $code_sl = "FE". $mydate . strval($sliplastid + 1);
             }
