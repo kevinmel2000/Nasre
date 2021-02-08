@@ -186,8 +186,10 @@ class TransactionController extends Controller
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $insured = Insured::where('slip_type', '=', 'ms')->orderby('id','desc')->paginate(10);
           $insured_ids = response()->json($insured->modelKeys());
+          $slip = SlipTable::where('slip_type', '=', 'ms')->orderby('id','desc')->paginate(10);
+          $slip_ids = response()->json($slip->modelKeys());
 
-          return view('crm.transaction.marine_index', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.transaction.marine_index', compact('user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
         
          }
          else
@@ -196,9 +198,82 @@ class TransactionController extends Controller
           
           $insured = Insured::where('slip_type', '=', 'ms')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
           $insured_ids = response()->json($insured->modelKeys());
+          $slip = SlipTable::where('slip_type', '=', 'ms')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
+          $slip_ids = response()->json($slip->modelKeys());
 
         
-          return view('crm.transaction.marine_index', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.transaction.marine_index', compact('user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+        
+        }
+    }
+
+    public function indexhio(Request $request)
+    {
+        $user = Auth::user();
+        $country = User::orderby('id','asc')->get();
+        $route_active = 'Hole In One - Index';   
+        $mydate = date("Y").date("m").date("d");
+        $hio_ids = response()->json($country->modelKeys());
+
+        $search = @$request->input('search');
+
+            if(empty($search))
+            {
+          //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
+            $insured = Insured::where('slip_type', '=', 'hio')->orderby('id','desc')->paginate(10);
+            $insured_ids = response()->json($insured->modelKeys());
+            $slip = SlipTable::where('slip_type', '=', 'hio')->orderby('id','desc')->paginate(10);
+            $slip_ids = response()->json($slip->modelKeys());
+
+            return view('crm.transaction.hio_index', compact('user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+        
+            }
+            else
+            {
+          //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
+        
+            $insured = Insured::where('slip_type', '=', 'hio')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
+            $insured_ids = response()->json($insured->modelKeys());
+            $slip = SlipTable::where('slip_type', '=', 'hio')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
+            $slip_ids = response()->json($slip->modelKeys());
+        
+            return view('crm.transaction.hio_index', compact('user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+        
+            }
+    }
+
+    public function indexpa(Request $request)
+    {
+         $user = Auth::user();
+         $country = User::orderby('id','asc')->get();
+         $route_active = 'Personal Accident - Index';   
+         $mydate = date("Y").date("m").date("d");
+         $ms_ids = response()->json($country->modelKeys());
+
+         $search = @$request->input('search');
+
+         if(empty($search))
+         {
+          //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
+          $insured = Insured::where('slip_type', '=', 'pa')->orderby('id','desc')->paginate(10);
+          $insured_ids = response()->json($insured->modelKeys());
+          $slip = SlipTable::where('slip_type', '=', 'pa')->orderby('id','desc')->paginate(10);
+          $slip_ids = response()->json($slip->modelKeys());
+
+          return view('crm.transaction.pa_index', compact('user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+        
+         }
+         else
+         {
+          //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
+          
+          $insured = Insured::where('slip_type', '=', 'pa')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
+          $insured_ids = response()->json($insured->modelKeys());
+          $slip = SlipTable::where('slip_type', '=', 'pa')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
+          $slip_ids = response()->json($slip->modelKeys());
+
+        
+          return view('crm.transaction.pa_index', compact('user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
         
         }
     }

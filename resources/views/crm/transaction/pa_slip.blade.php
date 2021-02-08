@@ -746,7 +746,7 @@
                                                                             <td width="20%">{{__('delete')}}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td colspan="2">
+                                                                            <td >
                                                                                 <div class="form-group">
                                                                                     <select name="slipcncode" class="form-control form-control-sm ">
                                                                                         <option selected disabled>{{__('Peril List')}}</option>

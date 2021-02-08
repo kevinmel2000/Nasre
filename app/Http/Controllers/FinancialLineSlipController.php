@@ -241,12 +241,7 @@ class FinancialLineSlipController extends Controller
         $validator = $request->validate([
             'flnumber'=>'required',
             'flinsured'=>'required',
-            'flsuggestinsured'=>'required',
-            'flsuffix'=>'required',
-            'flshare'=>'required',
-            'flsharefrom'=>'required',
-            'flshareto'=>'required',
-            'flcoinsurance'=>'required'
+            'flsuggestinsured'=>'required'
         ]);
         
         if($validator)
@@ -330,13 +325,8 @@ class FinancialLineSlipController extends Controller
             'slipuy'=>'required',
             'slipstatus'=>'required',
             'slippolicy_no'=>'required',
-            'slipno'=>'required',
             'slipcndn'=>'required',
-            'sliptotalsum'=>'required',
-            'sliptotalsum'=>'required',
-            'slippct'=>'required',
-            'sliptype'=>'required',
-            'sliptotalsumpct'=>'required'
+            'slipno'=>'required'
         ]);
         
         if($validator)

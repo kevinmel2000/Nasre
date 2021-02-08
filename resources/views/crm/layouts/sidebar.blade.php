@@ -1177,6 +1177,7 @@
 
                         @if(
                             @$route_active == 'Marine - Slip Entry'
+                            || @$route_active == 'Marine Slip - Index'
                             || @$route_active == 'Fire Engineering - Slip Entry'
                             || @$route_active == 'Financial Lines - Slip Entry'
                             || @$route_active == 'Moveable Property - Slip Entry'
@@ -1207,18 +1208,55 @@
                             </a>
     
                             <ul class="nav nav-treeview">
-    
-                                @if($route_active == 'Marine - Slip Entry')
-                                @php
-                                    $marine_slip = 'active';
-                                @endphp
+
+                                @if(
+                                    @$route_active == 'Marine - Slip Entry' 
+                                    || @$route_active == 'Marine Slip - Index'  
+                                    )
+                                        @php
+                                        $ms_dd = 'active';
+                                        $ms_menu_open = 'menu-open';
+                                        @endphp
+                                @else
+                                    @php
+                                    $ms_menu_open = 'menu-close';
+                                    @endphp
                                 @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/transaction-data/marine-slip')}}" class="nav-link {{@$marine_slip}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('MARINE - SLIP ENTRY')}}</p>
+                                <li class="nav-item has-treeview {{ @$ms_menu_open }}">
+                                    <a href="#" class="nav-link {{@$ms_dd}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>
+                                            {{__('MARINE DATA')}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                            @if($route_active == 'Marine Slip - Index')
+                                            @php
+                                                $fes_formindex = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/marine-index')}}" class="nav-link {{@$fes_formindex}}">
+                                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                                    <p>{{__('MARINE SLIP - INDEX')}}</p>
+                                                </a>
+                                            </li>
+
+                                            @if($route_active == 'Marine - Slip Entry')
+                                            @php
+                                                $fes_form = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/marine-slip')}}" class="nav-link {{@$fes_form}}">
+                                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                                    <p>{{__('MARINE - SLIP ENTRY')}}</p>
+                                                </a>
+                                            </li>
+                                    </ul>
                                 </li>
+
     
                                 @if(
                                     @$route_active == 'Fire Engineering - Slip Entry' 
@@ -1234,43 +1272,38 @@
                                     @endphp
                                 @endif
                                 <li class="nav-item has-treeview {{ @$fed_menu_open }}">
-                                <a href="#" class="nav-link {{@$fed_dd}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>
-                                        {{__('FIRE & ENGINEERING DATA')}}
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
+                                    <a href="#" class="nav-link {{@$fed_dd}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>
+                                            {{__('FIRE & ENGINEERING DATA')}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                            @if($route_active == 'Fire Engineering - Index')
+                                            @php
+                                                $fes_formindex = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/fe-slipindex')}}" class="nav-link {{@$fes_formindex}}">
+                                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                                    <p>{{__('FIRE & ENGINEERING -')}} <br> {{__('INDEX')}}</p>
+                                                </a>
+                                            </li>
 
-                                <ul class="nav nav-treeview">
-
-                                        @if($route_active == 'Fire Engineering - Index')
-                                        @php
-                                            $fes_formindex = 'active';
-                                        @endphp
-                                        @endif
-                                        <li class="nav-item">
-                                            <a href="{{url('/transaction-data/fe-slipindex')}}" class="nav-link {{@$fes_formindex}}">
-                                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                                <p>{{__('FIRE & ENGINEERING -')}} <br> {{__('INDEX')}}</p>
-                                            </a>
-                                        </li>
-
-                                        @if($route_active == 'Fire Engineering - Slip Entry')
-                                        @php
-                                            $fes_form = 'active';
-                                        @endphp
-                                        @endif
-                                        <li class="nav-item">
-                                            <a href="{{url('/transaction-data/fe-slip')}}" class="nav-link {{@$fes_form}}">
-                                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                                <p>{{__('FIRE & ENGINEERING -')}} <br> {{__(' SLIP ENTRY')}}</p>
-                                            </a>
-                                        </li>
-
-                                       
-                                
-                                </ul>
+                                            @if($route_active == 'Fire Engineering - Slip Entry')
+                                            @php
+                                                $fes_form = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/fe-slip')}}" class="nav-link {{@$fes_form}}">
+                                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                                    <p>{{__('FIRE & ENGINEERING -')}} <br> {{__(' SLIP ENTRY')}}</p>
+                                                </a>
+                                            </li>
+                                    </ul>
                                 </li>
 
                                 @if(
@@ -1287,41 +1320,38 @@
                                     @endphp
                                 @endif
                                 <li class="nav-item has-treeview {{ @$fld_menu_open }}">
-                                <a href="#" class="nav-link {{@$fld_dd}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>
-                                        {{__('FINANCIAL LINES DATA')}}
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-
-                                <ul class="nav nav-treeview">
-
-                                       
-                                        @if($route_active == 'Financial Lines - Index')
-                                        @php
-                                            $flform = 'active';
-                                        @endphp
-                                        @endif
-                                        <li class="nav-item">
-                                            <a href="{{url('/transaction-data/fl-slipindex')}}" class="nav-link {{@$flform}}">
-                                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                                <p>{{__('FINANCIAL LINES -')}} <br> {{__('INDEX')}}</p>
-                                            </a>
-                                        </li>
-            
-                                        @if($route_active == 'Financial Lines - Slip Entry')
-                                        @php
-                                            $fleform = 'active';
-                                        @endphp
-                                        @endif
-                                        <li class="nav-item">
-                                            <a href="{{url('/transaction-data/fl-slip')}}" class="nav-link {{@$fleform}}">
-                                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                                <p>{{__('FINANCIAL LINES -')}} <br> {{__('SLIP ENTRY')}}</p>
-                                            </a>
-                                        </li>
-                                </ul>
+                                    <a href="#" class="nav-link {{@$fld_dd}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>
+                                            {{__('FINANCIAL LINES DATA')}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                            @if($route_active == 'Financial Lines - Index')
+                                            @php
+                                                $flform = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/fl-slipindex')}}" class="nav-link {{@$flform}}">
+                                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                                    <p>{{__('FINANCIAL LINES -')}} <br> {{__('INDEX')}}</p>
+                                                </a>
+                                            </li>
+                
+                                            @if($route_active == 'Financial Lines - Slip Entry')
+                                            @php
+                                                $fleform = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/fl-slip')}}" class="nav-link {{@$fleform}}">
+                                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                                    <p>{{__('FINANCIAL LINES -')}} <br> {{__('SLIP ENTRY')}}</p>
+                                                </a>
+                                            </li>
+                                    </ul>
                                 </li>
 
                                 
@@ -1339,66 +1369,134 @@
                                     @endphp
                                 @endif
                                 <li class="nav-item has-treeview {{ @$mpd_menu_open }}">
-                                <a href="#" class="nav-link {{@$mpd_dd}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>
-                                        {{__('MOVEABLE PROPERTY DATA')}}
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-
-                                <ul class="nav nav-treeview">
-
-                                        @if($route_active == 'Moveable Property - Index')
-                                        @php
-                                            $mpe_form = 'active';
-                                        @endphp
-                                        @endif
-                                        <li class="nav-item">
-                                            <a href="{{url('/transaction-data/mp-slipindex')}}" class="nav-link {{@$mpe_form}}">
-                                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                                <p>{{__('MOVEABLE PROPERTY -')}} <br> {{__('INDEX')}}</p>
-                                            </a>
-                                        </li>
-
-    
-                                        @if($route_active == 'Moveable Property - Slip Entry')
-                                        @php
-                                            $mp_form = 'active';
-                                        @endphp
-                                        @endif
-                                        <li class="nav-item">
-                                            <a href="{{url('/transaction-data/mp-slip')}}" class="nav-link {{@$mp_form}}">
-                                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                                <p>{{__('MOVEABLE PROPERTY -')}} <br> {{__('SLIP ENTRY')}}</p>
-                                            </a>
-                                        </li>
-
-                                </ul>
-                                </li>
-    
-                                @if($route_active == 'Hole In One - Slip Entry')
-                                @php
-                                    $hioform = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/transaction-data/hio-slip')}}" class="nav-link {{@$hioform}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('HOLE IN ONE - SLIP ENTRY')}}</p>
+                                    <a href="#" class="nav-link {{@$mpd_dd}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>
+                                            {{__('MOVEABLE PROPERTY DATA')}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                            @if($route_active == 'Moveable Property - Index')
+                                            @php
+                                                $mpe_form = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/mp-slipindex')}}" class="nav-link {{@$mpe_form}}">
+                                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                                    <p>{{__('MOVEABLE PROPERTY -')}} <br> {{__('INDEX')}}</p>
+                                                </a>
+                                            </li>
+
+                                            @if($route_active == 'Moveable Property - Slip Entry')
+                                            @php
+                                                $mp_form = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/mp-slip')}}" class="nav-link {{@$mp_form}}">
+                                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                                    <p>{{__('MOVEABLE PROPERTY -')}} <br> {{__('SLIP ENTRY')}}</p>
+                                                </a>
+                                            </li>
+                                    </ul>
                                 </li>
-    
-                                @if($route_active == 'Personal Accident - Slip Entry')
-                                @php
-                                    $pa_form = 'active';
-                                @endphp
+
+                                @if(
+                                    @$route_active == 'Hole In One - Slip Entry' 
+                                    || @$route_active == 'Hole In One - Index'  
+                                    )
+                                        @php
+                                        $hio_dd = 'active';
+                                        $hio_menu_open = 'menu-open';
+                                        @endphp
+                                @else
+                                    @php
+                                    $hio_menu_open = 'menu-close';
+                                    @endphp
                                 @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/transaction-data/pa-slip')}}" class="nav-link {{@$pa_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('PERSONAL ACCIDENT - ')}} <br> {{__('SLIP ENTRY')}}</p>
+                                <li class="nav-item has-treeview {{ @$hio_menu_open }}">
+                                    <a href="#" class="nav-link {{@$hio_dd}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>
+                                            {{__('HOLE IN ONE DATA')}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                            @if($route_active == 'Hole In One - Index')
+                                            @php
+                                                $hio_idx = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/hio-index')}}" class="nav-link {{@$hio_idx}}">
+                                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                                    <p>{{__('HOLE IN ONE - INDEX')}}</p>
+                                                </a>
+                                            </li>
+
+                                            @if($route_active == 'Hole In One - Slip Entry')
+                                            @php
+                                                $hio_form = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/hio-slip')}}" class="nav-link {{@$hio_form}}">
+                                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                                    <p>{{__('HOLE IN ONE - SLIP ENTRY')}}</p>
+                                                </a>
+                                            </li>
+                                    </ul>
+                                </li>
+
+                                @if(
+                                    @$route_active == 'Personal Accident - Slip Entry' 
+                                    || @$route_active == 'Personal Accident - Index'  
+                                    )
+                                        @php
+                                        $pa_dd = 'active';
+                                        $pa_menu_open = 'menu-open';
+                                        @endphp
+                                @else
+                                    @php
+                                    $pa_menu_open = 'menu-close';
+                                    @endphp
+                                @endif
+                                <li class="nav-item has-treeview {{ @$pa_menu_open }}">
+                                    <a href="#" class="nav-link {{@$pa_dd}}">
+                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                        <p>
+                                            {{__('PERSONAL ACCIDENT DATA')}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                            @if($route_active == 'Personal Accident - Index')
+                                            @php
+                                                $pa_idx = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/pa-index')}}" class="nav-link {{@$pa_idx}}">
+                                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                                    <p>{{__('PERSONAL ACCIDENT - INDEX')}}</p>
+                                                </a>
+                                            </li>
+
+                                            @if($route_active == 'Personal Accident - Slip Entry')
+                                            @php
+                                                $pa_form = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/pa-slip')}}" class="nav-link {{@$pa_form}}">
+                                                        <i class="far fa-folder nav-icon text-secondary"></i>
+                                                    <p>{{__('PERSONAL ACCIDENT - SLIP ENTRY')}}</p>
+                                                </a>
+                                            </li>
+                                    </ul>
                                 </li>
     
                                 @if(

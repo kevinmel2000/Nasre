@@ -18,7 +18,7 @@ use App\Models\TransLocation;
 use App\Models\Currency;
 use App\Models\COB;
 use App\Models\Occupation;
-use App\Models\KOC;
+use App\Models\Koc;
 use App\Models\CedingBroker;
 use App\Models\ConditionNeeded;
 use App\Models\ShipListTemp;
@@ -153,7 +153,7 @@ class MovePropSlipController extends Controller
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
         $cob = COB::orderby('id','asc')->get();
-        $koc = KOC::orderby('id','asc')->get();
+        $koc = Koc::orderby('id','asc')->get();
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
         $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
@@ -246,12 +246,7 @@ class MovePropSlipController extends Controller
         $validator = $request->validate([
             'mpnumber'=>'required',
             'mpinsured'=>'required',
-            'mpsuggestinsured'=>'required',
-            'mpsuffix'=>'required',
-            'mpshare'=>'required',
-            'mpsharefrom'=>'required',
-            'mpshareto'=>'required',
-            'mpcoinsurance'=>'required'
+            'mpsuggestinsured'=>'required'
         ]);
         
         if($validator)
@@ -332,15 +327,9 @@ class MovePropSlipController extends Controller
         $validator = $request->validate([
             'slipnumber'=>'required',
             'slipuy'=>'required',
-            'slipstatus'=>'required',
             'slippolicy_no'=>'required',
             'slipno'=>'required',
-            'slipcndn'=>'required',
-            'sliptotalsum'=>'required',
-            'sliptotalsum'=>'required',
-            'slippct'=>'required',
-            'sliptype'=>'required',
-            'sliptotalsumpct'=>'required'
+            'slipcndn'=>'required'
         ]);
         
         if($validator)

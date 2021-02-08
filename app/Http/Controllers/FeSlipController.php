@@ -16,7 +16,7 @@ use App\Models\TransLocation;
 use App\Models\Currency;
 use App\Models\COB;
 use App\Models\Occupation;
-use App\Models\KOC;
+use App\Models\Koc;
 use App\Models\CedingBroker;
 use App\Models\ConditionNeeded;
 use App\Models\ShipListTemp;
@@ -145,7 +145,7 @@ class FeSlipController extends Controller
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
         $cob = COB::orderby('id','asc')->get();
-        $koc = KOC::orderby('id','asc')->get();
+        $koc = Koc::orderby('id','asc')->get();
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
         $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
@@ -236,13 +236,8 @@ class FeSlipController extends Controller
         
         $validator = $request->validate([
             'fesnumber'=>'required',
-            'fesinsured'=>'required',
-            'fessuggestinsured'=>'required',
-            'fessuffix'=>'required',
-            'fesshare'=>'required',
-            'fessharefrom'=>'required',
-            'fesshareto'=>'required',
-            'fescoinsurance'=>'required'
+            'feinsured'=>'required',
+            'fesuggestinsured'=>'required'
         ]);
         
         if($validator)
@@ -367,18 +362,11 @@ class FeSlipController extends Controller
     public function storefeslip(Request $request)
     {
         $validator = $request->validate([
-            'code_ms'=>'required',
             'slipnumber'=>'required',
             'slipuy'=>'required',
-            'slipstatus'=>'required',
             'slippolicy_no'=>'required',
             'slipno'=>'required',
-            'slipcndn'=>'required',
-            'sliptotalsum'=>'required',
-            'sliptotalsum'=>'required',
-            'slippct'=>'required',
-            'sliptype'=>'required',
-            'sliptotalsumpct'=>'required',
+            'slipcndn'=>'required'
         ]);
         
 
