@@ -47,16 +47,18 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
 
     // SECTION Marine Slip Group Routes
     Route::get('/marine-slip', [TransactionController::class, 'indexmarineslip']);
+    Route::get('/marine-index', [TransactionController::class, 'indexmarine']);
     Route::get('/marine-slip/{id}', [TransactionController::class, 'showshipdetails'])->name('shipDetails');
-    Route::post('/marine-insured', [TransactionController::class, 'storemarineinsured']);
-    Route::post('/marine-slip', [TransactionController::class, 'storemarineslip']);
+    Route::post('/marine-insured/store', [TransactionController::class, 'storemarineinsured']);
+    Route::post('/marine-slip/store', [TransactionController::class, 'storemarineslip']);
+    Route::delete('/marine-insured/destroy/{fe}', [TransactionController::class, 'destroymarineinsured']);
+    Route::delete('/marine-slip/destroy/{fe}', [TransactionController::class, 'destroyemarineslip']);
+
 
     // SECTION Fire Engineering Slip Group Routes
     Route::get('/fe-slip', [FeSlipController::class, 'indexfeslip']);
     Route::get('/fe-slipindex', [FeSlipController::class, 'index']);
     Route::post('/fe-slipindex', [FeSlipController::class, 'index']);
-
-
     Route::post('/fe-insured/store', [FeSlipController::class, 'storefeinsured']);
     Route::post('/fe-insured', [TransactionController::class, 'storefeinsured']);
     Route::post('/fe-slip/store', [FeSlipController::class, 'storefeslip']);
@@ -68,9 +70,6 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::get('/fl-slip', [FinancialLineSlipController::class, 'indexflslip']);
     Route::get('/fl-slipindex', [FinancialLineSlipController::class, 'index']);
     Route::post('/fl-slipindex', [FinancialLineSlipController::class, 'index']);
-
-    
-  
     Route::post('/fl-insured/store', [FinancialLineSlipController::class, 'storeflinsured']);
     Route::post('/fl-slip/store', [FinancialLineSlipController::class, 'storeflslip']);
     Route::delete('/fl-slip/destroy/{fe}', [FinancialLineSlipController::class, 'destroy']);
@@ -79,7 +78,6 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::get('/mp-slip', [MovePropSlipController::class, 'indexmpslip']);
     Route::get('/mp-slipindex', [MovePropSlipController::class, 'index']);
     Route::post('/mp-slipindex', [MovePropSlipController::class, 'index']);
-    
     Route::post('/mp-insured/store', [MovePropSlipController::class, 'storempinsured']);
     Route::post('/mp-slip/store', [MovePropSlipController::class, 'storempslip']);
     Route::delete('/mp-slip/destroy/{fe}', [MovePropSlipController::class, 'destroy']);
@@ -89,7 +87,6 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::get('/hem-slip', [HeMotorSlipController::class, 'indexhemslip']);
     Route::get('/hem-slipindex', [HeMotorSlipController::class, 'index']);
     Route::post('/hem-slipindex', [HeMotorSlipController::class, 'index']);
-
     Route::post('/hem-insured/store', [HeMotorSlipController::class, 'storeheminsured']);
     Route::post('/hem-slip/store', [HeMotorSlipController::class, 'storehemslip']);
     Route::delete('/hem-slip/destroy/{fe}', [HeMotorSlipController::class, 'destroy']);
@@ -97,10 +94,18 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
 
     // SECTION Hole in Ones Slip Group Routes
     Route::get('/hio-slip', [TransactionController::class, 'indexhioslip']);
+    Route::get('/hio-index', [TransactionController::class, 'indexhio']);
+    Route::get('/hio-slip/{id}', [TransactionController::class, 'showlocationdetails'])->name('locDetails');
+    Route::post('/hio-insured', [TransactionController::class, 'storehioinsured']);
+    Route::post('/hio-slip', [TransactionController::class, 'storehioslip']);
+
 
     // SECTION Personal Accident Slip Group Routes
     Route::get('/pa-slip', [TransactionController::class, 'indexpaslip']);
-
+    Route::get('/pa-index', [TransactionController::class, 'indexpa']);
+    Route::get('/pa-slip/{id}', [TransactionController::class, 'showlocationdetails'])->name('locDetails');
+    Route::post('/pa-insured', [TransactionController::class, 'storepainsured']);
+    Route::post('/pa-slip', [TransactionController::class, 'storepaslip']);
  
 
 

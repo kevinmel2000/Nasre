@@ -16,7 +16,7 @@ use App\Models\TransLocation;
 use App\Models\Currency;
 use App\Models\COB;
 use App\Models\Occupation;
-use App\Models\KOC;
+use App\Models\Koc;
 use App\Models\CedingBroker;
 use App\Models\ConditionNeeded;
 use App\Models\ShipListTemp;
@@ -114,8 +114,10 @@ class FeSlipController extends Controller
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $insured = Insured::where('slip_type', '=', 'fe')->orderby('id','desc')->paginate(10);
           $insured_ids = response()->json($insured->modelKeys());
+          $slip = SlipTable::where('slip_type', '=', 'fe')->orderby('id','desc')->paginate(10);
+          $slip_ids = response()->json($insured->modelKeys());
 
-          return view('crm.transaction.fe_slip_index', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.transaction.fe_slip_index', compact('user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
         
          }
          else
@@ -124,9 +126,10 @@ class FeSlipController extends Controller
           
           $insured = Insured::where('slip_type', '=', 'fe')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
           $insured_ids = response()->json($insured->modelKeys());
-
+          $slip = SlipTable::where('slip_type', '=', 'fe')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
+          $slip_ids = response()->json($insured->modelKeys());
         
-          return view('crm.transaction.fe_slip_index', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.transaction.fe_slip_index', compact('user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
         
         }
     }
@@ -145,7 +148,7 @@ class FeSlipController extends Controller
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
         $cob = COB::orderby('id','asc')->get();
-        $koc = KOC::orderby('id','asc')->get();
+        $koc = Koc::orderby('id','asc')->get();
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
         $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
@@ -187,23 +190,23 @@ class FeSlipController extends Controller
         }
 
         if($sliplastid != null){
-            if($lastid < 10)
+            if($sliplastid < 10)
             {
                 $code_sl = "FE". $mydate . "0000" . strval($sliplastid + 1);
             }   
-            elseif($lastid > 9 && $lastid < 100)
+            elseif($sliplastid > 9 && $sliplastid < 100)
             {
                 $code_sl = "FE". $mydate . "000" . strval($sliplastid + 1);
             }
-            elseif($lastid > 99 && $lastid < 1000)
+            elseif($sliplastid > 99 && $sliplastid < 1000)
             {
                 $code_sl = "FE". $mydate . "00" . strval($sliplastid + 1);
             }
-            elseif($lastid > 999 && $lastid < 10000)
+            elseif($sliplastid > 999 && $sliplastid < 10000)
             {
                 $code_sl = "FE". $mydate . "0" . strval($sliplastid + 1);
             }
-            elseif($lastid > 9999 && $lastid < 100000)
+            elseif($sliplastid > 9999 && $sliplastid < 100000)
             {
                 $code_sl = "FE". $mydate . strval($sliplastid + 1);
             }
@@ -231,106 +234,13 @@ class FeSlipController extends Controller
     }
 
 
-    public function updatefeslip($code_ms)
-    {
-        $user = Auth::user();
-        $country = User::orderby('id','asc')->get();
-        $route_active = 'Fire Engineering - Slip Entry';
-        $mydate = date("Y").date("m").date("d");
-        $costumer=Customer::orderby('id','asc')->get();
-
-        $currdate = date("Y/m/d");
-        $insured = Insured::orderby('id','asc')->get();
-        $slip = SlipTable::orderby('id','asc')->get();
-        $currency = Currency::orderby('id','asc')->get();
-        $cob = COB::orderby('id','asc')->get();
-        $koc = KOC::orderby('id','asc')->get();
-        $ocp = Occupation::orderby('id','asc')->get();
-        $cedingbroker = CedingBroker::orderby('id','asc')->get();
-        $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
-        $felookup = FelookupLocation::orderby('id','asc')->get();
-        $cnd = ConditionNeeded::orderby('id','asc')->get();
-        $deductibletype= DeductibleType::orderby('id','asc')->get();
-        $extendedcoverage= ExtendedCoverage::orderby('id','asc')->get();
-
-        $fe_ids = response()->json($insured->modelKeys());
-        
-        $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
-        $code_sl=$slipdata->number;
-
-        $interestinsured= InterestInsured::orderby('id','asc')->get();
-        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-        
-        
-        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();       
-        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-        $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-            
-
-        return view('crm.transaction.fe_slipupdate', compact(['user','cnd','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-    
-    }
-
-    public function detailfeslip($code_ms)
-    {
-        $user = Auth::user();
-        $country = User::orderby('id','asc')->get();
-        $route_active = 'Fire Engineering - Slip Entry';
-        $mydate = date("Y").date("m").date("d");
-        $costumer=Customer::orderby('id','asc')->get();
-
-        $currdate = date("Y/m/d");
-        $insured = Insured::orderby('id','asc')->get();
-        $slip = SlipTable::orderby('id','asc')->get();
-        $currency = Currency::orderby('id','asc')->get();
-        $cob = COB::orderby('id','asc')->get();
-        $koc = KOC::orderby('id','asc')->get();
-        $ocp = Occupation::orderby('id','asc')->get();
-        $cedingbroker = CedingBroker::orderby('id','asc')->get();
-        $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
-        $felookup = FelookupLocation::orderby('id','asc')->get();
-        $cnd = ConditionNeeded::orderby('id','asc')->get();
-        $deductibletype= DeductibleType::orderby('id','asc')->get();
-        $extendedcoverage= ExtendedCoverage::orderby('id','asc')->get();
-
-        $fe_ids = response()->json($insured->modelKeys());
-        
-        $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
-        $code_sl=$slipdata->number;
-
-        $interestinsured= InterestInsured::orderby('id','asc')->get();
-        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-        
-        
-        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();       
-        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-        $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-            
-
-        return view('crm.transaction.fe_slipdetail', compact(['user','cnd','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-    
-    }
-
-
-
     public function storefeinsured(Request $request)
     {   
         
         $validator = $request->validate([
             'fesnumber'=>'required',
             'fesinsured'=>'required',
-            'fessuggestinsured'=>'required',
-            'fessuffix'=>'required',
-            'fesshare'=>'required',
-            'fessharefrom'=>'required',
-            'fesshareto'=>'required',
-            'fescoinsurance'=>'required'
+            'fessuggestinsured'=>'required'
         ]);
         
         if($validator)
@@ -403,22 +313,66 @@ class FeSlipController extends Controller
     }
 
 
+    public function storeMultiFile(Request $request)
+    {
+         
+       $validatedData = $request->validate([
+        'files' => 'required'
+        ]);
+ 
+        if($request->TotalFiles > 0)
+        { 
+                for ($x = 0; $x < $request->TotalFiles; $x++) 
+                {
+        
+                    if ($request->hasFile('files'.$x)) 
+                        {
+                            $file = $request->file('files'.$x);
+        
+                            $path = 'public/files';
+                            //$file->move(base_path('\public\files'), $file->getClientOriginalName());
+                            //$name = $file->getClientOriginalName();
+
+                            $extension = $file->getClientOriginalExtension(); 
+                            
+                            if($extension=="csv" || $extension=="txt" || $extension=="xlx" || $extension=="xls" || $extension=="pdf")
+                            {  
+                                $name =  time() . rand(11111,99999).''.$file->getClientOriginalName();
+                                $file->move(base_path('\public\files'),$name);
+                                
+                                $insert[$x]['filename'] = $name;
+                                $insert[$x]['path'] = $path;
+                                $insert[$x]['user_id'] = Auth::user()->name;
+                                $insert[$x]['slip_id'] = $request->slip_id;
+                                SlipTableFile::insert($insert);
+                            }
+                            else{
+                                return response()->json(['message'=>'file type incorrect']);
+                            }
+                        }
+                }
+        
+               
+    
+           return response()->json(['success'=>'Ajax Multiple fIle has been uploaded']);
+ 
+        }
+        else
+        {
+           return response()->json(["message" => "Please try again."]);
+        }
+ 
+    }
+
 
     public function storefeslip(Request $request)
     {
         $validator = $request->validate([
-            'code_ms'=>'required',
             'slipnumber'=>'required',
             'slipuy'=>'required',
-            'slipstatus'=>'required',
             'slippolicy_no'=>'required',
             'slipno'=>'required',
-            'slipcndn'=>'required',
-            'sliptotalsum'=>'required',
-            'sliptotalsum'=>'required',
-            'slippct'=>'required',
-            'sliptype'=>'required',
-            'sliptotalsumpct'=>'required',
+            'slipcndn'=>'required'
         ]);
         
 

@@ -18,7 +18,7 @@ use App\Models\TransLocation;
 use App\Models\Currency;
 use App\Models\COB;
 use App\Models\Occupation;
-use App\Models\KOC;
+use App\Models\Koc;
 use App\Models\CedingBroker;
 use App\Models\ConditionNeeded;
 use App\Models\ShipListTemp;
@@ -153,7 +153,7 @@ class MovePropSlipController extends Controller
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
         $cob = COB::orderby('id','asc')->get();
-        $koc = KOC::orderby('id','asc')->get();
+        $koc = Koc::orderby('id','asc')->get();
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
         $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
@@ -196,23 +196,23 @@ class MovePropSlipController extends Controller
         }
 
         if($sliplastid != null){
-            if($lastid < 10)
+            if($sliplastid < 10)
             {
                 $code_sl =  "MP". $mydate . "0000" . strval($sliplastid + 1);
             }   
-            elseif($lastid > 9 && $lastid < 100)
+            elseif($sliplastid > 9 && $sliplastid < 100)
             {
                 $code_sl =  "MP". $mydate . "000" . strval($sliplastid + 1);
             }
-            elseif($lastid > 99 && $lastid < 1000)
+            elseif($sliplastid > 99 && $sliplastid < 1000)
             {
                 $code_sl =  "MP". $mydate . "00" . strval($sliplastid + 1);
             }
-            elseif($lastid > 999 && $lastid < 10000)
+            elseif($sliplastid > 999 && $sliplastid < 10000)
             {
                 $code_sl =  "MP". $mydate . "0" . strval($sliplastid + 1);
             }
-            elseif($lastid > 9999 && $lastid < 100000)
+            elseif($sliplastid > 9999 && $sliplastid < 100000)
             {
                 $code_sl = "MP". $mydate . strval($sliplastid + 1);
             }
@@ -333,12 +333,7 @@ class MovePropSlipController extends Controller
         $validator = $request->validate([
             'mpnumber'=>'required',
             'mpinsured'=>'required',
-            'mpsuggestinsured'=>'required',
-            'mpsuffix'=>'required',
-            'mpshare'=>'required',
-            'mpsharefrom'=>'required',
-            'mpshareto'=>'required',
-            'mpcoinsurance'=>'required'
+            'mpsuggestinsured'=>'required'
         ]);
         
         if($validator)
@@ -419,15 +414,9 @@ class MovePropSlipController extends Controller
         $validator = $request->validate([
             'slipnumber'=>'required',
             'slipuy'=>'required',
-            'slipstatus'=>'required',
             'slippolicy_no'=>'required',
             'slipno'=>'required',
-            'slipcndn'=>'required',
-            'sliptotalsum'=>'required',
-            'sliptotalsum'=>'required',
-            'slippct'=>'required',
-            'sliptype'=>'required',
-            'sliptotalsumpct'=>'required'
+            'slipcndn'=>'required'
         ]);
         
         if($validator)
