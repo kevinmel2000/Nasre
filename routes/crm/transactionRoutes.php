@@ -49,8 +49,11 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::get('/marine-slip', [TransactionController::class, 'indexmarineslip']);
     Route::get('/marine-index', [TransactionController::class, 'indexmarine']);
     Route::get('/marine-slip/{id}', [TransactionController::class, 'showshipdetails'])->name('shipDetails');
-    Route::post('/marine-insured', [TransactionController::class, 'storemarineinsured']);
-    Route::post('/marine-slip', [TransactionController::class, 'storemarineslip']);
+    Route::post('/marine-insured/store', [TransactionController::class, 'storemarineinsured']);
+    Route::post('/marine-slip/store', [TransactionController::class, 'storemarineslip']);
+    Route::delete('/marine-insured/destroy/{fe}', [TransactionController::class, 'destroymarineinsured']);
+    Route::delete('/marine-slip/destroy/{fe}', [TransactionController::class, 'destroyemarineslip']);
+
 
     // SECTION Fire Engineering Slip Group Routes
     Route::get('/fe-slip', [FeSlipController::class, 'indexfeslip']);

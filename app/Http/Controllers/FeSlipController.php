@@ -236,8 +236,8 @@ class FeSlipController extends Controller
         
         $validator = $request->validate([
             'fesnumber'=>'required',
-            'feinsured'=>'required',
-            'fesuggestinsured'=>'required'
+            'fesinsured'=>'required',
+            'fessuggestinsured'=>'required'
         ]);
         
         if($validator)
@@ -342,6 +342,9 @@ class FeSlipController extends Controller
                                 $insert[$x]['user_id'] = Auth::user()->name;
                                 $insert[$x]['slip_id'] = $request->slip_id;
                                 SlipTableFile::insert($insert);
+                            }
+                            else{
+                                return response()->json(['message'=>'file type incorrect']);
                             }
                         }
                 }

@@ -37,7 +37,7 @@
                                                 <div class="col-md-4">
                                                     <label for="">{{__('Insured')}}</label>
                                                     <select id="flinsured" name="flinsured" class="form-control form-control-sm ">
-                                                        <option selected readonly>{{__('Select Prefix')}}</option>
+                                                        <option selected disabled>{{__('Select Prefix')}}</option>
                                                         <option value="PT">PT</option>
                                                         <option value="CV">CV</option>
                                                     </select>
@@ -543,7 +543,7 @@
                                                                                             @php 
                                                                                             $totalamount=$totalamount+$isl->amount;
                                                                                             @endphp
-                                                                                            <td><a href="#" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
+                                                                                            <td><a href="javascript:void(0)" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
                                                                                     </tr>   
                                                                                 @endforeach
                                                                             </tr>

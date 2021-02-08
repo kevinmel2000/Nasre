@@ -140,8 +140,8 @@
                 insuredID:insured_id,
                 _token:token
             },
-        //     beforeSend: function() { $(".modal-content").attr("class"," loading");  },
-        //    complete: function() {  $(".modal-content").removeAttr("class"," loading"); },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 console.log(response)
                 $('#shipdetailTable tbody').prepend('<tr id="sid'+response.id+'"  data-name="shiplistvalue[]"><td data-name="'+shipcode+'">'+shipcode+'</td><td data-name="'+shipname+'">'+shipname+'</td><td><a href="javascript:void(0)" onclick="deleteshipdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
@@ -569,7 +569,68 @@
 </script>
 
 <script type="text/javascript">
-    
+    $('#addinsuredsave-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var msinumber = $('#insuredIDtxt').val();
+       var msiprefix = $('#msiprefix').val();
+       var msisuggestinsured = $('#autocomplete').val();
+       var msisuffix = $('#autocomplete2').val();
+       var msishare = $('#msishare').val();
+       var msisharefrom  = $('#msisharefrom').val();
+       var msishareto = $('#msishareto').val();
+       var msiroute = $('#msiroute').val();
+       var msiroutefrom  = $('#msiroutefrom').val();
+       var msirouteto = $('#msirouteto').val();
+       var msicoinsurance = $('#msicoinsurance').val();
+       
+       
+       var token2 = $('input[name=_token]').val();
+
+       console.log(msiprefix)
+       console.log(msisuggestinsured)
+       console.log(msinumber)
+       console.log(msisuffix)
+
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ url('transaction-data/marine-insured/store') }}",
+           type:"POST",
+           data:{
+               msinumber:msinumber,
+               msiprefix:msiprefix,
+               msisuggestinsured:msisuggestinsured,
+               msisuffix:msisuffix,
+               msishare:msishare,
+               msisharefrom:msisharefrom,
+               msishareto:msishareto,
+               msiroute:msiroute,
+               msiroutefrom:msiroutefrom,
+               msirouteto:msirouteto,
+               msicoinsurance:msicoinsurance
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                swal("Good job!", "Insured Marine Insert Success", "success")
+                console.log(response)
+
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", "Marine Insured Insert Error", "Insert Error");
+           }
+       });
+
+   });
 </script>
 
 <style>

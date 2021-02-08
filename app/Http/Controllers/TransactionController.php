@@ -299,34 +299,34 @@ class TransactionController extends Controller
     {
         $validator = $request->validate([
             'msinumber'=>'required',
-            'msiinsured'=>'required',
-            'msisuggestinsured'=>'required',
-            'msiprefix'=>'required',
-            'msisuffix'=>'required'
+            'msisuggestinsured'=>'required'
         ]);
         
         if($validator)
         {
             $user = Auth::user();
             
-            $insureddata= Insured::where('number','=',$request->fesnumber)->first();
+            $insureddata= Insured::where('number','=',$request->msinumber)->first();
 
             if($insureddata==null)
             {
                 Insured::create([
-                    'number'=>$request->fesnumber,
-                    'slip_type'=>'marine',
-                    'insured_prefix' => $request->fesinsured,
-                    'insured_name'=>$request->fessuggestinsured,
-                    'insured_suffix'=>$request->fessuffix,
-                    'share'=>$request->fesshare,
-                    'share_from'=>$request->fessharefrom,
-                    'share_to'=>$request->fesshareto,
-                    'coincurance'=>$request->coincurance
+                    'number'=>$request->msinumber,
+                    'slip_type'=>'ms',
+                    'insured_prefix' => $request->msiprefix,
+                    'insured_name'=>$request->msisuggestinsured,
+                    'insured_suffix'=>$request->msisuffix,
+                    'route'=>$request->msiroute,
+                    'route_from'=>$request->msiroutefrom,
+                    'route_to'=>$request->msirouteto,
+                    'share'=>$request->msishare,
+                    'share_from'=>$request->msisharefrom,
+                    'share_to'=>$request->msishareto,
+                    'coincurance'=>$request->msicoincurance
                 ]);
 
                 $notification = array(
-                    'message' => 'Fire & Engginering Insured added successfully!',
+                    'message' => 'Marine Insured added successfully!',
                     'alert-type' => 'success'
                 );
             }
@@ -334,18 +334,21 @@ class TransactionController extends Controller
             {
                 $insureddataid=$insureddata->id;
                 $insureddataup = Insured::findOrFail($insureddataid);
-                $insureddataup->insured_prefix=$request->fesinsured;
-                $insureddataup->insured_name=$request->fessuggestinsured;
-                $insureddataup->insured_suffix=$request->fessuffix;
-                $insureddataup->share=$request->fesshare;
-                $insureddataup->share_from=$request->fessharefrom;
-                $insureddataup->share_to=$request->fesshareto;
-                $insureddataup->coincurance=$request->coincurance;
+                $insureddataup->insured_prefix=$request->msiinsured;
+                $insureddataup->insured_name=$request->msisuggestinsured;
+                $insureddataup->insured_suffix=$request->msisuffix;
+                $insureddataup->route=$request->msiroute;
+                $insureddataup->route_from=$request->msiroutefrom;
+                $insureddataup->route_to=$request->msirouteto;
+                $insureddataup->share=$request->msishare;
+                $insureddataup->share_from=$request->msisharefrom;
+                $insureddataup->share_to=$request->msishareto;
+                $insureddataup->coincurance=$request->msicoincurance;
                 $insureddataup->save();
 
 
                 $notification = array(
-                    'message' => 'Fire & Engginering Insured Update successfully!',
+                    'message' => 'Marine Insured Update successfully!',
                     'alert-type' => 'success'
                 );
             }
@@ -361,7 +364,180 @@ class TransactionController extends Controller
         {
 
             $notification = array(
-                'message' => 'Fire & Engginering Insured added Failed!',
+                'message' => 'Marine Insured added Failed!',
+                'alert-type' => 'success'
+            );
+
+            return back()->with($validator)->withInput();
+            //Session::flash('Failed', 'Fire & Engginering Insured Failed added', 'danger');
+            //return redirect()->route('liniusaha.index');
+        }
+    }
+
+    public function storemarineslip(Request $request)
+    {
+        $validator = $request->validate([
+            'slipnumber'=>'required',
+            'slipuy'=>'required',
+            'slippolicy_no'=>'required',
+            'slipno'=>'required',
+            'slipcndn'=>'required'
+        ]);
+        
+
+        if($validator)
+        {
+            $user = Auth::user();
+            
+            $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
+            
+            $interestlist= InterestInsuredTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $deductiblelist= DeductibleTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();             
+
+            if($slipdata==null)
+            {
+                $currdate = date("Y/m/d");
+
+                SlipTable::create([
+                    'number'=>$request->slipnumber,
+                    'username'=>Auth::user()->name,
+                    'insured_id'=>$request->code_ms,
+                    'slip_type'=>'fe',
+                    'prod_year' => $currdate,
+                    'uy'=>$request->slipuy,
+                    'status'=>$request->slipstatus,
+                    'endorsment'=>$request->sliped,
+                    'selisih'=>$request->slipsls,
+                    'source'=>$request->slipcedingbroker,
+                    'source_2'=>$request->slipceding,
+                    'currency'=>$request->slipcurrency,
+                    'cob'=>$request->slipcob,
+                    'koc'=>$request->slipkoc,
+                    'occupacy'=>$request->slipoccupacy,
+                    'build_cost'=>$request->slipbld_const,
+                    'slip_no'=>$request->slipno,
+                    'cn_dn'=>$request->slipcndn,
+                    'policy_no'=>$request->slippolicy_no,
+                    'attacment_file'=>'',
+                    'interest_insured'=>$interestlist->toJSon(),
+                    'total_sum_insured'=>$request->sliptotalsum,
+                    'insured_type'=>$request->sliptype,
+                    'insured_pct'=>$request->slippct,
+                    'total_sum_pct'=>$request->sliptotalsumpct,
+                    'deductible_panel'=>$deductiblelist->toJson(),
+                    'extend_coverage'=>$extendcoveragelist->toJson(),
+                    'insurance_period_from'=>$request->slipipfrom,
+                    'insurance_perido_to'=>$request->slipipto,
+                    'reinsurance_period_from'=>$request->sliprpfrom,
+                    'reinsurance_period_to'=>$request->sliprpto,
+                    'proportional'=>$request->slipproportional,
+                    'layer_non_proportional'=>$request->sliplayerproportional,
+                    'rate'=>$request->sliprate,
+                    'share'=>$request->slipshare,
+                    'sum_share'=>$request->slipsumshare,
+                    'basic_premium'=>$request->slipbasicpremium,
+                    'commission'=>$request->slipcommission,
+                    'grossprm_to_nr'=>$request->slipgrossprmtonr,
+                    'netprm_to_nr'=>$request->slipnetprmtonr,
+                    'sum_commission'=>$request->slipsumcommission,
+                    'installment_panel'=>$installmentlist->toJson(),
+                    'retrocession_panel'=>$retrocessionlist->toJson(),
+                    'retro_backup'=>$request->sliprb,
+                    'own_retention'=>$request->slipor,
+                    'sum_own_retention'=>$request->slipsumor
+                    
+
+                ]);
+
+                $notification = array(
+                    'message' => 'Fire & Engginering Slip added successfully!',
+                    'alert-type' => 'success'
+                );
+            }
+            else
+            {
+                $currdate = date("Y/m/d");
+
+                $slipdataid=$slipdata->id;
+                $slipdataup = SlipTable::findOrFail($slipdataid);
+                
+                $slipdataup->number=$request->slipnumber;
+                $slipdataup->username=Auth::user()->name;
+                $slipdataup->insured_id=$request->code_ms;
+                $slipdataup->prod_year=$currdate;
+                $slipdataup->uy=$request->slipuy;
+                $slipdataup->status=$request->slipstatus;
+                $slipdataup->endorsment=$request->sliped;
+                $slipdataup->selisih=$request->slipsls;
+                $slipdataup->source=$request->slipcedingbroker;
+                $slipdataup->source_2=$request->slipceding;
+                $slipdataup->currency=$request->slipcurrency;
+                $slipdataup->cob=$request->slipcob;
+                $slipdataup->koc=$request->slipkoc;
+                $slipdataup->occupacy=$request->slipoccupacy;
+                $slipdataup->build_cost=$request->slipbld_const;
+                $slipdataup->slip_no=$request->slipno; 
+                $slipdataup->cn_dn=$request->slipcndn; 
+                $slipdataup->policy_no=$request->slippolicy_no; 
+                $slipdataup->attacment_file=''; 
+                $slipdataup->interest_insured=$interestlist->toJSon();
+                $slipdataup->total_sum_insured=$request->sliptotalsum; 
+                $slipdataup->insured_type=$request->sliptype; 
+                $slipdataup->insured_pct=$request->slippct; 
+                $slipdataup->total_sum_pct=$request->sliptotalsumpct; 
+                $slipdataup->deductible_panel=$deductiblelist->toJson(); 
+                $slipdataup->extend_coverage=$extendcoveragelist->toJson();  
+                $slipdataup->insurance_period_from=$request->slipipfrom;  
+                $slipdataup->insurance_perido_to=$request->slipipto;  
+                $slipdataup->reinsurance_period_from=$request->sliprpfrom;  
+                $slipdataup->reinsurance_period_to=$request->sliprpto;
+                $slipdataup->proportional=$request->slipproportional;
+                $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
+                $slipdataup->rate=$request->sliprate;  
+                $slipdataup->share=$request->slipshare;
+                $slipdataup->sum_share=$request->slipsumshare;
+                $slipdataup->basic_premium=$request->slipbasicpremium;
+                $slipdataup->commission=$request->slipcommission; 
+                $slipdataup->grossprm_to_nr=$request->slipgrossprmtonr; 
+                $slipdataup->netprm_to_nr=$request->slipnetprmtonr; 
+                $slipdataup->sum_commission=$request->slipsumcommission; 
+                $slipdataup->installment_panel=$installmentlist->toJson();   
+                $slipdataup->retrocession_panel=$retrocessionlist->toJson();  
+                $slipdataup->retro_backup=$request->sliprb;
+                $slipdataup->own_retention=$request->slipor;
+                $slipdataup->sum_own_retention=$request->slipsumor;
+
+                $slipdataup->save();
+
+
+                $notification = array(
+                    'message' => 'Fire & Engginering Slip Update successfully!',
+                    'alert-type' => 'success'
+                );
+            }
+
+            StatusLog::create([
+                'status'=>$request->slipstatus,
+                'user'=>Auth::user()->name,
+                'insured_id'=>$request->code_ms,
+                'slip_id'=>$request->slipnumber,
+            ]);
+
+           
+
+            return back()->with($notification);
+            //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
+            //return redirect()->route('liniusaha.index');
+        
+        }
+        else
+        {
+
+            $notification = array(
+                'message' => 'Fire & Engginering Slip added Failed!',
                 'alert-type' => 'success'
             );
 
@@ -737,10 +913,7 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function storemarineslip(Request $request)
-    {
-        //
-    }
+    
 
     /**
      * Remove the specified resource from storage.
