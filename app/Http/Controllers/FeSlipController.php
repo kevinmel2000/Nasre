@@ -234,6 +234,94 @@ class FeSlipController extends Controller
     }
 
 
+    public function updatefeslip($code_ms)
+    {
+        $user = Auth::user();
+        $country = User::orderby('id','asc')->get();
+        $route_active = 'Fire Engineering - Slip Entry';
+        $mydate = date("Y").date("m").date("d");
+        $costumer=Customer::orderby('id','asc')->get();
+
+        $currdate = date("Y/m/d");
+        $insured = Insured::orderby('id','asc')->get();
+        $slip = SlipTable::orderby('id','asc')->get();
+        $currency = Currency::orderby('id','asc')->get();
+        $cob = COB::orderby('id','asc')->get();
+        $koc = KOC::orderby('id','asc')->get();
+        $ocp = Occupation::orderby('id','asc')->get();
+        $cedingbroker = CedingBroker::orderby('id','asc')->get();
+        $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
+        $felookup = FelookupLocation::orderby('id','asc')->get();
+        $cnd = ConditionNeeded::orderby('id','asc')->get();
+        $deductibletype= DeductibleType::orderby('id','asc')->get();
+        $extendedcoverage= ExtendedCoverage::orderby('id','asc')->get();
+
+        $fe_ids = response()->json($insured->modelKeys());
+        
+        $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
+        $code_sl=$slipdata->number;
+
+        $interestinsured= InterestInsured::orderby('id','asc')->get();
+        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        
+        
+        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();       
+        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+            
+
+        return view('crm.transaction.fe_slipupdate', compact(['user','cnd','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+    
+    }
+
+
+    public function detailfeslip($code_ms)
+    {
+        $user = Auth::user();
+        $country = User::orderby('id','asc')->get();
+        $route_active = 'Fire Engineering - Slip Entry';
+        $mydate = date("Y").date("m").date("d");
+        $costumer=Customer::orderby('id','asc')->get();
+
+        $currdate = date("Y/m/d");
+        $insured = Insured::orderby('id','asc')->get();
+        $slip = SlipTable::orderby('id','asc')->get();
+        $currency = Currency::orderby('id','asc')->get();
+        $cob = COB::orderby('id','asc')->get();
+        $koc = KOC::orderby('id','asc')->get();
+        $ocp = Occupation::orderby('id','asc')->get();
+        $cedingbroker = CedingBroker::orderby('id','asc')->get();
+        $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
+        $felookup = FelookupLocation::orderby('id','asc')->get();
+        $cnd = ConditionNeeded::orderby('id','asc')->get();
+        $deductibletype= DeductibleType::orderby('id','asc')->get();
+        $extendedcoverage= ExtendedCoverage::orderby('id','asc')->get();
+
+        $fe_ids = response()->json($insured->modelKeys());
+        
+        $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
+        $code_sl=$slipdata->number;
+
+        $interestinsured= InterestInsured::orderby('id','asc')->get();
+        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        
+        
+        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();       
+        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+            
+
+        return view('crm.transaction.fe_slipdetail', compact(['user','cnd','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+    
+    }
+
+
     public function storefeinsured(Request $request)
     {   
         

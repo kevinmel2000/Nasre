@@ -235,6 +235,7 @@ class FinancialLineSlipController extends Controller
     
     }
 
+    
 
     public function updateflslip($code_ms)
     {
