@@ -327,7 +327,13 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            
+                                                                @foreach($statuslist as $statlist)
+                                                                    <tr>
+                                                                             <td>{{ $statlist->status }}</td>
+                                                                             <td>{{ $statlist->updated_at }}</td>
+                                                                             <td>{{ $statlist->user }}</td>
+                                                                    </tr>   
+                                                                @endforeach
                                                         </tbody>
                                                         
                                                         </table>
