@@ -538,7 +538,7 @@
                                                                                 @endphp
                                                                                 @foreach($interestlist as $isl)
                                                                                     <tr id="iid{{ $isl->id }}">
-                                                                                            <td>{{ $isl->interestinsured->description }}</td>
+                                                                                            <td>{{ $isl->interestinsureddata->description }}</td>
                                                                                             <td>{{ $isl->amount }}</td>
                                                                                             @php 
                                                                                             $totalamount=$totalamount+$isl->amount;

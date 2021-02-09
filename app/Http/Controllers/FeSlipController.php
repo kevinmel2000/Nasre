@@ -234,7 +234,7 @@ class FeSlipController extends Controller
     }
 
 
-    public function updatefeslip($code_ms)
+    public function updatefeslip($idm)
     {
         $user = Auth::user();
         $country = User::orderby('id','asc')->get();
@@ -258,8 +258,9 @@ class FeSlipController extends Controller
 
         $fe_ids = response()->json($insured->modelKeys());
         
-        $insureddata=Insured::where('number','=',$code_ms)->firstOrFail();
-        $slipdata=SlipTable::where('insured_id','=',$code_ms)->firstOrFail();
+        $insureddata=Insured::find($idm);
+        $code_ms=$insureddata->number;
+        $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
         $code_sl=$slipdata->number;
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
@@ -279,7 +280,7 @@ class FeSlipController extends Controller
     }
 
 
-    public function detailfeslip($code_ms)
+    public function detailfeslip($idm)
     {
         $user = Auth::user();
         $country = User::orderby('id','asc')->get();
@@ -303,8 +304,9 @@ class FeSlipController extends Controller
 
         $fe_ids = response()->json($insured->modelKeys());
         
-        $insureddata=Insured::where('number','=',$code_ms)->firstOrFail();
-        $slipdata=SlipTable::where('insured_id','=',$code_ms)->firstOrFail();
+        $insureddata=Insured::find($idm);
+        $code_ms=$insureddata->number;
+        $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
         $code_sl=$slipdata->number;
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
@@ -351,7 +353,7 @@ class FeSlipController extends Controller
                     'share'=>$request->fesshare,
                     'share_from'=>$request->fessharefrom,
                     'share_to'=>$request->fesshareto,
-                    'coincurance'=>$request->coincurance,
+                    'coincurance'=>$request->fescoincurance,
                     'location'=>$locationlist->toJson()
                 ]);
 
@@ -370,7 +372,7 @@ class FeSlipController extends Controller
                 $insureddataup->share=$request->fesshare;
                 $insureddataup->share_from=$request->fessharefrom;
                 $insureddataup->share_to=$request->fesshareto;
-                $insureddataup->coincurance=$request->coincurance;
+                $insureddataup->coincurance=$request->fescoincurance;
                 $insureddataup->location=$locationlist->toJson();
                 $insureddataup->save();
 

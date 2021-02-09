@@ -241,7 +241,7 @@ class HeMotorSlipController extends Controller
     }
 
 
-    public function updatehemslip($code_ms)
+    public function updatehemslip($idm)
     {
         $user = Auth::user();
         $country = User::orderby('id','asc')->get();
@@ -265,8 +265,9 @@ class HeMotorSlipController extends Controller
 
         $fe_ids = response()->json($insured->modelKeys());
         
-        $insureddata=Insured::where('number','=',$code_ms)->firstOrFail();
-        $slipdata=SlipTable::where('insured_id','=',$code_ms)->firstOrFail();
+        $insureddata=Insured::find($idm);
+        $code_ms=$insureddata->number;
+        $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
         $code_sl=$slipdata->number;
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
@@ -286,7 +287,7 @@ class HeMotorSlipController extends Controller
     }
 
 
-    public function detailhemslip($code_ms)
+    public function detailhemslip($idm)
     {
         $user = Auth::user();
         $country = User::orderby('id','asc')->get();
@@ -310,8 +311,9 @@ class HeMotorSlipController extends Controller
 
         $fe_ids = response()->json($insured->modelKeys());
         
-        $insureddata=Insured::where('number','=',$code_ms)->firstOrFail();
-        $slipdata=SlipTable::where('insured_id','=',$code_ms)->firstOrFail();
+        $insureddata=Insured::find($idm);
+        $code_ms=$insureddata->number;
+        $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
         $code_sl=$slipdata->number;
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();

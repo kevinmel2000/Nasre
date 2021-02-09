@@ -36,18 +36,21 @@
                                                 <div class="col-md-4">
                                                     <label for="">{{__('Insured')}}</label>
                                                     <select id="feinsured" name="feinsured" class="form-control form-control-sm ">
-                                                        <option selected readonly>{{__('Select Prefix')}}</option>
-                                                        <option value="PT">PT</option>
-                                                        <option value="CV">CV</option>
+                                                        <option readonly>{{__('Select Prefix')}}</option>
+                                                        @if($insureddata->insured_prefix  == "PT")
+                                                        <option value="PT" selected>PT</option>
+                                                        @else
+                                                        <option value="CV" selected>CV</option>
+                                                        @endif
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 1')}}</label>
-                                                    <input type="text"name="fesuggestinsured" id='autocomplete'  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
+                                                    <input type="text"name="fesuggestinsured" id='autocomplete'  value="{{$insureddata->insured_name}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 2')}}</label>
-                                                    <input type="text" name="fesuffix" id='autocomplete2' class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="suffix: QQ or TBk" required/>
+                                                    <input type="text" name="fesuffix" id='autocomplete2' value="{{$insureddata->insured_suffix}}" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="suffix: QQ or TBk" required/>
                                                
                                                 </div>
                                             </div>
@@ -64,7 +67,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                             <input type="number" id="feshare" min="0" value="0" step=".01" name="feshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                             <input type="number" id="feshare" min="0" step=".01" name="feshare" value="{{$insureddata->share}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -78,13 +81,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('From')}}</label>
-                                                    <input id="fesharefrom" type="number" min="0" value="0" step=".01"  name="fesharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input id="fesharefrom" type="number" min="0" step=".01"  name="fesharefrom" value="{{$insureddata->share_from}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input id="feshareto" type="number" min="0" value="0" step=".01"  name="feshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input id="feshareto" type="number" min="0" step=".01"  name="feshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -144,7 +147,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" id="fecoinsurance" name="fecoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                            <input type="text" id="fecoinsurance" name="fecoinsurance" value="{{$insureddata->coincurance}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -519,8 +522,8 @@
                                                                                 @endphp
                                                                                 @foreach($interestlist as $isl)
                                                                                     <tr id="iid{{ $isl->id }}">
-                                                                                            <td>{{ $isl->interestinsured->description }}</td>
-                                                                                            <td>{{ $isl->amount }}</td>
+                                                                                            <td>{{ @$isl->interestinsureddata->description }}</td>
+                                                                                            <td>{{ @$isl->amount }}</td>
                                                                                             @php 
                                                                                             $totalamountdata=$totalamountdata+$isl->amount;
                                                                                             @endphp
