@@ -62,6 +62,8 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::post('/fe-insured/store', [FeSlipController::class, 'storefeinsured']);
     Route::post('/fe-insured', [TransactionController::class, 'storefeinsured']);
     Route::post('/fe-slip/store', [FeSlipController::class, 'storefeslip']);
+    Route::get('/fe-slip/updatefeslip/{fe}', [FeSlipController::class, 'updatefeslip']);
+    Route::get('/fe-slip/detailfeslip/{fe}', [FeSlipController::class, 'detailfeslip']);
     Route::delete('/fe-slip/destroy/{fe}', [FeSlipController::class, 'destroy']);
     Route::post('/fe-slip/getCostumers/','FeSlipController@getCostumers')->name('customer.getCostumers');
 
@@ -72,6 +74,8 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::post('/fl-slipindex', [FinancialLineSlipController::class, 'index']);
     Route::post('/fl-insured/store', [FinancialLineSlipController::class, 'storeflinsured']);
     Route::post('/fl-slip/store', [FinancialLineSlipController::class, 'storeflslip']);
+    Route::get('/fl-slip/updateflslip/{fe}', [FinancialLineSlipController::class, 'updateflslip']);
+    Route::get('/fl-slip/detailflslip/{fe}', [FinancialLineSlipController::class, 'detailflslip']);
     Route::delete('/fl-slip/destroy/{fe}', [FinancialLineSlipController::class, 'destroy']);
     
     // SECTION Moveable Property Slip Group Routes
@@ -80,15 +84,19 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::post('/mp-slipindex', [MovePropSlipController::class, 'index']);
     Route::post('/mp-insured/store', [MovePropSlipController::class, 'storempinsured']);
     Route::post('/mp-slip/store', [MovePropSlipController::class, 'storempslip']);
+    Route::get('/mp-slip/updatempslip/{fe}', [MovePropSlipController::class, 'updatempslip']);
+    Route::get('/mp-slip/detailmpslip/{fe}', [MovePropSlipController::class, 'detailmpslip']);
     Route::delete('/mp-slip/destroy/{fe}', [MovePropSlipController::class, 'destroy']);
     
 
-    // SECTION HE & Motor Slip Group Routes
+    // SECTION HE & Motor Slip Group 
     Route::get('/hem-slip', [HeMotorSlipController::class, 'indexhemslip']);
     Route::get('/hem-slipindex', [HeMotorSlipController::class, 'index']);
     Route::post('/hem-slipindex', [HeMotorSlipController::class, 'index']);
     Route::post('/hem-insured/store', [HeMotorSlipController::class, 'storeheminsured']);
     Route::post('/hem-slip/store', [HeMotorSlipController::class, 'storehemslip']);
+    Route::get('/hem-slip/updatehemslip/{fe}', [MovePropSlipController::class, 'updatehemslip']);
+    Route::get('/hem-slip/detailhemslip/{fe}', [MovePropSlipController::class, 'detailhemslip']);
     Route::delete('/hem-slip/destroy/{fe}', [HeMotorSlipController::class, 'destroy']);
     
 
