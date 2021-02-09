@@ -36,11 +36,13 @@
                                                 <div class="col-md-4">
                                                     <label for="">{{__('Insured')}}</label>
                                                     <select id="feinsured" name="feinsured" class="form-control form-control-sm ">
-                                                        <option readonly>{{__('Select Prefix')}}</option>
+                                                        <option selected readonly>{{__('Select Prefix')}}</option>
                                                         @if($insureddata->insured_prefix  == "PT")
-                                                        <option value="PT" selected>PT</option>
+                                                        <option value="PT"  selected="selected">PT</option>
+                                                        <option value="CV">CV</option>
                                                         @else
-                                                        <option value="CV" selected>CV</option>
+                                                        <option value="PT">PT</option>
+                                                        <option value="CV"  selected="selected">CV</option>
                                                         @endif
                                                     </select>
                                                 </div>
@@ -255,7 +257,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Username')}}</label>
-                                                            <input type="text" id="slipusername" name="slipusername" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" value="{{Auth::user()->name}}" readonly="readonly" required/>
+                                                            <input type="text" id="slipusername" name="slipusername" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" value="{{$slipdata->username}}" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -264,7 +266,7 @@
                                                         <div class="form-group">
                                                             <label>{{__('Prod Year')}}:</label>
                                                                 <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        <input type="text" id="slipprodyear" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipprodyear" value="{{ $currdate }}" readonly="readonly">
+                                                                        <input type="text" id="slipprodyear" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipprodyear" value="{{$slipdata->prod_year}}" readonly="readonly">
                                                                         <div class="input-group-append" >
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
@@ -276,7 +278,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('UY')}}</label>
-                                                            <input type="number" id="slipuy" name="slipuy" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-4" required/>
+                                                            <input type="number" id="slipuy" name="slipuy" value="{{$slipdata->uy}}" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-4" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -285,13 +287,12 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Status')}}</label>
                                                         <select name="slipstatus" id="slipstatus" class="form-control form-control-sm ">
-                                                            {{-- <option selected readonly>{{__('Select Status')}}</option> --}}
-                                                            <option value="offer" selected>Offer</option>
-                                                            <option value="binding">Binding</option>
-                                                            <option value="slip">Slip</option>
-                                                            <option value="endorsement">Endorsement</option>
-                                                            <option value="decline">Decline</option>
-                                                            <option value="cancel">Cancel</option>
+                                                            <option value="offer"    @if($slipdata->status == "offer") selected="selected" @endif >Offer</option>
+                                                            <option value="binding"  @if($slipdata->status == "binding")  selected="selected" @endif >Binding</option>
+                                                            <option value="slip" @if($slipdata->status == "slip")  selected="selected" @endif >Slip</option>
+                                                            <option value="endorsement" @if($slipdata->status == "endorsement")  selected="selected" @endif >Endorsement</option>
+                                                            <option value="decline" @if($slipdata->status == "decline")  selected="selected" @endif > Decline</option>
+                                                            <option value="cancel" @if($slipdata->status == "cancel")  selected="selected" @endif >Cancel</option>
                                                         </select>
                                                     </div>    
                                                     </div>
@@ -309,11 +310,11 @@
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                    <input type="text" id="sliped"  name="sliped" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50"/>
+                                                                    <input type="text" id="sliped"  name="sliped" value="{{$slipdata->endorsment}}" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50"/>
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                    <input type="text" id="slipsls" name="slipsls" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50"/>
+                                                                    <input type="text" id="slipsls" name="slipsls" value="{{$slipdata->selisih}}" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50"/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -350,10 +351,13 @@
                                                 <div class="form-group">
                                                     <label for="">{{__('Source')}}</label>
                                                     <select id="slipcedingbroker" name="slipcedingbroker" class="e1 form-control form-control-sm ">
-                                                        <option value="" readonly selected>Ceding or Broker</option>
                                                         @foreach($cedingbroker as $cb)
-                                                            <option value="{{ $cb->id }}">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
-                                                        @endforeach
+                                                             @if($cb->id  == $slipdata->source)
+                                                             <option value="{{ $cb->id }}" selected="selected">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
+                                                             @else
+                                                             <option value="{{ $cb->id }}">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
+                                                             @endif
+                                                         @endforeach
                                                     </select>
                                                 </div>    
                                                 <div class="form-group">
@@ -373,9 +377,12 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Currency')}}</label>
                                                         <select id="slipcurrency" name="slipcurrency" class="e1 form-control form-control-sm ">
-                                                            <option selected readonly>{{__('Select Currency')}}</option>
                                                             @foreach($currency as $crc)
-                                                                <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
+                                                                 @if($crc->id  == $slipdata->currency)
+                                                                 <option value="{{ $crc->id }}" selected="selected">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
+                                                                 @else
+                                                                 <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
+                                                                 @endif
                                                             @endforeach
                                                         </select>
                                                     </div>    
@@ -389,7 +396,11 @@
                                                         <select id="slipcob" name="slipcob" class="e1 form-control form-control-sm ">
                                                             <option selected readonly>{{__('COB list')}}</option>
                                                             @foreach($cob as $boc)
-                                                                <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
+                                                                 @if($boc->id  == $slipdata->cob)
+                                                                 <option value="{{ $boc->id }}" selected="selected">{{ $boc->code }} - {{ $boc->description }}</option>
+                                                                 @else
+                                                                 <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
+                                                                 @endif
                                                             @endforeach
                                                         </select>
                                                     </div>    
@@ -403,7 +414,11 @@
                                                         <select id="slipkoc" name="slipkoc" class="e1 form-control form-control-sm ">
                                                             <option selected readonly>{{__('KOC list')}}</option>
                                                             @foreach($koc as $cok)
+                                                                 @if($cok->id  == $slipdata->koc)
+                                                                <option value="{{ $cok->id }}" selected="selected">{{ $cok->code }} - {{ $cok->description }}</option>
+                                                                @else
                                                                 <option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                     </div>    
@@ -417,7 +432,11 @@
                                                         <select id="slipoccupacy" name="slipoccupacy" class="e1 form-control form-control-sm ">
                                                             <option selected readonly>{{__('Occupation list')}}</option>
                                                             @foreach($ocp as $ocpy)
+                                                                @if($ocpy->id  == $slipdata->occupacy)
+                                                                <option value="{{ $ocpy->id }}" selected="selected">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
+                                                                @else
                                                                 <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                     </div>    
@@ -430,13 +449,13 @@
                                                         <label for="">{{__('Building Const')}}</label>
                                                         <select id="slipbld_const" name="slipbld_const" class="e1 form-control form-control-sm ">
                                                             <option selected readonly>{{__('Building Const list')}}</option>
-                                                            <option value="Buliding 1">Buliding 1</option>
-                                                            <option value="Buliding 2">Buliding 2</option>
-                                                            <option value="Buliding 3">Buliding 3</option>
-                                                            <option value="Buliding 4">Buliding 4</option>
-                                                            <option value="Buliding 5">Buliding 5 </option>
-                                                            <option value="Buliding 6">Buliding 6</option>
-                                                            <option value="Buliding 7">Buliding 7</option>
+                                                            <option value="Buliding 1" @if($slipdata->build_cost == "Buliding 1") selected="selected" @endif >Buliding 1</option>
+                                                            <option value="Buliding 2" @if($slipdata->build_cost == "Buliding 2") selected="selected" @endif >Buliding 2</option>
+                                                            <option value="Buliding 3" @if($slipdata->build_cost == "Buliding 3") selected="selected" @endif >Buliding 3</option>
+                                                            <option value="Buliding 4" @if($slipdata->build_cost == "Buliding 4") selected="selected" @endif >Buliding 4</option>
+                                                            <option value="Buliding 5" @if($slipdata->build_cost == "Buliding 5") selected="selected" @endif >Buliding 5 </option>
+                                                            <option value="Buliding 6" @if($slipdata->build_cost == "Buliding 6") selected="selected" @endif >Buliding 6</option>
+                                                            <option value="Buliding 7" @if($slipdata->build_cost == "Buliding 7") selected="selected" @endif >Buliding 7</option>
                                                         </select>
                                                     </div>    
                                                     </div>
@@ -454,19 +473,19 @@
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="">{{__('Slip No.')}}</label>
-                                                                        <input type="text" id="slipno" name="slipno" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                        <input type="text" id="slipno"  value="{{$slipdata->slip_no}}"  name="slipno" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="">{{__('CN/DN')}}</label>
-                                                                        <input type="text" id="slipcndn" name="slipcndn" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                        <input type="text" id="slipcndn" name="slipcndn" value="{{$slipdata->cn_dn}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="">{{__('Policy No')}}</label>
-                                                                        <input type="text" id="slippolicy_no"  name="slippolicy_no" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                        <input type="text" id="slippolicy_no" value="{{$slipdata->policy_no}}" name="slippolicy_no" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                                     </div>
                                                                 </div>
                                                                 
@@ -591,8 +610,8 @@
                                                             <label for="">{{__('Type')}}</label>
                                                             <select id="sliptype" name="sliptype" class="form-control form-control-sm ">
                                                                 {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
-                                                                <option value="PML" selected >PML</option>
-                                                                <option value="LOL">LOL</option>
+                                                                <option value="PML" @if($slipdata->insured_type == "PML") selected="selected" @endif >PML</option>
+                                                                <option value="LOL" @if($slipdata->insured_type == "LOL") selected="selected" @endif >LOL</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -602,7 +621,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-10">
                                                                     <div class="input-group">
-                                                                        <input type="number" value="0" step=".0001" id="slippct" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
+                                                                        <input type="number" value="{{ $slipdata->insured_pct }}" step=".0001" id="slippct" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-2">
@@ -616,7 +635,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for=""style="opacity: 0;">{{__('Type')}}</label>
-                                                            <input type="number" value="0" step=".0001" id="sliptotalsumpct" name="sliptotalsumpct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" required/>
+                                                            <input type="number" value="{{ $slipdata->total_sum_pct }}" step=".0001" id="sliptotalsumpct" name="sliptotalsumpct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -778,7 +797,7 @@
                                                         <div class="form-group">
                                                             <label>{{__('Insurance Periode')}}:</label>
                                                                 <div class="input-group date" id="dateinfrom" data-target-input="nearest">
-                                                                        <input type="text" id="slipipfrom" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipfrom">
+                                                                        <input type="text" id="slipipfrom" value="{{ $slipdata->insurance_period_from }}" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipfrom">
                                                                         <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
@@ -793,7 +812,7 @@
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
                                                                 <div class="input-group date" id="dateinto" data-target-input="nearest">
-                                                                        <input type="text" id="slipipto" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipto">
+                                                                        <input type="text" id="slipipto" value="{{ $slipdata->insurance_perido_to }}" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipto">
                                                                         <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
@@ -806,7 +825,7 @@
                                                         <div class="form-group">
                                                             <label>{{__('Reinsurance Periode')}}:</label>
                                                                 <div class="input-group date" id="daterefrom" data-target-input="nearest">
-                                                                        <input type="text" id="sliprpfrom" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpfrom">
+                                                                        <input type="text" id="sliprpfrom" value="{{ $slipdata->reinsurance_period_from }}" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpfrom">
                                                                         <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
@@ -822,7 +841,7 @@
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
                                                                 <div class="input-group date" id="datereto" data-target-input="nearest">
                                                                         
-                                                                        <input type="text" id="sliprpto" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpto">
+                                                                        <input type="text" id="sliprpto" value="{{ $slipdata->reinsurance_period_to }}" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpto">
                                                                         <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
@@ -860,11 +879,11 @@
                                                     <label for="">{{__('Layer for non proportional')}}</label>
                                                     <select id="sliplayerproportional" name="sliplayerproportional" class="form-control form-control-sm ">
                                                         <option selected disabled>{{__('Choose layer')}}</option>
-                                                        <option value="Layer 1">Layer 1</option>
-                                                        <option value="Layer 2">Layer 2</option>
-                                                        <option value="Layer 3">Layer 3</option>
-                                                        <option value="Layer 4">Layer 4</option>
-                                                        <option value="Layer 5">Layer 5</option>
+                                                        <option value="Layer 1"  @if($slipdata->layer_non_proportional == "Layer 1") selected="selected" @endif >Layer 1</option>
+                                                        <option value="Layer 2" @if($slipdata->layer_non_proportional == "Layer 2") selected="selected" @endif>Layer 2</option>
+                                                        <option value="Layer 3" @if($slipdata->layer_non_proportional == "Layer 3") selected="selected" @endif>Layer 3</option>
+                                                        <option value="Layer 4" @if($slipdata->layer_non_proportional == "Layer 4") selected="selected" @endif>Layer 4</option>
+                                                        <option value="Layer 5" @if($slipdata->layer_non_proportional == "Layer 5") selected="selected" @endif>Layer 5</option>
                                                     </select>
                                                 </div>  
                                             </div>
@@ -874,7 +893,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Rate (permil.. %)')}}</label>
-                                                        <input type="number" value="0" step=".0001" id="sliprate" name="sliprate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" required/>
+                                                        <input type="number"  value="{{ $slipdata->rate }}" step=".0001" id="sliprate" name="sliprate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" required/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -886,7 +905,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-10">
                                                                     <div class="input-group">
-                                                                        <input type="number" value="0" step=".0001" id="slipshare" name="slipshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="b" required/>
+                                                                        <input type="number" value="{{ $slipdata->share }}" step=".0001" id="slipshare" name="slipshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="b" required/>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-2">
@@ -900,7 +919,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
-                                                            <input type="number" value="0" step=".0001" id="slipsumshare" name="slipsumshare" placeholder="= b% * tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
+                                                            <input type="number" value="{{ $slipdata->sum_share }}" step=".0001" id="slipsumshare" name="slipsumshare" placeholder="= b% * tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -911,7 +930,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Basic Premium')}}</label>
-                                                        <input type="number" value="0" step=".0001" id="slipbasicpremium" name="slipbasicpremium" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a% * tsi" required/>
+                                                        <input type="number" value="{{ $slipdata->basic_premium }}" step=".0001" id="slipbasicpremium" name="slipbasicpremium" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a% * tsi" required/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -919,7 +938,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Gross Prm to NR')}}</label>
-                                                        <input type="number" value="0" step=".0001" id="slipgrossprmtonr" name="slipgrossprmtonr" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a% * b% * tsi" readonly="readonly" required/>
+                                                        <input type="number" value="{{ $slipdata->grossprm_to_nr }}" step=".0001" id="slipgrossprmtonr" name="slipgrossprmtonr" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a% * b% * tsi" readonly="readonly" required/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -933,7 +952,7 @@
                                                             <div class="row d-flex flex-wrap">
                                                                 <div class="col-md-10">
                                                                     <div class="input-group">
-                                                                        <input type="number" value="0" step=".0001" id="slipcommission" name="slipcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="d" required/>
+                                                                        <input type="number" value="{{ $slipdata->commission }}" step=".0001" id="slipcommission" name="slipcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="d" required/>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-2">
@@ -947,7 +966,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="" style="opacity: 0;">{{__('Gross Prm to NR')}}</label>
-                                                            <input type="number" value="0" step=".0001" id="slipsumcommission" name="slipsumcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" readonly="readonly" />
+                                                            <input type="number"  value="{{ $slipdata->grossprm_to_nr }}" step=".0001" id="slipsumcommission" name="slipsumcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" readonly="readonly" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -956,7 +975,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Net Prm to NR')}}</label>
-                                                        <input type="number" value="0" step=".0001" id="slipnetprmtonr" name="slipnetprmtonr" class="form-control form-control-sm " data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="2-50" readonly="readonly"/>
+                                                        <input type="number"  value="{{ $slipdata->netprm_to_nr }}" step=".0001" id="slipnetprmtonr" name="slipnetprmtonr" class="form-control form-control-sm " data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="2-50" readonly="readonly"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1035,9 +1054,8 @@
                                                 <div class="form-group">
                                                     <label for="">{{__('Retro Backup?')}}</label>
                                                     <select id="sliprb" name="sliprb" class="form-control form-control-sm ">
-                                                        {{-- <option selected readonly>{{__('Select Continent')}}</option> --}}
-                                                        <option value="AF" selected>YES</option>
-                                                        <option value="AN">NO</option>
+                                                        <option value="AF" @if($slipdata->retro_backup == "AF") selected="selected" @endif >YES</option>
+                                                        <option value="AN" @if($slipdata->retro_backup == "AN") selected="selected" @endif >NO</option>
                                                     </select>
                                                 </div>   
                                             </div>
@@ -1048,7 +1066,7 @@
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <div class="input-group">
-                                                                    <input type="text" id="slipor" name="slipor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                    <input type="text" id="slipor" value="{{$slipdata->own_retention}}" name="slipor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-2">
@@ -1058,7 +1076,7 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <input type="text" id="slipsumor"  name="slipsumor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly/>
+                                                                    <input type="text" id="slipsumor" value="{{$slipdata->sum_own_retention}}"   name="slipsumor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly/>
                                                                 </div>
                                                             </div>
                                                         </div>

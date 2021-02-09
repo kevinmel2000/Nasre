@@ -776,6 +776,7 @@ $(document).ready(function() {
        var slipsumshare =  $('#slipsumshare').val();
        var slipbasicpremium =  $('#slipbasicpremium').val();
        var slipgrossprmtonr =  $('#slipgrossprmtonr').val();
+       var slipcommission =  $('#slipcommission').val();
        var slipsumcommission =  $('#slipsumcommission').val();
        var slipnetprmtonr =  $('#slipnetprmtonr').val();
        var sliprb =  $('#sliprb').val();
@@ -826,6 +827,7 @@ $(document).ready(function() {
                slipbasicpremium:slipbasicpremium,
                slipgrossprmtonr:slipgrossprmtonr,
                slipsumcommission:slipsumcommission,
+               slipcommission:slipcommission,
                slipnetprmtonr:slipnetprmtonr,
                sliprb:sliprb,
                slipor:slipor,
