@@ -500,13 +500,25 @@
                                                 <div class="form-group">
                                                     <label>{{__('Attachment')}} </label>
                                                     <div class="input-group">
-                                                    
+
+                                                         
+                                                      
                                                         <div class="input-group control-group increment2" >
                                                         <input type="file" name="files[]" id="attachment" class="form-control">
                                                         <div class="input-group-btn"> 
                                                             <button class="btn btn-success" id="btn-success2" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
                                                         </div>
                                                         </div>
+
+                                                         
+                                                        @foreach($filelist as $isl)
+                                                        <div class="control-group input-group" id="control-group2" style="margin-top:10px">
+                                                            <a href="{{ asset('files')}}/{{$isl->filename}}">{{$isl->filename}}</a>
+                                                        </div>
+                                                        @endforeach
+
+                                                       
+
                                                         <div class="clone2 hide">
                                                         <div class="control-group input-group" id="control-group2" style="margin-top:10px">
                                                             <input type="file" name="files[]" id="attachment" class="form-control">

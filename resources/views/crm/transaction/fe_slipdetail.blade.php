@@ -492,20 +492,13 @@
                                                     <label>{{__('Attachment')}} </label>
                                                     <div class="input-group">
                                                     
-                                                        <div class="input-group control-group increment2" >
-                                                        <input type="file" name="files[]" id="attachment" class="form-control">
-                                                        <div class="input-group-btn"> 
-                                                            <button class="btn btn-success" id="btn-success2" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
-                                                        </div>
-                                                        </div>
-                                                        <div class="clone2 hide">
+
+                                                        @foreach($filelist as $isl)
                                                         <div class="control-group input-group" id="control-group2" style="margin-top:10px">
-                                                            <input type="file" name="files[]" id="attachment" class="form-control">
-                                                            <div class="input-group-btn"> 
-                                                            <button class="btn btn-danger" id="btn-danger2" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                                                            </div>
+                                                            <a href="{{ asset('files')}}/{{$isl->filename}}">{{$isl->filename}}</a>
                                                         </div>
-                                                        </div>
+                                                        @endforeach
+
 
                                                     </div>
                                                 </div>
