@@ -72,7 +72,7 @@
 
                                             
                                             {{-- @can('update-felookup', User::class) --}}
-                                                <a class="text-primary mr-3" href="{{ url('transaction-data/marine-insured', $insureddata->id) }}">
+                                                <a class="text-primary mr-3" href="{{ url('transaction-data/marine-insured/edit', $insureddata->id) }}">
                                                 <i class="fas fa-edit"></i>
                                                 </a>
                                                 {{-- @endcan   --}}

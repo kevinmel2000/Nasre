@@ -71,7 +71,7 @@
                                                     <select id="msiroute" name="msiroute" class="e1 form-control form-control-sm ">
                                                         {{-- <option selected disabled>{{__('Select Route')}}</option> --}}
                                                         @foreach($routeship as $rs)
-                                                            @if($isd->routeship->id  == $rs->id)
+                                                            @if($isd->route  == $rs->id)
                                                                 <option value="{{ $rs->id }}" selected >{{ $rs->name }} - {{ $rs->description }}</option>
                                                             @else 
                                                                 <option value="{{ $rs->id }}"  >{{ $rs->name }} - {{ $rs->description }}</option>
@@ -84,13 +84,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="" style="opacity: 0">{{__('b')}}</label>
-                                                    <input type="text" id="msiroutefrom" name="msiroutefrom" value="{{ $isd->route_from }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="*from" readonly="readonly" />
+                                                    <input type="text" id="msiroutefrom" name="msiroutefrom" value="{{ $isd->route_from }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="*from"  />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="" style="opacity: 0">{{__('a')}}</label>
-                                                    <input type="text" id="msirouteto" name="msirouteto" value="{{ $isd->route_to }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="*to" readonly="readonly" />
+                                                    <input type="text" id="msirouteto" name="msirouteto" value="{{ $isd->route_to }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="*to"  />
 
                                                 </div>
                                             </div>
@@ -154,6 +154,7 @@
                                                             <tr>
                                                                 <th>{{__('Ship Code')}}</th>
                                                                 <th>{{__('Ship Name')}}</th>
+                                                                <th>{{__('Action')}}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -162,66 +163,65 @@
                                                                     <td data-name="{{ $slt->ship_code }}">{{ $slt->ship_code }}</td>
                                                                     <td data-name="{{ $slt->ship_name }}">{{ $slt->ship_name }}</td>
                                                                     <td>
-                                                                        <a class="text-primary mr-3" data-toggle="modal" data-target="#updateshiplist{{$exc->id}}">
+                                                                        <a class="text-primary mr-3" data-toggle="modal" data-target="#updateshiplist{{$slt->id}}">
                                                                             <i class="fas fa-edit"></i>
                                                                         </a>
                                                                         
 
-                                                                        <div class="modal fade" id="updateshiplist{{$slt->id}}" tabindex="-1" user="dialog" aria-labelledby="updateshiplist{{$slt->id}}Label" aria-hidden="true">
-                                                                            <div class="modal-dialog" user="document">
-                                                                              <div class="modal-content bg-light-gray">
-                                                                                <div class="modal-header bg-gray">
-                                                                                  <h5 class="modal-title" id="updateshiplist{{$slt->id}}Label">{{__('Update Marine Ship List')}}</h5>
-                                                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                  </button>
-                                                                                </div>
-                                                                                <form id="form-updateship" action="{{url('ship-list/',$slt)}}" method="POST">
-                                                                                    <div class="modal-body">
-                                                                                        @csrf
-                                                                                        @method('PUT')
-                                                                                        <div class="row">
-                                                                                            <div class="col-md-6 col-md-12">
-                                                                                                <div class="form-group">
-                                                                                                    <label for="">{{__('Ship Code')}}</label><br>
-                                                                                                    <select name="shipcodems" id="shipcodems" class="e1 form-control form-control-sm ">
-                                                                                                        <option selected disabled>{{__('Select Currency')}}</option>
-                                                                                                        @foreach($mlu as $mrnlu)
-                                                                                                          @if($slt->ship_code  == $mrnlu->code)
-                                                                                                            <option value="{{ $mrnlu->code }}" selected>{{ $mrnlu->code }} - {{ $mrnlu->shipname }}</option>
-                                                                                                          @else
-                                                                                                            <option value="{{  $mrnlu->code }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
-                                                                                                          @endif
-                                                                                                        @endforeach
-                                                                                                    </select>
-                                                                                                </div>
-                                                                                              </div>
-                                                                                        </div>
-                                                                                        <div class="row">
-                                                                                            <div class="col-md-12 col-md-12">
-                                                                                                <div class="form-group">
-                                                                                                <label for="">{{__('Ship Name')}}</label>
-                                                                                                <input type="text" name="shipnamems" id="shipnamems" value="{{ $slt->ship_name }}" class="form-control" value="" />
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                        
-                                                                                    </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                                                                                        <input type="submit" class="btn btn-info" value="Update">
-                                                                                    </div>
-                                                                                </form>
-                                                                              </div>
-                                                                            </div>
-                                                                        </div>
-
                                                                         
-                                                                        <a href="javascript:void(0)" onclick="deleteshipdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a>
+                                                                        <a type="button" href="javascript:void(0)" onClick="deleteshipdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a>
                                                                     </td>
                                                                 </tr>   
 
-
+                                                                <div class="modal fade" id="updateshiplist{{$slt->id}}" tabindex="-1" user="dialog" aria-labelledby="updateshiplist{{$slt->id}}Label" aria-hidden="true">
+                                                                    <div class="modal-dialog" user="document">
+                                                                      <div class="modal-content bg-light-gray">
+                                                                        <div class="modal-header bg-gray">
+                                                                          <h5 class="modal-title" id="updateshiplist{{$slt->id}}Label">{{__('Update Marine Ship List')}}</h5>
+                                                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                          </button>
+                                                                        </div>
+                                                                        <form id="form-updateship">
+                                                                            @csrf
+                                                                            {{ method_field('POST') }}
+                                                                            <div class="modal-body">
+                                                                               
+                                                                                <div class="row">
+                                                                                    <div class="col-md-6 col-md-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="">{{__('Ship Code')}}</label><br>
+                                                                                            <select name="shipcodems" id="shipcodems" class="e1 form-control form-control-sm ">
+                                                                                                <option selected disabled>{{__('Select Currency')}}</option>
+                                                                                                @foreach($mlu as $mrnlu)
+                                                                                                  @if($slt->ship_code  == $mrnlu->code)
+                                                                                                    <option value="{{ $mrnlu->code }}" selected>{{ $mrnlu->code }} - {{ $mrnlu->shipname }}</option>
+                                                                                                  @else
+                                                                                                    <option value="{{  $mrnlu->code }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
+                                                                                                  @endif
+                                                                                                @endforeach
+                                                                                            </select>
+                                                                                        </div>
+                                                                                      </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 col-md-12">
+                                                                                        <div class="form-group">
+                                                                                        <label for="">{{__('Ship Name')}}</label>
+                                                                                        <input type="text" name="shipnamems" id="shipnamems" value="{{ $slt->ship_name }}" class="form-control" value="" />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                                                                <button type="button" onClick="shipdetailupdate({{$slt->id}})" data-dismiss="modal" class="btn btn-info">{{__('Update')}}</button>
+                                                                            </div>
+                                                                        </form>
+                                                                      </div>
+                                                                    </div>
+                                                                </div>
 
 
 
@@ -289,8 +289,8 @@
 
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
-                                        <button type="submit" id="addinsuredsave-btn" class="btn btn-primary btn-block ">
-                                            {{__('SAVE')}}
+                                        <button type="submit" id="updateinsuredsave-btn" class="btn btn-primary btn-block ">
+                                            {{__('UPDATE')}}
                                         </button>
                                     </div>
                                 </div>

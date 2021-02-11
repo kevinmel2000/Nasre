@@ -996,7 +996,7 @@ class TransactionController extends Controller
     public function editmarineinsured($id)
     {
         $user = Auth::user();
-        $route_active = 'Marine - Insured Details';
+        $route_active = 'Marine - Update Insured ';
         $mydate = date("Y").date("m").date("d");
         $currdate = date("Y-m-d");
         
@@ -1005,7 +1005,7 @@ class TransactionController extends Controller
         $route = $insured[0]->route;
         $mlu = MarineLookup::orderby('id','asc')->get();
         $customer= CustomerCustomer::orderby('id','asc')->get();
-        $routeship= RouteShip::where('id','=',$route)->first();
+        $routeship= RouteShip::where('id','=',$route)->get();
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $deductibletype= DeductibleType::orderby('id','asc')->get();
         $ms_ids = response()->json($insured->modelKeys());
@@ -1149,26 +1149,29 @@ class TransactionController extends Controller
     }
 
 
-    public function updateshiplist(Request $request, ShipListTemp $slt)
+    public function updateshiplist(Request $request, $id)
    {
     
     $validator = $request->validate([
-        'shipcodems'=>'required',
-            'shipnamems'=>'required',
-            'insured_number'=>'required'
+        'ship_code'=>'required',
+            'ship_name'=>'required',
+            'insuredID'=>'required'
     ]);
     
     if($validator){
-        $slt->ship_code = $request->shipcodems;
-        $slt->ship_name = $request->shipnamems;
+
+        $slt = ShipListTemp::find($id);
+        $slt->insured_id = $request->insuredID;
+        $slt->ship_code = $request->ship_code;
+        $slt->ship_name = $request->ship_name;
         $slt->save();
-        $notification = array(
-            'message' => 'Ship List updated successfully!',
-            'alert-type' => 'success'
-        );
-        return back()->with($notification);
+        // $notification = array(
+        //     'message' => 'Ship List updated successfully!',
+        //     'alert-type' => 'success'
+        // );
+        return response()->json($slt);
     }else{
-        return back()->with($validator)->withInput();
+        return response()->json($validator);
     }
    }
 
