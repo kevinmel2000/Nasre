@@ -237,7 +237,7 @@ class FinancialLineSlipController extends Controller
 
     
 
-    public function updateflslip($code_ms)
+    public function updateflslip($idm)
     {
         $user = Auth::user();
         $country = User::orderby('id','asc')->get();
@@ -261,14 +261,15 @@ class FinancialLineSlipController extends Controller
 
         $fe_ids = response()->json($insured->modelKeys());
         
-        $insureddata=Insured::where('number','=',$code_ms)->firstOrFail();
-        $slipdata=SlipTable::where('insured_id','=',$code_ms)->firstOrFail();
+        $insureddata=Insured::find($idm);
+        $code_ms=$insureddata->number;
+        $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
         $code_sl=$slipdata->number;
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         
-        
+        $filelist=SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
@@ -277,12 +278,12 @@ class FinancialLineSlipController extends Controller
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
             
 
-        return view('crm.transaction.fl_slipupdate', compact(['user','cnd','statuslist','slipdata','insureddata','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.fl_slipupdate', compact(['user','cnd','statuslist','filelist','slipdata','insureddata','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
     }
 
 
-    public function detailflslip($code_ms)
+    public function detailflslip($idm)
     {
         $user = Auth::user();
         $country = User::orderby('id','asc')->get();
@@ -306,14 +307,16 @@ class FinancialLineSlipController extends Controller
 
         $fe_ids = response()->json($insured->modelKeys());
         
-        $insureddata=Insured::where('number','=',$code_ms)->firstOrFail();
-        $slipdata=SlipTable::where('insured_id','=',$code_ms)->firstOrFail();
+        $insureddata=Insured::find($idm);
+        $code_ms=$insureddata->number;
+        $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
         $code_sl=$slipdata->number;
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         
         
+        $filelist=SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
@@ -322,7 +325,7 @@ class FinancialLineSlipController extends Controller
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
             
 
-        return view('crm.transaction.fl_slipdetail', compact(['user','cnd','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.fl_slipdetail', compact(['user','cnd','filelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
     }
 
@@ -352,7 +355,7 @@ class FinancialLineSlipController extends Controller
                     'share'=>$request->flshare,
                     'share_from'=>$request->flsharefrom,
                     'share_to'=>$request->flshareto,
-                    'coincurance'=>$request->flcoincurance,
+                    'coincurance'=>$request->flcoinsurance,
                     'obligee'=>$request->flobligee,
                     'principal'=>$request->flprincipal,
                     'location'=>$locationlist->toJson()
@@ -368,12 +371,13 @@ class FinancialLineSlipController extends Controller
                 $insureddataid=$insureddata->id;
                 $insureddataup = Insured::findOrFail($insureddataid);
                 $insureddataup->insured_prefix=$request->flinsured;
+                $insureddataup->slip_type='fl';
                 $insureddataup->insured_name=$request->flsuggestinsured;
                 $insureddataup->insured_suffix=$request->flsuffix;
                 $insureddataup->share=$request->flshare;
                 $insureddataup->share_from=$request->flsharefrom;
                 $insureddataup->share_to=$request->flshareto;
-                $insureddataup->coincurance=$request->flcoincurance;
+                $insureddataup->coincurance=$request->flcoinsurance;
                 $insureddataup->obligee=$request->flobligee;
                 $insureddataup->principal=$request->flprincipal;
                 $insureddataup->location=$locationlist->toJson();
@@ -499,6 +503,7 @@ class FinancialLineSlipController extends Controller
                 $slipdataup->number=$request->slipnumber;
                 $slipdataup->username=Auth::user()->name;
                 $slipdataup->insured_id=$request->code_ms;
+                $slipdataup->slip_type='fl';
                 $slipdataup->prod_year=$currdate;
                 $slipdataup->uy=$request->slipuy;
                 $slipdataup->status=$request->slipstatus;

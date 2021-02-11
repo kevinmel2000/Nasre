@@ -788,6 +788,7 @@ $("body").on("click","#btn-danger2",function(){
        var slipbasicpremium =  $('#slipbasicpremium').val();
        var slipgrossprmtonr =  $('#slipgrossprmtonr').val();
        var slipsumcommission =  $('#slipsumcommission').val();
+       var slipcommission =  $('#slipcommission').val();
        var slipnetprmtonr =  $('#slipnetprmtonr').val();
        var sliprb =  $('#sliprb').val();
        var slipor =  $('#slipor').val();
@@ -837,6 +838,7 @@ $("body").on("click","#btn-danger2",function(){
                slipbasicpremium:slipbasicpremium,
                slipgrossprmtonr:slipgrossprmtonr,
                slipsumcommission:slipsumcommission,
+               slipcommission:slipcommission,
                slipnetprmtonr:slipnetprmtonr,
                sliprb:sliprb,
                slipor:slipor,

@@ -13,4 +13,5 @@ class InterestInsured extends Model
     {
         return $this->belongsTo('App\Models\COB', 'cob_id');
     }
+
 }

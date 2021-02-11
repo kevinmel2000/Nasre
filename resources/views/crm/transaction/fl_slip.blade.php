@@ -346,7 +346,13 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            
+                                                        @foreach($statuslist as $statlist)
+                                                                    <tr>
+                                                                             <td>{{ $statlist->status }}</td>
+                                                                             <td>{{ $statlist->updated_at }}</td>
+                                                                             <td>{{ $statlist->user }}</td>
+                                                                    </tr>   
+                                                                @endforeach
                                                         </tbody>
                                                         
                                                         </table>
@@ -538,7 +544,7 @@
                                                                                 @endphp
                                                                                 @foreach($interestlist as $isl)
                                                                                     <tr id="iid{{ $isl->id }}">
-                                                                                            <td>{{ $isl->interestinsured->description }}</td>
+                                                                                            <td>{{ $isl->interestinsureddata->description }}</td>
                                                                                             <td>{{ $isl->amount }}</td>
                                                                                             @php 
                                                                                             $totalamount=$totalamount+$isl->amount;

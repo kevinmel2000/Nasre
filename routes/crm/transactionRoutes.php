@@ -105,10 +105,10 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::post('/hem-slipindex', [HeMotorSlipController::class, 'index']);
     Route::post('/hem-insured/store', [HeMotorSlipController::class, 'storeheminsured']);
     Route::post('/hem-slip/store', [HeMotorSlipController::class, 'storehemslip']);
-    Route::get('/hem-slip/updatehemslip/{fe}', [MovePropSlipController::class, 'updatehemslip']);
-    Route::get('/updatehemslip/{fe}', [MovePropSlipController::class, 'updatehemslip']);
-    Route::get('/hem-slip/detailhemslip/{fe}', [MovePropSlipController::class, 'detailhemslip']);
-    Route::get('/detailhemslip/{fe}', [MovePropSlipController::class, 'detailhemslip']);
+    Route::get('/hem-slip/updatehemslip/{fe}', [HeMotorSlipController::class, 'updatehemslip']);
+    Route::get('/updatehemslip/{fe}', [HeMotorSlipController::class, 'updatehemslip']);
+    Route::get('/hem-slip/detailhemslip/{fe}', [HeMotorSlipController::class, 'detailhemslip']);
+    Route::get('/detailhemslip/{fe}', [HeMotorSlipController::class, 'detailhemslip']);
     Route::delete('/hem-slip/destroy/{fe}', [HeMotorSlipController::class, 'destroy']);
     
 

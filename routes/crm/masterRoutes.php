@@ -89,7 +89,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // SECTION Golf Hole Routes
     Route::get('/golffieldhole', [GolfFieldHoleController::class, 'index'])->middleware(['can:view-gfh']);
     Route::post('/golffieldhole/store', [GolfFieldHoleController::class, 'store'])->middleware(['can:create-gfh']);
-    Route::put('/golffieldhole/update/{gfh}', [GolfFieldHoleontroller::class, 'update'])->middleware(['can:update-gfh']);
+    Route::put('/golffieldhole/update/{gfh}', [GolfFieldHoleController::class, 'update'])->middleware(['can:update-gfh']);
     Route::delete('/golffieldhole/destroy/{gfh}', [GolfFieldHoleController::class, 'destroy'])->middleware(['can:delete-gfh']);
 
     // SECTION Ceding Broker Routes

@@ -25,7 +25,7 @@
                                         <div class="form-group">
                                             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="hemnumber"  id="insuredIDtxt"  value="{{$code_ms}}" class="form-control form-control-sm" readonly required/>
+                                            <input type="text" name="flnumber"  id="insuredIDtxt"  value="{{$code_ms}}" class="form-control form-control-sm" readonly required/>
                                         </div>
                                     </div>
                                 </div>
@@ -36,7 +36,8 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="">{{__('Insured')}}</label>
-                                                    <select id="heminsured" name="heminsured" class="form-control form-control-sm ">
+                                                    <select id="flinsured" name="flinsured" class="form-control form-control-sm ">
+                                                        <option selected readonly>{{__('Select Prefix')}}</option>
                                                         @if($insureddata->insured_prefix  == "PT")
                                                         <option value="PT"  selected="selected">PT</option>
                                                         <option value="CV">CV</option>
@@ -44,16 +45,15 @@
                                                         <option value="PT">PT</option>
                                                         <option value="CV"  selected="selected">CV</option>
                                                         @endif
-
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 1')}}</label>
-                                                    <input type="text" name="hemsuggestinsured" id='autocomplete' value="{{$insureddata->insured_name}}" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
+                                                    <input type="text" name="flsuggestinsured" id='autocomplete'  value="{{$insureddata->insured_name}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 2')}}</label>
-                                                    <input type="text" name="hemsuffix" id='autocomplete2'  value="{{$insureddata->insured_suffix}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="suffix: QQ or TBk" required/>
+                                                    <input type="text" name="flsuffix" id='autocomplete2'  value="{{$insureddata->insured_suffix}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="suffix: QQ or TBk" required/>
                                                
                                                 </div>
                                             </div>
@@ -70,7 +70,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                               <input type="number" min="0" value="{{$insureddata->share}}" step=".01" id="hemshare"  name="hemshare" class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" required/>
+                                                             <input type="number" min="0"  value="{{$insureddata->share}}" step=".01" id="flshare" name="flshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -84,13 +84,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('From')}}</label>
-                                                    <input type="number" min="0" value="{{$insureddata->share_from}}" step=".01" id="hemsharefrom" name="hemsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="number" min="0" value="{{$insureddata->share_from}}"  step=".01"  id="flsharefrom" name="flsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input type="number" min="0" value="{{$insureddata->share_to}}" step=".01" id="hemshareto" name="hemshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input type="number" min="0" value="{{$insureddata->share_to}}" step=".01"  id="flshareto" name="flshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -104,11 +104,8 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         {{__('Location')}}
-                                                        
-                                                        <a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#addlocation">
-                                                        <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocr">{{__('Add Risk Location')}}</button>
-                                                        </a>
-
+                                                   
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
@@ -148,8 +145,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" id="hemcoinsurance" name="hemcoinsurance" value="{{$insureddata->coincurance}}" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                            <label for="">{{__('Principal')}}</label>
+                                            <input type="text" id="flprincipal" name="flprincipal"  value="{{$insureddata->principal}}" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -157,81 +154,29 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>{{__('Attachment')}} </label>
-                                                
-                                                <div class="input-group">
-                                                <div class="input-group control-group increment" >
-                                                <input type="file" name="hemfile_att[]" class="form-control">
-                                                <div class="input-group-btn"> 
-                                                    <button class="btn btn-success" id="btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
-                                                </div>
-                                                </div>
-
-                                                
-                                                @foreach($filelist as $isl)
-                                                <div class="control-group input-group" id="control-group2" style="margin-top:10px">
-                                                    <a href="{{ asset('files')}}/{{$isl->filename}}">{{$isl->filename}}</a>
-                                                </div>
-                                                @endforeach
-
-                                                <div class="clone hide">
-                                                <div class="control-group input-group" id="control-group" style="margin-top:10px">
-                                                    <input type="file" name="hemfile_att[]" class="form-control">
-                                                    <div class="input-group-btn"> 
-                                                    <button class="btn btn-danger" id="btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                                                    </div>
-                                                </div>
-                                                </div>
-
-
-                                            </div>
+                                            <label for="">{{__('Obligee')}}</label>
+                                            <input type="text"  id="flobligee" name="flobligee" value="{{$insureddata->obligee}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-6 d-flex justify-content-start">
-                                        <div class="col-md-12 com-sm-12 mt-3">
-                                            <label for="">{{__('Format')}}</label>
-
-                                            <table id="hemFormat" class="table table-bordered table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>{{__('Motor / Machine Type')}}</th>
-                                                        <th>{{__('chassis Number')}}</th>
-                                                        <th>{{__('Police Number')}}</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>{{__('AAA')}}</td>
-                                                        <td>{{__('EA001')}}</td>
-                                                        <td>{{__('B 1000 AA')}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{{__('BBB')}}</td>
-                                                        <td>{{__('EA002')}}</td>
-                                                        <td>{{__('B 2000 BB')}}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">{{__('Coinsurance')}}</label>
+                                            <input type="text" id="flcoinsurance" name="flcoinsurance" value="{{$insureddata->coincurance}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-12 com-sm-12 mt-3">
-                                        <button type="button" id="addinsuredsave-btn" class="btn btn-primary btn-block ">
-                                            {{__('Save')}}
-                                        </button>
-                                    </div>
-                                </div>
+                               
                                 
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
+
 
             <div class="modal fade" id="addlocation" tabindex="-1" user="dialog" aria-labelledby="addlocationLabel" aria-hidden="true">
                 <div class="modal-dialog" user="document">
@@ -274,7 +219,7 @@
 
         <div class="card ">
             <div class="card-header bg-gray">
-                 {{__('Slip Detail')}}
+            {{__('Slip Detail')}}
             </div>
             <div class="card-body bg-light-gray">
                 <div class="container-fluid p-3">
@@ -565,20 +510,11 @@
                                                     <label>{{__('Attachment')}} </label>
                                                     <div class="input-group">
                                                     
-                                                        <div class="input-group control-group increment2" >
-                                                        <input type="file" name="files[]" id="attachment" class="form-control">
-                                                        <div class="input-group-btn"> 
-                                                            <button class="btn btn-success" id="btn-success2" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
-                                                        </div>
-                                                        </div>
-                                                        <div class="clone2 hide">
+                                                        @foreach($filelist as $isl)
                                                         <div class="control-group input-group" id="control-group2" style="margin-top:10px">
-                                                            <input type="file" name="files[]" id="attachment" class="form-control">
-                                                            <div class="input-group-btn"> 
-                                                            <button class="btn btn-danger" id="btn-danger2" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                                                            </div>
+                                                            <a href="{{ asset('files')}}/{{$isl->filename}}">{{$isl->filename}}</a>
                                                         </div>
-                                                        </div>
+                                                        @endforeach
 
                                                     </div>
                                                 </div>
@@ -620,33 +556,7 @@
                                                                                     </tr>   
                                                                                 @endforeach
                                                                             </tr>
-                                                                            <tr>
-                                                                                <form id="addinterestinsured">
-                                                                                    @csrf
-                                                                                    <td>
-                                                                                        <div class="form-group">
-                                                                                            <select id="slipinterestlist" name="slipinterestlist" class="form-control form-control-sm ">
-                                                                                                <option selected disabled>{{__('Interest list')}}</option>
-                                                                                                @foreach($interestinsured as $ii)
-                                                                                                    <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
-                                                                                                @endforeach
-                                                                                            </select>
-                                                                                        </div>  
-                                                                                    </td>
-
-                                                                                    <td>
-                                                                                        <div class="form-group">
-                                                                                            <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipamount" name="slipamount" class="form-control form-control-sm " data-validation="length" data-validation-length="0-15"/>
-                                                                                        </div>
-                                                                                    </td>
-
-                                                                                    <td>
-                                                                                        <div class="form-group">
-                                                                                            <button type="button" id="addinterestinsured-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </form>
-                                                                            </tr>
+                                                                            
                                                                         </tbody>
                                                                     </table>
                                                                     </div>
@@ -816,33 +726,6 @@
                                                                                     <td><a href="#" onclick="deleteextendcoveragedetail({{ $isl->id }})">delete</i></a></td>
                                                                             </tr>   
                                                                         @endforeach
-                                                                        <tr>
-                                                                            <td colspan="2">
-                                                                                <div class="form-group">
-                                                                                    <select id="slipcncode" name="slipcncode" class="form-control form-control-sm ">
-                                                                                        <option selected readonly>{{__('Peril List')}}</option>
-                                                                                        @foreach($extendedcoverage as $ncd)
-                                                                                        <option value="{{ $ncd->id }}">{{ $ncd->code }} - {{ $ncd->name }} - {{ $ncd->description }}</option>
-                                                                                        @endforeach
-                                                                                    </select>
-                                                                                </div>  
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="number" value="0" step=".0001" id="slipnilaiec" name="slipnilaiec" placeholder="y" class="form-control form-control-sm "/>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="number" value="0" step=".0001" id="slipamountec" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm " readonly="readonly"/>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <button type="button" id="addextendcoverageinsured-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
                                                                     </tbody>
                                                                     </table>
                                                                 </div>
@@ -1074,36 +957,7 @@
                                                                                     <td><a href="#" onclick="deleteinstallmentdetail({{ $isl->id }})">delete</i></a></td>
                                                                             </tr>   
                                                                         @endforeach
-                                                                        <tr>
-                                                                            <form id="addinstallmentinsured">
-                                                                            @csrf
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                        <div class="input-group date" id="dateinstallment" data-target-input="nearest">
-                                                                                                <input type="text" id="dateinstallmentdata" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdate">
-                                                                                                <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
-                                                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                                                </div>
-                                                                                        </div>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="number" min="0" max="100" value="" step=".01"  id="slipippercentage" name="slipippercentage" placeholder="w" class="form-control form-control-sm " />
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm" readonly/>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <button type="button" id="addinstallmentinsured-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
-                                                                                </div>
-                                                                            </td>
-                                                                            </form>
-                                                                        </tr>
+                                                                        
                                                                     </tbody>
                                                                     </table>
                                                                 </div>
@@ -1178,51 +1032,7 @@
                                                                                     <td><a href="#" onclick="deleteretrocessiondetail({{ $isl->id }})">delete</i></a></td>
                                                                             </tr>   
                                                                         @endforeach
-                                                                        <tr>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <select id="sliprptype" name="sliprptype" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Type list')}}</option>
-                                                                                        <option value="NM XOL">NM XOL</option>
-                                                                                    </select>
-                                                                                </div>  
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <select id="sliprpcontract" name="sliprpcontract" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Contract list')}}</option>
-                                                                                        <option value="20NM11110">20NM11110</option>
-                                                                                        <option value="20ABC">20ABC</option>
-                                                                                    </select>
-                                                                                </div>  
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-8">
-                                                                                            <div class="input-group">
-                                                                                                <input type="number" min="0" max="100" value="" step=".01" id="sliprppercentage" name="sliprppercentage" class="form-control form-control-sm " />
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col-md-2">
-                                                                                            <div class="input-group-append">
-                                                                                                <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="text" id="sliprpamount" name="sliprpamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " readonly/>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <button type="button" id="addretrocessioninsured-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
+                                                                       
                                                                     </tbody>
                                                                     </table>
                                                                 </div>
@@ -1237,18 +1047,7 @@
                             </div>
                         </div>
 
-                        <div class="card card-primary">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12 com-sm-12 mt-3">
-                                        <button type="submit" id="addslipinsured-btn" class="btn btn-primary btn-block ">
-                                            {{__('Save')}}
-                                        </button>
-                                    </div>
-                                
-                                </div>
-                            </div>
-                        </div> 
+                         
                     </form>
                 </div>
                 
@@ -1261,5 +1060,5 @@
 
 
 @section('scripts')
-@include('crm.transaction.hem_slip_js')
+@include('crm.transaction.fl_slip_js')
 @endsection

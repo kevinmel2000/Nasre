@@ -10,7 +10,7 @@ class InterestInsuredTemp extends Model
 
     protected $guarded = [];
 
-    public function interestinsured()
+    public function interestinsureddata()
     {
         return $this->belongsTo('App\Models\InterestInsured', 'interest_id');
     }

@@ -66,12 +66,12 @@
 
                                 @can('update-felookup', User::class)
                                 
-                                {!! link_to('transaction-data/detailfeslip/'.@$insureddata->number,'Detail Data',['class'=>'btn btn-primary']) !!}
+                                {!! link_to('transaction-data/detailfeslip/'.@$insureddata->id,'Detail Data',['class'=>'btn btn-primary']) !!}
                                 @endcan  
                               
                                 @can('update-felookup', User::class)
                                 
-                                {!! link_to('transaction-data/updatefeslip/'.@$insureddata->number,'Edit Data',['class'=>'btn btn-primary']) !!}
+                                {!! link_to('transaction-data/updatefeslip/'.@$insureddata->id,'Edit Data',['class'=>'btn btn-primary']) !!}
                                 @endcan  
 
                                   
