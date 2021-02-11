@@ -128,7 +128,7 @@
 
         var shipcode = $('#shipcodetxt').val();
         var shipname = $('#shipnametxt').val();
-        var insured_id = $('#insuredIDtxt').val();
+        var insured_id = $('#msinumber').val();
         var token = $('input[name=_token]').val();
         
         $.ajax({
@@ -278,15 +278,12 @@
             
                console.log(response)
                $('#interestInsuredTable tbody').prepend('<tr id="iid'+response.id+'" data-name="interestvalue[]"><td data-name="'+response.interest_id+'">'+response.description+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestdetail('+response.id+')">delete</a></td></tr>')
-               $('#slipamount').val('');
-               $('#slipinterestlist').val('');
-               
                
                var total =  parseFloat($("#sliptotalsum").val());
                var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
                $("#sliptotalsum").val(sum);
                $("#msishareto").val(sum);
-               
+               $(':input','#addinterestinsured').not(':button, :submit, :reset, :hidden').val(' ').removeAttr('checked').removeAttr('selected');
             
            }
        });
@@ -331,9 +328,8 @@
             
                 console.log(response)
                 $('#deductiblePanel tbody').prepend('<tr id="ddtid'+response.id+'" data-name="deductiblevalue[]"><td data-name="'+response.deductibletype_id+'">'+ response.dtabbrev +' - '+ response.dtdescript+'</td><td data-name="'+response.currency_id+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibletype('+response.id+')">delete</a></td></tr>')
-                $('#slipdpminamount').val('');
-                $('#slipdpamount').val('');
-                $('#slipdppercentage').val('');
+                
+                $(':input','#adddeductibletype').not(':button, :submit, :reset, :hidden').val(' ').removeAttr('checked').removeAttr('selected');
                
            }
        });
@@ -362,8 +358,9 @@
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },
            success:function(response){
-            
+
                console.log(response)
+               
                if(response.information == null){
                 $('#conditionNeeded tbody').prepend('<tr id="cnid'+response.id+'" data-name="conditionneededvalue[]"><td data-name="'+response.conditionneeded_id+'">'+response.condition+'</td><td data-name="'+response.information+'">-</td><td><a href="javascript:void(0)" onclick="deleteconditionneeded('+response.id+')">delete</a></td></tr>')
                
@@ -371,6 +368,8 @@
                 $('#conditionNeeded tbody').prepend('<tr id="cnid'+response.id+'" data-name="conditionneededvalue[]"><td data-name="'+response.conditionneeded_id+'">'+response.condition+'</td><td data-name="'+response.information+'">'+response.information+'</td><td><a href="javascript:void(0)" onclick="deleteconditionneeded('+response.id+')">delete</a></td></tr>')
                
                }
+               $(':input','#addconditionneeded').not(':button, :submit, :reset, :hidden').val(' ').removeAttr('checked').removeAttr('selected');
+               
                
                
             
@@ -408,9 +407,9 @@
             
                console.log(response)
                $('#installmentPanel tbody').prepend('<tr id="ispid'+response.id+'" data-name="interestvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentpanel('+response.id+')">delete</a></td></tr>')
-               $('#slipipdate').val('');
-               $('#slipippercentage').val('');
-               $('#slipipamount').val('');
+               $(':input','#addinstallmentpanel').not(':button, :submit, :reset, :hidden').val(' ').removeAttr('checked').removeAttr('selected');
+               
+
                
                
             
@@ -450,9 +449,8 @@
             
                console.log(response)
                $('#retrocessionPanel tbody').prepend('<tr id="rscid'+response.id+'" data-name="retrocessionvalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessiontemp('+response.id+')">delete</a></td></tr>')
+               $(':input','#addretrocessiontemp').not(':button, :submit, :reset, :hidden').val(' ').removeAttr('checked').removeAttr('selected');
                
-               $('#sliprppercentage').val('');
-               $('#sliprpamount').val('');
                
                
             
@@ -622,7 +620,11 @@
            {
                 swal("Good job!", "Insured Marine Insert Success", "success")
                 console.log(response)
-
+                $(':input','#formmarineinsured')
+                    .not(':button, :submit, :reset, :hidden')
+                    .val('')
+                    .removeAttr('checked')
+                    .removeAttr('selected');
            },
            error: function (request, status, error) {
                 //alert(request.responseText);
@@ -634,11 +636,11 @@
 </script>
 
 <script type='text/javascript'>
-    $('#addslipsave-btn').click(function(e){
+    $('#marineslipform').submit(function(e){
        //alert('masuk');
        e.preventDefault();
 
-       var code_ms = $('#msinumber').val();
+       var code_ins = $('#msinumber').val();
        var slipnumber = $('#slipnumber').val();
        var slipuy = $('#slipuy').val();
        var slipstatus = $('#slipstatus').val();
@@ -685,10 +687,10 @@
             });
 
        $.ajax({
-           url:"{{url('transaction-data/fe-slip/store')}}",
+           url:"{{url('transaction-data/marine-slip/store')}}",
            type:"POST",
            data:{
-               code_ms:code_ms,
+               code_ins:code_ins,
                slipnumber:slipnumber,
                slipuy:slipuy,
                slipstatus:slipstatus,
@@ -730,13 +732,13 @@
            complete: function() {  $("body").removeClass("loading"); },
            success:function(response)
            {
-                swal("Good job!", "Insured Fire & Engineering Slip Insert Success", "success")
+                swal("Good job!", "Marine Slip Insert Success", "success")
                 console.log(response)
-
+                
            },
            error: function (request, status, error) {
-                //alert(request.responseText);
-                swal("Error!", "Insured Fire & Engineering Slip Insert Error", "Insert Error");
+                console.log(request.responseText);
+                swal("Error!", "Marine Slip Insert Error", "Insert Error");
            }
        });
 
@@ -768,7 +770,7 @@
                     },
                     error: function(data){
                      //alert(data.responseJSON.errors.files[0]);
-                     swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
+                     swal("Error!", data.responseJSON.errors.files[0], "Insert file Error");
                      console.log(data.responseJSON.errors);
                     }
         });

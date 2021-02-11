@@ -46,7 +46,7 @@
       var slip = <?php echo(($slip_ids->content())) ?>;
       for(const id of slip) {
           var btn = `
-              <a href="#" onclick="confirmDelete('${id}')">
+              <a href="#" onclick="confirmDelete2('${id}')">
                   <i class="fas fa-trash text-danger"></i>
               </a>
           `;
@@ -65,7 +65,7 @@
   
     });
   
-    function confirmDelete(id){
+    function confirmDelete2(id){
         let choice = confirm("{{__('Are you sure, you want to delete this Marine Slip related data?')}}")
         if(choice){
             document.getElementById('delete-marineslip-'+id).submit();
