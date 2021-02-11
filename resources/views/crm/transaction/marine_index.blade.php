@@ -39,6 +39,9 @@
                                 <tr>
                                 <th>{{__('Number')}}</th>
                                 <th>{{__('Insured')}}</th>
+                                <th>{{__('Route')}}</th>
+                                <th>{{__('Route From')}}</th>
+                                <th>{{__('Route To')}}</th>
                                 <th>{{__('Share')}}</th>
                                 <th>{{__('Share From')}}</th>
                                 <th>{{__('Share To')}}</th>
@@ -49,8 +52,11 @@
                                 <tbody>
                                     @foreach (@$insured as $insureddata)
                                         <tr>
-                                        <td>{{@$insureddata->number}}</td>
+                                        <td><a href="{{  url('transaction-data/marine-insured', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
                                         <td>{{@$insureddata->insured_prefix}} - {{@$insureddata->insured_name}} - {{@$insureddata->insured_suffix}}</td>
+                                        <td>{{@$insureddata->route }}</td>
+                                        <td>{{@$insureddata->route_from}}</td>
+                                        <td>{{@$insureddata->route_to}}</td>
                                         <td>{{@$insureddata->share }}</td>
                                         <td>{{@$insureddata->share_from}}</td>
                                         <td>{{@$insureddata->share_to}}</td>
@@ -66,59 +72,23 @@
 
                                             
                                             {{-- @can('update-felookup', User::class) --}}
-                                                <a class="text-primary mr-3" data-toggle="modal" data-target="#updateinsuredmarine{{$insureddata->id}}">
+                                                <a class="text-primary mr-3" href="{{ url('transaction-data/marine-insured', $insureddata->id) }}">
                                                 <i class="fas fa-edit"></i>
                                                 </a>
                                                 {{-- @endcan   --}}
 
-                                                <div class="modal fade" id="updateinsuredmarine{{$insureddata->id}}" tabindex="-1" user="dialog" aria-labelledby="updateinsuredmarine{{$insureddata->id}}Label" aria-hidden="true">
-                                                <div class="modal-dialog" user="document">
-                                                <div class="modal-content bg-light-gray">
-                                                    <div class="modal-header bg-gray">
-                                                    <h5 class="modal-title" id="updateinsuredmarine{{$insureddata->id}}Label">{{__('Update Marine Insured')}}</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                    </div>
-                                                    <form action="{{url('master-data/marineslip/update',$insureddata)}}" method="POST">
-                                                        <div class="modal-body">
-                                                            @csrf
-                                                            @method('PUT')
 
-                                                            <div class="row">
-                                                            <div class="col-md-6 col-md-12">
-                                                                <div class="form-group">
-                                                                <label for="">{{__('Number')}}</label>
-                                                                <input type="text" name="number" class="form-control" value="{{$insureddata->number}}" readonly required/>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-
-                                                            
-
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                                                            <input type="submit" class="btn btn-info" value="Update">
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            {{-- Edit Modal Ends --}}
-
-                                            @can('delete-marineinsured', User::class)
+                                            {{-- @can('delete-marineinsured', User::class) --}}
 
                                             <span id="delbtn{{@$insureddata->id}}"></span>
                                             
                                                 <form id="delete-marineinsured-{{$insureddata->id}}"
-                                                    action="{{ url('transaction-data/marine-insured/destroy', $insureddata->id) }}"
+                                                    action="{{ url('transaction-data/marine-insured/destroyinsured', $insureddata->id) }}"
                                                     method="POST">
                                                     @method('DELETE')
                                                     @csrf
                                                 </form>
-                                                @endcan  
+                                                {{-- @endcan   --}}
                                             </span>
                                         </td>
 
@@ -155,22 +125,22 @@
                                 <tr>
                                 <th>{{__('Number')}}</th>
                                 <th>{{__('Insured')}}</th>
-                                <th>{{__('Share')}}</th>
-                                <th>{{__('Share From')}}</th>
-                                <th>{{__('Share To')}}</th>
-                                <th>{{__('Coincurance')}}</th>
+                                <th>{{__('production year')}}</th>
+                                <th>{{__('UY')}}</th>
+                                <th>{{__('status')}}</th>
+                                <th>{{__('username')}}</th>
                                 <th width="20%">{{__('Actions')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (@$slip as $slipdata)
                                         <tr>
-                                        <td>{{@$slipdata->number}}</td>
-                                        <td>{{@$slipdata->insured_prefix}} - {{@$slipdata->insured_name}} - {{@$slipdata->insured_suffix}}</td>
-                                        <td>{{@$slipdata->share }}</td>
-                                        <td>{{@$slipdata->share_from}}</td>
-                                        <td>{{@$slipdata->share_to}}</td>
-                                        <td>{{@$slipdata->coincurance}}</td>
+                                        <td><a href="{{  url('transaction-data/marine-slip', $slipdata->id) }}">{{@$slipdata->number}}</a></td>
+                                        <td>{{@$slipdata->insureddata->insured_prefix}} - {{@$slipdata->insureddata->insured_name}} - {{@$slipdata->insureddata->insured_suffix}}</td>
+                                        <td>{{@$slipdata->prod_year }}</td>
+                                        <td>{{@$slipdata->uy}}</td>
+                                        <td>{{@$slipdata->status}}</td>
+                                        <td>{{@$slipdata->username}}</td>
                                         <td>
                                             <a href="#" data-toggle="tooltip" data-title="{{$slipdata->created_at}}" class="mr-3">
                                             <i class="fas fa-clock text-info"></i>
@@ -229,7 +199,7 @@
                                             <span id="delbtn2{{@$slipdata->id}}"></span>
                                             
                                                 <form id="delete-marineslip-{{$slipdata->id}}"
-                                                    action="{{ url('transaction-data/marine-slip/destroy', $slipdata->id) }}"
+                                                    action="{{ url('transaction-data/marine-slip/destroyslip', $slipdata->id) }}"
                                                     method="POST">
                                                     @method('DELETE')
                                                     @csrf

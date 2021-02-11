@@ -14,6 +14,7 @@ use App\Http\Controllers\TransactionController;
 
 Route::get('get-ship-list','TransactionController@showShipList');
 Route::post('/store-ship-list','TransactionController@storeshiplist')->name('shiplist.store');
+Route::put('ship-list/{slt}', 'TransactionController@updateshiplist');
 Route::delete('/delete-ship-list/{id}','TransactionController@destroyshiplist')->name('shiplist.delete');
 
 Route::post('/store-fe-sliplocation-list','FeSlipController@storelocationlist')->name('locationlist.store');
@@ -48,11 +49,14 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     // SECTION Marine Slip Group Routes
     Route::get('/marine-slip', [TransactionController::class, 'indexmarineslip']);
     Route::get('/marine-index', [TransactionController::class, 'indexmarine']);
-    Route::get('/marine-slip/{id}', [TransactionController::class, 'showshipdetails'])->name('shipDetails');
+    Route::get('/marine-slip/{id}', [TransactionController::class, 'showslipdetails']);
+    Route::get('/marine-slip/edit/{id}', [TransactionController::class, 'editslipdetails']);
+    Route::get('/marine-insured/{id}', [TransactionController::class, 'showinsureddetails']);
+    Route::get('/marine-insured/edit/{id}', [TransactionController::class, 'editinsureddetails']);
     Route::post('/marine-insured/store', [TransactionController::class, 'storemarineinsured']);
     Route::post('/marine-slip/store', [TransactionController::class, 'storemarineslip']);
-    Route::delete('/marine-insured/destroy/{fe}', [TransactionController::class, 'destroymarineinsured']);
-    Route::delete('/marine-slip/destroy/{fe}', [TransactionController::class, 'destroyemarineslip']);
+    Route::delete('/marine-insured/destroyinsured/{id}', [TransactionController::class, 'destroymarineinsured']);
+    Route::delete('/marine-slip/destroyslip/{id}', [TransactionController::class, 'destroyemarineslip']);
 
 
     // SECTION Fire Engineering Slip Group Routes
