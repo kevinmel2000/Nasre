@@ -605,6 +605,7 @@ class TransactionController extends Controller
                 $interestlist->save();
 
 
+                $interestdata= InterestInsured::where('id','=',$interest)->first();
 
                 return response()->json(
                     [
@@ -612,7 +613,7 @@ class TransactionController extends Controller
                         'interest_id' => $interestlist->interest_id,
                         'amount' => $interestlist->amount,
                         'slip_id' => $interestlist->slip_id,
-                        'description' => $interestlist->interestinsured->description
+                        'description' => $interestdata->description
                     ]
                 );
         
