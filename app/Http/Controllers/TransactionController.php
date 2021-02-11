@@ -589,13 +589,15 @@ class TransactionController extends Controller
                 $interestlist->slip_id = $slip_id; 
                 $interestlist->save();
 
+                $interestdata= InterestInsured::where('id','=',$interest)->first();
+
                 return response()->json(
                     [
                         'id' => $interestlist->id,
                         'interest_id' => $interestlist->interest_id,
                         'amount' => $interestlist->amount,
                         'slip_id' => $interestlist->slip_id,
-                        'description' => $interestlist->interestinsured->description
+                        'description' => $interestdata->description
                     ]
                 );
         
