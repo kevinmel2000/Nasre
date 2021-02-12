@@ -140,6 +140,76 @@
    }
 </script>
 
+<script type="text/javascript">
+    $('#formmarineinsured').submit(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var idinsured = $('#idslip').val();
+       var msinumber = $('#msinumber').val();
+       var msiprefix = $('#msiprefix').val();
+       var msisuggestinsured = $('#autocomplete').val();
+       var msisuffix = $('#autocomplete2').val();
+       var msishare = $('#msishare').val();
+       var msisharefrom  = $('#msisharefrom').val();
+       var msishareto = $('#msishareto').val();
+       var msiroute = $('#msiroute').val();
+       var msiroutefrom  = $('#msiroutefrom').val();
+       var msirouteto = $('#msirouteto').val();
+       var msicoinsurance = $('#msicoinsurance').val();
+       
+       
+       var token2 = $('input[name=_token]').val();
+
+       console.log(msiprefix)
+       console.log(msisuggestinsured)
+       console.log(msinumber)
+       console.log(msisuffix)
+
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ url('transaction-data/marine-insured/store') }}",
+           type:"POST",
+           data:{
+               insured_id:idinsured
+               msinumber:msinumber,
+               msiprefix:msiprefix,
+               msisuggestinsured:msisuggestinsured,
+               msisuffix:msisuffix,
+               msishare:msishare,
+               msisharefrom:msisharefrom,
+               msishareto:msishareto,
+               msiroute:msiroute,
+               msiroutefrom:msiroutefrom,
+               msirouteto:msirouteto,
+               msicoinsurance:msicoinsurance
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                swal("Good job!", "Insured Marine Update Success", "success")
+                console.log(response)
+                $(':input','#formmarineinsured')
+                    .not(':button, :submit, :reset, :hidden')
+                    .val('')
+                    .removeAttr('checked')
+                    .removeAttr('selected');
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", "Marine Insured Insert Error", "Insert Error");
+           }
+       });
+
+   });
+</script>
 
 <style>
     .overlay{

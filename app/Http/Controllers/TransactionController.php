@@ -1055,6 +1055,50 @@ class TransactionController extends Controller
 
             return view('crm.transaction.marine_slip_details', compact(['user','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate']));
     }
+
+    public function updatemarineinsured(request $request)
+    {
+        $user = Auth::user();
+        $country = User::orderby('id','asc')->get();
+        $route_active = 'Fire Engineering - Slip Entry';
+        $mydate = date("Y").date("m").date("d");
+        $costumer=CustomerCustomer::orderby('id','asc')->get();
+
+        $currdate = date("Y/m/d");
+        $insured = Insured::orderby('id','asc')->get();
+        $slip = SlipTable::orderby('id','asc')->get();
+        $currency = Currency::orderby('id','asc')->get();
+        $cob = COB::orderby('id','asc')->get();
+        $koc = KOC::orderby('id','asc')->get();
+        $ocp = Occupation::orderby('id','asc')->get();
+        $cedingbroker = CedingBroker::orderby('id','asc')->get();
+        $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
+        $felookup = FelookupLocation::orderby('id','asc')->get();
+        $cnd = ConditionNeeded::orderby('id','asc')->get();
+        $deductibletype= DeductibleType::orderby('id','asc')->get();
+        $extendedcoverage= ConditionNeeded::orderby('id','asc')->get();
+
+        $fe_ids = response()->json($insured->modelKeys());
+        $code_sl='';
+        $insureddata=Insured::where('number','=',$code_sl)->firstOrFail();
+        $slipdata=SlipTable::where('insured_id','=',$code_sl)->firstOrFail();
+        
+
+        $interestinsured= InterestInsured::orderby('id','asc')->get();
+        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        
+        
+        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $extendcoveragelist= ConditionNeededTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();       
+        // $locationlist= ShipListTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+            
+
+        return view('crm.transaction.fe_slipupdate', compact(['user','cnd','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+    
+    }
     
     public function updatemarineslip($code_sl)
     {
@@ -1100,10 +1144,33 @@ class TransactionController extends Controller
     
     }
 
+    public function updateshiplist(Request $request, $id)
+   {
+        $validator = $request->validate([
+            'ship_code'=>'required',
+                'ship_name'=>'required',
+                'insuredID'=>'required'
+        ]);
+        
+        if($validator){
 
-    
+            $slt = ShipListTemp::find($id);
+            $slt->insured_id = $request->insuredID;
+            $slt->ship_code = $request->ship_code;
+            $slt->ship_name = $request->ship_name;
+            $slt->save();
+            // $notification = array(
+            //     'message' => 'Ship List updated successfully!',
+            //     'alert-type' => 'success'
+            // );
+            return response()->json($slt);
+        }else{
+            return response()->json($validator);
+        }
+   }
 
-    public function destroymarineinsured($id)
+
+   public function destroymarineinsured($id)
     {
         $insured = Insured::find($id);
         if($insured->delete())
@@ -1150,31 +1217,7 @@ class TransactionController extends Controller
     }
 
 
-    public function updateshiplist(Request $request, $id)
-   {
     
-    $validator = $request->validate([
-        'ship_code'=>'required',
-            'ship_name'=>'required',
-            'insuredID'=>'required'
-    ]);
-    
-    if($validator){
-
-        $slt = ShipListTemp::find($id);
-        $slt->insured_id = $request->insuredID;
-        $slt->ship_code = $request->ship_code;
-        $slt->ship_name = $request->ship_name;
-        $slt->save();
-        // $notification = array(
-        //     'message' => 'Ship List updated successfully!',
-        //     'alert-type' => 'success'
-        // );
-        return response()->json($slt);
-    }else{
-        return response()->json($validator);
-    }
-   }
 
     /**
      * Remove the specified resource from storage.

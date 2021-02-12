@@ -12,7 +12,7 @@
         
         <form id="formmarineinsured">
           @csrf
-
+          {{ method_field('POST') }}
             @foreach($insured as $isd)
                 <div class="card">
                     <div class="card-header bg-gray">
@@ -73,6 +73,7 @@
                                                         @foreach($routeship as $rs)
                                                             @if($isd->route  == $rs->id)
                                                                 <option value="{{ $rs->id }}" selected >{{ $rs->name }} - {{ $rs->description }}</option>
+                                                                <option value="{{ $rs->id }}"  >{{ $rs->name }} - {{ $rs->description }}</option>
                                                             @else 
                                                                 <option value="{{ $rs->id }}"  >{{ $rs->name }} - {{ $rs->description }}</option>
                                                             @endif
@@ -222,9 +223,6 @@
                                                                       </div>
                                                                     </div>
                                                                 </div>
-
-
-
                                                             @endforeach
                                                         </tbody>
                                                     </table>
