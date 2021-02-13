@@ -141,6 +141,7 @@ class HeMotorSlipController extends Controller
     {
         
         $user = Auth::user();
+        $userid = Auth::user()->id;
         $route_active = 'HE & Motor - Slip Entry';
         $mydate = date("Y").date("m").date("d");
 
@@ -171,69 +172,74 @@ class HeMotorSlipController extends Controller
         if($lastid != null){
             if($lastid < 10)
             {
-                $code_ms = "IN" . $mydate . "0000" . strval($lastid + 1);
+                $code_ms = "IN" . $userid ."". $mydate . "0000" . strval($lastid + 1);
             }   
             elseif($lastid > 9 && $lastid < 100)
             {
-                $code_ms = "IN" . $mydate . "000" . strval($lastid + 1);
+                $code_ms = "IN" . $userid ."". $mydate . "000" . strval($lastid + 1);
             }
             elseif($lastid > 99 && $lastid < 1000)
             {
-                $code_ms = "IN" . $mydate . "00" . strval($lastid + 1);
+                $code_ms = "IN" . $userid ."". $mydate . "00" . strval($lastid + 1);
             }
             elseif($lastid > 999 && $lastid < 10000)
             {
-                $code_ms = "IN" . $mydate . "0" . strval($lastid + 1);
+                $code_ms = "IN" . $userid ."". $mydate . "0" . strval($lastid + 1);
             }
             elseif($lastid > 9999 && $lastid < 100000)
             {
-                $code_ms = "IN" . $mydate  . strval($lastid + 1);
+                $code_ms = "IN" . $userid ."". $mydate  . strval($lastid + 1);
             }
 
 
         }
         else{
-            $code_ms = "IN" . $mydate . "0000" . strval(1);
+            $code_ms = "IN" . $userid ."". $mydate . "0000" . strval(1);
         }
 
         if($sliplastid != null){
             if($sliplastid < 10)
             {
-                $code_sl =  "HEM". $mydate . "0000" . strval($sliplastid + 1);
+                $code_sl = "HEM". $userid ."". $mydate . "0000" . strval($sliplastid + 1);
             }   
             elseif($sliplastid > 9 && $sliplastid < 100)
             {
-                $code_sl =  "HEM". $mydate . "000" . strval($sliplastid + 1);
+                $code_sl = "HEM". $userid ."". $mydate . "000" . strval($sliplastid + 1);
             }
             elseif($sliplastid > 99 && $sliplastid < 1000)
             {
-                $code_sl =  "HEM". $mydate . "00" . strval($sliplastid + 1);
+                $code_sl = "HEM". $userid ."". $mydate . "00" . strval($sliplastid + 1);
             }
             elseif($sliplastid > 999 && $sliplastid < 10000)
             {
-                $code_sl =  "HEM". $mydate . "0" . strval($sliplastid + 1);
+                $code_sl = "HEM". $userid ."". $mydate . "0" . strval($sliplastid + 1);
             }
             elseif($sliplastid > 9999 && $sliplastid < 100000)
             {
-                $code_sl = "HEM". $mydate . strval($sliplastid + 1);
+                $code_sl = "HEM". $userid ."". $mydate . strval($sliplastid + 1);
             }
 
             
         }
         else{
-            $code_sl =  "HEM" . $mydate . "0000" . strval(1);
+            $code_sl = "HEM". $userid ."". $mydate . "0000" . strval(1);
         }
 
+        $interestinsured= InterestInsured::orderby('id','asc')->get();
+        
+        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
 
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-        
         $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-        
-        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-        $interestinsured= InterestInsured::orderby('id','asc')->get();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+
+        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
        
         
