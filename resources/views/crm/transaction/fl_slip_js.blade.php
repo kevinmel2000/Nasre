@@ -569,25 +569,56 @@ $(document).ready(function() {
 
 <script type='text/javascript'>
     
-     $('#sliprppercentage').keyup(function () {
+    $('#sliprppercentage').keyup(function () {
         var persentage =  parseFloat($('#sliprppercentage').val());
-        var slipnetprmtonr =  parseFloat($('#slipnetprmtonr').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+        var slipshare =  parseFloat($('#slipshare').val());
+
         //alert(premiumnr);
         //alert(persentage);
-        var sum = isNaN(slipnetprmtonr * persentage/100) ? 0 :(slipnetprmtonr * persentage/100) ;
+        var sum = isNaN(sliptotalsum * (slipshare * persentage)/100) ? 0 :(sliptotalsum * (slipshare * persentage)/100);
         //alert(sum);
         $('#sliprpamount').val(sum);
      });
 
+
      $('#sliprppercentage').change(function () {
         var persentage =  parseFloat($('#sliprppercentage').val());
-        var slipnetprmtonr =  parseFloat($('#slipnetprmtonr').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+        var slipshare =  parseFloat($('#slipshare').val());
         //alert(premiumnr);
         //alert(persentage);
-        var sum = isNaN(slipnetprmtonr * persentage/100) ? 0 :(slipnetprmtonr * persentage/100) ;
+        var sum = isNaN(sliptotalsum * (slipshare * persentage)/100) ? 0 :(sliptotalsum * (slipshare * persentage)/100);
         //alert(sum);
         $('#sliprpamount').val(sum);
      });
+
+     
+
+     $('#slipor').keyup(function () {
+        var persentage =  parseFloat($('#slipor').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+        var slipshare =  parseFloat($('#slipshare').val());
+
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (slipshare * persentage)/100) ? 0 :(sliptotalsum * (slipshare * persentage)/100);
+        //alert(sum);
+        $('#slipsumor').val(sum);
+     });
+
+
+     $('#slipor').change(function () {
+        var persentage =  parseFloat($('#slipor').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+        var slipshare =  parseFloat($('#slipshare').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (slipshare * persentage)/100) ? 0 :(sliptotalsum * (slipshare * persentage)/100);
+        //alert(sum);
+        $('#slipsumor').val(sum);
+     });
+
 
 </script>
 
