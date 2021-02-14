@@ -838,6 +838,8 @@ $(document).ready(function() {
            }
        });
 
+
+      
        var formData = new FormData(this);
        let TotalFiles = $('#attachment')[0].files.length; //Total files
        let files = $('#attachment')[0];

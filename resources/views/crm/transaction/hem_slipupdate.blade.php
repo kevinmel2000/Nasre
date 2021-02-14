@@ -161,11 +161,8 @@
                                                 
                                                 <div class="input-group">
                                                 <div class="input-group control-group increment" >
-                                                <input type="file" name="hemfile_att[]" class="form-control">
-                                                <div class="input-group-btn"> 
-                                                    <button class="btn btn-success" id="btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
-                                                </div>
-                                                </div>
+                                                <input type="file" name="hemfile_att[]" class="form-control" multiple>
+                                               </div>
 
                                                 
                                                 @foreach($filelist as $isl)
@@ -174,17 +171,10 @@
                                                 </div>
                                                 @endforeach
 
-                                                <div class="clone hide">
-                                                <div class="control-group input-group" id="control-group" style="margin-top:10px">
-                                                    <input type="file" name="hemfile_att[]" class="form-control">
-                                                    <div class="input-group-btn"> 
-                                                    <button class="btn btn-danger" id="btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                                                    </div>
-                                                </div>
-                                                </div>
+                                            
 
 
-                                            </div>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
