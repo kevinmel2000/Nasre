@@ -941,5 +941,53 @@ $(document).ready(function(){
                     }
         });
 
+
+        //save insured
+
+       var mpnumber = $('#insuredIDtxt').val();
+       var mpinsured = $('#mpinsured').val();
+       var mpsuggestinsured = $('#autocomplete').val();
+       var mpsuffix = $('#autocomplete2').val();
+       var mpshare = $('#mpshare').val();
+       var mpsharefrom  = $('#mpsharefrom').val();
+       var mpshareto = $('#mpshareto').val();
+       var mpcoinsurance = $('#mpcoinsurance').val();
+       
+       
+       var token2 = $('input[name=_token]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ url('transaction-data/mp-insured/store') }}",
+           type:"POST",
+           data:{
+               mpnumber:mpnumber,
+               mpinsured:mpinsured,
+               mpsuggestinsured:mpsuggestinsured,
+               mpsuffix:mpsuffix,
+               mpshare:mpshare,
+               mpsharefrom:mpsharefrom,
+               mpshareto:mpshareto,
+               mpcoinsurance:mpcoinsurance
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                swal("Good job!", "Moveable Property Insert Success", "success")
+                console.log(response)
+
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", request.responseText, "Insert Error");
+           }
+       });
+
    });
 </script>

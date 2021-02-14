@@ -882,5 +882,56 @@ $(document).ready(function() {
                     }
         });
 
+
+       //insured SAVE
+       var flnumber = $('#insuredIDtxt').val();
+       var flinsured = $('#flinsured').val();
+       var flsuggestinsured = $('#autocomplete').val();
+       var flsuffix = $('#autocomplete2').val();
+       var flshare = $('#flshare').val();
+       var flsharefrom  = $('#flsharefrom').val();
+       var flshareto = $('#flshareto').val();
+       var flcoinsurance = $('#flcoinsurance').val();
+       var flobligee = $('#flobligee').val();
+       var flprincipal = $('#flprincipal').val();
+       
+       
+       var token2 = $('input[name=_token]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ url('transaction-data/fl-insured/store') }}",
+           type:"POST",
+           data:{
+               flnumber:flnumber,
+               flinsured:flinsured,
+               flsuggestinsured:flsuggestinsured,
+               flsuffix:flsuffix,
+               flshare:flshare,
+               flsharefrom:flsharefrom,
+               flshareto:flshareto,
+               flcoinsurance:flcoinsurance,
+               flobligee:flobligee,
+               flprincipal:flprincipal
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                swal("Good job!", "Financial Line Insert Success", "success")
+                console.log(response)
+
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", request.responseText, "Insert Error");
+           }
+       });
+
    });
 </script>

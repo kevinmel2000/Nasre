@@ -871,6 +871,62 @@ $(document).ready(function() {
                     }
         });
 
+
+      // insured save
+       var fesnumber = $('#insuredIDtxt').val();
+       var fesinsured = $('#feinsured').val();
+       var fessuggestinsured = $('#autocomplete').val();
+       var fessuffix = $('#autocomplete2').val();
+       var fesshare = $('#feshare').val();
+       var fessharefrom  = $('#fesharefrom').val();
+       var fesshareto = $('#feshareto').val();
+       var fescoinsurance = $('#fecoinsurance').val();
+       
+       
+       var token2 = $('input[name=_token]').val();
+
+       console.log(fesinsured)
+       console.log(fessuggestinsured)
+       console.log(fesnumber)
+       console.log(fessuffix)
+
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ url('transaction-data/fe-insured/store') }}",
+           type:"POST",
+           data:{
+               fesnumber:fesnumber,
+               fesinsured:fesinsured,
+               fessuggestinsured:fessuggestinsured,
+               fessuffix:fessuffix,
+               fesshare:fesshare,
+               fessharefrom:fessharefrom,
+               fesshareto:fesshareto,
+               fescoinsurance:fescoinsurance
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                swal("Good job!", "Insured Fire & Engineering Insert Success", "success")
+                console.log(response)
+
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
+           }
+       });
+
+
+
+
    });
 </script>
 

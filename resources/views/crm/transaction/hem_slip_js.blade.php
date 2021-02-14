@@ -846,5 +846,53 @@ $("body").on("click","#btn-danger2",function(){
                     }
         });
 
+
+        //save insured
+
+        var hemnumber = $('#insuredIDtxt').val();
+       var heminsured = $('#heminsured').val();
+       var hemsuggestinsured = $('#autocomplete').val();
+       var hemsuffix = $('#autocomplete2').val();
+       var hemshare = $('#hemshare').val();
+       var hemsharefrom  = $('#hemsharefrom').val();
+       var hemshareto = $('#hemshareto').val();
+       var hemcoinsurance = $('#hemcoinsurance').val();
+       
+       
+       var token2 = $('input[name=_token]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ url('transaction-data/hem-insured/store') }}",
+           type:"POST",
+           data:{
+               hemnumber:hemnumber,
+               heminsured:heminsured,
+               hemsuggestinsured:hemsuggestinsured,
+               hemsuffix:hemsuffix,
+               hemshare:hemshare,
+               hemsharefrom:hemsharefrom,
+               hemshareto:hemshareto,
+               hemcoinsurance:hemcoinsurance
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                swal("Good job!", "HE & Motor Insert Success", "success")
+                console.log(response)
+
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", request.responseText, "Insert Error");
+           }
+       });
+
    });
 </script>
