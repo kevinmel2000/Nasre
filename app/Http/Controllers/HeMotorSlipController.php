@@ -427,6 +427,21 @@ class HeMotorSlipController extends Controller
             'slipno'=>'required',
             'slipcndn'=>'required'
         ]);
+
+        $costumcheck=Customer::where('company_name','=',$request->fessuggestinsured)->first();
+        if($costumcheck==null)
+        {
+
+            Customer::create([
+                'owner_id'=>'1',
+                'industry_id'=>'27',
+                'company_prefix' => $request->fesinsured,
+                'company_name'=>$request->fessuggestinsured,
+                'website'=>$request->fessuggestinsured,
+                'company_suffix'=>$request->fessuffix
+            ]);
+
+        }
         
         if($validator)
         {
