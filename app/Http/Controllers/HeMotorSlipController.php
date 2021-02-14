@@ -476,7 +476,7 @@ class HeMotorSlipController extends Controller
                     'cob'=>$request->slipcob,
                     'koc'=>$request->slipkoc,
                     'occupacy'=>$request->slipoccupacy,
-                    'build_cost'=>$request->slipbld_const,
+                    'build_const'=>$request->slipbld_const,
                     'slip_no'=>$request->slipno,
                     'cn_dn'=>$request->slipcndn,
                     'policy_no'=>$request->slippolicy_no,
@@ -489,7 +489,7 @@ class HeMotorSlipController extends Controller
                     'deductible_panel'=>$deductiblelist->toJson(),
                     'extend_coverage'=>$extendcoveragelist->toJson(),
                     'insurance_period_from'=>$request->slipipfrom,
-                    'insurance_perido_to'=>$request->slipipto,
+                    'insurance_period_to'=>$request->slipipto,
                     'reinsurance_period_from'=>$request->sliprpfrom,
                     'reinsurance_period_to'=>$request->sliprpto,
                     'proportional'=>$request->slipproportional,
@@ -535,7 +535,7 @@ class HeMotorSlipController extends Controller
                 $slipdataup->cob=$request->slipcob;
                 $slipdataup->koc=$request->slipkoc;
                 $slipdataup->occupacy=$request->slipoccupacy;
-                $slipdataup->build_cost=$request->slipbld_const;
+                $slipdataup->build_const=$request->slipbld_const;
                 $slipdataup->slip_no=$request->slipno; 
                 $slipdataup->cn_dn=$request->slipcndn; 
                 $slipdataup->policy_no=$request->slippolicy_no; 
@@ -548,7 +548,7 @@ class HeMotorSlipController extends Controller
                 $slipdataup->deductible_panel=$deductiblelist->toJson(); 
                 $slipdataup->extend_coverage=$extendcoveragelist->toJson();  
                 $slipdataup->insurance_period_from=$request->slipipfrom;  
-                $slipdataup->insurance_perido_to=$request->slipipto;  
+                $slipdataup->insurance_period_to=$request->slipipto;  
                 $slipdataup->reinsurance_period_from=$request->sliprpfrom;  
                 $slipdataup->reinsurance_period_to=$request->sliprpto;
                 $slipdataup->proportional=$request->slipproportional;
