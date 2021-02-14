@@ -79,13 +79,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('From')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01" id="mpsharefrom" name="mpsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                    <input type="number" min="0" value="0" step=".01" id="mpsharefrom" name="mpsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01" id="mpshareto" name="mpshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                    <input type="number" min="0" value="0" step=".01" id="mpshareto" name="mpshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly />
                                                 </div>
                                             </div>
                                         </div>
@@ -256,7 +256,7 @@
             <div class="card-body bg-light-gray">
                 
                 <div class="container-fluid p-3">
-                <form id="multi-file-upload-ajax" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
+                <form id="multi-file-upload-ajax" method="POST" autocomplete="off" action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
                    @csrf
                         <div class="card card-tabs">
                             <div class="card-header p-0 pt-1 border-bottom-0">

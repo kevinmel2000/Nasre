@@ -64,7 +64,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                             <input type="number" id="feshare" min="0" value="0" step=".01" name="feshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                             <input type="number" id="feshare" min="0" value="0" step=".01" name="feshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -78,13 +78,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('From')}}</label>
-                                                    <input id="fesharefrom" type="number" min="0" value="0" step=".01"  name="fesharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                    <input id="fesharefrom" type="number" min="0" value="0" step=".01"  name="fesharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  readonly />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input id="feshareto" type="number" min="0" value="0" step=".01"  name="feshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                    <input id="feshareto" type="number" min="0" value="0" step=".01"  name="feshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  readonly/>
                                                 </div>
                                             </div>
                                         </div>
@@ -209,7 +209,7 @@
             </div>
             <div class="card-body bg-light-gray">
                 <div class="container-fluid p-3">
-                <form id="multi-file-upload-ajax" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
+                <form id="multi-file-upload-ajax" method="POST" autocomplete="off"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
                 @csrf
                         <div class="card card-tabs">
                             <div class="card-header p-0 pt-1 border-bottom-0">
@@ -574,7 +574,7 @@
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured') }}</label>
-                                                    <input type="number" min="0" value="{{$totalamountdata}}" step=".0001" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
+                                                    <input type="number" min="0" value="" step=".0001" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
                                                 </div>
                                             </div>
                                         </div>

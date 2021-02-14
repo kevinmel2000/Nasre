@@ -206,7 +206,7 @@ $(document).ready(function() {
                $('#slipamount').val('');
                $('#slipinterestlist').val('');
                var total =  parseFloat($("#sliptotalsum").val());
-               var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
+               var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
                $("#sliptotalsum").val(sum);
                $("#feshareto").val(sum);
 
@@ -248,7 +248,7 @@ $(document).ready(function() {
 </script>
 
 <script  type='text/javascript'>
-    $('#slippct').keyup(function () {
+   $('#slippct').keyup(function () {
         var pct =  parseFloat($(this).val());
         var tsi = parseFloat($("#sliptotalsum").val());
         var sum = isNaN(pct * tsi/100) ? 0 :(pct * tsi/100) ;
@@ -280,7 +280,7 @@ $(document).ready(function() {
 
      $('#slipshare').change(function () {
         var rateslip =  parseFloat($('#sliprate').val()) / 100 ;
-        var shareslip =  parseFloat($(this).val()) / 100 ;
+        var shareslip =  parseFloat($('#slipshare').val()) / 100 ;
         var ourshare =  parseFloat($('#feshare').val()) / 100 ;
         var tsi = parseFloat($("#sliptotalsum").val());
         var sum = isNaN(rateslip * shareslip * tsi/100) ? 0 :(rateslip * shareslip * tsi/100) ;
@@ -297,32 +297,27 @@ $(document).ready(function() {
         $('#slipsumcommission').val(sum);
         $('#slipnetprmtonr').val(sumnetprmtonr);
     });
-</script>
 
+    $('#slipor').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumshare = parseFloat($("#slipsumshare").val());
+        var sum = isNaN(percent * sumshare) ? 0 :(percent * sumshare);
+        $('#slipsumor').val(sum);
+    });
 
+    $('#sliprppercentage').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumshare = parseFloat($("#slipsumshare").val());
+        var sum = isNaN(percent * sumshare) ? 0 :(percent * sumshare);
+        $('#sliprpamount').val(sum);
+    });
 
-<script type='text/javascript'>
-    
-     $('#slipippercentage').keyup(function () {
-        var persentage =  parseFloat($('#slipippercentage').val());
-        var premiumnr =  parseFloat($('#slipnetprmtonr').val());
-        //alert(premiumnr);
-        //alert(persentage);
-        var sum = isNaN(premiumnr * persentage/100) ? 0 :(premiumnr * persentage/100) ;
-        //alert(sum);
+    $('#slipippercentage').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumnetprtonr = parseFloat($("#slipnetprmtonr").val());
+        var sum = isNaN(percent * sumnetprtonr) ? 0 :(percent * sumnetprtonr);
         $('#slipipamount').val(sum);
-     });
-
-     $('#slipippercentage').change(function () {
-        var persentage =  parseFloat($('#slipippercentage').val());
-        var premiumnr =  parseFloat($('#slipnetprmtonr').val());
-        //alert(premiumnr);
-        //alert(persentage);
-        var sum = isNaN(premiumnr * persentage/100) ? 0 :(premiumnr * persentage/100) ;
-        //alert(sum);
-        $('#slipipamount').val(sum);
-     });
-
+    });
 </script>
 
 
@@ -333,7 +328,7 @@ $(document).ready(function() {
         var sliptotalsum =  parseFloat($('#sliptotalsum').val());
         //alert(premiumnr);
         //alert(persentage);
-        var sum = isNaN(sliptotalsum * persentage/100) ? 0 :(sliptotalsum * persentage/100) ;
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
         //alert(sum);
         $('#slipdpamount').val(sum);
      });
@@ -343,7 +338,7 @@ $(document).ready(function() {
         var sliptotalsum =  parseFloat($('#sliptotalsum').val());
         //alert(premiumnr);
         //alert(persentage);
-        var sum = isNaN(sliptotalsum * persentage/100) ? 0 :(sliptotalsum * persentage/100) ;
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
         //alert(sum);
         $('#slipdpamount').val(sum);
      });
@@ -358,7 +353,7 @@ $(document).ready(function() {
         var sliptotalsum =  parseFloat($('#sliptotalsum').val());
         //alert(premiumnr);
         //alert(persentage);
-        var sum = isNaN(sliptotalsum * persentage/100) ? 0 :(sliptotalsum * persentage/100) ;
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
         //alert(sum);
         $('#slipamountec').val(sum);
      });
@@ -368,7 +363,7 @@ $(document).ready(function() {
         var sliptotalsum =  parseFloat($('#sliptotalsum').val());
         //alert(premiumnr);
         //alert(persentage);
-        var sum = isNaN(sliptotalsum * persentage/100) ? 0 :(sliptotalsum * persentage/100) ;
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
         //alert(sum);
         $('#slipamountec').val(sum);
      });
@@ -580,61 +575,6 @@ $(document).ready(function() {
             }
         });
     }
-</script>
-
-
-<script type='text/javascript'>
-    
-     $('#sliprppercentage').keyup(function () {
-        var persentage =  parseFloat($('#sliprppercentage').val());
-        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
-        var slipshare =  parseFloat($('#slipshare').val());
-
-        //alert(premiumnr);
-        //alert(persentage);
-        var sum = isNaN(sliptotalsum * (slipshare * persentage)/100) ? 0 :(sliptotalsum * (slipshare * persentage)/100);
-        //alert(sum);
-        $('#sliprpamount').val(sum);
-     });
-
-
-     $('#sliprppercentage').change(function () {
-        var persentage =  parseFloat($('#sliprppercentage').val());
-        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
-        var slipshare =  parseFloat($('#slipshare').val());
-        //alert(premiumnr);
-        //alert(persentage);
-        var sum = isNaN(sliptotalsum * (slipshare * persentage)/100) ? 0 :(sliptotalsum * (slipshare * persentage)/100);
-        //alert(sum);
-        $('#sliprpamount').val(sum);
-     });
-
-     
-
-     $('#slipor').keyup(function () {
-        var persentage =  parseFloat($('#slipor').val());
-        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
-        var slipshare =  parseFloat($('#slipshare').val());
-
-        //alert(premiumnr);
-        //alert(persentage);
-        var sum = isNaN(sliptotalsum * (slipshare * persentage)/100) ? 0 :(sliptotalsum * (slipshare * persentage)/100);
-        //alert(sum);
-        $('#slipsumor').val(sum);
-     });
-
-
-     $('#slipor').change(function () {
-        var persentage =  parseFloat($('#slipor').val());
-        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
-        var slipshare =  parseFloat($('#slipshare').val());
-        //alert(premiumnr);
-        //alert(persentage);
-        var sum = isNaN(sliptotalsum * (slipshare * persentage)/100) ? 0 :(sliptotalsum * (slipshare * persentage)/100);
-        //alert(sum);
-        $('#slipsumor').val(sum);
-     });
-
 </script>
 
 
