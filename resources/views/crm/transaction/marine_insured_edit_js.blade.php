@@ -3,6 +3,8 @@
 <script>
         $(document).ready(function() { $(".e1").select2({ width: '100%' }); });
 </script>
+<link rel="stylesheet" href="{{url('/')}}/css/sweetalert2.min.css">
+<script src="{{url('/')}}/js/sweetalert2.all.min.js"></script>
 
 <script type="text/javascript">
     $('#shipcodetxt').change(function(){
@@ -118,7 +120,7 @@
             }
         });
     }
- </script>
+</script>
 
 <script type='text/javascript'>
    function deleteshipdetail(id){
@@ -145,7 +147,7 @@
        //alert('masuk');
        e.preventDefault();
 
-       var idinsured = $('#idslip').val();
+       var idinsured = $('#idinsured').val();
        var msinumber = $('#msinumber').val();
        var msiprefix = $('#msiprefix').val();
        var msisuggestinsured = $('#autocomplete').val();
@@ -161,6 +163,7 @@
        
        var token2 = $('input[name=_token]').val();
 
+       console.log(idinsured)
        console.log(msiprefix)
        console.log(msisuggestinsured)
        console.log(msinumber)
@@ -174,10 +177,9 @@
             });
 
        $.ajax({
-           url:"{{ url('transaction-data/marine-insured/store') }}",
+           url:'{{ url("/") }}/transaction-data/marine-insured/update/'+idinsured,
            type:"POST",
            data:{
-               insured_id:idinsured
                msinumber:msinumber,
                msiprefix:msiprefix,
                msisuggestinsured:msisuggestinsured,
@@ -196,15 +198,15 @@
            {
                 swal("Good job!", "Insured Marine Update Success", "success")
                 console.log(response)
-                $(':input','#formmarineinsured')
-                    .not(':button, :submit, :reset, :hidden')
-                    .val('')
-                    .removeAttr('checked')
-                    .removeAttr('selected');
+                // $(':input','#formmarineinsured')
+                //     .not(':button, :submit, :reset, :hidden')
+                //     .val('')
+                //     .removeAttr('checked')
+                //     .removeAttr('selected');
            },
            error: function (request, status, error) {
                 //alert(request.responseText);
-                swal("Error!", "Marine Insured Insert Error", "Insert Error");
+                swal("Error!", "Marine Insured Update Error", "Insert Error");
            }
        });
 

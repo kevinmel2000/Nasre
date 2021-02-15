@@ -26,7 +26,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-                                            <input type="hidden" name="idslip" id="idslip" value="{{ $isd->id }}">
+                                            <input type="hidden" name="idinsured" id="idinsured" value="{{ $isd->id }}">
                                             <label for="">{{__('Number')}} </label>
                                             <input type="text" name="msinumber" id="msinumber" class="form-control form-control-sm" data-validation="length" data-validation-length="1-25" value="{{ $isd->number }}" readonly="readonly" required/>
                                         </div>
@@ -70,10 +70,10 @@
                                                     <label for="">{{__('Route')}}</label>
                                                     <select id="msiroute" name="msiroute" class="e1 form-control form-control-sm ">
                                                         {{-- <option selected disabled>{{__('Select Route')}}</option> --}}
-                                                        @foreach($routeship as $rs)
+                                                        @foreach(@$routeship as $rs)
                                                             @if($isd->route  == $rs->id)
                                                                 <option value="{{ $rs->id }}" selected >{{ $rs->name }} - {{ $rs->description }}</option>
-                                                                <option value="{{ $rs->id }}"  >{{ $rs->name }} - {{ $rs->description }}</option>
+                                                                
                                                             @else 
                                                                 <option value="{{ $rs->id }}"  >{{ $rs->name }} - {{ $rs->description }}</option>
                                                             @endif
@@ -108,7 +108,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                                <input type="text" id="msishare" name="msishare" value="{{ $isd->share }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                                <input type="text" id="msishare" name="msishare" value="{{ $isd->share }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -124,13 +124,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('From')}}</label>
-                                                    <input type="text" id="msisharefrom" name="msisharefrom" class="form-control form-control-sm " value="{{ $isd->share_from }}" placeholder="total nasre share" data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                    <input type="text" id="msisharefrom" name="msisharefrom" class="form-control form-control-sm " value="{{ $isd->share_from }}" placeholder="total nasre share" data-validation="length" data-validation-length="0-50"  />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input type="text" id="msishareto" name="msishareto" class="form-control form-control-sm " value="{{ $isd->share_to }}" placeholder="total sum insured" data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                    <input type="text" id="msishareto" name="msishareto" class="form-control form-control-sm " value="{{ $isd->share_to }}" placeholder="total sum insured" data-validation="length" data-validation-length="0-50"  />
                                                 </div>
                                             </div>
                                         </div>
@@ -158,6 +158,7 @@
                                                                 <th>{{__('Action')}}</th>
                                                             </tr>
                                                         </thead>
+                                                        
                                                         <tbody>
                                                             @foreach($shiplist as $slt)
                                                                 <tr id="sid{{ $slt->id }}" data-name="shiplistvalue[]">
@@ -167,13 +168,10 @@
                                                                         <a class="text-primary mr-3" data-toggle="modal" data-target="#updateshiplist{{$slt->id}}">
                                                                             <i class="fas fa-edit"></i>
                                                                         </a>
-                                                                        
-
-                                                                        
                                                                         <a type="button" href="javascript:void(0)" onClick="deleteshipdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a>
                                                                     </td>
                                                                 </tr>   
-
+                                                            @endforeach
                                                                 <div class="modal fade" id="updateshiplist{{$slt->id}}" tabindex="-1" user="dialog" aria-labelledby="updateshiplist{{$slt->id}}Label" aria-hidden="true">
                                                                     <div class="modal-dialog" user="document">
                                                                       <div class="modal-content bg-light-gray">
@@ -223,8 +221,9 @@
                                                                       </div>
                                                                     </div>
                                                                 </div>
-                                                            @endforeach
+                                                           
                                                         </tbody>
+                                                        
                                                     </table>
                                                 </div>
                                             </div>
@@ -290,6 +289,14 @@
                                         <button type="submit" id="updateinsuredsave-btn" class="btn btn-primary btn-block ">
                                             {{__('UPDATE')}}
                                         </button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 com-sm-12 mt-3">
+                                        <a type="button" href="{{url('/transaction-data/marine-index')}}" id="addinsuredsave-btn" class="btn btn-primary btn-block ">
+                                            {{__('BACK')}}
+                                        </a>
                                     </div>
                                 </div>
 

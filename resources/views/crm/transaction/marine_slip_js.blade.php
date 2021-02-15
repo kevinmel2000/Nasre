@@ -12,23 +12,6 @@
     }
 </style>
 
-<script type="text/javascript">
-    $(function() {              
-       // Bootstrap DateTimePicker v4
-       $('#dateinstallment').datetimepicker({
-             format: 'YYYY-MM-DD'
-       });
-    });      
-</script>
-
-<script type="text/javascript">
-    $(function() {              
-       // Bootstrap DateTimePicker v4
-       $('#dateinstallment').datetimepicker({
-             format: 'YYYY-MM-DD'
-       });
-    });      
-</script>
 
 <script type="text/javascript">
     $(function() {              

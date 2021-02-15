@@ -20,23 +20,36 @@ Route::delete('/delete-ship-list/{id}','TransactionController@destroyshiplist')-
 Route::post('/store-fe-sliplocation-list','FeSlipController@storelocationlist')->name('locationlist.store');
 Route::delete('/delete-sliplocation-list/{id}','FeSlipController@destroysliplocationlist')->name('sliplistlocation.delete');
 
+Route::get('get-interest-list','TransactionController@showinterestinsuredList');
 Route::post('/store-interest-list','TransactionController@storeinterestlist')->name('interestlist.store');
+Route::post('update-interest-list/{id}', 'TransactionController@updateinterestlist')->name('interestlist.update');
 Route::delete('/delete-interest-list/{id}','TransactionController@destroyinterestlist')->name('interestlist.delete');
 
+Route::get('get-installment-list','TransactionController@showinstallmentList');
 Route::post('/store-installment-list','TransactionController@storeinstallmentlist')->name('installment.store');
+Route::post('update-installment-list/{id}', 'TransactionController@updateinstallmentlist')->name('installmentlist.update');
 Route::delete('/delete-installment-list/{id}','TransactionController@destroyinstallmentlist')->name('installment.delete');
 
+Route::get('get-extendcoverage-list','TransactionController@showextendcoverageList');
 Route::post('/store-extendcoverage-list','TransactionController@storeextendcoveragelist')->name('extendcoverage.store');
+Route::post('update-extendcoverage-list/{id}', 'TransactionController@updateextendcoveragelist')->name('extendcoverage.update');
 Route::delete('/delete-extendcoverage-list/{id}','TransactionController@destroyextendcoveragelist')->name('extendcoverage.delete');
 
+Route::get('get-conditionneeded-list','TransactionController@showconditionneededList');
 Route::post('/store-conditionneeded-list','TransactionController@storeconditionneededlist')->name('conditionneeded.store');
+Route::post('update-conditionneeded-list/{id}', 'TransactionController@updateconditionneededlist')->name('conditionneeded.update');
 Route::delete('/delete-conditionneeded-list/{id}','TransactionController@destroyconditionneededlist')->name('conditionneeded.delete');
 
+Route::get('get-deductible-list','TransactionController@showdeductibleList');
 Route::post('/store-deductible-list','TransactionController@storedeductiblelist')->name('deductible.store');
+Route::post('update-deductible-list/{id}', 'TransactionController@updatedeductiblelist')->name('deductible.update');
 Route::delete('/delete-deductible-list/{id}','TransactionController@destroydeductiblelist')->name('deductible.delete');
 
+Route::get('get-retrocession-list','TransactionController@showretrocessionList');
 Route::post('/store-retrocession-list','TransactionController@storeretrocessionlist')->name('retrocession.store');
+Route::post('update-retrocession-list/{id}', 'TransactionController@updateretrocessionlist')->name('retrocession.update');
 Route::delete('/delete-retrocession-list/{id}','TransactionController@destroyretrocessionlist')->name('retrocession.delete');
+
 
 Route::post('/store-propertytype-list','TransactionController@storepropertytypelist')->name('propertytype.store');
 Route::delete('/delete-propertytype-list/{id}','TransactionController@destroypropertytypelist')->name('propertytype.delete');
@@ -50,9 +63,11 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::get('/marine-slip', [TransactionController::class, 'indexmarineslip']);
     Route::get('/marine-index', [TransactionController::class, 'indexmarine']);
     Route::get('/marine-slip/{id}', [TransactionController::class, 'showslipdetails']);
-    Route::get('/marine-slip/edit/{id}', [TransactionController::class, 'editslipdetails']);
+    Route::get('/marine-slip/edit/{id}', [TransactionController::class, 'editmarineslip']);
+    Route::post('/marine-slip/update/{id}', [TransactionController::class, 'updatemarineslip']);
     Route::get('/marine-insured/{id}', [TransactionController::class, 'showinsureddetails']);
     Route::get('/marine-insured/edit/{id}', [TransactionController::class, 'editmarineinsured']);
+    Route::post('marine-insured/update/{id}', [TransactionController::class, 'updatemarineinsured']);
     Route::post('/marine-insured/store', [TransactionController::class, 'storemarineinsured']);
     Route::post('/marine-slip/store', [TransactionController::class, 'storemarineslip']);
     Route::delete('/marine-insured/destroyinsured/{id}', [TransactionController::class, 'destroymarineinsured']);

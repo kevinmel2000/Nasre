@@ -62,10 +62,10 @@
                                         <td>{{@$insureddata->share_to}}</td>
                                         <td>{{@$insureddata->coincurance}}</td>
                                         <td>
-                                            <a href="#" data-toggle="tooltip" data-title="{{$insureddata->created_at}}" class="mr-3">
+                                            <a href="javascript:void(0)" data-toggle="tooltip" data-title="{{$insureddata->created_at}}" class="mr-3">
                                             <i class="fas fa-clock text-info"></i>
                                             </a>
-                                            <a href="#" data-toggle="tooltip" data-title="{{$insureddata->updated_at}}" class="mr-3">
+                                            <a href="javascript:void(0)" data-toggle="tooltip" data-title="{{$insureddata->updated_at}}" class="mr-3">
                                             <i class="fas fa-history text-primary"></i>
                                             </a>
                                             <span>
@@ -142,57 +142,22 @@
                                         <td>{{@$slipdata->status}}</td>
                                         <td>{{@$slipdata->username}}</td>
                                         <td>
-                                            <a href="#" data-toggle="tooltip" data-title="{{$slipdata->created_at}}" class="mr-3">
+                                            <a href="javascript:void(0)" data-toggle="tooltip" data-title="{{$slipdata->created_at}}" class="mr-3">
                                             <i class="fas fa-clock text-info"></i>
                                             </a>
-                                            <a href="#" data-toggle="tooltip" data-title="{{$slipdata->updated_at}}" class="mr-3">
+                                            <a href="javascript:void(0)" data-toggle="tooltip" data-title="{{$slipdata->updated_at}}" class="mr-3">
                                             <i class="fas fa-history text-primary"></i>
                                             </a>
                                             <span>
 
                                             
                                             {{-- @can('update-felookup', User::class) --}}
-                                                <a class="text-primary mr-3" data-toggle="modal" data-target="#updateslipmarine{{$slipdata->id}}">
+                                                <a class="text-primary mr-3" href="{{ url('transaction-data/marine-slip/edit', $slipdata->id) }}">
                                                 <i class="fas fa-edit"></i>
                                                 </a>
                                                 {{-- @endcan   --}}
 
-                                                <div class="modal fade" id="updateslipmarine{{$slipdata->id}}" tabindex="-1" user="dialog" aria-labelledby="updateslipmarine{{$slipdata->id}}Label" aria-hidden="true">
-                                                <div class="modal-dialog" user="document">
-                                                <div class="modal-content bg-light-gray">
-                                                    <div class="modal-header bg-gray">
-                                                    <h5 class="modal-title" id="updateslipmarine{{$slipdata->id}}Label">{{__('Update Marine Insured')}}</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                    </div>
-                                                    <form action="{{url('master-data/marineslip/update',$slipdata)}}" method="POST">
-                                                        <div class="modal-body">
-                                                            @csrf
-                                                            @method('PUT')
-
-                                                            <div class="row">
-                                                            <div class="col-md-6 col-md-12">
-                                                                <div class="form-group">
-                                                                <label for="">{{__('Number')}}</label>
-                                                                <input type="text" name="number" class="form-control" value="{{$slipdata->number}}" readonly required/>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-
-                                                            
-
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                                                            <input type="submit" class="btn btn-info" value="Update">
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            {{-- Edit Modal Ends --}}
+                                                
 
                                             {{-- @can('delete-marineinsured', User::class) --}}
 

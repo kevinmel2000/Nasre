@@ -1531,11 +1531,11 @@
                                     <ul class="nav nav-treeview">
                                             @if($route_active == 'Marine Slip - Index')
                                             @php
-                                                $fes_formindex = 'active';
+                                                $ms_formindex = 'active';
                                             @endphp
                                             @endif
                                             <li class="nav-item">
-                                                <a href="{{url('/transaction-data/marine-index')}}" class="nav-link {{@$fes_formindex}}">
+                                                <a href="{{url('/transaction-data/marine-index')}}" class="nav-link {{@$ms_formindex}}">
                                                         <i class="far fa-folder nav-icon text-secondary"></i>
                                                     <p>{{__('MARINE SLIP - INDEX')}}</p>
                                                 </a>
@@ -1543,11 +1543,11 @@
 
                                             @if($route_active == 'Marine - Slip Entry')
                                             @php
-                                                $fes_form = 'active';
+                                                $ms_form = 'active';
                                             @endphp
                                             @endif
                                             <li class="nav-item">
-                                                <a href="{{url('/transaction-data/marine-slip')}}" class="nav-link {{@$fes_form}}">
+                                                <a href="{{url('/transaction-data/marine-slip')}}" class="nav-link {{@$ms_form}}">
                                                         <i class="far fa-folder nav-icon text-secondary"></i>
                                                     <p>{{__('MARINE - SLIP ENTRY')}}</p>
                                                 </a>

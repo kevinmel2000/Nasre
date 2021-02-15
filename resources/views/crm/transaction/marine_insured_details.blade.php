@@ -171,7 +171,7 @@
 
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
-                                        <a class="btn btn-primary btn-block " href="">
+                                        <a class="btn btn-primary btn-block " href="{{ url('transaction-data/marine-insured/edit', $isd->id) }}">
                                             {{__('EDIT')}}
                                         </a>
                                     </div>

@@ -310,7 +310,7 @@
                                                                             <tbody>
                                                                                 @foreach($interestlist as $isl)
                                                                                     <tr id="iid{{ $isl->id }}" data-name="interestvalue[]">
-                                                                                            <td data-name="{{ $isl->interest_id }}">{{ $isl->interestinsured->description }}</td>
+                                                                                            <td data-name="{{ $isl->interest_id }}">{{ $isl->interestinsureddata->description }}</td>
                                                                                             <td data-name="{{ $isl->amount }}">{{ $isl->amount }}</td>
                                                                                     </tr>   
                                                                                 @endforeach 
