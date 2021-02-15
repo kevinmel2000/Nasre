@@ -85,7 +85,6 @@
                     <table id="countryTable" class="table table-bordered table-striped">
                       <thead>
                       <tr>
-                        <th>{{__('ID')}}</th>
                         <th>{{__('Name')}}</th>
                         <th>{{__('Code')}}</th>
                         <th>{{__('Continent')}}</th>
@@ -95,7 +94,6 @@
                       <tbody>
                           @foreach (@$country as $cty)
                               <tr>
-                                <td>{{@$cty->id}}</td>
                                 <td>{{@$cty->name}}</td>
                                 <td>{{@$cty->code}}</td>
                                 <td>@if(@$cty->continent == "AF")Africa 

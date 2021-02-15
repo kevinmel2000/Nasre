@@ -67,7 +67,6 @@
                     <table id="classificationTable" class="table table-bordered table-striped">
                       <thead>
                       <tr>
-                        <th>{{__('ID')}}</th>
                         <th>{{__('Code')}}</th>
                         <th>{{__('Name')}}</th>
                         <th width="20%">{{__('Actions')}}</th>
@@ -76,7 +75,6 @@
                       <tbody>
                           @foreach (@$classification as $cs)
                               <tr>
-                                <td>{{@$cs->id}}</td>
                                 <td>{{@$cs->code}}</td>
                                 <td>{{@$cs->name}}</td>
                                 <td>

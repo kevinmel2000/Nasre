@@ -67,7 +67,6 @@
                     <table id="shipTypeTable" class="table table-bordered table-striped">
                       <thead>
                       <tr>
-                        <th>{{__('ID')}}</th>
                         <th>{{__('Code')}}</th>
                         <th>{{__('Name')}}</th>
                         <th width="20%">{{__('Actions')}}</th>
@@ -76,7 +75,6 @@
                       <tbody>
                           @foreach (@$shiptype as $stp)
                               <tr>
-                                <td>{{@$stp->id}}</td>
                                 <td>{{@$stp->code}}</td>
                                 <td>{{@$stp->name}}</td>
                                 <td>

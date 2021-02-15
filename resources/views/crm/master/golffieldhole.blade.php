@@ -77,7 +77,6 @@
                   <table id="golffieldholeTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th>{{__('ID')}}</th>
                       <th>{{__('Code')}}</th>
                       <th>{{__('Golf field')}}</th>
                       <th>{{__('Hole Number')}}</th>
@@ -87,7 +86,6 @@
                     <tbody>
                         @foreach (@$golffieldhole as $golf)
                             <tr>
-                              <td>{{@$golf->id}}</td>
                               <td>{{@$golf->code}}</td>
                               <td>{{@$golf->golf_field}}</td>
                               <td>{{@$golf->hole_number}}</td>

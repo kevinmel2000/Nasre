@@ -90,7 +90,6 @@
                     <table id="cdnTable" class="table table-bordered table-striped">
                       <thead>
                       <tr>
-                        <th>{{__('ID')}}</th>
                         <th>{{__('Code')}}</th>
                         <th>{{__('Name')}}</th>
                         <th>{{__('Description')}}</th>
@@ -101,7 +100,6 @@
                       <tbody>
                           @foreach (@$cdn as $ndc)
                               <tr>
-                                <td>{{@$ndc->id}}</td>
                                 <td>{{@$ndc->code}}</td>
                                 <td>{{@$ndc->name}}</td>
                                 <td>{{@$ndc->description}}</td>

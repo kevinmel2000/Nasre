@@ -67,7 +67,6 @@
                     <table id="propertyTypeTable" class="table table-bordered table-striped">
                       <thead>
                       <tr>
-                        <th>{{__('ID')}}</th>
                         <th>{{__('Code')}}</th>
                         <th>{{__('Name')}}</th>
                         <th width="20%">{{__('Actions')}}</th>
@@ -76,7 +75,6 @@
                       <tbody>
                           @foreach (@$propertytype as $pt)
                               <tr>
-                                <td>{{@$pt->id}}</td>
                                 <td>{{@$pt->code}}</td>
                                 <td>{{@$pt->name}}</td>
                                 <td>

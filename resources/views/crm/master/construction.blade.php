@@ -67,7 +67,6 @@
                     <table id="constructionTable" class="table table-bordered table-striped">
                       <thead>
                       <tr>
-                        <th>{{__('ID')}}</th>
                         <th>{{__('Code')}}</th>
                         <th>{{__('Name')}}</th>
                         <th width="20%">{{__('Actions')}}</th>
@@ -76,7 +75,6 @@
                       <tbody>
                           @foreach (@$construction as $cr)
                               <tr>
-                                <td>{{@$cr->id}}</td>
                                 <td>{{@$cr->code}}</td>
                                 <td>{{@$cr->name}}</td>
                                 <td>

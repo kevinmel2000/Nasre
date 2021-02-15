@@ -92,7 +92,6 @@
                   <table id="kocTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th>{{__('ID')}}</th>
                       <th>{{__('Code')}}</th>
                       <th>{{__('Description')}}</th>
                       <th>{{__('Abbreviation')}}</th>
@@ -103,7 +102,6 @@
                     <tbody>
                         @foreach (@$koc as $kocdata)
                             <tr>
-                              <td>{{@$kocdata->id}}</td>
                               <td>{{@$kocdata->code}}</td>
                               <td>{{@$kocdata->description}}</td>
                               <td>{{@$kocdata->abbreviation}}</td>

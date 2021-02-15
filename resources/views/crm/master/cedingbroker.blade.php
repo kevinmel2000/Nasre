@@ -117,7 +117,6 @@
                   <table id="cedingbrokerTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th>{{__('ID')}}</th>
                       <th>{{__('Code')}}</th>
                       <th>{{__('Name')}}</th>
                       <th>{{__('Company Name')}}</th>
@@ -130,7 +129,6 @@
                     <tbody>
                         @foreach (@$cedingbroker as $ceding)
                             <tr>
-                              <td>{{@$ceding->id}}</td>
                               <td>{{@$ceding->code}}</td>
                               <td>{{@$ceding->name}}</td>
                               <td>{{@$ceding->company_name}}</td>

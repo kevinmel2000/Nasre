@@ -132,6 +132,7 @@ class TransactionController extends Controller
                 $code_sl = "M" . $mydate . "0000" . strval(1);
             }
 
+
             $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
             $shiplist= ShipListTemp::where('insured_id',$code_ms)->where('status','saved')->orderby('id','desc')->get();
             $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
@@ -139,6 +140,9 @@ class TransactionController extends Controller
             $installmentpanel= InstallmentTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
             $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
             $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+
+            
+            $interestlist->delete();
 
 
             return view('crm.transaction.marine_slip', compact(['user','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestinsured','routeship','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
@@ -428,7 +432,7 @@ class TransactionController extends Controller
                     'cob'=>$request->slipcob,
                     'koc'=>$request->slipkoc,
                     'occupacy'=>$request->slipoccupacy,
-                    'build_cost'=>$request->slipbld_const,
+                    'build_const'=>$request->slipbld_const,
                     'slip_no'=>$request->slipno,
                     'cn_dn'=>$request->slipcndn,
                     'policy_no'=>$request->slippolicy_no,

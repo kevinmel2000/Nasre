@@ -78,7 +78,7 @@
    
            
    });
-   </script>
+</script>
 
 
 
@@ -725,7 +725,10 @@
            }
        });
 
-       var formData = new FormData(this);
+       
+
+
+        var formData = new FormData(this);
        let TotalFiles = $('#attachment')[0].files.length; //Total files
        let files = $('#attachment')[0];
        var slip_id = $('#slipnumber').val();
@@ -753,7 +756,7 @@
                     },
                     error: function(data){
                      //alert(data.responseJSON.errors.files[0]);
-                     swal("Error!", data.responseJSON.errors.files[0], "Insert file Error");
+                     swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
                      console.log(data.responseJSON.errors);
                     }
         });

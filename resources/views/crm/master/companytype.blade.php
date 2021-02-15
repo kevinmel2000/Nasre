@@ -67,7 +67,6 @@
                     <table id="ctTable" class="table table-bordered table-striped">
                       <thead>
                       <tr>
-                        <th>{{__('ID')}}</th>
                         <th>{{__('Code')}}</th>
                         <th>{{__('Type Name')}}</th>
                         <th width="20%">{{__('Actions')}}</th>
@@ -76,7 +75,6 @@
                       <tbody>
                           @foreach (@$companytype as $ct)
                               <tr>
-                                <td>{{@$ct->id}}</td>
                                 <td>{{@$ct->code}}</td>
                                 <td>{{@$ct->name}}</td>
                                 <td>

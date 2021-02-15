@@ -507,20 +507,8 @@
                                                     <label>{{__('Attachment')}} </label>
                                                     <div class="input-group">
                                                         <div class="input-group control-group increment2" >
-                                                            <input type="file" name="files[]" id="attachment" class="form-control" >
-                                                            <div class="input-group-btn"> 
-                                                                <button class="btn btn-success" id="btn-success2" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
-                                                            </div>
+                                                            <input type="file" name="files[]" id="attachment" class="form-control" multiple>
                                                         </div>
-                                                        <div class="clone2 hide">
-                                                            <div class="control-group input-group" id="control-group2" style="margin-top:10px">
-                                                                <input type="file" name="files[]" id="attachment" class="form-control">
-                                                                <div class="input-group-btn"> 
-                                                                    <button class="btn btn-danger" id="btn-danger2" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -548,7 +536,7 @@
                                                                         <tbody>
                                                                             @foreach($interestlist as $isl)
                                                                                 <tr id="iid{{ $isl->id }}" data-name="interestvalue[]">
-                                                                                        <td data-name="{{ $isl->interest_id }}">{{ $isl->interestinsured->description }}</td>
+                                                                                        <td data-name="{{ $isl->interest_id }}">{{ $isl->interestinsureddata->description }}</td>
                                                                                         <td data-name="{{ $isl->amount }}">{{ $isl->amount }}</td>
                                                                                         <td><a href="javascript:void(0)" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
                                                                                 </tr>   
