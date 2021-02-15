@@ -779,12 +779,14 @@
                                 @endphp
                             @endif
                             <li class="nav-item has-treeview {{ @$location_menu_open }}">
-                                <a href="#" class="nav-link {{@$location_dd}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>
-                                        {{__('LOCATION DATA')}}
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
+                                <a href="#" class="nav-link {{@$location_dd}}" >
+                                    
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:5px;"></i>
+                                        <p style="font-size: 90%;margin-left:5px;" >
+                                            {{__('LOCATION DATA')}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    
                                 </a>
 
                                 <ul class="nav nav-treeview">
@@ -1209,7 +1211,6 @@
     
                             <ul class="nav nav-treeview">
 
-                               
 
     
                                 @if(

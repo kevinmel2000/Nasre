@@ -12,7 +12,7 @@ use App\Models\Occupation;
 use App\Models\ShipType;
 use App\Models\PropertyType;
 use App\Models\ConditionNeeded;
-use App\Models\InterestINsured;
+use App\Models\InterestInsured;
 use App\Models\DeductibleType;
 use App\Models\ExtendedCoverage;
 use App\Models\ShipPort;
