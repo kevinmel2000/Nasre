@@ -10,7 +10,7 @@
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
-        <form>
+        <form  autocomplete="off">
           @csrf
             <div class="card">
                 <div class="card-header bg-gray">
@@ -79,13 +79,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('From')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01" id="mpsharefrom" name="mpsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                    <input type="number" min="0" value="0" step=".01" id="mpsharefrom" name="mpsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('To')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01" id="mpshareto" name="mpshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                    <input type="number" min="0" value="0" step=".01" id="mpshareto" name="mpshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly />
                                                 </div>
                                             </div>
                                         </div>
@@ -256,7 +256,7 @@
             <div class="card-body bg-light-gray">
                 
                 <div class="container-fluid p-3">
-                <form id="multi-file-upload-ajax" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
+                <form id="multi-file-upload-ajax" method="POST" autocomplete="off" action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
                    @csrf
                         <div class="card card-tabs">
                             <div class="card-header p-0 pt-1 border-bottom-0">
@@ -527,18 +527,7 @@
                                                     <div class="input-group">
                                                         
                                                         <div class="input-group control-group increment2" >
-                                                        <input type="file" name="slipfile_att[]" id="attachment" class="form-control">
-                                                        <div class="input-group-btn"> 
-                                                            <button class="btn btn-success" id="btn-success2" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
-                                                        </div>
-                                                        </div>
-                                                        <div class="clone2 hide">
-                                                        <div class="control-group input-group" id="control-group2" style="margin-top:10px">
-                                                            <input type="file" name="slipfile_att[]" class="form-control">
-                                                            <div class="input-group-btn"> 
-                                                            <button class="btn btn-danger" id="btn-danger2" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                                                            </div>
-                                                        </div>
+                                                        <input type="file" name="slipfile_att[]" id="attachment" class="form-control" multiple>
                                                         </div>
 
                                                     </div>

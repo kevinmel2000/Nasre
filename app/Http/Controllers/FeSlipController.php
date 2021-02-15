@@ -138,6 +138,7 @@ class FeSlipController extends Controller
     public function indexfeslip()
     {
         $user = Auth::user();
+        $userid = Auth::user()->id;
         $country = User::orderby('id','asc')->get();
         $route_active = 'Fire Engineering - Slip Entry';
         $mydate = date("Y").date("m").date("d");
@@ -164,67 +165,74 @@ class FeSlipController extends Controller
         if($lastid != null){
             if($lastid < 10)
             {
-                $code_ms = "IN" . $mydate . "0000" . strval($lastid + 1);
+                $code_ms = "IN" . $userid ."". $mydate . "0000" . strval($lastid + 1);
             }   
             elseif($lastid > 9 && $lastid < 100)
             {
-                $code_ms = "IN" . $mydate . "000" . strval($lastid + 1);
+                $code_ms = "IN" . $userid ."". $mydate . "000" . strval($lastid + 1);
             }
             elseif($lastid > 99 && $lastid < 1000)
             {
-                $code_ms = "IN" . $mydate . "00" . strval($lastid + 1);
+                $code_ms = "IN" . $userid ."". $mydate . "00" . strval($lastid + 1);
             }
             elseif($lastid > 999 && $lastid < 10000)
             {
-                $code_ms = "IN" . $mydate . "0" . strval($lastid + 1);
+                $code_ms = "IN" . $userid ."". $mydate . "0" . strval($lastid + 1);
             }
             elseif($lastid > 9999 && $lastid < 100000)
             {
-                $code_ms = "IN" . $mydate  . strval($lastid + 1);
+                $code_ms = "IN" . $userid ."". $mydate  . strval($lastid + 1);
             }
 
 
         }
         else{
-            $code_ms = "IN" . $mydate . "0000" . strval(1);
+            $code_ms = "IN" . $userid ."". $mydate . "0000" . strval(1);
         }
 
         if($sliplastid != null){
             if($sliplastid < 10)
             {
-                $code_sl = "FE". $mydate . "0000" . strval($sliplastid + 1);
+                $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + 1);
             }   
             elseif($sliplastid > 9 && $sliplastid < 100)
             {
-                $code_sl = "FE". $mydate . "000" . strval($sliplastid + 1);
+                $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + 1);
             }
             elseif($sliplastid > 99 && $sliplastid < 1000)
             {
-                $code_sl = "FE". $mydate . "00" . strval($sliplastid + 1);
+                $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + 1);
             }
             elseif($sliplastid > 999 && $sliplastid < 10000)
             {
-                $code_sl = "FE". $mydate . "0" . strval($sliplastid + 1);
+                $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + 1);
             }
             elseif($sliplastid > 9999 && $sliplastid < 100000)
             {
-                $code_sl = "FE". $mydate . strval($sliplastid + 1);
+                $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + 1);
             }
 
             
         }
         else{
-            $code_sl = "FE" . $mydate . "0000" . strval(1);
+            $code_sl = "FE". $userid ."". $mydate . "0000" . strval(1);
         }
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
+        
+
+        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-        
-        
         $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();       
+        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+
         $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
             
@@ -336,6 +344,21 @@ class FeSlipController extends Controller
             'fessuggestinsured'=>'required'
         ]);
         
+        $costumcheck=Customer::where('company_name','=',$request->fessuggestinsured)->first();
+        if($costumcheck==null)
+        {
+
+            Customer::create([
+                'owner_id'=>'1',
+                'industry_id'=>'27',
+                'company_prefix' => $request->fesinsured,
+                'company_name'=>$request->fessuggestinsured,
+                'website'=>$request->fessuggestinsured,
+                'company_suffix'=>$request->fessuffix
+            ]);
+
+        }
+
         if($validator)
         {
             $user = Auth::user();
@@ -501,7 +524,7 @@ class FeSlipController extends Controller
                     'cob'=>$request->slipcob,
                     'koc'=>$request->slipkoc,
                     'occupacy'=>$request->slipoccupacy,
-                    'build_cost'=>$request->slipbld_const,
+                    'build_const'=>$request->slipbld_const,
                     'slip_no'=>$request->slipno,
                     'cn_dn'=>$request->slipcndn,
                     'policy_no'=>$request->slippolicy_no,
@@ -514,7 +537,7 @@ class FeSlipController extends Controller
                     'deductible_panel'=>$deductiblelist->toJson(),
                     'extend_coverage'=>$extendcoveragelist->toJson(),
                     'insurance_period_from'=>$request->slipipfrom,
-                    'insurance_perido_to'=>$request->slipipto,
+                    'insurance_period_to'=>$request->slipipto,
                     'reinsurance_period_from'=>$request->sliprpfrom,
                     'reinsurance_period_to'=>$request->sliprpto,
                     'proportional'=>$request->slipproportional,
@@ -562,7 +585,7 @@ class FeSlipController extends Controller
                 $slipdataup->cob=$request->slipcob;
                 $slipdataup->koc=$request->slipkoc;
                 $slipdataup->occupacy=$request->slipoccupacy;
-                $slipdataup->build_cost=$request->slipbld_const;
+                $slipdataup->build_const=$request->slipbld_const;
                 $slipdataup->slip_no=$request->slipno; 
                 $slipdataup->cn_dn=$request->slipcndn; 
                 $slipdataup->policy_no=$request->slippolicy_no; 
@@ -575,7 +598,7 @@ class FeSlipController extends Controller
                 $slipdataup->deductible_panel=$deductiblelist->toJson(); 
                 $slipdataup->extend_coverage=$extendcoveragelist->toJson();  
                 $slipdataup->insurance_period_from=$request->slipipfrom;  
-                $slipdataup->insurance_perido_to=$request->slipipto;  
+                $slipdataup->insurance_period_to=$request->slipipto;  
                 $slipdataup->reinsurance_period_from=$request->sliprpfrom;  
                 $slipdataup->reinsurance_period_to=$request->sliprpto;
                 $slipdataup->proportional=$request->slipproportional;

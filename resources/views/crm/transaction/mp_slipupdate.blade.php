@@ -205,7 +205,7 @@
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
                                         <button  type="button" id="addinsuredsave-btn"  class="btn btn-primary btn-block ">
-                                            {{__('Save')}}
+                                            {{__('UPDATE')}}
                                         </button>
                                     </div>
                                 </div>
@@ -549,10 +549,7 @@
                                                     <div class="input-group">
                                                     
                                                         <div class="input-group control-group increment2" >
-                                                        <input type="file" name="files[]" id="attachment" class="form-control">
-                                                        <div class="input-group-btn"> 
-                                                            <button class="btn btn-success" id="btn-success2" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
-                                                        </div>
+                                                        <input type="file" name="files[]" id="attachment" class="form-control" multiple>
                                                         </div>
 
                                                         @foreach($filelist as $isl)
@@ -561,14 +558,7 @@
                                                         </div>
                                                         @endforeach
 
-                                                        <div class="clone2 hide">
-                                                        <div class="control-group input-group" id="control-group2" style="margin-top:10px">
-                                                            <input type="file" name="files[]" id="attachment" class="form-control">
-                                                            <div class="input-group-btn"> 
-                                                            <button class="btn btn-danger" id="btn-danger2" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                                                            </div>
-                                                        </div>
-                                                        </div>
+                                                      
 
                                                     </div>
                                                 </div>
@@ -1232,7 +1222,7 @@
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
                                         <button type="submit" id="addslipinsured-btn" class="btn btn-primary btn-block ">
-                                            {{__('Save')}}
+                                            {{__('UPDATE')}}
                                         </button>
                                     </div>
                                 
