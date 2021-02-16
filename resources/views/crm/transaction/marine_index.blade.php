@@ -30,9 +30,9 @@
                             
                             {!! link_to('transaction-data/marine-slip','Add Data',['class'=>'btn btn-primary']) !!}
                             <hr>
-                            {!! Form::open(array('url'=>'transaction-data/marine-index')) !!}
+                            {{-- {!! Form::open(array('url'=>'transaction-data/marine-index')) !!}
                             {!! Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari Marine Slip Insured Number, ketik lalu tekan enter']) !!}
-                            {!! Form::close() !!}
+                            {!! Form::close() !!} --}}
                             <hr>
                             <table id="marineinsured" class="table table-bordered table-striped">
                                 <thead>
@@ -73,7 +73,7 @@
                                             
                                             {{-- @can('update-felookup', User::class) --}}
                                                 <a class="text-primary mr-3" href="{{ url('transaction-data/marine-insured/edit', $insureddata->id) }}">
-                                                <i class="fas fa-edit"></i>
+                                                    <i class="fas fa-edit"></i>
                                                 </a>
                                                 {{-- @endcan   --}}
 
@@ -116,9 +116,9 @@
                             
                             {!! link_to('transaction-data/marine-slip','Add Data',['class'=>'btn btn-primary']) !!}
                             <hr>
-                            {!! Form::open(array('url'=>'transaction-data/marine-index')) !!}
+                            {{-- {!! Form::open(array('url'=>'transaction-data/marine-index')) !!}
                             {!! Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari Marine Slip Number, ketik lalu tekan enter']) !!}
-                            {!! Form::close() !!}
+                            {!! Form::close() !!} --}}
                             <hr>
                             <table id="marineslip" class="table table-bordered table-striped">
                                 <thead>

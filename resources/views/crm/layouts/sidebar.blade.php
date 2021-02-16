@@ -1,3 +1,24 @@
+  <style>
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 30px;
+  z-index: 99;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  background-color: white;
+  color: darkblue;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}
+</style>
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
@@ -64,8 +85,8 @@
                                     @php $manage_users = 'active'; @endphp
                                 @endif
                                 <a href="{{url('user')}}" class="nav-link {{@$manage_users}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('STAFF USERS')}}</p>
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('STAFF USERS')}}</p>
                                 </a>
                             </li>
                             @endcan
@@ -75,8 +96,8 @@
                                     @php $manage_roles = 'active'; @endphp
                                     @endif
                                     <a href="{{url('user/role')}}" class="nav-link {{@$manage_roles}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('ROLES')}}</p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('ROLES')}}</p>
                                     </a>
                                 </li>
                             @endcan      
@@ -87,8 +108,8 @@
                                     @php $manage_permissions = 'active'; @endphp
                                     @endif
                                     <a href="{{url('user/role/permissions')}}" class="nav-link {{@$manage_permissions}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('PERMISSIONS')}}</p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('PERMISSIONS')}}</p>
                                     </a>
                                 </li>
                             @endif
@@ -131,8 +152,8 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{url('lead/create')}}" class="nav-link {{@$add_lead}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('NEW LEAD')}}</p>
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('NEW LEAD')}}</p>
                                 </a>
                             </li>
                             @endcan
@@ -145,8 +166,8 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{url('lead')}}" class="nav-link {{@$manage_lead}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('MANAGE LEADS')}}</p>
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('MANAGE LEADS')}}</p>
                                 </a>
                             </li>
 
@@ -158,8 +179,8 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{url('lead/source')}}" class="nav-link {{@$lead_source}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('LEAD SOURCES')}}</p>
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('LEAD SOURCES')}}</p>
                                 </a>
                             </li>
 
@@ -170,8 +191,8 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{url('lead/status')}}" class="nav-link {{@$lead_status}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('LEAD STATUSESS')}}</p>
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('LEAD STATUSESS')}}</p>
                                 </a>
                             </li>
                             @endcan
@@ -211,8 +232,8 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{url('product/create')}}" class="nav-link {{@$productCreate}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('NEW PRODUCT')}}</p>
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('NEW PRODUCT')}}</p>
                                 </a>
                             </li>
                             @endcan
@@ -225,8 +246,8 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{url('product/')}}" class="nav-link {{@$product}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('PRODUCTS')}}</p>
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('PRODUCTS')}}</p>
                                 </a>
                             </li>
                             @endcan
@@ -239,8 +260,8 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{url('/product/productgroup')}}" class="nav-link {{@$productgroup}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('GROUPS')}}</p>
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('GROUPS')}}</p>
                                 </a>
                             </li>
 
@@ -281,8 +302,8 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{url('proposal/create')}}" class="nav-link {{@$proposalCreate}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('NEW PROPOSAL')}}</p>
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('NEW PROPOSAL')}}</p>
                                 </a>
                             </li>
                             @endcan
@@ -295,8 +316,8 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{url('proposal/')}}" class="nav-link {{@$proposal}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('PROPOSALS')}}</p>
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('PROPOSALS')}}</p>
                                 </a>
                             </li>
                             @endcan
@@ -338,8 +359,8 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{url('customer/create')}}" class="nav-link {{@$add_contact}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('NEW CUSTOMER')}}</p>
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('NEW CUSTOMER')}}</p>
                                 </a>
                             </li>
                             @endcan
@@ -352,8 +373,8 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{url('customer')}}" class="nav-link {{@$manage_contact}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('CUSTOMERS')}}</p>
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('CUSTOMERS')}}</p>
                                 </a>
                             </li>
 
@@ -365,8 +386,8 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{url('contact/title')}}" class="nav-link {{@$contact_title}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('CONTACT TITLES')}}</p>
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('CONTACT TITLES')}}</p>
                                 </a>
                             </li>
                             @endcan
@@ -405,8 +426,8 @@
                                 @endif
                                 <li class="nav-item">
                                     <a href="{{url('estimate/create')}}" class="nav-link {{@$estimateCreate}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('NEW ESTIMATE')}}</p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('NEW ESTIMATE')}}</p>
                                     </a>
                                 </li>
                             @endcan
@@ -419,8 +440,8 @@
                                 @endif
                                 <li class="nav-item">
                                     <a href="{{url('estimate/')}}" class="nav-link {{@$estimate}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('ESTIMATES')}}</p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('ESTIMATES')}}</p>
                                     </a>
                                 </li>
                             @endcan
@@ -461,8 +482,8 @@
                                 @endif
                                 <li class="nav-item">
                                     <a href="{{url('invoice/create')}}" class="nav-link {{@$invoiceCreate}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('NEW INVOICE')}}</p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('NEW INVOICE')}}</p>
                                     </a>
                                 </li>
                             @endcan
@@ -475,8 +496,8 @@
                                 @endif
                                 <li class="nav-item">
                                     <a href="{{url('invoice/')}}" class="nav-link {{@$invoice}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('INVOICES')}}</p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('INVOICES')}}</p>
                                     </a>
                                 </li>
                             @endcan
@@ -585,8 +606,8 @@
                                 @endif
                                 <li class="nav-item">
                                     <a href="{{url('/office/taxrate')}}" class="nav-link {{@$taxrate}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('TAX RATES')}}</p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('TAX RATES')}}</p>
                                     </a>
                                 </li>
                             
@@ -597,8 +618,8 @@
                                 @endif
                                 <li class="nav-item">
                                     <a href="{{url('/office/currency')}}" class="nav-link {{@$currency}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('CURRENCIES')}}</p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('CURRENCIES')}}</p>
                                     </a>
                                 </li>
 
@@ -609,8 +630,8 @@
                                 @endif
                                 <li class="nav-item">
                                     <a href="{{url('/office/paymentmode')}}" class="nav-link {{@$paymentmode}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('PAYMENT MODES')}}</p>
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('PAYMENT MODES')}}</p>
                                     </a>
                                 </li>
 
@@ -621,8 +642,8 @@
                                 @endif
                                 <li class="nav-item">
                                     <a href="{{url('/office/general_setting')}}" class="nav-link {{@$general_settings}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('GENERAL SETTINGS')}}</p>
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('GENERAL SETTINGS')}}</p>
                                     </a>
                                 </li>
                                 
@@ -633,8 +654,8 @@
                                 @endif
                                 <li class="nav-item">
                                     <a href="{{url('/office/tech_setting')}}" class="nav-link {{@$tech_settings}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('SMTP SETTINGS')}}</p>
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('SMTP SETTINGS')}}</p>
                                     </a>
                                 </li>
 
@@ -680,8 +701,8 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{url('/office/formfield')}}" class="nav-link {{@$formfield}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('FORM FIELDS')}}</p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('FORM FIELDS')}}</p>
                                 </a>
                             </li>
 
@@ -693,8 +714,8 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{url('/office/create_form')}}" class="nav-link {{@$create_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('CREATE FORM')}}</p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('CREATE FORM')}}</p>
                                 </a>
                             </li>
 
@@ -705,8 +726,8 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{url('/office/web_forms')}}" class="nav-link {{@$web_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('FORMS')}}</p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('FORMS')}}</p>
                                 </a>
                             </li>
                         </ul>
@@ -742,7 +763,7 @@
                     || @$route_active == 'Extend Coverage Data Master' 
                     || @$route_active == 'Deductible Type Data Master' 
                     || @$route_active == 'Ship Port Data Master' 
-                    || @$route_active == 'Route Data Master' 
+                    || @$route_active == 'Route Form Data Master' 
                     )
                         @php
                         $master_dd = 'active';
@@ -764,6 +785,190 @@
 
                         <ul class="nav nav-treeview">
 
+                            @can('viewany-cedingbroker', User::class)
+                                @if($route_active == 'Ceding / Broker')
+                                @php
+                                    $cedingform = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/cedingbroker')}}" class="nav-link {{@$cedingform}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('CEDING/BROKER FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            {{-- @can('viewany-cob', User::class) --}}
+                            @if($route_active == 'COB Data Master')
+                            @php
+                                $cob_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/cob')}}" class="nav-link {{@$cob_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('COB FORM')}}</p>
+                                </a>
+                            </li>
+                            {{-- @endcan --}}
+
+                            {{-- @can('viewany-cedingbroker', User::class) --}}
+                            @if($route_active == 'Company Type Data Master')
+                            @php
+                                $ctform = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/companytype')}}" class="nav-link {{@$ctform}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('COMPANY TYPE FORM')}}</p>
+                                </a>
+                            </li>
+                            {{-- @endcan --}}
+
+                            {{-- @can('viewany-condition_needed', User::class) --}}
+                            @if($route_active == 'Condition Needed Data Master')
+                            @php
+                                $cdn_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/conditionneeded')}}" class="nav-link {{@$cdn_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('CONDITION NEEDED FORM')}}</p>
+                                </a>
+                            </li>
+                            {{-- @endcan --}}
+
+                            @can('viewany-currency', User::class)
+                                @if($route_active == 'Currency Data Master')
+                                @php
+                                    $crc_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/currency')}}" class="nav-link {{@$crc_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('CURRENCY FORM')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('viewany-exchange', User::class)
+                                @if($route_active == 'Currency Exchange Data Master')
+                                @php
+                                    $exchange_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/exchange')}}" class="nav-link {{@$exchange_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('CURRENCY EXCHANGE')}}</p>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            {{-- @can('viewany-condition_needed', User::class) --}}
+                            @if($route_active == 'Deductible Type Data Master')
+                            @php
+                                $dt_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/deductibletype')}}" class="nav-link {{@$dt_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('DEDUCTIBLE TYPE FORM')}}</p>
+                                </a>
+                            </li>
+                            {{-- @endcan --}}
+
+                            {{-- @can('viewany-eqz', User::class) --}}
+                            @if($route_active == 'Earthquake Zone')
+                            @php
+                                $earthquakezone_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/earthquakezone')}}" class="nav-link {{@$earthquakezone_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('EARTHQUAKE ZONE FORM')}}</p>
+                                </a>
+                            </li>
+                            {{-- @endcan --}}
+
+                            {{-- @can('viewany-condition_needed', User::class) --}}
+                            @if($route_active == 'Extend Coverage Data Master')
+                            @php
+                                $ec_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/extendedcoverage')}}" class="nav-link {{@$ec_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('EXTEND COVERAGE FORM')}}</p>
+                                </a>
+                            </li>
+                            {{-- @endcan --}}
+
+                            
+
+                            {{-- @can('viewany-fz', User::class) --}}
+                                @if($route_active == 'Flood Zone Data Master')
+                                @php
+                                    $flood_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/floodzone')}}" class="nav-link {{@$flood_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('FLOOD ZONE FORM')}}</p>
+                                    </a>
+                                </li>
+                            {{-- @endcan --}}
+
+                            {{-- @can('viewany-gfh', User::class) --}}
+                            @if($route_active == 'Golf Field Hole')
+                            @php
+                                $gfh_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/golffieldhole')}}" class="nav-link {{@$gfh_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('GOLF FIELD HOLE')}}</p>
+                                </a>
+                            </li>
+                            {{-- @endcan --}}
+
+                            {{-- @can('viewany-condition_needed', User::class) --}}
+                            @if($route_active == 'Interest Insured Data Master')
+                            @php
+                                $ii_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/interestinsured')}}" class="nav-link {{@$ii_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('INTEREST INSURED FORM')}}</p>
+                                </a>
+                            </li>
+                            {{-- @endcan --}}
+
+                            {{-- @can('viewany-koc', User::class) --}}
+                            @if($route_active == 'KOC Data Master')
+                            @php
+                                $koc_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/koc')}}" class="nav-link {{@$koc_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('KIND OF CONTRACT')}}</p>
+                                </a>
+                            </li>
+                            {{-- @endcan --}}
+
                             @if(
                                 @$route_active == 'Country Data Master' 
                                 || @$route_active == 'State Data Master' 
@@ -781,8 +986,8 @@
                             <li class="nav-item has-treeview {{ @$location_menu_open }}">
                                 <a href="#" class="nav-link {{@$location_dd}}" >
                                     
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:5px;"></i>
-                                        <p style="font-size: 90%;margin-left:5px;" >
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;" >
                                             {{__('LOCATION DATA')}}
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
@@ -799,8 +1004,8 @@
                                         @endif
                                         <li class="nav-item">
                                             <a href="{{url('/master-data/country')}}" class="nav-link {{@$countryform}}">
-                                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                                <p>{{__('COUNTRY FORM')}}</p>
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('COUNTRY FORM')}}</p>
                                             </a>
                                         </li>
                                     @endcan
@@ -813,8 +1018,8 @@
                                         @endif
                                         <li class="nav-item">
                                             <a href="{{url('/master-data/state')}}" class="nav-link {{@$state_form}}">
-                                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                                <p>{{__('PROVINCE FORM')}}</p>
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('PROVINCE FORM')}}</p>
                                             </a>
                                         </li>
                                     @endcan
@@ -827,41 +1032,15 @@
                                         @endif
                                         <li class="nav-item">
                                             <a href="{{url('/master-data/city')}}" class="nav-link {{@$city_form}}">
-                                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                                <p>{{__('CITY FORM')}}</p>
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('CITY FORM')}}</p>
                                             </a>
                                         </li>
                                     @endcan
                                 </ul>
                             </li>
 
-                            @can('viewany-currency', User::class)
-                                @if($route_active == 'Currency Data Master')
-                                @php
-                                    $crc_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/currency')}}" class="nav-link {{@$crc_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('CURRENCY FORM')}}</p>
-                                    </a>
-                                </li>
-                            @endcan
-
-                            @can('viewany-exchange', User::class)
-                                @if($route_active == 'Currency Exchange Data Master')
-                                @php
-                                    $exchange_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/exchange')}}" class="nav-link {{@$exchange_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('CURRENCY EXCHANGE')}}</p>
-                                    </a>
-                                </li>
-                            @endcan
+                            
 
                             @can('viewany-felookup', User::class)
                                 @if($route_active == 'Fire & Engineering Lookup Location')
@@ -871,8 +1050,8 @@
                                 @endif
                                 <li class="nav-item">
                                     <a href="{{url('/master-data/felookuplocation')}}" class="nav-link {{@$felookuplocationform}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('LOOKUP LOCATION')}}</p>
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('LOOKUP LOCATION')}}</p>
                                     </a>
                                 </li>
                             @endcan
@@ -885,8 +1064,8 @@
                                 @endif
                                 <li class="nav-item">
                                     <a href="{{url('/master-data/marine-lookup')}}" class="nav-link {{@$marinelookupform}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('MARINE - LOOKUP FORM')}}</p>
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('MARINE - LOOKUP FORM')}}</p>
                                     </a>
                                 </li>
                             {{-- @endcan --}}
@@ -907,10 +1086,10 @@
                                 @endif
                                 <li class="nav-item has-treeview {{ @$marine_menu_open }}">
                                     <a href="#" class="nav-link {{@$marine_dd}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">
                                             {{__('MARINE MASTER DATA')}}
-                                            <i class="right fas fa-angle-left"></i>
+                                            <i class="right fas fa-angle-left" ></i>
                                         </p>
                                     </a>
     
@@ -924,8 +1103,8 @@
                                             @endif
                                             <li class="nav-item">
                                                 <a href="{{url('/master-data/shiptype')}}" class="nav-link {{@$shiptypeform}}">
-                                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                                    <p>{{__('SHIP TYPE FORM')}}</p>
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('SHIP TYPE FORM')}}</p>
                                                 </a>
                                             </li>
                                         {{-- @endcan --}}
@@ -938,8 +1117,8 @@
                                             @endif
                                             <li class="nav-item">
                                                 <a href="{{url('/master-data/classification')}}" class="nav-link {{@$classification_form}}">
-                                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                                    <p>{{__('CLASSIFICATION FORM')}}</p>
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('CLASSIFICATION FORM')}}</p>
                                                 </a>
                                             </li>
                                         {{-- @endcan --}}
@@ -952,226 +1131,71 @@
                                             @endif
                                             <li class="nav-item">
                                                 <a href="{{url('/master-data/construction')}}" class="nav-link {{@$construction_form}}">
-                                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                                    <p>{{__('CONSTRUCTION FORM')}}</p>
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('CONSTRUCTION FORM')}}</p>
                                                 </a>
                                             </li>
                                         {{-- @endcan --}}
                                     </ul>
                                 </li>
 
+                                {{-- @can('viewany-occupation', User::class) --}}
+                                    @if($route_active == 'Occupation Data Master')
+                                    @php
+                                        $ocp_form = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('/master-data/occupation')}}" class="nav-link {{@$ocp_form}}">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                            <p style="font-size: 90%;margin-left:2%;">{{__('OCCUPATION FORM')}}</p>
+                                        </a>
+                                    </li>
+                                {{-- @endcan --}}
+
+                                {{-- @can('viewany-property_type', User::class) --}}
+                                    @if($route_active == 'Property Type Data Master')
+                                    @php
+                                        $property_form = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('/master-data/propertytype')}}" class="nav-link {{@$property_form}}">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                            <p style="font-size: 90%;margin-left:2%;">{{__('PROPERTY TYPE FORM')}}</p>
+                                        </a>
+                                    </li>
+                                {{-- @endcan --}}
+
+                                {{-- @can('viewany-condition_needed', User::class) --}}
+                                @if($route_active == 'Route Form Data Master')
+                                @php
+                                    $rf_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/routeform')}}" class="nav-link {{@$rf_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('ROUTE FORM')}}</p>
+                                    </a>
+                                </li>
+                                {{-- @endcan --}}
+
+                                {{-- @can('viewany-condition_needed', User::class) --}}
+                                @if($route_active == 'Ship Port Data Master')
+                                @php
+                                    $sp_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/shipport')}}" class="nav-link {{@$sp_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('SHIP PORT FORM')}}</p>
+                                    </a>
+                                </li>
+                                {{-- @endcan --}}
+
                             
-
-                            {{-- @can('viewany-gfh', User::class) --}}
-                                @if($route_active == 'Golf Field Hole')
-                                @php
-                                    $gfh_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/golffieldhole')}}" class="nav-link {{@$gfh_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('GOLF FIELD HOLE')}}</p>
-                                    </a>
-                                </li>
-                            {{-- @endcan --}}
-                        
-
-                            {{-- @can('viewany-koc', User::class) --}}
-                                @if($route_active == 'KOC Data Master')
-                                @php
-                                    $koc_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/koc')}}" class="nav-link {{@$koc_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('KIND OF CONTRACT')}}</p>
-                                    </a>
-                                </li>
-                            {{-- @endcan --}}
-                            
-                            @can('viewany-cedingbroker', User::class)
-                                @if($route_active == 'Ceding / Broker')
-                                @php
-                                    $cedingform = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/cedingbroker')}}" class="nav-link {{@$cedingform}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('CEDING/BROKER FORM')}}</p>
-                                    </a>
-                                </li>
-                            @endcan
-
-                            {{-- @can('viewany-cedingbroker', User::class) --}}
-                                @if($route_active == 'Company Type Data Master')
-                                @php
-                                    $ctform = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/companytype')}}" class="nav-link {{@$ctform}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('COMPANY TYPE FORM')}}</p>
-                                    </a>
-                                </li>
-                            {{-- @endcan --}}
-
-                            {{-- @can('viewany-cob', User::class) --}}
-                                @if($route_active == 'COB Data Master')
-                                @php
-                                    $cob_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/cob')}}" class="nav-link {{@$cob_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('COB FORM')}}</p>
-                                    </a>
-                                </li>
-                            {{-- @endcan --}}
-
-                            {{-- @can('viewany-occupation', User::class) --}}
-                                @if($route_active == 'Occupation Data Master')
-                                @php
-                                    $ocp_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/occupation')}}" class="nav-link {{@$ocp_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('OCCUPATION FORM')}}</p>
-                                    </a>
-                                </li>
-                            {{-- @endcan --}}
-
-                            {{-- @can('viewany-eqz', User::class) --}}
-                                @if($route_active == 'Earthquake Zone')
-                                @php
-                                    $earthquakezone_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/earthquakezone')}}" class="nav-link {{@$earthquakezone_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('EARTHQUAKE ZONE FORM')}}</p>
-                                    </a>
-                                </li>
-                            {{-- @endcan --}}
-
-                            {{-- @can('viewany-fz', User::class) --}}
-                                @if($route_active == 'Flood Zone Data Master')
-                                @php
-                                    $flood_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/floodzone')}}" class="nav-link {{@$flood_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('FLOOD ZONE FORM')}}</p>
-                                    </a>
-                                </li>
-                            {{-- @endcan --}}
-
-                            {{-- @can('viewany-property_type', User::class) --}}
-                                @if($route_active == 'Property Type Data Master')
-                                @php
-                                    $property_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/propertytype')}}" class="nav-link {{@$property_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('PROPERTY TYPE FORM')}}</p>
-                                    </a>
-                                </li>
-                            {{-- @endcan --}}
-
-                            {{-- @can('viewany-condition_needed', User::class) --}}
-                                @if($route_active == 'Condition Needed Data Master')
-                                @php
-                                    $cdn_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/conditionneeded')}}" class="nav-link {{@$cdn_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>{{__('CONDITION NEEDED FORM')}}</p>
-                                    </a>
-                                </li>
-                            {{-- @endcan --}}
-
-                            {{-- @can('viewany-condition_needed', User::class) --}}
-                            @if($route_active == 'Interest Insured Data Master')
-                            @php
-                                $ii_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/interestinsured')}}" class="nav-link {{@$ii_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('INTEREST INSURED FORM')}}</p>
-                                </a>
-                            </li>
-                            {{-- @endcan --}}
-
-                            {{-- @can('viewany-condition_needed', User::class) --}}
-                            @if($route_active == 'Extend Coverage Data Master')
-                            @php
-                                $ec_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/extendedcoverage')}}" class="nav-link {{@$ec_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('EXTEND COVERAGE FORM')}}</p>
-                                </a>
-                            </li>
-                            {{-- @endcan --}}
-
-                            {{-- @can('viewany-condition_needed', User::class) --}}
-                            @if($route_active == 'Deductible Type Data Master')
-                            @php
-                                $dt_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/deductibletype')}}" class="nav-link {{@$dt_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('DEDUCTIBLE TYPE FORM')}}</p>
-                                </a>
-                            </li>
-                            {{-- @endcan --}}
-
-                            {{-- @can('viewany-condition_needed', User::class) --}}
-                            @if($route_active == 'Ship Port Data Master')
-                            @php
-                                $sp_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/shipport')}}" class="nav-link {{@$sp_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('SHIP PORT FORM')}}</p>
-                                </a>
-                            </li>
-                            {{-- @endcan --}}
-
-                            {{-- @can('viewany-condition_needed', User::class) --}}
-                            @if($route_active == 'Route Data Master')
-                            @php
-                                $rf_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/routeform')}}" class="nav-link {{@$rf_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>{{__('ROUTE FORM')}}</p>
-                                </a>
-                            </li>
-                        {{-- @endcan --}}
 
                         </ul>
                     </li>
@@ -1228,10 +1252,10 @@
                                 @endif
                                 <li class="nav-item has-treeview {{ @$fed_menu_open }}">
                                     <a href="#" class="nav-link {{@$fed_dd}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">
                                             {{__('FIRE & ENGINEERING DATA')}}
-                                            <i class="right fas fa-angle-left"></i>
+                                            <i class="right fas fa-angle-left" ></i>
                                         </p>
                                     </a>
                                     <ul class="nav nav-treeview">
@@ -1242,8 +1266,8 @@
                                             @endif
                                             <li class="nav-item">
                                                 <a href="{{url('/transaction-data/fe-slipindex')}}" class="nav-link {{@$fes_formindex}}">
-                                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                                    <p>{{__('FIRE & ENGINEERING -')}} <br> {{__('INDEX')}}</p>
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('FIRE & ENGINEERING -')}} <br> {{__('INDEX')}}</p>
                                                 </a>
                                             </li>
 
@@ -1254,8 +1278,8 @@
                                             @endif
                                             <li class="nav-item">
                                                 <a href="{{url('/transaction-data/fe-slip')}}" class="nav-link {{@$fes_form}}">
-                                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                                    <p>{{__('FIRE & ENGINEERING -')}} <br> {{__(' SLIP ENTRY')}}</p>
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('FIRE & ENGINEERING -')}} <br> {{__(' SLIP ENTRY')}}</p>
                                                 </a>
                                             </li>
                                     </ul>
@@ -1276,8 +1300,8 @@
                                 @endif
                                 <li class="nav-item has-treeview {{ @$fld_menu_open }}">
                                     <a href="#" class="nav-link {{@$fld_dd}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">
                                             {{__('FINANCIAL LINES DATA')}}
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
@@ -1290,8 +1314,8 @@
                                             @endif
                                             <li class="nav-item">
                                                 <a href="{{url('/transaction-data/fl-slipindex')}}" class="nav-link {{@$flform}}">
-                                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                                    <p>{{__('FINANCIAL LINES -')}} <br> {{__('INDEX')}}</p>
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('FINANCIAL LINES -')}} <br> {{__('INDEX')}}</p>
                                                 </a>
                                             </li>
                 
@@ -1302,57 +1326,8 @@
                                             @endif
                                             <li class="nav-item">
                                                 <a href="{{url('/transaction-data/fl-slip')}}" class="nav-link {{@$fleform}}">
-                                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                                    <p>{{__('FINANCIAL LINES -')}} <br> {{__('SLIP ENTRY')}}</p>
-                                                </a>
-                                            </li>
-                                    </ul>
-                                </li>
-
-                                
-                                @if(
-                                    @$route_active == 'Moveable Property - Slip Entry' 
-                                    || @$route_active == 'Moveable Property - Index'  
-                                    )
-                                        @php
-                                        $mpd_dd = 'active';
-                                        $mpd_menu_open = 'menu-open';
-                                        @endphp
-                                @else
-                                    @php
-                                    $mpd_menu_open = 'menu-close';
-                                    @endphp
-                                @endif
-                                <li class="nav-item has-treeview {{ @$mpd_menu_open }}">
-                                    <a href="#" class="nav-link {{@$mpd_dd}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>
-                                            {{__('MOVEABLE PROPERTY DATA')}}
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                            @if($route_active == 'Moveable Property - Index')
-                                            @php
-                                                $mpe_form = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/mp-slipindex')}}" class="nav-link {{@$mpe_form}}">
-                                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                                    <p>{{__('MOVEABLE PROPERTY -')}} <br> {{__('INDEX')}}</p>
-                                                </a>
-                                            </li>
-
-                                            @if($route_active == 'Moveable Property - Slip Entry')
-                                            @php
-                                                $mp_form = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/mp-slip')}}" class="nav-link {{@$mp_form}}">
-                                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                                    <p>{{__('MOVEABLE PROPERTY -')}} <br> {{__('SLIP ENTRY')}}</p>
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('FINANCIAL LINES -')}} <br> {{__('SLIP ENTRY')}}</p>
                                                 </a>
                                             </li>
                                     </ul>
@@ -1373,8 +1348,8 @@
                                 @endif
                                 <li class="nav-item has-treeview {{ @$hem_menu_open }}">
                                 <a href="#" class="nav-link {{@$hem_dd}}">
-                                    <i class="far fa-folder nav-icon text-secondary"></i>
-                                    <p>
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">
                                         {{__('HE & MOTOR DATA')}}
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
@@ -1389,8 +1364,8 @@
                                     @endif
                                     <li class="nav-item">
                                         <a href="{{url('/transaction-data/hem-slipindex')}}" class="nav-link {{@$hem_form}}">
-                                                <i class="far fa-folder nav-icon text-secondary"></i>
-                                            <p>{{__('HE & MOTOR - SLIP INDEX')}}</p>
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                            <p style="font-size: 80%;margin-left:2%;">{{__('HE & MOTOR - SLIP INDEX')}}</p>
                                         </a>
                                     </li>
 
@@ -1401,8 +1376,8 @@
                                     @endif
                                     <li class="nav-item">
                                         <a href="{{url('/transaction-data/hem-slip')}}" class="nav-link {{@$heme_form}}">
-                                                <i class="far fa-folder nav-icon text-secondary"></i>
-                                            <p>{{__('HE & MOTOR - SLIP ENTRY')}}</p>
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                            <p style="font-size: 80%;margin-left:2%;">{{__('HE & MOTOR - SLIP ENTRY')}}</p>
                                         </a>
                                     </li>
 
@@ -1424,8 +1399,8 @@
                                 @endif
                                 <li class="nav-item has-treeview {{ @$hio_menu_open }}">
                                     <a href="#" class="nav-link {{@$hio_dd}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">
                                             {{__('HOLE IN ONE DATA')}}
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
@@ -1438,8 +1413,8 @@
                                             @endif
                                             <li class="nav-item">
                                                 <a href="{{url('/transaction-data/hio-index')}}" class="nav-link {{@$hio_idx}}">
-                                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                                    <p>{{__('HOLE IN ONE - INDEX')}}</p>
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('HOLE IN ONE - INDEX')}}</p>
                                                 </a>
                                             </li>
 
@@ -1450,12 +1425,109 @@
                                             @endif
                                             <li class="nav-item">
                                                 <a href="{{url('/transaction-data/hio-slip')}}" class="nav-link {{@$hio_form}}">
-                                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                                    <p>{{__('HOLE IN ONE - SLIP ENTRY')}}</p>
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('HOLE IN ONE - SLIP ENTRY')}}</p>
                                                 </a>
                                             </li>
                                     </ul>
                                 </li>
+
+                                @if(
+                                    @$route_active == 'Moveable Property - Slip Entry' 
+                                    || @$route_active == 'Moveable Property - Index'  
+                                    )
+                                        @php
+                                        $mpd_dd = 'active';
+                                        $mpd_menu_open = 'menu-open';
+                                        @endphp
+                                @else
+                                    @php
+                                    $mpd_menu_open = 'menu-close';
+                                    @endphp
+                                @endif
+                                <li class="nav-item has-treeview {{ @$mpd_menu_open }}">
+                                    <a href="#" class="nav-link {{@$mpd_dd}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">
+                                            {{__('MOVEABLE PROPERTY DATA')}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                            @if($route_active == 'Moveable Property - Index')
+                                            @php
+                                                $mpe_form = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/mp-slipindex')}}" class="nav-link {{@$mpe_form}}">
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('MOVEABLE PROPERTY -')}} <br> {{__('INDEX')}}</p>
+                                                </a>
+                                            </li>
+
+                                            @if($route_active == 'Moveable Property - Slip Entry')
+                                            @php
+                                                $mp_form = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/mp-slip')}}" class="nav-link {{@$mp_form}}">
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('MOVEABLE PROPERTY -')}} <br> {{__('SLIP ENTRY')}}</p>
+                                                </a>
+                                            </li>
+                                    </ul>
+                                </li>
+
+                                @if(
+                                    @$route_active == 'Marine - Slip Entry' 
+                                    || @$route_active == 'Marine Slip - Index'  
+                                    )
+                                        @php
+                                        $ms_dd = 'active';
+                                        $ms_menu_open = 'menu-open';
+                                        @endphp
+                                @else
+                                    @php
+                                    $ms_menu_open = 'menu-close';
+                                    @endphp
+                                @endif
+                                <li class="nav-item has-treeview {{ @$ms_menu_open }}">
+                                    <a href="#" class="nav-link {{@$ms_dd}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">
+                                            {{__('MARINE DATA')}}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                            @if($route_active == 'Marine Slip - Index')
+                                            @php
+                                                $ms_formindex = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/marine-index')}}" class="nav-link {{@$ms_formindex}}">
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('MARINE SLIP - INDEX')}}</p>
+                                                </a>
+                                            </li>
+
+                                            @if($route_active == 'Marine - Slip Entry')
+                                            @php
+                                                $ms_form = 'active';
+                                            @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/marine-slip')}}" class="nav-link {{@$ms_form}}">
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('MARINE - SLIP ENTRY')}}</p>
+                                                </a>
+                                            </li>
+                                    </ul>
+                                </li>
+                           
 
                                 @if(
                                     @$route_active == 'Personal Accident - Slip Entry' 
@@ -1472,8 +1544,8 @@
                                 @endif
                                 <li class="nav-item has-treeview {{ @$pa_menu_open }}">
                                     <a href="#" class="nav-link {{@$pa_dd}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">
                                             {{__('PERSONAL ACCIDENT DATA')}}
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
@@ -1486,8 +1558,8 @@
                                             @endif
                                             <li class="nav-item">
                                                 <a href="{{url('/transaction-data/pa-index')}}" class="nav-link {{@$pa_idx}}">
-                                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                                    <p>{{__('PERSONAL ACCIDENT - INDEX')}}</p>
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('PERSONAL ACCIDENT - INDEX')}}</p>
                                                 </a>
                                             </li>
 
@@ -1498,68 +1570,41 @@
                                             @endif
                                             <li class="nav-item">
                                                 <a href="{{url('/transaction-data/pa-slip')}}" class="nav-link {{@$pa_form}}">
-                                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                                    <p>{{__('PERSONAL ACCIDENT - SLIP ENTRY')}}</p>
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;"> {{__('PERSONAL ACCIDENT - SLIP ENTRY')}}</p>
                                                 </a>
                                             </li>
                                     </ul>
                                 </li>
     
-                                
-    
-
-                                 @if(
-                                    @$route_active == 'Marine - Slip Entry' 
-                                    || @$route_active == 'Marine Slip - Index'  
-                                    )
-                                        @php
-                                        $ms_dd = 'active';
-                                        $ms_menu_open = 'menu-open';
-                                        @endphp
-                                @else
-                                    @php
-                                    $ms_menu_open = 'menu-close';
-                                    @endphp
-                                @endif
-                                <li class="nav-item has-treeview {{ @$ms_menu_open }}">
-                                    <a href="#" class="nav-link {{@$ms_dd}}">
-                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                        <p>
-                                            {{__('MARINE DATA')}}
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                            @if($route_active == 'Marine Slip - Index')
-                                            @php
-                                                $ms_formindex = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/marine-index')}}" class="nav-link {{@$ms_formindex}}">
-                                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                                    <p>{{__('MARINE SLIP - INDEX')}}</p>
-                                                </a>
-                                            </li>
-
-                                            @if($route_active == 'Marine - Slip Entry')
-                                            @php
-                                                $ms_form = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/marine-slip')}}" class="nav-link {{@$ms_form}}">
-                                                        <i class="far fa-folder nav-icon text-secondary"></i>
-                                                    <p>{{__('MARINE - SLIP ENTRY')}}</p>
-                                                </a>
-                                            </li>
-                                    </ul>
-                                </li>
                             </ul>
                         </li>
-
                         
               </ul>
+
+              <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-arrow-up" aria-hidden="true" ></i><span style="font-family:Source Sans Pro;font-weight: bold;"> TOP</span></button>
+
           </nav>
       </div>
   </aside>
+  <script>
+    //Get the button
+    var mybutton = document.getElementById("myBtn");
+    
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+    
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+    
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+</script>

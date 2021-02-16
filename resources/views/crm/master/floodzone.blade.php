@@ -14,7 +14,7 @@
           @csrf
         <div class="card">
           <div class="card-header bg-gray">
-            {{__('New Master State/Province Data')}}
+            {{__('New Master Flood Zone Data')}}
           </div>
           
           <div class="card-body bg-light-gray ">

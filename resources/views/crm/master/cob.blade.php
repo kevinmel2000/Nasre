@@ -72,6 +72,24 @@
                       </div>
                     </div>
                 </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">{{__('Form')}}</label>
+                        <select name="cobform" id="cobform" class="form-control form-control-sm ">
+                            <option selected disabled>{{__('Select Form')}}</option>
+                            <option value="fe">Fire & Engineering</option>
+                            <option value="fl">Financial Lines</option>
+                            <option value="hio">Hole In One</option>
+                            <option value="hem">HE & motors</option>
+                            <option value="ms" >Marine</option>
+                            <option value="mp">Moveable Property</option>
+                            <option value="pa">Personal Accident</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
                 
               </div>
             </div>
@@ -106,11 +124,12 @@
                     <th>{{__('Abbreviation')}}</th>
                     <th>{{__('Parent')}}</th>
                     <th>{{__('Remarks')}}</th>
+                    <th>{{__('Form')}}</th>
                     <th width="20%">{{__('Actions')}}</th>
                   </tr>
                   </thead>
                   <tbody>
-                      @foreach (@$cob as $boc)
+                    @foreach (@$cob as $boc)
                           <tr>
                             <td>{{@$boc->code}}</td>
                             <td>{{@$boc->description}}</td>
@@ -122,6 +141,24 @@
                                   {{@$boc->remarks}}
                                 @endif
                             </td>
+                            <td>
+                              @if($boc->form  == "fe")
+                                Fire & Engineering
+                              @elseif($boc->form  == "fl")
+                                Financial Lines
+                              @elseif($boc->form  == "hem")
+                                HE & motors
+                              @elseif($boc->form  == "hio")
+                                Hole In One
+                              @elseif($boc->form  == "mp")
+                                Moveable Property
+                              @elseif($boc->form  == "ms")
+                                Marine
+                              @elseif($boc->form  == "pa")
+                                Personal Accident
+                              @else 
+                              -
+                              @endif</td>
                             <td>
                               <a href="#" data-toggle="tooltip" data-title="{{$boc->created_at->toDayDateTimeString()}}" class="mr-3">
                                 <i class="fas fa-clock text-info"></i>
@@ -153,49 +190,122 @@
                                                 <div class="col-md-6 col-md-12">
                                                   <div class="form-group">
                                                     <label for="">{{__('Code')}}</label>
-                                                    <input type="text" name="codecob" class="form-control" value="{{$boc->code}}" data-validation="length" data-validation-length="1-12" required disabled/>
+                                                    <input type="text" name="codecob" class="form-control" value="{{$boc->code}}" data-validation="length" data-validation-length="1-12" required readonly="readonly"/>
                                                   </div>
                                                 </div>
                                               </div>
-                                              <div class="row">
-                                                <div class="col-md-4 col-md-12">
+
+                                              <div class="col-sm-12 col-md-12">
+                                                <div class="form-group">
+                                                    <label for="">{{__('Parent')}}</label><br>
+                                                    <select name="parent_id" class="form-control form-control-sm e1">
+                                                        <option selected disabled>{{__('Select Parent')}}</option>
+                                                        <option value=""></option>
+                                                        @foreach (@$cob as $boc2)
+                                                        @if($boc->parent_id  == $boc2->id)
+                                                        <option value="{{ $boc2->id }}" selected>{{ $boc2->code }} - {{ $boc2->description }}></option>
+                                                        @else
+                                                        <option value="{{ $boc2->id }}">{{ $boc2->code }} - {{ $boc2->description }}</option>
+                                                         @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-12">
+                                              <div class="form-group">
+                                                  <label for="">{{__('Form')}}</label><br>
+                                                  <select name="formcob" class="form-control form-control-sm e1">
+                                                      
+                                                      @if($boc->form  == "fe")
+                                                        <option  disabled>{{__('Select Form')}}</option>
+                                                        <option selected value="fe">Fire & Engineering</option>
+                                                        <option value="fl">Financial Lines</option>
+                                                        <option value="hio">Hole In One</option>
+                                                        <option value="hem">HE & motors</option>
+                                                        <option value="ms" >Marine</option>
+                                                        <option value="mp">Moveable Property</option>
+                                                        <option value="pa">Personal Accident</option>
+                                                      @elseif($boc->form  == "fl")
+                                                        <option  disabled>{{__('Select Form')}}</option>
+                                                        <option  value="fe">Fire & Engineering</option>
+                                                        <option selected value="fl">Financial Lines</option>
+                                                        <option value="hio">Hole In One</option>
+                                                        <option value="hem">HE & motors</option>
+                                                        <option value="ms" >Marine</option>
+                                                        <option value="mp">Moveable Property</option>
+                                                        <option value="pa">Personal Accident</option>
+                                                      @elseif($boc->form  == "hem")
+                                                        <option  disabled>{{__('Select Form')}}</option>
+                                                        <option  value="fe">Fire & Engineering</option>
+                                                        <option value="fl">Financial Lines</option>
+                                                        <option value="hio">Hole In One</option>
+                                                        <option selected value="hem">HE & motors</option>
+                                                        <option value="ms" >Marine</option>
+                                                        <option value="mp">Moveable Property</option>
+                                                        <option value="pa">Personal Accident</option>
+                                                      @elseif($boc->form  == "hio")
+                                                        <option  disabled>{{__('Select Form')}}</option>
+                                                        <option  value="fe">Fire & Engineering</option>
+                                                        <option value="fl">Financial Lines</option>
+                                                        <option selected value="hio">Hole In One</option>
+                                                        <option value="hem">HE & motors</option>
+                                                        <option value="ms" >Marine</option>
+                                                        <option value="mp">Moveable Property</option>
+                                                        <option value="pa">Personal Accident</option>
+                                                      @elseif($boc->form  == "mp")
+                                                        <option  disabled>{{__('Select Form')}}</option>
+                                                        <option  value="fe">Fire & Engineering</option>
+                                                        <option value="fl">Financial Lines</option>
+                                                        <option value="hio">Hole In One</option>
+                                                        <option value="hem">HE & motors</option>
+                                                        <option value="ms" >Marine</option>
+                                                        <option selected value="mp">Moveable Property</option>
+                                                        <option value="pa">Personal Accident</option>
+                                                      @elseif($boc->form  == "pa")
+                                                          <option  disabled>{{__('Select Form')}}</option>
+                                                          <option  value="fe">Fire & Engineering</option>
+                                                          <option value="fl">Financial Lines</option>
+                                                          <option value="hio">Hole In One</option>
+                                                          <option value="hem">HE & motors</option>
+                                                          <option value="ms" >Marine</option>
+                                                          <option value="mp">Moveable Property</option>
+                                                          <option selected value="pa">Personal Accident</option>
+                                                      @else 
+                                                          <option selected disabled>{{__('Select Form')}}</option>
+                                                          <option  value="fe">Fire & Engineering</option>
+                                                          <option value="fl">Financial Lines</option>
+                                                          <option value="hio">Hole In One</option>
+                                                          <option value="hem">HE & motors</option>
+                                                          <option value="ms" >Marine</option>
+                                                          <option value="mp">Moveable Property</option>
+                                                          <option  value="pa">Personal Accident</option>
+                                                      @endif
+                                                  </select>
+                                              </div>
+                                          </div>
+
+                                                <div class="col-sm-12 col-md-12">
                                                   <div class="form-group">
                                                     <label for="">{{__('Description')}}</label>
-                                                    <input type="text" name="descriptioncob" class="form-control" value="{{$boc->description}}" data-validation="length" data-validation-length="2-150" required/>
+                                                    <input type="text" name="descriptioncob" class="form-control" value="{{$boc->description}}" data-validation="length" data-validation-length="0-150" />
                                                   </div>
                                                 </div>
-                                                <div class="col-md-4 col-md-12">
+                                                <div class="col-sm-12 col-md-12">
                                                   <div class="form-group">
                                                     <label for="">{{__('Abbreviation')}}</label>
-                                                    <input type="text" name="abbreviationcob" class="form-control" value="{{$boc->abbreviation}}" data-validation="length" data-validation-length="1-150" required/>
+                                                    <input type="text" name="abbreviationcob" class="form-control" value="{{$boc->abbreviation}}" data-validation="length" data-validation-length="0-150" />
                                                   </div>
                                                 </div>
 
-                                                <div class="col-md-4 col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Parent')}}</label><br>
-                                                        <select name="parent_id" class="form-control form-control-sm e1">
-                                                            <option selected disabled>{{__('Select Parent')}}</option>
-                                                            <option value=""></option>
-                                                            @foreach (@$cob as $boc2)
-                                                            @if($boc->parent_id  == $boc2->id)
-                                                            <option value="{{ $boc2->id }}" selected>{{ $boc2->code }} - {{ $boc2->description }}></option>
-                                                            @else
-                                                            <option value="{{ $boc2->id }}">{{ $boc2->code }} - {{ $boc2->description }}</option>
-                                                             @endif
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-4 col-md-12">
+                                                <div class="col-sm-12 col-md-12">
                                                   <div class="form-group">
                                                     <label for="">{{__('Remarks')}}</label>
-                                                    <textarea name="remarkscob" class="form-control" value="{{$boc->remarks}}" data-validation="length" data-validation-length="0-350" required>{{$boc->remarks}}</textarea>
+                                                    <textarea name="remarkscob" class="form-control" value="{{$boc->remarks}}" data-validation="length" data-validation-length="0-350" >{{$boc->remarks}}</textarea>
                                                   </div>
                                                 </div>
-                                            
-                                              </div>
+
+                                                
                                           </div>
                                           <div class="modal-footer">
                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>

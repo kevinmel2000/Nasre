@@ -77,28 +77,24 @@ class FeLookupLocationController extends Controller
           $floodzone = FloodZone::orderby('id','asc')->get();
           $costumer=Customer::orderby('id','asc')->get();
 
-                $lastid = FeLookupLocation::select('id')->latest()->first();
+          $lastid = count(FeLookupLocation::all());
 
-                if($lastid != null){
-                    if($lastid->id == 9){
-                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                    }elseif($lastid->id >= 10){
-                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                    }elseif($lastid->id == 99){
-                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                    }elseif($lastid->id >= 100){
-                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                    }elseif($lastid->id == 999){
-                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                    }elseif($lastid->id >= 1000){
-                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                    }else{
-                        $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                    }
-                }
-                else{
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                }
+          if($lastid != null){
+              // $code_st = $mydate . strval($lastid + 1);
+
+              if($lastid < 10){
+                  $code_felookuplocation = '000' . strval($lastid + 1);
+              }elseif($lastid > 9 && $lastid < 100){
+                  $code_felookuplocation = '00' . strval($lastid + 1);
+              }elseif($lastid > 99 && $lastid < 1000){
+                  $code_felookuplocation = '0' . strval($lastid + 1);
+              }elseif($lastid > 999 && $lastid < 10000){
+                  $code_felookuplocation =  strval($lastid + 1);
+              }
+          }
+          else{
+              $code_felookuplocation = '000' . strval(1);
+          }
 
           return view('crm.master.felookuplocation', compact('user','code_felookuplocation','earthquakezone','floodzone','felookuplocation','costumer','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
@@ -114,28 +110,26 @@ class FeLookupLocationController extends Controller
           $floodzone = FloodZone::orderby('id','asc')->get();
           $costumer=Customer::orderby('id','asc')->get();
 
-            $lastid = FeLookupLocation::select('id')->latest()->first();
+            $lastid = count(FeLookupLocation::all());
 
             if($lastid != null){
-                if($lastid->id == 9){
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id >= 10){
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id == 99){
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id >= 100){
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id == 999){
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                }elseif($lastid->id >= 1000){
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
-                }else{
-                    $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                // $code_st = $mydate . strval($lastid + 1);
+
+                if($lastid < 10){
+                    $code_felookuplocation = '000' . strval($lastid + 1);
+                }elseif($lastid > 9 && $lastid < 100){
+                    $code_felookuplocation = '00' . strval($lastid + 1);
+                }elseif($lastid > 99 && $lastid < 1000){
+                    $code_felookuplocation = '0' . strval($lastid + 1);
+                }elseif($lastid > 999 && $lastid < 10000){
+                    $code_felookuplocation =  strval($lastid + 1);
                 }
             }
             else{
-                $code_felookuplocation = $mydate . strval($lastid->id + 1);
+                $code_felookuplocation = '000' . strval(1);
             }
+
+            
 
           return view('crm.master.felookuplocation', compact('user','code_felookuplocation','earthquakezone','floodzone','felookuplocation','costumer','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
          }

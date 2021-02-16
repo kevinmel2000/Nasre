@@ -14,6 +14,7 @@ use App\Http\Controllers\FloodZoneController;
 
 Route::get('get-state-list','FeLookupLocationController@getStateList');
 Route::get('get-city-list','FeLookupLocationController@getCityList');
+Route::get('get-city-all','MasterController@getCityList');
 Route::get('get-cedingbroker-autocode','CedingBrokerController@generatecode')->name('cedingbroker.getcode');
 Route::get('get-koc-autocode','KocController@generatecode')->name('koc.getcode');
 Route::get('get-cob-autocode','MasterController@generatecodecob')->name('cob.getcode');

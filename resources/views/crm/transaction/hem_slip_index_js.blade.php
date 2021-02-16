@@ -18,7 +18,7 @@
           $(`#delbtn${id}`).append(btn);
       }
   
-      $("#felookupTable").DataTable({
+      $("#hemlookupTable").DataTable({
         "order": [[ 0, "desc" ]],
         dom: '<"top"fB>rt<"bottom"lip><"clear">',
         lengthMenu: [

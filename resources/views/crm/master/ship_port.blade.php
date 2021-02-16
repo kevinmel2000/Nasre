@@ -51,7 +51,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                         <label for="">{{__('City')}} </label>
-                        <select name="spcity" class="e1 form-control form-control-sm ">
+                        <select name="spcity" id="spcity" class="e1 form-control form-control-sm ">
                             <option selected disabled>{{__('Select City')}}</option>
                             @foreach($city as $citydata)
                               <option value="{{ $citydata->id }}">{{ $citydata->id }} - {{ $citydata->name }}</option>

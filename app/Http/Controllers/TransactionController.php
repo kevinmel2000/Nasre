@@ -141,8 +141,11 @@ class TransactionController extends Controller
             $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
             $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
 
+
+            // if($interestlist){
+            //     $interestlist->delete();
+            // }
             
-            $interestlist->delete();
 
 
             return view('crm.transaction.marine_slip', compact(['user','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestinsured','routeship','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     

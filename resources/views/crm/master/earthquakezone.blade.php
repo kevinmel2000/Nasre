@@ -14,7 +14,7 @@
           @csrf
         <div class="card">
           <div class="card-header bg-gray">
-            {{__('New Master State/Province Data')}}
+            {{__('New Master Earthquake Zone Data')}}
           </div>
           
           <div class="card-body bg-light-gray ">
@@ -100,7 +100,7 @@
                                       <div class="modal-dialog" user="document">
                                         <div class="modal-content bg-light-gray">
                                           <div class="modal-header bg-gray">
-                                            <h5 class="modal-title" id="updateearthquakezone{{$earthquakezonedata->id}}Label">{{__('Update EarthQuake')}}</h5>
+                                            <h5 class="modal-title" id="updateearthquakezone{{$earthquakezonedata->id}}Label">{{__('Update EarthQuake Zone')}}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                               <span aria-hidden="true">&times;</span>
                                             </button>

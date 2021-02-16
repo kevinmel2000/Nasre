@@ -314,8 +314,10 @@ class FeSlipController extends Controller
         $fe_ids = response()->json($insured->modelKeys());
         
         $insureddata=Insured::find($idm);
+        // dd($insureddata->number);
         $code_ms=$insureddata->number;
-        $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
+        $slipdata=SlipTable::where('insured_id',$insureddata->number)->first();
+        // dd($slipdata);
         $code_sl=$slipdata->number;
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();

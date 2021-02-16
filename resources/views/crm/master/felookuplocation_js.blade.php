@@ -1,3 +1,11 @@
+<script type="text/javascript">
+  $(document).ready(function() { 
+    $("#state").attr('disabled','disabled');
+    $("#city").attr('disabled','disabled');
+    
+  });
+</script>
+
 <script type=text/javascript>
 
   $('#country').change(function(){
@@ -10,7 +18,8 @@
       success:function(res){        
       if(res){
         $("#state").empty();
-        $("#state").append('<option>Select</option>');
+        $("#state").removeAttr('disabled');
+        $("#state").append('<option selected disabled>Select Province</option>');
         $.each(res,function(key,value){
           $("#state").append('<option value="'+key+'">'+value+'</option>');
         });
@@ -37,6 +46,8 @@
       success:function(res){        
       if(res){
         $("#city").empty();
+        $("#city").removeAttr('disabled');
+        $("#city").append('<option selected disabled>Select City</option>');
         $.each(res,function(key,value){
           $("#city").append('<option value="'+key+'">'+value+'</option>');
         });

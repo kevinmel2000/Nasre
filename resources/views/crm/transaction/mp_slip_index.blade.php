@@ -30,11 +30,11 @@
                 
                   {!! link_to('transaction-data/mp-slip','Add Data',['class'=>'btn btn-primary']) !!}
                   <hr>
-                  {!! Form::open(array('url'=>'transaction-data/mp-slipindex')) !!}
+                  {{-- {!! Form::open(array('url'=>'transaction-data/mp-slipindex')) !!}
                   {!! Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari MOVEABLE PROPERTY Number, ketik lalu tekan enter']) !!}
-                  {!! Form::close() !!}
+                  {!! Form::close() !!} --}}
                   <hr>
-                  <table id="felookupTable2" class="table table-bordered table-striped">
+                  <table id="mplookupTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                       <th>{{__('Number')}}</th>
@@ -49,7 +49,7 @@
                     <tbody>
                         @foreach (@$insured as $insureddata)
                             <tr>
-                              <td>{{@$insureddata->number}}</td>
+                              <td><a href="{{  url('transaction-data/detailmpslip/', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
                               <td>{{@$insureddata->insured_prefix}} - {{@$insureddata->insured_name}} - {{@$insureddata->insured_suffix}}</td>
                               <td>{{@$insureddata->share }}</td>
                               <td>{{@$insureddata->share_from}}</td>
@@ -65,12 +65,15 @@
                                 <span>
 
                                 
-                                @can('update-felookup', User::class)
+                                {{-- @can('update-felookup', User::class)
                                 {!! link_to('transaction-data/detailmpslip/'.@$insureddata->id,'Detail Data',['class'=>'btn btn-primary']) !!}
-                                @endcan  
+                                @endcan   --}}
                               
                                 @can('update-felookup', User::class)
-                                {!! link_to('transaction-data/updatempslip/'.@$insureddata->id,'Edit Data',['class'=>'btn btn-primary']) !!}
+                                <a class="text-primary mr-3" href="{{ url('transaction-data/updatempslip', $insureddata->id) }}">
+                                  <i class="fas fa-edit"></i>
+                                </a>
+                                {{-- {!! link_to('transaction-data/updatempslip/'.@$insureddata->id,'Edit Data',['class'=>'btn btn-primary']) !!} --}}
                                 @endcan  
 
 

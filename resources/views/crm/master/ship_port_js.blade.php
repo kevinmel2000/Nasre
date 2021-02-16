@@ -1,7 +1,27 @@
 <link href="{{url('/')}}/css/select2.css" rel="stylesheet"/>
 <script src="{{url('/')}}/js/select2.js"></script>
 <script>
-        $(document).ready(function() { $(".e1").select2({ width: '100%' }); });
+        $(document).ready(function() { $(".e1").select2({ width: '100%' }); 
+        
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-city-all')}},
+            success:function(res){        
+                if(res){
+                    $("#spcity").attr('class','e1 form-control form-control-sm')
+                    $("#spcity").append('<option selected disabled>Select City</option>');
+                    $.each(res,function(key,value){
+                    $("#spcity").append('<option value="'+key+'">'+value+'</option>');
+                    });
+                
+                }else{
+                    $("#spcity").empty();
+                }
+            }
+        });
+        
+        
+        });
 </script>
 
 <script>

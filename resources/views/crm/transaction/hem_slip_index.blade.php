@@ -28,13 +28,13 @@
             <div class="row">
                 <div class="col-md-12 com-sm-12 mt-3">
                 
-                  {!! link_to('transaction-data/hem-slip','Add Data',['class'=>'btn btn-primary']) !!}
+                 {!! link_to('transaction-data/hem-slip','Add Data',['class'=>'btn btn-primary']) !!} 
                   <hr>
-                  {!! Form::open(array('url'=>'transaction-data/hem-slipindex')) !!}
+                  {{-- {!! Form::open(array('url'=>'transaction-data/hem-slipindex')) !!}
                   {!! Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari HE & MOTOR Number, ketik lalu tekan enter']) !!}
-                  {!! Form::close() !!}
+                  {!! Form::close() !!}  --}}
                   <hr>
-                  <table id="felookupTable2" class="table table-bordered table-striped">
+                  <table id="hemlookupTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                       <th>{{__('Number')}}</th>
@@ -49,7 +49,7 @@
                     <tbody>
                         @foreach (@$insured as $insureddata)
                             <tr>
-                              <td>{{@$insureddata->number}}</td>
+                              <td><a href="{{  url('transaction-data/detailhemslip', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
                               <td>{{@$insureddata->insured_prefix}} - {{@$insureddata->insured_name}} - {{@$insureddata->insured_suffix}}</td>
                               <td>{{@$insureddata->share }}</td>
                               <td>{{@$insureddata->share_from}}</td>
@@ -65,14 +65,16 @@
                                 <span>
 
                                    
-                                @can('update-felookup', User::class)
+                                {{-- @can('update-felookup', User::class)
                                 
                                 {!! link_to('transaction-data/detailhemslip/'.@$insureddata->id,'Detail Data',['class'=>'btn btn-primary']) !!}
-                                @endcan  
+                                @endcan   --}}
                               
                                 @can('update-felookup', User::class)
-                                
-                                {!! link_to('transaction-data/updatehemslip/'.@$insureddata->id,'Edit Data',['class'=>'btn btn-primary']) !!}
+                                <a class="text-primary mr-3" href="{{ url('transaction-data/updatehemslip/', $insureddata->id) }}">
+                                  <i class="fas fa-edit"></i>
+                                </a>
+                                {{-- {!! link_to('transaction-data/updatehemslip/'.@$insureddata->id,'Edit Data',['class'=>'btn btn-primary']) !!} --}}
                                 @endcan  
                                 
                                 @can('delete-felookup', User::class)

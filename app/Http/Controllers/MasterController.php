@@ -255,7 +255,7 @@ class MasterController extends Controller
                 if($lastid < 10){
                     $code_st = '000' . strval($lastid + 1);
                 }elseif($lastid > 9 && $lastid < 100){
-                    $code_st = '00' . strval($lastid- + 1);
+                    $code_st = '00' . strval($lastid + 1);
                 }elseif($lastid > 99 && $lastid < 1000){
                     $code_st = '0' . strval($lastid + 1);
                 }elseif($lastid > 999 && $lastid < 10000){
@@ -845,7 +845,8 @@ class MasterController extends Controller
                 'description'=>$request->cobdescription,
                 'abbreviation'=>$request->cobabbreviation,
                 'parent_id'=>$request->parent_id,
-                'remarks'=>$request->cobremarks
+                'remarks'=>$request->cobremarks,
+                'form'=>$request->cobform
             ]);
             $notification = array(
                 'message' => 'COB added successfully!',
@@ -890,7 +891,7 @@ class MasterController extends Controller
         $validator = $request->validate([
             'crccode'=>'required|max:5|unique:currencies,code',
             'crcsymbolname'=>'required',
-            'crccountry'=>'required'
+            'crccountry'=>'required|unique:currencies,country'
         ]);
         if($validator){
             $user = Auth::user();
@@ -1232,6 +1233,14 @@ class MasterController extends Controller
         }
     }
 
+    public function getCityList()
+    {
+        $cities = DB::table("cities")
+        ->orderBy('name')
+        ->get()
+        ->pluck("name","id");
+        return response()->json($cities);
+    }
 
     /**
      * Display the specified resource.
@@ -1287,7 +1296,7 @@ class MasterController extends Controller
     public function updatecob(Request $request, COB $cob)
     {
         $validator = $request->validate([
-            'codecob'=>'required|max:20',
+            'codecob'=>'max:20',
             'descriptioncob'=>'required',
             'abbreviationcob'=>'required'
         ]);
@@ -1297,6 +1306,7 @@ class MasterController extends Controller
             $cob->abbreviation = $request->abbreviationcob;
             $cob->parent_id = $request->parent_id;
             $cob->remarks = $request->remarkscob;
+            $cob->form = $request->formcob;
             $cob->save();
             $notification = array(
                 'message' => 'COB updated successfully!',
