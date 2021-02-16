@@ -22,7 +22,7 @@ class StateController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $state = State::orderby('id','desc')->paginate(10);
+          $state = State::orderby('id','desc')->get();
           $state_ids = response()->json($state->modelKeys());
           $country = Country::orderby('id','asc')->get();
           return view('crm.master.state', compact('user','state','route_active','state_ids','country'))->with('i', ($request->input('page', 1) - 1) * 10);

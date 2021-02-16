@@ -173,7 +173,7 @@
                     
                   </table>
 
-                  {!! $city->render() !!}
+                  {{-- {!! $city->render() !!} --}}
 
                 </div>
                

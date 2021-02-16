@@ -22,7 +22,7 @@ class CityController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $city = City::orderby('id','desc')->paginate(10);
+          $city = City::orderby('id','desc')->get();
           $city_ids = response()->json($city->modelKeys());
           $state = State::orderby('id','asc')->get();
           return view('crm.master.city', compact('user','city','route_active','city_ids','state'))->with('i', ($request->input('page', 1) - 1) * 10);

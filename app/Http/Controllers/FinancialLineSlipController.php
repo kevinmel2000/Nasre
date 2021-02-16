@@ -148,7 +148,7 @@ class FinancialLineSlipController extends Controller
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
-        $cob = COB::orderby('id','asc')->get();
+        $cob = COB::where('form','fl')->orderby('id','asc')->get();
         $koc = Koc::orderby('id','asc')->get();
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();

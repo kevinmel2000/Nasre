@@ -175,7 +175,7 @@
                     
                   </table>
 
-                  {!! $state->render() !!}
+                  {{-- {!! $state->render() !!} --}}
 
                 </div>
                
