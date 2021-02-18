@@ -271,6 +271,7 @@
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                         <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
+                                                        <input type="hidden" name="slipmsinumber" id="slipmsinumber" value="">
                                                         <label for="">{{__('Number')}} </label>
                                                         <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="0-25" value="{{ $code_sl }}" readonly="readonly" />
                                                         </div>
@@ -525,6 +526,10 @@
                                                         <div class="row">
                                                             <div class="col-md-8">
                                                                 <div class="col-md-12 com-sm-12 mt-3">
+                                                                    <input type="hidden" name="msitsi" id="msitsi" value="">
+                                                                    <input type="hidden" name="msisharev" id="msisharev" value="">
+                                                                    <input type="hidden" name="msisumsharev" id="msisumsharev" value="">
+
                                                                     <table id="interestInsuredTable" class="table table-bordered table-striped">
                                                                         <thead>
                                                                         <tr>
@@ -537,7 +542,7 @@
                                                                             @foreach($interestlist as $isl)
                                                                                 <tr id="iid{{ $isl->id }}" data-name="interestvalue[]">
                                                                                         <td data-name="{{ $isl->interest_id }}">{{ $isl->interestinsureddata->description }}</td>
-                                                                                        <td data-name="{{ $isl->amount }}">{{ $isl->amount }}</td>
+                                                                                        <td data-name="{{ $isl->amount }}">@currency($isl->amount)</td>
                                                                                         <td><a href="javascript:void(0)" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
                                                                                 </tr>   
                                                                             @endforeach
@@ -654,8 +659,8 @@
                                                                                         <td data-name="{{ $dtt->deductible_id }}">{{ $dtt->DeductibleType->abbreviation }} - {{ $dtt->DeductibleType->description }}</td>
                                                                                         <td data-name="{{ $dtt->currency_id }}">{{ $dtt->currency->symbol_name }}</td>
                                                                                         <td data-name="{{ $dtt->percentage }}">{{ $dtt->percentage }}</td>
-                                                                                        <td data-name="{{ $dtt->amount }}">{{ $dtt->amount }}</td>
-                                                                                        <td data-name="{{ $dtt->min_claimamount }}">{{ $dtt->min_claimamount }}</td>
+                                                                                        <td data-name="{{ $dtt->amount }}">@currency($dtt->amount)</td>
+                                                                                        <td data-name="{{ $dtt->min_claimamount }}">@currency($dtt->min_claimamount)</td>
                                                                                         <td><a href="javascript:void(0)" onclick="deletedeductibletype({{ $dtt->id }})">delete</i></a></td>
                                                                                 </tr>   
                                                                             @endforeach
@@ -992,7 +997,7 @@
                                                                             <tr id="ispid{{ $isp->id }}">
                                                                                     <td data-name="{{ $isp->installment_date }}">{{ $isp->installment_date }}</td>
                                                                                     <td data-name="{{ $isp->percentage }}">{{ $isp->percentage }}</td>
-                                                                                    <td data-name="{{ $isp->amount }}">{{ $isp->amount }}</td>
+                                                                                    <td data-name="{{ $isp->amount }}">@currency( $isp->amount)</td>
                                                                                     <td><a href="javascript:void(0)" onclick="deleteinstallmentpanel({{ $isp->id }})">delete</i></a></td>
                                                                             </tr>   
                                                                         @endforeach
@@ -1097,7 +1102,7 @@
                                                                                     <td data-name="{{ $rsc->type }}">{{ $rsc->type }}</td>
                                                                                     <td data-name="{{ $rsc->contract }}">{{ $rsc->contract }}</td>
                                                                                     <td data-name="{{ $rsc->percentage }}">{{ $rsc->percentage }}</td>
-                                                                                    <td data-name="{{ $rsc->amount }}">{{ $rsc->amount }}</td>
+                                                                                    <td data-name="{{ $rsc->amount }}">@currency( $rsc->amount)</td>
                                                                                     <td><a href="javascript:void(0)" onclick="deleteretrocessiontemp({{ $rsc->id }})">delete</i></a></td>
                                                                             </tr>   
                                                                         @endforeach

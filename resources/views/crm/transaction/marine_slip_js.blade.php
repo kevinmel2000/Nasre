@@ -6,6 +6,8 @@
         $("#btnaddlayer").attr('hidden','true');
         $("#sliplayerproportional").attr('hidden','true');
         $("#labelnonprop").attr('hidden','true');
+
+        $("#marineslipform :input").prop("disabled", true);
         
         });
 </script>
@@ -204,7 +206,8 @@
         var tsi = parseFloat($("#sliptotalsum").val());
         var sum = isNaN(shareslip * tsi/100) ? 0 :(shareslip * tsi/100) ;
         $('#slipsumshare').val(sum);
-        $('#msishare').val(shareslip);
+        // $('#msishare').val(shareslip);
+        $('#msisharev').val(shareslip);
      });
 
      $('#sliprate').keyup(function () {
@@ -217,12 +220,14 @@
      $('#slipshare').change(function () {
         var rateslip =  parseFloat($('#sliprate').val()) / 100 ;
         var shareslip =  parseFloat($('#slipshare').val()) / 100 ;
-        var ourshare =  parseFloat($('#msishare').val()) / 100 ;
+        var ourshare =  parseFloat($('#msisharev').val()) / 100 ;
         var tsi = parseFloat($("#sliptotalsum").val());
+        var mtsi = parseFloat($("#msitsi").val());
         var sum = isNaN(rateslip * shareslip * tsi/100) ? 0 :(rateslip * shareslip * tsi/100) ;
-        var sumourshare = isNaN(ourshare * tsi ) ? 0 :(ourshare * tsi) ;
+        var sumourshare = isNaN(ourshare * mtsi ) ? 0 :(ourshare * tsi) ;
         $('#slipgrossprmtonr').val(sum);
-        $('#msisharefrom').val(sumourshare);
+        // $('#msisharefrom').val(sumourshare);
+        $('#msisumsharev').val(sumourshare);
      });
 
      $('#slipcommission').keyup(function () {
@@ -289,7 +294,8 @@
                var total =  parseFloat($("#sliptotalsum").val());
                var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
                $("#sliptotalsum").val(sum);
-               $("#msishareto").val(sum);
+            //    $("#msishareto").val(sum);
+               $("#msitsi").val(sum);
                $(':input','#addinterestinsured').not(':button, :submit, :reset, :hidden').val(' ').removeAttr('checked').removeAttr('selected');
             
            }
@@ -632,6 +638,9 @@
                     .val('')
                     .removeAttr('checked')
                     .removeAttr('selected');
+
+                $("#marineslipform :input").prop("disabled", false);
+                $('#slipmsinumber').val();
            },
            error: function (request, status, error) {
                 //alert(request.responseText);
@@ -647,7 +656,7 @@
        //alert('masuk');
        e.preventDefault();
 
-       var code_ins = $('#msinumber').val();
+       var code_ins = $('#slipmsinumber').val();
        var slipnumber = $('#slipnumber').val();
        var slipuy = $('#slipuy').val();
        var slipstatus = $('#slipstatus').val();
@@ -684,6 +693,9 @@
        var slipor =  $('#slipor').val();
        var slipsumor =  $('#slipsumor').val();
        var token2 = $('input[name=_token]').val();
+       var msitsi = $('#msitsi').val();
+       var msisumsharev = $('#msisumsharev').val();
+       var msisharev = $('#msisharev').val();
        
        //ajaxfilefunction(e);
 
@@ -733,6 +745,9 @@
                sliprb:sliprb,
                slipor:slipor,
                slipsumor:slipsumor,
+               tsims:msitsi,
+               sharems:msisharev,
+               sumsharems:msisumsharev,
                formData:formData
            },
            beforeSend: function() { $("body").addClass("loading");  },

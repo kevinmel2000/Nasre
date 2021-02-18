@@ -474,6 +474,8 @@ class TransactionController extends Controller
                     'message' => 'Fire & Engginering Slip added successfully!',
                     'alert-type' => 'success'
                 );
+
+
             }
             else
             {
@@ -545,7 +547,14 @@ class TransactionController extends Controller
                 'user'=>Auth::user()->name,
             ]);
 
-           
+            $insdata = Insured::where('number',$request->code_ins)->where('slip_type','ms')->first();
+
+            $msdata = Insured::findOrFail($insdata->id);
+            $msdata->retro_backup=$request->sliprb;
+            $msdata->own_retention=$request->slipor;
+            $msdata->sum_own_retention=$request->slipsumor;
+            $msdata->save();
+
 
             return back()->with($notification);
             //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');

@@ -132,7 +132,7 @@
                                 @endif
                               </td>
                               <td>{{@$exc->year}}</td>
-                              <td>{{@$exc->kurs}}</td>
+                              <td>@currency(@$exc->kurs)</td>
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$exc->created_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>
