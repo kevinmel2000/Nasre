@@ -83,6 +83,10 @@ $(document).ready(function(){
  var count = 1;
  $(".e1").select2({ width: '100%' });
 
+ $("#btnaddlayer").attr('hidden','true');
+        $("#sliplayerproportional").attr('hidden','true');
+        $("#labelnonprop").attr('hidden','true');
+
 
 $("#btn-success").click(function(){ 
    var html = $(".clone").html();
@@ -157,6 +161,22 @@ $("body").on("click","#btn-danger2",function(){
     }
 </script>
 
+<script type='text/javascript'>
+    $('#switch-proportional').change(function(){
+        var attr = $("#btnaddlayer").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            $("#btnaddlayer").removeAttr('hidden');
+            $("#sliplayerproportional").removeAttr('hidden');
+            $("#labelnonprop").removeAttr('hidden');
+        }
+        else{
+            $("#btnaddlayer").attr('hidden','true');
+            $("#sliplayerproportional").attr('hidden','true');
+            $("#labelnonprop").attr('hidden','true');
+        }
+        
+    });
+</script>
 
 
 <script type='text/javascript'>
