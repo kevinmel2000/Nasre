@@ -49,24 +49,11 @@
       $("#cobTable").DataTable({
         "order": [[ 0, "desc" ]],
         dom: '<"top"fB>rt<"bottom"lip><"clear">',
-        initComplete: function () {
-            // Apply the search
-            this.columns().every( function () {
-                var that = this;
- 
-                $( 'input', this.footer() ).on( 'keyup change clear', function () {
-                    if ( that.search() !== this.value ) {
-                        that
-                            .search( this.value )
-                            .draw();
-                    }
-                } );
-            } );
-        },
         lengthMenu: [
             [ 10, 25, 50,100, -1 ],
             [ '10 rows', '25 rows', '50 rows','100 rows', 'Show all' ]
         ]
+        
       });
   
     });

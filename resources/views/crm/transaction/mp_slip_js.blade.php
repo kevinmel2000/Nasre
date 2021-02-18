@@ -83,6 +83,16 @@ $(document).ready(function(){
  var count = 1;
  $(".e1").select2({ width: '100%' });
 
+    $("#slipipfrom").change(function(){
+        console.log($(this).val())
+        $("#sliprpfrom").val($(this).val());
+    });
+
+    $("#slipipto").change(function(){
+        console.log($(this).val())
+        $("#sliprpto").val($(this).val());
+    });
+
     $("#btn-success2").click(function(){ 
     var html = $(".clone2").html();
     $(".increment2").after(html);

@@ -674,6 +674,7 @@ class MasterController extends Controller
          {
             $shipport = ShipPort::orderby('id','asc')->get();
             $city = DB::table('cities')->whereBetween('state_id', [4121, 4154])->orWhereBetween('state_id', [3805, 3978])->get();
+            // $city = DB::table('cities')->get();
             $shipport_ids = response()->json($shipport->modelKeys());
             $lastid = count($shipport);
 

@@ -19,6 +19,7 @@ Route::get('get-cedingbroker-autocode','CedingBrokerController@generatecode')->n
 Route::get('get-koc-autocode','KocController@generatecode')->name('koc.getcode');
 Route::get('get-cob-autocode','MasterController@generatecodecob')->name('cob.getcode');
 Route::get('get-ocp-autocode','MasterController@generatecodeocp')->name('ocp.getcode');
+Route::get('get-state-list','StateController@getState')->name('state.getall');
 
 
 Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){

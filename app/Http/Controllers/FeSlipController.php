@@ -152,7 +152,7 @@ class FeSlipController extends Controller
         $koc = Koc::orderby('id','asc')->get();
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
-        $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
+        $ceding = CedingBroker::orderby('id','asc')->where('type','4')->get();
         $felookup = FelookupLocation::orderby('id','asc')->get();
         $cnd = ConditionNeeded::orderby('id','asc')->get();
         $deductibletype= DeductibleType::orderby('id','asc')->get();

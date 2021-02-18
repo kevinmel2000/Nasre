@@ -22,9 +22,11 @@ class CityController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $city = City::orderby('id','desc')->get();
+          $citymk = City::orderby('id','asc')->paginate(100);
+            $city = City::whereBetween('state_id', [4121, 4154])->orWhereBetween('state_id', [3805, 3978])->get();
           $city_ids = response()->json($city->modelKeys());
-          $state = State::orderby('id','asc')->get();
+        //   $state = State::orderby('id','asc')->paginate(100);
+          $state = State::whereBetween('country_id', [230, 231])->orWhere('country_id', '102')->get();
           return view('crm.master.city', compact('user','city','route_active','city_ids','state'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else

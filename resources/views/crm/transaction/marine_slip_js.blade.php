@@ -1,7 +1,13 @@
 <link href="{{url('/')}}/css/select2.css" rel="stylesheet"/>
 <script src="{{url('/')}}/js/select2.js"></script>
-<script>
-        $(document).ready(function() { $(".e1").select2({ width: '100%' }); });
+<script type="text/javascript">
+        $(document).ready(function() { $(".e1").select2({ width: '100%' }); 
+        
+        $("#btnaddlayer").attr('hidden','true');
+        $("#sliplayerproportional").attr('hidden','true');
+        $("#labelnonprop").attr('hidden','true');
+        
+        });
 </script>
 <link rel="stylesheet" href="{{url('/')}}/css/sweetalert2.min.css">
 <script src="{{url('/')}}/js/sweetalert2.all.min.js"></script>
@@ -12,6 +18,24 @@
     }
 </style>
 
+<script type="text/javascript">
+    $('#switch-proportional').change(function(){
+        var attr = $("#btnaddlayer").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            $("#btnaddlayer").removeAttr('hidden');
+            $("#sliplayerproportional").removeAttr('hidden');
+            $("#labelnonprop").removeAttr('hidden');
+        }
+        else{
+            $("#btnaddlayer").attr('hidden','true');
+            $("#sliplayerproportional").attr('hidden','true');
+            $("#labelnonprop").attr('hidden','true');
+        }
+        
+    });
+
+    $('#slipipfrom').on('dp.change', function(e){ console.log(e.date); })
+</script>
 
 <script type="text/javascript">
     $(function() {              

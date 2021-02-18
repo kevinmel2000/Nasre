@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\Auth;
 
 class StateController extends Controller
 {   
+    public function getState(){
+
+        $state = State::orderby('id','asc')->select('*')->get();
+        // Fetch all records
+        $stateData['data'] = $state;
+   
+        echo json_encode($stateData);
+        exit;
+     }
+
     public function index(Request $request)
     {
          $user = Auth::user();
@@ -21,11 +31,13 @@ class StateController extends Controller
 
          if(empty($search))
          {
+            $count= count(State::all());
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $state = State::orderby('id','desc')->get();
+          $statemk = State::orderby('id','asc')->paginate(100);
+        $state = State::whereBetween('country_id', [230, 231])->orWhere('country_id', '102')->get();
           $state_ids = response()->json($state->modelKeys());
           $country = Country::orderby('id','asc')->get();
-          return view('crm.master.state', compact('user','state','route_active','state_ids','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.master.state', compact(['user','state','route_active','state_ids','country']));
          }
          else
          {

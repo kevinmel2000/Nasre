@@ -853,7 +853,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group d-flex justify-content-end">
                                                     <label style="opacity: 0;">{{__('p')}}:</label>
-                                                    <button type="button" class="btn plus-button" data-toggle="modal" data-target="#addLayerModal">
+                                                    <button type="button" class="btn plus-button" id="btnaddlayer" data-toggle="modal" data-target="#addLayerModal">
                                                         <span data-toggle="tooltip" data-placement="top" title="{{__('Add New layer')}}"> + add layer </span>
                                                     </button>
                                                 </div>
@@ -862,7 +862,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="">{{__('Layer for non proportional')}}</label>
+                                                    <label for="" id="labelnonprop">{{__('Layer for non proportional')}}</label>
                                                     <select id="sliplayerproportional" name="sliplayerproportional" class="form-control form-control-sm ">
                                                         <option selected disabled>{{__('Choose layer')}}</option>
                                                         <option value="Layer 1">Layer 1</option>
