@@ -1040,7 +1040,6 @@
                                 </ul>
                             </li>
 
-                            
 
                             @can('viewany-felookup', User::class)
                                 @if($route_active == 'Fire & Engineering Lookup Location')
@@ -1194,9 +1193,6 @@
                                     </a>
                                 </li>
                                 {{-- @endcan --}}
-
-                            
-
                         </ul>
                     </li>
                 @endcan
