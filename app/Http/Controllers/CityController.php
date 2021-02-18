@@ -22,8 +22,8 @@ class CityController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $citymk = City::orderby('id','asc')->paginate(100);
-            $city = City::whereBetween('state_id', [4121, 4154])->orWhereBetween('state_id', [3805, 3978])->get();
+        //   $citymk = City::orderby('id','asc')->paginate(100);
+            $city = City::whereBetween('state_id',[4121, 4154])->get();
           $city_ids = response()->json($city->modelKeys());
         //   $state = State::orderby('id','asc')->paginate(100);
           $state = State::whereBetween('country_id', [230, 231])->orWhere('country_id', '102')->get();
