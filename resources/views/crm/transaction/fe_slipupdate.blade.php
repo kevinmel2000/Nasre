@@ -747,7 +747,7 @@
                                                                             <tr id="iidextendcoverage{{ $isl->id }}">
                                                                                     <td>{{ @$isl->extendcoveragedata->code}} - {{ @$isl->extendcoveragedata->name}} - {{@$isl->extendcoveragedata->description }}</td>
                                                                                     <td>{{ $isl->percentage }}</td>
-                                                                                    <td >{{ $isl->amount }}</td>
+                                                                                    <td class="uang">{{ $isl->amount }}</td>
                                                                                     <td><a href="#" onclick="deleteextendcoveragedetail({{ $isl->id }})">delete</i></a></td>
                                                                             </tr>   
                                                                         @endforeach
