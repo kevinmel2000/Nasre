@@ -440,11 +440,7 @@ class HeMotorSlipController extends Controller
     public function storehemslip(Request $request,$code_ms)
     {
         $validator = $request->validate([
-            'slipnumber'=>'required',
-            'slipuy'=>'required',
-            'slippolicy_no'=>'required',
-            'slipno'=>'required',
-            'slipcndn'=>'required'
+            'slipnumber'=>'required'
         ]);
 
         $costumcheck=Customer::where('company_name','=',$request->fessuggestinsured)->first();

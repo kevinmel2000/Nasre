@@ -382,7 +382,7 @@
                                                 </div>    
                                                 <div class="form-group">
                                                     <select id="slipceding" name="slipceding" class="e1 form-control form-control-sm ">
-                                                        <option value="" readonly selected>Ceding </option>
+                                                        <option value="" readonly selected  value='0'>Ceding </option>
                                                         @foreach($ceding as $cd)
                                                             <option value="{{ $cd->id }}">{{ $cd->code }} - {{ $cd->name }}</option>
                                                         @endforeach
@@ -414,7 +414,7 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('COB')}}</label>
                                                         <select id="slipcob" name="slipcob" class="e1 form-control form-control-sm ">
-                                                            <option selected readonly>{{__('COB list')}}</option>
+                                                            <option selected readonly  value='0'>{{__('COB list')}}</option>
                                                             @foreach($cob as $boc)
                                                                  @if($boc->id  == $slipdata->cob)
                                                                  <option value="{{ $boc->id }}" selected="selected">{{ $boc->code }} - {{ $boc->description }}</option>
@@ -432,7 +432,7 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('KOC')}}</label>
                                                         <select id="slipkoc" name="slipkoc" class="e1 form-control form-control-sm ">
-                                                            <option selected readonly>{{__('KOC list')}}</option>
+                                                            <option selected readonly  value='0'>{{__('KOC list')}}</option>
                                                             @foreach($koc as $cok)
                                                                  @if($cok->id  == $slipdata->koc)
                                                                 <option value="{{ $cok->id }}" selected="selected">{{ $cok->code }} - {{ $cok->description }}</option>
@@ -450,7 +450,7 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Occupacy')}}</label>
                                                         <select id="slipoccupacy" name="slipoccupacy" class="e1 form-control form-control-sm ">
-                                                            <option selected readonly>{{__('Occupation list')}}</option>
+                                                            <option selected readonly  value='0'>{{__('Occupation list')}}</option>
                                                             @foreach($ocp as $ocpy)
                                                                 @if($ocpy->id  == $slipdata->occupacy)
                                                                 <option value="{{ $ocpy->id }}" selected="selected">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
@@ -468,7 +468,7 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Building Const')}}</label>
                                                         <select id="slipbld_const" name="slipbld_const" class="e1 form-control form-control-sm ">
-                                                            <option selected readonly>{{__('Building Const list')}}</option>
+                                                            <option selected readonly  value='0'>{{__('Building Const list')}}</option>
                                                             <option value="Buliding 1" @if($slipdata->build_cost == "Buliding 1") selected="selected" @endif >Buliding 1</option>
                                                             <option value="Buliding 2" @if($slipdata->build_cost == "Buliding 2") selected="selected" @endif >Buliding 2</option>
                                                             <option value="Buliding 3" @if($slipdata->build_cost == "Buliding 3") selected="selected" @endif >Buliding 3</option>

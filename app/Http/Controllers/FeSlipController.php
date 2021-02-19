@@ -288,7 +288,7 @@ class FeSlipController extends Controller
         $insureddata=Insured::find($idm);
         // dd($insureddata->number);
         $code_ms=$insureddata->number;
-        $slipdata=SlipTable::where('number',$insureddata->number)->first();
+        $slipdata=SlipTable::where('insured_id',$insureddata->number)->first();
         // dd($slipdata);
         $code_sl=$slipdata->number;
 
@@ -507,11 +507,7 @@ class FeSlipController extends Controller
     public function storefeslip(Request $request)
     {
         $validator = $request->validate([
-            'slipnumber'=>'required',
-            'slipuy'=>'required',
-            'slippolicy_no'=>'required',
-            'slipno'=>'required',
-            'slipcndn'=>'required'
+            'slipnumber'=>'required'
         ]);
         
 
