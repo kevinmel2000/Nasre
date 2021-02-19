@@ -241,6 +241,26 @@ class FinancialLineSlipController extends Controller
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
        
 
+        if(count($interestlist) != null){
+            InterestInsuredTemp::where('slip_id', $code_sl)->delete();
+        }
+
+        if(count($deductiblelist) != null){
+            DeductibleTemp::where('slip_id', $code_sl)->delete();
+        }
+
+        if(count($extendcoveragelist) != null){
+            ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
+        }
+
+        if(count($installmentlist) != null){
+            InstallmentTemp::where('slip_id', $code_sl)->delete();
+        }
+        
+        if(count($retrocessionlist) != null){
+            RetrocessionTemp::where('slip_id', $code_sl)->delete();
+        }
+
         return view('crm.transaction.fl_slip', compact(['user','cnd','statuslist','retrocessionlist','installmentlist','deductibletype','extendcoveragelist','deductiblelist','extendedcoverage','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fl_ids','code_ms','code_sl','costumer']));
     
     }

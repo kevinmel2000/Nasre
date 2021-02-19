@@ -71,7 +71,7 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::post('/marine-insured/store', [TransactionController::class, 'storemarineinsured']);
     Route::post('/marine-slip/store', [TransactionController::class, 'storemarineslip']);
     Route::delete('/marine-insured/destroyinsured/{id}', [TransactionController::class, 'destroymarineinsured']);
-    Route::delete('/marine-slip/destroyslip/{id}', [TransactionController::class, 'destroyemarineslip']);
+    Route::delete('/marine-slip/destroyslip/{id}', [TransactionController::class, 'destroymarineslip']);
 
 
     // SECTION Fire Engineering Slip Group Routes
@@ -133,6 +133,8 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::get('/hio-slip/{id}', [TransactionController::class, 'showlocationdetails'])->name('locDetails');
     Route::post('/hio-insured', [TransactionController::class, 'storehioinsured']);
     Route::post('/hio-slip', [TransactionController::class, 'storehioslip']);
+    Route::delete('/hio-insured/destroyinsured/{id}', [TransactionController::class, 'destroyhioinsured']);
+    Route::delete('/hio-slip/destroyslip/{id}', [TransactionController::class, 'destroyhioslip']);
 
 
     // SECTION Personal Accident Slip Group Routes
@@ -141,6 +143,8 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::get('/pa-slip/{id}', [TransactionController::class, 'showlocationdetails'])->name('locDetails');
     Route::post('/pa-insured', [TransactionController::class, 'storepainsured']);
     Route::post('/pa-slip', [TransactionController::class, 'storepaslip']);
+    Route::delete('/pa-insured/destroyinsured/{id}', [TransactionController::class, 'destroypainsured']);
+    Route::delete('/pa-slip/destroyslip/{id}', [TransactionController::class, 'destroypaslip']);
  
 
 

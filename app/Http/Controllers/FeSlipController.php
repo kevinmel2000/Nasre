@@ -235,7 +235,26 @@ class FeSlipController extends Controller
 
         $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-            
+        
+        if(count($interestlist) != null){
+            InterestInsuredTemp::where('slip_id', $code_sl)->delete();
+        }
+
+        if(count($deductiblelist) != null){
+            DeductibleTemp::where('slip_id', $code_sl)->delete();
+        }
+
+        if(count($extendcoveragelist) != null){
+            ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
+        }
+
+        if(count($installmentlist) != null){
+            InstallmentTemp::where('slip_id', $code_sl)->delete();
+        }
+        
+        if(count($retrocessionlist) != null){
+            RetrocessionTemp::where('slip_id', $code_sl)->delete();
+        }
 
         return view('crm.transaction.fe_slip', compact(['user','cnd','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     

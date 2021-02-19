@@ -17,6 +17,7 @@ use App\Models\FeLookupLocation;
 use App\Models\MarineLookup;
 use App\Models\Customer;
 use App\Models\ConditionNeeded;
+use App\Models\ExtendedCoverage;
 use App\Models\ConditionNeededTemp;
 use App\Models\RouteShip;
 use App\Models\Currency;
@@ -142,10 +143,25 @@ class TransactionController extends Controller
             $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
 
 
-            // if($interestlist){
-            //     $interestlist->delete();
-            // }
+            if(count($interestlist) != null){
+                InterestInsuredTemp::where('slip_id', $code_sl)->delete();
+            }
+
+            if(count($deductibletemp) != null){
+                DeductibleTemp::where('slip_id', $code_sl)->delete();
+            }
+
+            if(count($conditionneededtemp) != null){
+                ConditionNeededTemp::where('slip_id', $code_sl)->delete();
+            }
+
+            if(count($installmentpanel) != null){
+                InstallmentTemp::where('slip_id', $code_sl)->delete();
+            }
             
+            if(count($retrocessiontemp) != null){
+                RetrocessionTemp::where('slip_id', $code_sl)->delete();
+            }
 
 
             return view('crm.transaction.marine_slip', compact(['user','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestinsured','routeship','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
@@ -156,28 +172,276 @@ class TransactionController extends Controller
           $ms_ids = response()->json($insured->modelKeys());
           return view('crm.transaction.marine_slip', compact('user','customer','slip','insured','route_active','ms_ids','code_ms'))->with('i', ($request->input('page', 1) - 1) * 10);
         }
-
-        
     }
 
-    public function indexhioslip()
+    public function indexhioslip(Request $request)
     {
         $user = Auth::user();
-        $country = User::orderby('id','asc')->get();
         $route_active = 'Hole In One - Slip Entry';
-        $hio_ids = response()->json($country->modelKeys());
+        $search = @$request->input('search');
+        $mydate = date("Y").date("m").date("d");
+        $currdate = date("Y-m-d");
+        
 
-        return view('crm.transaction.hio_slip', compact(['user','route_active','hio_ids']));
+        if(empty($search))
+         {
+            $insured = Insured::orderby('id','asc')->get();
+            $slip = SlipTable::orderby('id','asc')->get();
+            $currency = Currency::orderby('id','asc')->get();
+            $cob = COB::where('form','ms')->orderby('id','asc')->get();
+            $koc = Koc::orderby('id','asc')->get();
+            $ocp = Occupation::orderby('id','asc')->get();
+            $cedingbroker = CedingBroker::orderby('id','asc')->get();
+            $ceding = CedingBroker::orderby('id','asc')->where('type','4')->get();
+            $felookup = FelookupLocation::orderby('id','asc')->get();
+            $cnd = ConditionNeeded::orderby('id','asc')->get();
+            $exc = ExtendedCoverage::orderby('id','asc')->get();
+            $mlu = MarineLookup::orderby('id','asc')->get();
+            
+            
+            $customer= CustomerCustomer::orderby('id','asc')->get();
+            $routeship= RouteShip::orderby('id','asc')->get();
+            $interestinsured= InterestInsured::orderby('id','asc')->get();
+            $deductibletype= DeductibleType::orderby('id','asc')->get();
+            $ms_ids = response()->json($insured->modelKeys());
+            $lastid = count($insured);
+            $sliplastid = count($slip);
+
+            if($lastid != null){
+                if($lastid < 10)
+                {
+                    $code_ms = "IN" . $mydate . "0000" . strval($lastid + 1);
+                }   
+                elseif($lastid > 9 && $lastid < 100)
+                {
+                    $code_ms = "IN" . $mydate . "000" . strval($lastid + 1);
+                }
+                elseif($lastid > 99 && $lastid < 1000)
+                {
+                    $code_ms = "IN" . $mydate . "00" . strval($lastid + 1);
+                }
+                elseif($lastid > 999 && $lastid < 10000)
+                {
+                    $code_ms = "IN" . $mydate . "0" . strval($lastid + 1);
+                }
+                elseif($lastid > 9999 && $lastid < 100000)
+                {
+                    $code_ms = "IN" . $mydate  . strval($lastid + 1);
+                }
+
+
+            }
+            else{
+                $code_ms = "IN" . $mydate . "0000" . strval(1);
+            }
+
+            if($sliplastid != null){
+                if($lastid < 10)
+                {
+                    $code_sl = "HIO". $mydate . "0000" . strval($sliplastid + 1);
+                }   
+                elseif($lastid > 9 && $lastid < 100)
+                {
+                    $code_sl = "HIO". $mydate . "000" . strval($sliplastid + 1);
+                }
+                elseif($lastid > 99 && $lastid < 1000)
+                {
+                    $code_sl = "HIO". $mydate . "00" . strval($sliplastid + 1);
+                }
+                elseif($lastid > 999 && $lastid < 10000)
+                {
+                    $code_sl = "HIO". $mydate . "0" . strval($sliplastid + 1);
+                }
+                elseif($lastid > 9999 && $lastid < 100000)
+                {
+                    $code_sl = "HIO". $mydate . strval($sliplastid + 1);
+                }
+
+                
+            }
+            else{
+                $code_sl = "HIO" . $mydate . "0000" . strval(1);
+            }
+
+
+            $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+            $shiplist= ShipListTemp::where('insured_id',$code_ms)->where('status','saved')->orderby('id','desc')->get();
+            $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+            $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+            $extendcoveragetemp= ExtendCoverageTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+            $installmentpanel= InstallmentTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+            $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+            $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+
+
+            if(count($interestlist) != null){
+                InterestInsuredTemp::where('slip_id', $code_sl)->delete();
+            }
+
+            if(count($deductibletemp) != null){
+                DeductibleTemp::where('slip_id', $code_sl)->delete();
+            }
+
+            if(count($extendcoveragetemp) != null){
+                ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
+            }
+
+            if(count($conditionneededtemp) != null){
+                ConditionNeededTemp::where('slip_id', $code_sl)->delete();
+            }
+
+            if(count($installmentpanel) != null){
+                InstallmentTemp::where('slip_id', $code_sl)->delete();
+            }
+            
+            if(count($retrocessiontemp) != null){
+                RetrocessionTemp::where('slip_id', $code_sl)->delete();
+            }
+
+
+            return view('crm.transaction.hio_slip', compact(['user','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestinsured','routeship','customer','interestlist','shiplist','exc','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
+         }
+        else
+        {
+          $insured = Insured::where('number', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $ms_ids = response()->json($insured->modelKeys());
+          return view('crm.transaction.hio_slip', compact('user','extendcoveragetemp','customer','slip','insured','route_active','ms_ids','code_ms'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
     }
 
-    public function indexpaslip()
+    public function indexpaslip(Request $request)
     {
         $user = Auth::user();
-        $country = User::orderby('id','asc')->get();
         $route_active = 'Personal Accident - Slip Entry';
-        $pa_ids = response()->json($country->modelKeys());
+        $search = @$request->input('search');
+        $mydate = date("Y").date("m").date("d");
+        $currdate = date("Y-m-d");
+        
 
-        return view('crm.transaction.pa_slip', compact(['user','route_active','pa_ids']));
+        if(empty($search))
+         {
+            $insured = Insured::orderby('id','asc')->get();
+            $slip = SlipTable::orderby('id','asc')->get();
+            $currency = Currency::orderby('id','asc')->get();
+            $cob = COB::where('form','ms')->orderby('id','asc')->get();
+            $koc = Koc::orderby('id','asc')->get();
+            $ocp = Occupation::orderby('id','asc')->get();
+            $cedingbroker = CedingBroker::orderby('id','asc')->get();
+            $ceding = CedingBroker::orderby('id','asc')->where('type','4')->get();
+            $felookup = FelookupLocation::orderby('id','asc')->get();
+            $cnd = ConditionNeeded::orderby('id','asc')->get();
+            $exc = ExtendedCoverage::orderby('id','asc')->get();
+            $mlu = MarineLookup::orderby('id','asc')->get();
+            
+            
+            $customer= CustomerCustomer::orderby('id','asc')->get();
+            $routeship= RouteShip::orderby('id','asc')->get();
+            $interestinsured= InterestInsured::orderby('id','asc')->get();
+            $deductibletype= DeductibleType::orderby('id','asc')->get();
+            $ms_ids = response()->json($insured->modelKeys());
+            $lastid = count($insured);
+            $sliplastid = count($slip);
+
+            if($lastid != null){
+                if($lastid < 10)
+                {
+                    $code_ms = "IN" . $mydate . "0000" . strval($lastid + 1);
+                }   
+                elseif($lastid > 9 && $lastid < 100)
+                {
+                    $code_ms = "IN" . $mydate . "000" . strval($lastid + 1);
+                }
+                elseif($lastid > 99 && $lastid < 1000)
+                {
+                    $code_ms = "IN" . $mydate . "00" . strval($lastid + 1);
+                }
+                elseif($lastid > 999 && $lastid < 10000)
+                {
+                    $code_ms = "IN" . $mydate . "0" . strval($lastid + 1);
+                }
+                elseif($lastid > 9999 && $lastid < 100000)
+                {
+                    $code_ms = "IN" . $mydate  . strval($lastid + 1);
+                }
+
+
+            }
+            else{
+                $code_ms = "IN" . $mydate . "0000" . strval(1);
+            }
+
+            if($sliplastid != null){
+                if($lastid < 10)
+                {
+                    $code_sl = "PA". $mydate . "0000" . strval($sliplastid + 1);
+                }   
+                elseif($lastid > 9 && $lastid < 100)
+                {
+                    $code_sl = "PA". $mydate . "000" . strval($sliplastid + 1);
+                }
+                elseif($lastid > 99 && $lastid < 1000)
+                {
+                    $code_sl = "PA". $mydate . "00" . strval($sliplastid + 1);
+                }
+                elseif($lastid > 999 && $lastid < 10000)
+                {
+                    $code_sl = "PA". $mydate . "0" . strval($sliplastid + 1);
+                }
+                elseif($lastid > 9999 && $lastid < 100000)
+                {
+                    $code_sl = "PA". $mydate . strval($sliplastid + 1);
+                }
+
+                
+            }
+            else{
+                $code_sl = "PA" . $mydate . "0000" . strval(1);
+            }
+
+
+            $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+            $shiplist= ShipListTemp::where('insured_id',$code_ms)->where('status','saved')->orderby('id','desc')->get();
+            $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+            $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+            $extendcoveragetemp= ExtendCoverageTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+            $installmentpanel= InstallmentTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+            $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+            $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+
+
+            if(count($interestlist) != null){
+                InterestInsuredTemp::where('slip_id', $code_sl)->delete();
+            }
+
+            if(count($deductibletemp) != null){
+                DeductibleTemp::where('slip_id', $code_sl)->delete();
+            }
+
+            if(count($extendcoveragetemp) != null){
+                ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
+            }
+
+            if(count($conditionneededtemp) != null){
+                ConditionNeededTemp::where('slip_id', $code_sl)->delete();
+            }
+
+            if(count($installmentpanel) != null){
+                InstallmentTemp::where('slip_id', $code_sl)->delete();
+            }
+            
+            if(count($retrocessiontemp) != null){
+                RetrocessionTemp::where('slip_id', $code_sl)->delete();
+            }
+
+
+            return view('crm.transaction.pa_slip', compact(['user','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestinsured','routeship','customer','interestlist','shiplist','exc','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
+         }
+        else
+        {
+          $insured = Insured::where('number', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $ms_ids = response()->json($insured->modelKeys());
+          return view('crm.transaction.pa_slip', compact('user','extendcoveragetemp','customer','slip','insured','route_active','ms_ids','code_ms'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
     }
 
     public function indexmarine(Request $request)

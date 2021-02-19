@@ -913,7 +913,7 @@
 
                             
 
-                            {{-- @can('viewany-fz', User::class) --}}
+                            @can('viewany-fz', User::class)
                                 @if($route_active == 'Flood Zone Data Master')
                                 @php
                                     $flood_form = 'active';
@@ -925,9 +925,9 @@
                                         <p style="font-size: 90%;margin-left:2%;">{{__('FLOOD ZONE FORM')}}</p>
                                     </a>
                                 </li>
-                            {{-- @endcan --}}
+                            @endcan
 
-                            {{-- @can('viewany-gfh', User::class) --}}
+                            @can('viewany-gfh', User::class)
                             @if($route_active == 'Golf Field Hole')
                             @php
                                 $gfh_form = 'active';
@@ -939,7 +939,7 @@
                                     <p style="font-size: 90%;margin-left:2%;">{{__('GOLF FIELD HOLE')}}</p>
                                 </a>
                             </li>
-                            {{-- @endcan --}}
+                            @endcan
 
                             {{-- @can('viewany-condition_needed', User::class) --}}
                             @if($route_active == 'Interest Insured Data Master')
@@ -955,7 +955,7 @@
                             </li>
                             {{-- @endcan --}}
 
-                            {{-- @can('viewany-koc', User::class) --}}
+                            @can('viewany-koc', User::class)
                             @if($route_active == 'KOC Data Master')
                             @php
                                 $koc_form = 'active';
@@ -967,7 +967,7 @@
                                     <p style="font-size: 90%;margin-left:2%;">{{__('KIND OF CONTRACT')}}</p>
                                 </a>
                             </li>
-                            {{-- @endcan --}}
+                            @endcan
 
                             @if(
                                 @$route_active == 'Country Data Master' 
@@ -1445,7 +1445,7 @@
                                     <a href="#" class="nav-link {{@$mpd_dd}}">
                                         <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                         <p style="font-size: 90%;margin-left:2%;">
-                                            {{__('MOVEABLE PROPERTY DATA')}}
+                                            {{__('MOVEABLE PROPERTY')}}
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
                                     </a>
@@ -1493,7 +1493,7 @@
                                     <a href="#" class="nav-link {{@$ms_dd}}">
                                         <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                         <p style="font-size: 90%;margin-left:2%;">
-                                            {{__('MARINE DATA')}}
+                                            {{__('MARINE')}}
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
                                     </a>
@@ -1542,7 +1542,7 @@
                                     <a href="#" class="nav-link {{@$pa_dd}}">
                                         <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                         <p style="font-size: 90%;margin-left:2%;">
-                                            {{__('PERSONAL ACCIDENT DATA')}}
+                                            {{__('PERSONAL ACCIDENT')}}
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
                                     </a>

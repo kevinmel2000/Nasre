@@ -763,8 +763,8 @@
                                                         <div class="form-group">
                                                             <label>{{__('Insurance Periode')}}:</label>
                                                                 <div class="input-group date" id="dateinfrom" data-target-input="nearest">
-                                                                        <input type="text" id="slipipfrom" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipfrom">
-                                                                        <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
+                                                                        <input type="text" id="slipipfrom" class="form-control form-control-sm"  name="slipipfrom">
+                                                                        <div class="input-group-append" id="dpinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
                                                                 </div>
@@ -778,8 +778,8 @@
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
                                                                 <div class="input-group date" id="dateinto" data-target-input="nearest">
-                                                                        <input type="text" id="slipipto" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipto">
-                                                                        <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
+                                                                        <input type="text" id="slipipto" class="form-control form-control-sm"  name="slipipto">
+                                                                        <div class="input-group-append" id="dpinto" data-target="#dateinto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
                                                                 </div>
@@ -791,7 +791,7 @@
                                                         <div class="form-group">
                                                             <label>{{__('Reinsurance Periode')}}:</label>
                                                                 <div class="input-group date" id="daterefrom" data-target-input="nearest">
-                                                                        <input type="text" id="sliprpfrom" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpfrom">
+                                                                        <input type="text" id="sliprpfrom" class="form-control form-control-sm datepicker-input" data-target="#date" name="sliprpfrom">
                                                                         <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
@@ -807,7 +807,7 @@
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
                                                                 <div class="input-group date" id="datereto" data-target-input="nearest">
                                                                         
-                                                                        <input type="text" id="sliprpto" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpto">
+                                                                        <input type="text" id="sliprpto" class="form-control form-control-sm datepicker-input" data-target="#date" name="sliprpto">
                                                                         <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
@@ -982,7 +982,7 @@
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                         <div class="input-group date" id="dateinstallment" data-target-input="nearest">
-                                                                                                <input type="text" id="dateinstallmentdata" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdate">
+                                                                                                <input type="text" id="dateinstallmentdata" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipdate">
                                                                                                 <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
                                                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                                                 </div>
@@ -1072,6 +1072,7 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
+                                                                        <?php setlocale(LC_MONETARY, 'id_ID'); ?>
                                                                         @foreach($retrocessionlist as $isl)
                                                                             <tr id="iidretrocession{{ $isl->id }}">
                                                                                     <td>{{ $isl->type }}</td>

@@ -135,11 +135,14 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::delete('/construction/destroy/{cr}', [MasterController::class, 'destroyconstruction']);
 
     // SECTION Marine Lookup Routes
+    // Route::get('/marine-lookup', [MasterController::class, 'indexmarinelookup'])->middleware(['can:view-marinelookup']);
+    // Route::post('/marine-lookup/store', [MasterController::class, 'storemarinelookup'])->middleware(['can:create-marinelookup']);
+    // Route::put('marine-lookup/{mlu}', [MasterController::class, 'updatemarinelookup'])->middleware(['can:update-marinelookup']);
+    // Route::delete('/marine-lookup/destroy/{mlu}', [MasterController::class, 'destroymarinelookup'])->middleware(['can:delete-marinelookup']);
     Route::get('/marine-lookup', [MasterController::class, 'indexmarinelookup']);
     Route::post('/marine-lookup/store', [MasterController::class, 'storemarinelookup']);
     Route::put('marine-lookup/{mlu}', [MasterController::class, 'updatemarinelookup']);
     Route::delete('/marine-lookup/destroy/{mlu}', [MasterController::class, 'destroymarinelookup']);
-   
     // SECTION property Type Routes
     Route::get('/propertytype', [MasterController::class, 'indexpropertytype']);
     Route::post('/propertytype/store', [MasterController::class, 'storepropertytype']);
