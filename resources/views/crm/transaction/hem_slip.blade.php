@@ -175,7 +175,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="col-md-6 d-flex justify-content-start">
                                         <div class="col-md-12 com-sm-12 mt-3">
                                             <label for="">{{__('Format')}}</label>
@@ -189,21 +189,12 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>{{__('AAA')}}</td>
-                                                        <td>{{__('EA001')}}</td>
-                                                        <td>{{__('B 1000 AA')}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{{__('BBB')}}</td>
-                                                        <td>{{__('EA002')}}</td>
-                                                        <td>{{__('B 2000 BB')}}</td>
-                                                    </tr>
+                                                    
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
