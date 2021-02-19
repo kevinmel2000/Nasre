@@ -733,9 +733,9 @@
                         </ul>
                     </li>
                 @endcan
-
-                @can('viewany-country', User::class)
-                    @if(
+                
+                @if(Auth::user()->name == "Andi" )
+                @if(
                     @$route_active == 'Country Data Master' 
                     || @$route_active == 'State Data Master' 
                     || @$route_active == 'City Data Master' 
@@ -764,585 +764,878 @@
                     || @$route_active == 'Deductible Type Data Master' 
                     || @$route_active == 'Ship Port Data Master' 
                     || @$route_active == 'Route Form Data Master' 
-                    )
+                )
+                    @php
+                    $master_dd = 'active';
+                    $master_menu_open = 'menu-open';
+                    @endphp
+                @else
+                    @php
+                    $master_menu_open = 'menu-close';
+                    @endphp
+                @endif
+                <li class="nav-item has-treeview {{ @$master_menu_open }}">
+                    <a href="#" class="nav-link {{@$master_dd}}">
+                        <i class="nav-icon fas fa-laptop"></i>
+                        <p>
+                            {{__('MASTER DATA')}}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+
+                        {{-- @can('viewany-eqz', User::class) --}}
+                        @if($route_active == 'Earthquake Zone')
                         @php
-                        $master_dd = 'active';
-                        $master_menu_open = 'menu-open';
+                            $earthquakezone_form = 'active';
+                        @endphp
+                        @endif
+                        <li class="nav-item">
+                            <a href="{{url('/master-data/earthquakezone')}}" class="nav-link {{@$earthquakezone_form}}">
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                <p style="font-size: 90%;margin-left:2%;">{{__('EARTHQUAKE ZONE FORM')}}</p>
+                            </a>
+                        </li>
+                        {{-- @endcan --}}
+
+                        {{-- @can('viewany-condition_needed', User::class) --}}
+                        @if($route_active == 'Extend Coverage Data Master')
+                        @php
+                            $ec_form = 'active';
+                        @endphp
+                        @endif
+                        <li class="nav-item">
+                            <a href="{{url('/master-data/extendedcoverage')}}" class="nav-link {{@$ec_form}}">
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                <p style="font-size: 90%;margin-left:2%;">{{__('EXTEND COVERAGE FORM')}}</p>
+                            </a>
+                        </li>
+                        {{-- @endcan --}}
+
+                        
+
+                        {{-- @can('viewany-fz', User::class) --}}
+                            @if($route_active == 'Flood Zone Data Master')
+                            @php
+                                $flood_form = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/floodzone')}}" class="nav-link {{@$flood_form}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('FLOOD ZONE FORM')}}</p>
+                                </a>
+                            </li>
+                        {{-- @endcan --}}
+
+                        {{-- @can('viewany-condition_needed', User::class) --}}
+                        @if($route_active == 'Interest Insured Data Master')
+                        @php
+                            $ii_form = 'active';
+                        @endphp
+                        @endif
+                        <li class="nav-item">
+                            <a href="{{url('/master-data/interestinsured')}}" class="nav-link {{@$ii_form}}">
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                <p style="font-size: 90%;margin-left:2%;">{{__('INTEREST INSURED FORM')}}</p>
+                            </a>
+                        </li>
+                        {{-- @endcan --}}
+
+                        @if(
+                            @$route_active == 'Country Data Master' 
+                            || @$route_active == 'State Data Master' 
+                            || @$route_active == 'City Data Master' 
+                            )
+                                @php
+                                $location_dd = 'active';
+                                $location_menu_open = 'menu-open';
+                                @endphp
+                        @else
+                            @php
+                            $location_menu_open = 'menu-close';
+                            @endphp
+                        @endif
+                        <li class="nav-item has-treeview {{ @$location_menu_open }}">
+                            <a href="#" class="nav-link {{@$location_dd}}" >
+                                
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;" >
+                                        {{__('LOCATION DATA')}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                
+                            </a>
+
+                            <ul class="nav nav-treeview">
+
+                                {{-- @can('viewany-country', User::class) --}}
+                                    @if($route_active == 'Country Data Master')
+                                    @php
+                                        $countryform = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('/master-data/country')}}" class="nav-link {{@$countryform}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                            <p style="font-size: 80%;margin-left:2%;">{{__('COUNTRY FORM')}}</p>
+                                        </a>
+                                    </li>
+                                {{-- @endcan --}}
+                                    
+                                {{-- @can('viewany-state', User::class) --}}
+                                    @if($route_active == 'State Data Master')
+                                    @php
+                                        $state_form = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('/master-data/state')}}" class="nav-link {{@$state_form}}">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                            <p style="font-size: 80%;margin-left:2%;">{{__('PROVINCE FORM')}}</p>
+                                        </a>
+                                    </li>
+                                {{-- @endcan --}}
+    
+                                {{-- @can('viewany-city', User::class) --}}
+                                    @if($route_active == 'City Data Master')
+                                    @php
+                                        $city_form = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('/master-data/city')}}" class="nav-link {{@$city_form}}">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                            <p style="font-size: 80%;margin-left:2%;">{{__('CITY FORM')}}</p>
+                                        </a>
+                                    </li>
+                                {{-- @endcan --}}
+                            </ul>
+                        </li>
+
+
+                        {{-- @can('viewany-felookup', User::class) --}}
+                            @if($route_active == 'Fire & Engineering Lookup Location')
+                            @php
+                                $felookuplocationform = 'active';
+                            @endphp
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{url('/master-data/felookuplocation')}}" class="nav-link {{@$felookuplocationform}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">{{__('LOOKUP LOCATION')}}</p>
+                                </a>
+                            </li>
+                            {{-- @endcan --}}
+
+                        
+
+                            {{-- @can('viewany-property_type', User::class) --}}
+                                @if($route_active == 'Property Type Data Master')
+                                @php
+                                    $property_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/propertytype')}}" class="nav-link {{@$property_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('PROPERTY TYPE FORM')}}</p>
+                                    </a>
+                                </li>
+                            {{-- @endcan --}}
+
+                    </ul>
+                </li>
+                    
+                    @if(
+                        @$route_active == 'Fire Engineering - Slip Entry'
+                        || @$route_active == 'Fire Engineering - Index'
+                        )
+                        @php
+                        $trF_dd = 'active';
+                        $transaction_menu_open = 'menu-open';
                         @endphp
                     @else
                         @php
-                        $master_menu_open = 'menu-close';
+                        $transaction_menu_open = 'menu-close';
                         @endphp
                     @endif
-                    <li class="nav-item has-treeview {{ @$master_menu_open }}">
-                        <a href="#" class="nav-link {{@$master_dd}}">
-                            <i class="nav-icon fas fa-laptop"></i>
+                    <li class="nav-item has-treeview {{ @$transaction_menu_open }}">
+                        <a href="#" class="nav-link {{@$trF_dd}}">
+                            <i class="nav-icon fas fa-industry"></i>
                             <p>
-                                {{__('MASTER DATA')}}
+                                {{__('TRANSACTION DATA')}}
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
 
                         <ul class="nav nav-treeview">
 
-                            @can('viewany-cedingbroker', User::class)
-                                @if($route_active == 'Ceding / Broker')
-                                @php
-                                    $cedingform = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/cedingbroker')}}" class="nav-link {{@$cedingform}}">
-                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">{{__('CEDING/BROKER FORM')}}</p>
-                                    </a>
-                                </li>
-                            @endcan
 
-                            {{-- @can('viewany-cob', User::class) --}}
-                            @if($route_active == 'COB Data Master')
-                            @php
-                                $cob_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/cob')}}" class="nav-link {{@$cob_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                    <p style="font-size: 90%;margin-left:2%;">{{__('COB FORM')}}</p>
-                                </a>
-                            </li>
-                            {{-- @endcan --}}
-
-                            {{-- @can('viewany-cedingbroker', User::class) --}}
-                            @if($route_active == 'Company Type Data Master')
-                            @php
-                                $ctform = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/companytype')}}" class="nav-link {{@$ctform}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                    <p style="font-size: 90%;margin-left:2%;">{{__('COMPANY TYPE FORM')}}</p>
-                                </a>
-                            </li>
-                            {{-- @endcan --}}
-
-                            {{-- @can('viewany-condition_needed', User::class) --}}
-                            @if($route_active == 'Condition Needed Data Master')
-                            @php
-                                $cdn_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/conditionneeded')}}" class="nav-link {{@$cdn_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                    <p style="font-size: 90%;margin-left:2%;">{{__('CONDITION NEEDED FORM')}}</p>
-                                </a>
-                            </li>
-                            {{-- @endcan --}}
-
-                            @can('viewany-currency', User::class)
-                                @if($route_active == 'Currency Data Master')
-                                @php
-                                    $crc_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/currency')}}" class="nav-link {{@$crc_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">{{__('CURRENCY FORM')}}</p>
-                                    </a>
-                                </li>
-                            @endcan
-
-                            @can('viewany-exchange', User::class)
-                                @if($route_active == 'Currency Exchange Data Master')
-                                @php
-                                    $exchange_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/exchange')}}" class="nav-link {{@$exchange_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">{{__('CURRENCY EXCHANGE')}}</p>
-                                    </a>
-                                </li>
-                            @endcan
-
-                            {{-- @can('viewany-condition_needed', User::class) --}}
-                            @if($route_active == 'Deductible Type Data Master')
-                            @php
-                                $dt_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/deductibletype')}}" class="nav-link {{@$dt_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                    <p style="font-size: 90%;margin-left:2%;">{{__('DEDUCTIBLE TYPE FORM')}}</p>
-                                </a>
-                            </li>
-                            {{-- @endcan --}}
-
-                            {{-- @can('viewany-eqz', User::class) --}}
-                            @if($route_active == 'Earthquake Zone')
-                            @php
-                                $earthquakezone_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/earthquakezone')}}" class="nav-link {{@$earthquakezone_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                    <p style="font-size: 90%;margin-left:2%;">{{__('EARTHQUAKE ZONE FORM')}}</p>
-                                </a>
-                            </li>
-                            {{-- @endcan --}}
-
-                            {{-- @can('viewany-condition_needed', User::class) --}}
-                            @if($route_active == 'Extend Coverage Data Master')
-                            @php
-                                $ec_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/extendedcoverage')}}" class="nav-link {{@$ec_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                    <p style="font-size: 90%;margin-left:2%;">{{__('EXTEND COVERAGE FORM')}}</p>
-                                </a>
-                            </li>
-                            {{-- @endcan --}}
-
-                            
-
-                            @can('viewany-fz', User::class)
-                                @if($route_active == 'Flood Zone Data Master')
-                                @php
-                                    $flood_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/floodzone')}}" class="nav-link {{@$flood_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">{{__('FLOOD ZONE FORM')}}</p>
-                                    </a>
-                                </li>
-                            @endcan
-
-                            @can('viewany-gfh', User::class)
-                            @if($route_active == 'Golf Field Hole')
-                            @php
-                                $gfh_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/golffieldhole')}}" class="nav-link {{@$gfh_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                    <p style="font-size: 90%;margin-left:2%;">{{__('GOLF FIELD HOLE')}}</p>
-                                </a>
-                            </li>
-                            @endcan
-
-                            {{-- @can('viewany-condition_needed', User::class) --}}
-                            @if($route_active == 'Interest Insured Data Master')
-                            @php
-                                $ii_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/interestinsured')}}" class="nav-link {{@$ii_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                    <p style="font-size: 90%;margin-left:2%;">{{__('INTEREST INSURED FORM')}}</p>
-                                </a>
-                            </li>
-                            {{-- @endcan --}}
-
-                            @can('viewany-koc', User::class)
-                            @if($route_active == 'KOC Data Master')
-                            @php
-                                $koc_form = 'active';
-                            @endphp
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('/master-data/koc')}}" class="nav-link {{@$koc_form}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                    <p style="font-size: 90%;margin-left:2%;">{{__('KIND OF CONTRACT')}}</p>
-                                </a>
-                            </li>
-                            @endcan
 
                             @if(
-                                @$route_active == 'Country Data Master' 
-                                || @$route_active == 'State Data Master' 
-                                || @$route_active == 'City Data Master' 
+                                @$route_active == 'Fire Engineering - Slip Entry' 
+                                || @$route_active == 'Fire Engineering - Index'  
                                 )
                                     @php
-                                    $location_dd = 'active';
-                                    $location_menu_open = 'menu-open';
+                                    $fed_dd = 'active';
+                                    $fed_menu_open = 'menu-open';
                                     @endphp
                             @else
                                 @php
-                                $location_menu_open = 'menu-close';
+                                $fed_menu_open = 'menu-close';
                                 @endphp
                             @endif
-                            <li class="nav-item has-treeview {{ @$location_menu_open }}">
-                                <a href="#" class="nav-link {{@$location_dd}}" >
-                                    
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;" >
-                                            {{__('LOCATION DATA')}}
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    
+                            <li class="nav-item has-treeview {{ @$fed_menu_open }}">
+                                <a href="#" class="nav-link {{@$fed_dd}}">
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">
+                                        {{__('FIRE & ENGINEERING DATA')}}
+                                        <i class="right fas fa-angle-left" ></i>
+                                    </p>
                                 </a>
-
                                 <ul class="nav nav-treeview">
+                                        @if($route_active == 'Fire Engineering - Index')
+                                        @php
+                                            $fes_formindex = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/fe-slipindex')}}" class="nav-link {{@$fes_formindex}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('FIRE & ENGINEERING -')}} <br> {{__('INDEX')}}</p>
+                                            </a>
+                                        </li>
 
-                                    @can('viewany-country', User::class)
-                                        @if($route_active == 'Country Data Master')
+                                        @if($route_active == 'Fire Engineering - Slip Entry')
                                         @php
-                                            $countryform = 'active';
+                                            $fes_form = 'active';
                                         @endphp
                                         @endif
                                         <li class="nav-item">
-                                            <a href="{{url('/master-data/country')}}" class="nav-link {{@$countryform}}">
-                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                <p style="font-size: 80%;margin-left:2%;">{{__('COUNTRY FORM')}}</p>
-                                            </a>
-                                        </li>
-                                    @endcan
-                                        
-                                    @can('viewany-state', User::class)
-                                        @if($route_active == 'State Data Master')
-                                        @php
-                                            $state_form = 'active';
-                                        @endphp
-                                        @endif
-                                        <li class="nav-item">
-                                            <a href="{{url('/master-data/state')}}" class="nav-link {{@$state_form}}">
+                                            <a href="{{url('/transaction-data/fe-slip')}}" class="nav-link {{@$fes_form}}">
                                                     <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                <p style="font-size: 80%;margin-left:2%;">{{__('PROVINCE FORM')}}</p>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('FIRE & ENGINEERING -')}} <br> {{__(' SLIP ENTRY')}}</p>
                                             </a>
                                         </li>
-                                    @endcan
-        
-                                    @can('viewany-city', User::class)
-                                        @if($route_active == 'City Data Master')
-                                        @php
-                                            $city_form = 'active';
-                                        @endphp
-                                        @endif
-                                        <li class="nav-item">
-                                            <a href="{{url('/master-data/city')}}" class="nav-link {{@$city_form}}">
-                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                <p style="font-size: 80%;margin-left:2%;">{{__('CITY FORM')}}</p>
-                                            </a>
-                                        </li>
-                                    @endcan
                                 </ul>
                             </li>
 
+                            
 
-                            @can('viewany-felookup', User::class)
-                                @if($route_active == 'Fire & Engineering Lookup Location')
+                        </ul>
+                    </li>
+                @else
+                    @can('viewany-country', User::class)
+                        @if(
+                            @$route_active == 'Country Data Master' 
+                            || @$route_active == 'State Data Master' 
+                            || @$route_active == 'City Data Master' 
+                            || @$route_active == 'Currency Data Master' 
+                            || @$route_active == 'Currency Exchange Data Master' 
+                            || @$route_active == 'Fire & Engineering Lookup Location' 
+                            || @$route_active == 'Marine - Lookup Ship' 
+                            || @$route_active == 'Golf Field Hole' 
+                            || @$route_active == 'KOC Data Master' 
+                            || @$route_active == 'Ceding / Broker' 
+                            || @$route_active == 'COB Data Master' 
+                            || @$route_active == 'Occupation Data Master' 
+                            || @$route_active == 'Earthquake Zone' 
+                            || @$route_active == 'Flood Zone Data Master' 
+                            || @$route_active == 'Country Data Master' 
+                            || @$route_active == 'State Data Master' 
+                            || @$route_active == 'City Data Master' 
+                            || @$route_active == 'Ship Type Data Master' 
+                            || @$route_active == 'Classification Data Master' 
+                            || @$route_active == 'Construction Data Master' 
+                            || @$route_active == 'Company Type Data Master' 
+                            || @$route_active == 'Property Type Data Master' 
+                            || @$route_active == 'Condition Needed Data Master' 
+                            || @$route_active == 'Interest Insured Data Master' 
+                            || @$route_active == 'Extend Coverage Data Master' 
+                            || @$route_active == 'Deductible Type Data Master' 
+                            || @$route_active == 'Ship Port Data Master' 
+                            || @$route_active == 'Route Form Data Master' 
+                        )
+                            @php
+                            $master_dd = 'active';
+                            $master_menu_open = 'menu-open';
+                            @endphp
+                        @else
+                            @php
+                            $master_menu_open = 'menu-close';
+                            @endphp
+                        @endif
+                        <li class="nav-item has-treeview {{ @$master_menu_open }}">
+                            <a href="#" class="nav-link {{@$master_dd}}">
+                                <i class="nav-icon fas fa-laptop"></i>
+                                <p>
+                                    {{__('MASTER DATA')}}
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+
+                            <ul class="nav nav-treeview">
+
+                                @can('viewany-cedingbroker', User::class)
+                                    @if($route_active == 'Ceding / Broker')
+                                    @php
+                                        $cedingform = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('/master-data/cedingbroker')}}" class="nav-link {{@$cedingform}}">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                            <p style="font-size: 90%;margin-left:2%;">{{__('CEDING/BROKER FORM')}}</p>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                {{-- @can('viewany-cob', User::class) --}}
+                                @if($route_active == 'COB Data Master')
                                 @php
-                                    $felookuplocationform = 'active';
+                                    $cob_form = 'active';
                                 @endphp
                                 @endif
                                 <li class="nav-item">
-                                    <a href="{{url('/master-data/felookuplocation')}}" class="nav-link {{@$felookuplocationform}}">
+                                    <a href="{{url('/master-data/cob')}}" class="nav-link {{@$cob_form}}">
                                             <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">{{__('LOOKUP LOCATION')}}</p>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('COB FORM')}}</p>
                                     </a>
                                 </li>
-                            @endcan
+                                {{-- @endcan --}}
 
-                            {{-- @can('viewany-marinelookup', User::class) --}}
-                                @if($route_active == 'Marine - Lookup Ship')
-                                    @php
-                                        $marinelookupform = 'active';
-                                    @endphp
+                                {{-- @can('viewany-cedingbroker', User::class) --}}
+                                @if($route_active == 'Company Type Data Master')
+                                @php
+                                    $ctform = 'active';
+                                @endphp
                                 @endif
                                 <li class="nav-item">
-                                    <a href="{{url('/master-data/marine-lookup')}}" class="nav-link {{@$marinelookupform}}">
+                                    <a href="{{url('/master-data/companytype')}}" class="nav-link {{@$ctform}}">
                                             <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">{{__('MARINE - LOOKUP FORM')}}</p>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('COMPANY TYPE FORM')}}</p>
                                     </a>
                                 </li>
-                            {{-- @endcan --}}
+                                {{-- @endcan --}}
+
+                                {{-- @can('viewany-condition_needed', User::class) --}}
+                                @if($route_active == 'Condition Needed Data Master')
+                                @php
+                                    $cdn_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/conditionneeded')}}" class="nav-link {{@$cdn_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('CONDITION NEEDED FORM')}}</p>
+                                    </a>
+                                </li>
+                                {{-- @endcan --}}
+
+                                @can('viewany-currency', User::class)
+                                    @if($route_active == 'Currency Data Master')
+                                    @php
+                                        $crc_form = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('/master-data/currency')}}" class="nav-link {{@$crc_form}}">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                            <p style="font-size: 90%;margin-left:2%;">{{__('CURRENCY FORM')}}</p>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @can('viewany-exchange', User::class)
+                                    @if($route_active == 'Currency Exchange Data Master')
+                                    @php
+                                        $exchange_form = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('/master-data/exchange')}}" class="nav-link {{@$exchange_form}}">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                            <p style="font-size: 90%;margin-left:2%;">{{__('CURRENCY EXCHANGE')}}</p>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                {{-- @can('viewany-condition_needed', User::class) --}}
+                                @if($route_active == 'Deductible Type Data Master')
+                                @php
+                                    $dt_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/deductibletype')}}" class="nav-link {{@$dt_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('DEDUCTIBLE TYPE FORM')}}</p>
+                                    </a>
+                                </li>
+                                {{-- @endcan --}}
+
+                                {{-- @can('viewany-eqz', User::class) --}}
+                                @if($route_active == 'Earthquake Zone')
+                                @php
+                                    $earthquakezone_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/earthquakezone')}}" class="nav-link {{@$earthquakezone_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('EARTHQUAKE ZONE FORM')}}</p>
+                                    </a>
+                                </li>
+                                {{-- @endcan --}}
+
+                                {{-- @can('viewany-condition_needed', User::class) --}}
+                                @if($route_active == 'Extend Coverage Data Master')
+                                @php
+                                    $ec_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/extendedcoverage')}}" class="nav-link {{@$ec_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('EXTEND COVERAGE FORM')}}</p>
+                                    </a>
+                                </li>
+                                {{-- @endcan --}}
+
+                                
+
+                                @can('viewany-fz', User::class)
+                                    @if($route_active == 'Flood Zone Data Master')
+                                    @php
+                                        $flood_form = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('/master-data/floodzone')}}" class="nav-link {{@$flood_form}}">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                            <p style="font-size: 90%;margin-left:2%;">{{__('FLOOD ZONE FORM')}}</p>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @can('viewany-gfh', User::class)
+                                @if($route_active == 'Golf Field Hole')
+                                @php
+                                    $gfh_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/golffieldhole')}}" class="nav-link {{@$gfh_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('GOLF FIELD HOLE')}}</p>
+                                    </a>
+                                </li>
+                                @endcan
+
+                                {{-- @can('viewany-condition_needed', User::class) --}}
+                                @if($route_active == 'Interest Insured Data Master')
+                                @php
+                                    $ii_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/interestinsured')}}" class="nav-link {{@$ii_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('INTEREST INSURED FORM')}}</p>
+                                    </a>
+                                </li>
+                                {{-- @endcan --}}
+
+                                @can('viewany-koc', User::class)
+                                @if($route_active == 'KOC Data Master')
+                                @php
+                                    $koc_form = 'active';
+                                @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/master-data/koc')}}" class="nav-link {{@$koc_form}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('KIND OF CONTRACT')}}</p>
+                                    </a>
+                                </li>
+                                @endcan
 
                                 @if(
-                                    @$route_active == 'Ship Type Data Master' 
-                                    || @$route_active == 'Classification Data Master' 
-                                    || @$route_active == 'Construction Data Master' 
+                                    @$route_active == 'Country Data Master' 
+                                    || @$route_active == 'State Data Master' 
+                                    || @$route_active == 'City Data Master' 
                                     )
                                         @php
-                                        $marine_dd = 'active';
-                                        $marine_menu_open = 'menu-open';
+                                        $location_dd = 'active';
+                                        $location_menu_open = 'menu-open';
                                         @endphp
                                 @else
                                     @php
                                     $location_menu_open = 'menu-close';
                                     @endphp
                                 @endif
-                                <li class="nav-item has-treeview {{ @$marine_menu_open }}">
-                                    <a href="#" class="nav-link {{@$marine_dd}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">
-                                            {{__('MARINE MASTER DATA')}}
-                                            <i class="right fas fa-angle-left" ></i>
-                                        </p>
+                                <li class="nav-item has-treeview {{ @$location_menu_open }}">
+                                    <a href="#" class="nav-link {{@$location_dd}}" >
+                                        
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                            <p style="font-size: 90%;margin-left:2%;" >
+                                                {{__('LOCATION DATA')}}
+                                                <i class="right fas fa-angle-left"></i>
+                                            </p>
+                                        
                                     </a>
-    
+
                                     <ul class="nav nav-treeview">
-    
-                                        {{-- @can('viewany-shiptype', User::class) --}}
-                                            @if($route_active == 'Ship Type Data Master')
+
+                                        @can('viewany-country', User::class)
+                                            @if($route_active == 'Country Data Master')
                                             @php
-                                                $shiptypeform = 'active';
+                                                $countryform = 'active';
                                             @endphp
                                             @endif
                                             <li class="nav-item">
-                                                <a href="{{url('/master-data/shiptype')}}" class="nav-link {{@$shiptypeform}}">
-                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('SHIP TYPE FORM')}}</p>
+                                                <a href="{{url('/master-data/country')}}" class="nav-link {{@$countryform}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('COUNTRY FORM')}}</p>
                                                 </a>
                                             </li>
-                                        {{-- @endcan --}}
+                                        @endcan
                                             
-                                        {{-- @can('viewany-classification', User::class) --}}
-                                            @if($route_active == 'Classification Data Master')
+                                        @can('viewany-state', User::class)
+                                            @if($route_active == 'State Data Master')
                                             @php
-                                                $classification_form = 'active';
+                                                $state_form = 'active';
                                             @endphp
                                             @endif
                                             <li class="nav-item">
-                                                <a href="{{url('/master-data/classification')}}" class="nav-link {{@$classification_form}}">
+                                                <a href="{{url('/master-data/state')}}" class="nav-link {{@$state_form}}">
                                                         <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('CLASSIFICATION FORM')}}</p>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('PROVINCE FORM')}}</p>
                                                 </a>
                                             </li>
-                                        {{-- @endcan --}}
+                                        @endcan
             
-                                        {{-- @can('viewany-construction', User::class) --}}
-                                            @if($route_active == 'Construction Data Master')
+                                        @can('viewany-city', User::class)
+                                            @if($route_active == 'City Data Master')
                                             @php
-                                                $construction_form = 'active';
+                                                $city_form = 'active';
                                             @endphp
                                             @endif
                                             <li class="nav-item">
-                                                <a href="{{url('/master-data/construction')}}" class="nav-link {{@$construction_form}}">
+                                                <a href="{{url('/master-data/city')}}" class="nav-link {{@$city_form}}">
                                                         <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('CONSTRUCTION FORM')}}</p>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('CITY FORM')}}</p>
                                                 </a>
                                             </li>
-                                        {{-- @endcan --}}
+                                        @endcan
                                     </ul>
                                 </li>
 
-                                {{-- @can('viewany-occupation', User::class) --}}
-                                    @if($route_active == 'Occupation Data Master')
+
+                                @can('viewany-felookup', User::class)
+                                    @if($route_active == 'Fire & Engineering Lookup Location')
                                     @php
-                                        $ocp_form = 'active';
+                                        $felookuplocationform = 'active';
                                     @endphp
                                     @endif
                                     <li class="nav-item">
-                                        <a href="{{url('/master-data/occupation')}}" class="nav-link {{@$ocp_form}}">
+                                        <a href="{{url('/master-data/felookuplocation')}}" class="nav-link {{@$felookuplocationform}}">
                                                 <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                            <p style="font-size: 90%;margin-left:2%;">{{__('OCCUPATION FORM')}}</p>
+                                            <p style="font-size: 90%;margin-left:2%;">{{__('LOOKUP LOCATION')}}</p>
                                         </a>
                                     </li>
-                                {{-- @endcan --}}
+                                @endcan
 
-                                {{-- @can('viewany-property_type', User::class) --}}
-                                    @if($route_active == 'Property Type Data Master')
-                                    @php
-                                        $property_form = 'active';
-                                    @endphp
+                                @can('viewany-marinelookup', User::class)
+                                    @if($route_active == 'Marine - Lookup Ship')
+                                        @php
+                                            $marinelookupform = 'active';
+                                        @endphp
                                     @endif
                                     <li class="nav-item">
-                                        <a href="{{url('/master-data/propertytype')}}" class="nav-link {{@$property_form}}">
+                                        <a href="{{url('/master-data/marine-lookup')}}" class="nav-link {{@$marinelookupform}}">
                                                 <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                            <p style="font-size: 90%;margin-left:2%;">{{__('PROPERTY TYPE FORM')}}</p>
+                                            <p style="font-size: 90%;margin-left:2%;">{{__('MARINE - LOOKUP FORM')}}</p>
                                         </a>
                                     </li>
-                                {{-- @endcan --}}
+                                @endcan
 
-                                {{-- @can('viewany-condition_needed', User::class) --}}
-                                @if($route_active == 'Route Form Data Master')
-                                @php
-                                    $rf_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/routeform')}}" class="nav-link {{@$rf_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">{{__('ROUTE FORM')}}</p>
-                                    </a>
-                                </li>
-                                {{-- @endcan --}}
-
-                                {{-- @can('viewany-condition_needed', User::class) --}}
-                                @if($route_active == 'Ship Port Data Master')
-                                @php
-                                    $sp_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/master-data/shipport')}}" class="nav-link {{@$sp_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">{{__('SHIP PORT FORM')}}</p>
-                                    </a>
-                                </li>
-                                {{-- @endcan --}}
-                        </ul>
-                    </li>
-                @endcan
-
-                        @if(
-                            @$route_active == 'Marine - Slip Entry'
-                            || @$route_active == 'Marine Slip - Index'
-                            || @$route_active == 'Fire Engineering - Slip Entry'
-                            || @$route_active == 'Financial Lines - Slip Entry'
-                            || @$route_active == 'Moveable Property - Slip Entry'
-                            || @$route_active == 'Hole In One - Slip Entry'
-                            || @$route_active == 'Personal Accident - Slip Entry'
-                            || @$route_active == 'HE & Motor - Slip Entry'
-                            || @$route_active == 'Fire Engineering - Index'
-                            || @$route_active == 'Financial Lines - Index'
-                            || @$route_active == 'HE & Motor - Index'
-                            || @$route_active == 'Moveable Property - Index'
-                            )
-                            @php
-                            $trF_dd = 'active';
-                            $transaction_menu_open = 'menu-open';
-                            @endphp
-                        @else
-                            @php
-                            $transaction_menu_open = 'menu-close';
-                            @endphp
-                        @endif
-                        <li class="nav-item has-treeview {{ @$transaction_menu_open }}">
-                            <a href="#" class="nav-link {{@$trF_dd}}">
-                                <i class="nav-icon fas fa-industry"></i>
-                                <p>
-                                    {{__('TRANSACTION DATA')}}
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-    
-                            <ul class="nav nav-treeview">
-
-
-    
-                                @if(
-                                    @$route_active == 'Fire Engineering - Slip Entry' 
-                                    || @$route_active == 'Fire Engineering - Index'  
-                                    )
+                                    @if(
+                                        @$route_active == 'Ship Type Data Master' 
+                                        || @$route_active == 'Classification Data Master' 
+                                        || @$route_active == 'Construction Data Master' 
+                                        )
+                                            @php
+                                            $marine_dd = 'active';
+                                            $marine_menu_open = 'menu-open';
+                                            @endphp
+                                    @else
                                         @php
-                                        $fed_dd = 'active';
-                                        $fed_menu_open = 'menu-open';
+                                        $location_menu_open = 'menu-close';
                                         @endphp
-                                @else
-                                    @php
-                                    $fed_menu_open = 'menu-close';
-                                    @endphp
-                                @endif
-                                <li class="nav-item has-treeview {{ @$fed_menu_open }}">
-                                    <a href="#" class="nav-link {{@$fed_dd}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">
-                                            {{__('FIRE & ENGINEERING DATA')}}
-                                            <i class="right fas fa-angle-left" ></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                            @if($route_active == 'Fire Engineering - Index')
-                                            @php
-                                                $fes_formindex = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/fe-slipindex')}}" class="nav-link {{@$fes_formindex}}">
-                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('FIRE & ENGINEERING -')}} <br> {{__('INDEX')}}</p>
-                                                </a>
-                                            </li>
-
-                                            @if($route_active == 'Fire Engineering - Slip Entry')
-                                            @php
-                                                $fes_form = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/fe-slip')}}" class="nav-link {{@$fes_form}}">
-                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('FIRE & ENGINEERING -')}} <br> {{__(' SLIP ENTRY')}}</p>
-                                                </a>
-                                            </li>
-                                    </ul>
-                                </li>
-
-                                @if(
-                                    @$route_active == 'Financial Lines - Slip Entry' 
-                                    || @$route_active == 'Financial Lines - Index'  
-                                    )
-                                        @php
-                                        $fld_dd = 'active';
-                                        $fld_menu_open = 'menu-open';
-                                        @endphp
-                                @else
-                                    @php
-                                    $fld_menu_open = 'menu-close';
-                                    @endphp
-                                @endif
-                                <li class="nav-item has-treeview {{ @$fld_menu_open }}">
-                                    <a href="#" class="nav-link {{@$fld_dd}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">
-                                            {{__('FINANCIAL LINES DATA')}}
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                            @if($route_active == 'Financial Lines - Index')
-                                            @php
-                                                $flform = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/fl-slipindex')}}" class="nav-link {{@$flform}}">
-                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('FINANCIAL LINES -')}} <br> {{__('INDEX')}}</p>
-                                                </a>
-                                            </li>
+                                    @endif
+                                    <li class="nav-item has-treeview {{ @$marine_menu_open }}">
+                                        <a href="#" class="nav-link {{@$marine_dd}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                            <p style="font-size: 90%;margin-left:2%;">
+                                                {{__('MARINE MASTER DATA')}}
+                                                <i class="right fas fa-angle-left" ></i>
+                                            </p>
+                                        </a>
+        
+                                        <ul class="nav nav-treeview">
+        
+                                            {{-- @can('viewany-shiptype', User::class) --}}
+                                                @if($route_active == 'Ship Type Data Master')
+                                                @php
+                                                    $shiptypeform = 'active';
+                                                @endphp
+                                                @endif
+                                                <li class="nav-item">
+                                                    <a href="{{url('/master-data/shiptype')}}" class="nav-link {{@$shiptypeform}}">
+                                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                        <p style="font-size: 80%;margin-left:2%;">{{__('SHIP TYPE FORM')}}</p>
+                                                    </a>
+                                                </li>
+                                            {{-- @endcan --}}
+                                                
+                                            {{-- @can('viewany-classification', User::class) --}}
+                                                @if($route_active == 'Classification Data Master')
+                                                @php
+                                                    $classification_form = 'active';
+                                                @endphp
+                                                @endif
+                                                <li class="nav-item">
+                                                    <a href="{{url('/master-data/classification')}}" class="nav-link {{@$classification_form}}">
+                                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                        <p style="font-size: 80%;margin-left:2%;">{{__('CLASSIFICATION FORM')}}</p>
+                                                    </a>
+                                                </li>
+                                            {{-- @endcan --}}
                 
-                                            @if($route_active == 'Financial Lines - Slip Entry')
-                                            @php
-                                                $fleform = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/fl-slip')}}" class="nav-link {{@$fleform}}">
-                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('FINANCIAL LINES -')}} <br> {{__('SLIP ENTRY')}}</p>
-                                                </a>
-                                            </li>
-                                    </ul>
-                                </li>
+                                            {{-- @can('viewany-construction', User::class) --}}
+                                                @if($route_active == 'Construction Data Master')
+                                                @php
+                                                    $construction_form = 'active';
+                                                @endphp
+                                                @endif
+                                                <li class="nav-item">
+                                                    <a href="{{url('/master-data/construction')}}" class="nav-link {{@$construction_form}}">
+                                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                        <p style="font-size: 80%;margin-left:2%;">{{__('CONSTRUCTION FORM')}}</p>
+                                                    </a>
+                                                </li>
+                                            {{-- @endcan --}}
+                                        </ul>
+                                    </li>
 
-                                @if(
-                                    @$route_active == 'HE & Motor - Slip Entry' 
-                                    || @$route_active == 'HE & Motor - Index'  
-                                    )
+                                    {{-- @can('viewany-occupation', User::class) --}}
+                                        @if($route_active == 'Occupation Data Master')
                                         @php
-                                        $hem_dd = 'active';
-                                        $hem_menu_open = 'menu-open';
+                                            $ocp_form = 'active';
                                         @endphp
-                                @else
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/master-data/occupation')}}" class="nav-link {{@$ocp_form}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                                <p style="font-size: 90%;margin-left:2%;">{{__('OCCUPATION FORM')}}</p>
+                                            </a>
+                                        </li>
+                                    {{-- @endcan --}}
+
+                                    {{-- @can('viewany-property_type', User::class) --}}
+                                        @if($route_active == 'Property Type Data Master')
+                                        @php
+                                            $property_form = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/master-data/propertytype')}}" class="nav-link {{@$property_form}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                                <p style="font-size: 90%;margin-left:2%;">{{__('PROPERTY TYPE FORM')}}</p>
+                                            </a>
+                                        </li>
+                                    {{-- @endcan --}}
+
+                                    {{-- @can('viewany-condition_needed', User::class) --}}
+                                    @if($route_active == 'Route Form Data Master')
                                     @php
-                                    $hem_menu_open = 'menu-close';
+                                        $rf_form = 'active';
                                     @endphp
-                                @endif
-                                <li class="nav-item has-treeview {{ @$hem_menu_open }}">
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('/master-data/routeform')}}" class="nav-link {{@$rf_form}}">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                            <p style="font-size: 90%;margin-left:2%;">{{__('ROUTE FORM')}}</p>
+                                        </a>
+                                    </li>
+                                    {{-- @endcan --}}
+
+                                    {{-- @can('viewany-condition_needed', User::class) --}}
+                                    @if($route_active == 'Ship Port Data Master')
+                                    @php
+                                        $sp_form = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('/master-data/shipport')}}" class="nav-link {{@$sp_form}}">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                            <p style="font-size: 90%;margin-left:2%;">{{__('SHIP PORT FORM')}}</p>
+                                        </a>
+                                    </li>
+                                    {{-- @endcan --}}
+                            </ul>
+                        </li>
+                    @endcan
+                
+                    @if(
+                        @$route_active == 'Marine - Slip Entry'
+                        || @$route_active == 'Marine Slip - Index'
+                        || @$route_active == 'Fire Engineering - Slip Entry'
+                        || @$route_active == 'Financial Lines - Slip Entry'
+                        || @$route_active == 'Moveable Property - Slip Entry'
+                        || @$route_active == 'Hole In One - Slip Entry'
+                        || @$route_active == 'Personal Accident - Slip Entry'
+                        || @$route_active == 'HE & Motor - Slip Entry'
+                        || @$route_active == 'Fire Engineering - Index'
+                        || @$route_active == 'Financial Lines - Index'
+                        || @$route_active == 'HE & Motor - Index'
+                        || @$route_active == 'Moveable Property - Index'
+                        )
+                        @php
+                        $trF_dd = 'active';
+                        $transaction_menu_open = 'menu-open';
+                        @endphp
+                    @else
+                        @php
+                        $transaction_menu_open = 'menu-close';
+                        @endphp
+                    @endif
+                    <li class="nav-item has-treeview {{ @$transaction_menu_open }}">
+                        <a href="#" class="nav-link {{@$trF_dd}}">
+                            <i class="nav-icon fas fa-industry"></i>
+                            <p>
+                                {{__('TRANSACTION DATA')}}
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+
+                        <ul class="nav nav-treeview">
+
+
+
+                            @if(
+                                @$route_active == 'Fire Engineering - Slip Entry' 
+                                || @$route_active == 'Fire Engineering - Index'  
+                                )
+                                    @php
+                                    $fed_dd = 'active';
+                                    $fed_menu_open = 'menu-open';
+                                    @endphp
+                            @else
+                                @php
+                                $fed_menu_open = 'menu-close';
+                                @endphp
+                            @endif
+                            <li class="nav-item has-treeview {{ @$fed_menu_open }}">
+                                <a href="#" class="nav-link {{@$fed_dd}}">
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">
+                                        {{__('FIRE & ENGINEERING DATA')}}
+                                        <i class="right fas fa-angle-left" ></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                        @if($route_active == 'Fire Engineering - Index')
+                                        @php
+                                            $fes_formindex = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/fe-slipindex')}}" class="nav-link {{@$fes_formindex}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('FIRE & ENGINEERING -')}} <br> {{__('INDEX')}}</p>
+                                            </a>
+                                        </li>
+
+                                        @if($route_active == 'Fire Engineering - Slip Entry')
+                                        @php
+                                            $fes_form = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/fe-slip')}}" class="nav-link {{@$fes_form}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('FIRE & ENGINEERING -')}} <br> {{__(' SLIP ENTRY')}}</p>
+                                            </a>
+                                        </li>
+                                </ul>
+                            </li>
+
+                            @if(
+                                @$route_active == 'Financial Lines - Slip Entry' 
+                                || @$route_active == 'Financial Lines - Index'  
+                                )
+                                    @php
+                                    $fld_dd = 'active';
+                                    $fld_menu_open = 'menu-open';
+                                    @endphp
+                            @else
+                                @php
+                                $fld_menu_open = 'menu-close';
+                                @endphp
+                            @endif
+                            <li class="nav-item has-treeview {{ @$fld_menu_open }}">
+                                <a href="#" class="nav-link {{@$fld_dd}}">
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">
+                                        {{__('FINANCIAL LINES DATA')}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                        @if($route_active == 'Financial Lines - Index')
+                                        @php
+                                            $flform = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/fl-slipindex')}}" class="nav-link {{@$flform}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('FINANCIAL LINES -')}} <br> {{__('INDEX')}}</p>
+                                            </a>
+                                        </li>
+            
+                                        @if($route_active == 'Financial Lines - Slip Entry')
+                                        @php
+                                            $fleform = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/fl-slip')}}" class="nav-link {{@$fleform}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('FINANCIAL LINES -')}} <br> {{__('SLIP ENTRY')}}</p>
+                                            </a>
+                                        </li>
+                                </ul>
+                            </li>
+
+                            @if(
+                                @$route_active == 'HE & Motor - Slip Entry' 
+                                || @$route_active == 'HE & Motor - Index'  
+                                )
+                                    @php
+                                    $hem_dd = 'active';
+                                    $hem_menu_open = 'menu-open';
+                                    @endphp
+                            @else
+                                @php
+                                $hem_menu_open = 'menu-close';
+                                @endphp
+                            @endif
+                            <li class="nav-item has-treeview {{ @$hem_menu_open }}">
                                 <a href="#" class="nav-link {{@$hem_dd}}">
                                     <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                     <p style="font-size: 90%;margin-left:2%;">
@@ -1378,204 +1671,205 @@
                                     </li>
 
                                 </ul>
-                                 </li>
+                            </li>
 
-                                @if(
-                                    @$route_active == 'Hole In One - Slip Entry' 
-                                    || @$route_active == 'Hole In One - Index'  
-                                    )
-                                        @php
-                                        $hio_dd = 'active';
-                                        $hio_menu_open = 'menu-open';
-                                        @endphp
-                                @else
+                            @if(
+                                @$route_active == 'Hole In One - Slip Entry' 
+                                || @$route_active == 'Hole In One - Index'  
+                                )
                                     @php
-                                    $hio_menu_open = 'menu-close';
+                                    $hio_dd = 'active';
+                                    $hio_menu_open = 'menu-open';
                                     @endphp
-                                @endif
-                                <li class="nav-item has-treeview {{ @$hio_menu_open }}">
-                                    <a href="#" class="nav-link {{@$hio_dd}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">
-                                            {{__('HOLE IN ONE DATA')}}
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                            @if($route_active == 'Hole In One - Index')
-                                            @php
-                                                $hio_idx = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/hio-index')}}" class="nav-link {{@$hio_idx}}">
-                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('HOLE IN ONE - INDEX')}}</p>
-                                                </a>
-                                            </li>
-
-                                            @if($route_active == 'Hole In One - Slip Entry')
-                                            @php
-                                                $hio_form = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/hio-slip')}}" class="nav-link {{@$hio_form}}">
-                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('HOLE IN ONE - SLIP ENTRY')}}</p>
-                                                </a>
-                                            </li>
-                                    </ul>
-                                </li>
-
-                                @if(
-                                    @$route_active == 'Moveable Property - Slip Entry' 
-                                    || @$route_active == 'Moveable Property - Index'  
-                                    )
+                            @else
+                                @php
+                                $hio_menu_open = 'menu-close';
+                                @endphp
+                            @endif
+                            <li class="nav-item has-treeview {{ @$hio_menu_open }}">
+                                <a href="#" class="nav-link {{@$hio_dd}}">
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">
+                                        {{__('HOLE IN ONE DATA')}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                        @if($route_active == 'Hole In One - Index')
                                         @php
-                                        $mpd_dd = 'active';
-                                        $mpd_menu_open = 'menu-open';
+                                            $hio_idx = 'active';
                                         @endphp
-                                @else
-                                    @php
-                                    $mpd_menu_open = 'menu-close';
-                                    @endphp
-                                @endif
-                                <li class="nav-item has-treeview {{ @$mpd_menu_open }}">
-                                    <a href="#" class="nav-link {{@$mpd_dd}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">
-                                            {{__('MOVEABLE PROPERTY')}}
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                            @if($route_active == 'Moveable Property - Index')
-                                            @php
-                                                $mpe_form = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/mp-slipindex')}}" class="nav-link {{@$mpe_form}}">
-                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('MOVEABLE PROPERTY -')}} <br> {{__('INDEX')}}</p>
-                                                </a>
-                                            </li>
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/hio-index')}}" class="nav-link {{@$hio_idx}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('HOLE IN ONE - INDEX')}}</p>
+                                            </a>
+                                        </li>
 
-                                            @if($route_active == 'Moveable Property - Slip Entry')
-                                            @php
-                                                $mp_form = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/mp-slip')}}" class="nav-link {{@$mp_form}}">
-                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('MOVEABLE PROPERTY -')}} <br> {{__('SLIP ENTRY')}}</p>
-                                                </a>
-                                            </li>
-                                    </ul>
-                                </li>
-
-                                @if(
-                                    @$route_active == 'Marine - Slip Entry' 
-                                    || @$route_active == 'Marine Slip - Index'  
-                                    )
+                                        @if($route_active == 'Hole In One - Slip Entry')
                                         @php
-                                        $ms_dd = 'active';
-                                        $ms_menu_open = 'menu-open';
+                                            $hio_form = 'active';
                                         @endphp
-                                @else
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/hio-slip')}}" class="nav-link {{@$hio_form}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('HOLE IN ONE - SLIP ENTRY')}}</p>
+                                            </a>
+                                        </li>
+                                </ul>
+                            </li>
+
+                            @if(
+                                @$route_active == 'Moveable Property - Slip Entry' 
+                                || @$route_active == 'Moveable Property - Index'  
+                                )
                                     @php
-                                    $ms_menu_open = 'menu-close';
+                                    $mpd_dd = 'active';
+                                    $mpd_menu_open = 'menu-open';
                                     @endphp
-                                @endif
-                                <li class="nav-item has-treeview {{ @$ms_menu_open }}">
-                                    <a href="#" class="nav-link {{@$ms_dd}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">
-                                            {{__('MARINE')}}
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                            @if($route_active == 'Marine Slip - Index')
-                                            @php
-                                                $ms_formindex = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/marine-index')}}" class="nav-link {{@$ms_formindex}}">
-                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('MARINE SLIP - INDEX')}}</p>
-                                                </a>
-                                            </li>
-
-                                            @if($route_active == 'Marine - Slip Entry')
-                                            @php
-                                                $ms_form = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/marine-slip')}}" class="nav-link {{@$ms_form}}">
-                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('MARINE - SLIP ENTRY')}}</p>
-                                                </a>
-                                            </li>
-                                    </ul>
-                                </li>
-                           
-
-                                @if(
-                                    @$route_active == 'Personal Accident - Slip Entry' 
-                                    || @$route_active == 'Personal Accident - Index'  
-                                    )
+                            @else
+                                @php
+                                $mpd_menu_open = 'menu-close';
+                                @endphp
+                            @endif
+                            <li class="nav-item has-treeview {{ @$mpd_menu_open }}">
+                                <a href="#" class="nav-link {{@$mpd_dd}}">
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">
+                                        {{__('MOVEABLE PROPERTY')}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                        @if($route_active == 'Moveable Property - Index')
                                         @php
-                                        $pa_dd = 'active';
-                                        $pa_menu_open = 'menu-open';
+                                            $mpe_form = 'active';
                                         @endphp
-                                @else
-                                    @php
-                                    $pa_menu_open = 'menu-close';
-                                    @endphp
-                                @endif
-                                <li class="nav-item has-treeview {{ @$pa_menu_open }}">
-                                    <a href="#" class="nav-link {{@$pa_dd}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">
-                                            {{__('PERSONAL ACCIDENT')}}
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                            @if($route_active == 'Personal Accident - Index')
-                                            @php
-                                                $pa_idx = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/pa-index')}}" class="nav-link {{@$pa_idx}}">
-                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('PERSONAL ACCIDENT - INDEX')}}</p>
-                                                </a>
-                                            </li>
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/mp-slipindex')}}" class="nav-link {{@$mpe_form}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('MOVEABLE PROPERTY -')}} <br> {{__('INDEX')}}</p>
+                                            </a>
+                                        </li>
 
-                                            @if($route_active == 'Personal Accident - Slip Entry')
-                                            @php
-                                                $pa_form = 'active';
-                                            @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/pa-slip')}}" class="nav-link {{@$pa_form}}">
-                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;"> {{__('PERSONAL ACCIDENT - SLIP ENTRY')}}</p>
-                                                </a>
-                                            </li>
-                                    </ul>
-                                </li>
-    
-                            </ul>
-                        </li>
+                                        @if($route_active == 'Moveable Property - Slip Entry')
+                                        @php
+                                            $mp_form = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/mp-slip')}}" class="nav-link {{@$mp_form}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('MOVEABLE PROPERTY -')}} <br> {{__('SLIP ENTRY')}}</p>
+                                            </a>
+                                        </li>
+                                </ul>
+                            </li>
+
+                            @if(
+                                @$route_active == 'Marine - Slip Entry' 
+                                || @$route_active == 'Marine Slip - Index'  
+                                )
+                                    @php
+                                    $ms_dd = 'active';
+                                    $ms_menu_open = 'menu-open';
+                                    @endphp
+                            @else
+                                @php
+                                $ms_menu_open = 'menu-close';
+                                @endphp
+                            @endif
+                            <li class="nav-item has-treeview {{ @$ms_menu_open }}">
+                                <a href="#" class="nav-link {{@$ms_dd}}">
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">
+                                        {{__('MARINE')}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                        @if($route_active == 'Marine Slip - Index')
+                                        @php
+                                            $ms_formindex = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/marine-index')}}" class="nav-link {{@$ms_formindex}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('MARINE SLIP - INDEX')}}</p>
+                                            </a>
+                                        </li>
+
+                                        @if($route_active == 'Marine - Slip Entry')
+                                        @php
+                                            $ms_form = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/marine-slip')}}" class="nav-link {{@$ms_form}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('MARINE - SLIP ENTRY')}}</p>
+                                            </a>
+                                        </li>
+                                </ul>
+                            </li>
                         
+
+                            @if(
+                                @$route_active == 'Personal Accident - Slip Entry' 
+                                || @$route_active == 'Personal Accident - Index'  
+                                )
+                                    @php
+                                    $pa_dd = 'active';
+                                    $pa_menu_open = 'menu-open';
+                                    @endphp
+                            @else
+                                @php
+                                $pa_menu_open = 'menu-close';
+                                @endphp
+                            @endif
+                            <li class="nav-item has-treeview {{ @$pa_menu_open }}">
+                                <a href="#" class="nav-link {{@$pa_dd}}">
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">
+                                        {{__('PERSONAL ACCIDENT')}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                        @if($route_active == 'Personal Accident - Index')
+                                        @php
+                                            $pa_idx = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/pa-index')}}" class="nav-link {{@$pa_idx}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('PERSONAL ACCIDENT - INDEX')}}</p>
+                                            </a>
+                                        </li>
+
+                                        @if($route_active == 'Personal Accident - Slip Entry')
+                                        @php
+                                            $pa_form = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/pa-slip')}}" class="nav-link {{@$pa_form}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;"> {{__('PERSONAL ACCIDENT - SLIP ENTRY')}}</p>
+                                            </a>
+                                        </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </li>
+                        
+                @endif
               </ul>
 
               <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-arrow-up" aria-hidden="true" ></i><span style="font-family:Source Sans Pro;font-weight: bold;"> TOP</span></button>

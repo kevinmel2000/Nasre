@@ -20,95 +20,11 @@
             @include('crm.layouts.error')
             
         
-                <div class="card card-primary">
-                    <div class="card-header bg-gray">
-                        {{__('Marine - Insured Data')}}
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12 com-sm-12 mt-3">
-                            
-                            {!! link_to('transaction-data/marine-slip','Add Data',['class'=>'btn btn-primary']) !!}
-                            <hr>
-                            {{-- {!! Form::open(array('url'=>'transaction-data/marine-index')) !!}
-                            {!! Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari Marine Slip Insured Number, ketik lalu tekan enter']) !!}
-                            {!! Form::close() !!} --}}
-                            <hr>
-                            <table id="marineinsured" class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                <th>{{__('Number')}}</th>
-                                <th>{{__('Insured')}}</th>
-                                <th>{{__('Route')}}</th>
-                                <th>{{__('Route From')}}</th>
-                                <th>{{__('Route To')}}</th>
-                                <th>{{__('Share')}}</th>
-                                <th>{{__('Share From')}}</th>
-                                <th>{{__('Share To')}}</th>
-                                <th>{{__('Coincurance')}}</th>
-                                <th width="20%">{{__('Actions')}}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (@$insured as $insureddata)
-                                        <tr>
-                                        <td><a href="{{  url('transaction-data/marine-insured', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
-                                        <td>{{@$insureddata->insured_prefix}} - {{@$insureddata->insured_name}} - {{@$insureddata->insured_suffix}}</td>
-                                        <td>{{@$insureddata->route }}</td>
-                                        <td>{{@$insureddata->route_from}}</td>
-                                        <td>{{@$insureddata->route_to}}</td>
-                                        <td>{{@$insureddata->share }}</td>
-                                        <td>{{@$insureddata->share_from}}</td>
-                                        <td>{{@$insureddata->share_to}}</td>
-                                        <td>{{@$insureddata->coincurance}}</td>
-                                        <td>
-                                            <a href="javascript:void(0)" data-toggle="tooltip" data-title="{{$insureddata->created_at}}" class="mr-3">
-                                            <i class="fas fa-clock text-info"></i>
-                                            </a>
-                                            <a href="javascript:void(0)" data-toggle="tooltip" data-title="{{$insureddata->updated_at}}" class="mr-3">
-                                            <i class="fas fa-history text-primary"></i>
-                                            </a>
-                                            <span>
-
-                                            
-                                            {{-- @can('update-felookup', User::class) --}}
-                                                <a class="text-primary mr-3" href="{{ url('transaction-data/marine-insured/edit', $insureddata->id) }}">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                {{-- @endcan   --}}
-
-
-                                            {{-- @can('delete-marineinsured', User::class) --}}
-
-                                            <span id="delbtn{{@$insureddata->id}}"></span>
-                                            
-                                                <form id="delete-marineinsured-{{$insureddata->id}}"
-                                                    action="{{ url('transaction-data/marine-insured/destroyinsured', $insureddata->id) }}"
-                                                    method="POST">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                </form>
-                                                {{-- @endcan   --}}
-                                            </span>
-                                        </td>
-
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                                
-                            </table>
-
-                            {!! $insured->render() !!}
-
-                            </div>
-                        
-                        </div>
-                    </div>
-                </div>
+                
                 
                 <div class="card card-primary">
                     <div class="card-header bg-gray">
-                        {{__('Marine - Slip Data')}}
+                        {{__('Marine - Slip and Insured Data')}}
                     </div>
                     <div class="card-body">
                         <div class="row">
