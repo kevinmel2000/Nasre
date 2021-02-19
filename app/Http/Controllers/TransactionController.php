@@ -52,7 +52,6 @@ class TransactionController extends Controller
         $search = @$request->input('search');
         $mydate = date("Y").date("m").date("d");
         $currdate = date("Y-m-d");
-        
 
         if(empty($search))
          {
@@ -98,13 +97,10 @@ class TransactionController extends Controller
                 {
                     $code_ms = "IN" . $mydate  . strval($lastid + 1);
                 }
-
-
             }
             else{
                 $code_ms = "IN" . $mydate . "0000" . strval(1);
             }
-
             if($sliplastid != null){
                 if($lastid < 10)
                 {
@@ -126,8 +122,6 @@ class TransactionController extends Controller
                 {
                     $code_sl = "M". $mydate . strval($sliplastid + 1);
                 }
-
-                
             }
             else{
                 $code_sl = "M" . $mydate . "0000" . strval(1);
@@ -710,7 +704,7 @@ class TransactionController extends Controller
                     'insured_pct'=>$request->slippct,
                     'total_sum_pct'=>$request->sliptotalsumpct,
                     'deductible_panel'=>$deductiblelist->toJson(),
-                    'extend_coverage'=>$conditionneededlist->toJson(),
+                    'condition_needed'=>$conditionneededlist->toJson(),
                     'insurance_period_from'=>$request->slipipfrom,
                     'insurance_perido_to'=>$request->slipipto,
                     'reinsurance_period_from'=>$request->sliprpfrom,
@@ -773,7 +767,7 @@ class TransactionController extends Controller
                 $slipdataup->insured_pct=$request->slippct; 
                 $slipdataup->total_sum_pct=$request->sliptotalsumpct; 
                 $slipdataup->deductible_panel=$deductiblelist->toJson(); 
-                $slipdataup->extend_coverage=$conditionneededlist->toJson();  
+                $slipdataup->condition_needed=$conditionneededlist->toJson();  
                 $slipdataup->insurance_period_from=$request->slipipfrom;  
                 $slipdataup->insurance_period_to=$request->slipipto;  
                 $slipdataup->reinsurance_period_from=$request->sliprpfrom;  
@@ -1279,34 +1273,46 @@ class TransactionController extends Controller
     public function showslipdetails($id)
     {
         $user = Auth::user();
-        $route_active = 'Marine - Slip Details';
+        $route_active = 'Marine - Slip and Insured Details';
         $mydate = date("Y").date("m").date("d");
         $currdate = date("Y-m-d");
 
         $slip = SlipTable::where('id',$id)->orderby('id','asc')->get();
         $sl_ids = response()->json($slip->modelKeys());
+        $insured = Insured::where('number',$slip[0]->insured_id)->orderby('id','desc')->get();
+        // dd($insured);
+        $route = $insured[0]->route;
+        $mlu = MarineLookup::orderby('id','asc')->get();
+        $customer= CustomerCustomer::orderby('id','asc')->get();
+        $routeship= RouteShip::where('id','=',$route)->first();
+        $interestinsured= InterestInsured::orderby('id','asc')->get();
+        $deductibletype= DeductibleType::orderby('id','asc')->get();
+        $ms_ids = response()->json($insured->modelKeys());
+        $lastid = count($insured);
+        $code_ms = $insured[0]->number;
+        $shiplist= ShipListTemp::where('insured_id',$code_ms)->orderby('id','desc')->get();
 
         $code_sl = $slip[0]->number;
         
-            $currency = Currency::orderby('id','asc')->get();
-            $cob = COB::where('id',$id)->orderby('id','asc')->first();
-            $koc = Koc::where('id',$id)->orderby('id','asc')->first();
-            $ocp = Occupation::where('id',$id)->orderby('id','asc')->first();
-            $cedingbroker = CedingBroker::where('id',$id)->orderby('id','asc')->first();
-            $ceding = CedingBroker::where('id',$id)->orderby('id','asc')->where('type','4')->first();
-            $felookup = FelookupLocation::where('id',$id)->orderby('id','asc')->get();
-            $cnd = ConditionNeeded::where('id',$id)->orderby('id','asc')->get();
+        $currency = Currency::orderby('id','asc')->get();
+        $cob = COB::where('id',$id)->orderby('id','asc')->first();
+        $koc = Koc::where('id',$id)->orderby('id','asc')->first();
+        $ocp = Occupation::where('id',$id)->orderby('id','asc')->first();
+        $cedingbroker = CedingBroker::where('id',$id)->orderby('id','asc')->first();
+        $ceding = CedingBroker::where('id',$id)->orderby('id','asc')->where('type','4')->first();
+        $felookup = FelookupLocation::where('id',$id)->orderby('id','asc')->get();
+        $cnd = ConditionNeeded::where('id',$id)->orderby('id','asc')->get();
 
-            $sliplastid = count($slip);
+        $sliplastid = count($slip);
 
-            $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-            $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-            $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-            $installmentpanel= InstallmentTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-            $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-            $statuslist= StatusLog::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $installmentpanel= InstallmentTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $statuslist= StatusLog::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
-            return view('crm.transaction.marine_slip_details', compact(['user','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate']));
+        return view('crm.transaction.marine_slip_details', compact(['user','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
     }
 
     /**
@@ -1345,11 +1351,7 @@ class TransactionController extends Controller
         $deductibletype= DeductibleType::orderby('id','asc')->get();
         $ms_ids = response()->json($insured->modelKeys());
         $lastid = count($insured);
-            
-
         $code_ms = $insured[0]->number;
-
-        
         $shiplist= ShipListTemp::where('insured_id',$code_ms)->orderby('id','desc')->get();
         
 
@@ -1366,30 +1368,41 @@ class TransactionController extends Controller
 
         $slip = SlipTable::where('id',$id)->orderby('id','asc')->get();
         $sl_ids = response()->json($slip->modelKeys());
+        // dd($slip[0]->insured_id);
+        $insured = Insured::where('number',$slip[0]->insured_id)->orderby('id','desc')->get();
+        
+        $route = $insured[0]->route;
+        $mlu = MarineLookup::orderby('id','asc')->get();
+        $customer= CustomerCustomer::orderby('id','asc')->get();
+        $routeship= RouteShip::orderby('id','asc')->get();
+        $ms_ids = response()->json($insured->modelKeys());
+        $lastid = count($insured);
+        $code_ms = $insured[0]->number;
+        $shiplist= ShipListTemp::where('insured_id',$code_ms)->orderby('id','desc')->get();
 
         $code_sl = $slip[0]->number;
         
-            $currency = Currency::orderby('id','asc')->get();
-            $cob = COB::orderby('id','asc')->get();
-            $koc = Koc::orderby('id','asc')->get();
-            $ocp = Occupation::orderby('id','asc')->get();
-            $cedingbroker = CedingBroker::orderby('id','asc')->get();
-            $ceding = CedingBroker::orderby('id','asc')->where('type','4')->get();
-            $felookup = FelookupLocation::orderby('id','asc')->get();
-            $cnd = ConditionNeeded::orderby('id','asc')->get();
-            $interestinsured = InterestInsured::orderby('id','asc')->get();
-            $deductibletype= DeductibleType::orderby('id','asc')->get();
+        $currency = Currency::orderby('id','asc')->get();
+        $cob = COB::orderby('id','asc')->get();
+        $koc = Koc::orderby('id','asc')->get();
+        $ocp = Occupation::orderby('id','asc')->get();
+        $cedingbroker = CedingBroker::orderby('id','asc')->get();
+        $ceding = CedingBroker::orderby('id','asc')->where('type','4')->get();
+        $felookup = FelookupLocation::orderby('id','asc')->get();
+        $cnd = ConditionNeeded::orderby('id','asc')->get();
+        $interestinsured = InterestInsured::orderby('id','asc')->get();
+        $deductibletype= DeductibleType::orderby('id','asc')->get();
 
-            $sliplastid = count($slip);
+        $sliplastid = count($slip);
 
-            $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-            $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-            $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-            $installmentpanel= InstallmentTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-            $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-            $statuslist= StatusLog::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $installmentpanel= InstallmentTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $statuslist= StatusLog::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
-            return view('crm.transaction.marine_slip_edit', compact(['user','interestinsured','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate']));
+        return view('crm.transaction.marine_slip_edit', compact(['user','interestinsured','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
     }
 
     public function updatemarineinsured(request $request, $id)

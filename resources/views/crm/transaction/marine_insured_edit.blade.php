@@ -4,9 +4,7 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-
-      <div class="container-fluid">
-         
+    <div class="container-fluid">
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
         
@@ -306,8 +304,6 @@
                 </div>
             @endforeach
         </form>
-
-            
 
     </div>
 </div>

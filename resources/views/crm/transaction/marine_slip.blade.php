@@ -2,10 +2,10 @@
 
 @section('content')
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
 
-      <div class="container-fluid">
+    <div class="container-fluid">
          
         {{-- NOTE Show All Errors Here --}}
         @include('crm.layouts.error')
@@ -162,8 +162,6 @@
                                     </div>
                                 </div>
 
-                                
-
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -182,56 +180,57 @@
                                 </div>
                                 
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-            <div class="modal fade" id="ModalAddShip" tabindex="-1" user="dialog" aria-hidden="true">
-                <div class="modal-dialog" user="document">
-                    <div class="modal-content bg-light-gray">
-                    <div class="modal-header bg-gray">
-                        <h5 class="modal-title">{{__('Ship Detail')}}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form id="form-addship" >
-                        @csrf
-                        <div class="modal-body">
-                                <div class="col-md-12 col-md-12">
-                                    <div class="form-group">
-                                        
-                                        <label for="">{{__('Ship Code')}}</label><br>
-                                        <select name="insshipcode" id="shipcodetxt" class="form-control form-control-sm e1">
-                                            <option selected disabled>{{__('Select Ship Code')}}</option>
-                                            @foreach($mlu as $mrnlu)
-                                                <option value="{{  $mrnlu->code }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
-        
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            <div class="row">
-                                <div class="col-md-12 col-md-12">
-                                    <div class="form-group">
-                                    <label for="">{{__('Ship Name')}}</label>
-                                    <input type="text" name="insshipname" id="shipnametxt" class="form-control" value="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-            
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-info" id="addship-btn">Add Ship</button>
-                        </div>
-                    </form>
                     </div>
                 </div>
             </div>
+        </form>
+
+        <div class="modal fade" id="ModalAddShip" tabindex="-1" user="dialog" aria-hidden="true">
+            <div class="modal-dialog" user="document">
+                <div class="modal-content bg-light-gray">
+                <div class="modal-header bg-gray">
+                    <h5 class="modal-title">{{__('Ship Detail')}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="form-addship" >
+                    @csrf
+                    <div class="modal-body">
+                            <div class="col-md-12 col-md-12">
+                                <div class="form-group">
+                                    
+                                    <label for="">{{__('Ship Code')}}</label><br>
+                                    <select name="insshipcode" id="shipcodetxt" class="form-control form-control-sm e1">
+                                        <option selected disabled>{{__('Select Ship Code')}}</option>
+                                        @foreach($mlu as $mrnlu)
+                                            <option value="{{  $mrnlu->code }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
+    
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-md-12 col-md-12">
+                                <div class="form-group">
+                                <label for="">{{__('Ship Name')}}</label>
+                                <input type="text" name="insshipname" id="shipnametxt" class="form-control" value="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                        <button type="submit" class="btn btn-info" id="addship-btn">Add Ship</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
 
         <div class="card ">
+
             <div class="card-header bg-gray">
                 {{__('Slip Detail')}}
             </div>

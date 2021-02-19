@@ -62,14 +62,16 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     // SECTION Marine Slip Group Routes
     Route::get('/marine-slip', [TransactionController::class, 'indexmarineslip']);
     Route::get('/marine-index', [TransactionController::class, 'indexmarine']);
+    Route::get('/marine-endorsement', [TransactionController::class, 'indexmarineendorsement']);
     Route::get('/marine-slip/{id}', [TransactionController::class, 'showslipdetails']);
     Route::get('/marine-slip/edit/{id}', [TransactionController::class, 'editmarineslip']);
-    Route::post('/marine-slip/update/{id}', [TransactionController::class, 'updatemarineslip']);
     Route::get('/marine-insured/{id}', [TransactionController::class, 'showinsureddetails']);
     Route::get('/marine-insured/edit/{id}', [TransactionController::class, 'editmarineinsured']);
     Route::post('marine-insured/update/{id}', [TransactionController::class, 'updatemarineinsured']);
+    Route::post('/marine-slip/update/{id}', [TransactionController::class, 'updatemarineslip']);
     Route::post('/marine-insured/store', [TransactionController::class, 'storemarineinsured']);
     Route::post('/marine-slip/store', [TransactionController::class, 'storemarineslip']);
+    Route::post('/marine-endorsement', [TransactionController::class, 'storemarineendorsement']);
     Route::delete('/marine-insured/destroyinsured/{id}', [TransactionController::class, 'destroymarineinsured']);
     Route::delete('/marine-slip/destroyslip/{id}', [TransactionController::class, 'destroymarineslip']);
 

@@ -148,7 +148,7 @@ class FeSlipController extends Controller
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
-        $cob = COB::orderby('id','asc')->get();
+        $cob = COB::where('form','fe')->orderby('id','asc')->get();
         $koc = Koc::orderby('id','asc')->get();
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
@@ -286,8 +286,10 @@ class FeSlipController extends Controller
         $fe_ids = response()->json($insured->modelKeys());
         
         $insureddata=Insured::find($idm);
+        // dd($insureddata->number);
         $code_ms=$insureddata->number;
-        $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
+        $slipdata=SlipTable::where('number',$insureddata->number)->first();
+        // dd($slipdata);
         $code_sl=$slipdata->number;
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
