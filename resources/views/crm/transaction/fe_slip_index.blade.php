@@ -64,23 +64,23 @@
                                 </a>
                                 <span>
                                 
-                                @can('update-felookup', User::class)
+                                {{-- @can('update-felookup', User::class) --}}
                                 <a class="text-primary mr-3" href="{{ url('transaction-data/detailfeslip', $insureddata->id) }}">
                                   <i class="fas fa-file"></i>
                                 </a>
                                 {{-- {!! link_to('transaction-data/detailfeslip/'.@$insureddata->id,'Detail Data',['class'=>'btn btn-primary']) !!} --}}
-                                @endcan  
+                                {{-- @endcan   --}}
 
-                                @can('update-felookup', User::class)
+                                {{-- @can('update-felookup', User::class) --}}
                                 <a class="text-primary mr-3" href="{{ url('transaction-data/updatefeslip', $insureddata->id) }}">
                                   <i class="fas fa-edit"></i>
                                 </a>
                                 {{-- {!! link_to('transaction-data/updatefeslip/'.@$insureddata->id,'Edit Data',['class'=>'btn btn-primary']) !!} --}}
-                                @endcan  
+                                {{-- @endcan   --}}
 
                                   
 
-                                @can('delete-felookup', User::class)
+                                {{-- @can('delete-felookup', User::class) --}}
 
                                     <span id="delbtn{{@$insureddata->id}}"></span>
                                 
@@ -90,7 +90,7 @@
                                         @method('DELETE')
                                         @csrf
                                     </form>
-                                    @endcan  
+                                    {{-- @endcan   --}}
                                 </span>
                               </td>
 
