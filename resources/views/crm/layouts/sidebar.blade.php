@@ -809,7 +809,152 @@
                                 </ul>
                             </li>
 
-                            
+                            @if(
+                                @$route_active == 'Financial Lines - Slip Entry' 
+                                || @$route_active == 'Financial Lines - Index'  
+                                )
+                                    @php
+                                    $fld_dd = 'active';
+                                    $fld_menu_open = 'menu-open';
+                                    @endphp
+                            @else
+                                @php
+                                $fld_menu_open = 'menu-close';
+                                @endphp
+                            @endif
+                            <li class="nav-item has-treeview {{ @$fld_menu_open }}">
+                                <a href="#" class="nav-link {{@$fld_dd}}">
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">
+                                        {{__('FINANCIAL LINES DATA')}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                        @if($route_active == 'Financial Lines - Index')
+                                        @php
+                                            $flform = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/fl-slipindex')}}" class="nav-link {{@$flform}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('FINANCIAL LINES -')}} <br> {{__('INDEX')}}</p>
+                                            </a>
+                                        </li>
+            
+                                        @if($route_active == 'Financial Lines - Slip Entry')
+                                        @php
+                                            $fleform = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/fl-slip')}}" class="nav-link {{@$fleform}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('FINANCIAL LINES -')}} <br> {{__('SLIP ENTRY')}}</p>
+                                            </a>
+                                        </li>
+                                </ul>
+                            </li>
+
+                            @if(
+                                @$route_active == 'HE & Motor - Slip Entry' 
+                                || @$route_active == 'HE & Motor - Index'  
+                                )
+                                    @php
+                                    $hem_dd = 'active';
+                                    $hem_menu_open = 'menu-open';
+                                    @endphp
+                            @else
+                                @php
+                                $hem_menu_open = 'menu-close';
+                                @endphp
+                            @endif
+                            <li class="nav-item has-treeview {{ @$hem_menu_open }}">
+                                <a href="#" class="nav-link {{@$hem_dd}}">
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">
+                                        {{__('HE & MOTOR DATA')}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+
+                                <ul class="nav nav-treeview">
+
+                                    @if($route_active == 'HE & Motor - Index')
+                                    @php
+                                        $hem_form = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('/transaction-data/hem-slipindex')}}" class="nav-link {{@$hem_form}}">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                            <p style="font-size: 80%;margin-left:2%;">{{__('HE & MOTOR - SLIP INDEX')}}</p>
+                                        </a>
+                                    </li>
+
+                                    @if($route_active == 'HE & Motor - Slip Entry')
+                                    @php
+                                        $heme_form = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('/transaction-data/hem-slip')}}" class="nav-link {{@$heme_form}}">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                            <p style="font-size: 80%;margin-left:2%;">{{__('HE & MOTOR - SLIP ENTRY')}}</p>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+                            @if(
+                                @$route_active == 'Hole In One - Slip Entry' 
+                                || @$route_active == 'Hole In One - Index'  
+                                )
+                                    @php
+                                    $hio_dd = 'active';
+                                    $hio_menu_open = 'menu-open';
+                                    @endphp
+                            @else
+                                @php
+                                $hio_menu_open = 'menu-close';
+                                @endphp
+                            @endif
+                            <li class="nav-item has-treeview {{ @$hio_menu_open }}">
+                                <a href="#" class="nav-link {{@$hio_dd}}">
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">
+                                        {{__('HOLE IN ONE DATA')}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                        @if($route_active == 'Hole In One - Index')
+                                        @php
+                                            $hio_idx = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/hio-index')}}" class="nav-link {{@$hio_idx}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('HOLE IN ONE - INDEX')}}</p>
+                                            </a>
+                                        </li>
+
+                                        @if($route_active == 'Hole In One - Slip Entry')
+                                        @php
+                                            $hio_form = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/hio-slip')}}" class="nav-link {{@$hio_form}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('HOLE IN ONE - SLIP ENTRY')}}</p>
+                                            </a>
+                                        </li>
+                                </ul>
+                            </li>
 
                         </ul>
                     </li>
@@ -1423,42 +1568,42 @@
                                 @endphp
                             @endif
                             <li class="nav-item has-treeview {{ @$hem_menu_open }}">
-                            <a href="#" class="nav-link {{@$hem_dd}}">
-                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                <p style="font-size: 90%;margin-left:2%;">
-                                    {{__('HE & MOTOR DATA')}}
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
+                                <a href="#" class="nav-link {{@$hem_dd}}">
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">
+                                        {{__('HE & MOTOR DATA')}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
 
-                            <ul class="nav nav-treeview">
+                                <ul class="nav nav-treeview">
 
-                                @if($route_active == 'HE & Motor - Index')
-                                @php
-                                    $hem_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/transaction-data/hem-slipindex')}}" class="nav-link {{@$hem_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                        <p style="font-size: 80%;margin-left:2%;">{{__('HE & MOTOR - SLIP INDEX')}}</p>
-                                    </a>
-                                </li>
+                                    @if($route_active == 'HE & Motor - Index')
+                                    @php
+                                        $hem_form = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('/transaction-data/hem-slipindex')}}" class="nav-link {{@$hem_form}}">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                            <p style="font-size: 80%;margin-left:2%;">{{__('HE & MOTOR - SLIP INDEX')}}</p>
+                                        </a>
+                                    </li>
 
-                                @if($route_active == 'HE & Motor - Slip Entry')
-                                @php
-                                    $heme_form = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('/transaction-data/hem-slip')}}" class="nav-link {{@$heme_form}}">
-                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                        <p style="font-size: 80%;margin-left:2%;">{{__('HE & MOTOR - SLIP ENTRY')}}</p>
-                                    </a>
-                                </li>
+                                    @if($route_active == 'HE & Motor - Slip Entry')
+                                    @php
+                                        $heme_form = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('/transaction-data/hem-slip')}}" class="nav-link {{@$heme_form}}">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                            <p style="font-size: 80%;margin-left:2%;">{{__('HE & MOTOR - SLIP ENTRY')}}</p>
+                                        </a>
+                                    </li>
 
-                            </ul>
-                                </li>
+                                </ul>
+                            </li>
 
                             @if(
                                 @$route_active == 'Hole In One - Slip Entry' 
