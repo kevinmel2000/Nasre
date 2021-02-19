@@ -16,7 +16,7 @@ class FloodZoneController extends Controller
     public function index(Request $request)
     {
          $user = Auth::user();
-         $route_active = 'Flood Zone Data Master';   
+         $route_active = 'Flood Zone Master';   
 
          $search = @$request->input('search');
 

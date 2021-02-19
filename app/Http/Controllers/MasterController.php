@@ -38,7 +38,7 @@ class MasterController extends Controller
     public function indexcountry(Request $request)
     {
         $user = Auth::user();
-        $route_active = 'Country Data Master';
+        $route_active = 'Country Master';
         $search = @$request->input('search');
         
 
@@ -63,7 +63,7 @@ class MasterController extends Controller
 
     public function indexcob(Request $request)
     {
-        $route_active = 'COB Data Master';
+        $route_active = 'COB Master';
         $user = Auth::user();
         $search = @$request->input('search');
         $mydate = date("Y").date("m").date("d");
@@ -123,7 +123,7 @@ class MasterController extends Controller
 
     public function indexoccupation(Request $request)
     {
-        $route_active = 'Occupation Data Master';
+        $route_active = 'Occupation Master';
         $user = Auth::user();
         $search = @$request->input('search');
         $mydate = date("Y").date("m").date("d");
@@ -185,7 +185,7 @@ class MasterController extends Controller
 
     public function indexcurrency(Request $request)
     {
-        $route_active = 'Currency Data Master';
+        $route_active = 'Currency Master';
         $user = Auth::user();
         $search = @$request->input('search');
 
@@ -210,7 +210,7 @@ class MasterController extends Controller
 
     public function indexexchange(Request $request)
     {
-        $route_active = 'Currency Exchange Data Master';
+        $route_active = 'Currency Exchange Master';
         $user = Auth::user();
         $search = @$request->input('search');
 
@@ -238,7 +238,7 @@ class MasterController extends Controller
     public function indexshiptype(Request $request)
     {
         $user = Auth::user();
-        $route_active = 'Ship Type Data Master';
+        $route_active = 'Ship Type Master';
         $search = @$request->input('search');
         // $mydate = date("Y").date("m").date("d");
 
@@ -279,7 +279,7 @@ class MasterController extends Controller
     public function indexclassification(Request $request)
     {
         $user = Auth::user();
-        $route_active = 'Classification Data Master';
+        $route_active = 'Classification Master';
         $search = @$request->input('search');
         // $mydate = date("Y").date("m").date("d");
         // dd($country);
@@ -321,7 +321,7 @@ class MasterController extends Controller
     public function indexconstruction(Request $request)
     {
         $user = Auth::user();
-        $route_active = 'Construction Data Master';
+        $route_active = 'Construction Master';
         $search = @$request->input('search');
         // $mydate = date("Y").date("m").date("d");
 
@@ -411,7 +411,7 @@ class MasterController extends Controller
     public function indexpropertytype(Request $request)
     {
         $user = Auth::user();
-        $route_active = 'Property Type Data Master';
+        $route_active = 'Property Type Master';
         $search = @$request->input('search');
         $mydate = date("Y").date("m").date("d");
 
@@ -452,7 +452,7 @@ class MasterController extends Controller
     public function indexconditionneeded(Request $request)
     {
         $user = Auth::user();
-        $route_active = 'Condition Needed Data Master';
+        $route_active = 'Condition Needed Master';
         $search = @$request->input('search');
         $mydate = date("Y").date("m").date("d");
 
@@ -496,7 +496,7 @@ class MasterController extends Controller
     public function indexcompanytype(Request $request)
     {
         $user = Auth::user();
-        $route_active = 'Company Type Data Master';
+        $route_active = 'Company Type Master';
         $search = @$request->input('search');
         $mydate = date("Y").date("m").date("d");
 
@@ -537,7 +537,7 @@ class MasterController extends Controller
     public function indexinterestinsured(Request $request)
     {
         $user = Auth::user();
-        $route_active = 'Interest Insured Data Master';
+        $route_active = 'Interest Insured Master';
         $search = @$request->input('search');
         // $mydate = date("Y").date("m").date("d");
 
@@ -580,7 +580,7 @@ class MasterController extends Controller
     public function indexdeductibletype(Request $request)
     {
         $user = Auth::user();
-        $route_active = 'Deductible Type Data Master';
+        $route_active = 'Deductible Type Master';
         $search = @$request->input('search');
         // $mydate = date("Y").date("m").date("d");
 
@@ -622,7 +622,7 @@ class MasterController extends Controller
     public function indexextendedcoverage(Request $request)
     {
         $user = Auth::user();
-        $route_active = 'Extend Coverage Data Master';
+        $route_active = 'Extend Coverage Master';
         $search = @$request->input('search');
         // $mydate = date("Y").date("m").date("d");
 
@@ -665,7 +665,7 @@ class MasterController extends Controller
     public function indexshipport(Request $request)
     {
         $user = Auth::user();
-        $route_active = 'Ship Port Data Master';
+        $route_active = 'Ship Port Master';
         $search = @$request->input('search');
         // $mydate = date("Y").date("m").date("d");
 
@@ -709,7 +709,7 @@ class MasterController extends Controller
     public function indexrouteform(Request $request)
     {
         $user = Auth::user();
-        $route_active = 'Route Form Data Master';
+        $route_active = 'Route Form Master';
         $search = @$request->input('search');
         // $mydate = date("Y").date("m").date("d");
 

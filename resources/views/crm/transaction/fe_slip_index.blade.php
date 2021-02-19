@@ -90,7 +90,7 @@
                                         @method('DELETE')
                                         @csrf
                                     </form>
-                                    {{-- @endcan   --}}
+                                    @endcan  
                                 </span>
                               </td>
 

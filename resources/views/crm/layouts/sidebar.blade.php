@@ -736,34 +736,34 @@
                 
                 @if(Auth::user()->name == "Andi" )
                 @if(
-                    @$route_active == 'Country Data Master' 
-                    || @$route_active == 'State Data Master' 
-                    || @$route_active == 'City Data Master' 
-                    || @$route_active == 'Currency Data Master' 
-                    || @$route_active == 'Currency Exchange Data Master' 
+                    @$route_active == 'Country Master' 
+                    || @$route_active == 'State Master' 
+                    || @$route_active == 'City  Master' 
+                    || @$route_active == 'Currency  Master' 
+                    || @$route_active == 'Currency Exchange  Master' 
                     || @$route_active == 'Fire & Engineering Lookup Location' 
                     || @$route_active == 'Marine - Lookup Ship' 
                     || @$route_active == 'Golf Field Hole' 
-                    || @$route_active == 'KOC Data Master' 
+                    || @$route_active == 'KOC Master' 
                     || @$route_active == 'Ceding / Broker' 
-                    || @$route_active == 'COB Data Master' 
-                    || @$route_active == 'Occupation Data Master' 
+                    || @$route_active == 'COB Master' 
+                    || @$route_active == 'Occupation Master' 
                     || @$route_active == 'Earthquake Zone' 
-                    || @$route_active == 'Flood Zone Data Master' 
-                    || @$route_active == 'Country Data Master' 
-                    || @$route_active == 'State Data Master' 
-                    || @$route_active == 'City Data Master' 
-                    || @$route_active == 'Ship Type Data Master' 
-                    || @$route_active == 'Classification Data Master' 
-                    || @$route_active == 'Construction Data Master' 
-                    || @$route_active == 'Company Type Data Master' 
-                    || @$route_active == 'Property Type Data Master' 
-                    || @$route_active == 'Condition Needed Data Master' 
-                    || @$route_active == 'Interest Insured Data Master' 
-                    || @$route_active == 'Extend Coverage Data Master' 
-                    || @$route_active == 'Deductible Type Data Master' 
-                    || @$route_active == 'Ship Port Data Master' 
-                    || @$route_active == 'Route Form Data Master' 
+                    || @$route_active == 'Flood Zone Master' 
+                    || @$route_active == 'Country Master' 
+                    || @$route_active == 'State Master' 
+                    || @$route_active == 'City Master' 
+                    || @$route_active == 'Ship Type Master' 
+                    || @$route_active == 'Classification Master' 
+                    || @$route_active == 'Construction Master' 
+                    || @$route_active == 'Company Type Master' 
+                    || @$route_active == 'Property Type Master' 
+                    || @$route_active == 'Condition Needed Master' 
+                    || @$route_active == 'Interest Insured Master' 
+                    || @$route_active == 'Extend Coverage Master' 
+                    || @$route_active == 'Deductible Type Master' 
+                    || @$route_active == 'Ship Port Master' 
+                    || @$route_active == 'Route Form Master' 
                 )
                     @php
                     $master_dd = 'active';
@@ -778,7 +778,7 @@
                     <a href="#" class="nav-link {{@$master_dd}}">
                         <i class="nav-icon fas fa-laptop"></i>
                         <p>
-                            {{__('MASTER DATA')}}
+                            {{__('MASTER')}}
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -800,7 +800,7 @@
                         {{-- @endcan --}}
 
                         {{-- @can('viewany-condition_needed', User::class) --}}
-                        @if($route_active == 'Extend Coverage Data Master')
+                        @if($route_active == 'Extend Coverage Master')
                         @php
                             $ec_form = 'active';
                         @endphp
@@ -816,7 +816,7 @@
                         
 
                         {{-- @can('viewany-fz', User::class) --}}
-                            @if($route_active == 'Flood Zone Data Master')
+                            @if($route_active == 'Flood Zone Master')
                             @php
                                 $flood_form = 'active';
                             @endphp
@@ -830,7 +830,7 @@
                         {{-- @endcan --}}
 
                         {{-- @can('viewany-condition_needed', User::class) --}}
-                        @if($route_active == 'Interest Insured Data Master')
+                        @if($route_active == 'Interest Insured Master')
                         @php
                             $ii_form = 'active';
                         @endphp
@@ -844,9 +844,9 @@
                         {{-- @endcan --}}
 
                         @if(
-                            @$route_active == 'Country Data Master' 
-                            || @$route_active == 'State Data Master' 
-                            || @$route_active == 'City Data Master' 
+                            @$route_active == 'Country Master' 
+                            || @$route_active == 'State Master' 
+                            || @$route_active == 'City Master' 
                             )
                                 @php
                                 $location_dd = 'active';
@@ -862,7 +862,7 @@
                                 
                                     <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                     <p style="font-size: 90%;margin-left:2%;" >
-                                        {{__('LOCATION DATA')}}
+                                        {{__('LOCATION')}}
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 
@@ -871,7 +871,7 @@
                             <ul class="nav nav-treeview">
 
                                 {{-- @can('viewany-country', User::class) --}}
-                                    @if($route_active == 'Country Data Master')
+                                    @if($route_active == 'Country Master')
                                     @php
                                         $countryform = 'active';
                                     @endphp
@@ -885,7 +885,7 @@
                                 {{-- @endcan --}}
                                     
                                 {{-- @can('viewany-state', User::class) --}}
-                                    @if($route_active == 'State Data Master')
+                                    @if($route_active == 'State Master')
                                     @php
                                         $state_form = 'active';
                                     @endphp
@@ -899,7 +899,7 @@
                                 {{-- @endcan --}}
     
                                 {{-- @can('viewany-city', User::class) --}}
-                                    @if($route_active == 'City Data Master')
+                                    @if($route_active == 'City Master')
                                     @php
                                         $city_form = 'active';
                                     @endphp
@@ -932,7 +932,7 @@
                         
 
                             {{-- @can('viewany-property_type', User::class) --}}
-                                @if($route_active == 'Property Type Data Master')
+                                @if($route_active == 'Property Type Master')
                                 @php
                                     $property_form = 'active';
                                 @endphp
@@ -965,7 +965,7 @@
                         <a href="#" class="nav-link {{@$trF_dd}}">
                             <i class="nav-icon fas fa-industry"></i>
                             <p>
-                                {{__('TRANSACTION DATA')}}
+                                {{__('TRANSACTION')}}
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -991,7 +991,7 @@
                                 <a href="#" class="nav-link {{@$fed_dd}}">
                                     <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                     <p style="font-size: 90%;margin-left:2%;">
-                                        {{__('FIRE & ENGINEERING DATA')}}
+                                        {{__('FIRE & ENGINEERING')}}
                                         <i class="right fas fa-angle-left" ></i>
                                     </p>
                                 </a>
@@ -1029,34 +1029,34 @@
                 @else
                     @can('viewany-country', User::class)
                         @if(
-                            @$route_active == 'Country Data Master' 
-                            || @$route_active == 'State Data Master' 
-                            || @$route_active == 'City Data Master' 
-                            || @$route_active == 'Currency Data Master' 
-                            || @$route_active == 'Currency Exchange Data Master' 
+                            @$route_active == 'Country Master' 
+                            || @$route_active == 'State Master' 
+                            || @$route_active == 'City Master' 
+                            || @$route_active == 'Currency Master' 
+                            || @$route_active == 'Currency Exchange Master' 
                             || @$route_active == 'Fire & Engineering Lookup Location' 
                             || @$route_active == 'Marine - Lookup Ship' 
                             || @$route_active == 'Golf Field Hole' 
-                            || @$route_active == 'KOC Data Master' 
+                            || @$route_active == 'KOC Master' 
                             || @$route_active == 'Ceding / Broker' 
-                            || @$route_active == 'COB Data Master' 
-                            || @$route_active == 'Occupation Data Master' 
+                            || @$route_active == 'COB Master' 
+                            || @$route_active == 'Occupation Master' 
                             || @$route_active == 'Earthquake Zone' 
-                            || @$route_active == 'Flood Zone Data Master' 
-                            || @$route_active == 'Country Data Master' 
-                            || @$route_active == 'State Data Master' 
-                            || @$route_active == 'City Data Master' 
-                            || @$route_active == 'Ship Type Data Master' 
-                            || @$route_active == 'Classification Data Master' 
-                            || @$route_active == 'Construction Data Master' 
-                            || @$route_active == 'Company Type Data Master' 
-                            || @$route_active == 'Property Type Data Master' 
-                            || @$route_active == 'Condition Needed Data Master' 
-                            || @$route_active == 'Interest Insured Data Master' 
-                            || @$route_active == 'Extend Coverage Data Master' 
-                            || @$route_active == 'Deductible Type Data Master' 
-                            || @$route_active == 'Ship Port Data Master' 
-                            || @$route_active == 'Route Form Data Master' 
+                            || @$route_active == 'Flood Zone Master' 
+                            || @$route_active == 'Country Master' 
+                            || @$route_active == 'State Master' 
+                            || @$route_active == 'City Master' 
+                            || @$route_active == 'Ship Type Master' 
+                            || @$route_active == 'Classification Master' 
+                            || @$route_active == 'Construction Master' 
+                            || @$route_active == 'Company Type Master' 
+                            || @$route_active == 'Property Type Master' 
+                            || @$route_active == 'Condition Needed Master' 
+                            || @$route_active == 'Interest Insured Master' 
+                            || @$route_active == 'Extend Coverage Master' 
+                            || @$route_active == 'Deductible Type Master' 
+                            || @$route_active == 'Ship Port Master' 
+                            || @$route_active == 'Route Form Master' 
                         )
                             @php
                             $master_dd = 'active';
@@ -1071,7 +1071,7 @@
                             <a href="#" class="nav-link {{@$master_dd}}">
                                 <i class="nav-icon fas fa-laptop"></i>
                                 <p>
-                                    {{__('MASTER DATA')}}
+                                    {{__('MASTER')}}
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -1093,7 +1093,7 @@
                                 @endcan
 
                                 {{-- @can('viewany-cob', User::class) --}}
-                                @if($route_active == 'COB Data Master')
+                                @if($route_active == 'COB Master')
                                 @php
                                     $cob_form = 'active';
                                 @endphp
@@ -1107,7 +1107,7 @@
                                 {{-- @endcan --}}
 
                                 {{-- @can('viewany-cedingbroker', User::class) --}}
-                                @if($route_active == 'Company Type Data Master')
+                                @if($route_active == 'Company Type Master')
                                 @php
                                     $ctform = 'active';
                                 @endphp
@@ -1121,7 +1121,7 @@
                                 {{-- @endcan --}}
 
                                 {{-- @can('viewany-condition_needed', User::class) --}}
-                                @if($route_active == 'Condition Needed Data Master')
+                                @if($route_active == 'Condition Needed Master')
                                 @php
                                     $cdn_form = 'active';
                                 @endphp
@@ -1135,7 +1135,7 @@
                                 {{-- @endcan --}}
 
                                 @can('viewany-currency', User::class)
-                                    @if($route_active == 'Currency Data Master')
+                                    @if($route_active == 'Currency Master')
                                     @php
                                         $crc_form = 'active';
                                     @endphp
@@ -1149,7 +1149,7 @@
                                 @endcan
 
                                 @can('viewany-exchange', User::class)
-                                    @if($route_active == 'Currency Exchange Data Master')
+                                    @if($route_active == 'Currency Exchange Master')
                                     @php
                                         $exchange_form = 'active';
                                     @endphp
@@ -1163,7 +1163,7 @@
                                 @endcan
 
                                 {{-- @can('viewany-condition_needed', User::class) --}}
-                                @if($route_active == 'Deductible Type Data Master')
+                                @if($route_active == 'Deductible Type Master')
                                 @php
                                     $dt_form = 'active';
                                 @endphp
@@ -1191,7 +1191,7 @@
                                 {{-- @endcan --}}
 
                                 {{-- @can('viewany-condition_needed', User::class) --}}
-                                @if($route_active == 'Extend Coverage Data Master')
+                                @if($route_active == 'Extend Coverage Master')
                                 @php
                                     $ec_form = 'active';
                                 @endphp
@@ -1207,7 +1207,7 @@
                                 
 
                                 @can('viewany-fz', User::class)
-                                    @if($route_active == 'Flood Zone Data Master')
+                                    @if($route_active == 'Flood Zone Master')
                                     @php
                                         $flood_form = 'active';
                                     @endphp
@@ -1235,7 +1235,7 @@
                                 @endcan
 
                                 {{-- @can('viewany-condition_needed', User::class) --}}
-                                @if($route_active == 'Interest Insured Data Master')
+                                @if($route_active == 'Interest Insured Master')
                                 @php
                                     $ii_form = 'active';
                                 @endphp
@@ -1249,7 +1249,7 @@
                                 {{-- @endcan --}}
 
                                 @can('viewany-koc', User::class)
-                                @if($route_active == 'KOC Data Master')
+                                @if($route_active == 'KOC Master')
                                 @php
                                     $koc_form = 'active';
                                 @endphp
@@ -1263,9 +1263,9 @@
                                 @endcan
 
                                 @if(
-                                    @$route_active == 'Country Data Master' 
-                                    || @$route_active == 'State Data Master' 
-                                    || @$route_active == 'City Data Master' 
+                                    @$route_active == 'Country Master' 
+                                    || @$route_active == 'State Master' 
+                                    || @$route_active == 'City Master' 
                                     )
                                         @php
                                         $location_dd = 'active';
@@ -1281,7 +1281,7 @@
                                         
                                             <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                             <p style="font-size: 90%;margin-left:2%;" >
-                                                {{__('LOCATION DATA')}}
+                                                {{__('LOCATION')}}
                                                 <i class="right fas fa-angle-left"></i>
                                             </p>
                                         
@@ -1290,7 +1290,7 @@
                                     <ul class="nav nav-treeview">
 
                                         @can('viewany-country', User::class)
-                                            @if($route_active == 'Country Data Master')
+                                            @if($route_active == 'Country Master')
                                             @php
                                                 $countryform = 'active';
                                             @endphp
@@ -1304,7 +1304,7 @@
                                         @endcan
                                             
                                         @can('viewany-state', User::class)
-                                            @if($route_active == 'State Data Master')
+                                            @if($route_active == 'State Master')
                                             @php
                                                 $state_form = 'active';
                                             @endphp
@@ -1318,7 +1318,7 @@
                                         @endcan
             
                                         @can('viewany-city', User::class)
-                                            @if($route_active == 'City Data Master')
+                                            @if($route_active == 'City Master')
                                             @php
                                                 $city_form = 'active';
                                             @endphp
@@ -1363,9 +1363,9 @@
                                 @endcan
 
                                     @if(
-                                        @$route_active == 'Ship Type Data Master' 
-                                        || @$route_active == 'Classification Data Master' 
-                                        || @$route_active == 'Construction Data Master' 
+                                        @$route_active == 'Ship Type Master' 
+                                        || @$route_active == 'Classification Master' 
+                                        || @$route_active == 'Construction Master' 
                                         )
                                             @php
                                             $marine_dd = 'active';
@@ -1380,7 +1380,7 @@
                                         <a href="#" class="nav-link {{@$marine_dd}}">
                                             <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                             <p style="font-size: 90%;margin-left:2%;">
-                                                {{__('MARINE MASTER DATA')}}
+                                                {{__('MARINE MASTER')}}
                                                 <i class="right fas fa-angle-left" ></i>
                                             </p>
                                         </a>
@@ -1388,7 +1388,7 @@
                                         <ul class="nav nav-treeview">
         
                                             {{-- @can('viewany-shiptype', User::class) --}}
-                                                @if($route_active == 'Ship Type Data Master')
+                                                @if($route_active == 'Ship Type Master')
                                                 @php
                                                     $shiptypeform = 'active';
                                                 @endphp
@@ -1402,7 +1402,7 @@
                                             {{-- @endcan --}}
                                                 
                                             {{-- @can('viewany-classification', User::class) --}}
-                                                @if($route_active == 'Classification Data Master')
+                                                @if($route_active == 'Classification Master')
                                                 @php
                                                     $classification_form = 'active';
                                                 @endphp
@@ -1416,7 +1416,7 @@
                                             {{-- @endcan --}}
                 
                                             {{-- @can('viewany-construction', User::class) --}}
-                                                @if($route_active == 'Construction Data Master')
+                                                @if($route_active == 'Construction Master')
                                                 @php
                                                     $construction_form = 'active';
                                                 @endphp
@@ -1432,7 +1432,7 @@
                                     </li>
 
                                     {{-- @can('viewany-occupation', User::class) --}}
-                                        @if($route_active == 'Occupation Data Master')
+                                        @if($route_active == 'Occupation Master')
                                         @php
                                             $ocp_form = 'active';
                                         @endphp
@@ -1446,7 +1446,7 @@
                                     {{-- @endcan --}}
 
                                     {{-- @can('viewany-property_type', User::class) --}}
-                                        @if($route_active == 'Property Type Data Master')
+                                        @if($route_active == 'Property Type Master')
                                         @php
                                             $property_form = 'active';
                                         @endphp
@@ -1460,7 +1460,7 @@
                                     {{-- @endcan --}}
 
                                     {{-- @can('viewany-condition_needed', User::class) --}}
-                                    @if($route_active == 'Route Form Data Master')
+                                    @if($route_active == 'Route Form Master')
                                     @php
                                         $rf_form = 'active';
                                     @endphp
@@ -1474,7 +1474,7 @@
                                     {{-- @endcan --}}
 
                                     {{-- @can('viewany-condition_needed', User::class) --}}
-                                    @if($route_active == 'Ship Port Data Master')
+                                    @if($route_active == 'Ship Port Master')
                                     @php
                                         $sp_form = 'active';
                                     @endphp
@@ -1517,7 +1517,7 @@
                         <a href="#" class="nav-link {{@$trF_dd}}">
                             <i class="nav-icon fas fa-industry"></i>
                             <p>
-                                {{__('TRANSACTION DATA')}}
+                                {{__('TRANSACTION')}}
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -1543,7 +1543,7 @@
                                 <a href="#" class="nav-link {{@$fed_dd}}">
                                     <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                     <p style="font-size: 90%;margin-left:2%;">
-                                        {{__('FIRE & ENGINEERING DATA')}}
+                                        {{__('FIRE & ENGINEERING')}}
                                         <i class="right fas fa-angle-left" ></i>
                                     </p>
                                 </a>
@@ -1591,7 +1591,7 @@
                                 <a href="#" class="nav-link {{@$fld_dd}}">
                                     <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                     <p style="font-size: 90%;margin-left:2%;">
-                                        {{__('FINANCIAL LINES DATA')}}
+                                        {{__('FINANCIAL LINES')}}
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
@@ -1639,7 +1639,7 @@
                                 <a href="#" class="nav-link {{@$hem_dd}}">
                                     <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                     <p style="font-size: 90%;margin-left:2%;">
-                                        {{__('HE & MOTOR DATA')}}
+                                        {{__('HE & MOTOR')}}
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
@@ -1690,7 +1690,7 @@
                                 <a href="#" class="nav-link {{@$hio_dd}}">
                                     <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                     <p style="font-size: 90%;margin-left:2%;">
-                                        {{__('HOLE IN ONE DATA')}}
+                                        {{__('HOLE IN ONE')}}
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>

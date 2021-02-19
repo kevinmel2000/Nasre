@@ -706,7 +706,7 @@ class TransactionController extends Controller
                     'deductible_panel'=>$deductiblelist->toJson(),
                     'condition_needed'=>$conditionneededlist->toJson(),
                     'insurance_period_from'=>$request->slipipfrom,
-                    'insurance_perido_to'=>$request->slipipto,
+                    'insurance_period_to'=>$request->slipipto,
                     'reinsurance_period_from'=>$request->sliprpfrom,
                     'reinsurance_period_to'=>$request->sliprpto,
                     'proportional'=>$request->slipproportional,
