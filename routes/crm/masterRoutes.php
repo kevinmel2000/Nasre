@@ -25,95 +25,153 @@ Route::get('get-state-list','StateController@getState')->name('state.getall');
 Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
 
     // SECTION Country Group Routes
-    Route::get('/country', [MasterController::class, 'indexcountry'])->middleware(['can:view-country']);
-    Route::post('/country/store', [MasterController::class, 'storecountry'])->middleware(['can:create-country']);
-    Route::put('country/{country}', [MasterController::class, 'updatecountry'])->middleware(['can:update-country']);
-    Route::delete('/country/destroy/{country}', [MasterController::class, 'destroycountry'])->middleware(['can:delete-country']);
+    // Route::get('/country', [MasterController::class, 'indexcountry'])->middleware(['can:view-country']);
+    // Route::post('/country/store', [MasterController::class, 'storecountry'])->middleware(['can:create-country']);
+    // Route::put('country/{country}', [MasterController::class, 'updatecountry'])->middleware(['can:update-country']);
+    // Route::delete('/country/destroy/{country}', [MasterController::class, 'destroycountry'])->middleware(['can:delete-country']);
+    Route::get('/country', [MasterController::class, 'indexcountry']);
+    Route::post('/country/store', [MasterController::class, 'storecountry']);
+    Route::put('country/{country}', [MasterController::class, 'updatecountry']);
+    Route::delete('/country/destroy/{country}', [MasterController::class, 'destroycountry']);
 
     
     // SECTION COB Group Routes
-    Route::get('/cob', [MasterController::class, 'indexcob'])->middleware(['can:view-cob']);
-    Route::post('/cob/store', [MasterController::class, 'storecob'])->middleware(['can:create-cob']);
-    Route::put('cob/{cob}', [MasterController::class, 'updatecob'])->middleware(['can:update-cob']);
-    Route::delete('/cob/destroy/{cob}', [MasterController::class, 'destroycob'])->middleware(['can:delete-cob']);
-
+    // Route::get('/cob', [MasterController::class, 'indexcob'])->middleware(['can:view-cob']);
+    // Route::post('/cob/store', [MasterController::class, 'storecob'])->middleware(['can:create-cob']);
+    // Route::put('cob/{cob}', [MasterController::class, 'updatecob'])->middleware(['can:update-cob']);
+    // Route::delete('/cob/destroy/{cob}', [MasterController::class, 'destroycob'])->middleware(['can:delete-cob']);
+    Route::get('/cob', [MasterController::class, 'indexcob']);
+    Route::post('/cob/store', [MasterController::class, 'storecob']);
+    Route::put('cob/{cob}', [MasterController::class, 'updatecob']);
+    Route::delete('/cob/destroy/{cob}', [MasterController::class, 'destroycob']);
 
     // SECTION Occupation Routes
-    Route::get('/occupation', [MasterController::class, 'indexoccupation'])->middleware(['can:view-occupation']);
-    Route::post('/occupation/store', [MasterController::class, 'storeoccupation'])->middleware(['can:create-occupation']);
-    Route::put('occupation/{ocp}', [MasterController::class, 'updateoccupation'])->middleware(['can:update-occupation']);
-    Route::delete('/occupation/destroy/{ocp}', [MasterController::class, 'destroyoccupation'])->middleware(['can:delete-occupation']);
+    // Route::get('/occupation', [MasterController::class, 'indexoccupation'])->middleware(['can:view-occupation']);
+    // Route::post('/occupation/store', [MasterController::class, 'storeoccupation'])->middleware(['can:create-occupation']);
+    // Route::put('occupation/{ocp}', [MasterController::class, 'updateoccupation'])->middleware(['can:update-occupation']);
+    // Route::delete('/occupation/destroy/{ocp}', [MasterController::class, 'destroyoccupation'])->middleware(['can:delete-occupation']);
+    Route::get('/occupation', [MasterController::class, 'indexoccupation']);
+    Route::post('/occupation/store', [MasterController::class, 'storeoccupation']);
+    Route::put('occupation/{ocp}', [MasterController::class, 'updateoccupation']);
+    Route::delete('/occupation/destroy/{ocp}', [MasterController::class, 'destroyoccupation']);
 
 
     // SECTION currency Routes
-    Route::get('/currency', [MasterController::class, 'indexcurrency'])->middleware(['can:view-currency']);
-    Route::post('/currency/store', [MasterController::class, 'storecurrency'])->middleware(['can:create-currency']);
-    Route::put('currency/{crc}', [MasterController::class, 'updatecurrency'])->middleware(['can:update-currency']);
-    Route::delete('/currency/destroy/{crc}', [MasterController::class, 'destroycurrency'])->middleware(['can:delete-currency']);
+    // Route::get('/currency', [MasterController::class, 'indexcurrency'])->middleware(['can:view-currency']);
+    // Route::post('/currency/store', [MasterController::class, 'storecurrency'])->middleware(['can:create-currency']);
+    // Route::put('currency/{crc}', [MasterController::class, 'updatecurrency'])->middleware(['can:update-currency']);
+    // Route::delete('/currency/destroy/{crc}', [MasterController::class, 'destroycurrency'])->middleware(['can:delete-currency']);
+    Route::get('/currency', [MasterController::class, 'indexcurrency']);
+    Route::post('/currency/store', [MasterController::class, 'storecurrency']);
+    Route::put('currency/{crc}', [MasterController::class, 'updatecurrency']);
+    Route::delete('/currency/destroy/{crc}', [MasterController::class, 'destroycurrency']);
 
 
     // SECTION currency Exchange Routes
-    Route::get('/exchange', [MasterController::class, 'indexexchange'])->middleware(['can:view-exchange']);
-    Route::post('/exchange/store', [MasterController::class, 'storeexchange'])->middleware(['can:create-exchange']);
-    Route::put('exchange/{exc}', [MasterController::class, 'updateexchange'])->middleware(['can:update-exchange']);
-    Route::delete('/exchange/destroy/{exc}', [MasterController::class, 'destroyexchange'])->middleware(['can:delete-exchange']);
+    // Route::get('/exchange', [MasterController::class, 'indexexchange'])->middleware(['can:view-exchange']);
+    // Route::post('/exchange/store', [MasterController::class, 'storeexchange'])->middleware(['can:create-exchange']);
+    // Route::put('exchange/{exc}', [MasterController::class, 'updateexchange'])->middleware(['can:update-exchange']);
+    // Route::delete('/exchange/destroy/{exc}', [MasterController::class, 'destroyexchange'])->middleware(['can:delete-exchange']);
+    Route::get('/exchange', [MasterController::class, 'indexexchange']);
+    Route::post('/exchange/store', [MasterController::class, 'storeexchange']);
+    Route::put('exchange/{exc}', [MasterController::class, 'updateexchange']);
+    Route::delete('/exchange/destroy/{exc}', [MasterController::class, 'destroyexchange']);
 
 
     // SECTION FE Lookup Routes
-    Route::get('/felookuplocation', [FeLookupLocationController::class, 'index'])->middleware(['can:view-felookup']);
-    Route::post('/felookuplocation', [FeLookupLocationController::class, 'index'])->middleware(['can:view-felookup']);
-    Route::post('/felookuplocation/store', [FeLookupLocationController::class, 'store'])->middleware(['can:create-felookup']);
-    Route::put('/felookuplocation/update/{fl}', [FeLookupLocationController::class, 'update'])->middleware(['can:update-felookup']);
-    Route::delete('/felookuplocation/destroy/{fl}', [FeLookupLocationController::class, 'destroy'])->middleware(['can:delete-felookup']);
+    // Route::get('/felookuplocation', [FeLookupLocationController::class, 'index'])->middleware(['can:view-felookup']);
+    // Route::post('/felookuplocation', [FeLookupLocationController::class, 'index'])->middleware(['can:view-felookup']);
+    // Route::post('/felookuplocation/store', [FeLookupLocationController::class, 'store'])->middleware(['can:create-felookup']);
+    // Route::put('/felookuplocation/update/{fl}', [FeLookupLocationController::class, 'update'])->middleware(['can:update-felookup']);
+    // Route::delete('/felookuplocation/destroy/{fl}', [FeLookupLocationController::class, 'destroy'])->middleware(['can:delete-felookup']);
+    Route::get('/felookuplocation', [FeLookupLocationController::class, 'index']);
+    Route::post('/felookuplocation', [FeLookupLocationController::class, 'index']);
+    Route::post('/felookuplocation/store', [FeLookupLocationController::class, 'store']);
+    Route::put('/felookuplocation/update/{fl}', [FeLookupLocationController::class, 'update']);
+    Route::delete('/felookuplocation/destroy/{fl}', [FeLookupLocationController::class, 'destroy']);
 
 
     // SECTION KOC Routes
-    Route::get('/koc', [KocController::class, 'index'])->middleware(['can:view-koc']);
-    Route::post('/koc/store', [KocController::class, 'store'])->middleware(['can:create-koc']);
-    Route::put('/koc/update/{koc}', [KocController::class, 'update'])->middleware(['can:update-koc']);
-    Route::delete('/koc/destroy/{koc}', [KocController::class, 'destroy'])->middleware(['can:delete-koc']);
+    // Route::get('/koc', [KocController::class, 'index'])->middleware(['can:view-koc']);
+    // Route::post('/koc/store', [KocController::class, 'store'])->middleware(['can:create-koc']);
+    // Route::put('/koc/update/{koc}', [KocController::class, 'update'])->middleware(['can:update-koc']);
+    // Route::delete('/koc/destroy/{koc}', [KocController::class, 'destroy'])->middleware(['can:delete-koc']);
+    Route::get('/koc', [KocController::class, 'index']);
+    Route::post('/koc/store', [KocController::class, 'store']);
+    Route::put('/koc/update/{koc}', [KocController::class, 'update']);
+    Route::delete('/koc/destroy/{koc}', [KocController::class, 'destroy']);
 
 
     // SECTION City Routes
-    Route::get('/city',  [CityController::class, 'index'])->middleware(['can:view-city']);
-    Route::post('/city',  [CityController::class, 'index'])->middleware(['can:view-city']);
-    Route::post('/city/store', [CityController::class, 'store'])->middleware(['can:create-city']);
-    Route::put('/city/update/{city}', [CityController::class, 'update'])->middleware(['can:update-city']);
-    Route::delete('/city/destroy/{city}', [CityController::class, 'destroy'])->middleware(['can:delete-city']);
+    // Route::get('/city',  [CityController::class, 'index'])->middleware(['can:view-city']);
+    // Route::post('/city',  [CityController::class, 'index'])->middleware(['can:view-city']);
+    // Route::post('/city/store', [CityController::class, 'store'])->middleware(['can:create-city']);
+    // Route::put('/city/update/{city}', [CityController::class, 'update'])->middleware(['can:update-city']);
+    // Route::delete('/city/destroy/{city}', [CityController::class, 'destroy'])->middleware(['can:delete-city']);
+    Route::get('/city',  [CityController::class, 'index']);
+    Route::post('/city',  [CityController::class, 'index']);
+    Route::post('/city/store', [CityController::class, 'store']);
+    Route::put('/city/update/{city}', [CityController::class, 'update']);
+    Route::delete('/city/destroy/{city}', [CityController::class, 'destroy']);
 
     // SECTION State Routes
-    Route::get('/state',  [StateController::class, 'index'])->middleware(['can:view-state']);
-    Route::post('/state',  [StateController::class, 'index'])->middleware(['can:view-state']);
-    Route::post('/state/store', [StateController::class, 'store'])->middleware(['can:create-state']);
-    Route::put('/state/update/{state}', [StateController::class, 'update'])->middleware(['can:update-state']);
-    Route::delete('/state/destroy/{state}', [StateController::class, 'destroy'])->middleware(['can:delete-state']);
+    // Route::get('/state',  [StateController::class, 'index'])->middleware(['can:view-state']);
+    // Route::post('/state',  [StateController::class, 'index'])->middleware(['can:view-state']);
+    // Route::post('/state/store', [StateController::class, 'store'])->middleware(['can:create-state']);
+    // Route::put('/state/update/{state}', [StateController::class, 'update'])->middleware(['can:update-state']);
+    // Route::delete('/state/destroy/{state}', [StateController::class, 'destroy'])->middleware(['can:delete-state']);
+    Route::get('/state',  [StateController::class, 'index']);
+    Route::post('/state',  [StateController::class, 'index']);
+    Route::post('/state/store', [StateController::class, 'store']);
+    Route::put('/state/update/{state}', [StateController::class, 'update']);
+    Route::delete('/state/destroy/{state}', [StateController::class, 'destroy']);
 
     // SECTION Golf Hole Routes
-    Route::get('/golffieldhole', [GolfFieldHoleController::class, 'index'])->middleware(['can:view-gfh']);
-    Route::post('/golffieldhole/store', [GolfFieldHoleController::class, 'store'])->middleware(['can:create-gfh']);
-    Route::put('/golffieldhole/update/{gfh}', [GolfFieldHoleController::class, 'update'])->middleware(['can:update-gfh']);
-    Route::delete('/golffieldhole/destroy/{gfh}', [GolfFieldHoleController::class, 'destroy'])->middleware(['can:delete-gfh']);
+    // Route::get('/golffieldhole', [GolfFieldHoleController::class, 'index'])->middleware(['can:view-gfh']);
+    // Route::post('/golffieldhole/store', [GolfFieldHoleController::class, 'store'])->middleware(['can:create-gfh']);
+    // Route::put('/golffieldhole/update/{gfh}', [GolfFieldHoleController::class, 'update'])->middleware(['can:update-gfh']);
+    // Route::delete('/golffieldhole/destroy/{gfh}', [GolfFieldHoleController::class, 'destroy'])->middleware(['can:delete-gfh']);
+    Route::get('/golffieldhole', [GolfFieldHoleController::class, 'index']);
+    Route::post('/golffieldhole/store', [GolfFieldHoleController::class, 'store']);
+    Route::put('/golffieldhole/update/{gfh}', [GolfFieldHoleController::class, 'update']);
+    Route::delete('/golffieldhole/destroy/{gfh}', [GolfFieldHoleController::class, 'destroy']);
 
     // SECTION Ceding Broker Routes
-    Route::get('/cedingbroker', [CedingBrokerController::class, 'index'])->middleware(['can:view-cedingbroker']);
-    Route::post('/cedingbroker', [CedingBrokerController::class, 'index'])->middleware(['can:view-cedingbroker']);
-    Route::post('/cedingbroker/store', [CedingBrokerController::class, 'store'])->middleware(['can:create-cedingbroker']);
-    Route::put('/cedingbroker/update/{cb}', [CedingBrokerController::class, 'update'])->middleware(['can:update-cedingbroker']);
-    Route::delete('/cedingbroker/destroy/{cb}', [CedingBrokerController::class, 'destroy'])->middleware(['can:delete-cedingbroker']);
+    // Route::get('/cedingbroker', [CedingBrokerController::class, 'index'])->middleware(['can:view-cedingbroker']);
+    // Route::post('/cedingbroker', [CedingBrokerController::class, 'index'])->middleware(['can:view-cedingbroker']);
+    // Route::post('/cedingbroker/store', [CedingBrokerController::class, 'store'])->middleware(['can:create-cedingbroker']);
+    // Route::put('/cedingbroker/update/{cb}', [CedingBrokerController::class, 'update'])->middleware(['can:update-cedingbroker']);
+    // Route::delete('/cedingbroker/destroy/{cb}', [CedingBrokerController::class, 'destroy'])->middleware(['can:delete-cedingbroker']);
+    Route::get('/cedingbroker', [CedingBrokerController::class, 'index']);
+    Route::post('/cedingbroker', [CedingBrokerController::class, 'index']);
+    Route::post('/cedingbroker/store', [CedingBrokerController::class, 'store']);
+    Route::put('/cedingbroker/update/{cb}', [CedingBrokerController::class, 'update']);
+    Route::delete('/cedingbroker/destroy/{cb}', [CedingBrokerController::class, 'destroy']);
 
     // SECTION Earthquake Zone Routes
-    Route::get('/earthquakezone', [EarthQuakeZoneController::class, 'index'])->middleware(['can:view-eqz']);
-    Route::post('/earthquakezone', [EarthQuakeZoneController::class, 'index'])->middleware(['can:view-eqz']);
-    Route::post('/earthquakezone/store',  [EarthQuakeZoneController::class, 'store'])->middleware(['can:create-eqz']);
-    Route::put('/earthquakezone/update/{eq}', [EarthQuakeZoneController::class, 'update'])->middleware(['can:update-eqz']);
-    Route::delete('/earthquakezone/destroy/{eq}',  [EarthQuakeZoneController::class, 'destroy'])->middleware(['can:delete-eqz']);
+    // Route::get('/earthquakezone', [EarthQuakeZoneController::class, 'index'])->middleware(['can:view-eqz']);
+    // Route::post('/earthquakezone', [EarthQuakeZoneController::class, 'index'])->middleware(['can:view-eqz']);
+    // Route::post('/earthquakezone/store',  [EarthQuakeZoneController::class, 'store'])->middleware(['can:create-eqz']);
+    // Route::put('/earthquakezone/update/{eq}', [EarthQuakeZoneController::class, 'update'])->middleware(['can:update-eqz']);
+    // Route::delete('/earthquakezone/destroy/{eq}',  [EarthQuakeZoneController::class, 'destroy'])->middleware(['can:delete-eqz']);
+
+    Route::get('/earthquakezone', [EarthQuakeZoneController::class, 'index']);
+    Route::post('/earthquakezone', [EarthQuakeZoneController::class, 'index']);
+    Route::post('/earthquakezone/store',  [EarthQuakeZoneController::class, 'store']);
+    Route::put('/earthquakezone/update/{eq}', [EarthQuakeZoneController::class, 'update']);
+    Route::delete('/earthquakezone/destroy/{eq}',  [EarthQuakeZoneController::class, 'destroy']);
 
     // SECTION Flood Zone Routes
-    Route::get('/floodzone', [FloodZoneController::class, 'index'])->middleware(['can:view-fz']);
-    Route::post('/floodzone', [FloodZoneController::class, 'index'])->middleware(['can:view-fz']);
-    Route::post('/floodzone/store',  [FloodZoneController::class, 'store'])->middleware(['can:create-fz']);
-    Route::put('/floodzone/update/{flood}', [FloodZoneController::class, 'update'])->middleware(['can:update-fz']);
-    Route::delete('/floodzone/destroy/{flood}',  [FloodZoneController::class, 'destroy'])->middleware(['can:delete-fz']);
+    // Route::get('/floodzone', [FloodZoneController::class, 'index'])->middleware(['can:view-fz']);
+    // Route::post('/floodzone', [FloodZoneController::class, 'index'])->middleware(['can:view-fz']);
+    // Route::post('/floodzone/store',  [FloodZoneController::class, 'store'])->middleware(['can:create-fz']);
+    // Route::put('/floodzone/update/{flood}', [FloodZoneController::class, 'update'])->middleware(['can:update-fz']);
+    // Route::delete('/floodzone/destroy/{flood}',  [FloodZoneController::class, 'destroy'])->middleware(['can:delete-fz']);
+    Route::get('/floodzone', [FloodZoneController::class, 'index']);
+    Route::post('/floodzone', [FloodZoneController::class, 'index']);
+    Route::post('/floodzone/store',  [FloodZoneController::class, 'store']);
+    Route::put('/floodzone/update/{flood}', [FloodZoneController::class, 'update']);
+    Route::delete('/floodzone/destroy/{flood}',  [FloodZoneController::class, 'destroy']);
     
 
     // SECTION Ship Type Routes

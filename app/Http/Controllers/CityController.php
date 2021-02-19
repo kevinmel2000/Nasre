@@ -15,7 +15,7 @@ class CityController extends Controller
     public function index(Request $request)
     {
          $user = Auth::user();
-         $route_active = 'City Data Master';   
+         $route_active = 'City Master';   
 
          $search = @$request->input('search');
 
