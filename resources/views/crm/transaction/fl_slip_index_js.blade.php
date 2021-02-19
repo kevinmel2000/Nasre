@@ -19,6 +19,7 @@
       }
   
       $("#fllookupTable").DataTable({
+        "paging":   false,
         "order": [[ 0, "desc" ]],
         dom: '<"top"fB>rt<"bottom"lip><"clear">',
         lengthMenu: [

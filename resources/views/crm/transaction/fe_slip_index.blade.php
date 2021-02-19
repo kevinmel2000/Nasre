@@ -63,12 +63,14 @@
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
-
-                                {{-- @can('update-felookup', User::class)
                                 
-                                {!! link_to('transaction-data/detailfeslip/'.@$insureddata->id,'Detail Data',['class'=>'btn btn-primary']) !!}
-                                @endcan   --}}
-                              
+                                @can('update-felookup', User::class)
+                                <a class="text-primary mr-3" href="{{ url('transaction-data/detailfeslip', $insureddata->id) }}">
+                                  <i class="fas fa-file"></i>
+                                </a>
+                                {{-- {!! link_to('transaction-data/detailfeslip/'.@$insureddata->id,'Detail Data',['class'=>'btn btn-primary']) !!} --}}
+                                @endcan  
+
                                 @can('update-felookup', User::class)
                                 <a class="text-primary mr-3" href="{{ url('transaction-data/updatefeslip', $insureddata->id) }}">
                                   <i class="fas fa-edit"></i>

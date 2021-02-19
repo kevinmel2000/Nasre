@@ -64,10 +64,12 @@
                                 </a>
                                 <span>
 
-                                
-                                {{-- @can('update-felookup', User::class)
-                                {!! link_to('transaction-data/detailmpslip/'.@$insureddata->id,'Detail Data',['class'=>'btn btn-primary']) !!}
-                                @endcan   --}}
+                                @can('update-felookup', User::class)
+                                <a class="text-primary mr-3" href="{{ url('transaction-data/detailmpslip', $insureddata->id) }}">
+                                  <i class="fas fa-file"></i>
+                                </a>
+                                {{-- {!! link_to('transaction-data/detailmpslip/'.@$insureddata->id,'Detail Data',['class'=>'btn btn-primary']) !!} --}}
+                                @endcan 
                               
                                 @can('update-felookup', User::class)
                                 <a class="text-primary mr-3" href="{{ url('transaction-data/updatempslip', $insureddata->id) }}">
