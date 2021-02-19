@@ -547,7 +547,7 @@
                                                                                 @foreach($interestlist as $isl)
                                                                                     <tr id="iid{{ $isl->id }}">
                                                                                             <td>{{ @$isl->interestinsureddata->description }}</td>
-                                                                                            <td>{{ @$isl->amount }}</td>
+                                                                                            <td class="uang">{{ @$isl->amount }}</td>
                                                                                             @php 
                                                                                             $totalamountdata=$totalamountdata+$isl->amount;
                                                                                             @endphp
@@ -571,7 +571,7 @@
 
                                                                                     <td>
                                                                                         <div class="form-group">
-                                                                                            <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipamount" name="slipamount" class="form-control form-control-sm " data-validation="length" data-validation-length="0-15"/>
+                                                                                            <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipamount" name="slipamount" class="uang form-control form-control-sm " data-validation="length" data-validation-length="0-15"/>
                                                                                         </div>
                                                                                     </td>
 
@@ -595,7 +595,7 @@
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured') }}</label>
-                                                    <input type="number" min="0" value="{{$totalamountdata}}" step=".0001" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
+                                                    <input type="number" min="0" value="{{$totalamountdata}}" step=".0001" id="sliptotalsum" name="sliptotalsum" class="uang form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
                                                 </div>
                                             </div>
                                         </div>
@@ -620,7 +620,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-10">
                                                                     <div class="input-group">
-                                                                        <input type="number" value="{{ $slipdata->insured_pct }}" step=".0001" id="slippct" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
+                                                                        <input type="number" value="{{ $slipdata->insured_pct }}" step=".0001" id="slippct" name="slippct" class="uang form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-2">

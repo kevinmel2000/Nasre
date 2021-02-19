@@ -73,6 +73,8 @@
         <script src="{{asset('js/jquery.form-validator.min.js')}}"></script>
         <script src="{{asset('js/select2.min.js')}}"></script>
         <script src="{{asset('js/toastr.min.js')}}"></script>
+        <script src="{{asset('js/jquery.mask.js')}}"></script>
+        
         <script src="{{asset('js/script.js')}}"></script>
         <script src="{{asset('js/jquery.formatCurrency-1.4.0.js')}}"></script>
  

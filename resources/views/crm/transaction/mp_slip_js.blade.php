@@ -83,6 +83,9 @@ $(document).ready(function(){
  var count = 1;
  $(".e1").select2({ width: '100%' });
 
+ $( '.uang' ).mask('000.000.000', {reverse: true});
+
+
  $("#btnaddlayer").attr('hidden','true');
         $("#sliplayerproportional").attr('hidden','true');
         $("#labelnonprop").attr('hidden','true');
