@@ -85,6 +85,7 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::post('/fe-slip/store', [FeSlipController::class, 'storefeslip']);
     Route::get('/fe-slip/updatefeslip/{fe}', [FeSlipController::class, 'updatefeslip']);
     Route::get('/updatefeslip/{fe}', [FeSlipController::class, 'updatefeslip']);
+    Route::get('/endorsementfeslip/{fe}', [FeSlipController::class, 'endorsementfeslip']);
     Route::get('/fe-slip/detailfeslip/{fe}', [FeSlipController::class, 'detailfeslip']);
     Route::get('/detailfeslip/{fe}', [FeSlipController::class, 'detailfeslip']);
     Route::delete('/fe-slip/destroy/{fe}', [FeSlipController::class, 'destroy']);
@@ -99,6 +100,7 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::post('/fl-slip/store', [FinancialLineSlipController::class, 'storeflslip']);
     Route::get('/fl-slip/updateflslip/{fe}', [FinancialLineSlipController::class, 'updateflslip']);
     Route::get('/updateflslip/{fe}', [FinancialLineSlipController::class, 'updateflslip']);
+    Route::get('/endorsementflslip/{fe}', [FinancialLineSlipController::class, 'endorsementflslip']);
     Route::get('/fl-slip/detailflslip/{fe}', [FinancialLineSlipController::class, 'detailflslip']);
     Route::get('/detailflslip/{fe}', [FinancialLineSlipController::class, 'detailflslip']);
     Route::delete('/fl-slip/destroy/{fe}', [FinancialLineSlipController::class, 'destroy']);
@@ -111,6 +113,7 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::post('/mp-slip/store', [MovePropSlipController::class, 'storempslip']);
     Route::get('/mp-slip/updatempslip/{fe}', [MovePropSlipController::class, 'updatempslip']);
     Route::get('/updatempslip/{fe}', [MovePropSlipController::class, 'updatempslip']);
+    Route::get('/endorsementmpslip/{fe}', [MovePropSlipController::class, 'endorsementmpslip']);
     Route::get('/mp-slip/detailmpslip/{fe}', [MovePropSlipController::class, 'detailmpslip']);
     Route::get('/detailmpslip/{fe}', [MovePropSlipController::class, 'detailmpslip']);
     Route::delete('/mp-slip/destroy/{fe}', [MovePropSlipController::class, 'destroy']);
@@ -124,6 +127,7 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::post('/hem-slip/store', [HeMotorSlipController::class, 'storehemslip']);
     Route::get('/hem-slip/updatehemslip/{fe}', [HeMotorSlipController::class, 'updatehemslip']);
     Route::get('/updatehemslip/{fe}', [HeMotorSlipController::class, 'updatehemslip']);
+    Route::get('/endorsementhemslip/{fe}', [HeMotorSlipController::class, 'endorsementhemslip']);
     Route::get('/hem-slip/detailhemslip/{fe}', [HeMotorSlipController::class, 'detailhemslip']);
     Route::get('/detailhemslip/{fe}', [HeMotorSlipController::class, 'detailhemslip']);
     Route::delete('/hem-slip/destroy/{fe}', [HeMotorSlipController::class, 'destroy']);
