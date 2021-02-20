@@ -314,7 +314,7 @@ class FeSlipController extends Controller
     }
 
 
-    public function endorsementfeslip($idm)
+    public function endorsementfeslip($ms,$sl)
     {
         $user = Auth::user();
         $country = User::orderby('id','asc')->get();
@@ -338,12 +338,8 @@ class FeSlipController extends Controller
 
         $fe_ids = response()->json($insured->modelKeys());
         
-        $insureddata=Insured::find($idm);
-        // dd($insureddata->number);
-        $code_ms=$insureddata->number;
-        $slipdata=SlipTable::where('insured_id',$insureddata->number)->first();
-        // dd($slipdata);
-        $code_sl=$slipdata->number;
+        $code_ms=$ms;
+        $code_sl=$sl;
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();

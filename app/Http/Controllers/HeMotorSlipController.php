@@ -312,7 +312,7 @@ class HeMotorSlipController extends Controller
     }
 
 
-    public function endorsementhemslip($idm)
+    public function endorsementhemslip($ms,$sl)
     {
         $user = Auth::user();
         $country = User::orderby('id','asc')->get();
@@ -336,10 +336,8 @@ class HeMotorSlipController extends Controller
 
         $fe_ids = response()->json($insured->modelKeys());
         
-        $insureddata=Insured::find($idm);
-        $code_ms=$insureddata->number;
-        $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
-        $code_sl=$slipdata->number;
+        $code_ms=$ms;
+        $code_sl=$sl;
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
