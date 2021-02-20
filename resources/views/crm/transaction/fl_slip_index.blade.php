@@ -80,7 +80,7 @@
                                 @endcan  
 
 
-                                @can('delete-felookup', User::class)
+                                  @can('delete-felookup', User::class)
 
                                   <span id="delbtn{{@$insureddata->id}}"></span>
                                 

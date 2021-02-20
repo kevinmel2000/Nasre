@@ -80,7 +80,7 @@
 
                                   
 
-                                {{-- @can('delete-felookup', User::class) --}}
+                                   {{-- @can('delete-felookup', User::class) --}}
 
                                     <span id="delbtn{{@$insureddata->id}}"></span>
                                 
@@ -90,7 +90,7 @@
                                         @method('DELETE')
                                         @csrf
                                     </form>
-                                    @endcan  
+                                  {{-- @endcan   --}}
                                 </span>
                               </td>
 
