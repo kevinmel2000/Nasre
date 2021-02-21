@@ -343,6 +343,9 @@ class FinancialLineSlipController extends Controller
         $insureddata=Insured::where('number',$code_ms)->first();
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
 
+        $countendorsement=SlipTable::where('slip_idendorsement',$code_ms)->count();
+        $countendorsement=$countendorsement+1;
+
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         
@@ -355,7 +358,7 @@ class FinancialLineSlipController extends Controller
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
             
 
-        return view('crm.transaction.fl_slipendorsement', compact(['user','cnd','statuslist','filelist','slipdata','insureddata','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.fl_slipendorsement', compact(['user','cnd','statuslist','countendorsement','filelist','slipdata','insureddata','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
     }
 
