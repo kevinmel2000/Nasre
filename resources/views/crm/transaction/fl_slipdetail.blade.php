@@ -673,17 +673,17 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" value="0" step=".0001" id="slipdppercentage" name="slipdppercentage" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                                    <input type="number" value="0" step=".0001" id="slipdppercentage" name="slipdppercentage" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" value="0" step=".0001" id="slipdpamount" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
+                                                                                    <input type="number" value="0" step=".0001" id="slipdpamount" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" disabled required/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" value="0" step=".0001" id="slipdpminamount" name="slipdpminamount" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                                    <input type="number" value="0" step=".0001" id="slipdpminamount" name="slipdpminamount" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
                                                                                 </div>
                                                                             </td> 
                                                                             <td>
