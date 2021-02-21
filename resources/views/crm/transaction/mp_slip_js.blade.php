@@ -83,7 +83,7 @@ $(document).ready(function(){
  var count = 1;
  $(".e1").select2({ width: '100%' });
 
- $( '.uang' ).mask('000.000.000.000.000.000.000.000.000', {reverse: true});
+ $('.uang').mask("#,##0.00", {reverse: true});
 
 
  $("#btnaddlayer").attr('hidden','true');
