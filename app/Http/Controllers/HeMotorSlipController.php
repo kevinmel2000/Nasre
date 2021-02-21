@@ -339,6 +339,9 @@ class HeMotorSlipController extends Controller
         $code_ms=$ms;
         $code_sl=$sl;
 
+        $insureddata=Insured::where('number',$code_ms)->first();
+        $slipdata=SlipTable::where('insured_id',$code_ms)->first();
+
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         
