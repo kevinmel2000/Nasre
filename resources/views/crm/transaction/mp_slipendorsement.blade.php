@@ -298,10 +298,21 @@
                                                     <div class="form-group">
                                                         <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
                                                         <label for="">{{__('Number')}} </label>
-                                                        <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" value="{{ $code_sl }}" readonly="readonly" required/>
+                                                        <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" value="{{ $slipdata->prev_endorsement }}" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
+                                                        <label for="">{{__('Prev Number')}} </label>
+                                                        <input type="text" id="prevslipnumber" name="prevslipnumber" class="form-control form-control-sm" value="{{ $code_sl }}" readonly="readonly" required/>
+                                                    </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
