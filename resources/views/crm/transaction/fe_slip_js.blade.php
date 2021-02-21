@@ -1098,6 +1098,7 @@ $(document).ready(function() {
 
        var code_ms = $('#insuredIDtxt').val();
        var slipnumber = $('#slipnumber').val();
+       var prevslipnumber = $('#prevslipnumber').val();
        var slipuy = $('#slipuy').val();
        var slipstatus = $('#slipstatus').val();
        var sliped = $('#sliped').val();
@@ -1150,6 +1151,7 @@ $(document).ready(function() {
            data:{
                code_ms:code_ms,
                slipnumber:slipnumber,
+               prevslipnumber:prevslipnumber,
                slipuy:slipuy,
                slipstatus:slipstatus,
                sliped:sliped,

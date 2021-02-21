@@ -347,8 +347,19 @@ class MovePropSlipController extends Controller
         $code_ms=$ms;
         $code_sl=$sl;
 
-        $countendorsement=SlipTable::where('slip_idendorsement',$code_ms)->count();
-        $countendorsement=$countendorsement+1;
+        if($slipdata->slip_idendorsementcount==NULL || $slipdata->slip_idendorsementcount=="")
+        {
+            $countendorsement=1;
+        }
+        else 
+        {
+            $countendorsement=$slipdata->slip_idendorsementcount+1;
+        }
+
+        if($slipdata->prev_endorsement==NULL || $slipdata->prev_endorsement=="")
+        {
+            $slipdata->prev_endorsement=$code_sl;
+        }
 
 
         $insureddata=Insured::where('number',$code_ms)->first();
@@ -702,60 +713,10 @@ class MovePropSlipController extends Controller
 
             if($slipdata==null)
             {
-                $currdate = date("Y/m/d");
-
-                SlipTable::create([
-                    'number'=>$request->slipnumber,
-                    'username'=>Auth::user()->name,
-                    'insured_id'=>$request->code_ms,
-                    'slip_type'=>'fe',
-                    'prod_year' => $currdate,
-                    'uy'=>$request->slipuy,
-                    'status'=>$request->slipstatus,
-                    'endorsment'=>$request->sliped,
-                    'selisih'=>$request->slipsls,
-                    'source'=>$request->slipcedingbroker,
-                    'source_2'=>$request->slipceding,
-                    'currency'=>$request->slipcurrency,
-                    'cob'=>$request->slipcob,
-                    'koc'=>$request->slipkoc,
-                    'occupacy'=>$request->slipoccupacy,
-                    'build_const'=>$request->slipbld_const,
-                    'slip_no'=>$request->slipno,
-                    'cn_dn'=>$request->slipcndn,
-                    'policy_no'=>$request->slippolicy_no,
-                    'attacment_file'=>'',
-                    'interest_insured'=>$interestlist->toJSon(),
-                    'total_sum_insured'=>$request->sliptotalsum,
-                    'insured_type'=>$request->sliptype,
-                    'insured_pct'=>$request->slippct,
-                    'total_sum_pct'=>$request->sliptotalsumpct,
-                    'deductible_panel'=>$deductiblelist->toJson(),
-                    'extend_coverage'=>$extendcoveragelist->toJson(),
-                    'insurance_period_from'=>$request->slipipfrom,
-                    'insurance_period_to'=>$request->slipipto,
-                    'reinsurance_period_from'=>$request->sliprpfrom,
-                    'reinsurance_period_to'=>$request->sliprpto,
-                    'proportional'=>$request->slipproportional,
-                    'layer_non_proportional'=>$request->sliplayerproportional,
-                    'rate'=>$request->sliprate,
-                    'share'=>$request->slipshare,
-                    'sum_share'=>$request->slipsumshare,
-                    'basic_premium'=>$request->slipbasicpremium,
-                    'commission'=>$request->slipcommission,
-                    'grossprm_to_nr'=>$request->slipgrossprmtonr,
-                    'netprm_to_nr'=>$request->slipnetprmtonr,
-                    'sum_commission'=>$request->slipsumcommission,
-                    'installment_panel'=>$installmentlist->toJson(),
-                    'retrocession_panel'=>$retrocessionlist->toJson(),
-                    'retro_backup'=>$request->sliprb,
-                    'own_retention'=>$request->slipor,
-                    'sum_own_retention'=>$request->slipsumor
-                ]);
-
+               
                 $notification = array(
-                    'message' => 'Moveable Property Slip added successfully!',
-                    'alert-type' => 'success'
+                    'message' => 'Moveable Property Slip added fail!',
+                    'alert-type' => 'danger'
                 );
 
             }
@@ -810,6 +771,19 @@ class MovePropSlipController extends Controller
                 $slipdataup->retrocession_panel=$retrocessionlist->toJson(); 
                 $slipdataup->retro_backup=$request->sliprb;
                 $slipdataup->own_retention=$request->slipor;
+                $slipdataup->prev_endorsement=$request->prevslipnumber;
+
+                if($slipdataup->slip_idendorsementcount==NULL || $slipdataup->slip_idendorsementcount=="")
+                {
+                    $countendorsement=1;
+                }
+                else 
+                {
+                    $countendorsement=$slipdataup->slip_idendorsementcount+1;
+                }
+
+                $slipdataup->slip_idendorsementcount=$countendorsement;
+
                 $slipdataup->sum_own_retention=$request->slipsumor;
                 
                 $slipdataup->save();
