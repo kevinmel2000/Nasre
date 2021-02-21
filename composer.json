@@ -23,7 +23,8 @@
         "laravel/ui": "^2.0",
         "laravelcollective/html": "^6.2",
         "maatwebsite/excel": "^3.1",
-        "phpoffice/phpspreadsheet": "^1.9"
+        "phpoffice/phpspreadsheet": "^1.9",
+        "phpoffice/phpword": "^0.18.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
