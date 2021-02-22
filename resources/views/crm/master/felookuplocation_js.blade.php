@@ -17,7 +17,7 @@
       url:"{{url('get-state-list')}}?country_id="+countryID,
       success:function(res){        
       if(res){
-        $("#state").empty();
+        // $("#state").empty();
         $("#state").removeAttr('disabled');
         $("#state").append('<option selected disabled>Select Province</option>');
         $.each(res,function(key,value){

@@ -38,7 +38,7 @@
                             <div class="col-md-12">
                               <div class="form-group">
                                   <label for="">{{__('Loc Code')}} </label>
-                                  <input type="text" name="code" class="form-control form-control-sm" value="{{ $code_felookuplocation }}" readonly required/>
+                                  <input type="text" style="width:25%" name="code" class="form-control form-control-sm" value="{{ $code_felookuplocation }}" readonly required/>
                                 </div>
                             </div>
                         </div>
@@ -95,10 +95,8 @@
                               <div class="form-group">
                               <label for="">{{__('Province')}}</label>
                                     <select name="province" id="state"  class="e1 form-control form-control-sm ">
-                                      <option selected disabled>{{__('Select Province')}}</option>
-                                      @foreach($country as $statedata)
-                                      <option value="{{ $statedata->id }}">{{ $statedata->id }} - {{ $statedata->name }}</option>
-                                      @endforeach
+                                      {{-- <option selected disabled>{{__('Select Province')}}</option> --}}
+                                      
                                   </select>
                               </div>    
                             </div>
@@ -107,10 +105,8 @@
                               <div class="form-group">
                               <label for="">{{__('Cities')}}</label>
                                     <select name="cityinsert" id="city" class="e1 form-control form-control-sm ">
-                                      <option selected disabled>{{__('Select Cities')}}</option>
-                                      @foreach($country as $citydata)
-                                      <option value="{{ $citydata->id }}">{{ $citydata->id }} - {{ $citydata->name }}</option>
-                                      @endforeach
+                                      {{-- <option selected disabled>{{__('Select Cities')}}</option> --}}
+                                      
                                     </select>
                               </div>     
                             </div>
