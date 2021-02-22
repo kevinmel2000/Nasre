@@ -1777,9 +1777,9 @@ class TransactionController extends Controller
        $mydate = date("Y").date("m").date("d");
        $currdate = date("Y-m-d");
 
-       $slip = SlipTable::where('slip_type','ms')->where('id',$id)->orderby('id','desc')->get();
+       $slip = SlipTable::where('id',$id)->orderby('id','desc')->get();
        $sl_ids = response()->json($slip->modelKeys());
-       // dd($slip[0]->insured_id);
+    //    dd($slip[0]->slip_idendorsementcount);
        $insured = Insured::where('number',$slip[0]->insured_id)->orderby('id','desc')->get();
        
        $route = $insured[0]->route;
@@ -1792,28 +1792,32 @@ class TransactionController extends Controller
        $shiplist= ShipListTemp::where('insured_id',$code_ms)->orderby('id','desc')->get();
 
        $countendorsement = $slip[0]->slip_idendorsementcount;
-        if($countendorsement == null){
+    //    dd($countendorsement);
+        if($countendorsement = null){
             $code_sl = $slip[0]->number . '-END' . '000' . '1';
         }
         else{
             if($countendorsement < 10)
             {
-                $code_sl = substr($slip[0]->number,0,16) . '-END' . '000' . ($countendorsement + 1);
+                $code_sl = substr($slip[0]->number,0,15) . '-END' . '000' . ($countendorsement + 1);
             }
             elseif($countendorsement > 9 && $countendorsement < 100)
             {
-                $code_sl = substr($slip[0]->number,0,16) . '-END' . '00' . ($countendorsement + 1);
+                $code_sl = substr($slip[0]->number,0,15) . '-END' . '00' . ($countendorsement + 1);
             }
             elseif($countendorsement > 99 && $countendorsement < 1000)
             {
-                $code_sl = substr($slip[0]->number,0,16) . '-END' . '0' . ($countendorsement + 1);
+                $code_sl = substr($slip[0]->number,0,15) . '-END' . '0' . ($countendorsement + 1);
             }
             elseif($countendorsement > 999 && $countendorsement < 10000)
             {
-                $code_sl = substr($slip[0]->number,0,16) . '-END' . ($countendorsement + 1);
+                $code_sl = substr($slip[0]->number,0,15) . '-END' . ($countendorsement + 1);
             }
         }
       
+        $sl_number = substr($slip[0]->number,0,15);
+
+
        
        $currency = Currency::orderby('id','asc')->get();
        $cob = COB::orderby('id','asc')->get();
@@ -1828,14 +1832,14 @@ class TransactionController extends Controller
 
        $sliplastid = count($slip);
 
-       $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-       $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-       $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-       $installmentpanel= InstallmentTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-       $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-       $statuslist= StatusLog::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+       $interestlist= InterestInsuredTemp::where('slip_id',$sl_number)->orderby('id','desc')->get();
+       $deductibletemp= DeductibleTemp::where('slip_id',$sl_number)->orderby('id','desc')->get();
+       $conditionneededtemp= ConditionNeededTemp::where('slip_id',$sl_number)->orderby('id','desc')->get();
+       $installmentpanel= InstallmentTemp::where('slip_id',$sl_number)->orderby('id','desc')->get();
+       $retrocessiontemp= RetrocessionTemp::where('slip_id',$sl_number)->orderby('id','desc')->get();
+       $statuslist= StatusLog::where('slip_id','=',$sl_number)->orderby('id','desc')->get();
 
-       return view('crm.transaction.marine_slip_endorsement', compact(['user','interestinsured','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
+       return view('crm.transaction.marine_endorsement', compact(['user','interestinsured','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
    }
 
    public function destroymarineinsured($id)

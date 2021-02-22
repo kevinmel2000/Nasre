@@ -338,6 +338,7 @@
                     if(response){
                         $("#slipinterestlist").val(response.interest_id);
                         $("#slipamount").val(response.amount);
+                        $("#idinterestinsured").val(response.id);
                         $(':input','#addinterestinsured')
                     .not(':button, :submit, :reset, :hidden')
                     .val('')
@@ -347,6 +348,7 @@
                         swal("Ohh no!", "Data failed to get", "failed")
                         $("#slipinterestlist").empty();
                         $("#slipamount").empty();
+                        $("#idinterestinsured").empty();
                     }
                 }
             });
@@ -373,6 +375,7 @@
                         $("#slipdppercentage").val(response.perceentage);
                         $("#slipdpamount").val(response.amount);
                         $("#slipdpminamount").val(response.min_claimamount);
+                        $('#id_deduct').val(response.id);
                     }else{
                         swal("Ohh no!", "Data failed to get", "failed")
                         $("#slipdptype").empty();
@@ -402,9 +405,11 @@
                     console.log(response)      
                     if(response){
                         $("#slipcncode").val(response.condition_id);
+                        $("#id_cnt").val(response.id);
                     }else{
                         swal("Ohh no!", "Data failed to get", "failed")
                         $("#slipcncode").empty();
+                        $("#id_cnt").empty();
                     }
                 }
             });
@@ -429,11 +434,13 @@
                         $("#slipipdate").val(response.installment_date);
                         $("#slipippercentage").val(response.percentage);
                         $("#slipipamount").val(response.amount);
+                        $("#id_inspan").val(response.id);
                     }else{
                         swal("Ohh no!", "Data failed to get", "failed")
                         $("#slipipdate").empty();
                         $("#slipippercentage").empty();
                         $("#slipipamount").empty();
+                        $("#id_inspan").empty();
                     }
                 }
             });
@@ -459,12 +466,14 @@
                         $("#sliprpcontract").val(response.contract);
                         $("#sliprppercentage").val(response.percentage);
                         $("#sliprpamount").val(response.amount);
+                        $("#id_rsp").val(response.id);
                     }else{
                         swal("Ohh no!", "Data failed to get", "failed")
                         $("#sliprptype").empty();
                         $("#sliprpcontract").empty();
                         $("#sliprppercentage").empty();
                         $("#sliprpamount").empty();
+                        $("#id_rsp").empty();
                     }
                 }
             });
@@ -476,11 +485,12 @@
 
 
 <script type='text/javascript'>
-    function interestdetailupdate(id){
+    function interestdetailupdate(){
         var token = $('input[name=_token]').val();
         var interestins = $('#slipinterestlist').val();
         var interestamount = $('#slipamount').val();
         var slipnumber = $('#slipnumber').val();
+        var id = $('#idinterestinsured').val();
 
         console.log(token)
         console.log(interestins)
@@ -512,7 +522,7 @@
         });
     }
 
-    function deductibledetailupdate(id){
+    function deductibledetailupdate(){
         var token = $('input[name=_token]').val();
         var deduct_type = $('#slipdptype').val();
         var deduct_currency = $('#slipdpcurrency').val();
@@ -520,6 +530,7 @@
         var deduct_amount = $('#slipdpamount').val();
         var deduct_minamount = $('#slipdpminamount').val();
         var slipnumber = $('#slipnumber').val();
+        var id = $('#id_deduct').val();
 
         console.log(token)
         console.log(deduct_type)
@@ -557,10 +568,11 @@
         });
     }
 
-    function conditionneededdetailupdate(id){
+    function conditionneededdetailupdate(){
         var token = $('input[name=_token]').val();
         var cncode = $('#slipcncode').val();
         var slipnumber = $('#slipnumber').val();
+        var id = $('#id_cnt').val();
 
         console.log(token)
         console.log(cncode)
@@ -590,12 +602,13 @@
         });
     }
 
-    function installmentdetailupdate(id){
+    function installmentdetailupdate(){
         var token = $('input[name=_token]').val();
         var ip_date = $('#slipipdate').val();
         var ip_percent = $('#slipippercentage').val();
         var ip_amount = $('#slipipamount').val();
         var slipnumber = $('#slipnumber').val();
+        var id = $('#id_inspan').val();
 
         console.log(token)
         console.log(ip_date)
@@ -629,13 +642,14 @@
         });
     }
 
-    function retrocessiondetailupdate(id){
+    function retrocessiondetailupdate(){
         var token = $('input[name=_token]').val();
         var retro_type = $('#sliprptype').val();
         var retro_contract = $('#sliprpcontract').val();
         var retro_percent = $('#sliprppercentage').val();
         var retro_amount = $('#sliprpamount').val();
         var slipnumber = $('#slipnumber').val();
+        var id = $('#id_rsp').val();
 
         console.log(token)
         console.log(retro_type)

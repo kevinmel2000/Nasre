@@ -57,7 +57,7 @@
                                                             <input type="hidden" name="idslip" id="idslip" value="{{$slp->id}}" />
                                                             <input type="hidden" name="msinumber" id="msinumber" value="{{$slp->insured_id}}" />
                                                             <label for="">{{__('Number')}} </label>
-                                                            <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="0-25" value="{{ $slp->number }}" readonly="readonly" />
+                                                            <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="0-25" value="{{ $code_sl }}" readonly="readonly" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -445,16 +445,16 @@
                                                                             </thead>
                                                                             
                                                                             <tbody>
-                                                                                @foreach($interestlist as $isl)
-                                                                                        <tr id="iid{{ $isl->id }}" data-name="interestvalue[]">
-                                                                                                <td id="interestdescription" data-name="{{ $isl->interest_id }}">{{ $isl->interestinsureddata->description }}</td>
-                                                                                                <td id="interestamount" data-name="{{ $isl->amount }}">{{ $isl->amount }}</td>
+                                                                                @foreach($interestlist as $isddl)
+                                                                                        <tr id="iid{{ $isddl->id }}" data-name="interestvalue[]">
+                                                                                                <td id="interestdescription" data-name="{{ $isddl->interest_id }}">{{ $isddl->interestinsureddata->description }}</td>
+                                                                                                <td id="interestamount" data-name="{{ $isddl->amount }}">{{ $isddl->amount }}</td>
                                                                                                 <td>
-                                                                                                    <input type="hidden" id="interestidupdate" value="{{ $isl->id }}"/>
-                                                                                                    <a class="text-primary mr-3" id="editinterestinsured" type="button" onClick="geteditinterest({{ $isl->id }})" href="javascript:void(0)">
+                                                                                                    <input type="hidden" id="interestidupdate" value="{{ $isddl->id }}"/>
+                                                                                                    <a class="text-primary mr-3" id="editinterestinsured" type="button" onClick="geteditinterest({{ $isddl->id }})" href="javascript:void(0)">
                                                                                                         <i class="fas fa-edit"></i>
                                                                                                     </a>
-                                                                                                    <a type="button" href="javascript:void(0)" onClick="deleteshipdetail({{ $isl->id }})"><i class="fas fa-trash text-danger"></i></a>
+                                                                                                    <a type="button" href="javascript:void(0)" onClick="deleteshipdetail({{ $isddl->id }})"><i class="fas fa-trash text-danger"></i></a>
                                                                                                 </td>
                                                                                         </tr>   
                                                                                 @endforeach 
@@ -481,7 +481,8 @@
                     
                                                                                             <td>
                                                                                                 <div class="form-group">
-                                                                                                    <button type="button" onClick="interestdetailupdate({{$isl->id}})" id="updateinterestinsured-btn" class="btn btn-md btn-primary ">{{__('Update')}}</button>
+                                                                                                    <input type="hidden"  value=""  id="idinterestinsured" name="idinterestinsured" class="form-control form-control-sm " data-validation="length" data-validation-length="0-15" />
+                                                                                                    <button type="button" onClick="interestdetailupdate()" id="updateinterestinsured-btn" class="btn btn-md btn-primary ">{{__('Update')}}</button>
                                                                                                     <button type="button" id="addinterestinsured-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
                                                                                                 </div>
                                                                                             </td>
@@ -629,7 +630,8 @@
                                                                                         </td> 
                                                                                         <td>
                                                                                             <div class="form-group">
-                                                                                                <button type="button" id="updatedeductibletype-btn" onClick="deductibledetailupdate({{$dtt->id}})" class="btn btn-md btn-primary" >{{__('Update')}}</button>
+                                                                                                <input type="hidden"  id="id_deduct" name="id_deduct" placeholder="min amount" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                                                <button type="button" id="updatedeductibletype-btn" onClick="deductibledetailupdate()" class="btn btn-md btn-primary" >{{__('Update')}}</button>
                                                                                                 <button type="button" id="adddeductibletype-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
                                                                                             </div>
                                                                                         </td>
@@ -697,7 +699,8 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <div class="form-group">
-                                                                                                <button type="button" class="btn btn-md btn-primary" onClick="conditionneededdetailupdate({{ $cnt->id }})" id="updateconditionneeded-btn">{{__('Update')}}</button>
+                                                                                                <input type="hidden" id="id_cnt" value=""/>
+                                                                                                <button type="button" class="btn btn-md btn-primary" onClick="conditionneededdetailupdate()" id="updateconditionneeded-btn">{{__('Update')}}</button>
                                                                                                 <button type="button" id="addconditionneeded-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
                                                                                             </div>
                                                                                         </td>
@@ -989,7 +992,8 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <div class="form-group">
-                                                                                                <button type="button" class="btn btn-md btn-primary" id="updateinstallmentpanel-btn" onClick="installmentdetailupdate({{ $isp->id }})" >{{__('Update')}}</button>
+                                                                                                <input type="hidden" id="id_inspan" value=""/>
+                                                                                                <button type="button" class="btn btn-md btn-primary" id="updateinstallmentpanel-btn" onClick="installmentdetailupdate()" >{{__('Update')}}</button>
                                                                                                 <button type="button" id="addinstallmentpanel-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
                                                                                                 
                                                                                             </div>
@@ -1126,7 +1130,8 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <div class="form-group">
-                                                                                                <button type="button" class="btn btn-md btn-primary" id="updateretrocessiontemp-btn" onClick="retrocessiondetailupdate({{ $rsc->id }})" >{{__('Update')}}</button>
+                                                                                                <input type="hidden" id="id_rsp" />
+                                                                                                <button type="button" class="btn btn-md btn-primary" id="updateretrocessiontemp-btn" onClick="retrocessiondetailupdate()" >{{__('Update')}}</button>
                                                                                                 
                                                                                                 <button type="button" id="addretrocessiontemp-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
                                                                                             </div>
@@ -1182,5 +1187,5 @@
 @endsection
 
 @section('scripts')
-@include('crm.transaction.marine_slip_endorsement_js')
+@include('crm.transaction.marine_endorsement_js')
 @endsection
