@@ -55,6 +55,7 @@ class TransactionController extends Controller
 
         if(empty($search))
          {
+            $userid = Auth::user()->id;
             $insured = Insured::orderby('id','asc')->get();
             $slip = SlipTable::orderby('id','asc')->get();
             $currency = Currency::orderby('id','asc')->get();
@@ -79,23 +80,23 @@ class TransactionController extends Controller
             if($lastid != null){
                 if($lastid < 10)
                 {
-                    $code_ms = "IN" . $mydate . "0000" . strval($lastid + 1);
+                    $code_ms = "IN" . $userid . $mydate . "0000" . strval($lastid + 1);
                 }   
                 elseif($lastid > 9 && $lastid < 100)
                 {
-                    $code_ms = "IN" . $mydate . "000" . strval($lastid + 1);
+                    $code_ms = "IN" . $userid . $mydate . "000" . strval($lastid + 1);
                 }
                 elseif($lastid > 99 && $lastid < 1000)
                 {
-                    $code_ms = "IN" . $mydate . "00" . strval($lastid + 1);
+                    $code_ms = "IN" . $userid . $mydate . "00" . strval($lastid + 1);
                 }
                 elseif($lastid > 999 && $lastid < 10000)
                 {
-                    $code_ms = "IN" . $mydate . "0" . strval($lastid + 1);
+                    $code_ms = "IN" . $userid . $mydate . "0" . strval($lastid + 1);
                 }
                 elseif($lastid > 9999 && $lastid < 100000)
                 {
-                    $code_ms = "IN" . $mydate  . strval($lastid + 1);
+                    $code_ms = "IN" . $userid . $mydate  . strval($lastid + 1);
                 }
             }
             else{
@@ -104,23 +105,23 @@ class TransactionController extends Controller
             if($sliplastid != null){
                 if($lastid < 10)
                 {
-                    $code_sl = "M". $mydate . "0000" . strval($sliplastid + 1);
+                    $code_sl = "M". $userid . $mydate . "0000" . strval($sliplastid + 1);
                 }   
                 elseif($lastid > 9 && $lastid < 100)
                 {
-                    $code_sl = "M". $mydate . "000" . strval($sliplastid + 1);
+                    $code_sl = "M". $userid . $mydate . "000" . strval($sliplastid + 1);
                 }
                 elseif($lastid > 99 && $lastid < 1000)
                 {
-                    $code_sl = "M". $mydate . "00" . strval($sliplastid + 1);
+                    $code_sl = "M". $userid . $mydate . "00" . strval($sliplastid + 1);
                 }
                 elseif($lastid > 999 && $lastid < 10000)
                 {
-                    $code_sl = "M". $mydate . "0" . strval($sliplastid + 1);
+                    $code_sl = "M". $userid . $mydate . "0" . strval($sliplastid + 1);
                 }
                 elseif($lastid > 9999 && $lastid < 100000)
                 {
-                    $code_sl = "M". $mydate . strval($sliplastid + 1);
+                    $code_sl = "M". $userid . $mydate . strval($sliplastid + 1);
                 }
             }
             else{
@@ -1776,7 +1777,7 @@ class TransactionController extends Controller
        $mydate = date("Y").date("m").date("d");
        $currdate = date("Y-m-d");
 
-       $slip = SlipTable::where('id',$id)->orderby('id','asc')->get();
+       $slip = SlipTable::where('slip_type','ms')->where('id',$id)->orderby('id','desc')->get();
        $sl_ids = response()->json($slip->modelKeys());
        // dd($slip[0]->insured_id);
        $insured = Insured::where('number',$slip[0]->insured_id)->orderby('id','desc')->get();
@@ -1790,7 +1791,29 @@ class TransactionController extends Controller
        $code_ms = $insured[0]->number;
        $shiplist= ShipListTemp::where('insured_id',$code_ms)->orderby('id','desc')->get();
 
-       $code_sl = $slip[0]->number . '-ED' . '000' . '1';
+       $countendorsement = $slip[0]->slip_idendorsementcount;
+        if($countendorsement == null){
+            $code_sl = $slip[0]->number . '-END' . '000' . '1';
+        }
+        else{
+            if($countendorsement < 10)
+            {
+                $code_sl = substr($slip[0]->number,0,16) . '-END' . '000' . ($countendorsement + 1);
+            }
+            elseif($countendorsement > 9 && $countendorsement < 100)
+            {
+                $code_sl = substr($slip[0]->number,0,16) . '-END' . '00' . ($countendorsement + 1);
+            }
+            elseif($countendorsement > 99 && $countendorsement < 1000)
+            {
+                $code_sl = substr($slip[0]->number,0,16) . '-END' . '0' . ($countendorsement + 1);
+            }
+            elseif($countendorsement > 999 && $countendorsement < 10000)
+            {
+                $code_sl = substr($slip[0]->number,0,16) . '-END' . ($countendorsement + 1);
+            }
+        }
+      
        
        $currency = Currency::orderby('id','asc')->get();
        $cob = COB::orderby('id','asc')->get();
@@ -1812,7 +1835,7 @@ class TransactionController extends Controller
        $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
        $statuslist= StatusLog::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
-       return view('crm.transaction.marine_slip_edit', compact(['user','interestinsured','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
+       return view('crm.transaction.marine_slip_endorsement', compact(['user','interestinsured','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
    }
 
    public function destroymarineinsured($id)
