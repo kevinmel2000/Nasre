@@ -353,28 +353,74 @@ class MovePropSlipController extends Controller
         if($slipdata==NULL || empty($slipdata) || $code_ms==0 || $code_sl==0)
         {
 
-            $insureddata=Insured::where('slip_type','mp')->orderby('id','desc')->first();
+            $countendorsement =$slipdata->slip_idendorsementcount;
+            $insureddata=Insured::where('slip_type','fe')->orderby('id','desc')->first();
             $slipdata=SlipTable::where('insured_id',$insureddata->number)->orderby('id','desc')->first();
-            $countendorsement=1;
-
+            
             $code_ms=$insureddata->number;
-            $code_sl=$slipdata->number;
-        }
-        else
-        {
-
+   
             if($slipdata->slip_idendorsementcount==NULL || $slipdata->slip_idendorsementcount=="")
             {
-                $countendorsement=1;
+                $code_sl = $slipdata->number . '-END' . '000' . '1';
             }
             else 
             {
-                $countendorsement=$slipdata->slip_idendorsementcount+1;
+                if($countendorsement < 10)
+                {
+                    $code_sl = substr($slipdata->number,0,16) . '-END' . '000' . ($countendorsement + 1);
+                }
+                elseif($countendorsement > 9 && $countendorsement < 100)
+                {
+                    $code_sl = substr($slipdata->number,0,16) . '-END' . '00' . ($countendorsement + 1);
+                }
+                elseif($countendorsement > 99 && $countendorsement < 1000)
+                {
+                    $code_sl = substr($slipdata->number,0,16) . '-END' . '0' . ($countendorsement + 1);
+                }
+                elseif($countendorsement > 999 && $countendorsement < 10000)
+                {
+                    $code_sl = substr($slipdata->number,0,16) . '-END' . ($countendorsement + 1);
+                }
             }
 
             if($slipdata->prev_endorsement==NULL || $slipdata->prev_endorsement=="")
             {
-                $slipdata->prev_endorsement=$code_sl;
+                $slipdata->prev_endorsement=$sl;
+            }
+        
+        
+        }
+        else
+        {
+
+            $countendorsement =$slipdata->slip_idendorsementcount;
+            if($slipdata->slip_idendorsementcount==NULL || $slipdata->slip_idendorsementcount=="")
+            {
+                $code_sl = $slipdata->number . '-END' . '000' . '1';
+            }
+            else 
+            {
+                if($countendorsement < 10)
+                {
+                    $code_sl = substr($slipdata->number,0,16) . '-END' . '000' . ($countendorsement + 1);
+                }
+                elseif($countendorsement > 9 && $countendorsement < 100)
+                {
+                    $code_sl = substr($slipdata->number,0,16) . '-END' . '00' . ($countendorsement + 1);
+                }
+                elseif($countendorsement > 99 && $countendorsement < 1000)
+                {
+                    $code_sl = substr($slipdata->number,0,16) . '-END' . '0' . ($countendorsement + 1);
+                }
+                elseif($countendorsement > 999 && $countendorsement < 10000)
+                {
+                    $code_sl = substr($slipdata->number,0,16) . '-END' . ($countendorsement + 1);
+                }
+            }
+
+            if($slipdata->prev_endorsement==NULL || $slipdata->prev_endorsement=="")
+            {
+                $slipdata->prev_endorsement=$sl;
             }
 
         }
