@@ -347,23 +347,37 @@ class MovePropSlipController extends Controller
         $code_ms=$ms;
         $code_sl=$sl;
 
-        if($slipdata->slip_idendorsementcount==NULL || $slipdata->slip_idendorsementcount=="")
-        {
-            $countendorsement=1;
-        }
-        else 
-        {
-            $countendorsement=$slipdata->slip_idendorsementcount+1;
-        }
-
-        if($slipdata->prev_endorsement==NULL || $slipdata->prev_endorsement=="")
-        {
-            $slipdata->prev_endorsement=$code_sl;
-        }
-
-
         $insureddata=Insured::where('number',$code_ms)->first();
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
+
+        if($slipdata==NULL || empty($slipdata) || $code_ms==0 || $code_sl==0)
+        {
+
+            $insureddata=Insured::where('slip_type','mp')->orderby('id','desc')->first();
+            $slipdata=SlipTable::where('insured_id',$insureddata->number)->orderby('id','desc')->first();
+            $countendorsement=1;
+
+            $code_ms=$insureddata->number;
+            $code_sl=$slipdata->number;
+        }
+        else
+        {
+
+            if($slipdata->slip_idendorsementcount==NULL || $slipdata->slip_idendorsementcount=="")
+            {
+                $countendorsement=1;
+            }
+            else 
+            {
+                $countendorsement=$slipdata->slip_idendorsementcount+1;
+            }
+
+            if($slipdata->prev_endorsement==NULL || $slipdata->prev_endorsement=="")
+            {
+                $slipdata->prev_endorsement=$code_sl;
+            }
+
+        }
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();

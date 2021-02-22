@@ -236,7 +236,7 @@
                                         <div class="row">
                                             
                                             <div class="col-md-12">
-                                                <a href="{{url('transaction-data/endorsementfeslip/'.$code_ms.'/'.$code_sl)}}" target="_blank">
+                                                <a href="{{url('transaction-data/endorsementfeslip/0/0')}}" target="_blank">
                                                 <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsement">{{__('Endorsement')}}</button>
                                                 </a>
                                             </div>
