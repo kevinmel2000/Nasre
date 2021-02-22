@@ -298,7 +298,7 @@
                                                     <div class="form-group">
                                                         <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
                                                         <label for="">{{__('Number')}} </label>
-                                                        <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" value="{{ $code_sl }}-end{{ $countendorsement }}" readonly="readonly" required/>
+                                                        <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" value="{{ $code_sl }}" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
