@@ -52,8 +52,8 @@
                               <td><a href="{{  url('transaction-data/detailhemslip', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
                               <td>{{@$insureddata->insured_prefix}} - {{@$insureddata->insured_name}} - {{@$insureddata->insured_suffix}}</td>
                               <td>{{@$insureddata->share }}</td>
-                              <td>{{@$insureddata->share_from}}</td>
-                              <td>{{@$insureddata->share_to}}</td>
+                              <td class="uang">{{@$insureddata->share_from}}</td>
+                              <td class="uang">{{@$insureddata->share_to}}</td>
                               <td>{{@$insureddata->coincurance}}</td>
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$insureddata->created_at}}" class="mr-3">
