@@ -62,7 +62,7 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     // SECTION Marine Slip Group Routes
     Route::get('/marine-slip', [TransactionController::class, 'indexmarineslip']);
     Route::get('/marine-index', [TransactionController::class, 'indexmarine']);
-    Route::get('/marine-endorsement', [TransactionController::class, 'indexmarineendorsement']);
+    Route::get('/marine-endorsement/{id}', [TransactionController::class, 'indexmarineendorsement']);
     Route::get('/marine-slip/{id}', [TransactionController::class, 'showslipdetails']);
     Route::get('/marine-slip/edit/{id}', [TransactionController::class, 'editmarineslip']);
     Route::get('/marine-insured/{id}', [TransactionController::class, 'showinsureddetails']);

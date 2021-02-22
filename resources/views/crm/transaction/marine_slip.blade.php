@@ -261,7 +261,11 @@
                                     <div class="tab-pane fade show active" id="general-details-id" role="tabpanel" aria-labelledby="general-details">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsement">{{__('Endorsement')}}</button>
+                                                @if($edslipid == 0)
+                                                <a href="{{url('/transaction-data/marine-endorsement',$edslipid)}}" class="btn btn-sm btn-primary float-right" aria-readonly="true">{{__('Endorsement')}}</a>
+                                                @else
+                                                <a href="{{url('/transaction-data/marine-endorsement',$edslipid)}}" class="btn btn-sm btn-primary float-right" >{{__('Endorsement')}}</a>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="row">
@@ -270,7 +274,7 @@
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                         <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
-                                                        <input type="hidden" name="slipmsinumber" id="slipmsinumber" value="">
+                                                        <input type="hidden" name="slipmsinumber" id="slipmsinumber" value="{{ $code_ms }}">
                                                         <label for="">{{__('Number')}} </label>
                                                         <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="0-25" value="{{ $code_sl }}" readonly="readonly" />
                                                         </div>
@@ -334,11 +338,11 @@
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                    <input type="text" id="sliped" name="sliped" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"/>
+                                                                    <input type="text" id="sliped" name="sliped" class="form-control form-control-sm " data-validation="length" value="0" readonly="readonly" data-validation-length="0-50"/>
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                    <input type="text" id="slipsls" name="slipsls" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"/>
+                                                                    <input type="text" id="slipsls" name="slipsls" class="form-control form-control-sm " data-validation="length" value="0" readonly="readonly" data-validation-length="0-50"/>
                                                                 </div>
                                                             </div>
                                                         </div>
