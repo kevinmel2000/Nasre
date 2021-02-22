@@ -752,7 +752,7 @@
            data:{
                code_ins:code_ins,
                slipnumber:slipnumber,
-               slipusername:slipusername,
+               slip_username:slipusername,
                prod_year:slipprodyear,
                slipuy:slipuy,
                slipstatus:slipstatus,

@@ -1888,7 +1888,7 @@ class TransactionController extends Controller
 
                 SlipTable::create([
                     'number'=>$request->slipnumber,
-                    'username'=>$request->username,
+                    'username'=>$request->slip_username,
                     'insured_id'=>$request->code_ins,
                     'slip_type'=>'ms',
                     'prod_year' => $currdate,
