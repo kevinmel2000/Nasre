@@ -1673,53 +1673,7 @@
                                 </ul>
                             </li>
 
-                            @if(
-                                @$route_active == 'Hole In One - Slip Entry' 
-                                || @$route_active == 'Hole In One - Index'  
-                                )
-                                    @php
-                                    $hio_dd = 'active';
-                                    $hio_menu_open = 'menu-open';
-                                    @endphp
-                            @else
-                                @php
-                                $hio_menu_open = 'menu-close';
-                                @endphp
-                            @endif
-                            <li class="nav-item has-treeview {{ @$hio_menu_open }}">
-                                <a href="#" class="nav-link {{@$hio_dd}}">
-                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                    <p style="font-size: 90%;margin-left:2%;">
-                                        {{__('HOLE IN ONE')}}
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                        @if($route_active == 'Hole In One - Index')
-                                        @php
-                                            $hio_idx = 'active';
-                                        @endphp
-                                        @endif
-                                        <li class="nav-item">
-                                            <a href="{{url('/transaction-data/hio-index')}}" class="nav-link {{@$hio_idx}}">
-                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                <p style="font-size: 80%;margin-left:2%;">{{__('HOLE IN ONE - INDEX')}}</p>
-                                            </a>
-                                        </li>
-
-                                        @if($route_active == 'Hole In One - Slip Entry')
-                                        @php
-                                            $hio_form = 'active';
-                                        @endphp
-                                        @endif
-                                        <li class="nav-item">
-                                            <a href="{{url('/transaction-data/hio-slip')}}" class="nav-link {{@$hio_form}}">
-                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                <p style="font-size: 80%;margin-left:2%;">{{__('HOLE IN ONE - SLIP ENTRY')}}</p>
-                                            </a>
-                                        </li>
-                                </ul>
-                            </li>
+                            
 
                             @if(
                                 @$route_active == 'Moveable Property - Slip Entry' 
@@ -1817,6 +1771,53 @@
                                 </ul>
                             </li>
                         
+                            @if(
+                                @$route_active == 'Hole In One - Slip Entry' 
+                                || @$route_active == 'Hole In One - Index'  
+                                )
+                                    @php
+                                    $hio_dd = 'active';
+                                    $hio_menu_open = 'menu-open';
+                                    @endphp
+                            @else
+                                @php
+                                $hio_menu_open = 'menu-close';
+                                @endphp
+                            @endif
+                            <li class="nav-item has-treeview {{ @$hio_menu_open }}">
+                                <a href="#" class="nav-link {{@$hio_dd}}">
+                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                    <p style="font-size: 90%;margin-left:2%;">
+                                        {{__('HOLE IN ONE')}}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                        @if($route_active == 'Hole In One - Index')
+                                        @php
+                                            $hio_idx = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/hio-index')}}" class="nav-link {{@$hio_idx}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('HOLE IN ONE - INDEX')}}</p>
+                                            </a>
+                                        </li>
+
+                                        @if($route_active == 'Hole In One - Slip Entry')
+                                        @php
+                                            $hio_form = 'active';
+                                        @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/transaction-data/hio-slip')}}" class="nav-link {{@$hio_form}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                <p style="font-size: 80%;margin-left:2%;">{{__('HOLE IN ONE - SLIP ENTRY')}}</p>
+                                            </a>
+                                        </li>
+                                </ul>
+                            </li>
 
                             @if(
                                 @$route_active == 'Personal Accident - Slip Entry' 
