@@ -1348,7 +1348,7 @@
                                     </li>
                                 @endcan
 
-                                @can('viewany-marinelookup', User::class)
+                                {{-- @can('viewany-marinelookup', User::class) --}}
                                     @if($route_active == 'Marine - Lookup Ship')
                                         @php
                                             $marinelookupform = 'active';
@@ -1360,7 +1360,7 @@
                                             <p style="font-size: 90%;margin-left:2%;">{{__('MARINE - LOOKUP FORM')}}</p>
                                         </a>
                                     </li>
-                                @endcan
+                                {{-- @endcan --}}
 
                                     @if(
                                         @$route_active == 'Ship Type Master' 

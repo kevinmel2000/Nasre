@@ -1790,7 +1790,7 @@ class TransactionController extends Controller
        $code_ms = $insured[0]->number;
        $shiplist= ShipListTemp::where('insured_id',$code_ms)->orderby('id','desc')->get();
 
-       $code_sl = $slip[0]->number + '-ED001';
+       $code_sl = $slip[0]->number . '-ED' . '000' . '1';
        
        $currency = Currency::orderby('id','asc')->get();
        $cob = COB::orderby('id','asc')->get();
