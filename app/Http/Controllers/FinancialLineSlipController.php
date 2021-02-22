@@ -343,18 +343,33 @@ class FinancialLineSlipController extends Controller
         $insureddata=Insured::where('number',$code_ms)->first();
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
 
-        if($slipdata->slip_idendorsementcount==NULL || $slipdata->slip_idendorsementcount=="")
+        if($slipdata==NULL || empty($slipdata) || $code_ms==0 || $code_sl==0)
         {
-            $countendorsement=1;
-        }
-        else 
-        {
-            $countendorsement=$slipdata->slip_idendorsementcount+1;
-        }
 
-        if($slipdata->prev_endorsement==NULL || $slipdata->prev_endorsement=="")
+            $insureddata=Insured::where('slip_type','fl')->orderby('id','desc')->first();
+            $slipdata=SlipTable::where('insured_id',$insureddata->number)->orderby('id','desc')->first();
+            $countendorsement=1;
+
+            $code_ms=$insureddata->number;
+            $code_sl=$slipdata->number;
+        }
+        else
         {
-            $slipdata->prev_endorsement=$code_sl;
+
+            if($slipdata->slip_idendorsementcount==NULL || $slipdata->slip_idendorsementcount=="")
+            {
+                $countendorsement=1;
+            }
+            else 
+            {
+                $countendorsement=$slipdata->slip_idendorsementcount+1;
+            }
+
+            if($slipdata->prev_endorsement==NULL || $slipdata->prev_endorsement=="")
+            {
+                $slipdata->prev_endorsement=$code_sl;
+            }
+
         }
 
 
