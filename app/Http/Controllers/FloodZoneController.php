@@ -39,8 +39,7 @@ class FloodZoneController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'name'=>'required',
-            'flagdelete'=>'required'
+            'name'=>'required'
         ]);
         
         if($validator)
@@ -49,8 +48,7 @@ class FloodZoneController extends Controller
             //exit();
             $user = Auth::user();
             FloodZone::create([
-                'name'=>$request->name,
-                'flag_delete'=>$request->flagdelete
+                'name'=>$request->name
             ]);
             $notification = array(
                 'message' => 'Flood Zone added successfully!',
@@ -67,8 +65,7 @@ class FloodZoneController extends Controller
     public function update(Request $request, $floodzone)
     {
         $validator = $request->validate([
-            'name'=>'required',
-            'flag_delete'=>'required'
+            'name'=>'required'
         ]);
         if($validator){
             

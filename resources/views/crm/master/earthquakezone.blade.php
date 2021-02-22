@@ -30,14 +30,14 @@
                     </div>
                 </div>
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Flag Delete')}}</label>
                           <input type="text" name="flagdelete" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                       </div>
                     </div>
-                </div>
+                </div> --}}
                 
               </div>
             </div>
@@ -74,7 +74,7 @@
                     <tr>
                       <th>{{__('ID')}}</th>
                       <th>{{__('EarthQuake Zone ')}}</th>
-                      <th>{{__('Flag Delete ')}}</th>
+                      {{-- <th>{{__('Flag Delete ')}}</th> --}}
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
@@ -83,7 +83,7 @@
                             <tr>
                               <td>{{@$earthquakezonedata->id}}</td>
                               <td>{{@$earthquakezonedata->name}}</td>
-                              <td>{{@$earthquakezonedata->flag_delete}}</td>
+                              {{-- <td>{{@$earthquakezonedata->flag_delete}}</td> --}}
                              
                               <td>
                                
@@ -120,14 +120,14 @@
                                                   </div>
 
                                                   
-                                                  <div class="row">
+                                                  {{-- <div class="row">
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Flag Delete')}}</label>
                                                         <input type="text" name="flag_delete" class="form-control" value="{{$earthquakezonedata->flag_delete}}" required/>
                                                       </div>
                                                     </div>
-                                                  </div>
+                                                  </div> --}}
 
                                               </div>
 

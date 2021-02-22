@@ -31,14 +31,7 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                          <label for="">{{__('Flag Delete')}}</label>
-                          <input type="text" name="flagdelete" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                      </div>
-                    </div>
-                </div>
+                
                 
               </div>
             </div>
@@ -74,8 +67,7 @@
                     <thead>
                     <tr>
                       <th>{{__('ID')}}</th>
-                      <th>{{__('Country')}}</th>
-                      <th>{{__('State/Province Name')}}</th>
+                      <th>{{__('Name')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
@@ -84,7 +76,6 @@
                             <tr>
                               <td>{{@$floodzonedata->id}}</td>
                               <td>{{@$floodzonedata->name}}</td>
-                              <td>{{@$floodzonedata->flag_delete}}</td>
                              
                              
                               <td>
@@ -122,15 +113,6 @@
                                                     </div>
                                                   </div>
 
-                                                  
-                                                  <div class="row">
-                                                    <div class="col-md-6 col-md-12">
-                                                      <div class="form-group">
-                                                        <label for="">{{__('Flag Delete')}}</label>
-                                                        <input type="text" name="flag_delete" class="form-control" value="{{$floodzonedata->flag_delete}}" required/>
-                                                      </div>
-                                                    </div>
-                                                  </div>
 
                                               </div>
 

@@ -39,8 +39,7 @@ class EarthQuakeZoneController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'name'=>'required',
-            'flagdelete'=>'required'
+            'name'=>'required'
         ]);
         
         if($validator)
@@ -50,7 +49,7 @@ class EarthQuakeZoneController extends Controller
             $user = Auth::user();
             EarthQuakeZone::create([
                 'name'=>$request->name,
-                'flag_delete'=>$request->flagdelete
+                'flag_delete'=>" "
             ]);
             $notification = array(
                 'message' => 'Earth Quake Zone added successfully!',
@@ -68,8 +67,7 @@ class EarthQuakeZoneController extends Controller
     public function update(Request $request, $eqzone)
     {
         $validator = $request->validate([
-            'name'=>'required',
-            'flag_delete'=>'required'
+            'name'=>'required'
         ]);
 
         if($validator){

@@ -142,9 +142,17 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::get('/hio-index', [TransactionController::class, 'indexhio']);
     Route::get('/hio-slip/{id}', [TransactionController::class, 'showlocationdetails'])->name('locDetails');
     Route::post('/hio-insured', [TransactionController::class, 'storehioinsured']);
-    Route::post('/hio-slip', [TransactionController::class, 'storehioslip']);
+    Route::post('/hio-slip/store', [TransactionController::class, 'storehioslip']);
     Route::delete('/hio-insured/destroyinsured/{id}', [TransactionController::class, 'destroyhioinsured']);
     Route::delete('/hio-slip/destroyslip/{id}', [TransactionController::class, 'destroyhioslip']);
+    Route::get('/hio-endorsement/{id}', [TransactionController::class, 'indexmarineendorsement']);
+    Route::get('/hio-slip/{id}', [TransactionController::class, 'showslipdetails']);
+    Route::get('/hio-slip/edit/{id}', [TransactionController::class, 'editmarineslip']);
+    Route::get('/hio-insured/{id}', [TransactionController::class, 'showinsureddetails']);
+    Route::get('/hio-insured/edit/{id}', [TransactionController::class, 'editmarineinsured']);
+    Route::post('hio-insured/update/{id}', [TransactionController::class, 'updatemarineinsured']);
+    Route::post('/hio-slip/update/{id}', [TransactionController::class, 'updatemarineslip']);
+    Route::post('/hio-endorsement', [TransactionController::class, 'storemarineendorsement']);
 
 
     // SECTION Personal Accident Slip Group Routes
