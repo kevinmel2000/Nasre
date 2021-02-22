@@ -693,6 +693,7 @@
 
        var slip_id = $('#idslip').val();
        var code_ins = $('#msinumber').val();
+       var oldslipnumber = $('#oldslipnumber').val();
        var slipnumber = $('#slipnumber').val();
        var slipusername = $('#slipusername').val();
        var slipprodyear = $('#slipprodyear').val();
@@ -750,8 +751,10 @@
            url:'{{ url("/") }}/transaction-data/marine-endorsement',
            type:"POST",
            data:{
+               slip_id:slip_id,
                code_ins:code_ins,
                slipnumber:slipnumber,
+               oldslipnumber:oldslipnumber,
                slip_username:slipusername,
                prod_year:slipprodyear,
                slipuy:slipuy,

@@ -54,6 +54,7 @@
                                                         <div class="form-group">
                                                             <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}" />
                                                             <input type="hidden" name="idslip" id="idslip" value="{{$slp->id}}" />
+                                                            <input type="hidden" name="oldslipnumber" id="oldslipnumber" value="{{$slp->number}}" />
                                                             <input type="hidden" name="msinumber" id="msinumber" value="{{$slp->insured_id}}" />
                                                             <label for="">{{__('Number')}} </label>
                                                             <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="0-25" value="{{ $code_sl }}" readonly="readonly" />

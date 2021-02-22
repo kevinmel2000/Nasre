@@ -446,11 +446,11 @@
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                        <input type="text" id="sliped" name="sliped" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="{{ $slp->endorsment }}"  />
+                                                                        <input type="text" id="sliped" name="sliped" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="{{ $slp->endorsment }}" readonly="readonly" />
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                        <input type="text" id="slipsls" name="slipsls" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="{{ $slp->selisih }}" />
+                                                                        <input type="text" id="slipsls" name="slipsls" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="{{ $slp->selisih }}" readonly="readonly" />
                                                                     </div>
                                                                 </div>
                                                             </div>

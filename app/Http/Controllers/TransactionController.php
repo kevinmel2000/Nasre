@@ -1854,7 +1854,7 @@ class TransactionController extends Controller
        $retrocessiontemp= RetrocessionTemp::where('slip_id',$sl_number)->orderby('id','desc')->get();
        $statuslist= StatusLog::where('slip_id','=',$sl_number)->orderby('id','desc')->get();
 
-       return view('crm.transaction.marine_endorsement', compact(['user','filelist','selisih','ed_count','interestinsured','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
+       return view('crm.transaction.marine_endorsement', compact(['user','sl_number','filelist','selisih','ed_count','interestinsured','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
    }
 
 
@@ -1932,7 +1932,9 @@ class TransactionController extends Controller
                     'retrocession_panel'=>$retrocessionlist->toJson(),
                     'retro_backup'=>$request->sliprb,
                     'own_retention'=>$request->slipor,
-                    'sum_own_retention'=>$request->slipsumor
+                    'sum_own_retention'=>$request->slipsumor,
+                    'slip_idendorsementcount' => $request->sliped,
+                    'prev_endorsement' => $request->oldslipnumber
                     
 
                 ]);
@@ -1953,12 +1955,11 @@ class TransactionController extends Controller
                 'user'=>Auth::user()->name,
             ]);
 
-            $insdata = Insured::where('number',$request->code_ins)->where('slip_type','ms')->first();
+            // $slipdata = SlipTable::where('number',$request->pre)->where('slip_type','ms')->first();
 
-            $msdata = Insured::findOrFail($insdata->id);
-            $msdata->share=$request->sharems;
-            $msdata->share_from=$request->sumsharems;
-            $msdata->share_to=$request->tsims;
+            $msdata = SlipTable::findOrFail($request->slip_id);
+            $msdata->slip_idendorsementcount=$request->sliped;
+            $msdata->prev_endorsement=$request->oldslipnumber;
             $msdata->save();
 
 
