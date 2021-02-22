@@ -1067,3 +1067,201 @@ $(document).ready(function() {
 
    });
 </script>
+
+
+<script type='text/javascript'>
+    $('#multi-file-upload-ajax2').submit(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var code_ms = $('#insuredIDtxt').val();
+       var prevslipnumber = $('#prevslipnumber').val();
+       var slipnumber = $('#slipnumber').val();
+       var slipuy = $('#slipuy').val();
+       var slipstatus = $('#slipstatus').val();
+       var sliped = $('#sliped').val();
+       var slipsls = $('#slipsls').val();
+       var slipcedingbroker = $('#slipcedingbroker').val();
+       var slipceding = $('#slipceding').val();
+       var slipcurrency = $('#slipcurrency').val();
+       var slipcob = $('#slipcob').val();
+       var slipkoc = $('#slipkoc').val();
+       var slipoccupacy = $('#slipoccupacy').val();
+       var slipbld_const = $('#slipbld_const').val();
+       var slipno = $('#slipno').val();
+       var slipcndn = $('#slipcndn').val();
+       var slippolicy_no = $('#slippolicy_no').val();
+       var sliptotalsum = $('#sliptotalsum').val();
+       var sliptype =  $('#sliptype').val();
+       var slippct =  $('#slippct').val();
+       var sliptotalsumpct =  $('#sliptotalsumpct').val();
+       var slipipfrom =  $('#slipipfrom').val();
+       var slipipto =  $('#slipipto').val();
+       var sliprpfrom =  $('#sliprpfrom').val();
+       var sliprpto =  $('#sliprpto').val();
+       var proportional =  $('#switch-proportional').val();
+       var sliplayerproportional =  $('#sliplayerproportional').val();
+       var sliprate =  $('#sliprate').val();
+       var slipshare =  $('#slipshare').val();
+       var slipsumshare =  $('#slipsumshare').val();
+       var slipbasicpremium =  $('#slipbasicpremium').val();
+       var slipgrossprmtonr =  $('#slipgrossprmtonr').val();
+       var slipcommission =  $('#slipcommission').val();
+       var slipsumcommission =  $('#slipsumcommission').val();
+       var slipnetprmtonr =  $('#slipnetprmtonr').val();
+       var sliprb =  $('#sliprb').val();
+       var slipor =  $('#slipor').val();
+       var slipsumor =  $('#slipsumor').val();
+
+       var token2 = $('input[name=_token]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{url('transaction-data/fl-slip/endorsementstore')}}",
+           type:"POST",
+           data:{
+               code_ms:code_ms,
+               slipnumber:slipnumber,
+               prevslipnumber:prevslipnumber,
+               slipuy:slipuy,
+               slipstatus:slipstatus,
+               sliped:sliped,
+               slipsls:slipsls,
+               slipcedingbroker:slipcedingbroker,
+               slipceding:slipceding,
+               slipcurrency:slipcurrency,
+               slipcob:slipcob,
+               slipkoc:slipkoc,
+               slipoccupacy:slipoccupacy,
+               slipbld_const:slipbld_const,
+               slipno:slipno,
+               slipcndn:slipcndn,
+               slippolicy_no:slippolicy_no,
+               sliptotalsum:sliptotalsum,
+               sliptype:sliptype,
+               slippct:slippct,
+               sliptotalsumpct:sliptotalsumpct,
+               slipipfrom:slipipfrom,
+               slipipto:slipipto,
+               sliprpfrom:sliprpfrom,
+               sliprpto:sliprpto,
+               proportional:proportional,
+               sliplayerproportional:sliplayerproportional,
+               sliprate:sliprate,
+               slipshare:slipshare,
+               slipsumshare:slipsumshare,
+               slipbasicpremium:slipbasicpremium,
+               slipgrossprmtonr:slipgrossprmtonr,
+               slipsumcommission:slipsumcommission,
+               slipcommission:slipcommission,
+               slipnetprmtonr:slipnetprmtonr,
+               sliprb:sliprb,
+               slipor:slipor,
+               slipsumor:slipsumor
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                swal("Good job!", "Financial Line Slip Insert Success", "success")
+                console.log(response)
+
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", "Financial Line Slip Insert Error", "Insert Error");
+           }
+       });
+
+
+       var formData = new FormData(this);
+       let TotalFiles = $('#attachment')[0].files.length; //Total files
+       let files = $('#attachment')[0];
+       var slip_id = $('#slipnumber').val();
+
+       for (let i = 0; i < TotalFiles; i++) 
+       {
+        formData.append('files' + i, files.files[i]);
+       }
+       
+       formData.append('TotalFiles', TotalFiles);
+       formData.append('slip_id', slip_id);
+     
+       $.ajax({
+                    type:'POST',
+                    url: "{{ url('store-multi-file-ajax')}}",
+                    data: formData,
+                    cache:false,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    success: (data) => {
+                    //this.reset();
+                    //alert('Files has been uploaded using jQuery ajax');
+                      swal("Good job!", "Files has been uploaded", "success")
+                    },
+                    error: function(data){
+                     //alert(data.responseJSON.errors.files[0]);
+                     swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
+                     console.log(data.responseJSON.errors);
+                    }
+        });
+
+
+       //insured SAVE
+       var flnumber = $('#insuredIDtxt').val();
+       var flinsured = $('#flinsured').val();
+       var flsuggestinsured = $('#autocomplete').val();
+       var flsuffix = $('#autocomplete2').val();
+       var flshare = $('#flshare').val();
+       var flsharefrom  = $('#flsharefrom').val();
+       var flshareto = $('#flshareto').val();
+       var flcoinsurance = $('#flcoinsurance').val();
+       var flobligee = $('#flobligee').val();
+       var flprincipal = $('#flprincipal').val();
+       
+       
+       var token2 = $('input[name=_token]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ url('transaction-data/fl-insured/store') }}",
+           type:"POST",
+           data:{
+               flnumber:flnumber,
+               flinsured:flinsured,
+               flsuggestinsured:flsuggestinsured,
+               flsuffix:flsuffix,
+               flshare:flshare,
+               flsharefrom:flsharefrom,
+               flshareto:flshareto,
+               flcoinsurance:flcoinsurance,
+               flobligee:flobligee,
+               flprincipal:flprincipal
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                swal("Good job!", "Financial Line Insert Success", "success")
+                console.log(response)
+
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", request.responseText, "Insert Error");
+           }
+       });
+
+   });
+</script>

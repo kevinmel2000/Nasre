@@ -232,7 +232,7 @@
             </div>
             <div class="card-body bg-light-gray">
                 <div class="container-fluid p-3">
-                <form id="multi-file-upload-ajax" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
+                <form id="multi-file-upload-ajax2" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
                 @csrf
                         <div class="card card-tabs">
                             <div class="card-header p-0 pt-1 border-bottom-0">
@@ -265,14 +265,26 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                             <div class="row">
-                                                    <div class="col-md-12">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
                                                         <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
                                                         <label for="">{{__('Number')}} </label>
-                                                        <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" value="{{ $code_sl }}" readonly="readonly" required/>
+                                                        <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" value="{{ $code_sl }}-end{{ $countendorsement }}" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
+                                                        <label for="">{{__('Prev Number')}} </label>
+                                                        <input type="text" id="prevslipnumber" name="prevslipnumber" class="form-control form-control-sm" value="{{ $slipdata->prev_endorsement }}" readonly="readonly" required/>
+                                                    </div>
+                                                    </div>
+                                                </div>
+
+
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
@@ -330,7 +342,7 @@
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                    <input type="text" id="sliped"  name="sliped" value="{{$slipdata->endorsment}}" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50"/>
+                                                                    <input type="text" id="sliped"  name="sliped" value="@if($slipdata->endorsment != null)  {{$slipdata->endorsment}} @else {{ $countendorsement }} @endif" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50"/>
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>

@@ -13,6 +13,12 @@ class SlipTable extends Model
 
     public $timestamps = false;
 
+    public function slipdata()
+    {
+        
+        return $this->belongsTo('App\Models\SlipTable', 'slip_idendorsement');
+    }
+
     public function insureddata()
     {
         
