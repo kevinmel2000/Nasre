@@ -207,7 +207,7 @@
                                         <div class="tab-pane fade show active" id="general-details-id" role="tabpanel" aria-labelledby="general-details">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsement">{{__('Endorsement')}}</button>
+                                                    <a href="{{url('/transaction-data/marine-endorsement', $slp->id )}}" class="btn btn-sm btn-primary float-right" >{{__('Endorsement')}}</a>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -442,12 +442,15 @@
                                                     <div class="form-group">
                                                         <label>{{__('Attachment')}} </label>
                                                         <div class="input-group">
-                                                            <div class="input-group control-group " >
-                                                                <input type="text" name="files" id="attachment" value="{{ $slp->slipfile->filename }}" readonly="readonly" class="form-control" >
-                                                                
+                                                            <div class="input-group control-group increment2" >
+                                                                <input type="file" name="files[]" id="attachment" class="form-control" multiple>
                                                             </div>
-                                                            
 
+                                                            @foreach($filelist as $isl)
+                                                                <div class="control-group input-group" id="control-group2" style="margin-top:10px">
+                                                                    <a href="{{ asset('files')}}/{{$isl->filename}}">{{$isl->filename}}</a>
+                                                                </div>
+                                                            @endforeach
                                                         </div>
                                                     </div>
                                                 </div>

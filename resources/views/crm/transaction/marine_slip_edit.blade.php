@@ -241,7 +241,7 @@
                                             <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form id="form-addship" >
+                                        <form id="form-addship" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="row">
@@ -696,20 +696,14 @@
                                                         <label>{{__('Attachment')}} </label>
                                                         <div class="input-group">
                                                             <div class="input-group control-group increment2" >
-                                                                <input type="file" name="files[]" id="attachment" class="form-control" />
-                                                                <div class="input-group-btn"> 
-                                                                    <button class="btn btn-success" id="btn-success2" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
-                                                                </div>
+                                                                <input type="file" name="files[]" id="attachment" class="form-control" multiple>
                                                             </div>
-                                                            <div class="clone2 hide">
+
+                                                            @foreach($filelist as $isl)
                                                                 <div class="control-group input-group" id="control-group2" style="margin-top:10px">
-                                                                    <input type="file" name="files[]" id="attachment" class="form-control" />
-                                                                    <div class="input-group-btn"> 
-                                                                        <button class="btn btn-danger" id="btn-danger2" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                                                                    </div>
+                                                                    <a href="{{ asset('files')}}/{{$isl->filename}}">{{$isl->filename}}</a>
                                                                 </div>
-                                                            </div>
-    
+                                                            @endforeach
                                                         </div>
                                                     </div>
                                                 </div>
@@ -772,7 +766,8 @@
                     
                                                                                             <td>
                                                                                                 <div class="form-group">
-                                                                                                    <button type="button" onClick="interestdetailupdate({{$isl->id}})" id="updateinterestinsured-btn" class="btn btn-md btn-primary ">{{__('Update')}}</button>
+                                                                                                    <input type="hidden"  value=""  id="idinterestinsured" name="idinterestinsured" class="form-control form-control-sm " data-validation="length" data-validation-length="0-15" />
+                                                                                                    <button type="button" onClick="interestdetailupdate()" id="updateinterestinsured-btn" class="btn btn-md btn-primary ">{{__('Update')}}</button>
                                                                                                     <button type="button" id="addinterestinsured-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
                                                                                                 </div>
                                                                                             </td>
@@ -920,7 +915,8 @@
                                                                                         </td> 
                                                                                         <td>
                                                                                             <div class="form-group">
-                                                                                                <button type="button" id="updatedeductibletype-btn" onClick="deductibledetailupdate({{$dtt->id}})" class="btn btn-md btn-primary" >{{__('Update')}}</button>
+                                                                                                <input type="hidden"  id="id_deduct" name="id_deduct" placeholder="min amount" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                                                <button type="button" id="updatedeductibletype-btn" onClick="deductibledetailupdate()" class="btn btn-md btn-primary" >{{__('Update')}}</button>
                                                                                                 <button type="button" id="adddeductibletype-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
                                                                                             </div>
                                                                                         </td>
@@ -989,7 +985,8 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <div class="form-group">
-                                                                                                {{-- <button type="button" class="btn btn-md btn-primary" onClick="conditionneededdetailupdate({{$cntt->id}})" id="updateconditionneeded-btn">{{__('Update')}}</button> --}}
+                                                                                                <input type="hidden" id="id_cnt" value=""/>
+                                                                                                <button type="button" class="btn btn-md btn-primary" onClick="conditionneededdetailupdate()" id="updateconditionneeded-btn">{{__('Update')}}</button>
                                                                                                 <button type="button" id="addconditionneeded-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
                                                                                             </div>
                                                                                         </td>
@@ -1283,7 +1280,8 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <div class="form-group">
-                                                                                                <button type="button" class="btn btn-md btn-primary" id="updateinstallmentpanel-btn" onClick="installmentdetailupdate({{ $isp->id }})" >{{__('Update')}}</button>
+                                                                                                <input type="hidden" id="id_inspan" value=""/>
+                                                                                                <button type="button" class="btn btn-md btn-primary" id="updateinstallmentpanel-btn" onClick="installmentdetailupdate()" >{{__('Update')}}</button>
                                                                                                 <button type="button" id="addinstallmentpanel-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
                                                                                                 
                                                                                             </div>
@@ -1420,8 +1418,8 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <div class="form-group">
-                                                                                                <button type="button" class="btn btn-md btn-primary" id="updateretrocessiontemp-btn" onClick="retrocessiondetailupdate({{ $rsc->id }})" >{{__('Update')}}</button>
-                                                                                                
+                                                                                                <input type="hidden" id="id_rsp" />
+                                                                                                <button type="button" class="btn btn-md btn-primary" id="updateretrocessiontemp-btn" onClick="retrocessiondetailupdate()" >{{__('Update')}}</button>
                                                                                                 <button type="button" id="addretrocessiontemp-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
                                                                                             </div>
                                                                                         </td>

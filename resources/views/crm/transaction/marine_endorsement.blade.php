@@ -16,9 +16,8 @@
             <div class="card-body bg-light-gray">
                 
                 <div class="container-fluid p-3">
-                    <form id="marineslipform" >
-                        @csrf
-                        {{ method_field('POST') }}      
+                    <form id="marineslipform" method="POST" action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
+                         
                         @foreach($slip as $slp)
                             <div class="card card-tabs">
                                 
@@ -155,11 +154,11 @@
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                        <input type="text" id="sliped" name="sliped" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="{{ $slp->endorsment }}"  />
+                                                                        <input type="text" id="sliped" name="sliped" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="{{ $ed_count }}" readonly="readonly"  />
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                        <input type="text" id="slipsls" name="slipsls" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="{{ $slp->selisih }}" />
+                                                                        <input type="text" id="slipsls" name="slipsls" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="{{ $selisih }}" readonly="readonly" />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -405,20 +404,14 @@
                                                         <label>{{__('Attachment')}} </label>
                                                         <div class="input-group">
                                                             <div class="input-group control-group increment2" >
-                                                                <input type="file" name="files[]" id="attachment" class="form-control" />
-                                                                <div class="input-group-btn"> 
-                                                                    <button class="btn btn-success" id="btn-success2" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
-                                                                </div>
+                                                                <input type="file" name="files[]" id="attachment" class="form-control" multiple>
                                                             </div>
-                                                            <div class="clone2 hide">
+
+                                                            @foreach($filelist as $isl)
                                                                 <div class="control-group input-group" id="control-group2" style="margin-top:10px">
-                                                                    <input type="file" name="files[]" id="attachment" class="form-control" />
-                                                                    <div class="input-group-btn"> 
-                                                                        <button class="btn btn-danger" id="btn-danger2" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                                                                    </div>
+                                                                    <a href="{{ asset('files')}}/{{$isl->filename}}">{{$isl->filename}}</a>
                                                                 </div>
-                                                            </div>
-    
+                                                            @endforeach
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1158,7 +1151,7 @@
                                     <div class="row">
                                         <div class="col-md-12 com-sm-12 mt-3">
                                             <a type="button" href="javascript:void(0)" id="updateslipmarine-btn" class="btn btn-primary btn-block ">
-                                                {{__('UPDATE')}}
+                                                {{__('UPDATE ENDORSEMENT')}}
                                             </a>
                                         </div>
                                     </div>

@@ -694,6 +694,7 @@
        var slip_id = $('#idslip').val();
        var code_ins = $('#msinumber').val();
        var slipnumber = $('#slipnumber').val();
+       var slipusername = $('#slipusername').val();
        var slipprodyear = $('#slipprodyear').val();
        var slipuy = $('#slipuy').val();
        var slipstatus = $('#slipstatus').val();
@@ -746,11 +747,12 @@
             });
 
        $.ajax({
-           url:'{{ url("/") }}/transaction-data/marine-slip/update/'+slip_id,
+           url:'{{ url("/") }}/transaction-data/marine-endorsement',
            type:"POST",
            data:{
                code_ins:code_ins,
                slipnumber:slipnumber,
+               slipusername:slipusername,
                prod_year:slipprodyear,
                slipuy:slipuy,
                slipstatus:slipstatus,
@@ -785,13 +787,14 @@
                slipnetprmtonr:slipnetprmtonr,
                sliprb:sliprb,
                slipor:slipor,
-               slipsumor:slipsumor
+               slipsumor:slipsumor,
+               formData:formData
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },
            success:function(response)
            {
-                swal("Good job!", "Marine Slip Update Success", "success")
+                swal("Good job!", "Marine Slip Endorsement Success", "success")
                 console.log(response)
                 // $(':input','#formmarineinsured')
                 //     .not(':button, :submit, :reset, :hidden')
@@ -804,6 +807,39 @@
                 swal("Error!", "Marine Slip Update Error", "Insert Error");
            }
        });
+
+       var formData = new FormData(this);
+       let TotalFiles = $('#attachment')[0].files.length; //Total files
+       let files = $('#attachment')[0];
+       var slip_id = $('#slipnumber').val();
+
+       for (let i = 0; i < TotalFiles; i++) 
+       {
+        formData.append('files' + i, files.files[i]);
+       }
+       
+       formData.append('TotalFiles', TotalFiles);
+       formData.append('slip_id', slip_id);
+     
+       $.ajax({
+                    type:'POST',
+                    url: "{{ url('store-multi-file-ajax')}}",
+                    data: formData,
+                    cache:false,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    success: (data) => {
+                    //this.reset();
+                    //alert('Files has been uploaded using jQuery ajax');
+                      swal("Good job!", "Files has been uploaded", "success")
+                    },
+                    error: function(data){
+                     //alert(data.responseJSON.errors.files[0]);
+                     swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
+                     console.log(data.responseJSON.errors);
+                    }
+        });
 
    });
 </script>

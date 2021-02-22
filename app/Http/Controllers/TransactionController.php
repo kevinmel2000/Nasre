@@ -470,6 +470,7 @@ class TransactionController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
+          
           $insured = Insured::where('slip_type', '=', 'ms')->orderby('id','desc')->paginate(10);
           $insured_ids = response()->json($insured->modelKeys());
           $slip = SlipTable::with('insureddata')->where('slip_type', '=', 'ms')->orderby('id','desc')->paginate(10);
@@ -1324,6 +1325,7 @@ class TransactionController extends Controller
 
         $sliplastid = count($slip);
 
+        $filelist=SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
         $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
         $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
@@ -1331,7 +1333,7 @@ class TransactionController extends Controller
         $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
         $statuslist= StatusLog::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
-        return view('crm.transaction.marine_slip_details', compact(['user','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
+        return view('crm.transaction.marine_slip_details', compact(['user','filelist','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
     }
 
     /**
@@ -1414,6 +1416,8 @@ class TransactionController extends Controller
 
         $sliplastid = count($slip);
 
+
+        $filelist=SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
         $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
         $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
@@ -1421,7 +1425,7 @@ class TransactionController extends Controller
         $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
         $statuslist= StatusLog::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
-        return view('crm.transaction.marine_slip_edit', compact(['user','interestinsured','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
+        return view('crm.transaction.marine_slip_edit', compact(['user','filelist','interestinsured','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
     }
 
     public function updatemarineinsured(request $request, $id)
@@ -1795,23 +1799,33 @@ class TransactionController extends Controller
     //    dd($countendorsement);
         if($countendorsement = null){
             $code_sl = $slip[0]->number . '-END' . '000' . '1';
+            $ed_count = 1;
+            $selisih = "false";
         }
         else{
             if($countendorsement < 10)
             {
                 $code_sl = substr($slip[0]->number,0,15) . '-END' . '000' . ($countendorsement + 1);
+                $ed_count = ($countendorsement + 1);
+                $selisih = "true";
             }
             elseif($countendorsement > 9 && $countendorsement < 100)
             {
                 $code_sl = substr($slip[0]->number,0,15) . '-END' . '00' . ($countendorsement + 1);
+                $ed_count = ($countendorsement + 1);
+                $selisih = "true";
             }
             elseif($countendorsement > 99 && $countendorsement < 1000)
             {
                 $code_sl = substr($slip[0]->number,0,15) . '-END' . '0' . ($countendorsement + 1);
+                $ed_count = ($countendorsement + 1);
+                $selisih = "true";
             }
             elseif($countendorsement > 999 && $countendorsement < 10000)
             {
                 $code_sl = substr($slip[0]->number,0,15) . '-END' . ($countendorsement + 1);
+                $ed_count = ($countendorsement + 1);
+                $selisih = "true";
             }
         }
       
@@ -1832,6 +1846,7 @@ class TransactionController extends Controller
 
        $sliplastid = count($slip);
 
+       $filelist=SlipTableFile::where('slip_id','=',$sl_number)->orderby('id','desc')->get();
        $interestlist= InterestInsuredTemp::where('slip_id',$sl_number)->orderby('id','desc')->get();
        $deductibletemp= DeductibleTemp::where('slip_id',$sl_number)->orderby('id','desc')->get();
        $conditionneededtemp= ConditionNeededTemp::where('slip_id',$sl_number)->orderby('id','desc')->get();
@@ -1839,8 +1854,146 @@ class TransactionController extends Controller
        $retrocessiontemp= RetrocessionTemp::where('slip_id',$sl_number)->orderby('id','desc')->get();
        $statuslist= StatusLog::where('slip_id','=',$sl_number)->orderby('id','desc')->get();
 
-       return view('crm.transaction.marine_endorsement', compact(['user','interestinsured','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
+       return view('crm.transaction.marine_endorsement', compact(['user','filelist','selisih','ed_count','interestinsured','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
    }
+
+
+
+   public function storemarineendorsement(Request $request)
+    {
+        $validator = $request->validate([
+            'slipnumber'=>'required',
+            'slipuy'=>'required',
+            'slippolicy_no'=>'required',
+            'slipno'=>'required',
+            'slipcndn'=>'required'
+        ]);
+        
+
+        if($validator)
+        {
+            $user = Auth::user();
+            
+            $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
+            
+            $interestlist= InterestInsuredTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $conditionneededlist= ConditionNeededTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $deductiblelist= DeductibleTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();             
+            $slipfile=SlipTableFile::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();             
+
+            
+                $currdate = date("Y-m-d");
+
+                SlipTable::create([
+                    'number'=>$request->slipnumber,
+                    'username'=>$request->username,
+                    'insured_id'=>$request->code_ins,
+                    'slip_type'=>'ms',
+                    'prod_year' => $currdate,
+                    'uy'=>$request->slipuy,
+                    'status'=>$request->slipstatus,
+                    'endorsment'=>$request->sliped,
+                    'selisih'=>$request->slipsls,
+                    'source'=>$request->slipcedingbroker,
+                    'source_2'=>$request->slipceding,
+                    'currency'=>$request->slipcurrency,
+                    'cob'=>$request->slipcob,
+                    'koc'=>$request->slipkoc,
+                    'occupacy'=>$request->slipoccupacy,
+                    'build_const'=>$request->slipbld_const,
+                    'slip_no'=>$request->slipno,
+                    'cn_dn'=>$request->slipcndn,
+                    'policy_no'=>$request->slippolicy_no,
+                    'attacment_file'=>$slipfile->toJson(),
+                    'interest_insured'=>$interestlist->toJSon(),
+                    'total_sum_insured'=>$request->sliptotalsum,
+                    'insured_type'=>$request->sliptype,
+                    'insured_pct'=>$request->slippct,
+                    'total_sum_pct'=>$request->sliptotalsumpct,
+                    'deductible_panel'=>$deductiblelist->toJson(),
+                    'condition_needed'=>$conditionneededlist->toJson(),
+                    'insurance_period_from'=>$request->slipipfrom,
+                    'insurance_period_to'=>$request->slipipto,
+                    'reinsurance_period_from'=>$request->sliprpfrom,
+                    'reinsurance_period_to'=>$request->sliprpto,
+                    'proportional'=>$request->slipproportional,
+                    'layer_non_proportional'=>$request->sliplayerproportional,
+                    'rate'=>$request->sliprate,
+                    'share'=>$request->slipshare,
+                    'sum_share'=>$request->slipsumshare,
+                    'basic_premium'=>$request->slipbasicpremium,
+                    'commission'=>$request->slipcommission,
+                    'grossprm_to_nr'=>$request->slipgrossprmtonr,
+                    'netprm_to_nr'=>$request->slipnetprmtonr,
+                    'sum_commission'=>$request->slipsumcommission,
+                    'installment_panel'=>$installmentlist->toJson(),
+                    'retrocession_panel'=>$retrocessionlist->toJson(),
+                    'retro_backup'=>$request->sliprb,
+                    'own_retention'=>$request->slipor,
+                    'sum_own_retention'=>$request->slipsumor
+                    
+
+                ]);
+
+                $notification = array(
+                    'message' => 'Fire & Engginering Slip added successfully!',
+                    'alert-type' => 'success'
+                );
+
+
+            
+
+            StatusLog::create([
+                'insured_id'=>$request->code_ins,
+                'status'=>$request->slipstatus,
+                'datetime'=>date('Y-m-d H:i:s'),
+                'slip_id'=>$request->slipnumber,
+                'user'=>Auth::user()->name,
+            ]);
+
+            $insdata = Insured::where('number',$request->code_ins)->where('slip_type','ms')->first();
+
+            $msdata = Insured::findOrFail($insdata->id);
+            $msdata->share=$request->sharems;
+            $msdata->share_from=$request->sumsharems;
+            $msdata->share_to=$request->tsims;
+            $msdata->save();
+
+
+            return back()->with($notification);
+            //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
+            //return redirect()->route('liniusaha.index');
+        
+        }
+        else
+        {
+
+            $notification = array(
+                'message' => 'Marine Slip added Failed!',
+                'alert-type' => 'success'
+            );
+
+            return back()->with($validator)->withInput();
+            //Session::flash('Failed', 'Fire & Engginering Insured Failed added', 'danger');
+            //return redirect()->route('liniusaha.index');
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
    public function destroymarineinsured($id)
     {
