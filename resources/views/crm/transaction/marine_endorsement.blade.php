@@ -45,7 +45,7 @@
                                         <div class="tab-pane fade show active" id="general-details-id" role="tabpanel" aria-labelledby="general-details">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsement">{{__('Endorsement')}}</button>
+                                                    {{-- <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsement">{{__('Endorsement')}}</button> --}}
                                                 </div>
                                             </div>
                                             <div class="row">
