@@ -27,7 +27,21 @@ class GolfFieldHoleController extends Controller
           $lastid = count($golffieldhole);
 
           if($lastid != null){
-            $code_gfh = $mydate . strval($lastid + 1);
+            // $code_gfh = $mydate . strval($lastid + 1);
+
+            if($lastid < 10){
+                $code_gfh = '00000' . strval($lastid + 1);
+            }elseif($lastid > 9 && $lastid < 100){
+                $code_gfh = '0000' . strval($lastid + 1);
+            }elseif($lastid > 99 && $lastid < 1000){
+                $code_gfh = '000' . strval($lastid + 1);
+            }elseif($lastid > 999 && $lastid < 10000){
+                $code_gfh = '00' . strval($lastid + 1);
+            }elseif($lastid > 9999 && $lastid < 100000){
+                $code_gfh = '0' . strval($lastid + 1);
+            }elseif($lastid > 99999 ){
+                $code_gfh =  strval($lastid + 1);
+            }
             // if($lastid->id == 9){
             //     $code_gfh = $mydate . strval($lastid->id + 1);
             // }elseif($lastid->id >= 10){
@@ -45,7 +59,7 @@ class GolfFieldHoleController extends Controller
             // }
         }
         else{
-            $code_gfh = $mydate . strval(1);
+            $code_gfh = '00000' . strval(1);
             // $code_gfh = $mydate . strval($lastid->id + 1);
         }
 

@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" id="koccode" name="code" class="form-control form-control-sm" value="" placeholder="enter code manually if not have parent data" data-validation="length" data-validation-length="1-12" required/>
+                          <input type="text" id="koccode" style="width: 25%;" name="code" class="form-control form-control-sm" value="{{ $code_koc }}" placeholder="enter code manually if not have parent data" data-validation="length" data-validation-length="1-12" required/>
                         </div>
                     </div>
                 </div>

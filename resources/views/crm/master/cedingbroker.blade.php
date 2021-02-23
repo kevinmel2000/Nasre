@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" id="codecedbrok" name="codebroker" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="" readonly="readonly" required/>
+                          <input type="text" id="codecedbrok" style="width: 25%;" name="codebroker" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="" readonly="readonly" placeholder="input type and company name first" required/>
                         </div>
                     </div>
                 </div>
@@ -42,21 +42,21 @@
                     </div>    
                   </div>
                 </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">{{__('Company Name')}}</label>
+                        <input type="text" id="companynamefield" name="companyname" class="form-control form-control-sm " placeholder="please input with Uppercase letter in the beginning" data-validation="length" data-validation-length="2-50" required/>
+                    </div>
+                  </div>
+                </div>
                 
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Name')}}</label>
                           <input type="text" name="name" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                      </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                          <label for="">{{__('Company Name')}}</label>
-                          <input type="text" id="companynamefield" name="companyname" class="form-control form-control-sm " placeholder="please input with Uppercase letter in the beginning" data-validation="length" data-validation-length="2-50" required/>
                       </div>
                     </div>
                 </div>

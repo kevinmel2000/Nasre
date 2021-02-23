@@ -75,11 +75,19 @@ class MasterController extends Controller
 
             $cob = COB::orderby('id','asc')->get();
             $cobparent = COB::where('code','<',100)->orderby('code','desc')->get();
-            $lastid = count($cob);
+            $countparent= COB::where('parent_id',null)->where('code','<',100)->orderby('code','desc')->get();
+            // dd($countparent);
+            $lastid = count($countparent);
             $cob_ids = response()->json($cob->modelKeys());
 
             if($lastid != null){
-                $code_cob = strval($lastid + 1);
+
+                if($lastid < 10){
+                    $code_cob = '0' . strval($lastid + 1);
+                }   
+                elseif($lastid > 9 && $lastid < 100){
+                    $code_cob = strval($lastid + 1);
+                } 
                 //$code_cob = $mydate . strval($lastid + 1);
                 
                 // if($lastid->id == 9){
@@ -99,7 +107,7 @@ class MasterController extends Controller
                 // }
             }
             else{
-                $code_cob = strval($lastid + 1);
+                $code_cob = '0' . strval(1);
                 //$code_cob = $mydate . strval(1);
             }
 
@@ -134,14 +142,21 @@ class MasterController extends Controller
          {
             $occupation = Occupation::orderby('id','asc')->get();
             $ocpparent = Occupation::where('code','<',100)->orderby('code','desc')->get();
-            $lastid = count($occupation);
+            $countparent= Occupation::where('parent_id',null)->where('code','<',100)->orderby('code','desc')->get();
+            $lastid = count($countparent);
             $ocp_ids = response()->json($occupation->modelKeys());
             $cob = COB::orderby('id','asc')->get();
 
 
             if($lastid != null){
                 //$code_ocp = $mydate . strval($lastid + 1);
-                $code_ocp = strval($lastid + 1);
+                // $code_ocp = strval($lastid + 1);
+                if($lastid < 10){
+                    $code_ocp = '0' . strval($lastid + 1);
+                }   
+                elseif($lastid > 9 && $lastid < 100){
+                    $code_ocp = strval($lastid + 1);
+                } 
                 
                 // if($lastid->id == 9){
                 //     $code_ocp = $mydate . strval($lastid->id + 1);
@@ -160,7 +175,7 @@ class MasterController extends Controller
                 // }
             }
             else{
-                $code_ocp = strval($lastid + 1);
+                $code_ocp = '0' . strval( 1);
                 //$code_ocp = $mydate . strval(1);
             }
 
@@ -253,17 +268,21 @@ class MasterController extends Controller
                 // $code_st = $mydate . strval($lastid + 1);
 
                 if($lastid < 10){
-                    $code_st = '000' . strval($lastid + 1);
+                    $code_st = '00000' . strval($lastid + 1);
                 }elseif($lastid > 9 && $lastid < 100){
-                    $code_st = '00' . strval($lastid + 1);
+                    $code_st = '0000' . strval($lastid + 1);
                 }elseif($lastid > 99 && $lastid < 1000){
-                    $code_st = '0' . strval($lastid + 1);
+                    $code_st = '000' . strval($lastid + 1);
                 }elseif($lastid > 999 && $lastid < 10000){
+                    $code_st = '00' . strval($lastid + 1);
+                }elseif($lastid > 9999 && $lastid < 100000){
+                    $code_st = '0' . strval($lastid + 1);
+                }elseif($lastid > 99999 ){
                     $code_st =  strval($lastid + 1);
                 }
             }
             else{
-                $code_st = '000' . strval(1);
+                $code_st = '00000' . strval(1);
             }
 
             return view('crm.master.ship_type', compact(['route_active', 'shiptype','shiptype_ids','code_st']));  
@@ -293,19 +312,23 @@ class MasterController extends Controller
                 // $code_cs = $mydate . strval($lastid + 1);
 
                 if($lastid < 10){
-                    $code_cs = '000' . strval($lastid + 1);
+                    $code_cs = '00000' . strval($lastid + 1);
                 }elseif($lastid > 9 && $lastid < 100){
-                    $code_cs = '00' . strval($lastid- + 1);
+                    $code_cs = '0000' . strval($lastid- + 1);
                 }elseif($lastid > 99 && $lastid < 1000){
-                    $code_cs = '0' . strval($lastid + 1);
+                    $code_cs = '000' . strval($lastid + 1);
                 }elseif($lastid > 999 && $lastid < 10000){
+                    $code_cs = '00' . strval($lastid + 1);
+                }elseif($lastid > 9999 && $lastid < 100000){
+                    $code_cs = '0' . strval($lastid + 1);
+                }elseif($lastid > 99999 ){
                     $code_cs =  strval($lastid + 1);
                 }
                 
                 
             }
             else{
-                $code_cs = '000' . strval(1);
+                $code_cs = '00000' . strval(1);
             }
 
             return view('crm.master.classification', compact(['route_active', 'code_cs','classification','classification_ids']));   
@@ -336,19 +359,23 @@ class MasterController extends Controller
                 // $code_cr = $mydate . strval($lastid + 1);
 
                 if($lastid < 10){
-                    $code_cr = '000' . strval($lastid + 1);
+                    $code_cr = '00000' . strval($lastid + 1);
                 }elseif($lastid > 9 && $lastid < 100){
-                    $code_cr = '00' . strval($lastid- + 1);
+                    $code_cr = '0000' . strval($lastid- + 1);
                 }elseif($lastid > 99 && $lastid < 1000){
-                    $code_cr = '0' . strval($lastid + 1);
+                    $code_cr = '000' . strval($lastid + 1);
                 }elseif($lastid > 999 && $lastid < 10000){
+                    $code_cr = '00' . strval($lastid + 1);
+                }elseif($lastid > 9999 && $lastid < 100000){
+                    $code_cr = '0' . strval($lastid + 1);
+                }elseif($lastid > 99999 ){
                     $code_cr =  strval($lastid + 1);
                 }
 
                 
             }
             else{
-                $code_cr = '000' . strval(1);
+                $code_cr = '00000' . strval(1);
             }
             return view('crm.master.construction', compact(['route_active','code_cr','construction','construction_ids']));   
          }
@@ -384,19 +411,23 @@ class MasterController extends Controller
 
                 
                 if($lastid < 10){
-                    $code_mlu = '000' . strval($lastid + 1);
+                    $code_mlu = '00000' . strval($lastid + 1);
                 }elseif($lastid > 9 && $lastid < 100){
-                    $code_mlu = '00' . strval($lastid- + 1);
+                    $code_mlu = '0000' . strval($lastid- + 1);
                 }elseif($lastid > 99 && $lastid < 1000){
-                    $code_mlu = '0' . strval($lastid + 1);
+                    $code_mlu = '000' . strval($lastid + 1);
                 }elseif($lastid > 999 && $lastid < 10000){
+                    $code_mlu = '00' . strval($lastid + 1);
+                }elseif($lastid > 9999 && $lastid < 100000){
+                    $code_mlu = '0' . strval($lastid + 1);
+                }elseif($lastid > 99999){
                     $code_mlu =  strval($lastid + 1);
                 }
 
                 
             }
             else{
-                $code_mlu ='000' . strval(1);
+                $code_mlu ='00000' . strval(1);
             }
             return view('crm.master.marine_lookup', compact(['user','country','shiptype','classification','construction','code_mlu','mlu','route_active','mlu_ids']));     
          }
@@ -426,17 +457,21 @@ class MasterController extends Controller
                 $code_pt = $mydate . strval($lastid + 1);
 
                 if($lastid < 10){
-                    $code_pt = '000' . strval($lastid + 1);
+                    $code_pt = '00000' . strval($lastid + 1);
                 }elseif($lastid > 9 && $lastid < 100){
-                    $code_pt = '00' . strval($lastid- + 1);
+                    $code_pt = '0000' . strval($lastid- + 1);
                 }elseif($lastid > 99 && $lastid < 1000){
-                    $code_pt = '0' . strval($lastid + 1);
+                    $code_pt = '000' . strval($lastid + 1);
                 }elseif($lastid > 999 && $lastid < 10000){
+                    $code_pt = '00' . strval($lastid + 1);
+                }elseif($lastid > 9999 && $lastid < 100000){
+                    $code_pt = '0' . strval($lastid + 1);
+                }elseif($lastid > 99999 ){
                     $code_pt =  strval($lastid + 1);
                 }
             }
             else{
-                $code_pt = '000' . strval(1);
+                $code_pt = '00000' . strval(1);
             }
 
             return view('crm.master.property_type', compact(['route_active', 'propertytype','propertytype_ids','code_pt']));  
@@ -468,19 +503,23 @@ class MasterController extends Controller
                 // $code_cdn = $mydate . strval($lastid + 1);
 
                 if($lastid < 10){
-                    $code_cdn = '000' . strval($lastid + 1);
+                    $code_cdn = '00000' . strval($lastid + 1);
                 }elseif($lastid > 9 && $lastid < 100){
-                    $code_cdn = '00' . strval($lastid- + 1);
+                    $code_cdn = '0000' . strval($lastid- + 1);
                 }elseif($lastid > 99 && $lastid < 1000){
-                    $code_cdn = '0' . strval($lastid + 1);
+                    $code_cdn = '000' . strval($lastid + 1);
                 }elseif($lastid > 999 && $lastid < 10000){
+                    $code_cdn = '00' . strval($lastid + 1);
+                }elseif($lastid > 9999 && $lastid < 100000){
+                    $code_cdn = '0' . strval($lastid + 1);
+                }elseif($lastid > 99999 ){
                     $code_cdn =  strval($lastid + 1);
                 }
 
                 
             }
             else{
-                $code_cdn = '000' . strval(1);
+                $code_cdn = '00000' . strval(1);
             }
 
             return view('crm.master.condition_needed', compact(['route_active', 'cob','cdn','cdn_ids','code_cdn']));  
@@ -511,17 +550,21 @@ class MasterController extends Controller
                 $code_ct = $mydate . strval($lastid + 1);
 
                 if($lastid < 10){
-                    $code_ct = '000' . strval($lastid + 1);
+                    $code_ct = '00000' . strval($lastid + 1);
                 }elseif($lastid > 9 && $lastid < 100){
-                    $code_ct = '00' . strval($lastid- + 1);
+                    $code_ct = '0000' . strval($lastid- + 1);
                 }elseif($lastid > 99 && $lastid < 1000){
-                    $code_ct = '0' . strval($lastid + 1);
+                    $code_ct = '000' . strval($lastid + 1);
                 }elseif($lastid > 999 && $lastid < 10000){
+                    $code_ct = '00' . strval($lastid + 1);
+                }elseif($lastid > 9999 && $lastid < 100000){
+                    $code_ct = '0' . strval($lastid + 1);
+                }elseif($lastid > 99999){
                     $code_ct =  strval($lastid + 1);
                 }
             }
             else{
-                $code_ct ='000' . strval(1);
+                $code_ct ='00000' . strval(1);
             }
 
             return view('crm.master.companytype', compact(['route_active', 'companytype','companytype_ids','code_ct']));  
@@ -553,19 +596,23 @@ class MasterController extends Controller
                 // $code_cr = $mydate . strval($lastid + 1);
 
                 if($lastid < 10){
-                    $code_ii = '000' . strval($lastid + 1);
+                    $code_ii = '00000' . strval($lastid + 1);
                 }elseif($lastid > 9 && $lastid < 100){
-                    $code_ii = '00' . strval($lastid- + 1);
+                    $code_ii = '0000' . strval($lastid- + 1);
                 }elseif($lastid > 99 && $lastid < 1000){
-                    $code_ii = '0' . strval($lastid + 1);
+                    $code_ii = '000' . strval($lastid + 1);
                 }elseif($lastid > 999 && $lastid < 10000){
+                    $code_ii = '00' . strval($lastid + 1);
+                }elseif($lastid > 9999 && $lastid < 100000){
+                    $code_ii = '0' . strval($lastid + 1);
+                }elseif($lastid > 99999 ){
                     $code_ii =  strval($lastid + 1);
                 }
 
                 
             }
             else{
-                $code_ii = '000' . strval(1);
+                $code_ii = '00000' . strval(1);
             }
             return view('crm.master.interest_insured', compact(['route_active','cob','code_ii','interestinsured','interestinsured_ids']));   
          }
@@ -595,19 +642,23 @@ class MasterController extends Controller
                 // $code_cr = $mydate . strval($lastid + 1);
 
                 if($lastid < 10){
-                    $code_dt = '000' . strval($lastid + 1);
+                    $code_dt = '00000' . strval($lastid + 1);
                 }elseif($lastid > 9 && $lastid < 100){
-                    $code_dt = '00' . strval($lastid- + 1);
+                    $code_dt = '0000' . strval($lastid- + 1);
                 }elseif($lastid > 99 && $lastid < 1000){
-                    $code_dt = '0' . strval($lastid + 1);
+                    $code_dt = '000' . strval($lastid + 1);
                 }elseif($lastid > 999 && $lastid < 10000){
+                    $code_dt = '00' . strval($lastid + 1);
+                }elseif($lastid > 9999 && $lastid < 100000){
+                    $code_dt = '0' . strval($lastid + 1);
+                }elseif($lastid > 99999 ){
                     $code_dt =  strval($lastid + 1);
                 }
 
                 
             }
             else{
-                $code_dt = '000' . strval(1);
+                $code_dt = '00000' . strval(1);
             }
             return view('crm.master.deductible_type', compact(['route_active','code_dt','deductibletype','deductibletype_ids']));   
          }
@@ -638,19 +689,23 @@ class MasterController extends Controller
                 // $code_cr = $mydate . strval($lastid + 1);
 
                 if($lastid < 10){
-                    $code_ec = '000' . strval($lastid + 1);
+                    $code_ec = '00000' . strval($lastid + 1);
                 }elseif($lastid > 9 && $lastid < 100){
-                    $code_ec = '00' . strval($lastid- + 1);
+                    $code_ec = '0000' . strval($lastid- + 1);
                 }elseif($lastid > 99 && $lastid < 1000){
-                    $code_ec = '0' . strval($lastid + 1);
+                    $code_ec = '000' . strval($lastid + 1);
                 }elseif($lastid > 999 && $lastid < 10000){
+                    $code_ec = '00' . strval($lastid + 1);
+                }elseif($lastid > 9999 && $lastid < 100000){
+                    $code_ec = '0' . strval($lastid + 1);
+                }elseif($lastid > 99999 ){
                     $code_ec =  strval($lastid + 1);
                 }
 
                 
             }
             else{
-                $code_ec = '000' . strval(1);
+                $code_ec = '00000' . strval(1);
             }
             return view('crm.master.extend_coverage', compact(['route_active','cob','code_ec','extendcoverage','extendcoverage_ids']));   
          }
@@ -682,19 +737,23 @@ class MasterController extends Controller
                 // $code_cr = $mydate . strval($lastid + 1);
 
                 if($lastid < 10){
-                    $code_sp = '000' . strval($lastid + 1);
+                    $code_sp = '00000' . strval($lastid + 1);
                 }elseif($lastid > 9 && $lastid < 100){
-                    $code_sp = '00' . strval($lastid- + 1);
+                    $code_sp = '0000' . strval($lastid- + 1);
                 }elseif($lastid > 99 && $lastid < 1000){
-                    $code_sp = '0' . strval($lastid + 1);
+                    $code_sp = '000' . strval($lastid + 1);
                 }elseif($lastid > 999 && $lastid < 10000){
+                    $code_sp = '00' . strval($lastid + 1);
+                }elseif($lastid > 9999 && $lastid < 100000){
+                    $code_sp = '0' . strval($lastid + 1);
+                }elseif($lastid > 99999 ){
                     $code_sp =  strval($lastid + 1);
                 }
 
                 
             }
             else{
-                $code_sp = '000' . strval(1);
+                $code_sp = '00000' . strval(1);
             }
             return view('crm.master.ship_port', compact(['route_active','city','code_sp','shipport','shipport_ids']));   
          }
@@ -725,19 +784,23 @@ class MasterController extends Controller
                 // $code_cr = $mydate . strval($lastid + 1);
 
                 if($lastid < 10){
-                    $code_rf = '000' . strval($lastid + 1);
+                    $code_rf = '00000' . strval($lastid + 1);
                 }elseif($lastid > 9 && $lastid < 100){
-                    $code_rf = '00' . strval($lastid- + 1);
+                    $code_rf = '0000' . strval($lastid- + 1);
                 }elseif($lastid > 99 && $lastid < 1000){
-                    $code_rf = '0' . strval($lastid + 1);
+                    $code_rf = '000' . strval($lastid + 1);
                 }elseif($lastid > 999 && $lastid < 10000){
+                    $code_rf = '00' . strval($lastid + 1);
+                }elseif($lastid > 9999 && $lastid < 100000){
+                    $code_rf = '0' . strval($lastid + 1);
+                }elseif($lastid > 99999){
                     $code_rf =  strval($lastid + 1);
                 }
 
                 
             }
             else{
-                $code_rf = '000' . strval(1);
+                $code_rf = '00000' . strval(1);
             }
             return view('crm.master.route_form', compact(['route_active','shipport','code_rf','routeform','routeform_ids']));   
          }
@@ -757,10 +820,18 @@ class MasterController extends Controller
         $lastid = count($cob);
         
         if($lastid > 0){
+            if($lastid < 10){
+                $code_cob = $cob_parent->code . '0' . strval($lastid + 1);
+            }elseif($lastid > 9 && $lastid < 100){
                 $code_cob = $cob_parent->code . strval($lastid + 1);
+            }
+                
+
         }
         elseif($lastid == 0){
-            $code_cob =  $cob_parent->code  . strval(0);
+
+            $code_cob =  $cob_parent->code . '0' . strval(0);
+
         }
        
 
@@ -778,10 +849,14 @@ class MasterController extends Controller
         $lastid = count($ocp);
         
         if($lastid > 0){
-                $code_ocp = $ocp_parent->code . strval($lastid);
+                if($lastid < 10){
+                    $code_ocp = $ocp_parent->code . '0' . strval($lastid + 1);
+                }elseif($lastid > 9 && $lastid < 100){
+                    $code_ocp = $ocp_parent->code . strval($lastid + 1);
+                }
         }
         elseif($lastid == 0){
-            $code_ocp =  $ocp_parent->code  . strval(0);
+            $code_ocp =  $ocp_parent->code . '0' . strval(0);
         }
        
 

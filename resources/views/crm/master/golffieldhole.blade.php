@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="code" class="form-control form-control-sm" value="{{ $code_gfh }}" readonly required/>
+                          <input type="text" name="code" style="width: 25%;" class="form-control form-control-sm" value="{{ $code_gfh }}" readonly required/>
                         </div>
                     </div>
                 </div>

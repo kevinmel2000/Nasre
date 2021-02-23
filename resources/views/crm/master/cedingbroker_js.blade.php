@@ -1,14 +1,27 @@
 <link href="{{url('/')}}/css/select2.css" rel="stylesheet"/>
 <script src="{{url('/')}}/js/select2.js"></script>
 <script>
-        $(document).ready(function() { $(".e1").select2({ width: '100%' }); });
+        $(document).ready(function() { 
+            
+            $(".e1").select2({ width: '100%' }); 
+        
+        });
 </script>
 <script type="text/javascript">
     $('#companynamefield').change(function(){
         var str = $(this).val();
         var ret = str.split(" ");
-        var str1 = ret[1];
-        var res = str1.substr(0,2).toUpperCase();
+        var str0 = ret[0].substr(0,1).toUpperCase();
+        var str1 = ret[1].substr(0,1).toUpperCase();
+        var str2 = ret[2].substr(0,1).toUpperCase();
+        var res;
+        if(str2 != ""){
+            res = (str1 + str2);
+        }
+        else{
+            res = (str0 + str1);
+        }
+        
         
         if(str){
         $.ajax({

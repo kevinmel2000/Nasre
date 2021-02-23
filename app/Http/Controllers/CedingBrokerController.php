@@ -52,19 +52,22 @@ class CedingBrokerController extends Controller
 
         if($lastid != null){
               if($lastid < 10){
-                  $code_ceding = '0000' . strval($lastid + 1);
+                  $code_ceding = '00000' . strval($lastid + 1);
               }elseif($lastid > 9 && $lastid < 100){
-                  $code_ceding = '000' . strval($lastid + 1);
+                  $code_ceding = '0000' . strval($lastid + 1);
               }elseif($lastid > 99 && $lastid < 1000){
-                  $code_ceding = '00' . strval($lastid + 1);
+                  $code_ceding = '000' . strval($lastid + 1);
               }elseif($lastid > 999 && $lastid < 10000){
+                  $code_ceding = '00' . strval($lastid + 1);
+              }elseif($lastid > 9999 && $lastid < 100000){
                   $code_ceding = '0' . strval($lastid + 1);
-              }elseif($lastid > 9999){
-                  $code_ceding =  strval($lastid + 1);
-              }
+              }elseif($lastid > 99999){
+                $code_ceding =  strval($lastid + 1);
+            }
+              
           }
           else{
-              $code_ceding = '0000' . strval(1);
+              $code_ceding = '00000' . strval(1);
           }
 
           
