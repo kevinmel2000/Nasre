@@ -77,13 +77,13 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="">{{__('From')}}</label>
+                                                    <label for="">{{__('Nasional Reinsurance')}}</label>
                                                     <input id="fesharefrom" type="number" min="0" value="0" step=".01"  name="fesharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  readonly />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="">{{__('To')}}</label>
+                                                    <label for="">{{__('Total')}}</label>
                                                     <input id="feshareto" type="number" min="0" value="0" step=".01"  name="feshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  readonly/>
                                                 </div>
                                             </div>

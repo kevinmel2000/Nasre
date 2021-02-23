@@ -662,6 +662,7 @@ class FeSlipController extends Controller
         ]);
         
 
+        
         if($validator)
         {
             $user = Auth::user();
