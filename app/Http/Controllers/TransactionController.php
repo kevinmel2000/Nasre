@@ -820,7 +820,7 @@ class TransactionController extends Controller
             StatusLog::create([
                 'insured_id'=>$request->code_ins,
                 'status'=>$request->slipstatus,
-                'datetime'=>date('Y-m-d H:i:s'),
+                'datetime'=>date('d/m/Y H:i:s'),
                 'slip_id'=>$request->slipnumber,
                 'user'=>Auth::user()->name,
             ]);
@@ -1540,7 +1540,7 @@ class TransactionController extends Controller
                 StatusLog::create([
                     'insured_id'=>$request->code_ins,
                     'status'=>$request->slipstatus,
-                    'datetime'=>date('Y-m-d H:i:s'),
+                    'datetime'=>date('d/m/Y H:i:s'),
                     'slip_id'=>$request->slipnumber,
                     'user'=>Auth::user()->name,
                 ]);
@@ -1950,7 +1950,7 @@ class TransactionController extends Controller
             StatusLog::create([
                 'insured_id'=>$request->code_ins,
                 'status'=>$request->slipstatus,
-                'datetime'=>date('Y-m-d H:i:s'),
+                'datetime'=>date('d/m/Y H:i:s'),
                 'slip_id'=>$request->slipnumber,
                 'user'=>Auth::user()->name,
             ]);
@@ -1958,8 +1958,21 @@ class TransactionController extends Controller
             // $slipdata = SlipTable::where('number',$request->pre)->where('slip_type','ms')->first();
 
             $msdata = SlipTable::findOrFail($request->slip_id);
-            $msdata->slip_idendorsementcount=$request->sliped;
-            $msdata->prev_endorsement=$request->oldslipnumber;
+            $msdata->slip_idendorsementcount=($request->sliped - 1);
+            $msdata->prev_endorsement='first slip';
+            $msdata->total_sum_insured=($request->sliptotalsum * (-1));
+            // $msdata->insured_pct=($request->slippct * (-1));
+            $msdata->total_sum_pct=($request->sliptotalsumpct * (-1));
+            // $msdata->rate=($request->sliprate * (-1));
+            // $msdata->share=($request->slipshare * (-1));
+            $msdata->sum_share=($request->slipsumshare * (-1));
+            $msdata->basic_premium=($request->slipbasicpremium * (-1));
+            $msdata->commission=($request->slipcommission * (-1));
+            $msdata->grossprm_to_nr=($request->slipgrossprmtonr * (-1));
+            $msdata->netprm_to_nr=($request->slipnetprmtonr * (-1));
+            $msdata->sum_commission=($request->slipsumcommission * (-1)); 
+            // $msdata->own_retention=($request->slipor * (-1)); 
+            $msdata->sum_own_retention=($request->slipsumor * (-1)); 
             $msdata->save();
 
 

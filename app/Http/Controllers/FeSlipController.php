@@ -854,7 +854,7 @@ class FeSlipController extends Controller
             }
             else
             {
-                $currdate = date("Y/m/d");
+                $currdate = date("d/m/Y");
 
                 $slipdataid=$slipdata->id;
                 $slipdataup = SlipTable::findOrFail($slipdataid);
