@@ -35,7 +35,6 @@
   }   
   });
 
-
   $('#state').on('change',function(){
   var stateID = $(this).val();  
   //alert(stateID);
@@ -71,52 +70,52 @@
   $('#country2').change(function(){
   var countryID = $(this).val();  
   //alert(countryID);
-  if(countryID){
-    $.ajax({
-      type:"GET",
-      url:"{{url('get-state-list')}}?country_id="+countryID,
-      success:function(res){        
-      if(res){
-        $("#state2").empty();
-        $("#state2").append('<option>Select</option>');
-        $.each(res,function(key,value){
-          $("#state2").append('<option value="'+key+'">'+value+'</option>');
-        });
-      
-      }else{
-        $("#state2").empty();
-      }
-      }
-    });
-  }else{
-    $("#state2").empty();
-    $("#city2").empty();
-  }   
+    if(countryID){
+      $.ajax({
+        type:"GET",
+        url:"{{url('get-state-list')}}?country_id="+countryID,
+        success:function(res){        
+          if(res){
+            $("#state2").empty();
+            $("#state2").append('<option>Select</option>');
+            $.each(res,function(key,value){
+              $("#state2").append('<option value="'+key+'">'+value+'</option>');
+            });
+          
+          }else{
+            $("#state2").empty();
+          }
+        }
+      });
+    }else{
+      $("#state2").empty();
+      $("#city2").empty();
+    }   
   });
 
 
   $('#state2').on('change',function(){
   var stateID = $(this).val();  
   //alert(stateID);
-  if(stateID){
-    $.ajax({
-      type:"GET",
-      url:"{{url('get-city-list')}}?state_id="+stateID,
-      success:function(res){        
-      if(res){
-        $("#city2").empty();
-        $.each(res,function(key,value){
-          $("#city2").append('<option value="'+key+'">'+value+'</option>');
-        });
-      
-      }else{
-        $("#city2").empty();
-      }
-      }
-    });
-  }else{
-    $("#city2").empty();
-  }
+    if(stateID){
+      $.ajax({
+        type:"GET",
+        url:"{{url('get-city-list')}}?state_id="+stateID,
+        success:function(res){        
+          if(res){
+            $("#city2").empty();
+            $.each(res,function(key,value){
+              $("#city2").append('<option value="'+key+'">'+value+'</option>');
+            });
+          
+          }else{
+            $("#city2").empty();
+          }
+        }
+      });
+    }else{
+      $("#city2").empty();
+    }
     
   });
 
@@ -174,6 +173,7 @@ function GoogleGeocode() {
       geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           var result = {};
+          // console.log(results)
           result.latitude = results[0].geometry.location.lat();
           result.longitude = results[0].geometry.location.lng();
           callbackFunction(result);

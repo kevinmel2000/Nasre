@@ -81,6 +81,32 @@ class FeSlipController extends Controller
         return response()->json($cities);
     }
 
+    public function getStateLookup(Request $request)
+    {
+        $states = DB::table("fe_lookup_location")
+        ->join('states', 'fe_lookup_location.province_id', '=', 'states.id')
+        ->where("fe_lookup_location.country_id",$request->country_id)
+        ->pluck("states.name","fe_lookup_location.province_id");
+        return response()->json($states);
+    }
+
+    public function getCityLookup(Request $request)
+    {
+        $cities = DB::table("fe_lookup_location")
+        ->join('cities', 'fe_lookup_location.city_id', '=', 'cities.id')
+        ->where("fe_lookup_location.province_id",$request->state_id)
+        ->pluck("cities.name","fe_lookup_location.city_id");
+        return response()->json($cities);
+    }
+
+    public function getAddressLookup(Request $request)
+    {
+        $address = DB::table("fe_lookup_location")
+        ->where("city_id",$request->city_id)
+        ->pluck("address","id");
+        return response()->json($address);
+    }
+
     public function getCostumers(Request $request){
 
         $search = $request->search;
@@ -953,7 +979,17 @@ class FeSlipController extends Controller
 
                 $felookuplocations = FeLookupLocation::find($lookuplocation);
 
-                return response()->json($felookuplocations);
+                return response()->json([
+                    'id' => $locationlist->id,
+                    'loc_code' => $felookuplocations->loc_code,
+                    'address' => $felookuplocations->address,
+                    'city_id' => $felookuplocations->city_id,
+                    'province_id' => $felookuplocations->province_id,
+                    'latitude' => $felookuplocations->latitude,
+                    'longtitude' => $felookuplocations->longtitude,
+                    'state_name' => $felookuplocations->state->name,
+                    'city_name' => $felookuplocations->city->name,
+                ]);
             }
             else
             {

@@ -1,6 +1,8 @@
 <link href="{{url('/')}}/css/select2.css" rel="stylesheet"/>
 <script src="{{url('/')}}/js/select2.js"></script>
-
+<script>
+    $(document).ready(function() { $(".e1").select2({ width: '100%' }); });
+</script>
 <link rel="stylesheet" href="{{url('/')}}/css/sweetalert2.min.css">
 <script src="{{url('/')}}/js/sweetalert2.all.min.js"></script>
 
@@ -80,7 +82,7 @@ $( "#autocomplete" ).autocomplete({
  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 $(document).ready(function() { 
         
-        $(".e1").select2({ width: '100%' }); 
+        
         
         $('.uang').mask("#,##0.00", {reverse: true});
 
@@ -153,33 +155,94 @@ $(document).ready(function() {
 </script>
 
 <script type='text/javascript'>
+    $('#country_location').change(function(){
+    var countryID = $(this).val();  
+    //alert(countryID);
+        if(countryID){
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-state-lookup')}}?country_id="+countryID,
+            success:function(res){  
+                console.log(res)      
+                if(res){
+                    $("#state_location").empty();
+                    $("#state_location").append('<option selected disabled>Select States/Province</option>');
+                    $.each(res,function(key,value){
+                    $("#state_location").append('<option value="'+key+'">'+value+'</option>');
+                    });
+                
+                }else{
+                    $("#state_location").append('<option value="" selected disabled>get value error</option>');
+                }
+            }
+        });
+        }else{
+        $("#state_location").append('<option value="" selected disabled>countryID null</option>');
+        $("#city_location").empty();
+        }   
+    });
+
+    $('#state_location').on('change',function(){
+        var stateID = $(this).val();  
+        //alert(stateID);
+            if(stateID){
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('get-city-lookup')}}?state_id="+stateID,
+                    success:function(res){        
+                        if(res){
+                            $("#city_location").empty();
+                            $("#city_location").append('<option selected disabled>Select City</option>');
+                            $.each(res,function(key,value){
+                                $("#city_location").append('<option value="'+key+'">'+value+'</option>');
+                            });
+                        
+                        }else{
+                            $("#city_location").append('<option value="" selected disabled>get value error</option>');
+                        }
+                    }
+                });
+            }else{
+                $("#city_location").append('<option value="" selected disabled>countryID null</option>');
+                $("#address_location").empty();
+            }
+            
+    });
 
 
-//     $('#dateinfrom').on('changeDate', function() {
-//     // console.log( $('#dateinfrom').datepicker('getFormattedDate'))
-//     console.log( $('#dateinfrom').getDate())
-//     $('#slipipto').val(
-//         $('#slipipfrom').val()
-//     );
-// });
-
-// $('#slipipfrom').change(function(){
-//     $('#slipipto').val(
-//         $(this).val()
-//     );
-// });
-
-// $('#dateinfrom').on('dp.change', function(e){ 
-//     var formatedValue = e.date.format(e.date._f);
-//     console.log(formatedValue);
-// })
+    $('#city_location').on('change',function(){
+        var cityID = $(this).val();  
+        //alert(stateID);
+            if(cityID){
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('get-address-lookup')}}?city_id="+cityID,
+                    success:function(res){        
+                        if(res){
+                            $("#address_location").empty();
+                            $("#address_location").append('<option selected disabled>Select Address</option>');
+                            $.each(res,function(key,value){
+                                $("#address_location").append('<option value="'+key+'">'+value+'</option>');
+                            });
+                        
+                        }else{
+                            $("#address_location").append('<option value="" selected disabled>get value error</option>');
+                        }
+                    }
+                });
+            }else{
+                $("#address_location").append('<option value="" selected disabled>countryID null</option>');
+                
+            }
+            
+    });
 </script>
 
 <script type='text/javascript'>
      $('#form-addlocation').submit(function(e){
         e.preventDefault();
 
-        var lookupcode = $('#lookup_location').val();
+        var lookupcode = $('#address_location').val();
         var insured_id = $('#insuredIDtxt').val();
         var token = $('input[name=_token]').val();
         
@@ -195,8 +258,7 @@ $(document).ready(function() {
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 console.log(response)
-               
-                $('#locRiskTable tbody').prepend('<tr id="sid'+response.id+'"><td>'+response.loc_code+'</td><td>'+response.address+'</td><td>'+response.city_id+'</td><td>'+response.province_id+'</td><td>'+response.latitude+' , '+response.longtitude+'</td><td><a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
+                $('#locRiskTable tbody').prepend('<tr id="sid'+response.id+'"><td>'+response.loc_code+'</td><td>'+response.address+'</td><td>'+response.city_name+'</td><td>'+response.state_name+'</td><td>'+response.latitude+' , '+response.longtitude+'</td><td><a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
                 $('#addlocation').modal('toggle');
                 $('#form-addlocation')[0].reset();
             }
@@ -217,9 +279,9 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
-                $('#sid'+id).remove();
                 console.log(response);
+                $('#sid'+id).remove();
+                
             }
         });
     }

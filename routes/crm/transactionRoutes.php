@@ -11,6 +11,11 @@ use App\Http\Controllers\HeMotorSlipController;
 use App\Http\Controllers\MovePropSlipController;
 use App\Http\Controllers\TransactionController;
 
+Route::get('get-state-lookup','FeSlipController@getStateLookup');
+Route::get('get-city-lookup','FeSlipController@getCityLookup');
+Route::get('get-address-lookup','FeSlipController@getAddressLookup');
+
+
 
 Route::get('get-ship-list','TransactionController@showShipList');
 Route::post('/store-ship-list','TransactionController@storeshiplist')->name('shiplist.store');

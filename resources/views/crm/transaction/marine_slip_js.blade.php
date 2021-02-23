@@ -10,7 +10,7 @@
         $("#tabretro").attr('hidden','true');
 
         // $("#marineslipform").attr("hidden", true);
-        $("#marineslipform :input").prop("disabled", true);
+        // $("#marineslipform :input").prop("disabled", true);
         
         });
 </script>
@@ -48,7 +48,7 @@
         else{
             $("#retrocessionPanel").attr('hidden','true');
             $("#tabretro").attr('hidden','true');
-        
+        }
     });
 
     $('#slipipfrom').on('dp.change', function(e){ console.log(e.date); })
@@ -274,6 +274,13 @@
         var sum = isNaN(percent * sumshare) ? 0 :(percent * sumshare);
         $('#sliprpamount').val(sum);
     });
+
+    $('#sliprppercentage').change(function () {
+        var percentval =  parseFloat($(this).val());
+        var orpercent = parseFloat($('#slipor').val());
+        var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval);
+        $('#slipor').val(sumpercentor)
+    });
 </script>
 
 <script type='text/javascript'>
@@ -482,7 +489,8 @@
                var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
                $('#retrocessionPanel tbody').prepend('<tr id="rscid'+response.id+'" data-name="retrocessionvalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessiontemp('+response.id+')">delete</a></td></tr>')
                $(':input','#addretrocessiontemp').not(':button, :submit, :reset, :hidden').val(' ').removeAttr('checked').removeAttr('selected');
-               
+               $('#sliprppercentage').val(' ');
+               $('#sliprpamount').val(' ');
                
                
             

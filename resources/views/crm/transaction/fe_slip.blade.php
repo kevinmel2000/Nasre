@@ -115,7 +115,7 @@
                                                         <th>{{__('Address')}}</th>
                                                         <th>{{__('City')}}</th>
                                                         <th>{{__('Province')}}</th>
-                                                        <th>{{__('LatLong')}}</th>
+                                                        <th>{{__('Coordinate')}}</th>
                                                         <th width="20%">{{__('Actions')}}</th>
                                                     </tr>
                                                     </thead>
@@ -178,18 +178,69 @@
                         @csrf
                         <div class="modal-body">
                             <div class="row">
-                            
-                            <div class="col-md-6 col-md-12">
-                                <div class="form-group">
-                                <label for="">{{__('Lookup Location')}}</label>
-                                    <select name="lookup_location_id" id="lookup_location" class="e1 form-control form-control-sm " >
-                                    <option selected readonly>{{__('Select Lookup Location ')}}</option>
-                                    @foreach($felookup as $felookuplocationdata)
-                                    <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->address }}</option>
-                                    @endforeach
-                                    </select>
+                                <div class="col-md-6 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Lookup Location')}}</label>
+                                        <select name="lookup_location_id" id="lookup_location" class="e1 form-control form-control-sm " >
+                                            <option selected readonly>{{__('Select Lookup Location ')}}</option>
+                                            @foreach($felookup as $felookuplocationdata)
+                                                <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->address }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Country')}}</label>
+                                        <select name="country_location_id" id="country_location" class="e1 form-control form-control-sm " >
+                                            <option selected readonly>{{__('Select Country ')}}</option>
+                                            @foreach($felookup as $felookuplocationdata)
+                                                <option value="{{ $felookuplocationdata->country_id }}">{{ $felookuplocationdata->country->code }} - {{ $felookuplocationdata->country->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('State/Province')}}</label>
+                                        <select name="state_location_id" id="state_location" class="e1 form-control form-control-sm " >
+                                            {{-- <option selected readonly>{{__('Select State/Province ')}}</option>
+                                            @foreach($felookup as $felookuplocationdata)
+                                                <option value="{{ $felookuplocationdata->state_id }}">{{ $felookuplocationdata->state->name }}</option>
+                                            @endforeach --}}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('City')}}</label>
+                                        <select name="city_location_id" id="city_location" class="e1 form-control form-control-sm " >
+                                            {{-- <option selected readonly>{{__('Select City ')}}</option>
+                                            @foreach($felookup as $felookuplocationdata)
+                                                <option value="{{ $felookuplocationdata->city_id }}">{{ $felookuplocationdata->city->name }}</option>
+                                            @endforeach --}}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Address')}}</label>
+                                        <select name="address_location_id" id="address_location" class="e1 form-control form-control-sm " >
+                                            {{-- <option selected readonly>{{__('Select Address ')}}</option>
+                                            @foreach($felookup as $felookuplocationdata)
+                                                <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->address }}</option>
+                                            @endforeach --}}
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
