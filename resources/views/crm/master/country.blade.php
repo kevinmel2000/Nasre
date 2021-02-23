@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="countrycode" class="form-control form-control-sm" data-validation="length" data-validation-length="3" required/>
+                          <input type="text" name="countrycode" style="width: 25%;" class="form-control form-control-sm" data-validation="length" data-validation-length="3" required/>
                         </div>
                     </div>
                 </div>

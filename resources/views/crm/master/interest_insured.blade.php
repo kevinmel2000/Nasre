@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__(' Code')}} </label>
-                          <input type="text" name="iicode" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_ii }}" readonly="readonly" required/>
+                          <input type="text" name="iicode" style="width: 25%" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_ii }}" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>

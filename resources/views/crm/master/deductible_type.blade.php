@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__(' Code')}} </label>
-                          <input type="text" name="dtcode" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_dt }}" readonly="readonly" required/>
+                          <input type="text" name="dtcode" style="width: 25%;" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_dt }}" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>

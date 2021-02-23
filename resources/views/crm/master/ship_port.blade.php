@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Code')}} </label>
-                          <input type="text" name="spcode" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_sp }}" readonly="readonly" required/>
+                          <input type="text" name="spcode" style="width: 25%;" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_sp }}" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>

@@ -24,9 +24,43 @@ class KocController extends Controller
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $koc = Koc::orderby('id','desc')->get();
           $kocparent = Koc::where('code','<',100)->orderby('code','desc')->get();
+          $countparent= Koc::where('parent_id',null)->where('code','<',100)->orderby('code','desc')->get();
+          // dd($countparent);
+          $lastid = count($countparent);
           $koc_ids = response()->json($koc->modelKeys());
+
+          if($lastid != null){
+
+            if($lastid < 10){
+                $code_koc = '0' . strval($lastid + 1);
+            }   
+            elseif($lastid > 9 && $lastid < 100){
+                $code_koc = strval($lastid + 1);
+            } 
+            //$code_cob = $mydate . strval($lastid + 1);
+            
+            // if($lastid->id == 9){
+            //     $code_cob = $mydate . strval($lastid->id + 1);
+            // }elseif($lastid->id >= 10){
+            //     $code_cob = $mydate . strval($lastid->id + 1);
+            // }elseif($lastid->id == 99){
+            //     $code_cob = $mydate . strval($lastid->id + 1);
+            // }elseif($lastid->id >= 100){
+            //     $code_cob = $mydate . strval($lastid->id + 1);
+            // }elseif($lastid->id == 999){
+            //     $code_cob = $mydate . strval($lastid->id + 1);
+            // }elseif($lastid->id >= 1000){
+            //     $code_cob = $mydate . strval($lastid->id + 1);
+            // }else{
+            //     $code_cob = $mydate . strval($lastid->id + 1);
+            // }
+        }
+        else{
+            $code_koc = '0' . strval(1);
+            //$code_cob = $mydate . strval(1);
+        }
           
-          return view('crm.master.koc', compact('user','koc','kocparent','route_active','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.master.koc', compact('user','koc','kocparent','route_active','code_koc','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
@@ -45,10 +79,14 @@ class KocController extends Controller
         $lastid = count($koc);
         
         if($lastid > 0){
-                $code_koc = $koc_parent->code . strval($lastid + 1);
+                if($lastid < 10){
+                    $code_koc = $koc_parent->code . '0' . strval($lastid + 1);
+                }elseif($lastid > 9 && $lastid < 100){
+                    $code_koc = $koc_parent->code . strval($lastid + 1);
+                }
         }
         elseif($lastid == 0){
-            $code_koc =  $koc_parent->code  . strval(0);
+            $code_koc =  $koc_parent->code . '0'  . strval(0);
         }
        
 

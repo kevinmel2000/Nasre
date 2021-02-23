@@ -6,7 +6,10 @@
         $("#btnaddlayer").attr('hidden','true');
         $("#sliplayerproportional").attr('hidden','true');
         $("#labelnonprop").attr('hidden','true');
+        $("#retrocessionPanel").attr('hidden','true');
+        $("#tabretro").attr('hidden','true');
 
+        // $("#marineslipform").attr("hidden", true);
         $("#marineslipform :input").prop("disabled", true);
         
         });
@@ -33,6 +36,18 @@
             $("#sliplayerproportional").attr('hidden','true');
             $("#labelnonprop").attr('hidden','true');
         }
+        
+    });
+
+    $('#sliprb').change(function(){
+        var attr = $("#retrocessionPanel").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            $("#retrocessionPanel").removeAttr('hidden');
+            $("#tabretro").removeAttr('hidden');
+        }
+        else{
+            $("#retrocessionPanel").attr('hidden','true');
+            $("#tabretro").attr('hidden','true');
         
     });
 
@@ -643,6 +658,7 @@
                     .removeAttr('checked')
                     .removeAttr('selected');
 
+                // $("#marineslipform").attr("hidden", false);
                 $("#marineslipform :input").prop("disabled", false);
                 $('#slipmsinumber').val();
            },
