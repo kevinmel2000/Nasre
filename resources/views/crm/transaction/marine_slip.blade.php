@@ -788,12 +788,12 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Insurance Periode')}}:</label>
-                                                                <div class="input-group date" id="dateinfrom" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipipfrom" name="slipipfrom">
-                                                                        <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
+                                                                {{-- <div class="input-group date" id="dateinfrom" data-target-input="nearest"> --}}
+                                                                        <input type="date" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipipfrom" name="slipipfrom">
+                                                                        {{-- <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
-                                                                </div>
+                                                                </div> --}}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -803,12 +803,12 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                                <div class="input-group date" id="dateinto" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipipto" name="slipipto">
-                                                                        <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
+                                                                {{-- <div class="input-group date" id="dateinto" data-target-input="nearest"> --}}
+                                                                        <input type="date" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipipto" name="slipipto">
+                                                                        {{-- <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
-                                                                </div>
+                                                                </div> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -816,12 +816,12 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Reinsurance Periode')}}:</label>
-                                                                <div class="input-group date" id="daterefrom" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" id="sliprpfrom" name="sliprpfrom">
-                                                                        <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
+                                                                {{-- <div class="input-group date" id="daterefrom" data-target-input="nearest"> --}}
+                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" id="sliprpfrom" name="sliprpfrom">
+                                                                        {{-- <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
-                                                                </div>
+                                                                </div> --}}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -831,13 +831,12 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                                <div class="input-group date" id="datereto" data-target-input="nearest">
-                                                                        
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" id="sliprpto" name="sliprpto">
-                                                                        <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
+                                                                {{-- <div class="input-group date" id="datereto" data-target-input="nearest"> --}}
+                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" id="sliprpto" name="sliprpto">
+                                                                        {{-- <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
-                                                                </div>
+                                                                </div> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1009,12 +1008,12 @@
                                                                                 @csrf
                                                                                 <td>
                                                                                     <div class="form-group">
-                                                                                            <div class="input-group date" id="dateinstallment" data-target-input="nearest">
-                                                                                                    <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#dateinstallment" id="slipipdate" name="slipipdate">
-                                                                                                    <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
+                                                                                            {{-- <div class="input-group date" id="dateinstallment" data-target-input="nearest"> --}}
+                                                                                                    <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#dateinstallment" id="slipipdate" name="slipipdate">
+                                                                                                    {{-- <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
                                                                                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                                                    </div>
-                                                                                            </div>
+                                                                                                    </div> --}}
+                                                                                            {{-- </div> --}}
                                                                                     </div>
                                                                                 </td>
                                                                                 <td>

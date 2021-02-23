@@ -58,25 +58,33 @@
     $(function() {              
        // Bootstrap DateTimePicker v4
        $('#dateinstallment').datetimepicker({
-             format: 'YYYY-MM-DD'
+             format: 'DD/MM/YYYY'
        });
 
        $('#dateinfrom').datetimepicker({
-             format: 'YYYY-MM-DD'
+             format: 'DD/MM/YYYY'
        });
 
        $('#dateinto').datetimepicker({
-             format: 'YYYY-MM-DD'
+             format: 'DD/MM/YYYY'
        });
 
        $('#daterefrom').datetimepicker({
-             format: 'YYYY-MM-DD'
+             format: 'DD/MM/YYYY'
        });
 
        $('#datereto').datetimepicker({
-             format: 'YYYY-MM-DD'
+             format: 'DD/MM/YYYY'
        });
     });      
+
+    $('#slipipfrom').change(function(){
+        $('#sliprpfrom').val($(this).val());
+    });
+
+    $('#slipipto').change(function(){
+        $('#sliprpto').val($(this).val());
+    });
 
 </script>
 

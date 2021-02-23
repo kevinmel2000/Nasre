@@ -51,7 +51,7 @@ class TransactionController extends Controller
         $route_active = 'Marine - Slip Entry';
         $search = @$request->input('search');
         $mydate = date("Y").date("m").date("d");
-        $currdate = date("Y-m-d");
+        $currdate = date("d/m/Y");
 
         if(empty($search))
          {
