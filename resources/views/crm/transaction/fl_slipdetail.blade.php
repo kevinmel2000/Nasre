@@ -798,12 +798,12 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Insurance Periode')}}:</label>
-                                                                <div class="input-group date" id="dateinfrom" data-target-input="nearest">
-                                                                        <input type="text" id="slipipfrom" value="{{ $slipdata->insurance_period_from }}" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipfrom">
-                                                                        <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
+                                                                {{-- <div class="input-group date" id="dateinfrom" data-target-input="nearest"> --}}
+                                                                        <input type="date" class="form-control form-control-sm datepicker-input" value="{{ $slipdata->insurance_period_from }}" data-target="#date" id="slipipfrom" name="slipipfrom">
+                                                                        {{-- <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
-                                                                </div>
+                                                                </div> --}}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -813,12 +813,12 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                                <div class="input-group date" id="dateinto" data-target-input="nearest">
-                                                                        <input type="text" id="slipipto" value="{{ $slipdata->insurance_perido_to }}" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipto">
-                                                                        <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
+                                                                {{-- <div class="input-group date" id="dateinto" data-target-input="nearest"> --}}
+                                                                        <input type="date" class="form-control form-control-sm datepicker-input"  value="{{ $slipdata->insurance_perido_to }}" data-target="#date" id="slipipto" name="slipipto">
+                                                                        {{-- <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
-                                                                </div>
+                                                                </div> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -826,12 +826,12 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Reinsurance Periode')}}:</label>
-                                                                <div class="input-group date" id="daterefrom" data-target-input="nearest">
-                                                                        <input type="text" id="sliprpfrom" value="{{ $slipdata->reinsurance_period_from }}" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpfrom">
-                                                                        <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
+                                                                {{-- <div class="input-group date" id="daterefrom" data-target-input="nearest"> --}}
+                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" value="{{ $slipdata->reinsurance_period_from }}" data-target="#date" id="sliprpfrom" name="sliprpfrom">
+                                                                        {{-- <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
-                                                                </div>
+                                                                </div> --}}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -841,18 +841,20 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                                <div class="input-group date" id="datereto" data-target-input="nearest">
-                                                                        
-                                                                        <input type="text" id="sliprpto" value="{{ $slipdata->reinsurance_period_to }}" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpto">
-                                                                        <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
+                                                                {{-- <div class="input-group date" id="datereto" data-target-input="nearest"> --}}
+                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" value="{{ $slipdata->reinsurance_period_to }}"  data-target="#date" id="sliprpto" name="sliprpto">
+                                                                        {{-- <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
-                                                                </div>
+                                                                </div> --}}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        
+
+
                                         <div class="row d-flex justify-content-start">
                                             <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> non proportional panel</i>
                                         </div>
