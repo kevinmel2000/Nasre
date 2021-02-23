@@ -782,6 +782,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="row">
@@ -842,6 +843,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                         <div class="row d-flex justify-content-start">
                                             <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> non proportional panel</i>
                                         </div>
