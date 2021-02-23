@@ -118,6 +118,93 @@ $(document).ready(function() {
     });
 </script>
 
+
+
+<script type='text/javascript'>
+    $('#country_location').change(function(){
+    var countryID = $(this).val();  
+    //alert(countryID);
+        if(countryID){
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-state-lookup')}}?country_id="+countryID,
+            success:function(res){  
+                console.log(res)      
+                if(res){
+                    $("#state_location").empty();
+                    $("#state_location").append('<option selected disabled>Select States/Province</option>');
+                    $.each(res,function(key,value){
+                    $("#state_location").append('<option value="'+key+'">'+value+'</option>');
+                    });
+                
+                }else{
+                    $("#state_location").append('<option value="" selected disabled>get value error</option>');
+                }
+            }
+        });
+        }else{
+        $("#state_location").append('<option value="" selected disabled>countryID null</option>');
+        $("#city_location").empty();
+        }   
+    });
+
+    $('#state_location').on('change',function(){
+        var stateID = $(this).val();  
+        //alert(stateID);
+            if(stateID){
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('get-city-lookup')}}?state_id="+stateID,
+                    success:function(res){        
+                        if(res){
+                            $("#city_location").empty();
+                            $("#city_location").append('<option selected disabled>Select City</option>');
+                            $.each(res,function(key,value){
+                                $("#city_location").append('<option value="'+key+'">'+value+'</option>');
+                            });
+                        
+                        }else{
+                            $("#city_location").append('<option value="" selected disabled>get value error</option>');
+                        }
+                    }
+                });
+            }else{
+                $("#city_location").append('<option value="" selected disabled>countryID null</option>');
+                $("#address_location").empty();
+            }
+            
+    });
+
+
+    $('#city_location').on('change',function(){
+        var cityID = $(this).val();  
+        //alert(stateID);
+            if(cityID){
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('get-address-lookup')}}?city_id="+cityID,
+                    success:function(res){        
+                        if(res){
+                            $("#address_location").empty();
+                            $("#address_location").append('<option selected disabled>Select Address</option>');
+                            $.each(res,function(key,value){
+                                $("#address_location").append('<option value="'+key+'">'+value+'</option>');
+                            });
+                        
+                        }else{
+                            $("#address_location").append('<option value="" selected disabled>get value error</option>');
+                        }
+                    }
+                });
+            }else{
+                $("#address_location").append('<option value="" selected disabled>countryID null</option>');
+                
+            }
+            
+    });
+</script>
+
+
 <script type='text/javascript'>
      $('#form-addlocation').submit(function(e){
         e.preventDefault();
