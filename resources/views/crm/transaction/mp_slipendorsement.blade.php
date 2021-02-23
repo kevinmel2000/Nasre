@@ -845,8 +845,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="insurance-details-id" role="tabpanel" aria-labelledby="insurance-details">
+
+                                        
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="row">
@@ -1037,7 +1037,9 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
+                                   
                                     <div class="tab-pane fade" id="installment-details-id" role="tabpanel" aria-labelledby="installment-details">
                                         <div class="row">
                                             <div class="col-md-12">
