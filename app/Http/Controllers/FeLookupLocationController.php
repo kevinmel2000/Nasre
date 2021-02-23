@@ -83,17 +83,23 @@ class FeLookupLocationController extends Controller
               // $code_st = $mydate . strval($lastid + 1);
 
               if($lastid < 10){
-                  $code_felookuplocation = '000' . strval($lastid + 1);
+                  $code_felookuplocation = '00000' . strval($lastid + 1);
               }elseif($lastid > 9 && $lastid < 100){
-                  $code_felookuplocation = '00' . strval($lastid + 1);
+                  $code_felookuplocation = '0000' . strval($lastid + 1);
               }elseif($lastid > 99 && $lastid < 1000){
-                  $code_felookuplocation = '0' . strval($lastid + 1);
+                  $code_felookuplocation = '000' . strval($lastid + 1);
               }elseif($lastid > 999 && $lastid < 10000){
-                  $code_felookuplocation =  strval($lastid + 1);
+                  $code_felookuplocation = '00' . strval($lastid + 1);
+              }
+              elseif($lastid > 9999 && $lastid < 100000){
+                $code_felookuplocation = '0' . strval($lastid + 1);
+              }
+              elseif($lastid > 99999 && $lastid < 1000000){
+                $code_felookuplocation =  strval($lastid + 1);
               }
           }
           else{
-              $code_felookuplocation = '000' . strval(1);
+              $code_felookuplocation = '00000' . strval(1);
           }
 
           return view('crm.master.felookuplocation', compact('user','code_felookuplocation','earthquakezone','floodzone','felookuplocation','costumer','route_active','felookuplocation_ids','country','city','state'))->with('i', ($request->input('page', 1) - 1) * 10);
@@ -112,21 +118,28 @@ class FeLookupLocationController extends Controller
 
             $lastid = count(FeLookupLocation::all());
 
-            if($lastid != null){
+            
+          if($lastid != null){
                 // $code_st = $mydate . strval($lastid + 1);
 
                 if($lastid < 10){
-                    $code_felookuplocation = '000' . strval($lastid + 1);
+                    $code_felookuplocation = '00000' . strval($lastid + 1);
                 }elseif($lastid > 9 && $lastid < 100){
-                    $code_felookuplocation = '00' . strval($lastid + 1);
+                    $code_felookuplocation = '0000' . strval($lastid + 1);
                 }elseif($lastid > 99 && $lastid < 1000){
-                    $code_felookuplocation = '0' . strval($lastid + 1);
+                    $code_felookuplocation = '000' . strval($lastid + 1);
                 }elseif($lastid > 999 && $lastid < 10000){
-                    $code_felookuplocation =  strval($lastid + 1);
+                    $code_felookuplocation = '00' . strval($lastid + 1);
+                }
+                elseif($lastid > 9999 && $lastid < 100000){
+                $code_felookuplocation = '0' . strval($lastid + 1);
+                }
+                elseif($lastid > 99999 && $lastid < 1000000){
+                $code_felookuplocation =  strval($lastid + 1);
                 }
             }
             else{
-                $code_felookuplocation = '000' . strval(1);
+                $code_felookuplocation = '00000' . strval(1);
             }
 
             
