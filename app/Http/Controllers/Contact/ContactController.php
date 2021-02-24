@@ -37,9 +37,9 @@ class ContactController extends Controller
     public function import()
     {
         $languages = Language::all();
-        $industries = Industry::all();
+        // $industries = Industry::all();
         $route_active = 'manage_contact';
-        return view('crm.customer.customers_import', compact(['route_active', 'languages', 'industries']));
+        return view('crm.customer.customers_import', compact(['route_active', 'languages']));
     }
 
     /**
@@ -78,7 +78,7 @@ class ContactController extends Controller
         $countries = DB::table('countries')->get();
         $languages = DB::table('languages')->get();
         $industries = DB::table('industries')->get();
-        return view('crm.customer.create', compact(['route_active', 'contact_titles', 'countries','languages','industries']));
+        return view('crm.customer.create', compact(['route_active', 'contact_titles','industries','countries','languages']));
     }
 
     public function leadToCustomer(Lead $lead, Request $request){
@@ -276,9 +276,9 @@ class ContactController extends Controller
         $validator = $request->validate([
             'title_id' => 'required',
             'last_name' => 'required',
-            'username' => 'required | unique:customers',
+            // 'username' => 'required | unique:customers',
             'email' => 'required | email | unique:contacts',
-            'password' => 'required'
+            // 'password' => 'required'
         ]);
         if(!$validator){
             return back()->withErrors($validator)->withInput();
@@ -287,8 +287,8 @@ class ContactController extends Controller
 
         // Make a new customer
         $customer = Customer::create([
-            'username'=> $request->username,
-            'password'=> bcrypt($request->password),
+            // 'username'=> $request->username,
+            // 'password'=> bcrypt($request->password),
             'customer_type'=> $request->customer_type,
             'prospect_status'=> $request->prospect_status,
             "owner_id"=>$user->id,
@@ -527,21 +527,22 @@ class ContactController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $contact = $customer->first_contact;
-        if($request->page_name != NULL && $request->page_name == 'from_leadToCustomer'){
-            // If update request is coming from leadToCustomer, then username is required, check for it.
-            if($request->username == NULL){
-                $notification = array(
-                    'message' => 'Username is required!',
-                    'alert-type' => 'error'
-                );
-                return redirect(url('/customer/show', $customer))->with($notification)->withInput();    
-            }
-        }
+        // if($request->page_name != NULL && $request->page_name == 'from_leadToCustomer'){
+        //     // If update request is coming from leadToCustomer, then username is required, check for it.
+        //     if($request->username == NULL){
+        //         $notification = array(
+        //             'message' => 'Username is required!',
+        //             'alert-type' => 'error'
+        //         );
+        //         return redirect(url('/customer/show', $customer))->with($notification)->withInput();    
+        //     }
+        // }
+
         $validator = $request->validate([
-            'title_id'=>'required',
-            'last_name'=>'required',
-            'username'=>'required | unique:customers,username,'.$customer->id,
-            'email'=>'sometimes | email |unique:contacts,email,'.$contact->id,
+            // 'title_id'=>'required',
+            // 'last_name'=>'required',
+            // 'username'=>'required | unique:customers,username,'.$customer->id,
+            // 'email'=>'sometimes | email |unique:contacts,email,'.$contact->id,
         ]);
 
         if(!$validator){

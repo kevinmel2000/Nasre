@@ -44,16 +44,16 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
         $this->mapWebRoutes();
         $this->mapContactRoutes();
-        $this->mapLeadRoutes();
-        $this->mapOfficeRoutes();
-        $this->mapProductRoutes();
-        $this->mapProposalRoutes();
-        $this->mapProjectRoutes();
-        $this->mapInvoiceRoutes();
-        $this->mapEstimateRoutes();
-        $this->mapTaskRoutes();
-        $this->mapMediaRoutes();
-        $this->mapReminderRoutes();
+        // $this->mapLeadRoutes();
+        // $this->mapOfficeRoutes();
+        // $this->mapProductRoutes();
+        // $this->mapProposalRoutes();
+        // $this->mapProjectRoutes();
+        // $this->mapInvoiceRoutes();
+        // $this->mapEstimateRoutes();
+        // $this->mapTaskRoutes();
+        // $this->mapMediaRoutes();
+        // $this->mapReminderRoutes();
         $this->mapUserRoutes();
         $this->mapMasterRoutes();
         $this->mapTransactionRoutes();
@@ -100,75 +100,75 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/crm/contactRoutes.php'));
     }
 
-    protected function mapLeadRoutes()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/crm/leadRoutes.php'));
-    }
+    // protected function mapLeadRoutes()
+    // {
+    //     Route::middleware('web')
+    //         ->namespace($this->namespace)
+    //         ->group(base_path('routes/crm/leadRoutes.php'));
+    // }
 
-    protected function mapOfficeRoutes()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/crm/officeRoutes.php'));
-    }
+    // protected function mapOfficeRoutes()
+    // {
+    //     Route::middleware('web')
+    //         ->namespace($this->namespace)
+    //         ->group(base_path('routes/crm/officeRoutes.php'));
+    // }
 
-    protected function mapProductRoutes()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/crm/productRoutes.php'));
-    }
+    // protected function mapProductRoutes()
+    // {
+    //     Route::middleware('web')
+    //         ->namespace($this->namespace)
+    //         ->group(base_path('routes/crm/productRoutes.php'));
+    // }
 
-    protected function mapProposalRoutes()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/crm/proposalRoutes.php'));
-    }
+    // protected function mapProposalRoutes()
+    // {
+    //     Route::middleware('web')
+    //         ->namespace($this->namespace)
+    //         ->group(base_path('routes/crm/proposalRoutes.php'));
+    // }
 
-    protected function mapProjectRoutes()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/crm/projectRoutes.php'));
-    }
+    // protected function mapProjectRoutes()
+    // {
+    //     Route::middleware('web')
+    //         ->namespace($this->namespace)
+    //         ->group(base_path('routes/crm/projectRoutes.php'));
+    // }
 
-    protected function mapInvoiceRoutes()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/crm/invoiceRoutes.php'));
-    }
+    // protected function mapInvoiceRoutes()
+    // {
+    //     Route::middleware('web')
+    //         ->namespace($this->namespace)
+    //         ->group(base_path('routes/crm/invoiceRoutes.php'));
+    // }
 
-    protected function mapEstimateRoutes()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/crm/estimateRoutes.php'));
-    }
+    // protected function mapEstimateRoutes()
+    // {
+    //     Route::middleware('web')
+    //         ->namespace($this->namespace)
+    //         ->group(base_path('routes/crm/estimateRoutes.php'));
+    // }
 
-    protected function mapTaskRoutes()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/crm/taskRoutes.php'));
-    }
+    // protected function mapTaskRoutes()
+    // {
+    //     Route::middleware('web')
+    //         ->namespace($this->namespace)
+    //         ->group(base_path('routes/crm/taskRoutes.php'));
+    // }
 
-    protected function mapMediaRoutes()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/crm/mediaRoutes.php'));
-    }
+    // protected function mapMediaRoutes()
+    // {
+    //     Route::middleware('web')
+    //         ->namespace($this->namespace)
+    //         ->group(base_path('routes/crm/mediaRoutes.php'));
+    // }
 
-    protected function mapReminderRoutes()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/crm/reminderRoutes.php'));
-    }
+    // protected function mapReminderRoutes()
+    // {
+    //     Route::middleware('web')
+    //         ->namespace($this->namespace)
+    //         ->group(base_path('routes/crm/reminderRoutes.php'));
+    // }
 
     protected function mapClientAuthRoutes()
     {

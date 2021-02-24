@@ -1,17 +1,6 @@
 <script>
 
-  $(function(){
-    "use strict";
-    var contacts = <?php echo(($contact_ids->content())) ?>;
-    for(const id of contacts) {
-        var btn = `
-            <a href="#" onclick="confirmDelete('${id}')">
-                <i class="fas fa-trash text-danger"></i>
-            </a>
-        `;
-        $(`#delbtn${id}`).append(btn);
-    }
-  })
+  
 
   // Check Username if already exisits
   $('#username').on('change',()=>{

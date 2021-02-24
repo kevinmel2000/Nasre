@@ -23,77 +23,77 @@ class HomeController extends Controller
     public function index()
     {
         $route_active = 'home';
-        $total_revenue = Invoice::where('invoice_paid','=','yes')->sum('total_amount');
-        $total_leads = $this->count_total_leads();
-        if ($total_leads > 0) {
-            $won_leads = $this->count_won_leads();
-            $won_leads_avg = ($won_leads*100)/$total_leads;
+        // $total_revenue = Invoice::where('invoice_paid','=','yes')->sum('total_amount');
+        // $total_leads = $this->count_total_leads();
+        // if ($total_leads > 0) {
+        //     $won_leads = $this->count_won_leads();
+        //     $won_leads_avg = ($won_leads*100)/$total_leads;
     
-            $pending_leads = $this->count_pending_leads();
-            $pending_leads_avg = ($pending_leads*100)/$total_leads;
+        //     $pending_leads = $this->count_pending_leads();
+        //     $pending_leads_avg = ($pending_leads*100)/$total_leads;
     
-            $dead_leads = $this->count_dead_leads();
-            $dead_leads_avg = ($dead_leads*100)/$total_leads;
+        //     $dead_leads = $this->count_dead_leads();
+        //     $dead_leads_avg = ($dead_leads*100)/$total_leads;
     
-            $poorfit_leads = $this->count_poorfit_leads();
-            $poorfit_leads_avg = ($poorfit_leads*100)/$total_leads;
-        }else{
-            $won_leads = $this->count_won_leads();
-            $won_leads_avg = '0';
+        //     $poorfit_leads = $this->count_poorfit_leads();
+        //     $poorfit_leads_avg = ($poorfit_leads*100)/$total_leads;
+        // }else{
+        //     $won_leads = $this->count_won_leads();
+        //     $won_leads_avg = '0';
     
-            $pending_leads = $this->count_pending_leads();
-            $pending_leads_avg = '0';
+        //     $pending_leads = $this->count_pending_leads();
+        //     $pending_leads_avg = '0';
     
-            $dead_leads = $this->count_dead_leads();
-            $dead_leads_avg = '0';
+        //     $dead_leads = $this->count_dead_leads();
+        //     $dead_leads_avg = '0';
     
-            $poorfit_leads = $this->count_poorfit_leads();
-            $poorfit_leads_avg = '0';           
-        }
+        //     $poorfit_leads = $this->count_poorfit_leads();
+        //     $poorfit_leads_avg = '0';           
+        // }
 
-        $monthly_leads_recap = $this->monthly_leads_recap();
-        $m_total_leads = json_encode($monthly_leads_recap['total_leads']);
-        $m_pending_leads = json_encode($monthly_leads_recap['pending_leads']);
-        $m_won_leads = json_encode($monthly_leads_recap['won_leads']);
-        $m_dead_leads = json_encode($monthly_leads_recap['dead_leads']);
-        $m_poorfit_leads = json_encode($monthly_leads_recap['poorfit_leads']);
+        // $monthly_leads_recap = $this->monthly_leads_recap();
+        // $m_total_leads = json_encode($monthly_leads_recap['total_leads']);
+        // $m_pending_leads = json_encode($monthly_leads_recap['pending_leads']);
+        // $m_won_leads = json_encode($monthly_leads_recap['won_leads']);
+        // $m_dead_leads = json_encode($monthly_leads_recap['dead_leads']);
+        // $m_poorfit_leads = json_encode($monthly_leads_recap['poorfit_leads']);
 
         // oldest year = The year when first lead is created.
-        $first_lead = Lead::select('created_at')->oldest()->first();
-        if($first_lead != null){
-            $oldest_year = $first_lead->created_at->format('Y');
-        }else{
-            $oldest_year = '0';
-        }
+        // $first_lead = Lead::select('created_at')->oldest()->first();
+        // if($first_lead != null){
+        //     $oldest_year = $first_lead->created_at->format('Y');
+        // }else{
+        //     $oldest_year = '0';
+        // }
 
-        $now = Carbon::now();
-        $thisYear = $now->isoFormat('YYYY');
+        // $now = Carbon::now();
+        // $thisYear = $now->isoFormat('YYYY');
 
-        $monthly_leads_avg =  json_encode($this->monthly_leads_avg());
+        // $monthly_leads_avg =  json_encode($this->monthly_leads_avg());
         return view('crm.home', compact([
             'route_active',
-            'total_revenue',
-            'pending_leads',
-            'pending_leads_avg',
-            'won_leads',
-            'won_leads_avg',
-            'dead_leads',
-            'dead_leads_avg',
-            'poorfit_leads',
-            'poorfit_leads_avg',
-            'total_leads',
+            // 'total_revenue',
+            // 'pending_leads',
+            // 'pending_leads_avg',
+            // 'won_leads',
+            // 'won_leads_avg',
+            // 'dead_leads',
+            // 'dead_leads_avg',
+            // 'poorfit_leads',
+            // 'poorfit_leads_avg',
+            // 'total_leads',
             
-            'monthly_leads_recap',
-            'm_total_leads',
-            'm_pending_leads',
-            'm_won_leads',
-            'm_dead_leads',
-            'm_poorfit_leads',
+            // 'monthly_leads_recap',
+            // 'm_total_leads',
+            // 'm_pending_leads',
+            // 'm_won_leads',
+            // 'm_dead_leads',
+            // 'm_poorfit_leads',
 
-            'thisYear',
-            'oldest_year',
+            // 'thisYear',
+            // 'oldest_year',
 
-            'monthly_leads_avg'
+            // 'monthly_leads_avg'
         ]));
     }
 

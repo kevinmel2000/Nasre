@@ -38,7 +38,8 @@
                   </div>
                   <div class="card-body bg-light-gray">
                     <div class="row">
-                      <div class="col-md-4 col-sm-12">
+
+                      {{-- <div class="col-md-4 col-sm-12">
                         <div class="form-group">
                           <span ><span class="text-danger">*</span> {{__('Username')}} 
                           <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="top" title="{{__('Client can use this username to login in his account.')}}"></i> 
@@ -68,9 +69,9 @@
                         <div class="form-group">
                           <span ><span class="text-danger"></span> {{__('Website')}}</span>
                           <input type="text" name="website" class="form-control form-control-sm "  value="{{ old('website') }}" />
-                      </div>
-                      <span class="text text-danger"></span>
-                      </div>
+                        </div>
+                        <span class="text text-danger"></span>
+                      </div> --}}
                           
                       <div class="col-md-4 col-sm-12">
                           <div class="form-group">
@@ -148,11 +149,14 @@
                         <div class="form-group">
                           <span ><span class="text-danger"></span> {{__('VAT Number')}}</span>
                           <input type="text" name="vat_number" class="form-control form-control-sm "  value="{{ old('vat_number') }}" />
+                        </div>
+                        <span class="text text-danger"></span>
+                        <div class="form-group">
+                          <span ><span class="text-danger"></span> {{__('Website')}}</span>
+                          <input type="text" name="website" class="form-control form-control-sm "  value="{{ old('website') }}" />
+                        </div>
+                        <span class="text text-danger"></span>
                       </div>
-                      <span class="text text-danger"></span>
-                      </div>
-
-
 
                     </div>
                   </div>
@@ -226,7 +230,7 @@
       
       
       
-                      <div class="col-md-3 col-sm-12">
+                      {{-- <div class="col-md-3 col-sm-12">
                         <span ><span class="text-danger"></span> {{__('Customer Speaks')}}</span>
                         <div class="input-group">
                             <select name="language_id" id="languages" class="form-control form-control-sm">
@@ -253,9 +257,10 @@
                           <input type="date" name="birth_date" class="form-control form-control-sm" 
                            />
                         </div>
-                      </div>
+                      </div> --}}
                       
                       <div class="col-md-3 col-sm-12">  
+                        <span style="opacity: 0%;">{{__('Decision Maker')}}</span>   
                         <div class="form-group">
                           <label class="mr-3"><span class="text-danger"></span> {{__('Decision Maker')}}</label>
                           <input type="radio" name="decision_maker" id="yes" class="mr-1" value="yes" checked />
@@ -265,7 +270,8 @@
                         </div>
                       </div> 
       
-                      <div class="col-md-4 col-sm-12">  
+                      <div class="col-md-3 col-sm-12"> 
+                        <span style="opacity: 0%;">{{__('Gender')}}</span>   
                         <div class="form-group">
                           <label class="mr-3">{{__('Gender')}}</label>   
                           <input type="radio" name="gender" id="male" class="mr-1" value="male"  checked />
@@ -276,220 +282,16 @@
                           <label for="other" class="mr-3">{{__('Other')}}</label>
                         </div>
                       </div>
+
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-              <div class="tab-pane fade" id="address-details-id" role="tabpanel" aria-labelledby="address-details">
-                <div class="row">
-                  <div class="col-md-7 col-sm-12">
-                      <div class="form-group">
-                          <span>{{__('Address Line 1')}}</span>   
-                          <input type="text" name="address_line_1" class="form-control form-control-sm "  value="{{ old('address_line_1') }}" />
-                      </div>
-                      <div class="form-group">
-                          <span>{{__('Address Line 2')}}</span>   
-                          <input type="text" name="address_line_2" class="form-control form-control-sm " value="{{ old('address_line_2') }}" />
-                      </div>
-          
-                      <div class="row">
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                  <span> {{__('Country Name')}}</span>   
-                                  <select name="country_id" class="form-control form-control-sm"  id="countries" >
-                                      <option selected disabled>{{__('Select an option')}}</option>
-                                      @foreach ($countries as $country)
-                                          <option value="{{$country->id}}">{{$country->name}}</option>
-                                      @endforeach
-                                  </select>
-                              </div>
-                          </div>
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                  <span> {{__('State Name')}}</span>   
-                                  <select name="state_id" class="form-control form-control-sm" id="states">
-                                  </select>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                  <span> {{__('City Name')}}</span> 
-                                  <select name="city_id" class="form-control form-control-sm" id="cities">
-                                      <option selected disabled>{{__('Select an option')}}</option>
-                                  </select>
-                              </div>
-                          </div>
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                  <span> {{__('Zip')}}</span> 
-                                  <input type="text" name="zip" class="form-control form-control-sm  "  value="{{ old('zip') }}" />
-                              </div>
-                          </div>
-                      </div>
-          
-                  </div>
-                  <div class="col-md-5 col-sm-12">
-                      <div class="form-group">
-                          <span> {{__('Phone 1 ')}}</span> 
-                          <div class="input-group">
-                              <input type="tel" name="phone_1" class="form-control form-control-sm "  value="{{ old('phone_1') }}" />
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <span> {{__('Phone 2')}} </span> 
-                          <div class="input-group">
-                              <input type="tel" name="phone_2" class="form-control form-control-sm "  value="{{ old('phone_2') }}" />
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <span> {{__('Email 1')}} </span> 
-                          <div class="input-group">
-                              <input type="email" name="email_1" class="form-control form-control-sm "  value="{{ old('email_1') }}" />
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <span> Email 2 </span> 
-                          <div class="form-group">
-                              <input type="email" name="email_2" class="form-control form-control-sm "  value="{{ old('email_2') }}" />
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <input type="checkbox" name="is_shipping_address" class="mr-2" id="is_shipping_address" value="yes" />
-                          <label for="is_shipping_address"> {{__('Shipping Address')}} </label> 
-                           &nbsp; &nbsp; &nbsp; &nbsp;    
-                          <input type="checkbox" name="is_billing_address" class="mr-2" id="is_billing_address" value="yes"/>
-                          <label for="is_billing_address" > {{__('Billing Address ')}}</label> 
-                      </div>
-                  </div>
-              </div>
-            </div>
+              
         
-              <div class="tab-pane fade" id="social-media-details-id" role="tabpanel" aria-labelledby="social-media-details">
-                <div class="row">
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Linkedin')}}</span>   
-                      <input type="text" name="linkedin" class="form-control form-control-sm "  value="{{ old('linkedin') }}" />
-                    </div>
-                  </div>
-
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Facebook')}}</span>   
-                      <input type="text" value="{{ old('facebook') }}" name="facebook" class="form-control form-control-sm " />
-                    </div>
-                  </div>
-
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Twitter')}}</span>   
-                      <input type="text" value="{{ old('twitter') }}" name="twitter" class="form-control form-control-sm " />
-                    </div>
-                  </div>
-
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Skype')}}</span>   
-                      <input type="text" value="{{ old('skype') }}" name="skype" class="form-control form-control-sm "  />
-                    </div>
-                  </div>
-
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Instagram')}}</span>   
-                      <input type="text" value="{{ old('instagram') }}" name="instagram" class="form-control form-control-sm "  />
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('YouTube')}}</span>   
-                      <input type="text" value="{{ old('youtube') }}" name="youtube" class="form-control form-control-sm "  />
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Tumblr')}}</span>   
-                      <input type="text" value="{{ old('tumblr') }}" name="tumblr" class="form-control form-control-sm "  />
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Snapchat')}}</span>   
-                      <input type="text" value="{{ old('snapchat') }}" name="snapchat" class="form-control form-control-sm "  />
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Reddit')}}</span>   
-                      <input type="text" value="{{ old('reddit') }}" name="reddit" class="form-control form-control-sm "  />
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Pinterest')}}</span>   
-                      <input type="text" value="{{ old('pinterest') }}" name="pinterest" class="form-control form-control-sm " />
-                    </div>
-                  </div>
-
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Telegram')}}</span>   
-                      <input type="text" value="{{ old('telegram') }}" name="telegram" class="form-control form-control-sm " />
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Vimeo')}}</span>   
-                      <input type="text" value="{{ old('vimeo') }}" name="vimeo" class="form-control form-control-sm "  />
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Patreon')}}</span>   
-                      <input type="text" value="{{ old('patreon') }}" name="patreon" class="form-control form-control-sm " />
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Flickr')}}</span>   
-                      <input type="text" value="{{ old('flickr') }}" name="flickr" class="form-control form-control-sm " />
-                    </div>
-                  </div>
-
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Discord')}}</span>   
-                      <input type="text" value="{{ old('discord') }}" name="discord" class="form-control form-control-sm " />
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Tiktok')}}</span>   
-                      <input type="text" value="{{ old('tiktok') }}" name="tiktok" class="form-control form-control-sm " />
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <span>{{__('Vine')}}</span>   
-                      <input type="text" value="{{ old('vine') }}" name="vine" class="form-control form-control-sm " />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              </div>
+              
+            </div>
 
             </div>
           </div>
@@ -497,15 +299,16 @@
         <div class="card card-primary">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6 com-sm-12 mt-3">
+                    <div class="col-md-12 com-sm-12 mt-3">
                         <button class="btn btn-primary btn-block ">
                             {{__('Save Contact')}}
                         </button>
                     </div>
 
-                    <div class="col-md-6 com-sm-12 mt-3">
+                    {{-- <div class="col-md-6 com-sm-12 mt-3">
                       <input type="submit" value="{{__('Save and Send Email')}}" name="send_email" class="btn btn-primary btn-block ">
-                  </div>
+                    </div> --}}
+
                 </div>
             </div>
         </div>   

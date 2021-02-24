@@ -34,7 +34,7 @@
                     <tr>
                       <th>{{__('ID')}}</th>
                       <th>{{__('Company')}}</th>
-                      <th>{{__('Username/Full Name')}}</th>
+                      {{-- <th>{{__('Username/Full Name')}}</th> --}}
                       <th>{{__('Contact')}}</th>
                       <th>{{__('Customer Type')}}</th>
                       <th>{{__('Prospect')}}</th>
@@ -47,162 +47,158 @@
                             <tr>
                                 <td>{{@$customer->id}}</td>
                                 <td>{{@$customer->company_prefix}} {{@$customer->company_name}} {{@$customer->company_suffix}}</td>
-                                <td>
-                                  
+                                {{-- <td>
+                                    <a href="#" data-toggle="modal" data-target="#viewCustomer{{@$customer->id}}">
+                                      @can('update-contact', User::class)
+                                      <a href="{{url('/customer/show', $customer->id)}}">
+                                        {{@$customer->username}} |
+                                        {{@$customer->first_contact->first_name}} {{@$customer->first_contact->last_name}}
+                                      </a>
+                                      @else 
+                                        {{@$customer->first_contact->first_name}} {{@$customer->first_contact->last_name}}
+                                      @endcan
+                                    </a>
+                                    <div class="modal fade" id="viewCustomer{{@$customer->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog modal-lg">
+                                        <div class="modal-content bg-light-gray">
+                                          <div class="modal-header bg-gray">
+                                            <h5 class="modal-title">#{{@$customer->id}} | {{$customer->username}} </h5>
+                                            
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <div class="row">
+                                              <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for=""> {{__('Company')}} </label>
+                                                    <input type="text"  value="{{@$customer->company_name}}"  name="customer_number" class="form-control form-control-sm" readonly/>
+                                                </div>
+                                              </div>
+                                              <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for=""> {{__('Website')}} </label>
+                                                    <input type="text"  value="{{@$customer->website}}"  name="customer_title" class="form-control form-control-sm" readonly/>
+                                                </div>
+                                              </div>
+                                              <div class="col-md-3">
+                                                <div class="form-group">
+                                                  <label for="">{{__('VAT')}} </label>
+                                                  <input type="text" value="{{@$customer->vat}}" class="form-control form-control-sm" readonly>
+                                                </div>
+                                              </div>
 
+                                              <div class="col-md-3">
+                                                <div class="form-group">
+                                                  <label for=""> {{__('Customer Type')}}</label>
+                                                  <input type="text" value="{{@$customer->customer_type}}" class="form-control form-control-sm" readonly>
+                                                </div>
+                                              </div>
 
-  <a href="#" data-toggle="modal" data-target="#viewCustomer{{@$customer->id}}">
-    @can('update-contact', User::class)
-    <a href="{{url('/customer/show', $customer->id)}}">
-      {{@$customer->username}} |
-      {{@$customer->first_contact->first_name}} {{@$customer->first_contact->last_name}}
-    </a>
-    @else 
-      {{@$customer->first_contact->first_name}} {{@$customer->first_contact->last_name}}
-    @endcan
-  </a>
-  <div class="modal fade" id="viewCustomer{{@$customer->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content bg-light-gray">
-        <div class="modal-header bg-gray">
-          <h5 class="modal-title">#{{@$customer->id}} | {{$customer->username}} </h5>
-          
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-md-3">
-              <div class="form-group">
-                  <label for=""> {{__('Company')}} </label>
-                  <input type="text"  value="{{@$customer->company_name}}"  name="customer_number" class="form-control form-control-sm" readonly/>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                  <label for=""> {{__('Website')}} </label>
-                  <input type="text"  value="{{@$customer->website}}"  name="customer_title" class="form-control form-control-sm" readonly/>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="">{{__('VAT')}} </label>
-                <input type="text" value="{{@$customer->vat}}" class="form-control form-control-sm" readonly>
-              </div>
-            </div>
+                                          </div>
 
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for=""> {{__('Customer Type')}}</label>
-                <input type="text" value="{{@$customer->customer_type}}" class="form-control form-control-sm" readonly>
-              </div>
-            </div>
+                                          <div class="row">
+                                            <div class="col-md-3">
+                                              <div class="form-group">
+                                                <label for="">{{__('Prospect Status')}}</label>
+                                                <input type="text" value="{{@$customer->prospect_status}}"  class="form-control form-control-sm" readonly/>
+                                              </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                              <div class="form-group">
+                                                <label for="">{{__('Industry')}} </label>
+                                                <input type="text" value="{{@$customer->industry->name}}"  class="form-control form-control-sm" readonly/>
+                                              </div>
+                                            </div>
 
-        </div>
+                                          </div>
 
-        <div class="row">
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="">{{__('Prospect Status')}}</label>
-              <input type="text" value="{{@$customer->prospect_status}}"  class="form-control form-control-sm" readonly/>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="">{{__('Industry')}} </label>
-              <input type="text" value="{{@$customer->industry->name}}"  class="form-control form-control-sm" readonly/>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="card">
-          <div class="card-header bg-gray">{{__('Primary Contact')}}</div>
-          <div class="card-body bg-light-blue">
-            <div class="row">
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="">{{__('Title')}} </label>
-                  <input type="text" value="{{@$customer->first_contact->title->name}}"  class="form-control form-control-sm" readonly/>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="">{{__('First Name')}}</label>
-                  <input type="text" value="{{ @$customer->first_contact->first_name }}"  class="form-control form-control-sm" readonly/>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="">{{__('Last Name')}} </label>
-                  <input type="text" value="{{ @$customer->first_contact->last_name }}"  class="form-control form-control-sm" readonly/>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="">{{__('Email')}} </label>
-                  <input type="text" value="{{ @$customer->first_contact->email }}"  class="form-control form-control-sm" readonly/>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="">{{__('Phone')}} </label>
-                  <input type="text" value="{{@$customer->first_contact->phone}}"  class="form-control form-control-sm" readonly/>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="">{{__('Whatsapp')}} </label>
-                  <input type="text" value="{{ @$customer->first_contact->whatsapp }}"  class="form-control form-control-sm" readonly/>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="">{{__('Customer Speaks')}} </label>
-                  <input type="text" value="{{ @$customer->first_contact->language->name }}"  class="form-control form-control-sm" readonly/>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="">{{__('Personal ID')}}</label>
-                  <input type="text" value="{{ @$customer->first_contact->personal_id }}"  class="form-control form-control-sm" readonly/>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="">{{__('BirthDate')}} </label>
-                  <input type="text" value="{{@$customer->first_contact->birthdate}}"  class="form-control form-control-sm" readonly/>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="">{{__('Gender')}} </label>
-                  <input type="text" value="{{ @$customer->first_contact->gender }}"  class="form-control form-control-sm" readonly/>
-                </div>
-              </div>
-              <div class="col-md-3">
-              </div>
-              <div class="col-md-3">
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {{-- View invoice Modal Ends --}}
-
-                                </td>
+                                          <div class="card">
+                                            <div class="card-header bg-gray">{{__('Primary Contact')}}</div>
+                                            <div class="card-body bg-light-blue">
+                                              <div class="row">
+                                                <div class="col-md-3">
+                                                  <div class="form-group">
+                                                    <label for="">{{__('Title')}} </label>
+                                                    <input type="text" value="{{@$customer->first_contact->title->name}}"  class="form-control form-control-sm" readonly/>
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                  <div class="form-group">
+                                                    <label for="">{{__('First Name')}}</label>
+                                                    <input type="text" value="{{ @$customer->first_contact->first_name }}"  class="form-control form-control-sm" readonly/>
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                  <div class="form-group">
+                                                    <label for="">{{__('Last Name')}} </label>
+                                                    <input type="text" value="{{ @$customer->first_contact->last_name }}"  class="form-control form-control-sm" readonly/>
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                  <div class="form-group">
+                                                    <label for="">{{__('Email')}} </label>
+                                                    <input type="text" value="{{ @$customer->first_contact->email }}"  class="form-control form-control-sm" readonly/>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-3">
+                                                  <div class="form-group">
+                                                    <label for="">{{__('Phone')}} </label>
+                                                    <input type="text" value="{{@$customer->first_contact->phone}}"  class="form-control form-control-sm" readonly/>
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                  <div class="form-group">
+                                                    <label for="">{{__('Whatsapp')}} </label>
+                                                    <input type="text" value="{{ @$customer->first_contact->whatsapp }}"  class="form-control form-control-sm" readonly/>
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                  <div class="form-group">
+                                                    <label for="">{{__('Customer Speaks')}} </label>
+                                                    <input type="text" value="{{ @$customer->first_contact->language->name }}"  class="form-control form-control-sm" readonly/>
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                  <div class="form-group">
+                                                    <label for="">{{__('Personal ID')}}</label>
+                                                    <input type="text" value="{{ @$customer->first_contact->personal_id }}"  class="form-control form-control-sm" readonly/>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-3">
+                                                  <div class="form-group">
+                                                    <label for="">{{__('BirthDate')}} </label>
+                                                    <input type="text" value="{{@$customer->first_contact->birthdate}}"  class="form-control form-control-sm" readonly/>
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                  <div class="form-group">
+                                                    <label for="">{{__('Gender')}} </label>
+                                                    <input type="text" value="{{ @$customer->first_contact->gender }}"  class="form-control form-control-sm" readonly/>
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                </div>
+                                                <div class="col-md-3">
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+  
+                                </td> --}}
+                                {{-- View invoice Modal Ends --}}
                                 <td>
                                   <a href="tel:{{@$customer->first_contact->phone}}">{{@$customer->first_contact->phone}}
                                     <span class="font20">
@@ -237,7 +233,7 @@
                                   <span>
                                    
                                     @can('update-contact', User::class)
-                                      <a class="text-primary mr-2" href="{{url('/customer/show', $customer->first_contact)}}">
+                                      <a class="text-primary mr-2" href="{{url('/customer/show', $customer)}}">
                                         <i class="fas fa-edit"></i>
                                       </a>
                                     @endcan

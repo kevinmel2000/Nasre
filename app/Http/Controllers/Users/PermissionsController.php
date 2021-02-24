@@ -24,17 +24,17 @@ class PermissionsController extends Controller
         $contact_module =  Module::where(['module_name'=>'contact_module','role_id'=>$selected_role_id])->first();
         $role_module =  Module::where(['module_name'=>'role_module','role_id'=>$selected_role_id])->first();
         $user_module =  Module::where(['module_name'=>'user_module','role_id'=>$selected_role_id])->first();
-        $lead_module =  Module::where(['module_name'=>'lead_module','role_id'=>$selected_role_id])->first();
-        $finance_module =  Module::where(['module_name'=>'finance_module','role_id'=>$selected_role_id])->first();
-        $product_module =  Module::where(['module_name'=>'product_module','role_id'=>$selected_role_id])->first();
-        $proposal_module =  Module::where(['module_name'=>'proposal_module','role_id'=>$selected_role_id])->first();
-        $invoice_module =  Module::where(['module_name'=>'invoice_module','role_id'=>$selected_role_id])->first();
-        $project_module =  Module::where(['module_name'=>'project_module','role_id'=>$selected_role_id])->first();
-        $estimate_module =  Module::where(['module_name'=>'estimate_module','role_id'=>$selected_role_id])->first();
-        $task_module =  Module::where(['module_name'=>'task_module','role_id'=>$selected_role_id])->first();
-        $media_module =  Module::where(['module_name'=>'media_module','role_id'=>$selected_role_id])->first();
-        $reminder_module =  Module::where(['module_name'=>'reminder_module','role_id'=>$selected_role_id])->first();
-        $office_module =  Module::where(['module_name'=>'office_module','role_id'=>$selected_role_id])->first();
+        // $lead_module =  Module::where(['module_name'=>'lead_module','role_id'=>$selected_role_id])->first();
+        // $finance_module =  Module::where(['module_name'=>'finance_module','role_id'=>$selected_role_id])->first();
+        // $product_module =  Module::where(['module_name'=>'product_module','role_id'=>$selected_role_id])->first();
+        // $proposal_module =  Module::where(['module_name'=>'proposal_module','role_id'=>$selected_role_id])->first();
+        // $invoice_module =  Module::where(['module_name'=>'invoice_module','role_id'=>$selected_role_id])->first();
+        // $project_module =  Module::where(['module_name'=>'project_module','role_id'=>$selected_role_id])->first();
+        // $estimate_module =  Module::where(['module_name'=>'estimate_module','role_id'=>$selected_role_id])->first();
+        // $task_module =  Module::where(['module_name'=>'task_module','role_id'=>$selected_role_id])->first();
+        // $media_module =  Module::where(['module_name'=>'media_module','role_id'=>$selected_role_id])->first();
+        // $reminder_module =  Module::where(['module_name'=>'reminder_module','role_id'=>$selected_role_id])->first();
+        // $office_module =  Module::where(['module_name'=>'office_module','role_id'=>$selected_role_id])->first();
         $country_module =  Module::where(['module_name'=>'country_module','role_id'=>$selected_role_id])->first();
         $occupation_module =  Module::where(['module_name'=>'occupation_module','role_id'=>$selected_role_id])->first();
         $cob_module =  Module::where(['module_name'=>'cob_module','role_id'=>$selected_role_id])->first();
@@ -65,17 +65,17 @@ class PermissionsController extends Controller
                     'contact_module',
                     'role_module',
                     'user_module',
-                    'lead_module',
-                    'finance_module',
-                    'product_module',
-                    'proposal_module',
-                    'invoice_module',
-                    'project_module',
-                    'estimate_module',
-                    'task_module',
-                    'media_module',
-                    'reminder_module',
-                    'office_module',
+                    // 'lead_module',
+                    // 'finance_module',
+                    // 'product_module',
+                    // 'proposal_module',
+                    // 'invoice_module',
+                    // 'project_module',
+                    // 'estimate_module',
+                    // 'task_module',
+                    // 'media_module',
+                    // 'reminder_module',
+                    // 'office_module',
                     'country_module',
                     'occupation_module',
                     'cob_module',
@@ -116,17 +116,17 @@ class PermissionsController extends Controller
         $contact_module =  Module::where(['module_name'=>'contact_module','role_id'=>$selected_role_id])->first();
         $role_module =  Module::where(['module_name'=>'role_module','role_id'=>$selected_role_id])->first();
         $user_module =  Module::where(['module_name'=>'user_module','role_id'=>$selected_role_id])->first();
-        $lead_module =  Module::where(['module_name'=>'lead_module','role_id'=>$selected_role_id])->first();
-        $finance_module =  Module::where(['module_name'=>'finance_module','role_id'=>$selected_role_id])->first();
-        $product_module =  Module::where(['module_name'=>'product_module','role_id'=>$selected_role_id])->first();
-        $proposal_module =  Module::where(['module_name'=>'proposal_module','role_id'=>$selected_role_id])->first();
-        $invoice_module =  Module::where(['module_name'=>'invoice_module','role_id'=>$selected_role_id])->first();
-        $project_module =  Module::where(['module_name'=>'project_module','role_id'=>$selected_role_id])->first();
-        $estimate_module =  Module::where(['module_name'=>'estimate_module','role_id'=>$selected_role_id])->first();
-        $task_module =  Module::where(['module_name'=>'task_module','role_id'=>$selected_role_id])->first();
-        $media_module =  Module::where(['module_name'=>'media_module','role_id'=>$selected_role_id])->first();
-        $reminder_module =  Module::where(['module_name'=>'reminder_module','role_id'=>$selected_role_id])->first();
-        $office_module =  Module::where(['module_name'=>'office_module','role_id'=>$selected_role_id])->first();
+        // $lead_module =  Module::where(['module_name'=>'lead_module','role_id'=>$selected_role_id])->first();
+        // $finance_module =  Module::where(['module_name'=>'finance_module','role_id'=>$selected_role_id])->first();
+        // $product_module =  Module::where(['module_name'=>'product_module','role_id'=>$selected_role_id])->first();
+        // $proposal_module =  Module::where(['module_name'=>'proposal_module','role_id'=>$selected_role_id])->first();
+        // $invoice_module =  Module::where(['module_name'=>'invoice_module','role_id'=>$selected_role_id])->first();
+        // $project_module =  Module::where(['module_name'=>'project_module','role_id'=>$selected_role_id])->first();
+        // $estimate_module =  Module::where(['module_name'=>'estimate_module','role_id'=>$selected_role_id])->first();
+        // $task_module =  Module::where(['module_name'=>'task_module','role_id'=>$selected_role_id])->first();
+        // $media_module =  Module::where(['module_name'=>'media_module','role_id'=>$selected_role_id])->first();
+        // $reminder_module =  Module::where(['module_name'=>'reminder_module','role_id'=>$selected_role_id])->first();
+        // $office_module =  Module::where(['module_name'=>'office_module','role_id'=>$selected_role_id])->first();
         $country_module =  Module::where(['module_name'=>'country_module','role_id'=>$selected_role_id])->first();
         $occupation_module =  Module::where(['module_name'=>'occupation_module','role_id'=>$selected_role_id])->first();
         $cob_module =  Module::where(['module_name'=>'cob_module','role_id'=>$selected_role_id])->first();
@@ -157,17 +157,17 @@ class PermissionsController extends Controller
                     'contact_module',
                     'role_module',
                     'user_module',
-                    'lead_module',
-                    'finance_module',
-                    'product_module',
-                    'proposal_module',
-                    'invoice_module',
-                    'project_module',
-                    'estimate_module',
-                    'task_module',
-                    'media_module',
-                    'reminder_module',
-                    'office_module',
+                    // 'lead_module',
+                    // 'finance_module',
+                    // 'product_module',
+                    // 'proposal_module',
+                    // 'invoice_module',
+                    // 'project_module',
+                    // 'estimate_module',
+                    // 'task_module',
+                    // 'media_module',
+                    // 'reminder_module',
+                    // 'office_module',
                     'country_module',
                     'occupation_module',
                     'cob_module',
@@ -208,17 +208,17 @@ class PermissionsController extends Controller
         $contact_module =  Module::where(['module_name'=>'contact_module','role_id'=>$selected_role_id])->first();
         $role_module =  Module::where(['module_name'=>'role_module','role_id'=>$selected_role_id])->first();
         $user_module =  Module::where(['module_name'=>'user_module','role_id'=>$selected_role_id])->first();
-        $lead_module =  Module::where(['module_name'=>'lead_module','role_id'=>$selected_role_id])->first();
-        $finance_module =  Module::where(['module_name'=>'finance_module','role_id'=>$selected_role_id])->first();
-        $product_module =  Module::where(['module_name'=>'product_module','role_id'=>$selected_role_id])->first();
-        $proposal_module =  Module::where(['module_name'=>'proposal_module','role_id'=>$selected_role_id])->first();
-        $invoice_module =  Module::where(['module_name'=>'invoice_module','role_id'=>$selected_role_id])->first();
-        $project_module =  Module::where(['module_name'=>'project_module','role_id'=>$selected_role_id])->first();
-        $estimate_module =  Module::where(['module_name'=>'estimate_module','role_id'=>$selected_role_id])->first();
-        $task_module =  Module::where(['module_name'=>'task_module','role_id'=>$selected_role_id])->first();
-        $media_module =  Module::where(['module_name'=>'media_module','role_id'=>$selected_role_id])->first();
-        $reminder_module =  Module::where(['module_name'=>'reminder_module','role_id'=>$selected_role_id])->first();
-        $office_module =  Module::where(['module_name'=>'office_module','role_id'=>$selected_role_id])->first();
+        // $lead_module =  Module::where(['module_name'=>'lead_module','role_id'=>$selected_role_id])->first();
+        // $finance_module =  Module::where(['module_name'=>'finance_module','role_id'=>$selected_role_id])->first();
+        // $product_module =  Module::where(['module_name'=>'product_module','role_id'=>$selected_role_id])->first();
+        // $proposal_module =  Module::where(['module_name'=>'proposal_module','role_id'=>$selected_role_id])->first();
+        // $invoice_module =  Module::where(['module_name'=>'invoice_module','role_id'=>$selected_role_id])->first();
+        // $project_module =  Module::where(['module_name'=>'project_module','role_id'=>$selected_role_id])->first();
+        // $estimate_module =  Module::where(['module_name'=>'estimate_module','role_id'=>$selected_role_id])->first();
+        // $task_module =  Module::where(['module_name'=>'task_module','role_id'=>$selected_role_id])->first();
+        // $media_module =  Module::where(['module_name'=>'media_module','role_id'=>$selected_role_id])->first();
+        // $reminder_module =  Module::where(['module_name'=>'reminder_module','role_id'=>$selected_role_id])->first();
+        // $office_module =  Module::where(['module_name'=>'office_module','role_id'=>$selected_role_id])->first();
         $country_module =  Module::where(['module_name'=>'country_module','role_id'=>$selected_role_id])->first();
         $occupation_module =  Module::where(['module_name'=>'occupation_module','role_id'=>$selected_role_id])->first();
         $cob_module =  Module::where(['module_name'=>'cob_module','role_id'=>$selected_role_id])->first();
@@ -249,17 +249,17 @@ class PermissionsController extends Controller
                     'contact_module',
                     'role_module',
                     'user_module',
-                    'lead_module',
-                    'finance_module',
-                    'product_module',
-                    'proposal_module',
-                    'invoice_module',
-                    'project_module',
-                    'estimate_module',
-                    'task_module',
-                    'media_module',
-                    'reminder_module',
-                    'office_module',
+                    // 'lead_module',
+                    // 'finance_module',
+                    // 'product_module',
+                    // 'proposal_module',
+                    // 'invoice_module',
+                    // 'project_module',
+                    // 'estimate_module',
+                    // 'task_module',
+                    // 'media_module',
+                    // 'reminder_module',
+                    // 'office_module',
                     'country_module',
                     'occupation_module',
                     'cob_module',

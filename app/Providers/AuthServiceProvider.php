@@ -18,9 +18,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Contact::class => 'App\Policies\ContactPolicy',
-        Lead::class => 'App\Policies\LeadPolicy',
-        Product::class => 'App\Policies\ProductPolicy',
-        Project::class => 'App\Policies\ProjectPolicy',
+        // Lead::class => 'App\Policies\LeadPolicy',
+        // Product::class => 'App\Policies\ProductPolicy',
+        // Project::class => 'App\Policies\ProjectPolicy',
     ];
 
     /**
@@ -33,11 +33,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         // ANCHOR Project Gates
-        Gate::define('viewany-office', 'App\Policies\OfficePolicy@viewany');
-        Gate::define('view-office', 'App\Policies\OfficePolicy@view');
-        Gate::define('create-office', 'App\Policies\OfficePolicy@create');
-        Gate::define('update-office', 'App\Policies\OfficePolicy@update');
-        Gate::define('delete-office', 'App\Policies\OfficePolicy@delete');
+        // Gate::define('viewany-office', 'App\Policies\OfficePolicy@viewany');
+        // Gate::define('view-office', 'App\Policies\OfficePolicy@view');
+        // Gate::define('create-office', 'App\Policies\OfficePolicy@create');
+        // Gate::define('update-office', 'App\Policies\OfficePolicy@update');
+        // Gate::define('delete-office', 'App\Policies\OfficePolicy@delete');
 
         // ANCHOR Contact Gates
         Gate::define('viewany-contact', 'App\Policies\ContactPolicy@viewany');
@@ -61,25 +61,25 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('delete-role', 'App\Policies\RolePolicy@delete');
 
         // ANCHOR Lead Gates
-        Gate::define('viewany-lead', 'App\Policies\LeadPolicy@viewany');
-        Gate::define('view-lead', 'App\Policies\LeadPolicy@view');
-        Gate::define('create-lead', 'App\Policies\LeadPolicy@create');
-        Gate::define('update-lead', 'App\Policies\LeadPolicy@update');
-        Gate::define('delete-lead', 'App\Policies\LeadPolicy@delete');
+        // Gate::define('viewany-lead', 'App\Policies\LeadPolicy@viewany');
+        // Gate::define('view-lead', 'App\Policies\LeadPolicy@view');
+        // Gate::define('create-lead', 'App\Policies\LeadPolicy@create');
+        // Gate::define('update-lead', 'App\Policies\LeadPolicy@update');
+        // Gate::define('delete-lead', 'App\Policies\LeadPolicy@delete');
 
         // ANCHOR Product Gates
-        Gate::define('viewany-product', 'App\Policies\ProductPolicy@viewany');
-        Gate::define('view-product', 'App\Policies\ProductPolicy@view');
-        Gate::define('create-product', 'App\Policies\ProductPolicy@create');
-        Gate::define('update-product', 'App\Policies\ProductPolicy@update');
-        Gate::define('delete-product', 'App\Policies\ProductPolicy@delete');
+        // Gate::define('viewany-product', 'App\Policies\ProductPolicy@viewany');
+        // Gate::define('view-product', 'App\Policies\ProductPolicy@view');
+        // Gate::define('create-product', 'App\Policies\ProductPolicy@create');
+        // Gate::define('update-product', 'App\Policies\ProductPolicy@update');
+        // Gate::define('delete-product', 'App\Policies\ProductPolicy@delete');
                 
         // ANCHOR Project Gates
-        Gate::define('viewany-project', 'App\Policies\ProjectPolicy@viewany');
-        Gate::define('view-project', 'App\Policies\ProjectPolicy@view');
-        Gate::define('create-project', 'App\Policies\ProjectPolicy@create');
-        Gate::define('update-project', 'App\Policies\ProjectPolicy@update');
-        Gate::define('delete-project', 'App\Policies\ProjectPolicy@delete');
+        // Gate::define('viewany-project', 'App\Policies\ProjectPolicy@viewany');
+        // Gate::define('view-project', 'App\Policies\ProjectPolicy@view');
+        // Gate::define('create-project', 'App\Policies\ProjectPolicy@create');
+        // Gate::define('update-project', 'App\Policies\ProjectPolicy@update');
+        // Gate::define('delete-project', 'App\Policies\ProjectPolicy@delete');
 
         // ANCHOR Country Gates
         Gate::define('viewany-country', 'App\Policies\CountryPolicy@viewany');
