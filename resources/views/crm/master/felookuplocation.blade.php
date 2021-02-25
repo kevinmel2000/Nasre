@@ -76,7 +76,7 @@
                                     <select name="crccountry" id="country" class="e1 form-control form-control-sm ">
                                       <option selected disabled>{{__('Select Country')}}</option>
                                       @foreach($country as $cty)
-                                      <option value="{{ $cty->id }}">{{ $cty->id }} - {{ $cty->name }}</option>
+                                      <option value="{{ $cty->id }}">{{ $cty->name }}</option>
                                       @endforeach
                                   </select>
                               </div>    
@@ -85,7 +85,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                               <label for="">{{__('Postal Code')}}</label>
-                                  <input type="text" name="postal_code" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                  <input type="text" name="postal_code"  id="postal_code" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                               </div>    
                             </div>
                         </div>

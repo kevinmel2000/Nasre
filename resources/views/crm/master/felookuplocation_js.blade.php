@@ -203,6 +203,7 @@ function GoogleGeocode2() {
   };
 }
 
+
 //Process form input
 $('input[name=address]').on('input',function(e){
  //alert('Changed!');
@@ -249,7 +250,16 @@ function updateMarkerPosition(latLng)
     }, function(results, status) {
       //alert('masuk1');
       //alert(results[4].formatted_address);
-      document.getElementById('address').value=results[4].formatted_address;
+      console.log(results);
+      document.getElementById('address').value=results[0].formatted_address;
+      //alert(results[0].address_components[8].long_name);
+      document.getElementById('postal_code').value=results[0].address_components[9].long_name;
+      
+      var text1 = results[0].address_components[8].long_name;
+      $("#country option").filter(function() {
+          return this.text == text1; 
+      }).attr('selected', true);
+      
   });
 
    
