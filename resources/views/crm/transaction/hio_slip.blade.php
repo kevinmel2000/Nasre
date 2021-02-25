@@ -131,29 +131,37 @@
                                             <div class="card-header bg-gray">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        {{__('Location Detail')}}
-                                                        <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalAddShip">{{__('Add Ship')}}</button>
+                                                        {{__('Location')}}
+                                                        <a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#addlocation">
+                                                            <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocr">{{__('Add Risk Location')}}</button>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="card-body">
                                                 <div class="col-md-12 com-sm-12 mt-3">
-                                                    <table id="shipdetailTable" class="table table-bordered table-striped">
+                                                    <table id="locRiskTable" class="table table-bordered table-striped">
                                                         <thead>
                                                             <tr>
-                                                                <th>{{__('Ship Code')}}</th>
-                                                                <th>{{__('Ship Name')}}</th>
+                                                                <th>{{__('Loc Code')}}</th>
+                                                                <th>{{__('Address')}}</th>
+                                                                <th>{{__('City')}}</th>
+                                                                <th>{{__('Province')}}</th>
+                                                                <th>{{__('Coordinate')}}</th>
                                                                 <th width="20%">{{__('Actions')}}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach($shiplist as $slt)
-                                                             <tr id="sid{{ $slt->id }}" data-name="shiplistvalue[]">
-                                                                    <td data-name="{{ $slt->ship_code }}">{{ $slt->ship_code }}</td>
-                                                                    <td data-name="{{ $slt->ship_name }}">{{ $slt->ship_name }}</td>
-                                                                    <td><a href="javascript:void(0)" onclick="deleteshipdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
-                                                             </tr>   
-                                                            @endforeach
+                                                                @foreach($locationlist as $slt)
+                                                                    <tr id="sid{{ $slt->id }}">
+                                                                            <td>{{ $slt->felookuplocation->loc_code }}</td>
+                                                                            <td>{{ $slt->felookuplocation->address }}</td>
+                                                                            <td>{{@$slt->felookuplocation->state->id}} - {{@$slt->felookuplocation->state->name}}</td>
+                                                                            <td>{{@$slt->felookuplocation->city->id}} - {{@$slt->felookuplocation->city->name}}</td>
+                                                                            <td>{{ $slt->felookuplocation->latitude , $slt->felookuplocation->longtitude  }}</td>
+                                                                            <td><a href="javascript:void(0)" onclick="deletelocationdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
+                                                                    </tr>   
+                                                                @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -185,52 +193,88 @@
             </div>
         </form>
 
-        <div class="modal fade" id="ModalAddShip" tabindex="-1" user="dialog" aria-hidden="true">
+        <div class="modal fade" id="addlocation" tabindex="-1" user="dialog" aria-labelledby="addlocationLabel" aria-hidden="true">
             <div class="modal-dialog" user="document">
-                <div class="modal-content bg-light-gray">
+            <div class="modal-content bg-light-gray">
                 <div class="modal-header bg-gray">
-                    <h5 class="modal-title">{{__('Location Detail')}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="addlocationLabel">{{__('Add Lookup Location')}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                    </button>
+                </button>
                 </div>
-                <form id="form-addship" >
+
+                <form id="form-addlocation">
                     @csrf
                     <div class="modal-body">
-                            <div class="col-md-12 col-md-12">
+                    
+                        
+
+                        <div class="row">
+                            <div class="col-md-6 col-md-12">
                                 <div class="form-group">
-                                    
-                                    <label for="">{{__('Ship Code')}}</label><br>
-                                    <select name="insshipcode" id="shipcodetxt" class="form-control form-control-sm e1">
-                                        <option selected disabled>{{__('Select Ship Code')}}</option>
-                                        @foreach($mlu as $mrnlu)
-                                            <option value="{{  $mrnlu->code }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
-    
+                                    <label for="">{{__('Country')}}</label>
+                                    <select name="country_location_id" id="country_location" class="e1 form-control form-control-sm " >
+                                        <option selected readonly>{{__('Select Country ')}}</option>
+                                        @foreach($felookup as $felookuplocationdata)
+                                            <option value="{{ $felookuplocationdata->country_id }}">{{ $felookuplocationdata->country->code }} - {{ $felookuplocationdata->country->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+                        </div>
                         <div class="row">
-                            <div class="col-md-12 col-md-12">
+                            <div class="col-md-6 col-md-12">
                                 <div class="form-group">
-                                <label for="">{{__('Ship Name')}}</label>
-                                <input type="text" name="insshipname" id="shipnametxt" class="form-control" value="" />
+                                    <label for="">{{__('State/Province')}}</label>
+                                    <select name="state_location_id" id="state_location" class="e1 form-control form-control-sm " >
+                                        {{-- <option selected readonly>{{__('Select State/Province ')}}</option>
+                                        @foreach($felookup as $felookuplocationdata)
+                                            <option value="{{ $felookuplocationdata->state_id }}">{{ $felookuplocationdata->state->name }}</option>
+                                        @endforeach --}}
+                                    </select>
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="">{{__('City')}}</label>
+                                    <select name="city_location_id" id="city_location" class="e1 form-control form-control-sm " >
+                                        {{-- <option selected readonly>{{__('Select City ')}}</option>
+                                        @foreach($felookup as $felookuplocationdata)
+                                            <option value="{{ $felookuplocationdata->city_id }}">{{ $felookuplocationdata->city->name }}</option>
+                                        @endforeach --}}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="">{{__('Address')}}</label>
+                                    <select name="address_location_id" id="address_location" class="e1 form-control form-control-sm " >
+                                        {{-- <option selected readonly>{{__('Select Address ')}}</option>
+                                        @foreach($felookup as $felookuplocationdata)
+                                            <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->address }}</option>
+                                        @endforeach --}}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-        
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                        <button type="submit" class="btn btn-info" id="addship-btn">Add Ship</button>
+                        <button type="submit" class="btn btn-info" id="addship-btn">Add Risk Location</button>
                     </div>
                 </form>
-                </div>
+            </div>
             </div>
         </div>
+        {{-- Edit Modal Ends --}}
 
         <div class="card ">
-
             <div class="card-header bg-gray">
                 {{__('Slip Detail')}}
             </div>
@@ -248,9 +292,9 @@
                                     <li class="nav-item">
                                     <a class="nav-link" id="insured-details" data-toggle="pill" href="#insured-details-id" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data')}}</a>
                                     </li>
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                     <a class="nav-link" id="insurance-details" data-toggle="pill" href="#insurance-details-id" role="tab" aria-controls="social-media-details-id" aria-selected="false">{{__('Insurance Measurement')}}</a>
-                                    </li>
+                                    </li> --}}
                                     <li class="nav-item">
                                         <a class="nav-link" id="installment-details" data-toggle="pill" href="#installment-details-id" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
                                     </li>
@@ -726,52 +770,56 @@
                                             <div class="col-md-12">
                                                 <div class="card">
                                                     <div class="card-header bg-gray">
-                                                        {{__('Condition Needed')}}
+                                                        {{__('Extend Coverage')}}
                                                     </div>
                                                     <div class="card-body bg-light-gray ">
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="col-md-12 com-sm-12 mt-3">
-                                                                    <table id="conditionNeeded" class="table table-bordered table-striped">
+                                                                    <table id="ExtendCoveragePanel" class="table table-bordered table-striped">
                                                                     <thead>
                                                                     <tr>
-                                                                        <th>{{__('Condition Needed Code - Name')}}</th>
-                                                                        <th>{{__('Information')}}</th>
+                                                                        <th>{{__('Peril Code - Name')}}</th>
+                                                                        <th>{{__('Nilai (permil %.)')}}</th>
+                                                                        <th>{{__('Amount')}}</th>
                                                                         <th width="20%">{{__('Actions')}}</th>
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        @foreach($conditionneededtemp as $cnt)
-                                                                            <tr id="cnid{{ $cnt->id }}">
-                                                                                    <td data-name="{{ $cnt->condition_id }}">{{ $cnt->conditionneeded->name }} - {{ $cnt->conditionneeded->description }}</td>
-                                                                                    <td data-name="{{ $cnt->information }}">@if($cnt->information == null)
-                                                                                            - 
-                                                                                        @else
-                                                                                            {{ $cnt->information }}
-                                                                                        @endif
-                                                                                    </td>
-                                                                                    <td><a href="javascript:void(0)" onclick="deleteconditionneeded({{ $cnt->id }})">delete</i></a></td>
+                                                                        @foreach($extendcoveragelist as $exl)
+                                                                            <tr id="iidextendcoverage{{ $exl->id }}">
+                                                                                    <td>{{ @$exl->extendcoveragedata->code}} - {{ @$exl->extendcoveragedata->name}} - {{@$exl->extendcoveragedata->description }}</td>
+                                                                                    <td>{{ $exl->percentage }}</td>
+                                                                                    <td class="uang">@currency($exl->amount)</td>
+                                                                                    <td><a href="#" onclick="deleteextendcoveragedetail({{ $exl->id }})">delete</i></a></td>
                                                                             </tr>   
                                                                         @endforeach
                                                                         <tr>
-                                                                            <form id="addconditionneeded">
-                                                                                @csrf
-                                                                                <td colspan="2">
-                                                                                    <div class="form-group">
-                                                                                        <select id="slipcncode" name="slipcncode" class="form-control form-control-sm ">
-                                                                                            <option selected disabled>{{__('Condition Needed Code - Name - Information List')}}</option>
-                                                                                            @foreach($cnd as $ncd)
-                                                                                            <option value="{{ $ncd->id }}">{{ $ncd->code }} - {{ $ncd->name }} - {{ $ncd->description }}</option>
-                                                                                            @endforeach
-                                                                                        </select>
-                                                                                    </div>  
-                                                                                </td>
-                                                                                <td>
-                                                                                    <div class="form-group">
-                                                                                        <button type="button" class="btn btn-md btn-primary" id="addconditionneeded-btn">{{__('Add')}}</button>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </form>
+                                                                            <td >
+                                                                                <div class="form-group">
+                                                                                    <select id="slipcncode" name="slipcncode" class="form-control form-control-sm ">
+                                                                                        <option selected readonly>{{__('Peril List')}}</option>
+                                                                                        @foreach($exc as $ncd)
+                                                                                        <option value="{{ $ncd->id }}">{{ $ncd->code }} - {{ $ncd->name }} - {{ $ncd->description }}</option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                </div>  
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="number" value="0" step=".0001" id="slipnilaiec" name="slipnilaiec" placeholder="y" class="form-control form-control-sm "/>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="number" value="0" step=".0001" id="slipamountec" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm " readonly="readonly"/>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <button type="button" id="addextendcoverageinsured-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                </div>
+                                                                            </td>
                                                                         </tr>
                                                                     </tbody>
                                                                     </table>
@@ -782,20 +830,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="insurance-details-id" role="tabpanel" aria-labelledby="insurance-details">
+
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="row">
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Insurance Periode')}}:</label>
-                                                                <div class="input-group date" id="dateinfrom" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipipfrom" name="slipipfrom">
-                                                                        <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
+                                                                {{-- <div class="input-group date" id="dateinfrom" data-target-input="nearest"> --}}
+                                                                        <input type="date" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipipfrom" name="slipipfrom">
+                                                                        {{-- <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
-                                                                </div>
+                                                                </div> --}}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -805,12 +852,12 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                                <div class="input-group date" id="dateinto" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipipto" name="slipipto">
-                                                                        <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
+                                                                {{-- <div class="input-group date" id="dateinto" data-target-input="nearest"> --}}
+                                                                        <input type="date" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipipto" name="slipipto">
+                                                                        {{-- <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
-                                                                </div>
+                                                                </div> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -818,12 +865,12 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Reinsurance Periode')}}:</label>
-                                                                <div class="input-group date" id="daterefrom" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" id="sliprpfrom" name="sliprpfrom">
-                                                                        <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
+                                                                {{-- <div class="input-group date" id="daterefrom" data-target-input="nearest"> --}}
+                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" id="sliprpfrom" name="sliprpfrom">
+                                                                        {{-- <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
-                                                                </div>
+                                                                </div> --}}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -833,18 +880,18 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                                <div class="input-group date" id="datereto" data-target-input="nearest">
-                                                                        
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" id="sliprpto" name="sliprpto">
-                                                                        <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
+                                                                {{-- <div class="input-group date" id="datereto" data-target-input="nearest"> --}}
+                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" id="sliprpto" name="sliprpto">
+                                                                        {{-- <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
-                                                                </div>
+                                                                </div> --}}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                         <div class="row d-flex justify-content-start">
                                             <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> non proportional panel</i>
                                         </div>
@@ -975,6 +1022,8 @@
                                             </div>
                                         </div>
                                     </div>
+                                    {{-- <div class="tab-pane fade" id="insurance-details-id" role="tabpanel" aria-labelledby="insurance-details">
+                                    </div> --}}
                                     <div class="tab-pane fade" id="installment-details-id" role="tabpanel" aria-labelledby="installment-details">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -1009,12 +1058,12 @@
                                                                                 @csrf
                                                                                 <td>
                                                                                     <div class="form-group">
-                                                                                            <div class="input-group date" id="dateinstallment" data-target-input="nearest">
-                                                                                                    <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#dateinstallment" id="slipipdate" name="slipipdate">
-                                                                                                    <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
+                                                                                            {{-- <div class="input-group date" id="dateinstallment" data-target-input="nearest"> --}}
+                                                                                                    <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#dateinstallment" id="slipipdate" name="slipipdate">
+                                                                                                    {{-- <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
                                                                                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                                                    </div>
-                                                                                            </div>
+                                                                                                    </div> --}}
+                                                                                            {{-- </div> --}}
                                                                                     </div>
                                                                                 </td>
                                                                                 <td>
@@ -1049,8 +1098,8 @@
                                                     <label for="">{{__('Retro Backup?')}}</label>
                                                     <select id="sliprb" name="sliprb" class="form-control form-control-sm ">
                                                         {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
-                                                        <option value="YES" selected>YES</option>
-                                                        <option value="NO">NO</option>
+                                                        <option value="YES" >YES</option>
+                                                        <option value="NO" selected>NO</option>
                                                     </select>
                                                 </div>   
                                             </div>
@@ -1061,7 +1110,7 @@
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <div class="input-group">
-                                                                    <input type="number" value="0" step=".0001" id="slipor" name="slipor" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                    <input type="number" value="100" step=".0001" id="slipor" name="slipor" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-2">
@@ -1079,7 +1128,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row" id="tabretro">
                                             <div class="col-md-12">
                                                 <div class="card">
                                                     <div class="card-header bg-gray">
@@ -1090,75 +1139,75 @@
                                                             <div class="col-md-12">
                                                                 <div class="col-md-12 com-sm-12 mt-3">
                                                                     <table id="retrocessionPanel" class="table table-bordered table-striped">
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th>{{__('Type')}}</th>
-                                                                        <th>{{__('Retrocession Contract')}}</th>
-                                                                        <th>{{__('Percentage')}}</th>
-                                                                        <th>{{__('Amount')}}</th>
-                                                                        <th width="20%">{{__('Actions')}}</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        @foreach($retrocessiontemp as $rsc)
-                                                                            <tr id="rscid{{ $rsc->id }}">
-                                                                                    <td data-name="{{ $rsc->type }}">{{ $rsc->type }}</td>
-                                                                                    <td data-name="{{ $rsc->contract }}">{{ $rsc->contract }}</td>
-                                                                                    <td data-name="{{ $rsc->percentage }}">{{ $rsc->percentage }}</td>
-                                                                                    <td data-name="{{ $rsc->amount }}">@currency( $rsc->amount)</td>
-                                                                                    <td><a href="javascript:void(0)" onclick="deleteretrocessiontemp({{ $rsc->id }})">delete</i></a></td>
-                                                                            </tr>   
-                                                                        @endforeach
-                                                                        
-                                                                        <tr>
-                                                                            <form id="addretrocessiontemp">
-                                                                                @csrf
-                                                                                <td>
-                                                                                    <div class="form-group">
-                                                                                        <select id="sliprptype" name="sliprptype" class="form-control form-control-sm ">
-                                                                                            <option selected disabled>{{__('Type list')}}</option>
-                                                                                            <option value="NM XOL">NM XOL</option>
-                                                                                        </select>
-                                                                                    </div>  
-                                                                                </td>
-                                                                                <td>
-                                                                                    <div class="form-group">
-                                                                                        <select id="sliprpcontract" name="sliprpcontract" class="form-control form-control-sm ">
-                                                                                            <option selected disabled>{{__('Contract list')}}</option>
-                                                                                            <option value="20NM11110">20NM11110</option>
-                                                                                            <option value="20ABC">20ABC</option>
-                                                                                        </select>
-                                                                                    </div>  
-                                                                                </td>
-                                                                                <td>
-                                                                                    <div class="form-group">
-                                                                                        <div class="row">
-                                                                                            <div class="col-md-8">
-                                                                                                <div class="input-group">
-                                                                                                    <input type="number" value="0" step=".0001" id="sliprppercentage" name="sliprppercentage" class="form-control form-control-sm " data-validation="length" placeholder="z" data-validation-length="0-50" />
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>{{__('Type')}}</th>
+                                                                                <th>{{__('Retrocession Contract')}}</th>
+                                                                                <th>{{__('Percentage')}}</th>
+                                                                                <th>{{__('Amount')}}</th>
+                                                                                <th width="20%">{{__('Actions')}}</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @foreach($retrocessiontemp as $rsc)
+                                                                                <tr id="rscid{{ $rsc->id }}">
+                                                                                        <td data-name="{{ $rsc->type }}">{{ $rsc->type }}</td>
+                                                                                        <td data-name="{{ $rsc->contract }}">{{ $rsc->contract }}</td>
+                                                                                        <td data-name="{{ $rsc->percentage }}">{{ $rsc->percentage }}</td>
+                                                                                        <td data-name="{{ $rsc->amount }}">@currency( $rsc->amount)</td>
+                                                                                        <td><a href="javascript:void(0)" onclick="deleteretrocessiontemp({{ $rsc->id }})">delete</i></a></td>
+                                                                                </tr>   
+                                                                            @endforeach
+                                                                            
+                                                                            <tr>
+                                                                                <form id="addretrocessiontemp">
+                                                                                    @csrf
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <select id="sliprptype" name="sliprptype" class="form-control form-control-sm ">
+                                                                                                <option selected disabled>{{__('Type list')}}</option>
+                                                                                                <option value="NM XOL">NM XOL</option>
+                                                                                            </select>
+                                                                                        </div>  
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <select id="sliprpcontract" name="sliprpcontract" class="form-control form-control-sm ">
+                                                                                                <option selected disabled>{{__('Contract list')}}</option>
+                                                                                                <option value="20NM11110">20NM11110</option>
+                                                                                                <option value="20ABC">20ABC</option>
+                                                                                            </select>
+                                                                                        </div>  
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-8">
+                                                                                                    <div class="input-group">
+                                                                                                        <input type="number" value="0" step=".0001" id="sliprppercentage" name="sliprppercentage" class="form-control form-control-sm " data-validation="length" placeholder="z" data-validation-length="0-50" />
+                                                                                                    </div>
                                                                                                 </div>
-                                                                                            </div>
-                                                                                            <div class="col-md-2">
-                                                                                                <div class="input-group-append">
-                                                                                                    <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                                                <div class="col-md-2">
+                                                                                                    <div class="input-group-append">
+                                                                                                        <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                                                    </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <div class="form-group">
-                                                                                        <input type="number" value="0" step=".0001" id="sliprpamount" name="sliprpamount" placeholder="= z% * b% * tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=z * b% * tsi" readonly="readonly" />
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <div class="form-group">
-                                                                                        <button type="button" class="btn btn-md btn-primary" id="addretrocessiontemp-btn">{{__('Add')}}</button>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </form>
-                                                                        </tr>
-                                                                    </tbody>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <input type="number" value="0" step=".0001" id="sliprpamount" name="sliprpamount" placeholder="= z% * b% * tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=z * b% * tsi" readonly="readonly" />
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <button type="button" class="btn btn-md btn-primary" id="addretrocessiontemp-btn">{{__('Add')}}</button>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </form>
+                                                                            </tr>
+                                                                        </tbody>
                                                                     </table>
                                                                 </div>
                                                             </div>

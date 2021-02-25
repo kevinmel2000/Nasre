@@ -102,43 +102,37 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         {{__('Location')}}
-                                                        <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocr">{{__('Add Risk Location')}}</button>
+                                                        <a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#addlocation">
+                                                            <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocr">{{__('Add Risk Location')}}</button>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="card-body">
                                                 <div class="col-md-12 com-sm-12 mt-3">
                                                     <table id="locRiskTable" class="table table-bordered table-striped">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>{{__('Loc Code')}}</th>
-                                                        <th>{{__('Address')}}</th>
-                                                        <th>{{__('City')}}</th>
-                                                        <th>{{__('Province')}}</th>
-                                                        <th>{{__('LatLong')}}</th>
-                                                        <th width="20%">{{__('Actions')}}</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>{{__('CODE0001')}}</td>
-                                                            <td>{{__('Jl cikini Raya no 99 Jakarta Pusat')}}</td>
-                                                            <td>{{__('Jakarta Pusat')}}</td>
-                                                            <td>{{__('Jakarta')}}</td>
-                                                            <td>{{__('-6.25625:106.877481')}}</td>
-                                                            <td width="20%"><input class="form-check-input" style="margin-left: 30;" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>{{__('CODE0002')}}</td>
-                                                            <td>{{__('Jl Raya Panjang Lebar no 66 Jakarta Timur')}}</td>
-                                                            <td>{{__('Jakarta Timur')}}</td>
-                                                            <td>{{__('Jakarta')}}</td>
-                                                            <td>{{__('-6.25625:106.877481')}}</td>
-                                                            <td width="20%"><input class="form-check-input" style="margin-left: 30;" type="radio" name="locOption" id="locOption" value="locOption" checked></td>
-                                                        </tr>
-                                                        
-                                                    </tbody>
-                                                    
+                                                        <thead>
+                                                            <tr>
+                                                                <th>{{__('Loc Code')}}</th>
+                                                                <th>{{__('Address')}}</th>
+                                                                <th>{{__('City')}}</th>
+                                                                <th>{{__('Province')}}</th>
+                                                                <th>{{__('Coordinate')}}</th>
+                                                                <th width="20%">{{__('Actions')}}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                @foreach($locationlist as $slt)
+                                                                    <tr id="sid{{ $slt->id }}">
+                                                                            <td>{{ $slt->felookuplocation->loc_code }}</td>
+                                                                            <td>{{ $slt->felookuplocation->address }}</td>
+                                                                            <td>{{@$slt->felookuplocation->state->id}} - {{@$slt->felookuplocation->state->name}}</td>
+                                                                            <td>{{@$slt->felookuplocation->city->id}} - {{@$slt->felookuplocation->city->name}}</td>
+                                                                            <td>{{ $slt->felookuplocation->latitude , $slt->felookuplocation->longtitude  }}</td>
+                                                                            <td><a href="javascript:void(0)" onclick="deletelocationdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
+                                                                    </tr>   
+                                                                @endforeach
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             </div>
@@ -207,699 +201,924 @@
                 </div>
             </form>
 
-        <div class="card ">
-            <div class="card-header bg-gray">
-                {{__('Slip Detail')}}
-            </div>
-            <div class="card-body bg-light-gray">
-                
-                <div class="container-fluid p-3">
-                    <form>
-                        <div class="card card-tabs">
-                            <div class="card-header p-0 pt-1 border-bottom-0">
-                                <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
-                                    <li class="pt-1 px-3"><h3 class="card-title">{{__('Slip Form')}}</h3></li>
-                                    <li class="nav-item">
-                                    <a class="nav-link active" id="general-details" data-toggle="pill" href="#general-details-id" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
-                                    </li>
-                                    <li class="nav-item">
-                                    <a class="nav-link" id="insured-details" data-toggle="pill" href="#insured-details-id" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data')}}</a>
-                                    </li>
-                                    <li class="nav-item">
-                                    <a class="nav-link" id="insurance-details" data-toggle="pill" href="#insurance-details-id" role="tab" aria-controls="social-media-details-id" aria-selected="false">{{__('Insurance Measurement')}}</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="installment-details" data-toggle="pill" href="#installment-details-id" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
-                                    </li>
-                                </ul>
+            <div class="modal fade" id="addlocation" tabindex="-1" user="dialog" aria-labelledby="addlocationLabel" aria-hidden="true">
+                <div class="modal-dialog" user="document">
+                <div class="modal-content bg-light-gray">
+                    <div class="modal-header bg-gray">
+                    <h5 class="modal-title" id="addlocationLabel">{{__('Add Lookup Location')}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+    
+                    <form id="form-addlocation">
+                        @csrf
+                        <div class="modal-body">
+                        
+                            
+    
+                            <div class="row">
+                                <div class="col-md-6 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Country')}}</label>
+                                        <select name="country_location_id" id="country_location" class="e1 form-control form-control-sm " >
+                                            <option selected readonly>{{__('Select Country ')}}</option>
+                                            @foreach($felookup as $felookuplocationdata)
+                                                <option value="{{ $felookuplocationdata->country_id }}">{{ $felookuplocationdata->country->code }} - {{ $felookuplocationdata->country->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body bg-light-gray">
-                                <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
-                                    <div class="tab-pane fade show active" id="general-details-id" role="tabpanel" aria-labelledby="general-details">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsement">{{__('Endorsement')}}</button>
+                            <div class="row">
+                                <div class="col-md-6 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('State/Province')}}</label>
+                                        <select name="state_location_id" id="state_location" class="e1 form-control form-control-sm " >
+                                            {{-- <option selected readonly>{{__('Select State/Province ')}}</option>
+                                            @foreach($felookup as $felookuplocationdata)
+                                                <option value="{{ $felookuplocationdata->state_id }}">{{ $felookuplocationdata->state->name }}</option>
+                                            @endforeach --}}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('City')}}</label>
+                                        <select name="city_location_id" id="city_location" class="e1 form-control form-control-sm " >
+                                            {{-- <option selected readonly>{{__('Select City ')}}</option>
+                                            @foreach($felookup as $felookuplocationdata)
+                                                <option value="{{ $felookuplocationdata->city_id }}">{{ $felookuplocationdata->city->name }}</option>
+                                            @endforeach --}}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Address')}}</label>
+                                        <select name="address_location_id" id="address_location" class="e1 form-control form-control-sm " >
+                                            {{-- <option selected readonly>{{__('Select Address ')}}</option>
+                                            @foreach($felookup as $felookuplocationdata)
+                                                <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->address }}</option>
+                                            @endforeach --}}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                            <button type="submit" class="btn btn-info" id="addship-btn">Add Risk Location</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+            {{-- Edit Modal Ends --}}
+
+            <div class="card ">
+                <div class="card-header bg-gray">
+                    {{__('Slip Detail')}}
+                </div>
+                <div class="card-body bg-light-gray">
+                    
+                    <div class="container-fluid p-3">
+                        <form id="marineslipform" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
+                            <div class="card card-tabs">
+                                <div class="card-header p-0 pt-1 border-bottom-0">
+                                    <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                        <li class="pt-1 px-3"><h3 class="card-title">{{__('Slip Form')}}</h3></li>
+                                        <li class="nav-item">
+                                        <a class="nav-link active" id="general-details" data-toggle="pill" href="#general-details-id" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
+                                        </li>
+                                        <li class="nav-item">
+                                        <a class="nav-link" id="insured-details" data-toggle="pill" href="#insured-details-id" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data')}}</a>
+                                        </li>
+                                        {{-- <li class="nav-item">
+                                        <a class="nav-link" id="insurance-details" data-toggle="pill" href="#insurance-details-id" role="tab" aria-controls="social-media-details-id" aria-selected="false">{{__('Insurance Measurement')}}</a>
+                                        </li> --}}
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="installment-details" data-toggle="pill" href="#installment-details-id" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-body bg-light-gray">
+                                    <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
+                                        <div class="tab-pane fade show active" id="general-details-id" role="tabpanel" aria-labelledby="general-details">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    @if($edslipid == 0)
+                                                    <a href="{{url('/transaction-data/marine-endorsement',$edslipid)}}" class="btn btn-sm btn-primary float-right" aria-readonly="true">{{__('Endorsement')}}</a>
+                                                    @else
+                                                    <a href="{{url('/transaction-data/marine-endorsement',$edslipid)}}" class="btn btn-sm btn-primary float-right" >{{__('Endorsement')}}</a>
+                                                    @endif
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Number')}} </label>
-                                                        <input type="text" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="3" required/>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
+                                                            <input type="hidden" name="slipmsinumber" id="slipmsinumber" value="{{ $code_ms }}">
+                                                            <label for="">{{__('Number')}} </label>
+                                                            <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="0-25" value="{{ $code_sl }}" readonly="readonly" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Username')}}</label>
+                                                                <input type="text" id="slipusername" name="slipusername" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="{{Auth::user()->name}}" readonly="readonly" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label>{{__('Prod Year')}}:</label>
+                                                                    <div class="input-group date" id="date" data-target-input="nearest">
+                                                                            <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipprodyear" name="slipprodyear" value="{{ $currdate }}" readonly="readonly">
+                                                                            <div class="input-group-append" >
+                                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                            </div>
+                                                                    </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('UY')}}</label>
+                                                                <input type="number" id="slipuy" name="slipuy" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-15" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Status')}}</label>
+                                                            <select id="slipstatus" name="slipstatus" class="form-control form-control-sm ">
+                                                                {{-- <option selected disabled>{{__('Select Status')}}</option> --}}
+                                                                <option value="offer" selected>Offer</option>
+                                                                <option value="binding">Binding</option>
+                                                                <option value="slip">Slip</option>
+                                                                <option value="endorsement">Endorsement</option>
+                                                                <option value="decline">Decline</option>
+                                                                <option value="cancel">Cancel</option>
+                                                            </select>
+                                                        </div>    
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="">{{__('Username')}}</label>
-                                                            <input type="text" name="slipusername" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label>{{__('Prod Year')}}:</label>
-                                                                <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipprodyear">
-                                                                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
-                                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                        </div>
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
+                                                                        <label for="" class="d-flex justify-content-center">{{__('Endorsement / Selisih')}}</label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
+                                                                        <input type="text" id="sliped" name="sliped" class="form-control form-control-sm " data-validation="length" value="0" readonly="readonly" data-validation-length="0-50"/>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
+                                                                        <input type="text" id="slipsls" name="slipsls" class="form-control form-control-sm " data-validation="length" value="0" readonly="readonly" data-validation-length="0-50"/>
+                                                                    </div>
                                                                 </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="">{{__('UY')}}</label>
-                                                            <input type="text" name="slipuy" class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" required/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Status')}}</label>
-                                                        <select name="slipstatus" class="form-control form-control-sm ">
-                                                            {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
-                                                            <option value="AF" selected>Offer</option>
-                                                            <option value="AN">Binding</option>
-                                                            <option value="AS">Slip</option>
-                                                            <option value="EU">Endorsement</option>
-                                                        </select>
-                                                    </div>    
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="" class="d-flex justify-content-center">{{__('Endorsement / Selisih')}}</label>
-                                                        <br>
-                                                        <div class="form-check form-check-inline d-flex justify-content-around">
-                                                                <input class="form-check-input" type="checkbox" id="slipedselisih" name="slipedselisih" value="Endorsement">
-                                                                <input class="form-check-input" type="checkbox" id="slipedselisih" name="slipedselisih" value="Selisih">
-                                                        </div>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 com-sm-12 mt-3">
-                                                        <table id="slipStatusTable" class="table table-bordered table-striped">
+                                                    <div class="row">
+                                                        <div class="col-md-12 com-sm-12 mt-3">
+                                                            <table id="slipStatusTable" class="table table-bordered table-striped">
                                                             <thead>
                                                                 <tr>
                                                                     <th>{{__('Status')}}</th>
                                                                     <th>{{__('Datetime')}}</th>
-                                                                    <th>{{__('User')}}</th>]
+                                                                    <th>{{__('User')}}</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>{{__('Offer')}}</td>
-                                                                    <td>{{__('01/10/2020 09:00:00')}}</td>
-                                                                    <td>{{__('User A')}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{__('Binding')}}</td>
-                                                                    <td>{{__('01/10/2020 14:15:00')}}</td>
-                                                                    <td>{{__('User A')}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{__('Slip')}}</td>
-                                                                    <td>{{__('01/10/2020 11:20:00')}}</td>
-                                                                    <td>{{__('User B')}}</td>
-                                                                </tr>
+                                                                @foreach($statuslist as $stl)
+                                                                 <tr id="sid{{ $stl->id }}" data-name="shiplistvalue[]">
+                                                                        <td data-name="{{ $stl->id }}">{{ $stl->status }}</td>
+                                                                        <td data-name="{{ $stl->datetime }}">{{ $stl->datetime }}</td>
+                                                                        <td data-name="{{ $stl->user }}">{{ $stl->user }}</td>
+                                                                 </tr>   
+                                                                @endforeach
                                                             </tbody>
-                                                        
-                                                        </table>
-                                                        <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> Data is Transferred!</i>
+                                                            
+                                                            </table>
+                                                            <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> Data is Transferred!</i>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="">{{__('Source')}}</label>
-                                                    <select name="slipcedingbroker" class="form-control form-control-sm ">
-                                                        {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
-                                                        <option value="AF" selected>Ceding or Broker</option>
-                                                        <option value="AN">Binding</option>
-                                                        <option value="AS">Slip</option>
-                                                        <option value="EU">Endorsement</option>
-                                                    </select>
-                                                </div>    
-                                                <div class="form-group">
-                                                    <select name="slipceding" class="form-control form-control-sm ">
-                                                        {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
-                                                        <option value="AF" selected>Ceding </option>
-                                                        <option value="AN">Binding</option>
-                                                        <option value="AS">Slip</option>
-                                                        <option value="EU">Endorsement</option>
-                                                    </select>
-                                                </div>  
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Source')}}</label>
+                                                        <select id="slipcedingbroker" name="slipcedingbroker" class="e1 form-control form-control-sm ">
+                                                            <option value="" disabled selected>Ceding or Broker</option>
+                                                            @foreach($cedingbroker as $cb)
+                                                                <option value="{{ $cb->id }}">{{ $cb->companytype->name }} - {{ $cb->code }} - {{ $cb->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>    
+                                                    <div class="form-group">
+                                                        <select id="slipceding" name="slipceding" class="e1 form-control form-control-sm ">
+                                                            <option value="" disabled selected>Ceding </option>
+                                                            @foreach($ceding as $cd)
+                                                                <option value="{{ $cd->id }}">{{ $cd->code }} - {{ $cd->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>  
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Currency')}}</label>
-                                                        <select name="slipcurrency" class="form-control form-control-sm ">
-                                                            <option selected disabled>{{__('Select Currency')}}</option>
-                                                            <option value="AF">Africa</option>
-                                                            <option value="AN">Antartica</option>
-                                                            <option value="AS">Asia</option>
-                                                            <option value="EU">Europa</option>
-                                                            <option value="NA">North America </option>
-                                                            <option value="OC">Oceania</option>
-                                                            <option value="SA">South America</option>
-                                                        </select>
-                                                    </div>    
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Currency')}}</label>
+                                                            <select id="slipcurrency" name="slipcurrency" class="e1 form-control form-control-sm ">
+                                                                <option selected disabled>{{__('Select Currency')}}</option>
+                                                                @foreach($currency as $crc)
+                                                                    <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>    
+                                                        </div>
                                                     </div>
-                                                </div>
-                        
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('COB')}}</label>
-                                                        <select name="slipcob" class="form-control form-control-sm ">
-                                                            <option selected disabled>{{__('COB list')}}</option>
-                                                            <option value="AF">Africa</option>
-                                                            <option value="AN">Antartica</option>
-                                                            <option value="AS">Asia</option>
-                                                            <option value="EU">Europa</option>
-                                                            <option value="NA">North America </option>
-                                                            <option value="OC">Oceania</option>
-                                                            <option value="SA">South America</option>
-                                                        </select>
-                                                    </div>    
+                            
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('COB')}}</label>
+                                                            <select id="slipcob" name="slipcob" class="e1 form-control form-control-sm ">
+                                                                <option selected disabled>{{__('COB list')}}</option>
+                                                                @foreach($cob as $boc)
+                                                                    <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>    
+                                                        </div>
                                                     </div>
-                                                </div>
-                        
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('KOC')}}</label>
-                                                        <select name="slipkoc" class="form-control form-control-sm ">
-                                                            <option selected disabled>{{__('KOC list')}}</option>
-                                                            <option value="AF">Africa</option>
-                                                            <option value="AN">Antartica</option>
-                                                            <option value="AS">Asia</option>
-                                                            <option value="EU">Europa</option>
-                                                            <option value="NA">North America </option>
-                                                            <option value="OC">Oceania</option>
-                                                            <option value="SA">South America</option>
-                                                        </select>
-                                                    </div>    
+                            
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('KOC')}}</label>
+                                                            <select id="slipkoc" name="slipkoc" class="e1 form-control form-control-sm ">
+                                                                <option selected disabled>{{__('KOC list')}}</option>
+                                                                @foreach($koc as $cok)
+                                                                    <option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>    
+                                                        </div>
                                                     </div>
-                                                </div>
-                        
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Occupacy')}}</label>
-                                                        <select name="slipoccupacy" class="form-control form-control-sm ">
-                                                            <option selected disabled>{{__('Occupation list')}}</option>
-                                                            <option value="AF">Africa</option>
-                                                            <option value="AN">Antartica</option>
-                                                            <option value="AS">Asia</option>
-                                                            <option value="EU">Europa</option>
-                                                            <option value="NA">North America </option>
-                                                            <option value="OC">Oceania</option>
-                                                            <option value="SA">South America</option>
-                                                        </select>
-                                                    </div>    
+                            
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Occupacy')}}</label>
+                                                            <select id="slipoccupacy" name="slipoccupacy" class="e1 form-control form-control-sm ">
+                                                                <option selected disabled>{{__('Occupation list')}}</option>
+                                                                @foreach($ocp as $ocpy)
+                                                                    <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>    
+                                                        </div>
                                                     </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Building Const')}}</label>
-                                                        <select name="slipbld_const" class="form-control form-control-sm ">
-                                                            <option selected disabled>{{__('Building Const list')}}</option>
-                                                            <option value="AF">Africa</option>
-                                                            <option value="AN">Antartica</option>
-                                                            <option value="AS">Asia</option>
-                                                            <option value="EU">Europa</option>
-                                                            <option value="NA">North America </option>
-                                                            <option value="OC">Oceania</option>
-                                                            <option value="SA">South America</option>
-                                                        </select>
-                                                    </div>    
+    
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Building Const')}}</label>
+                                                            <select id="slipbld_const" name="slipbld_const" class="e1 form-control form-control-sm ">
+                                                                <option selected disabled>{{__('Building Const list')}}</option>
+                                                                <option value="Buliding 1">Buliding 1</option>
+                                                                <option value="Buliding 2">Buliding 2</option>
+                                                                <option value="Buliding 3">Buliding 3</option>
+                                                                <option value="Buliding 4">Buliding 4</option>
+                                                                <option value="Buliding 5">Buliding 5 </option>
+                                                                <option value="Buliding 6">Buliding 6</option>
+                                                                <option value="Buliding 7">Buliding 7</option>
+                                                            </select>
+                                                        </div>    
+                                                        </div>
                                                     </div>
+    
                                                 </div>
-
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="card">
-                                                            <div class="card-header bg-gray">
-                                                                {{__('Reference Number')}}
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="card">
+                                                                <div class="card-header bg-gray">
+                                                                    {{__('Reference Number')}}
+                                                                </div>
+                                                                <div class="card-body bg-light-gray ">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label for="">{{__('Slip No.')}}</label>
+                                                                            <input type="text" id="slipno" name="slipno" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label for="">{{__('CN/DN')}}</label>
+                                                                            <input type="text" id="slipcndn" name="slipcndn" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label for="">{{__('Policy No')}}</label>
+                                                                            <input type="text" id="slippolicy_no" name="slippolicy_no" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                </div>
                                                             </div>
-                                                            <div class="card-body bg-light-gray ">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <label for="">{{__('Slip No.')}}</label>
-                                                                        <input type="text" name="slipno" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <label for="">{{__('CN/DN')}}</label>
-                                                                        <input type="text" name="slipcndn" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <label for="">{{__('Policy No')}}</label>
-                                                                        <input type="text" name="slippolicy_no" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                    </div>
-                                                                </div>
-                                                                
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('Attachment')}} </label>
+                                                        <div class="input-group">
+                                                            <div class="input-group control-group increment2" >
+                                                                <input type="file" name="files[]" id="attachment" class="form-control" multiple>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>{{__('Attachment')}} </label>
-                                                    <div class="input-group">
-                                                        <input type="file" name="file_att" id="attachment" required>
+                                        <div class="tab-pane fade" id="insured-details-id" role="tabpanel" aria-labelledby="insured-details">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header bg-gray">
+                                                            {{__('Interest Insured')}}
+                                                        </div>
+                                                        <div class="card-body bg-light-gray ">
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <div class="col-md-12 com-sm-12 mt-3">
+                                                                        <input type="hidden" name="msitsi" id="msitsi" value="">
+                                                                        <input type="hidden" name="msisharev" id="msisharev" value="">
+                                                                        <input type="hidden" name="msisumsharev" id="msisumsharev" value="">
+    
+                                                                        <table id="interestInsuredTable" class="table table-bordered table-striped">
+                                                                            <thead>
+                                                                            <tr>
+                                                                            <th>{{__('Interest ID - Name')}}</th>
+                                                                            <th>{{__('Amount')}}</th>
+                                                                            <th width="20%">{{__('Actions')}}</th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                @foreach($interestlist as $isl)
+                                                                                    <tr id="iid{{ $isl->id }}" data-name="interestvalue[]">
+                                                                                            <td data-name="{{ $isl->interest_id }}">{{ $isl->interestinsureddata->description }}</td>
+                                                                                            <td data-name="{{ $isl->amount }}">@currency($isl->amount)</td>
+                                                                                            <td><a href="javascript:void(0)" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
+                                                                                    </tr>   
+                                                                                @endforeach
+                                                                                <tr>
+                                                                                    <form id="addinterestinsured">
+                                                                                        @csrf
+                                                                                        <td>
+                                                                                            <div class="form-group">
+                                                                                                <select id="slipinterestlist" name="slipinterestlist" class="form-control form-control-sm ">
+                                                                                                    <option selected disabled>{{__('Interest list')}}</option>
+                                                                                                    @foreach($interestinsured as $ii)
+                                                                                                        <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
+                                                                                                    @endforeach
+                                                                                                </select>
+                                                                                            </div>  
+                                                                                        </td>
+    
+                                                                                        <td>
+                                                                                            <div class="form-group">
+                                                                                                <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipamount" name="slipamount" class="form-control form-control-sm " data-validation="length" data-validation-length="0-15" />
+                                                                                            </div>
+                                                                                        </td>
+    
+                                                                                        <td>
+                                                                                            <div class="form-group">
+                                                                                                <button type="button" id="addinterestinsured-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </form>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> 
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 d-flex justify-content-end">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Total Sum Insured')}}</label>
+                                                        <input type="number" min="0" value="0" step=".0001" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="insured-details-id" role="tabpanel" aria-labelledby="insured-details">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header bg-gray">
-                                                        {{__('Interest Insured')}}
+                                            <div class="row">
+                                                <div class="col-md-12 d-flex justify-content-end">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Type')}}</label>
+                                                                <select id="sliptype" name="sliptype" class="form-control form-control-sm ">
+                                                                    {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
+                                                                    <option value="PML" selected >PML</option>
+                                                                    <option value="LOL">LOL</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="" style="opacity: 0;">{{__('Type')}}</label>
+                                                                <div class="row">
+                                                                    <div class="col-md-10">
+                                                                        <div class="input-group">
+                                                                            <input type="number" value="0" step=".0001" id="slippct" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="input-group-append">
+                                                                            <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for=""style="opacity: 0;">{{__('Type')}}</label>
+                                                                <input type="number" value="0" step=".0001" id="sliptotalsumpct" name="sliptotalsumpct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" />
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="card-body bg-light-gray ">
-                                                        <div class="row">
-                                                            <div class="col-md-8">
-                                                                <div class="col-md-12 com-sm-12 mt-3">
-                                                                    <table id="interestInsured" class="table table-bordered table-striped">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header bg-gray">
+                                                            {{__('Deductible Panel')}}
+                                                        </div>
+                                                        <div class="card-body bg-light-gray ">
+                                                            <div class="row">
+                                                                <div class="col-md-10">
+                                                                    <div class="col-md-12 com-sm-12 mt-3">
+                                                                        <table id="deductiblePanel" class="table table-bordered table-striped">
                                                                         <thead>
                                                                         <tr>
-                                                                        <th>{{__('Interest ID - Name')}}</th>
-                                                                        <th>{{__('Amount')}}</th>
-                                                                        <th width="20%">{{__('Actions')}}</th>
+                                                                            <th>{{__('Type')}}</th>
+                                                                            <th>{{__('Currency')}}</th>
+                                                                            <th>{{__('Percentage')}}</th>
+                                                                            <th>{{__('Amount')}}</th>
+                                                                            <th>{{__('MIn Claim Amount')}}</th>
+                                                                            <th width="20%">{{__('Actions')}}</th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
                                                                             <tr>
-                                                                            <td>{{__('036 - Heavy Equipment')}}</td>
-                                                                            <td>{{__('100.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
+                                                                                @foreach($deductibletemp as $dtt)
+                                                                                    <tr id="ddtid{{ $dtt->id }}">
+                                                                                            <td data-name="{{ $dtt->deductible_id }}">{{ $dtt->DeductibleType->abbreviation }} - {{ $dtt->DeductibleType->description }}</td>
+                                                                                            <td data-name="{{ $dtt->currency_id }}">{{ $dtt->currency->symbol_name }}</td>
+                                                                                            <td data-name="{{ $dtt->percentage }}">{{ $dtt->percentage }}</td>
+                                                                                            <td data-name="{{ $dtt->amount }}">@currency($dtt->amount)</td>
+                                                                                            <td data-name="{{ $dtt->min_claimamount }}">@currency($dtt->min_claimamount)</td>
+                                                                                            <td><a href="javascript:void(0)" onclick="deletedeductibletype({{ $dtt->id }})">delete</i></a></td>
+                                                                                    </tr>   
+                                                                                @endforeach
                                                                             </tr>
                                                                             <tr>
-                                                                            <td>{{__('450 - Bensin')}}</td>
-                                                                            <td>{{__('100.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
+                                                                                <form id="adddeductibletype">
+                                                                                    @csrf
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <select id="slipdptype" name="slipdptype" class="form-control form-control-sm ">
+                                                                                                <option selected disabled>{{__('Type')}}</option>
+                                                                                                @foreach($deductibletype as $dt)
+                                                                                                    <option value="{{ $dt->id }}">{{ $dt->abbreviation }} - {{ $dt->description }}</option>
+                                                                                                @endforeach
+                                                                                            </select>
+                                                                                        </div>  
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <select id="slipdpcurrency" name="slipdpcurrency" class="form-control form-control-sm ">
+                                                                                                <option selected disabled>{{__('Currency')}}</option>
+                                                                                                @foreach($currency as $crc)
+                                                                                                    <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name}}</option>
+                                                                                                @endforeach
+                                                                                            </select>
+                                                                                        </div>  
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <input type="number" value="0" step=".0001" id="slipdppercentage" name="slipdppercentage" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <input type="number" value="0" step=".0001" id="slipdpamount" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <input type="number" value="0" step=".0001" id="slipdpminamount" name="slipdpminamount" placeholder="min amount" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                                        </div>
+                                                                                    </td> 
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <button type="button" id="adddeductibletype-btn" class="btn btn-md btn-primary" >{{__('Add')}}</button>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </form>
                                                                             </tr>
+                                                                        </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header bg-gray">
+                                                            {{__('Extend Coverage')}}
+                                                        </div>
+                                                        <div class="card-body bg-light-gray ">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-12 com-sm-12 mt-3">
+                                                                        <table id="ExtendCoveragePanel" class="table table-bordered table-striped">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th>{{__('Peril Code - Name')}}</th>
+                                                                            <th>{{__('Nilai (permil %.)')}}</th>
+                                                                            <th>{{__('Amount')}}</th>
+                                                                            <th width="20%">{{__('Actions')}}</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @foreach($extendcoveragelist as $exl)
+                                                                                <tr id="iidextendcoverage{{ $exl->id }}">
+                                                                                        <td>{{ @$exl->extendcoveragedata->code}} - {{ @$exl->extendcoveragedata->name}} - {{@$exl->extendcoveragedata->description }}</td>
+                                                                                        <td>{{ $exl->percentage }}</td>
+                                                                                        <td class="uang">@currency($exl->amount)</td>
+                                                                                        <td><a href="#" onclick="deleteextendcoveragedetail({{ $exl->id }})">delete</i></a></td>
+                                                                                </tr>   
+                                                                            @endforeach
                                                                             <tr>
-                                                                                <td>
-                                                                                <div class="form-group">
-                                                                                    <select name="slipinterestlist" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Interest list')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
-                                                                                    </select>
-                                                                                </div>  
+                                                                                <td >
+                                                                                    <div class="form-group">
+                                                                                        <select id="slipcncode" name="slipcncode" class="form-control form-control-sm ">
+                                                                                            <option selected readonly>{{__('Peril List')}}</option>
+                                                                                            @foreach($exc as $ncd)
+                                                                                            <option value="{{ $ncd->id }}">{{ $ncd->code }} - {{ $ncd->name }} - {{ $ncd->description }}</option>
+                                                                                            @endforeach
+                                                                                        </select>
+                                                                                    </div>  
                                                                                 </td>
                                                                                 <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="text" name="slipamount" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                                </div>
+                                                                                    <div class="form-group">
+                                                                                        <input type="number" value="0" step=".0001" id="slipnilaiec" name="slipnilaiec" placeholder="y" class="form-control form-control-sm "/>
+                                                                                    </div>
                                                                                 </td>
                                                                                 <td>
-                                                                                <div class="form-group">
-                                                                                    <button type="button" class="btn btn-md btn-primary " data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
-                                                                                </div>
+                                                                                    <div class="form-group">
+                                                                                        <input type="number" value="0" step=".0001" id="slipamountec" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm " readonly="readonly"/>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="form-group">
+                                                                                        <button type="button" id="addextendcoverageinsured-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                    </div>
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
-                                                                    </table>
+                                                                        </table>
                                                                     </div>
                                                                 </div>
-                                                            </div> 
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12 d-flex justify-content-end">
-                                                <div class="form-group">
-                                                    <label for="">{{__('Total Sum Insured')}}</label>
-                                                    <input type="text" name="sliptotalsum" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+    
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+                                                            <div class="form-group">
+                                                                <label>{{__('Insurance Periode')}}:</label>
+                                                                    {{-- <div class="input-group date" id="dateinfrom" data-target-input="nearest"> --}}
+                                                                            <input type="date" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipipfrom" name="slipipfrom">
+                                                                            {{-- <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
+                                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                            </div>
+                                                                    </div> --}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label style="opacity: 0;">{{__('p')}}:</label>
+                                                            <p class="d-flex justify-content-center">to</p>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="form-group">
+                                                                <label style="opacity: 0;">{{__('p')}}:</label>
+                                                                    {{-- <div class="input-group date" id="dateinto" data-target-input="nearest"> --}}
+                                                                            <input type="date" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipipto" name="slipipto">
+                                                                            {{-- <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
+                                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                            </div>
+                                                                    </div> --}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+                                                            <div class="form-group">
+                                                                <label>{{__('Reinsurance Periode')}}:</label>
+                                                                    {{-- <div class="input-group date" id="daterefrom" data-target-input="nearest"> --}}
+                                                                            <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" id="sliprpfrom" name="sliprpfrom">
+                                                                            {{-- <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
+                                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                            </div>
+                                                                    </div> --}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label style="opacity: 0;">{{__('p')}}:</label>
+                                                            <p class="d-flex justify-content-center">to</p>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="form-group">
+                                                                <label style="opacity: 0;">{{__('p')}}:</label>
+                                                                    {{-- <div class="input-group date" id="datereto" data-target-input="nearest"> --}}
+                                                                            <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" id="sliprpto" name="sliprpto">
+                                                                            {{-- <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
+                                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                            </div>
+                                                                    </div> --}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row d-flex justify-content-start">
+                                                <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> non proportional panel</i>
+                                            </div>
+                                            <div class="row d-flex justify-content-end">
+                                                <div class="col-md-4">
+                                                    <label class="cl-switch cl-switch-green">
+                                                        <span for="switch-proportional" class="label"> {{__('Proportional')}} </span>
+                                                        <input type="checkbox" name="slipproportional[]" value="1" id="switch-proportional"
+                                                        class="submit" checked>
+                                                        <span class="switcher"></span>
+                                                        <span  class="label"> {{__('Non Proportional')}} </span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group d-flex justify-content-end">
+                                                        <label style="opacity: 0;">{{__('p')}}:</label>
+                                                        <button type="button" class="btn plus-button" id="btnaddlayer" data-toggle="modal" data-target="#addLayerModal">
+                                                            <span data-toggle="tooltip" data-placement="top" title="{{__('Add New layer')}}"> + add layer </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="" id="labelnonprop">{{__('Layer for non proportional')}}</label>
+                                                        <select id="sliplayerproportional" name="sliplayerproportional" class="form-control form-control-sm ">
+                                                            <option selected disabled>{{__('Choose layer')}}</option>
+                                                            <option value="Layer 1">Layer 1</option>
+                                                            <option value="Layer 2">Layer 2</option>
+                                                            <option value="Layer 3">Layer 3</option>
+                                                            <option value="Layer 4">Layer 4</option>
+                                                            <option value="Layer 5">Layer 5</option>
+                                                        </select>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 d-flex justify-content-start">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Rate (permil.. %)')}}</label>
+                                                            <input type="number" value="0" step=".0001" id="sliprate" name="sliprate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Share')}}</label>
+                                                                <div class="row">
+                                                                    <div class="col-md-10">
+                                                                        <div class="input-group">
+                                                                            <input type="number" value="0" step=".0001" id="slipshare" name="slipshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="b" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="input-group-append">
+                                                                            <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
+                                                                <input type="number" value="0" step=".0001" id="slipsumshare" name="slipsumshare" placeholder="= b% * tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Basic Premium')}}</label>
+                                                            <input type="number" value="0" step=".0001" id="slipbasicpremium" name="slipbasicpremium" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a% * tsi" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Gross Prm to NR')}}</label>
+                                                            <input type="number" value="0" step=".0001" id="slipgrossprmtonr" name="slipgrossprmtonr" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a% * b% * tsi" readonly="readonly" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Commission')}}</label>
+                                                                <div class="row d-flex flex-wrap">
+                                                                    <div class="col-md-10">
+                                                                        <div class="input-group">
+                                                                            <input type="number" value="0" step=".0001" id="slipcommission" name="slipcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="d" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="input-group-append">
+                                                                            <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="" style="opacity: 0;">{{__('Gross Prm to NR')}}</label>
+                                                                <input type="number" value="0" step=".0001" id="slipsumcommission" name="slipsumcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" readonly="readonly" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Net Prm to NR')}}</label>
+                                                            <input type="number" value="0" step=".0001" id="slipnetprmtonr" name="slipnetprmtonr" class="form-control form-control-sm " data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="0-50" readonly="readonly"/>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12 d-flex justify-content-end">
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label for="">{{__('Type')}}</label>
-                                                            <select name="sliptype" class="form-control form-control-sm ">
-                                                                {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
-                                                                <option value="PML" selected >PML</option>
-                                                                <option value="LOL">LOL</option>
-                                                            </select>
+                                        {{-- <div class="tab-pane fade" id="insurance-details-id" role="tabpanel" aria-labelledby="insurance-details">
+                                        </div> --}}
+                                        <div class="tab-pane fade" id="installment-details-id" role="tabpanel" aria-labelledby="installment-details">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header bg-gray">
+                                                            {{__('Installment Panel')}}
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label for="" style="opacity: 0;">{{__('Type')}}</label>
+                                                        <div class="card-body bg-light-gray ">
                                                             <div class="row">
                                                                 <div class="col-md-10">
-                                                                    <div class="input-group">
-                                                                        <input type="text" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                    <div class="col-md-12 com-sm-12 mt-3">
+                                                                        <table id="installmentPanel" class="table table-bordered table-striped">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th>{{__('Installment Date')}}</th>
+                                                                            <th>{{__('Percentage')}}</th>
+                                                                            <th>{{__('Amount')}}</th>
+                                                                            <th width="20%">{{__('Actions')}}</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @foreach($installmentpanel as $isp)
+                                                                                <tr id="ispid{{ $isp->id }}">
+                                                                                        <td data-name="{{ $isp->installment_date }}">{{ $isp->installment_date }}</td>
+                                                                                        <td data-name="{{ $isp->percentage }}">{{ $isp->percentage }}</td>
+                                                                                        <td data-name="{{ $isp->amount }}">@currency( $isp->amount)</td>
+                                                                                        <td><a href="javascript:void(0)" onclick="deleteinstallmentpanel({{ $isp->id }})">delete</i></a></td>
+                                                                                </tr>   
+                                                                            @endforeach
+                                                                            <tr>
+                                                                                <form id="addinstallmentpanel">
+                                                                                    @csrf
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                                {{-- <div class="input-group date" id="dateinstallment" data-target-input="nearest"> --}}
+                                                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#dateinstallment" id="slipipdate" name="slipipdate">
+                                                                                                        {{-- <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
+                                                                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                                                        </div> --}}
+                                                                                                {{-- </div> --}}
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <input type="number" value="0" step=".0001" id="slipippercentage" name="slipippercentage" placeholder="w" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <input type="number" value="0" step=".0001" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <button type="button" class="btn btn-md btn-primary" id="addinstallmentpanel-btn">{{__('Add')}}</button>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </form>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                        </table>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-2">
-                                                                    <div class="input-group-append">
-                                                                        <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label for=""style="opacity: 0;">{{__('Type')}}</label>
-                                                            <input type="text" name="sliptotalsumpct" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header bg-gray">
-                                                        {{__('Deductible Panel')}}
-                                                    </div>
-                                                    <div class="card-body bg-light-gray ">
-                                                        <div class="row">
-                                                            <div class="col-md-10">
-                                                                <div class="col-md-12 com-sm-12 mt-3">
-                                                                    <table id="deductiblePanel" class="table table-bordered table-striped">
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th>{{__('Type')}}</th>
-                                                                        <th>{{__('Currency')}}</th>
-                                                                        <th>{{__('Percentage')}}</th>
-                                                                        <th>{{__('Amount')}}</th>
-                                                                        <th>{{__('MIn Claim Amount')}}</th>
-                                                                        <th width="20%">{{__('Actions')}}</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>{{__('MD')}}</td>
-                                                                            <td>{{__('IDR')}}</td>
-                                                                            <td>{{__('x %')}}</td>
-                                                                            <td>{{__('= x * tsi')}}</td>
-                                                                            <td>{{__('10.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>{{__('TPL')}}</td>
-                                                                            <td>{{__('USD')}}</td>
-                                                                            <td>{{__('0,001 %')}}</td>
-                                                                            <td>{{__('= x * tsi')}}</td>
-                                                                            <td>{{__('100.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <select name="slipdptype" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Type')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
-                                                                                    </select>
-                                                                                </div>  
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <select name="slipdpcurrency" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Currency')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
-                                                                                    </select>
-                                                                                </div>  
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="text" name="slipdppercentage" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="text" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="text" name="slipdpminamount" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                                </div>
-                                                                            </td> 
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                    </table>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header bg-gray">
-                                                        {{__('Extend Coverage')}}
-                                                    </div>
-                                                    <div class="card-body bg-light-gray ">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="col-md-12 com-sm-12 mt-3">
-                                                                    <table id="ExtendCoverage" class="table table-bordered table-striped">
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th>{{__('Peril Code - Name')}}</th>
-                                                                        <th>{{__('Nilai (permil %.)')}}</th>
-                                                                        <th>{{__('Amount')}}</th>
-                                                                        <th width="20%">{{__('Actions')}}</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>{{__('001 - R.S.M.D')}}</td>
-                                                                            <td>{{__('y%.')}}</td>
-                                                                            <td>{{__('= y * tsi')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>{{__('005 - Earthquake')}}</td>
-                                                                            <td>{{__('0.1%.')}}</td>
-                                                                            <td>{{__('1.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td >
-                                                                                <div class="form-group">
-                                                                                    <select name="slipcncode" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Peril List')}}</option>
-                                                                                        <option value="001 - R.S.M.D">001 - R.S.M.D</option>
-                                                                                        <option value="005 - Earthquake">005 - Earthquake</option>
-                                                                                    </select>
-                                                                                </div>  
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="text" name="slipnilaiec" placeholder="y" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="text" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly="readonly" required/>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="insurance-details-id" role="tabpanel" aria-labelledby="insurance-details">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <label>{{__('Insurance Periode')}}:</label>
-                                                                <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipfrom">
-                                                                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
-                                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                        </div>
-                                                                </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label style="opacity: 0;">{{__('p')}}:</label>
-                                                        <p class="d-flex justify-content-center">to</p>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <label style="opacity: 0;">{{__('p')}}:</label>
-                                                                <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipto">
-                                                                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
-                                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                        </div>
-                                                                </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <label>{{__('Reinsurance Periode')}}:</label>
-                                                                <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpfrom">
-                                                                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
-                                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                        </div>
-                                                                </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label style="opacity: 0;">{{__('p')}}:</label>
-                                                        <p class="d-flex justify-content-center">to</p>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <label style="opacity: 0;">{{__('p')}}:</label>
-                                                                <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        
-                                                                        <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="sliprpto">
-                                                                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
-                                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                        </div>
-                                                                </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row d-flex justify-content-start">
-                                            <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> non proportional panel</i>
-                                        </div>
-                                        <div class="row d-flex justify-content-end">
-                                            <div class="col-md-4">
-                                                <label class="cl-switch cl-switch-green">
-                                                    <span for="switch-proportional" class="label"> {{__('Proportional')}} </span>
-                                                    <input type="checkbox" name="slipproportional[]" id="switch-proportional"
-                                                    class="submit" checked>
-                                                    <span class="switcher"></span>
-                                                    <span  class="label"> {{__('Non Proportional')}} </span>
-                                                </label>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group d-flex justify-content-end">
-                                                    <label style="opacity: 0;">{{__('p')}}:</label>
-                                                    <button type="button" class="btn plus-button" data-toggle="modal" data-target="#addLayerModal">
-                                                        <span data-toggle="tooltip" data-placement="top" title="{{__('Add New layer')}}"> + add layer </span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="">{{__('Layer for non proportional')}}</label>
-                                                    <select name="sliplayerproportional" class="form-control form-control-sm ">
-                                                        <option selected disabled>{{__('Choose layer')}}</option>
-                                                        <option value="AF">Africa</option>
-                                                        <option value="AN">Antartica</option>
-                                                        <option value="AS">Asia</option>
-                                                        <option value="EU">Europa</option>
-                                                        <option value="NA">North America </option>
-                                                        <option value="OC">Oceania</option>
-                                                        <option value="SA">South America</option>
-                                                    </select>
-                                                </div>  
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6 d-flex justify-content-start">
-                                                <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6 d-flex justify-content-start">
                                                     <div class="form-group">
-                                                        <label for="">{{__('Rate (permil.. %)')}}</label>
-                                                        <input type="text" name="sliprate" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                    </div>
+                                                        <label for="">{{__('Retro Backup?')}}</label>
+                                                        <select id="sliprb" name="sliprb" class="form-control form-control-sm ">
+                                                            {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
+                                                            <option value="YES" >YES</option>
+                                                            <option value="NO" selected>NO</option>
+                                                        </select>
+                                                    </div>   
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="row">
-                                                    <div class="col-md-6">
+                                                <div class="col-md-6 d-flex justify-content-end">
+                                                    <div class="row">
                                                         <div class="form-group">
-                                                            <label for="">{{__('Share')}}</label>
+                                                            <label for="">{{__('Own Retention')}}</label>
                                                             <div class="row">
-                                                                <div class="col-md-10">
+                                                                <div class="col-md-4">
                                                                     <div class="input-group">
-                                                                        <input type="text" name="slipshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                        <input type="number" value="100" step=".0001" id="slipor" name="slipor" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-2">
@@ -907,272 +1126,98 @@
                                                                         <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
-                                                            <input type="text" name="slipsumshare" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Basic Premium')}}</label>
-                                                        <input type="text" name="slipbasicpremium" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Gross Prm to NR')}}</label>
-                                                        <input type="text" name="slipgrossprmtonr" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="">{{__('Commission')}}</label>
-                                                            <div class="row d-flex flex-wrap">
-                                                                <div class="col-md-10">
-                                                                    <div class="input-group">
-                                                                        <input type="text" name="slipcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <div class="input-group-append">
-                                                                        <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <input type="number" value="0" step=".0001" id="slipsumor" name="slipsumor" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="= x% * b% * tsi" readonly="readonly" />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="" style="opacity: 0;">{{__('Gross Prm to NR')}}</label>
-                                                            <input type="text" name="slipsumcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="row" id="tabretro">
                                                 <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Net Prm to NR')}}</label>
-                                                        <input type="text" name="slipnetprmtonr" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="installment-details-id" role="tabpanel" aria-labelledby="installment-details">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header bg-gray">
-                                                        {{__('Installment Panel')}}
-                                                    </div>
-                                                    <div class="card-body bg-light-gray ">
-                                                        <div class="row">
-                                                            <div class="col-md-10">
-                                                                <div class="col-md-12 com-sm-12 mt-3">
-                                                                    <table id="installmentPanel" class="table table-bordered table-striped">
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th>{{__('Installment Date')}}</th>
-                                                                        <th>{{__('Percentage')}}</th>
-                                                                        <th>{{__('Amount')}}</th>
-                                                                        <th width="20%">{{__('Actions')}}</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>{{__('20/09/2020')}}</td>
-                                                                            <td>{{__('50%')}}</td>
-                                                                            <td>{{__('100.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>{{__('20/10/2020')}}</td>
-                                                                            <td>{{__('50%')}}</td>
-                                                                            <td>{{__('100.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                        <div class="input-group date" id="date" data-target-input="nearest">
-                                                                                                <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdate">
-                                                                                                <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
-                                                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                    <div class="card">
+                                                        <div class="card-header bg-gray">
+                                                            {{__('Retrocession Panel')}}
+                                                        </div>
+                                                        <div class="card-body bg-light-gray ">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-12 com-sm-12 mt-3">
+                                                                        <table id="retrocessionPanel" class="table table-bordered table-striped">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>{{__('Type')}}</th>
+                                                                                    <th>{{__('Retrocession Contract')}}</th>
+                                                                                    <th>{{__('Percentage')}}</th>
+                                                                                    <th>{{__('Amount')}}</th>
+                                                                                    <th width="20%">{{__('Actions')}}</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                @foreach($retrocessiontemp as $rsc)
+                                                                                    <tr id="rscid{{ $rsc->id }}">
+                                                                                            <td data-name="{{ $rsc->type }}">{{ $rsc->type }}</td>
+                                                                                            <td data-name="{{ $rsc->contract }}">{{ $rsc->contract }}</td>
+                                                                                            <td data-name="{{ $rsc->percentage }}">{{ $rsc->percentage }}</td>
+                                                                                            <td data-name="{{ $rsc->amount }}">@currency( $rsc->amount)</td>
+                                                                                            <td><a href="javascript:void(0)" onclick="deleteretrocessiontemp({{ $rsc->id }})">delete</i></a></td>
+                                                                                    </tr>   
+                                                                                @endforeach
+                                                                                
+                                                                                <tr>
+                                                                                    <form id="addretrocessiontemp">
+                                                                                        @csrf
+                                                                                        <td>
+                                                                                            <div class="form-group">
+                                                                                                <select id="sliprptype" name="sliprptype" class="form-control form-control-sm ">
+                                                                                                    <option selected disabled>{{__('Type list')}}</option>
+                                                                                                    <option value="NM XOL">NM XOL</option>
+                                                                                                </select>
+                                                                                            </div>  
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="form-group">
+                                                                                                <select id="sliprpcontract" name="sliprpcontract" class="form-control form-control-sm ">
+                                                                                                    <option selected disabled>{{__('Contract list')}}</option>
+                                                                                                    <option value="20NM11110">20NM11110</option>
+                                                                                                    <option value="20ABC">20ABC</option>
+                                                                                                </select>
+                                                                                            </div>  
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="form-group">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-8">
+                                                                                                        <div class="input-group">
+                                                                                                            <input type="number" value="0" step=".0001" id="sliprppercentage" name="sliprppercentage" class="form-control form-control-sm " data-validation="length" placeholder="z" data-validation-length="0-50" />
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="col-md-2">
+                                                                                                        <div class="input-group-append">
+                                                                                                            <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                                                        </div>
+                                                                                                    </div>
                                                                                                 </div>
-                                                                                        </div>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="text" name="slipippercentage" placeholder="w" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="text" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6 d-flex justify-content-start">
-                                                <div class="form-group">
-                                                    <label for="">{{__('Retro Backup?')}}</label>
-                                                    <select name="sliprb" class="form-control form-control-sm ">
-                                                        {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
-                                                        <option value="AF" selected>YES</option>
-                                                        <option value="AN">NO</option>
-                                                    </select>
-                                                </div>   
-                                            </div>
-                                            <div class="col-md-6 d-flex justify-content-end">
-                                                <div class="row">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Own Retention')}}</label>
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="input-group">
-                                                                    <input type="text" name="slipor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="input-group-append">
-                                                                    <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <input type="text" name="slipsumor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header bg-gray">
-                                                        {{__('Retrocession Panel')}}
-                                                    </div>
-                                                    <div class="card-body bg-light-gray ">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="col-md-12 com-sm-12 mt-3">
-                                                                    <table id="retrocessionPanel" class="table table-bordered table-striped">
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th>{{__('Type')}}</th>
-                                                                        <th>{{__('Retrocession Contract')}}</th>
-                                                                        <th>{{__('Percentage')}}</th>
-                                                                        <th>{{__('Amount')}}</th>
-                                                                        <th width="20%">{{__('Actions')}}</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>{{__('NM XOL')}}</td>
-                                                                            <td>{{__('20NM11110')}}</td>
-                                                                            <td>{{__('80%')}}</td>
-                                                                            <td>{{__('160.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>{{__('NM XOL')}}</td>
-                                                                            <td>{{__('20ABC')}}</td>
-                                                                            <td>{{__('80%')}}</td>
-                                                                            <td>{{__('40.000.000')}}</td>
-                                                                            <td width="20%">{{__('delete')}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <select name="sliprptype" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Type list')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
-                                                                                    </select>
-                                                                                </div>  
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <select name="sliprpcontract" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Contract list')}}</option>
-                                                                                        <option value="AF">Africa</option>
-                                                                                        <option value="AN">Antartica</option>
-                                                                                        <option value="AS">Asia</option>
-                                                                                        <option value="EU">Europa</option>
-                                                                                        <option value="NA">North America </option>
-                                                                                        <option value="OC">Oceania</option>
-                                                                                        <option value="SA">South America</option>
-                                                                                    </select>
-                                                                                </div>  
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-8">
-                                                                                            <div class="input-group">
-                                                                                                <input type="text" name="sliprppercentage" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                                                             </div>
-                                                                                        </div>
-                                                                                        <div class="col-md-2">
-                                                                                            <div class="input-group-append">
-                                                                                                <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="form-group">
+                                                                                                <input type="number" value="0" step=".0001" id="sliprpamount" name="sliprpamount" placeholder="= z% * b% * tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=z * b% * tsi" readonly="readonly" />
                                                                                             </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="text" name="sliprpamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" disabled required/>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                    </table>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="form-group">
+                                                                                                <button type="button" class="btn btn-md btn-primary" id="addretrocessiontemp-btn">{{__('Add')}}</button>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </form>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1183,25 +1228,24 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="card card-primary">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12 com-sm-12 mt-3">
-                                        <button class="btn btn-primary btn-block ">
-                                            {{__('Save')}}
-                                        </button>
+    
+                            <div class="card card-primary">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12 com-sm-12 mt-3">
+                                            <button type="submit" id="addslipsave-btn" class="btn btn-primary btn-block ">
+                                                {{__('Save')}}
+                                            </button>
+                                        </div>
+                                    
                                     </div>
-                                
                                 </div>
-                            </div>
-                        </div> 
-                    </form>
+                            </div> 
+                        </form>
+                    </div>
+                    
                 </div>
-                
-            </div>
-        </div> 
+            </div> 
 
     </div>
 </div>

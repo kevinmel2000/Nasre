@@ -6,8 +6,11 @@
         $("#btnaddlayer").attr('hidden','true');
         $("#sliplayerproportional").attr('hidden','true');
         $("#labelnonprop").attr('hidden','true');
+        $("#retrocessionPanel").attr('hidden','true');
+        $("#tabretro").attr('hidden','true');
 
-        $("#marineslipform :input").prop("disabled", true);
+        // $("#marineslipform").attr("hidden", true);
+        // $("#marineslipform :input").prop("disabled", true);
         
         });
 </script>
@@ -36,6 +39,18 @@
         
     });
 
+    $('#sliprb').change(function(){
+        var attr = $("#retrocessionPanel").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            $("#retrocessionPanel").removeAttr('hidden');
+            $("#tabretro").removeAttr('hidden');
+        }
+        else{
+            $("#retrocessionPanel").attr('hidden','true');
+            $("#tabretro").attr('hidden','true');
+        }
+    });
+
     $('#slipipfrom').on('dp.change', function(e){ console.log(e.date); })
 </script>
 
@@ -43,25 +58,33 @@
     $(function() {              
        // Bootstrap DateTimePicker v4
        $('#dateinstallment').datetimepicker({
-             format: 'YYYY-MM-DD'
+             format: 'DD/MM/YYYY'
        });
 
        $('#dateinfrom').datetimepicker({
-             format: 'YYYY-MM-DD'
+             format: 'DD/MM/YYYY'
        });
 
        $('#dateinto').datetimepicker({
-             format: 'YYYY-MM-DD'
+             format: 'DD/MM/YYYY'
        });
 
        $('#daterefrom').datetimepicker({
-             format: 'YYYY-MM-DD'
+             format: 'DD/MM/YYYY'
        });
 
        $('#datereto').datetimepicker({
-             format: 'YYYY-MM-DD'
+             format: 'DD/MM/YYYY'
        });
     });      
+
+    $('#slipipfrom').change(function(){
+        $('#sliprpfrom').val($(this).val());
+    });
+
+    $('#slipipto').change(function(){
+        $('#sliprpto').val($(this).val());
+    });
 
 </script>
 
@@ -108,44 +131,107 @@
 
 
 
-<script type="text/javascript">
-     $('#shipcodetxt').change(function(){
-        var shipcode = $(this).val();
-
-        if(shipcode){
-            $.ajax({
-                type:"GET",
-                dataType: 'json',
-                url:"{{url('get-ship-list')}}?ship_code="+shipcode,
-                success:function(response){        
-                    if(response){
-                        $("#shipnametxt").val(response.shipname);
-                    }else{
-                        $("#shipnametxt").empty();
-                    }
+<script type='text/javascript'>
+    $('#country_location').change(function(){
+    var countryID = $(this).val();  
+    //alert(countryID);
+        if(countryID){
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-state-lookup')}}?country_id="+countryID,
+            success:function(res){  
+                console.log(res)      
+                if(res){
+                    $("#state_location").empty();
+                    $("#state_location").append('<option selected disabled>Select States/Province</option>');
+                    $.each(res,function(key,value){
+                    $("#state_location").append('<option value="'+key+'">'+value+'</option>');
+                    });
+                
+                }else{
+                    $("#state_location").append('<option value="" selected disabled>get value error</option>');
                 }
-            });
+            }
+        });
         }else{
-            $("#shipnametxt").empty();
-        }
+        $("#state_location").append('<option value="" selected disabled>countryID null</option>');
+        $("#city_location").empty();
+        }   
+    });
+
+    $('#state_location').on('change',function(){
+        var stateID = $(this).val();  
+        //alert(stateID);
+            if(stateID){
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('get-city-lookup')}}?state_id="+stateID,
+                    success:function(res){
+                console.log(res)      
+                        if(res){
+                            $("#city_location").empty();
+                            $("#city_location").append('<option selected disabled>Select City</option>');
+                            $.each(res,function(key,value){
+                                $("#city_location").append('<option value="'+key+'">'+value+'</option>');
+                            });
+                        
+                        }else{
+                            $("#city_location").append('<option value="" selected disabled>get value error</option>');
+                        }
+                    }
+                });
+            }else{
+                $("#city_location").append('<option value="" selected disabled>countryID null</option>');
+                $("#address_location").empty();
+            }
+            
+    });
+
+
+    $('#city_location').on('change',function(){
+        var cityID = $(this).val();  
+        //alert(stateID);
+            if(cityID){
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('get-address-lookup')}}?city_id="+cityID,
+                    success:function(res){        
+                        console.log(res)      
+                        
+                        if(res){
+                            
+                            $("#address_location").empty();
+                            $("#address_location").append('<option selected disabled>Select Address</option>');
+                            $.each(res,function(key,value){
+                                $("#address_location").append('<option value="'+key+'">'+value+'</option>');
+                            });
+                        
+                        }else{
+                            $("#address_location").append('<option value="" selected disabled>get value error</option>');
+                        }
+                    }
+                });
+            }else{
+                $("#address_location").append('<option value="" selected disabled>countryID null</option>');
+                
+            }
+            
     });
 </script>
 
 <script type='text/javascript'>
-     $('#form-addship').submit(function(e){
+     $('#form-addlocation').submit(function(e){
         e.preventDefault();
 
-        var shipcode = $('#shipcodetxt').val();
-        var shipname = $('#shipnametxt').val();
+        var lookupcode = $('#address_location').val();
         var insured_id = $('#msinumber').val();
         var token = $('input[name=_token]').val();
         
         $.ajax({
-            url:"{{ route('shiplist.store') }}",
+            url:"{{ route('locationlist.store') }}",
             type:"POST",
             data:{
-                ship_code:shipcode,
-                ship_name:shipname,
+                lookupcode:lookupcode,
                 insuredID:insured_id,
                 _token:token
             },
@@ -153,13 +239,33 @@
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 console.log(response)
-                $('#shipdetailTable tbody').prepend('<tr id="sid'+response.id+'"  data-name="shiplistvalue[]"><td data-name="'+shipcode+'">'+shipcode+'</td><td data-name="'+shipname+'">'+shipname+'</td><td><a href="javascript:void(0)" onclick="deleteshipdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
-                $('#ModalAddShip').modal('toggle');
-                $('#form-addship')[0].reset();
+                $('#locRiskTable tbody').prepend('<tr id="sid'+response.id+'"><td>'+response.loc_code+'</td><td>'+response.address+'</td><td>'+response.city_name+'</td><td>'+response.state_name+'</td><td>'+response.latitude+' , '+response.longtitude+'</td><td><a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
+                $('#addlocation').modal('toggle');
+                $('#form-addlocation')[0].reset();
             }
         });
 
     });
+
+
+    function deletelocationdetail(id){
+        var token = $('input[name=_token]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-sliplocation-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token
+            },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response){
+                console.log(response);
+                $('#sid'+id).remove();
+                
+            }
+        });
+    }
 </script>
 
 
@@ -259,6 +365,20 @@
         var sum = isNaN(percent * sumshare) ? 0 :(percent * sumshare);
         $('#sliprpamount').val(sum);
     });
+
+    $('#sliprppercentage').change(function () {
+        var percentval =  parseFloat($(this).val());
+        var orpercent = parseFloat($('#slipor').val());
+        var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval);
+        $('#slipor').val(sumpercentor);
+    });
+
+    $('#slipnilaiec').keyup(function (){
+        var percentec = parseFloat($(this).val()) / 100;
+        var tsi = parseFloat($("#sliptotalsum").val());
+        var sumexc = isNaN(percentec * tsi) ? 0 :(percentec * tsi);
+        $('#slipamountec').val(sumexc);
+    });
 </script>
 
 <script type='text/javascript'>
@@ -351,11 +471,16 @@
 
     });
 
-    $('#addconditionneeded-btn').click(function(e){
+    $('#addextendcoverageinsured-btn').click(function(e){
+       //alert('masuk');
        e.preventDefault();
 
-       var cncode = $('#slipcncode').val();
+       var slipcncode = $('#slipcncode').val();
+       var percentage = $('#slipnilaiec').val();
+       var amount = $('#slipamountec').val();
+       
        var slip_id = $('#slipnumber').val();
+       var token2 = $('input[name=_token2]').val();
        
        $.ajaxSetup({
                 headers: {
@@ -364,34 +489,29 @@
             });
 
        $.ajax({
-           url:"{{ route('conditionneeded.store') }}",
+           url:"{{ route('extendcoverage.store') }}",
            type:"POST",
            data:{
-                slipcncode:cncode,
-                id_slip:slip_id
+               slipcncode:slipcncode,
+               percentage:percentage,
+               amount:amount,
+               id_slip:slip_id
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },
-           success:function(response){
-
-               console.log(response)
-               
-               if(response.information == null){
-                $('#conditionNeeded tbody').prepend('<tr id="cnid'+response.id+'" data-name="conditionneededvalue[]"><td data-name="'+response.conditionneeded_id+'">'+response.condition+'</td><td data-name="'+response.information+'">-</td><td><a href="javascript:void(0)" onclick="deleteconditionneeded('+response.id+')">delete</a></td></tr>')
-               
-               }else{
-                $('#conditionNeeded tbody').prepend('<tr id="cnid'+response.id+'" data-name="conditionneededvalue[]"><td data-name="'+response.conditionneeded_id+'">'+response.condition+'</td><td data-name="'+response.information+'">'+response.information+'</td><td><a href="javascript:void(0)" onclick="deleteconditionneeded('+response.id+')">delete</a></td></tr>')
-               
-               }
-               $(':input','#addconditionneeded').not(':button, :submit, :reset, :hidden').val(' ').removeAttr('checked').removeAttr('selected');
-               
-               
-               
+           success:function(response)
+           {
             
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#ExtendCoveragePanel tbody').prepend('<tr id="iidextendcoverage'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoveragedetail('+response.id+')">delete</a></td></tr>');
+               $('#slipnilaiec').val('');
+               $('#slipamountec').val('');
+               
            }
        });
 
-    });
+   });
 
     $('#addinstallmentpanel-btn').click(function(e){
        e.preventDefault();
@@ -424,9 +544,6 @@
                var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
                $('#installmentPanel tbody').prepend('<tr id="ispid'+response.id+'" data-name="interestvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentpanel('+response.id+')">delete</a></td></tr>')
                $(':input','#addinstallmentpanel').not(':button, :submit, :reset, :hidden').val(' ').removeAttr('checked').removeAttr('selected');
-               
-
-               
                
             
            }
@@ -467,7 +584,8 @@
                var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
                $('#retrocessionPanel tbody').prepend('<tr id="rscid'+response.id+'" data-name="retrocessionvalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessiontemp('+response.id+')">delete</a></td></tr>')
                $(':input','#addretrocessiontemp').not(':button, :submit, :reset, :hidden').val(' ').removeAttr('checked').removeAttr('selected');
-               
+               $('#sliprppercentage').val(' ');
+               $('#sliprpamount').val(' ');
                
                
             
@@ -522,22 +640,22 @@
         });
     }
 
-    function deleteconditionneeded(id){
+    function deleteextendcoveragedetail(id)
+    {
         var token2 = $('input[name=_token2]').val();
 
         $.ajax({
-            url:'{{ url("/") }}/delete-conditionneeded-list/'+id,
+            url:'{{ url("/") }}/delete-extendcoverage-list/'+id,
             type:"DELETE",
             data:{
                 _token:token2
             },
             beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
+            complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
-                $('#cnid'+id).remove();
+                $('#iidextendcoverage'+id).remove();
                 console.log(response);
-                
             }
         });
     }
@@ -643,6 +761,7 @@
                     .removeAttr('checked')
                     .removeAttr('selected');
 
+                // $("#marineslipform").attr("hidden", false);
                 $("#marineslipform :input").prop("disabled", false);
                 $('#slipmsinumber').val();
            },
@@ -829,38 +948,36 @@
 </style>
 
 <script>
-    $(function () {
-      "use strict";
+    // $(function () {
+    //   "use strict";
   
-      var marineslip = <?php echo(($ms_ids->content())) ?>;
-      for(const id of marineslip) {
-          var btn = `
-              <a href="#" onclick="confirmDelete('${id}')">
-                  <i class="fas fa-trash text-danger"></i>
-              </a>
-          `;
-          $(`#delbtn${id}`).append(btn);
-      }
+    //   var marineslip = <?php echo(($ms_ids->content())) ?>;
+    //   for(const id of marineslip) {
+    //       var btn = `
+    //           <a href="#" onclick="confirmDelete('${id}')">
+    //               <i class="fas fa-trash text-danger"></i>
+    //           </a>
+    //       `;
+    //       $(`#delbtn${id}`).append(btn);
+    //   }
   
   
-      $("#marineSlip").DataTable({
-        "order": [[ 0, "desc" ]],
-        dom: '<"top"Bf>rt<"bottom"lip><"clear">',
-        lengthMenu: [
-            [ 10, 25, 50,100, -1 ],
-            [ '10 rows', '25 rows', '50 rows','100 rows', 'Show all' ]
-        ]
-      });
+    //   $("#marineSlip").DataTable({
+    //     "order": [[ 0, "desc" ]],
+    //     dom: '<"top"Bf>rt<"bottom"lip><"clear">',
+    //     lengthMenu: [
+    //         [ 10, 25, 50,100, -1 ],
+    //         [ '10 rows', '25 rows', '50 rows','100 rows', 'Show all' ]
+    //     ]
+    //   });
   
-    });
+    // });
   
-    function confirmDelete(id){
-        let choice = confirm("{{__('Are you sure, you want to delete this product and related data?')}}")
-        if(choice){
-            document.getElementById('delete-country-'+id).submit();
-        }
-    }
+    // function confirmDelete(id){
+    //     let choice = confirm("{{__('Are you sure, you want to delete this product and related data?')}}")
+    //     if(choice){
+    //         document.getElementById('delete-country-'+id).submit();
+    //     }
+    // }
   
 </script>
-
-

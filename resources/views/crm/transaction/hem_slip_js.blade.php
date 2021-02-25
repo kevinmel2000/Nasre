@@ -79,6 +79,7 @@ $(document).ready(function(){
  $("#btnaddlayer").attr('hidden','true');
         $("#sliplayerproportional").attr('hidden','true');
         $("#labelnonprop").attr('hidden','true');
+        $("#tabretro").attr('hidden','true');
 
 
 $("#btn-success").click(function(){ 
@@ -255,6 +256,18 @@ $("body").on("click","#btn-danger2",function(){
             $("#labelnonprop").attr('hidden','true');
         }
         
+    });
+
+    $('#sliprb').change(function(){
+        var attr = $("#tabretro").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            // $("#retrocessionPanel").removeAttr('hidden');
+            $("#tabretro").removeAttr('hidden');
+        }
+        else{
+            // $("#retrocessionPanel").attr('hidden','true');
+            $("#tabretro").attr('hidden','true');
+        }
     });
 </script>
 

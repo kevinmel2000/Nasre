@@ -80,6 +80,8 @@ $(document).ready(function(){
  $("#btnaddlayer").attr('hidden','true');
         $("#sliplayerproportional").attr('hidden','true');
         $("#labelnonprop").attr('hidden','true');
+        $("#tabretro").attr('hidden','true');
+
 
     $("#slipipfrom").change(function(){
         console.log($(this).val())
@@ -178,6 +180,18 @@ $(document).ready(function(){
             $("#labelnonprop").attr('hidden','true');
         }
         
+    });
+
+    $('#sliprb').change(function(){
+        var attr = $("#tabretro").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            // $("#retrocessionPanel").removeAttr('hidden');
+            $("#tabretro").removeAttr('hidden');
+        }
+        else{
+            // $("#retrocessionPanel").attr('hidden','true');
+            $("#tabretro").attr('hidden','true');
+        }
     });
 </script>
 

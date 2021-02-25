@@ -1288,7 +1288,7 @@
                                             <li class="nav-item">
                                                 <a href="{{url('/transaction-data/pa-slip')}}" class="nav-link {{@$pa_form}}">
                                                         <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;"> {{__('PERSONAL ACCIDENT - SLIP ENTRY')}}</p>
+                                                    <p style="font-size: 80%;margin-left:2%;"> {{__('PERSONAL ACCIDENT -')}} <br> {{__('SLIP ENTRY')}}</p>
                                                 </a>
                                             </li>
                                     </ul>

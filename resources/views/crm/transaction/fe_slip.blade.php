@@ -181,20 +181,6 @@
                             <div class="row">
                                 <div class="col-md-6 col-md-12">
                                     <div class="form-group">
-                                        <label for="">{{__('Lookup Location')}}</label>
-                                        <select name="lookup_location_id" id="lookup_location" class="e1 form-control form-control-sm " >
-                                            <option selected readonly>{{__('Select Lookup Location ')}}</option>
-                                            @foreach($felookup as $felookuplocationdata)
-                                                <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->address }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6 col-md-12">
-                                    <div class="form-group">
                                         <label for="">{{__('Country')}}</label>
                                         <select name="country_location_id" id="country_location" class="e1 form-control form-control-sm " >
                                             <option selected readonly>{{__('Select Country ')}}</option>
@@ -1111,7 +1097,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row" id="tabretro">
                                             <div class="col-md-12">
                                                 <div class="card">
                                                     <div class="card-header bg-gray">

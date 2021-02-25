@@ -287,7 +287,7 @@
         var percentval =  parseFloat($(this).val());
         var orpercent = parseFloat($('#slipor').val());
         var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval);
-        $('#slipor').val(sumpercentor)
+        $('#slipor').val(sumpercentor);
     });
 </script>
 
@@ -861,37 +861,37 @@
 </style>
 
 <script>
-    $(function () {
-      "use strict";
+    // $(function () {
+    //   "use strict";
   
-      var marineslip = <?php echo(($ms_ids->content())) ?>;
-      for(const id of marineslip) {
-          var btn = `
-              <a href="#" onclick="confirmDelete('${id}')">
-                  <i class="fas fa-trash text-danger"></i>
-              </a>
-          `;
-          $(`#delbtn${id}`).append(btn);
-      }
+    //   var marineslip = <?php echo(($ms_ids->content())) ?>;
+    //   for(const id of marineslip) {
+    //       var btn = `
+    //           <a href="#" onclick="confirmDelete('${id}')">
+    //               <i class="fas fa-trash text-danger"></i>
+    //           </a>
+    //       `;
+    //       $(`#delbtn${id}`).append(btn);
+    //   }
   
   
-      $("#marineSlip").DataTable({
-        "order": [[ 0, "desc" ]],
-        dom: '<"top"Bf>rt<"bottom"lip><"clear">',
-        lengthMenu: [
-            [ 10, 25, 50,100, -1 ],
-            [ '10 rows', '25 rows', '50 rows','100 rows', 'Show all' ]
-        ]
-      });
+    //   $("#marineSlip").DataTable({
+    //     "order": [[ 0, "desc" ]],
+    //     dom: '<"top"Bf>rt<"bottom"lip><"clear">',
+    //     lengthMenu: [
+    //         [ 10, 25, 50,100, -1 ],
+    //         [ '10 rows', '25 rows', '50 rows','100 rows', 'Show all' ]
+    //     ]
+    //   });
   
-    });
+    // });
   
-    function confirmDelete(id){
-        let choice = confirm("{{__('Are you sure, you want to delete this product and related data?')}}")
-        if(choice){
-            document.getElementById('delete-country-'+id).submit();
-        }
-    }
+    // function confirmDelete(id){
+    //     let choice = confirm("{{__('Are you sure, you want to delete this product and related data?')}}")
+    //     if(choice){
+    //         document.getElementById('delete-country-'+id).submit();
+    //     }
+    // }
   
 </script>
 

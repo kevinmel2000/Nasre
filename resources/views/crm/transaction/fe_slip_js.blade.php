@@ -1,7 +1,13 @@
 <link href="{{url('/')}}/css/select2.css" rel="stylesheet"/>
 <script src="{{url('/')}}/js/select2.js"></script>
 <script>
-    $(document).ready(function() { $(".e1").select2({ width: '100%' }); });
+    $(document).ready(function() { 
+        
+        $(".e1").select2({ width: '100%' }); 
+    
+        $("#tabretro").attr('hidden','true');
+        
+    });
 </script>
 <link rel="stylesheet" href="{{url('/')}}/css/sweetalert2.min.css">
 <script src="{{url('/')}}/js/sweetalert2.all.min.js"></script>
@@ -141,6 +147,18 @@ $(document).ready(function() {
             $("#labelnonprop").attr('hidden','true');
         }
         
+    });
+
+    $('#sliprb').change(function(){
+        var attr = $("#tabretro").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            // $("#retrocessionPanel").removeAttr('hidden');
+            $("#tabretro").removeAttr('hidden');
+        }
+        else{
+            // $("#retrocessionPanel").attr('hidden','true');
+            $("#tabretro").attr('hidden','true');
+        }
     });
 </script>
 
