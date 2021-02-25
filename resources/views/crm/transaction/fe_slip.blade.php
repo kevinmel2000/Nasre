@@ -248,6 +248,31 @@
                 {{__('Slip Detail')}}
             </div>
             <div class="card-body bg-light-gray">
+                
+                <table id="felookupTable2" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>{{__('Number')}}</th>
+                      <th>{{__('UY')}}</th>
+                      <th>{{__('Status')}}</th>
+                      <th width="20%">{{__('Actions')}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                    
+                </table>
+  
+
+            </div>
+        </div>
+          
+          <div class="card ">
+            <div class="card-header bg-gray">
+                {{__('Slip Detail')}}
+            </div>
+            <div class="card-body bg-light-gray">
                 <div class="container-fluid p-3">
                 <form id="multi-file-upload-ajax" method="POST" autocomplete="off"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
                 @csrf
