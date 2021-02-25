@@ -170,12 +170,78 @@
                                     </div>
                                 </div>
 
+
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Coinsurance')}}</label>
                                             <input type="text" id="msicoinsurance" name="msicoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                         </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-header bg-gray">
+                                                {{__('Hole Detail')}}
+                                            </div>
+                                            <div class="card-body bg-light-gray ">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="col-md-12 com-sm-12 mt-3">
+                                                            <table id="interestInsuredTable" class="table table-bordered table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>{{__('Code')}}</th>
+                                                                        <th>{{__('Golf Field - Hole Number')}}</th>
+                                                                        <th>{{__('Event')}}</th>
+                                                                        <th width="20%">{{__('Actions')}}</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach($holedetaillist as $hdl)
+                                                                        <tr id="hdid{{ $hdl->id }}" data-name="holedetailvalue[]">
+                                                                                <td data-name="{{ $hdl->code }}">{{ $hdl->code }}</td>
+                                                                                <td data-name="{{ $hdl->interest_id }}">{{ $hdl->golffieldhole->golf_field }} - {{ $hdl->golffieldhole->hole_number }}</td>
+                                                                                <td data-name="{{ $hdl->event }}">@currency($hdl->event)</td>
+                                                                                <td><a href="javascript:void(0)" onclick="deleteholedetail({{ $hdl->id }})">delete</i></a></td>
+                                                                        </tr>   
+                                                                    @endforeach
+                                                                    <tr>
+                                                                        <form id="addholedetail">
+                                                                            @csrf
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <select id="msigolffield" name="msigolffield" class="form-control form-control-sm ">
+                                                                                        <option selected disabled>{{__('Interest list')}}</option>
+                                                                                        @foreach($golffieldhole as $gfh)
+                                                                                            <option value="{{ $gfh->id }}">{{ $gfh->code }} - {{ $gfh->description }}</option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                </div>  
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="text" id="msievent" name="msievent" class="form-control form-control-sm " data-validation="length" data-validation-length="0-15" />
+                                                                                </div>
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <button type="button" id="addholedetail-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
+                                                                                </div>
+                                                                            </td>
+                                                                        </form>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </div>
                                     </div>
                                 </div>
 

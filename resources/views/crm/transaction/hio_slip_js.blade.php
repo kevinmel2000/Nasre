@@ -329,11 +329,16 @@
         var ourshare =  parseFloat($('#msisharev').val()) / 100 ;
         var tsi = parseFloat($("#sliptotalsum").val());
         var mtsi = parseFloat($("#msitsi").val());
+        var sumshare = parseFloat($('#slipsumshare').val()) ;
+        var orpercent = parseFloat($('#slipor').val()) / 100;
+        var sumor = isNaN(orpercent * sumshare) ? 0 :(orpercent * sumshare);
         var sum = isNaN(rateslip * shareslip * tsi/100) ? 0 :(rateslip * shareslip * tsi/100) ;
         var sumourshare = isNaN(ourshare * mtsi ) ? 0 :(ourshare * tsi) ;
         $('#slipgrossprmtonr').val(sum);
         // $('#msisharefrom').val(sumourshare);
         $('#msisumsharev').val(sumourshare);
+        
+        $('#slipsumor').val(sumor);
      });
 
      $('#slipcommission').keyup(function () {
@@ -369,8 +374,12 @@
     $('#sliprppercentage').change(function () {
         var percentval =  parseFloat($(this).val());
         var orpercent = parseFloat($('#slipor').val());
+        var sumshare = parseFloat($('#slipsumshare').val()) ;
+        var orpercentage = parseFloat($('#slipor').val()) / 100;
+        var sumor = isNaN(orpercentage * sumshare) ? 0 :(orpercentage * sumshare);
         var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval);
         $('#slipor').val(sumpercentor);
+        $('#slipsumor').val(sumor);
     });
 
     $('#slipnilaiec').keyup(function (){
@@ -379,6 +388,8 @@
         var sumexc = isNaN(percentec * tsi) ? 0 :(percentec * tsi);
         $('#slipamountec').val(sumexc);
     });
+
+    
 </script>
 
 <script type='text/javascript'>
@@ -418,7 +429,7 @@
             //    $("#msishareto").val(sum);
                $("#msitsi").val(sum);
                $(':input','#addinterestinsured').not(':button, :submit, :reset, :hidden').val(' ').removeAttr('checked').removeAttr('selected');
-            
+               $("#slipamount").val('');
            }
        });
 
@@ -465,6 +476,9 @@
                 $('#deductiblePanel tbody').prepend('<tr id="ddtid'+response.id+'" data-name="deductiblevalue[]"><td data-name="'+response.deductibletype_id+'">'+ response.dtabbrev +' - '+ response.dtdescript+'</td><td data-name="'+response.currency_id+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibletype('+response.id+')">delete</a></td></tr>')
                 
                 $(':input','#adddeductibletype').not(':button, :submit, :reset, :hidden').val(' ').removeAttr('checked').removeAttr('selected');
+                $("#slipdpminamount").val('');
+                $("#slipdpamount").val('');
+                $("#slipdppercentage").val('');
                
            }
        });
@@ -544,7 +558,8 @@
                var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
                $('#installmentPanel tbody').prepend('<tr id="ispid'+response.id+'" data-name="interestvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentpanel('+response.id+')">delete</a></td></tr>')
                $(':input','#addinstallmentpanel').not(':button, :submit, :reset, :hidden').val(' ').removeAttr('checked').removeAttr('selected');
-               
+               $('#slipippercentage').val('');
+               $('#slipipamount').val('');
             
            }
        });
@@ -586,7 +601,6 @@
                $(':input','#addretrocessiontemp').not(':button, :submit, :reset, :hidden').val(' ').removeAttr('checked').removeAttr('selected');
                $('#sliprppercentage').val(' ');
                $('#sliprpamount').val(' ');
-               
                
             
            }
