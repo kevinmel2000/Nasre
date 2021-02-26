@@ -204,7 +204,7 @@
                                                                         <tr id="hdid{{ $hdl->id }}" data-name="holedetailvalue[]">
                                                                                 <td data-name="{{ $hdl->code }}">{{ $hdl->code }}</td>
                                                                                 <td data-name="{{ $hdl->interest_id }}">{{ $hdl->golffieldhole->golf_field }} - {{ $hdl->golffieldhole->hole_number }}</td>
-                                                                                <td data-name="{{ $hdl->event }}">@currency($hdl->event)</td>
+                                                                                <td data-name="{{ $hdl->event }}">{{ $hdl->event }}</td>
                                                                                 <td><a href="javascript:void(0)" onclick="deleteholedetail({{ $hdl->id }})">delete</i></a></td>
                                                                         </tr>   
                                                                     @endforeach
@@ -230,7 +230,7 @@
 
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <button type="button" id="addholedetail-btn" class="btn btn-md btn-primary ">{{__('Add Hole Detail')}}</button>
+                                                                                    <button type="button" id="addholedetail-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>
                                                                         </form>

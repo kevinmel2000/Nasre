@@ -313,7 +313,7 @@
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
-                $('#sid'+id).remove();
+                $('#hd id'+id).remove();
                 console.log(response);
             }
         });
@@ -806,7 +806,7 @@
 
                 // $("#marineslipform").attr("hidden", false);
                 $("#marineslipform :input").prop("disabled", false);
-                $('#slipmsinumber').val();
+                // $('#slipmsinumber').val('');
            },
            error: function (request, status, error) {
                 //alert(request.responseText);

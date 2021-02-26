@@ -1248,12 +1248,12 @@ class TransactionController extends Controller
     public function storeholedetaillist(Request $request)
     {
 
-            $golffieldhole = $request->percentage;
-            $event = $request->contract;
-            $insured_id = $request->type;
+            $golffieldhole = $request->golffield_hole;
+            $event = $request->event;
+            $insured_id = $request->insuredID;
             $mydate = date("Y").date("m").date("d");
             $golffield = GolfFieldHole::where('id',$golffieldhole)->first();
-            $count_hole = GolfFieldHole::where('insured_id',$insured_id)->get();
+            $count_hole = HoleDetail::where('insured_id',$insured_id)->get();
             $lastid = count($count_hole);
 
             if($lastid != null){
@@ -2285,9 +2285,9 @@ class TransactionController extends Controller
 
     public function destroyholedetaillist($id)
     {
-        $propertytypeTemplist = PropertyTypeTemp::find($id);
+        $holedetaillist = HoleDetail::find($id);
         
-        $propertytypeTemplist->delete();
+        $holedetaillist->delete();
         
         return response()->json(['success'=>'Data has been deleted']);
     }
