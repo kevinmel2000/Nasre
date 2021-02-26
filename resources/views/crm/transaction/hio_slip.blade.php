@@ -190,7 +190,7 @@
                                                 <div class="row">
                                                     <div class="col-md-8">
                                                         <div class="col-md-12 com-sm-12 mt-3">
-                                                            <table id="interestInsuredTable" class="table table-bordered table-striped">
+                                                            <table id="holeDetailTable" class="table table-bordered table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>{{__('Code')}}</th>
@@ -209,14 +209,14 @@
                                                                         </tr>   
                                                                     @endforeach
                                                                     <tr>
-                                                                        <form id="addholedetail">
+                                                                        <form id="form-addholedetail">
                                                                             @csrf
-                                                                            <td>
+                                                                            <td colspan="2">
                                                                                 <div class="form-group">
                                                                                     <select id="msigolffield" name="msigolffield" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Interest list')}}</option>
+                                                                                        <option selected disabled>{{__('Golf Field Hole')}}</option>
                                                                                         @foreach($golffieldhole as $gfh)
-                                                                                            <option value="{{ $gfh->id }}">{{ $gfh->code }} - {{ $gfh->description }}</option>
+                                                                                            <option value="{{ $gfh->id }}">{{ $gfh->code }} - {{ $gfh->golf_field }} - {{ $gfh->hole_number }}</option>
                                                                                         @endforeach
                                                                                     </select>
                                                                                 </div>  
@@ -230,7 +230,7 @@
 
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <button type="button" id="addholedetail-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
+                                                                                    <button type="button" id="addholedetail-btn" class="btn btn-md btn-primary ">{{__('Add Hole Detail')}}</button>
                                                                                 </div>
                                                                             </td>
                                                                         </form>

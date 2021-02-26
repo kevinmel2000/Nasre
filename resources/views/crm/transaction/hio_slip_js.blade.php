@@ -271,11 +271,40 @@
 
 
 <script type='text/javascript'>
-    function deleteshipdetail(id){
+    $('#addholedetail-btn').click(function(e){
+        e.preventDefault();
+
+        var golffieldhole = $('#msigolffield').val();
+        var event = $('#msievent').val();
+        var insured_id = $('#msinumber').val();
+        var token = $('input[name=_token]').val();
+        
+        $.ajax({
+            url:"{{ route('holedetail.store') }}",
+            type:"POST",
+            data:{
+                golffield_hole:golffieldhole,
+                event:event,
+                insuredID:insured_id,
+                _token:token
+            },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response){
+                console.log(response)
+                $('#holeDetailTable tbody').prepend('<tr id="hdid'+response.id+'"><td>'+response.code+'</td><td>'+response.golffield_hole+'</td><td>'+response.event+'</td><td><a href="javascript:void(0)" onclick="deleteholedetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
+                // $('#form-holedetail')[0].reset();
+                $('#msievent').val();
+            }
+        });
+
+    });
+
+    function deleteholedetail(id){
         var token = $('input[name=_token]').val();
 
         $.ajax({
-            url:'{{ url("/") }}/delete-ship-list/'+id,
+            url:'{{ url("/") }}/delete-holedetail-list/'+id,
             type:"DELETE",
             data:{
                 _token:token

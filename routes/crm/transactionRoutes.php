@@ -15,8 +15,6 @@ Route::get('get-state-lookup','FeSlipController@getStateLookup');
 Route::get('get-city-lookup','FeSlipController@getCityLookup');
 Route::get('get-address-lookup','FeSlipController@getAddressLookup');
 
-
-
 Route::get('get-ship-list','TransactionController@showShipList');
 Route::post('/store-ship-list','TransactionController@storeshiplist')->name('shiplist.store');
 Route::post('update-ship-list/{id}', 'TransactionController@updateshiplist')->name('shiplist.update');
@@ -55,6 +53,10 @@ Route::post('/store-retrocession-list','TransactionController@storeretrocessionl
 Route::post('update-retrocession-list/{id}', 'TransactionController@updateretrocessionlist')->name('retrocession.update');
 Route::delete('/delete-retrocession-list/{id}','TransactionController@destroyretrocessionlist')->name('retrocession.delete');
 
+Route::get('get-holedetail-list','TransactionController@showholedetailList');
+Route::post('/store-holedetail-list','TransactionController@storeholedetaillist')->name('holedetail.store');
+Route::post('update-holedetail-list/{id}', 'TransactionController@updateholedetaillist')->name('holedetail.update');
+Route::delete('/delete-holedetail-list/{id}','TransactionController@destroyholedetaillist')->name('holedetail.delete');
 
 Route::post('/store-propertytype-list','TransactionController@storepropertytypelist')->name('propertytype.store');
 Route::delete('/delete-propertytype-list/{id}','TransactionController@destroypropertytypelist')->name('propertytype.delete');
