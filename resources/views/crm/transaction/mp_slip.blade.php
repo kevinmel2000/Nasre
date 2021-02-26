@@ -349,29 +349,8 @@
                         @csrf
                         <div class="modal-body">
                         
-                            
 
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-info" id="addslipnew-btn">Add New Slip </button>
-                        </div>
-                    </form>
-                </div>
-                </div>
-            </div>
-            {{-- Edit Modal Ends --}}
-          
-
-        <div class="card ">
-            <div class="card-header bg-gray">
-                {{__('Slip Detail')}}
-            </div>
-            <div class="card-body bg-light-gray">
-                
-                <div class="container-fluid p-3">
-                <form id="multi-file-upload-ajax" method="POST" autocomplete="off" action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
+                        <form id="multi-file-upload-ajax" method="POST" autocomplete="off" action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
                    @csrf
                         <div class="card card-tabs">
                             <div class="card-header p-0 pt-1 border-bottom-0">
@@ -1315,10 +1294,21 @@
                             </div>
                         </div> 
                     </form>
+                            
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                            <button type="submit" class="btn btn-info" id="addslipnew-btn">Add New Slip </button>
+                        </div>
+                    </form>
                 </div>
-                
+                </div>
             </div>
-        </div> 
+            {{-- Edit Modal Ends --}}
+          
+
 
     </div>
 </div>
