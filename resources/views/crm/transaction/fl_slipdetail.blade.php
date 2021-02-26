@@ -273,6 +273,65 @@
             </div>
             {{-- Edit Modal Ends --}}
 
+            <div class="card ">
+                <div class="card-header bg-gray">
+                    {{__('Slip Detail')}}
+                </div>
+                <div class="card-body bg-light-gray">
+                    
+                    <a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#addslipnew">
+                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addslipnewcr">{{__('Add New Slip')}}</button>
+                    </a>
+                    
+                    <table id="felookupTable2" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                        <th>{{__('Number')}}</th>
+                        <th>{{__('UY')}}</th>
+                        <th>{{__('Status')}}</th>
+                        <th width="20%">{{__('Actions')}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                        
+                    </table>
+    
+
+                </div>
+            </div>
+
+
+            <div class="modal fade" id="addslipnew" tabindex="-1" user="dialog" aria-labelledby="addslipnewLabel" aria-hidden="true">
+                <div class="modal-dialog" user="document">
+                <div class="modal-content bg-light-gray">
+                    <div class="modal-header bg-gray">
+                    <h5 class="modal-title" id="addslipnewLabel">{{__('Add New Slip')}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+
+                    <form id="form-addslipnew">
+                        @csrf
+                        <div class="modal-body">
+                        
+                            
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                            <button type="submit" class="btn btn-info" id="addslipnew-btn">Add New Slip </button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+            {{-- Edit Modal Ends --}}
+          
+
         <div class="card ">
             <div class="card-header bg-gray">
             {{__('Slip Detail')}}
