@@ -285,35 +285,28 @@
             {{-- Edit Modal Ends --}}
         
             <div class="card ">
-                <div class="card-header bg-gray">
-                    {{__('Slip Detail')}}
-                </div>
-                <div class="card-body bg-light-gray">
-                    
-                    <a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#addslipnew">
-                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addslipnewcr">{{__('Add New Slip')}}</button>
-                    </a>
-                    
-                    <table id="felookupTable2" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                        <th>{{__('Number')}}</th>
-                        <th>{{__('UY')}}</th>
-                        <th>{{__('Status')}}</th>
-                        <th width="20%">{{__('Actions')}}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                        
-                    </table>
-    
-
-                </div>
+            <div class="card-header bg-gray">
+                {{__('Slip Detail')}}
             </div>
+            <div class="card-body bg-light-gray">
+                
+                <table id="felookupTable2" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>{{__('Number')}}</th>
+                      <th>{{__('UY')}}</th>
+                      <th>{{__('Status')}}</th>
+                      <th width="20%">{{__('Actions')}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
+                    </tbody>
+                    
+                </table>
+  
 
+<<<<<<< HEAD
             <div class="modal fade" id="addslipnew" tabindex="-1" user="dialog" aria-labelledby="addslipnewLabel" aria-hidden="true">
                 <div class="modal-dialog" user="document">
                 <div class="modal-content bg-light-gray">
@@ -1282,9 +1275,10 @@
                     </form>
                 </div>
                 </div>
+=======
+>>>>>>> parent of 1770c7d... Modal Ui Progress
             </div>
-            {{-- Edit Modal Ends --}}
-          
+        </div>
 
         <div class="card ">
             <div class="card-header bg-gray">
