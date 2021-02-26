@@ -37,6 +37,8 @@ use App\Models\DeductibleTemp;
 use App\Models\RetrocessionTemp;
 use App\Models\PropertyType;
 use App\Models\PropertyTypeTemp;
+use App\Models\HoleDetail;
+use App\Models\GolfFieldHole;
 
 
 class TransactionController extends Controller
@@ -212,6 +214,7 @@ class TransactionController extends Controller
             $cnd = ConditionNeeded::orderby('id','asc')->get();
             $exc = ExtendedCoverage::orderby('id','asc')->get();
             $mlu = MarineLookup::orderby('id','asc')->get();
+            $golffieldhole = GolfFieldHole::orderby('id','asc')->get();
             
             
             $customer= CustomerCustomer::orderby('id','asc')->get();
@@ -289,6 +292,7 @@ class TransactionController extends Controller
             $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
             $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
             $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+            $holedetaillist= HoleDetail::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
 
 
             if(count($interestlist) != null){
@@ -297,6 +301,10 @@ class TransactionController extends Controller
 
             if(count($locationlist) != null){
                 TransLocationTemp::where('insured_id', $code_ms)->delete();
+            }
+
+            if(count($holedetaillist) != null){
+                HoleDetail::where('insured_id', $code_ms)->delete();
             }
 
             if(count($deductibletemp) != null){
@@ -338,7 +346,7 @@ class TransactionController extends Controller
             }
 
 
-            return view('crm.transaction.hio_slip', compact(['user','extendcoveragelist','edslipid','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestinsured','routeship','customer','interestlist','locationlist','exc','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
+            return view('crm.transaction.hio_slip', compact(['user','golffieldhole','holedetaillist','extendcoveragelist','edslipid','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestinsured','routeship','customer','interestlist','locationlist','exc','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
          }
         else
         {
@@ -1237,6 +1245,68 @@ class TransactionController extends Controller
         
     }
 
+    public function storeholedetaillist(Request $request)
+    {
+
+            $golffieldhole = $request->percentage;
+            $event = $request->contract;
+            $insured_id = $request->type;
+            $mydate = date("Y").date("m").date("d");
+            $golffield = GolfFieldHole::where('id',$golffieldhole)->first();
+            $count_hole = GolfFieldHole::where('insured_id',$insured_id)->get();
+            $lastid = count($count_hole);
+
+            if($lastid != null){
+                if($lastid < 10)
+                {
+                    $code =  $mydate . "00000" . strval($lastid + 1);
+                }   
+                elseif($lastid > 9 && $lastid < 100)
+                {
+                    $code = "IN" . $mydate . "0000" . strval($lastid + 1);
+                }
+
+            }
+            else{
+                $code =  $mydate . "00000" . strval(1);
+            }
+
+
+            if($golffieldhole !='' && $insured_id !='' )
+            {
+            
+                $holedetaillist = new HoleDetail();
+                $holedetaillist->code  = $code;
+                $holedetaillist->golffieldhole_id  = $golffieldhole;
+                $holedetaillist->event  = $event;
+                $holedetaillist->insured_id = $insured_id;
+                $holedetaillist->save();
+
+                return response()->json(
+                    [
+                        'id' => $holedetaillist->id,
+                        'code' => $holedetaillist->code,
+                        'golffield_hole' => $golffield->golf_field,
+                        'event' => $holedetaillist->event,
+                        'insured_id' => $holedetaillist->insured_id
+                    ]
+                );
+        
+            }
+            else
+            {
+
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Fill all fields'
+                    ]
+                );
+
+            }
+        
+    }
+
     /**
      * Display the specified resource.
      *
@@ -1303,6 +1373,14 @@ class TransactionController extends Controller
         ->where("id",$request->rsc_code)
         ->first();
         return response()->json($retrocessionlist);
+    }
+
+    public function showholedetailList(Request $request)
+    {
+        $holedetaillist = DB::table("hole_detail_temp")
+        ->where("id",$request->hd_code)
+        ->first();
+        return response()->json($holedetaillist);
     }
 
     public function showinsureddetails($id)
@@ -1818,6 +1896,37 @@ class TransactionController extends Controller
         }
    }
 
+   public function updateholedetaillist(Request $request, $id)
+   {
+        $validator = $request->validate([
+            'type'=>'required',
+                'contract'=>'required',
+                'slip_number'=>'required'
+        ]);
+        
+        if($validator){
+
+            $holedetaillist = HoleDetail::find($id);
+            $holedetaillist->code = $request->code;
+            $holedetaillist->golffieldhole_id = $request->golffieldhole_id;
+            $holedetaillist->event = $request->event;
+            $holedetaillist->insured_id = $request->insured_id;
+            $holedetaillist->save();
+            
+            return response()->json(
+                [
+                    'code' => $holedetaillist->code,
+                    'golffieldhole_id' => $holedetaillist->golffieldhole_id,
+                    'event' => $holedetaillist->event,
+                    'insured_id' => $holedetaillist->insured_id,
+                ]
+            );
+
+        }else{
+            return response()->json($validator);
+        }
+   }
+
    public function indexmarineendorsement($id)
    {
        $user = Auth::user();
@@ -2041,18 +2150,6 @@ class TransactionController extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
    public function destroymarineinsured($id)
     {
         $insured = Insured::find($id);
@@ -2186,7 +2283,14 @@ class TransactionController extends Controller
         return response()->json(['success'=>'Data has been deleted']);
     }
 
-    
+    public function destroyholedetaillist($id)
+    {
+        $propertytypeTemplist = PropertyTypeTemp::find($id);
+        
+        $propertytypeTemplist->delete();
+        
+        return response()->json(['success'=>'Data has been deleted']);
+    }
     
 
 }
