@@ -1030,6 +1030,8 @@ $("body").on("click","#btn-danger2",function(){
            {
                 swal("Good job!", "HE & Motor  Slip Insert Success", "success")
                 console.log(response)
+                $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.slipuy+'">'+slipuy+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td></td></tr>')
+                $('#slipnumber').val(response.code_sl);
 
            },
            error: function (request, status, error) {
@@ -1226,7 +1228,7 @@ $("body").on("click","#btn-danger2",function(){
                 swal("Good job!", "HE & Motor  Slip Insert Success", "success")
                 console.log(response)
                 $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.slipuy+'">'+slipuy+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td></td></tr>')
-              
+                $('#slipnumber').val(response.code_sl);
 
            },
            error: function (request, status, error) {

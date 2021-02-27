@@ -1133,7 +1133,7 @@ $(document).ready(function(){
                 console.log(response)
 
                 $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.slipuy+'">'+slipuy+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td></td></tr>')
-              
+                $('#slipnumber').val(response.code_sl);
 
            },
            error: function (request, status, error) {
@@ -1331,7 +1331,7 @@ $(document).ready(function(){
                 console.log(response)
 
                 $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.slipuy+'">'+slipuy+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td></td></tr>')
-              
+                $('#slipnumber').val(response.code_sl);
            },
            error: function (request, status, error) {
                 //alert(request.responseText);
