@@ -265,26 +265,6 @@
                 </table>
   
 
-<<<<<<< HEAD
-            <div class="modal fade" id="addslipnew" tabindex="-1" user="dialog" aria-labelledby="addslipnewLabel" aria-hidden="true">
-                <div class="modal-dialog" user="document">
-                <div class="modal-content bg-light-gray">
-                    <div class="modal-header bg-gray">
-                    <h5 class="modal-title" id="addslipnewLabel">{{__('Add New Slip')}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-
-                    <form id="form-addslipnew">
-                        @csrf
-                        <div class="modal-body">
-                        
-                            
-           
-                    <form id="multi-file-upload-ajax" method="POST" autocomplete="off"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
-                    @csrf
-=======
             </div>
         </div>
           
@@ -296,7 +276,6 @@
                 <div class="container-fluid p-3">
                 <form id="multi-file-upload-ajax" method="POST" autocomplete="off"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
                 @csrf
->>>>>>> parent of 1770c7d... Modal Ui Progress
                         <div class="card card-tabs">
                             <div class="card-header p-0 pt-1 border-bottom-0">
                                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
