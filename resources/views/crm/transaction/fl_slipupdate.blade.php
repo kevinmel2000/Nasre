@@ -287,7 +287,7 @@
             </div>
             <div class="card-body bg-light-gray">
                 
-                <table id="felookupTable2" class="table table-bordered table-striped">
+                <table id="SlipInsuredTableData" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                       <th>{{__('Number')}}</th>

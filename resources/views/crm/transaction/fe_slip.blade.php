@@ -249,7 +249,7 @@
             </div>
             <div class="card-body bg-light-gray">
                 
-                <table id="felookupTable2" class="table table-bordered table-striped">
+                <table id="SlipInsuredTableData" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                       <th>{{__('Number')}}</th>
@@ -1226,22 +1226,6 @@
                         </div> 
                     </form>
                
-       
-
-
-
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-info" id="addslipnew-btn">Add New Slip </button>
-                        </div>
-                    </form>
-                </div>
-                </div>
-            </div>
-            {{-- Edit Modal Ends --}}
-          
           </div> 
 
     </div>

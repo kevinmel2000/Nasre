@@ -149,7 +149,7 @@ class MovePropSlipController extends Controller
         $costumer=Customer::orderby('id','asc')->get();
 
         
-        $currdate = date("d/m/Y");
+       $currdate = date("Y-m-d");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -279,7 +279,7 @@ class MovePropSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-        $currdate = date("d/m/Y");
+       $currdate = date("Y-m-d");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -327,7 +327,7 @@ class MovePropSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-        $currdate = date("d/m/Y");
+       $currdate = date("Y-m-d");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -451,7 +451,7 @@ class MovePropSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-        $currdate = date("d/m/Y");
+       $currdate = date("Y-m-d");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -607,9 +607,9 @@ class MovePropSlipController extends Controller
 
             if($slipdata==null)
             {
-                $currdate = date("d/m/Y");
+               $currdate = date("Y-m-d");
 
-                SlipTable::create([
+               $slipdataup=SlipTable::create([
                     'number'=>$request->slipnumber,
                     'username'=>Auth::user()->name,
                     'insured_id'=>$request->code_ms,
@@ -666,7 +666,7 @@ class MovePropSlipController extends Controller
             }
             else
             {
-                $currdate = date("d/m/Y");
+               $currdate = date("Y-m-d");
 
                 $slipdataid=$slipdata->id;
                 $slipdataup = SlipTable::findOrFail($slipdataid);
@@ -733,7 +733,17 @@ class MovePropSlipController extends Controller
                 'slip_id'=>$request->slipnumber,
             ]);
 
-            return back()->with($notification);
+
+            return response()->json(
+                [
+                    'id' => $slipdataup->id,
+                    'number' => $slipdataup->number,
+                    'slipuy' => $slipdataup->uy,
+                    'slipstatus' => $slipdataup->status
+                ]
+            );
+            
+            //return back()->with($notification);
             //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
             //return redirect()->route('liniusaha.index');
         
@@ -782,7 +792,7 @@ class MovePropSlipController extends Controller
             }
             else
             {
-                $currdate = date("d/m/Y");
+               $currdate = date("Y-m-d");
 
                 $slipdataid=$slipdata->id;
                 $slipdataup = SlipTable::findOrFail($slipdataid);

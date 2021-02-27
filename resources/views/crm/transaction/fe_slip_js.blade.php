@@ -1058,6 +1058,9 @@ $(document).ready(function() {
                 swal("Good job!", "Insured Fire & Engineering Slip Insert Success", "success")
                 console.log(response)
 
+                $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.slipuy+'">'+slipuy+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td></td></tr>')
+              
+
            },
            error: function (request, status, error) {
                 //alert(request.responseText);
@@ -1264,6 +1267,9 @@ $(document).ready(function() {
            {
                 swal("Good job!", "Insured Fire & Engineering Slip Insert Success", "success")
                 console.log(response)
+
+                $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.slipuy+'">'+slipuy+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td></td></tr>')
+              
 
            },
            error: function (request, status, error) {
