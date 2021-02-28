@@ -299,6 +299,11 @@
                     </thead>
                     <tbody>
 
+                    
+                    @foreach (@$slipdata2 as $insureddata)
+
+                    @endforeach
+
                     </tbody>
                     
                 </table>
