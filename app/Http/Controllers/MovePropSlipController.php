@@ -197,6 +197,8 @@ class MovePropSlipController extends Controller
             $code_ms = "IN" . $userid ."". $mydate . "0000" . strval(1);
         }
 
+        $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
+
         if($sliplastid != null){
             if($sliplastid < 10)
             {
@@ -267,7 +269,7 @@ class MovePropSlipController extends Controller
             RetrocessionTemp::where('slip_id', $code_sl)->delete();
         }
         
-        return view('crm.transaction.mp_slip', compact(['user','statuslist','propertytypelist','propertytype','retrocessionlist','interestinsured','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','deductibletype','cnd','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','mp_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.mp_slip', compact(['user','statuslist','slipdata2','propertytypelist','propertytype','retrocessionlist','interestinsured','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','deductibletype','cnd','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','mp_ids','code_ms','code_sl','costumer']));
     }
 
   
