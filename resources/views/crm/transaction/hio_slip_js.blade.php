@@ -313,7 +313,7 @@
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
-                $('#hd id'+id).remove();
+                $('#hdid'+id).remove();
                 console.log(response);
             }
         });

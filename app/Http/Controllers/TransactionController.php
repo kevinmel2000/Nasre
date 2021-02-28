@@ -698,7 +698,7 @@ class TransactionController extends Controller
                     'alert-type' => 'success'
                 );
             }
-            dd($shiplist);
+            // dd($shiplist);
             // ShipListTemp::whereIn('id', $shiplist->id)->update(['status' => 'saved']);
             // ShipListTemp::where('status','pending')->delete();
 
@@ -905,8 +905,546 @@ class TransactionController extends Controller
         }
     }
 
-    
+    public function storeholeinoneinsured(Request $request)
+    {
+        $validator = $request->validate([
+            'msinumber'=>'required',
+            'msisuggestinsured'=>'required'
+        ]);
 
+        $holedetail= HoleDetail::where('insured_id','=',$request->msinumber)->orderby('created_at','desc')->get();
+        $locationlist= TransLocationTemp::where('insured_id','=',$request->msinumber)->orderby('created_at','desc')->get();
+        
+        if($validator)
+        {
+            $user = Auth::user();
+            
+            $insureddata= Insured::where('number','=',$request->msinumber)->first();
+
+            if($insureddata==null)
+            {
+                Insured::create([
+                    'number'=>$request->msinumber,
+                    'slip_type'=>'hio',
+                    'insured_prefix' => $request->msiprefix,
+                    'insured_name'=>$request->msisuggestinsured,
+                    'insured_suffix'=>$request->msisuffix,
+                    'route'=>$request->msiroute,
+                    'route_from'=>$request->msiroutefrom,
+                    'route_to'=>$request->msirouteto,
+                    'share'=>$request->msishare,
+                    'share_from'=>$request->msisharefrom,
+                    'share_to'=>$request->msishareto,
+                    'location'=>$locationlist->toJson(),
+                    'hole_detail'=>$holedetail->toJson(),
+                    'coincurance'=>$request->msicoinsurance
+                ]);
+
+                $notification = array(
+                    'message' => 'Hole in One Insured added successfully!',
+                    'alert-type' => 'success'
+                );
+            }
+            else
+            {
+                $insureddataid=$insureddata->id;
+                $insureddataup = Insured::findOrFail($insureddataid);
+                $insureddataup->slip_type='hio';
+                $insureddataup->insured_prefix=$request->msiinsured;
+                $insureddataup->insured_name=$request->msisuggestinsured;
+                $insureddataup->insured_suffix=$request->msisuffix;
+                $insureddataup->route=$request->msiroute;
+                $insureddataup->route_from=$request->msiroutefrom;
+                $insureddataup->route_to=$request->msirouteto;
+                $insureddataup->share=$request->msishare;
+                $insureddataup->share_from=$request->msisharefrom;
+                $insureddataup->share_to=$request->msishareto;
+                $insureddataup->location=$locationlist->toJson();
+                $insureddataup->hole_detail=$holedetail->toJson();
+                $insureddataup->coincurance=$request->msicoinsurance;
+                $insureddataup->save();
+
+
+                $notification = array(
+                    'message' => 'Hole in One Insured Update successfully!',
+                    'alert-type' => 'success'
+                );
+            }
+            // dd($locationlist);
+            // ShipListTemp::whereIn('id', $shiplist->id)->update(['status' => 'saved']);
+            // ShipListTemp::where('status','pending')->delete();
+
+            return back()->with($notification);
+            //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
+            //return redirect()->route('liniusaha.index');
+        
+        }
+        else
+        {
+
+            $notification = array(
+                'message' => 'Hole in One Insured added Failed!',
+                'alert-type' => 'success'
+            );
+
+            return back()->with($validator)->withInput();
+            //Session::flash('Failed', 'Fire & Engginering Insured Failed added', 'danger');
+            //return redirect()->route('liniusaha.index');
+        }
+    }
+
+    public function storeholeinoneslip(Request $request)
+    {
+        $validator = $request->validate([
+            'slipnumber'=>'required',
+            'slipuy'=>'required',
+            'slippolicy_no'=>'required',
+            'slipno'=>'required',
+            'slipcndn'=>'required'
+        ]);
+        
+
+        if($validator)
+        {
+            $user = Auth::user();
+            
+            $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
+            
+            $interestlist= InterestInsuredTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $conditionneededlist= ConditionNeededTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $deductiblelist= DeductibleTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();             
+            $slipfile=SlipTableFile::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();             
+
+            if($slipdata==null)
+            {
+                $currdate = date("d/m/Y");
+
+                SlipTable::create([
+                    'number'=>$request->slipnumber,
+                    'username'=>Auth::user()->name,
+                    'insured_id'=>$request->code_ins,
+                    'slip_type'=>'hio',
+                    'prod_year' => $currdate,
+                    'uy'=>$request->slipuy,
+                    'status'=>$request->slipstatus,
+                    'endorsment'=>$request->sliped,
+                    'selisih'=>$request->slipsls,
+                    'source'=>$request->slipcedingbroker,
+                    'source_2'=>$request->slipceding,
+                    'currency'=>$request->slipcurrency,
+                    'cob'=>$request->slipcob,
+                    'koc'=>$request->slipkoc,
+                    'occupacy'=>$request->slipoccupacy,
+                    'build_const'=>$request->slipbld_const,
+                    'slip_no'=>$request->slipno,
+                    'cn_dn'=>$request->slipcndn,
+                    'policy_no'=>$request->slippolicy_no,
+                    'attacment_file'=>$slipfile->toJson(),
+                    'interest_insured'=>$interestlist->toJSon(),
+                    'total_sum_insured'=>$request->sliptotalsum,
+                    'insured_type'=>$request->sliptype,
+                    'insured_pct'=>$request->slippct,
+                    'total_sum_pct'=>$request->sliptotalsumpct,
+                    'deductible_panel'=>$deductiblelist->toJson(),
+                    'condition_needed'=>$conditionneededlist->toJson(),
+                    'insurance_period_from'=>$request->slipipfrom,
+                    'insurance_period_to'=>$request->slipipto,
+                    'reinsurance_period_from'=>$request->sliprpfrom,
+                    'reinsurance_period_to'=>$request->sliprpto,
+                    'proportional'=>$request->slipproportional,
+                    'layer_non_proportional'=>$request->sliplayerproportional,
+                    'rate'=>$request->sliprate,
+                    'share'=>$request->slipshare,
+                    'sum_share'=>$request->slipsumshare,
+                    'basic_premium'=>$request->slipbasicpremium,
+                    'commission'=>$request->slipcommission,
+                    'grossprm_to_nr'=>$request->slipgrossprmtonr,
+                    'netprm_to_nr'=>$request->slipnetprmtonr,
+                    'sum_commission'=>$request->slipsumcommission,
+                    'installment_panel'=>$installmentlist->toJson(),
+                    'retrocession_panel'=>$retrocessionlist->toJson(),
+                    'retro_backup'=>$request->sliprb,
+                    'own_retention'=>$request->slipor,
+                    'sum_own_retention'=>$request->slipsumor
+                    
+
+                ]);
+
+                $notification = array(
+                    'message' => 'Hole in One Slip added successfully!',
+                    'alert-type' => 'success'
+                );
+
+
+            }
+            else
+            {
+                $currdate = date("d/m/Y");
+
+                $slipdataid=$slipdata->id;
+                $slipdataup = SlipTable::findOrFail($slipdataid);
+                
+                $slipdataup->number=$request->slipnumber;
+                $slipdataup->username=Auth::user()->name;
+                $slipdataup->insured_id=$request->code_ins;
+                $slipdataup->prod_year=$currdate;
+                $slipdataup->uy=$request->slipuy;
+                $slipdataup->status=$request->slipstatus;
+                $slipdataup->endorsment=$request->sliped;
+                $slipdataup->selisih=$request->slipsls;
+                $slipdataup->source=$request->slipcedingbroker;
+                $slipdataup->source_2=$request->slipceding;
+                $slipdataup->currency=$request->slipcurrency;
+                $slipdataup->cob=$request->slipcob;
+                $slipdataup->koc=$request->slipkoc;
+                $slipdataup->occupacy=$request->slipoccupacy;
+                $slipdataup->build_const=$request->slipbld_const;
+                $slipdataup->slip_no=$request->slipno; 
+                $slipdataup->cn_dn=$request->slipcndn; 
+                $slipdataup->policy_no=$request->slippolicy_no; 
+                $slipdataup->attacment_file=$slipfile->toJson(); 
+                $slipdataup->interest_insured=$interestlist->toJSon();
+                $slipdataup->total_sum_insured=$request->sliptotalsum; 
+                $slipdataup->insured_type=$request->sliptype; 
+                $slipdataup->insured_pct=$request->slippct; 
+                $slipdataup->total_sum_pct=$request->sliptotalsumpct; 
+                $slipdataup->deductible_panel=$deductiblelist->toJson(); 
+                $slipdataup->condition_needed=$conditionneededlist->toJson();  
+                $slipdataup->insurance_period_from=$request->slipipfrom;  
+                $slipdataup->insurance_period_to=$request->slipipto;  
+                $slipdataup->reinsurance_period_from=$request->sliprpfrom;  
+                $slipdataup->reinsurance_period_to=$request->sliprpto;
+                $slipdataup->proportional=$request->slipproportional;
+                $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
+                $slipdataup->rate=$request->sliprate;  
+                $slipdataup->share=$request->slipshare;
+                $slipdataup->sum_share=$request->slipsumshare;
+                $slipdataup->basic_premium=$request->slipbasicpremium;
+                $slipdataup->commission=$request->slipcommission; 
+                $slipdataup->grossprm_to_nr=$request->slipgrossprmtonr; 
+                $slipdataup->netprm_to_nr=$request->slipnetprmtonr; 
+                $slipdataup->sum_commission=$request->slipsumcommission; 
+                $slipdataup->installment_panel=$installmentlist->toJson();   
+                $slipdataup->retrocession_panel=$retrocessionlist->toJson();  
+                $slipdataup->retro_backup=$request->sliprb;
+                $slipdataup->own_retention=$request->slipor;
+                $slipdataup->sum_own_retention=$request->slipsumor;
+
+                $slipdataup->save();
+
+
+                $notification = array(
+                    'message' => 'Hole in One Slip Update successfully!',
+                    'alert-type' => 'success'
+                );
+            }
+
+            StatusLog::create([
+                'insured_id'=>$request->code_ins,
+                'status'=>$request->slipstatus,
+                'datetime'=>date('d/m/Y H:i:s'),
+                'slip_id'=>$request->slipnumber,
+                'user'=>Auth::user()->name,
+            ]);
+
+            $insdata = Insured::where('number',$request->code_ins)->where('slip_type','hio')->first();
+
+            $msdata = Insured::findOrFail($insdata->id);
+            $msdata->share=$request->sharems;
+            $msdata->share_from=$request->sumsharems;
+            $msdata->share_to=$request->tsims;
+            $msdata->save();
+
+
+            return back()->with($notification);
+            //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
+            //return redirect()->route('liniusaha.index');
+        
+        }
+        else
+        {
+
+            $notification = array(
+                'message' => 'Hole in One Slip added Failed!',
+                'alert-type' => 'success'
+            );
+
+            return back()->with($validator)->withInput();
+            //Session::flash('Failed', 'Fire & Engginering Insured Failed added', 'danger');
+            //return redirect()->route('liniusaha.index');
+        }
+    }
+
+    public function storepersonalaccidentinsured(Request $request)
+    {
+        $validator = $request->validate([
+            'msinumber'=>'required',
+            'msisuggestinsured'=>'required'
+        ]);
+
+        $shiplist= ShipListTemp::where('insured_id','=',$request->msinumber)->where('status','=','pending')->orderby('created_at','desc')->get();
+        
+        if($validator)
+        {
+            $user = Auth::user();
+            
+            $insureddata= Insured::where('number','=',$request->msinumber)->first();
+
+            if($insureddata==null)
+            {
+                Insured::create([
+                    'number'=>$request->msinumber,
+                    'slip_type'=>'pa',
+                    'insured_prefix' => $request->msiprefix,
+                    'insured_name'=>$request->msisuggestinsured,
+                    'insured_suffix'=>$request->msisuffix,
+                    'route'=>$request->msiroute,
+                    'route_from'=>$request->msiroutefrom,
+                    'route_to'=>$request->msirouteto,
+                    'share'=>$request->msishare,
+                    'share_from'=>$request->msisharefrom,
+                    'share_to'=>$request->msishareto,
+                    'ship_detail'=>$shiplist->toJson(),
+                    'coincurance'=>$request->msicoinsurance
+                ]);
+
+                $notification = array(
+                    'message' => 'Personal Accident Insured added successfully!',
+                    'alert-type' => 'success'
+                );
+            }
+            else
+            {
+                $insureddataid=$insureddata->id;
+                $insureddataup = Insured::findOrFail($insureddataid);
+                $insureddataup->slip_type='pa';
+                $insureddataup->insured_prefix=$request->msiinsured;
+                $insureddataup->insured_name=$request->msisuggestinsured;
+                $insureddataup->insured_suffix=$request->msisuffix;
+                $insureddataup->route=$request->msiroute;
+                $insureddataup->route_from=$request->msiroutefrom;
+                $insureddataup->route_to=$request->msirouteto;
+                $insureddataup->share=$request->msishare;
+                $insureddataup->share_from=$request->msisharefrom;
+                $insureddataup->share_to=$request->msishareto;
+                $insureddataup->ship_detail=$shiplist->toJson();
+                $insureddataup->coincurance=$request->msicoinsurance;
+                $insureddataup->save();
+
+
+                $notification = array(
+                    'message' => 'Personal Accident Insured Update successfully!',
+                    'alert-type' => 'success'
+                );
+            }
+            dd($shiplist);
+            // ShipListTemp::whereIn('id', $shiplist->id)->update(['status' => 'saved']);
+            // ShipListTemp::where('status','pending')->delete();
+
+            return back()->with($notification);
+            //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
+            //return redirect()->route('liniusaha.index');
+        
+        }
+        else
+        {
+
+            $notification = array(
+                'message' => 'Personal Accident Insured added Failed!',
+                'alert-type' => 'success'
+            );
+
+            return back()->with($validator)->withInput();
+            //Session::flash('Failed', 'Fire & Engginering Insured Failed added', 'danger');
+            //return redirect()->route('liniusaha.index');
+        }
+    }
+
+    public function storepersonalaccidentslip(Request $request)
+    {
+        $validator = $request->validate([
+            'slipnumber'=>'required',
+            'slipuy'=>'required',
+            'slippolicy_no'=>'required',
+            'slipno'=>'required',
+            'slipcndn'=>'required'
+        ]);
+        
+
+        if($validator)
+        {
+            $user = Auth::user();
+            
+            $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
+            
+            $interestlist= InterestInsuredTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $conditionneededlist= ConditionNeededTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $deductiblelist= DeductibleTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();             
+            $slipfile=SlipTableFile::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();             
+
+            if($slipdata==null)
+            {
+                $currdate = date("d/m/Y");
+
+                SlipTable::create([
+                    'number'=>$request->slipnumber,
+                    'username'=>Auth::user()->name,
+                    'insured_id'=>$request->code_ins,
+                    'slip_type'=>'pa',
+                    'prod_year' => $currdate,
+                    'uy'=>$request->slipuy,
+                    'status'=>$request->slipstatus,
+                    'endorsment'=>$request->sliped,
+                    'selisih'=>$request->slipsls,
+                    'source'=>$request->slipcedingbroker,
+                    'source_2'=>$request->slipceding,
+                    'currency'=>$request->slipcurrency,
+                    'cob'=>$request->slipcob,
+                    'koc'=>$request->slipkoc,
+                    'occupacy'=>$request->slipoccupacy,
+                    'build_const'=>$request->slipbld_const,
+                    'slip_no'=>$request->slipno,
+                    'cn_dn'=>$request->slipcndn,
+                    'policy_no'=>$request->slippolicy_no,
+                    'attacment_file'=>$slipfile->toJson(),
+                    'interest_insured'=>$interestlist->toJSon(),
+                    'total_sum_insured'=>$request->sliptotalsum,
+                    'insured_type'=>$request->sliptype,
+                    'insured_pct'=>$request->slippct,
+                    'total_sum_pct'=>$request->sliptotalsumpct,
+                    'deductible_panel'=>$deductiblelist->toJson(),
+                    'condition_needed'=>$conditionneededlist->toJson(),
+                    'insurance_period_from'=>$request->slipipfrom,
+                    'insurance_period_to'=>$request->slipipto,
+                    'reinsurance_period_from'=>$request->sliprpfrom,
+                    'reinsurance_period_to'=>$request->sliprpto,
+                    'proportional'=>$request->slipproportional,
+                    'layer_non_proportional'=>$request->sliplayerproportional,
+                    'rate'=>$request->sliprate,
+                    'share'=>$request->slipshare,
+                    'sum_share'=>$request->slipsumshare,
+                    'basic_premium'=>$request->slipbasicpremium,
+                    'commission'=>$request->slipcommission,
+                    'grossprm_to_nr'=>$request->slipgrossprmtonr,
+                    'netprm_to_nr'=>$request->slipnetprmtonr,
+                    'sum_commission'=>$request->slipsumcommission,
+                    'installment_panel'=>$installmentlist->toJson(),
+                    'retrocession_panel'=>$retrocessionlist->toJson(),
+                    'retro_backup'=>$request->sliprb,
+                    'own_retention'=>$request->slipor,
+                    'sum_own_retention'=>$request->slipsumor
+                    
+
+                ]);
+
+                $notification = array(
+                    'message' => 'Personal Accident Slip added successfully!',
+                    'alert-type' => 'success'
+                );
+
+
+            }
+            else
+            {
+                $currdate = date("d/m/Y");
+
+                $slipdataid=$slipdata->id;
+                $slipdataup = SlipTable::findOrFail($slipdataid);
+                
+                $slipdataup->number=$request->slipnumber;
+                $slipdataup->username=Auth::user()->name;
+                $slipdataup->insured_id=$request->code_ins;
+                $slipdataup->prod_year=$currdate;
+                $slipdataup->uy=$request->slipuy;
+                $slipdataup->status=$request->slipstatus;
+                $slipdataup->endorsment=$request->sliped;
+                $slipdataup->selisih=$request->slipsls;
+                $slipdataup->source=$request->slipcedingbroker;
+                $slipdataup->source_2=$request->slipceding;
+                $slipdataup->currency=$request->slipcurrency;
+                $slipdataup->cob=$request->slipcob;
+                $slipdataup->koc=$request->slipkoc;
+                $slipdataup->occupacy=$request->slipoccupacy;
+                $slipdataup->build_const=$request->slipbld_const;
+                $slipdataup->slip_no=$request->slipno; 
+                $slipdataup->cn_dn=$request->slipcndn; 
+                $slipdataup->policy_no=$request->slippolicy_no; 
+                $slipdataup->attacment_file=$slipfile->toJson(); 
+                $slipdataup->interest_insured=$interestlist->toJSon();
+                $slipdataup->total_sum_insured=$request->sliptotalsum; 
+                $slipdataup->insured_type=$request->sliptype; 
+                $slipdataup->insured_pct=$request->slippct; 
+                $slipdataup->total_sum_pct=$request->sliptotalsumpct; 
+                $slipdataup->deductible_panel=$deductiblelist->toJson(); 
+                $slipdataup->condition_needed=$conditionneededlist->toJson();  
+                $slipdataup->insurance_period_from=$request->slipipfrom;  
+                $slipdataup->insurance_period_to=$request->slipipto;  
+                $slipdataup->reinsurance_period_from=$request->sliprpfrom;  
+                $slipdataup->reinsurance_period_to=$request->sliprpto;
+                $slipdataup->proportional=$request->slipproportional;
+                $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
+                $slipdataup->rate=$request->sliprate;  
+                $slipdataup->share=$request->slipshare;
+                $slipdataup->sum_share=$request->slipsumshare;
+                $slipdataup->basic_premium=$request->slipbasicpremium;
+                $slipdataup->commission=$request->slipcommission; 
+                $slipdataup->grossprm_to_nr=$request->slipgrossprmtonr; 
+                $slipdataup->netprm_to_nr=$request->slipnetprmtonr; 
+                $slipdataup->sum_commission=$request->slipsumcommission; 
+                $slipdataup->installment_panel=$installmentlist->toJson();   
+                $slipdataup->retrocession_panel=$retrocessionlist->toJson();  
+                $slipdataup->retro_backup=$request->sliprb;
+                $slipdataup->own_retention=$request->slipor;
+                $slipdataup->sum_own_retention=$request->slipsumor;
+
+                $slipdataup->save();
+
+
+                $notification = array(
+                    'message' => 'Personal Accident Slip Update successfully!',
+                    'alert-type' => 'success'
+                );
+            }
+
+            StatusLog::create([
+                'insured_id'=>$request->code_ins,
+                'status'=>$request->slipstatus,
+                'datetime'=>date('d/m/Y H:i:s'),
+                'slip_id'=>$request->slipnumber,
+                'user'=>Auth::user()->name,
+            ]);
+
+            $insdata = Insured::where('number',$request->code_ins)->where('slip_type','pa')->first();
+
+            $msdata = Insured::findOrFail($insdata->id);
+            $msdata->share=$request->sharems;
+            $msdata->share_from=$request->sumsharems;
+            $msdata->share_to=$request->tsims;
+            $msdata->save();
+
+
+            return back()->with($notification);
+            //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
+            //return redirect()->route('liniusaha.index');
+        
+        }
+        else
+        {
+
+            $notification = array(
+                'message' => 'Personal Accident Slip added Failed!',
+                'alert-type' => 'success'
+            );
+
+            return back()->with($validator)->withInput();
+            //Session::flash('Failed', 'Fire & Engginering Insured Failed added', 'danger');
+            //return redirect()->route('liniusaha.index');
+        }
+    }
 
     public function storeshiplist(Request $request)
     {
