@@ -323,7 +323,7 @@ class FeSlipController extends Controller
         $slipdata=SlipTable::where('insured_id',$insureddata->number)->first();
         $slipdata2=SlipTable::where('insured_id',$insureddata->number)->get();
         // dd($slipdata);
-        $code_sl=$slipdata2->number;
+        $code_sl=$slipdata->number;
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();

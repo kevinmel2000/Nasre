@@ -271,7 +271,12 @@
                     </thead>
                     <tbody>
 
-                    @foreach (@$slipdata2 as $insureddata)
+                    @foreach (@$slipdata2 as $slipdatatadetail)
+                    
+                    <td>{{@$slipdatatadetail->number}}</td>
+                    <td>{{@$slipdatatadetail->uy }}</td>
+                    <td >{{@$slipdatatadetail->status}}</td>
+                    <td></td>
 
                     @endforeach
 
