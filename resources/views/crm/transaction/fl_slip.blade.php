@@ -278,73 +278,78 @@
             {{-- Edit Modal Ends --}}
 
             <div class="card ">
-                <div class="card-header bg-gray">
-                    {{__('Slip Detail')}}
-                </div>
-                <div class="card-body bg-light-gray">
-                    
-                    <a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#addslipnew">
-                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addslipnewcr">{{__('Add New Slip')}}</button>
-                    </a>
-                    
-                    <table id="felookupTable2" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                        <th>{{__('Number')}}</th>
-                        <th>{{__('UY')}}</th>
-                        <th>{{__('Status')}}</th>
-                        <th width="20%">{{__('Actions')}}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                        
-                    </table>
-    
-
-                </div>
+            <div class="card-header bg-gray">
+                {{__('Slip Detail')}}
             </div>
+            <div class="card-body bg-light-gray">
+                
+                <table id="SlipInsuredTableData" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>{{__('Number')}}</th>
+                      <th>{{__('UY')}}</th>
+                      <th>{{__('Status')}}</th>
+                      <th width="20%">{{__('Actions')}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    @foreach (@$slipdata2 as $slipdatatadetail)
+                    
+                    <td>{{ @$slipdatatadetail->number }}</td>
+                    <td>{{ @$slipdatatadetail->uy }}</td>
+                    <td >{{ @$slipdatatadetail->status }}</td>
+                    <td></td>
+
+                    @endforeach
 
 
-            <div class="modal fade" id="addslipnew" tabindex="-1" user="dialog" aria-labelledby="addslipnewLabel" aria-hidden="true">
-                <div class="modal-dialog" user="document">
-                <div class="modal-content bg-light-gray">
-                    <div class="modal-header bg-gray">
-                    <h5 class="modal-title" id="addslipnewLabel">{{__('Add New Slip')}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
+                    </tbody>
+                    
+                </table>
+  
 
-                    <form id="form-addslipnew">
-                        @csrf
-                        <div class="modal-body">
-                        
-                            
-            
-                        <form id="multi-file-upload-ajax" method="POST" autocomplete="off" action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
-                        @csrf
-                                <div class="card card-tabs">
-                                    <div class="card-header p-0 pt-1 border-bottom-0">
-                                        <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
-                                            <li class="pt-1 px-3"><h3 class="card-title">{{__('Slip Form')}}</h3></li>
-                                            <li class="nav-item">
-                                            <a class="nav-link active" id="general-details" data-toggle="pill" href="#general-details-id" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
-                                            </li>
-                                            <li class="nav-item">
-                                            <a class="nav-link" id="insured-details" data-toggle="pill" href="#insured-details-id" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data & Insurance Measurement')}}</a>
-                                            </li>
-                                            
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="installment-details" data-toggle="pill" href="#installment-details-id" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="card-body bg-light-gray">
-                                        <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
-                                            <div class="tab-pane fade show active" id="general-details-id" role="tabpanel" aria-labelledby="general-details">
-                                                <div class="row">
+            </div>
+        </div>
+
+        <div class="card ">
+            <div class="card-header bg-gray">
+                {{__('Slip Detail')}}
+            </div>
+            <div class="card-body bg-light-gray">
+                
+                <div class="container-fluid p-3">
+                <form id="multi-file-upload-ajax" method="POST" autocomplete="off" action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
+                  @csrf
+                        <div class="card card-tabs">
+                            <div class="card-header p-0 pt-1 border-bottom-0">
+                                <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                    <li class="pt-1 px-3"><h3 class="card-title">{{__('Slip Form')}}</h3></li>
+                                    <li class="nav-item">
+                                    <a class="nav-link active" id="general-details" data-toggle="pill" href="#general-details-id" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                    <a class="nav-link" id="insured-details" data-toggle="pill" href="#insured-details-id" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data & Insurance Measurement')}}</a>
+                                    </li>
+                                    
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="installment-details" data-toggle="pill" href="#installment-details-id" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body bg-light-gray">
+                                <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
+                                    <div class="tab-pane fade show active" id="general-details-id" role="tabpanel" aria-labelledby="general-details">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <a href="{{url('transaction-data/endorsementflslip/0/0')}}" target="_blank">
+                                                <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsement">{{__('Endorsement')}}</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                            <div class="row">
                                                     <div class="col-md-12">
                                                         <a href="{{url('transaction-data/endorsementflslip/0/0')}}" target="_blank">
                                                         <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsement">{{__('Endorsement')}}</button>

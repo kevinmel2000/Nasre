@@ -149,7 +149,7 @@ class MovePropSlipController extends Controller
         $costumer=Customer::orderby('id','asc')->get();
 
         
-        $currdate = date("d/m/Y");
+       $currdate = date("Y-m-d");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -196,6 +196,8 @@ class MovePropSlipController extends Controller
         else{
             $code_ms = "IN" . $userid ."". $mydate . "0000" . strval(1);
         }
+
+        $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
 
         if($sliplastid != null){
             if($sliplastid < 10)
@@ -267,7 +269,7 @@ class MovePropSlipController extends Controller
             RetrocessionTemp::where('slip_id', $code_sl)->delete();
         }
         
-        return view('crm.transaction.mp_slip', compact(['user','statuslist','propertytypelist','propertytype','retrocessionlist','interestinsured','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','deductibletype','cnd','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','mp_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.mp_slip', compact(['user','statuslist','slipdata2','propertytypelist','propertytype','retrocessionlist','interestinsured','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','deductibletype','cnd','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','mp_ids','code_ms','code_sl','costumer']));
     }
 
   
@@ -279,7 +281,7 @@ class MovePropSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-        $currdate = date("d/m/Y");
+       $currdate = date("Y-m-d");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -299,6 +301,7 @@ class MovePropSlipController extends Controller
         $insureddata=Insured::find($idm);
         $code_ms=$insureddata->number;
         $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
+        $slipdata2=SlipTable::where('insured_id','=',$code_ms)->get();
         $code_sl=$slipdata->number;
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
@@ -314,7 +317,7 @@ class MovePropSlipController extends Controller
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
         $propertytypelist=PropertyTypeTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
-        return view('crm.transaction.mp_slipupdate', compact(['user','cnd','propertytype','filelist','propertytypelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.mp_slipupdate', compact(['user','cnd','slipdata2','propertytype','filelist','propertytypelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
     }
 
@@ -327,7 +330,7 @@ class MovePropSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-        $currdate = date("d/m/Y");
+       $currdate = date("Y-m-d");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -349,6 +352,8 @@ class MovePropSlipController extends Controller
 
         $insureddata=Insured::where('number',$code_ms)->first();
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
+        $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
+
 
         if($slipdata==NULL || empty($slipdata) || $code_ms==0 || $code_sl==0)
         {
@@ -438,7 +443,7 @@ class MovePropSlipController extends Controller
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
         $propertytypelist=PropertyTypeTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
-        return view('crm.transaction.mp_slipendorsement', compact(['user','cnd','propertytype','countendorsement','filelist','propertytypelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.mp_slipendorsement', compact(['user','cnd','slipdata2','propertytype','countendorsement','filelist','propertytypelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
     }
 
@@ -451,7 +456,7 @@ class MovePropSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-        $currdate = date("d/m/Y");
+       $currdate = date("Y-m-d");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -470,6 +475,8 @@ class MovePropSlipController extends Controller
         $insureddata=Insured::find($idm);
         $code_ms=$insureddata->number;
         $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
+        $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
+        
         $code_sl=$slipdata->number;
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
@@ -486,7 +493,7 @@ class MovePropSlipController extends Controller
         $propertytypelist=PropertyTypeTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
 
-        return view('crm.transaction.mp_slipdetail', compact(['user','cnd','filelist','propertytype','propertytypelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.mp_slipdetail', compact(['user','cnd','slipdata2','filelist','propertytype','propertytypelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
     }
 
@@ -607,9 +614,9 @@ class MovePropSlipController extends Controller
 
             if($slipdata==null)
             {
-                $currdate = date("d/m/Y");
+               $currdate = date("Y-m-d");
 
-                SlipTable::create([
+               $slipdataup=SlipTable::create([
                     'number'=>$request->slipnumber,
                     'username'=>Auth::user()->name,
                     'insured_id'=>$request->code_ms,
@@ -666,7 +673,7 @@ class MovePropSlipController extends Controller
             }
             else
             {
-                $currdate = date("d/m/Y");
+               $currdate = date("Y-m-d");
 
                 $slipdataid=$slipdata->id;
                 $slipdataup = SlipTable::findOrFail($slipdataid);
@@ -733,7 +740,53 @@ class MovePropSlipController extends Controller
                 'slip_id'=>$request->slipnumber,
             ]);
 
-            return back()->with($notification);
+            
+
+            $slip = SlipTable::orderby('id','asc')->get();            
+            $sliplastid = count($slip);
+            $mydate = date("Y").date("m").date("d");
+            $userid = Auth::user()->id;
+
+            if($sliplastid != null){
+                if($sliplastid < 10)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + 1);
+                }   
+                elseif($sliplastid > 9 && $sliplastid < 100)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + 1);
+                }
+                elseif($sliplastid > 99 && $sliplastid < 1000)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + 1);
+                }
+                elseif($sliplastid > 999 && $sliplastid < 10000)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + 1);
+                }
+                elseif($sliplastid > 9999 && $sliplastid < 100000)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + 1);
+                }
+
+                
+            }
+            else{
+                $code_sl = "FE". $userid ."". $mydate . "0000" . strval(1);
+            }
+
+           
+            return response()->json(
+                [
+                    'id' => $slipdataup->id,
+                    'number' => $slipdataup->number,
+                    'slipuy' => $slipdataup->uy,
+                    'code_sl'=> $code_sl,
+                    'slipstatus' => $slipdataup->status
+                ]
+            );
+            
+            //return back()->with($notification);
             //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
             //return redirect()->route('liniusaha.index');
         
@@ -782,7 +835,7 @@ class MovePropSlipController extends Controller
             }
             else
             {
-                $currdate = date("d/m/Y");
+               $currdate = date("Y-m-d");
 
                 $slipdataid=$slipdata->id;
                 $slipdataup = SlipTable::findOrFail($slipdataid);
