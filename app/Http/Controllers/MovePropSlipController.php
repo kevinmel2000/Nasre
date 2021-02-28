@@ -299,6 +299,7 @@ class MovePropSlipController extends Controller
         $insureddata=Insured::find($idm);
         $code_ms=$insureddata->number;
         $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
+        $slipdata2=SlipTable::where('insured_id','=',$code_ms)->get();
         $code_sl=$slipdata->number;
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
@@ -314,7 +315,7 @@ class MovePropSlipController extends Controller
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
         $propertytypelist=PropertyTypeTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
-        return view('crm.transaction.mp_slipupdate', compact(['user','cnd','propertytype','filelist','propertytypelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.mp_slipupdate', compact(['user','cnd','slipdata2','propertytype','filelist','propertytypelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
     }
 
@@ -349,6 +350,8 @@ class MovePropSlipController extends Controller
 
         $insureddata=Insured::where('number',$code_ms)->first();
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
+        $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
+
 
         if($slipdata==NULL || empty($slipdata) || $code_ms==0 || $code_sl==0)
         {
@@ -438,7 +441,7 @@ class MovePropSlipController extends Controller
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
         $propertytypelist=PropertyTypeTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
-        return view('crm.transaction.mp_slipendorsement', compact(['user','cnd','propertytype','countendorsement','filelist','propertytypelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.mp_slipendorsement', compact(['user','cnd','slipdata2','propertytype','countendorsement','filelist','propertytypelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
     }
 
@@ -470,6 +473,8 @@ class MovePropSlipController extends Controller
         $insureddata=Insured::find($idm);
         $code_ms=$insureddata->number;
         $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
+        $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
+        
         $code_sl=$slipdata->number;
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
@@ -486,7 +491,7 @@ class MovePropSlipController extends Controller
         $propertytypelist=PropertyTypeTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
 
-        return view('crm.transaction.mp_slipdetail', compact(['user','cnd','filelist','propertytype','propertytypelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.mp_slipdetail', compact(['user','cnd','slipdata2','filelist','propertytype','propertytypelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
     }
 
