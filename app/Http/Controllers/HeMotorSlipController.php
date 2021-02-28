@@ -730,6 +730,9 @@ class HeMotorSlipController extends Controller
             $slip = SlipTable::orderby('id','asc')->get();            
             $sliplastid = count($slip);
 
+            $mydate = date("Y").date("m").date("d");
+            $userid = Auth::user()->id;
+
             if($sliplastid != null){
                 if($sliplastid < 10)
                 {
