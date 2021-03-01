@@ -18,8 +18,55 @@
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response)
             {
-                    alert(response.number);
-                    //swal("Good job!", "Insured Fire & Engineering Insert Success", "success")
+                    $('#slipnumberdetail').val(response.number);
+                    $('#slipusernamedetail').val(response.username);
+                    $('#slipprodyeardetail').val(response.prod_year);
+                    $('#slipuydetail').val(response.uy);
+                    $('#slipeddetail').val(response.endorsment);
+                    $('#slipslsdetail').val(response.selisih);
+                    $("#slipstatusdetail option[value=" + response.status + "]:first")[0].selected = true;
+                    $("#slipcedingbrokerdetail option[value=" + response.source + "]:first")[0].selected = true;
+                    $("#slipcedingdetail option[value=" + response.source2 + "]:first")[0].selected = true;
+                    $("#slipcurrencydetail option[value=" + response.currency + "]:first")[0].selected = true;
+                    $("#slipcobdetail option[value=" + response.cob + "]:first")[0].selected = true;
+                    $("#slipkocdetail option[value=" + response.koc + "]:first")[0].selected = true;
+                    $("#slipoccupacydetail option[value=" + response.occupacy + "]:first")[0].selected = true;
+                    $("#slipbld_constdetail option[value=" + response.build_const + "]:first")[0].selected = true;
+                   
+
+                    $('#slipnodetail').val(response.slip_no);
+                    $('#slipcndndetail').val(response.cn_dn);
+                    $('#slippolicy_nodetail').val(response.policy_no);
+                    $('#sliptotalsumdetail').val(response.total_sum_insured);
+                    $("#sliptypedetail option[value=" + response.insured_type + "]:first")[0].selected = true;
+                   
+                    $('#slippctdetail').val(response.insured_pct);
+                    $('#sliptotalsumpctdetail').val(response.total_sum_pct);
+
+                    $('#slipipfromdetail').val(response.insurance_period_from);
+                    $('#slipiptodetail').val(response.insurance_period_to);
+                    $('#sliprpfromdetail').val(response.reinsurance_period_from);
+                    $('#sliprptodetail').val(response.reinsurance_period_to);
+
+                    $('#switch-proportional').val(response.proportional);
+
+                    $("#sliplayerproportionaldetail option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
+                    $('#slipratedetail').val(response.rate);
+                    $('#slipsharedetail').val(response.share);
+                    $('#slipsumsharedetail').val(response.sum_share);
+                    $('#slipbasicpremiumdetail').val(response.basic_premium);
+                    $('#slipgrossprmtonrdetail').val(response.grossprm_to_nr);
+                    $('#slipcommissiondetail').val(response.commission);
+                    $('#slipsumcommissiondetail').val(response.sum_commission);
+                    $('#slipnetprmtonrdetail').val(response.netprm_to_nr);
+
+                    $("#sliprbdetail option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                    
+                    $('#slipordetail').val(response.own_retention);
+                    $('#slipsumordetail').val(response.sum_own_retention);
+                    
+                    
+                    swal("Good job!", "Data Show")
                     console.log(response)
 
             },
@@ -50,8 +97,56 @@
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response)
             {
-                    alert(response.number);
-                    //swal("Good job!", "Insured Fire & Engineering Insert Success", "success")
+                    
+                    $('#slipnumberupdate').val(response.number);
+                    $('#slipusernameupdate').val(response.username);
+                    $('#slipprodyearupdate').val(response.prod_year);
+                    $('#slipuyupdate').val(response.uy);
+                    $('#slipedupdate').val(response.endorsment);
+                    $('#slipslsupdate').val(response.selisih);
+                    $("#slipstatusupdate option[value=" + response.status + "]:first")[0].selected = true;
+                    $("#slipcedingbrokerupdate option[value=" + response.source + "]:first")[0].selected = true;
+                    $("#slipcedingupdate option[value=" + response.source2 + "]:first")[0].selected = true;
+                    $("#slipcurrencyupdate option[value=" + response.currency + "]:first")[0].selected = true;
+                    $("#slipcobupdate option[value=" + response.cob + "]:first")[0].selected = true;
+                    $("#slipkocupdate option[value=" + response.koc + "]:first")[0].selected = true;
+                    $("#slipoccupacyupdate option[value=" + response.occupacy + "]:first")[0].selected = true;
+                    $("#slipbld_constupdate option[value=" + response.build_const + "]:first")[0].selected = true;
+                   
+
+                    $('#slipnoupdate').val(response.slip_no);
+                    $('#slipcndnupdate').val(response.cn_dn);
+                    $('#slippolicy_noupdate').val(response.policy_no);
+                    $('#sliptotalsumupdate').val(response.total_sum_insured);
+                    $("#sliptypeupdate option[value=" + response.insured_type + "]:first")[0].selected = true;
+                   
+                    $('#slippctupdate').val(response.insured_pct);
+                    $('#sliptotalsumpctupdate').val(response.total_sum_pct);
+
+                    $('#slipipfromupdate').val(response.insurance_period_from);
+                    $('#slipiptoupdate').val(response.insurance_period_to);
+                    $('#sliprpfromupdate').val(response.reinsurance_period_from);
+                    $('#sliprptoupdate').val(response.reinsurance_period_to);
+
+                    $('#switch-proportional').val(response.proportional);
+
+                    $("#sliplayerproportionalupdate option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
+                    $('#sliprateupdate').val(response.rate);
+                    $('#slipshareupdate').val(response.share);
+                    $('#slipsumshareupdate').val(response.sum_share);
+                    $('#slipbasicpremiumupdate').val(response.basic_premium);
+                    $('#slipgrossprmtonrupdate').val(response.grossprm_to_nr);
+                    $('#slipcommissionupdate').val(response.commission);
+                    $('#slipsumcommissionupdate').val(response.sum_commission);
+                    $('#slipnetprmtonrupdate').val(response.netprm_to_nr);
+
+                    $("#sliprbupdate option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                    
+                    $('#sliporupdate').val(response.own_retention);
+                    $('#slipsumorupdate').val(response.sum_own_retention);
+                    
+                    
+                    swal("Good job!", "Data Show")
                     console.log(response)
 
             },
@@ -81,8 +176,55 @@
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response)
             {
-                    alert(response.number);
-                    //swal("Good job!", "Insured Fire & Engineering Insert Success", "success")
+                   $('#slipnumberendorsement').val(response.number);
+                    $('#slipusernameendorsement').val(response.username);
+                    $('#slipprodyearendorsement').val(response.prod_year);
+                    $('#slipuyendorsement').val(response.uy);
+                    $('#slipedendorsement').val(response.endorsment);
+                    $('#slipslsendorsement').val(response.selisih);
+                    $("#slipstatusendorsement option[value=" + response.status + "]:first")[0].selected = true;
+                    $("#slipcedingbrokerendorsement option[value=" + response.source + "]:first")[0].selected = true;
+                    $("#slipcedingendorsement option[value=" + response.source2 + "]:first")[0].selected = true;
+                    $("#slipcurrencyendorsement option[value=" + response.currency + "]:first")[0].selected = true;
+                    $("#slipcobendorsement option[value=" + response.cob + "]:first")[0].selected = true;
+                    $("#slipkocendorsement option[value=" + response.koc + "]:first")[0].selected = true;
+                    $("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
+                    $("#slipbld_constendorsement option[value=" + response.build_const + "]:first")[0].selected = true;
+                   
+
+                    $('#slipnoendorsement').val(response.slip_no);
+                    $('#slipcndnendorsement').val(response.cn_dn);
+                    $('#slippolicy_noendorsement').val(response.policy_no);
+                    $('#sliptotalsumendorsement').val(response.total_sum_insured);
+                    $("#sliptypeendorsement option[value=" + response.insured_type + "]:first")[0].selected = true;
+                   
+                    $('#slippctendorsement').val(response.insured_pct);
+                    $('#sliptotalsumpctendorsement').val(response.total_sum_pct);
+
+                    $('#slipipfromendorsement').val(response.insurance_period_from);
+                    $('#slipiptoendorsement').val(response.insurance_period_to);
+                    $('#sliprpfromendorsement').val(response.reinsurance_period_from);
+                    $('#sliprptoendorsement').val(response.reinsurance_period_to);
+
+                    $('#switch-proportional').val(response.proportional);
+
+                    $("#sliplayerproportionalendorsement option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
+                    $('#sliprateendorsement').val(response.rate);
+                    $('#slipshareendorsement').val(response.share);
+                    $('#slipsumshareendorsement').val(response.sum_share);
+                    $('#slipbasicpremiumendorsement').val(response.basic_premium);
+                    $('#slipgrossprmtonrendorsement').val(response.grossprm_to_nr);
+                    $('#slipcommissionendorsement').val(response.commission);
+                    $('#slipsumcommissionendorsement').val(response.sum_commission);
+                    $('#slipnetprmtonrendorsement').val(response.netprm_to_nr);
+
+                    $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                    
+                    $('#sliporendorsement').val(response.own_retention);
+                    $('#slipsumorendorsement').val(response.sum_own_retention);
+                    
+                    
+                    swal("Good job!", "Data Show")
                     console.log(response)
 
             },
