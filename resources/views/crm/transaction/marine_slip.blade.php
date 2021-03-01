@@ -163,15 +163,6 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" id="msicoinsurance" name="msicoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
                                         <button id="addinsuredsave-btn" class="btn btn-primary btn-block ">
                                             {{__('Save')}}
@@ -240,7 +231,7 @@
             </div>
             <div class="card-body">
                 <div class="col-md-12 com-sm-12 mt-3">
-                    <table id="shipdetailTable" class="table table-bordered table-striped">
+                    <table id="SlipInsuredTableData" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>{{__('Slip Number')}}</th>
@@ -250,14 +241,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach($shiplist as $slt) --}}
+                            @foreach(@$slipdata2 as $slipdatatadetail)
                              <tr>
-                                    <td ></td>
-                                    <td ></td>
-                                    <td ></td>
+                                    <td>{{ @$slipdatatadetail->number }}</td>
+                                    <td>{{ @$slipdatatadetail->uy }}</td>
+                                    <td >{{ @$slipdatatadetail->status }}</td>
                                     <td></td>
                              </tr>   
-                            {{-- @endforeach --}}
+                             @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -268,7 +259,7 @@
             <div class="card-header bg-gray">
                 {{__('Slip Detail')}}
             </div>
-            <div class="card-body bg-light-gray">
+            {{-- <div class="card-body bg-light-gray">
                 <div class="card card-tabs">
                     <div class="card-header p-0 pt-1 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -281,7 +272,7 @@
                                 <button type="button" id="addslipform" class="btn btn-sm btn-primary float-right" style="margin-top:5px;margin-left:5px;" >{{__('Add Slip')}}</button>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                     <div class="card-body bg-light-gray">
                         <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
                             
@@ -412,7 +403,7 @@
                                                                             @foreach($statuslist as $stl)
                                                                              <tr id="sid{{ $stl->id }}" data-name="shiplistvalue[]">
                                                                                     <td data-name="{{ $stl->id }}">{{ $stl->status }}</td>
-                                                                                    <td data-name="{{ $stl->datetime }}">{{ $stl->datetime }}</td>
+                                                                                    <td data-name="{{ $stl->datetime }}">{{ date('d/m/Y H:i:s',$stl->datetime) }}</td>
                                                                                     <td data-name="{{ $stl->user }}">{{ $stl->user }}</td>
                                                                              </tr>   
                                                                             @endforeach
@@ -552,6 +543,14 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label for="">{{__('Coinsurance')}}</label>
+                                                                    <input type="text" id="slipcoinsurance" name="slipcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -895,7 +894,7 @@
                                                         </div>
                                                         
                                                         <div class="row d-flex justify-content-start">
-                                                            <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> non proportional panel</i>
+                                                            <i class="fa fa-info-circle" style="color: grey;" id="labelnp" aria-hidden="true"> non proportional panel</i>
                                                         </div>
                                                         <div class="row d-flex justify-content-end">
                                                             <div class="col-md-4">
@@ -1241,10 +1240,9 @@
                         </div>
                     </div>
 
-                </div>
-                
-                
-            </div>
+                {{-- </div>
+            </div> --}}
+
         </div> 
 
     </div>

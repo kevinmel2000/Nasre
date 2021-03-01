@@ -1,0 +1,17 @@
+08 februari 2021
+
+1. filter facultative parent cob,koc,tertanggung,cedant,insured hanya 5 filter
+2. generate code claim facultative initial depannya per produk contoh +thn+bln+tgl+digit5
+3. eclaim definite & preliminary
+4. tambah menu dan table claim pending
+5. input dokumen yg tgl produksi dapat diubah (back date) dengan otorisasi
+6. tambah master data untuk retrocession panel (facultative)
+7. tambah master data untuk retrocession panel di cliam
+
+
+
+input->entrim->dla
+     ->pla
+
+Pla->Dla
+   ->pending
