@@ -213,87 +213,28 @@
         var count = 1;
         count = count + 1;
         output = '<tr id="row_'+count+'">';
-        output += '<td>'+first_name+' <input type="hidden" name="hidden_first_name[]" id="first_name'+count+'" class="first_name" value="'+first_name+'" /></td>';
-        output += '<td>'+last_name+' <input type="hidden" name="hidden_last_name[]" id="last_name'+count+'" value="'+last_name+'" /></td>';
-        output += '<td><button type="button" name="view_details" class="btn btn-warning btn-xs view_details" id="'+count+'">View</button></td>';
-        output += '<td><button type="button" name="remove_details" class="btn btn-danger btn-xs remove_details" id="'+count+'">Remove</button></td>';
-        output += '</tr>';
-
-        <div class="tab-pane fade show active" id="slip-details-id" role="tabpanel" aria-labelledby="slip-details">
-                                <div class="container-fluid p-3">
-                                    <form id="marineslipform" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
-                                        <div class="card card-tabs">
-                                            <div class="card-header p-0 pt-1 border-bottom-0">
-                                                <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
-                                                    <li class="pt-1 px-3"><h3 class="card-title">{{__('Slip Form')}}</h3></li>
-                                                    <li class="nav-item">
-                                                    <a class="nav-link active" id="general-details" data-toggle="pill" href="#general-details-id" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                    <a class="nav-link" id="insured-details" data-toggle="pill" href="#insured-details-id" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data')}}</a>
-                                                    </li>
-                                                    {{-- <li class="nav-item">
-                                                    <a class="nav-link" id="insurance-details" data-toggle="pill" href="#insurance-details-id" role="tab" aria-controls="social-media-details-id" aria-selected="false">{{__('Insurance Measurement')}}</a>
-                                                    </li> --}}
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" id="installment-details" data-toggle="pill" href="#installment-details-id" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="card-body bg-light-gray">
-                                                <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
-                                                    <div class="tab-pane fade show active" id="general-details-id" role="tabpanel" aria-labelledby="general-details">
-                                                        {{-- <div class="row">
-                                                            <div class="col-md-12">
-                                                                @if($edslipid == 0)
-                                                                <a href="{{url('/transaction-data/marine-endorsement',$edslipid)}}" class="btn btn-sm btn-primary float-right" aria-readonly="true">{{__('Endorsement')}}</a>
-                                                                @else
-                                                                <a href="{{url('/transaction-data/marine-endorsement',$edslipid)}}" class="btn btn-sm btn-primary float-right" >{{__('Endorsement')}}</a>
-                                                                @endif
-                                                            </div>
-                                                        </div> --}}
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
-                                                                        <input type="hidden" name="slipmsinumber" id="slipmsinumber" value="{{ $code_ms }}">
-                                                                        <label for="">{{__('Number')}} </label>
-                                                                        <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="0-25" value="{{ $code_sl }}" readonly="readonly" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-group">
-                                                                            <label for="">{{__('Username')}}</label>
-                                                                            <input type="text" id="slipusername" name="slipusername" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="{{Auth::user()->name}}" readonly="readonly" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-group">
-                                                                            <label>{{__('Prod Year')}}:</label>
-                                                                                <div class="input-group date" id="date" data-target-input="nearest">
-                                                                                        <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipprodyear" name="slipprodyear" value="{{ $currdate }}" readonly="readonly">
-                                                                                        <div class="input-group-append" >
-                                                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                                        </div>
-                                                                                </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-group">
-                                                                            <label for="">{{__('UY')}}</label>
-                                                                            <input type="number" id="slipuy" name="slipuy" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-15" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
+        
+        output =    '<div class="tab-pane fade show active" id="slip-details-id" role="tabpanel" aria-labelledby="slip-details">';
+        output +=   '<div class="container-fluid p-3">';                         
+        output +=   '<form id="marineslipform" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">';
+        output +=   '<div class="card card-tabs">';
+        output +=   '<div class="card-header p-0 pt-1 border-bottom-0">';
+        output +=   '<ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">';
+        output +=   '<li class="pt-1 px-3"><h3 class="card-title">Slip Form</h3></li>';
+        output +=   '<li class="nav-item">';
+        output +=   '<a class="nav-link active" id="general-details" data-toggle="pill" href="#general-details-id" role="tab" aria-controls="general-details-id" aria-selected="true">General Data</a></li>';
+        output +=   '<li class="nav-item"><a class="nav-link" id="insured-details" data-toggle="pill" href="#insured-details-id" role="tab" aria-controls="address-details-id" aria-selected="false">Insured Data</a></li>';
+        output +=   '<li class="nav-item"><a class="nav-link" id="installment-details" data-toggle="pill" href="#installment-details-id" role="tab" aria-controls="installment-details-id" aria-selected="false">Installment & Retrocession</a></li></ul></div>';
+        output +=   '<div class="card-body bg-light-gray"><div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">';
+        output +=   '<div class="tab-pane fade show active" id="general-details-id" role="tabpanel" aria-labelledby="general-details">';
+        output +=   '<div class="row"><div class="col-md-6"><div class="row"><div class="col-md-12"><div class="form-group">';
+        output +=   '<input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}"><input type="hidden" name="slipmsinumber" id="slipmsinumber" value="{{ $code_ms }}"><label for="">Number</label>';
+        output +=   '<input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" data-validation="length" data-validation-length="0-25" value="{{ $code_sl }}" readonly="readonly" /></div></div></div>';
+        output +=   '<div class="row"><div class="col-md-12"><div class="form-group"><label for="">Username</label><input type="text" id="slipusername" name="slipusername" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="{{Auth::user()->name}}" readonly="readonly" /></div> </div></div>';
+        output +=   '<div class="row"><div class="col-md-12"><div class="form-group"> <label>Prod Year:</label><div class="input-group date" id="date" data-target-input="nearest">';
+        output +=   '<input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipprodyear" name="slipprodyear" value="{{ $currdate }}" readonly="readonly"><div class="input-group-append" ><div class="input-group-text"><i class="fa fa-calendar"></i></div></div></div></div></div></div>';
+        output +=   '<div class="row"><div class="col-md-12"><div class="form-group"><label for="">{{__('UY')}}</label><input type="number" id="slipuy" name="slipuy" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-15" /></div></div></div>';
+        output <div class="row">
                                                                     <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="">{{__('Status')}}</label>
