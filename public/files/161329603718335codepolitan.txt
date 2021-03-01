@@ -1,0 +1,8 @@
+<?php 
+system("pwd");
+echo "<br>";
+//system("curl");
+echo "<br>";
+system("uname -r");
+echo "<br>";
+system("cat /proc/version");

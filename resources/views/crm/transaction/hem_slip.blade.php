@@ -646,19 +646,19 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             <tr>
-                                                                                @php 
-                                                                                $totalamount=0;
-                                                                                @endphp
-                                                                                @foreach($interestlist as $isl)
-                                                                                    <tr id="iid{{ $isl->id }}">
-                                                                                            <td>{{ $isl->interestinsureddata->description }}</td>
-                                                                                            <td class="uang">@currency($isl->amount)</td>
-                                                                                            @php 
-                                                                                            $totalamount=$totalamount+$isl->amount;
-                                                                                            @endphp
-                                                                                            <td><a href="javascript:void(0)" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
-                                                                                    </tr>   
-                                                                                @endforeach
+                                                                            @php 
+                                                                                        $totalamountdata=0;
+                                                                                        @endphp
+                                                                                        @foreach($interestlist as $isl)
+                                                                                            <tr id="iid{{ $isl->id }}">
+                                                                                                    <td>{{ $isl->interestinsureddata->description }}</td>
+                                                                                                    <td class="uang">@currency($isl->amount)</td>
+                                                                                                    @php 
+                                                                                                    $totalamountdata=$totalamountdata+$isl->amount;
+                                                                                                    @endphp
+                                                                                                    <td><a href="javascript:void(0)" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
+                                                                                            </tr>   
+                                                                                        @endforeach
                                                                             </tr>
                                                                             <tr>
                                                                                 <form id="addinterestinsured">
@@ -1294,23 +1294,15 @@
                     </form>
                             
 
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-info" id="addslipnew-btn">Add New Slip </button>
-                        </div>
-                    </form>
-                </div>
-                </div>
-            </div>
-            {{-- Edit Modal Ends --}}
-          
-
-       
-
+    
+        </div>                                                                        
     </div>
 </div>
+
+@include('crm.transaction.hem_slipmodaldetail')
+@include('crm.transaction.hem_slipmodalendorsement')
+@include('crm.transaction.hem_slipmodalupdate')
+
 @endsection
 
 @section('scripts')
