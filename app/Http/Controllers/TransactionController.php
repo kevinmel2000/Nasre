@@ -105,30 +105,31 @@ class TransactionController extends Controller
             else{
                 $code_ms = "IN" . $mydate . "0000" . strval(1);
             }
+
             if($sliplastid != null){
-                if($lastid < 10)
+                if($sliplastid < 10)
                 {
                     $code_sl = "M". $userid . $mydate . "0000" . strval($sliplastid + 1);
                 }   
-                elseif($lastid > 9 && $lastid < 100)
+                elseif($sliplastid > 9 && $sliplastid < 100)
                 {
                     $code_sl = "M". $userid . $mydate . "000" . strval($sliplastid + 1);
                 }
-                elseif($lastid > 99 && $lastid < 1000)
+                elseif($sliplastid > 99 && $sliplastid < 1000)
                 {
                     $code_sl = "M". $userid . $mydate . "00" . strval($sliplastid + 1);
                 }
-                elseif($lastid > 999 && $lastid < 10000)
+                elseif($sliplastid > 999 && $sliplastid < 10000)
                 {
                     $code_sl = "M". $userid . $mydate . "0" . strval($sliplastid + 1);
                 }
-                elseif($lastid > 9999 && $lastid < 100000)
+                elseif($sliplastid > 9999 && $sliplastid < 100000)
                 {
                     $code_sl = "M". $userid . $mydate . strval($sliplastid + 1);
                 }
             }
             else{
-                $code_sl = "M" . $mydate . "0000" . strval(1);
+                $code_sl = "M" . $userid . $mydate . "0000" . strval(1);
             }
 
             // $checklastins = Insured::where('slip_type','ms')->orderby('id','desc')->first();
@@ -150,6 +151,8 @@ class TransactionController extends Controller
                 $edslipid = 0;
             }
 
+
+            $slipdata2 = SlipTable::where('insured_id',$code_ms)->where('slip_type','ms')->orderby('id','desc')->get();
             $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
             $shiplist= ShipListTemp::where('insured_id',$code_ms)->where('status','saved')->orderby('id','desc')->get();
             $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
@@ -181,7 +184,7 @@ class TransactionController extends Controller
             }
 
 
-            return view('crm.transaction.marine_slip', compact(['user','edslipid','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestinsured','routeship','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
+            return view('crm.transaction.marine_slip', compact(['user','slipdata2','edslipid','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestinsured','routeship','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
          }
         else
         {
@@ -665,8 +668,8 @@ class TransactionController extends Controller
                     'share'=>$request->msishare,
                     'share_from'=>$request->msisharefrom,
                     'share_to'=>$request->msishareto,
-                    'ship_detail'=>$shiplist->toJson(),
-                    'coincurance'=>$request->msicoinsurance
+                    'ship_detail'=>$shiplist->toJson()
+                    // 'coincurance'=>$request->msicoinsurance
                 ]);
 
                 $notification = array(
@@ -679,7 +682,7 @@ class TransactionController extends Controller
                 $insureddataid=$insureddata->id;
                 $insureddataup = Insured::findOrFail($insureddataid);
                 $insureddataup->slip_type='ms';
-                $insureddataup->insured_prefix=$request->msiinsured;
+                $insureddataup->insured_prefix=$request->msiprefix;
                 $insureddataup->insured_name=$request->msisuggestinsured;
                 $insureddataup->insured_suffix=$request->msisuffix;
                 $insureddataup->route=$request->msiroute;
@@ -689,7 +692,7 @@ class TransactionController extends Controller
                 $insureddataup->share_from=$request->msisharefrom;
                 $insureddataup->share_to=$request->msishareto;
                 $insureddataup->ship_detail=$shiplist->toJson();
-                $insureddataup->coincurance=$request->msicoinsurance;
+                // $insureddataup->coincurance=$request->msicoinsurance;
                 $insureddataup->save();
 
 
@@ -738,6 +741,7 @@ class TransactionController extends Controller
             
             $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
             
+            
             $interestlist= InterestInsuredTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
             $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
             $conditionneededlist= ConditionNeededTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
@@ -749,7 +753,7 @@ class TransactionController extends Controller
             {
                 $currdate = date("Y-m-d");
 
-                SlipTable::create([
+                $newmarineslip = SlipTable::create([
                     'number'=>$request->slipnumber,
                     'username'=>Auth::user()->name,
                     'insured_id'=>$request->code_ins,
@@ -757,8 +761,8 @@ class TransactionController extends Controller
                     'prod_year' => $currdate,
                     'uy'=>$request->slipuy,
                     'status'=>$request->slipstatus,
-                    'endorsment'=>$request->sliped,
-                    'selisih'=>$request->slipsls,
+                    'endorsment'=>'0',
+                    'selisih'=>'false',
                     'source'=>$request->slipcedingbroker,
                     'source_2'=>$request->slipceding,
                     'currency'=>$request->slipcurrency,
@@ -795,21 +799,73 @@ class TransactionController extends Controller
                     'retrocession_panel'=>$retrocessionlist->toJson(),
                     'retro_backup'=>$request->sliprb,
                     'own_retention'=>$request->slipor,
-                    'sum_own_retention'=>$request->slipsumor
-                    
+                    'sum_own_retention'=>$request->slipsumor,
+                    'coinsurance_slip'=>$request->slipcoinsurance
 
                 ]);
 
-                $notification = array(
-                    'message' => 'Fire & Engginering Slip added successfully!',
-                    'alert-type' => 'success'
-                );
+                StatusLog::create([
+                    'insured_id'=>$request->code_ins,
+                    'status'=>$request->slipstatus,
+                    'datetime'=>date('Y-m-d H:i:s'),
+                    'slip_id'=>$request->slipnumber,
+                    'user'=>Auth::user()->name,
+                ]);
+
+                $insdata = Insured::where('number',$request->code_ins)->where('slip_type','ms')->first();
+
+                $inscoinsurance = $insdata->coincurance . ',' . $request->slipcoinsurance;
+
+                $msdata = Insured::findOrFail($insdata->id);
+                $msdata->share=$request->sharems;
+                $msdata->share_from=$request->sumsharems;
+                $msdata->share_to=$request->tsims;
+                $msdata->coincurance=$inscoinsurance;
+                $msdata->save();
+
+                $mydate = date("Y").date("m").date("d");
+                $slip = SlipTable::orderby('id','asc')->get();
+                $sliplastid = count($slip);
+                $userid = Auth::user()->id;
+                if($sliplastid != null){
+                    if($sliplastid < 10)
+                    {
+                        $code_sl = "M". $userid . $mydate . "0000" . strval($sliplastid + 1);
+                    }   
+                    elseif($sliplastid > 9 && $sliplastid < 100)
+                    {
+                        $code_sl = "M". $userid . $mydate . "000" . strval($sliplastid + 1);
+                    }
+                    elseif($sliplastid > 99 && $sliplastid < 1000)
+                    {
+                        $code_sl = "M". $userid . $mydate . "00" . strval($sliplastid + 1);
+                    }
+                    elseif($sliplastid > 999 && $sliplastid < 10000)
+                    {
+                        $code_sl = "M". $userid . $mydate . "0" . strval($sliplastid + 1);
+                    }
+                    elseif($sliplastid > 9999 && $sliplastid < 100000)
+                    {
+                        $code_sl = "M". $userid . $mydate . strval($sliplastid + 1);
+                    }
+                }
+                else{
+                    $code_sl = "M" . $userid . $mydate . "0000" . strval(1);
+                }
 
 
+                return response()->json([
+                    'id' => $newmarineslip->id,
+                    'slip_number' => $newmarineslip->number,
+                    'new_slip_number' => $code_sl,
+                    'uy' => $newmarineslip->uy,
+                    'status' => $newmarineslip->status,
+                    'insured_id' => $newmarineslip->insured_id
+                ]);
             }
             else
             {
-                $currdate = date("Y-m-d");
+                $currdate = date("d/m/Y");
 
                 $slipdataid=$slipdata->id;
                 $slipdataup = SlipTable::findOrFail($slipdataid);
@@ -820,8 +876,8 @@ class TransactionController extends Controller
                 $slipdataup->prod_year=$currdate;
                 $slipdataup->uy=$request->slipuy;
                 $slipdataup->status=$request->slipstatus;
-                $slipdataup->endorsment=$request->sliped;
-                $slipdataup->selisih=$request->slipsls;
+                $slipdataup->endorsment='0';
+                $slipdataup->selisih='false';
                 $slipdataup->source=$request->slipcedingbroker;
                 $slipdataup->source_2=$request->slipceding;
                 $slipdataup->currency=$request->slipcurrency;
@@ -859,34 +915,75 @@ class TransactionController extends Controller
                 $slipdataup->retro_backup=$request->sliprb;
                 $slipdataup->own_retention=$request->slipor;
                 $slipdataup->sum_own_retention=$request->slipsumor;
+                $slipdataup->coinsurance_slip=$request->slipcoinsurance;
 
                 $slipdataup->save();
 
+                StatusLog::create([
+                    'insured_id'=>$request->code_ins,
+                    'status'=>$request->slipstatus,
+                    'datetime'=>date('Y-m-d H:i:s '),
+                    'slip_id'=>$request->slipnumber,
+                    'user'=>Auth::user()->name,
+                ]);
 
-                $notification = array(
-                    'message' => 'Marine Slip Update successfully!',
-                    'alert-type' => 'success'
-                );
+                $insdata = Insured::where('number',$request->code_ins)->where('slip_type','ms')->first();
+
+                $inscoinsurance = $insdata->coincurance . ',' . $request->slipcoinsurance;
+
+                $msdata = Insured::findOrFail($insdata->id);
+                $msdata->share=$request->sharems;
+                $msdata->share_from=$request->sumsharems;
+                $msdata->share_to=$request->tsims;
+                $msdata->coincurance=$inscoinsurance;
+                $msdata->save();
+
+                $mydate = date("Y").date("m").date("d");
+                $slip = SlipTable::orderby('id','asc')->get();
+                $sliplastid = count($slip);
+                $userid = Auth::user()->id;
+                if($sliplastid != null){
+                    if($sliplastid < 10)
+                    {
+                        $code_sl = "M". $userid . $mydate . "0000" . strval($sliplastid + 1);
+                    }   
+                    elseif($sliplastid > 9 && $sliplastid < 100)
+                    {
+                        $code_sl = "M". $userid . $mydate . "000" . strval($sliplastid + 1);
+                    }
+                    elseif($sliplastid > 99 && $sliplastid < 1000)
+                    {
+                        $code_sl = "M". $userid . $mydate . "00" . strval($sliplastid + 1);
+                    }
+                    elseif($sliplastid > 999 && $sliplastid < 10000)
+                    {
+                        $code_sl = "M". $userid . $mydate . "0" . strval($sliplastid + 1);
+                    }
+                    elseif($sliplastid > 9999 && $sliplastid < 100000)
+                    {
+                        $code_sl = "M". $userid . $mydate . strval($sliplastid + 1);
+                    }
+                }
+                else{
+                    $code_sl = "M" . $userid . $mydate . "0000" . strval(1);
+                }
+
+                return response()->json([
+                    'id' => $slipdataup->id,
+                    'slip_number' => $slipdataup->number,
+                    'new_slip_number' => $code_sl,
+                    'uy' => $slipdataup->uy,
+                    'status' => $slipdataup->status,
+                    'insured_id' => $slipdataup->insured_id
+                ]);
             }
 
-            StatusLog::create([
-                'insured_id'=>$request->code_ins,
-                'status'=>$request->slipstatus,
-                'datetime'=>date('d/m/Y H:i:s'),
-                'slip_id'=>$request->slipnumber,
-                'user'=>Auth::user()->name,
-            ]);
+            
 
-            $insdata = Insured::where('number',$request->code_ins)->where('slip_type','ms')->first();
-
-            $msdata = Insured::findOrFail($insdata->id);
-            $msdata->share=$request->sharems;
-            $msdata->share_from=$request->sumsharems;
-            $msdata->share_to=$request->tsims;
-            $msdata->save();
+            
 
 
-            return back()->with($notification);
+            
             //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
             //return redirect()->route('liniusaha.index');
         
