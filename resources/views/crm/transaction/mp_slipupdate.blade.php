@@ -1333,6 +1333,9 @@
 
     </div>
 </div>
+@include('crm.transaction.mp_slipmodaldetail')
+@include('crm.transaction.mp_slipmodalendorsement')
+@include('crm.transaction.mp_slipmodalupdate')
 @endsection
 
 

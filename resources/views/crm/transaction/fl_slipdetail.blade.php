@@ -290,7 +290,7 @@
                     </thead>
                     <tbody>
 
-                    @foreach (@$slipdata2 as $slipdatatadetail)
+                     @foreach (@$slipdata2 as $slipdatatadetail)
                     
                     <td>{{ @$slipdatatadetail->number }}</td>
                     <td>{{ @$slipdatatadetail->uy }}</td>
@@ -1150,6 +1150,12 @@
 
     </div>
 </div>
+
+@include('crm.transaction.fl_slipmodaldetail')
+@include('crm.transaction.fl_slipmodalendorsement')
+@include('crm.transaction.fl_slipmodalupdate')
+
+
 @endsection
 
 

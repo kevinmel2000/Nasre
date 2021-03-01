@@ -173,6 +173,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     </div>
+                  
 
                     <form id="form-addlocation">
                         @csrf
@@ -277,12 +278,28 @@
             </div>
         </div>
           
-          <div class="card ">
+
+        <div class="card ">
             <div class="card-header bg-gray">
                 {{__('Slip Detail')}}
             </div>
             <div class="card-body bg-light-gray">
                 <div class="container-fluid p-3">
+
+                  
+                <a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#detailmodaldata">
+                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata">{{__('Detail')}}</button>
+                </a>
+
+                <a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#updatemodaldata">
+                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata">{{__('Edit')}}</button>
+                </a>
+
+                <a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#endorsementmodaldata">
+                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata">{{__('Endorsement')}}</button>
+                </a>
+
+
                 <form id="multi-file-upload-ajax" method="POST" autocomplete="off"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
                 @csrf
                         <div class="card card-tabs">
@@ -1239,7 +1256,16 @@
 
     </div>
 </div>
+
+
+@include('crm.transaction.fe_slipmodaldetail')
+@include('crm.transaction.fe_slipmodalendorsement')
+@include('crm.transaction.fe_slipmodalupdate')
+
+
 @endsection
+
+
 
 
 @section('scripts')

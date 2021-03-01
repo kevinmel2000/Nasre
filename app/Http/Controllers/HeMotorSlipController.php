@@ -198,6 +198,7 @@ class HeMotorSlipController extends Controller
         }
 
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
+        $slipdata=SlipTable::where('insured_id',$code_ms)->first();
 
         if($sliplastid != null){
             if($sliplastid < 10)
@@ -264,7 +265,7 @@ class HeMotorSlipController extends Controller
             RetrocessionTemp::where('slip_id', $code_sl)->delete();
         }
         
-        return view('crm.transaction.hem_slip', compact(['user','cnd','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','deductibletype','extendedcoverage','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','hem_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.hem_slip', compact(['user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','deductibletype','extendedcoverage','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','hem_ids','code_ms','code_sl','costumer']));
     }
 
 
