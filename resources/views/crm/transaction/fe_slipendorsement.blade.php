@@ -283,10 +283,26 @@
 
                     @foreach (@$slipdata2 as $slipdatatadetail)
                     
-                    <td>{{@$slipdatatadetail->number}}</td>
-                    <td>{{@$slipdatatadetail->uy }}</td>
-                    <td >{{@$slipdatatadetail->status}}</td>
-                    <td></td>
+                    <tr>
+                    <td>{{ @$slipdatatadetail->number }}</td>
+                    <td>{{ @$slipdatatadetail->uy }}</td>
+                    <td >{{ @$slipdatatadetail->status }}</td>
+                    <td>
+                    
+                    <a class="text-primary mr-3 float-right " data-toggle="modal"  data-book-id="{{  @$slipdatatadetail->number }}" data-target="#detailmodaldata" href="#detailmodaldata">
+                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">{{__('Detail')}}</button>
+                    </a>
+
+                    <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->number }}" data-target="#updatemodaldata">
+                        <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">{{__('Edit')}}</button>
+                    </a>
+
+                    <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->number }}" data-target="#endorsementmodaldata">
+                        <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">{{__('Endorsement')}}</button>
+                    </a>
+                    
+                    </td>
+                    </tr>
 
                     @endforeach
 

@@ -1,6 +1,101 @@
 <link href="{{url('/')}}/css/select2.css" rel="stylesheet"/>
 <script src="{{url('/')}}/js/select2.js"></script>
 
+<script type="text/javascript">
+
+    //triggered when modal is about to be shown
+    $('#detailmodaldata').on('show.bs.modal', function(e) {
+
+         //get data-id attribute of the clicked element
+        var codesl = $(e.relatedTarget).data('book-id');
+        alert(codesl);
+        
+        $.ajax({
+            url:'{{ url("/") }}/transaction-data/detailslip/'+codesl,
+            type:"GET",
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response)
+            {
+                    alert(response.number);
+                    //swal("Good job!", "Insured Fire & Engineering Insert Success", "success")
+                    console.log(response)
+
+            },
+            error: function (request, status, error) {
+                    //alert(request.responseText);
+                    swal("Error!", "Get Slip Data Error", "Get Data Error");
+            }
+        });
+        
+
+    });
+</script>
+
+
+<script type="text/javascript">
+
+    //triggered when modal is about to be shown
+    $('#updatemodaldata').on('show.bs.modal', function(e) {
+
+         //get data-id attribute of the clicked element
+        var codesl = $(e.relatedTarget).data('book-id');
+        alert(codesl);
+        
+        $.ajax({
+            url:'{{ url("/") }}/transaction-data/detailslip/'+codesl,
+            type:"GET",
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response)
+            {
+                    alert(response.number);
+                    //swal("Good job!", "Insured Fire & Engineering Insert Success", "success")
+                    console.log(response)
+
+            },
+            error: function (request, status, error) {
+                    //alert(request.responseText);
+                    swal("Error!", "Get Slip Data Error", "Get Data Error");
+            }
+        });
+        
+
+    });
+</script>
+
+<script type="text/javascript">
+
+    //triggered when modal is about to be shown
+    $('#endorsementmodaldata').on('show.bs.modal', function(e) {
+
+         //get data-id attribute of the clicked element
+        var codesl = $(e.relatedTarget).data('book-id');
+        alert(codesl);
+        
+        $.ajax({
+            url:'{{ url("/") }}/transaction-data/detailslip/'+codesl,
+            type:"GET",
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response)
+            {
+                    alert(response.number);
+                    //swal("Good job!", "Insured Fire & Engineering Insert Success", "success")
+                    console.log(response)
+
+            },
+            error: function (request, status, error) {
+                    //alert(request.responseText);
+                    swal("Error!", "Get Slip Data Error", "Get Data Error");
+            }
+        });
+        
+
+    });
+</script>
+
+
 <link rel="stylesheet" href="{{url('/')}}/css/sweetalert2.min.css">
 <script src="{{url('/')}}/js/sweetalert2.all.min.js"></script>
 
