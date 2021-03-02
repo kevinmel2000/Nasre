@@ -1625,6 +1625,97 @@ $("body").on("click","#btn-danger2",function(){
    });
 </script>
 
+
+<script type='text/javascript'>
+    $('#addextendcoverageinsuredupdate-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var slipcncode = $('#slipcncodeupdate').val();
+       var percentage = $('#slipnilaiecupdate').val();
+       var amount = $('#slipamountecupdate').val();
+       
+       var slip_id = $('#slipnumberupdate').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('extendcoverage.store') }}",
+           type:"POST",
+           data:{
+               slipcncode:slipcncode,
+               percentage:percentage,
+               amount:amount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+response.id+'" data-name="extendcoverageupdatevalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageupdate('+response.id+')">delete</a></td></tr>');
+               $('#slipnilaiecupdate').val('');
+               $('#slipamountecupdate').val('');
+               
+           }
+       });
+
+   });
+</script>
+
+
+<script type='text/javascript'>
+    $('#addextendcoverageinsuredendorsement-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var slipcncode = $('#slipcncodeendorsement').val();
+       var percentage = $('#slipnilaiecendorsement').val();
+       var amount = $('#slipamountecendorsement').val();
+       
+       var slip_id = $('#slipnumberendorsement').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('extendcoverage.store') }}",
+           type:"POST",
+           data:{
+               slipcncode:slipcncode,
+               percentage:percentage,
+               amount:amount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#ExtendCoveragePanelendorsement tbody').prepend('<tr id="iidextendcoverageendorsement'+response.id+'" data-name="extendcoverageendorsementvalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageendorsement('+response.id+')">delete</a></td></tr>');
+               $('#slipnilaiecendorsement').val('');
+               $('#slipamountecendorsement').val('');
+               
+           }
+       });
+
+   });
+</script>
+
+
 <script type='text/javascript'>
     function deleteextendcoveragedetail(id)
     {
