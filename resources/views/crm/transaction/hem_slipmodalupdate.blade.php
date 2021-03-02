@@ -32,11 +32,7 @@
                                         <div class="tab-pane fade show active" id="general-details-id4" role="tabpanel" aria-labelledby="general-details">
                                             <div class="row">
                                                 
-                                                <div class="col-md-12">
-                                                    <a href="{{url('transaction-data/endorsementfeslip/'.$code_ms.'/'.$code_sl)}}" target="_blank">
-                                                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsement">{{__('Endorsement')}}</button>
-                                                    </a>
-                                                </div>
+                                               
                                             
                                             </div>
                                             <div class="row">
