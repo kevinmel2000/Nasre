@@ -460,6 +460,44 @@ class HeMotorSlipController extends Controller
 
         }
 
+        $kondisi=false;
+        $i=1;
+        while($kondisi==false)
+        {
+            $slipdatatest=SlipTable::where('number',$code_sl)->first();
+            if(empty($slipdatatest) || $slipdatatest==NULL)
+            {
+                $kondisi=true;
+            }
+            else
+            {
+                if($sliplastid < 10)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + $i);
+                }   
+                elseif($sliplastid > 9 && $sliplastid < 100)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + $i);
+                }
+                elseif($sliplastid > 99 && $sliplastid < 1000)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + $i);
+                }
+                elseif($sliplastid > 999 && $sliplastid < 10000)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + $i);
+                }
+                elseif($sliplastid > 9999 && $sliplastid < 100000)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + $i);
+                }
+            }
+
+            $i++;
+        }
+
+
+
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         
@@ -506,6 +544,44 @@ class HeMotorSlipController extends Controller
         $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
         $code_sl=$slipdata->number;
+
+        $kondisi=false;
+        $i=1;
+        while($kondisi==false)
+        {
+            $slipdatatest=SlipTable::where('number',$code_sl)->first();
+            if(empty($slipdatatest) || $slipdatatest==NULL)
+            {
+                $kondisi=true;
+            }
+            else
+            {
+                if($sliplastid < 10)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + $i);
+                }   
+                elseif($sliplastid > 9 && $sliplastid < 100)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + $i);
+                }
+                elseif($sliplastid > 99 && $sliplastid < 1000)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + $i);
+                }
+                elseif($sliplastid > 999 && $sliplastid < 10000)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + $i);
+                }
+                elseif($sliplastid > 9999 && $sliplastid < 100000)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + $i);
+                }
+            }
+
+            $i++;
+        }
+
+
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
