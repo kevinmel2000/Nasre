@@ -1,5 +1,5 @@
-<div class="modal fade" id="detailmodaldata" tabindex="-1" user="dialog" aria-labelledby="addDetailLabel" aria-hidden="true">
-                <div class="modal-dialog" user="document">
+        <div class="modal fade" id="detailmodaldata" tabindex="-1" user="dialog" aria-labelledby="addDetailLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl" user="document">
                 <div class="modal-content bg-light-gray">
                     <div class="modal-header bg-gray">
                     <h5 class="modal-title" id="addDetailLabel">{{__('Slip Detail')}}</h5>

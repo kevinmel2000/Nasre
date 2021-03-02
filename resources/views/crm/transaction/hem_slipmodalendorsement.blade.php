@@ -1,5 +1,5 @@
 <div class="modal fade" id="endorsementmodaldata" tabindex="-1" user="dialog" aria-labelledby="addendorsementLabel" aria-hidden="true">
-                <div class="modal-dialog" user="document">
+                <div class="modal-dialog modal-xl" user="document">
                 <div class="modal-content bg-light-gray">
                     <div class="modal-header bg-gray">
                     <h5 class="modal-title" id="addendorsementLabel">{{__('Slip Endorsement')}}</h5>
@@ -27,13 +27,13 @@
                                         </li>
                                     </ul>
                                 </div>
+
                                 <div class="card-body bg-light-gray">
                                     <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
                                         <div class="tab-pane fade show active" id="general-details-id3" role="tabpanel" aria-labelledby="general-details">
                                             <div class="row">
                                                 
-                                              
-                                            
+                                               
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -298,12 +298,43 @@
                                                                             </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <tr>
-                                                                                  
-                                                                                </tr>
+                                                                                
+                                                                                
                                                                                 
                                                                             </tbody>
                                                                         </table>
+                                                                        <table class="table table-bordered table-striped">
+                                                                            <tbody>
+                                                                                    <tr>
+                                                                                        <form id="addinterestinsuredendorsement">
+                                                                                            @csrf
+                                                                                            <td>
+                                                                                                <div class="form-group">
+                                                                                                    <select id="slipinterestlistendorsement" name="slipinterestlistendorsement" class="form-control form-control-sm ">
+                                                                                                        <option selected disabled>{{__('Interest list')}}</option>
+                                                                                                        @foreach($interestinsured as $ii)
+                                                                                                            <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
+                                                                                                        @endforeach
+                                                                                                    </select>
+                                                                                                </div>  
+                                                                                            </td>
+
+                                                                                            <td>
+                                                                                                <div class="form-group">
+                                                                                                    <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipamountendorsement" name="slipamountendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-20"/>
+                                                                                                </div>
+                                                                                            </td>
+
+                                                                                            <td>
+                                                                                                <div class="form-group">
+                                                                                                    <button type="button" id="addinterestinsuredendorsement-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                        </form>
+                                                                                        </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                                   
                                                                         </div>
                                                                     </div>
                                                                 </div> 
@@ -385,6 +416,55 @@
                                                                            
                                                                         </tbody>
                                                                         </table>
+
+                                                                        <table class="table table-bordered table-striped">
+                                                                        <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <select id="slipdptypeendorsement" name="slipdptypeendorsement" class="form-control form-control-sm ">
+                                                                                        <option selected disabled>{{__('Type')}}</option>
+                                                                                        @foreach($deductibletype as $dt)
+                                                                                            <option value="{{ $dt->id }}">{{ $dt->abbreviation }} - {{ $dt->description }}</option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                </div>  
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <select  id="slipdpcurrencyendorsement" name="slipdpcurrencyendorsement" class="form-control form-control-sm ">
+                                                                                        <option selected disabled>{{__('Currency')}}</option>
+                                                                                        @foreach($currency as $crc)
+                                                                                            <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name}}</option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                </div>  
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="number" value="0" step=".0001" id="slipdppercentageendorsement" name="slipdppercentageendorsement" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="number" value="0" step=".0001" id="slipdpamountendorsement" name="slipdpamountendorsement" placeholder="=x*tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="number" value="0" step=".0001" id="slipdpminamountendorsement" name="slipdpminamountendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                                </div>
+                                                                            </td> 
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <button type="button" id="adddeductibleinsuredendorsement-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                        </tbody>
+                                                                        </table>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -416,6 +496,39 @@
                                                                             
                                                                         </tbody>
                                                                         </table>
+
+                                                                        <table class="table table-bordered table-striped">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <td >
+                                                                                <div class="form-group">
+                                                                                    <select id="slipcncodeendorsement" name="slipcncodeendorsement" class="form-control form-control-sm ">
+                                                                                        <option selected readonly>{{__('Peril List')}}</option>
+                                                                                        @foreach($extendedcoverage as $ncd)
+                                                                                        <option value="{{ $ncd->id }}">{{ $ncd->code }} - {{ $ncd->name }} - {{ $ncd->description }}</option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                </div>  
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="number" value="0" step=".0001" id="slipnilaiecendorsement" name="slipnilaiecendorsement" placeholder="y" class="form-control form-control-sm "/>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="number" value="0" step=".0001" id="slipamountecendorsement" name="slipamountecendorsement" placeholder="=y*tsi" class="form-control form-control-sm " readonly="readonly"/>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <button type="button" id="addextendcoverageinsuredendorsement-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                        </table>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -644,6 +757,42 @@
                                                                           
                                                                         </tbody>
                                                                         </table>
+
+                                                                        <table class="table table-bordered table-striped">
+                                                                        <tbody>
+                                                                        <tr>
+                                                                            <form id="addinstallmentinsuredendorsement">
+                                                                            @csrf
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                        <div class="input-group date" id="dateinstallment" data-target-input="nearest">
+                                                                                                <input type="text" id="dateinstallmentdataendorsement" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipdateendorsement">
+                                                                                                <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
+                                                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="number" min="0" max="100" value="" step=".01"  id="slipippercentageendorsement" name="slipippercentageendorsement" placeholder="w" class="form-control form-control-sm " />
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipipamountendorsement" name="slipipamountendorsement" placeholder="= w% * net premium to NR" class="form-control form-control-sm" readonly/>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <button type="button" id="addinstallmentinsuredendorsement-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                </div>
+                                                                            </td>
+                                                                            </form>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                        </table>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -710,6 +859,57 @@
                                                                           
                                                                         </tbody>
                                                                         </table>
+
+                                                                        <table class="table table-bordered table-striped">
+                                                                        <tbody>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <select id="sliprptypeendorsement" name="sliprptypeendorsement" class="form-control form-control-sm ">
+                                                                                                <option selected disabled>{{__('Type list')}}</option>
+                                                                                                <option value="NM XOL">NM XOL</option>
+                                                                                            </select>
+                                                                                        </div>  
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <select id="sliprpcontractendorsement" name="sliprpcontractendorsement" class="form-control form-control-sm ">
+                                                                                                <option selected disabled>{{__('Contract list')}}</option>
+                                                                                                <option value="20NM11110">20NM11110</option>
+                                                                                                <option value="20ABC">20ABC</option>
+                                                                                            </select>
+                                                                                        </div>  
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-8">
+                                                                                                    <div class="input-group">
+                                                                                                        <input type="number" min="0" max="100" value="" step=".01" id="sliprppercentageendorsement" name="sliprppercentageendorsement" class="form-control form-control-sm " />
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-md-2">
+                                                                                                    <div class="input-group-append">
+                                                                                                        <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <input type="text" id="sliprpamountendorsement" name="sliprpamountendorsement" placeholder="= w% * net premium to NR" class="form-control form-control-sm " readonly/>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <button type="button" id="addretrocessioninsuredendorsement-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                            </table>
+
                                                                     </div>
                                                                 </div>
                                                             </div>

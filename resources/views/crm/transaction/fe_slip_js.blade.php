@@ -44,6 +44,7 @@
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
+                            
                             $('#interestInsuredTabledetail tbody').empty();
                             $('#interestInsuredTabledetail tbody').prepend('<tr id="iiddetail'+obj.id+'" data-name="interestdetailvalue[]"><td data-name="'+obj.description+'">'+obj.description+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td></td></tr>')
                 
