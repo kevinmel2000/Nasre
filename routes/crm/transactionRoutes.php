@@ -71,6 +71,7 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::get('/marine-index', [TransactionController::class, 'indexmarine']);
     Route::get('/marine-endorsement/{id}', [TransactionController::class, 'indexmarineendorsement']);
     Route::get('/marine-slip/{id}', [TransactionController::class, 'showslipdetails']);
+    Route::get('/getmodal-marine-slip/{id}', [TransactionController::class, 'showslipmodaldetails']);
     Route::get('/marine-slip/edit/{id}', [TransactionController::class, 'editmarineslip']);
     Route::get('/marine-insured/{id}', [TransactionController::class, 'showinsureddetails']);
     Route::get('/marine-insured/edit/{id}', [TransactionController::class, 'editmarineinsured']);

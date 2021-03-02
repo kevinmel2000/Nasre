@@ -1,5 +1,5 @@
 <div class="modal fade" id="detailmodaldata" tabindex="-1" user="dialog" aria-labelledby="addDetailLabel" aria-hidden="true">
-    <div class="modal-dialog" user="document">
+    <div class="modal-dialog modal-lg" user="document">
     <div class="modal-content bg-light-gray">
         <div class="modal-header bg-gray">
         <h5 class="modal-title" id="addDetailLabel">{{__('Slip Detail')}}</h5>
@@ -32,11 +32,11 @@
                             <div class="tab-pane fade show active" id="general-details-id2" role="tabpanel" aria-labelledby="general-details">
                                 <div class="row">
                                     
-                                    <div class="col-md-12">
+                                    {{-- <div class="col-md-12">
                                         <a href="{{url('transaction-data/endorsementfeslip/'.$code_ms.'/'.$code_sl)}}" target="_blank">
                                         <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsement">{{__('Endorsement')}}</button>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                 
                                 </div>
                                 <div class="row">
@@ -46,7 +46,7 @@
                                             <div class="form-group">
                                                 <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
                                                 <label for="">{{__('Number')}} </label>
-                                                <input type="text" id="slipnumberdetail" name="slipnumberdetail" class="form-control form-control-sm" value="{{ $code_sl }}" readonly="readonly" required/>
+                                                <input type="text" id="slipnumberdetail" name="slipnumberdetail" class="form-control form-control-sm" value=" " readonly="readonly" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -132,17 +132,17 @@
                                         <div class="form-group">
                                             <label for="">{{__('Source')}}</label>
                                             <select id="slipcedingbrokerdetail" name="slipcedingbrokerdetail" class="e1 form-control form-control-sm ">
-                                                @foreach($cedingbroker as $cb)
+                                                {{-- @foreach($cedingbroker as $cb)
                                                     <option value="{{ $cb->id }}" >{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
-                                                @endforeach
+                                                @endforeach --}}
                                             </select>
                                         </div>    
                                         <div class="form-group">
                                             <select id="slipcedingdetail" name="slipcedingdetail" class="e1 form-control form-control-sm ">
                                                 <option value="" readonly selected  value='0'>Ceding </option>
-                                                @foreach($ceding as $cd)
+                                                {{-- @foreach($ceding as $cd)
                                                     <option value="{{ $cd->id }}">{{ $cd->code }} - {{ $cd->name }}</option>
-                                                @endforeach
+                                                @endforeach --}}
                                             </select>
                                         </div>  
                                     </div>
@@ -154,10 +154,10 @@
                                             <div class="form-group">
                                                 <label for="">{{__('Currency')}}</label>
                                                 <select id="slipcurrencydetail" name="slipcurrencydetail" class="e1 form-control form-control-sm ">
-                                                    @foreach($currency as $crc)
+                                                    {{-- @foreach($currency as $crc)
                                                         <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
                                                         
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                             </div>    
                                             </div>
@@ -169,10 +169,10 @@
                                                 <label for="">{{__('COB')}}</label>
                                                 <select id="slipcobdetail" name="slipcobdetail" class="e1 form-control form-control-sm ">
                                                     <option selected readonly  value='0'>{{__('COB list')}}</option>
-                                                    @foreach($cob as $boc)
+                                                    {{-- @foreach($cob as $boc)
                                                         <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
                                                        
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                             </div>    
                                             </div>
@@ -184,10 +184,10 @@
                                                 <label for="">{{__('KOC')}}</label>
                                                 <select id="slipkocdetail" name="slipkocdetail" class="e1 form-control form-control-sm ">
                                                     <option selected readonly  value='0'>{{__('KOC list')}}</option>
-                                                    @foreach($koc as $cok)
+                                                    {{-- @foreach($koc as $cok)
                                                         <option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
                                                         
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                             </div>    
                                             </div>
@@ -199,10 +199,10 @@
                                                 <label for="">{{__('Occupacy')}}</label>
                                                 <select id="slipoccupacydetail" name="slipoccupacydetail" class="e1 form-control form-control-sm ">
                                                     <option selected readonly  value='0'>{{__('Occupation list')}}</option>
-                                                    @foreach($ocp as $ocpy)
+                                                    {{-- @foreach($ocp as $ocpy)
                                                         <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
                                                       
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                             </div>    
                                             </div>
@@ -265,8 +265,15 @@
                                         <div class="form-group">
                                             <label>{{__('Attachment')}} </label>
                                             <div class="input-group" id="aid">
-                                        
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">{{__('Coinsurance')}}</label>
+                                            <input type="text" id="slipcoinsurance" name="slipcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                         </div>
                                     </div>
                                 </div>

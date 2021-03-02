@@ -173,6 +173,41 @@
             @endforeach
         </form>
 
+        <div class="card card-primary" id="sliplistSection">
+            <div class="card-header bg-gray">
+                <div class="row">
+                    <div class="col-md-12">
+                        {{__('Slip List')}}
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12 com-sm-12 mt-3">
+                    <table id="SlipInsuredTableData" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>{{__('Slip Number')}}</th>
+                                <th>{{__('UY')}}</th>
+                                <th>{{__('Status')}}</th>
+                                <th width="20%">{{__('Actions')}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(@$slipdata2 as $slipdatatadetail)
+                             <tr>
+                                    <td><a class="text-primary mr-3 " data-toggle="modal" data-target="#detailmodaldata" href="javascript:void(0)" onclick="detailslip({{ @$slipdatatadetail->id }})">{{ @$slipdatatadetail->number }}</a></td>
+                                    <td>{{ @$slipdatatadetail->uy }}</td>
+                                    <td >{{ @$slipdatatadetail->status }}</td>
+                                    <td><a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#detailmodaldata" href="javascript:void(0)" onclick="edit({{  @$slipdatatadetail->id }})">Update </a><a href="javascript:void(0)" onclick="endorsementmarine({{  @$slipdatatadetail->id }})"> Endorsement</a></td>
+                             </tr>   
+                             @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
         <div class="card ">
             <div class="card-header bg-gray">
                 {{__('Slip Details')}}
@@ -452,6 +487,14 @@
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Coinsurance')}}</label>
+                                                        <input type="text" id="slipcoinsurance" name="slipcoinsurance" class="form-control form-control-sm " value="{{ $slp->coinsurance_slip }} " data-validation="length" data-validation-length="0-50" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -955,9 +998,10 @@
 
     </div>
 </div>
-
+@include('crm.transaction.marine_modal_slip')
 
 @endsection
 
 @section('scripts')
+@include('crm.transaction.marine_slip_detail_js')
 @endsection
