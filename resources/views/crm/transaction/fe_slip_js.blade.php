@@ -18,7 +18,7 @@
 
          //get data-id attribute of the clicked element
         var codesl = $(e.relatedTarget).data('book-id');
-        alert(codesl);
+        //alert(codesl);
         
         $.ajax({
             url:'{{ url("/") }}/transaction-data/detailslip/'+codesl,
@@ -34,6 +34,96 @@
                     $('#slipeddetail').val(response.endorsment);
                     $('#slipslsdetail').val(response.selisih);
 
+                    if(response.interest_insured)
+                    {
+                        var interestdata = JSON.parse(response.interest_insured); 
+
+                        for(var i = 0; i < interestdata.length; i++) 
+                        {
+                            var obj = interestdata[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#interestInsuredTabledetail tbody').empty();
+                            $('#interestInsuredTabledetail tbody').prepend('<tr id="iiddetail'+obj.id+'" data-name="interestdetailvalue[]"><td data-name="'+obj.description+'">'+obj.description+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td></td></tr>')
+                
+                        }
+                    }
+
+
+                    if(response.deductible_panel)
+                    {
+
+                        var deductibledata = JSON.parse(response.deductible_panel); 
+
+                        for(var i = 0; i < deductibledata.length; i++) 
+                        {
+                            var obj = deductibledata[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#deductiblePaneldetail tbody').empty();
+                            $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.currencydata+'">'+obj.currencydata+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td data-name="'+obj.min_claimamount+'">'+obj.min_claimamount+'</td><td></td></tr>');
+              
+                        }
+                    }
+
+
+                    if(response.extend_coverage)
+                    {
+
+                        var extend_coverage = JSON.parse(response.extend_coverage); 
+
+                        for(var i = 0; i < extend_coverage.length; i++) 
+                        {
+                            var obj = extend_coverage[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#ExtendCoveragePaneldetail tbody').empty();
+                            $('#ExtendCoveragePaneldetail tbody').prepend('<tr id="iidextendcoveragedetail'+obj.id+'" data-name="extendcoveragedetailvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragetype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td></td></tr>');
+                            
+                        }
+                    }
+
+
+                    if(response.installment_panel)
+                    {
+
+                        var installment_panel = JSON.parse(response.installment_panel); 
+
+                        for(var i = 0; i < installment_panel.length; i++) 
+                        {
+                            var obj = installment_panel[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#installmentPaneldetail tbody').empty();
+                           $('#installmentPaneldetail tbody').prepend('<tr id="iidinstallmentdetail'+obj.id+'" data-name="installmentdetailvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td></td></tr>')
+               
+                        }
+                    }
+
+
+
+                    if(response.retrocession_panel)
+                    {
+
+                        var retrocession_panel = JSON.parse(response.retrocession_panel); 
+
+                        for(var i = 0; i < retrocession_panel.length; i++) 
+                        {
+                            var obj = retrocession_panel[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#retrocessionPaneldetail tbody').empty();
+                            
+                            $('#retrocessionPaneldetail tbody').prepend('<tr id="iidretrocessiondetail'+obj.id+'" data-name="retrocessiondetailvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+')</td><td></td></tr>');
+              
+                        }
+                    }
+                    
                     
                     if(response.status)
                     {
@@ -138,7 +228,7 @@
 
          //get data-id attribute of the clicked element
         var codesl = $(e.relatedTarget).data('book-id');
-        alert(codesl);
+        //alert(codesl);
         
         $.ajax({
             url:'{{ url("/") }}/transaction-data/detailslip/'+codesl,
@@ -264,7 +354,7 @@
 
          //get data-id attribute of the clicked element
         var codesl = $(e.relatedTarget).data('book-id');
-        alert(codesl);
+        //alert(codesl);
         
         $.ajax({
             url:'{{ url("/") }}/transaction-data/detailendorsementslip/'+codesl,
@@ -313,7 +403,7 @@
 
                     if(response.occupacy)
                     {
-                        $("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
+                        //$("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
                     }
 
                     if(response.build_const)
