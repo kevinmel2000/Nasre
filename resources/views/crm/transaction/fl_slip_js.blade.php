@@ -1513,6 +1513,107 @@ $(document).ready(function() {
    });
 </script>
 
+
+<script type='text/javascript'>
+    $('#addinstallmentinsuredupdate-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var installmentdate = $('#dateinstallmentdataupdate').val();
+       
+       var percentage = $('#slipippercentageupdate').val();
+       var amount = $('#slipipamountupdate').val();
+       var slip_id = $('#slipnumberupdate').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('installment.store') }}",
+           type:"POST",
+           data:{
+               installmentdate:installmentdate,
+               percentage:percentage,
+               slipamount:amount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+response.id+'" data-name="installmentupdatevalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+response.id+')">delete</a></td></tr>')
+               $('#dateinstallmentupdate').val('');
+               $('#slipippercentageupdate').val('');
+               $('#slipipamountupdate').val('');
+               
+               //var total =  parseFloat($("#sliptotalsum").val());
+               //var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
+               //$("#sliptotalsum").val(sum);
+
+           }
+       });
+
+   });
+</script>
+
+
+<script type='text/javascript'>
+    $('#addinstallmentinsuredendorsement-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var installmentdate = $('#dateinstallmentdataendorsement').val();
+       
+       var percentage = $('#slipippercentageendorsement').val();
+       var amount = $('#slipipamountendorsement').val();
+       var slip_id = $('#slipnumberendorsement').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('installment.store') }}",
+           type:"POST",
+           data:{
+               installmentdate:installmentdate,
+               percentage:percentage,
+               slipamount:amount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+response.id+'" data-name="installmentendorsementvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+response.id+')">delete</a></td></tr>')
+               $('#dateinstallmentendorsement').val('');
+               $('#slipippercentageendorsement').val('');
+               $('#slipipamountendorsement').val('');
+               
+               //var total =  parseFloat($("#sliptotalsum").val());
+               //var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
+               //$("#sliptotalsum").val(sum);
+
+           }
+       });
+
+   });
+</script>
+
+
 <script type='text/javascript'>
     function deleteinstallmentdetail(id)
     {
