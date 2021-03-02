@@ -841,6 +841,7 @@
                                                         <div class="card-header bg-gray">
                                                             {{__('Retrocession Panel')}}
                                                         </div>
+                                                        
                                                         <div class="card-body bg-light-gray ">
                                                             <div class="row">
                                                                 <div class="col-md-12">
