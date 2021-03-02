@@ -364,6 +364,9 @@ class FeSlipController extends Controller
         // dd($slipdata);
         $code_sl=$slipdata->number;
 
+        $slip = SlipTable::orderby('id','asc')->get();
+        $sliplastid = count($slip);
+
         $kondisi=false;
         $i=1;
         while($kondisi==false)
@@ -428,7 +431,7 @@ class FeSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-       $currdate = date("Y-m-d");
+        $currdate = date("Y-m-d");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -524,43 +527,6 @@ class FeSlipController extends Controller
                 $slipdata->prev_endorsement=$sl;
             }
 
-        }
-
-
-        $kondisi=false;
-        $i=1;
-        while($kondisi==false)
-        {
-            $slipdatatest=SlipTable::where('number',$code_sl)->first();
-            if(empty($slipdatatest) || $slipdatatest==NULL)
-            {
-                $kondisi=true;
-            }
-            else
-            {
-                if($sliplastid < 10)
-                {
-                    $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + $i);
-                }   
-                elseif($sliplastid > 9 && $sliplastid < 100)
-                {
-                    $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + $i);
-                }
-                elseif($sliplastid > 99 && $sliplastid < 1000)
-                {
-                    $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + $i);
-                }
-                elseif($sliplastid > 999 && $sliplastid < 10000)
-                {
-                    $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + $i);
-                }
-                elseif($sliplastid > 9999 && $sliplastid < 100000)
-                {
-                    $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + $i);
-                }
-            }
-
-            $i++;
         }
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();

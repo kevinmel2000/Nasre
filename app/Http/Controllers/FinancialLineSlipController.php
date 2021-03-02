@@ -238,23 +238,23 @@ class FinancialLineSlipController extends Controller
             {
                 if($sliplastid < 10)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + $i);
+                    $code_sl = "FL". $userid ."". $mydate . "0000" . strval($sliplastid + $i);
                 }   
                 elseif($sliplastid > 9 && $sliplastid < 100)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + $i);
+                    $code_sl = "FL". $userid ."". $mydate . "000" . strval($sliplastid + $i);
                 }
                 elseif($sliplastid > 99 && $sliplastid < 1000)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + $i);
+                    $code_sl = "FL". $userid ."". $mydate . "00" . strval($sliplastid + $i);
                 }
                 elseif($sliplastid > 999 && $sliplastid < 10000)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + $i);
+                    $code_sl = "FL". $userid ."". $mydate . "0" . strval($sliplastid + $i);
                 }
                 elseif($sliplastid > 9999 && $sliplastid < 100000)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + $i);
+                    $code_sl = "FL". $userid ."". $mydate . strval($sliplastid + $i);
                 }
             }
 
@@ -336,6 +336,9 @@ class FinancialLineSlipController extends Controller
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
         $code_sl=$slipdata->number;
 
+        $slip = SlipTable::orderby('id','asc')->get();
+        $sliplastid = count($slip);
+
         $kondisi=false;
         $i=1;
         while($kondisi==false)
@@ -349,23 +352,23 @@ class FinancialLineSlipController extends Controller
             {
                 if($sliplastid < 10)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + $i);
+                    $code_sl = "FL". $userid ."". $mydate . "0000" . strval($sliplastid + $i);
                 }   
                 elseif($sliplastid > 9 && $sliplastid < 100)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + $i);
+                    $code_sl = "FL". $userid ."". $mydate . "000" . strval($sliplastid + $i);
                 }
                 elseif($sliplastid > 99 && $sliplastid < 1000)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + $i);
+                    $code_sl = "FL". $userid ."". $mydate . "00" . strval($sliplastid + $i);
                 }
                 elseif($sliplastid > 999 && $sliplastid < 10000)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + $i);
+                    $code_sl = "FL". $userid ."". $mydate . "0" . strval($sliplastid + $i);
                 }
                 elseif($sliplastid > 9999 && $sliplastid < 100000)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + $i);
+                    $code_sl = "FL". $userid ."". $mydate . strval($sliplastid + $i);
                 }
             }
 
@@ -495,42 +498,6 @@ class FinancialLineSlipController extends Controller
                 $slipdata->prev_endorsement=$sl;
             }
 
-        }
-
-        $kondisi=false;
-        $i=1;
-        while($kondisi==false)
-        {
-            $slipdatatest=SlipTable::where('number',$code_sl)->first();
-            if(empty($slipdatatest) || $slipdatatest==NULL)
-            {
-                $kondisi=true;
-            }
-            else
-            {
-                if($sliplastid < 10)
-                {
-                    $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + $i);
-                }   
-                elseif($sliplastid > 9 && $sliplastid < 100)
-                {
-                    $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + $i);
-                }
-                elseif($sliplastid > 99 && $sliplastid < 1000)
-                {
-                    $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + $i);
-                }
-                elseif($sliplastid > 999 && $sliplastid < 10000)
-                {
-                    $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + $i);
-                }
-                elseif($sliplastid > 9999 && $sliplastid < 100000)
-                {
-                    $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + $i);
-                }
-            }
-
-            $i++;
         }
 
 
@@ -852,29 +819,29 @@ class FinancialLineSlipController extends Controller
             if($sliplastid != null){
                 if($sliplastid < 10)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + 1);
+                    $code_sl = "FL". $userid ."". $mydate . "0000" . strval($sliplastid + 1);
                 }   
                 elseif($sliplastid > 9 && $sliplastid < 100)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + 1);
+                    $code_sl = "FL". $userid ."". $mydate . "000" . strval($sliplastid + 1);
                 }
                 elseif($sliplastid > 99 && $sliplastid < 1000)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + 1);
+                    $code_sl = "FL". $userid ."". $mydate . "00" . strval($sliplastid + 1);
                 }
                 elseif($sliplastid > 999 && $sliplastid < 10000)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + 1);
+                    $code_sl = "FL". $userid ."". $mydate . "0" . strval($sliplastid + 1);
                 }
                 elseif($sliplastid > 9999 && $sliplastid < 100000)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + 1);
+                    $code_sl = "FL". $userid ."". $mydate . strval($sliplastid + 1);
                 }
 
                 
             }
             else{
-                $code_sl = "FE". $userid ."". $mydate . "0000" . strval(1);
+                $code_sl = "FL". $userid ."". $mydate . "0000" . strval(1);
             }
 
             $kondisi=false;
@@ -890,23 +857,23 @@ class FinancialLineSlipController extends Controller
                 {
                     if($sliplastid < 10)
                     {
-                        $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + $i);
+                        $code_sl = "FL". $userid ."". $mydate . "0000" . strval($sliplastid + $i);
                     }   
                     elseif($sliplastid > 9 && $sliplastid < 100)
                     {
-                        $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + $i);
+                        $code_sl = "FL". $userid ."". $mydate . "000" . strval($sliplastid + $i);
                     }
                     elseif($sliplastid > 99 && $sliplastid < 1000)
                     {
-                        $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + $i);
+                        $code_sl = "FL". $userid ."". $mydate . "00" . strval($sliplastid + $i);
                     }
                     elseif($sliplastid > 999 && $sliplastid < 10000)
                     {
-                        $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + $i);
+                        $code_sl = "FL". $userid ."". $mydate . "0" . strval($sliplastid + $i);
                     }
                     elseif($sliplastid > 9999 && $sliplastid < 100000)
                     {
-                        $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + $i);
+                        $code_sl = "FL". $userid ."". $mydate . strval($sliplastid + $i);
                     }
                 }
 
@@ -1071,29 +1038,29 @@ class FinancialLineSlipController extends Controller
             if($sliplastid != null){
                 if($sliplastid < 10)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + 1);
+                    $code_sl = "FL". $userid ."". $mydate . "0000" . strval($sliplastid + 1);
                 }   
                 elseif($sliplastid > 9 && $sliplastid < 100)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + 1);
+                    $code_sl = "FL". $userid ."". $mydate . "000" . strval($sliplastid + 1);
                 }
                 elseif($sliplastid > 99 && $sliplastid < 1000)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + 1);
+                    $code_sl = "FL". $userid ."". $mydate . "00" . strval($sliplastid + 1);
                 }
                 elseif($sliplastid > 999 && $sliplastid < 10000)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + 1);
+                    $code_sl = "FL". $userid ."". $mydate . "0" . strval($sliplastid + 1);
                 }
                 elseif($sliplastid > 9999 && $sliplastid < 100000)
                 {
-                    $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + 1);
+                    $code_sl = "FL". $userid ."". $mydate . strval($sliplastid + 1);
                 }
 
                 
             }
             else{
-                $code_sl = "FE". $userid ."". $mydate . "0000" . strval(1);
+                $code_sl = "FL". $userid ."". $mydate . "0000" . strval(1);
             }
 
             $kondisi=false;
@@ -1109,23 +1076,23 @@ class FinancialLineSlipController extends Controller
                 {
                     if($sliplastid < 10)
                     {
-                        $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + $i);
+                        $code_sl = "FL". $userid ."". $mydate . "0000" . strval($sliplastid + $i);
                     }   
                     elseif($sliplastid > 9 && $sliplastid < 100)
                     {
-                        $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + $i);
+                        $code_sl = "FL". $userid ."". $mydate . "000" . strval($sliplastid + $i);
                     }
                     elseif($sliplastid > 99 && $sliplastid < 1000)
                     {
-                        $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + $i);
+                        $code_sl = "FL". $userid ."". $mydate . "00" . strval($sliplastid + $i);
                     }
                     elseif($sliplastid > 999 && $sliplastid < 10000)
                     {
-                        $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + $i);
+                        $code_sl = "FL". $userid ."". $mydate . "0" . strval($sliplastid + $i);
                     }
                     elseif($sliplastid > 9999 && $sliplastid < 100000)
                     {
-                        $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + $i);
+                        $code_sl = "FL". $userid ."". $mydate . strval($sliplastid + $i);
                     }
                 }
 
