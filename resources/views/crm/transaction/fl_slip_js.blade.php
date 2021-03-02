@@ -2,7 +2,6 @@
 <script src="{{url('/')}}/js/select2.js"></script>
 
 
-
 <script type="text/javascript">
 
     //triggered when modal is about to be shown
@@ -64,7 +63,7 @@
 
                     if(response.build_const)
                     {
-                     $("#slipbld_constdetail option[value=" + response.build_const + "]:first")[0].selected = true;
+                      //$("#slipbld_constdetail option[value=" + response.build_const + "]:first")[0].selected = true;
                     }
 
                     if(response.insured_type)
@@ -79,7 +78,7 @@
 
                     if(response.retro_backup)
                     {
-                        $("#sliprbdetail option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                        //$("#sliprbdetail option[value=" + response.retro_backup + "]:first")[0].selected = true;
                     }
 
 
@@ -185,7 +184,7 @@
 
                     if(response.build_const)
                     {
-                     $("#slipbld_constupdate option[value=" + response.build_const + "]:first")[0].selected = true;
+                      //$("#slipbld_constupdate option[value=" + response.build_const + "]:first")[0].selected = true;
                     }
 
                     if(response.insured_type)
@@ -200,7 +199,7 @@
 
                     if(response.retro_backup)
                     {
-                        $("#sliprbupdate option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                        //$("#sliprbupdate option[value=" + response.retro_backup + "]:first")[0].selected = true;
                     }
 
                     
@@ -309,7 +308,7 @@
 
                     if(response.build_const)
                     {
-                     $("#slipbld_constendorsement option[value=" + response.build_const + "]:first")[0].selected = true;
+                       //$("#slipbld_constendorsement option[value=" + response.build_const + "]:first")[0].selected = true;
                     }
 
                     if(response.insured_type)
@@ -324,7 +323,7 @@
 
                     if(response.retro_backup)
                     {
-                        $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                        //$("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
                     }
 
                     $('#slipnoendorsement').val(response.slip_no);
@@ -365,7 +364,6 @@
 
     });
 </script>
-
 
 
 <link rel="stylesheet" href="{{url('/')}}/css/sweetalert2.min.css">
