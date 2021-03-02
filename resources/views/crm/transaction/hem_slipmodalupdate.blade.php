@@ -767,12 +767,13 @@
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                         <div class="input-group date" id="dateinstallment" data-target-input="nearest">
-                                                                                                <input type="text" id="dateinstallmentdataupdate" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipdateupdate">
+                                                                                                <input type="date" id="dateinstallmentdataupdate" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdateupdate">
                                                                                                 <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
                                                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                                                 </div>
                                                                                         </div>
                                                                                 </div>
+                                                                                
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">

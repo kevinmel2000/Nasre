@@ -766,7 +766,7 @@
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                         <div class="input-group date" id="dateinstallment" data-target-input="nearest">
-                                                                                                <input type="text" id="dateinstallmentdataendorsement" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipdateendorsement">
+                                                                                                <input type="date" id="dateinstallmentdataendorsement" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdateendorsement">
                                                                                                 <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
                                                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                                                 </div>
@@ -841,6 +841,7 @@
                                                         <div class="card-header bg-gray">
                                                             {{__('Retrocession Panel')}}
                                                         </div>
+                                                        
                                                         <div class="card-body bg-light-gray ">
                                                             <div class="row">
                                                                 <div class="col-md-12">
