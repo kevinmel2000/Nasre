@@ -1102,7 +1102,7 @@ $(document).ready(function(){
    });
 </script>
     
-    
+
 
 <script type='text/javascript'>
     function deleteinterestdetail(id){
@@ -1498,6 +1498,107 @@ $(document).ready(function(){
 
    });
 </script>
+
+<script type='text/javascript'>
+    $('#adddeductibleinsuredupdate-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var slipdptype = $('#slipdptypeupdate').val();
+       var slipdpcurrency = $('#slipdpcurrencyupdate').val();
+       
+       var percentage = $('#slipdppercentageupdate').val();
+       var amount = $('#slipdpamountupdate').val();
+       var minamount = $('#slipdpminamountupdate').val();
+       
+       var slip_id = $('#slipnumberupdate').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('deductible.store') }}",
+           type:"POST",
+           data:{
+               slipdptype:slipdptype,
+               slipdpcurrency:slipdpcurrency,
+               percentage:percentage,
+               amount:amount,
+               minamount:minamount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#deductiblePanelupdate tbody').prepend('<tr id="iiddeductibleupdate'+response.id+'" data-name="deductibleupdatevalue[]"><td data-name="'+response.deductibletype+'">'+response.deductibletype+'</td><td data-name="'+response.currencydata+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleupdate('+response.id+')">delete</a></td></tr>');
+               $('#slipdppercentageupdate').val('');
+               $('#slipdpamountupdate').val('');
+               $('#slipdpminamountupdate').val('');
+               
+           }
+       });
+
+   });
+</script>
+
+<script type='text/javascript'>
+    $('#adddeductibleinsuredendorsement-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var slipdptype = $('#slipdptypeendorsement').val();
+       var slipdpcurrency = $('#slipdpcurrencyendorsement').val();
+       
+       var percentage = $('#slipdppercentageendorsement').val();
+       var amount = $('#slipdpamountendorsement').val();
+       var minamount = $('#slipdpminamountendorsement').val();
+       
+       var slip_id = $('#slipnumberendorsement').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('deductible.store') }}",
+           type:"POST",
+           data:{
+               slipdptype:slipdptype,
+               slipdpcurrency:slipdpcurrency,
+               percentage:percentage,
+               amount:amount,
+               minamount:minamount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#deductiblePanelendorsement tbody').prepend('<tr id="iiddeductibleendorsement'+response.id+'" data-name="deductibleendorsementvalue[]"><td data-name="'+response.deductibletype+'">'+response.deductibletype+'</td><td data-name="'+response.currencydata+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleendorsement('+response.id+')">delete</a></td></tr>');
+               $('#slipdppercentageendorsement').val('');
+               $('#slipdpamountendorsement').val('');
+               $('#slipdpminamountendorsement').val('');
+               
+           }
+       });
+
+   });
+</script>
+
 
 <script type='text/javascript'>
     function deletedeductibledetail(id)
