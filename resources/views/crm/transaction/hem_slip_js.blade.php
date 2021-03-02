@@ -1307,6 +1307,82 @@ $("body").on("click","#btn-danger2",function(){
 
 
 
+
+<script type='text/javascript'>
+    
+     $('#slipdppercentage').keyup(function () {
+        var persentage =  parseFloat($('#slipdppercentage').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipdpamount').val(sum);
+     });
+
+     $('#slipdppercentage').change(function () {
+        var persentage =  parseFloat($('#slipdppercentage').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipdpamount').val(sum);
+     });
+
+</script>
+
+<script type='text/javascript'>
+    
+     $('#slipdppercentageupdate').keyup(function () {
+        var persentage =  parseFloat($('#slipdppercentageupdate').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumupdate').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipdpamountupdate').val(sum);
+     });
+
+     $('#slipdppercentageupdate').change(function () {
+        var persentage =  parseFloat($('#slipdppercentageupdate').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumupdate').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipdpamountupdate').val(sum);
+     });
+
+</script>
+
+
+<script type='text/javascript'>
+    
+     $('#slipdppercentageendorsement').keyup(function () {
+        var persentage =  parseFloat($('#slipdppercentageendorsement').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumendorsement').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipdpamountendorsement').val(sum);
+     });
+
+     $('#slipdppercentageendorsement').change(function () {
+        var persentage =  parseFloat($('#slipdppercentageendorsement').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumendorsement').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipdpamountendorsement').val(sum);
+     });
+
+</script>
+
+
+
 <script type='text/javascript'>
     
      $('#slipnilaiec').keyup(function () {
@@ -1314,7 +1390,7 @@ $("body").on("click","#btn-danger2",function(){
         var sliptotalsum =  parseFloat($('#sliptotalsum').val());
         //alert(premiumnr);
         //alert(persentage);
-        var sum = isNaN(sliptotalsum * persentage/100) ? 0 :(sliptotalsum * persentage/100) ;
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
         //alert(sum);
         $('#slipamountec').val(sum);
      });
@@ -1324,13 +1400,62 @@ $("body").on("click","#btn-danger2",function(){
         var sliptotalsum =  parseFloat($('#sliptotalsum').val());
         //alert(premiumnr);
         //alert(persentage);
-        var sum = isNaN(sliptotalsum * persentage/100) ? 0 :(sliptotalsum * persentage/100) ;
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
         //alert(sum);
         $('#slipamountec').val(sum);
      });
 
 </script>
 
+<script type='text/javascript'>
+    
+     $('#slipnilaiecupdate').keyup(function () {
+        var persentage =  parseFloat($('#slipnilaiecupdate').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumupdate').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipamountecupdate').val(sum);
+     });
+
+     $('#slipnilaiecupdate').change(function () {
+        var persentage =  parseFloat($('#slipnilaiecupdate').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumupdate').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipamountecupdate').val(sum);
+     });
+
+</script>
+
+
+
+<script type='text/javascript'>
+    
+     $('#slipnilaiecendorsement').keyup(function () {
+        var persentage =  parseFloat($('#slipnilaiecendorsement').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumendorsement').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipamountecendorsement').val(sum);
+     });
+
+     $('#slipnilaiecendorsement').change(function () {
+        var persentage =  parseFloat($('#slipnilaiecendorsement').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumendorsement').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipamountecendorsement').val(sum);
+     });
+
+</script>
 
 
 <script type='text/javascript'>
