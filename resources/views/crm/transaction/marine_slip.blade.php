@@ -1247,7 +1247,7 @@
 
     </div>
 </div>
-
+@include('crm.transaction.marine_modal_slip')
 
 @endsection
 

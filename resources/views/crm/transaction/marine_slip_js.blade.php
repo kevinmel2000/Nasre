@@ -809,7 +809,7 @@
            {
                 swal("Good job!", "Marine Slip Insert Success", "success")
                 console.log(response)
-               $('#SlipInsuredTableData tbody').prepend('<tr id="sliid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.slip_number+'"><a href="#modal">'+response.slip_number+'</a></td><td data-name="'+response.uy+'">'+response.uy+'</td><td data-name="'+response.status+'">'+response.status+'</td><td><a href="javascript:void(0)" onclick="edit('+response.id+')">Update </a><a href="javascript:void(0)" onclick="endorsementmarine('+response.id+')"> Endorsement</a></td></tr>')
+               $('#SlipInsuredTableData tbody').prepend('<tr id="sliid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.slip_number+'"><a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#detailmodaldata" onclick="detailslip('+response.id+')">'+response.slip_number+'</a></td><td data-name="'+response.uy+'">'+response.uy+'</td><td data-name="'+response.status+'">'+response.status+'</td><td><a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#detailmodaldata" href="javascript:void(0)" onclick="edit('+response.id+')">Update </a><a href="javascript:void(0)" onclick="endorsementmarine('+response.id+')"> Endorsement</a></td></tr>')
 
                $('#slipnumber').val(response.new_slip_number);
                 
@@ -857,6 +857,47 @@
         });
 
    });
+</script>
+
+<script type="text/javascript">
+
+function detailslip(id){
+    if(id){
+            $.ajax({
+                type:"GET",
+                dataType: 'json',
+                url:"{{url('transaction-data/marine-slip')}}?id="+id,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(response){  
+                    console.log(response)      
+                    if(response){
+                        $("#slipnumberdetail").val(response.slip_number);
+                        $("#slipusernamedetail").val(response.username);
+                        $("#slipprodyeardetail").val(response.prod_year);
+                        $("#slipuydetail").val(response.uy);
+                        $("#slipstatusdetail").val(response.status);
+                        $('#slipcedingbrokerdetail').append(' <option value="'+response.cedbrok_id+'" selected>'+response.cedbrok_cn+' - '+response.cedbrok_code+' - '+response.cedbrok+'</option>');
+                        // $('#slipcedingdetail').val(response.id);
+                        // $('#slipcurrencydetail').val(response.id);
+                        // $('#slipcobdetail').val(response.id);
+                        // $('#slipkocdetail').val(response.id);
+                        // $('#slipoccupacydetail').val(response.id);
+                        // $('#slipbld_constdetail').val(response.id);
+                        // $('#slipnodetail').val(response.slip_no);
+                        // $('#slipcndndetail').val(response.cn_dn);
+                        // $('#slippolicy_nodetail').val(response.policy_no);
+                        $('#aid').append('<div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+response.attachment_filename+'">'+response.attachment_filename+'</a></div>');
+                    }else{
+                        swal("Ohh no!", "Data failed to get", "failed")
+                    }
+                }
+            });
+        }else{
+            swal("Ohh no!", "Current object failed to get", "failed")
+        }
+}
+
 </script>
 
 

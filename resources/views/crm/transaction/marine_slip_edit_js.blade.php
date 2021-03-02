@@ -565,7 +565,6 @@
 
     function geteditdeductible(id){
         // var deductible_code = $('#deductidupdate').val();
-
         if(id){
             $.ajax({
                 type:"GET",
