@@ -259,13 +259,14 @@
         alert(codesl);
         
         $.ajax({
-            url:'{{ url("/") }}/transaction-data/detailslip/'+codesl,
+            url:'{{ url("/") }}/transaction-data/detailendorsementslip/'+codesl,
             type:"GET",
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response)
             {
-                   $('#slipnumberendorsement').val(response.number);
+                    //$('#slipnumberendorsement').val(response.number);
+                    $('#slipnumberendorsement').val(response.code_sl);
                     $('#slipusernameendorsement').val(response.username);
                     $('#slipprodyearendorsement').val(response.prod_year);
                     $('#slipuyendorsement').val(response.uy);

@@ -662,6 +662,100 @@ class FeSlipController extends Controller
 
     }
 
+    public function getdetailEndorsementSlip($idm)
+    {
+        $user = Auth::user();
+        $slipdata=SlipTable::where('number',$idm)->first();
+
+        $countendorsement =$slipdata->slip_idendorsementcount;
+
+        if($slipdata->slip_idendorsementcount==NULL || $slipdata->slip_idendorsementcount=="")
+        {
+            $code_sl = $slipdata->number . '-END' . '000' . '1';
+        }
+        else 
+        {
+            if($countendorsement < 10)
+            {
+                $code_sl = substr($slipdata->number,0,16) . '-END' . '000' . ($countendorsement + 1);
+            }
+            elseif($countendorsement > 9 && $countendorsement < 100)
+            {
+                $code_sl = substr($slipdata->number,0,16) . '-END' . '00' . ($countendorsement + 1);
+            }
+            elseif($countendorsement > 99 && $countendorsement < 1000)
+            {
+                $code_sl = substr($slipdata->number,0,16) . '-END' . '0' . ($countendorsement + 1);
+            }
+            elseif($countendorsement > 999 && $countendorsement < 10000)
+            {
+                $code_sl = substr($slipdata->number,0,16) . '-END' . ($countendorsement + 1);
+            }
+        }
+
+    
+        return response()->json(
+            [
+                'id' => $slipdata->id,
+                'code_sl'=>$code_sl,
+                'insured_id' => $slipdata->insured_id,
+                'slip_type' => $slipdata->slip_type,
+                'username' => $slipdata->username,
+                'prod_year' => $slipdata->prod_year,
+                'number' => $slipdata->number,
+                'slipuy' => $slipdata->uy,
+                'uy' => $slipdata->uy,
+                'status' => $slipdata->status,
+                'endorsment' => $slipdata->endorsment,
+                'selisih' => $slipdata->selisih,
+                'source' => $slipdata->source,
+                'source_2' => $slipdata->source_2,
+                'currency'=> $slipdata->currency,
+                'cob'=> $slipdata->cob,
+                'koc'=> $slipdata->koc,
+                'occupacy'=> $slipdata->occupacy,
+                'build_const'=> $slipdata->build_const,
+                'slip_no'=> $slipdata->slip_no,
+                'cn_dn'=> $slipdata->cn_dn,
+                'policy_no'=> $slipdata->policy_no,
+                'attacment_file'=> $slipdata->attacment_file,
+                'interest_insured'=> $slipdata->interest_insured,
+                'total_sum_insured'=> $slipdata->total_sum_insured,
+                'insured_type'=>$slipdata->insured_type,
+                'insured_pct'=>$slipdata->insured_pct,
+                'total_sum_pct'=>$slipdata->total_sum_pct,
+                'deductible_panel'=>$slipdata->deductible_panel,
+                'extend_coverage'=>$slipdata->extend_coverage,
+                'insurance_period_from'=>$slipdata->insurance_period_from,
+                'insurance_period_to'=>$slipdata->insurance_period_to,
+                'reinsurance_period_from'=>$slipdata->reinsurance_period_from,
+                'reinsurance_period_to'=>$slipdata->reinsurance_period_to,
+                'proportional'=>$slipdata->proportional,
+                'layer_non_proportional'=>$slipdata->layer_non_proportional,
+                'rate'=>$slipdata->rate,
+                'share'=>$slipdata->share,
+                'sum_share'=>$slipdata->sum_share,
+                'basic_premium'=>$slipdata->basic_premium,
+                'commission'=>$slipdata->commission,
+                'grossprm_to_nr'=>$slipdata->grossprm_to_nr,
+                'netprm_to_nr'=>$slipdata->netprm_to_nr,
+                'installment_panel'=>$slipdata->installment_panel,
+                'sum_commission'=>$slipdata->sum_commission,
+                'retro_backup'=>$slipdata->retro_backup,
+                'own_retention'=>$slipdata->own_retention,
+                'sum_own_retention'=>$slipdata->sum_own_retention,
+                'retrocession_panel'=>$slipdata->retrocession_panel,
+                'slip_idendorsementcount'=>$slipdata->slip_idendorsementcount,
+                'prev_endorsement'=>$slipdata->prev_endorsement,
+                'condition_needed'=>$slipdata->condition_needed,
+                'created_at'=>$slipdata->created_at,
+                'updated_at'=>$slipdata->updated_at,
+                'coinsurance_slip'=>$slipdata->coinsurance_slip
+            ]
+        );
+
+    }
+
 
     public function storefeinsured(Request $request)
     {   
