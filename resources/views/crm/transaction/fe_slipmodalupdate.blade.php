@@ -1,4 +1,4 @@
-            <div class="modal fade" id="updatemodaldata" tabindex="-1" user="dialog" aria-labelledby="addupdateLabel" aria-hidden="true">
+<div class="modal fade" id="updatemodaldata" tabindex="-1" user="dialog" aria-labelledby="addupdateLabel" aria-hidden="true">
                 <div class="modal-dialog" user="document">
                 <div class="modal-content bg-light-gray">
                     <div class="modal-header bg-gray">
@@ -32,7 +32,7 @@
                                         <div class="tab-pane fade show active" id="general-details-id4" role="tabpanel" aria-labelledby="general-details">
                                             <div class="row">
                                                 
-                                              
+                                             
                                             
                                             </div>
                                             <div class="row">
@@ -124,7 +124,7 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                
+                                                                   
                                                             </tbody>
                                                             
                                                             </table>
@@ -140,6 +140,7 @@
                                                         <select id="slipcedingbrokerupdate" name="slipcedingbrokerupdate" class="e1 form-control form-control-sm ">
                                                             @foreach($cedingbroker as $cb)
                                                                 <option value="{{ $cb->id }}">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
+                                                               
                                                             @endforeach
                                                         </select>
                                                     </div>    
@@ -161,7 +162,8 @@
                                                             <label for="">{{__('Currency')}}</label>
                                                             <select id="slipcurrencyupdate" name="slipcurrencyupdate" class="e1 form-control form-control-sm ">
                                                                 @foreach($currency as $crc)
-                                                                    <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
+                                                                   <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
+                                                                   
                                                                 @endforeach
                                                             </select>
                                                         </div>    
@@ -175,7 +177,8 @@
                                                             <select id="slipcobupdate" name="slipcobupdate" class="e1 form-control form-control-sm ">
                                                                 <option selected readonly  value='0'>{{__('COB list')}}</option>
                                                                 @foreach($cob as $boc)
-                                                                    <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
+                                                                   <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
+                                                                
                                                                 @endforeach
                                                             </select>
                                                         </div>    
@@ -190,6 +193,7 @@
                                                                 <option selected readonly  value='0'>{{__('KOC list')}}</option>
                                                                 @foreach($koc as $cok)
                                                                     <option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
+                                                                   
                                                                 @endforeach
                                                             </select>
                                                         </div>    
@@ -367,19 +371,19 @@
                                                                 <div class="col-md-10">
                                                                     <div class="col-md-12 com-sm-12 mt-3">
                                                                         <table id="deductiblePanelupdate" class="table table-bordered table-striped">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th>{{__('Type')}}</th>
-                                                                                    <th>{{__('Currency')}}</th>
-                                                                                    <th>{{__('Percentage')}}</th>
-                                                                                    <th>{{__('Amount')}}</th>
-                                                                                    <th>{{__('MIn Claim Amount')}}</th>
-                                                                                    <th width="20%">{{__('Actions')}}</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                            
-                                                                            </tbody>
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th>{{__('Type')}}</th>
+                                                                            <th>{{__('Currency')}}</th>
+                                                                            <th>{{__('Percentage')}}</th>
+                                                                            <th>{{__('Amount')}}</th>
+                                                                            <th>{{__('MIn Claim Amount')}}</th>
+                                                                            <th width="20%">{{__('Actions')}}</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                           
+                                                                        </tbody>
                                                                         </table>
                                                                     </div>
                                                                 </div>
@@ -400,15 +404,15 @@
                                                                     <div class="col-md-12 com-sm-12 mt-3">
                                                                         <table id="ExtendCoveragePanelupdate" class="table table-bordered table-striped">
                                                                         <thead>
-                                                                            <tr>
-                                                                                <th>{{__('Peril Code - Name')}}</th>
-                                                                                <th>{{__('Nilai (permil %.)')}}</th>
-                                                                                <th>{{__('Amount')}}</th>
-                                                                                <th width="20%">{{__('Actions')}}</th>
-                                                                            </tr>
+                                                                        <tr>
+                                                                            <th>{{__('Peril Code - Name')}}</th>
+                                                                            <th>{{__('Nilai (permil %.)')}}</th>
+                                                                            <th>{{__('Amount')}}</th>
+                                                                            <th width="20%">{{__('Actions')}}</th>
+                                                                        </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                        
+                                                                           
                                                                             
                                                                         </tbody>
                                                                         </table>
@@ -703,6 +707,7 @@
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
+                                                                          
                                                                           
                                                                         </tbody>
                                                                         </table>

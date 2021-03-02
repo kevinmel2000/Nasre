@@ -27,6 +27,7 @@
                                         </li>
                                     </ul>
                                 </div>
+                                
                                 <div class="card-body bg-light-gray">
                                     <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
                                         <div class="tab-pane fade show active" id="general-details-id3" role="tabpanel" aria-labelledby="general-details">
