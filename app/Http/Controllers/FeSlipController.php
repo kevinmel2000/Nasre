@@ -247,6 +247,44 @@ class FeSlipController extends Controller
             $code_sl = "FE". $userid ."". $mydate . "0000" . strval(1);
         }
 
+        $kondisi=false;
+        $i=1;
+        while($kondisi==false)
+        {
+            $slipdatatest=SlipTable::where('number',$code_sl)->first();
+            if(empty($slipdatatest) || $slipdatatest==NULL)
+            {
+                $kondisi=true;
+            }
+            else
+            {
+                if($sliplastid < 10)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + $i);
+                }   
+                elseif($sliplastid > 9 && $sliplastid < 100)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + $i);
+                }
+                elseif($sliplastid > 99 && $sliplastid < 1000)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + $i);
+                }
+                elseif($sliplastid > 999 && $sliplastid < 10000)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + $i);
+                }
+                elseif($sliplastid > 9999 && $sliplastid < 100000)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + $i);
+                }
+            }
+
+            $i++;
+        }
+
+
+
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         
 
@@ -513,6 +551,73 @@ class FeSlipController extends Controller
 
         return view('crm.transaction.fe_slipdetail', compact(['user','slipdata2','cnd','filelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
+    }
+
+
+    public function getdetailSlip($idm)
+    {
+        $user = Auth::user();
+        $slipdata=SlipTable::where('number',$idm)->first();
+    
+        return response()->json(
+            [
+                'id' => $slipdata->id,
+                'insured_id' => $slipdata->insured_id,
+                'slip_type' => $slipdata->slip_type,
+                'username' => $slipdata->username,
+                'prod_year' => $slipdata->prod_year,
+                'number' => $slipdata->number,
+                'slipuy' => $slipdata->uy,
+                'uy' => $slipdata->uy,
+                'status' => $slipdata->status,
+                'endorsment' => $slipdata->endorsment,
+                'selisih' => $slipdata->selisih,
+                'source' => $slipdata->source,
+                'source_2' => $slipdata->source_2,
+                'currency'=> $slipdata->currency,
+                'cob'=> $slipdata->cob,
+                'koc'=> $slipdata->koc,
+                'occupacy'=> $slipdata->occupacy,
+                'build_const'=> $slipdata->build_const,
+                'slip_no'=> $slipdata->slip_no,
+                'cn_dn'=> $slipdata->cn_dn,
+                'policy_no'=> $slipdata->policy_no,
+                'attacment_file'=> $slipdata->attacment_file,
+                'interest_insured'=> $slipdata->interest_insured,
+                'total_sum_insured'=> $slipdata->total_sum_insured,
+                'insured_type'=>$slipdata->insured_type,
+                'insured_pct'=>$slipdata->insured_pct,
+                'total_sum_pct'=>$slipdata->total_sum_pct,
+                'deductible_panel'=>$slipdata->deductible_panel,
+                'extend_coverage'=>$slipdata->extend_coverage,
+                'insurance_period_from'=>$slipdata->insurance_period_from,
+                'insurance_period_to'=>$slipdata->insurance_period_to,
+                'reinsurance_period_from'=>$slipdata->reinsurance_period_from,
+                'reinsurance_period_to'=>$slipdata->reinsurance_period_to,
+                'proportional'=>$slipdata->proportional,
+                'layer_non_proportional'=>$slipdata->layer_non_proportional,
+                'rate'=>$slipdata->rate,
+                'share'=>$slipdata->share,
+                'sum_share'=>$slipdata->sum_share,
+                'basic_premium'=>$slipdata->basic_premium,
+                'commission'=>$slipdata->commission,
+                'grossprm_to_nr'=>$slipdata->grossprm_to_nr,
+                'netprm_to_nr'=>$slipdata->netprm_to_nr,
+                'installment_panel'=>$slipdata->installment_panel,
+                'sum_commission'=>$slipdata->sum_commission,
+                'retro_backup'=>$slipdata->retro_backup,
+                'own_retention'=>$slipdata->own_retention,
+                'sum_own_retention'=>$slipdata->sum_own_retention,
+                'retrocession_panel'=>$slipdata->retrocession_panel,
+                'slip_idendorsementcount'=>$slipdata->slip_idendorsementcount,
+                'prev_endorsement'=>$slipdata->prev_endorsement,
+                'condition_needed'=>$slipdata->condition_needed,
+                'created_at'=>$slipdata->created_at,
+                'updated_at'=>$slipdata->updated_at,
+                'coinsurance_slip'=>$slipdata->coinsurance_slip
+            ]
+        );
+
     }
 
 
@@ -846,7 +951,42 @@ class FeSlipController extends Controller
                 $code_sl = "FE". $userid ."". $mydate . "0000" . strval(1);
             }
 
-           
+            $kondisi=false;
+            $i=1;
+            while($kondisi==false)
+            {
+                $slipdatatest=SlipTable::where('number',$code_sl)->first();
+                if(empty($slipdatatest) || $slipdatatest==NULL)
+                {
+                    $kondisi=true;
+                }
+                else
+                {
+                    if($sliplastid < 10)
+                    {
+                        $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + $i);
+                    }   
+                    elseif($sliplastid > 9 && $sliplastid < 100)
+                    {
+                        $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + $i);
+                    }
+                    elseif($sliplastid > 99 && $sliplastid < 1000)
+                    {
+                        $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + $i);
+                    }
+                    elseif($sliplastid > 999 && $sliplastid < 10000)
+                    {
+                        $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + $i);
+                    }
+                    elseif($sliplastid > 9999 && $sliplastid < 100000)
+                    {
+                        $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + $i);
+                    }
+                }
+
+                $i++;
+            }
+
             return response()->json(
                 [
                     'id' => $slipdataup->id,
@@ -996,8 +1136,88 @@ class FeSlipController extends Controller
             ]);
 
            
+            $slip = SlipTable::orderby('id','asc')->get();            
+            $sliplastid = count($slip);
 
-            return back()->with($notification);
+            $mydate = date("Y").date("m").date("d");
+            $userid = Auth::user()->id;
+            if($sliplastid != null){
+                if($sliplastid < 10)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + 1);
+                }   
+                elseif($sliplastid > 9 && $sliplastid < 100)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + 1);
+                }
+                elseif($sliplastid > 99 && $sliplastid < 1000)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + 1);
+                }
+                elseif($sliplastid > 999 && $sliplastid < 10000)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + 1);
+                }
+                elseif($sliplastid > 9999 && $sliplastid < 100000)
+                {
+                    $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + 1);
+                }
+
+                
+            }
+            else{
+                $code_sl = "FE". $userid ."". $mydate . "0000" . strval(1);
+            }
+
+            $kondisi=false;
+            $i=1;
+            while($kondisi==false)
+            {
+                $slipdatatest=SlipTable::where('number',$code_sl)->first();
+                if(empty($slipdatatest) || $slipdatatest==NULL)
+                {
+                    $kondisi=true;
+                }
+                else
+                {
+                    if($sliplastid < 10)
+                    {
+                        $code_sl = "FE". $userid ."". $mydate . "0000" . strval($sliplastid + $i);
+                    }   
+                    elseif($sliplastid > 9 && $sliplastid < 100)
+                    {
+                        $code_sl = "FE". $userid ."". $mydate . "000" . strval($sliplastid + $i);
+                    }
+                    elseif($sliplastid > 99 && $sliplastid < 1000)
+                    {
+                        $code_sl = "FE". $userid ."". $mydate . "00" . strval($sliplastid + $i);
+                    }
+                    elseif($sliplastid > 999 && $sliplastid < 10000)
+                    {
+                        $code_sl = "FE". $userid ."". $mydate . "0" . strval($sliplastid + $i);
+                    }
+                    elseif($sliplastid > 9999 && $sliplastid < 100000)
+                    {
+                        $code_sl = "FE". $userid ."". $mydate . strval($sliplastid + $i);
+                    }
+                }
+
+                $i++;
+            }
+
+            return response()->json(
+                [
+                    'id' => $slipdataup->id,
+                    'number' => $slipdataup->number,
+                    'slipuy' => $slipdataup->uy,
+                    'code_sl'=> $code_sl,
+                    'slipstatus' => $slipdataup->status
+                ]
+            );
+
+            
+            
+            //return back()->with($notification);
             //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
             //return redirect()->route('liniusaha.index');
         

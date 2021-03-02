@@ -10,6 +10,7 @@
                     
                     <form id="multi-file-upload-ajaxdetail" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
                     @csrf
+<<<<<<< HEAD
                         <div class="card card-tabs">
                             <div class="card-header p-0 pt-1 border-bottom-0">
                                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -30,6 +31,29 @@
                                 <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
                                     <div class="tab-pane fade show active" id="general-details-id2" role="tabpanel" aria-labelledby="general-details">
                                         <div class="row">
+=======
+                            <div class="card card-tabs">
+                                <div class="card-header p-0 pt-1 border-bottom-0">
+                                    <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                        <li class="pt-1 px-3"><h3 class="card-title">{{__('Slip Form')}}</h3></li>
+                                        <li class="nav-item">
+                                        <a class="nav-link active" id="general-details2" data-toggle="pill" href="#general-details-id2" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
+                                        </li>
+                                        <li class="nav-item">
+                                        <a class="nav-link" id="insured-details2" data-toggle="pill" href="#insured-details-id2" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data & Insurance Measurement')}}</a>
+                                        </li>
+                                    
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="installment-details2" data-toggle="pill" href="#installment-details-id2" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-body bg-light-gray">
+                                    <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
+                                        <div class="tab-pane fade show active" id="general-details-id2" role="tabpanel" aria-labelledby="general-details">
+                                            <div class="row">
+                                                
+>>>>>>> 6531ff1c4cb33098dd92ab09475e3f6a36bffe78
                                             
                                             <div class="col-md-12">
                                                 <a href="{{url('transaction-data/endorsementfeslip/'.$code_ms.'/'.$code_sl)}}" target="_blank">
@@ -666,11 +690,31 @@
                                             <div class="col-md-6 d-flex justify-content-end">
                                                 <div class="row">
                                                     <div class="form-group">
+<<<<<<< HEAD
                                                         <label for="">{{__('Own Retention')}}</label>
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <div class="input-group">
                                                                     <input type="text" id="slipordetail" value="" name="slipordetail" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+=======
+                                                        <label for="">{{__('Retro Backup?')}}</label>
+                                                        <select id="sliprbdetail" name="sliprbdetail" class="form-control form-control-sm ">
+                                                            <option value="AF" >YES</option>
+                                                            <option value="AN" >NO</option>
+                                                        </select>
+                                                    </div>   
+                                                </div>
+                                                
+                                                <div class="col-md-6 d-flex justify-content-end">
+                                                    <div class="row">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Own Retention')}}</label>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <div class="input-group">
+                                                                        <input type="text" id="slipordetail" value="" name="slipordetail" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                    </div>
+>>>>>>> 6531ff1c4cb33098dd92ab09475e3f6a36bffe78
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-2">
