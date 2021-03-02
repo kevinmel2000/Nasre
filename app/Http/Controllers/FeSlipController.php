@@ -606,13 +606,16 @@ class FeSlipController extends Controller
         $interestdata=json_decode($slipdata->interest_insured);   
         $newarray=[];
 
-        foreach($interestdata as $mydata)
+        if(!empty($interestdata))
         {
-            $interestdatadesc= InterestInsured::where('id','=',$mydata->interest_id)->first();
-            $mydata->description=$interestdatadesc->description;     
-            
-            array_push($newarray,$mydata);
-        }       
+            foreach($interestdata as $mydata)
+            {
+                $interestdatadesc= InterestInsured::where('id','=',$mydata->interest_id)->first();
+                $mydata->description=$interestdatadesc->description;     
+                
+                array_push($newarray,$mydata);
+            }  
+        }     
 
         $newinterestdata=json_encode($newarray);
 
@@ -621,17 +624,20 @@ class FeSlipController extends Controller
 
         $newarraydeduct=[];
 
-        foreach($deductibledata as $mydata)
+        if(!empty($deductibledata))
         {
-            $deductdatadesc= DeductibleType::where('id','=',$mydata->deductibletype_id)->first();
-            $mydata->deductibletype=$deductdatadesc->description;
-            
-            $currencydesc=Currency::where('id','=',$mydata->currency_id)->first();
-            $mydata->currencydata=$currencydesc->symbol_name;
-            
-            
-            array_push($newarraydeduct,$mydata);
-        }       
+            foreach($deductibledata as $mydata)
+            {
+                $deductdatadesc= DeductibleType::where('id','=',$mydata->deductibletype_id)->first();
+                $mydata->deductibletype=$deductdatadesc->description;
+                
+                $currencydesc=Currency::where('id','=',$mydata->currency_id)->first();
+                $mydata->currencydata=$currencydesc->symbol_name;
+                
+                
+                array_push($newarraydeduct,$mydata);
+            }     
+        }  
 
         $newdeductdata=json_encode($newarraydeduct);
 
@@ -640,14 +646,16 @@ class FeSlipController extends Controller
 
         $newarrayextend=[];
 
-        foreach($extendcoverdata as $mydata)
+        if(!empty($extendcoverdata))
         {
-            $extenddesc= ExtendCoverage::where('id','=',$mydata->extendcoverage_id)->first();
-            $mydata->coveragetype=$extenddesc->description;
-            
-            array_push($newarrayextend,$mydata);
-        }       
-
+            foreach($extendcoverdata as $mydata)
+            {
+                $extenddesc= ExtendedCoverage::where('id','=',$mydata->extendcoverage_id)->first();
+                $mydata->coveragetype=$extenddesc->description;
+                
+                array_push($newarrayextend,$mydata);
+            }       
+        }
         $newextenddata=json_encode($newarrayextend);
 
 
@@ -747,13 +755,16 @@ class FeSlipController extends Controller
         $interestdata=json_decode($slipdata->interest_insured);   
         $newarray=[];
 
-        foreach($interestdata as $mydata)
+        if(!empty($interestdata))
         {
-            $interestdatadesc= InterestInsured::where('id','=',$mydata->interest_id)->first();
-            $mydata->description=$interestdatadesc->description;     
-            
-            array_push($newarray,$mydata);
-        }       
+            foreach($interestdata as $mydata)
+            {
+                $interestdatadesc= InterestInsured::where('id','=',$mydata->interest_id)->first();
+                $mydata->description=$interestdatadesc->description;     
+                
+                array_push($newarray,$mydata);
+            }  
+        }     
 
         $newinterestdata=json_encode($newarray);
 
@@ -762,17 +773,20 @@ class FeSlipController extends Controller
 
         $newarraydeduct=[];
 
-        foreach($deductibledata as $mydata)
+        if(!empty($deductibledata))
         {
-            $deductdatadesc= DeductibleType::where('id','=',$mydata->deductibletype_id)->first();
-            $mydata->deductibletype=$deductdatadesc->description;
-            
-            $currencydesc=Currency::where('id','=',$mydata->currency_id)->first();
-            $mydata->currencydata=$currencydesc->symbol_name;
-            
-            
-            array_push($newarraydeduct,$mydata);
-        }       
+            foreach($deductibledata as $mydata)
+            {
+                $deductdatadesc= DeductibleType::where('id','=',$mydata->deductibletype_id)->first();
+                $mydata->deductibletype=$deductdatadesc->description;
+                
+                $currencydesc=Currency::where('id','=',$mydata->currency_id)->first();
+                $mydata->currencydata=$currencydesc->symbol_name;
+                
+                
+                array_push($newarraydeduct,$mydata);
+            }     
+        }  
 
         $newdeductdata=json_encode($newarraydeduct);
 
@@ -781,14 +795,16 @@ class FeSlipController extends Controller
 
         $newarrayextend=[];
 
-        foreach($extendcoverdata as $mydata)
+        if(!empty($extendcoverdata))
         {
-            $extenddesc= ExtendCoverage::where('id','=',$mydata->extendcoverage_id)->first();
-            $mydata->coveragetype=$extenddesc->description;
-            
-            array_push($newarrayextend,$mydata);
-        }       
-
+            foreach($extendcoverdata as $mydata)
+            {
+                $extenddesc= ExtendedCoverage::where('id','=',$mydata->extendcoverage_id)->first();
+                $mydata->coveragetype=$extenddesc->description;
+                
+                array_push($newarrayextend,$mydata);
+            }       
+        }
         $newextenddata=json_encode($newarrayextend);
 
 
