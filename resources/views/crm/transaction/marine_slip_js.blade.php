@@ -863,10 +863,11 @@
 
 function detailslip(id){
     if(id){
+        alert(id);
             $.ajax({
                 type:"GET",
                 dataType: 'json',
-                url:"{{url('transaction-data/marine-slip')}}?id="+id,
+                url:"{{url('transaction-data/getmodal-marine-slip')}}?slipid="+id,
                 beforeSend: function() { $("body").addClass("loading");  },
                 complete: function() {  $("body").removeClass("loading"); },
                 success:function(response){  

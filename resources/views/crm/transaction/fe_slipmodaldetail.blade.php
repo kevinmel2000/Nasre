@@ -11,6 +11,28 @@
                     
                     <form id="multi-file-upload-ajaxdetail" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
                     @csrf
+<<<<<<< HEAD
+                        <div class="card card-tabs">
+                            <div class="card-header p-0 pt-1 border-bottom-0">
+                                <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                    <li class="pt-1 px-3"><h3 class="card-title">{{__('Slip Form')}}</h3></li>
+                                    <li class="nav-item">
+                                    <a class="nav-link active" id="general-details2" data-toggle="pill" href="#general-details-id2" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                    <a class="nav-link" id="insured-details2" data-toggle="pill" href="#insured-details-id2" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data & Insurance Measurement')}}</a>
+                                    </li>
+                                
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="installment-details2" data-toggle="pill" href="#installment-details-id2" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body bg-light-gray">
+                                <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
+                                    <div class="tab-pane fade show active" id="general-details-id2" role="tabpanel" aria-labelledby="general-details">
+                                        <div class="row">
+=======
                             <div class="card card-tabs">
                                 <div class="card-header p-0 pt-1 border-bottom-0">
                                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -33,6 +55,7 @@
                                             <div class="row">
                                                 
                                              
+>>>>>>> c50605658d8199c843aa698b4181665f13961121
                                             
                                             </div>
                                             <div class="row">

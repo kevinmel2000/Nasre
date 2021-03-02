@@ -2083,6 +2083,56 @@ class TransactionController extends Controller
 
         $sliplastid = count($slip);
 
+        $slipdata2 = SlipTable::where('insured_id',$code_ms)->where('slip_type','ms')->orderby('id','desc')->get();
+        $filelist=SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $installmentpanel= InstallmentTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $statuslist= StatusLog::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+
+       
+        return view('crm.transaction.marine_slip_details', compact(['user','slipdata2','filelist','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
+    }
+
+    public function showslipmodaldetails($id)
+    {
+        $user = Auth::user();
+        $route_active = 'Marine - Slip and Insured Details';
+        $mydate = date("Y").date("m").date("d");
+        $currdate = date("Y-m-d");
+
+        $slip = SlipTable::where('id',$id)->orderby('id','asc')->first();
+        // $sl_ids = response()->json($slip->modelKeys());
+        $insured = Insured::where('number',$slip->insured_id)->orderby('id','desc')->first();
+        // dd($insured);
+        $route = $insured->route;
+        $mlu = MarineLookup::orderby('id','asc')->get();
+        $customer= CustomerCustomer::orderby('id','asc')->get();
+        $routeship= RouteShip::where('id','=',$route)->first();
+        $interestinsured= InterestInsured::orderby('id','asc')->get();
+        $deductibletype= DeductibleType::orderby('id','asc')->get();
+        // $ms_ids = response()->json($insured->modelKeys());
+        // $lastid = count($insured);
+        $code_ms = $insured->number;
+        $shiplist= ShipListTemp::where('insured_id',$code_ms)->orderby('id','desc')->get();
+
+        $code_sl = $slip->number;
+        
+        $currency = Currency::orderby('id','asc')->get();
+        $cob = COB::where('id',$id)->orderby('id','asc')->first();
+        $koc = Koc::where('id',$id)->orderby('id','asc')->first();
+        $ocp = Occupation::where('id',$id)->orderby('id','asc')->first();
+        $cedingbroker = CedingBroker::where('id',$id)->orderby('id','asc')->first();
+        $ceding = CedingBroker::where('id',$id)->orderby('id','asc')->where('type','4')->first();
+        $felookup = FelookupLocation::where('id',$id)->orderby('id','asc')->get();
+        $cnd = ConditionNeeded::where('id',$id)->orderby('id','asc')->get();
+
+        // $sliplastid = count($slip);
+        
+       
+
         $filelist=SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
         $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
@@ -2092,86 +2142,84 @@ class TransactionController extends Controller
         $statuslist= StatusLog::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
         return response()->json([
-            "id" => $slip[0]->id,
-            "slip_number" => $slip[0]->number,
-            "username" => $slip[0]->username,
-            "prod_year" => $slip[0]->prod_year,
-            "uy" => $slip[0]->uy,
-            "status" => $slip[0]->status,
-            "endorsment" => $slip[0]->endorsment,
-            "selisih" => $slip[0]->selisih,
-            "cedbrok_id" => $slip[0]->cedbrok_id,
-            "cedbrok" => $slip[0]->cedingbroker->name,
-            "cedbrok_code" => $slip[0]->cedingbroker->code,
-            "cedbrok_cn" => $slip[0]->cedingbroker->code,
-            "ceding_id" => $slip[0]->ceding_id,
-            "ceding" => $slip[0]->ceding->name,
-            "currency_id" => $slip[0]->currency_id,
-            "currency" => $slip[0]->currencies->symbol_name,
-            "cob_id" => $slip[0]->cob_id,
-            "cob" => $slip[0]->corebusiness->description,
-            "koc_id" => $slip[0]->koc_id,
-            "koc" => $slip[0]->kindcontract->description,
-            "occupacy_id" => $slip[0]->occupacy_id,
-            "occupacy" => $slip[0]->occupation->description,
-            "build_const" => $slip[0]->build_const,
-            "slip_no" => $slip[0]->slip_no,
-            "cn_dn" => $slip[0]->cn_dn,
-            "policy_no" => $slip[0]->policy_no,
-            "build_const" => $slip[0]->build_const,
-            "insured_type" => $slip[0]->insured_type,
-            "insured_Pct" => $slip[0]->insured_Pct,
-            "total_sum_insured" => $slip[0]->total_sum_insured,
-            "total_sum_pct" => $slip[0]->total_sum_pct,
-            "insurance_period_from" => $slip[0]->insurance_period_from,
-            "insurance_period_to" => $slip[0]->insurance_period_to,
-            "reinsurance_period_from" => $slip[0]->reinsurance_period_from,
-            "reinsurance_period_to" => $slip[0]->reinsurance_period_to,
-            "proportional" => $slip[0]->proportional,
-            "layer_non_proportional" => $slip[0]->layer_non_proportional,
-            "rate" => $slip[0]->rate,
-            "share" => $slip[0]->share,
-            "sum_share" => $slip[0]->sum_share,
-            "basic_premium" => $slip[0]->basic_premium,
-            "commission" => $slip[0]->commission,
-            "grossprm_to_nr" => $slip[0]->grossprm_to_nr,
-            "netprm_to_nr" => $slip[0]->netprm_to_nr,
-            "retro_backup" => $slip[0]->retro_backup,
-            "own_retention" => $slip[0]->own_retention,
-            "sum_own_retention" => $slip[0]->sum_own_retention,
-            "coinsurance_slip" => $slip[0]->coinsurance_slip,
-            "interestinsured_id" => $interestlist->id,
-            "interestinsured_interest" => $interestlist->interestinsureddata->description,
-            "interestinsured_interestid" => $interestlist->interest_id,
-            "attachment_filename" => $filelist->filename,
-            "deductible_id" => $deductibletemp->id,
-            "deductible_type" => $deductibletemp->DeductibleType->abbreviation,
-            "deductible_desc" => $deductibletemp->DeductibleType->description,
-            "deductible_typeid" => $deductibletemp->deductibletype_id,
-            "deductible_currency" => $deductibletemp->currency->symbol_name,
-            "deductible_currencyid" => $deductibletemp->currency_id,
-            "deductible_percentage" => $deductibletemp->percentage,
-            "deductible_min_claimamount" => $deductibletemp->min_claimamount,
-            "deductible_amount" => $deductibletemp->amount,
-            "condition_needed_id" => $conditionneededtemp->id,
-            "condition_needed_cnid" => $conditionneededtemp->codition_id,
-            "condition_needed_cn" => $conditionneededtemp->conditionneeded->name,
-            "condition_needed_id" => $conditionneededtemp->information,
-            "installment_panel_id" => $installmentpanel->id,
-            "installment_panel_percentage" => $installmentpanel->percentage,
-            "installment_panel_amount" => $installmentpanel->amount,
-            "retrocession_id" => $retrocessiontemp->id,
-            "retrocession_type" => $retrocessiontemp->type,
-            "retrocession_contract" => $retrocessiontemp->contract,
-            "retrocession_percentage" => $retrocessiontemp->percentage,
-            "retrocession_amount" => $retrocessiontemp->amount,
-            "status_id" => $statuslist->id,
-            "status_status" => $statuslist->status,
-            "status_datetime" => $statuslist->datetime,
-            "status_user" => $statuslist->user
+            "id" => $slip->id,
+            "slip_number" => $slip->number,
+            "username" => $slip->username,
+            "prod_year" => $slip->prod_year,
+            "uy" => $slip->uy,
+            "status" => $slip->status,
+            "endorsment" => $slip->endorsment,
+            "selisih" => $slip->selisih,
+            "cedbrok_id" => $slip->source,
+            "cedbrok" => $slip->cedingbroker->name,
+            "cedbrok_code" => $slip->cedingbroker->code,
+            "cedbrok_cn" => $slip->cedingbroker->companytype->name,
+            "ceding_id" => $slip->source_2,
+            "ceding" => $slip->ceding->name,
+            "currency_id" => $slip->currency,
+            "currency" => $slip->currencies->symbol_name,
+            "cob_id" => $slip->cob,
+            "cob" => $slip->corebusiness->description,
+            "koc_id" => $slip->koc,
+            "koc" => $slip->kindcontract->description,
+            "occupacy_id" => $slip->occupacy,
+            "occupacy" => $slip->occupation->description,
+            "build_const" => $slip->build_const,
+            "slip_no" => $slip->slip_no,
+            "cn_dn" => $slip->cn_dn,
+            "policy_no" => $slip->policy_no,
+            "build_const" => $slip->build_const,
+            "insured_type" => $slip->insured_type,
+            "insured_Pct" => $slip->insured_Pct,
+            "total_sum_insured" => $slip->total_sum_insured,
+            "total_sum_pct" => $slip->total_sum_pct,
+            "insurance_period_from" => $slip->insurance_period_from,
+            "insurance_period_to" => $slip->insurance_period_to,
+            "reinsurance_period_from" => $slip->reinsurance_period_from,
+            "reinsurance_period_to" => $slip->reinsurance_period_to,
+            "proportional" => $slip->proportional,
+            "layer_non_proportional" => $slip->layer_non_proportional,
+            "rate" => $slip->rate,
+            "share" => $slip->share,
+            "sum_share" => $slip->sum_share,
+            "basic_premium" => $slip->basic_premium,
+            "commission" => $slip->commission,
+            "grossprm_to_nr" => $slip->grossprm_to_nr,
+            "netprm_to_nr" => $slip->netprm_to_nr,
+            "retro_backup" => $slip->retro_backup,
+            "own_retention" => $slip->own_retention,
+            "sum_own_retention" => $slip->sum_own_retention,
+            "coinsurance_slip" => $slip->coinsurance_slip
+            // "interestinsured_id" => $interestlist->id,
+            // "interestinsured_interest" => $interestlist->interestinsureddata->description,
+            // "interestinsured_interestid" => $interestlist->interest_id,
+            // "attachment_filename" => $filelist->filename,
+            // "deductible_id" => $deductibletemp->id,
+            // "deductible_type" => $deductibletemp->DeductibleType->abbreviation,
+            // "deductible_desc" => $deductibletemp->DeductibleType->description,
+            // "deductible_typeid" => $deductibletemp->deductibletype_id,
+            // "deductible_currency" => $deductibletemp->currency->symbol_name,
+            // "deductible_currencyid" => $deductibletemp->currency_id,
+            // "deductible_percentage" => $deductibletemp->percentage,
+            // "deductible_min_claimamount" => $deductibletemp->min_claimamount,
+            // "deductible_amount" => $deductibletemp->amount,
+            // "condition_needed_id" => $conditionneededtemp->id,
+            // "condition_needed_cnid" => $conditionneededtemp->codition_id,
+            // "condition_needed_cn" => $conditionneededtemp->conditionneeded->name,
+            // "condition_needed_id" => $conditionneededtemp->information,
+            // "installment_panel_id" => $installmentpanel->id,
+            // "installment_panel_percentage" => $installmentpanel->percentage,
+            // "installment_panel_amount" => $installmentpanel->amount,
+            // "retrocession_id" => $retrocessiontemp->id,
+            // "retrocession_type" => $retrocessiontemp->type,
+            // "retrocession_contract" => $retrocessiontemp->contract,
+            // "retrocession_percentage" => $retrocessiontemp->percentage,
+            // "retrocession_amount" => $retrocessiontemp->amount,
+            // "status_id" => $statuslist->id,
+            // "status_status" => $statuslist->status,
+            // "status_datetime" => $statuslist->datetime,
+            // "status_user" => $statuslist->user
         ]);
-
-        // return view('crm.transaction.marine_slip_details', compact(['user','filelist','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','interestlist','cnd','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','route_active','code_sl','currdate','routeship','shiplist','mlu','insured','ms_ids']));
     }
 
     /**
