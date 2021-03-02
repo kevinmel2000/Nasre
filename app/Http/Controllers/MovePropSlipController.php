@@ -779,6 +779,7 @@ class MovePropSlipController extends Controller
 
             
 
+            $slip = SlipTable::orderby('id','asc')->get();            
             $sliplastid = count($slip);
 
             $mydate = date("Y").date("m").date("d");
@@ -995,6 +996,7 @@ class MovePropSlipController extends Controller
                 'slip_id'=>$request->slipnumber,
             ]);
 
+            $slip = SlipTable::orderby('id','asc')->get();            
             $sliplastid = count($slip);
 
             $mydate = date("Y").date("m").date("d");

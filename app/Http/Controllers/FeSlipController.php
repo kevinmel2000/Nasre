@@ -918,7 +918,7 @@ class FeSlipController extends Controller
 
 
 
-            //$slip = SlipTable::orderby('id','asc')->get();            
+            $slip = SlipTable::orderby('id','asc')->get();            
             $sliplastid = count($slip);
 
             $mydate = date("Y").date("m").date("d");
@@ -1136,6 +1136,7 @@ class FeSlipController extends Controller
             ]);
 
            
+            $slip = SlipTable::orderby('id','asc')->get();            
             $sliplastid = count($slip);
 
             $mydate = date("Y").date("m").date("d");

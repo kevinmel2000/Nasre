@@ -765,7 +765,7 @@ class HeMotorSlipController extends Controller
                 'slip_id'=>$request->slipnumber,
             ]);
 
-            //$slip = SlipTable::orderby('id','asc')->get();            
+            $slip = SlipTable::orderby('id','asc')->get();            
             $sliplastid = count($slip);
 
             $mydate = date("Y").date("m").date("d");
@@ -982,6 +982,7 @@ class HeMotorSlipController extends Controller
                 'slip_id'=>$request->slipnumber,
             ]);
 
+            $slip = SlipTable::orderby('id','asc')->get();            
             $sliplastid = count($slip);
 
             $mydate = date("Y").date("m").date("d");
