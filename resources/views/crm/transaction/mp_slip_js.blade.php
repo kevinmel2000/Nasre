@@ -2052,6 +2052,100 @@ $(document).ready(function(){
 </script>
 
 <script type='text/javascript'>
+    $('#addretrocessioninsuredupdate-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var type = $('#sliprptypeupdate').val();
+       var contract = $('#sliprpcontractupdate').val();
+       var percentage = $('#sliprppercentageupdate').val();
+       var amount = $('#sliprpamountupdate').val();
+       
+       var slip_id = $('#slipnumberupdate').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('retrocession.store') }}",
+           type:"POST",
+           data:{
+               type:type,
+               contract:contract,
+               percentage:percentage,
+               amount:amount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#retrocessionPanelupdate tbody').prepend('<tr id="iidretrocessionupdate'+response.id+'" data-name="retrocessionupdatevalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+')</td><td><a href="javascript:void(0)" onclick="deleteretrocessionupdate('+response.id+')">delete</a></td></tr>');
+               $('#sliprppercentageupdate').val('');
+               $('#sliprpamountupdate').val('');
+               
+           }
+       });
+
+   });
+</script>
+
+
+<script type='text/javascript'>
+    $('#addretrocessioninsuredendorsement-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var type = $('#sliprptypeendorsement').val();
+       var contract = $('#sliprpcontractendorsement').val();
+       var percentage = $('#sliprppercentageendorsement').val();
+       var amount = $('#sliprpamountendorsement').val();
+       
+       var slip_id = $('#slipnumberendorsement').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('retrocession.store') }}",
+           type:"POST",
+           data:{
+               type:type,
+               contract:contract,
+               percentage:percentage,
+               amount:amount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#retrocessionPanelendorsement tbody').prepend('<tr id="iidretrocessionendorsement'+response.id+'" data-name="retrocessionendorsementvalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+')</td><td><a href="javascript:void(0)" onclick="deleteretrocessionendorsement('+response.id+')">delete</a></td></tr>');
+               $('#sliprppercentageendorsement').val('');
+               $('#sliprpamountendorsement').val('');
+               
+           }
+       });
+
+   });
+</script>
+
+
+<script type='text/javascript'>
     function deleteretrocessiondetail(id)
     {
         var token2 = $('input[name=_token2]').val();
