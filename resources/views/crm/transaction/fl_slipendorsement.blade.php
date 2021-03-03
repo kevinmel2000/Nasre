@@ -359,11 +359,7 @@
                                 <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
                                     <div class="tab-pane fade show active" id="general-details-id" role="tabpanel" aria-labelledby="general-details">
                                         <div class="row">
-                                            <div class="col-md-12">
-                                                <a href="{{url('transaction-data/endorsementflslip/'.$code_ms.'/'.$code_sl)}}" target="_blank">
-                                                <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsement">{{__('Endorsement')}}</button>
-                                                </a>
-                                            </div>
+                                            
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -434,27 +430,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-                                                                    <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                    <label for="" class="d-flex justify-content-center">{{__('Endorsement / Selisih')}}</label>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                    <input type="text" id="sliped"  name="sliped" value="@if($slipdata->endorsment != null)  {{$slipdata->endorsment}} @else {{ $countendorsement }} @endif" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50"/>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                    <input type="text" id="slipsls" name="slipsls" value="{{$slipdata->selisih}}" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50"/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
                                                 <div class="row">
                                                     <div class="col-md-12 com-sm-12 mt-3">
                                                         <table id="slipStatusTable" class="table table-bordered table-striped">
