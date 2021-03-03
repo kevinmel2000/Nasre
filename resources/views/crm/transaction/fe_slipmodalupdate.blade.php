@@ -362,6 +362,7 @@
                                                                     {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
                                                                     <option value="PML"  >PML</option>
                                                                     <option value="LOL"  >LOL</option>
+                                                                    <option value="TSI"  >TSI</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -641,10 +642,16 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6 d-flex justify-content-start">
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="">{{__('Rate (permil.. %)')}}</label>
                                                             <input type="number"  value="" step=".0001" id="sliprateupdate" name="sliprateupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" required/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('V Broker')}}</label>
+                                                            <input type="number" value="0" step=".0001" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -699,7 +706,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="">{{__('Commission')}}</label>
+                                                                <label for="">{{__('RE Com')}}</label>
                                                                 <div class="row d-flex flex-wrap">
                                                                     <div class="col-md-10">
                                                                         <div class="input-group">

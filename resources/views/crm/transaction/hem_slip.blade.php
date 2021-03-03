@@ -382,13 +382,7 @@
                             <div class="card-body bg-light-gray">
                                 <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
                                     <div class="tab-pane fade show active" id="general-details-id" role="tabpanel" aria-labelledby="general-details">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <a href="{{url('transaction-data/endorsementhemslip/0/0')}}" target="_blank">
-                                                <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsement">{{__('Endorsement')}}</button>
-                                                </a>
-                                            </div>
-                                        </div>
+                                      
                                         <div class="row">
                                             <div class="col-md-6">
                                             <div class="row">
@@ -732,6 +726,7 @@
                                                                 {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
                                                                 <option value="PML" selected >PML</option>
                                                                 <option value="LOL">LOL</option>
+                                                                <option value="TSI">TSI</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -1009,10 +1004,16 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 d-flex justify-content-start">
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="">{{__('Rate (permil.. %)')}}</label>
                                                         <input type="number" value="0" step=".0001" id="sliprate" name="sliprate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('V Broker')}}</label>
+                                                        <input type="number" value="0" step=".0001" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -1067,7 +1068,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="">{{__('Commission')}}</label>
+                                                            <label for="">{{__('RE Com')}}</label>
                                                             <div class="row d-flex flex-wrap">
                                                                 <div class="col-md-10">
                                                                     <div class="input-group">
