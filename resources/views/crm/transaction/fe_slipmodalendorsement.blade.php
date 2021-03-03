@@ -608,7 +608,7 @@
                                                 <div class="col-md-4">
                                                     <label class="cl-switch cl-switch-green">
                                                         <span for="switch-proportional" class="label"> {{__('Proportional')}} </span>
-                                                        <input type="checkbox" name="slipproportionalendorsement[]" id="switch-proportional"
+                                                        <input type="checkbox" name="slipproportionalendorsement[]" id="switch-proportionalendorsement"
                                                         class="submit" checked>
                                                         <span class="switcher"></span>
                                                         <span  class="label"> {{__('Non Proportional')}} </span>
@@ -803,7 +803,7 @@
                                                 <div class="col-md-6 d-flex justify-content-start">
                                                     <div class="form-group">
                                                         <label for="">{{__('Retro Backup?')}}</label>
-                                                        <select id="sliprb" name="sliprb" class="form-control form-control-sm ">
+                                                        <select id="sliprbendorsement" name="sliprbendorsement" class="form-control form-control-sm ">
                                                             <option value="AF" >YES</option>
                                                             <option value="AN" >NO</option>
                                                         </select>
@@ -834,7 +834,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row" id="tabretroendorsement">
                                                 <div class="col-md-12">
                                                     <div class="card">
                                                         <div class="card-header bg-gray">

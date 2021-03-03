@@ -2055,10 +2055,11 @@ class TransactionController extends Controller
         $mydate = date("Y").date("m").date("d");
         $currdate = date("Y-m-d");
 
-        $slip = SlipTable::where('id',$id)->orderby('id','asc')->get();
-        $sl_ids = response()->json($slip->modelKeys());
-        $insured = Insured::where('number',$slip[0]->insured_id)->orderby('id','desc')->get();
-        // dd($insured);
+        
+        // $sl_ids = response()->json($slip->modelKeys());
+        $insured = Insured::where('id',$id)->orderby('id','desc')->get();
+        $slip = SlipTable::where('insured_id',$insured[0]->number)->orderby('id','desc')->first();
+        // dd($slip);
         $route = $insured[0]->route;
         $mlu = MarineLookup::orderby('id','asc')->get();
         $customer= CustomerCustomer::orderby('id','asc')->get();
@@ -2070,7 +2071,7 @@ class TransactionController extends Controller
         $code_ms = $insured[0]->number;
         $shiplist= ShipListTemp::where('insured_id',$code_ms)->orderby('id','desc')->get();
 
-        $code_sl = $slip[0]->number;
+        $code_sl = $slip->number;
         
         $currency = Currency::orderby('id','asc')->get();
         $cob = COB::where('id',$id)->orderby('id','asc')->first();
@@ -2081,7 +2082,7 @@ class TransactionController extends Controller
         $felookup = FelookupLocation::where('id',$id)->orderby('id','asc')->get();
         $cnd = ConditionNeeded::where('id',$id)->orderby('id','asc')->get();
 
-        $sliplastid = count($slip);
+        // $sliplastid = count($slip);
 
         $slipdata2 = SlipTable::where('insured_id',$code_ms)->where('slip_type','ms')->orderby('id','desc')->get();
         $filelist=SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->get();

@@ -39,9 +39,9 @@
                     <tr>
                       <th>{{__('Number')}}</th>
                       <th>{{__('Insured')}}</th>
-                      <th>{{__('Share')}}</th>
-                      <th>{{__('Share From')}}</th>
-                      <th>{{__('Share To')}}</th>
+                      <th>{{__('Our Share')}}</th>
+                      <th>{{__('National Reinsurance')}}</th>
+                      <th>{{__('Total Sum Insurance')}}</th>
                       <th>{{__('Coincurance')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>

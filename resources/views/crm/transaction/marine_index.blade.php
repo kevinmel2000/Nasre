@@ -41,35 +41,35 @@
                                 <tr>
                                 <th>{{__('Number')}}</th>
                                 <th>{{__('Insured')}}</th>
-                                <th>{{__('production year')}}</th>
-                                <th>{{__('UY')}}</th>
-                                <th>{{__('status')}}</th>
-                                <th>{{__('username')}}</th>
+                                <th>{{__('Our Share')}}</th>
+                                <th>{{__('National Reinsurance')}}</th>
+                                <th>{{__('Total Sum Insurance')}}</th>
+                                <th>{{__('Coinsurance')}}</th>
                                 <th width="20%">{{__('Actions')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (@$slip as $slipdata)
+                                    @foreach (@$insured as $insdata)
                                         <tr>
-                                        <td><a href="{{  url('transaction-data/marine-slip', $slipdata->id) }}">{{@$slipdata->number}}</a></td>
-                                        <td>{{@$slipdata->insureddata->insured_prefix}} - {{@$slipdata->insureddata->insured_name}} - {{@$slipdata->insureddata->insured_suffix}}</td>
-                                        <td>{{@$slipdata->prod_year }}</td>
-                                        <td>{{@$slipdata->uy}}</td>
-                                        <td>{{@$slipdata->status}}</td>
-                                        <td>{{@$slipdata->username}}</td>
+                                        <td><a href="{{  url('transaction-data/marine-slip', $insdata->id) }}">{{@$insdata->number}}</a></td>
+                                        <td>{{@$insdata->insured_prefix}} - {{@$insdata->insured_name}} - {{@$insdata->insured_suffix}}</td>
+                                        <td>{{@$insdata->share }}</td>
+                                        <td>@currency($insdata->share_from)</td>
+                                        <td>@currency($insdata->share_to)</td>
+                                        <td>{{@$insdata->coincurance}}</td>
                                         <td>
-                                            <a href="javascript:void(0)" data-toggle="tooltip" data-title="{{$slipdata->created_at}}" class="mr-3">
+                                            <a href="javascript:void(0)" data-toggle="tooltip" data-title="{{$insdata->created_at}}" class="mr-3">
                                             <i class="fas fa-clock text-info"></i>
                                             </a>
-                                            <a href="javascript:void(0)" data-toggle="tooltip" data-title="{{$slipdata->updated_at}}" class="mr-3">
+                                            <a href="javascript:void(0)" data-toggle="tooltip" data-title="{{$insdata->updated_at}}" class="mr-3">
                                             <i class="fas fa-history text-primary"></i>
                                             </a>
                                             <span>
 
                                             
                                             {{-- @can('update-felookup', User::class) --}}
-                                                <a class="text-primary mr-3" href="{{ url('transaction-data/marine-slip/edit', $slipdata->id) }}">
-                                                <i class="fas fa-edit"></i>
+                                                <a class="text-primary mr-3" href="{{ url('transaction-data/marine-slip/edit', $insdata->id) }}">
+                                                    <i class="fas fa-edit"></i>
                                                 </a>
                                                 {{-- @endcan   --}}
 
@@ -77,16 +77,18 @@
 
                                             {{-- @can('delete-marineinsured', User::class) --}}
 
-                                            <span id="delbtn2{{@$slipdata->id}}"></span>
+                                            {{-- <span id="delbtn2{{@$insdata->id}}"></span>
                                             
-                                                <form id="delete-marineslip-{{$slipdata->id}}"
-                                                    action="{{ url('transaction-data/marine-slip/destroyslip', $slipdata->id) }}"
+                                                <form id="delete-marineslip-{{$insdata->id}}"
+                                                    action="{{ url('transaction-data/marine-slip/destroyslip', $insdata->id) }}"
                                                     method="POST">
                                                     @method('DELETE')
                                                     @csrf
                                                 </form>
-                                                {{-- @endcan   --}}
-                                            </span>
+                                               
+                                            </span> --}}
+                                            {{-- @endcan   --}}
+                                        
                                         </td>
 
                                         </tr>

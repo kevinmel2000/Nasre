@@ -6,6 +6,9 @@
         $(".e1").select2({ width: '100%' }); 
     
         $("#tabretro").attr('hidden','true');
+        $("#tabretrodetail").attr('hidden','true');
+        $("#tabretroupdate").attr('hidden','true');
+        $("#tabretroendorsement").attr('hidden','true');
         
     });
 </script>
@@ -691,6 +694,23 @@
         $('#sliprpto').val($(this).val());
     });
 
+    $('#slipipfromupdate').change(function(){
+        $('#sliprpfromupdate').val($(this).val());
+    });
+
+    $('#slipiptoupdate').change(function(){
+        $('#sliprptoupdate').val($(this).val());
+    });
+
+    $('#slipipfromendorsement').change(function(){
+        $('#sliprpfromendorsement').val($(this).val());
+    });
+
+    $('#slipiptoendorsement').change(function(){
+        $('#sliprptoendorsement').val($(this).val());
+    });
+
+
 </script>
 
 
@@ -789,6 +809,51 @@ $(document).ready(function() {
         
     });
 
+    $('#switch-proportionaldetail').change(function(){
+        var attr = $("#btnaddlayerdetail").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            $("#btnaddlayerdetail").removeAttr('hidden');
+            $("#sliplayerproportionaldetail").removeAttr('hidden');
+            $("#labelnonpropdetail").removeAttr('hidden');
+        }
+        else{
+            $("#btnaddlayerdetail").attr('hidden','true');
+            $("#sliplayerproportionaldetail").attr('hidden','true');
+            $("#labelnonpropdetail").attr('hidden','true');
+        }
+        
+    });
+
+    $('#switch-proportionalupdate').change(function(){
+        var attr = $("#btnaddlayerupdate").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            $("#btnaddlayerupdate").removeAttr('hidden');
+            $("#sliplayerproportionalupdate").removeAttr('hidden');
+            $("#labelnonpropupdate").removeAttr('hidden');
+        }
+        else{
+            $("#btnaddlayerupdate").attr('hidden','true');
+            $("#sliplayerproportionalupdate").attr('hidden','true');
+            $("#labelnonpropupdate").attr('hidden','true');
+        }
+        
+    });
+
+    $('#switch-proportionalendorsement').change(function(){
+        var attr = $("#btnaddlayerendorsement").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            $("#btnaddlayerendorsement").removeAttr('hidden');
+            $("#sliplayerproportionalendorsement").removeAttr('hidden');
+            $("#labelnonpropendorsement").removeAttr('hidden');
+        }
+        else{
+            $("#btnaddlayerendorsement").attr('hidden','true');
+            $("#sliplayerproportionalendorsement").attr('hidden','true');
+            $("#labelnonpropendorsement").attr('hidden','true');
+        }
+        
+    });
+
     $('#sliprb').change(function(){
         var attr = $("#tabretro").attr('hidden');
         if(typeof attr !== typeof undefined && attr !== false){
@@ -798,6 +863,42 @@ $(document).ready(function() {
         else{
             // $("#retrocessionPanel").attr('hidden','true');
             $("#tabretro").attr('hidden','true');
+        }
+    });
+
+    $('#sliprbdetail').change(function(){
+        var attr = $("#tabretrodetail").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            // $("#retrocessionPanel").removeAttr('hidden');
+            $("#tabretrodetail").removeAttr('hidden');
+        }
+        else{
+            // $("#retrocessionPanel").attr('hidden','true');
+            $("#tabretrodetail").attr('hidden','true');
+        }
+    });
+
+    $('#sliprbupdate').change(function(){
+        var attr = $("#tabretroupdate").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            // $("#retrocessionPanel").removeAttr('hidden');
+            $("#tabretroupdate").removeAttr('hidden');
+        }
+        else{
+            // $("#retrocessionPanel").attr('hidden','true');
+            $("#tabretroupdate").attr('hidden','true');
+        }
+    });
+
+    $('#sliprbendorsement').change(function(){
+        var attr = $("#tabretroendorsement").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            // $("#retrocessionPanel").removeAttr('hidden');
+            $("#tabretroendorsement").removeAttr('hidden');
+        }
+        else{
+            // $("#retrocessionPanel").attr('hidden','true');
+            $("#tabretroendorsement").attr('hidden','true');
         }
     });
 </script>

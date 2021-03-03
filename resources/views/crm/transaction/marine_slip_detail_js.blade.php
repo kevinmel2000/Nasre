@@ -198,6 +198,7 @@
                             };
 
                             $("#slipnumberupdate").val(response.slip_number);
+                            $("#msinumberupdate").val(response.insured_id);
                             $("#slipusernameupdate").val(response.username);
                             $("#slipprodyearupdate").val(response.prod_year);
                             $("#slipuyupdate").val(response.uy);
