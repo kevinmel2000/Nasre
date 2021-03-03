@@ -2321,6 +2321,50 @@ $(document).ready(function() {
     }
 </script>
 
+<script type='text/javascript'>
+    function deleteretrocessionupdate(id)
+    {
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-retrocession-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response){
+                
+                $('#iidretrocessionupdate'+id).remove();
+                console.log(response);
+            }
+        });
+    }
+</script>
+
+<script type='text/javascript'>
+    function deleteretrocessionendorsement(id)
+    {
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-retrocession-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response){
+                
+                $('#iidretrocessionendorsement'+id).remove();
+                console.log(response);
+            }
+        });
+    }
+</script>
+
 <style>
     .overlay{
         display: none;
