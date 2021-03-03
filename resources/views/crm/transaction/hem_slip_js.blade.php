@@ -3,6 +3,7 @@
 
 
 
+
 <script type="text/javascript">
 
     //triggered when modal is about to be shown
@@ -10,7 +11,7 @@
 
          //get data-id attribute of the clicked element
         var codesl = $(e.relatedTarget).data('book-id');
-        alert(codesl);
+        //alert(codesl);
         
         $.ajax({
             url:'{{ url("/") }}/transaction-data/detailslip/'+codesl,
@@ -26,6 +27,97 @@
                     $('#slipeddetail').val(response.endorsment);
                     $('#slipslsdetail').val(response.selisih);
 
+                    if(response.interest_insured)
+                    {
+                        var interestdata = JSON.parse(response.interest_insured); 
+
+                        for(var i = 0; i < interestdata.length; i++) 
+                        {
+                            var obj = interestdata[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            
+                            $('#interestInsuredTabledetail tbody').empty();
+                            $('#interestInsuredTabledetail tbody').prepend('<tr id="iiddetail'+obj.id+'" data-name="interestdetailvalue[]"><td data-name="'+obj.description+'">'+obj.description+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td></td></tr>')
+                
+                        }
+                    }
+
+
+                    if(response.deductible_panel)
+                    {
+
+                        var deductibledata = JSON.parse(response.deductible_panel); 
+
+                        for(var i = 0; i < deductibledata.length; i++) 
+                        {
+                            var obj = deductibledata[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#deductiblePaneldetail tbody').empty();
+                            $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.currencydata+'">'+obj.currencydata+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td data-name="'+obj.min_claimamount+'">'+obj.min_claimamount+'</td><td></td></tr>');
+              
+                        }
+                    }
+
+
+                    if(response.extend_coverage)
+                    {
+
+                        var extend_coverage = JSON.parse(response.extend_coverage); 
+
+                        for(var i = 0; i < extend_coverage.length; i++) 
+                        {
+                            var obj = extend_coverage[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#ExtendCoveragePaneldetail tbody').empty();
+                            $('#ExtendCoveragePaneldetail tbody').prepend('<tr id="iidextendcoveragedetail'+obj.id+'" data-name="extendcoveragedetailvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragetype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td></td></tr>');
+                            
+                        }
+                    }
+
+
+                    if(response.installment_panel)
+                    {
+
+                        var installment_panel = JSON.parse(response.installment_panel); 
+
+                        for(var i = 0; i < installment_panel.length; i++) 
+                        {
+                            var obj = installment_panel[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#installmentPaneldetail tbody').empty();
+                           $('#installmentPaneldetail tbody').prepend('<tr id="iidinstallmentdetail'+obj.id+'" data-name="installmentdetailvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td></td></tr>')
+               
+                        }
+                    }
+
+
+
+                    if(response.retrocession_panel)
+                    {
+
+                        var retrocession_panel = JSON.parse(response.retrocession_panel); 
+
+                        for(var i = 0; i < retrocession_panel.length; i++) 
+                        {
+                            var obj = retrocession_panel[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#retrocessionPaneldetail tbody').empty();
+                            
+                            $('#retrocessionPaneldetail tbody').prepend('<tr id="iidretrocessiondetail'+obj.id+'" data-name="retrocessiondetailvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+')</td><td></td></tr>');
+              
+                        }
+                    }
+                    
                     
                     if(response.status)
                     {
@@ -130,7 +222,7 @@
 
          //get data-id attribute of the clicked element
         var codesl = $(e.relatedTarget).data('book-id');
-        alert(codesl);
+        //alert(codesl);
         
         $.ajax({
             url:'{{ url("/") }}/transaction-data/detailslip/'+codesl,
@@ -146,6 +238,97 @@
                     $('#slipuyupdate').val(response.uy);
                     $('#slipedupdate').val(response.endorsment);
                     $('#slipslsupdate').val(response.selisih);
+
+                    if(response.interest_insured)
+                    {
+                        var interestdata = JSON.parse(response.interest_insured); 
+
+                        for(var i = 0; i < interestdata.length; i++) 
+                        {
+                            var obj = interestdata[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#interestInsuredTableupdate tbody').empty();
+                            $('#interestInsuredTableupdate tbody').prepend('<tr id="iidupdate'+obj.id+'" data-name="interestupdatevalue[]"><td data-name="'+obj.description+'">'+obj.description+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestupdate('+response.id+')">delete</a></td></tr>')
+                
+                        }
+                    }
+
+
+                    if(response.deductible_panel)
+                    {
+
+                        var deductibledata = JSON.parse(response.deductible_panel); 
+
+                        for(var i = 0; i < deductibledata.length; i++) 
+                        {
+                            var obj = deductibledata[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#deductiblePanelupdate tbody').empty();
+                            $('#deductiblePanelupdate tbody').prepend('<tr id="iiddeductibleupdate'+obj.id+'" data-name="deductibleupdatevalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.currencydata+'">'+obj.currencydata+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td data-name="'+obj.min_claimamount+'">'+obj.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleupdate('+response.id+')">delete</a></td></tr>');
+              
+                        }
+                    }
+
+
+                    if(response.extend_coverage)
+                    {
+
+                        var extend_coverage = JSON.parse(response.extend_coverage); 
+
+                        for(var i = 0; i < extend_coverage.length; i++) 
+                        {
+                            var obj = extend_coverage[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#ExtendCoveragePanelupdate tbody').empty();
+                            $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+obj.id+'" data-name="extendcoverageupdatevalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragetype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageupdate('+response.id+')">delete</a></td></tr>');
+                            
+                        }
+                    }
+
+
+                    if(response.installment_panel)
+                    {
+
+                        var installment_panel = JSON.parse(response.installment_panel); 
+
+                        for(var i = 0; i < installment_panel.length; i++) 
+                        {
+                            var obj = installment_panel[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#installmentPanelupdate tbody').empty();
+                           $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+obj.id+'" data-name="installmentupdatevalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+response.id+')">delete</a></td></tr>')
+               
+                        }
+                    }
+
+
+
+                    if(response.retrocession_panel)
+                    {
+
+                        var retrocession_panel = JSON.parse(response.retrocession_panel); 
+
+                        for(var i = 0; i < retrocession_panel.length; i++) 
+                        {
+                            var obj = retrocession_panel[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#retrocessionPanelupdate tbody').empty();
+                            
+                            $('#retrocessionPanelupdate tbody').prepend('<tr id="iidretrocessionupdate'+obj.id+'" data-name="retrocessionupdatevalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+')</td><td><a href="javascript:void(0)" onclick="deleteretrocessionupdate('+response.id+')">delete</a></td></tr>');
+              
+                        }
+                    }
+                    
 
 
                     if(response.status)
@@ -256,7 +439,7 @@
 
          //get data-id attribute of the clicked element
         var codesl = $(e.relatedTarget).data('book-id');
-        alert(codesl);
+        //alert(codesl);
         
         $.ajax({
             url:'{{ url("/") }}/transaction-data/detailendorsementslip/'+codesl,
@@ -272,6 +455,97 @@
                     $('#slipuyendorsement').val(response.uy);
                     $('#slipedendorsement').val(response.endorsment);
                     $('#slipslsendorsement').val(response.selisih);
+
+                    if(response.interest_insured)
+                    {
+                        var interestdata = JSON.parse(response.interest_insured); 
+
+                        for(var i = 0; i < interestdata.length; i++) 
+                        {
+                            var obj = interestdata[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#interestInsuredTableendorsement tbody').empty();
+                            $('#interestInsuredTableendorsement tbody').prepend('<tr id="iidendorsement'+obj.id+'" data-name="interestendorsementvalue[]"><td data-name="'+obj.description+'">'+obj.description+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestendorsement('+response.id+')">delete</a></td></tr>')
+                
+                        }
+                    }
+
+
+                    if(response.deductible_panel)
+                    {
+
+                        var deductibledata = JSON.parse(response.deductible_panel); 
+
+                        for(var i = 0; i < deductibledata.length; i++) 
+                        {
+                            var obj = deductibledata[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#deductiblePanelendorsement tbody').empty();
+                            $('#deductiblePanelendorsement tbody').prepend('<tr id="iiddeductibleendorsement'+obj.id+'" data-name="deductibleendorsementvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.currencydata+'">'+obj.currencydata+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td data-name="'+obj.min_claimamount+'">'+obj.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleendorsement('+response.id+')">delete</a></td></tr>');
+              
+                        }
+                    }
+
+
+                    if(response.extend_coverage)
+                    {
+
+                        var extend_coverage = JSON.parse(response.extend_coverage); 
+
+                        for(var i = 0; i < extend_coverage.length; i++) 
+                        {
+                            var obj = extend_coverage[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#ExtendCoveragePanelendorsement tbody').empty();
+                            $('#ExtendCoveragePanelendorsement tbody').prepend('<tr id="iidextendcoverageendorsement'+obj.id+'" data-name="extendcoverageendorsementvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragetype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageendorsement('+response.id+')">delete</a></td></tr>');
+                            
+                        }
+                    }
+
+
+                    if(response.installment_panel)
+                    {
+
+                        var installment_panel = JSON.parse(response.installment_panel); 
+
+                        for(var i = 0; i < installment_panel.length; i++) 
+                        {
+                            var obj = installment_panel[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#installmentPanelendorsement tbody').empty();
+                            $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+obj.id+'" data-name="installmentendorsementvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+response.id+')">delete</a></td></tr>')
+               
+                        }
+                    }
+
+
+
+                    if(response.retrocession_panel)
+                    {
+
+                        var retrocession_panel = JSON.parse(response.retrocession_panel); 
+
+                        for(var i = 0; i < retrocession_panel.length; i++) 
+                        {
+                            var obj = retrocession_panel[i];
+
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
+                            $('#retrocessionPanelendorsement tbody').empty();
+                            
+                            $('#retrocessionPanelendorsement tbody').prepend('<tr id="iidretrocessionendorsement'+obj.id+'" data-name="retrocessionendorsementvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+')</td><td><a href="javascript:void(0)" onclick="deleteretrocessionendorsement('+response.id+')">delete</a></td></tr>');
+              
+                        }
+                    }
+                    
                     
                     if(response.status)
                     {
@@ -305,7 +579,7 @@
 
                     if(response.occupacy)
                     {
-                        $("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
+                        //$("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
                     }
 
                     if(response.build_const)
@@ -366,6 +640,7 @@
 
     });
 </script>
+
 
 
 <link rel="stylesheet" href="{{url('/')}}/css/sweetalert2.min.css">
@@ -686,9 +961,88 @@ $("body").on("click","#btn-danger2",function(){
    });
 </script>
     
-<script  type='text/javascript'>
-    
+<script type='text/javascript'>
+    $('#addinterestinsuredupdate-btn').click(function(e){
+       e.preventDefault();
+
+       var interest = $('#slipinterestlistupdate').val();
+       var amount = $('#slipamountupdate').val();
+       var slip_id = $('#slipnumberupdate').val();
+       var token2 = $('input[name=_token]').val();
+       
+       $.ajax({
+           url:"{{ route('interestlist.store') }}",
+           type:"POST",
+           data:{
+               interest_insured:interest,
+               slipamount:amount,
+               id_slip:slip_id,
+               _token:token2
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response){
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#interestInsuredTableupdate tbody').prepend('<tr id="iidupdate'+response.id+'" data-name="interestupdatevalue[]"><td data-name="'+response.description+'">'+response.description+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestupdate('+response.id+')">delete</a></td></tr>')
+               $('#slipamountupdate').val('');
+               $('#slipinterestlistupdate').val('');
+               var total =  parseFloat($("#sliptotalsumupdate").val());
+               var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
+               $("#sliptotalsumupdate").val(sum);
+               $("#fesharetoupdate").val(sum);
+
+               
+
+           }
+       });
+
+   });
 </script>
+
+
+<script type='text/javascript'>
+    $('#addinterestinsuredendorsement-btn').click(function(e){
+       e.preventDefault();
+
+       var interest = $('#slipinterestlistendorsement').val();
+       var amount = $('#slipamountendorsement').val();
+       var slip_id = $('#slipnumberendorsement').val();
+       var token2 = $('input[name=_token]').val();
+       
+       $.ajax({
+           url:"{{ route('interestlist.store') }}",
+           type:"POST",
+           data:{
+               interest_insured:interest,
+               slipamount:amount,
+               id_slip:slip_id,
+               _token:token2
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response){
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#interestInsuredTableendorsement tbody').prepend('<tr id="iidendorsement'+response.id+'" data-name="interestendorsementvalue[]"><td data-name="'+response.description+'">'+response.description+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestendorsement('+response.id+')">delete</a></td></tr>')
+               $('#slipamountendorsement').val('');
+               $('#slipinterestlistendorsement').val('');
+               var total =  parseFloat($("#sliptotalsumendorsement").val());
+               var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
+               $("#sliptotalsumendorsement").val(sum);
+               $("#fesharetoendorsement").val(sum);
+
+               
+
+           }
+       });
+
+   });
+</script>
+    
+
 
 <script type='text/javascript'>
     function deleteinterestdetail(id){
@@ -711,6 +1065,154 @@ $("body").on("click","#btn-danger2",function(){
     }
 </script>
 
+
+<script  type='text/javascript'>
+     $('#slippctupdate').keyup(function () {
+        var pct =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumupdate").val());
+        var sum = isNaN(pct * tsi/100) ? 0 :(pct * tsi/100) ;
+         $('#sliptotalsumpctupdate').val(sum);
+         
+     });
+
+     $('#slipdppercentageupdate').keyup(function () {
+        var percent =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumupdate").val());
+        var sum = isNaN(percent * tsi/100) ? 0 :(percent * tsi/100) ;
+        $('#slipdpamountupdate').val(sum);
+     });
+
+     $('#slipshareupdate').keyup(function () {
+        var shareslip =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumupdate").val());
+        var sum = isNaN(shareslip * tsi/100) ? 0 :(shareslip * tsi/100) ;
+        $('#slipsumshareupdate').val(sum);
+        $('#feshareupdate').val(shareslip);
+     });
+
+     $('#sliprateupdate').keyup(function () {
+        var rateslip =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumupdate").val());
+        var sum = isNaN(rateslip * tsi/100) ? 0 :(rateslip * tsi/100) ;
+        $('#slipbasicpremiumupdate').val(sum);
+     });
+
+     $('#slipshareupdate').change(function () {
+        var rateslip =  parseFloat($('#sliprateupdate').val()) / 100 ;
+        var shareslip =  parseFloat($('#slipshareupdate').val()) / 100 ;
+        var ourshare =  parseFloat($('#feshareupdate').val()) / 100 ;
+        var tsi = parseFloat($("#sliptotalsumupdate").val());
+        var sum = isNaN(rateslip * shareslip * tsi/100) ? 0 :(rateslip * shareslip * tsi/100) ;
+        var sumourshare = isNaN(ourshare * tsi ) ? 0 :(ourshare * tsi) ;
+        $('#slipgrossprmtonrupdate').val(sum);
+        $('#fesharefromupdate').val(sumourshare);
+     });
+
+     $('#slipcommissionupdate').keyup(function () {
+        var commision =  parseFloat($(this).val()) / 100;
+        var sumgrossprmtonr = parseFloat($("#slipgrossprmtonrupdate").val());
+        var sum = isNaN(commision * sumgrossprmtonr/100) ? 0 :(commision * sumgrossprmtonr/100);
+        var sumnetprmtonr = isNaN( sumgrossprmtonr * (100/100 - commision)) ? 0 :(sumgrossprmtonr * (100/100 - commision));
+        $('#slipsumcommissionupdate').val(sum);
+        $('#slipnetprmtonrupdate').val(sumnetprmtonr);
+    });
+
+    $('#sliporupdate').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumshare = parseFloat($("#slipsumshareupdate").val());
+        var sum = isNaN(percent * sumshare) ? 0 :(percent * sumshare);
+        $('#slipsumorupdate').val(sum);
+    });
+
+    $('#sliprppercentageupdate').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumshare = parseFloat($("#slipsumshareupdate").val());
+        var sum = isNaN(percent * sumshare) ? 0 :(percent * sumshare);
+        $('#sliprpamountupdate').val(sum);
+    });
+
+    $('#slipippercentageupdate').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumnetprtonr = parseFloat($("#slipnetprmtonrupdate").val());
+        var sum = isNaN(percent * sumnetprtonr) ? 0 :(percent * sumnetprtonr);
+        $('#slipipamountupdate').val(sum);
+    });
+</script>
+
+
+
+<script  type='text/javascript'>
+     $('#slippctendorsement').keyup(function () {
+        var pct =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumendorsement").val());
+        var sum = isNaN(pct * tsi/100) ? 0 :(pct * tsi/100) ;
+         $('#sliptotalsumpctendorsement').val(sum);
+         
+     });
+
+     $('#slipdppercentageendorsement').keyup(function () {
+        var percent =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumendorsement").val());
+        var sum = isNaN(percent * tsi/100) ? 0 :(percent * tsi/100) ;
+        $('#slipdpamountendorsement').val(sum);
+     });
+
+     $('#slipshareendorsement').keyup(function () {
+        var shareslip =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumendorsement").val());
+        var sum = isNaN(shareslip * tsi/100) ? 0 :(shareslip * tsi/100) ;
+        $('#slipsumshareendorsement').val(sum);
+        $('#feshareendorsement').val(shareslip);
+     });
+
+     $('#sliprateendorsement').keyup(function () {
+        var rateslip =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumendorsement").val());
+        var sum = isNaN(rateslip * tsi/100) ? 0 :(rateslip * tsi/100) ;
+        $('#slipbasicpremiumendorsement').val(sum);
+     });
+
+     $('#slipshareendorsement').change(function () {
+        var rateslip =  parseFloat($('#sliprateendorsement').val()) / 100 ;
+        var shareslip =  parseFloat($('#slipshareendorsement').val()) / 100 ;
+        var ourshare =  parseFloat($('#feshareendorsement').val()) / 100 ;
+        var tsi = parseFloat($("#sliptotalsumendorsement").val());
+        var sum = isNaN(rateslip * shareslip * tsi/100) ? 0 :(rateslip * shareslip * tsi/100) ;
+        var sumourshare = isNaN(ourshare * tsi ) ? 0 :(ourshare * tsi) ;
+        $('#slipgrossprmtonrendorsement').val(sum);
+        $('#fesharefromendorsement').val(sumourshare);
+     });
+
+     $('#slipcommissionendorsement').keyup(function () {
+        var commision =  parseFloat($(this).val()) / 100;
+        var sumgrossprmtonr = parseFloat($("#slipgrossprmtonrendorsement").val());
+        var sum = isNaN(commision * sumgrossprmtonr/100) ? 0 :(commision * sumgrossprmtonr/100);
+        var sumnetprmtonr = isNaN( sumgrossprmtonr * (100/100 - commision)) ? 0 :(sumgrossprmtonr * (100/100 - commision));
+        $('#slipsumcommissionendorsement').val(sum);
+        $('#slipnetprmtonrendorsement').val(sumnetprmtonr);
+    });
+
+    $('#sliporendorsement').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumshare = parseFloat($("#slipsumshareendorsement").val());
+        var sum = isNaN(percent * sumshare) ? 0 :(percent * sumshare);
+        $('#slipsumorendorsement').val(sum);
+    });
+
+    $('#sliprppercentageendorsement').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumshare = parseFloat($("#slipsumshareendorsement").val());
+        var sum = isNaN(percent * sumshare) ? 0 :(percent * sumshare);
+        $('#sliprpamountendorsement').val(sum);
+    });
+
+    $('#slipippercentageendorsement').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumnetprtonr = parseFloat($("#slipnetprmtonrendorsement").val());
+        var sum = isNaN(percent * sumnetprtonr) ? 0 :(percent * sumnetprtonr);
+        $('#slipipamountendorsement').val(sum);
+    });
+</script>
 
 <script  type='text/javascript'>
     $('#slippct').keyup(function () {
@@ -806,6 +1308,82 @@ $("body").on("click","#btn-danger2",function(){
 
 
 
+
+<script type='text/javascript'>
+    
+     $('#slipdppercentage').keyup(function () {
+        var persentage =  parseFloat($('#slipdppercentage').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipdpamount').val(sum);
+     });
+
+     $('#slipdppercentage').change(function () {
+        var persentage =  parseFloat($('#slipdppercentage').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipdpamount').val(sum);
+     });
+
+</script>
+
+<script type='text/javascript'>
+    
+     $('#slipdppercentageupdate').keyup(function () {
+        var persentage =  parseFloat($('#slipdppercentageupdate').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumupdate').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipdpamountupdate').val(sum);
+     });
+
+     $('#slipdppercentageupdate').change(function () {
+        var persentage =  parseFloat($('#slipdppercentageupdate').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumupdate').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipdpamountupdate').val(sum);
+     });
+
+</script>
+
+
+<script type='text/javascript'>
+    
+     $('#slipdppercentageendorsement').keyup(function () {
+        var persentage =  parseFloat($('#slipdppercentageendorsement').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumendorsement').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipdpamountendorsement').val(sum);
+     });
+
+     $('#slipdppercentageendorsement').change(function () {
+        var persentage =  parseFloat($('#slipdppercentageendorsement').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumendorsement').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipdpamountendorsement').val(sum);
+     });
+
+</script>
+
+
+
 <script type='text/javascript'>
     
      $('#slipnilaiec').keyup(function () {
@@ -813,7 +1391,7 @@ $("body").on("click","#btn-danger2",function(){
         var sliptotalsum =  parseFloat($('#sliptotalsum').val());
         //alert(premiumnr);
         //alert(persentage);
-        var sum = isNaN(sliptotalsum * persentage/100) ? 0 :(sliptotalsum * persentage/100) ;
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
         //alert(sum);
         $('#slipamountec').val(sum);
      });
@@ -823,13 +1401,62 @@ $("body").on("click","#btn-danger2",function(){
         var sliptotalsum =  parseFloat($('#sliptotalsum').val());
         //alert(premiumnr);
         //alert(persentage);
-        var sum = isNaN(sliptotalsum * persentage/100) ? 0 :(sliptotalsum * persentage/100) ;
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
         //alert(sum);
         $('#slipamountec').val(sum);
      });
 
 </script>
 
+<script type='text/javascript'>
+    
+     $('#slipnilaiecupdate').keyup(function () {
+        var persentage =  parseFloat($('#slipnilaiecupdate').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumupdate').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipamountecupdate').val(sum);
+     });
+
+     $('#slipnilaiecupdate').change(function () {
+        var persentage =  parseFloat($('#slipnilaiecupdate').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumupdate').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipamountecupdate').val(sum);
+     });
+
+</script>
+
+
+
+<script type='text/javascript'>
+    
+     $('#slipnilaiecendorsement').keyup(function () {
+        var persentage =  parseFloat($('#slipnilaiecendorsement').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumendorsement').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipamountecendorsement').val(sum);
+     });
+
+     $('#slipnilaiecendorsement').change(function () {
+        var persentage =  parseFloat($('#slipnilaiecendorsement').val());
+        var sliptotalsum =  parseFloat($('#sliptotalsumendorsement').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipamountecendorsement').val(sum);
+     });
+
+</script>
 
 
 <script type='text/javascript'>
@@ -880,6 +1507,106 @@ $("body").on("click","#btn-danger2",function(){
 
    });
 </script>
+
+<script type='text/javascript'>
+    $('#addinstallmentinsuredupdate-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var installmentdate = $('#dateinstallmentdataupdate').val();
+       
+       var percentage = $('#slipippercentageupdate').val();
+       var amount = $('#slipipamountupdate').val();
+       var slip_id = $('#slipnumberupdate').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('installment.store') }}",
+           type:"POST",
+           data:{
+               installmentdate:installmentdate,
+               percentage:percentage,
+               slipamount:amount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+response.id+'" data-name="installmentupdatevalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+response.id+')">delete</a></td></tr>')
+               $('#dateinstallmentupdate').val('');
+               $('#slipippercentageupdate').val('');
+               $('#slipipamountupdate').val('');
+               
+               //var total =  parseFloat($("#sliptotalsum").val());
+               //var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
+               //$("#sliptotalsum").val(sum);
+
+           }
+       });
+
+   });
+</script>
+
+
+<script type='text/javascript'>
+    $('#addinstallmentinsuredendorsement-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var installmentdate = $('#dateinstallmentdataendorsement').val();
+       
+       var percentage = $('#slipippercentageendorsement').val();
+       var amount = $('#slipipamountendorsement').val();
+       var slip_id = $('#slipnumberendorsement').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('installment.store') }}",
+           type:"POST",
+           data:{
+               installmentdate:installmentdate,
+               percentage:percentage,
+               slipamount:amount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+response.id+'" data-name="installmentendorsementvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+response.id+')">delete</a></td></tr>')
+               $('#dateinstallmentendorsement').val('');
+               $('#slipippercentageendorsement').val('');
+               $('#slipipamountendorsement').val('');
+               
+               //var total =  parseFloat($("#sliptotalsum").val());
+               //var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
+               //$("#sliptotalsum").val(sum);
+
+           }
+       });
+
+   });
+</script>
+
 
 <script type='text/javascript'>
     function deleteinstallmentdetail(id)
@@ -956,6 +1683,107 @@ $("body").on("click","#btn-danger2",function(){
 </script>
 
 <script type='text/javascript'>
+    $('#adddeductibleinsuredupdate-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var slipdptype = $('#slipdptypeupdate').val();
+       var slipdpcurrency = $('#slipdpcurrencyupdate').val();
+       
+       var percentage = $('#slipdppercentageupdate').val();
+       var amount = $('#slipdpamountupdate').val();
+       var minamount = $('#slipdpminamountupdate').val();
+       
+       var slip_id = $('#slipnumberupdate').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('deductible.store') }}",
+           type:"POST",
+           data:{
+               slipdptype:slipdptype,
+               slipdpcurrency:slipdpcurrency,
+               percentage:percentage,
+               amount:amount,
+               minamount:minamount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#deductiblePanelupdate tbody').prepend('<tr id="iiddeductibleupdate'+response.id+'" data-name="deductibleupdatevalue[]"><td data-name="'+response.deductibletype+'">'+response.deductibletype+'</td><td data-name="'+response.currencydata+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleupdate('+response.id+')">delete</a></td></tr>');
+               $('#slipdppercentageupdate').val('');
+               $('#slipdpamountupdate').val('');
+               $('#slipdpminamountupdate').val('');
+               
+           }
+       });
+
+   });
+</script>
+
+<script type='text/javascript'>
+    $('#adddeductibleinsuredendorsement-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var slipdptype = $('#slipdptypeendorsement').val();
+       var slipdpcurrency = $('#slipdpcurrencyendorsement').val();
+       
+       var percentage = $('#slipdppercentageendorsement').val();
+       var amount = $('#slipdpamountendorsement').val();
+       var minamount = $('#slipdpminamountendorsement').val();
+       
+       var slip_id = $('#slipnumberendorsement').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('deductible.store') }}",
+           type:"POST",
+           data:{
+               slipdptype:slipdptype,
+               slipdpcurrency:slipdpcurrency,
+               percentage:percentage,
+               amount:amount,
+               minamount:minamount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#deductiblePanelendorsement tbody').prepend('<tr id="iiddeductibleendorsement'+response.id+'" data-name="deductibleendorsementvalue[]"><td data-name="'+response.deductibletype+'">'+response.deductibletype+'</td><td data-name="'+response.currencydata+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleendorsement('+response.id+')">delete</a></td></tr>');
+               $('#slipdppercentageendorsement').val('');
+               $('#slipdpamountendorsement').val('');
+               $('#slipdpminamountendorsement').val('');
+               
+           }
+       });
+
+   });
+</script>
+
+
+<script type='text/javascript'>
     function deletedeductibledetail(id)
     {
         var token2 = $('input[name=_token2]').val();
@@ -1022,6 +1850,97 @@ $("body").on("click","#btn-danger2",function(){
 
    });
 </script>
+
+
+<script type='text/javascript'>
+    $('#addextendcoverageinsuredupdate-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var slipcncode = $('#slipcncodeupdate').val();
+       var percentage = $('#slipnilaiecupdate').val();
+       var amount = $('#slipamountecupdate').val();
+       
+       var slip_id = $('#slipnumberupdate').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('extendcoverage.store') }}",
+           type:"POST",
+           data:{
+               slipcncode:slipcncode,
+               percentage:percentage,
+               amount:amount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+response.id+'" data-name="extendcoverageupdatevalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageupdate('+response.id+')">delete</a></td></tr>');
+               $('#slipnilaiecupdate').val('');
+               $('#slipamountecupdate').val('');
+               
+           }
+       });
+
+   });
+</script>
+
+
+<script type='text/javascript'>
+    $('#addextendcoverageinsuredendorsement-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var slipcncode = $('#slipcncodeendorsement').val();
+       var percentage = $('#slipnilaiecendorsement').val();
+       var amount = $('#slipamountecendorsement').val();
+       
+       var slip_id = $('#slipnumberendorsement').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('extendcoverage.store') }}",
+           type:"POST",
+           data:{
+               slipcncode:slipcncode,
+               percentage:percentage,
+               amount:amount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#ExtendCoveragePanelendorsement tbody').prepend('<tr id="iidextendcoverageendorsement'+response.id+'" data-name="extendcoverageendorsementvalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageendorsement('+response.id+')">delete</a></td></tr>');
+               $('#slipnilaiecendorsement').val('');
+               $('#slipamountecendorsement').val('');
+               
+           }
+       });
+
+   });
+</script>
+
 
 <script type='text/javascript'>
     function deleteextendcoveragedetail(id)
@@ -1091,6 +2010,100 @@ $("body").on("click","#btn-danger2",function(){
 
    });
 </script>
+
+<script type='text/javascript'>
+    $('#addretrocessioninsuredupdate-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var type = $('#sliprptypeupdate').val();
+       var contract = $('#sliprpcontractupdate').val();
+       var percentage = $('#sliprppercentageupdate').val();
+       var amount = $('#sliprpamountupdate').val();
+       
+       var slip_id = $('#slipnumberupdate').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('retrocession.store') }}",
+           type:"POST",
+           data:{
+               type:type,
+               contract:contract,
+               percentage:percentage,
+               amount:amount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#retrocessionPanelupdate tbody').prepend('<tr id="iidretrocessionupdate'+response.id+'" data-name="retrocessionupdatevalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+')</td><td><a href="javascript:void(0)" onclick="deleteretrocessionupdate('+response.id+')">delete</a></td></tr>');
+               $('#sliprppercentageupdate').val('');
+               $('#sliprpamountupdate').val('');
+               
+           }
+       });
+
+   });
+</script>
+
+
+<script type='text/javascript'>
+    $('#addretrocessioninsuredendorsement-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var type = $('#sliprptypeendorsement').val();
+       var contract = $('#sliprpcontractendorsement').val();
+       var percentage = $('#sliprppercentageendorsement').val();
+       var amount = $('#sliprpamountendorsement').val();
+       
+       var slip_id = $('#slipnumberendorsement').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('retrocession.store') }}",
+           type:"POST",
+           data:{
+               type:type,
+               contract:contract,
+               percentage:percentage,
+               amount:amount,
+               id_slip:slip_id
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+               $('#retrocessionPanelendorsement tbody').prepend('<tr id="iidretrocessionendorsement'+response.id+'" data-name="retrocessionendorsementvalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+')</td><td><a href="javascript:void(0)" onclick="deleteretrocessionendorsement('+response.id+')">delete</a></td></tr>');
+               $('#sliprppercentageendorsement').val('');
+               $('#sliprpamountendorsement').val('');
+               
+           }
+       });
+
+   });
+</script>
+
 
 <script type='text/javascript'>
     function deleteretrocessiondetail(id)

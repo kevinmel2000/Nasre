@@ -1683,6 +1683,7 @@ class TransactionController extends Controller
                     [
                         'id' => $deductiblelist->id,
                         'deductibletype_id' => $deductiblelist->deductibletype_id,
+                        'deductibletype' => $deductiblelist->DeductibleType->description,
                         'dtdescript' => $deductiblelist->DeductibleType->description,
                         'dtabbrev' => $deductiblelist->DeductibleType->abbreviation,
                         'percentage' => $deductiblelist->percentage,

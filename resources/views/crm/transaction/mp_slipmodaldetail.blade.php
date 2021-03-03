@@ -1,5 +1,5 @@
 <div class="modal fade" id="detailmodaldata" tabindex="-1" user="dialog" aria-labelledby="addDetailLabel" aria-hidden="true">
-                <div class="modal-dialog" user="document">
+                <div class="modal-dialog modal-xl" user="document">
                 <div class="modal-content bg-light-gray">
                     <div class="modal-header bg-gray">
                     <h5 class="modal-title" id="addDetailLabel">{{__('Slip Detail')}}</h5>
@@ -31,6 +31,7 @@
                                     <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
                                         <div class="tab-pane fade show active" id="general-details-id2" role="tabpanel" aria-labelledby="general-details">
                                             <div class="row">
+                                                
                                              
                                             
                                             </div>
@@ -719,6 +720,7 @@
                                     </div>
                                 </div>
                             </div>
+
 
                     <div class="card card-primary">
                         <div class="card-body">

@@ -1,5 +1,5 @@
 <div class="modal fade" id="updatemodaldata" tabindex="-1" user="dialog" aria-labelledby="addupdateLabel" aria-hidden="true">
-                <div class="modal-dialog" user="document">
+                <div class="modal-dialog modal-xl" user="document">
                 <div class="modal-content bg-light-gray">
                     <div class="modal-header bg-gray">
                     <h5 class="modal-title" id="addupdateLabel">{{__('Slip Update')}}</h5>
@@ -298,12 +298,43 @@
                                                                             </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <tr>
-                                                                                  
-                                                                                </tr>
                                                                                 
                                                                             </tbody>
-                                                                        </table>
+                                                                            </table>
+
+                                                                            <table class="table table-bordered table-striped">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                <form id="addinterestinsuredupdate">
+                                                                                    @csrf
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <select id="slipinterestlistupdate" name="slipinterestlistupdate" class="form-control form-control-sm ">
+                                                                                                <option selected disabled>{{__('Interest list')}}</option>
+                                                                                                @foreach($interestinsured as $ii)
+                                                                                                    <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
+                                                                                                @endforeach
+                                                                                            </select>
+                                                                                        </div>  
+                                                                                    </td>
+
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipamountupdate" name="slipamountupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-20"/>
+                                                                                        </div>
+                                                                                    </td>
+
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <button type="button" id="addinterestinsuredupdate-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </form>
+                                                                                </tr>
+                                                                                
+                                                                                 </tbody>
+                                                                            </table>
+
                                                                         </div>
                                                                     </div>
                                                                 </div> 
@@ -385,6 +416,56 @@
                                                                            
                                                                         </tbody>
                                                                         </table>
+
+
+                                                                        <table class="table table-bordered table-striped">
+                                                                        <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <select id="slipdptypeupdate" name="slipdptypeupdate" class="form-control form-control-sm ">
+                                                                                        <option selected disabled>{{__('Type')}}</option>
+                                                                                        @foreach($deductibletype as $dt)
+                                                                                            <option value="{{ $dt->id }}">{{ $dt->abbreviation }} - {{ $dt->description }}</option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                </div>  
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <select  id="slipdpcurrencyupdate" name="slipdpcurrencyupdate" class="form-control form-control-sm ">
+                                                                                        <option selected disabled>{{__('Currency')}}</option>
+                                                                                        @foreach($currency as $crc)
+                                                                                            <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name}}</option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                </div>  
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="number" value="0" step=".0001" id="slipdppercentageupdate" name="slipdppercentageupdate" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="number" value="0" step=".0001" id="slipdpamountupdate" name="slipdpamountupdate" placeholder="=x*tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="number" value="0" step=".0001" id="slipdpminamountupdate" name="slipdpminamountupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                                </div>
+                                                                            </td> 
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <button type="button" id="adddeductibleinsuredupdate-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                        </tbody>
+                                                                        </table>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -416,6 +497,39 @@
                                                                             
                                                                         </tbody>
                                                                         </table>
+
+                                                                        <table class="table table-bordered table-striped">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <td >
+                                                                                    <div class="form-group">
+                                                                                        <select id="slipcncodeupdate" name="slipcncodeupdate" class="form-control form-control-sm ">
+                                                                                            <option selected readonly>{{__('Peril List')}}</option>
+                                                                                            @foreach($extendedcoverage as $ncd)
+                                                                                            <option value="{{ $ncd->id }}">{{ $ncd->code }} - {{ $ncd->name }} - {{ $ncd->description }}</option>
+                                                                                            @endforeach
+                                                                                        </select>
+                                                                                    </div>  
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="form-group">
+                                                                                        <input type="number" value="0" step=".0001" id="slipnilaiecupdate" name="slipnilaiecupdate" placeholder="y" class="form-control form-control-sm "/>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="form-group">
+                                                                                        <input type="number" value="0" step=".0001" id="slipamountecupdate" name="slipamountecupdate" placeholder="=y*tsi" class="form-control form-control-sm " readonly="readonly"/>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="form-group">
+                                                                                        <button type="button" id="addextendcoverageinsuredupdate-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                        </table>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -644,6 +758,42 @@
                                                                           
                                                                         </tbody>
                                                                         </table>
+                                                                        
+                                                                        <table class="table table-bordered table-striped">
+                                                                        <tbody>
+                                                                        <tr>
+                                                                            <form id="addinstallmentinsuredupdate">
+                                                                            @csrf
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                        <div class="input-group date" id="dateinstallment" data-target-input="nearest">
+                                                                                                <input type="date" id="dateinstallmentdataupdate" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdateupdate">
+                                                                                                <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
+                                                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                                
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="number" min="0" max="100" value="" step=".01"  id="slipippercentageupdate" name="slipippercentageupdate" placeholder="w" class="form-control form-control-sm " />
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipipamountupdate" name="slipipamountupdate" placeholder="= w% * net premium to NR" class="form-control form-control-sm" readonly/>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-group">
+                                                                                    <button type="button" id="addinstallmentinsuredupdate-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                </div>
+                                                                            </td>
+                                                                            </form>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                        </table>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -711,6 +861,56 @@
                                                                           
                                                                         </tbody>
                                                                         </table>
+
+                                                                        <table class="table table-bordered table-striped">
+                                                                        <tbody>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <select id="sliprptypeupdate" name="sliprptypeupdate" class="form-control form-control-sm ">
+                                                                                                <option selected disabled>{{__('Type list')}}</option>
+                                                                                                <option value="NM XOL">NM XOL</option>
+                                                                                            </select>
+                                                                                        </div>  
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <select id="sliprpcontractupdate" name="sliprpcontractupdate" class="form-control form-control-sm ">
+                                                                                                <option selected disabled>{{__('Contract list')}}</option>
+                                                                                                <option value="20NM11110">20NM11110</option>
+                                                                                                <option value="20ABC">20ABC</option>
+                                                                                            </select>
+                                                                                        </div>  
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-8">
+                                                                                                    <div class="input-group">
+                                                                                                        <input type="number" min="0" max="100" value="" step=".01" id="sliprppercentageupdate" name="sliprppercentageupdate" class="form-control form-control-sm " />
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-md-2">
+                                                                                                    <div class="input-group-append">
+                                                                                                        <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <input type="text" id="sliprpamountupdate" name="sliprpamountupdate" placeholder="= w% * net premium to NR" class="form-control form-control-sm " readonly/>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="form-group">
+                                                                                            <button type="button" id="addretrocessioninsuredupdate-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                            </table>
                                                                     </div>
                                                                 </div>
                                                             </div>

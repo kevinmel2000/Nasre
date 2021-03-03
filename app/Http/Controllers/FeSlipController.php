@@ -601,6 +601,64 @@ class FeSlipController extends Controller
         $user = Auth::user();
         $slipdata=SlipTable::where('number',$idm)->first();
     
+       
+
+        $interestdata=json_decode($slipdata->interest_insured);   
+        $newarray=[];
+
+        if(!empty($interestdata))
+        {
+            foreach($interestdata as $mydata)
+            {
+                $interestdatadesc= InterestInsured::where('id','=',$mydata->interest_id)->first();
+                $mydata->description=$interestdatadesc->description;     
+                
+                array_push($newarray,$mydata);
+            }  
+        }     
+
+        $newinterestdata=json_encode($newarray);
+
+
+        $deductibledata=json_decode($slipdata->deductible_panel);   
+
+        $newarraydeduct=[];
+
+        if(!empty($deductibledata))
+        {
+            foreach($deductibledata as $mydata)
+            {
+                $deductdatadesc= DeductibleType::where('id','=',$mydata->deductibletype_id)->first();
+                $mydata->deductibletype=$deductdatadesc->description;
+                
+                $currencydesc=Currency::where('id','=',$mydata->currency_id)->first();
+                $mydata->currencydata=$currencydesc->symbol_name;
+                
+                
+                array_push($newarraydeduct,$mydata);
+            }     
+        }  
+
+        $newdeductdata=json_encode($newarraydeduct);
+
+
+        $extendcoverdata=json_decode($slipdata->extend_coverage);   
+
+        $newarrayextend=[];
+
+        if(!empty($extendcoverdata))
+        {
+            foreach($extendcoverdata as $mydata)
+            {
+                $extenddesc= ExtendedCoverage::where('id','=',$mydata->extendcoverage_id)->first();
+                $mydata->coveragetype=$extenddesc->description;
+                
+                array_push($newarrayextend,$mydata);
+            }       
+        }
+        $newextenddata=json_encode($newarrayextend);
+
+
         return response()->json(
             [
                 'id' => $slipdata->id,
@@ -625,13 +683,13 @@ class FeSlipController extends Controller
                 'cn_dn'=> $slipdata->cn_dn,
                 'policy_no'=> $slipdata->policy_no,
                 'attacment_file'=> $slipdata->attacment_file,
-                'interest_insured'=> $slipdata->interest_insured,
+                'interest_insured'=> $newinterestdata,
                 'total_sum_insured'=> $slipdata->total_sum_insured,
                 'insured_type'=>$slipdata->insured_type,
                 'insured_pct'=>$slipdata->insured_pct,
                 'total_sum_pct'=>$slipdata->total_sum_pct,
-                'deductible_panel'=>$slipdata->deductible_panel,
-                'extend_coverage'=>$slipdata->extend_coverage,
+                'deductible_panel'=>$newdeductdata,
+                'extend_coverage'=>$newextenddata,
                 'insurance_period_from'=>$slipdata->insurance_period_from,
                 'insurance_period_to'=>$slipdata->insurance_period_to,
                 'reinsurance_period_from'=>$slipdata->reinsurance_period_from,
@@ -693,6 +751,63 @@ class FeSlipController extends Controller
             }
         }
 
+
+        $interestdata=json_decode($slipdata->interest_insured);   
+        $newarray=[];
+
+        if(!empty($interestdata))
+        {
+            foreach($interestdata as $mydata)
+            {
+                $interestdatadesc= InterestInsured::where('id','=',$mydata->interest_id)->first();
+                $mydata->description=$interestdatadesc->description;     
+                
+                array_push($newarray,$mydata);
+            }  
+        }     
+
+        $newinterestdata=json_encode($newarray);
+
+
+        $deductibledata=json_decode($slipdata->deductible_panel);   
+
+        $newarraydeduct=[];
+
+        if(!empty($deductibledata))
+        {
+            foreach($deductibledata as $mydata)
+            {
+                $deductdatadesc= DeductibleType::where('id','=',$mydata->deductibletype_id)->first();
+                $mydata->deductibletype=$deductdatadesc->description;
+                
+                $currencydesc=Currency::where('id','=',$mydata->currency_id)->first();
+                $mydata->currencydata=$currencydesc->symbol_name;
+                
+                
+                array_push($newarraydeduct,$mydata);
+            }     
+        }  
+
+        $newdeductdata=json_encode($newarraydeduct);
+
+
+        $extendcoverdata=json_decode($slipdata->extend_coverage);   
+
+        $newarrayextend=[];
+
+        if(!empty($extendcoverdata))
+        {
+            foreach($extendcoverdata as $mydata)
+            {
+                $extenddesc= ExtendedCoverage::where('id','=',$mydata->extendcoverage_id)->first();
+                $mydata->coveragetype=$extenddesc->description;
+                
+                array_push($newarrayextend,$mydata);
+            }       
+        }
+        $newextenddata=json_encode($newarrayextend);
+
+
     
         return response()->json(
             [
@@ -719,13 +834,13 @@ class FeSlipController extends Controller
                 'cn_dn'=> $slipdata->cn_dn,
                 'policy_no'=> $slipdata->policy_no,
                 'attacment_file'=> $slipdata->attacment_file,
-                'interest_insured'=> $slipdata->interest_insured,
+                'interest_insured'=> $newinterestdata,
                 'total_sum_insured'=> $slipdata->total_sum_insured,
                 'insured_type'=>$slipdata->insured_type,
                 'insured_pct'=>$slipdata->insured_pct,
                 'total_sum_pct'=>$slipdata->total_sum_pct,
-                'deductible_panel'=>$slipdata->deductible_panel,
-                'extend_coverage'=>$slipdata->extend_coverage,
+                'deductible_panel'=>$newdeductdata,
+                'extend_coverage'=>$newextenddata,
                 'insurance_period_from'=>$slipdata->insurance_period_from,
                 'insurance_period_to'=>$slipdata->insurance_period_to,
                 'reinsurance_period_from'=>$slipdata->reinsurance_period_from,
