@@ -1726,6 +1726,51 @@ $(document).ready(function(){
     }
 </script>
 
+<script type='text/javascript'>
+    function deleteinstallmentupdate(id)
+    {
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-installment-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response){
+                
+                $('#iidinstallmentupdate'+id).remove();
+                console.log(response);
+            }
+        });
+    }
+</script>
+
+
+<script type='text/javascript'>
+    function deleteinstallmentendorsement(id)
+    {
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-installment-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response){
+                
+                $('#iidinstallmentendorsement'+id).remove();
+                console.log(response);
+            }
+        });
+    }
+</script>
+
 
 
 <script type='text/javascript'>
