@@ -1033,10 +1033,16 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 d-flex justify-content-start">
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="">{{__('Rate (permil.. %)')}}</label>
                                                         <input type="number"  value="{{ $slipdata->rate }}" step=".0001" id="sliprate" name="sliprate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" required/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('V Broker')}}</label>
+                                                        <input type="number" value="0" step=".0001" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                     </div>
                                                 </div>
                                             </div>
