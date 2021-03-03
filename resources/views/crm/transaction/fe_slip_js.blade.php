@@ -2063,6 +2063,54 @@ $(document).ready(function() {
 </script>
 
 
+
+<script type='text/javascript'>
+    function deleteextendcoverageupdate(id)
+    {
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-extendcoverage-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response){
+                
+                $('#iidextendcoverageupdate'+id).remove();
+                console.log(response);
+            }
+        });
+    }
+</script>
+
+
+
+<script type='text/javascript'>
+    function deleteextendcoverageendorsement(id)
+    {
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-extendcoverage-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response){
+                
+                $('#iidextendcoverageendorsement'+id).remove();
+                console.log(response);
+            }
+        });
+    }
+</script>
+
+
 <script type='text/javascript'>
     $('#addretrocessioninsured-btn').click(function(e){
        //alert('masuk');
