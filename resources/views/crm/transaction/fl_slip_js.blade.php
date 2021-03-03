@@ -1056,8 +1056,6 @@ $(document).ready(function() {
         });
     }
 </script>
-
-
 <script type='text/javascript'>
     function deleteinterestupdate(id){
         var token2 = $('input[name=_token2]').val();
@@ -1072,7 +1070,7 @@ $(document).ready(function() {
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
-                $('#iid'+id).remove();
+                $('#iidupdate'+id).remove();
                 console.log(response);
                 var total =  parseFloat($("#sliptotalsumupdate").val());
                 var sum = isNaN(total - parseFloat(response.amount)) ? 0 :(total - parseFloat(response.amount)) ;
@@ -1082,6 +1080,7 @@ $(document).ready(function() {
         });
     }
 </script>
+
 
 
 <script type='text/javascript'>
@@ -1098,7 +1097,7 @@ $(document).ready(function() {
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 
-                $('#iid'+id).remove();
+                $('#iidendorsement'+id).remove();
                 console.log(response);
                 var total =  parseFloat($("#sliptotalsumendorsement").val());
                 var sum = isNaN(total - parseFloat(response.amount)) ? 0 :(total - parseFloat(response.amount)) ;
@@ -1868,6 +1867,50 @@ $(document).ready(function() {
     }
 </script>
 
+<script type='text/javascript'>
+    function deletedeductibleupdate(id)
+    {
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-deductible-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response){
+                
+                $('#iiddeductibleupdate'+id).remove();
+                console.log(response);
+            }
+        });
+    }
+</script>
+
+
+<script type='text/javascript'>
+    function deletedeductibleendorsement(id)
+    {
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-deductible-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response){
+                
+                $('#iiddeductibleendorsement'+id).remove();
+                console.log(response);
+            }
+        });
+    }
+</script>
 
 
 <script type='text/javascript'>
