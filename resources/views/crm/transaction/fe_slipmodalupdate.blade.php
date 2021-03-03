@@ -42,7 +42,7 @@
                                                         <div class="form-group">
                                                             <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
                                                             <label for="">{{__('Number')}} </label>
-                                                            <input type="text" id="slipnumberupdate" name="slipnumberupdate" class="form-control form-control-sm" value="{{ $code_sl }}" readonly="readonly" required/>
+                                                            <input type="text" id="slipnumberupdate" name="slipnumberupdate" class="form-control form-control-sm" readonly="readonly" required/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -307,8 +307,7 @@
                                                                             <table class="table table-bordered table-striped">
                                                                             <tbody>
                                                                                 <tr>
-                                                                                <form id="addinterestinsuredupdate">
-                                                                                    @csrf
+                                                                                
                                                                                     <td>
                                                                                         <div class="form-group">
                                                                                             <select id="slipinterestlistupdate" name="slipinterestlistupdate" class="form-control form-control-sm ">
@@ -331,8 +330,7 @@
                                                                                             <button type="button" id="addinterestinsuredupdate-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
                                                                                         </div>
                                                                                     </td>
-                                                                                </form>
-                                                                                </tr>
+                                                                                 </tr>
                                                                                 
                                                                                  </tbody>
                                                                             </table>
@@ -764,9 +762,7 @@
                                                                         <table class="table table-bordered table-striped">
                                                                         <tbody>
                                                                         <tr>
-                                                                            <form id="addinstallmentinsuredupdate">
-                                                                            @csrf
-                                                                            <td>
+                                                                           <td>
                                                                                 <div class="form-group">
                                                                                         <div class="input-group date" id="dateinstallment" data-target-input="nearest">
                                                                                                 <input type="date" id="dateinstallmentdataupdate" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdateupdate">
@@ -792,7 +788,7 @@
                                                                                     <button type="button" id="addinstallmentinsuredupdate-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>
-                                                                            </form>
+                                                                            
                                                                         </tr>
                                                                         </tbody>
                                                                         </table>
@@ -925,20 +921,20 @@
                                 </div>
                             </div>
 
-                <div class="card card-primary">
-                    <div class="card-body">
-                        <div class="row">
+                            <div class="card card-primary">
+                                <div class="card-body">
+                                    <div class="row">
+                                    
+                                    </div>
+                                </div>
+                            </div> 
                         
-                        
-                        </div>
-                    </div>
-                </div> 
-            
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-info" id="addship-btn">Update</button>
+                            <input type="submit" class="btn btn-secondary"  value="Update"/>
                         </div>
+
                     </form>
                 </div>
                 </div>

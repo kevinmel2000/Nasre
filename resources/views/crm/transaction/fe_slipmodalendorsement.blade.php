@@ -936,9 +936,10 @@
                 </div> 
             
 
-                        <div class="modal-footer">
+                        
+                    <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-info" id="addship-btn">Endorsement</button>
+                            <input type="submit" class="btn btn-secondary"  value="Endorsement"/>
                         </div>
                     </form>
                 </div>
