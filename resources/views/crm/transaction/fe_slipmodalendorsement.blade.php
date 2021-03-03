@@ -308,8 +308,7 @@
                                                                         <table class="table table-bordered table-striped">
                                                                             <tbody>
                                                                                     <tr>
-                                                                                        <form id="addinterestinsuredendorsement">
-                                                                                            @csrf
+                                                                                        
                                                                                             <td>
                                                                                                 <div class="form-group">
                                                                                                     <select id="slipinterestlistendorsement" name="slipinterestlistendorsement" class="form-control form-control-sm ">
@@ -332,7 +331,6 @@
                                                                                                     <button type="button" id="addinterestinsuredendorsement-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
                                                                                                 </div>
                                                                                             </td>
-                                                                                        </form>
                                                                                         </tr>
                                                                             </tbody>
                                                                         </table>
@@ -764,9 +762,7 @@
                                                                         <tbody>
                                                                         <tr>
 
-                                                                            <form id="addinstallmentinsuredendorsement">
-                                                                            @csrf
-                                                                            <td>
+                                                                           <td>
                                                                                 <div class="form-group">
                                                                                         <div class="input-group date" id="dateinstallment" data-target-input="nearest">
                                                                                                 <input type="date" id="dateinstallmentdataendorsement" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdateendorsement">
@@ -791,7 +787,7 @@
                                                                                     <button type="button" id="addinstallmentinsuredendorsement-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>
-                                                                            </form>
+                                                                            
                                                                         </tr>
                                                                         </tbody>
                                                                         </table>
@@ -926,15 +922,15 @@
                                 </div>
                             </div>
 
-                <div class="card card-primary">
-                    <div class="card-body">
-                        <div class="row">
-                        
-                        
-                        </div>
-                    </div>
-                </div> 
-            
+                        <div class="card card-primary">
+                            <div class="card-body">
+                                <div class="row">
+                                
+                                
+                                </div>
+                            </div>
+                        </div> 
+                    
 
                         
                     <div class="modal-footer">
