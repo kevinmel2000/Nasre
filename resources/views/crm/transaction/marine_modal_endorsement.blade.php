@@ -9,7 +9,7 @@
         </div>
 
         
-        <form id="multi-file-upload-ajaxupdate" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
+        <form id="multi-file-upload-ajaxendorsement" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
         @csrf
                 <div class="card card-tabs">
                     <div class="card-header p-0 pt-1 border-bottom-0">
@@ -44,10 +44,10 @@
                                     <div class="row">
                                             <div class="col-md-12">
                                             <div class="form-group">
-                                                <input type="hidden" name="_token3" id="token3" value="{{ csrf_token() }}">
-                                                <input type="hidden" name="msinumberupdate" id="msinumberupdate" value="">
+                                                <input type="hidden" name="_token4" id="token4" value="{{ csrf_token() }}">
+                                                <input type="hidden" name="msinumberendorsement" id="msinumberendorsement" value="">
                                                 <label for="">{{__('Number')}} </label>
-                                                <input type="text" id="slipnumberupdate" name="slipnumberupdate" class="form-control form-control-sm" value=" " readonly="readonly" required/>
+                                                <input type="text" id="slipnumberendorsement" name="slipnumberendorsement" class="form-control form-control-sm" value=" " readonly="readonly" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -55,7 +55,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="">{{__('Username')}}</label>
-                                                    <input type="text" id="slipusernameupdate" name="slipusernameupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" value="" readonly="readonly" required/>
+                                                    <input type="text" id="slipusernameendorsement" name="slipusernameendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" value="" readonly="readonly" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -64,7 +64,7 @@
                                                 <div class="form-group">
                                                     <label>{{__('Prod Year')}}:</label>
                                                         <div class="input-group date" id="date" data-target-input="nearest">
-                                                                <input type="text" id="slipprodyearupdate" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipprodyearupdate" value="" readonly="readonly">
+                                                                <input type="text" id="slipprodyearendorsement" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipprodyearendorsement" value="" readonly="readonly">
                                                                 <div class="input-group-append" >
                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                 </div>
@@ -76,7 +76,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="">{{__('UY')}}</label>
-                                                    <input type="number" id="slipuyupdate" name="slipuyupdate" value="" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-4" required/>
+                                                    <input type="number" id="slipuyendorsement" name="slipuyendorsement" value="" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-4" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -84,7 +84,7 @@
                                             <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Status')}}</label>
-                                                <select name="slipstatusdetail" id="slipstatusupdate" class="form-control form-control-sm ">
+                                                <select name="slipstatusdetail" id="slipstatusendorsement" class="form-control form-control-sm ">
                                                     <option value="offer" >Offer</option>
                                                     <option value="binding" >Binding</option>
                                                     <option value="slip">Slip</option>
@@ -109,7 +109,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 com-sm-12 mt-3">
-                                                <table id="slipStatusTableupdate" class="table table-bordered table-striped">
+                                                <table id="slipStatusTableendorsement" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
                                                         <th>{{__('Status')}}</th>
@@ -131,14 +131,14 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Source')}}</label>
-                                            <select id="slipcedingbrokerupdate" name="slipcedingbrokerupdate" class="e1 form-control form-control-sm ">
+                                            <select id="slipcedingbrokerendorsement" name="slipcedingbrokerendorsement" class="e1 form-control form-control-sm ">
                                                 {{-- @foreach($cedingbroker as $cb)
                                                     <option value="{{ $cb->id }}" >{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
                                                 @endforeach --}}
                                             </select>
                                         </div>    
                                         <div class="form-group">
-                                            <select id="slipcedingupdate" name="slipcedingupdate" class="e1 form-control form-control-sm ">
+                                            <select id="slipcedingendorsement" name="slipcedingendorsement" class="e1 form-control form-control-sm ">
                                                 <option value="" readonly selected  value='0'>Ceding </option>
                                                 {{-- @foreach($ceding as $cd)
                                                     <option value="{{ $cd->id }}">{{ $cd->code }} - {{ $cd->name }}</option>
@@ -153,7 +153,7 @@
                                             <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Currency')}}</label>
-                                                <select id="slipcurrencyupdate" name="slipcurrencyupdate" class="e1 form-control form-control-sm ">
+                                                <select id="slipcurrencyendorsement" name="slipcurrencyendorsement" class="e1 form-control form-control-sm ">
                                                     {{-- @foreach($currency as $crc)
                                                         <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
                                                         
@@ -167,7 +167,7 @@
                                             <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('COB')}}</label>
-                                                <select id="slipcobupdate" name="slipcobupdate" class="e1 form-control form-control-sm ">
+                                                <select id="slipcobendorsement" name="slipcobendorsement" class="e1 form-control form-control-sm ">
                                                     <option selected readonly  value='0'>{{__('COB list')}}</option>
                                                     {{-- @foreach($cob as $boc)
                                                         <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
@@ -182,7 +182,7 @@
                                             <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('KOC')}}</label>
-                                                <select id="slipkocupdate" name="slipkocupdate" class="e1 form-control form-control-sm ">
+                                                <select id="slipkocendorsement" name="slipkocendorsement" class="e1 form-control form-control-sm ">
                                                     <option selected readonly  value='0'>{{__('KOC list')}}</option>
                                                     {{-- @foreach($koc as $cok)
                                                         <option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
@@ -197,7 +197,7 @@
                                             <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Occupacy')}}</label>
-                                                <select id="slipoccupacyupdate" name="slipoccupacyupdate" class="e1 form-control form-control-sm ">
+                                                <select id="slipoccupacyendorsement" name="slipoccupacyendorsement" class="e1 form-control form-control-sm ">
                                                     <option selected readonly  value='0'>{{__('Occupation list')}}</option>
                                                     {{-- @foreach($ocp as $ocpy)
                                                         <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
@@ -212,7 +212,7 @@
                                             <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Building Const')}}</label>
-                                                <select id="slipbld_constupdate" name="slipbld_constupdate" class="e1 form-control form-control-sm ">
+                                                <select id="slipbld_constendorsement" name="slipbld_constendorsement" class="e1 form-control form-control-sm ">
                                                     <option selected readonly  value='0'>{{__('Building Const list')}}</option>
                                                     <option value="Buliding 1" >Buliding 1</option>
                                                     <option value="Buliding 2" >Buliding 2</option>
@@ -238,19 +238,19 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Slip No.')}}</label>
-                                                                <input type="text" id="slipnoupdate"  value=""  name="slipnoupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                <input type="text" id="slipnoendorsement"  value=""  name="slipnoendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">{{__('CN/DN')}}</label>
-                                                                <input type="text" id="slipcndnupdate" name="slipcndnupdate" value=""  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                <input type="text" id="slipcndnendorsement" name="slipcndnendorsement" value=""  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Policy No')}}</label>
-                                                                <input type="text" id="slippolicy_noupdate" value="" name="slippolicy_noupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                                <input type="text" id="slippolicy_noendorsement" value="" name="slippolicy_noendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                             </div>
                                                         </div>
                                                         
@@ -266,9 +266,9 @@
                                             <label>{{__('Attachment')}} </label>
                                             <div class="input-group" >
                                                 <div class="input-group control-group increment2" >
-                                                    <input type="file" name="files[]" id="attachmentupdate" class="form-control" multiple>
+                                                    <input type="file" name="files[]" id="attachmentendorsement" class="form-control" multiple>
                                                 </div>
-                                                <ul id="aidlistupdate">
+                                                <ul id="aidlistendorsement">
 
 
                                                 </ul>
@@ -280,7 +280,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" id="slipcoinsuranceupdate" name="slipcoinsuranceupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                            <input type="text" id="slipcoinsuranceendorsement" name="slipcoinsuranceendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                         </div>
                                     </div>
                                 </div>
@@ -296,7 +296,7 @@
                                                 <div class="row">
                                                     <div class="col-md-8">
                                                         <div class="col-md-12 com-sm-12 mt-3">
-                                                            <table id="interestInsuredTableupdate" class="table table-bordered table-striped">
+                                                            <table id="interestInsuredTableendorsement" class="table table-bordered table-striped">
                                                                 <thead>
                                                                 <tr>
                                                                 <th>{{__('Interest ID - Name')}}</th>
@@ -322,7 +322,7 @@
                                     <div class="col-md-12 d-flex justify-content-end">
                                         <div class="form-group">
                                             <label for="">{{__('Total Sum Insured') }}</label>
-                                            <input type="number" min="0" value="" step=".0001" id="sliptotalsumupdate" name="sliptotalsumupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
+                                            <input type="number" min="0" value="" step=".0001" id="sliptotalsumendorsement" name="sliptotalsumendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
                                         </div>
                                     </div>
                                 </div>
@@ -334,7 +334,7 @@
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label for="">{{__('Type')}}</label>
-                                                    <select id="sliptypeupdate" name="sliptypeupdate" class="form-control form-control-sm ">
+                                                    <select id="sliptypeendorsement" name="sliptypeendorsement" class="form-control form-control-sm ">
                                                         {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
                                                         <option value="PML" >PML</option>
                                                         <option value="LOL" >LOL</option>
@@ -347,7 +347,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                                <input type="number" value="" step=".0001" id="slippctupdate" name="slippctupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
+                                                                <input type="number" value="" step=".0001" id="slippctendorsement" name="slippctendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -361,7 +361,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for=""style="opacity: 0;">{{__('Type')}}</label>
-                                                    <input type="number" value="" step=".0001" id="sliptotalsumpctupdate" name="sliptotalsumpctupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" required/>
+                                                    <input type="number" value="" step=".0001" id="sliptotalsumpctendorsement" name="sliptotalsumpctendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -377,7 +377,7 @@
                                                 <div class="row">
                                                     <div class="col-md-10">
                                                         <div class="col-md-12 com-sm-12 mt-3">
-                                                            <table id="deductiblePanelupdate" class="table table-bordered table-striped">
+                                                            <table id="deductiblePanelendorsement" class="table table-bordered table-striped">
                                                             <thead>
                                                             <tr>
                                                                 <th>{{__('Type')}}</th>
@@ -409,7 +409,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="col-md-12 com-sm-12 mt-3">
-                                                            <table id="conditionNeededupdate" class="table table-bordered table-striped">
+                                                            <table id="conditionNeededendorsement" class="table table-bordered table-striped">
                                                             <thead>
                                                             <tr>
                                                                 <th>{{__('Condition Needed Code - Name')}}</th>
@@ -436,7 +436,7 @@
                                                 <div class="form-group">
                                                     <label>{{__('Insurance Periode')}}:</label>
                                                         {{-- <div class="input-group date" id="dateinfrom" data-target-input="nearest"> --}}
-                                                                <input type="date" class="form-control form-control-sm datepicker-input" value="" data-target="#date" id="slipipfromupdate" name="slipipfromupdate">
+                                                                <input type="date" class="form-control form-control-sm datepicker-input" value="" data-target="#date" id="slipipfromendorsement" name="slipipfromendorsement">
                                                                 {{-- <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                 </div>
@@ -451,7 +451,7 @@
                                                 <div class="form-group">
                                                     <label style="opacity: 0;">{{__('p')}}:</label>
                                                         {{-- <div class="input-group date" id="dateinto" data-target-input="nearest"> --}}
-                                                                <input type="date" class="form-control form-control-sm datepicker-input"  value="" data-target="#date" id="slipiptoupdate" name="slipiptoupdate">
+                                                                <input type="date" class="form-control form-control-sm datepicker-input"  value="" data-target="#date" id="slipiptoendorsement" name="slipiptoendorsement">
                                                                 {{-- <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                 </div>
@@ -464,7 +464,7 @@
                                                 <div class="form-group">
                                                     <label>{{__('Reinsurance Periode')}}:</label>
                                                         {{-- <div class="input-group date" id="daterefrom" data-target-input="nearest"> --}}
-                                                                <input type="date" class="form-control form-control-sm datetimepicker-input" value="" data-target="#date" id="sliprpfromupdate" name="sliprpfromupdate">
+                                                                <input type="date" class="form-control form-control-sm datetimepicker-input" value="" data-target="#date" id="sliprpfromendorsement" name="sliprpfromendorsement">
                                                                 {{-- <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                 </div>
@@ -479,7 +479,7 @@
                                                 <div class="form-group">
                                                     <label style="opacity: 0;">{{__('p')}}:</label>
                                                         {{-- <div class="input-group date" id="datereto" data-target-input="nearest"> --}}
-                                                                <input type="date" class="form-control form-control-sm datetimepicker-input" value=""  data-target="#date" id="sliprptoupdate" name="sliprptoupdate">
+                                                                <input type="date" class="form-control form-control-sm datetimepicker-input" value=""  data-target="#date" id="sliprptoendorsement" name="sliprptoendorsement">
                                                                 {{-- <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                 </div>
@@ -499,7 +499,7 @@
                                     <div class="col-md-4">
                                         <label class="cl-switch cl-switch-green">
                                             <span for="switch-proportional" class="label"> {{__('Proportional')}} </span>
-                                            <input type="checkbox" name="slipproportionalupdate[]" id="switch-proportionalupdate"
+                                            <input type="checkbox" name="slipproportionalendorsement[]" id="switch-proportionalendorsement"
                                             class="submit" checked>
                                             <span class="switcher"></span>
                                             <span  class="label"> {{__('Non Proportional')}} </span>
@@ -518,7 +518,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Layer for non proportional')}}</label>
-                                            <select id="sliplayerproportionalupdate" name="sliplayerproportionalupdate" class="form-control form-control-sm ">
+                                            <select id="sliplayerproportionalendorsement" name="sliplayerproportionalendorsement" class="form-control form-control-sm ">
                                                 <option selected disabled>{{__('Choose layer')}}</option>
                                                 <option value="Layer 1" >Layer 1</option>
                                                 <option value="Layer 2" >Layer 2</option>
@@ -534,7 +534,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Rate (permil.. %)')}}</label>
-                                                <input type="number"  value="" step=".0001" id="sliprateupdate" name="sliprateupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" required/>
+                                                <input type="number"  value="" step=".0001" id="sliprateendorsement" name="sliprateendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" required/>
                                             </div>
                                         </div>
                                     </div>
@@ -546,7 +546,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                                <input type="number" value="" step=".0001" id="slipshareupdate" name="slipshareupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="b" required/>
+                                                                <input type="number" value="" step=".0001" id="slipshareendorsement" name="slipshareendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="b" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -560,7 +560,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
-                                                    <input type="number" value="" step=".0001" id="slipsumshareupdate" name="slipsumshareupdate" placeholder="= b% * tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
+                                                    <input type="number" value="" step=".0001" id="slipsumshareendorsement" name="slipsumshareendorsement" placeholder="= b% * tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -571,7 +571,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Basic Premium')}}</label>
-                                                <input type="number" value="" step=".0001" id="slipbasicpremiumupdate" name="slipbasicpremiumupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a% * tsi" required/>
+                                                <input type="number" value="" step=".0001" id="slipbasicpremiumendorsement" name="slipbasicpremiumendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a% * tsi" required/>
                                             </div>
                                         </div>
                                     </div>
@@ -579,7 +579,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Gross Prm to NR')}}</label>
-                                                <input type="number" value="" step=".0001" id="slipgrossprmtonrupdate" name="slipgrossprmtonrupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a% * b% * tsi" readonly="readonly" required/>
+                                                <input type="number" value="" step=".0001" id="slipgrossprmtonrendorsement" name="slipgrossprmtonrendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a% * b% * tsi" readonly="readonly" required/>
                                             </div>
                                         </div>
                                     </div>
@@ -593,7 +593,7 @@
                                                     <div class="row d-flex flex-wrap">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                                <input type="number" value="" step=".0001" id="slipcommissionupdate" name="slipcommissionupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="d" required/>
+                                                                <input type="number" value="" step=".0001" id="slipcommissionendorsement" name="slipcommissionendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="d" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -607,7 +607,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="" style="opacity: 0;">{{__('Gross Prm to NR')}}</label>
-                                                    <input type="number"  value="" step=".0001" id="slipsumcommissionupdate" name="slipsumcommissionupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" readonly="readonly" />
+                                                    <input type="number"  value="" step=".0001" id="slipsumcommissionendorsement" name="slipsumcommissionendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" readonly="readonly" />
                                                 </div>
                                             </div>
                                         </div>
@@ -616,7 +616,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Net Prm to NR')}}</label>
-                                                <input type="number"  value="" step=".0001" id="slipnetprmtonrupdate" name="slipnetprmtonrupdate" class="form-control form-control-sm " data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="2-50" readonly="readonly"/>
+                                                <input type="number"  value="" step=".0001" id="slipnetprmtonrendorsement" name="slipnetprmtonrendorsement" class="form-control form-control-sm " data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="2-50" readonly="readonly"/>
                                             </div>
                                         </div>
                                     </div>
@@ -635,7 +635,7 @@
                                                 <div class="row">
                                                     <div class="col-md-10">
                                                         <div class="col-md-12 com-sm-12 mt-3">
-                                                            <table id="installmentPanelupdate" class="table table-bordered table-striped">
+                                                            <table id="installmentPanelendorsement" class="table table-bordered table-striped">
                                                             <thead>
                                                             <tr>
                                                                 <th>{{__('Installment Date')}}</th>
@@ -659,7 +659,7 @@
                                     <div class="col-md-6 d-flex justify-content-start">
                                         <div class="form-group">
                                             <label for="">{{__('Retro Backup?')}}</label>
-                                            <select id="sliprbupdate" name="sliprbupdate" class="form-control form-control-sm ">
+                                            <select id="sliprbendorsement" name="sliprbendorsement" class="form-control form-control-sm ">
                                                 <option value="AF" >YES</option>
                                                 <option value="AN" >NO</option>
                                             </select>
@@ -672,7 +672,7 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <div class="input-group">
-                                                            <input type="text" id="sliporupdate" value="" name="sliporupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                            <input type="text" id="sliporendorsement" value="" name="sliporendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -682,7 +682,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <input type="text" id="slipsumorupdate" value=""   name="slipsumorupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly/>
+                                                            <input type="text" id="slipsumorendorsement" value=""   name="slipsumorendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -700,7 +700,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="col-md-12 com-sm-12 mt-3">
-                                                            <table id="retrocessionPanelupdate" class="table table-bordered table-striped">
+                                                            <table id="retrocessionPanelendorsement" class="table table-bordered table-striped">
                                                             <thead>
                                                             <tr>
                                                                 <th>{{__('Type')}}</th>
@@ -738,7 +738,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                <button type="submit" class="btn btn-info" id="updatemodal-btn">Update</button>
+                <button type="submit" class="btn btn-info" id="endorsemodal-btn">Endorsement</button>
             </div>
         </form>
     </div>
