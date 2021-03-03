@@ -1,4 +1,4 @@
-<div class="modal fade" id="updatemodaldata" tabindex="-1" user="dialog" aria-labelledby="addupdateLabel" aria-hidden="true">
+            <div class="modal fade" id="updatemodaldata" tabindex="-1" user="dialog" aria-labelledby="addupdateLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl" user="document">
                 <div class="modal-content bg-light-gray">
                     <div class="modal-header bg-gray">
@@ -272,8 +272,10 @@
                                                     <div class="form-group">
                                                         <label>{{__('Attachment')}} </label>
                                                         <div class="input-group">
-                                                    
+                                                             <div class="input-group control-group increment2" >
+                                                            <input type="file" name="filesupdate[]" id="attachmentupdate" class="form-control" multiple>
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>

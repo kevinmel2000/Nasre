@@ -272,8 +272,10 @@
                                                     <div class="form-group">
                                                         <label>{{__('Attachment')}} </label>
                                                         <div class="input-group">
-                                                    
+                                                             <div class="input-group control-group increment2" >
+                                                            <input type="file" name="filesupdate[]" id="attachmentupdate" class="form-control" multiple>
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>

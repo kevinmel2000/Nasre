@@ -9,7 +9,7 @@
                     </div>
 
                     
-                    <form id="multi-file-upload-ajaxupdate" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
+                    <form id="multi-file-upload-ajaxendorsement" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
                     @csrf
                             <div class="card card-tabs">
                                 <div class="card-header p-0 pt-1 border-bottom-0">
@@ -272,8 +272,10 @@
                                                     <div class="form-group">
                                                         <label>{{__('Attachment')}} </label>
                                                         <div class="input-group">
-                                                    
+                                                        <div class="input-group control-group increment2" >
+                                                            <input type="file" name="filesendorsement[]" id="attachmentendorsement" class="form-control" multiple>
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -761,6 +763,7 @@
                                                                         <table class="table table-bordered table-striped">
                                                                         <tbody>
                                                                         <tr>
+
                                                                             <form id="addinstallmentinsuredendorsement">
                                                                             @csrf
                                                                             <td>
