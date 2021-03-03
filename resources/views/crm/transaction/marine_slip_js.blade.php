@@ -387,7 +387,8 @@
             
                 console.log(response)
                var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-                $('#deductiblePanel tbody').prepend('<tr id="ddtid'+response.id+'" data-name="deductiblevalue[]"><td data-name="'+response.deductibletype_id+'">'+ response.dtabbrev +' - '+ response.dtdescript+'</td><td data-name="'+response.currency_id+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibletype('+response.id+')">delete</a></td></tr>')
+               var curr_minclaimamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.min_claimamount);
+                $('#deductiblePanel tbody').prepend('<tr id="ddtid'+response.id+'" data-name="deductiblevalue[]"><td data-name="'+response.deductibletype_id+'">'+ response.dtabbrev +' - '+ response.dtdescript+'</td><td data-name="'+response.currency_id+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+response.min_claimamount+'">'+curr_minclaimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibletype('+response.id+')">delete</a></td></tr>')
                 
                 $(':input','#adddeductibletype').not(':button, :submit, :reset, :hidden').val(' ').removeAttr('checked').removeAttr('selected');
                
@@ -738,6 +739,7 @@
        var slipsumshare =  $('#slipsumshare').val();
        var slipbasicpremium =  $('#slipbasicpremium').val();
        var slipgrossprmtonr =  $('#slipgrossprmtonr').val();
+       var slipcommission   =   $('#slipcommission').val();
        var slipsumcommission =  $('#slipsumcommission').val();
        var slipnetprmtonr =  $('#slipnetprmtonr').val();
        var sliprb =  $('#sliprb').val();
@@ -792,6 +794,7 @@
                slipsumshare:slipsumshare,
                slipbasicpremium:slipbasicpremium,
                slipgrossprmtonr:slipgrossprmtonr,
+               slipcommission:slipcommission,
                slipsumcommission:slipsumcommission,
                slipnetprmtonr:slipnetprmtonr,
                sliprb:sliprb,
@@ -861,7 +864,8 @@
 
 <script type="text/javascript">
 
-function detailslip(id){
+function detailslip(id)
+    {
         if(id){
             alert(id);
             swal("Please wait!", "Loading Data")
@@ -892,7 +896,7 @@ function detailslip(id){
                             var attachment = response.attachment;
                             for (var i = 0; i < attachment.length; i++){
                                 var filename = attachment[i].filename;
-                                $('#aidlist').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
+                                $('#aidlistdetail').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
                             };
                             var deductible = response.deductible;
                             for (var i = 0; i < deductible.length; i++){
@@ -911,7 +915,7 @@ function detailslip(id){
                                 var code = condition_needed[i].code;
                                 var name = condition_needed[i].name;
                                 var information = condition_needed[i].information;
-                                $('#conditionNeeded tbody').prepend('<tr id="cntid'+condition_needed[i].id+'" ><td >'+code+' - '+name+' - '+description+'</td><td >'+information+'</td></tr>')
+                                $('#conditionNeededdetail tbody').prepend('<tr id="cntid'+condition_needed[i].id+'" ><td >'+code+' - '+name+' - '+description+'</td><td >'+information+'</td></tr>')
                             };
                             var installment_panel = response.installment_panel;
                             for (var i = 0; i < installment_panel.length; i++){
@@ -957,7 +961,7 @@ function detailslip(id){
                             $('#slipiptodetail').val(response.insurance_period_to);
                             $('#sliprpfromdetail').val(response.reinsurance_period_from);
                             $('#sliprptodetail').val(response.reinsurance_period_to);
-                            $('#switch-proportional').val(response.proportional);
+                            $('#switch-proportionaldetail').val(response.proportional);
                             $('#slipratedetail').val(response.rate);
                             $('#slipsharedetail').val(response.share);
                             $('#slipsumsharedetail').val(response.sum_share);
@@ -978,6 +982,126 @@ function detailslip(id){
                 swal("Ohh no!", "Current object failed to get", "failed")
             }
     }
+
+    function editslip(id)
+    {
+        if(id){
+            alert(id);
+            swal("Please wait!", "Loading Data")
+                $.ajax({
+                    type:"GET",
+                    dataType: 'json',
+                    url:'{{ url("/") }}/transaction-data/getmodal-marine-slip/'+id,
+                    beforeSend: function() { $("body").addClass("loading");  },
+                    complete: function() {  $("body").removeClass("loading"); },
+                    success:function(response){  
+                        console.log(response)      
+                        if(response){
+                            
+                            var status_log = response.status_log;
+                            for (var i = 0; i < status_log.length; i++){
+                                var status = status_log[i].status;
+                                var datetime = status_log[i].datetime;
+                                var user = status_log[i].user;
+                                $('#slipStatusTableupdate tbody').prepend('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
+                            };
+                            var interest_insured = response.interestinsured;
+                            for (var i = 0; i < interest_insured.length; i++){
+                                var interest = interest_insured[i].description;
+                                var code = interest_insured[i].code;
+                                var amount = interest_insured[i].amount;
+                                $('#interestInsuredTableupdate tbody').prepend('<tr id="itsid'+interest_insured[i].id+'"><td >'+code+' - '+interest+'</td><td >currency('+amount+')</td></tr>')
+                            };
+                            var attachment = response.attachment;
+                            for (var i = 0; i < attachment.length; i++){
+                                var filename = attachment[i].filename;
+                                $('#aidlistupdate').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
+                            };
+                            var deductible = response.deductible;
+                            for (var i = 0; i < deductible.length; i++){
+                                var currency_code = deductible[i].code;
+                                var currency = deductible[i].symbol_name;
+                                var abbreviation = deductible[i].abbreviation;
+                                var description = deductible[i].description;
+                                var percentage = deductible[i].percentage;
+                                var amount = deductible[i].amount;
+                                var min_claimamount = deductible[i].min_claimamount;
+                                $('#deductiblePanelupdate tbody').prepend('<tr id="dbtid'+deductible[i].id+'"><td >'+abbreviation+' - '+description+'</td><td >'+currency_code+'-'+currency+'</td><td>'+percentage+'</td><td>currency('+amount+')</td><td>currency('+min_claimamount+')</td></tr>')
+                            };
+                            var condition_needed = response.condition_needed;
+                            for (var i = 0; i < condition_needed.length; i++){
+                                var description = condition_needed[i].description;
+                                var code = condition_needed[i].code;
+                                var name = condition_needed[i].name;
+                                var information = condition_needed[i].information;
+                                $('#conditionNeededupdate tbody').prepend('<tr id="cntid'+condition_needed[i].id+'" ><td >'+code+' - '+name+' - '+description+'</td><td >'+information+'</td></tr>')
+                            };
+                            var installment_panel = response.installment_panel;
+                            for (var i = 0; i < installment_panel.length; i++){
+                                var date = installment_panel[i].installment_date;
+                                var percentage = installment_panel[i].percentage;
+                                var amount = installment_panel[i].amount;
+                                $('#installmentPanelupdate tbody').prepend('<tr id="isptid'+installment_panel[i].id+'" ><td >'+date+'</td><td >'+percentage+'</td><td >currency('+amount+')</td></tr>')
+                            };
+                            var retrocession = response.retrocession;
+                            for (var i = 0; i < retrocession.length; i++){
+                                var type = retrocession[i].type;
+                                var contract = retrocession[i].contract;
+                                var percentage = retrocession[i].percentage;
+                                var amount = retrocession[i].amount;
+                                $('#retrocessionPanelupdate tbody').prepend('<tr id="rcstid'+retrocession[i].id+'" ><td >'+type+'</td><td >'+contract+'</td><td >'+percentage+'</td><td >currency('+amount+')</td></tr>')
+                            };
+
+                            $("#slipnumberupdate").val(response.slip_number);
+                            $("#slipusernameupdate").val(response.username);
+                            $("#slipprodyearupdate").val(response.prod_year);
+                            $("#slipuyupdate").val(response.uy);
+                            $("#slipstatusupdate").append('<option value="'+response.status+'" selected>'+response.status+'</option>');
+                            $('#slipcedingbrokerupdate').append(' <option value="'+response.cedbrok_id+'" selected>'+response.cedbrok_cn+' - '+response.cedbrok_code+' - '+response.cedbrok+'</option>');
+                            $('#slipcedingupdate').append(' <option value="'+response.ceding_id+'" selected>'+response.ceding_cn+' - '+response.ceding_code+' - '+response.ceding+'</option>');
+                            $('#slipcurrencyupdate').append('<option value="'+response.currency_id+'"selected>'+response.currency_code+' - '+response.currency+'</option>');
+                            $('#slipcobupdate').append('<option value="'+response.cob_id+'"selected>'+response.cob+'</option>');
+                            $('#slipkocupdate').append('<option value="'+response.koc_id+'"selected>'+response.koc+'</option>');
+                            $('#slipoccupacyupdate').append('<option value="'+response.occupacy_id+'"selected>'+response.occupacy+'</option>');
+                            $('#slipbld_constupdate').append('<option value="'+response.build_const+'"selected>'+response.build_const+'</option>');
+                            $('#sliptypeupdate').append('<option value="'+response.insured_type+'"selected>'+response.insured_type+'</option>');
+                            $('#sliplayerproportionalupdate').append('<option value="'+response.layer_non_proportional+'"selected>'+response.layer_non_proportional+'</option>');
+                            $('#sliprbupdate').append('<option value="'+response.retro_backup+'"selected>'+response.retro_backup+'</option>');
+                            
+                            $('#slipbld_constupdate').val(response.build_const);
+                            $('#slipnoupdate').val(response.slip_no);
+                            $('#slipcndnupdate').val(response.cn_dn);
+                            $('#slippolicy_noupdate').val(response.policy_no);
+                            $('#slipcoinsuranceupdate').val(response.coinsurance_slip);
+                            $('#sliptotalsumupdate').val(response.total_sum_insured);
+                            $('#slippctupdate').val(response.insured_Pct);
+                            $('#sliptotalsumpctupdate').val(response.total_sum_pct);
+                            $('#slipipfromupdate').val(response.insurance_period_from);
+                            $('#slipiptoupdate').val(response.insurance_period_to);
+                            $('#sliprpfromupdate').val(response.reinsurance_period_from);
+                            $('#sliprptoupdate').val(response.reinsurance_period_to);
+                            $('#switch-proportionalupdate').val(response.proportional);
+                            $('#sliprateupdate').val(response.rate);
+                            $('#slipshareupdate').val(response.share);
+                            $('#slipsumshareupdate').val(response.sum_share);
+                            $('#slipbasicpremiumupdate').val(response.basic_premium);
+                            $('#slipgrossprmtonrupdate').val(response.grossprm_to_nr);
+                            $('#slipcommissionupdate').val(response.commission);
+                            $('#slipsumcommissionupdate').val(response.sum_commission);
+                            $('#slipnetprmtonrupdate').val(response.netprm_to_nr);
+                            $('#sliporupdate').val(response.own_retention);
+                            $('#slipsumorupdate').val(response.sum_own_retention);
+                            swal("Good job!", "Data Show", "success")
+                        }else{
+                            swal("Ohh no!", "Data failed to get", "failed")
+                        }
+                    }
+                });
+            }else{
+                swal("Ohh no!", "Current object failed to get", "failed")
+            }
+    }
+
 
 </script>
 

@@ -2130,7 +2130,6 @@ class TransactionController extends Controller
         $cnd = ConditionNeeded::where('id',$id)->orderby('id','asc')->get();
 
         // $sliplastid = count($slip);
-        
 
         $filelist=SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         // $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
@@ -2158,6 +2157,7 @@ class TransactionController extends Controller
 
         return response()->json([
             "id" => $slip->id,
+            "insured_id" => $slip->insured_id,
             "slip_number" => $slip->number,
             "username" => $slip->username,
             "prod_year" => $slip->prod_year,
@@ -2188,7 +2188,7 @@ class TransactionController extends Controller
             "policy_no" => $slip->policy_no,
             "build_const" => $slip->build_const,
             "insured_type" => $slip->insured_type,
-            "insured_Pct" => $slip->insured_Pct,
+            "insured_pct" => $slip->insured_pct,
             "total_sum_insured" => $slip->total_sum_insured,
             "total_sum_pct" => $slip->total_sum_pct,
             "insurance_period_from" => $slip->insurance_period_from,
@@ -2279,7 +2279,6 @@ class TransactionController extends Controller
         $lastid = count($insured);
         $code_ms = $insured[0]->number;
         $shiplist= ShipListTemp::where('insured_id',$code_ms)->orderby('id','desc')->get();
-        
 
 
         return view('crm.transaction.marine_insured_edit', compact(['user','routeship','customer','shiplist','mlu','insured','route_active','ms_ids']));
@@ -2320,7 +2319,6 @@ class TransactionController extends Controller
         $deductibletype= DeductibleType::orderby('id','asc')->get();
 
         $sliplastid = count($slip);
-
 
         $filelist=SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();

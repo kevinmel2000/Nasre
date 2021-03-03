@@ -264,7 +264,7 @@
                                         <div class="form-group">
                                             <label>{{__('Attachment')}} </label>
                                             <div class="input-group" >
-                                                <ul id="aidlist">
+                                                <ul id="aidlistdetail">
 
 
                                                 </ul>
@@ -405,7 +405,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="col-md-12 com-sm-12 mt-3">
-                                                            <table id="conditionNeeded" class="table table-bordered table-striped">
+                                                            <table id="conditionNeededdetail" class="table table-bordered table-striped">
                                                             <thead>
                                                             <tr>
                                                                 <th>{{__('Condition Needed Code - Name')}}</th>
@@ -495,7 +495,7 @@
                                     <div class="col-md-4">
                                         <label class="cl-switch cl-switch-green">
                                             <span for="switch-proportional" class="label"> {{__('Proportional')}} </span>
-                                            <input type="checkbox" name="slipproportionaldetail[]" id="switch-proportional"
+                                            <input type="checkbox" name="slipproportionaldetail[]" id="switch-proportionaldetail"
                                             class="submit" checked>
                                             <span class="switcher"></span>
                                             <span  class="label"> {{__('Non Proportional')}} </span>

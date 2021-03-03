@@ -199,7 +199,7 @@
                                     <td><a class="text-primary mr-3 " data-toggle="modal" data-target="#detailmodaldata" href="javascript:void(0)" onclick="detailslip({{ @$slipdatatadetail->id }})">{{ @$slipdatatadetail->number }}</a></td>
                                     <td>{{ @$slipdatatadetail->uy }}</td>
                                     <td >{{ @$slipdatatadetail->status }}</td>
-                                    <td><a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#detailmodaldata" href="javascript:void(0)" onclick="edit({{  @$slipdatatadetail->id }})">Update </a><a href="javascript:void(0)" onclick="endorsementmarine({{  @$slipdatatadetail->id }})"> Endorsement</a></td>
+                                    <td><a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#editmodaldata" href="javascript:void(0)" onclick="editslip({{  @$slipdatatadetail->id }})">Update </a><a href="javascript:void(0)" onclick="endorsementmarine({{  @$slipdatatadetail->id }})"> Endorsement</a></td>
                              </tr>   
                              @endforeach
                         </tbody>
@@ -997,6 +997,7 @@
     </div>
 </div>
 @include('crm.transaction.marine_modal_slip')
+@include('crm.transaction.marine_modal_edit')
 
 @endsection
 
