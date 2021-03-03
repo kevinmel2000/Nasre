@@ -3105,7 +3105,7 @@ $(document).ready(function() {
                     +'</a><td></td></tr>');
                     */
                     
-                $('#slipnumberupdate').val(response.code_sl);
+                //$('#slipnumberupdate').val(response.code_sl);
 
            },
            error: function (request, status, error) {
@@ -3120,6 +3120,228 @@ $(document).ready(function() {
        let TotalFiles = $('#attachmentupdate')[0].files.length; //Total files
        let files = $('#attachmentupdate')[0];
        var slip_id = $('#slipnumberupdate').val();
+
+       for (let i = 0; i < TotalFiles; i++) 
+       {
+        formData.append('files' + i, files.files[i]);
+       }
+       
+       formData.append('TotalFiles', TotalFiles);
+       formData.append('slip_id', slip_id);
+     
+       $.ajax({
+                    type:'POST',
+                    url: "{{ url('store-multi-file-ajax')}}",
+                    data: formData,
+                    cache:false,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    success: (data) => {
+                    //this.reset();
+                    //alert('Files has been uploaded using jQuery ajax');
+                      swal("Good job!", "Files has been uploaded", "success")
+                    },
+                    error: function(data){
+                     //alert(data.responseJSON.errors.files[0]);
+                     swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
+                     console.log(data.responseJSON.errors);
+                    }
+        });
+
+
+      // insured save
+       var fesnumber = $('#insuredIDtxt').val();
+       var fesinsured = $('#feinsured').val();
+       var fessuggestinsured = $('#autocomplete').val();
+       var fessuffix = $('#autocomplete2').val();
+       var fesshare = $('#feshare').val();
+       var fessharefrom  = $('#fesharefrom').val();
+       var fesshareto = $('#feshareto').val();
+       var fescoinsurance = $('#fecoinsurance').val();
+       
+       
+       var token2 = $('input[name=_token]').val();
+
+       console.log(fesinsured)
+       console.log(fessuggestinsured)
+       console.log(fesnumber)
+       console.log(fessuffix)
+
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ url('transaction-data/fe-insured/store') }}",
+           type:"POST",
+           data:{
+               fesnumber:fesnumber,
+               fesinsured:fesinsured,
+               fessuggestinsured:fessuggestinsured,
+               fessuffix:fessuffix,
+               fesshare:fesshare,
+               fessharefrom:fessharefrom,
+               fesshareto:fesshareto,
+               fescoinsurance:fescoinsurance
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                swal("Good job!", "Insured Fire & Engineering Insert Success", "success")
+                console.log(response)
+
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
+           }
+       });
+
+
+
+
+   });
+</script>
+
+
+
+
+<script type='text/javascript'>
+    $('#multi-file-upload-ajaxendorsement').submit(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var code_ms = $('#insuredIDtxt').val();
+       var slipnumber = $('#slipnumberendorsement').val();
+       var prevslipnumber = $('#prevslipnumberendorsement').val();
+       var slipuy = $('#slipuyendorsement').val();
+       var slipstatus = $('#slipstatusendorsement').val();
+       var sliped = $('#slipedendorsement').val();
+       var slipsls = $('#slipslsendorsement').val();
+       var slipcedingbroker = $('#slipcedingbrokerendorsement').val();
+       var slipceding = $('#slipcedingendorsement').val();
+       var slipcurrency = $('#slipcurrencyendorsement').val();
+       var slipcob = $('#slipcobendorsement').val();
+       var slipkoc = $('#slipkocendorsement').val();
+       var slipoccupacy = $('#slipoccupacyendorsement').val();
+       var slipbld_const = $('#slipbld_constendorsement').val();
+       var slipno = $('#slipnoendorsement').val();
+       var slipcndn = $('#slipcndnendorsement').val();
+       var slippolicy_no = $('#slippolicy_noendorsement').val();
+       var sliptotalsum = $('#sliptotalsumendorsement').val();
+       var sliptype =  $('#sliptypeendorsement').val();
+       var slippct =  $('#slippctendorsement').val();
+       var sliptotalsumpct =  $('#sliptotalsumpctendorsement').val();
+       var slipipfrom =  $('#slipipfromendorsement').val();
+       var slipipto =  $('#slipiptoendorsement').val();
+       var sliprpfrom =  $('#sliprpfromendorsement').val();
+       var sliprpto =  $('#sliprptoendorsement').val();
+       var proportional =  $('#switch-proportionalendorsement').val();
+       var sliplayerproportional =  $('#sliplayerproportionalendorsement').val();
+       var sliprate =  $('#sliprateendorsement').val();
+       var slipshare =  $('#slipshareendorsement').val();
+       var slipsumshare =  $('#slipsumshareendorsement').val();
+       var slipbasicpremium =  $('#slipbasicpremiumendorsement').val();
+       var slipgrossprmtonr =  $('#slipgrossprmtonrendorsement').val();
+       var slipsumcommission =  $('#slipsumcommissionendorsement').val();
+       var slipcommission =  $('#slipcommissionendorsement').val();
+       var slipnetprmtonr =  $('#slipnetprmtonrendorsement').val();
+       var sliprb =  $('#sliprbendorsement').val();
+       var slipor =  $('#sliporendorsement').val();
+       var slipsumor =  $('#slipsumorendorsement').val();
+
+       var token2 = $('input[name=_token]').val();
+       
+       //ajaxfilefunction(e);
+
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{url('transaction-data/fe-slip/endorsementstore')}}",
+           type:"POST",
+           data:{
+               code_ms:code_ms,
+               slipnumber:slipnumber,
+               prevslipnumber:prevslipnumber,
+               slipuy:slipuy,
+               slipstatus:slipstatus,
+               sliped:sliped,
+               slipsls:slipsls,
+               slipcedingbroker:slipcedingbroker,
+               slipceding:slipceding,
+               slipcurrency:slipcurrency,
+               slipcob:slipcob,
+               slipkoc:slipkoc,
+               slipoccupacy:slipoccupacy,
+               slipbld_const:slipbld_const,
+               slipno:slipno,
+               slipcndn:slipcndn,
+               slippolicy_no:slippolicy_no,
+               sliptotalsum:sliptotalsum,
+               sliptype:sliptype,
+               slippct:slippct,
+               sliptotalsumpct:sliptotalsumpct,
+               slipipfrom:slipipfrom,
+               slipipto:slipipto,
+               sliprpfrom:sliprpfrom,
+               sliprpto:sliprpto,
+               proportional:proportional,
+               sliplayerproportional:sliplayerproportional,
+               sliprate:sliprate,
+               slipshare:slipshare,
+               slipsumshare:slipsumshare,
+               slipbasicpremium:slipbasicpremium,
+               slipgrossprmtonr:slipgrossprmtonr,
+               slipcommission:slipcommission,
+               slipsumcommission:slipsumcommission,
+               slipnetprmtonr:slipnetprmtonr,
+               sliprb:sliprb,
+               slipor:slipor,
+               slipsumor:slipsumor
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                swal("Good job!", "Insured Fire & Engineering Slip Insert Success", "success")
+                console.log(response)
+
+                /*
+                $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.slipuy+'">'+slipuy+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.number+'" data-target="#detailmodaldata" href="#detailmodaldata">'
+                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
+                    +'</a>'
+                    +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#updatemodaldata">'
+                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
+                    +'</a>'
+                    +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#endorsementmodaldata">'
+                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
+                    +'</a><td></td></tr>');
+                    */
+
+                //$('#slipnumberendorsement').val(response.code_sl);
+
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", "Insured Fire & Engineering Slip Insert Error", "Insert Error");
+           }
+       });
+
+
+      
+       var formData = new FormData(this);
+       let TotalFiles = $('#attachmentendorsement')[0].files.length; //Total files
+       let files = $('#attachmentendorsement')[0];
+       var slip_id = $('#slipnumberendorsement').val();
 
        for (let i = 0; i < TotalFiles; i++) 
        {
