@@ -228,9 +228,9 @@
                                         <li class="nav-item">
                                         <a class="nav-link" id="insured-details" data-toggle="pill" href="#insured-details-id" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data')}}</a>
                                         </li>
-                                        <li class="nav-item">
+                                        {{-- <li class="nav-item">
                                         <a class="nav-link" id="insurance-details" data-toggle="pill" href="#insurance-details-id" role="tab" aria-controls="social-media-details-id" aria-selected="false">{{__('Insurance Measurement')}}</a>
-                                        </li>
+                                        </li> --}}
                                         <li class="nav-item">
                                             <a class="nav-link" id="installment-details" data-toggle="pill" href="#installment-details-id" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
                                         </li>
@@ -480,7 +480,6 @@
                                                             <div class="input-group control-group increment2" >
                                                                 <input type="file" name="files[]" id="attachment" class="form-control" multiple>
                                                             </div>
-
                                                             @foreach($filelist as $isl)
                                                                 <div class="control-group input-group" id="control-group2" style="margin-top:10px">
                                                                     <a href="{{ asset('files')}}/{{$isl->filename}}">{{$isl->filename}}</a>
@@ -659,8 +658,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="insurance-details-id" role="tabpanel" aria-labelledby="insurance-details">
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <div class="row">
@@ -848,6 +845,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                         <div class="tab-pane fade" id="installment-details-id" role="tabpanel" aria-labelledby="installment-details">
                                             <div class="row">
                                                 <div class="col-md-12">

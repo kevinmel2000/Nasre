@@ -2131,12 +2131,27 @@ class TransactionController extends Controller
 
         // $sliplastid = count($slip);
         
-       
 
         $filelist=SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-        $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-        $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-        $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        // $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $interestlist = DB::table('interestinsured_temp')
+            ->join('interest_insured', 'interest_insured.id', '=', 'interestinsured_temp.interest_id')
+            ->select('interestinsured_temp.*', 'interest_insured.code', 'interest_insured.description')
+            ->where('interestinsured_temp.slip_id',$code_sl)
+            ->get();
+        // $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $deductibletemp = DB::table('deductible_temp')
+            ->join('deductible_type', 'deductible_type.id', '=', 'deductible_temp.deductibletype_id')
+            ->join('currencies', 'currencies.id', '=', 'deductible_temp.currency_id')
+            ->select('deductible_temp.*', 'currencies.code','currencies.symbol_name','deductible_type.abbreviation', 'deductible_type.description')
+            ->where('deductible_temp.slip_id',$code_sl)
+            ->get();
+        // $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
+        $conditionneededtemp = DB::table('condition_needed_temp')
+        ->join('condition_needed', 'condition_needed.id', '=', 'condition_needed_temp.condition_id')
+        ->select('condition_needed_temp.*', 'condition_needed.name','condition_needed.code' ,'condition_needed.description')
+        ->where('condition_needed_temp.slip_id',$code_sl)
+        ->get();
         $installmentpanel= InstallmentTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
         $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
         $statuslist= StatusLog::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
@@ -2156,8 +2171,11 @@ class TransactionController extends Controller
             "cedbrok_cn" => $slip->cedingbroker->companytype->name,
             "ceding_id" => $slip->source_2,
             "ceding" => $slip->ceding->name,
+            "ceding_cn" => $slip->ceding->companytype->name,
+            "ceding_code" => $slip->ceding->code,
             "currency_id" => $slip->currency,
             "currency" => $slip->currencies->symbol_name,
+            "currency_code" => $slip->currencies->code,
             "cob_id" => $slip->cob,
             "cob" => $slip->corebusiness->description,
             "koc_id" => $slip->koc,
@@ -2184,17 +2202,18 @@ class TransactionController extends Controller
             "sum_share" => $slip->sum_share,
             "basic_premium" => $slip->basic_premium,
             "commission" => $slip->commission,
+            "sum_commission" => $slip->sum_commission,
             "grossprm_to_nr" => $slip->grossprm_to_nr,
             "netprm_to_nr" => $slip->netprm_to_nr,
             "retro_backup" => $slip->retro_backup,
             "own_retention" => $slip->own_retention,
             "sum_own_retention" => $slip->sum_own_retention,
-            "coinsurance_slip" => $slip->coinsurance_slip
-            // "interestinsured_id" => $interestlist->id,
+            "coinsurance_slip" => $slip->coinsurance_slip,
+            "interestinsured" => $interestlist,
             // "interestinsured_interest" => $interestlist->interestinsureddata->description,
             // "interestinsured_interestid" => $interestlist->interest_id,
-            // "attachment_filename" => $filelist->filename,
-            // "deductible_id" => $deductibletemp->id,
+            "attachment" => $filelist,
+            "deductible" => $deductibletemp,
             // "deductible_type" => $deductibletemp->DeductibleType->abbreviation,
             // "deductible_desc" => $deductibletemp->DeductibleType->description,
             // "deductible_typeid" => $deductibletemp->deductibletype_id,
@@ -2203,19 +2222,19 @@ class TransactionController extends Controller
             // "deductible_percentage" => $deductibletemp->percentage,
             // "deductible_min_claimamount" => $deductibletemp->min_claimamount,
             // "deductible_amount" => $deductibletemp->amount,
-            // "condition_needed_id" => $conditionneededtemp->id,
+            "condition_needed" => $conditionneededtemp,
             // "condition_needed_cnid" => $conditionneededtemp->codition_id,
             // "condition_needed_cn" => $conditionneededtemp->conditionneeded->name,
             // "condition_needed_id" => $conditionneededtemp->information,
-            // "installment_panel_id" => $installmentpanel->id,
+            "installment_panel" => $installmentpanel,
             // "installment_panel_percentage" => $installmentpanel->percentage,
             // "installment_panel_amount" => $installmentpanel->amount,
-            // "retrocession_id" => $retrocessiontemp->id,
+            "retrocession" => $retrocessiontemp,
             // "retrocession_type" => $retrocessiontemp->type,
             // "retrocession_contract" => $retrocessiontemp->contract,
             // "retrocession_percentage" => $retrocessiontemp->percentage,
             // "retrocession_amount" => $retrocessiontemp->amount,
-            // "status_id" => $statuslist->id,
+            "status_log" => $statuslist
             // "status_status" => $statuslist->status,
             // "status_datetime" => $statuslist->datetime,
             // "status_user" => $statuslist->user

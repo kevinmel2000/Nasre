@@ -117,8 +117,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody >
-                                                    <tr id= sid>
-                                                    </tr>
+                                                    
                                                 </tbody>
                                                 
                                                 </table>
@@ -264,7 +263,11 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>{{__('Attachment')}} </label>
-                                            <div class="input-group" id="aid">
+                                            <div class="input-group" >
+                                                <ul id="aidlist">
+
+
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -273,7 +276,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" id="slipcoinsurance" name="slipcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                            <input type="text" id="slipcoinsurancedetail" name="slipcoinsurancedetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                         </div>
                                     </div>
                                 </div>
