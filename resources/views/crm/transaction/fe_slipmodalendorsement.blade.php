@@ -9,7 +9,7 @@
                     </div>
 
                     
-                    <form id="multi-file-upload-ajaxupdate" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
+                    <form id="multi-file-upload-ajaxendorsement" method="POST"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
                     @csrf
                             <div class="card card-tabs">
                                 <div class="card-header p-0 pt-1 border-bottom-0">
@@ -272,8 +272,10 @@
                                                     <div class="form-group">
                                                         <label>{{__('Attachment')}} </label>
                                                         <div class="input-group">
-                                                    
+                                                        <div class="input-group control-group increment2" >
+                                                            <input type="file" name="filesendorsement[]" id="attachmentendorsement" class="form-control" multiple>
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -306,8 +308,7 @@
                                                                         <table class="table table-bordered table-striped">
                                                                             <tbody>
                                                                                     <tr>
-                                                                                        <form id="addinterestinsuredendorsement">
-                                                                                            @csrf
+                                                                                        
                                                                                             <td>
                                                                                                 <div class="form-group">
                                                                                                     <select id="slipinterestlistendorsement" name="slipinterestlistendorsement" class="form-control form-control-sm ">
@@ -330,7 +331,6 @@
                                                                                                     <button type="button" id="addinterestinsuredendorsement-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
                                                                                                 </div>
                                                                                             </td>
-                                                                                        </form>
                                                                                         </tr>
                                                                             </tbody>
                                                                         </table>
@@ -761,9 +761,8 @@
                                                                         <table class="table table-bordered table-striped">
                                                                         <tbody>
                                                                         <tr>
-                                                                            <form id="addinstallmentinsuredendorsement">
-                                                                            @csrf
-                                                                            <td>
+
+                                                                           <td>
                                                                                 <div class="form-group">
                                                                                         <div class="input-group date" id="dateinstallment" data-target-input="nearest">
                                                                                                 <input type="date" id="dateinstallmentdataendorsement" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdateendorsement">
@@ -788,7 +787,7 @@
                                                                                     <button type="button" id="addinstallmentinsuredendorsement-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>
-                                                                            </form>
+                                                                            
                                                                         </tr>
                                                                         </tbody>
                                                                         </table>
@@ -923,19 +922,20 @@
                                 </div>
                             </div>
 
-                <div class="card card-primary">
-                    <div class="card-body">
-                        <div class="row">
-                        
-                        
-                        </div>
-                    </div>
-                </div> 
-            
+                        <div class="card card-primary">
+                            <div class="card-body">
+                                <div class="row">
+                                
+                                
+                                </div>
+                            </div>
+                        </div> 
+                    
 
-                        <div class="modal-footer">
+                        
+                    <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-info" id="addship-btn">Endorsement</button>
+                            <input type="submit" class="btn btn-secondary"  value="Endorsement"/>
                         </div>
                     </form>
                 </div>
