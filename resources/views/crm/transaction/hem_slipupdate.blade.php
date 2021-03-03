@@ -749,6 +749,8 @@
                                                                 {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
                                                                 <option value="PML" @if($slipdata->insured_type == "PML") selected="selected" @endif >PML</option>
                                                                 <option value="LOL" @if($slipdata->insured_type == "LOL") selected="selected" @endif >LOL</option>
+                                                                <option value="TSI" @if($slipdata->insured_type == "TSI") selected="selected" @endif >TSI</option>
+                                                           
                                                             </select>
                                                         </div>
                                                     </div>
@@ -1087,7 +1089,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="">{{__('Commission')}}</label>
+                                                            <label for="">{{__('RE Com')}}</label>
                                                             <div class="row d-flex flex-wrap">
                                                                 <div class="col-md-10">
                                                                     <div class="input-group">

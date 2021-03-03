@@ -330,6 +330,7 @@
                                                                     {{-- <option selected disabled>{{__('Select Continent')}}</option> --}}
                                                                     <option value="PML" >PML</option>
                                                                     <option value="LOL" >LOL</option>
+                                                                    <option value="TSI" >TSI</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -584,7 +585,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="">{{__('Commission')}}</label>
+                                                                <label for="">{{__('RE Com')}}</label>
                                                                 <div class="row d-flex flex-wrap">
                                                                     <div class="col-md-10">
                                                                         <div class="input-group">
