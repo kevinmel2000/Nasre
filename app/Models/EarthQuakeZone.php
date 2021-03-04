@@ -10,7 +10,7 @@ class EarthQuakeZone extends Model
 
     protected $table = 'earthquake_zone';
 
-    protected $fillable = ['name','flag_delete'];
+    protected $fillable = ['name','code'];
  
 }
 

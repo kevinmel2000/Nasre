@@ -22,10 +22,33 @@ class EarthQuakeZoneController extends Controller
 
          if(empty($search))
          {
+
+            $earthquakezonecount = EarthQuakeZone::orderby('id','asc')->get();
+            $lastid = count($earthquakezonecount);
+            if($lastid != null){
+                // $code_st = $mydate . strval($lastid + 1);
+
+                if($lastid < 10){
+                    $code_eqz = '00000' . strval($lastid + 1);
+                }elseif($lastid > 9 && $lastid < 100){
+                    $code_eqz = '0000' . strval($lastid + 1);
+                }elseif($lastid > 99 && $lastid < 1000){
+                    $code_eqz = '000' . strval($lastid + 1);
+                }elseif($lastid > 999 && $lastid < 10000){
+                    $code_eqz = '00' . strval($lastid + 1);
+                }elseif($lastid > 9999 && $lastid < 100000){
+                    $code_eqz = '0' . strval($lastid + 1);
+                }elseif($lastid > 99999 ){
+                    $code_eqz =  strval($lastid + 1);
+                }
+            }
+            else{
+                $code_eqz = '00000' . strval(1);
+            }
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $earthquakezone = EarthQuakeZone::orderby('id','desc')->paginate(10);
           $earthquakezone_ids = response()->json($earthquakezone->modelKeys());
-          return view('crm.master.earthquakezone', compact('user','earthquakezone','route_active','earthquakezone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.master.earthquakezone', compact('user','code_eqz','earthquakezone','route_active','earthquakezone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
@@ -49,7 +72,7 @@ class EarthQuakeZoneController extends Controller
             $user = Auth::user();
             EarthQuakeZone::create([
                 'name'=>$request->name,
-                'flag_delete'=>" "
+                'code'=>$request->code
             ]);
             $notification = array(
                 'message' => 'Earth Quake Zone added successfully!',

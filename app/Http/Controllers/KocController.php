@@ -23,7 +23,7 @@ class KocController extends Controller
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $koc = Koc::orderby('id','desc')->get();
-          $kocparent = Koc::where('code','<',100)->orderby('code','desc')->get();
+          $kocparent = Koc::whereRaw('LENGTH(code) < 5')->orderby('code','desc')->get();
           $countparent= Koc::where('parent_id',null)->where('code','<',100)->orderby('code','desc')->get();
           // dd($countparent);
           $lastid = count($countparent);
@@ -31,10 +31,10 @@ class KocController extends Controller
 
           if($lastid != null){
 
-            if($lastid < 10){
+            if($lastid < 9){
                 $code_koc = '0' . strval($lastid + 1);
             }   
-            elseif($lastid > 9 && $lastid < 100){
+            elseif($lastid > 8 && $lastid < 100){
                 $code_koc = strval($lastid + 1);
             } 
             //$code_cob = $mydate . strval($lastid + 1);
@@ -76,17 +76,22 @@ class KocController extends Controller
     {
         $koc_parent = Koc::where('id',$request->koc_code)->first();
         $koc = Koc::where('parent_id',$request->koc_code)->orderby('id','desc')->get();
+        $koclastparent = COB::where('parent_id',$request->ocp_code)->orderby('id','desc')->first();
         $lastid = count($koc);
         
-        if($lastid > 0){
-                if($lastid < 10){
-                    $code_koc = $koc_parent->code . '0' . strval($lastid + 1);
-                }elseif($lastid > 9 && $lastid < 100){
-                    $code_koc = $koc_parent->code . strval($lastid + 1);
-                }
+        if(!$koclastparent){
+            $code_koc =  $koc_parent->code . '0' . strval(0);
         }
-        elseif($lastid == 0){
-            $code_koc =  $koc_parent->code . '0'  . strval(0);
+        else{
+            
+            $parentlastcode = substr($koclastparent->code,2) ;
+            $sumlastcode = strval($parentlastcode + 1);
+
+                if($parentlastcode < 9){
+                    $code_koc = $koc_parent->code . '0' . strval($parentlastcode + 1);
+                }elseif($parentlastcode > 8 && $parentlastcode < 100){
+                    $code_koc = $koc_parent->code . strval($parentlastcode + 1);
+                }
         }
        
 

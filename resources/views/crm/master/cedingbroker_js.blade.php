@@ -11,35 +11,39 @@
     $('#companynamefield').change(function(){
         var str = $(this).val();
         var ret = str.split(" ");
-        var str0 = ret[0].substr(0,1).toUpperCase();
-        var str1 = ret[1].substr(0,1).toUpperCase();
-        var str2 = ret[2].substr(0,1).toUpperCase();
+        var count = ret.length;
+        console.log(ret)
+        console.log(ret.length)
         var res;
-        if(str2 != ""){
+        if(count > 2){
+            var str0 = ret[0].substr(0,1).toUpperCase();
+            var str1 = ret[1].substr(0,1).toUpperCase();
+            var str2 = ret[2].substr(0,1).toUpperCase();
+
             res = (str1 + str2);
         }
-        else{
+        else
+        {
+            var str0 = ret[0].substr(0,1).toUpperCase();
+            var str1 = ret[1].substr(0,1).toUpperCase();
             res = (str0 + str1);
         }
-        
-        
         if(str){
-        $.ajax({
-                type: "GET",
-                url: "{{route('cedingbroker.getcode')}}",
-                dataType: 'json',
-                success:function(response){        
-                    if(response){
-                        console.log(response.autocode);
-                        // console.log(res + response.autocode);
-                        $('#codecedbrok').val(res + response.autocode);     
-                    }else{
-                        // $('#codecedbrok').val(res);     
-
-                        console.log(res);
+            $.ajax({
+                    type: "GET",
+                    url: "{{route('cedingbroker.getcode')}}",
+                    dataType: 'json',
+                    success:function(response){        
+                        if(response){
+                            console.log(response.autocode);
+                            // console.log(res + response.autocode);
+                            $('#codecedbrok').val(res + response.autocode);     
+                        }else{
+                            // $('#codecedbrok').val(res);
+                            console.log(res);
+                        }
                     }
-                }
-            });
+                });
         }
     });
 </script>

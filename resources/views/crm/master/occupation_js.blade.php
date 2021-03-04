@@ -15,6 +15,8 @@
                 success:function(response){        
                     if(response){
                         console.log(response);
+                        console.log(response.last_parent);
+                        console.log(response.last_sum);
                         $("#ocpcode").val(response.autocode);
                         $("#ocpcode").attr('readonly',false);
                     }else{

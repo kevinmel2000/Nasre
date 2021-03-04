@@ -22,10 +22,32 @@ class FloodZoneController extends Controller
 
          if(empty($search))
          {
+            $floodzonecount = FloodZone::orderby('id','asc')->get();
+            $lastid = count($floodzonecount);
+            if($lastid != null){
+                // $code_st = $mydate . strval($lastid + 1);
+
+                if($lastid < 10){
+                    $code_flz = '00000' . strval($lastid + 1);
+                }elseif($lastid > 9 && $lastid < 100){
+                    $code_flz = '0000' . strval($lastid + 1);
+                }elseif($lastid > 99 && $lastid < 1000){
+                    $code_flz = '000' . strval($lastid + 1);
+                }elseif($lastid > 999 && $lastid < 10000){
+                    $code_flz = '00' . strval($lastid + 1);
+                }elseif($lastid > 9999 && $lastid < 100000){
+                    $code_flz = '0' . strval($lastid + 1);
+                }elseif($lastid > 99999 ){
+                    $code_flz =  strval($lastid + 1);
+                }
+            }
+            else{
+                $code_flz = '00000' . strval(1);
+            }
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $floodzone = FloodZone::orderby('id','desc')->paginate(10);
           $floodzone_ids = response()->json($floodzone->modelKeys());
-          return view('crm.master.floodzone', compact('user','floodzone','route_active','floodzone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.master.floodzone', compact('user','code_flz','floodzone','route_active','floodzone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
@@ -48,7 +70,8 @@ class FloodZoneController extends Controller
             //exit();
             $user = Auth::user();
             FloodZone::create([
-                'name'=>$request->name
+                'name'=>$request->name,
+                'code'=>$request->code
             ]);
             $notification = array(
                 'message' => 'Flood Zone added successfully!',

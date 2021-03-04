@@ -77,7 +77,6 @@
                   <table id="cityTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th>{{__('ID')}}</th>
                       <th>{{__('State')}}</th>
                       <th>{{__('City Name')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
@@ -86,7 +85,6 @@
                     <tbody>
                         @foreach (@$city as $citydata)
                             <tr>
-                              <td>{{@$citydata->id}}</td>
                               <td>{{@$citydata->state->id}} - {{@$citydata->state->name}}</td>
                               <td>{{@$citydata->name}}</td>
                              

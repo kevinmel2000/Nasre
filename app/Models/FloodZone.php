@@ -10,7 +10,7 @@ class FloodZone extends Model
 
     protected $table = 'flood_zone';
 
-    protected $fillable = ['name','flag_delete'];
+    protected $fillable = ['name','code'];
     
  
 }

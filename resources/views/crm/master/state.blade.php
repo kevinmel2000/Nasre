@@ -79,7 +79,6 @@
                   <table id="stateTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th>{{__('ID')}}</th>
                       <th>{{__('Country')}}</th>
                       <th>{{__('State/Province Name')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
@@ -88,7 +87,6 @@
                     <tbody>
                         @foreach (@$state as $statedata)
                             <tr>
-                              <td>{{@$statedata->id}}</td>
                               <td>{{@$statedata->country->id}} - {{@$statedata->country->name}}</td>
                               <td>{{@$statedata->name}}</td>
                              

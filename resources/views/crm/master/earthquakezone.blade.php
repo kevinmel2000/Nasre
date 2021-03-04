@@ -21,6 +21,15 @@
             <div class="tab-content" id="custom-tabs-three-tabContent">
               <div class="tab-pane fade show active" id="lead-details-id" role="tabpanel" aria-labelledby="lead-details">
               
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">{{__('Enter Code')}} </label>
+                        <input type="text" name="code" style="width: 25%;" class="form-control form-control-sm" value="{{ $code_eqz }}" readonly required/>
+                    </div>
+                  </div>
+                </div>
+
               <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
@@ -72,7 +81,7 @@
                   <table id="eqzTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th>{{__('ID')}}</th>
+                      <th>{{__('Code')}}</th>
                       <th>{{__('EarthQuake Zone ')}}</th>
                       {{-- <th>{{__('Flag Delete ')}}</th> --}}
                       <th width="20%">{{__('Actions')}}</th>
@@ -81,7 +90,7 @@
                     <tbody>
                         @foreach (@$earthquakezone as $earthquakezonedata)
                             <tr>
-                              <td>{{@$earthquakezonedata->id}}</td>
+                              <td>{{@$earthquakezonedata->code}}</td>
                               <td>{{@$earthquakezonedata->name}}</td>
                               {{-- <td>{{@$earthquakezonedata->flag_delete}}</td> --}}
                              
@@ -109,6 +118,15 @@
                                               <div class="modal-body">
                                                   @csrf
                                                   @method('PUT')
+
+                                                  <div class="row">
+                                                    <div class="col-md-6 col-md-12">
+                                                      <div class="form-group">
+                                                        <label for="">{{__('Code')}}</label>
+                                                        <input type="text" name="code" class="form-control" value="{{$earthquakezonedata->code}}" required readonly/>
+                                                      </div>
+                                                    </div>
+                                                  </div>
 
                                                   <div class="row">
                                                     <div class="col-md-6 col-md-12">

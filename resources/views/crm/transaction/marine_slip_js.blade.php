@@ -318,6 +318,214 @@
     });
 </script>
 
+<script  type='text/javascript'>
+    $('#slippctupdate').keyup(function () {
+        var pct =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumupdate").val());
+        var sum = isNaN(pct * tsi/100) ? 0 :(pct * tsi/100) ;
+         $('#sliptotalsumpctupdate').val(sum);
+         
+     });
+
+     $('#slipdppercentageupdate').keyup(function () {
+        var percent =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumupdate").val());
+        var sum = isNaN(percent * tsi/100) ? 0 :(percent * tsi/100) ;
+        $('#slipdpamountupdate').val(sum);
+     });
+
+     $('#slipshareupdate').keyup(function () {
+        var shareslip =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumupdate").val());
+        var sum = isNaN(shareslip * tsi/100) ? 0 :(shareslip * tsi/100) ;
+        $('#slipsumshareupdate').val(sum);
+        // $('#msishare').val(shareslip);
+        $('#msisharevupdate').val(shareslip);
+     });
+
+     $('#sliprateupdate').keyup(function () {
+        var insurance_period_from = $('#slipipfromupdate').val().split('-');
+        var insurance_period_to = $('#slipiptoupdate').val().split('-');
+        var month_from = parseInt(insurance_period_from[1]);
+        var month_to = parseInt(insurance_period_to[1]);
+        var month = (month_to - month_from);
+        var insurance = (month/365);
+        console.log(insurance_period_from)
+        console.log(insurance_period_to)
+        console.log(month_from)
+        console.log(month_to)
+        console.log(month)
+        console.log(insurance)
+        var rateslip =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumupdate").val());
+        var sum = isNaN(rateslip * tsi/100 * insurance) ? 0 :(rateslip * tsi/100 * insurance) ;
+        $('#slipbasicpremiumupdate').val(sum);
+     });
+
+     $('#slipshare').change(function () {
+        var rateslip =  parseFloat($('#sliprateupdate').val()) / 100 ;
+        var shareslip =  parseFloat($('#slipshareupdate').val()) / 100 ;
+        var ourshare =  parseFloat($('#msisharevupdate').val()) / 100 ;
+        var tsi = parseFloat($("#sliptotalsumupdate").val());
+        var mtsi = parseFloat($("#msitsiupdate").val());
+        var sumshare = parseFloat($('#slipsumshareupdate').val()) ;
+        var orpercent = parseFloat($('#sliporupdate').val()) / 100;
+        var sumor = isNaN(orpercent * sumshare) ? 0 :(orpercent * sumshare);
+        var sum = isNaN(rateslip * shareslip * tsi/100) ? 0 :(rateslip * shareslip * tsi/100) ;
+        var sumourshare = isNaN(ourshare * mtsi ) ? 0 :(ourshare * tsi) ;
+        $('#slipgrossprmtonrupdate').val(sum);
+        // $('#msisharefrom').val(sumourshare);
+        $('#msisumsharevupdate').val(sumourshare);
+        
+        $('#slipsumorupdate').val(sumor);
+     });
+
+     $('#slipcommissionupdate').keyup(function () {
+        var commision =  parseFloat($(this).val()) / 100;
+        var sumgrossprmtonr = parseFloat($("#slipgrossprmtonrupdate").val());
+        var sum = isNaN(commision * sumgrossprmtonr/100) ? 0 :(commision * sumgrossprmtonr/100);
+        var sumnetprmtonr = isNaN( sumgrossprmtonr * (100/100 - commision)) ? 0 :(sumgrossprmtonr * (100/100 - commision));
+        $('#slipsumcommissionupdate').val(sum);
+        $('#slipnetprmtonrupdate').val(sumnetprmtonr);
+    });
+
+    $('#slipippercentageupdate').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumnetprtonr = parseFloat($("#slipnetprmtonrupdate").val());
+        var sum = isNaN(percent * sumnetprtonr) ? 0 :(percent * sumnetprtonr);
+        $('#slipipamountupdate').val(sum);
+    });
+
+    $('#sliporupdate').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumshare = parseFloat($("#slipsumshareupdate").val());
+        var sum = isNaN(percent * sumshare) ? 0 :(percent * sumshare);
+        $('#slipsumorupdate').val(sum);
+    });
+
+    $('#sliprppercentageupdate').keyup(function () {
+        var percentval =  parseFloat($(this).val());
+        var orpercent = parseFloat($('#sliporupdate').val());
+        var sumshare = parseFloat($('#slipsumshareupdate').val()) ;
+        var orpercentage = parseFloat($('#sliporupdate').val()) / 100;
+        var sumor = isNaN(orpercentage * sumshare) ? 0 :(orpercentage * sumshare);
+        var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval);
+        $('#sliporupdate').val(sumpercentor);
+        $('#slipsumorupdate').val(sumor);
+    });
+
+    $('#sliprppercentageupdate').change(function () {
+        var percentval =  parseFloat($(this).val());
+        var orpercent = parseFloat($('#sliporupdate').val());
+        var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval);
+        $('#sliporupdate').val(sumpercentor);
+    });
+</script>
+
+<script  type='text/javascript'>
+    $('#slippctendorsement').keyup(function () {
+        var pct =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumendorsement").val());
+        var sum = isNaN(pct * tsi/100) ? 0 :(pct * tsi/100) ;
+         $('#sliptotalsumpctendorsement').val(sum);
+         
+     });
+
+     $('#slipdppercentageendorsement').keyup(function () {
+        var percent =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumendorsement").val());
+        var sum = isNaN(percent * tsi/100) ? 0 :(percent * tsi/100) ;
+        $('#slipdpamountendorsement').val(sum);
+     });
+
+     $('#slipshareendorsement').keyup(function () {
+        var shareslip =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumendorsement").val());
+        var sum = isNaN(shareslip * tsi/100) ? 0 :(shareslip * tsi/100) ;
+        $('#slipsumshareendorsement').val(sum);
+        // $('#msishare').val(shareslip);
+        $('#msisharevendorsement').val(shareslip);
+     });
+
+     $('#sliprateendorsement').keyup(function () {
+        var insurance_period_from = $('#slipipfromendorsement').val().split('-');
+        var insurance_period_to = $('#slipiptoendorsement').val().split('-');
+        var month_from = parseInt(insurance_period_from[1]);
+        var month_to = parseInt(insurance_period_to[1]);
+        var month = (month_to - month_from);
+        var insurance = (month/365);
+        console.log(insurance_period_from)
+        console.log(insurance_period_to)
+        console.log(month_from)
+        console.log(month_to)
+        console.log(month)
+        console.log(insurance)
+        var rateslip =  parseFloat($(this).val());
+        var tsi = parseFloat($("#sliptotalsumendorsement").val());
+        var sum = isNaN(rateslip * tsi/100 * insurance) ? 0 :(rateslip * tsi/100 * insurance) ;
+        $('#slipbasicpremiumendorsement').val(sum);
+     });
+
+     $('#slipshare').change(function () {
+        var rateslip =  parseFloat($('#sliprateendorsement').val()) / 100 ;
+        var shareslip =  parseFloat($('#slipshareendorsement').val()) / 100 ;
+        var ourshare =  parseFloat($('#msisharevendorsement').val()) / 100 ;
+        var tsi = parseFloat($("#sliptotalsumendorsement").val());
+        var mtsi = parseFloat($("#msitsiendorsement").val());
+        var sumshare = parseFloat($('#slipsumshareendorsement').val()) ;
+        var orpercent = parseFloat($('#sliporendorsement').val()) / 100;
+        var sumor = isNaN(orpercent * sumshare) ? 0 :(orpercent * sumshare);
+        var sum = isNaN(rateslip * shareslip * tsi/100) ? 0 :(rateslip * shareslip * tsi/100) ;
+        var sumourshare = isNaN(ourshare * mtsi ) ? 0 :(ourshare * tsi) ;
+        $('#slipgrossprmtonrendorsement').val(sum);
+        // $('#msisharefrom').val(sumourshare);
+        $('#msisumsharevendorsement').val(sumourshare);
+        
+        $('#slipsumorendorsement').val(sumor);
+     });
+
+     $('#slipcommissionendorsement').keyup(function () {
+        var commision =  parseFloat($(this).val()) / 100;
+        var sumgrossprmtonr = parseFloat($("#slipgrossprmtonrendorsement").val());
+        var sum = isNaN(commision * sumgrossprmtonr/100) ? 0 :(commision * sumgrossprmtonr/100);
+        var sumnetprmtonr = isNaN( sumgrossprmtonr * (100/100 - commision)) ? 0 :(sumgrossprmtonr * (100/100 - commision));
+        $('#slipsumcommissionendorsement').val(sum);
+        $('#slipnetprmtonrendorsement').val(sumnetprmtonr);
+    });
+
+    $('#slipippercentageendorsement').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumnetprtonr = parseFloat($("#slipnetprmtonrendorsement").val());
+        var sum = isNaN(percent * sumnetprtonr) ? 0 :(percent * sumnetprtonr);
+        $('#slipipamountendorsement').val(sum);
+    });
+
+    $('#sliporendorsement').keyup(function () {
+        var percent =  parseFloat($(this).val()) / 100;
+        var sumshare = parseFloat($("#slipsumshareendorsement").val());
+        var sum = isNaN(percent * sumshare) ? 0 :(percent * sumshare);
+        $('#slipsumorendorsement').val(sum);
+    });
+
+    $('#sliprppercentageendorsement').keyup(function () {
+        var percentval =  parseFloat($(this).val());
+        var orpercent = parseFloat($('#sliporendorsement').val());
+        var sumshare = parseFloat($('#slipsumshareendorsement').val()) ;
+        var orpercentage = parseFloat($('#sliporendorsement').val()) / 100;
+        var sumor = isNaN(orpercentage * sumshare) ? 0 :(orpercentage * sumshare);
+        var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval);
+        $('#sliporendorsement').val(sumpercentor);
+        $('#slipsumorendorsement').val(sumor);
+    });
+
+    $('#sliprppercentageendorsement').change(function () {
+        var percentval =  parseFloat($(this).val());
+        var orpercent = parseFloat($('#sliporendorsement').val());
+        var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval);
+        $('#sliporendorsement').val(sumpercentor);
+    });
+</script>
+
 <script type='text/javascript'>
     $('#addinterestinsured-btn').click(function(e){
        e.preventDefault();

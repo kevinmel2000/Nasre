@@ -21,6 +21,14 @@
             <div class="tab-content" id="custom-tabs-three-tabContent">
               <div class="tab-pane fade show active" id="lead-details-id" role="tabpanel" aria-labelledby="lead-details">
                
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">{{__('Enter Code')}} </label>
+                        <input type="text" name="code" style="width: 25%;" class="form-control form-control-sm" value="{{ $code_flz }}" readonly required/>
+                    </div>
+                  </div>
+                </div>
                 
                 <div class="row">
                     <div class="col-md-12">
@@ -66,7 +74,7 @@
                   <table id="fzTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th>{{__('ID')}}</th>
+                      <th>{{__('Code')}}</th>
                       <th>{{__('Name')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
@@ -74,7 +82,7 @@
                     <tbody>
                         @foreach (@$floodzone as $floodzonedata)
                             <tr>
-                              <td>{{@$floodzonedata->id}}</td>
+                              <td>{{@$floodzonedata->code}}</td>
                               <td>{{@$floodzonedata->name}}</td>
                              
                              
@@ -103,6 +111,15 @@
                                               <div class="modal-body">
                                                   @csrf
                                                   @method('PUT')
+
+                                                  <div class="row">
+                                                    <div class="col-md-6 col-md-12">
+                                                      <div class="form-group">
+                                                        <label for="">{{__('Code')}}</label>
+                                                        <input type="text" name="code" class="form-control" value="{{$floodzonedata->code}}" required readonly/>
+                                                      </div>
+                                                    </div>
+                                                  </div>
 
                                                   <div class="row">
                                                     <div class="col-md-6 col-md-12">

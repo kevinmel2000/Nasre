@@ -74,18 +74,18 @@ class MasterController extends Controller
          {
 
             $cob = COB::orderby('id','asc')->get();
-            $cobparent = COB::where('code','<',100)->orderby('code','desc')->get();
-            $countparent= COB::where('parent_id',null)->where('code','<',100)->orderby('code','desc')->get();
+            $cobparent = COB::whereRaw('LENGTH(code) < 5')->orderby('code','desc')->get();
+            $countparent= COB::where('parent_id',null)->whereRaw('LENGTH(code) < 5')->orderby('code','desc')->get();
             // dd($countparent);
             $lastid = count($countparent);
             $cob_ids = response()->json($cob->modelKeys());
 
             if($lastid != null){
 
-                if($lastid < 10){
+                if($lastid < 9){
                     $code_cob = '0' . strval($lastid + 1);
                 }   
-                elseif($lastid > 9 && $lastid < 100){
+                elseif($lastid > 8 && $lastid < 100){
                     $code_cob = strval($lastid + 1);
                 } 
                 //$code_cob = $mydate . strval($lastid + 1);
@@ -141,8 +141,9 @@ class MasterController extends Controller
         if(empty($search))
          {
             $occupation = Occupation::orderby('id','asc')->get();
-            $ocpparent = Occupation::where('code','<',100)->orderby('code','desc')->get();
-            $countparent= Occupation::where('parent_id',null)->where('code','<',100)->orderby('code','desc')->get();
+            $ocpparent = Occupation::whereRaw('LENGTH(code) < 5')->orderby('code','desc')->get();
+            $countparent= Occupation::where('parent_id',null)->whereRaw('LENGTH(code) < 5')->orderby('code','desc')->get();
+            $lastparent= Occupation::where('parent_id',null)->whereRaw('LENGTH(code) < 5')->orderby('code','desc')->first();
             $lastid = count($countparent);
             $ocp_ids = response()->json($occupation->modelKeys());
             $cob = COB::orderby('id','asc')->get();
@@ -151,12 +152,14 @@ class MasterController extends Controller
             if($lastid != null){
                 //$code_ocp = $mydate . strval($lastid + 1);
                 // $code_ocp = strval($lastid + 1);
-                if($lastid < 10){
+
+                if($lastid < 9){
                     $code_ocp = '0' . strval($lastid + 1);
-                }   
-                elseif($lastid > 9 && $lastid < 100){
+                } 
+                elseif($lastid > 8 && $lastid < 100){
                     $code_ocp = strval($lastid + 1);
                 } 
+                
                 
                 // if($lastid->id == 9){
                 //     $code_ocp = $mydate . strval($lastid->id + 1);
@@ -817,21 +820,22 @@ class MasterController extends Controller
     {
         $cob_parent = COB::where('id',$request->cob_code)->first();
         $cob = COB::where('parent_id',$request->cob_code)->orderby('id','desc')->get();
+        $coblastparent = COB::where('parent_id',$request->ocp_code)->orderby('id','desc')->first();
         $lastid = count($cob);
         
-        if($lastid > 0){
-            if($lastid < 10){
-                $code_cob = $cob_parent->code . '0' . strval($lastid + 1);
-            }elseif($lastid > 9 && $lastid < 100){
-                $code_cob = $cob_parent->code . strval($lastid + 1);
-            }
-                
-
-        }
-        elseif($lastid == 0){
-
+        if(!$coblastparent){
             $code_cob =  $cob_parent->code . '0' . strval(0);
+        }
+        else{
+            
+            $parentlastcode = substr($coblastparent->code,2) ;
+            $sumlastcode = strval($parentlastcode + 1);
 
+                if($parentlastcode < 9){
+                    $code_cob = $cob_parent->code . '0' . strval($parentlastcode + 1);
+                }elseif($parentlastcode > 8 && $parentlastcode < 100){
+                    $code_cob = $cob_parent->code . strval($parentlastcode + 1);
+                }
         }
        
 
@@ -846,17 +850,23 @@ class MasterController extends Controller
     {
         $ocp_parent = Occupation::where('id',$request->ocp_code)->first();
         $ocp = Occupation::where('parent_id',$request->ocp_code)->orderby('id','desc')->get();
+        $ocplastparent = Occupation::where('parent_id',$request->ocp_code)->orderby('id','desc')->first();
         $lastid = count($ocp);
+
         
-        if($lastid > 0){
-                if($lastid < 10){
-                    $code_ocp = $ocp_parent->code . '0' . strval($lastid + 1);
-                }elseif($lastid > 9 && $lastid < 100){
-                    $code_ocp = $ocp_parent->code . strval($lastid + 1);
-                }
-        }
-        elseif($lastid == 0){
+        if(!$ocplastparent){
             $code_ocp =  $ocp_parent->code . '0' . strval(0);
+        }
+        else{
+            
+            $parentlastcode = substr($ocplastparent->code,2) ;
+            $sumlastcode = strval($parentlastcode + 1);
+
+                if($parentlastcode < 9){
+                    $code_ocp = $ocp_parent->code . '0' . strval($parentlastcode + 1);
+                }elseif($parentlastcode > 8 && $parentlastcode < 100){
+                    $code_ocp = $ocp_parent->code . strval($parentlastcode + 1);
+                }
         }
        
 

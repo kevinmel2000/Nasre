@@ -36,7 +36,7 @@
                         <select name="parent_id" id="ocpparentdd" class="form-control form-control-sm ">
                             <option selected disabled>{{__('Select Parent')}}</option>
                             <option ></option>
-                            @foreach (@$occupation as $ocp)
+                            @foreach (@$ocpparent as $ocp)
                             <option value="{{ $ocp->id }}">{{ $ocp->code }} - {{ $ocp->description }}</option>
                             @endforeach
                         </select>
