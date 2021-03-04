@@ -1405,6 +1405,8 @@ $(document).ready(function() {
         $('#slipdpamount').val(sum);
      });
 
+     
+
      $('#slipshare').keyup(function () {
         var shareslip =  parseFloat($(this).val());
         var tsi = parseFloat($("#sliptotalsum").val());
@@ -1414,9 +1416,21 @@ $(document).ready(function() {
      });
 
      $('#sliprate').keyup(function () {
+        var insurance_period_from = $('#slipipfrom').val().split('-');
+        var insurance_period_to = $('#slipipto').val().split('-');
+        var month_from = parseInt(insurance_period_from[1]);
+        var month_to = parseInt(insurance_period_to[1]);
+        var month = (month_to - month_from);
+        var insurance = (month/365);
+        console.log(insurance_period_from)
+        console.log(insurance_period_to)
+        console.log(month_from)
+        console.log(month_to)
+        console.log(month)
+        console.log(insurance)
         var rateslip =  parseFloat($(this).val());
         var tsi = parseFloat($("#sliptotalsum").val());
-        var sum = isNaN(rateslip * tsi/100) ? 0 :(rateslip * tsi/100) ;
+        var sum = isNaN(rateslip * tsi/100 * insurance) ? 0 :(rateslip * tsi/100 * insurance) ;
         $('#slipbasicpremium').val(sum);
      });
 
