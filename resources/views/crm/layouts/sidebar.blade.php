@@ -935,6 +935,11 @@
                             || @$route_active == 'Financial Lines - Index'
                             || @$route_active == 'HE & Motor - Index'
                             || @$route_active == 'Moveable Property - Index'
+                            || @$route_active == 'Hole In One - Index'
+                            || @$route_active == 'Personal Accident - Index'
+                            || @$route_active == 'Hole In One - Slip Entry'
+                            || @$route_active == 'Personal Accident - Entry'
+                            || @$route_active == 'Marine - Slip and Insured Details'
                             )
                             @php
                             $trF_dd = 'active';
@@ -1153,6 +1158,7 @@
                                 @if(
                                     @$route_active == 'Marine - Slip Entry' 
                                     || @$route_active == 'Marine Slip - Index'  
+                                    || @$route_active == 'Marine - Slip and Insured Details'  
                                     )
                                         @php
                                             $ms_dd = 'active';

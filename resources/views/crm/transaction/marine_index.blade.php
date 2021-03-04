@@ -45,7 +45,7 @@
                                 <th>{{__('National Reinsurance')}}</th>
                                 <th>{{__('Total Sum Insurance')}}</th>
                                 <th>{{__('Coinsurance')}}</th>
-                                <th width="20%">{{__('Actions')}}</th>
+                                <th width="10%">{{__('Actions')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -57,7 +57,7 @@
                                         <td>@currency($insdata->share_from)</td>
                                         <td>@currency($insdata->share_to)</td>
                                         <td>{{@$insdata->coincurance}}</td>
-                                        <td>
+                                        <td width="10%">
                                             <a href="javascript:void(0)" data-toggle="tooltip" data-title="{{$insdata->created_at}}" class="mr-3">
                                             <i class="fas fa-clock text-info"></i>
                                             </a>
@@ -68,9 +68,9 @@
 
                                             
                                             {{-- @can('update-felookup', User::class) --}}
-                                                <a class="text-primary mr-3" href="{{ url('transaction-data/marine-slip/edit', $insdata->id) }}">
+                                                {{-- <a class="text-primary mr-3" href="{{ url('transaction-data/marine-slip/edit', $insdata->id) }}">
                                                     <i class="fas fa-edit"></i>
-                                                </a>
+                                                </a> --}}
                                                 {{-- @endcan   --}}
 
                                                 

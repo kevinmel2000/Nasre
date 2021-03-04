@@ -467,9 +467,7 @@
                                                     <div class="form-group">
                                                         <label>{{__('Attachment')}} </label>
                                                         <div class="input-group">
-                                                            <div class="input-group control-group increment2" >
-                                                                <input type="file" name="files[]" id="attachment" class="form-control" multiple>
-                                                            </div>
+                                                            
                                                             @foreach($filelist as $isl)
                                                                 <div class="control-group input-group" id="control-group2" style="margin-top:10px">
                                                                     <a href="{{ asset('files')}}/{{$isl->filename}}">{{$isl->filename}}</a>
@@ -948,7 +946,7 @@
 
                             </div>
 
-                            <div class="card card-primary">
+                            {{-- <div class="card card-primary">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-12 com-sm-12 mt-3">
@@ -958,7 +956,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>  --}}
 
                             <div class="card card-primary">
                                 <div class="card-body">
