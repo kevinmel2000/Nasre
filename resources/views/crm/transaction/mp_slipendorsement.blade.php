@@ -229,20 +229,7 @@
                     <form id="form-addlocation">
                         @csrf
                         <div class="modal-body">
-                            <div class="row">
                             
-                            <div class="col-md-6 col-md-12">
-                                <div class="form-group">
-                                <label for="">{{__('Lookup Location')}}</label>
-                                    <select name="lookup_location_id" id="lookup_location" class="e1 form-control form-control-sm " required>
-                                    <option selected readonly>{{__('Select Lookup Location ')}}</option>
-                                    @foreach($felookup as $felookuplocationdata)
-                                    <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->postal_code }}</option>
-                                    @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            </div>
 
                              
                             <div class="row">
