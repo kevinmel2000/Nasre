@@ -96,20 +96,7 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 
-                                                                <div class="row">
-                                                                    <div class="col-md-4">
-                                                                        <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                        <label for="" class="d-flex justify-content-center">{{__('Endorsement / Selisih')}}</label>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                        <input type="text" id="slipeddetail"  name="slipeddetail" value="" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50"/>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                        <input type="text" id="slipslsdetail" name="slipslsdetail" value="" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50"/>
-                                                                    </div>
-                                                                </div>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
