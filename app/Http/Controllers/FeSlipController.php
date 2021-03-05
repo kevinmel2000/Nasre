@@ -970,7 +970,7 @@ class FeSlipController extends Controller
     {
          
        $validatedData = $request->validate([
-        'files' => 'required'
+        // 'files' => 'required'
         ]);
  
         if($request->TotalFiles > 0)

@@ -92,14 +92,12 @@
                                                 <div class="form-group">
                                                     <label for="">{{__('Our Share')}}</label>
                                                     <div class="row">
-                                                        <div class="col-md-10">
+                                                        <div class="col-md-12">
                                                             <div class="input-group">
                                                                 <input type="text" id="msishare" name="msishare" value="{{ $isd->share }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="input-group-append">
-                                                                <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                <div class="input-group-append">
+                                                                    <div class="input-group-text"><i class="fa fa-percent"></i></div> 
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -199,7 +197,7 @@
                                     <td><a class="text-primary mr-3 " data-toggle="modal" data-target="#detailmodaldata" href="javascript:void(0)" onclick="detailslip({{ @$slipdatatadetail->id }})">{{ @$slipdatatadetail->number }}</a></td>
                                     <td>{{ @$slipdatatadetail->uy }}</td>
                                     <td >{{ @$slipdatatadetail->status }}</td>
-                                    <td><a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#editmodaldata" href="javascript:void(0)" onclick="editslip({{  @$slipdatatadetail->id }})">Update </a><a href="javascript:void(0)" onclick="endorsementmarine({{  @$slipdatatadetail->id }})"> Endorsement</a></td>
+                                    <td><a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#editmodaldata" href="javascript:void(0)" onclick="editslip({{  @$slipdatatadetail->id }})">Update </a><a data-toggle="modal" data-target="#endorsementmodaldata" href="javascript:void(0)" onclick="endorsementslip({{  @$slipdatatadetail->id }})"> Endorsement</a></td>
                              </tr>   
                              @endforeach
                         </tbody>
@@ -266,11 +264,9 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label>{{__('Prod Year')}}:</label>
-                                                                    <div class="input-group date" id="date" data-target-input="nearest">
-                                                                            <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipprodyear" name="slipprodyear" value="{{ $slip->prod_year }}" readonly="readonly">
-                                                                            <div class="input-group-append" >
-                                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                            </div>
+                                                                    <div class="input-group " >
+                                                                            <input type="date" class="form-control form-control-sm " id="slipprodyear" name="slipprodyear" value="{{ $slip->prod_year }}" readonly="readonly">
+                                                                            
                                                                     </div>
                                                             </div>
                                                         </div>
@@ -296,27 +292,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                
-                                                                <div class="row">
-                                                                    <div class="col-md-4">
-                                                                        <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                        <label for="" class="d-flex justify-content-center">{{__('Endorsement / Selisih')}}</label>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                        <input type="text" id="sliped" name="sliped" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="{{ $slip->endorsment }}" readonly="readonly" />
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                        <input type="text" id="slipsls" name="slipsls" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="{{ $slip->selisih }}" readonly="readonly"/>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    
                                                     <div class="row">
                                                         <div class="col-md-12 com-sm-12 mt-3">
                                                             <table id="slipStatusTable" class="table table-bordered table-striped">
@@ -410,7 +386,6 @@
                                                             <select id="slipoccupacy" name="slipoccupacy" class="e1 form-control form-control-sm ">
                                                                 
                                                                     <option value="{{ $slip->occupation->id }}">{{ $slip->occupation->code }} - {{ $slip->occupation->description }}</option>
-                                                                
                                                             </select>
                                                         </div>    
                                                         </div>
@@ -741,10 +716,18 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6 d-flex justify-content-start">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="">{{__('Rate (permil.. %)')}}</label>
-                                                            <input type="number"  step=".0001" id="sliprate" name="sliprate" value="{{ $slip->rate }}" readonly="readonly" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Rate (permil.. %)')}}</label>
+                                                                <input type="number"  step=".0001" id="sliprate" name="sliprate" value="{{ $slip->rate }}" readonly="readonly" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('V Broker')}}</label>
+                                                                <input type="number" value="0" step=".0001" id="slipvbroker" name="slipvbroker" value="{{ $slip->v_broker }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -982,6 +965,7 @@
 </div>
 @include('crm.transaction.marine_modal_slip')
 @include('crm.transaction.marine_modal_edit')
+@include('crm.transaction.marine_modal_endorsement')
 
 @endsection
 

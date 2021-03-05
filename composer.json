@@ -23,6 +23,7 @@
         "laravel/ui": "^2.0",
         "laravelcollective/html": "^6.2",
         "maatwebsite/excel": "^3.1",
+        "nesbot/carbon": "^2.45",
         "phpoffice/phpspreadsheet": "^1.9",
         "phpoffice/phpword": "^0.18.0"
     },
