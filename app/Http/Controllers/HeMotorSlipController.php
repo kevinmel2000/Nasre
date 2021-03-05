@@ -151,7 +151,7 @@ class HeMotorSlipController extends Controller
         $costumer=Customer::orderby('id','asc')->get();
 
 
-       $currdate = date("d/m/Y");
+        $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -315,7 +315,7 @@ class HeMotorSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-       $currdate = date("d/m/Y");
+        $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -402,7 +402,7 @@ class HeMotorSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-       $currdate = date("d/m/Y");
+        $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -528,7 +528,7 @@ class HeMotorSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-       $currdate = date("d/m/Y");
+        $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -721,7 +721,7 @@ class HeMotorSlipController extends Controller
 
             if($slipdata==null)
             {
-               $currdate = date("d/m/Y");
+               $currdate = date("Y-m-d");
 
                $slipdataup=SlipTable::create([
                     'number'=>$request->slipnumber,
@@ -780,7 +780,7 @@ class HeMotorSlipController extends Controller
             }
             else
             {
-               $currdate = date("d/m/Y");
+               $currdate = date("Y-m-d");
 
                 $slipdataid=$slipdata->id;
                 $slipdataup = SlipTable::findOrFail($slipdataid);
@@ -978,7 +978,7 @@ class HeMotorSlipController extends Controller
             }
             else
             {
-               $currdate = date("d/m/Y");
+               $currdate = date("Y-m-d");
 
                 $slipdataid=$slipdata->id;
                 $slipdataup = SlipTable::findOrFail($slipdataid);

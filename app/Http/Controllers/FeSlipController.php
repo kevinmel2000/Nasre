@@ -658,14 +658,15 @@ class FeSlipController extends Controller
         }
         $newextenddata=json_encode($newarrayextend);
 
-
+        $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
+      
         return response()->json(
             [
                 'id' => $slipdata->id,
                 'insured_id' => $slipdata->insured_id,
                 'slip_type' => $slipdata->slip_type,
                 'username' => $slipdata->username,
-                'prod_year' => $slipdata->prod_year,
+                'prod_year' => $dateyeardata,
                 'number' => $slipdata->number,
                 'slipuy' => $slipdata->uy,
                 'uy' => $slipdata->uy,
@@ -807,6 +808,7 @@ class FeSlipController extends Controller
         }
         $newextenddata=json_encode($newarrayextend);
 
+        $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
 
     
         return response()->json(
@@ -816,7 +818,7 @@ class FeSlipController extends Controller
                 'insured_id' => $slipdata->insured_id,
                 'slip_type' => $slipdata->slip_type,
                 'username' => $slipdata->username,
-                'prod_year' => $slipdata->prod_year,
+                'prod_year' => $dateyeardata,
                 'number' => $slipdata->number,
                 'slipuy' => $slipdata->uy,
                 'uy' => $slipdata->uy,
@@ -1040,7 +1042,7 @@ class FeSlipController extends Controller
 
             if($slipdata==null)
             {
-                $currdate = date("d/m/Y");
+                $currdate = date("Y-m-d");
 
                 $slipdataup=SlipTable::create([
                     'number'=>$request->slipnumber,
@@ -1101,7 +1103,7 @@ class FeSlipController extends Controller
             }
             else
             {
-                $currdate = date("d/m/Y");
+                $currdate = date("Y-m-d");
 
                 $slipdataid=$slipdata->id;
                 $slipdataup = SlipTable::findOrFail($slipdataid);
@@ -1300,7 +1302,7 @@ class FeSlipController extends Controller
             }
             else
             {
-                $currdate = date("d/m/Y");
+                $currdate = date("Y-m-d");
 
                 $slipdataid=$slipdata->id;
                 $slipdataup = SlipTable::findOrFail($slipdataid);
