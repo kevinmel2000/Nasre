@@ -481,7 +481,7 @@
                                             <div class="row d-flex justify-content-end">
                                                 <div class="col-md-4">
                                                     <label class="cl-switch cl-switch-green">
-                                                        <span for="switch-proportional" class="label"> {{__('Proportional')}} </span>
+                                                        <span for="switch-proportionaldetail" class="label"> {{__('Proportional')}} </span>
                                                         <input type="checkbox" name="slipproportionaldetail[]" id="switch-proportional"
                                                         class="submit" checked>
                                                         <span class="switcher"></span>
@@ -679,7 +679,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row" id="tabretrodetail">
                                                 <div class="col-md-12">
                                                     <div class="card">
                                                         <div class="card-header bg-gray">

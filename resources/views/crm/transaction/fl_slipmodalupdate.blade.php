@@ -597,7 +597,7 @@
                                                 <div class="col-md-4">
                                                     <label class="cl-switch cl-switch-green">
                                                         <span for="switch-proportional" class="label"> {{__('Proportional')}} </span>
-                                                        <input type="checkbox" name="slipproportionalupdate[]" id="switch-proportional"
+                                                        <input type="checkbox" name="slipproportionalupdate[]" id="switch-proportionalupdate"
                                                         class="submit" checked>
                                                         <span class="switcher"></span>
                                                         <span  class="label"> {{__('Non Proportional')}} </span>
@@ -828,7 +828,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row" id="tabretroupdate">
                                                 <div class="col-md-12">
                                                     <div class="card">
                                                         <div class="card-header bg-gray">

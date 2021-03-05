@@ -721,7 +721,9 @@ $(document).ready(function(){
         $("#sliplayerproportional").attr('hidden','true');
         $("#labelnonprop").attr('hidden','true');
         $("#tabretro").attr('hidden','true');
-
+        $("#tabretrodetail").attr('hidden','true');
+        $("#tabretroupdate").attr('hidden','true');
+        $("#tabretroendorsement").attr('hidden','true');
 
     $("#slipipfrom").change(function(){
         console.log($(this).val())
@@ -831,6 +833,42 @@ $(document).ready(function(){
         else{
             // $("#retrocessionPanel").attr('hidden','true');
             $("#tabretro").attr('hidden','true');
+        }
+    });
+
+    $('#sliprbdetail').change(function(){
+        var attr = $("#tabretrodetail").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            // $("#retrocessionPanel").removeAttr('hidden');
+            $("#tabretrodetail").removeAttr('hidden');
+        }
+        else{
+            // $("#retrocessionPanel").attr('hidden','true');
+            $("#tabretrodetail").attr('hidden','true');
+        }
+    });
+
+    $('#sliprbupdate').change(function(){
+        var attr = $("#tabretroupdate").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            // $("#retrocessionPanel").removeAttr('hidden');
+            $("#tabretroupdate").removeAttr('hidden');
+        }
+        else{
+            // $("#retrocessionPanel").attr('hidden','true');
+            $("#tabretroupdate").attr('hidden','true');
+        }
+    });
+
+    $('#sliprbendorsement').change(function(){
+        var attr = $("#tabretroendorsement").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            // $("#retrocessionPanel").removeAttr('hidden');
+            $("#tabretroendorsement").removeAttr('hidden');
+        }
+        else{
+            // $("#retrocessionPanel").attr('hidden','true');
+            $("#tabretroendorsement").attr('hidden','true');
         }
     });
 </script>
