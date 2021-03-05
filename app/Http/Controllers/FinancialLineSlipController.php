@@ -144,7 +144,7 @@ class FinancialLineSlipController extends Controller
         $state = State::orderby('id','asc')->get();
         $costumer=Customer::orderby('id','asc')->get();
         
-       $currdate = date("Y-m-d");
+       $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -315,7 +315,7 @@ class FinancialLineSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-       $currdate = date("Y-m-d");
+       $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -403,7 +403,7 @@ class FinancialLineSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-       $currdate = date("Y-m-d");
+       $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -527,7 +527,7 @@ class FinancialLineSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-       $currdate = date("Y-m-d");
+       $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -683,7 +683,7 @@ class FinancialLineSlipController extends Controller
 
             if($slipdata==null)
             {
-               $currdate = date("Y-m-d");
+               $currdate = date("d/m/Y");
 
                $slipdataup=SlipTable::create([
                     'number'=>$request->slipnumber,
@@ -743,7 +743,7 @@ class FinancialLineSlipController extends Controller
             }
             else
             {
-               $currdate = date("Y-m-d");
+               $currdate = date("d/m/Y");
 
                 $slipdataid=$slipdata->id;
                 $slipdataup = SlipTable::findOrFail($slipdataid);
@@ -933,7 +933,7 @@ class FinancialLineSlipController extends Controller
 
             if($slipdata==null)
             {
-               $currdate = date("Y-m-d");
+               $currdate = date("d/m/Y");
 
                 
                 $notification = array(
@@ -943,7 +943,7 @@ class FinancialLineSlipController extends Controller
             }
             else
             {
-               $currdate = date("Y-m-d");
+               $currdate = date("d/m/Y");
 
                 $slipdataid=$slipdata->id;
                 $slipdataup = SlipTable::findOrFail($slipdataid);
