@@ -149,7 +149,7 @@ class MovePropSlipController extends Controller
         $costumer=Customer::orderby('id','asc')->get();
 
         
-       $currdate = date("Y-m-d");
+        $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -319,7 +319,7 @@ class MovePropSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-       $currdate = date("Y-m-d");
+        $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -407,7 +407,7 @@ class MovePropSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-       $currdate = date("Y-m-d");
+        $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -535,7 +535,7 @@ class MovePropSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-       $currdate = date("Y-m-d");
+        $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -768,6 +768,7 @@ class MovePropSlipController extends Controller
                     'proportional'=>$request->slipproportional,
                     'layer_non_proportional'=>$request->sliplayerproportional,
                     'rate'=>$request->sliprate,
+                    'v_broker'=>$request->slipvbroker,
                     'share'=>$request->slipshare,
                     'sum_share'=>$request->slipsumshare,
                     'basic_premium'=>$request->slipbasicpremium,
@@ -827,7 +828,8 @@ class MovePropSlipController extends Controller
                 $slipdataup->reinsurance_period_to=$request->sliprpto;
                 $slipdataup->proportional=$request->slipproportional;
                 $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
-                $slipdataup->rate=$request->sliprate;  
+                $slipdataup->rate=$request->sliprate;
+                $slipdataup->v_broker=$request->slipvbroker;  
                 $slipdataup->share=$request->slipshare;
                 $slipdataup->sum_share=$request->slipsumshare;
                 $slipdataup->basic_premium=$request->slipbasicpremium;
@@ -1024,7 +1026,8 @@ class MovePropSlipController extends Controller
                 $slipdataup->reinsurance_period_to=$request->sliprpto;
                 $slipdataup->proportional=$request->slipproportional;
                 $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
-                $slipdataup->rate=$request->sliprate;  
+                $slipdataup->rate=$request->sliprate; 
+                $slipdataup->v_broker=$request->slipvbroker; 
                 $slipdataup->share=$request->slipshare;
                 $slipdataup->sum_share=$request->slipsumshare;
                 $slipdataup->basic_premium=$request->slipbasicpremium;

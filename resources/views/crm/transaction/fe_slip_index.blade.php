@@ -49,11 +49,11 @@
                     <tbody>
                         @foreach (@$insured as $insureddata)
                             <tr>
-                              <td ><a href="{{  url('transaction-data/detailfeslip', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
+                              <td ><a href="{{  url('transaction-data/updatefeslip', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
                               <td>{{@$insureddata->insured_prefix}} - {{@$insureddata->insured_name}} - {{@$insureddata->insured_suffix}}</td>
                               <td>{{@$insureddata->share }}</td>
-                              <td class="uang">{{@$insureddata->share_from}}</td>
-                              <td class="uang">{{@$insureddata->share_to}}</td>
+                              <td >@currency(@$insureddata->share_from)</td>
+                              <td >@currency(@$insureddata->share_to)</td>
                               <td>{{@$insureddata->coincurance}}</td>
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$insureddata->created_at}}" class="mr-3">
@@ -65,16 +65,16 @@
                                 <span>
                                 
                                 {{-- @can('update-felookup', User::class) --}}
-                                <a class="text-primary mr-3" href="{{ url('transaction-data/detailfeslip', $insureddata->id) }}">
+                                {{--<a class="text-primary mr-3" href="{{ url('transaction-data/detailfeslip', $insureddata->id) }}">
                                   <i class="fas fa-file"></i>
-                                </a>
+                                </a>--}}
                                 {{-- {!! link_to('transaction-data/detailfeslip/'.@$insureddata->id,'Detail Data',['class'=>'btn btn-primary']) !!} --}}
                                 {{-- @endcan   --}}
 
                                 {{-- @can('update-felookup', User::class) --}}
-                                <a class="text-primary mr-3" href="{{ url('transaction-data/updatefeslip', $insureddata->id) }}">
+                                {{--<a class="text-primary mr-3" href="{{ url('transaction-data/updatefeslip', $insureddata->id) }}">
                                   <i class="fas fa-edit"></i>
-                                </a>
+                                </a>--}}
                                 {{-- {!! link_to('transaction-data/updatefeslip/'.@$insureddata->id,'Edit Data',['class'=>'btn btn-primary']) !!} --}}
                                 {{-- @endcan   --}}
 
@@ -82,14 +82,14 @@
 
                                    {{-- @can('delete-felookup', User::class) --}}
 
-                                    <span id="delbtn{{@$insureddata->id}}"></span>
+                                   {{--<span id="delbtn{{@$insureddata->id}}"></span>
                                 
                                     <form id="delete-felookuplocation-{{$insureddata->id}}"
                                         action="{{ url('transaction-data/fe-slip/destroy', $insureddata->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
-                                    </form>
+                                    </form>>--}}
                                   {{-- @endcan   --}}
                                 </span>
                               </td>

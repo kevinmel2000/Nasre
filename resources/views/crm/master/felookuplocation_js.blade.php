@@ -123,7 +123,7 @@
 
 
 
-<script src="http://maps.google.com/maps/api/js?sensor=false&amp;key=AIzaSyD4yhKiCvJpWtee_7Bobk_9qjDUAZTTOKE" type="text/javascript"></script>
+<script src="//maps.google.com/maps/api/js?sensor=false&amp;key=AIzaSyD4yhKiCvJpWtee_7Bobk_9qjDUAZTTOKE" type="text/javascript"></script>
 
 <link href="{{url('/')}}/css/select2.css" rel="stylesheet"/>
 <script src="{{url('/')}}/js/select2.js"></script>

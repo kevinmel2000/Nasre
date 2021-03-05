@@ -223,20 +223,7 @@
                     <form id="form-addlocation">
                         @csrf
                         <div class="modal-body">
-                            <div class="row">
-                            
-                            <div class="col-md-6 col-md-12">
-                                <div class="form-group">
-                                <label for="">{{__('Lookup Location')}}</label>
-                                    <select name="lookup_location_id" id="lookup_location" class="e1 form-control form-control-sm " >
-                                    <option selected readonly>{{__('Select Lookup Location ')}}</option>
-                                    @foreach($felookup as $felookuplocationdata)
-                                    <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->postal_code }}</option>
-                                    @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            </div>
+                           
 
                             
                             <div class="row">
@@ -445,20 +432,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-                                                                    <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                    <label for="" class="d-flex justify-content-center">{{__('Endorsement / Selisih')}}</label>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                    <input type="text" id="sliped"  name="sliped" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"/>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                    <input type="text" id="slipsls" name="slipsls" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"/>
-                                                                </div>
-                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>

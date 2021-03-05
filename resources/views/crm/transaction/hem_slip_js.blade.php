@@ -2429,6 +2429,7 @@ $("body").on("click","#btn-danger2",function(){
        var proportional =  $('#switch-proportional').val();
        var sliplayerproportional =  $('#sliplayerproportional').val();
        var sliprate =  $('#sliprate').val();
+       var slipvbroker =  $('#slipvbroker').val();
        var slipshare =  $('#slipshare').val();
        var slipsumshare =  $('#slipsumshare').val();
        var slipbasicpremium =  $('#slipbasicpremium').val();
@@ -2481,6 +2482,7 @@ $("body").on("click","#btn-danger2",function(){
                proportional:proportional,
                sliplayerproportional:sliplayerproportional,
                sliprate:sliprate,
+               slipvbroker:slipvbroker,
                slipshare:slipshare,
                slipsumshare:slipsumshare,
                slipbasicpremium:slipbasicpremium,
@@ -2590,6 +2592,7 @@ $("body").on("click","#btn-danger2",function(){
        var proportional =  $('#switch-proportional').val();
        var sliplayerproportional =  $('#sliplayerproportional').val();
        var sliprate =  $('#sliprate').val();
+       var slipvbroker =  $('#slipvbroker').val();
        var slipshare =  $('#slipshare').val();
        var slipsumshare =  $('#slipsumshare').val();
        var slipbasicpremium =  $('#slipbasicpremium').val();
@@ -2640,6 +2643,7 @@ $("body").on("click","#btn-danger2",function(){
                proportional:proportional,
                sliplayerproportional:sliplayerproportional,
                sliprate:sliprate,
+               slipvbroker:slipvbroker,
                slipshare:slipshare,
                slipsumshare:slipsumshare,
                slipbasicpremium:slipbasicpremium,
@@ -2796,6 +2800,7 @@ $("body").on("click","#btn-danger2",function(){
        var proportional =  $('#switch-proportional').val();
        var sliplayerproportional =  $('#sliplayerproportional').val();
        var sliprate =  $('#sliprate').val();
+       var slipvbroker =  $('#slipvbroker').val();
        var slipshare =  $('#slipshare').val();
        var slipsumshare =  $('#slipsumshare').val();
        var slipbasicpremium =  $('#slipbasicpremium').val();
@@ -2847,6 +2852,7 @@ $("body").on("click","#btn-danger2",function(){
                proportional:proportional,
                sliplayerproportional:sliplayerproportional,
                sliprate:sliprate,
+               slipvbroker:slipvbroker,
                slipshare:slipshare,
                slipsumshare:slipsumshare,
                slipbasicpremium:slipbasicpremium,
@@ -3001,6 +3007,7 @@ $("body").on("click","#btn-danger2",function(){
        var proportional =  $('#switch-proportionalupdate').val();
        var sliplayerproportional =  $('#sliplayerproportionalupdate').val();
        var sliprate =  $('#sliprateupdate').val();
+       var slipvbroker =  $('#v_brokerupdate').val();
        var slipshare =  $('#slipshareupdate').val();
        var slipsumshare =  $('#slipsumshareupdate').val();
        var slipbasicpremium =  $('#slipbasicpremiumupdate').val();
@@ -3053,6 +3060,7 @@ $("body").on("click","#btn-danger2",function(){
                proportional:proportional,
                sliplayerproportional:sliplayerproportional,
                sliprate:sliprate,
+               slipvbroker:slipvbroker,
                slipshare:slipshare,
                slipsumshare:slipsumshare,
                slipbasicpremium:slipbasicpremium,
@@ -3222,6 +3230,7 @@ $("body").on("click","#btn-danger2",function(){
        var proportional =  $('#switch-proportionalendorsement').val();
        var sliplayerproportional =  $('#sliplayerproportionalendorsement').val();
        var sliprate =  $('#sliprateendorsement').val();
+       var slipvbroker =  $('#v_brokerendorsement').val();
        var slipshare =  $('#slipshareendorsement').val();
        var slipsumshare =  $('#slipsumshareendorsement').val();
        var slipbasicpremium =  $('#slipbasicpremiumendorsement').val();
@@ -3275,6 +3284,7 @@ $("body").on("click","#btn-danger2",function(){
                proportional:proportional,
                sliplayerproportional:sliplayerproportional,
                sliprate:sliprate,
+               slipvbroker:slipvbroker,
                slipshare:slipshare,
                slipsumshare:slipsumshare,
                slipbasicpremium:slipbasicpremium,
