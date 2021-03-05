@@ -758,6 +758,7 @@ class HeMotorSlipController extends Controller
                     'proportional'=>$request->slipproportional,
                     'layer_non_proportional'=>$request->sliplayerproportional,
                     'rate'=>$request->sliprate,
+                    'v_broker'=>$request->slipvbroker,
                     'share'=>$request->slipshare,
                     'sum_share'=>$request->slipsumshare,
                     'basic_premium'=>$request->slipbasicpremium,
@@ -816,7 +817,8 @@ class HeMotorSlipController extends Controller
                 $slipdataup->reinsurance_period_to=$request->sliprpto;
                 $slipdataup->proportional=$request->slipproportional;
                 $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
-                $slipdataup->rate=$request->sliprate;  
+                $slipdataup->rate=$request->sliprate; 
+                $slipdataup->v_broker=$request->slipvbroker; 
                 $slipdataup->share=$request->slipshare;
                 $slipdataup->sum_share=$request->slipsumshare;
                 $slipdataup->basic_premium=$request->slipbasicpremium;
@@ -1014,6 +1016,7 @@ class HeMotorSlipController extends Controller
                 $slipdataup->proportional=$request->slipproportional;
                 $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
                 $slipdataup->rate=$request->sliprate;  
+                $slipdataup->v_broker=$request->slipvbroker;
                 $slipdataup->share=$request->slipshare;
                 $slipdataup->sum_share=$request->slipsumshare;
                 $slipdataup->basic_premium=$request->slipbasicpremium;
