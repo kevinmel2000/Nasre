@@ -49,7 +49,7 @@
                     <tbody>
                         @foreach (@$insured as $insureddata)
                             <tr>
-                              <td ><a href="{{  url('transaction-data/detailfeslip', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
+                              <td ><a href="{{  url('transaction-data/updatefeslip', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
                               <td>{{@$insureddata->insured_prefix}} - {{@$insureddata->insured_name}} - {{@$insureddata->insured_suffix}}</td>
                               <td>{{@$insureddata->share }}</td>
                               <td >@currency(@$insureddata->share_from)</td>
@@ -72,9 +72,9 @@
                                 {{-- @endcan   --}}
 
                                 {{-- @can('update-felookup', User::class) --}}
-                                <a class="text-primary mr-3" href="{{ url('transaction-data/updatefeslip', $insureddata->id) }}">
+                                {{--<a class="text-primary mr-3" href="{{ url('transaction-data/updatefeslip', $insureddata->id) }}">
                                   <i class="fas fa-edit"></i>
-                                </a>
+                                </a>--}}
                                 {{-- {!! link_to('transaction-data/updatefeslip/'.@$insureddata->id,'Edit Data',['class'=>'btn btn-primary']) !!} --}}
                                 {{-- @endcan   --}}
 

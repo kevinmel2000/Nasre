@@ -72,9 +72,9 @@
                                 @endcan 
                               
                                 @can('update-felookup', User::class)
-                                <a class="text-primary mr-3" href="{{ url('transaction-data/updatempslip', $insureddata->id) }}">
+                                {{--<a class="text-primary mr-3" href="{{ url('transaction-data/updatempslip', $insureddata->id) }}">
                                   <i class="fas fa-edit"></i>
-                                </a>
+                                </a>--}}
                                 {{-- {!! link_to('transaction-data/updatempslip/'.@$insureddata->id,'Edit Data',['class'=>'btn btn-primary']) !!} --}}
                                 @endcan  
 
