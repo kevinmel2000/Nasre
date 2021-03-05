@@ -3346,6 +3346,7 @@ $(document).ready(function() {
        var proportional =  $('#switch-proportionalendorsement').val();
        var sliplayerproportional =  $('#sliplayerproportionalendorsement').val();
        var sliprate =  $('#sliprateendorsement').val();
+       var slipvbroker =  $('#v_brokerendorsement').val();
        var slipshare =  $('#slipshareendorsement').val();
        var slipsumshare =  $('#slipsumshareendorsement').val();
        var slipbasicpremium =  $('#slipbasicpremiumendorsement').val();
@@ -3399,6 +3400,7 @@ $(document).ready(function() {
                proportional:proportional,
                sliplayerproportional:sliplayerproportional,
                sliprate:sliprate,
+               slipvbroker:slipvbroker,
                slipshare:slipshare,
                slipsumshare:slipsumshare,
                slipbasicpremium:slipbasicpremium,
