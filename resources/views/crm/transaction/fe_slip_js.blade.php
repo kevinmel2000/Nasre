@@ -2815,8 +2815,6 @@ $(document).ready(function() {
    });
 </script>
 
-
-
 <script type='text/javascript'>
     $('#multi-file-upload-ajax').submit(function(e){
        //alert('masuk');
@@ -3034,8 +3032,6 @@ $(document).ready(function() {
 
    });
 </script>
-
-
 
 <script type='text/javascript'>
     $('#multi-file-upload-ajax2').submit(function(e){
@@ -3256,8 +3252,6 @@ $(document).ready(function() {
    });
 </script>
 
-
-
 <script type='text/javascript'>
     $('#multi-file-upload-ajaxupdate').submit(function(e){
        //alert('masuk');
@@ -3476,9 +3470,6 @@ $(document).ready(function() {
 
    });
 </script>
-
-
-
 
 <script type='text/javascript'>
     $('#multi-file-upload-ajaxendorsement').submit(function(e){

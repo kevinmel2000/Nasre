@@ -16,20 +16,20 @@
                         <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                             <li class="pt-1 px-3"><h3 class="card-title">{{__('Slip Form')}}</h3></li>
                             <li class="nav-item">
-                            <a class="nav-link active" id="general-details3" data-toggle="pill" href="#general-details-id3" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
+                            <a class="nav-link active" id="general-details-nav" data-toggle="pill" href="#general-details-id4" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link" id="insured-details3" data-toggle="pill" href="#insured-details-id3" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data & Insurance Measurement')}}</a>
+                            <a class="nav-link" id="insured-details-nav" data-toggle="pill" href="#insured-details-id4" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data & Insurance Measurement')}}</a>
                             </li>
                         
                             <li class="nav-item">
-                                <a class="nav-link" id="installment-details3" data-toggle="pill" href="#installment-details-id3" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
+                                <a class="nav-link" id="installment-details-nav" data-toggle="pill" href="#installment-details-id4" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
                             </li>
                         </ul>
                     </div>
                     <div class="card-body bg-light-gray">
                         <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
-                            <div class="tab-pane fade show active" id="general-details-id3" role="tabpanel" aria-labelledby="general-details">
+                            <div class="tab-pane fade show active" id="general-details-id4" role="tabpanel" aria-labelledby="general-details">
                                 <div class="row">
                                     
                                     {{-- <div class="col-md-12">
@@ -295,7 +295,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="insured-details-id3" role="tabpanel" aria-labelledby="insured-details">
+                            <div class="tab-pane fade" id="insured-details-id4" role="tabpanel" aria-labelledby="insured-details">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="card">
@@ -638,7 +638,7 @@
 
                             </div>
                             
-                            <div class="tab-pane fade" id="installment-details-id3" role="tabpanel" aria-labelledby="installment-details">
+                            <div class="tab-pane fade" id="installment-details-id4" role="tabpanel" aria-labelledby="installment-details">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="card">

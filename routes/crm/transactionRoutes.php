@@ -174,8 +174,9 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::get('/pa-slip', [TransactionController::class, 'indexpaslip']);
     Route::get('/pa-index', [TransactionController::class, 'indexpa']);
     Route::get('/pa-slip/{id}', [TransactionController::class, 'showlocationdetails'])->name('locDetails');
-    Route::post('/pa-insured', [TransactionController::class, 'storepainsured']);
-    Route::post('/pa-slip', [TransactionController::class, 'storepaslip']);
+    Route::post('/pa-insured', [TransactionController::class, 'storepersonalaccidentinsured']);
+    Route::post('/pa-endorsement', [TransactionController::class, 'storepersonalaccidentendorsement']);
+    Route::post('/pa-slip', [TransactionController::class, 'storepersonalaccidentslip']);
     Route::delete('/pa-insured/destroyinsured/{id}', [TransactionController::class, 'destroypainsured']);
     Route::delete('/pa-slip/destroyslip/{id}', [TransactionController::class, 'destroypaslip']);
  
