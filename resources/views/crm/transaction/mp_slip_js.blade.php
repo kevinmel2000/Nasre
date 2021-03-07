@@ -882,6 +882,8 @@ $(document).ready(function(){
         $.ajax({
             type:"GET",
             url:"{{url('get-state-lookup')}}?country_id="+countryID,
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
             success:function(res){  
                 console.log(res)      
                 if(res){
@@ -909,6 +911,8 @@ $(document).ready(function(){
                 $.ajax({
                     type:"GET",
                     url:"{{url('get-city-lookup')}}?state_id="+stateID,
+                    beforeSend: function() { $("body").addClass("loading");  },
+                    complete: function() {  $("body").removeClass("loading"); },
                     success:function(res){        
                         if(res){
                             $("#city_location").empty();
@@ -937,6 +941,8 @@ $(document).ready(function(){
                 $.ajax({
                     type:"GET",
                     url:"{{url('get-address-lookup')}}?city_id="+cityID,
+                    beforeSend: function() { $("body").addClass("loading");  },
+                    complete: function() {  $("body").removeClass("loading"); },
                     success:function(res){        
                         if(res){
                             $("#address_location").empty();
@@ -2548,7 +2554,7 @@ $(document).ready(function(){
         height: 100%;
         top: 0;
         left: 0;
-        z-index: 1100 !important;;
+        z-index: 1100 !important;
         background: rgba(255,255,255,0.8) url("{{url('/')}}/loader.gif") center no-repeat;
     }
     /* Turn off scrollbar when body element has the loading class */
