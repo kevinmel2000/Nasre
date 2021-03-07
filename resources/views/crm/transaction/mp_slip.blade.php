@@ -278,6 +278,56 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-md-6 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Interest list')}}</label>
+                                        <select id="slipinterestlistlocation" name="slipinterestlistlocation" class="form-control form-control-sm ">
+                                            <option selected disabled>{{__('Interest list')}}</option>
+                                            @foreach($interestinsured as $ii)
+                                                <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('CN No')}}</label>
+                                        <input type="text" id="cnno" name="cnno" class="form-control form-control-sm" value="" required/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Cert No')}}</label>
+                                        <input type="text" id="certno" name="certno" class="form-control form-control-sm" value="" required/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Ref No')}}</label>
+                                        <input type="text" id="refno" name="refno" class="form-control form-control-sm" value="" required/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Amount')}}</label>
+                                        <input type="number" min="0" max="999999999,9999" value="" step=".01" id="amountlocation" name="amountlocation" class="form-control form-control-sm " data-validation="length" data-validation-length="0-20"/>
+                                    </div>
+                                </div>
+                            </div>
+
                             
                         </div>
 
