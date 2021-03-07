@@ -1522,6 +1522,7 @@ class FeSlipController extends Controller
                     'loc_code' => $felookuplocations->loc_code,
                     'address' => $felookuplocations->address,
                     'city_id' => $felookuplocations->city_id,
+                    'postal_code' => $felookuplocations->postal_code,
                     'province_id' => $felookuplocations->province_id,
                     'latitude' => $felookuplocations->latitude,
                     'longtitude' => $felookuplocations->longtitude,
