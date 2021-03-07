@@ -1028,7 +1028,13 @@ $(document).ready(function() {
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 console.log(response)
-                $('#locRiskTable tbody').prepend('<tr id="sid'+response.id+'"><td>'+response.loc_code+'</td><td>'+response.address+'</td><td>'+response.city_name+'</td><td>'+response.state_name+'</td><td>'+response.latitude+' , '+response.longtitude+'</td><td><a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
+                $('#locRiskTable tbody').prepend('<tr id="sid'+response.id+'"><td>'+response.loc_code+'<br>'+response.address+'<br>'+response.city_name+'<br>'+response.state_name+'<br>'+response.latitude+' , '+response.longtitude+'<br>'+ response.postal_code+'</td>'+
+                                                 '<td>'+response.interest_name+'</td>'+
+                                                 '<td>'+response.ccno+'</td>'+
+                                                 '<td>'+response.certno+'</td>'+
+                                                 '<td>'+response.refno+'</td>'+
+                                                 '<td>'+response.amountlocation+'</td>'+
+                                                 '<a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
                 $('#addlocation').modal('toggle');
                 $('#form-addlocation')[0].reset();
             }

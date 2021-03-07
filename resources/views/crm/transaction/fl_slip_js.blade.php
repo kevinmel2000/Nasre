@@ -955,15 +955,36 @@ $(document).ready(function() {
      $('#form-addlocation').submit(function(e){
         e.preventDefault();
 
-        var lookupcode = $('#lookup_location').val();
+        var lookupcode = $('#address_location').val();
         var insured_id = $('#insuredIDtxt').val();
         var token = $('input[name=_token]').val();
         
+        var country = $('#country_location_id').val();
+        var state = $('#state_location_id').val();
+        var city = $('#city_location_id').val();        
+        var adrress = $('#address_location_id').val();
+        var slipinterestid = $('#slipinterestlistlocation').val();
+        var cnno = $('#cnno').val();
+        var certno = $('#certno').val();
+        var refno = $('#refno').val();
+        var amountlocation = $('#amountlocation').val();
+        
+        
+
         $.ajax({
             url:"{{ route('locationlist.store') }}",
             type:"POST",
             data:{
                 lookupcode:lookupcode,
+                country:country,
+                state:state,
+                city:city,
+                adrress:adrress,
+                slipinterestid:slipinterestid,
+                cnno:cnno,
+                certno:certno,
+                refno:refno,
+                amountlocation:amountlocation,
                 insuredID:insured_id,
                 _token:token
             },
@@ -971,9 +992,13 @@ $(document).ready(function() {
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 console.log(response)
-                //alert(response);
-                
-                $('#locRiskTable tbody').prepend('<tr id="sid'+response.id+'"><td>'+response.loc_code+'</td><td>'+response.address+'</td><td>'+response.city_id+'</td><td>'+response.province_id+'</td><td>'+response.latitude+' , '+response.longtitude+'</td><td><a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
+                $('#locRiskTable tbody').prepend('<tr id="sid'+response.id+'"><td>'+response.loc_code+'<br>'+response.address+'<br>'+response.city_name+'<br>'+response.state_name+'<br>'+response.latitude+' , '+response.longtitude+'<br>'+ response.postal_code+'</td>'+
+                                                 '<td>'+response.interest_name+'</td>'+
+                                                 '<td>'+response.ccno+'</td>'+
+                                                 '<td>'+response.certno+'</td>'+
+                                                 '<td>'+response.refno+'</td>'+
+                                                 '<td>'+response.amountlocation+'</td>'+
+                                                 '<a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
                 $('#addlocation').modal('toggle');
                 $('#form-addlocation')[0].reset();
             }
