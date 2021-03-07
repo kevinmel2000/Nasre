@@ -1504,18 +1504,19 @@ class FeSlipController extends Controller
                 $locationlist = new TransLocationTemp();
                 $locationlist->insured_id = $insured_id;
                 $locationlist->lookup_location_id = $adrress;
-                $locationlist->country_id=$country;
-                $locationlist->state_id=$state;
-                $locationlist->city_id=$city;
+                $locationlist->country_id=$request->country;
+                $locationlist->state_id=$request->state;
+                $locationlist->city_id=$request->city;
                 $locationlist->address_location_id=$adrress;
-                $locationlist->interest_id=$slipinterestid;
-                $locationlist->cnno=$cnno;
-                $locationlist->certno=$certno;
-                $locationlist->refno=$refno;
-                $locationlist->amountlocation=$amountlocation;
+                $locationlist->interest_id=$request->slipinterestid;
+                $locationlist->cnno=$request->cnno;
+                $locationlist->certno=$request->certno;
+                $locationlist->refno=$request->refno;
+                $locationlist->amountlocation=$request->amountlocation;
                 $locationlist->save();
 
                 $felookuplocations = FeLookupLocation::find($adrress);
+                $locationlist2 = TransLocationTemp::where('id','=',$locationlist->id);
 
                 return response()->json([
                     'id' => $locationlist->id,
@@ -1528,12 +1529,12 @@ class FeSlipController extends Controller
                     'longtitude' => $felookuplocations->longtitude,
                     'state_name' => $felookuplocations->state->name,
                     'city_name' => $felookuplocations->city->name,
-                    'interest_id'=> $slipinterestid,
-                    'interest_name'=> $felookuplocations->interestdata->code.'-'.$felookuplocations->interestdata->description,
-                    'cnno' => $cnno,
-                    'certno' => $certno,
-                    'refno' => $refno,
-                    'amountlocation' => $amountlocation,
+                    'interest_id'=> $request->slipinterestid,
+                    'interest_name'=> $locationlist->interestdata->code.'-'.$locationlist->interestdata->description,
+                    'cnno' => $request->cnno,
+                    'certno' => $request->certno,
+                    'refno' => $request->refno,
+                    'amountlocation' => $request->amountlocation,
                 ]);
             }
             else

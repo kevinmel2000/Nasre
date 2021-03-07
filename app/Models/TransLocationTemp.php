@@ -20,4 +20,9 @@ class TransLocationTemp extends Model
     {
 		return $this->belongsTo('App\Models\FeLookupLocation','lookup_location_id'); 
     }
+    
+    public function interestdata()
+    {  
+       return $this->belongsTo('App\Models\InterestInsured', 'interest_id');
+    }
 }

@@ -968,10 +968,10 @@ $(document).ready(function(){
         var insured_id = $('#insuredIDtxt').val();
         var token = $('input[name=_token]').val();
         
-        var country = $('#country_location_id').val();
-        var state = $('#state_location_id').val();
-        var city = $('#city_location_id').val();        
-        var adrress = $('#address_location_id').val();
+        var country = $('#country_location').val();
+        var state = $('#state_location').val();
+        var city = $('#city_location').val();        
+        var adrress = $('#address_location').val();
         var slipinterestid = $('#slipinterestlistlocation').val();
         var cnno = $('#cnno').val();
         var certno = $('#certno').val();
@@ -1007,7 +1007,7 @@ $(document).ready(function(){
                                                  '<td>'+response.certno+'</td>'+
                                                  '<td>'+response.refno+'</td>'+
                                                  '<td>'+response.amountlocation+'</td>'+
-                                                 '<a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
+                                                 '<td><a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
                 $('#addlocation').modal('toggle');
                 $('#form-addlocation')[0].reset();
             }
@@ -2566,113 +2566,6 @@ $(document).ready(function(){
     $('#addinsuredsave-btn').click(function(e){
        //alert('masuk');
        e.preventDefault();
-
-       var code_ms = $('#insuredIDtxt').val();
-       var slipnumber = $('#slipnumber').val();
-       var slipuy = $('#slipuy').val();
-       var slipstatus = $('#slipstatus').val();
-       var sliped = $('#sliped').val();
-       var slipsls = $('#slipsls').val();
-       var slipcedingbroker = $('#slipcedingbroker').val();
-       var slipceding = $('#slipceding').val();
-       var slipcurrency = $('#slipcurrency').val();
-       var slipcob = $('#slipcob').val();
-       var slipkoc = $('#slipkoc').val();
-       var slipoccupacy = $('#slipoccupacy').val();
-       var slipbld_const = $('#slipbld_const').val();
-       var slipno = $('#slipno').val();
-       var slipcndn = $('#slipcndn').val();
-       var slippolicy_no = $('#slippolicy_no').val();
-       var sliptotalsum = $('#sliptotalsum').val();
-       var sliptype =  $('#sliptype').val();
-       var slippct =  $('#slippct').val();
-       var sliptotalsumpct =  $('#sliptotalsumpct').val();
-       var slipipfrom =  $('#slipipfrom').val();
-       var slipipto =  $('#slipipto').val();
-       var sliprpfrom =  $('#sliprpfrom').val();
-       var sliprpto =  $('#sliprpto').val();
-       var proportional =  $('#switch-proportional').val();
-       var sliplayerproportional =  $('#sliplayerproportional').val();
-       var sliprate =  $('#sliprate').val();
-       var slipvbroker =  $('#slipvbroker').val();
-       var slipshare =  $('#slipshare').val();
-       var slipsumshare =  $('#slipsumshare').val();
-       var slipbasicpremium =  $('#slipbasicpremium').val();
-       var slipgrossprmtonr =  $('#slipgrossprmtonr').val();
-       var slipsumcommission =  $('#slipsumcommission').val();
-       var slipcommission =  $('#slipcommission').val();
-       var slipnetprmtonr =  $('#slipnetprmtonr').val();
-       var sliprb =  $('#sliprb').val();
-       var slipor =  $('#slipor').val();
-       var slipsumor =  $('#slipsumor').val();
-
-       var token2 = $('input[name=_token]').val();
-       
-       //ajaxfilefunction(e);
-
-       $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-       $.ajax({
-           url:"{{url('transaction-data/fe-slip/store')}}",
-           type:"POST",
-           data:{
-               code_ms:code_ms,
-               slipnumber:slipnumber,
-               slipuy:slipuy,
-               slipstatus:slipstatus,
-               sliped:sliped,
-               slipsls:slipsls,
-               slipcedingbroker:slipcedingbroker,
-               slipceding:slipceding,
-               slipcurrency:slipcurrency,
-               slipcob:slipcob,
-               slipkoc:slipkoc,
-               slipoccupacy:slipoccupacy,
-               slipbld_const:slipbld_const,
-               slipno:slipno,
-               slipcndn:slipcndn,
-               slippolicy_no:slippolicy_no,
-               sliptotalsum:sliptotalsum,
-               sliptype:sliptype,
-               slippct:slippct,
-               sliptotalsumpct:sliptotalsumpct,
-               slipipfrom:slipipfrom,
-               slipipto:slipipto,
-               sliprpfrom:sliprpfrom,
-               sliprpto:sliprpto,
-               proportional:proportional,
-               sliplayerproportional:sliplayerproportional,
-               sliprate:sliprate,
-               slipvbroker:slipvbroker,
-               slipshare:slipshare,
-               slipsumshare:slipsumshare,
-               slipbasicpremium:slipbasicpremium,
-               slipgrossprmtonr:slipgrossprmtonr,
-               slipcommission:slipcommission,
-               slipsumcommission:slipsumcommission,
-               slipnetprmtonr:slipnetprmtonr,
-               sliprb:sliprb,
-               slipor:slipor,
-               slipsumor:slipsumor
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-                swal("Good job!", "Insured Moveable Property Slip Insert Success", "success")
-                console.log(response)
-
-           },
-           error: function (request, status, error) {
-                //alert(request.responseText);
-                swal("Error!", "Insured Moveable Property Slip Insert Error", "Insert Error");
-           }
-       });
-
 
        var mpnumber = $('#insuredIDtxt').val();
        var mpinsured = $('#mpinsured').val();

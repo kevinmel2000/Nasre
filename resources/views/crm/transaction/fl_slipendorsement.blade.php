@@ -140,7 +140,7 @@
                                                                     <td>{{@$slt->cnno}}</td>
                                                                     <td>{{@$slt->certno }}</td>
                                                                     <td>{{@$slt->refno }}</td>
-                                                                    <td>currency(@$slt->amountlocation)</td>
+                                                                    <td>{{@$slt->amountlocation}}</td>
                                                                     <td><a href="javascript:void(0)" onclick="deletelocationdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
                                                             </tr>   
                                                             @endforeach
