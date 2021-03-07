@@ -35,5 +35,10 @@ class FeLookupLocation extends Model
     {
 		return $this->belongsTo('App\Models\City','city_id'); 
     }
+
+    public function interestdata()
+    {  
+       return $this->belongsTo('App\Models\InterestInsured', 'interest_id');
+    }
 }
 

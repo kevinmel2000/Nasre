@@ -995,11 +995,32 @@ $(document).ready(function() {
         var insured_id = $('#insuredIDtxt').val();
         var token = $('input[name=_token]').val();
         
+        var country = $('#country_location_id').val();
+        var state = $('#state_location_id').val();
+        var city = $('#city_location_id').val();        
+        var adrress = $('#address_location_id').val();
+        var slipinterestid = $('#slipinterestlistlocation').val();
+        var cnno = $('#cnno').val();
+        var certno = $('#certno').val();
+        var refno = $('#refno').val();
+        var amountlocation = $('#amountlocation').val();
+        
+        
+
         $.ajax({
             url:"{{ route('locationlist.store') }}",
             type:"POST",
             data:{
                 lookupcode:lookupcode,
+                country:country,
+                state:state,
+                city:city,
+                adrress:adrress,
+                slipinterestid:slipinterestid,
+                cnno:cnno,
+                certno:certno,
+                refno:refno,
+                amountlocation:amountlocation,
                 insuredID:insured_id,
                 _token:token
             },

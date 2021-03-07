@@ -1496,17 +1496,26 @@ class FeSlipController extends Controller
     public function storelocationlist(Request $request)
     {
 
-            $lookuplocation = $request->lookupcode;
+            $adrress = $request->adrress;
             $insured_id = $request->insuredID;
         
-            if($lookuplocation !='' && $insured_id != '')
+            if($adrress !='' && $insured_id != '')
             {    
                 $locationlist = new TransLocationTemp();
                 $locationlist->insured_id = $insured_id;
-                $locationlist->lookup_location_id = $lookuplocation;
+                $locationlist->lookup_location_id = $adrress;
+                $locationlist->country_id=$country;
+                $locationlist->state_id=$state;
+                $locationlist->city_id=$city;
+                $locationlist->address_location_id=$adrress;
+                $locationlist->interest_id=$slipinterestid;
+                $locationlist->cnno=$cnno;
+                $locationlist->certno=$certno;
+                $locationlist->refno=$refno;
+                $locationlist->amountlocation=$amountlocation;
                 $locationlist->save();
 
-                $felookuplocations = FeLookupLocation::find($lookuplocation);
+                $felookuplocations = FeLookupLocation::find($adrress);
 
                 return response()->json([
                     'id' => $locationlist->id,
@@ -1518,6 +1527,12 @@ class FeSlipController extends Controller
                     'longtitude' => $felookuplocations->longtitude,
                     'state_name' => $felookuplocations->state->name,
                     'city_name' => $felookuplocations->city->name,
+                    'interest_id'=> $slipinterestid,
+                    'interest_name'=> $felookuplocations->interestdata->code.'-'.$felookuplocations->interestdata->description,
+                    'cnno' => $cnno,
+                    'certno' => $certno,
+                    'refno' => $refno,
+                    'amountlocation' => $amountlocation,
                 ]);
             }
             else
