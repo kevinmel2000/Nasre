@@ -2448,7 +2448,7 @@ $("body").on("click","#btn-danger2",function(){
         height: 100%;
         top: 0;
         left: 0;
-        z-index: 999;
+        z-index: 1100 !important;;
         background: rgba(255,255,255,0.8) url("{{url('/')}}/loader.gif") center no-repeat;
     }
     /* Turn off scrollbar when body element has the loading class */

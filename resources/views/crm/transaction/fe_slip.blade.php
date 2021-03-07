@@ -121,6 +121,7 @@
                                                             </tr>
                                                             </thead>
                                                             <tbody>
+                                                                
                                                                     @foreach($locationlist as $slt)
                                                                     <tr id="sid{{ $slt->id }}">
                                                                             <td >{{ $slt->felookuplocation->loc_code }}<br>
