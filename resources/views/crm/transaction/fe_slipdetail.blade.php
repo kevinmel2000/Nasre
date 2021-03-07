@@ -133,7 +133,7 @@
                                                                                   {{ $slt->felookuplocation->latitude , $slt->felookuplocation->longtitude  }}
                                                                                   {{ $slt->felookuplocation->postal_code }}<br>
                                                                             </td>
-                                                                            <td>{{@$slt->felookuplocations->interestdata->code }} - {{ @$slt->felookuplocations->interestdata->description}}</td>
+                                                                            <td>{{@$slt->interestdata->code }} - {{ @$slt->interestdata->description}}</td>
                                                                             <td>{{@$slt->cnno}}</td>
                                                                             <td>{{@$slt->certno }}</td>
                                                                             <td>{{@$slt->refno }}</td>
