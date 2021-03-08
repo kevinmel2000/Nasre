@@ -665,50 +665,7 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="insured-details-id" role="tabpanel" aria-labelledby="insured-details">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header bg-gray">
-                                                        {{__('Interest Insured')}}
-                                                    </div>
-                                                    <div class="card-body bg-light-gray ">
-                                                        <div class="row">
-                                                            <div class="col-md-8">
-                                                                <div class="col-md-12 com-sm-12 mt-3">
-                                                                    <table id="interestInsuredTable" class="table table-bordered table-striped">
-                                                                        <thead>
-                                                                        <tr>
-                                                                        <th>{{__('Interest ID - Name')}}</th>
-                                                                        <th>{{__('Amount')}}</th>
-                                                                        <th width="20%">{{__('Actions')}}</th>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                @php 
-                                                                                $totalamountdata=0;
-                                                                                @endphp
-                                                                                @foreach($interestlist as $isl)
-                                                                                    <tr id="iid{{ $isl->id }}">
-                                                                                            <td>{{ @$isl->interestinsureddata->description }}</td>
-                                                                                            <td class="uang">{{ @$isl->amount }}</td>
-                                                                                            @php 
-                                                                                            $totalamountdata=$totalamountdata+$isl->amount;
-                                                                                            @endphp
-                                                                                            <td><a href="#" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
-                                                                                    </tr>   
-                                                                                @endforeach
-                                                                            </tr>
-                                                                            
-                                                                        </tbody>
-                                                                    </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div> 
-                                                        </div>
-                                                    </div>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="row">
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <div class="form-group">

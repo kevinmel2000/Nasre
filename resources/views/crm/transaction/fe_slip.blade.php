@@ -653,7 +653,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-8">
                                                                         <div class="col-md-12 com-sm-12 mt-3">
-                                                                            <table id="interestInsuredTable" class="table table-bordered table-striped">
+                                                                            <!--table id="interestInsuredTable" class="table table-bordered table-striped">
                                                                                 <thead>
                                                                                 <tr>
                                                                                 <th>{{__('Interest ID - Name')}}</th>
@@ -705,7 +705,7 @@
                                                                                         </form>
                                                                                     </tr>
                                                                                 </tbody>
-                                                                            </table>
+                                                                            </table-->
                                                                             </div>
                                                                         </div>
                                                                     </div> 
