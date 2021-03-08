@@ -1041,7 +1041,12 @@ $(document).ready(function() {
                                                  '<td>'+response.refno+'</td>'+
                                                  '<td>'+response.amountlocation+'</td>'+
                                                  '<td><a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
-                $('#addlocation').modal('toggle');
+                                                 $('#addlocation').modal('toggle');
+                $('#slipamount').val('');
+                $('#slipinterestlist').val('');
+                var total =  parseFloat($("#sliptotalsum").val());
+                var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                $("#sliptotalsum").val(sum);
                 $('#form-addlocation')[0].reset();
             }
         });
@@ -1063,7 +1068,10 @@ $(document).ready(function() {
             success:function(response){
                 console.log(response);
                 $('#sid'+id).remove();
-                
+                var total =  parseFloat($("#sliptotalsum").val());
+                var sum = isNaN(total - parseFloat(response.amountlocation)) ? 0 :(total - parseFloat(response.amountlocation)) ;
+                $("#sliptotalsum").val(sum);
+                $("#feshareto").val(sum);
             }
         });
     }
