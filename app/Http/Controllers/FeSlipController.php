@@ -1619,9 +1619,10 @@ class FeSlipController extends Controller
     public function destroysliplocationlist($id)
     {
         $sliplistlocation = TransLocationTemp::find($id);
+        $amountlocation = $sliplistlocation->amountlocation;
         $sliplistlocation->delete();
         
-        return response()->json(['success'=>'Data has been deleted']);
+        return response()->json(['success'=>'Data has been deleted','amountlocation'=>$amountlocation]);
     }
 
     

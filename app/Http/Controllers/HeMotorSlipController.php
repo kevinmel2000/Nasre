@@ -523,6 +523,7 @@ class HeMotorSlipController extends Controller
     public function detailhemslip($idm)
     {
         $user = Auth::user();
+        $userid = Auth::user()->id;
         $country = User::orderby('id','asc')->get();
         $route_active = 'Fire Engineering - Slip Entry';
         $mydate = date("Y").date("m").date("d");
@@ -549,6 +550,9 @@ class HeMotorSlipController extends Controller
         $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
         $code_sl=$slipdata->number;
+
+        $slip = SlipTable::orderby('id','asc')->get();
+        $sliplastid = count($slip);
 
         $kondisi=false;
         $i=1;

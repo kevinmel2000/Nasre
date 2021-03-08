@@ -75,13 +75,13 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="">{{__('From')}}</label>
+                                                    <label for="">{{__('Nasional Reinsurance')}}</label>
                                                     <input type="text" id="pasharefrom" name="pasharefrom" class="form-control form-control-sm " data-validation="length" readonly="readonly" data-validation-length="0-50" required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="">{{__('To')}}</label>
+                                                    <label for="">{{__('Total')}}</label>
                                                     <input type="text" id="pashareto" name="pashareto" class="form-control form-control-sm " data-validation="length" readonly="readonly" data-validation-length="0-50" required/>
                                                 </div>
                                             </div>
@@ -107,22 +107,30 @@
                                                     <table id="locRiskTable" class="table table-bordered table-striped">
                                                         <thead>
                                                             <tr>
-                                                                <th>{{__('Loc Code')}}</th>
-                                                                <th>{{__('Address')}}</th>
-                                                                <th>{{__('City')}}</th>
-                                                                <th>{{__('Province')}}</th>
-                                                                <th>{{__('Coordinate')}}</th>
+                                                                <th>{{__('Risk Location')}}</th>
+                                                                <th>{{__('Int Insured')}}</th>
+                                                                <th>{{__('CN NO')}}</th>
+                                                                <th>{{__('Cert No')}}</th>
+                                                                <th>{{__('Ref No')}}</th>
+                                                                <th>{{__('Amount')}}</th>
                                                                 <th width="20%">{{__('Actions')}}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                                 @foreach($locationlist as $slt)
                                                                     <tr id="sid{{ $slt->id }}">
-                                                                            <td>{{ $slt->felookuplocation->loc_code }}</td>
-                                                                            <td>{{ $slt->felookuplocation->address }}</td>
-                                                                            <td>{{@$slt->felookuplocation->state->id}} - {{@$slt->felookuplocation->state->name}}</td>
-                                                                            <td>{{@$slt->felookuplocation->city->id}} - {{@$slt->felookuplocation->city->name}}</td>
-                                                                            <td>{{ $slt->felookuplocation->latitude , $slt->felookuplocation->longtitude  }}</td>
+                                                                        <td >{{ $slt->felookuplocation->loc_code }}<br>
+                                                                            {{ $slt->felookuplocation->address }}<br>
+                                                                            {{@$slt->felookuplocation->state->id}} - {{@$slt->felookuplocation->state->name}}<br>
+                                                                            {{@$slt->felookuplocation->city->id}} - {{@$slt->felookuplocation->city->name}}<br>
+                                                                            {{ $slt->felookuplocation->latitude , $slt->felookuplocation->longtitude  }}
+                                                                            {{ $slt->felookuplocation->postal_code }}<br>
+                                                                        </td>
+                                                                        <td>{{@$slt->interestdata->code }} - {{ @$slt->interestdata->description}}</td>
+                                                                        <td>{{@$slt->cnno}}</td>
+                                                                        <td>{{@$slt->certno }}</td>
+                                                                        <td>{{@$slt->refno }}</td>
+                                                                        <td>{{@$slt->amountlocation}}</td>
                                                                             <td><a href="javascript:void(0)" onclick="deletelocationdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
                                                                     </tr>   
                                                                 @endforeach
@@ -155,7 +163,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="col-md-6 d-flex justify-content-start">
                                         <div class="col-md-12 com-sm-12 mt-3">
                                             <label for="">{{__('Format')}}</label>
@@ -171,7 +179,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">

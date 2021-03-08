@@ -890,6 +890,11 @@ $("body").on("click","#btn-danger2",function(){
                                                  '<td>'+response.amountlocation+'</td>'+
                                                  '<td><a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
                 $('#addlocation').modal('toggle');
+                $('#slipamount').val('');
+                $('#slipinterestlist').val('');
+                var total =  parseFloat($("#sliptotalsum").val());
+                var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                $("#sliptotalsum").val(sum);
                 $('#form-addlocation')[0].reset();
             }
         });
@@ -912,6 +917,10 @@ $("body").on("click","#btn-danger2",function(){
                 
                 $('#sid'+id).remove();
                 console.log(response);
+                var total =  parseFloat($("#sliptotalsum").val());
+                var sum = isNaN(total - parseFloat(response.amountlocation)) ? 0 :(total - parseFloat(response.amountlocation)) ;
+                $("#sliptotalsum").val(sum);
+                $("#feshareto").val(sum);
             }
         });
     }
@@ -1010,11 +1019,7 @@ $("body").on("click","#btn-danger2",function(){
                console.log(response)
                var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
                $('#interestInsuredTable tbody').prepend('<tr id="iid'+response.id+'" data-name="interestvalue[]"><td data-name="'+response.description+'">'+response.description+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestdetail('+response.id+')">delete</a></td></tr>')
-               $('#slipamount').val('');
-               $('#slipinterestlist').val('');
-               var total =  parseFloat($("#sliptotalsum").val());
-               var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
-               $("#sliptotalsum").val(sum);
+              
 
                
 
@@ -1059,10 +1064,7 @@ $("body").on("click","#btn-danger2",function(){
                $('#interestInsuredTableupdate tbody').prepend('<tr id="iidupdate'+response.id+'" data-name="interestupdatevalue[]"><td data-name="'+response.description+'">'+response.description+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestupdate('+response.id+')">delete</a></td></tr>')
                $('#slipamountupdate').val('');
                $('#slipinterestlistupdate').val('');
-               var total =  parseFloat($("#sliptotalsumupdate").val());
-               var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
-               $("#sliptotalsumupdate").val(sum);
-               $("#fesharetoupdate").val(sum);
+              
 
                
 
@@ -1100,10 +1102,7 @@ $("body").on("click","#btn-danger2",function(){
                $('#interestInsuredTableendorsement tbody').prepend('<tr id="iidendorsement'+response.id+'" data-name="interestendorsementvalue[]"><td data-name="'+response.description+'">'+response.description+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestendorsement('+response.id+')">delete</a></td></tr>')
                $('#slipamountendorsement').val('');
                $('#slipinterestlistendorsement').val('');
-               var total =  parseFloat($("#sliptotalsumendorsement").val());
-               var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
-               $("#sliptotalsumendorsement").val(sum);
-               $("#fesharetoendorsement").val(sum);
+              
 
                
 
@@ -1152,10 +1151,7 @@ $("body").on("click","#btn-danger2",function(){
                 
                 $('#iidupdate'+id).remove();
                 console.log(response);
-                var total =  parseFloat($("#sliptotalsumupdate").val());
-                var sum = isNaN(total - parseFloat(response.amount)) ? 0 :(total - parseFloat(response.amount)) ;
-                $("#sliptotalsumupdate").val(sum);
-                $("#fesharetoupdate").val(sum);
+                
             }
         });
     }
@@ -1179,10 +1175,7 @@ $("body").on("click","#btn-danger2",function(){
                 
                 $('#iidendorsement'+id).remove();
                 console.log(response);
-                var total =  parseFloat($("#sliptotalsumendorsement").val());
-                var sum = isNaN(total - parseFloat(response.amount)) ? 0 :(total - parseFloat(response.amount)) ;
-                $("#sliptotalsumendorsement").val(sum);
-                $("#fesharetoendorsement").val(sum);
+               
             }
         });
     }

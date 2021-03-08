@@ -1399,8 +1399,7 @@ class TransactionController extends Controller
     public function storepersonalaccidentinsured(Request $request)
     {
         $validator = $request->validate([
-            'msinumber'=>'required',
-            'msisuggestinsured'=>'required'
+            'msinumber'=>'required'
         ]);
 
         $shiplist= FeLookupLocation::where('insured_id','=',$request->msinumber)->orderby('created_at','desc')->get();
@@ -1422,7 +1421,7 @@ class TransactionController extends Controller
                     'share'=>$request->msishare,
                     'share_from'=>$request->msisharefrom,
                     'share_to'=>$request->msishareto,
-                    'ship_detail'=>$shiplist->toJson(),
+                    'location'=>$shiplist->toJson(),
                     'coincurance'=>$request->msicoinsurance
                 ]);
 
@@ -1442,7 +1441,7 @@ class TransactionController extends Controller
                 $insureddataup->share=$request->msishare;
                 $insureddataup->share_from=$request->msisharefrom;
                 $insureddataup->share_to=$request->msishareto;
-                $insureddataup->ship_detail=$shiplist->toJson();
+                $insureddataup->location=$shiplist->toJson();
                 $insureddataup->coincurance=$request->msicoinsurance;
                 $insureddataup->save();
 
