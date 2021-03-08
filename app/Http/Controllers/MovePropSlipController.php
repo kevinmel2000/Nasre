@@ -557,7 +557,8 @@ class MovePropSlipController extends Controller
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
         
         $code_sl=$slipdata->number;
-
+        $sliplastid = count($slip);
+        
         $kondisi=false;
         $i=1;
         while($kondisi==false)
