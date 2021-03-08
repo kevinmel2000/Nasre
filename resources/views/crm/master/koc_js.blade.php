@@ -1,7 +1,7 @@
 <script>
     $('#kocparentdd').change(function(){
         var parentkoc = $(this).val();
-
+        console.log(parentkoc)
         if(parentkoc){
             $.ajax({
                 type:"GET",
@@ -41,7 +41,7 @@
   
   
       $("#kocTable").DataTable({
-        "order": [[ 0, "desc" ]],
+        "order": [[ 0, "asc" ]],
         dom: '<"top"fB>rt<"bottom"lip><"clear">',
         lengthMenu: [
             [ 10, 25, 50,100, -1 ],

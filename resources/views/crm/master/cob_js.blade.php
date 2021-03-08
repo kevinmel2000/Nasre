@@ -7,7 +7,7 @@
 <script>
     $('#cobparentdd').change(function(){
         var parentcob = $(this).val();
-
+        console.log(parentcob)
         if(parentcob){
             $.ajax({
                 type:"GET",
@@ -47,7 +47,7 @@
   
   
       $("#cobTable").DataTable({
-        "order": [[ 0, "desc" ]],
+        "order": [[ 0, "asc" ]],
         dom: '<"top"fB>rt<"bottom"lip><"clear">',
         lengthMenu: [
             [ 10, 25, 50,100, -1 ],

@@ -23,7 +23,7 @@ class CedingBrokerController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $cedingbroker = CedingBroker::orderby('id','desc')->paginate(10);
+          $cedingbroker = CedingBroker::orderby('code')->get();
           $cedingbroker_ids = response()->json($cedingbroker->modelKeys());
           $country = Country::orderby('id','asc')->get();
           $companytype = CompanyType::orderby('id','asc')->get();

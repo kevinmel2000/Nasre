@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Code')}} </label>
-                          <input type="text" id="ocpcode" style="width: 25%;" name="ocpcode" class="form-control form-control-sm" data-validation="length" placeholder="enter code manually if not have parent data" value="{{ $code_ocp }}" data-validation-length="1-12" required/>
+                          <input type="text" id="ocpcode" style="width: 25%;" name="ocpcode" class="form-control form-control-sm" data-validation="length" placeholder="enter code manually if not have parent data" value="{{ $code_ocp }}" data-validation-length="1-16" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,6 @@
                         <label for="">{{__('Parent')}}</label>
                         <select name="parent_id" id="ocpparentdd" class="form-control form-control-sm ">
                             <option selected disabled>{{__('Select Parent')}}</option>
-                            <option ></option>
                             @foreach (@$ocpparent as $ocp)
                             <option value="{{ $ocp->id }}">{{ $ocp->code }} - {{ $ocp->description }}</option>
                             @endforeach
@@ -48,7 +47,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Description')}}</label>
-                          <input type="text" name="ocpdescription" class="form-control form-control-sm " data-validation="length" data-validation-length="2-150" required/>
+                          <input type="text" name="ocpdescription" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" required/>
                       </div>
                     </div>
                 </div>
@@ -59,7 +58,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Abbreviation')}}</label>
-                          <input type="text" name="ocpabbreviation" class="form-control form-control-sm " data-validation="length" data-validation-length="1-20" required/>
+                          <input type="text" name="ocpabbreviation" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
                       </div>
                     </div>
                 </div>
@@ -85,6 +84,56 @@
                           </select>
                       </div>    
                     </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="">{{__('Range Rate Bawah Building Class 1')}}</label>
+                          <input type="number" name="ocprrbc1" class="form-control form-control-sm "  data-validation="length" data-validation-length="0-50" />
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="">{{__('Range Rate Bawah Building Class 2')}}</label>
+                          <input type="number" name="ocprrbc2" class="form-control form-control-sm "  data-validation="length" data-validation-length="0-50" />
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="">{{__('Range Rate Bawah Building Class 3')}}</label>
+                          <input type="number" name="ocprrbc3" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="">{{__('Range Rate Atas Building Class 1')}}</label>
+                          <input type="number" name="ocprrac1" class="form-control form-control-sm "  data-validation="length" data-validation-length="0-50" />
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="">{{__('Range Rate Atas Building Class 2')}}</label>
+                          <input type="number" name="ocprrac2" class="form-control form-control-sm "  data-validation="length" data-validation-length="0-50" />
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="">{{__('Range Rate Atas Building Class 3')}}</label>
+                          <input type="number" name="ocprrac3" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 
               </div>
@@ -121,6 +170,13 @@
                       <th>{{__('Group Type')}}</th>
                       <th>{{__('Parent')}}</th>
                       <th>{{__('COB')}}</th>
+                      <th>{{__('Rate Batas Bawah Building Class 1')}}</th>
+                      <th>{{__('Rate Batas Bawah Building Class 2')}}</th>
+                      <th>{{__('Rate Batas Bawah Building Class 3')}}</th>
+                      <th>{{__('Rate Batas Atas Building Class 1')}}</th>
+                      <th>{{__('Rate Batas Atas Building Class 2')}}</th>
+                      <th>{{__('Rate Batas Atas Building Class 3')}}</th>
+
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
@@ -133,6 +189,12 @@
                               <td>{{@$ocp->group_type}}</td>
                               <td>{{@$ocp->occupationparent->code}} - {{@$ocp->occupationparent->description}}</td>
                               <td>{{@$ocp->cobs->code}} - {{@$ocp->cobs->description}}</td>
+                              <td>{{@$ocp->rate_batas_bawah_building_class_1}}</td>
+                              <td>{{@$ocp->rate_batas_bawah_building_class_2}}</td>
+                              <td>{{@$ocp->rate_batas_bawah_building_class_3}}</td>
+                              <td>{{@$ocp->rate_batas_atas_building_class_1}}</td>
+                              <td>{{@$ocp->rate_batas_atas_building_class_2}}</td>
+                              <td>{{@$ocp->rate_batas_atas_building_class_3}}</td>
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$ocp->created_at->toDayDateTimeString()}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>
@@ -164,7 +226,24 @@
                                                   <div class="col-md-6 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Code')}}</label>
-                                                      <input type="text" name="codeocp" class="form-control" value="{{$ocp->code}}" data-validation="length" data-validation-length="1-13" required disabled/>
+                                                      <input type="text" name="codeocp" class="form-control" value="{{$ocp->code}}" data-validation="length" data-validation-length="1-16" required disabled/>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="col-md-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Parent')}}</label><br>
+                                                        <select name="parent_id" class="form-control form-control-sm e1">
+                                                            <option selected disabled>{{__('Select Parent')}}</option>
+                                                            @foreach(@$occupation as $ocp2)
+                                                            @if($ocp->parent_id  == $ocp2->id)
+                                                            <option value="{{ $ocp2->id }}" selected>{{ $ocp2->code }} - {{ $ocp2->description }}></option>
+                                                            @else
+                                                            <option value="{{ $ocp2->id }}">{{ $ocp2->code }} - {{ $ocp2->description }}</option>
+                                                             @endif
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -172,21 +251,27 @@
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Description')}}</label>
-                                                      <input type="text" name="descriptionocp" class="form-control" value="{{$ocp->description}}" data-validation="length" data-validation-length="1-150" required/>
+                                                      <input type="text" name="descriptionocp" class="form-control" value="{{$ocp->description}}" data-validation="length" data-validation-length="0-150" required/>
                                                     </div>
                                                   </div>
+                                                </div>
+                                                <div class="row">
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Abbreviation')}}</label>
-                                                      <input type="text" name="abbreviationocp" class="form-control" value="{{$ocp->abbreviation}}" data-validation="length" data-validation-length="1-150" required/>
+                                                      <input type="text" name="abbreviationocp" class="form-control" value="{{$ocp->abbreviation}}" data-validation="length" data-validation-length="0-150" required/>
                                                     </div>
                                                   </div>
+                                                </div>
+                                                <div class="row">
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Group Type')}}</label>
                                                       <input type="text" name="grouptypeocp" class="form-control" value="{{$ocp->group_type}}" data-validation="length" data-validation-length="0-350" required/>
                                                     </div>
                                                   </div>
+                                                </div>
+                                                <div class="row">
                                                   <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('COB')}}</label><br>
@@ -203,26 +288,63 @@
                                                         </select>
                                                     </div>
                                                   </div>
-
-                                                  <div class="col-md-4 col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Parent')}}</label><br>
-                                                        <select name="parent_id" class="form-control form-control-sm e1">
-                                                            <option selected disabled>{{__('Select Parent')}}</option>
-                                                            @foreach(@$occupation as $ocp2)
-                                                            @if($ocp->parent_id  == $ocp2->id)
-                                                            <option value="{{ $ocp2->id }}" selected>{{ $ocp2->code }} - {{ $ocp2->description }}></option>
-                                                            @else
-                                                            <option value="{{ $ocp2->id }}">{{ $ocp2->code }} - {{ $ocp2->description }}</option>
-                                                             @endif
-                                                            @endforeach
-                                                        </select>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                          <div class="form-group">
+                                                            <label for="">{{__('Range Rate Bawah Building Class 1')}}</label>
+                                                            <input type="number" name="rrbc1ocp" class="form-control" value="{{$ocp->rate_batas_bawah_building_class_1}}" data-validation="length" data-validation-length="0-350" required/>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <div class="form-group">
+                                                            <label for="">{{__('Range Rate Atas Building Class 1')}}</label>
+                                                            <input type="number" name="rrac1ocp" class="form-control" value="{{$ocp->rate_batas_atas_building_class_1}}" data-validation="length" data-validation-length="0-350" required/>
+                                                          </div>
+                                                        </div>
                                                     </div>
                                                   </div>
-
-                                                  
-                                              
                                                 </div>
+                                                <div class="row">
+                                                  <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                          <div class="form-group">
+                                                            <label for="">{{__('Range Rate Bawah Building Class 2')}}</label>
+                                                            <input type="number" name="rrbc2ocp" class="form-control" value="{{$ocp->rate_batas_bawah_building_class_2}}" data-validation="length" data-validation-length="0-350" required/>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <div class="form-group">
+                                                            <label for="">{{__('Range Rate Atas Building Class 2')}}</label>
+                                                            <input type="number" name="rrac2ocp" class="form-control" value="{{$ocp->rate_batas_atas_building_class_2}}" data-validation="length" data-validation-length="0-350" required/>
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                          <div class="form-group">
+                                                            <label for="">{{__('Range Rate Bawah Building Class 3')}}</label>
+                                                            <input type="number" name="rrbc3ocp" class="form-control" value="{{$ocp->rate_batas_bawah_building_class_3}}" data-validation="length" data-validation-length="0-350" required/>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <div class="form-group">
+                                                            <label for="">{{__('Range Rate Atas Building Class 3')}}</label>
+                                                            <input type="number" name="rrac3ocp" class="form-control" value="{{$ocp->rate_batas_atas_building_class_3}}" data-validation="length" data-validation-length="0-350" required/>
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              
+                                                
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>

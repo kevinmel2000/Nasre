@@ -22,8 +22,9 @@ class KocController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $koc = Koc::orderby('id','desc')->get();
-          $kocparent = Koc::whereRaw('LENGTH(code) < 5')->orderby('code','desc')->get();
+          $koc = Koc::orderby('code')->get();
+          $kocparent = Koc::whereRaw('LENGTH(code) < 9')->orderby('code','desc')->get();
+        //   $kocparent = Koc::orderby('code')->get();
           $countparent= Koc::where('parent_id',null)->where('code','<',100)->orderby('code','desc')->get();
           // dd($countparent);
           $lastid = count($countparent);
@@ -76,11 +77,16 @@ class KocController extends Controller
     {
         $koc_parent = Koc::where('id',$request->koc_code)->first();
         $koc = Koc::where('parent_id',$request->koc_code)->orderby('id','desc')->get();
-        $koclastparent = COB::where('parent_id',$request->ocp_code)->orderby('id','desc')->first();
+        $koclastparent = Koc::where('parent_id',$request->koc_code)->orderby('id','desc')->first();
         $lastid = count($koc);
         
         if(!$koclastparent){
             $code_koc =  $koc_parent->code . '0' . strval(0);
+            return response()->json(
+                [
+                    'autocode' => $code_koc
+                ]
+            );
         }
         else{
             
@@ -89,17 +95,23 @@ class KocController extends Controller
 
                 if($parentlastcode < 9){
                     $code_koc = $koc_parent->code . '0' . strval($parentlastcode + 1);
+                    return response()->json(
+                        [
+                            'autocode' => $code_koc
+                        ]
+                    );
                 }elseif($parentlastcode > 8 && $parentlastcode < 100){
                     $code_koc = $koc_parent->code . strval($parentlastcode + 1);
+                    return response()->json(
+                        [
+                            'autocode' => $code_koc
+                        ]
+                    );
                 }
         }
        
 
-          return response()->json(
-            [
-                'autocode' => $code_koc
-            ]
-        );
+          
     }
 
     public function store(Request $request)

@@ -6,7 +6,7 @@
 <script>
     $('#ocpparentdd').change(function(){
         var parentocp = $(this).val();
-
+        console.log(parentocp)
         if(parentocp){
             $.ajax({
                 type:"GET",
@@ -48,7 +48,10 @@
   
   
       $("#ocpTable").DataTable({
-        "order": [[ 0, "desc" ]],
+        "order": [[ 0, "asc" ]],
+        "sScrollY": 300,
+        "sScrollX": "90%",
+        "sScrollXInner": "100%",
         dom: '<"top"fB>rt<"bottom"lip><"clear">',
         lengthMenu: [
             [ 10, 25, 50,100, -1 ],

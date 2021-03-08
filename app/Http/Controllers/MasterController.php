@@ -73,8 +73,9 @@ class MasterController extends Controller
         if(empty($search))
          {
 
-            $cob = COB::orderby('id','asc')->get();
-            $cobparent = COB::whereRaw('LENGTH(code) < 5')->orderby('code','desc')->get();
+            $cob = COB::orderby('code')->get();
+            $cobparent = COB::whereRaw('LENGTH(code) < 9')->orderby('code','desc')->get();
+            // $cobparent = COB::orderby('code')->get();
             $countparent= COB::where('parent_id',null)->whereRaw('LENGTH(code) < 5')->orderby('code','desc')->get();
             // dd($countparent);
             $lastid = count($countparent);
@@ -140,8 +141,9 @@ class MasterController extends Controller
 
         if(empty($search))
          {
-            $occupation = Occupation::orderby('id','asc')->get();
-            $ocpparent = Occupation::whereRaw('LENGTH(code) < 5')->orderby('code','desc')->get();
+            $occupation = Occupation::orderby('code')->get();
+            // $ocpparent = Occupation::orderby('code')->get();
+            $ocpparent = Occupation::whereRaw('LENGTH(code) < 9')->orderby('code','desc')->get();
             $countparent= Occupation::where('parent_id',null)->whereRaw('LENGTH(code) < 5')->orderby('code','desc')->get();
             $lastparent= Occupation::where('parent_id',null)->whereRaw('LENGTH(code) < 5')->orderby('code','desc')->first();
             $lastid = count($countparent);
@@ -820,30 +822,44 @@ class MasterController extends Controller
     {
         $cob_parent = COB::where('id',$request->cob_code)->first();
         $cob = COB::where('parent_id',$request->cob_code)->orderby('id','desc')->get();
-        $coblastparent = COB::where('parent_id',$request->ocp_code)->orderby('id','desc')->first();
+        $coblastparent = COB::where('parent_id',$request->cob_code)->orderby('id','desc')->first();
         $lastid = count($cob);
         
         if(!$coblastparent){
             $code_cob =  $cob_parent->code . '0' . strval(0);
+
+            return response()->json(
+                [
+                    'autocode' => $code_cob
+                ]
+            );
         }
         else{
             
             $parentlastcode = substr($coblastparent->code,2) ;
-            $sumlastcode = strval($parentlastcode + 1);
+            // $sumlastcode = strval($parentlastcode + 1);
 
                 if($parentlastcode < 9){
                     $code_cob = $cob_parent->code . '0' . strval($parentlastcode + 1);
+
+                    return response()->json(
+                        [
+                            'autocode' => $code_cob
+                        ]
+                    );
                 }elseif($parentlastcode > 8 && $parentlastcode < 100){
                     $code_cob = $cob_parent->code . strval($parentlastcode + 1);
+
+                    return response()->json(
+                        [
+                            'autocode' => $code_cob
+                        ]
+                    );
                 }
         }
        
 
-          return response()->json(
-            [
-                'autocode' => $code_cob
-            ]
-        );
+          
     }
 
     public function generatecodeocp(request $request)
@@ -856,6 +872,12 @@ class MasterController extends Controller
         
         if(!$ocplastparent){
             $code_ocp =  $ocp_parent->code . '0' . strval(0);
+
+            return response()->json(
+                [
+                    'autocode' => $code_ocp
+                ]
+            );
         }
         else{
             
@@ -864,17 +886,25 @@ class MasterController extends Controller
 
                 if($parentlastcode < 9){
                     $code_ocp = $ocp_parent->code . '0' . strval($parentlastcode + 1);
+
+                    return response()->json(
+                        [
+                            'autocode' => $code_ocp
+                        ]
+                    );
                 }elseif($parentlastcode > 8 && $parentlastcode < 100){
                     $code_ocp = $ocp_parent->code . strval($parentlastcode + 1);
+
+                    return response()->json(
+                        [
+                            'autocode' => $code_ocp
+                        ]
+                    );
                 }
         }
        
 
-          return response()->json(
-            [
-                'autocode' => $code_ocp
-            ]
-        );
+          
     }
 
     /**
@@ -948,8 +978,6 @@ class MasterController extends Controller
     {
         $validator = $request->validate([
             'ocpcode'=>'required|max:15|unique:occupation,code',
-            'ocpdescription'=>'required',
-            'ocpabbreviation'=>'required',
             'ocpcob'=>'required'
         ]);
         if($validator){
@@ -961,6 +989,13 @@ class MasterController extends Controller
                 'group_type'=>$request->ocpgrouptype,
                 'parent_id'=>$request->parent_id,
                 'cob'=>$request->ocpcob,
+                'rate_batas_bawah_building_class_1'=>$request->ocprrbc1,
+                'rate_batas_bawah_building_class_2'=>$request->ocprrbc2,
+                'rate_batas_bawah_building_class_3'=>$request->ocprrbc3,
+                'rate_batas_atas_building_class_1'=>$request->ocprrac1,
+                'rate_batas_atas_building_class_2'=>$request->ocprrac2,
+                'rate_batas_atas_building_class_3'=>$request->ocprrac3
+                
             ]);
             $notification = array(
                 'message' => 'Occupation added successfully!',
@@ -1408,8 +1443,6 @@ class MasterController extends Controller
     {
         $validator = $request->validate([
             'codeocp'=>'required|max:20',
-            'descriptionocp'=>'required',
-            'abbreviationocp'=>'required',
             'cobocp'=>'required'
         ]);
         if($validator){
@@ -1418,6 +1451,12 @@ class MasterController extends Controller
             $ocp->abbreviation = $request->abbreviationocp;
             $ocp->group_type = $request->grouptypeocp;
             $ocp->parent_id = $request->parent_id;
+            $ocp->rate_batas_bawah_building_class_1 = $request->rrbc1ocp;
+            $ocp->rate_batas_bawah_building_class_2 = $request->rrbc2ocp;
+            $ocp->rate_batas_bawah_building_class_3 = $request->rrbc3ocp;
+            $ocp->rate_batas_atas_building_class_1  = $request->rrac1ocp;
+            $ocp->rate_batas_atas_building_class_2  = $request->rrac2ocp;
+            $ocp->rate_batas_atas_building_class_3  = $request->rrac3ocp;
             $ocp->cob = $request->cobocp;
             $ocp->save();
             $notification = array(

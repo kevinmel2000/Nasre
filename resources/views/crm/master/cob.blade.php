@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" id="cobcode" style="width:25%;" name="cobcode" class="form-control form-control-sm" data-validation="length" placeholder="enter code manually if not have parent data" data-validation-length="1-12" value="{{ $code_cob }}" required/>
+                          <input type="text" id="cobcode" style="width:25%;" name="cobcode" class="form-control form-control-sm" data-validation="length" placeholder="enter code manually if not have parent data" data-validation-length="1-16" value="{{ $code_cob }}" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,6 @@
                         <label for="">{{__('Parent')}}</label>
                         <select name="parent_id" id="cobparentdd" class="form-control form-control-sm ">
                             <option selected disabled>{{__('Select Parent')}}</option>
-                            <option ></option>
                             @foreach (@$cobparent as $boc)
                             <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
                             @endforeach
@@ -48,7 +47,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Description')}}</label>
-                          <input type="text" name="cobdescription" class="form-control form-control-sm " data-validation="length" data-validation-length="2-150" required/>
+                          <input type="text" name="cobdescription" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" required/>
                       </div>
                     </div>
                 </div>
@@ -59,7 +58,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Abbreviation')}}</label>
-                          <input type="text" name="cobabbreviation" class="form-control form-control-sm " data-validation="length" data-validation-length="1-20" required/>
+                          <input type="text" name="cobabbreviation" class="form-control form-control-sm " data-validation="length" data-validation-length="0-20" required/>
                       </div>
                     </div>
                 </div>

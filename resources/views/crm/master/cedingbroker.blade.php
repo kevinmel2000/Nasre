@@ -270,7 +270,7 @@
                     </tbody>
                     
                   </table>
-                   {!! $cedingbroker->render() !!}
+                   {{-- {!! $cedingbroker->render() !!} --}}
 
                 </div>
                
