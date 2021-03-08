@@ -550,6 +550,7 @@ class HeMotorSlipController extends Controller
         $slipdata=SlipTable::where('insured_id','=',$code_ms)->first();
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
         $code_sl=$slipdata->number;
+        $sliplastid = count($slip);
 
         $slip = SlipTable::orderby('id','asc')->get();
         $sliplastid = count($slip);

@@ -1,7 +1,5 @@
-<link href="{{url('/')}}/css/select2.css" rel="stylesheet"/>
-<script src="{{url('/')}}/js/select2.js"></script>
-
-
+<link href="{{asset('css/select2.css')}}" rel="stylesheet"/>
+<script src="{{asset('/js/select2.js')}}"></script>
 
 
 
@@ -142,7 +140,7 @@
                     
                     if(response.cob)
                     {
-                        $("#slipcobdetail option[value=" + response.cob + "]:first")[0].selected = true;
+                        //$("#slipcobdetail option[value=" + response.cob + "]:first")[0].selected = true;
                     }
 
                     if(response.koc)
@@ -354,7 +352,7 @@
                     
                     if(response.cob)
                     {
-                        $("#slipcobupdate option[value=" + response.cob + "]:first")[0].selected = true;
+                        //$("#slipcobupdate option[value=" + response.cob + "]:first")[0].selected = true;
                     }
 
                     if(response.koc)
@@ -570,7 +568,7 @@
                     
                     if(response.cob)
                     {
-                        $("#slipcobendorsement option[value=" + response.cob + "]:first")[0].selected = true;
+                        //$("#slipcobendorsement option[value=" + response.cob + "]:first")[0].selected = true;
                     }
 
                     if(response.koc)
@@ -643,8 +641,8 @@
 </script>
 
 
-<link rel="stylesheet" href="{{url('/')}}/css/sweetalert2.min.css">
-<script src="{{url('/')}}/js/sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
+<script src="{{asset('js/sweetalert2.all.min.js')}}"></script>
 
 
 <style>
@@ -2448,7 +2446,7 @@ $("body").on("click","#btn-danger2",function(){
         top: 0;
         left: 0;
         z-index: 1100 !important;
-        background: rgba(255,255,255,0.8) url("{{url('/')}}/loader.gif") center no-repeat;
+        background: rgba(255,255,255,0.8) url("{{asset('loader.gif')}}") center no-repeat;
     }
     /* Turn off scrollbar when body element has the loading class */
     body.loading{
