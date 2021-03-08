@@ -139,7 +139,7 @@
                     
                     if(response.cob)
                     {
-                        $("#slipcobdetail option[value=" + response.cob + "]:first")[0].selected = true;
+                        //$("#slipcobdetail option[value=" + response.cob + "]:first")[0].selected = true;
                     }
 
                     if(response.koc)
@@ -351,7 +351,7 @@
                     
                     if(response.cob)
                     {
-                        $("#slipcobupdate option[value=" + response.cob + "]:first")[0].selected = true;
+                        //$("#slipcobupdate option[value=" + response.cob + "]:first")[0].selected = true;
                     }
 
                     if(response.koc)
@@ -567,7 +567,7 @@
                     
                     if(response.cob)
                     {
-                        $("#slipcobendorsement option[value=" + response.cob + "]:first")[0].selected = true;
+                        //$("#slipcobendorsement option[value=" + response.cob + "]:first")[0].selected = true;
                     }
 
                     if(response.koc)
