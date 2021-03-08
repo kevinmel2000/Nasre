@@ -142,14 +142,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" id="pacoinsurance" name="pacoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
-                                        </div>
-                                    </div>
-                                </div>
+                                
 
                                 <div class="row">
                                     <div class="col-md-12">
@@ -587,6 +580,14 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="">{{__('Coinsurance')}}</label>
+                                                    <input type="text" id="slipcoinsurance" name="slipcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="tab-pane fade" id="insured-details-id" role="tabpanel" aria-labelledby="insured-details">
                                         <div class="row">
@@ -921,7 +922,7 @@
                                         </div>
                                         
                                         <div class="row d-flex justify-content-start">
-                                            <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> non proportional panel</i>
+                                            <i class="fa fa-info-circle" id="labelnp" style="color: grey;" aria-hidden="true"> non proportional panel</i>
                                         </div>
                                         <div class="row d-flex justify-content-end">
                                             <div class="col-md-4">

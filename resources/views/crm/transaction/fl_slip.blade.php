@@ -63,14 +63,12 @@
                                                 <div class="form-group">
                                                     <label for="">{{__('Our Share')}}</label>
                                                     <div class="row">
-                                                        <div class="col-md-10">
+                                                        <div class="col-md-12">
                                                             <div class="input-group">
-                                                             <input type="number" min="0" value="0" step=".01" id="flshare" name="flshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="input-group-append">
-                                                                <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                <input type="number" min="0" value="0" step=".01" id="flshare" name="flshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly />
+                                                                <div class="input-group-append">
+                                                                    <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -162,15 +160,6 @@
                                         <div class="form-group">
                                             <label for="">{{__('Obligee')}}</label>
                                             <input type="text"  id="flobligee" name="flobligee" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"/>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" id="flcoinsurance" name="flcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"/>
                                         </div>
                                     </div>
                                 </div>
@@ -665,6 +654,14 @@
                                                             <input type="file" name="files[]" id="attachment" class="form-control" multiple>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="">{{__('Coinsurance')}}</label>
+                                                    <input type="text" id="slipcoinsurance" name="slipcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                                 </div>
                                             </div>
                                         </div>

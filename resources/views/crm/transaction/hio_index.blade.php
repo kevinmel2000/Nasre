@@ -22,7 +22,7 @@
         
                 <div class="card card-primary">
                     <div class="card-header bg-gray">
-                        {{__('Hole In One - Insured Data')}}
+                        {{__('Hole In One - Index Data')}}
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -43,7 +43,7 @@
                                 <th>{{__('Share From')}}</th>
                                 <th>{{__('Share To')}}</th>
                                 <th>{{__('Coincurance')}}</th>
-                                <th width="20%">{{__('Actions')}}</th>
+                                <th width="10%">{{__('Actions')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

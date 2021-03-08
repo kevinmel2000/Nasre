@@ -58,50 +58,16 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="">{{__('Route')}}</label>
-                                                    <select id="msiroute" name="msiroute" class="e1 form-control form-control-sm ">
-                                                        <option selected disabled>{{__('Select Route')}}</option>
-                                                        @foreach($routeship as $rs)
-                                                            <option value="{{ $rs->id }}">{{ $rs->name }} - {{ $rs->description }}</option>
-                                                        @endforeach
-                                                        
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="" style="opacity: 0">{{__('b')}}</label>
-                                                    <input type="text" id="msiroutefrom" name="msiroutefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="*from" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="" style="opacity: 0">{{__('a')}}</label>
-                                                    <input type="text" id="msirouteto" name="msirouteto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="*to" />
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="row">
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label for="">{{__('Our Share')}}</label>
                                                     <div class="row">
-                                                        <div class="col-md-10">
+                                                        <div class="col-md-12">
                                                             <div class="input-group">
                                                                 <input type="text" id="msishare" name="msishare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="input-group-append">
-                                                                <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                <div class="input-group-append">
+                                                                    <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -111,13 +77,13 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="">{{__('From')}}</label>
+                                                    <label for="">{{__('Nasional Reinsurance')}}</label>
                                                     <input type="text" id="msisharefrom" name="msisharefrom" class="form-control form-control-sm " placeholder="total nasre share" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="">{{__('To')}}</label>
+                                                    <label for="">{{__('Total')}}</label>
                                                     <input type="text" id="msishareto" name="msishareto" class="form-control form-control-sm " placeholder="total sum insured" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                                 </div>
                                             </div>
@@ -143,22 +109,30 @@
                                                     <table id="locRiskTable" class="table table-bordered table-striped">
                                                         <thead>
                                                             <tr>
-                                                                <th>{{__('Loc Code')}}</th>
-                                                                <th>{{__('Address')}}</th>
-                                                                <th>{{__('City')}}</th>
-                                                                <th>{{__('Province')}}</th>
-                                                                <th>{{__('Coordinate')}}</th>
+                                                                <th>{{__('Risk Location')}}</th>
+                                                                <th>{{__('Int Insured')}}</th>
+                                                                <th>{{__('CN NO')}}</th>
+                                                                <th>{{__('Cert No')}}</th>
+                                                                <th>{{__('Ref No')}}</th>
+                                                                <th>{{__('Amount')}}</th>
                                                                 <th width="20%">{{__('Actions')}}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                                 @foreach($locationlist as $slt)
                                                                     <tr id="sid{{ $slt->id }}">
-                                                                            <td>{{ $slt->felookuplocation->loc_code }}</td>
-                                                                            <td>{{ $slt->felookuplocation->address }}</td>
-                                                                            <td>{{@$slt->felookuplocation->state->id}} - {{@$slt->felookuplocation->state->name}}</td>
-                                                                            <td>{{@$slt->felookuplocation->city->id}} - {{@$slt->felookuplocation->city->name}}</td>
-                                                                            <td>{{ $slt->felookuplocation->latitude , $slt->felookuplocation->longtitude  }}</td>
+                                                                        <td >{{ $slt->felookuplocation->loc_code }}<br>
+                                                                            {{ $slt->felookuplocation->address }}<br>
+                                                                            {{@$slt->felookuplocation->state->id}} - {{@$slt->felookuplocation->state->name}}<br>
+                                                                            {{@$slt->felookuplocation->city->id}} - {{@$slt->felookuplocation->city->name}}<br>
+                                                                            {{ $slt->felookuplocation->latitude , $slt->felookuplocation->longtitude  }}
+                                                                            {{ $slt->felookuplocation->postal_code }}<br>
+                                                                        </td>
+                                                                        <td>{{@$slt->interestdata->code }} - {{ @$slt->interestdata->description}}</td>
+                                                                        <td>{{@$slt->cnno}}</td>
+                                                                        <td>{{@$slt->certno }}</td>
+                                                                        <td>{{@$slt->refno }}</td>
+                                                                        <td>{{@$slt->amountlocation}}</td>
                                                                             <td><a href="javascript:void(0)" onclick="deletelocationdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
                                                                     </tr>   
                                                                 @endforeach
@@ -166,16 +140,6 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" id="msicoinsurance" name="msicoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                         </div>
                                     </div>
                                 </div>
@@ -402,11 +366,9 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label>{{__('Prod Year')}}:</label>
-                                                                <div class="input-group date" id="date" data-target-input="nearest">
-                                                                        <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipprodyear" name="slipprodyear" value="{{ $currdate }}" readonly="readonly">
-                                                                        <div class="input-group-append" >
-                                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                        </div>
+                                                                <div class="input-group " id="date" >
+                                                                        <input type="date" class="form-control form-control-sm "  id="slipprodyear" name="slipprodyear" value="{{ $currdate }}" readonly="readonly">
+                                                                        
                                                                 </div>
                                                         </div>
                                                     </div>
@@ -624,6 +586,14 @@
                                                             <input type="file" name="files[]" id="attachment" class="form-control" multiple>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="">{{__('Coinsurance')}}</label>
+                                                    <input type="text" id="slipcoinsurance" name="slipcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                                 </div>
                                             </div>
                                         </div>
@@ -959,7 +929,7 @@
                                         </div>
                                         
                                         <div class="row d-flex justify-content-start">
-                                            <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> non proportional panel</i>
+                                            <i class="fa fa-info-circle" id="labelnp" style="color: grey;" aria-hidden="true"> non proportional panel</i>
                                         </div>
                                         <div class="row d-flex justify-content-end">
                                             <div class="col-md-4">
