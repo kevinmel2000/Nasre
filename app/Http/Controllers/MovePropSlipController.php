@@ -530,6 +530,7 @@ class MovePropSlipController extends Controller
     public function detailmpslip($idm)
     {
         $user = Auth::user();
+        $userid = Auth::user()->id;
         $country = User::orderby('id','asc')->get();
         $route_active = 'Fire Engineering - Slip Entry';
         $mydate = date("Y").date("m").date("d");
