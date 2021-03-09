@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Code')}} </label>
-                          <input type="text" id="ocpcode" style="width: 25%;" name="ocpcode" class="form-control form-control-sm" data-validation="length" placeholder="enter code manually if not have parent data" value="{{ $code_ocp }}" data-validation-length="1-16" readonly="readonly" required/>
+                          <input type="text" id="ocpcode" style="width: 25%;" name="ocpcode" class="form-control form-control-sm" data-validation="length" placeholder="enter code manually if not have parent data" value="" data-validation-length="1-16"  required/>
                         </div>
                     </div>
                 </div>
