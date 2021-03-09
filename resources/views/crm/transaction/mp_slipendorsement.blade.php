@@ -153,17 +153,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" id="mpcoinsurance" name="mpcoinsurance" value="{{$insureddata->coincurance}}" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                        </div>
-                                    </div>
-                                </div>
-
-
                                 
                                 <div class="row">
                                     <div class="col-md-6 d-flex justify-content-start">
@@ -685,14 +674,6 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="">{{__('Coinsurance')}}</label>
-                                                    <input type="text" id="slipcoinsurance" name="slipcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
                                                     <label>{{__('Attachment')}} </label>
                                                     <div class="input-group">
                                                     
@@ -1025,7 +1006,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="">{{__('V Broker')}}</label>
+                                                        <label for="">{{__('Fee Broker')}}</label>
                                                         <input type="number" value="0" step=".0001" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                     </div>
                                                 </div>
