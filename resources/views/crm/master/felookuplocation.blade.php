@@ -119,7 +119,7 @@
                                     <select name="eqzone"  class="e1 form-control form-control-sm ">
                                       <option selected disabled>{{__('Select EQ Zone')}}</option>
                                       @foreach($earthquakezone as $earthquakezonedata)
-                                      <option value="{{ $earthquakezonedata->id }}">{{ $earthquakezonedata->id }} - {{ $earthquakezonedata->name }}</option>
+                                      <option value="{{ $earthquakezonedata->id }}">{{ $earthquakezonedata->code }} - {{ $earthquakezonedata->name }}</option>
                                       @endforeach
                                   </select>
                               </div>    
@@ -131,7 +131,7 @@
                                     <select name="floodzone"  class="e1 form-control form-control-sm ">
                                       <option selected disabled>{{__('Select Flood Zone')}}</option>
                                       @foreach($floodzone as $floodzonedata)
-                                      <option value="{{ $floodzonedata->id }}">{{ $floodzonedata->id }} - {{ $floodzonedata->name }}</option>
+                                      <option value="{{ $floodzonedata->id }}">{{ $floodzonedata->code }} - {{ $floodzonedata->name }}</option>
                                       @endforeach
                                   </select>
                               </div>     

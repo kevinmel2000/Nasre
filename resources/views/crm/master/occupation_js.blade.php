@@ -4,31 +4,31 @@
         $(document).ready(function() { $(".e1").select2({ width: '100%' }); });
 </script>
 <script>
-    $('#ocpparentdd').change(function(){
-        var parentocp = $(this).val();
-        console.log(parentocp)
-        if(parentocp){
-            $.ajax({
-                type:"GET",
-                dataType: 'json',
-                url:"{{url('get-ocp-autocode')}}?ocp_code="+parentocp,
-                success:function(response){        
-                    if(response){
-                        console.log(response);
-                        console.log(response.last_parent);
-                        console.log(response.last_sum);
-                        $("#ocpcode").val(response.autocode);
-                        $("#ocpcode").attr('readonly',false);
-                    }else{
-                        console.log("data gak ada");
-                    }
-                }
-            });
-        }else{
-            $("#ocpcode").val(" ");
-            $("#ocpcode").attr('readonly',false);
-        }
-    });
+    // $('#ocpparentdd').change(function(){
+    //     var parentocp = $(this).val();
+    //     console.log(parentocp)
+    //     if(parentocp){
+    //         $.ajax({
+    //             type:"GET",
+    //             dataType: 'json',
+    //             url:"{{url('get-ocp-autocode')}}?ocp_code="+parentocp,
+    //             success:function(response){        
+    //                 if(response){
+    //                     console.log(response);
+    //                     console.log(response.last_parent);
+    //                     console.log(response.last_sum);
+    //                     $("#ocpcode").val(response.autocode);
+    //                     $("#ocpcode").attr('readonly',false);
+    //                 }else{
+    //                     console.log("data gak ada");
+    //                 }
+    //             }
+    //         });
+    //     }else{
+    //         $("#ocpcode").val(" ");
+    //         $("#ocpcode").attr('readonly',false);
+    //     }
+    // });
 
 </script>
 
@@ -50,7 +50,7 @@
       $("#ocpTable").DataTable({
         "order": [[ 0, "asc" ]],
         "sScrollY": 300,
-        "sScrollX": "90%",
+        "sScrollX": "100%",
         "sScrollXInner": "100%",
         dom: '<"top"fB>rt<"bottom"lip><"clear">',
         lengthMenu: [
