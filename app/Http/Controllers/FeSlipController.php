@@ -335,6 +335,8 @@ class FeSlipController extends Controller
     public function updatefeslip($idm)
     {
         $user = Auth::user();
+        //print_r($user);
+        //exit();
         $userid = Auth::user()->id;
         $country = User::orderby('id','asc')->get();
         $route_active = 'Fire Engineering - Slip Entry';
