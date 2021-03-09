@@ -1,5 +1,5 @@
-<link href="{{url('/')}}/css/select2.css" rel="stylesheet"/>
-<script src="{{url('/')}}/js/select2.js"></script>
+<link href="{{asset('css/select2.css')}}" rel="stylesheet"/>
+<script src="{{asset('js/select2.js')}}"></script>
 <script type="text/javascript">
         $(document).ready(function() { 
             
