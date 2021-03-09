@@ -567,13 +567,10 @@
                                                                 <label for="">{{__('Building Const')}}</label>
                                                                 <select id="slipbld_const" name="slipbld_const" class="e1 form-control form-control-sm ">
                                                                     <option selected readonly  value='0'>{{__('Building Const list')}}</option>
-                                                                    <option value="Buliding 1">Buliding 1</option>
-                                                                    <option value="Buliding 2">Buliding 2</option>
-                                                                    <option value="Buliding 3">Buliding 3</option>
-                                                                    <option value="Buliding 4">Buliding 4</option>
-                                                                    <option value="Buliding 5">Buliding 5 </option>
-                                                                    <option value="Buliding 6">Buliding 6</option>
-                                                                    <option value="Buliding 7">Buliding 7</option>
+                                                                    <option value="Building 1">Building 1</option>
+                                                                    <option value="Building 2">Building 2</option>
+                                                                    <option value="Building 3">Building 3</option>
+                                                                   
                                                                 </select>
                                                             </div>    
                                                             </div>
