@@ -125,8 +125,8 @@
 
 <script src="//maps.google.com/maps/api/js?sensor=false&amp;key=AIzaSyD4yhKiCvJpWtee_7Bobk_9qjDUAZTTOKE" type="text/javascript"></script>
 
-<link href="{{url('/')}}/css/select2.css" rel="stylesheet"/>
-<script src="{{url('/')}}/js/select2.js"></script>
+<link href="{{asset('css/select2.css')}}" rel="stylesheet"/>
+<script src="{{asset('js/select2.js')}}"></script>
 <script>
         $(document).ready(function() { $(".e1").select2({ width: '100%' }); });
 </script>
