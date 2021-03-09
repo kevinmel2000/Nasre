@@ -34,7 +34,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Earthquake Zone Name')}}</label>
-                          <input type="text" name="name" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <input type="text" name="name" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150"/>
                       </div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('name')}}</label>
-                                                        <input type="text" name="name" class="form-control" value="{{$earthquakezonedata->name}}" required/>
+                                                        <input type="text" name="name" class="form-control" value="{{$earthquakezonedata->name}}"/>
                                                       </div>
                                                     </div>
                                                   </div>

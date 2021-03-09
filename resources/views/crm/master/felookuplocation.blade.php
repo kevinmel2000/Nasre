@@ -56,7 +56,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                               <label for="">{{__('Longitude')}}</label>
-                                  <input type="text" name="longtitude" id='longitude' class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                  <input type="text" name="longtitude" id='longitude' class="form-control form-control-sm " data-validation="length" data-validation-length="0-150"/>
                           
                               </div>    
                             </div>
@@ -64,7 +64,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                               <label for="">{{__('Latitude')}}</label>
-                                  <input type="text" name="latitude" id="latitude" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                  <input type="text" name="latitude" id="latitude" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150"/>
                               </div>    
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                               <label for="">{{__('Postal Code')}}</label>
-                                  <input type="text" name="postal_code"  id="postal_code" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                  <input type="text" name="postal_code"  id="postal_code" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150"/>
                               </div>    
                             </div>
                         </div>
@@ -282,14 +282,14 @@
                                                   <div class="col-md-6 col-md-6">
                                                     <div class="form-group">
                                                       <label for="">{{__('Longtitude')}}</label>
-                                                      <input type="text" name="longtitude" class="form-control" value="{{$location->longtitude}}" required/>
+                                                      <input type="text" name="longtitude" class="form-control" value="{{$location->longtitude}}"/>
                                                     </div>
                                                   </div>
                                                   
                                                   <div class="col-md-6 col-md-6">
                                                     <div class="form-group">
                                                       <label for="">{{__('Latitude')}}</label>
-                                                      <input type="text" name="latitude" class="form-control" value="{{$location->latitude}}" required/>
+                                                      <input type="text" name="latitude" class="form-control" value="{{$location->latitude}}"/>
                                                     </div>
                                                   </div>
 
@@ -317,7 +317,7 @@
                                                   <div class="col-md-6 col-md-6">
                                                     <div class="form-group">
                                                       <label for="">{{__('Postal Code')}}</label>
-                                                      <input type="text" name="postal_code" class="form-control" value="{{$location->postal_code}}" required/>
+                                                      <input type="text" name="postal_code" class="form-control" value="{{$location->postal_code}}"/>
                                                     </div>
                                                   </div>
                                                 </div>

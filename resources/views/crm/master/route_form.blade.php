@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__(' Code')}} </label>
-                          <input type="text" name="rfcode" style="width: 25%;" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_rf }}" readonly="readonly" required/>
+                          <input type="text" name="rfcode" style="width: 25%;" class="form-control form-control-sm" data-validation="length" data-validation-length="1-16" value="{{ $code_rf }}" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Name')}}</label>
-                          <input type="text" name="rfname" class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" required/>
+                          <input type="text" name="rfname" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" required/>
                       </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                         <label for="">{{__('Description')}}</label>
-                        <input type="text" name="rfdescription" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                        <input type="text" name="rfdescription" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" />
                     </div>
                   </div>
                 </div>
@@ -183,7 +183,7 @@
                                                     <div class="col-md-4 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Code')}}</label>
-                                                        <input type="text" name="coderf" class="form-control" value="{{$rf->code}}" data-validation="length" data-validation-length="1-12" readonly="readonly" required/>
+                                                        <input type="text" name="coderf" class="form-control" value="{{$rf->code}}" data-validation="length" data-validation-length="1-16" readonly="readonly" required/>
                                                       </div>
                                                     </div>
                                                   </div>
@@ -191,7 +191,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Name')}}</label>
-                                                        <input type="text" name="namerf" class="form-control" value="{{$rf->name}}" data-validation="length" data-validation-length="1-50" required />
+                                                        <input type="text" name="namerf" class="form-control" value="{{$rf->name}}" data-validation="length" data-validation-length="0-150" required />
                                                       </div>
                                                     </div>
                                                   </div>
@@ -199,7 +199,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Description')}}</label>
-                                                        <input type="text" name="descriptionrf" class="form-control" value="{{$rf->description}}" data-validation="length" data-validation-length="0-50"  />
+                                                        <input type="text" name="descriptionrf" class="form-control" value="{{$rf->description}}" data-validation="length" data-validation-length="0-250"  />
                                                       </div>
                                                     </div>
                                                   </div>

@@ -33,7 +33,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Golf Field')}}</label>
-                          <input type="text" name="golffield" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <input type="text" name="golffield" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150"/>
                       </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Hole Number')}}</label>
-                          <input type="text" name="holenumber" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <input type="text" name="holenumber" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" />
                       </div>
                     </div>
                 </div>
@@ -132,14 +132,14 @@
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Golf Field')}}</label>
-                                                      <input type="text" name="golffieldgolf" class="form-control" value="{{$golf->golf_field}}" data-validation="length" data-validation-length="2-150" required/>
+                                                      <input type="text" name="golffieldgolf" class="form-control" value="{{$golf->golf_field}}" data-validation="length" data-validation-length="0-150"/>
                                                     </div>
                                                   </div>
 
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Hole Number ')}}</label>
-                                                      <input type="text" name="holenumbergolf" class="form-control" value="{{$golf->hole_number}}" data-validation="length" data-validation-length="2-150" required/>
+                                                      <input type="text" name="holenumbergolf" class="form-control" value="{{$golf->hole_number}}" data-validation="length" data-validation-length="0-150"/>
                                                     </div>
                                                   </div>
                                                  

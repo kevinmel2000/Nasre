@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__(' Code')}} </label>
-                          <input type="text" name="dtcode" style="width: 25%;" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_dt }}" readonly="readonly" required/>
+                          <input type="text" name="dtcode" style="width: 25%;" class="form-control form-control-sm" data-validation="length" data-validation-length="1-16" value="{{ $code_dt }}" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Abbreviation')}}</label>
-                          <input type="text" name="dtabbreviation" class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" required/>
+                          <input type="text" name="dtabbreviation" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" />
                       </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                         <label for="">{{__('Description')}}</label>
-                        <input type="text" name="dtdescription" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
+                        <input type="text" name="dtdescription" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" />
                     </div>
                   </div>
               </div>
@@ -119,7 +119,7 @@
                                                     <div class="col-md-12 col-sm-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Code')}}</label>
-                                                        <input type="text" name="codedt" class="form-control" value="{{$dt->code}}" data-validation="length" data-validation-length="1-12" readonly="readonly" required/>
+                                                        <input type="text" name="codedt" class="form-control" value="{{$dt->code}}" data-validation="length" data-validation-length="1-16" readonly="readonly" required/>
                                                       </div>
                                                     </div>
                                                   </div>
@@ -127,7 +127,7 @@
                                                     <div class="col-md-12 col-sm-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Abbreviation')}}</label>
-                                                        <input type="text" name="abbreviationdt" class="form-control" value="{{$dt->abbreviation}}" data-validation="length" data-validation-length="1-50" required />
+                                                        <input type="text" name="abbreviationdt" class="form-control" value="{{$dt->abbreviation}}" data-validation="length" data-validation-length="0-150"  />
                                                       </div>
                                                     </div>
                                                   </div>
@@ -135,7 +135,7 @@
                                                     <div class="col-md-12 col-sm-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Description')}}</label>
-                                                        <input type="text" name="descriptiondt" class="form-control" value="{{$dt->description}}" data-validation="length" data-validation-length="0-50" required />
+                                                        <input type="text" name="descriptiondt" class="form-control" value="{{$dt->description}}" data-validation="length" data-validation-length="0-150"  />
                                                       </div>
                                                     </div>
                                                   </div>

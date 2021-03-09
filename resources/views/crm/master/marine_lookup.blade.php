@@ -24,13 +24,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">{{__('Code')}} </label>
-                                    <input type="text" name="mlucode" style="width: 25%;" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_mlu }}" readonly="readonly" required/>
+                                    <input type="text" name="mlucode" style="width: 25%;" class="form-control form-control-sm" data-validation="length" data-validation-length="1-16" value="{{ $code_mlu }}" readonly="readonly" required/>
                                 </div>
                             </div>
                             <div class="col-md-8">
                             <div class="form-group">
                                 <label for="">{{__('Ship Name')}} </label>
-                                <input type="text" name="mlushipname" placeholder="enter ship name" class="form-control form-control-sm" data-validation="length" data-validation-length="2-50" required/>
+                                <input type="text" name="mlushipname" placeholder="enter ship name" class="form-control form-control-sm" data-validation="length" data-validation-length="0-150" required/>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                             <div class="col-md-12">
                             <div class="form-group">
                                 <label for="">{{__('Owner')}}</label>
-                                <input type="text" name="mluowner" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                <input type="text" name="mluowner" class="form-control form-control-sm " data-validation="length" data-validation-length="0-250" required/>
                             </div>
                             </div>
                         </div>
@@ -55,13 +55,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">{{__('GRT')}}</label>
-                                                    <input type="text" name="mlugrt" class="form-control form-control-sm " data-validation="length" data-validation-length="1-10" value="0" required/>
+                                                    <input type="text" name="mlugrt" class="form-control form-control-sm " data-validation="length" data-validation-length="0-20" value="0" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">{{__('NRT')}}</label>
-                                                    <input type="text" name="mlunrt" class="form-control form-control-sm " data-validation="length" data-validation-length="1-10" value="0" required/>
+                                                    <input type="text" name="mlunrt" class="form-control form-control-sm " data-validation="length" data-validation-length="0-30" value="0" />
                                                 </div>
                                             </div>
                                         </div>
@@ -69,13 +69,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">{{__('DWT')}}</label>
-                                                    <input type="text" name="mludwt" class="form-control form-control-sm " data-validation="length" data-validation-length="1-10" value="0" required/>
+                                                    <input type="text" name="mludwt" class="form-control form-control-sm " data-validation="length" data-validation-length="0-30" value="0" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">{{__('Power')}}</label>
-                                                    <input type="text" name="mlupower" class="form-control form-control-sm " data-validation="length" data-validation-length="1-10" value="0" required/>
+                                                    <input type="text" name="mlupower" class="form-control form-control-sm " data-validation="length" data-validation-length="0-30" value="0"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -87,7 +87,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Ship Year')}}</label>
-                                            <input type="text" name="mlushipyear" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                            <input type="text" name="mlushipyear" class="form-control form-control-sm " data-validation="length" data-validation-length="0-70"/>
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Repair Year')}}</label>
-                                            <input type="text" name="mlurepairyear" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                            <input type="text" name="mlurepairyear" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" />
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +103,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('Galangan')}}</label>
-                                            <input type="text" name="mlugalangan" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                            <input type="text" name="mlugalangan" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" />
                                         </div>
                                     </div>
                                 </div>

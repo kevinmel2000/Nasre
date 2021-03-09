@@ -33,7 +33,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Country Name')}}</label>
-                          <input type="text" name="countryname" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <input type="text" name="countryname" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" />
                       </div>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                                               <div class="col-md-6 col-md-12">
                                                 <div class="form-group">
                                                   <label for="">{{__('Name')}}</label>
-                                                  <input type="text" name="namecountry" class="form-control" value="{{$cty->name}}" data-validation="length" data-validation-length="2-20" required />
+                                                  <input type="text" name="namecountry" class="form-control" value="{{$cty->name}}" data-validation="length" data-validation-length="1-50" />
                                                 </div>
                                               </div>
                                             </div>

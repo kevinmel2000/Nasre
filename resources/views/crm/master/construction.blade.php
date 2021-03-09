@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Enter Code')}} </label>
-                          <input type="text" name="crcode" style="width: 25%;" class="form-control form-control-sm" data-validation="length" data-validation-length="2-12" value="{{ $code_cr }}" readonly="readonly" required/>
+                          <input type="text" name="crcode" style="width: 25%;" class="form-control form-control-sm" data-validation="length" data-validation-length="1-16" value="{{ $code_cr }}" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Construction Name')}}</label>
-                          <input type="text" name="crname" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <input type="text" name="crname" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150"/>
                       </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                                                     <div class="col-md-4 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Code')}}</label>
-                                                        <input type="text" name="codecr" class="form-control" value="{{$cr->code}}" data-validation="length" data-validation-length="2-12" readonly="readonly" required/>
+                                                        <input type="text" name="codecr" class="form-control" value="{{$cr->code}}" data-validation="length" data-validation-length="1-16" readonly="readonly" required/>
                                                       </div>
                                                     </div>
                                                   </div>
@@ -116,7 +116,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Name')}}</label>
-                                                        <input type="text" name="namecr" class="form-control" value="{{$cr->name}}" data-validation="length" data-validation-length="2-50" required />
+                                                        <input type="text" name="namecr" class="form-control" value="{{$cr->name}}" data-validation="length" data-validation-length="0-150" />
                                                       </div>
                                                     </div>
                                                   </div>

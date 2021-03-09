@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__(' Code')}} </label>
-                          <input type="text" name="iicode" style="width: 25%" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_ii }}" readonly="readonly" required/>
+                          <input type="text" name="iicode" style="width: 25%" class="form-control form-control-sm" data-validation="length" data-validation-length="1-16" value="{{ $code_ii }}" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Description')}}</label>
-                          <input type="text" name="iidescription" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
+                          <input type="text" name="iidescription" class="form-control form-control-sm " data-validation="length" data-validation-length="0-250"/>
                       </div>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                                                     <div class="col-md-4 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Code')}}</label>
-                                                        <input type="text" name="codeii" class="form-control" value="{{$ii->code}}" data-validation="length" data-validation-length="1-12" readonly="readonly" required/>
+                                                        <input type="text" name="codeii" class="form-control" value="{{$ii->code}}" data-validation="length" data-validation-length="1-16" readonly="readonly" required/>
                                                       </div>
                                                     </div>
                                                   </div>
@@ -132,7 +132,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Description')}}</label>
-                                                        <input type="text" name="descriptionii" class="form-control" value="{{$ii->description}}" data-validation="length" data-validation-length="1-50" required />
+                                                        <input type="text" name="descriptionii" class="form-control" value="{{$ii->description}}" data-validation="length" data-validation-length="0-150" />
                                                       </div>
                                                     </div>
                                                   </div>

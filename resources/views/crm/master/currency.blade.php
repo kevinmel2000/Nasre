@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Code')}} </label>
-                          <input type="text" name="crccode" style="width: 25%;" class="form-control form-control-sm" data-validation="length" data-validation-length="2-3" required/>
+                          <input type="text" name="crccode" style="width: 25%;" class="form-control form-control-sm" data-validation="length" data-validation-length="1-3" required/>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Symbol/Name')}}</label>
-                          <input type="text" name="crcsymbolname" class="form-control form-control-sm " data-validation="length" data-validation-length="2-150" required/>
+                          <input type="text" name="crcsymbolname" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" />
                       </div>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                                                   <div class="col-md-6 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Code')}}</label>
-                                                      <input type="text" name="codecrc"  class="form-control" value="{{$crc->code}}" data-validation="length" data-validation-length="2-3" required />
+                                                      <input type="text" name="codecrc"  class="form-control" value="{{$crc->code}}" data-validation="length" data-validation-length="1-3" required />
                                                     </div>
                                                   </div>
                                                 </div>
@@ -131,7 +131,7 @@
                                                   <div class="col-md-4 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Symbol/Name')}}</label>
-                                                      <input type="text" name="symbolnamecrc" class="form-control" value="{{$crc->symbol_name}}" data-validation="length" data-validation-length="2-150" required/>
+                                                      <input type="text" name="symbolnamecrc" class="form-control" value="{{$crc->symbol_name}}" data-validation="length" data-validation-length="0-150"/>
                                                     </div>
                                                   </div>
                                                   <div class="col-md-4 col-md-12">

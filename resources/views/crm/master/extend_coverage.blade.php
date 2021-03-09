@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Code')}} </label>
-                          <input type="text" name="eccode" style="width: 25%;" class="form-control form-control-sm" data-validation="length" data-validation-length="1-12" value="{{ $code_ec }}" readonly="readonly" required/>
+                          <input type="text" name="eccode" style="width: 25%;" class="form-control form-control-sm" data-validation="length" data-validation-length="1-16" value="{{ $code_ec }}" readonly="readonly" required/>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Name')}}</label>
-                          <input type="text" name="ecname" class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" required/>
+                          <input type="text" name="ecname" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150"/>
                       </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                         <label for="">{{__('Description')}}</label>
-                        <input type="text" name="ecdescription" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                        <input type="text" name="ecdescription" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" />
                     </div>
                   </div>
                 </div>
@@ -136,7 +136,7 @@
                                                     <div class="col-md-4 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Code')}}</label>
-                                                        <input type="text" name="codeec" class="form-control" value="{{$ec->code}}" data-validation="length" data-validation-length="1-12" readonly="readonly" required/>
+                                                        <input type="text" name="codeec" class="form-control" value="{{$ec->code}}" data-validation="length" data-validation-length="1-16" readonly="readonly" required/>
                                                       </div>
                                                     </div>
                                                   </div>
@@ -144,7 +144,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Name')}}</label>
-                                                        <input type="text" name="nameec" class="form-control" value="{{$ec->name}}" data-validation="length" data-validation-length="1-50" required />
+                                                        <input type="text" name="nameec" class="form-control" value="{{$ec->name}}" data-validation="length" data-validation-length="0-150" />
                                                       </div>
                                                     </div>
                                                   </div>
@@ -152,7 +152,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Description')}}</label>
-                                                        <input type="text" name="descriptionec" class="form-control" value="{{$ec->description}}" data-validation="length" data-validation-length="0-50"  />
+                                                        <input type="text" name="descriptionec" class="form-control" value="{{$ec->description}}" data-validation="length" data-validation-length="0-250"  />
                                                       </div>
                                                     </div>
                                                   </div>

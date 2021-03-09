@@ -62,7 +62,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Year')}} </label>
-                          <input type="number" name="excyear" class="form-control form-control-sm" data-validation="length" data-validation-length="2-20" required/>
+                          <input type="number" name="excyear" class="form-control form-control-sm" data-validation="length" data-validation-length="1-20"/>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Kurs')}}</label>
-                          <input type="text" name="exckurs" class="form-control form-control-sm " data-validation="length" data-validation-length="2-150" required/>
+                          <input type="text" name="exckurs" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150"/>
                       </div>
                     </div>
                 </div>
@@ -349,7 +349,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Year')}}</label>
-                                                        <input type="text" name="yearexc"  class="form-control" value="{{$exc->year}}" data-validation="length" data-validation-length="2-15" required />
+                                                        <input type="text" name="yearexc"  class="form-control" value="{{$exc->year}}" data-validation="length" data-validation-length="0-20" />
                                                       </div>
                                                     </div>
                                                 </div>
@@ -358,7 +358,7 @@
                                                   <div class="col-md-6 col-md-12">
                                                     <div class="form-group">
                                                       <label for="">{{__('Kurs')}}</label>
-                                                      <input type="text" name="kursexc" class="form-control" value="{{$exc->kurs}}" data-validation="length" data-validation-length="2-150" required/>
+                                                      <input type="text" name="kursexc" class="form-control" value="{{$exc->kurs}}" data-validation="length" data-validation-length="0-150"/>
                                                     </div>
                                                   </div>
                                                 </div>
