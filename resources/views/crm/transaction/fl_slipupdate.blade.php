@@ -409,7 +409,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Username')}}</label>
-                                                            <input type="text" id="slipusername" name="slipusername" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" value="{{$slipdata->username}}" readonly="readonly" required/>
+                                                            <input type="text" id="slipusername" name="slipusername" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" value="{{$user->username}}" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
