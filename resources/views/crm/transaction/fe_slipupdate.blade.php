@@ -652,7 +652,7 @@
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured') }}</label>
-                                                    <input type="text" value="{{$totalamountdata}}" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm" readonly="readonly" placeholder="" />
+                                                    <input type="text" value="" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm" readonly="readonly" placeholder="" />
                                                 </div>
                                             </div>
                                         </div>

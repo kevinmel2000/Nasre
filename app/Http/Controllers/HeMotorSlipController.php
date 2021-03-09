@@ -338,15 +338,11 @@ class HeMotorSlipController extends Controller
 
 
         if(!empty($slipdata))
-        {
-            $code_sl=$slipdata->number;
-        }
-        else
-        {
-
+        {      
+                $code_sl=$slipdata->number;
                 $slip = SlipTable::orderby('id','asc')->get();
                 $sliplastid = count($slip);
-
+                
                 $kondisi=false;
                 $i=1;
                 while($kondisi==false)
@@ -383,6 +379,41 @@ class HeMotorSlipController extends Controller
                     $i++;
                 }
 
+        }
+        else
+        {
+            $slip = SlipTable::orderby('id','asc')->get();
+            $sliplastid = count($slip);
+            
+            if($sliplastid != null){
+                if($sliplastid < 10)
+                {
+                    $code_sl = "HEM". $userid ."". $mydate . "0000" . strval($sliplastid + 1);
+                }   
+                elseif($sliplastid > 9 && $sliplastid < 100)
+                {
+                    $code_sl = "HEM". $userid ."". $mydate . "000" . strval($sliplastid + 1);
+                }
+                elseif($sliplastid > 99 && $sliplastid < 1000)
+                {
+                    $code_sl = "HEM". $userid ."". $mydate . "00" . strval($sliplastid + 1);
+                }
+                elseif($sliplastid > 999 && $sliplastid < 10000)
+                {
+                    $code_sl = "HEM". $userid ."". $mydate . "0" . strval($sliplastid + 1);
+                }
+                elseif($sliplastid > 9999 && $sliplastid < 100000)
+                {
+                    $code_sl = "HEM". $userid ."". $mydate . strval($sliplastid + 1);
+                }
+    
+                
+            }
+            else{
+                $code_sl = "HEM". $userid ."". $mydate . "0000" . strval(1);
+            }
+
+            $slipdata=SlipTable::orderBy('id', 'desc')->first();
         }
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
