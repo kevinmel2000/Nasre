@@ -613,14 +613,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="">{{__('Coinsurance')}}</label>
-                                                            <input type="text" id="slipcoinsurance" name="slipcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
@@ -633,14 +626,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <!--div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Coinsurance')}}</label>
                                                             <input type="text" id="slipcoinsurance" name="slipcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div-->
                                             </div>
                                             <div class="tab-pane fade" id="insured-details-id" role="tabpanel" aria-labelledby="insured-details">
                                                 <div class="row">

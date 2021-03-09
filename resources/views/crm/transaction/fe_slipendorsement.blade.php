@@ -152,16 +152,6 @@
                                     </div>
                                 </div>
 
-                                
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" id="fecoinsurance" name="fecoinsurance" value="{{$insureddata->coincurance}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
                                         <button type="button" id="addinsuredsave-btn" class="btn btn-primary btn-block ">
@@ -632,14 +622,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="">{{__('Coinsurance')}}</label>
-                                                    <input type="text" id="slipcoinsurance" name="slipcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">

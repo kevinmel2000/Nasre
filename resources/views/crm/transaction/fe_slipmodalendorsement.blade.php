@@ -254,14 +254,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Coinsurance')}}</label>
-                                                        <input type="text" id="slipcoinsuranceendorsement" name="slipcoinsuranceendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">

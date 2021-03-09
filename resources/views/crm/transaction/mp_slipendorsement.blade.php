@@ -153,17 +153,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="">{{__('Coinsurance')}}</label>
-                                            <input type="text" id="mpcoinsurance" name="mpcoinsurance" value="{{$insureddata->coincurance}}" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                        </div>
-                                    </div>
-                                </div>
-
-
                                 
                                 <div class="row">
                                     <div class="col-md-6 d-flex justify-content-start">
@@ -679,14 +668,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="">{{__('Coinsurance')}}</label>
-                                                    <input type="text" id="slipcoinsurance" name="slipcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                                 </div>
                                             </div>
                                         </div>
