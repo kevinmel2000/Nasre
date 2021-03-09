@@ -623,6 +623,16 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('WPC')}}</label>
+                                                        <input type="number" min="0" value="" step=".0001" id="wpc" name="wpc" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                    </div>
+                                                </div>
+                                        </div>
+
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
