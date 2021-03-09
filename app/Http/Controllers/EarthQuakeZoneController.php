@@ -47,8 +47,10 @@ class EarthQuakeZoneController extends Controller
             }
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $earthquakezone = EarthQuakeZone::orderby('id','desc')->paginate(10);
+          $country = Country::orderby('id','asc')->get();
+
           $earthquakezone_ids = response()->json($earthquakezone->modelKeys());
-          return view('crm.master.earthquakezone', compact('user','code_eqz','earthquakezone','route_active','earthquakezone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.master.earthquakezone', compact('user','country','code_eqz','earthquakezone','route_active','earthquakezone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
@@ -62,7 +64,7 @@ class EarthQuakeZoneController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'name'=>'required'
+            'ezname'=>'required'
         ]);
         
         if($validator)
@@ -71,8 +73,9 @@ class EarthQuakeZoneController extends Controller
             //exit();
             $user = Auth::user();
             EarthQuakeZone::create([
-                'name'=>$request->name,
-                'code'=>$request->code
+                'name'=>$request->ezname,
+                'code'=>$request->ezcode,
+                'country_id'=>$request->ezcountry
             ]);
             $notification = array(
                 'message' => 'Earth Quake Zone added successfully!',
@@ -90,7 +93,7 @@ class EarthQuakeZoneController extends Controller
     public function update(Request $request, $eqzone)
     {
         $validator = $request->validate([
-            'name'=>'required'
+            'nameez'=>'required'
         ]);
 
         if($validator){

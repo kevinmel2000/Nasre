@@ -25,7 +25,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                         <label for="">{{__('Enter Code')}} </label>
-                        <input type="text" name="code" style="width: 25%;" class="form-control form-control-sm" value="{{ $code_flz }}" readonly required/>
+                        <input type="text" name="flzcode" style="width: 25%;" class="form-control form-control-sm" value=""  required/>
                     </div>
                   </div>
                 </div>
@@ -34,9 +34,23 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Flood Zone Name')}}</label>
-                          <input type="text" name="name" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150"/>
+                          <input type="text" name="flzname" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150"/>
                       </div>
                     </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">{{__('Country')}}</label>
+                        <select name="flzcountry" id="e1" class="e1 form-control form-control-sm ">
+                            <option selected disabled>{{__('Select Country')}}</option>
+                            @foreach($country as $cty)
+                            <option value="{{ $cty->id }}">{{ $cty->id }} - {{ $cty->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                  </div>
                 </div>
 
                 
@@ -76,6 +90,7 @@
                     <tr>
                       <th>{{__('Code')}}</th>
                       <th>{{__('Name')}}</th>
+                      <th>{{__('Country')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
@@ -84,6 +99,7 @@
                             <tr>
                               <td>{{@$floodzonedata->code}}</td>
                               <td>{{@$floodzonedata->name}}</td>
+                              <td>{{@$floodzonedata->country->name}}</td>
                              
                              
                               <td>
@@ -116,7 +132,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Code')}}</label>
-                                                        <input type="text" name="code" class="form-control" value="{{$floodzonedata->code}}" required readonly/>
+                                                        <input type="text" name="codeflz" class="form-control" value="{{$floodzonedata->code}}" required readonly/>
                                                       </div>
                                                     </div>
                                                   </div>
@@ -125,8 +141,24 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('name')}}</label>
-                                                        <input type="text" name="name" class="form-control" value="{{$floodzonedata->name}}" required/>
+                                                        <input type="text" name="nameflz" class="form-control" value="{{$floodzonedata->name}}" required/>
                                                       </div>
+                                                    </div>
+                                                  </div>
+
+                                                  <div class="col-md-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('State')}}</label><br>
+                                                        <select name="countryflz" class="form-control form-control-sm e1">
+                                                            <option selected disabled>{{__('Select State')}}</option>
+                                                            @foreach($country as $cty)
+                                                            @if($floodzonedata->country_id  == $cty->id)
+                                                            <option value="{{ $cty->id }}" selected>{{ $cty->id }} - {{ $cty->name }}</option>
+                                                            @else
+                                                            <option value="{{  $cty->id }}">{{  $cty->id  }} - {{ $cty->name }}</option>
+                                                            @endif
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                   </div>
 

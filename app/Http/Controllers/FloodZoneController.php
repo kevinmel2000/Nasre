@@ -46,8 +46,10 @@ class FloodZoneController extends Controller
             }
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $floodzone = FloodZone::orderby('id','desc')->paginate(10);
+          $country = Country::orderby('id','asc')->get();
+          
           $floodzone_ids = response()->json($floodzone->modelKeys());
-          return view('crm.master.floodzone', compact('user','code_flz','floodzone','route_active','floodzone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.master.floodzone', compact('user','country','code_flz','floodzone','route_active','floodzone_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
@@ -61,7 +63,7 @@ class FloodZoneController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'name'=>'required'
+            'flzname'=>'required'
         ]);
         
         if($validator)
@@ -70,8 +72,9 @@ class FloodZoneController extends Controller
             //exit();
             $user = Auth::user();
             FloodZone::create([
-                'name'=>$request->name,
-                'code'=>$request->code
+                'name'=>$request->flzname,
+                'code'=>$request->flzcode,
+                'country_id'=>$request->flzcountry
             ]);
             $notification = array(
                 'message' => 'Flood Zone added successfully!',
@@ -88,7 +91,7 @@ class FloodZoneController extends Controller
     public function update(Request $request, $floodzone)
     {
         $validator = $request->validate([
-            'name'=>'required'
+            'nameflz'=>'required'
         ]);
         if($validator){
             

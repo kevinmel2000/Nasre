@@ -25,7 +25,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                         <label for="">{{__('Enter Code')}} </label>
-                        <input type="text" name="code" style="width: 25%;" class="form-control form-control-sm" value="{{ $code_eqz }}" readonly required/>
+                        <input type="text" name="ezcode" style="width: 25%;" class="form-control form-control-sm" value=""  required/>
                     </div>
                   </div>
                 </div>
@@ -34,19 +34,24 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Earthquake Zone Name')}}</label>
-                          <input type="text" name="name" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150"/>
+                          <input type="text" name="ezname" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150"/>
                       </div>
                     </div>
                 </div>
 
-                {{-- <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                          <label for="">{{__('Flag Delete')}}</label>
-                          <input type="text" name="flagdelete" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                      </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">{{__('Country')}}</label>
+                        <select name="ezcountry" id="e1" class="e1 form-control form-control-sm ">
+                            <option selected disabled>{{__('Select Country')}}</option>
+                            @foreach($country as $cty)
+                            <option value="{{ $cty->id }}">{{ $cty->id }} - {{ $cty->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                </div> --}}
+                  </div>
+              </div>
                 
               </div>
             </div>
@@ -83,7 +88,7 @@
                     <tr>
                       <th>{{__('Code')}}</th>
                       <th>{{__('EarthQuake Zone ')}}</th>
-                      {{-- <th>{{__('Flag Delete ')}}</th> --}}
+                      <th>{{__('Country ')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
@@ -92,7 +97,7 @@
                             <tr>
                               <td>{{@$earthquakezonedata->code}}</td>
                               <td>{{@$earthquakezonedata->name}}</td>
-                              {{-- <td>{{@$earthquakezonedata->flag_delete}}</td> --}}
+                              <td>{{@$earthquakezonedata->country->name}}</td>
                              
                               <td>
                                
@@ -123,7 +128,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Code')}}</label>
-                                                        <input type="text" name="code" class="form-control" value="{{$earthquakezonedata->code}}" required readonly/>
+                                                        <input type="text" name="codeez" class="form-control" value="{{$earthquakezonedata->code}}" required readonly/>
                                                       </div>
                                                     </div>
                                                   </div>
@@ -132,20 +137,29 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('name')}}</label>
-                                                        <input type="text" name="name" class="form-control" value="{{$earthquakezonedata->name}}"/>
+                                                        <input type="text" name="nameez" class="form-control" value="{{$earthquakezonedata->name}}"/>
                                                       </div>
                                                     </div>
                                                   </div>
 
                                                   
-                                                  {{-- <div class="row">
+                                                  <div class="row">
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
-                                                        <label for="">{{__('Flag Delete')}}</label>
-                                                        <input type="text" name="flag_delete" class="form-control" value="{{$earthquakezonedata->flag_delete}}" required/>
+                                                          <label for="">{{__('State')}}</label><br>
+                                                          <select name="countryez" class="form-control form-control-sm e1">
+                                                              <option selected disabled>{{__('Select State')}}</option>
+                                                              @foreach($country as $cty)
+                                                              @if($earthquakezonedata->country_id  == $cty->id)
+                                                              <option value="{{ $cty->id }}" selected>{{ $cty->id }} - {{ $cty->name }}</option>
+                                                              @else
+                                                              <option value="{{  $cty->id }}">{{  $cty->id  }} - {{ $cty->name }}</option>
+                                                              @endif
+                                                              @endforeach
+                                                          </select>
                                                       </div>
                                                     </div>
-                                                  </div> --}}
+                                                  </div>
 
                                               </div>
 
@@ -163,7 +177,7 @@
 
                                   <span id="delbtn{{@$earthquakezonedata->id}}"></span>
                                 
-                                    <form id="delete-state-{{$earthquakezonedata->id}}"
+                                    <form id="delete-earthquakezone-{{$earthquakezonedata->id}}"
                                         action="{{ url('master-data/earthquakezone/destroy', $earthquakezonedata->id) }}"
                                         method="POST">
                                         @method('DELETE')

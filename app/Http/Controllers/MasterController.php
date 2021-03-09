@@ -977,7 +977,7 @@ class MasterController extends Controller
     public function storeoccupation(Request $request)
     {
         $validator = $request->validate([
-            'ocpcode'=>'required|max:15|unique:occupation,code'
+            'ocpcode'=>'required|max:35|unique:occupation,code'
         ]);
         if($validator){
             $user = Auth::user();
@@ -1441,7 +1441,7 @@ class MasterController extends Controller
     public function updateoccupation(Request $request, Occupation $ocp)
     {
         $validator = $request->validate([
-            'codeocp'=>'required|max:20'
+            'codeocp'=>'required|max:40'
         ]);
         if($validator){
             $ocp->code = $request->codeocp;

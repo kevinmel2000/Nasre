@@ -39,7 +39,6 @@
                               <option value="{{ $cty->id }}">{{ $cty->id }} - {{ $cty->name }}</option>
                               @endforeach
                           </select>
-
                       </div>
                     </div>
                 </div>
