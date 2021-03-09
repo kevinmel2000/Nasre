@@ -979,6 +979,8 @@ class MasterController extends Controller
         $validator = $request->validate([
             'ocpcode'=>'required|max:35|unique:occupation,code'
         ]);
+
+        // dd($request);
         if($validator){
             $user = Auth::user();
             Occupation::create([

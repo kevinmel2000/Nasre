@@ -92,19 +92,19 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="">{{__('Range Rate Bawah Building Class 1')}}</label>
-                          <input type="number" name="ocprrbc1" step="0.01" class="form-control form-control-sm "  data-validation="length" data-validation-length="0-500" />
+                          <input type="number" name="ocprrbc1" step="0.001" class="form-control form-control-sm "  data-validation="length" data-validation-length="0-500" />
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="">{{__('Range Rate Bawah Building Class 2')}}</label>
-                          <input type="number" name="ocprrbc2" step="0.01" class="form-control form-control-sm "  data-validation="length" data-validation-length="0-500" />
+                          <input type="number" name="ocprrbc2" step="0.001" class="form-control form-control-sm "  data-validation="length" data-validation-length="0-500" />
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="">{{__('Range Rate Bawah Building Class 3')}}</label>
-                          <input type="number" name="ocprrbc3" step="0.01" class="form-control form-control-sm " data-validation="length" data-validation-length="0-500" />
+                          <input type="number" name="ocprrbc3" step="0.001" class="form-control form-control-sm " data-validation="length" data-validation-length="0-500" />
                         </div>
                       </div>
                     </div>
@@ -117,19 +117,19 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="">{{__('Range Rate Atas Building Class 1')}}</label>
-                          <input type="number" name="ocprrac1" step="0.01" class="form-control form-control-sm "  data-validation="length" data-validation-length="0-500" />
+                          <input type="number" name="ocprrac1" step="0.001" class="form-control form-control-sm "  data-validation="length" data-validation-length="0-500" />
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="">{{__('Range Rate Atas Building Class 2')}}</label>
-                          <input type="number" name="ocprrac2" step="0.01" class="form-control form-control-sm "  data-validation="length" data-validation-length="0-500" />
+                          <input type="number" name="ocprrac2" step="0.001" class="form-control form-control-sm "  data-validation="length" data-validation-length="0-500" />
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="">{{__('Range Rate Atas Building Class 3')}}</label>
-                          <input type="number" name="ocprrac3" step="0.01" class="form-control form-control-sm " data-validation="length" data-validation-length="0-500" />
+                          <input type="number" name="ocprrac3" step="0.001" class="form-control form-control-sm " data-validation="length" data-validation-length="0-500" />
                         </div>
                       </div>
                     </div>
