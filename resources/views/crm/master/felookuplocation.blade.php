@@ -365,9 +365,9 @@
                                                               <option selected disabled>{{__('Select EarthQuake Zone')}}</option>
                                                               @foreach($earthquakezone as $zone)
                                                               @if($location->eq_zone  == $zone->id)
-                                                              <option value="{{ $zone->id }}" selected>{{ $zone->id }} - {{ $zone->name }}</option>
+                                                              <option value="{{ $zone->id }}" selected>{{ $zone->code }} - {{ $zone->name }}</option>
                                                               @else
-                                                              <option value="{{  $zone->id }}">{{  $zone->id  }} - {{ $zone->name }}</option>
+                                                              <option value="{{  $zone->id }}">{{  $zone->code  }} - {{ $zone->name }}</option>
                                                               @endif
                                                               @endforeach
                                                           </select>
@@ -381,9 +381,9 @@
                                                               <option selected disabled>{{__('Select Flood Zone')}}</option>
                                                               @foreach($floodzone as $zone)
                                                               @if($location->flood_zone  == $zone->id)
-                                                              <option value="{{ $zone->id }}" selected>{{ $zone->id }} - {{ $zone->name }}</option>
+                                                              <option value="{{ $zone->id }}" selected>{{ $zone->code }} - {{ $zone->name }}</option>
                                                               @else
-                                                              <option value="{{  $zone->id }}">{{  $zone->id  }} - {{ $zone->name }}</option>
+                                                              <option value="{{  $zone->id }}">{{  $zone->code  }} - {{ $zone->name }}</option>
                                                               @endif
                                                               @endforeach
                                                           </select>
