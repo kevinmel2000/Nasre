@@ -101,6 +101,9 @@ class FloodZoneController extends Controller
 
             $data=$request->all();
             $floodzones = FloodZone::find($floodzone);
+            $floodzones->code = $request->codeflz;
+            $floodzones->name = $request->nameflz;
+            $floodzones->country_id = $request->countryflz;
             $floodzones->update($data);
 
             $notification = array(

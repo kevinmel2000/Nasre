@@ -72,6 +72,7 @@ class EarthQuakeZoneController extends Controller
             //print_r($request);
             //exit();
             $user = Auth::user();
+            // dd($request);
             EarthQuakeZone::create([
                 'name'=>$request->ezname,
                 'code'=>$request->ezcode,
@@ -96,10 +97,15 @@ class EarthQuakeZoneController extends Controller
             'nameez'=>'required'
         ]);
 
+        // dd($eqzone);
+
         if($validator){
             
             $data=$request->all();
             $eqzones = EarthQuakeZone::find($eqzone);
+            $eqzones->code = $request->codeez;
+            $eqzones->name = $request->nameez;
+            $eqzones->country_id = $request->countryez;
             $eqzones->update($data);
 
             $notification = array(

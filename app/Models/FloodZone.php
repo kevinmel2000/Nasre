@@ -10,7 +10,7 @@ class FloodZone extends Model
 
     protected $table = 'flood_zone';
 
-    protected $fillable = ['name','code'];
+    protected $fillable = ['name','code','country_id'];
 
     public function country() 
     {

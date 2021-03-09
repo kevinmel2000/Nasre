@@ -10,7 +10,7 @@ class EarthQuakeZone extends Model
 
     protected $table = 'earthquake_zone';
 
-    protected $fillable = ['name','code'];
+    protected $fillable = ['name','code','country_id'];
 
     public function country() 
     {
