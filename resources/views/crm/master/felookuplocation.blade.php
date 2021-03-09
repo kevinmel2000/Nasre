@@ -367,7 +367,7 @@
                                                               @if($location->eq_zone  == $zone->id)
                                                               <option value="{{ $zone->id }}" selected>{{ $zone->id }} - {{ $zone->name }}</option>
                                                               @else
-                                                              <option value="{{  $zone->id }}">{{  $zone->id  }} - {{ $zone->name }}</option>
+                                                              <option value="{{  $zone->id }}">{{  $zone->id }} - {{ $zone->name }}</option>
                                                               @endif
                                                               @endforeach
                                                           </select>
@@ -383,7 +383,7 @@
                                                               @if($location->flood_zone  == $zone->id)
                                                               <option value="{{ $zone->id }}" selected>{{ $zone->id }} - {{ $zone->name }}</option>
                                                               @else
-                                                              <option value="{{  $zone->id }}">{{  $zone->id  }} - {{ $zone->name }}</option>
+                                                              <option value="{{  $zone->id }}">{{  $zone->id }} - {{ $zone->name }}</option>
                                                               @endif
                                                               @endforeach
                                                           </select>
