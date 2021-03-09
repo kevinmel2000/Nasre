@@ -612,13 +612,9 @@
                                                         <label for="">{{__('Building Const')}}</label>
                                                         <select id="slipbld_const" name="slipbld_const" class="e1 form-control form-control-sm ">
                                                             <option selected readonly  value='0'>{{__('Building Const list')}}</option>
-                                                            <option value="Buliding 1" @if($slipdata->build_cost == "Buliding 1") selected="selected" @endif >Buliding 1</option>
-                                                            <option value="Buliding 2" @if($slipdata->build_cost == "Buliding 2") selected="selected" @endif >Buliding 2</option>
-                                                            <option value="Buliding 3" @if($slipdata->build_cost == "Buliding 3") selected="selected" @endif >Buliding 3</option>
-                                                            <option value="Buliding 4" @if($slipdata->build_cost == "Buliding 4") selected="selected" @endif >Buliding 4</option>
-                                                            <option value="Buliding 5" @if($slipdata->build_cost == "Buliding 5") selected="selected" @endif >Buliding 5 </option>
-                                                            <option value="Buliding 6" @if($slipdata->build_cost == "Buliding 6") selected="selected" @endif >Buliding 6</option>
-                                                            <option value="Buliding 7" @if($slipdata->build_cost == "Buliding 7") selected="selected" @endif >Buliding 7</option>
+                                                            <option value="Building 1" @if($slipdata->build_cost == "Building 1") selected="selected" @endif >Building 1</option>
+                                                            <option value="Building 2" @if($slipdata->build_cost == "Building 2") selected="selected" @endif >Building 2</option>
+                                                            <option value="Building 3" @if($slipdata->build_cost == "Building 3") selected="selected" @endif >Building 3</option>
                                                         </select>
                                                     </div>    
                                                     </div>
