@@ -1,5 +1,5 @@
-<link href="{{url('/')}}/css/select2.css" rel="stylesheet"/>
-<script src="{{url('/')}}/js/select2.js"></script>
+<link href="{{asset('css/select2.css')}}" rel="stylesheet"/>
+<script src="{{asset('js/select2.js')}}"></script>
 <script type="text/javascript">
         $(document).ready(function() { 
             
@@ -8,8 +8,8 @@
         
         });
 </script>
-<link rel="stylesheet" href="{{url('/')}}/css/sweetalert2.min.css">
-<script src="{{url('/')}}/js/sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
+<script src="{{asset('js/sweetalert2.all.min.js')}}"></script>
 
 <script  type='text/javascript'>
     $('#slippctupdate').keyup(function () {
