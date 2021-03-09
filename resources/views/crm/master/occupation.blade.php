@@ -295,13 +295,13 @@
                                                         <div class="col-md-6">
                                                           <div class="form-group">
                                                             <label for="">{{__('Range Rate Bawah Building Class 1')}}</label>
-                                                            <input type="number" name="rrbc1ocp" class="form-control" value="{{$ocp->rate_batas_bawah_building_class_1}}" data-validation="length" data-validation-length="0-500"/>
+                                                            <input type="number" step="0.001" name="rrbc1ocp" class="form-control" value="{{$ocp->rate_batas_bawah_building_class_1}}" data-validation="length" data-validation-length="0-500"/>
                                                           </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                           <div class="form-group">
                                                             <label for="">{{__('Range Rate Atas Building Class 1')}}</label>
-                                                            <input type="number" name="rrac1ocp" class="form-control" value="{{$ocp->rate_batas_atas_building_class_1}}" data-validation="length" data-validation-length="0-500"/>
+                                                            <input type="number" step="0.001" name="rrac1ocp" class="form-control" value="{{$ocp->rate_batas_atas_building_class_1}}" data-validation="length" data-validation-length="0-500"/>
                                                           </div>
                                                         </div>
                                                     </div>
@@ -313,13 +313,13 @@
                                                         <div class="col-md-6">
                                                           <div class="form-group">
                                                             <label for="">{{__('Range Rate Bawah Building Class 2')}}</label>
-                                                            <input type="number" name="rrbc2ocp" class="form-control" value="{{$ocp->rate_batas_bawah_building_class_2}}" data-validation="length" data-validation-length="0-500" />
+                                                            <input type="number" step="0.001" name="rrbc2ocp" class="form-control" value="{{$ocp->rate_batas_bawah_building_class_2}}" data-validation="length" data-validation-length="0-500" />
                                                           </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                           <div class="form-group">
                                                             <label for="">{{__('Range Rate Atas Building Class 2')}}</label>
-                                                            <input type="number" name="rrac2ocp" class="form-control" value="{{$ocp->rate_batas_atas_building_class_2}}" data-validation="length" data-validation-length="0-500" />
+                                                            <input type="number" step="0.001" name="rrac2ocp" class="form-control" value="{{$ocp->rate_batas_atas_building_class_2}}" data-validation="length" data-validation-length="0-500" />
                                                           </div>
                                                         </div>
                                                     </div>
@@ -331,13 +331,13 @@
                                                         <div class="col-md-6">
                                                           <div class="form-group">
                                                             <label for="">{{__('Range Rate Bawah Building Class 3')}}</label>
-                                                            <input type="number" name="rrbc3ocp" class="form-control" value="{{$ocp->rate_batas_bawah_building_class_3}}" data-validation="length" data-validation-length="0-500" />
+                                                            <input type="number" step="0.001" name="rrbc3ocp" class="form-control" value="{{$ocp->rate_batas_bawah_building_class_3}}" data-validation="length" data-validation-length="0-500" />
                                                           </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                           <div class="form-group">
                                                             <label for="">{{__('Range Rate Atas Building Class 3')}}</label>
-                                                            <input type="number" name="rrac3ocp" class="form-control" value="{{$ocp->rate_batas_atas_building_class_3}}" data-validation="length" data-validation-length="0-500" />
+                                                            <input type="number" step="0.001" name="rrac3ocp" class="form-control" value="{{$ocp->rate_batas_atas_building_class_3}}" data-validation="length" data-validation-length="0-500" />
                                                           </div>
                                                         </div>
                                                     </div>
