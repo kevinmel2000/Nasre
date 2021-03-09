@@ -965,7 +965,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="">{{__('V Broker')}}</label>
+                                                        <label for="">{{__('Fee Broker')}}</label>
                                                         <input type="number" value="0" step=".0001" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                     </div>
                                                 </div>
