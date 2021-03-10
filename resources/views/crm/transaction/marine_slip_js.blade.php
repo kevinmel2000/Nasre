@@ -29,6 +29,25 @@
 </style>
 
 <script type="text/javascript">
+    // $('#slipamount').keyup(function(){
+    //     var currenc = $(this).val();
+    //     console.log(currenc)
+    //     currenc.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // });
+
+    $('#slipamount').keyup(function(event) {
+            // skip for arrow keys
+            if(event.which >= 37 && event.which <= 40) return;
+                console.log(event.which)
+                console.log($(this).val())
+                // format number
+                $(this).val(function(index, value) {
+                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            });
+    });
+</script>
+
+<script type="text/javascript">
     $('#switch-proportional').change(function(){
         var attr = $("#btnaddlayer").attr('hidden');
         if(typeof attr !== typeof undefined && attr !== false){
@@ -64,6 +83,76 @@
 </script>
 
 <script type="text/javascript">
+    $('#switch-proportionalupdate').change(function(){
+        var attr = $("#btnaddlayerupdate").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            $("#btnaddlayer").removeAttr('hidden');
+            $("#sliplayerproportionalupdate").removeAttr('hidden');
+            $("#labelnonpropupdate").removeAttr('hidden');
+            $("#labelnpupdate").removeAttr('hidden');
+            
+        }
+        else{
+            $("#btnaddlayerupdate").attr('hidden','true');
+            $("#sliplayerproportionalupdate").attr('hidden','true');
+            $("#labelnonpropupdate").attr('hidden','true');
+            $("#labelnpupdate").attr('hidden','true');
+
+        }
+        
+    });
+
+    $('#sliprbupdate').change(function(){
+        var attr = $("#retrocessionPanelupdate").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            $("#retrocessionPanelupdate").removeAttr('hidden');
+            $("#tabretroupdate").removeAttr('hidden');
+        }
+        else{
+            $("#retrocessionPanelupdate").attr('hidden','true');
+            $("#tabretroupdate").attr('hidden','true');
+        }
+    });
+
+    $('#slipipfromupdate').on('dp.change', function(e){ console.log(e.date); })
+</script>
+
+<script type="text/javascript">
+    $('#switch-proportionalendorsement').change(function(){
+        var attr = $("#btnaddlayerendorsement").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            $("#btnaddlayerendorsement").removeAttr('hidden');
+            $("#sliplayerproportionalendorsement").removeAttr('hidden');
+            $("#labelnonpropendorsement").removeAttr('hidden');
+            $("#labelnpendorsement").removeAttr('hidden');
+            
+        }
+        else{
+            $("#btnaddlayerendorsement").attr('hidden','true');
+            $("#sliplayerproportionalendorsement").attr('hidden','true');
+            $("#labelnonpropendorsement").attr('hidden','true');
+            $("#labelnpendorsement").attr('hidden','true');
+
+        }
+        
+    });
+
+    $('#sliprbendorsement').change(function(){
+        var attr = $("#retrocessionPanelendorsement").attr('hidden');
+        if(typeof attr !== typeof undefined && attr !== false){
+            $("#retrocessionPanelendorsement").removeAttr('hidden');
+            $("#tabretroendorsement").removeAttr('hidden');
+        }
+        else{
+            $("#retrocessionPanelendorsement").attr('hidden','true');
+            $("#tabretroendorsement").attr('hidden','true');
+        }
+    });
+
+    $('#slipipfromendorsement').on('dp.change', function(e){ console.log(e.date); })
+</script>
+
+<script type="text/javascript">
     $(function() {              
        // Bootstrap DateTimePicker v4
        $('#dateinstallment').datetimepicker({
@@ -93,6 +182,22 @@
 
     $('#slipipto').change(function(){
         $('#sliprpto').val($(this).val());
+    });
+
+    $('#slipipfromupdate').change(function(){
+        $('#sliprpfromupdate').val($(this).val());
+    });
+
+    $('#slipiptoupdate').change(function(){
+        $('#sliprptoupdate').val($(this).val());
+    });
+
+    $('#slipipfromendorsement').change(function(){
+        $('#sliprpfromendorsement').val($(this).val());
+    });
+
+    $('#slipiptoendorsement').change(function(){
+        $('#sliprptoendorsement').val($(this).val());
     });
 
 </script>

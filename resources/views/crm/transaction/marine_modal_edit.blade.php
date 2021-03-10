@@ -486,7 +486,7 @@
 
                                 
                                 <div class="row d-flex justify-content-start">
-                                    <i class="fa fa-info-circle"  id="labelnpupdate" style="color: grey;" aria-hidden="true"> non proportional panel</i>
+                                    <i class="fa fa-info-circle"  id="labelnpupdate" style="color: grey;"> non proportional panel</i>
                                 </div>
                                 <div class="row d-flex justify-content-end">
                                     <div class="col-md-4">
