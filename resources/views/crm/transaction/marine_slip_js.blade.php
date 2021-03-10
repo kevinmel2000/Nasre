@@ -12,19 +12,6 @@
         $("#tabretro").attr('hidden','true');
         $("#labelnp").attr('hidden','true');
 
-        // $('#slipamount').keyup(function(event) {
-        //     // skip for arrow keys
-        //     if(event.which >= 37 && event.which <= 40) return;
-
-        //     // format number
-        //     $(this).val(function(index, value) {
-        //         return value
-        //         .replace(/\D/g, "")
-        //         .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-        //         ;
-        //     });
-        // });
-
 
         // $("#marineslipform").attr("hidden", true);
         // $("#marineslipform :input").prop("disabled", true);
@@ -293,14 +280,14 @@
         console.log(month_to)
         console.log(month)
         console.log(insurance)
-        var rateslip =  parseFloat($(this).val());
+        var rateslip =  parseFloat($(this).val()) / 1000;
         var tsi = parseFloat($("#sliptotalsum").val());
         var sum = isNaN(rateslip * tsi/100 * insurance) ? 0 :(rateslip * tsi/100 * insurance) ;
         $('#slipbasicpremium').val(sum);
      });
 
      $('#slipshare').change(function () {
-        var rateslip =  parseFloat($('#sliprate').val()) / 100 ;
+        var rateslip =  parseFloat($('#sliprate').val()) / 1000 ;
         var shareslip =  parseFloat($('#slipshare').val()) / 100 ;
         var ourshare =  parseFloat($('#msisharev').val()) / 100 ;
         var tsi = parseFloat($("#sliptotalsum").val());
@@ -397,14 +384,14 @@
         console.log(month_to)
         console.log(month)
         console.log(insurance)
-        var rateslip =  parseFloat($(this).val());
+        var rateslip =  parseFloat($(this).val()) / 1000;
         var tsi = parseFloat($("#sliptotalsumupdate").val());
         var sum = isNaN(rateslip * tsi/100 * insurance) ? 0 :(rateslip * tsi/100 * insurance) ;
         $('#slipbasicpremiumupdate').val(sum);
      });
 
      $('#slipshare').change(function () {
-        var rateslip =  parseFloat($('#sliprateupdate').val()) / 100 ;
+        var rateslip =  parseFloat($('#sliprateupdate').val()) / 1000 ;
         var shareslip =  parseFloat($('#slipshareupdate').val()) / 100 ;
         var ourshare =  parseFloat($('#msisharevupdate').val()) / 100 ;
         var tsi = parseFloat($("#sliptotalsumupdate").val());
@@ -501,14 +488,14 @@
         console.log(month_to)
         console.log(month)
         console.log(insurance)
-        var rateslip =  parseFloat($(this).val());
+        var rateslip =  parseFloat($(this).val()) / 1000;
         var tsi = parseFloat($("#sliptotalsumendorsement").val());
         var sum = isNaN(rateslip * tsi/100 * insurance) ? 0 :(rateslip * tsi/100 * insurance) ;
         $('#slipbasicpremiumendorsement').val(sum);
      });
 
      $('#slipshare').change(function () {
-        var rateslip =  parseFloat($('#sliprateendorsement').val()) / 100 ;
+        var rateslip =  parseFloat($('#sliprateendorsement').val()) / 1000 ;
         var shareslip =  parseFloat($('#slipshareendorsement').val()) / 100 ;
         var ourshare =  parseFloat($('#msisharevendorsement').val()) / 100 ;
         var tsi = parseFloat($("#sliptotalsumendorsement").val());
