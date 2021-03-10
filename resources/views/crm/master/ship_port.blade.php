@@ -50,12 +50,38 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
+                    <label for="">{{__('Country')}}</label>
+                          <select name="spcountry" id="spcountry" class="e1 form-control form-control-sm ">
+                            <option selected disabled>{{__('Select Country')}}</option>
+                            @foreach($country as $cty)
+                            <option value="{{ $cty->id }}">{{ $cty->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>    
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                    <label for="">{{__('Province/State')}}</label>
+                          <select name="spstate" id="spstate"  class="e1 form-control form-control-sm ">
+                            <option selected disabled>{{__('Select Province/State')}}</option>
+                            
+                        </select>
+                    </div>    
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
                         <label for="">{{__('City')}} </label>
                         <select name="spcity" id="spcity" class="e1 form-control form-control-sm ">
                             <option selected disabled>{{__('Select City')}}</option>
-                            @foreach($city as $citydata)
+                            {{-- @foreach($city as $citydata)
                               <option value="{{ $citydata->id }}">{{ $citydata->id }} - {{ $citydata->name }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select> 
                     </div>
                   </div>
@@ -155,19 +181,41 @@
                                                       </div>
                                                     </div>
                                                   </div>
+
+                                                  <div class="row">
+                                                    <div class="col-md-12">
+                                                      <div class="form-group">
+                                                      <label for="">{{__('Country')}}</label>
+                                                            <select name="countrysp" id="countrysp" class="e1 form-control form-control-sm ">
+                                                              <option selected disabled>{{__('Select Country')}}</option>
+                                                              @foreach($country as $cty)
+                                                              <option value="{{ $cty->id }}">{{ $cty->name }}</option>
+                                                              @endforeach
+                                                          </select>
+                                                      </div>    
+                                                    </div>
+                                                  </div>
+                                  
+                                                  <div class="row">
+                                                    <div class="col-md-12">
+                                                      <div class="form-group">
+                                                      <label for="">{{__('Province/State')}}</label>
+                                                            <select name="statesp" id="statesp"  class="e1 form-control form-control-sm ">
+                                                              <option selected disabled>{{__('Select Province/State')}}</option>
+                                                              
+                                                          </select>
+                                                      </div>    
+                                                    </div>
+                                                  </div>
+
                                                   <div class="row">
                                                     <div class="col-md-4 col-md-12">
                                                       <div class="form-group">
                                                           <label for="">{{__('City')}}</label><br>
-                                                          <select name="citysp" class="form-control form-control-sm e1">
-                                                              <option selected disabled>{{__('Select State')}}</option>
-                                                              @foreach($city as $citydata)
-                                                                @if($sp->city_id  == $citydata->id)
-                                                                  <option value="{{ $citydata->id }}" selected>{{ $citydata->id }} - {{ $citydata->name }}</option>
-                                                                @else
-                                                                  <option value="{{  $citydata->id }}">{{  $citydata->id  }} - {{ $citydata->name }}</option>
-                                                                @endif
-                                                              @endforeach
+                                                          <select name="citysp" id="citysp" class="form-control form-control-sm e1">
+                                                              <option selected disabled>{{__('Select City')}}</option>
+                                                              <option value="{{ $sp->city_id }}" selected>{{ $sp->city->id }} - {{ $sp->city->name }}</option>
+                                                               
                                                           </select>
                                                       </div>
                                                     </div>
@@ -180,7 +228,7 @@
                                           </form>
                                         </div>
                                       </div>
-                                  </div>
+                                    </div>
                                   {{-- Edit Modal Ends --}}
   
                                     {{-- @can('delete-country', User::class) --}}

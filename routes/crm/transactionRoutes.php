@@ -15,6 +15,7 @@ Route::get('get-state-lookup','FeSlipController@getStateLookup');
 Route::get('get-city-lookup','FeSlipController@getCityLookup');
 Route::get('get-address-lookup','FeSlipController@getAddressLookup');
 
+Route::get('get-route-list','TransactionController@showRouteList');
 Route::get('get-ship-list','TransactionController@showShipList');
 Route::post('/store-ship-list','TransactionController@storeshiplist')->name('shiplist.store');
 Route::post('update-ship-list/{id}', 'TransactionController@updateshiplist')->name('shiplist.update');

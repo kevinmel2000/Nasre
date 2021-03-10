@@ -735,6 +735,7 @@ class MasterController extends Controller
             $shipport = ShipPort::orderby('id','asc')->get();
             $city = DB::table('cities')->whereBetween('state_id', [4121, 4154])->orWhereBetween('state_id', [3805, 3978])->get();
             // $city = DB::table('cities')->get();
+            $country = Country::orderby('id','asc')->get();
             $shipport_ids = response()->json($shipport->modelKeys());
             $lastid = count($shipport);
 
@@ -760,7 +761,7 @@ class MasterController extends Controller
             else{
                 $code_sp = '00000' . strval(1);
             }
-            return view('crm.master.ship_port', compact(['route_active','city','code_sp','shipport','shipport_ids']));   
+            return view('crm.master.ship_port', compact(['route_active','country','city','code_sp','shipport','shipport_ids']));   
          }
         else
         {
@@ -1304,9 +1305,8 @@ class MasterController extends Controller
     public function storeshipport(Request $request)
     {
         $validator = $request->validate([
-            'spcode'=>'required|max:12|unique:ship_port,code',
-            'spname'=>'required',
-            'spcity'=>'required'
+            'spcode'=>'required|max:16|unique:ship_port,code',
+            'spname'=>'required'
         ]);
         if($validator){
             $user = Auth::user();
@@ -1775,9 +1775,8 @@ class MasterController extends Controller
    {
     
     $validator = $request->validate([
-        'codesp'=>'required|max:12',
-        'namesp'=>'required',
-        'citysp'=>'required'
+        'codesp'=>'required|max:16',
+        'namesp'=>'required'
     ]);
     
     if($validator){

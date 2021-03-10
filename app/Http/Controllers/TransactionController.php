@@ -2349,6 +2349,22 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function showRouteList(Request $request)
+    {
+        $route = DB::table("route")
+        ->join('ship_port as sp1', 'route.from', '=', 'sp1.id')
+        ->join('ship_port as sp2', 'route.to', '=', 'sp2.id')
+        ->where("route.id",$request->route_code)
+        ->select('route.*','sp1.name as route_from','sp2.name as route_to')
+        ->first();
+
+        // dd($route);
+        return response()->json([
+            'route_from' => $route->route_from,
+            'route_to' => $route->route_to
+        ]);
+    }
+
     public function showShipList(Request $request)
     {
         $ship = DB::table("marine_lookup")

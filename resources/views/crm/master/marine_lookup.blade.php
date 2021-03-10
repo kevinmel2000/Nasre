@@ -229,7 +229,104 @@
                                 <td>{{@$mlp->ship_year}}</td>
                                 <td>{{@$mlp->repair_year}}</td>
                                 <td>{{@$mlp->galangan}}</td>
-                                <td ><input class="form-check-input" style="margin-left: 30;" type="radio" name="mluOption" id="mluOption" value="mluOption" checked></td>
+                                <td >
+                                    <a class="text-primary mr-3" data-toggle="modal" data-target="#updateshipport{{$mlp->id}}">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <div class="modal fade" id="updateshipport{{$mlp->id}}" tabindex="-1" user="dialog" aria-labelledby="updateshipport{{$sp->id}}Label" aria-hidden="true">
+                                        <div class="modal-dialog" user="document">
+                                          <div class="modal-content bg-light-gray">
+                                            <div class="modal-header bg-gray">
+                                              <h5 class="modal-title" id="updateshipport{{$mlp->id}}Label">{{__('Update Ship Port')}}</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <form action="{{url('master-data/shipport',$mlp)}}" method="POST">
+                                                <div class="modal-body">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="row">
+                                                      <div class="col-md-4 col-md-12">
+                                                        <div class="form-group">
+                                                          <label for="">{{__('Code')}}</label>
+                                                          <input type="text" name="codesp" class="form-control" value="{{$mlp->code}}" data-validation="length" data-validation-length="1-16" readonly="readonly" required/>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="row">
+                                                      <div class="col-md-6 col-md-12">
+                                                        <div class="form-group">
+                                                          <label for="">{{__('Name')}}</label>
+                                                          <input type="text" name="namesp" class="form-control" value="{{$mlp->name}}" data-validation="length" data-validation-length="0-150" required />
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="row">
+                                                      <div class="col-md-6 col-md-12">
+                                                        <div class="form-group">
+                                                          <label for="">{{__('Description')}}</label>
+                                                          <input type="text" name="descriptionsp" class="form-control" value="{{$sp->description}}" data-validation="length" data-validation-length="0-250"  />
+                                                        </div>
+                                                      </div>
+                                                    </div>
+  
+                                                    <div class="row">
+                                                      <div class="col-md-12">
+                                                        <div class="form-group">
+                                                        <label for="">{{__('Country')}}</label>
+                                                              <select name="countrysp" id="countrysp" class="e1 form-control form-control-sm ">
+                                                                <option selected disabled>{{__('Select Country')}}</option>
+                                                                @foreach($country as $cty)
+                                                                <option value="{{ $cty->id }}">{{ $cty->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>    
+                                                      </div>
+                                                    </div>
+                                    
+                                                    <div class="row">
+                                                      <div class="col-md-12">
+                                                        <div class="form-group">
+                                                        <label for="">{{__('Province/State')}}</label>
+                                                              <select name="statesp" id="statesp"  class="e1 form-control form-control-sm ">
+                                                                <option selected disabled>{{__('Select Province/State')}}</option>
+                                                                
+                                                            </select>
+                                                        </div>    
+                                                      </div>
+                                                    </div>
+  
+                                                    <div class="row">
+                                                      <div class="col-md-4 col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('City')}}</label><br>
+                                                            <select name="citysp" class="form-control form-control-sm e1">
+                                                                <option selected disabled>{{__('Select City')}}</option>
+                                                                <option value="{{ $sp->city_id }}" selected>{{ $sp->city->id }} - {{ $sp->city->name }}</option>
+                                                                 
+                                                            </select>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                                    <input type="submit" class="btn btn-info" value="Update">
+                                                </div>
+                                            </form>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <span id="delbtn{{@$mlp->id}}"></span>
+                                        <form id="delete-mlu-{{$mlp->id}}"
+                                            action="{{ url('master-data/marinelookup/destroy', $mlp->id) }}"
+                                            method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                        </form>
+                                      </span>    
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
