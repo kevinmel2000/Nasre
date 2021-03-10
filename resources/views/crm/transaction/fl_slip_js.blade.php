@@ -645,6 +645,9 @@
 <script src="{{asset('js/sweetalert2.all.min.js')}}"></script>
 
 
+<link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
+<script src="{{asset('js/sweetalert2.all.min.js')}}"></script>
+
 <style>
 .hide {
     display: none;
@@ -698,8 +701,10 @@
 
     $('#slipiptoendorsement').change(function(){
         $('#sliprptoendorsement').val($(this).val());
-</script>
+    });
 
+
+</script>
 
 
 

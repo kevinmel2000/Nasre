@@ -13,6 +13,28 @@
     });
 </script>
 
+<script type="text/javascript">
+    $('#slipdpminamount').keyup(function(event) {
+        // alert(event);
+        // skip for arrow keys
+        if(event.which >= 37 && event.which <= 40) return;
+
+        // format number
+            $(this).val(function(index, value) {
+            return value.replace(/\D/g, "").replace(/\B(?=(\d{6})+(?!\d))/g, ".");
+            });
+    });
+
+
+    // var el = document.querySelector('#slipdpminamount');
+    // el.addEventListener('keyup', function (event) {
+    // if (event.which >= 37 && event.which <= 40) return;
+
+    // this.value = this.value.replace(/\D/g, '')
+    //                         .replace(/\B(?=(\d{4})+(?!\d))/g, ',');
+    // });
+</script>
+
 
 <script type="text/javascript">
 
@@ -2693,6 +2715,7 @@ $(document).ready(function() {
     $('#addinsuredsave-btn').click(function(e){
        //alert('masuk');
        e.preventDefault();
+       
 
        var fesnumber = $('#insuredIDtxt').val();
        var fesinsured = $('#feinsured').val();

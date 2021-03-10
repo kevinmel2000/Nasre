@@ -2349,6 +2349,22 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function showRouteList(Request $request)
+    {
+        $route = DB::table("route")
+        ->join('ship_port as sp1', 'route.from', '=', 'sp1.id')
+        ->join('ship_port as sp2', 'route.to', '=', 'sp2.id')
+        ->where("route.id",$request->route_code)
+        ->select('route.*','sp1.name as route_from','sp2.name as route_to')
+        ->first();
+
+        // dd($route);
+        return response()->json([
+            'route_from' => $route->route_from,
+            'route_to' => $route->route_to
+        ]);
+    }
+
     public function showShipList(Request $request)
     {
         $ship = DB::table("marine_lookup")
@@ -2461,7 +2477,7 @@ class TransactionController extends Controller
         $insured = Insured::where('id',$id)->orderby('id','desc')->get();
         // dd($insured[0]->number);
         $slip = SlipTable::where('insured_id',$insured[0]->number)->orderby('id','desc')->first();
-        // dd($slip);
+        dd($slip);
         $route = $insured[0]->route;
         $mlu = MarineLookup::orderby('id','asc')->get();
         $customer= CustomerCustomer::orderby('id','asc')->get();

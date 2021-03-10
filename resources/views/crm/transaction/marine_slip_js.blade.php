@@ -151,7 +151,32 @@
    });
 </script>
 
+<script type="text/javascript">
+    $('#msiroute').change(function(){
+       var routeship = $(this).val();
 
+        console.log(routeship);
+       if(routeship){
+           $.ajax({
+               type:"GET",
+               dataType: 'json',
+               url:"{{url('get-route-list')}}?route_code="+routeship,
+               success:function(response){        
+                   if(response){
+                       $("#msiroutefrom").val(response.route_from);
+                       $("#msirouteto").val(response.route_to);
+                   }else{
+                       $("#msiroutefrom").empty();
+                       $("#msirouteto").empty();
+                   }
+               }
+           });
+       }else{
+           $("#msiroutefrom").empty();
+           $("#msirouteto").empty();
+       }
+   });
+</script>
 
 <script type="text/javascript">
      $('#shipcodetxt').change(function(){
@@ -1041,7 +1066,7 @@
                sharems:msisharev,
                sumsharems:msisumsharev,
                slipcoinsurance:slipcoinsurance,
-               slipvbroker:slipvbroker;
+               slipvbroker:slipvbroker,
                formData:formData
            },
            beforeSend: function() { $("body").addClass("loading");  },

@@ -823,8 +823,7 @@ class FeSlipController extends Controller
                 $mydata->deductibletype=$deductdatadesc->description;
                 
                 $currencydesc=Currency::where('id','=',$mydata->currency_id)->first();
-                $mydata->currencydata=$currencydesc->symbol_name;
-                
+                $mydata->currencydata=@$currencydesc->symbol_name;
                 
                 array_push($newarraydeduct,$mydata);
             }     

@@ -50,7 +50,7 @@
                     <tbody>
                         @foreach (@$insured as $insureddata)
                             <tr>
-                              <td><a href="{{  url('transaction-data/detailflslip', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
+                              <td><a href="{{  url('transaction-data/updateflslip', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
                               <td>{{@$insureddata->insured_prefix}} - {{@$insureddata->insured_name}} - {{@$insureddata->insured_suffix}}</td>
                               <td>{{@$insureddata->share }}</td>
                               <td >@currency(@$insureddata->share_from)</td>

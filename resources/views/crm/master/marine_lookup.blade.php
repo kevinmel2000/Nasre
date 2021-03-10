@@ -229,7 +229,202 @@
                                 <td>{{@$mlp->ship_year}}</td>
                                 <td>{{@$mlp->repair_year}}</td>
                                 <td>{{@$mlp->galangan}}</td>
-                                <td ><input class="form-check-input" style="margin-left: 30;" type="radio" name="mluOption" id="mluOption" value="mluOption" checked></td>
+                                <td >
+                                    <a class="text-primary mr-3" data-toggle="modal" data-target="#updateshipport{{$mlp->id}}">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <div class="modal fade" id="updateshipport{{$mlp->id}}" tabindex="-1" user="dialog" aria-labelledby="updateshipport{{$mlp->id}}Label" aria-hidden="true">
+                                        <div class="modal-dialog" user="document">
+                                          <div class="modal-content bg-light-gray">
+                                            <div class="modal-header bg-gray">
+                                              <h5 class="modal-title" id="updateshipport{{$mlp->id}}Label">{{__('Update Ship Port')}}</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <form action="{{url('master-data/marine-lookup',$mlp)}}">
+                                                <div class="modal-body">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Code')}} </label>
+                                                                <input type="text" name="codemlu" style="width: 75%;" class="form-control form-control-sm" data-validation="length" data-validation-length="1-16" value="{{ $mlp->code }}" readonly="readonly" required/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Ship Name')}} </label>
+                                                            <input type="text" name="shipnamemlu" value="{{ $mlp->shipname }}" placeholder="enter ship name" class="form-control form-control-sm" data-validation="length" data-validation-length="0-150" required/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Owner')}}</label>
+                                                            <input type="text" name="ownermlu" value="{{ $mlp->owner }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-250" required/>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                            
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <div class="card">
+                                                                <div class="card-header bg-gray">
+                                                                    {{__('The Tornanger of the ship')}}
+                                                                </div>
+                                                                <div class="card-body bg-light-gray ">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="">{{__('GRT')}}</label>
+                                                                                <input type="text" name="grtmlu" value="{{ $mlp->grt }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-20" value="0" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="">{{__('NRT')}}</label>
+                                                                                <input type="text" name="nrtmlu" value="{{ $mlp->nrt }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-30" value="0" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="">{{__('DWT')}}</label>
+                                                                                <input type="text" name="dwtmlu" value="{{ $mlp->dwt }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-30" value="0" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="">{{__('Power')}}</label>
+                                                                                <input type="text" name="powermlu" value="{{ $mlp->power }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-30" value="0"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="">{{__('Ship Year')}}</label>
+                                                                        <input type="text" name="shipyearmlu" value="{{ $mlp->ship_year }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-70"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="">{{__('Repair Year')}}</label>
+                                                                        <input type="text" name="repairyearmlu" value="{{ $mlp->repair_year }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="">{{__('Galangan')}}</label>
+                                                                        <input type="text" name="galanganmlu" value="{{ $mlp->galangan }}" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                            
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                          <div class="form-group">
+                                                              <label for="">{{__('Country')}}</label>
+                                                              <select name="countrymlu" class="form-control form-control-sm ">
+                                                                  <option selected disabled>{{__('Select Country')}}</option>
+                                                                  @foreach($country as $cty)
+                                                                    @if($mlp->country == $cty->id)
+                                                                    <option value="{{ $cty->id }}" selected>{{ $cty->code }} - {{ $cty->name }}</option>
+                                                                    @else 
+                                                                    <option value="{{ $cty->id }}">{{ $cty->code }} - {{ $cty->name }}</option>
+                                                                    @endif
+                                                                  @endforeach
+                                                              </select>
+                                                          </div>    
+                                                        </div>
+                                                    </div>
+                            
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                          <div class="form-group">
+                                                              <label for="">{{__('Ship Type')}}</label>
+                                                              <select name="shiptypemlu" class="form-control form-control-sm ">
+                                                                  <option selected disabled>{{__('Select Ship Type')}}</option>
+                                                                    @foreach($shiptype as $stp)
+                                                                        @if($mlp->ship_type == $stp->id )
+                                                                            <option value="{{ $stp->id }}" selected>{{ $stp->code }} - {{ $stp->name }}</option>
+                                                                        @else
+                                                                            <option value="{{ $stp->id }}">{{ $stp->code }} - {{ $stp->name }}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                              </select>
+                                                          </div>    
+                                                        </div>
+                                                    </div>
+                            
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                          <div class="form-group">
+                                                              <label for="">{{__('Classification')}}</label>
+                                                              <select name="classificationmlu" class="form-control form-control-sm ">
+                                                                  <option selected disabled>{{__('Select Classification')}}</option>
+                                                                    @foreach($classification as $cs)
+                                                                        @if($mlp->classification == $cs->id )
+                                                                        <option value="{{ $cs->id }}" selected>{{ $cs->code }} - {{ $cs->name }}</option>
+                                                                        @else 
+                                                                            <option value="{{ $cs->id }}">{{ $cs->code }} - {{ $cs->name }}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                              </select>
+                                                          </div>    
+                                                        </div>
+                                                    </div>
+                            
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                          <div class="form-group">
+                                                              <label for="">{{__('Construction')}}</label>
+                                                              <select name="constructionmlu" class="form-control form-control-sm ">
+                                                                  <option selected disabled>{{__('Select Construction')}}</option>
+                                                                  @foreach($construction as $cr)
+                                                                        @if($mlp->construction == $cr->id)
+                                                                            <option value="{{ $cr->id }}" selected>{{ $cr->code }} - {{ $cr->name }}</option>
+                                                                        @else 
+                                                                        <option value="{{ $cr->id }}">{{ $cr->code }} - {{ $cr->name }}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                              </select>
+                                                          </div>    
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                                    <input type="submit" class="btn btn-info" value="Update">
+                                                </div>
+                                            </form>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <span id="delbtn{{@$mlp->id}}"></span>
+                                        <form id="delete-mlu-{{$mlp->id}}"
+                                            action="{{ url('master-data/marinelookup/destroy', $mlp->id) }}"
+                                            method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                        </form>
+                                      </span>    
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

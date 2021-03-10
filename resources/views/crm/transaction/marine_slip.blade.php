@@ -478,7 +478,7 @@
                                                                     </div>
                                                                 </div>
                                         
-                                                                <div class="row">
+                                                                {{-- <div class="row">
                                                                     <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="">{{__('Occupacy')}}</label>
@@ -508,7 +508,7 @@
                                                                         </select>
                                                                     </div>    
                                                                     </div>
-                                                                </div>
+                                                                </div> --}}
                 
                                                             </div>
                                                             <div class="col-md-6">
@@ -544,14 +544,14 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
+                                                        {{-- <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <label for="">{{__('Coinsurance')}}</label>
                                                                     <input type="text" id="slipcoinsurance" name="slipcoinsurance" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
@@ -938,7 +938,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label for="">{{__('V Broker')}}</label>
+                                                                            <label for="">{{__('Fee Broker')}}</label>
                                                                             <input type="number" value="0" step=".0001" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                                         </div>
                                                                     </div>
@@ -993,7 +993,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label for="">{{__('RE Com')}}</label>
+                                                                            <label for="">{{__('RI Com')}}</label>
                                                                             <div class="row d-flex flex-wrap">
                                                                                 <div class="col-md-12">
                                                                                     <div class="input-group">
