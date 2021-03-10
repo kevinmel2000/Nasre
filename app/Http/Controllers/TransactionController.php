@@ -2477,7 +2477,7 @@ class TransactionController extends Controller
         $insured = Insured::where('id',$id)->orderby('id','desc')->get();
         // dd($insured[0]->number);
         $slip = SlipTable::where('insured_id',$insured[0]->number)->orderby('id','desc')->first();
-        // dd($slip);
+        dd($slip);
         $route = $insured[0]->route;
         $mlu = MarineLookup::orderby('id','asc')->get();
         $customer= CustomerCustomer::orderby('id','asc')->get();
