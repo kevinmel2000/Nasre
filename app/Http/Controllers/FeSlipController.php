@@ -335,6 +335,8 @@ class FeSlipController extends Controller
     public function updatefeslip($idm)
     {
         $user = Auth::user();
+        //print_r($user);
+        //exit();
         $userid = Auth::user()->id;
         $country = User::orderby('id','asc')->get();
         $route_active = 'Fire Engineering - Slip Entry';
@@ -458,7 +460,7 @@ class FeSlipController extends Controller
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
             
 
-        return view('crm.transaction.fe_slipupdate', compact(['user','cnd','slipdata2','filelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.fe_slipupdate', compact(['user','userid','cnd','slipdata2','filelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
     }
 
@@ -821,8 +823,7 @@ class FeSlipController extends Controller
                 $mydata->deductibletype=$deductdatadesc->description;
                 
                 $currencydesc=Currency::where('id','=',$mydata->currency_id)->first();
-                $mydata->currencydata=$currencydesc->symbol_name;
-                
+                $mydata->currencydata=@$currencydesc->symbol_name;
                 
                 array_push($newarraydeduct,$mydata);
             }     

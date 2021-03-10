@@ -170,8 +170,6 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             </div>
-                        
-
                             <form id="form-addlocation">
                                 @csrf
                                 <div class="modal-body">
@@ -334,6 +332,7 @@
                                 </tr>
 
                                 @endforeach
+
 
                                 </tbody>
                                 

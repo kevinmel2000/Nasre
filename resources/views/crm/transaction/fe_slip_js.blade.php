@@ -2715,6 +2715,7 @@ $(document).ready(function() {
     $('#addinsuredsave-btn').click(function(e){
        //alert('masuk');
        e.preventDefault();
+       
 
        var fesnumber = $('#insuredIDtxt').val();
        var fesinsured = $('#feinsured').val();
