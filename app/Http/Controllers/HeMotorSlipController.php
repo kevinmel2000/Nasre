@@ -814,7 +814,8 @@ class HeMotorSlipController extends Controller
                     'retrocession_panel'=>$retrocessionlist->toJson(),
                     'retro_backup'=>$request->sliprb,
                     'own_retention'=>$request->slipor,
-                    'sum_own_retention'=>$request->slipsumor
+                    'sum_own_retention'=>$request->slipsumor,
+                    'wpc'=>$request->wpc
                 ]);
 
                 $notification = array(
@@ -875,6 +876,7 @@ class HeMotorSlipController extends Controller
                 $slipdataup->retro_backup=$request->sliprb;
                 $slipdataup->own_retention=$request->slipor;
                 $slipdataup->sum_own_retention=$request->slipsumor;
+                $slipdataup->wpc=$request->wpc;
                 
                 $slipdataup->save();
 
@@ -1073,6 +1075,7 @@ class HeMotorSlipController extends Controller
                 $slipdataup->retro_backup=$request->sliprb;
                 $slipdataup->own_retention=$request->slipor;
                 $slipdataup->prev_endorsement=$request->prevslipnumber;
+                $slipdataup->wpc=$request->wpc;
 
                 if($slipdataup->slip_idendorsementcount==NULL || $slipdataup->slip_idendorsementcount=="")
                 {
