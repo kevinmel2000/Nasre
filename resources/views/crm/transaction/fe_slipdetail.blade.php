@@ -613,6 +613,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
 
                                     </div>
                                     <div class="tab-pane fade" id="insured-details-id" role="tabpanel" aria-labelledby="insured-details">
