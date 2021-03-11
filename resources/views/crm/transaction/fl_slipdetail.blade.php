@@ -310,7 +310,7 @@
             <div class="card-header bg-gray">
                 {{__('Slip Detail')}}
             </div>
-            <div class="card-body bg-light-gray">
+            <div class="card-body">
                 
                 <table id="SlipInsuredTableData" class="table table-bordered table-striped">
                     <thead>

@@ -295,8 +295,7 @@
                         <div class="card-header bg-gray">
                             {{__('Slip Detail')}}
                         </div>
-                        <div class="card-body bg-light-gray">
-                            
+                        <div class="card-body">
                             <table id="SlipInsuredTableData" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
@@ -337,8 +336,6 @@
                                 </tbody>
                                 
                             </table>
-            
-
                         </div>
                     </div>
                 
@@ -1291,23 +1288,26 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="card card-primary">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12 com-sm-12 mt-3">
+                                                            <button type="submit" id="addslipinsured-btn" class="btn btn-primary btn-block ">
+                                                                {{__('Save')}}
+                                                            </button>
+                                                        </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                            </div> 
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="card card-primary">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-12 com-sm-12 mt-3">
-                                                <button type="submit" id="addslipinsured-btn" class="btn btn-primary btn-block ">
-                                                    {{__('Save')}}
-                                                </button>
-                                            </div>
-                                        
-                                        </div>
-                                    </div>
-                                </div> 
+                                
                             </form>
                         
                             </div> 
