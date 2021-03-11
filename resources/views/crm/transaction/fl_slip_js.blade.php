@@ -712,6 +712,12 @@
 
     $('#slipiptoupdate').change(function(){
         $('#sliprptoupdate').val($(this).val());
+
+        var insurance_period_from2 = $('#slipipfrom').val();
+        var insurance_period_to2 = $('#slipipto').val();
+        var days=daysBetween(insurance_period_from2, insurance_period_to2);
+
+        document.getElementById("daytotalupdate").innerHTML = "Total Days :"+days;
     });
 
     $('#slipipfromendorsement').change(function(){
@@ -720,6 +726,12 @@
 
     $('#slipiptoendorsement').change(function(){
         $('#sliprptoendorsement').val($(this).val());
+
+        var insurance_period_from2 = $('#slipipfrom').val();
+        var insurance_period_to2 = $('#slipipto').val();
+        var days=daysBetween(insurance_period_from2, insurance_period_to2);
+
+        document.getElementById("daytotalendorsement").innerHTML = "Total Days :"+days;
     });
 
 
