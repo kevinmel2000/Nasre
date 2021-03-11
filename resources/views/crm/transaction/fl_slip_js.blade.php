@@ -34,6 +34,7 @@
                     $('#slipuydetail').val(response.uy);
                     $('#slipeddetail').val(response.endorsment);
                     $('#slipslsdetail').val(response.selisih);
+                    $('#wpcdetail').val(response.wpc);
 
                     if(response.interest_insured)
                     {
@@ -246,6 +247,7 @@
                     $('#slipuyupdate').val(response.uy);
                     $('#slipedupdate').val(response.endorsment);
                     $('#slipslsupdate').val(response.selisih);
+                    $('#wpcupdate').val(response.wpc);
 
                     if(response.interest_insured)
                     {
@@ -463,6 +465,7 @@
                     $('#slipuyendorsement').val(response.uy);
                     $('#slipedendorsement').val(response.endorsment);
                     $('#slipslsendorsement').val(response.selisih);
+                    $('#wpcendorsement').val(response.wpc);
 
                     if(response.interest_insured)
                     {
