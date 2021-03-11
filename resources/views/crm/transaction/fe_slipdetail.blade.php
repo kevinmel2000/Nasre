@@ -751,6 +751,7 @@
 
 
                                         <div class="row">
+                                        
                                             <div class="col-md-8">
                                                 <div class="row">
                                                     <div class="col-md-5">
@@ -809,6 +810,17 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <div class="form-group" id="daytotal">                         
+                                                        Total Days :0
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         
 

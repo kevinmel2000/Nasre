@@ -15,6 +15,8 @@
     $.ajax({
       type:"GET",
       url:"{{url('get-state-list')}}?country_id="+countryID,
+      beforeSend: function() { $("body").addClass("loading");  },
+      complete: function() {  $("body").removeClass("loading"); },
       success:function(res){        
       if(res){
         // $("#state").empty();
@@ -42,6 +44,8 @@
     $.ajax({
       type:"GET",
       url:"{{url('get-city-list')}}?state_id="+stateID,
+      beforeSend: function() { $("body").addClass("loading");  },
+      complete: function() {  $("body").removeClass("loading"); },
       success:function(res){        
       if(res){
         $("#city").empty();
@@ -74,6 +78,8 @@
       $.ajax({
         type:"GET",
         url:"{{url('get-state-list')}}?country_id="+countryID,
+        beforeSend: function() { $("body").addClass("loading");  },
+        complete: function() {  $("body").removeClass("loading"); },
         success:function(res){        
           if(res){
             $("#state2").empty();
@@ -101,6 +107,8 @@
       $.ajax({
         type:"GET",
         url:"{{url('get-city-list')}}?state_id="+stateID,
+        beforeSend: function() { $("body").addClass("loading");  },
+        complete: function() {  $("body").removeClass("loading"); },
         success:function(res){        
           if(res){
             $("#city2").empty();

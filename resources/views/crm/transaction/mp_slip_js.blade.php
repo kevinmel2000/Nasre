@@ -692,6 +692,12 @@
 
     $('#slipipto').change(function(){
         $('#sliprpto').val($(this).val());
+
+        var insurance_period_from2 = $('#slipipfrom').val();
+        var insurance_period_to2 = $('#slipipto').val();
+        var days=daysBetween(insurance_period_from2, insurance_period_to2);
+
+        document.getElementById("daytotal").innerHTML = "Total Days :"+days;
     });
 
 </script>

@@ -137,7 +137,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                               <label for="">{{__('Province')}}</label>
-                                    <select name="province" id="state"  class="e1 form-control form-control-sm ">
+                                    <select name="province" id="province"  class="e1 form-control form-control-sm ">
                                       {{-- <option selected disabled>{{__('Select Province')}}</option> --}}
                                       
                                   </select>
