@@ -3,6 +3,16 @@
 
 <script type="text/javascript">
 
+    function treatAsUTC(date) {
+        var result = new Date(date);
+        result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
+        return result;
+    }
+
+    function daysBetween(startDate, endDate) {
+        var millisecondsPerDay = 24 * 60 * 60 * 1000;
+        return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
+    }
     //triggered when modal is about to be shown
     $('#detailmodaldata').on('show.bs.modal', function(e) {
 
@@ -1440,19 +1450,25 @@ $(document).ready(function(){
      $('#sliprate').keyup(function () {
         var insurance_period_from = $('#slipipfrom').val().split('-');
         var insurance_period_to = $('#slipipto').val().split('-');
+        var insurance_period_from2 = $('#slipipfrom').val();
+        var insurance_period_to2 = $('#slipipto').val();
         var month_from = parseInt(insurance_period_from[1]);
         var month_to = parseInt(insurance_period_to[1]);
         var month = (month_to - month_from);
         var insurance = (month/365);
+        
+        var days=daysBetween(insurance_period_from2, insurance_period_to2);
+       
         console.log(insurance_period_from)
         console.log(insurance_period_to)
         console.log(month_from)
         console.log(month_to)
         console.log(month)
         console.log(insurance)
+        
         var rateslip =  parseFloat($(this).val());
         var tsi = parseFloat($("#sliptotalsum").val());
-        var sum = isNaN(rateslip * tsi/100 * insurance) ? 0 :(rateslip * tsi/100 * insurance) ;
+        var sum = isNaN((rateslip * (tsi/1000)) * days) ? 0 :((rateslip * (tsi/1000)) * days) ;
         $('#slipbasicpremium').val(sum);
      });
 
