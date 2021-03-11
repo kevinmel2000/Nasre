@@ -3146,6 +3146,7 @@ $.ajax({
        var sliprb =  $('#sliprbupdate').val();
        var slipor =  $('#sliporupdate').val();
        var slipsumor =  $('#slipsumorupdate').val();
+       var wpc =  $('#wpcupdate').val();
 
        var token2 = $('input[name=_token]').val();
        
@@ -3198,7 +3199,8 @@ $.ajax({
                slipnetprmtonr:slipnetprmtonr,
                sliprb:sliprb,
                slipor:slipor,
-               slipsumor:slipsumor
+               slipsumor:slipsumor,
+               wpc:wpc
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },
@@ -3369,6 +3371,7 @@ $.ajax({
        var sliprb =  $('#sliprbendorsement').val();
        var slipor =  $('#sliporendorsement').val();
        var slipsumor =  $('#slipsumorendorsement').val();
+       var wpc =  $('#wpcendorsement').val();
 
        var token2 = $('input[name=_token]').val();
        
@@ -3422,7 +3425,8 @@ $.ajax({
                slipnetprmtonr:slipnetprmtonr,
                sliprb:sliprb,
                slipor:slipor,
-               slipsumor:slipsumor
+               slipsumor:slipsumor,
+               wpc:wpc
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },
