@@ -964,8 +964,8 @@
                     },
                     error: function(data){
                      //alert(data.responseJSON.errors.files[0]);
-                     swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
-                     console.log(data.responseJSON.errors);
+                     //swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
+                     //console.log(data.responseJSON.errors);
                     }
         });
 
