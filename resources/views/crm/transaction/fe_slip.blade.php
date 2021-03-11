@@ -1177,8 +1177,8 @@
                                                             <label for="">{{__('Retro Backup?')}}</label>
                                                             <select id="sliprb" name="sliprb" class="form-control form-control-sm ">
                                                                 {{-- <option selected readonly>{{__('Select Continent')}}</option> --}}
-                                                                <option value="YES" >YES</option>
-                                                                <option value="NO" selected>NO</option>
+                                                                <option value="AF" >YES</option>
+                                                                <option value="AN" selected >NO</option>
                                                             </select>
                                                         </div>   
                                                     </div>

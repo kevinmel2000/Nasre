@@ -824,7 +824,9 @@ $(document).ready(function(){
 
     $('#sliprb').change(function(){
         var attr = $("#tabretro").attr('hidden');
-        if(typeof attr !== typeof undefined && attr !== false){
+        var valdata =  $('#sliprb').val();
+        //alert(valdata);
+        if((typeof attr !== typeof undefined && attr !== false) || valdata=="AF"){
             // $("#retrocessionPanel").removeAttr('hidden');
             $("#tabretro").removeAttr('hidden');
         }
@@ -836,7 +838,9 @@ $(document).ready(function(){
 
     $('#sliprbdetail').change(function(){
         var attr = $("#tabretrodetail").attr('hidden');
-        if(typeof attr !== typeof undefined && attr !== false){
+        var valdata =  $('#sliprbdetail').val();
+
+        if((typeof attr !== typeof undefined && attr !== false ) || valdata=="AF"){
             // $("#retrocessionPanel").removeAttr('hidden');
             $("#tabretrodetail").removeAttr('hidden');
         }
@@ -848,7 +852,9 @@ $(document).ready(function(){
 
     $('#sliprbupdate').change(function(){
         var attr = $("#tabretroupdate").attr('hidden');
-        if(typeof attr !== typeof undefined && attr !== false){
+        var valdata =  $('#sliprbupdate').val();
+
+        if((typeof attr !== typeof undefined && attr !== false ) || valdata=="AF"){
             // $("#retrocessionPanel").removeAttr('hidden');
             $("#tabretroupdate").removeAttr('hidden');
         }
@@ -860,7 +866,9 @@ $(document).ready(function(){
 
     $('#sliprbendorsement').change(function(){
         var attr = $("#tabretroendorsement").attr('hidden');
-        if(typeof attr !== typeof undefined && attr !== false){
+        var valdata =  $('#sliprbendorsement').val();
+
+        if((typeof attr !== typeof undefined && attr !== false) || valdata=="AF"){
             // $("#retrocessionPanel").removeAttr('hidden');
             $("#tabretroendorsement").removeAttr('hidden');
         }
