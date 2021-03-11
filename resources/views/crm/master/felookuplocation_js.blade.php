@@ -281,12 +281,11 @@ const searchBox = new google.maps.places.SearchBox(input);
 
 map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 // Bias the SearchBox results towards current map's viewport.
-map.addListener("bounds_changed", () => {
-  searchBox.setBounds(map.getBounds());
-});
+//map.addListener("bounds_changed", () => {
+  //searchBox.setBounds(map.getBounds());
+//});
 
 let markers = [];
-
 
 searchBox.addListener("places_changed", () => {
   const places = searchBox.getPlaces();
@@ -294,10 +293,12 @@ searchBox.addListener("places_changed", () => {
   if (places.length == 0) {
     return;
   }
+
   // Clear out the old markers.
   markers.forEach((marker) => {
     marker.setMap(null);
   });
+  
   markers = [];
   // For each place, get the icon, name and location.
   const bounds = new google.maps.LatLngBounds();
@@ -306,6 +307,7 @@ searchBox.addListener("places_changed", () => {
       console.log("Returned place contains no geometry");
       return;
     }
+
     const icon = {
       url: place.icon,
       size: new google.maps.Size(71, 71),
@@ -313,6 +315,7 @@ searchBox.addListener("places_changed", () => {
       anchor: new google.maps.Point(17, 34),
       scaledSize: new google.maps.Size(25, 25),
     };
+
     // Create a marker for each place.
     markers.push(
       new google.maps.Marker({
@@ -338,7 +341,7 @@ searchBox.addListener("places_changed", () => {
   panggil fungsi updateMarkerPosition(latLng)
  dan letakan posisi terakhir di id=latitude dan id=longitude
  */
-var marker2 = new google.maps.Marker({
+var marker = new google.maps.Marker({
     position : latLng,
     title : 'lokasi',
     map : map,
@@ -355,10 +358,10 @@ geocoder.geocode({
       document.getElementById('address').value=results[4].formatted_address;
 });
 
-google.maps.event.addListener(marker2, 'drag', function() {
+google.maps.event.addListener(marker, 'drag', function() {
  // ketika marker di drag, otomatis nilai latitude dan longitude
  //menyesuaikan dengan posisi marker 
-    updateMarkerPosition(marker2.getPosition());
+    updateMarkerPosition(marker.getPosition());
 });
 
 

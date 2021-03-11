@@ -198,7 +198,11 @@
                                         <select name="country_location_id" id="country_location" class="e1 form-control form-control-sm " >
                                             <option selected readonly>{{__('Select Country ')}}</option>
                                             @foreach($felookup as $felookuplocationdata)
+                                                @if($felookuplocationdata->country_id  == 102 || $felookuplocationdata->country_id=="102")
+                                                <option value="{{ $felookuplocationdata->country_id }}" selected>{{ $felookuplocationdata->country->code }} - {{ $felookuplocationdata->country->name }}</option>
+                                                    @else
                                                 <option value="{{ $felookuplocationdata->country_id }}">{{ $felookuplocationdata->country->code }} - {{ $felookuplocationdata->country->name }}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>

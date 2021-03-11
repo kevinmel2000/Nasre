@@ -1515,6 +1515,32 @@ $(document).ready(function() {
             
         }
         
+        var countryID = 102; 
+        //alert(countryID);
+        if(countryID){
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-state-lookup')}}?country_id="+countryID,
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(res){  
+                console.log(res)      
+                if(res){
+                    $("#state_location").empty();
+                    $("#state_location").append('<option selected disabled>Select States/Province</option>');
+                    $.each(res,function(key,value){
+                    $("#state_location").append('<option value="'+key+'">'+value+'</option>');
+                    });
+                
+                }else{
+                    $("#state_location").append('<option value="" selected disabled>get value error</option>');
+                }
+            }
+        });
+        }else{
+          $("#state_location").append('<option value="" selected disabled>countryID null</option>');
+          $("#city_location").empty();
+        }  
 
      });
    
