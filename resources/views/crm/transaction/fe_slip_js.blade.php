@@ -10,6 +10,9 @@
         $("#tabretroupdate").attr('hidden','true');
         $("#tabretroendorsement").attr('hidden','true');
 
+        $("#fesharefrom").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $("#feshareto").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
 
         var countryID = 102; 
         //alert(countryID);
