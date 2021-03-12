@@ -24,7 +24,7 @@
                                                 <div class="form-group">
                                                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                                                     <label for="">{{__('Number')}} </label>
-                                                    <input type="text" name="fesnumber"  id="insuredIDtxt"  value="{{$code_ms}}" class="form-control form-control-sm" readonly required/>
+                                                    <input type="text" name="flsnumber"  id="insuredIDtxt"  value="{{$code_ms}}" class="form-control form-control-sm" readonly required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -35,7 +35,7 @@
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <label for="">{{__('Insured')}}</label>
-                                                            <select id="feinsured" name="feinsured" class="form-control form-control-sm ">
+                                                            <select id="flinsured" name="flinsured" class="form-control form-control-sm ">
                                                                 <option selected disabled>{{__('Select Prefix')}}</option>
                                                                 <option value="PT">PT</option>
                                                                 <option value="CV">CV</option>
@@ -43,11 +43,11 @@
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label for="" style="opacity: 0">{{__('insured 1')}}</label>
-                                                            <input type="text"name="fesuggestinsured" id='autocomplete'  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="search for insured suggestion" required/>
+                                                            <input type="text"name="flsuggestinsured" id='autocomplete'  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="search for insured suggestion" required/>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label for="" style="opacity: 0">{{__('insured 2')}}</label>
-                                                            <input type="text" name="fesuffix" id='autocomplete2' class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="suffix: QQ or TBk" />
+                                                            <input type="text" name="flsuffix" id='autocomplete2' class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="suffix: QQ or TBk" />
                                                     
                                                         </div>
                                                     </div>
@@ -64,7 +64,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="input-group">
-                                                                        <input type="number" id="feshare" min="0" value="0" step=".01" name="feshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly />
+                                                                        <input type="number" id="flshare" min="0" value="0" step=".01" name="flshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly />
                                                                         <div class="input-group-append">
                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                         </div>
@@ -76,13 +76,13 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                            <input id="fesharefrom" type="number" min="0" value="0" step=".01"  name="fesharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  readonly />
+                                                            <input id="flsharefrom" type="number" min="0" value="0" step=".01"  name="flsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  readonly />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="">{{__('Total')}}</label>
-                                                            <input id="feshareto" type="number" min="0" value="0" step=".01"  name="feshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  readonly/>
+                                                            <input id="flshareto" type="number" min="0" value="0" step=".01"  name="flshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  readonly/>
                                                         </div>
                                                     </div>
                                                 </div>

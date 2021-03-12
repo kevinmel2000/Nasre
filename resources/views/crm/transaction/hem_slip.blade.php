@@ -77,13 +77,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01" id="hemsharefrom" name="hemsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly />
+                                                    <input id="hemsharefrom" type="number" min="0" value="0" step=".01"  name="hemsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  readonly />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total')}}</label>
-                                                    <input type="number" min="0" value="0" step=".01" id="hemshareto" name="hemshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  readonly/>
+                                                    <input id="hemshareto" type="number" min="0" value="0" step=".01"  name="hemshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  readonly/>
                                                 </div>
                                             </div>
                                         </div>
