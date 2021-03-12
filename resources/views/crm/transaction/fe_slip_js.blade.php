@@ -2865,9 +2865,9 @@ $(document).ready(function() {
        var slipkoc = $('#slipkoc').val();
        var slipoccupacy = $('#slipoccupacy').val();
        var slipbld_const = $('#slipbld_const').val();
-       var slipno = "";
-       var slipcndn = "";
-       var slippolicy_no = "";
+       var slipno = $('#slipno').val();
+       var slipcndn = $('#slipcndn').val();
+       var slippolicy_no =  $('#slippolicy_no').val();
        var sliptotalsum = $('#sliptotalsum').val();
        var sliptype =  $('#sliptype').val();
        var slippct =  $('#slippct').val();
@@ -3086,9 +3086,9 @@ $(document).ready(function() {
        var slipkoc = $('#slipkoc').val();
        var slipoccupacy = $('#slipoccupacy').val();
        var slipbld_const = $('#slipbld_const').val();
-       var slipno = "";
-       var slipcndn = "";
-       var slippolicy_no = "";
+       var slipno = $('#slipno').val();
+       var slipcndn = $('#slipcndn').val();
+       var slippolicy_no =  $('#slippolicy_no').val();
        var sliptotalsum = $('#sliptotalsum').val();
        var sliptype =  $('#sliptype').val();
        var slippct =  $('#slippct').val();
