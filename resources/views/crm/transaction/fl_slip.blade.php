@@ -76,13 +76,13 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                            <input id="flsharefrom" type="number" min="0" value="0" step=".01"  name="flsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  readonly />
+                                                            <input id="flsharefrom" type="number" min="0" value="0" step=".01"  name="flsharefrom" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="">{{__('Total')}}</label>
-                                                            <input id="flshareto" type="number" min="0" value="0" step=".01"  name="flshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  readonly/>
+                                                            <input id="flshareto" type="number" min="0" value="0" step=".01"  name="flshareto" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly/>
                                                         </div>
                                                     </div>
                                                 </div>
