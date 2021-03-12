@@ -69,7 +69,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="input-group">
-                                                             <input type="number" id="feshare" min="0" step=".01" name="feshare" value="{{$insureddata->share}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                             <input type="number" id="feshare" min="0" step=".01" name="feshare" value="{{$insureddata->share}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" readonly/>
                                                              <div class="input-group-append">
                                                                 <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                             </div>
@@ -81,13 +81,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                    <input id="fesharefrom" type="number" min="0" step=".01"  name="fesharefrom" value="{{$insureddata->share_from}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="" required/>
+                                                    <input id="fesharefrom" type="text"  name="fesharefrom" value="{{$insureddata->share_from}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total')}}</label>
-                                                    <input id="feshareto" type="number" min="0" step=".01"  name="feshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
+                                                    <input id="feshareto" type="text"  name="feshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly/>
                                                 </div>
                                             </div>
                                         </div>
@@ -137,7 +137,7 @@
                                                                     <td>{{@$slt->cnno}}</td>
                                                                     <td>{{@$slt->certno }}</td>
                                                                     <td>{{@$slt->refno }}</td>
-                                                                    <td>{{@$slt->amountlocation}}</td>
+                                                                    <td>@currency($slt->amountlocation)</td>
                                                                     <td><a href="javascript:void(0)" onclick="deletelocationdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
                                                             </tr>   
                                                             @endforeach
