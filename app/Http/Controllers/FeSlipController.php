@@ -1234,7 +1234,7 @@ class FeSlipController extends Controller
             ]);
 
 
-
+            $ceding = CedingBroker::where('id',$request->slipcedingbroker)->first();
             $slip = SlipTable::orderby('id','asc')->get();            
             $sliplastid = count($slip);
 
@@ -1310,7 +1310,9 @@ class FeSlipController extends Controller
                     'number' => $slipdataup->number,
                     'slipuy' => $slipdataup->uy,
                     'code_sl'=> $code_sl,
-                    'slipstatus' => $slipdataup->status
+                    'slipstatus' => $slipdataup->status,
+                    'cedingid'=>$ceding->id,
+                    'cedingbroker'=>$ceding->name
                 ]
             );
 
