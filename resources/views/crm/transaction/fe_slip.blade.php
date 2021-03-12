@@ -76,13 +76,13 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                            <input id="fesharefrom" type="number" min="0" value="0" step=".01"  name="fesharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  readonly />
+                                                            <input id="fesharefrom" type="text"   name="fesharefrom" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="">{{__('Total')}}</label>
-                                                            <input id="feshareto" type="number" min="0" value="0" step=".01"  name="feshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  readonly/>
+                                                            <input id="feshareto" type="text"  name="feshareto" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -133,7 +133,7 @@
                                                                             <td>{{@$slt->cnno}}</td>
                                                                             <td>{{@$slt->certno }}</td>
                                                                             <td>{{@$slt->refno }}</td>
-                                                                            <td>{{@$slt->amountlocation}}</td>
+                                                                            <td>@currency($slt->amountlocation)</td>
                                                                             <td><a href="javascript:void(0)" onclick="deletelocationdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
                                                                     </tr>   
                                                                     @endforeach
@@ -277,7 +277,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Amount')}}</label>
-                                                <input type="number" min="0" max="999999999,9999" value="" step=".01" id="amountlocation" name="amountlocation" class="form-control form-control-sm " data-validation="length" data-validation-length="0-20"/>
+                                                <input type="text" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-20"/>
                                           </div>
                                         </div>
                                     </div>
@@ -306,6 +306,7 @@
                                 <th>{{__('Number')}}</th>
                                 <th>{{__('UY')}}</th>
                                 <th>{{__('Ceding/Broker')}}</th>
+                                <th>{{__('Ceding')}}</th>
                                 <th>{{__('Status')}}</th>
                                 <th width="20%">{{__('Actions')}}</th>
                                 </tr>
@@ -317,7 +318,8 @@
                                 <tr>
                                 <td>{{ @$slipdatatadetail->number }}</td>
                                 <td>{{ @$slipdatatadetail->uy }}</td>
-                                <td>{{ @$slipdatatadetail->cedingbroker->name }}</td>
+                                <td>{{ @$slipdatatadetail->cedingbroker->name }} - {{ @$slipdatatadetail->cedingbroker->company_name }}</td>
+                                <td>{{ @$slipdatatadetail->ceding->name }} - {{ @$slipdatatadetail->ceding->company_name }}</td>
                                 <td >{{ @$slipdatatadetail->status }}</td>
                                 <td>
                                 
@@ -645,50 +647,50 @@
                                                 </div-->
                                             </div>
                                             <div class="tab-pane fade" id="insured-details-id" role="tabpanel" aria-labelledby="insured-details">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="card">
-                                                            <div class="card-header bg-gray">
+                                                {{-- <div class="row"> --}}
+                                                    {{-- <div class="col-md-12"> --}}
+                                                        {{-- <div class="card"> --}}
+                                                            {{-- <div class="card-header bg-gray">
                                                                 {{__('Interest Insured')}}
-                                                            </div>
-                                                            <div class="card-body bg-light-gray ">
+                                                            </div> --}}
+                                                            {{-- <div class="card-body bg-light-gray ">
                                                                 <div class="row">
                                                                     <div class="col-md-8">
-                                                                        <div class="col-md-12 com-sm-12 mt-3">
+                                                                        <div class="col-md-12 com-sm-12 mt-3"> --}}
                                                                             <!--table id="interestInsuredTable" class="table table-bordered table-striped">
                                                                                 <thead>
                                                                                 <tr>
-                                                                                <th>{{__('Interest ID - Name')}}</th>
-                                                                                <th>{{__('Amount')}}</th>
-                                                                                <th width="20%">{{__('Actions')}}</th>
+                                                                                {{-- <th>{{__('Interest ID - Name')}}</th> --}}
+                                                                                {{-- <th>{{__('Amount')}}</th> --}}
+                                                                                {{-- <th width="20%">{{__('Actions')}}</th> --}}
                                                                                 </tr>
                                                                                 </thead>
                                                                                 <tbody>
                                                                                     <tr>
-                                                                                        @php 
+                                                                                        {{-- @php 
                                                                                         $totalamountdata=0;
-                                                                                        @endphp
-                                                                                        @foreach($interestlist as $isl)
-                                                                                            <tr id="iid{{ $isl->id }}">
-                                                                                                    <td>{{ $isl->interestinsureddata->description }}</td>
-                                                                                                    <td class="uang">@currency($isl->amount)</td>
-                                                                                                    @php 
+                                                                                        @endphp --}}
+                                                                                        {{-- @foreach($interestlist as $isl) --}}
+                                                                                            {{-- <tr id="iid{{ $isl->id }}"> --}}
+                                                                                                    {{-- <td>{{ $isl->interestinsureddata->description }}</td> --}}
+                                                                                                    {{-- <td class="uang">@currency($isl->amount)</td> --}}
+                                                                                                    {{-- @php 
                                                                                                     $totalamountdata=$totalamountdata+$isl->amount;
-                                                                                                    @endphp
-                                                                                                    <td><a href="javascript:void(0)" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
+                                                                                                    @endphp --}}
+                                                                                                    {{-- <td><a href="javascript:void(0)" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td> --}}
                                                                                             </tr>   
-                                                                                        @endforeach
+                                                                                        {{-- @endforeach --}}
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <form id="addinterestinsured">
-                                                                                            @csrf
+                                                                                            {{-- @csrf --}}
                                                                                             <td>
                                                                                                 <div class="form-group">
                                                                                                     <select id="slipinterestlist" name="slipinterestlist" class="form-control form-control-sm ">
-                                                                                                        <option selected disabled>{{__('Interest list')}}</option>
-                                                                                                        @foreach($interestinsured as $ii)
+                                                                                                        {{-- <option selected disabled>{{__('Interest list')}}</option> --}}
+                                                                                                        {{-- @foreach($interestinsured as $ii)
                                                                                                             <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
-                                                                                                        @endforeach
+                                                                                                        @endforeach --}}
                                                                                                     </select>
                                                                                                 </div>  
                                                                                             </td>
@@ -701,26 +703,26 @@
 
                                                                                             <td>
                                                                                                 <div class="form-group">
-                                                                                                    <button type="button" id="addinterestinsured-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
+                                                                                                    {{-- <button type="button" id="addinterestinsured-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button> --}}
                                                                                                 </div>
                                                                                             </td>
                                                                                         </form>
                                                                                     </tr>
                                                                                 </tbody>
                                                                             </table-->
-                                                                            </div>
-                                                                        </div>
+                                                                            {{-- </div> --}}
+                                                                        {{-- </div>
                                                                     </div> 
-                                                                </div>
-                                                            </div>
-                                                    </div>
-                                                </div>
+                                                                </div> --}}
+                                                        {{-- </div> --}}
+                                                    {{-- </div>
+                                                </div> --}}
                                                 
                                                 <div class="row">
                                                     <div class="col-md-12 d-flex justify-content-end">
                                                         <div class="form-group">
                                                             <label for="">{{__('Total Sum Insured') }}</label>
-                                                            <input type="number" min="0" value="" step=".0001" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
+                                                            <input type="text" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -758,7 +760,7 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for=""style="opacity: 0;">{{__('Type')}}</label>
-                                                                    <input type="number" value="0" step=".0001" id="sliptotalsumpct" name="sliptotalsumpct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" />
+                                                                    <input type="text"  id="sliptotalsumpct" name="sliptotalsumpct" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -824,12 +826,12 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="form-group">
-                                                                                            <input type="number" value="0" step=".0001" id="slipdpamount" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                                                            <input type="text" id="slipdpamount" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="form-group">
-                                                                                            <input type="number" value=""  id="slipdpminamount" name="slipdpminamount" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                                            <input type="text"   id="slipdpminamount" name="slipdpminamount" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" />
                                                                                         </div>
                                                                                     </td> 
                                                                                     <td>
@@ -893,7 +895,7 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="form-group">
-                                                                                            <input type="number" value="0" step=".0001" id="slipamountec" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm " readonly="readonly"/>
+                                                                                            <input type="text" id="slipamountec" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm amount" readonly="readonly"/>
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
@@ -1034,7 +1036,7 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Fee Broker')}}</label>
-                                                                <input type="number" value="0" step=".0001" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                <input type="text" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1059,7 +1061,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
-                                                                    <input type="number" value="0" step=".0001" id="slipsumshare" name="slipsumshare" placeholder="= b% * tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                                    <input type="text" id="slipsumshare" name="slipsumshare" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1070,7 +1072,7 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Basic Premium')}}</label>
-                                                                <input type="number" value="0" step=".0001" id="slipbasicpremium" name="slipbasicpremium" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a% * tsi" />
+                                                                <input type="text" id="slipbasicpremium" name="slipbasicpremium" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a% * tsi" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1078,7 +1080,7 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Gross Prm to NR')}}</label>
-                                                                <input type="number" value="0" step=".0001" id="slipgrossprmtonr" name="slipgrossprmtonr" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a% * b% * tsi" readonly="readonly" />
+                                                                <input type="text" id="slipgrossprmtonr" name="slipgrossprmtonr" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a% * b% * tsi" readonly="readonly" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1088,7 +1090,7 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="">{{__('RE Com')}}</label>
+                                                                    <label for="">{{__('RI Com')}}</label>
                                                                     <div class="row d-flex flex-wrap">
                                                                         <div class="col-md-12">
                                                                             <div class="input-group">
@@ -1104,7 +1106,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="" style="opacity: 0;">{{__('Gross Prm to NR')}}</label>
-                                                                    <input type="number" value="0" step=".0001" id="slipsumcommission" name="slipsumcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" readonly="readonly" />
+                                                                    <input type="text" id="slipsumcommission" name="slipsumcommission" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" readonly="readonly" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1113,7 +1115,7 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Net Prm to NR')}}</label>
-                                                                <input type="number" value="0" step=".0001" id="slipnetprmtonr" name="slipnetprmtonr" class="form-control form-control-sm " data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="2-50" readonly="readonly"/>
+                                                                <input type="text" id="slipnetprmtonr" name="slipnetprmtonr" class="form-control form-control-sm amount" data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="2-50" readonly="readonly"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1166,12 +1168,12 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="form-group">
-                                                                                            <input type="number" min="0" max="100" value="" step=".01"  id="slipippercentage" name="slipippercentage" placeholder="w" class="form-control form-control-sm " />
+                                                                                            <input type="number" min="0" max="100" value="" step=".001"  id="slipippercentage" name="slipippercentage" placeholder="w" class="form-control form-control-sm " />
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="form-group">
-                                                                                            <input type="number" min="0" max="999999999,9999" value="" step=".01" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm" readonly/>
+                                                                                            <input type="text" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" readonly/>
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
@@ -1216,7 +1218,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <input type="text" id="slipsumor"  name="slipsumor" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                                            <input type="text" id="slipsumor"  name="slipsumor" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1289,7 +1291,7 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="form-group">
-                                                                                            <input type="text" id="sliprpamount" name="sliprpamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm " readonly/>
+                                                                                            <input type="text" id="sliprpamount" name="sliprpamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" readonly/>
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
