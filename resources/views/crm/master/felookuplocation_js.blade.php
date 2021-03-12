@@ -214,8 +214,8 @@ function GoogleGeocode2() {
 
 //Process form input
 $('input[name=address]').on('input',function(e){
- //alert('Changed!');
- e.preventDefault();
+    //alert('Changed!');
+    e.preventDefault();
     //Get the user input and use it
     var userinput = $('form #address').val();
       if (userinput == "")
@@ -333,6 +333,11 @@ searchBox.addListener("places_changed", () => {
         position: place.geometry.location,
       })
     );
+    
+    console.log("latitude: " + place.geometry.location.lat() + ", longitude: " + place.geometry.location.lng());
+    var latLng2 = new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng());
+    updateMarkerPosition(latLng2);
+    
 
     if (place.geometry.viewport) {
       // Only geocodes have viewport.
