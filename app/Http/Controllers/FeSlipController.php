@@ -83,19 +83,27 @@ class FeSlipController extends Controller
 
     public function getStateLookup(Request $request)
     {
-        $states = DB::table("fe_lookup_location")
+        $statestable = collect( DB::table("fe_lookup_location")
         ->join('states', 'fe_lookup_location.province_id', '=', 'states.id')
         ->where("fe_lookup_location.country_id",$request->country_id)
-        ->pluck("states.name","fe_lookup_location.province_id");
+        ->pluck("states.name","fe_lookup_location.province_id"));
+        $states = $statestable->unique('fe_lookup_location.province_id');
+        $states->values()->all();
         return response()->json($states);
     }
 
     public function getCityLookup(Request $request)
     {
-        $cities = DB::table("fe_lookup_location")
+        // $cities = DB::table("fe_lookup_location")
+        // ->join('cities', 'fe_lookup_location.city_id', '=', 'cities.id')
+        // ->where("fe_lookup_location.province_id",$request->state_id)
+        // ->pluck("cities.name","fe_lookup_location.city_id");
+        $citiestable = collect(DB::table("fe_lookup_location")
         ->join('cities', 'fe_lookup_location.city_id', '=', 'cities.id')
         ->where("fe_lookup_location.province_id",$request->state_id)
-        ->pluck("cities.name","fe_lookup_location.city_id");
+        ->pluck("cities.name","fe_lookup_location.city_id"));
+        $cities = $citiestable->unique('fe_lookup_location.province_id');
+        $cities->values()->all();
         return response()->json($cities);
     }
 
@@ -179,7 +187,16 @@ class FeSlipController extends Controller
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
         $ceding = CedingBroker::orderby('id','asc')->where('type','4')->get();
-        $felookup = FelookupLocation::orderby('id','asc')->get();
+        // $felookup = FelookupLocation::distinct()->orderby('id','asc')->get();
+        $felookuptable = collect(FelookupLocation::orderby('id','asc')->get());
+        $felookup = $felookuptable->unique('country_id');
+        $felookup->values()->all();
+        // $felookup = DB::table('fe_lookup_location')
+        //             ->join('countries','countries.id','=','fe_lookup_location.country_id')
+        //             ->select('fe_lookup_location.*','countries.code','countries.name')        
+        //             ->orderby('id','asc')
+        //             ->distinct('fe_lookup_location.country_id')
+        //             ->get();
         $cnd = ConditionNeeded::orderby('id','asc')->get();
         $deductibletype= DeductibleType::orderby('id','asc')->get();
         $extendedcoverage= ExtendedCoverage::orderby('id','asc')->get();
@@ -293,6 +310,9 @@ class FeSlipController extends Controller
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
+        // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+
 
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
