@@ -116,7 +116,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total')}}</label>
-                                                    <input type="text" id="msishareto" name="msishareto" class="form-control form-control-sm " placeholder="total sum insured" data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                    <input type="text" id="msishareto" name="msishareto" class="form-control form-control-sm amount" placeholder="total sum insured" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                                 </div>
                                             </div>
                                         </div>
@@ -612,7 +612,7 @@
                 
                                                                                                     <td>
                                                                                                         <div class="form-group">
-                                                                                                            <input type="text"  value="" id="slipamount" name="slipamount" class="form-control form-control-sm " data-validation="length" data-validation-length="0-15" />
+                                                                                                            <input type="text"  value="" id="slipamount" name="slipamount" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-15" />
                                                                                                         </div>
                                                                                                     </td>
                 
@@ -636,7 +636,7 @@
                                                             <div class="col-md-12 d-flex justify-content-end">
                                                                 <div class="form-group">
                                                                     <label for="">{{__('Total Sum Insured')}}</label>
-                                                                    <input type="text" min="0" value="0" step=".0001" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
+                                                                    <input type="text" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -674,7 +674,7 @@
                                                                     <div class="col-md-4">
                                                                         <div class="form-group">
                                                                             <label for=""style="opacity: 0;">{{__('Type')}}</label>
-                                                                            <input type="number" value="0" step=".0001" id="sliptotalsumpct" name="sliptotalsumpct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" />
+                                                                            <input type="text"  id="sliptotalsumpct" name="sliptotalsumpct" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -997,7 +997,7 @@
                                                                             <div class="row d-flex flex-wrap">
                                                                                 <div class="col-md-12">
                                                                                     <div class="input-group">
-                                                                                        <input type="text" value="0" step=".0001" id="slipcommission" name="slipcommission" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="d" />
+                                                                                        <input type="number" value="0" step=".0001" id="slipcommission" name="slipcommission" class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder="d" />
                                                                                         <div class="input-group-append">
                                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                                         </div>
@@ -1009,7 +1009,7 @@
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label for="" style="opacity: 0;">{{__('Gross Prm to NR')}}</label>
-                                                                            <input type="text" value="0" step=".0001" id="slipsumcommission" name="slipsumcommission" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" readonly="readonly" />
+                                                                            <input type="text"  id="slipsumcommission" name="slipsumcommission" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" readonly="readonly" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1018,7 +1018,7 @@
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="">{{__('Net Prm to NR')}}</label>
-                                                                        <input type="text" value="0" step=".0001" id="slipnetprmtonr" name="slipnetprmtonr" class="form-control form-control-sm amount" data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="0-50" readonly="readonly"/>
+                                                                        <input type="text"  id="slipnetprmtonr" name="slipnetprmtonr" class="form-control form-control-sm amount" data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="0-50" readonly="readonly"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1120,7 +1120,7 @@
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
-                                                                                    <input type="text" value="0" step=".0001" id="slipsumor" name="slipsumor" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= x% * b% * tsi" readonly="readonly" />
+                                                                                    <input type="text" id="slipsumor" name="slipsumor" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= x% * b% * tsi" readonly="readonly" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -1195,7 +1195,7 @@
                                                                                                     </td>
                                                                                                     <td>
                                                                                                         <div class="form-group">
-                                                                                                            <input type="text" value="0" step=".0001" id="sliprpamount" name="sliprpamount" placeholder="= z% * b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="=z * b% * tsi" readonly="readonly" />
+                                                                                                            <input type="text" id="sliprpamount" name="sliprpamount" placeholder="= z% * b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="=z * b% * tsi" readonly="readonly" />
                                                                                                         </div>
                                                                                                     </td>
                                                                                                     <td>

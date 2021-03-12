@@ -150,6 +150,15 @@ class TransactionController extends Controller
                 $edslipid = 0;
             }
 
+            $slipdata2 = SlipTable::where('insured_id',$code_ms)->where('slip_type','ms')->where('endorsment','true')->delete();
+            $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->delete();
+            $shiplist= ShipListTemp::where('insured_id',$code_ms)->where('status','saved')->delete();
+            $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->delete();
+            $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->delete();
+            $installmentpanel= InstallmentTemp::where('slip_id',$code_sl)->delete();
+            $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->delete();
+            $statuslist= StatusLog::where('insured_id','=',$code_sl)->delete();
+            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->delete();
 
             $slipdata2 = SlipTable::where('insured_id',$code_ms)->where('slip_type','ms')->where('endorsment','true')->orderby('id','desc')->get();
             $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
