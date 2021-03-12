@@ -328,7 +328,7 @@
                     <tr>
                     <td>{{ @$slipdatatadetail->number }}</td>
                     <td>{{ @$slipdatatadetail->uy }}</td>
-                    <td>{{ @$slipdatatadetail->cedingbroker->name }}</td>
+                    <td>{{ @$slipdatatadetail->cedingbroker->name }} - {{ @$slipdatatadetail->cedingbroker->company_name }}</td>
                     <td >{{ @$slipdatatadetail->status }}</td>
                     <td>
                     

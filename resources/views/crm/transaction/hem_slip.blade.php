@@ -355,6 +355,7 @@
                     <tr>
                       <th>{{__('Number')}}</th>
                       <th>{{__('UY')}}</th>
+                      <th>{{__('Ceding/Broker')}}</th>
                       <th>{{__('Status')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
@@ -366,6 +367,7 @@
                     <tr>
                     <td>{{ @$slipdatatadetail->number }}</td>
                     <td>{{ @$slipdatatadetail->uy }}</td>
+                    <td>{{ @$slipdatatadetail->cedingbroker->name }} - {{ @$slipdatatadetail->cedingbroker->company_name }}</td>
                     <td >{{ @$slipdatatadetail->status }}</td>
                     <td>
                     

@@ -83,13 +83,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                    <input id="fesharefrom" type="number" min="0" step=".01"  name="fesharefrom" value="{{$insureddata->share_from}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input id="fesharefrom" type="text"  name="fesharefrom" value="{{$insureddata->share_from}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total')}}</label>
-                                                    <input id="feshareto" type="number" min="0" step=".01"  name="feshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input id="feshareto" type="text"  name="feshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly/>
                                                 </div>
                                             </div>
                                         </div>
@@ -319,7 +319,7 @@
                     <tr>
                     <td>{{ @$slipdatatadetail->number }}</td>
                     <td>{{ @$slipdatatadetail->uy }}</td>
-                    <td>{{ @$slipdatatadetail->cedingbroker->name }}</td>
+                    <td>{{ @$slipdatatadetail->cedingbroker->name }} - {{ @$slipdatatadetail->cedingbroker->company_name }}</td>
                     <td >{{ @$slipdatatadetail->status }}</td>
                     <td>
                     

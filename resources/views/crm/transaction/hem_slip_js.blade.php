@@ -798,6 +798,10 @@ $.ajax({
         $("#tabretroupdate").attr('hidden','true');
         $("#tabretroendorsement").attr('hidden','true');
 
+        $("#hemsharefrom").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $("#hemshareto").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
 
 $("#btn-success").click(function(){ 
    var html = $(".clone").html();

@@ -84,15 +84,17 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                    <input type="number" min="0" value="{{$insureddata->share_from}}"  step=".01"  id="flsharefrom" name="flsharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input id="flsharefrom" type="text"  name="flsharefrom" value="{{$insureddata->share_from}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total')}}</label>
-                                                    <input type="number" min="0" value="{{$insureddata->share_to}}" step=".01"  id="flshareto" name="flshareto" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                    <input id="flshareto" type="text"  name="flshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly/>
                                                 </div>
                                             </div>
+
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -329,6 +331,7 @@
                     <tr>
                       <th>{{__('Number')}}</th>
                       <th>{{__('UY')}}</th>
+                      <th>{{__('Ceding/Broker')}}</th>
                       <th>{{__('Status')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
@@ -340,6 +343,7 @@
                     <tr>
                     <td>{{ @$slipdatatadetail->number }}</td>
                     <td>{{ @$slipdatatadetail->uy }}</td>
+                    <td>{{ @$slipdatatadetail->cedingbroker->name }} - {{ @$slipdatatadetail->cedingbroker->company_name }}</td>
                     <td >{{ @$slipdatatadetail->status }}</td>
                     <td>
                     

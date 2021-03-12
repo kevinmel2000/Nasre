@@ -797,6 +797,10 @@ $.ajax({
         $("#tabretroupdate").attr('hidden','true');
         $("#tabretroendorsement").attr('hidden','true');
 
+        $("#mpsharefrom").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $("#mpshareto").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
     $("#slipipfrom").change(function(){
         console.log($(this).val())
         $("#sliprpfrom").val($(this).val());

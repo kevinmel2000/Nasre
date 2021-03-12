@@ -1,6 +1,24 @@
 <link href="{{asset('css/select2.css')}}" rel="stylesheet"/>
 <script src="{{asset('/js/select2.js')}}"></script>
 
+<script type="text/javascript">
+    // $('#slipamount').keyup(function(){
+    //     var currenc = $(this).val();
+    //     console.log(currenc)
+    //     currenc.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // });
+
+    $('input.amount').keyup(function(event) {
+            // skip for arrow keys
+            if(event.which >= 37 && event.which <= 40) return;
+                console.log(event.which)
+                console.log($(this).val())
+                // format number
+                $(this).val(function(index, value) {
+                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            });
+    });
+</script>
 
 <script type="text/javascript">
     function treatAsUTC(date) {
@@ -774,6 +792,10 @@ $(document).ready(function() {
         $("#tabretrodetail").attr('hidden','true');
         $("#tabretroupdate").attr('hidden','true');
         $("#tabretroendorsement").attr('hidden','true');
+
+        $("#flsharefrom").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $("#flshareto").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
         
         $("#btn-success2").click(function(){ 
         var html = $(".clone2").html();
