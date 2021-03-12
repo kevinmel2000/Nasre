@@ -1061,7 +1061,7 @@ $(document).ready(function() {
                 console.log(response)
                 $('#locRiskTable tbody').prepend('<tr id="sid'+response.id+'"><td>'+response.loc_code+'<br>'+response.address+'<br>'+response.city_name+'<br>'+response.state_name+'<br>'+response.latitude+' , '+response.longtitude+'<br>'+ response.postal_code+'</td>'+
                                                  '<td>'+response.interest_name+'</td>'+
-                                                 '<td>'+response.ccno+'</td>'+
+                                                 '<td>'+response.cnno+'</td>'+
                                                  '<td>'+response.certno+'</td>'+
                                                  '<td>'+response.refno+'</td>'+
                                                  '<td>'+response.amountlocation+'</td>'+
