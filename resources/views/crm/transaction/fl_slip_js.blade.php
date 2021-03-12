@@ -8,16 +8,30 @@
     //     currenc.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     // });
 
-    $('input.amount').keyup(function(event) {
-            // skip for arrow keys
-            if(event.which >= 37 && event.which <= 40) return;
-                console.log(event.which)
-                console.log($(this).val())
-                // format number
-                $(this).val(function(index, value) {
-                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            });
+    $(".money").click(function() {
+    var inputLength = $(".money").val().length;
+    setCaretToPos($(".money")[0], inputLength)
     });
+
+    var options = {
+    onKeyPress: function(cep, e, field, options){
+        if (cep.length<=6)
+        {
+        
+            var inputVal = parseFloat(cep);
+            jQuery('.money').val(inputVal.toFixed(2));
+        }
+        
+        // setCaretToPos(jQuery('#money')[0], 4);
+                    
+        var masks = ['#,##0.00', '0.00'];
+        mask = (cep == 0) ? masks[1] : masks[0];
+        $('.money').mask(mask, options);
+    },
+    reverse: true
+    };
+
+    $('.money').mask('#,##0.00', options);
 </script>
 
 <script type="text/javascript">
@@ -778,6 +792,7 @@ $("#autocomplete").autocomplete({
 </script>
 
 <script>
+
 $(document).ready(function() { 
         
         $(".e1").select2({ width: '100%' }); 
@@ -793,8 +808,8 @@ $(document).ready(function() {
         $("#tabretroupdate").attr('hidden','true');
         $("#tabretroendorsement").attr('hidden','true');
 
-        $("#flsharefrom").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        $("#flshareto").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        //$("#flsharefrom").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        //$("#flshareto").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
         
         $("#btn-success2").click(function(){ 
@@ -1074,6 +1089,7 @@ $(document).ready(function() {
                 var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
                 $("#sliptotalsum").val(sum);
                 $('#form-addlocation')[0].reset();
+
             }
         });
 
@@ -1098,7 +1114,7 @@ $(document).ready(function() {
                 var total =  parseFloat($("#sliptotalsum").val());
                 var sum = isNaN(total - parseFloat(response.amountlocation)) ? 0 :(total - parseFloat(response.amountlocation)) ;
                 $("#sliptotalsum").val(sum);
-                $("#feshareto").val(sum);
+                $("#flshareto").val(sum);
             }
         });
     }
@@ -3287,13 +3303,13 @@ $(document).ready(function() {
 
       // insured save
        var fesnumber = $('#insuredIDtxt').val();
-       var fesinsured = $('#feinsured').val();
+       var fesinsured = $('#flinsured').val();
        var fessuggestinsured = $('#autocomplete').val();
        var fessuffix = $('#autocomplete2').val();
-       var fesshare = $('#feshare').val();
-       var fessharefrom  = $('#fesharefrom').val();
-       var fesshareto = $('#feshareto').val();
-       var fescoinsurance = $('#fecoinsurance').val();
+       var fesshare = $('#flshare').val();
+       var fessharefrom  = $('#flsharefrom').val();
+       var fesshareto = $('#flshareto').val();
+       var fescoinsurance = $('#flcoinsurance').val();
        
        
        var token2 = $('input[name=_token]').val();
@@ -3513,13 +3529,13 @@ $(document).ready(function() {
 
       // insured save
        var fesnumber = $('#insuredIDtxt').val();
-       var fesinsured = $('#feinsured').val();
+       var fesinsured = $('#flinsured').val();
        var fessuggestinsured = $('#autocomplete').val();
        var fessuffix = $('#autocomplete2').val();
-       var fesshare = $('#feshare').val();
-       var fessharefrom  = $('#fesharefrom').val();
-       var fesshareto = $('#feshareto').val();
-       var fescoinsurance = $('#fecoinsurance').val();
+       var fesshare = $('#flshare').val();
+       var fessharefrom  = $('#flsharefrom').val();
+       var fesshareto = $('#flshareto').val();
+       var fescoinsurance = $('#flcoinsurance').val();
        
        
        var token2 = $('input[name=_token]').val();

@@ -77,13 +77,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                    <input id="hemsharefrom" type="number" min="0" value="0" step=".01"  name="hemsharefrom" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly />
+                                                    <input id="hemsharefrom" type="number" min="0" value="0" step=".01"  name="hemsharefrom" class="form-control form-control-sm money" data-validation="length" data-validation-length="0-50"  readonly />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total')}}</label>
-                                                    <input id="hemshareto" type="number" min="0" value="0" step=".01"  name="hemshareto" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly/>
+                                                    <input id="hemshareto" type="number" min="0" value="0" step=".01"  name="hemshareto" class="form-control form-control-sm money" data-validation="length" data-validation-length="0-50"  readonly/>
                                                 </div>
                                             </div>
                                         </div>
@@ -673,6 +673,11 @@
                                     </div>
                                     <div class="tab-pane fade" id="insured-details-id" role="tabpanel" aria-labelledby="insured-details">
                                         
+                                        <input type="hidden" name="msitsi" id="msitsi" value="">
+                                        <input type="hidden" name="msisharev" id="msisharev" value="">
+                                        <input type="hidden" name="msisumsharev" id="msisumsharev" value="">
+                                        
+
                                         <div class="row">
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <div class="form-group">

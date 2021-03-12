@@ -8,16 +8,30 @@
     //     currenc.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     // });
 
-    $('input.amount').keyup(function(event) {
-            // skip for arrow keys
-            if(event.which >= 37 && event.which <= 40) return;
-                console.log(event.which)
-                console.log($(this).val())
-                // format number
-                $(this).val(function(index, value) {
-                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            });
+    $(".money").click(function() {
+    var inputLength = $(".money").val().length;
+    setCaretToPos($(".money")[0], inputLength)
     });
+
+    var options = {
+    onKeyPress: function(cep, e, field, options){
+        if (cep.length<=6)
+        {
+        
+            var inputVal = parseFloat(cep);
+            jQuery('.money').val(inputVal.toFixed(2));
+        }
+        
+        // setCaretToPos(jQuery('#money')[0], 4);
+                    
+        var masks = ['#,##0.00', '0.00'];
+        mask = (cep == 0) ? masks[1] : masks[0];
+        $('.money').mask(mask, options);
+    },
+    reverse: true
+    };
+
+    $('.money').mask('#,##0.00', options);
 </script>
 
 
@@ -817,8 +831,8 @@ $.ajax({
         $("#tabretroupdate").attr('hidden','true');
         $("#tabretroendorsement").attr('hidden','true');
 
-        $("#mpsharefrom").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        $("#mpshareto").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        //$("#mpsharefrom").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        //$("#mpshareto").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 
     $("#slipipfrom").change(function(){

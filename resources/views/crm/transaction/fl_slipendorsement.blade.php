@@ -84,13 +84,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                    <input id="flsharefrom" type="text"  name="flsharefrom" value="{{$insureddata->share_from}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                    <input id="flsharefrom" type="text"  name="flsharefrom" value="{{$insureddata->share_from}}"  class="form-control form-control-sm money" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total')}}</label>
-                                                    <input id="flshareto" type="text"  name="flshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly/>
+                                                    <input id="flshareto" type="text"  name="flshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm money" data-validation="length" data-validation-length="0-50" readonly/>
                                                 </div>
                                             </div>
                                         </div>
@@ -669,7 +669,12 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="insured-details-id" role="tabpanel" aria-labelledby="insured-details">
-                                       
+                                        
+                                        <input type="hidden" name="msitsi" id="msitsi" value="">
+                                        <input type="hidden" name="msisharev" id="msisharev" value="">
+                                        <input type="hidden" name="msisumsharev" id="msisumsharev" value="">
+                                        
+
                                         <div class="row">
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <div class="form-group">
