@@ -83,13 +83,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                    <input id="fesharefrom" type="text"  name="fesharefrom" value="{{$insureddata->share_from}}"  class="form-control form-control-sm money" data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                    <input id="fesharefrom" type="text"  name="fesharefrom" value="{{$insureddata->share_from}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total')}}</label>
-                                                    <input id="feshareto" type="text"  name="feshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm money" data-validation="length" data-validation-length="0-50" readonly/>
+                                                    <input id="feshareto" type="text"  name="feshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly/>
                                                 </div>
                                             </div>
                                         </div>

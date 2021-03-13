@@ -49,11 +49,11 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 1')}}</label>
-                                                    <input type="text" name="flsuggestinsured" id='autocomplete'  value="{{$insureddata->insured_name}}"  class="form-control form-control-sm money" data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
+                                                    <input type="text" name="flsuggestinsured" id='autocomplete'  value="{{$insureddata->insured_name}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 2')}}</label>
-                                                    <input type="text" name="flsuffix" id='autocomplete2'  value="{{$insureddata->insured_suffix}}"  class="form-control form-control-sm money" data-validation="length" data-validation-length="2-50" placeholder="suffix: QQ or TBk" required/>
+                                                    <input type="text" name="flsuffix" id='autocomplete2'  value="{{$insureddata->insured_suffix}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="2-50" placeholder="suffix: QQ or TBk" required/>
                                                
                                                 </div>
                                             </div>
@@ -84,13 +84,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                    <input id="flsharefrom" type="text"  name="flsharefrom" value="{{$insureddata->share_from}}"  class="form-control form-control-sm money" data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                    <input id="flsharefrom" type="text"  name="flsharefrom" value="{{$insureddata->share_from}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total')}}</label>
-                                                    <input id="flshareto" type="text"  name="flshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm money" data-validation="length" data-validation-length="0-50" readonly/>
+                                                    <input id="flshareto" type="text"  name="flshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly/>
                                                 </div>
                                             </div>
                                         </div>
