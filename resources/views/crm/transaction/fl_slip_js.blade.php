@@ -8,6 +8,17 @@
     //     currenc.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     // });
 
+    $('input.amount').keyup(function(event) {
+            // skip for arrow keys
+            if(event.which >= 37 && event.which <= 40) return;
+                console.log(event.which)
+                console.log($(this).val())
+                // format number
+                $(this).val(function(index, value) {
+                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            });
+    });
+
     $(".money").click(function() {
     var inputLength = $(".money").val().length;
     setCaretToPos($(".money")[0], inputLength)
