@@ -286,7 +286,7 @@
                                 <div class="col-md-6 col-md-12">
                                     <div class="form-group">
                                         <label for="">{{__('Amount')}}</label>
-                                        <input type="number" min="0" max="999999999,9999" value="" step=".01" id="amountlocation" name="amountlocation" class="form-control form-control-sm " data-validation="length" data-validation-length="0-20"/>
+                                        <input type="number" min="0" max="999999999,9999" value="" step=".01" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-20"/>
                                     </div>
                                 </div>
                             </div>
@@ -589,7 +589,7 @@
 
                                         </div>
                                         <div class="col-md-6">
-                                            <!--div class="row">
+                                            <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="card">
                                                         <div class="card-header bg-gray">
@@ -618,7 +618,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div-->
+                                            </div>
                                         </div>
                                     </div>
                                     
@@ -1312,6 +1312,7 @@
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
+                                                                
                                                                 </table>
                                                             </div>
                                                         </div>
