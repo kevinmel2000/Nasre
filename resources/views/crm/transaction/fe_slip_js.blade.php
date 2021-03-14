@@ -1162,7 +1162,8 @@ $(document).ready(function() {
                                                     '<td>'+response.refno+'</td>'+
                                                     '<td>'+curr_amount+'</td>'+
                                                     '<td><a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
-                                                    $('#addlocation').modal('toggle');
+                                                    
+                    $('#addlocation').modal('toggle');
                     $('#slipamount').val('');
                     $('#slipinterestlist').val('');
                     var totalsum = $("#sliptotalsum").val();
@@ -1252,7 +1253,7 @@ $(document).ready(function() {
            type:"POST",
            data:{
                interest_insured:interest,
-               slipamount:amount,
+               slipamount:real_amount,
                id_slip:slip_id,
                _token:token2
            },
@@ -1268,12 +1269,12 @@ $(document).ready(function() {
                var totalsum = $("#sliptotalsum").val();
                if(totalsum == '')
                {
-               var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
-               var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                console.log(' sum : ' + sum)
-                console.log(' real sum : ' + real_sum)
-               $("#sliptotalsum").val(real_sum);
-               $("#feshareto").val(real_sum);
+                    var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
+                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        console.log(' sum : ' + sum)
+                        console.log(' real sum : ' + real_sum)
+                    $("#sliptotalsum").val(real_sum);
+                    $("#feshareto").val(real_sum);
                }
                else
                {
@@ -1632,6 +1633,7 @@ $(document).ready(function() {
         $('#slipor').val(sumpercentor);
     });
 </script>
+
 
 <script  type='text/javascript'>
     $('#slippctupdate').keyup(function () {
