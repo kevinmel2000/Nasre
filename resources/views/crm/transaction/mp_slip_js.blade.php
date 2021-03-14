@@ -634,7 +634,7 @@
 
                     if(response.occupacy)
                     {
-                        $("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
+                        //$("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
                     }
 
                     if(response.build_const)

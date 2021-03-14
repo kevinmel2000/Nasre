@@ -70,7 +70,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                             <input type="number" min="0"  value="{{$insureddata->share}}" step=".01" id="flshare" name="flshare" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                             <input type="number" min="0"  value="{{$insureddata->share}}" step=".01" id="flshare" name="flshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">

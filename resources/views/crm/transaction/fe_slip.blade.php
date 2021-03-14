@@ -330,6 +330,7 @@
                                     <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">{{__('Edit')}}</button>
                                 </a>
 
+
                                 <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->number }}" data-target="#endorsementmodaldata">
                                     <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">{{__('Endorsement')}}</button>
                                 </a>
@@ -1130,7 +1131,7 @@
                                             </div>
                                             
                                             
-                                            
+
                                             <div class="tab-pane fade" id="installment-details-id" role="tabpanel" aria-labelledby="installment-details">
                                                 <div class="row">
                                                     <div class="col-md-12">

@@ -532,6 +532,8 @@
     });
 </script>
 
+
+
 <script type="text/javascript">
 
     //triggered when modal is about to be shown
@@ -680,7 +682,7 @@
 
                     if(response.occupacy)
                     {
-                        $("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
+                        //$("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
                     }
 
                     if(response.build_const)
@@ -700,7 +702,7 @@
 
                     if(response.retro_backup)
                     {
-                        /("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                        $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
                     }
 
                     $('#slipnoendorsement').val(response.slip_no);

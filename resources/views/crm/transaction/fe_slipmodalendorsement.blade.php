@@ -1,4 +1,4 @@
-            <div class="modal fade" id="endorsementmodaldata" tabindex="-1" user="dialog" aria-labelledby="addendorsementLabel" aria-hidden="true">
+<div class="modal fade" id="endorsementmodaldata" tabindex="-1" user="dialog" aria-labelledby="addendorsementLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl" user="document">
                 <div class="modal-content bg-light-gray">
                     <div class="modal-header bg-gray">
@@ -207,6 +207,7 @@
                                                                 <option value="Building 1" >Building 1</option>
                                                                 <option value="Building 2" >Building 2</option>
                                                                 <option value="Building 3" >Building 3</option>
+                                                                
                                                             </select>
                                                         </div>    
                                                         </div>
@@ -248,15 +249,14 @@
                                             </div>
 
                                             <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="">{{__('WPC')}}</label>
-                                                            <input type="number" min="0" value="" step=".0001" id="wpcendorsement" name="wpcendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
-                                                        </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('WPC')}}</label>
+                                                        <input type="number" min="0" value="" step=".0001" id="wpcendorsement" name="wpcendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
                                                     </div>
+                                                </div>
                                             </div>
 
-                                            
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
@@ -589,16 +589,15 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-4">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <div class="form-group" id="daytotalendorsement">                         
-                                                            Total Days :0
+                                                    <div class="col-md-4">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <div class="form-group" id="daytotalendorsement">                         
+                                                                Total Days :0
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                
                                             </div>
                                             
 
@@ -674,11 +673,10 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
-                                                                <input type="text" value="" id="slipsumshareendorsement" name="slipsumshareendorsement" placeholder="= b% * tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
+                                                                <input type="text" value="" id="slipsumshareendorsement" name="slipsumshareendorsement" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
                                                             </div>
                                                         </div>
                                                     </div>
