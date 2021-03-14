@@ -1103,8 +1103,6 @@ $(document).ready(function() {
                 $('#slipamount').val('');
                 $('#slipinterestlist').val('');
              
-                $('#slipamount').val('');
-                $('#slipinterestlist').val('');
                 var totalsum = $("#sliptotalsum").val();
                 if(totalsum == '')
                 {
@@ -1115,7 +1113,7 @@ $(document).ready(function() {
                     console.log(' real sum : ' + real_sum)
                     $("#sliptotalsum").val(real_sum);
                     $("#msishareto").val(real_sum);
-                    $('#form-addlocation')[0].reset();
+                    //$('#form-addlocation')[0].reset();
                     $("#flshareto").val(real_sum);
 
                 }
@@ -1133,7 +1131,7 @@ $(document).ready(function() {
                     console.log(' real sum : ' + real_sum)
                     $("#sliptotalsum").val(real_sum);
                     $("#flshareto").val(real_sum);
-                    $('#form-addlocation')[0].reset();
+                    //$('#form-addlocation')[0].reset();
                 }
 
             }

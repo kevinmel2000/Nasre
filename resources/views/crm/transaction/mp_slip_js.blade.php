@@ -2854,6 +2854,7 @@ $.ajax({
        var property_type_id = $('#mppropertytypelist').val();
        
        var slip_id = $('#slipnumber').val();
+       var insured_id = $('#insuredIDtxt').val();
        var token2 = $('input[name=_token2]').val();
        
        $.ajaxSetup({
@@ -2867,7 +2868,8 @@ $.ajax({
            type:"POST",
            data:{
                property_type_id:property_type_id,
-               id_slip:slip_id
+               id_slip:slip_id,
+               insured_id:insured_id
            },
            beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },

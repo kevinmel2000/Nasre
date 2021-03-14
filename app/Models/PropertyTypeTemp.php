@@ -15,3 +15,4 @@ class PropertyTypeTemp extends Model
 		return $this->belongsTo('App\Models\PropertyType','property_type_id'); 
     }
 }
+

@@ -73,18 +73,20 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                            <input id="flsharefrom" type="number" min="0" value="0" step=".01"  name="flsharefrom" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly />
+                                                            <input id="flsharefrom" type="text" name="flsharefrom" value="0" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="">{{__('Total')}}</label>
-                                                            <input id="flshareto" type="number" min="0" value="0" step=".01"  name="flshareto" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly/>
+                                                            <input id="flshareto" type="text" name="flshareto" value="0" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly/>
                                                         </div>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -295,7 +297,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Amount')}}</label>
-                                                <input type="number" min="0" max="999999999,9999" value="" step=".01" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-20"/>
+                                                <input type="text" value=""  id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-20"/>
                                           </div>
                                         </div>
                                     </div>

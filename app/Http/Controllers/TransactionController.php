@@ -2255,6 +2255,7 @@ class TransactionController extends Controller
         
             $property_type_id = $request->property_type_id;
             $slip_id = $request->id_slip;
+            $insured_id = $request->insured_id;
         
             if($property_type_id !='' && $slip_id != '')
             {
@@ -2262,6 +2263,12 @@ class TransactionController extends Controller
                 $retrocessionlist = new PropertyTypeTemp();
                 $retrocessionlist->property_type_id  = $property_type_id;
                 $retrocessionlist->slip_id = $slip_id; 
+                $retrocessionlist->insured_id = $insured_id; 
+                $retrocessionlist->save();
+
+                $retrocessionlist = new TransPropertyTemp();
+                $retrocessionlist->property_type_id  = $property_type_id;
+                $retrocessionlist->insured_id = $insured_id; 
                 $retrocessionlist->save();
 
                 return response()->json(

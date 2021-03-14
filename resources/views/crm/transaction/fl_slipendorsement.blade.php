@@ -304,7 +304,7 @@
                                 <div class="col-md-6 col-md-12">
                                     <div class="form-group">
                                         <label for="">{{__('Amount')}}</label>
-                                        <input type="number" min="0" max="999999999,9999" value="" step=".01" id="amountlocation" name="amountlocation" class="form-control form-control-sm " data-validation="length" data-validation-length="0-20"/>
+                                        <input type="text" id="amountlocation" name="amountlocation" class="form-control form-control-sm " data-validation="length" data-validation-length="0-20"/>
                                     </div>
                                 </div>
                             </div>

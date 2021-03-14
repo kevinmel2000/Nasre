@@ -79,13 +79,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                    <input id="mpsharefrom" type="number" min="0" value="0" step=".01"  name="mpsharefrom" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly />
+                                                    <input id="mpsharefrom" type="text" name="mpsharefrom" value="0" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total')}}</label>
-                                                    <input id="mpshareto" type="number" min="0" value="0" step=".01"  name="mpshareto" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly/>
+                                                    <input id="mpshareto" type="text" name="mpshareto" value="0" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly/>
                                                 </div>
                                             </div>
                                         </div>
@@ -324,7 +324,7 @@
                                 <div class="col-md-6 col-md-12">
                                     <div class="form-group">
                                         <label for="">{{__('Amount')}}</label>
-                                        <input type="number" min="0" max="999999999,9999" value="" step=".01" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-20"/>
+                                        <input type="text" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-20"/>
                                     </div>
                                 </div>
                             </div>
