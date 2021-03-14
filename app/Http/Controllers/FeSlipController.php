@@ -777,6 +777,7 @@ class FeSlipController extends Controller
                 'created_at'=>$slipdata->created_at,
                 'updated_at'=>$slipdata->updated_at,
                 'wpc'=>$slipdata->wpc,
+                'v_broker'=>$slipdata->v_broker,
                 'coinsurance_slip'=>$slipdata->coinsurance_slip
             ]
         );
@@ -928,6 +929,8 @@ class FeSlipController extends Controller
                 'condition_needed'=>$slipdata->condition_needed,
                 'created_at'=>$slipdata->created_at,
                 'updated_at'=>$slipdata->updated_at,
+                'wpc'=>$slipdata->wpc,
+                'v_broker'=>$slipdata->v_broker,
                 'coinsurance_slip'=>$slipdata->coinsurance_slip
             ]
         );

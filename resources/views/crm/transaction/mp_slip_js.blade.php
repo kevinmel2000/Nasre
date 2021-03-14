@@ -79,6 +79,7 @@
                     $('#slipeddetail').val(response.endorsment);
                     $('#slipslsdetail').val(response.selisih);
                     $('#wpcdetail').val(response.wpc);
+                    $('#slipvbrokerdetail').val(response.v_broker);
 
                     if(response.interest_insured)
                     {
@@ -292,6 +293,7 @@
                     $('#slipedupdate').val(response.endorsment);
                     $('#slipslsupdate').val(response.selisih);
                     $('#wpcupdate').val(response.wpc);
+                    $('#slipvbrokerupdate').val(response.v_broker);
 
                     if(response.interest_insured)
                     {
@@ -510,6 +512,7 @@
                     $('#slipedendorsement').val(response.endorsment);
                     $('#slipslsendorsement').val(response.selisih);
                     $('#wpcendorsement').val(response.wpc);
+                    $('#slipvbrokerendorsement').val(response.v_broker);
 
                     if(response.interest_insured)
                     {
