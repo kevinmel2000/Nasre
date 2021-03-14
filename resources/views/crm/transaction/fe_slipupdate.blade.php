@@ -286,7 +286,7 @@
                                 <div class="col-md-6 col-md-12">
                                     <div class="form-group">
                                         <label for="">{{__('Amount')}}</label>
-                                        <input type="text" id="amountlocation" name="amountlocation" class="form-control form-control-sm " data-validation="length" data-validation-length="0-20"/>
+                                        <input type="text" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-20"/>
                                     </div>
                                 </div>
                             </div>
@@ -651,7 +651,7 @@
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured') }}</label>
-                                                    <input type="text" value="" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
+                                                    <input type="text" value="{{ $slipdata->total_sum_insured }}" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
                                                 </div>
                                             </div>
                                         </div>
