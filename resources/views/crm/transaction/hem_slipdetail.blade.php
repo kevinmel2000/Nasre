@@ -712,7 +712,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for=""style="opacity: 0;">{{__('Type')}}</label>
-                                                            <input type="number" value="{{ $slipdata->total_sum_pct }}" step=".0001" id="sliptotalsumpct" name="sliptotalsumpct" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" required/>
+                                                            <input type="text" value="{{ $slipdata->total_sum_pct }}" id="sliptotalsumpct" name="sliptotalsumpct" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>

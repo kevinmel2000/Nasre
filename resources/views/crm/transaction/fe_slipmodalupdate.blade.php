@@ -341,7 +341,7 @@
                                                 <div class="col-md-12 d-flex justify-content-end">
                                                     <div class="form-group">
                                                         <label for="">{{__('Total Sum Insured') }}</label>
-                                                        <input type="number" min="0" value="" step=".0001" id="sliptotalsumupdate" name="sliptotalsumupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
+                                                        <input type="text" value="" id="sliptotalsumupdate" name="sliptotalsumupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -381,7 +381,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for=""style="opacity: 0;">{{__('Type')}}</label>
-                                                                <input type="number" value="" step=".0001" id="sliptotalsumpctupdate" name="sliptotalsumpctupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" required/>
+                                                                <input type="text" value="" id="sliptotalsumpctupdate" name="sliptotalsumpctupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" required/>
                                                             </div>
                                                         </div>
                                                     </div>
