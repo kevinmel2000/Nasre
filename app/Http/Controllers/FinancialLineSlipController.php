@@ -284,6 +284,10 @@ class FinancialLineSlipController extends Controller
             InterestInsuredTemp::where('slip_id', $code_sl)->delete();
         }
 
+        if(count($locationlist) != null){
+            TransLocationTemp::where('insured_id', $code_ms)->delete();
+        }
+
         if(count($deductiblelist) != null){
             DeductibleTemp::where('slip_id', $code_sl)->delete();
         }
