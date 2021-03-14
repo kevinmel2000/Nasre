@@ -151,7 +151,7 @@
                     
                     if(response.cob)
                     {
-                        //$("#slipcobdetail option[value=" + response.cob + "]:first")[0].selected = true;
+                        $("#slipcobdetail option[value=" + response.cob + "]:first")[0].selected = true;
                     }
 
                     if(response.koc)
@@ -181,7 +181,7 @@
 
                     if(response.retro_backup)
                     {
-                        //$("#sliprbdetail option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                        $("#sliprbdetail option[value=" + response.retro_backup + "]:first")[0].selected = true;
                     }
 
 
@@ -364,7 +364,7 @@
                     
                     if(response.cob)
                     {
-                        //$("#slipcobupdate option[value=" + response.cob + "]:first")[0].selected = true;
+                        $("#slipcobupdate option[value=" + response.cob + "]:first")[0].selected = true;
                     }
 
                     if(response.koc)
@@ -394,7 +394,7 @@
 
                     if(response.retro_backup)
                     {
-                        //$("#sliprbupdate option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                        $("#sliprbupdate option[value=" + response.retro_backup + "]:first")[0].selected = true;
                     }
 
                     
@@ -581,7 +581,7 @@
                     
                     if(response.cob)
                     {
-                        //$("#slipcobendorsement option[value=" + response.cob + "]:first")[0].selected = true;
+                        $("#slipcobendorsement option[value=" + response.cob + "]:first")[0].selected = true;
                     }
 
                     if(response.koc)
@@ -591,7 +591,7 @@
 
                     if(response.occupacy)
                     {
-                        //$("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
+                        $("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
                     }
 
                     if(response.build_const)
@@ -611,7 +611,7 @@
 
                     if(response.retro_backup)
                     {
-                        //$("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                        $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
                     }
 
                     $('#slipnoendorsement').val(response.slip_no);

@@ -162,7 +162,6 @@
                                                         <div class="form-group">
                                                             <label for="">{{__('COB')}}</label>
                                                             <select id="slipcobendorsement" name="slipcobendorsement" class="e1 form-control form-control-sm ">
-                                                                <option selected readonly  value='0'>{{__('COB list')}}</option>
                                                                 @foreach($cob as $boc)
                                                                     <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
                                                                     
@@ -177,7 +176,6 @@
                                                         <div class="form-group">
                                                             <label for="">{{__('KOC')}}</label>
                                                             <select id="slipkocendorsement" name="slipkocendorsement" class="e1 form-control form-control-sm ">
-                                                                <option selected readonly  value='0'>{{__('KOC list')}}</option>
                                                                 @foreach($koc as $cok)
                                                                     <option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
                                                                     
@@ -192,7 +190,6 @@
                                                         <div class="form-group">
                                                             <label for="">{{__('Occupacy')}}</label>
                                                             <select id="slipoccupacydetail" name="slipoccupacydetail" class="e1 form-control form-control-sm ">
-                                                                <option selected readonly  value='0'>{{__('Occupation list')}}</option>
                                                                 @foreach($ocp as $ocpy)
                                                                     <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
                                                                    
@@ -207,7 +204,6 @@
                                                         <div class="form-group">
                                                             <label for="">{{__('Building Const')}}</label>
                                                             <select id="slipbld_constendorsement" name="slipbld_constendorsement" class="e1 form-control form-control-sm ">
-                                                                <option selected readonly  value='0'>{{__('Building Const list')}}</option>
                                                                 <option value="Building 1" >Building 1</option>
                                                                 <option value="Building 2" >Building 2</option>
                                                                 <option value="Building 3" >Building 3</option>

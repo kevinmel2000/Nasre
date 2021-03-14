@@ -1130,6 +1130,7 @@
                                             </div>
                                             
                                             
+                                            
                                             <div class="tab-pane fade" id="installment-details-id" role="tabpanel" aria-labelledby="installment-details">
                                                 <div class="row">
                                                     <div class="col-md-12">
