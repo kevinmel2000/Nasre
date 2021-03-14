@@ -3500,6 +3500,7 @@ $(document).ready(function() {
     $('#multi-file-upload-ajaxupdate').submit(function(e){
        //alert('masuk');
        e.preventDefault();
+    
 
        var code_ms = $('#insuredIDtxt').val();
        var slipnumber = $('#slipnumberupdate').val();

@@ -3459,7 +3459,7 @@ $.ajax({
 
         //save insured
 
-        var mpnumber = $('#insuredIDtxt').val();
+       var mpnumber = $('#insuredIDtxt').val();
        var mpinsured = $('#mpinsured').val();
        var mpsuggestinsured = $('#autocomplete').val();
        var mpsuffix = $('#autocomplete2').val();
@@ -3523,7 +3523,8 @@ $.ajax({
        //alert('masuk');
        e.preventDefault();
 
-       var code_ms = $('#insuredIDtxt').val();
+
+        var code_ms = $('#insuredIDtxt').val();
        var slipnumber = $('#slipnumberupdate').val();
        var slipuy = $('#slipuyupdate').val();
        var slipstatus = $('#slipstatusupdate').val();
@@ -3564,6 +3565,47 @@ $.ajax({
        var wpc =  $('#wpcupdate').val();
 
        var token2 = $('input[name=_token]').val();
+
+       var conv_sliptotalsum = sliptotalsum.replace(/,/g, "");
+       console.log(conv_sliptotalsum)
+       var real_sliptotalsum = parseInt(conv_sliptotalsum);
+       console.log(real_sliptotalsum)
+       
+       var conv_sliptotalsumpct = sliptotalsumpct.replace(/,/g, "");
+       console.log(conv_sliptotalsumpct)
+       var real_sliptotalsumpct = parseInt(conv_sliptotalsumpct);
+       console.log(real_sliptotalsumpct)
+
+       var conv_slipsumshare = slipsumshare.replace(/,/g, "");
+       console.log(conv_slipsumshare)
+       var real_slipsumshare = parseInt(conv_slipsumshare);
+       console.log(real_slipsumshare)
+
+       var conv_slipbasicpremium = slipbasicpremium.replace(/,/g, "");
+       console.log(conv_slipbasicpremium)
+       var real_slipbasicpremium = parseInt(conv_slipbasicpremium);
+       console.log(real_slipbasicpremium)
+
+       var conv_slipgrossprmtonr = slipgrossprmtonr.replace(/,/g, "");
+       console.log(conv_slipgrossprmtonr)
+       var real_slipgrossprmtonr = parseInt(conv_slipgrossprmtonr);
+       console.log(real_slipgrossprmtonr)
+
+       var conv_slipsumcommission = slipsumcommission.replace(/,/g, "");
+       console.log(conv_slipsumcommission)
+       var real_slipsumcommission = parseInt(conv_slipsumcommission);
+       console.log(real_slipsumcommission)
+
+       var conv_slipnetprmtonr = slipnetprmtonr.replace(/,/g, "");
+       console.log(conv_slipnetprmtonr)
+       var real_slipnetprmtonr = parseInt(conv_slipnetprmtonr);
+       console.log(real_slipnetprmtonr)
+
+       var conv_slipsumor = slipsumor.replace(/,/g, "");
+       console.log(conv_slipsumor)
+       var real_slipsumor = parseInt(conv_slipsumor);
+       console.log(real_slipsumor)
+       
        
        //ajaxfilefunction(e);
 
@@ -3574,7 +3616,7 @@ $.ajax({
             });
 
        $.ajax({
-           url:"{{url('transaction-data/fe-slip/store')}}",
+           url:"{{url('transaction-data/mp-slip/store')}}",
            type:"POST",
            data:{
                code_ms:code_ms,
@@ -3593,10 +3635,10 @@ $.ajax({
                slipno:slipno,
                slipcndn:slipcndn,
                slippolicy_no:slippolicy_no,
-               sliptotalsum:sliptotalsum,
+               sliptotalsum:real_sliptotalsum,
                sliptype:sliptype,
                slippct:slippct,
-               sliptotalsumpct:sliptotalsumpct,
+               sliptotalsumpct:real_sliptotalsumpct,
                slipipfrom:slipipfrom,
                slipipto:slipipto,
                sliprpfrom:sliprpfrom,
@@ -3606,15 +3648,15 @@ $.ajax({
                sliprate:sliprate,
                slipvbroker:slipvbroker,
                slipshare:slipshare,
-               slipsumshare:slipsumshare,
-               slipbasicpremium:slipbasicpremium,
-               slipgrossprmtonr:slipgrossprmtonr,
+               slipsumshare:real_slipsumshare,
+               slipbasicpremium:real_slipbasicpremium,
+               slipgrossprmtonr:real_slipgrossprmtonr,
                slipcommission:slipcommission,
-               slipsumcommission:slipsumcommission,
-               slipnetprmtonr:slipnetprmtonr,
+               slipsumcommission:real_slipsumcommission,
+               slipnetprmtonr:real_slipnetprmtonr,
                sliprb:sliprb,
                slipor:slipor,
-               slipsumor:slipsumor,
+               slipsumor:real_slipsumor,
                wpc:wpc
            },
            beforeSend: function() { $("body").addClass("loading");  },
@@ -3682,23 +3724,26 @@ $.ajax({
 
 
       // insured save
-       var fesnumber = $('#insuredIDtxt').val();
-       var fesinsured = $('#feinsured').val();
-       var fessuggestinsured = $('#autocomplete').val();
-       var fessuffix = $('#autocomplete2').val();
-       var fesshare = $('#feshare').val();
-       var fessharefrom  = $('#fesharefrom').val();
-       var fesshareto = $('#feshareto').val();
-       var fescoinsurance = $('#fecoinsurance').val();
+      var mpnumber = $('#insuredIDtxt').val();
+       var mpinsured = $('#mpinsured').val();
+       var mpsuggestinsured = $('#autocomplete').val();
+       var mpsuffix = $('#autocomplete2').val();
+       var mpshare = $('#mpshare').val();
+       var mpsharefrom  = $('#mpsharefrom').val();
+       var mpshareto = $('#mpshareto').val();
+       var mpcoinsurance = $('#mpcoinsurance').val();
        
+       var conv_mpsharefrom = mpshare.replace(/,/g, "");
+       console.log(conv_mpsharefrom)
+       var real_mpsharefrom = parseInt(conv_mpsharefrom);
+       console.log(real_mpsharefrom)
+
+       var conv_mpshareto = mpsharefrom.replace(/,/g, "");
+       console.log(conv_mpshareto)
+       var real_mpshareto = parseInt(conv_mpshareto);
+       console.log(real_mpshareto)
        
        var token2 = $('input[name=_token]').val();
-
-       console.log(fesinsured)
-       console.log(fessuggestinsured)
-       console.log(fesnumber)
-       console.log(fessuffix)
-
        
        $.ajaxSetup({
                 headers: {
@@ -3707,29 +3752,29 @@ $.ajax({
             });
 
        $.ajax({
-           url:"{{ url('transaction-data/fe-insured/store') }}",
+           url:"{{ url('transaction-data/mp-insured/store') }}",
            type:"POST",
            data:{
-               fesnumber:fesnumber,
-               fesinsured:fesinsured,
-               fessuggestinsured:fessuggestinsured,
-               fessuffix:fessuffix,
-               fesshare:fesshare,
-               fessharefrom:fessharefrom,
-               fesshareto:fesshareto,
-               fescoinsurance:fescoinsurance
+               mpnumber:mpnumber,
+               mpinsured:mpinsured,
+               mpsuggestinsured:mpsuggestinsured,
+               mpsuffix:mpsuffix,
+               mpshare:mpshare,
+               mpsharefrom:real_mpsharefrom,
+               mpshareto:real_mpshareto,
+               mpcoinsurance:mpcoinsurance
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },
            success:function(response)
            {
-                swal("Good job!", "Insured Fire & Engineering Insert Success", "success")
+                swal("Good job!", "Moveable Property Insert Success", "success")
                 console.log(response)
 
            },
            error: function (request, status, error) {
                 //alert(request.responseText);
-                swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
+                swal("Error!", request.responseText, "Insert Error");
            }
        });
 
@@ -3790,6 +3835,47 @@ $.ajax({
 
        var token2 = $('input[name=_token]').val();
        
+
+       var conv_sliptotalsum = sliptotalsum.replace(/,/g, "");
+       console.log(conv_sliptotalsum)
+       var real_sliptotalsum = parseInt(conv_sliptotalsum);
+       console.log(real_sliptotalsum)
+       
+       var conv_sliptotalsumpct = sliptotalsumpct.replace(/,/g, "");
+       console.log(conv_sliptotalsumpct)
+       var real_sliptotalsumpct = parseInt(conv_sliptotalsumpct);
+       console.log(real_sliptotalsumpct)
+
+       var conv_slipsumshare = slipsumshare.replace(/,/g, "");
+       console.log(conv_slipsumshare)
+       var real_slipsumshare = parseInt(conv_slipsumshare);
+       console.log(real_slipsumshare)
+
+       var conv_slipbasicpremium = slipbasicpremium.replace(/,/g, "");
+       console.log(conv_slipbasicpremium)
+       var real_slipbasicpremium = parseInt(conv_slipbasicpremium);
+       console.log(real_slipbasicpremium)
+
+       var conv_slipgrossprmtonr = slipgrossprmtonr.replace(/,/g, "");
+       console.log(conv_slipgrossprmtonr)
+       var real_slipgrossprmtonr = parseInt(conv_slipgrossprmtonr);
+       console.log(real_slipgrossprmtonr)
+
+       var conv_slipsumcommission = slipsumcommission.replace(/,/g, "");
+       console.log(conv_slipsumcommission)
+       var real_slipsumcommission = parseInt(conv_slipsumcommission);
+       console.log(real_slipsumcommission)
+
+       var conv_slipnetprmtonr = slipnetprmtonr.replace(/,/g, "");
+       console.log(conv_slipnetprmtonr)
+       var real_slipnetprmtonr = parseInt(conv_slipnetprmtonr);
+       console.log(real_slipnetprmtonr)
+
+       var conv_slipsumor = slipsumor.replace(/,/g, "");
+       console.log(conv_slipsumor)
+       var real_slipsumor = parseInt(conv_slipsumor);
+       console.log(real_slipsumor)
+       
        //ajaxfilefunction(e);
 
        $.ajaxSetup({
@@ -3799,12 +3885,11 @@ $.ajax({
             });
 
        $.ajax({
-           url:"{{url('transaction-data/fe-slip/endorsementstore')}}",
+           url:"{{url('transaction-data/mp-slip/endorsementstore')}}",
            type:"POST",
            data:{
                code_ms:code_ms,
                slipnumber:slipnumber,
-               prevslipnumber:prevslipnumber,
                slipuy:slipuy,
                slipstatus:slipstatus,
                sliped:sliped,
@@ -3819,10 +3904,10 @@ $.ajax({
                slipno:slipno,
                slipcndn:slipcndn,
                slippolicy_no:slippolicy_no,
-               sliptotalsum:sliptotalsum,
+               sliptotalsum:real_sliptotalsum,
                sliptype:sliptype,
                slippct:slippct,
-               sliptotalsumpct:sliptotalsumpct,
+               sliptotalsumpct:real_sliptotalsumpct,
                slipipfrom:slipipfrom,
                slipipto:slipipto,
                sliprpfrom:sliprpfrom,
@@ -3832,15 +3917,15 @@ $.ajax({
                sliprate:sliprate,
                slipvbroker:slipvbroker,
                slipshare:slipshare,
-               slipsumshare:slipsumshare,
-               slipbasicpremium:slipbasicpremium,
-               slipgrossprmtonr:slipgrossprmtonr,
+               slipsumshare:real_slipsumshare,
+               slipbasicpremium:real_slipbasicpremium,
+               slipgrossprmtonr:real_slipgrossprmtonr,
                slipcommission:slipcommission,
-               slipsumcommission:slipsumcommission,
-               slipnetprmtonr:slipnetprmtonr,
+               slipsumcommission:real_slipsumcommission,
+               slipnetprmtonr:real_slipnetprmtonr,
                sliprb:sliprb,
                slipor:slipor,
-               slipsumor:slipsumor,
+               slipsumor:real_slipsumor,
                wpc:wpc
            },
            beforeSend: function() { $("body").addClass("loading");  },
@@ -3908,23 +3993,26 @@ $.ajax({
 
 
       // insured save
-       var fesnumber = $('#insuredIDtxt').val();
-       var fesinsured = $('#feinsured').val();
-       var fessuggestinsured = $('#autocomplete').val();
-       var fessuffix = $('#autocomplete2').val();
-       var fesshare = $('#feshare').val();
-       var fessharefrom  = $('#fesharefrom').val();
-       var fesshareto = $('#feshareto').val();
-       var fescoinsurance = $('#fecoinsurance').val();
+       var mpnumber = $('#insuredIDtxt').val();
+       var mpinsured = $('#mpinsured').val();
+       var mpsuggestinsured = $('#autocomplete').val();
+       var mpsuffix = $('#autocomplete2').val();
+       var mpshare = $('#mpshare').val();
+       var mpsharefrom  = $('#mpsharefrom').val();
+       var mpshareto = $('#mpshareto').val();
+       var mpcoinsurance = $('#mpcoinsurance').val();
        
+       var conv_mpsharefrom = mpshare.replace(/,/g, "");
+       console.log(conv_mpsharefrom)
+       var real_mpsharefrom = parseInt(conv_mpsharefrom);
+       console.log(real_mpsharefrom)
+
+       var conv_mpshareto = mpsharefrom.replace(/,/g, "");
+       console.log(conv_mpshareto)
+       var real_mpshareto = parseInt(conv_mpshareto);
+       console.log(real_mpshareto)
        
        var token2 = $('input[name=_token]').val();
-
-       console.log(fesinsured)
-       console.log(fessuggestinsured)
-       console.log(fesnumber)
-       console.log(fessuffix)
-
        
        $.ajaxSetup({
                 headers: {
@@ -3933,32 +4021,31 @@ $.ajax({
             });
 
        $.ajax({
-           url:"{{ url('transaction-data/fe-insured/store') }}",
+           url:"{{ url('transaction-data/mp-insured/store') }}",
            type:"POST",
            data:{
-               fesnumber:fesnumber,
-               fesinsured:fesinsured,
-               fessuggestinsured:fessuggestinsured,
-               fessuffix:fessuffix,
-               fesshare:fesshare,
-               fessharefrom:fessharefrom,
-               fesshareto:fesshareto,
-               fescoinsurance:fescoinsurance
+               mpnumber:mpnumber,
+               mpinsured:mpinsured,
+               mpsuggestinsured:mpsuggestinsured,
+               mpsuffix:mpsuffix,
+               mpshare:mpshare,
+               mpsharefrom:real_mpsharefrom,
+               mpshareto:real_mpshareto,
+               mpcoinsurance:mpcoinsurance
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },
            success:function(response)
            {
-                swal("Good job!", "Insured Fire & Engineering Insert Success", "success")
+                swal("Good job!", "Moveable Property Insert Success", "success")
                 console.log(response)
 
            },
            error: function (request, status, error) {
                 //alert(request.responseText);
-                swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
+                swal("Error!", request.responseText, "Insert Error");
            }
        });
-
 
 
 
