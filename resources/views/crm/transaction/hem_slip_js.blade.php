@@ -2168,6 +2168,16 @@ $("body").on("click","#btn-danger2",function(){
        
        var slip_id = $('#slipnumberupdate').val();
        var token2 = $('input[name=_token2]').val();
+      
+       var conv_amount = amount.replace(/,/g, "");
+       console.log(conv_amount)
+       var real_amount = parseInt(conv_amount);
+       console.log(real_amount)
+
+       var conv_minamount = minamount.replace(/,/g, "");
+       console.log(conv_minamount)
+       var real_minamount = parseInt(conv_minamount);
+       console.log(real_minamount)
        
        $.ajaxSetup({
                 headers: {
@@ -2182,8 +2192,8 @@ $("body").on("click","#btn-danger2",function(){
                slipdptype:slipdptype,
                slipdpcurrency:slipdpcurrency,
                percentage:percentage,
-               amount:amount,
-               minamount:minamount,
+               amount:real_amount,
+               minamount:real_minamount,
                id_slip:slip_id
            },
            beforeSend: function() { $("body").addClass("loading");  },
@@ -2219,6 +2229,16 @@ $("body").on("click","#btn-danger2",function(){
        var slip_id = $('#slipnumberendorsement').val();
        var token2 = $('input[name=_token2]').val();
        
+       var conv_amount = amount.replace(/,/g, "");
+       console.log(conv_amount)
+       var real_amount = parseInt(conv_amount);
+       console.log(real_amount)
+
+       var conv_minamount = minamount.replace(/,/g, "");
+       console.log(conv_minamount)
+       var real_minamount = parseInt(conv_minamount);
+       console.log(real_minamount)
+       
        $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -2232,8 +2252,8 @@ $("body").on("click","#btn-danger2",function(){
                slipdptype:slipdptype,
                slipdpcurrency:slipdpcurrency,
                percentage:percentage,
-               amount:amount,
-               minamount:minamount,
+               amount:real_amount,
+               minamount:real_minamount,
                id_slip:slip_id
            },
            beforeSend: function() { $("body").addClass("loading");  },
@@ -2335,6 +2355,12 @@ $("body").on("click","#btn-danger2",function(){
        var slip_id = $('#slipnumber').val();
        var token2 = $('input[name=_token2]').val();
        
+       var conv_amount = amount.replace(/,/g, "");
+       console.log(conv_amount)
+       var real_amount = parseInt(conv_amount);
+       console.log(real_amount)
+
+       
        $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -2347,7 +2373,7 @@ $("body").on("click","#btn-danger2",function(){
            data:{
                slipcncode:slipcncode,
                percentage:percentage,
-               amount:amount,
+               amount:real_amount,
                id_slip:slip_id
            },
            beforeSend: function() { $("body").addClass("loading");  },
@@ -2380,6 +2406,12 @@ $("body").on("click","#btn-danger2",function(){
        var slip_id = $('#slipnumberupdate').val();
        var token2 = $('input[name=_token2]').val();
        
+      
+       var conv_amount = amount.replace(/,/g, "");
+       console.log(conv_amount)
+       var real_amount = parseInt(conv_amount);
+       console.log(real_amount)
+       
        $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -2392,7 +2424,7 @@ $("body").on("click","#btn-danger2",function(){
            data:{
                slipcncode:slipcncode,
                percentage:percentage,
-               amount:amount,
+               amount:real_amount,
                id_slip:slip_id
            },
            beforeSend: function() { $("body").addClass("loading");  },
@@ -2425,6 +2457,11 @@ $("body").on("click","#btn-danger2",function(){
        var slip_id = $('#slipnumberendorsement').val();
        var token2 = $('input[name=_token2]').val();
        
+       var conv_amount = amount.replace(/,/g, "");
+       console.log(conv_amount)
+       var real_amount = parseInt(conv_amount);
+       console.log(real_amount)
+       
        $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -2437,7 +2474,7 @@ $("body").on("click","#btn-danger2",function(){
            data:{
                slipcncode:slipcncode,
                percentage:percentage,
-               amount:amount,
+               amount:real_amount,
                id_slip:slip_id
            },
            beforeSend: function() { $("body").addClass("loading");  },
