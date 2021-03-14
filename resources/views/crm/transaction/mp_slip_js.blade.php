@@ -2738,7 +2738,7 @@ $.ajax({
        
        var slip_id = $('#slipnumberendorsement').val();
        var token2 = $('input[name=_token2]').val();
-       
+
        var conv_amount = amount.replace(/,/g, "");
        console.log(conv_amount)
        var real_amount = parseInt(conv_amount);
@@ -2942,6 +2942,16 @@ $.ajax({
        var mpshareto = $('#mpshareto').val();
        var mpcoinsurance = $('#mpcoinsurance').val();
        
+
+       var conv_mpsharefrom = mpshare.replace(/,/g, "");
+       console.log(conv_mpsharefrom)
+       var real_mpsharefrom = parseInt(conv_mpsharefrom);
+       console.log(real_mpsharefrom)
+
+       var conv_mpshareto = mpsharefrom.replace(/,/g, "");
+       console.log(conv_mpshareto)
+       var real_mpshareto = parseInt(conv_mpshareto);
+       console.log(real_mpshareto)
        
        var token2 = $('input[name=_token]').val();
        
@@ -2960,8 +2970,8 @@ $.ajax({
                mpsuggestinsured:mpsuggestinsured,
                mpsuffix:mpsuffix,
                mpshare:mpshare,
-               mpsharefrom:mpsharefrom,
-               mpshareto:mpshareto,
+               mpsharefrom:real_mpsharefrom,
+               mpshareto:real_mpshareto,
                mpcoinsurance:mpcoinsurance
            },
            beforeSend: function() { $("body").addClass("loading");  },

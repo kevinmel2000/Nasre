@@ -2899,6 +2899,16 @@ $(document).ready(function() {
        var flobligee = $('#flobligee').val();
        var flprincipal = $('#flprincipal').val();
        
+       var conv_flssharefrom = flsharefrom.replace(/,/g, "");
+       console.log(conv_flssharefrom)
+       var real_flssharefrom = parseInt(conv_flssharefrom);
+       console.log(real_flssharefrom)
+
+       var conv_flsshareto = flshareto.replace(/,/g, "");
+       console.log(conv_flsshareto)
+       var real_flsshareto = parseInt(conv_flsshareto);
+       console.log(real_flsshareto)
+       
        
        var token2 = $('input[name=_token]').val();
        
@@ -2917,8 +2927,8 @@ $(document).ready(function() {
                flsuggestinsured:flsuggestinsured,
                flsuffix:flsuffix,
                flshare:flshare,
-               flsharefrom:flsharefrom,
-               flshareto:flshareto,
+               flsharefrom:real_flssharefrom,
+               flshareto:real_flsshareto,
                flcoinsurance:flcoinsurance,
                flobligee:flobligee,
                flprincipal:flprincipal
