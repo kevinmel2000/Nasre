@@ -1092,7 +1092,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
-                                                                    <input type="number" value="0" step=".0001" id="slipsumshare" name="slipsumshare" placeholder="= b% * tsi" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                                    <input type="text" value="" id="slipsumshare" name="slipsumshare" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                                                 </div>
                                                             </div>
                                                         </div>
