@@ -9,7 +9,7 @@ class TransPropertyTemp extends Model
     //
     protected $guarded = [];
 
-    protected $table = 'trans_location_temp';
+    protected $table = 'trans_property_temp';
 
     public function propertytypedata() 
     {

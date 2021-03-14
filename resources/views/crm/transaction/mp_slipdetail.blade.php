@@ -659,6 +659,9 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="insured-details-id" role="tabpanel" aria-labelledby="insured-details">
+                                        <input type="hidden" name="msitsi" id="msitsi" value="">
+                                        <input type="hidden" name="msisharev" id="msisharev" value="">
+                                        <input type="hidden" name="msisumsharev" id="msisumsharev" value="">
                                         
                                         <div class="row">
                                             <div class="col-md-12 d-flex justify-content-end">

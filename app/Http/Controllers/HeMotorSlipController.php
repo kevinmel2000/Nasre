@@ -748,7 +748,7 @@ class HeMotorSlipController extends Controller
 
 
 
-    public function storehemslip(Request $request,$code_ms)
+    public function storehemslip(Request $request)
     {
         $validator = $request->validate([
             'slipnumber'=>'required'

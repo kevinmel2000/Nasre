@@ -37,6 +37,7 @@ use App\Models\DeductibleTemp;
 use App\Models\RetrocessionTemp;
 use App\Models\PropertyType;
 use App\Models\PropertyTypeTemp;
+use App\Models\TransPropertyTemp;
 use App\Models\HoleDetail;
 use App\Models\GolfFieldHole;
 use Carbon\Carbon;

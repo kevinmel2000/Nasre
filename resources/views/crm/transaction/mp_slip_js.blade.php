@@ -1628,6 +1628,7 @@ $.ajax({
         var conv_tsi = parseInt(tsi.replace(/,/g, ""));
         var mtsi = $("#msitsi").val();
         var conv_mtsi = parseInt(mtsi.replace(/,/g, ""));
+        
         var sumshare = $('#slipsumshare').val() ;
         var conv_sumshare = parseInt(sumshare.replace(/,/g, ""));
         var orpercent = parseFloat($('#slipor').val()) / 100;
@@ -2664,6 +2665,7 @@ $.ajax({
            {
             
                console.log(response)
+               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
                $('#retrocessionPanel tbody').prepend('<tr id="iidretrocession'+response.id+'" data-name="retrocessionvalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessiondetail('+response.id+')">delete</a></td></tr>');
                $('#sliprppercentage').val('');
                $('#sliprpamount').val('');

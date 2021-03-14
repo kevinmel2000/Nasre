@@ -706,7 +706,7 @@ class FinancialLineSlipController extends Controller
     }
 
 
-    public function storeflslip(Request $request,$code_ms)
+    public function storeflslip(Request $request)
     {
         $validator = $request->validate([
             'slipnumber'=>'required'

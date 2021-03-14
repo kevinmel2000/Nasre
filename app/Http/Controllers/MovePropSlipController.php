@@ -756,7 +756,7 @@ class MovePropSlipController extends Controller
     }
 
 
-    public function storempslip(Request $request,$code_ms)
+    public function storempslip(Request $request)
     {
         $validator = $request->validate([
             'slipnumber'=>'required'

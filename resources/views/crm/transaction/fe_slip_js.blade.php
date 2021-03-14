@@ -3463,6 +3463,7 @@ $(document).ready(function() {
                 }
             });
 
+
        $.ajax({
            url:"{{ url('transaction-data/fe-insured/store') }}",
            type:"POST",
