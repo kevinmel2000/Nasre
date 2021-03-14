@@ -910,7 +910,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="">{{__('Fee Broker')}}</label>
-                                                        <input type="number" value="0" step=".0001" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                        <input type="text" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -936,7 +936,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
-                                                            <input type="number" value="{{ $slipdata->sum_share }}" step=".0001" id="slipsumshare" name="slipsumshare" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
+                                                            <input type="text" value="{{ $slipdata->sum_share }}" id="slipsumshare" name="slipsumshare" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -947,7 +947,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Basic Premium')}}</label>
-                                                        <input type="number" value="{{ $slipdata->basic_premium }}" step=".0001" id="slipbasicpremium" name="slipbasicpremium" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a% * tsi" required/>
+                                                        <input type="text" value="{{ $slipdata->basic_premium }}" id="slipbasicpremium" name="slipbasicpremium" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a% * tsi" required/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -955,7 +955,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Gross Prm to NR')}}</label>
-                                                        <input type="number" value="{{ $slipdata->grossprm_to_nr }}" step=".0001" id="slipgrossprmtonr" name="slipgrossprmtonr" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a% * b% * tsi" readonly="readonly" required/>
+                                                        <input type="text" value="{{ $slipdata->grossprm_to_nr }}" id="slipgrossprmtonr" name="slipgrossprmtonr" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a% * b% * tsi" readonly="readonly" required/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -969,7 +969,7 @@
                                                             <div class="row d-flex flex-wrap">
                                                                 <div class="col-md-10">
                                                                     <div class="input-group">
-                                                                        <input type="number" value="{{ $slipdata->commission }}" step=".0001" id="slipcommission" name="slipcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="d" required/>
+                                                                        <input type="text" value="{{ $slipdata->commission }}" id="slipcommission" name="slipcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="d" required/>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-2">
@@ -983,7 +983,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="" style="opacity: 0;">{{__('Gross Prm to NR')}}</label>
-                                                            <input type="number"  value="{{ $slipdata->grossprm_to_nr }}" step=".0001" id="slipsumcommission" name="slipsumcommission" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" readonly="readonly" />
+                                                            <input type="text"  value="{{ $slipdata->grossprm_to_nr }}"  id="slipsumcommission" name="slipsumcommission" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" readonly="readonly" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -992,7 +992,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Net Prm to NR')}}</label>
-                                                        <input type="number"  value="{{ $slipdata->netprm_to_nr }}" step=".0001" id="slipnetprmtonr" name="slipnetprmtonr" class="form-control form-control-sm amount" data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="2-50" readonly="readonly"/>
+                                                        <input type="text"  value="{{ $slipdata->netprm_to_nr }}"  id="slipnetprmtonr" name="slipnetprmtonr" class="form-control form-control-sm amount" data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="2-50" readonly="readonly"/>
                                                     </div>
                                                 </div>
                                             </div>
