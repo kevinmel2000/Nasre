@@ -3254,6 +3254,11 @@ $.ajax({
            }
        });
 
+       $('#installmentPanel tbody').empty();
+       $('#ExtendCoveragePanel tbody').empty();
+       $('#deductiblePanel tbody').empty();
+       $('#retrocessionPanel tbody').empty();
+
    });
 </script>
 
@@ -3514,6 +3519,11 @@ $.ajax({
                 swal("Error!", request.responseText, "Insert Error");
            }
        });
+
+       $('#installmentPanel tbody').empty();
+       $('#ExtendCoveragePanel tbody').empty();
+       $('#deductiblePanel tbody').empty();
+       $('#retrocessionPanel tbody').empty();
 
    });
 </script>
@@ -3781,6 +3791,11 @@ $.ajax({
        });
 
 
+       
+       $('#installmentPanelupdate tbody').empty();
+       $('#ExtendCoveragePanelupdate tbody').empty();
+       $('#deductiblePanelupdate tbody').empty();
+       $('#retrocessionPanelupdate tbody').empty();
 
 
    });
@@ -4049,6 +4064,11 @@ $.ajax({
            }
        });
 
+       
+       $('#installmentPanelendorsement tbody').empty();
+       $('#ExtendCoveragePanelendorsement tbody').empty();
+       $('#deductiblePanelendorsement tbody').empty();
+       $('#retrocessionPanelendorsement tbody').empty();
 
 
    });

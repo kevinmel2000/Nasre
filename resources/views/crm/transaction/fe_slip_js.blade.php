@@ -191,7 +191,7 @@
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
-                            $('#installmentPaneldetail tbody').empty();
+                           $('#installmentPaneldetail tbody').empty();
                            $('#installmentPaneldetail tbody').prepend('<tr id="iidinstallmentdetail'+obj.id+'" data-name="installmentdetailvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td></td></tr>')
                
                         }
@@ -2456,6 +2456,7 @@ $(document).ready(function() {
            success:function(response)
            {
             
+        
                console.log(response)
                var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
                $('#ExtendCoveragePanel tbody').prepend('<tr id="iidextendcoverage'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoveragedetail('+response.id+')">delete</a></td></tr>');
@@ -2568,6 +2569,7 @@ $(document).ready(function() {
 
    });
 </script>
+
 
 <script type='text/javascript'>
     function deleteextendcoveragedetail(id)
@@ -3219,9 +3221,14 @@ $(document).ready(function() {
            }
        });
 
+ 
+       $('#installmentPanel tbody').empty();
+       $('#ExtendCoveragePanel tbody').empty();
+       $('#deductiblePanel tbody').empty();
+       $('#retrocessionPanel tbody').empty();
+       
 
-
-
+       
    });
 </script>
 
@@ -3492,6 +3499,10 @@ $(document).ready(function() {
        });
 
 
+       $('#installmentPanel tbody').empty();
+       $('#ExtendCoveragePanel tbody').empty();
+       $('#deductiblePanel tbody').empty();
+       $('#retrocessionPanel tbody').empty();
 
 
    });
@@ -3765,6 +3776,10 @@ $(document).ready(function() {
        });
 
 
+       $('#installmentPanelupdate tbody').empty();
+       $('#ExtendCoveragePanelupdate tbody').empty();
+       $('#deductiblePanelupdate tbody').empty();
+       $('#retrocessionPanelupdate tbody').empty();
 
 
    });
@@ -4037,6 +4052,10 @@ $(document).ready(function() {
            }
        });
 
+       $('#installmentPanelendorsement tbody').empty();
+       $('#ExtendCoveragePanelendorsement tbody').empty();
+       $('#deductiblePanelendorsement tbody').empty();
+       $('#retrocessionPanelendorsement tbody').empty();
 
 
 

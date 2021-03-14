@@ -3209,6 +3209,11 @@ $(document).ready(function() {
            }
        });
 
+       $('#installmentPanel tbody').empty();
+       $('#ExtendCoveragePanel tbody').empty();
+       $('#deductiblePanel tbody').empty();
+       $('#retrocessionPanel tbody').empty();
+
    });
 </script>
 
@@ -3473,6 +3478,12 @@ $(document).ready(function() {
                 swal("Error!", request.responseText, "Insert Error");
            }
        });
+
+
+       $('#installmentPanel tbody').empty();
+       $('#ExtendCoveragePanel tbody').empty();
+       $('#deductiblePanel tbody').empty();
+       $('#retrocessionPanel tbody').empty();
 
    });
 </script>
@@ -3742,6 +3753,10 @@ $(document).ready(function() {
        });
 
 
+       $('#installmentPanelupdate tbody').empty();
+       $('#ExtendCoveragePanelupdate tbody').empty();
+       $('#deductiblePanelupdate tbody').empty();
+       $('#retrocessionPanelupdate tbody').empty();
 
 
    });
@@ -3955,7 +3970,7 @@ $(document).ready(function() {
 
 
       // insured save
-      var flnumber = $('#insuredIDtxt').val();
+       var flnumber = $('#insuredIDtxt').val();
        var flinsured = $('#flinsured').val();
        var flsuggestinsured = $('#autocomplete').val();
        var flsuffix = $('#autocomplete2').val();
@@ -4014,6 +4029,10 @@ $(document).ready(function() {
        });
 
 
+       $('#installmentPanelendorsement tbody').empty();
+       $('#ExtendCoveragePanelendorsement tbody').empty();
+       $('#deductiblePanelendorsement tbody').empty();
+       $('#retrocessionPanelendorsement tbody').empty();
 
 
    });
