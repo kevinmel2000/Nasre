@@ -3039,6 +3039,49 @@ $.ajax({
 
        var token2 = $('input[name=_token]').val();
        
+       
+       var conv_sliptotalsum = sliptotalsum.replace(/,/g, "");
+       console.log(conv_sliptotalsum)
+       var real_sliptotalsum = parseInt(conv_sliptotalsum);
+       console.log(real_sliptotalsum)
+       
+       var conv_sliptotalsumpct = sliptotalsumpct.replace(/,/g, "");
+       console.log(conv_sliptotalsumpct)
+       var real_sliptotalsumpct = parseInt(conv_sliptotalsumpct);
+       console.log(real_sliptotalsumpct)
+
+       var conv_slipsumshare = slipsumshare.replace(/,/g, "");
+       console.log(conv_slipsumshare)
+       var real_slipsumshare = parseInt(conv_slipsumshare);
+       console.log(real_slipsumshare)
+
+       var conv_slipbasicpremium = slipbasicpremium.replace(/,/g, "");
+       console.log(conv_slipbasicpremium)
+       var real_slipbasicpremium = parseInt(conv_slipbasicpremium);
+       console.log(real_slipbasicpremium)
+
+       var conv_slipgrossprmtonr = slipgrossprmtonr.replace(/,/g, "");
+       console.log(conv_slipgrossprmtonr)
+       var real_slipgrossprmtonr = parseInt(conv_slipgrossprmtonr);
+       console.log(real_slipgrossprmtonr)
+
+       var conv_slipsumcommission = slipsumcommission.replace(/,/g, "");
+       console.log(conv_slipsumcommission)
+       var real_slipsumcommission = parseInt(conv_slipsumcommission);
+       console.log(real_slipsumcommission)
+
+       var conv_slipnetprmtonr = slipnetprmtonr.replace(/,/g, "");
+       console.log(conv_slipnetprmtonr)
+       var real_slipnetprmtonr = parseInt(conv_slipnetprmtonr);
+       console.log(real_slipnetprmtonr)
+
+       var conv_slipsumor = slipsumor.replace(/,/g, "");
+       console.log(conv_slipsumor)
+       var real_slipsumor = parseInt(conv_slipsumor);
+       console.log(real_slipsumor)
+       
+       //ajaxfilefunction(e);
+
        $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -3065,10 +3108,10 @@ $.ajax({
                slipno:slipno,
                slipcndn:slipcndn,
                slippolicy_no:slippolicy_no,
-               sliptotalsum:sliptotalsum,
+               sliptotalsum:real_sliptotalsum,
                sliptype:sliptype,
                slippct:slippct,
-               sliptotalsumpct:sliptotalsumpct,
+               sliptotalsumpct:real_sliptotalsumpct,
                slipipfrom:slipipfrom,
                slipipto:slipipto,
                sliprpfrom:sliprpfrom,
@@ -3078,15 +3121,15 @@ $.ajax({
                sliprate:sliprate,
                slipvbroker:slipvbroker,
                slipshare:slipshare,
-               slipsumshare:slipsumshare,
-               slipbasicpremium:slipbasicpremium,
-               slipgrossprmtonr:slipgrossprmtonr,
-               slipsumcommission:slipsumcommission,
+               slipsumshare:real_slipsumshare,
+               slipbasicpremium:real_slipbasicpremium,
+               slipgrossprmtonr:real_slipgrossprmtonr,
                slipcommission:slipcommission,
-               slipnetprmtonr:slipnetprmtonr,
+               slipsumcommission:real_slipsumcommission,
+               slipnetprmtonr:real_slipnetprmtonr,
                sliprb:sliprb,
                slipor:slipor,
-               slipsumor:slipsumor,
+               slipsumor:real_slipsumor,
                wpc:wpc
            },
            beforeSend: function() { $("body").addClass("loading");  },
@@ -3162,6 +3205,15 @@ $.ajax({
        var mpshareto = $('#mpshareto').val();
        var mpcoinsurance = $('#mpcoinsurance').val();
        
+       var conv_mpsharefrom = mpshare.replace(/,/g, "");
+       console.log(conv_mpsharefrom)
+       var real_mpsharefrom = parseInt(conv_mpsharefrom);
+       console.log(real_mpsharefrom)
+
+       var conv_mpshareto = mpsharefrom.replace(/,/g, "");
+       console.log(conv_mpshareto)
+       var real_mpshareto = parseInt(conv_mpshareto);
+       console.log(real_mpshareto)
        
        var token2 = $('input[name=_token]').val();
        
@@ -3180,8 +3232,8 @@ $.ajax({
                mpsuggestinsured:mpsuggestinsured,
                mpsuffix:mpsuffix,
                mpshare:mpshare,
-               mpsharefrom:mpsharefrom,
-               mpshareto:mpshareto,
+               mpsharefrom:real_mpsharefrom,
+               mpshareto:real_mpshareto,
                mpcoinsurance:mpcoinsurance
            },
            beforeSend: function() { $("body").addClass("loading");  },
@@ -3249,7 +3301,49 @@ $.ajax({
        var wpc =  $('#wpc').val();
 
        var token2 = $('input[name=_token]').val();
+       var conv_sliptotalsum = sliptotalsum.replace(/,/g, "");
+       console.log(conv_sliptotalsum)
+       var real_sliptotalsum = parseInt(conv_sliptotalsum);
+       console.log(real_sliptotalsum)
        
+       var conv_sliptotalsumpct = sliptotalsumpct.replace(/,/g, "");
+       console.log(conv_sliptotalsumpct)
+       var real_sliptotalsumpct = parseInt(conv_sliptotalsumpct);
+       console.log(real_sliptotalsumpct)
+
+       var conv_slipsumshare = slipsumshare.replace(/,/g, "");
+       console.log(conv_slipsumshare)
+       var real_slipsumshare = parseInt(conv_slipsumshare);
+       console.log(real_slipsumshare)
+
+       var conv_slipbasicpremium = slipbasicpremium.replace(/,/g, "");
+       console.log(conv_slipbasicpremium)
+       var real_slipbasicpremium = parseInt(conv_slipbasicpremium);
+       console.log(real_slipbasicpremium)
+
+       var conv_slipgrossprmtonr = slipgrossprmtonr.replace(/,/g, "");
+       console.log(conv_slipgrossprmtonr)
+       var real_slipgrossprmtonr = parseInt(conv_slipgrossprmtonr);
+       console.log(real_slipgrossprmtonr)
+
+       var conv_slipsumcommission = slipsumcommission.replace(/,/g, "");
+       console.log(conv_slipsumcommission)
+       var real_slipsumcommission = parseInt(conv_slipsumcommission);
+       console.log(real_slipsumcommission)
+
+       var conv_slipnetprmtonr = slipnetprmtonr.replace(/,/g, "");
+       console.log(conv_slipnetprmtonr)
+       var real_slipnetprmtonr = parseInt(conv_slipnetprmtonr);
+       console.log(real_slipnetprmtonr)
+
+       var conv_slipsumor = slipsumor.replace(/,/g, "");
+       console.log(conv_slipsumor)
+       var real_slipsumor = parseInt(conv_slipsumor);
+       console.log(real_slipsumor)
+       
+       
+       //ajaxfilefunction(e);
+
        $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -3262,7 +3356,6 @@ $.ajax({
            data:{
                code_ms:code_ms,
                slipnumber:slipnumber,
-               prevslipnumber:prevslipnumber,
                slipuy:slipuy,
                slipstatus:slipstatus,
                sliped:sliped,
@@ -3277,10 +3370,10 @@ $.ajax({
                slipno:slipno,
                slipcndn:slipcndn,
                slippolicy_no:slippolicy_no,
-               sliptotalsum:sliptotalsum,
+               sliptotalsum:real_sliptotalsum,
                sliptype:sliptype,
                slippct:slippct,
-               sliptotalsumpct:sliptotalsumpct,
+               sliptotalsumpct:real_sliptotalsumpct,
                slipipfrom:slipipfrom,
                slipipto:slipipto,
                sliprpfrom:sliprpfrom,
@@ -3290,15 +3383,15 @@ $.ajax({
                sliprate:sliprate,
                slipvbroker:slipvbroker,
                slipshare:slipshare,
-               slipsumshare:slipsumshare,
-               slipbasicpremium:slipbasicpremium,
-               slipgrossprmtonr:slipgrossprmtonr,
-               slipsumcommission:slipsumcommission,
+               slipsumshare:real_slipsumshare,
+               slipbasicpremium:real_slipbasicpremium,
+               slipgrossprmtonr:real_slipgrossprmtonr,
                slipcommission:slipcommission,
-               slipnetprmtonr:slipnetprmtonr,
+               slipsumcommission:real_slipsumcommission,
+               slipnetprmtonr:real_slipnetprmtonr,
                sliprb:sliprb,
                slipor:slipor,
-               slipsumor:slipsumor,
+               slipsumor:real_slipsumor,
                wpc:wpc
            },
            beforeSend: function() { $("body").addClass("loading");  },
@@ -3364,7 +3457,7 @@ $.ajax({
 
         //save insured
 
-       var mpnumber = $('#insuredIDtxt').val();
+        var mpnumber = $('#insuredIDtxt').val();
        var mpinsured = $('#mpinsured').val();
        var mpsuggestinsured = $('#autocomplete').val();
        var mpsuffix = $('#autocomplete2').val();
@@ -3373,6 +3466,15 @@ $.ajax({
        var mpshareto = $('#mpshareto').val();
        var mpcoinsurance = $('#mpcoinsurance').val();
        
+       var conv_mpsharefrom = mpshare.replace(/,/g, "");
+       console.log(conv_mpsharefrom)
+       var real_mpsharefrom = parseInt(conv_mpsharefrom);
+       console.log(real_mpsharefrom)
+
+       var conv_mpshareto = mpsharefrom.replace(/,/g, "");
+       console.log(conv_mpshareto)
+       var real_mpshareto = parseInt(conv_mpshareto);
+       console.log(real_mpshareto)
        
        var token2 = $('input[name=_token]').val();
        
@@ -3391,8 +3493,8 @@ $.ajax({
                mpsuggestinsured:mpsuggestinsured,
                mpsuffix:mpsuffix,
                mpshare:mpshare,
-               mpsharefrom:mpsharefrom,
-               mpshareto:mpshareto,
+               mpsharefrom:real_mpsharefrom,
+               mpshareto:real_mpshareto,
                mpcoinsurance:mpcoinsurance
            },
            beforeSend: function() { $("body").addClass("loading");  },
