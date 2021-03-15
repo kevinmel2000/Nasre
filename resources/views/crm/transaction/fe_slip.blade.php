@@ -403,11 +403,9 @@
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <label>{{__('Prod Year')}}:</label>
-                                                                        <div class="input-group date" id="date" data-target-input="nearest">
-                                                                                <input type="text" id="slipprodyear" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipprodyear" value="{{ $currdate }}" readonly="readonly">
-                                                                                <div class="input-group-append" >
-                                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                                </div>
+                                                                        <div class="input-group " >
+                                                                                <input type="date" id="slipprodyear" class="form-control form-control-sm "  name="slipprodyear" value="{{ $currdate }}" readonly="readonly">
+                                                                                
                                                                         </div>
                                                                 </div>
                                                             </div>
@@ -481,7 +479,7 @@
                                                                 </tbody>
                                                                 
                                                                 </table>
-                                                                <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> Data is Transferred!</i>
+                                                                <i class="fa fa-info-circle" style="color: grey;" hidden="true" aria-hidden="true"> Data is Transferred!</i>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -491,7 +489,7 @@
                                                         <div class="form-group">
                                                             <label for="">{{__('Source')}}</label>
                                                             <select id="slipcedingbroker" name="slipcedingbroker" class="e1 form-control form-control-sm ">
-                                                                <option value="" readonly selected  value='0'>Ceding or Broker</option>
+                                                                <option value=""  selected disabled >Ceding or Broker</option>
                                                                 @foreach($cedingbroker as $cb)
                                                                     <option value="{{ $cb->id }}">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
                                                                 @endforeach
@@ -499,7 +497,7 @@
                                                         </div>    
                                                         <div class="form-group">
                                                             <select id="slipceding" name="slipceding" class="e1 form-control form-control-sm ">
-                                                                <option value="" readonly selected  value='0'>Ceding </option>
+                                                                <option value=""  selected disabled>Ceding </option>
                                                                 @foreach($ceding as $cd)
                                                                     <option value="{{ $cd->id }}">{{ $cd->code }} - {{ $cd->name }}</option>
                                                                 @endforeach
@@ -765,7 +763,7 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for=""style="opacity: 0;">{{__('Type')}}</label>
-                                                                    <input type="text"  id="sliptotalsumpct" name="sliptotalsumpct" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" />
+                                                                    <input type="text"  id="sliptotalsumpct" name="sliptotalsumpct" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-150" placeholder="=pct*tsi" readonly="readonly" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -995,7 +993,7 @@
                                                 </div>
                                                 
                                                 <div class="row d-flex justify-content-start">
-                                                    <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> non proportional panel</i>
+                                                    <i class="fa fa-info-circle" id="labelnp" style="color: grey;" aria-hidden="true"> non proportional panel</i>
                                                 </div>
                                                 <div class="row d-flex justify-content-end">
                                                     <div class="col-md-4">
@@ -1218,7 +1216,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <div class="input-group">
-                                                                            <input type="text" id="slipor" name="slipor" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                            <input type="number" step="0.001" value="100" id="slipor" name="slipor" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                                                             <div class="input-group-append">
                                                                                 <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                             </div>

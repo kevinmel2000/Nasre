@@ -178,7 +178,8 @@ class FeSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-        $currdate = date("d/m/Y");
+        $currdate = date("Y-m-d");
+        // $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
@@ -363,7 +364,7 @@ class FeSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-        $currdate = date("d/m/Y");
+        $currdate = date("Y-m-d");
         $insured = Insured::orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
