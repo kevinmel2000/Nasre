@@ -293,7 +293,7 @@
 
                     if(response.retro_backup)
                     {
-                        $("#sliprbdetail option[value=" + response.retro_backup + "]:first")[0].selected;
+                        $("#sliprbdetail option[value=" + response.retro_backup + "]:first")[0].attr("selected","selected");
                     }
 
 
@@ -507,7 +507,7 @@
 
                     if(response.retro_backup)
                     {
-                        $("#sliprbupdate option[value=" + response.retro_backup + "]:first")[0].selected;
+                        $("#sliprbupdate option[value=" + response.retro_backup + "]:first")[0].attr("selected","selected");
                     }
 
                     
@@ -727,7 +727,7 @@
 
                     if(response.retro_backup)
                     {
-                        $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected;
+                        $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].attr("selected","selected");
                     }
 
                     $('#slipnoendorsement').val(response.slip_no);

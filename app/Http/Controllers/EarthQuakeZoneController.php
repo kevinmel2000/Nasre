@@ -28,17 +28,17 @@ class EarthQuakeZoneController extends Controller
             if($lastid != null){
                 // $code_st = $mydate . strval($lastid + 1);
 
-                if($lastid < 10){
+                if($lastid < 9){
                     $code_eqz = '00000' . strval($lastid + 1);
-                }elseif($lastid > 9 && $lastid < 100){
+                }elseif($lastid > 8 && $lastid < 99){
                     $code_eqz = '0000' . strval($lastid + 1);
-                }elseif($lastid > 99 && $lastid < 1000){
+                }elseif($lastid > 98 && $lastid < 999){
                     $code_eqz = '000' . strval($lastid + 1);
-                }elseif($lastid > 999 && $lastid < 10000){
+                }elseif($lastid > 998 && $lastid < 9999){
                     $code_eqz = '00' . strval($lastid + 1);
-                }elseif($lastid > 9999 && $lastid < 100000){
+                }elseif($lastid > 9998 && $lastid < 99999){
                     $code_eqz = '0' . strval($lastid + 1);
-                }elseif($lastid > 99999 ){
+                }elseif($lastid > 99998 ){
                     $code_eqz =  strval($lastid + 1);
                 }
             }

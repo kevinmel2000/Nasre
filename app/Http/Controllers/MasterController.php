@@ -86,7 +86,7 @@ class MasterController extends Controller
                 if($lastid < 9){
                     $code_cob = '0' . strval($lastid + 1);
                 }   
-                elseif($lastid > 8 && $lastid < 100){
+                elseif($lastid > 8 && $lastid < 99){
                     $code_cob = strval($lastid + 1);
                 } 
                 //$code_cob = $mydate . strval($lastid + 1);
@@ -158,7 +158,7 @@ class MasterController extends Controller
                 if($lastid < 9){
                     $code_ocp = '0' . strval($lastid + 1);
                 } 
-                elseif($lastid > 8 && $lastid < 100){
+                elseif($lastid > 8 && $lastid < 99){
                     $code_ocp = strval($lastid + 1);
                 } 
                 
@@ -272,17 +272,17 @@ class MasterController extends Controller
             if($lastid != null){
                 // $code_st = $mydate . strval($lastid + 1);
 
-                if($lastid < 10){
+                if($lastid < 9){
                     $code_st = '00000' . strval($lastid + 1);
-                }elseif($lastid > 9 && $lastid < 100){
+                }elseif($lastid > 8 && $lastid < 99){
                     $code_st = '0000' . strval($lastid + 1);
-                }elseif($lastid > 99 && $lastid < 1000){
+                }elseif($lastid > 98 && $lastid < 999){
                     $code_st = '000' . strval($lastid + 1);
-                }elseif($lastid > 999 && $lastid < 10000){
+                }elseif($lastid > 998 && $lastid < 9999){
                     $code_st = '00' . strval($lastid + 1);
-                }elseif($lastid > 9999 && $lastid < 100000){
+                }elseif($lastid > 9998 && $lastid < 99999){
                     $code_st = '0' . strval($lastid + 1);
-                }elseif($lastid > 99999 ){
+                }elseif($lastid > 99998 ){
                     $code_st =  strval($lastid + 1);
                 }
             }
@@ -316,17 +316,17 @@ class MasterController extends Controller
             if($lastid != null){
                 // $code_cs = $mydate . strval($lastid + 1);
 
-                if($lastid < 10){
+                if($lastid < 9){
                     $code_cs = '00000' . strval($lastid + 1);
-                }elseif($lastid > 9 && $lastid < 100){
+                }elseif($lastid > 8 && $lastid < 99){
                     $code_cs = '0000' . strval($lastid- + 1);
-                }elseif($lastid > 99 && $lastid < 1000){
+                }elseif($lastid > 98 && $lastid < 999){
                     $code_cs = '000' . strval($lastid + 1);
-                }elseif($lastid > 999 && $lastid < 10000){
+                }elseif($lastid > 998 && $lastid < 9999){
                     $code_cs = '00' . strval($lastid + 1);
-                }elseif($lastid > 9999 && $lastid < 100000){
+                }elseif($lastid > 9998 && $lastid < 99999){
                     $code_cs = '0' . strval($lastid + 1);
-                }elseif($lastid > 99999 ){
+                }elseif($lastid > 99998 ){
                     $code_cs =  strval($lastid + 1);
                 }
                 
@@ -363,17 +363,17 @@ class MasterController extends Controller
             if($lastid != null){
                 // $code_cr = $mydate . strval($lastid + 1);
 
-                if($lastid < 10){
+                if($lastid < 9){
                     $code_cr = '00000' . strval($lastid + 1);
-                }elseif($lastid > 9 && $lastid < 100){
+                }elseif($lastid > 8 && $lastid < 99){
                     $code_cr = '0000' . strval($lastid- + 1);
-                }elseif($lastid > 99 && $lastid < 1000){
+                }elseif($lastid > 98 && $lastid < 999){
                     $code_cr = '000' . strval($lastid + 1);
-                }elseif($lastid > 999 && $lastid < 10000){
+                }elseif($lastid > 998 && $lastid < 9999){
                     $code_cr = '00' . strval($lastid + 1);
-                }elseif($lastid > 9999 && $lastid < 100000){
+                }elseif($lastid > 9998 && $lastid < 99999){
                     $code_cr = '0' . strval($lastid + 1);
-                }elseif($lastid > 99999 ){
+                }elseif($lastid > 99998){
                     $code_cr =  strval($lastid + 1);
                 }
 
@@ -415,17 +415,17 @@ class MasterController extends Controller
                 // $code_mlu = $mydate . strval($lastid + 1);
 
                 
-                if($lastid < 10){
+                if($lastid < 9){
                     $code_mlu = '00000' . strval($lastid + 1);
-                }elseif($lastid > 9 && $lastid < 100){
+                }elseif($lastid > 8 && $lastid < 99){
                     $code_mlu = '0000' . strval($lastid- + 1);
-                }elseif($lastid > 99 && $lastid < 1000){
+                }elseif($lastid > 98 && $lastid < 999){
                     $code_mlu = '000' . strval($lastid + 1);
-                }elseif($lastid > 999 && $lastid < 10000){
+                }elseif($lastid > 998 && $lastid < 9999){
                     $code_mlu = '00' . strval($lastid + 1);
-                }elseif($lastid > 9999 && $lastid < 100000){
+                }elseif($lastid > 9998 && $lastid < 99999){
                     $code_mlu = '0' . strval($lastid + 1);
-                }elseif($lastid > 99999){
+                }elseif($lastid > 99998){
                     $code_mlu =  strval($lastid + 1);
                 }
 
@@ -461,17 +461,17 @@ class MasterController extends Controller
             if($lastid != null){
                 $code_pt = $mydate . strval($lastid + 1);
 
-                if($lastid < 10){
+                if($lastid < 9){
                     $code_pt = '00000' . strval($lastid + 1);
-                }elseif($lastid > 9 && $lastid < 100){
+                }elseif($lastid > 8 && $lastid < 99){
                     $code_pt = '0000' . strval($lastid- + 1);
-                }elseif($lastid > 99 && $lastid < 1000){
+                }elseif($lastid > 98 && $lastid < 999){
                     $code_pt = '000' . strval($lastid + 1);
-                }elseif($lastid > 999 && $lastid < 10000){
+                }elseif($lastid > 998 && $lastid < 9999){
                     $code_pt = '00' . strval($lastid + 1);
-                }elseif($lastid > 9999 && $lastid < 100000){
+                }elseif($lastid > 9998 && $lastid < 99999){
                     $code_pt = '0' . strval($lastid + 1);
-                }elseif($lastid > 99999 ){
+                }elseif($lastid > 99998 ){
                     $code_pt =  strval($lastid + 1);
                 }
             }
@@ -507,17 +507,17 @@ class MasterController extends Controller
             if($lastid != null){
                 // $code_cdn = $mydate . strval($lastid + 1);
 
-                if($lastid < 10){
+                if($lastid < 9){
                     $code_cdn = '00000' . strval($lastid + 1);
-                }elseif($lastid > 9 && $lastid < 100){
+                }elseif($lastid > 8 && $lastid < 99){
                     $code_cdn = '0000' . strval($lastid- + 1);
-                }elseif($lastid > 99 && $lastid < 1000){
+                }elseif($lastid > 98 && $lastid < 999){
                     $code_cdn = '000' . strval($lastid + 1);
-                }elseif($lastid > 999 && $lastid < 10000){
+                }elseif($lastid > 998 && $lastid < 9999){
                     $code_cdn = '00' . strval($lastid + 1);
-                }elseif($lastid > 9999 && $lastid < 100000){
+                }elseif($lastid > 9998 && $lastid < 99999){
                     $code_cdn = '0' . strval($lastid + 1);
-                }elseif($lastid > 99999 ){
+                }elseif($lastid > 99998 ){
                     $code_cdn =  strval($lastid + 1);
                 }
 
@@ -554,17 +554,17 @@ class MasterController extends Controller
             if($lastid != null){
                 $code_ct = $mydate . strval($lastid + 1);
 
-                if($lastid < 10){
+                if($lastid < 9){
                     $code_ct = '00000' . strval($lastid + 1);
-                }elseif($lastid > 9 && $lastid < 100){
+                }elseif($lastid > 8 && $lastid < 99){
                     $code_ct = '0000' . strval($lastid- + 1);
-                }elseif($lastid > 99 && $lastid < 1000){
+                }elseif($lastid > 98 && $lastid < 999){
                     $code_ct = '000' . strval($lastid + 1);
-                }elseif($lastid > 999 && $lastid < 10000){
+                }elseif($lastid > 998 && $lastid < 9999){
                     $code_ct = '00' . strval($lastid + 1);
-                }elseif($lastid > 9999 && $lastid < 100000){
+                }elseif($lastid > 9998 && $lastid < 99999){
                     $code_ct = '0' . strval($lastid + 1);
-                }elseif($lastid > 99999){
+                }elseif($lastid > 99998){
                     $code_ct =  strval($lastid + 1);
                 }
             }
@@ -600,17 +600,17 @@ class MasterController extends Controller
             if($lastid != null){
                 // $code_cr = $mydate . strval($lastid + 1);
 
-                if($lastid < 10){
+                if($lastid < 9){
                     $code_ii = '00000' . strval($lastid + 1);
-                }elseif($lastid > 9 && $lastid < 100){
+                }elseif($lastid > 8 && $lastid < 99){
                     $code_ii = '0000' . strval($lastid- + 1);
-                }elseif($lastid > 99 && $lastid < 1000){
+                }elseif($lastid > 98 && $lastid < 999){
                     $code_ii = '000' . strval($lastid + 1);
-                }elseif($lastid > 999 && $lastid < 10000){
+                }elseif($lastid > 998 && $lastid < 9999){
                     $code_ii = '00' . strval($lastid + 1);
-                }elseif($lastid > 9999 && $lastid < 100000){
+                }elseif($lastid > 9998 && $lastid < 99999){
                     $code_ii = '0' . strval($lastid + 1);
-                }elseif($lastid > 99999 ){
+                }elseif($lastid > 99998 ){
                     $code_ii =  strval($lastid + 1);
                 }
 
@@ -646,17 +646,17 @@ class MasterController extends Controller
             if($lastid != null){
                 // $code_cr = $mydate . strval($lastid + 1);
 
-                if($lastid < 10){
+                if($lastid < 9){
                     $code_dt = '00000' . strval($lastid + 1);
-                }elseif($lastid > 9 && $lastid < 100){
+                }elseif($lastid > 8 && $lastid < 99){
                     $code_dt = '0000' . strval($lastid- + 1);
-                }elseif($lastid > 99 && $lastid < 1000){
+                }elseif($lastid > 98 && $lastid < 999){
                     $code_dt = '000' . strval($lastid + 1);
-                }elseif($lastid > 999 && $lastid < 10000){
+                }elseif($lastid > 998 && $lastid < 9999){
                     $code_dt = '00' . strval($lastid + 1);
-                }elseif($lastid > 9999 && $lastid < 100000){
+                }elseif($lastid > 9998 && $lastid < 99999){
                     $code_dt = '0' . strval($lastid + 1);
-                }elseif($lastid > 99999 ){
+                }elseif($lastid > 99998 ){
                     $code_dt =  strval($lastid + 1);
                 }
 
@@ -693,17 +693,17 @@ class MasterController extends Controller
             if($lastid != null){
                 // $code_cr = $mydate . strval($lastid + 1);
 
-                if($lastid < 10){
+                if($lastid < 9){
                     $code_ec = '00000' . strval($lastid + 1);
-                }elseif($lastid > 9 && $lastid < 100){
+                }elseif($lastid > 8 && $lastid < 99){
                     $code_ec = '0000' . strval($lastid- + 1);
-                }elseif($lastid > 99 && $lastid < 1000){
+                }elseif($lastid > 98 && $lastid < 999){
                     $code_ec = '000' . strval($lastid + 1);
-                }elseif($lastid > 999 && $lastid < 10000){
+                }elseif($lastid > 998 && $lastid < 9999){
                     $code_ec = '00' . strval($lastid + 1);
-                }elseif($lastid > 9999 && $lastid < 100000){
+                }elseif($lastid > 9998 && $lastid < 99999){
                     $code_ec = '0' . strval($lastid + 1);
-                }elseif($lastid > 99999 ){
+                }elseif($lastid > 99998 ){
                     $code_ec =  strval($lastid + 1);
                 }
 
@@ -742,17 +742,17 @@ class MasterController extends Controller
             if($lastid != null){
                 // $code_cr = $mydate . strval($lastid + 1);
 
-                if($lastid < 10){
+                if($lastid < 9){
                     $code_sp = '00000' . strval($lastid + 1);
-                }elseif($lastid > 9 && $lastid < 100){
+                }elseif($lastid > 8 && $lastid < 99){
                     $code_sp = '0000' . strval($lastid- + 1);
-                }elseif($lastid > 99 && $lastid < 1000){
+                }elseif($lastid > 98 && $lastid < 999){
                     $code_sp = '000' . strval($lastid + 1);
-                }elseif($lastid > 999 && $lastid < 10000){
+                }elseif($lastid > 998 && $lastid < 9999){
                     $code_sp = '00' . strval($lastid + 1);
-                }elseif($lastid > 9999 && $lastid < 100000){
+                }elseif($lastid > 9998 && $lastid < 99999){
                     $code_sp = '0' . strval($lastid + 1);
-                }elseif($lastid > 99999 ){
+                }elseif($lastid > 99998 ){
                     $code_sp =  strval($lastid + 1);
                 }
 
@@ -789,17 +789,17 @@ class MasterController extends Controller
             if($lastid != null){
                 // $code_cr = $mydate . strval($lastid + 1);
 
-                if($lastid < 10){
+                if($lastid < 9){
                     $code_rf = '00000' . strval($lastid + 1);
-                }elseif($lastid > 9 && $lastid < 100){
+                }elseif($lastid > 8 && $lastid < 99){
                     $code_rf = '0000' . strval($lastid- + 1);
-                }elseif($lastid > 99 && $lastid < 1000){
+                }elseif($lastid > 98 && $lastid < 999){
                     $code_rf = '000' . strval($lastid + 1);
-                }elseif($lastid > 999 && $lastid < 10000){
+                }elseif($lastid > 998 && $lastid < 9999){
                     $code_rf = '00' . strval($lastid + 1);
-                }elseif($lastid > 9999 && $lastid < 100000){
+                }elseif($lastid > 9998 && $lastid < 99999){
                     $code_rf = '0' . strval($lastid + 1);
-                }elseif($lastid > 99999){
+                }elseif($lastid > 99998){
                     $code_rf =  strval($lastid + 1);
                 }
 

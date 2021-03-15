@@ -35,7 +35,7 @@ class KocController extends Controller
             if($lastid < 9){
                 $code_koc = '0' . strval($lastid + 1);
             }   
-            elseif($lastid > 8 && $lastid < 100){
+            elseif($lastid > 8 && $lastid < 99){
                 $code_koc = strval($lastid + 1);
             } 
             //$code_cob = $mydate . strval($lastid + 1);

@@ -581,8 +581,8 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="card">
+                                                            <div class="col-md-6">
+                                                                {{-- <div class="card">
                                                                     <div class="card-header bg-gray">
                                                                         {{__('Reference Number')}}
                                                                     </div>
@@ -607,6 +607,16 @@
                                                                         </div>
                                                                         
                                                                     </div>
+                                                                </div> --}}
+                                                                <div class="form-group">
+                                                                    <label for="">{{__('Build Const Upper Area')}}</label>
+                                                                    <input type="text"  id="slipbcua" name="slipbcua" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="">{{__('Build Const Lower Area')}}</label>
+                                                                    <input type="text" s id="slipbcla" name="slipbcla" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -982,9 +992,18 @@
 
                                                     <div class="col-md-4">
                                                         <div class="row">
-                                                            <div class="col-md-5">
-                                                                <div class="form-group" id="daytotal">                         
+                                                            <div class="col-md-12">
+                                                                {{-- <div class="form-group" id="daytotal">                         
                                                                 Total Days :0
+                                                                
+                                                                </div> --}}
+                                                                <div class="form-group">
+                                                                    <label for="">{{__('Total Days')}}</label>
+                                                                    <input type="text"  id="daytotal" name="daytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="">{{__('Total Summary Insurance Periode')}}</label>
+                                                                    <input type="text"  id="sliptotalsumdate" name="sliprate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                                 </div>
                                                             </div>
                                                         </div>

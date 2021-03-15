@@ -170,23 +170,23 @@ class HeMotorSlipController extends Controller
         $sliplastid = count($slip);
 
         if($lastid != null){
-            if($lastid < 10)
+            if($lastid < 9)
             {
                 $code_ms = "IN" .  $mydate . "0000" . strval($lastid + 1);
             }   
-            elseif($lastid > 9 && $lastid < 100)
+            elseif($lastid > 8 && $lastid < 99)
             {
                 $code_ms = "IN" .  $mydate . "000" . strval($lastid + 1);
             }
-            elseif($lastid > 99 && $lastid < 1000)
+            elseif($lastid > 98 && $lastid < 999)
             {
                 $code_ms = "IN" .  $mydate . "00" . strval($lastid + 1);
             }
-            elseif($lastid > 999 && $lastid < 10000)
+            elseif($lastid > 998 && $lastid < 9999)
             {
                 $code_ms = "IN" .  $mydate . "0" . strval($lastid + 1);
             }
-            elseif($lastid > 9999 && $lastid < 100000)
+            elseif($lastid > 9998 && $lastid < 99999)
             {
                 $code_ms = "IN" .  $mydate  . strval($lastid + 1);
             }
@@ -201,23 +201,23 @@ class HeMotorSlipController extends Controller
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
 
         if($sliplastid != null){
-            if($sliplastid < 10)
+            if($sliplastid < 9)
             {
                 $code_sl = "HEM".  $mydate . "0000" . strval($sliplastid + 1);
             }   
-            elseif($sliplastid > 9 && $sliplastid < 100)
+            elseif($sliplastid > 8 && $sliplastid < 99)
             {
                 $code_sl = "HEM".  $mydate . "000" . strval($sliplastid + 1);
             }
-            elseif($sliplastid > 99 && $sliplastid < 1000)
+            elseif($sliplastid > 98 && $sliplastid < 999)
             {
                 $code_sl = "HEM".  $mydate . "00" . strval($sliplastid + 1);
             }
-            elseif($sliplastid > 999 && $sliplastid < 10000)
+            elseif($sliplastid > 998 && $sliplastid < 9999)
             {
                 $code_sl = "HEM".  $mydate . "0" . strval($sliplastid + 1);
             }
-            elseif($sliplastid > 9999 && $sliplastid < 100000)
+            elseif($sliplastid > 9998 && $sliplastid < 99999)
             {
                 $code_sl = "HEM".  $mydate . strval($sliplastid + 1);
             }
@@ -240,23 +240,23 @@ class HeMotorSlipController extends Controller
             }
             else
             {
-                if($sliplastid < 10)
+                if($sliplastid < 9)
                 {
                     $code_sl = "HEM".  $mydate . "0000" . strval($sliplastid + $i);
                 }   
-                elseif($sliplastid > 9 && $sliplastid < 100)
+                elseif($sliplastid > 8 && $sliplastid < 99)
                 {
                     $code_sl = "HEM".  $mydate . "000" . strval($sliplastid + $i);
                 }
-                elseif($sliplastid > 99 && $sliplastid < 1000)
+                elseif($sliplastid > 98 && $sliplastid < 999)
                 {
                     $code_sl = "HEM".  $mydate . "00" . strval($sliplastid + $i);
                 }
-                elseif($sliplastid > 999 && $sliplastid < 10000)
+                elseif($sliplastid > 998 && $sliplastid < 9999)
                 {
                     $code_sl = "HEM".  $mydate . "0" . strval($sliplastid + $i);
                 }
-                elseif($sliplastid > 9999 && $sliplastid < 100000)
+                elseif($sliplastid > 9998 && $sliplastid < 99999)
                 {
                     $code_sl = "HEM".  $mydate . strval($sliplastid + $i);
                 }
@@ -358,23 +358,23 @@ class HeMotorSlipController extends Controller
                     }
                     else
                     {
-                        if($sliplastid < 10)
+                        if($sliplastid < 9)
                         {
                             $code_sl = "HEM".  $mydate . "0000" . strval($sliplastid + $i);
                         }   
-                        elseif($sliplastid > 9 && $sliplastid < 100)
+                        elseif($sliplastid > 8 && $sliplastid < 99)
                         {
                             $code_sl = "HEM".  $mydate . "000" . strval($sliplastid + $i);
                         }
-                        elseif($sliplastid > 99 && $sliplastid < 1000)
+                        elseif($sliplastid > 98 && $sliplastid < 999)
                         {
                             $code_sl = "HEM".  $mydate . "00" . strval($sliplastid + $i);
                         }
-                        elseif($sliplastid > 999 && $sliplastid < 10000)
+                        elseif($sliplastid > 998 && $sliplastid < 9999)
                         {
                             $code_sl = "HEM".  $mydate . "0" . strval($sliplastid + $i);
                         }
-                        elseif($sliplastid > 9999 && $sliplastid < 100000)
+                        elseif($sliplastid > 9998 && $sliplastid < 99999)
                         {
                             $code_sl = "HEM".  $mydate . strval($sliplastid + $i);
                         }
@@ -390,23 +390,23 @@ class HeMotorSlipController extends Controller
             $sliplastid = count($slip);
             
             if($sliplastid != null){
-                if($sliplastid < 10)
+                if($sliplastid < 9)
                 {
                     $code_sl = "HEM".  $mydate . "0000" . strval($sliplastid + 1);
                 }   
-                elseif($sliplastid > 9 && $sliplastid < 100)
+                elseif($sliplastid > 8 && $sliplastid < 99)
                 {
                     $code_sl = "HEM".  $mydate . "000" . strval($sliplastid + 1);
                 }
-                elseif($sliplastid > 99 && $sliplastid < 1000)
+                elseif($sliplastid > 98 && $sliplastid < 999)
                 {
                     $code_sl = "HEM".  $mydate . "00" . strval($sliplastid + 1);
                 }
-                elseif($sliplastid > 999 && $sliplastid < 10000)
+                elseif($sliplastid > 998 && $sliplastid < 9999)
                 {
                     $code_sl = "HEM".  $mydate . "0" . strval($sliplastid + 1);
                 }
-                elseif($sliplastid > 9999 && $sliplastid < 100000)
+                elseif($sliplastid > 9998 && $sliplastid < 99999)
                 {
                     $code_sl = "HEM".  $mydate . strval($sliplastid + 1);
                 }
@@ -484,19 +484,19 @@ class HeMotorSlipController extends Controller
             }
             else 
             {
-                if($countendorsement < 10)
+                if($countendorsement < 9)
                 {
-                    $code_sl = substr($slipdata->number,0,16) . '-END' . '000' . ($countendorsement + 1);
+                    $code_sl = substr($slipdata->number,0,15) . '-END' . '000' . ($countendorsement + 1);
                 }
-                elseif($countendorsement > 9 && $countendorsement < 100)
+                elseif($countendorsement > 8 && $countendorsement < 99)
                 {
-                    $code_sl = substr($slipdata->number,0,16) . '-END' . '00' . ($countendorsement + 1);
+                    $code_sl = substr($slipdata->number,0,15) . '-END' . '00' . ($countendorsement + 1);
                 }
-                elseif($countendorsement > 99 && $countendorsement < 1000)
+                elseif($countendorsement > 98 && $countendorsement < 999)
                 {
                     $code_sl = substr($slipdata->number,0,16) . '-END' . '0' . ($countendorsement + 1);
                 }
-                elseif($countendorsement > 999 && $countendorsement < 10000)
+                elseif($countendorsement > 998 && $countendorsement < 9999)
                 {
                     $code_sl = substr($slipdata->number,0,16) . '-END' . ($countendorsement + 1);
                 }
@@ -519,19 +519,19 @@ class HeMotorSlipController extends Controller
             }
             else 
             {
-                if($countendorsement < 10)
+                if($countendorsement < 9)
                 {
-                    $code_sl = substr($slipdata->number,0,16) . '-END' . '000' . ($countendorsement + 1);
+                    $code_sl = substr($slipdata->number,0,15) . '-END' . '000' . ($countendorsement + 1);
                 }
-                elseif($countendorsement > 9 && $countendorsement < 100)
+                elseif($countendorsement > 8 && $countendorsement < 99)
                 {
-                    $code_sl = substr($slipdata->number,0,16) . '-END' . '00' . ($countendorsement + 1);
+                    $code_sl = substr($slipdata->number,0,15) . '-END' . '00' . ($countendorsement + 1);
                 }
-                elseif($countendorsement > 99 && $countendorsement < 1000)
+                elseif($countendorsement > 98 && $countendorsement < 9999)
                 {
-                    $code_sl = substr($slipdata->number,0,16) . '-END' . '0' . ($countendorsement + 1);
+                    $code_sl = substr($slipdata->number,0,15) . '-END' . '0' . ($countendorsement + 1);
                 }
-                elseif($countendorsement > 999 && $countendorsement < 10000)
+                elseif($countendorsement > 998 && $countendorsement < 99999)
                 {
                     $code_sl = substr($slipdata->number,0,16) . '-END' . ($countendorsement + 1);
                 }
@@ -609,23 +609,23 @@ class HeMotorSlipController extends Controller
             }
             else
             {
-                if($sliplastid < 10)
+                if($sliplastid < 9)
                 {
                     $code_sl = "HEM".  $mydate . "0000" . strval($sliplastid + $i);
                 }   
-                elseif($sliplastid > 9 && $sliplastid < 100)
+                elseif($sliplastid > 8 && $sliplastid < 99)
                 {
                     $code_sl = "HEM".  $mydate . "000" . strval($sliplastid + $i);
                 }
-                elseif($sliplastid > 99 && $sliplastid < 1000)
+                elseif($sliplastid > 98 && $sliplastid < 999)
                 {
                     $code_sl = "HEM".  $mydate . "00" . strval($sliplastid + $i);
                 }
-                elseif($sliplastid > 999 && $sliplastid < 10000)
+                elseif($sliplastid > 998 && $sliplastid < 9999)
                 {
                     $code_sl = "HEM".  $mydate . "0" . strval($sliplastid + $i);
                 }
-                elseif($sliplastid > 9999 && $sliplastid < 100000)
+                elseif($sliplastid > 9998 && $sliplastid < 99999)
                 {
                     $code_sl = "HEM".  $mydate . strval($sliplastid + $i);
                 }
@@ -904,23 +904,23 @@ class HeMotorSlipController extends Controller
             $mydate = date("Y").date("m").date("d");
             $userid = Auth::user()->id;
             if($sliplastid != null){
-                if($sliplastid < 10)
+                if($sliplastid < 9)
                 {
                     $code_sl = "HEM".  $mydate . "0000" . strval($sliplastid + 1);
                 }   
-                elseif($sliplastid > 9 && $sliplastid < 100)
+                elseif($sliplastid > 8 && $sliplastid < 99)
                 {
                     $code_sl = "HEM".  $mydate . "000" . strval($sliplastid + 1);
                 }
-                elseif($sliplastid > 99 && $sliplastid < 1000)
+                elseif($sliplastid > 98 && $sliplastid < 999)
                 {
                     $code_sl = "HEM".  $mydate . "00" . strval($sliplastid + 1);
                 }
-                elseif($sliplastid > 999 && $sliplastid < 10000)
+                elseif($sliplastid > 998 && $sliplastid < 9999)
                 {
                     $code_sl = "HEM".  $mydate . "0" . strval($sliplastid + 1);
                 }
-                elseif($sliplastid > 9999 && $sliplastid < 100000)
+                elseif($sliplastid > 9998 && $sliplastid < 99999)
                 {
                     $code_sl = "HEM".  $mydate . strval($sliplastid + 1);
                 }
@@ -942,23 +942,23 @@ class HeMotorSlipController extends Controller
                 }
                 else
                 {
-                    if($sliplastid < 10)
+                    if($sliplastid < 9)
                     {
                         $code_sl = "HEM".  $mydate . "0000" . strval($sliplastid + $i);
                     }   
-                    elseif($sliplastid > 9 && $sliplastid < 100)
+                    elseif($sliplastid > 8 && $sliplastid < 99)
                     {
                         $code_sl = "HEM".  $mydate . "000" . strval($sliplastid + $i);
                     }
-                    elseif($sliplastid > 99 && $sliplastid < 1000)
+                    elseif($sliplastid > 98 && $sliplastid < 999)
                     {
                         $code_sl = "HEM".  $mydate . "00" . strval($sliplastid + $i);
                     }
-                    elseif($sliplastid > 999 && $sliplastid < 10000)
+                    elseif($sliplastid > 998 && $sliplastid < 9999)
                     {
                         $code_sl = "HEM".  $mydate . "0" . strval($sliplastid + $i);
                     }
-                    elseif($sliplastid > 9999 && $sliplastid < 100000)
+                    elseif($sliplastid > 9998 && $sliplastid < 99999)
                     {
                         $code_sl = "HEM".  $mydate . strval($sliplastid + $i);
                     }
@@ -1123,23 +1123,23 @@ class HeMotorSlipController extends Controller
             $mydate = date("Y").date("m").date("d");
             $userid = Auth::user()->id;
             if($sliplastid != null){
-                if($sliplastid < 10)
+                if($sliplastid < 9)
                 {
                     $code_sl = "HEM".  $mydate . "0000" . strval($sliplastid + 1);
                 }   
-                elseif($sliplastid > 9 && $sliplastid < 100)
+                elseif($sliplastid > 8 && $sliplastid < 99)
                 {
                     $code_sl = "HEM".  $mydate . "000" . strval($sliplastid + 1);
                 }
-                elseif($sliplastid > 99 && $sliplastid < 1000)
+                elseif($sliplastid > 98 && $sliplastid < 999)
                 {
                     $code_sl = "HEM".  $mydate . "00" . strval($sliplastid + 1);
                 }
-                elseif($sliplastid > 999 && $sliplastid < 10000)
+                elseif($sliplastid > 998 && $sliplastid < 9999)
                 {
                     $code_sl = "HEM".  $mydate . "0" . strval($sliplastid + 1);
                 }
-                elseif($sliplastid > 9999 && $sliplastid < 100000)
+                elseif($sliplastid > 9998 && $sliplastid < 99999)
                 {
                     $code_sl = "HEM".  $mydate . strval($sliplastid + 1);
                 }
@@ -1161,23 +1161,23 @@ class HeMotorSlipController extends Controller
                 }
                 else
                 {
-                    if($sliplastid < 10)
+                    if($sliplastid < 9)
                     {
                         $code_sl = "HEM".  $mydate . "0000" . strval($sliplastid + $i);
                     }   
-                    elseif($sliplastid > 9 && $sliplastid < 100)
+                    elseif($sliplastid > 8 && $sliplastid < 99)
                     {
                         $code_sl = "HEM".  $mydate . "000" . strval($sliplastid + $i);
                     }
-                    elseif($sliplastid > 99 && $sliplastid < 1000)
+                    elseif($sliplastid > 98 && $sliplastid < 999)
                     {
                         $code_sl = "HEM".  $mydate . "00" . strval($sliplastid + $i);
                     }
-                    elseif($sliplastid > 999 && $sliplastid < 10000)
+                    elseif($sliplastid > 998 && $sliplastid < 9999)
                     {
                         $code_sl = "HEM".  $mydate . "0" . strval($sliplastid + $i);
                     }
-                    elseif($sliplastid > 9999 && $sliplastid < 100000)
+                    elseif($sliplastid > 9998 && $sliplastid < 99999)
                     {
                         $code_sl = "HEM".  $mydate . strval($sliplastid + $i);
                     }
