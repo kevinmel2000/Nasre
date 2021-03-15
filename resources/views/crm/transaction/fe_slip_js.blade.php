@@ -507,7 +507,7 @@
 
                     if(response.retro_backup)
                     {
-                        $("#sliprbupdate option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                        $("#sliprbupdate option[value=" + response.retro_backup + "]:first")[0].selected;
                     }
 
                     
@@ -727,7 +727,7 @@
 
                     if(response.retro_backup)
                     {
-                        $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                        $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected;
                     }
 
                     $('#slipnoendorsement').val(response.slip_no);
