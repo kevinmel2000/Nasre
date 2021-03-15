@@ -293,7 +293,7 @@
 
                     if(response.retro_backup)
                     {
-                        $("#sliprbdetail option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                        $("#sliprbdetail option[value=" + response.retro_backup + "]:first")[0].selected;
                     }
 
 
