@@ -3,6 +3,32 @@
     $("#state").attr('disabled','disabled');
     $("#city").attr('disabled','disabled');
     
+        var countryID = 102; 
+        if(countryID){
+        $.ajax({
+          type:"GET",
+          url:"{{url('get-state-list')}}?country_id="+countryID,
+          beforeSend: function() { $("body").addClass("loading");  },
+          complete: function() {  $("body").removeClass("loading"); },
+          success:function(res){        
+          if(res){
+            // $("#state").empty();
+            $("#province").removeAttr('disabled');
+            $("#province").append('<option selected disabled>Select Province</option>');
+            $.each(res,function(key,value){
+              $("#province").append('<option value="'+key+'">'+value+'</option>');
+            });
+          
+          }else{
+            $("#province").empty();
+          }
+          }
+        });
+      }else{
+        $("#province").empty();
+        $("#city").empty();
+      }   
+
   });
 </script>
 
@@ -20,24 +46,24 @@
       success:function(res){        
       if(res){
         // $("#state").empty();
-        $("#state").removeAttr('disabled');
-        $("#state").append('<option selected disabled>Select Province</option>');
+        $("#province").removeAttr('disabled');
+        $("#province").append('<option selected disabled>Select Province</option>');
         $.each(res,function(key,value){
-          $("#state").append('<option value="'+key+'">'+value+'</option>');
+          $("#province").append('<option value="'+key+'">'+value+'</option>');
         });
       
       }else{
-        $("#state").empty();
+        $("#province").empty();
       }
       }
     });
   }else{
-    $("#state").empty();
+    $("#province").empty();
     $("#city").empty();
   }   
   });
 
-  $('#state').on('change',function(){
+  $('#province').on('change',function(){
   var stateID = $(this).val();  
   //alert(stateID);
   if(stateID){
@@ -380,3 +406,26 @@ google.maps.event.addListener(marker, 'drag', function() {
 
 
 </script>
+
+
+
+<style>
+    .overlay{
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1100 !important;
+        background: rgba(255,255,255,0.8) url("{{asset('loader.gif')}}") center no-repeat;
+    }
+    /* Turn off scrollbar when body element has the loading class */
+    body.loading{
+        overflow: hidden;   
+    }
+    /* Make spinner image visible when body element has the loading class */
+    body.loading .overlay{
+        display: block;
+    }
+</style>

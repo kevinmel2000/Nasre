@@ -502,6 +502,7 @@
   </div>
 @endsection
 
+
 @section('scripts')
 @include('crm.master.felookuplocation_js')
 @endsection
