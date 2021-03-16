@@ -1597,13 +1597,13 @@ class FeSlipController extends Controller
                     'latitude' => $felookuplocations->latitude,
                     'longtitude' => $felookuplocations->longtitude,
                     'state_name' => $felookuplocations->state->name,
-                    'city_name' => $felookuplocations->city->name,
-                    'interest_id'=> $request->slipinterestid,
-                    'interest_name'=> $locationlist->interestdata->code.'-'.$locationlist->interestdata->description,
-                    'cnno' => $request->cnno,
-                    'certno' => $request->certno,
-                    'refno' => $request->refno,
-                    'amountlocation' => $request->amountlocation,
+                    'city_name' => $felookuplocations->city->name
+                    //'interest_id'=> $request->slipinterestid,
+                    //'interest_name'=> $locationlist->interestdata->code.'-'.$locationlist->interestdata->description,
+                    //'cnno' => $request->cnno,
+                    //'certno' => $request->certno,
+                    //'refno' => $request->refno,
+                    //'amountlocation' => $request->amountlocation,
                 ]);
             }
             else

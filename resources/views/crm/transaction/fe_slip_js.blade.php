@@ -1151,6 +1151,22 @@ $(document).ready(function() {
     });
 </script>
 
+
+<script type="text/javascript">
+
+    //triggered when modal is about to be shown
+    $('#addlocdetailmodaldata').on('show.bs.modal', function(e) {
+
+         //get data-id attribute of the clicked element
+
+        var codesl = $(e.relatedTarget).data('look-id');
+        //alert(codesl);
+        $('#insurednoloc').val(codesl);
+    });
+
+</script>
+
+
 <script type='text/javascript'>
      $('#form-addlocation').submit(function(e){
         e.preventDefault();
@@ -1190,35 +1206,66 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                console.log(response)
-                    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amountlocation);
-                    $('#locRiskTable tbody').prepend('<tr id="sid'+response.id+'"><td>'+response.loc_code+'<br>'+response.address+'<br>'+response.city_name+'<br>'+response.state_name+'<br>'+response.latitude+' , '+response.longtitude+'<br>'+ response.postal_code+'</td>'+
-                                                    '<td>'+response.interest_name+'</td>'+
-                                                    '<td>'+response.cnno+'</td>'+
-                                                    '<td>'+response.certno+'</td>'+
-                                                    '<td>'+response.refno+'</td>'+
-                                                    '<td>'+curr_amount+'</td>'+
-                                                    '<td><a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td></tr>')
+            console.log(response)
+                    
+                    //var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amountlocation);
+                    
+                    $('#locRiskTable > tbody:last-child').prepend('<tr id="sid'+response.id+'">'+
+                                                    '<td>'+response.loc_code+'</td>'+
+                                                    '<td>'+response.address+'<br>'+response.city_name+'<br>'+response.state_name+'<br>'+response.latitude+' , '+response.longtitude+'<br>'+ response.postal_code+'</td>'+
+                                                    '<td>'+response.latitude+' , '+response.longtitude+'<br></td>'+
+                                                    '<td>'+
+                                                    '<a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="'+response.id+'" data-target="#addlocdetailmodaldata">'+
+                                                        '<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addlocdetailmodaldata2">Add</button>'+
+                                                    '</a>'+
+                                                    '<a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
+                                                    '</tr>'+
                                                     
+                                                    '<tr id="cid'+response.id+'">'+
+                                                        '<td></td>'+
+                                                        '<td colspan="3">'+
+                                                            '<table id="tcid'+response.id+'" width="600" class="table table-bordered table-striped">'+
+                                                                '<thead>'+
+                                                                '<tr>'+
+                                                                '<th>Interest Insured</th>'+
+                                                                '<th>Ceding/Broker</th>'+
+                                                                '<th>CN No</th>'+
+                                                                '<th>Cert No</th>'+
+                                                                '<th>Ref No</th>'+
+                                                                '<th>amount</th>'+
+                                                                '<th>Action</th>'+
+                                                                '</tr>'+
+                                                                '</thead>'+
+                                                                '<tbody id="tbcid'+response.id+'">'+
+                                                                '</tbody>'+
+                                                            '</table>'+
+                                                        '</td>'+
+                                                    '</tr>');
+                                                    
+                    
                     $('#addlocation').modal('toggle');
                     $('#slipamount').val('');
                     $('#slipinterestlist').val('');
+                    
                     var totalsum = $("#sliptotalsum").val();
                     if(totalsum == '')
                     {
-                        var total_num = 0;
-                        var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
-                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        console.log(' sum : ' + sum)
-                        console.log(' real sum : ' + real_sum)
-                        $("#sliptotalsum").val(real_sum);
-                        $("#msishareto").val(real_sum);
-                        $('#form-addlocation')[0].reset();
-                        $("#feshareto").val(real_sum);
+                        //var total_num = 0;
+                        //var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                        //var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        //console.log(' sum : ' + sum)
+                        //console.log(' real sum : ' + real_sum)
+                        //$("#sliptotalsum").val(real_sum);
+                        //$("#msishareto").val(real_sum);
+                        //$("#feshareto").val(real_sum);
+
+                        //$('#form-addlocation')[0].reset();
+                      
 
                     }
                     else
                     {
+                        /*
                         var conv_total = totalsum.replace(/,/g, "");
                         console.log('conv total : ' + conv_total)
                         var real_total = parseInt(conv_total);
@@ -1231,7 +1278,9 @@ $(document).ready(function() {
                         console.log(' real sum : ' + real_sum)
                         $("#sliptotalsum").val(real_sum);
                         $("#feshareto").val(real_sum);
-                        $('#form-addlocation')[0].reset();
+                        */
+
+                        //$('#form-addlocation')[0].reset();
                     }
             }
         });
@@ -1252,19 +1301,22 @@ $(document).ready(function() {
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
                 console.log(response);
+                
                 $('#sid'+id).remove();
+                $('#cid'+id).remove();
 
-                var total =  parseFloat($("#sliptotalsum").val());
-                console.log(total)
-                var conv_total = total.replace(/,/g, "");
-                console.log(conv_total)
-                var real_total = parseInt(conv_total);
-                console.log(real_total)
-                var sum = isNaN(real_total - parseFloat(response.amountlocation)) ? 0 :(real_total - parseFloat(response.amountlocation)) ;
-                console.log(sum)
-                var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                $("#sliptotalsum").val(real_sum);
-                $("#feshareto").val(real_sum);
+                //var total =  parseFloat($("#sliptotalsum").val());
+                //console.log(total)
+                //var conv_total = total.replace(/,/g, "");
+                //console.log(conv_total)
+                //var real_total = parseInt(conv_total);
+                //console.log(real_total)
+                //var sum = isNaN(real_total - parseFloat(response.amountlocation)) ? 0 :(real_total - parseFloat(response.amountlocation)) ;
+                //console.log(sum)
+                //var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                //$("#sliptotalsum").val(real_sum);
+                //$("#feshareto").val(real_sum);
+
             }
         });
     }
