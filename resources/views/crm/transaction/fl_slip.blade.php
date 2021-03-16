@@ -266,41 +266,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-6 col-md-12">
-                                            <div class="form-group">
-                                                <label for="">{{__('CN No')}}</label>
-                                                <input type="text" id="cnno" name="cnno" class="form-control form-control-sm" value="" required/>
-                                          </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6 col-md-12">
-                                            <div class="form-group">
-                                                <label for="">{{__('Cert No')}}</label>
-                                                <input type="text" id="certno" name="certno" class="form-control form-control-sm" value="" required/>
-                                          </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6 col-md-12">
-                                            <div class="form-group">
-                                                <label for="">{{__('Ref No')}}</label>
-                                                <input type="text" id="refno" name="refno" class="form-control form-control-sm" value="" required/>
-                                          </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6 col-md-12">
-                                            <div class="form-group">
-                                                <label for="">{{__('Amount')}}</label>
-                                                <input type="text" value=""  id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-20"/>
-                                          </div>
-                                        </div>
-                                    </div>
+                              
 
                                 </div>
 

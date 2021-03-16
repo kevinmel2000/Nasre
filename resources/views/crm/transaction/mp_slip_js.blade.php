@@ -1110,16 +1110,17 @@ $.ajax({
         var state = $('#state_location').val();
         var city = $('#city_location').val();        
         var adrress = $('#address_location').val();
-        var slipinterestid = $('#slipinterestlistlocation').val();
-        var cnno = $('#cnno').val();
-        var certno = $('#certno').val();
-        var refno = $('#refno').val();
-        var amountlocation = $('#amountlocation').val();
         
-        var conv_amount = amountlocation.replace(/,/g, "");
-        console.log(conv_amount)
-        var real_amount = parseInt(conv_amount);
-        console.log(real_amount)
+        //var slipinterestid = $('#slipinterestlistlocation').val();
+        //var cnno = $('#cnno').val();
+        //var certno = $('#certno').val();
+        //var refno = $('#refno').val();
+        //var amountlocation = $('#amountlocation').val();
+        
+        //var conv_amount = amountlocation.replace(/,/g, "");
+        //console.log(conv_amount)
+        //var real_amount = parseInt(conv_amount);
+        //console.log(real_amount)
         
 
         $.ajax({
@@ -1131,11 +1132,6 @@ $.ajax({
                 state:state,
                 city:city,
                 adrress:adrress,
-                slipinterestid:slipinterestid,
-                cnno:cnno,
-                certno:certno,
-                refno:refno,
-                amountlocation:real_amount,
                 insuredID:insured_id,
                 _token:token
             },
