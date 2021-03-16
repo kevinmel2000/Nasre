@@ -40,6 +40,7 @@ use App\Models\PropertyType;
 use App\Models\PropertyTypeTemp;
 use App\Models\StatusLog;
 use App\Models\RetrocessionTemp;
+use App\Models\RiskLocationDetail;
 
 class MovePropSlipController extends Controller
 {

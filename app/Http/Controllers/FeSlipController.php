@@ -36,6 +36,7 @@ use App\Models\ExtendCoverageTemp;
 use App\Models\DeductibleTemp;
 use App\Models\StatusLog;
 use App\Models\RetrocessionTemp;
+use App\Models\RiskLocationDetail;
 
 
 class FeSlipController extends Controller

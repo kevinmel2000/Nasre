@@ -40,6 +40,7 @@ use App\Models\DeductibleTemp;
 use App\Models\InstallmentTemp;
 use App\Models\StatusLog;
 use App\Models\RetrocessionTemp;
+use App\Models\RiskLocationDetail;
 
 class HeMotorSlipController extends Controller
 {
