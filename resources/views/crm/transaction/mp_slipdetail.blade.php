@@ -134,6 +134,26 @@
                                                                             <td>{{ $slt->felookuplocation->latitude , $slt->felookuplocation->longtitude  }}</td>
                                                                             <td><a href="javascript:void(0)" onclick="deletelocationdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
                                                                     </tr>   
+                                                                    <tr id="cid{{ $slt->id }}">
+                                                                    <td></td>
+                                                                    <td colspan="3">
+                                                                        <table id="tcid{{ $slt->id }}" width="600" class="table table-bordered table-striped">
+                                                                            <thead>
+                                                                            <tr>
+                                                                            <th>Interest Insured</th>
+                                                                            <th>Ceding/Broker</th>
+                                                                            <th>CN No</th>
+                                                                            <th>Cert No</th>
+                                                                            <th>Ref No</th>
+                                                                            <th>amount</th>
+                                                                            <th>Action</th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody id="tbcid{{ $slt->id }}">
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                    </tr>
                                                                     @endforeach
                                                             </tbody>
                                                             
