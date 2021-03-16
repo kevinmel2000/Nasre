@@ -295,20 +295,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-6 col-md-12">
-                                    <div class="form-group">
-                                        <label for="">{{__('Interest list')}}</label>
-                                        <select id="slipinterestlistlocation" name="slipinterestlistlocation" class="form-control form-control-sm ">
-                                            <option selected disabled>{{__('Interest list')}}</option>
-                                            @foreach($interestinsured as $ii)
-                                                <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
+                           
 
                         </div>
 
