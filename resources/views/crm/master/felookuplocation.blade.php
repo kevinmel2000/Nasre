@@ -81,7 +81,7 @@
                             <div class="col-md-12">
                               <div class="form-group">
                                   <label for="">{{__('Loc Code')}} </label>
-                                  <input type="text" style="width:25%" name="code" class="form-control form-control-sm" value="{{ $code_felookuplocation }}" readonly required/>
+                                  <input type="text" style="width:25%" name="code" id="code"  class="form-control form-control-sm" value="{{ $code_felookuplocation }}" readonly required/>
                                 </div>
                             </div>
                         </div>
@@ -111,6 +111,7 @@
                               </div>    
                             </div>
                         </div>
+
 
                         <div class="row">
                             <div class="col-md-6">
