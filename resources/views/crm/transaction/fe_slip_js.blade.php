@@ -131,7 +131,16 @@
 
          //get data-id attribute of the clicked element
         var codesl = $(e.relatedTarget).data('book-id');
-        
+        $('input .amount').val(function(event) {
+            // skip for arrow keys
+            if(event.which >= 37 && event.which <= 40) return;
+                console.log(event.which)
+                console.log($(this).val())
+                // format number
+                $(this).val(function(index, value) {
+                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            });
+        });
         //alert(codesl);
         
         $.ajax({
@@ -348,7 +357,7 @@
             }
         });
 
-        $('input.amount').val(function(event) {
+        $('input .amount').val(function(event) {
             // skip for arrow keys
             if(event.which >= 37 && event.which <= 40) return;
                 console.log(event.which)
@@ -361,7 +370,8 @@
 
         var bld = $('#slipbld_constdetail').val();
         var ocp_id = $('#slipoccupacydetail').val();
-
+        console.log(bld)
+        console.log(ocp_id)
         $.ajax({
             type:"GET",
             url:"{{url('get-building-rate')}}",
@@ -402,6 +412,16 @@
          //get data-id attribute of the clicked element
         var codesl = $(e.relatedTarget).data('book-id');
         //alert(codesl);
+        $('input .amount').val(function(event) {
+            // skip for arrow keys
+            if(event.which >= 37 && event.which <= 40) return;
+                console.log(event.which)
+                console.log($(this).val())
+                // format number
+                $(this).val(function(index, value) {
+                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            });
+        });
         
         $.ajax({
             url:'{{ url("/") }}/transaction-data/detailslip/'+codesl,
@@ -678,6 +698,16 @@
          //get data-id attribute of the clicked element
         var codesl = $(e.relatedTarget).data('book-id');
         //alert(codesl);
+        $('input .amount').val(function(event) {
+            // skip for arrow keys
+            if(event.which >= 37 && event.which <= 40) return;
+                console.log(event.which)
+                console.log($(this).val())
+                // format number
+                $(this).val(function(index, value) {
+                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            });
+        });
         
         $.ajax({
             url:'{{ url("/") }}/transaction-data/detailendorsementslip/'+codesl,
