@@ -202,50 +202,35 @@
                                                         </div>    
                                                         </div>
                                                     </div>
-
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="">{{__('Building Const')}}</label>
-                                                            <select id="slipbld_constupdate" name="slipbld_constupdate" class="e1 form-control form-control-sm ">
-                                                                <option value="Building 1" >Building 1</option>
-                                                                <option value="Building 2" >Building 2</option>
-                                                                <option value="Building 3"  >Building 3</option>
-                                                                
-                                                            </select>
-                                                        </div>    
-                                                        </div>
-                                                    </div>
-
                                                 </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Building Const')}}</label>
+                                                        <select id="slipbld_constupdate" name="slipbld_constupdate" class="e1 form-control form-control-sm ">
+                                                            <option selected disabled>{{__('Building Const list')}}</option>
+                                                            <option value="Building 1">Building 1</option>
+                                                            <option value="Building 2">Building 2</option>
+                                                            <option value="Building 3">Building 3</option>
+                                                        
+                                                        </select>
+                                                    </div>    
+                                                </div>
+                                                
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="card">
-                                                                <div class="card-header bg-gray">
-                                                                    {{__('Reference Number')}}
-                                                                </div>
-                                                                <div class="card-body bg-light-gray ">
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-group">
-                                                                            <label for="">{{__('Slip No.')}}</label>
-                                                                            <input type="text" id="slipnoupdate"  value=""  name="slipnoupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-group">
-                                                                            <label for="">{{__('CN/DN')}}</label>
-                                                                            <input type="text" id="slipcndnupdate" name="slipcndnupdate" value=""  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-group">
-                                                                            <label for="">{{__('Policy No')}}</label>
-                                                                            <input type="text" id="slippolicy_noupdate" value="" name="slippolicy_noupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Build Const Upper Area')}}</label>
+                                                                <input type="text" id="slipbcuaupdate" name="slipbcuaupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Build Const Lower Area')}}</label>
+                                                                <input type="text" id="slipbclaupdate" name="slipbclaupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -535,9 +520,18 @@
 
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-5">
-                                                            <div class="form-group" id="daytotalupdate">                         
+                                                        <div class="col-md-12">
+                                                            {{-- <div class="form-group" id="daytotal">                         
                                                             Total Days :0
+                                                            
+                                                            </div> --}}
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Total Days')}}</label>
+                                                                <input type="text"  id="slipdaytotalupdate" name="slipdaytotalupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Total Summary Insurance Periode')}}</label>
+                                                                <input type="text"  id="sliptotalsumdateupdate" name="sliptotalsumdateupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
                                                             </div>
                                                         </div>
                                                     </div>

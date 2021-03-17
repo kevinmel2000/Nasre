@@ -691,32 +691,6 @@
                                             <div class="col-md-6">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        {{-- <div class="card">
-                                                            <div class="card-header bg-gray">
-                                                                {{__('Reference Number')}}
-                                                            </div>
-                                                            <div class="card-body bg-light-gray ">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <label for="">{{__('Slip No.')}}</label>
-                                                                        <input type="text" id="slipno" name="slipno" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <label for="">{{__('CN/DN')}}</label>
-                                                                        <input type="text" id="slipcndn" name="slipcndn" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <label for="">{{__('Policy No')}}</label>
-                                                                        <input type="text" id="slippolicy_no"  name="slippolicy_no" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                            </div>
-                                                        </div> --}}
                                                         <div class="form-group">
                                                             <label for="">{{__('Build Const Upper Area')}}</label>
                                                             <input type="text" id="slipbcua" name="slipbcua" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
