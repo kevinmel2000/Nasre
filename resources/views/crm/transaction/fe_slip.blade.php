@@ -140,8 +140,7 @@
                                                                             </td>
                                                                     </tr>   
                                                                     <tr id="cid{{ $slt->id }}">
-                                                                            <td><a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="'+response.id+'" data-target="#addrisklocdetailmodaldata5">
-                                                                                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocdetailmodaldata5">Addb Detail</button></td>
+                                                                            <td></td>
                                                                             <td colspan="3">
                                                                                 <table id="tcid{{ $slt->id }}" width="600" class="table table-bordered table-striped">
                                                                                     <thead>
@@ -168,7 +167,7 @@
                                                                                                 <td>{{ $detaillocrisk->cnno }}</td>
                                                                                                 <td>{{ $detaillocrisk->certno }}</td>
                                                                                                 <td>{{ $detaillocrisk->refno }}</td>
-                                                                                                <td>{{ $detaillocrisk->amountlocation }}</td>
+                                                                                                <td>@currency($detaillocrisk->amountlocation)</td>
                                                                                                 <td>
                                                                                                 <a href="javascript:void(0)" onclick="deletelocationriskdetail({{ $detaillocrisk->id }})"><i class="fas fa-trash text-danger"></i></a>
                                                                                                 </td>

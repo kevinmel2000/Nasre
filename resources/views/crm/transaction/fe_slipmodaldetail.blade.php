@@ -539,14 +539,12 @@
                                                             <div class="form-group">
                                                                 <label for="">{{__('Share')}}</label>
                                                                 <div class="row">
-                                                                    <div class="col-md-10">
+                                                                    <div class="col-md-12">
                                                                         <div class="input-group">
                                                                             <input type="number" value="" step=".0001" id="slipsharedetail" name="slipsharedetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="b" required/>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <div class="input-group-append">
-                                                                            <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                            <div class="input-group-append">
+                                                                                <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>

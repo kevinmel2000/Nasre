@@ -1874,7 +1874,7 @@ $(document).ready(function() {
             success:function(response){
             console.log(response)
                     
-                    //var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amountlocation);
+                    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amountlocation);
                     
                     $('#tcid'+insurednoloc+' > tbody:last-child').prepend('<tr id="riskdetailsid'+response.id+'">'+
                                                     '<td>'+response.interest_name+'</td>'+
@@ -1882,7 +1882,7 @@ $(document).ready(function() {
                                                     '<td>'+response.cnno+'</td>'+
                                                     '<td>'+response.certno+'</td>'+
                                                     '<td>'+response.refno+'</td>'+
-                                                    '<td>'+response.amountlocation+'</td>'+
+                                                    '<td>'+curr_amount+'</td>'+
                                                     '<td>'+
                                                     '<a href="javascript:void(0)" onclick="deletelocationriskdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
                                                     '</tr>');
