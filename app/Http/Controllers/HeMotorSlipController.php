@@ -280,7 +280,22 @@ class HeMotorSlipController extends Controller
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
-        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+        
+        $locationlist=[];
+
+        if(!empty($locationlist2))
+        {
+            foreach($locationlist2 as $datadetail)
+            {
+                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+           
+                array_push($locationlist,$datadetail);
+            }     
+        }  
+
+
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
        
         if(count($interestlist) != null){
@@ -429,7 +444,22 @@ class HeMotorSlipController extends Controller
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();       
-        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+        
+        $locationlist=[];
+
+        if(!empty($locationlist2))
+        {
+            foreach($locationlist2 as $datadetail)
+            {
+                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+           
+                array_push($locationlist,$datadetail);
+            }     
+        }  
+
+
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
             
 
@@ -555,7 +585,23 @@ class HeMotorSlipController extends Controller
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();       
-        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        
+        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+        
+        $locationlist=[];
+
+        if(!empty($locationlist2))
+        {
+            foreach($locationlist2 as $datadetail)
+            {
+                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+           
+                array_push($locationlist,$datadetail);
+            }     
+        }  
+
+
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
             
 
@@ -645,7 +691,23 @@ class HeMotorSlipController extends Controller
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();       
-        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        
+        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+        
+        $locationlist=[];
+
+        if(!empty($locationlist2))
+        {
+            foreach($locationlist2 as $datadetail)
+            {
+                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+           
+                array_push($locationlist,$datadetail);
+            }     
+        }  
+
+
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
             
 

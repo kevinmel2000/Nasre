@@ -126,7 +126,7 @@
                                                             </thead>
                                                             <tbody>
                                                                 
-                                                                    @foreach($locationlist as $slt)
+                                                            @foreach($locationlist as $slt)
                                                                     <tr id="sid{{ $slt->id }}">
                                                                             <td >{{ $slt->felookuplocation->loc_code }}<br>
                                                                                  <br>
@@ -136,27 +136,56 @@
                                                                                   {{@$slt->felookuplocation->city->id}} - {{@$slt->felookuplocation->city->name}}<br>
                                                                                   {{ $slt->felookuplocation->postal_code }}</td>
                                                                             <td>{{ $slt->felookuplocation->latitude , $slt->felookuplocation->longtitude  }}</td>
-                                                                            <td><a href="javascript:void(0)" onclick="deletelocationdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
+                                                                            <td>
+                                                                                
+                                                                                <a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="{{ $slt->id }}" data-target="#addlocdetailmodaldata">
+                                                                                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addlocdetailmodaldata2">Add</button>
+                                                                                </a>
+                                                                                <a href="javascript:void(0)" onclick="deletelocationdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a>
+                                                                                 
+                                                                            </td>
                                                                     </tr>   
                                                                     <tr id="cid{{ $slt->id }}">
-                                                                    <td></td>
-                                                                    <td colspan="3">
-                                                                        <table id="tcid{{ $slt->id }}" width="600" class="table table-bordered table-striped">
-                                                                            <thead>
-                                                                            <tr>
-                                                                            <th>Interest Insured</th>
-                                                                            <th>Ceding/Broker</th>
-                                                                            <th>CN No</th>
-                                                                            <th>Cert No</th>
-                                                                            <th>Ref No</th>
-                                                                            <th>amount</th>
-                                                                            <th>Action</th>
-                                                                            </tr>
-                                                                            </thead>
-                                                                            <tbody id="tbcid{{ $slt->id }}">
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
+                                                                            <td><a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="'+response.id+'" data-target="#addrisklocdetailmodaldata5">
+                                                                                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocdetailmodaldata5">Addb Detail</button></td>
+                                                                            <td colspan="3">
+                                                                                <table id="tcid{{ $slt->id }}" width="600" class="table table-bordered table-striped">
+                                                                                    <thead>
+                                                                                    <tr>
+                                                                                    <th>Interest Insured</th>
+                                                                                    <th>Ceding/Broker</th>
+                                                                                    <th>CN No</th>
+                                                                                    <th>Cert No</th>
+                                                                                    <th>Ref No</th>
+                                                                                    <th>amount</th>
+                                                                                    <th>Action</th>
+                                                                                    </tr>
+                                                                                    </thead>
+                                                                                    <tbody id="tbcid{{ $slt->id }}">
+                                                                                  
+                                                                                        @if(!empty($slt->risklocationdetail))
+   
+
+                                                                                            @foreach($slt->risklocationdetail as $detaillocrisk)
+
+                                                                                                <tr id="riskdetailsid{{ $detaillocrisk->id }}">
+                                                                                                <td>{{ $detaillocrisk->cnno }}</td>
+                                                                                                <td>{{ $detaillocrisk->cnno }}</td>
+                                                                                                <td>{{ $detaillocrisk->cnno }}</td>
+                                                                                                <td>{{ $detaillocrisk->certno }}</td>
+                                                                                                <td>{{ $detaillocrisk->refno }}</td>
+                                                                                                <td>{{ $detaillocrisk->amountlocation }}</td>
+                                                                                                <td>
+                                                                                                <a href="javascript:void(0)" onclick="deletelocationriskdetail({{ $detaillocrisk->id }})"><i class="fas fa-trash text-danger"></i></a>
+                                                                                                </td>
+                                                                                                </tr>
+
+                                                                                            @endforeach
+
+                                                                                        @endif
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
                                                                     </tr>
                                                                     @endforeach
                                                             </tbody>

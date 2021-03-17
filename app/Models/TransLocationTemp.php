@@ -25,4 +25,9 @@ class TransLocationTemp extends Model
     {  
        return $this->belongsTo('App\Models\InterestInsured', 'interest_id');
     }
+
+    public function risklocationdetail()
+    {  
+       return $this->hasMany('App\Models\RiskLocationDetail', 'translocation_id');
+    }
 }

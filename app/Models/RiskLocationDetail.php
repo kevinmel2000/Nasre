@@ -13,7 +13,7 @@ class RiskLocationDetail extends Model
 
     public function translocation() 
     {
-		return $this->belongsTo('App\Models\TransLocation','translocation_id'); 
+		  return $this->belongsTo('App\Models\TransLocation','translocation_id'); 
     }
     
     public function translocationtemp()
@@ -28,7 +28,6 @@ class RiskLocationDetail extends Model
 
     public function cedingbroker()
     {
-        
         return $this->belongsTo('App\Models\CedingBroker', 'ceding_id');
     }
 

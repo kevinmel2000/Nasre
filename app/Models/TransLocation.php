@@ -20,4 +20,9 @@ class TransLocation extends Model
     {
 		return $this->belongsTo('App\Models\FeLookupLocation','lookup_location_id'); 
     }
+
+    public function risklocationdetail()
+    {  
+       return $this->hasMany('App\Models\RiskLocationDetail', 'translocation_id');
+    }
 }

@@ -1188,14 +1188,15 @@ $("body").on("click","#btn-danger2",function(){
                     var totalsum = $("#sliptotalsum").val();
                     if(totalsum == '')
                     {
-                        //var total_num = 0;
-                        //var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
-                        //var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        //console.log(' sum : ' + sum)
-                        //console.log(' real sum : ' + real_sum)
-                        //$("#sliptotalsum").val(real_sum);
-                        //$("#msishareto").val(real_sum);
-                        //$("#feshareto").val(real_sum);
+                        var total_num = 0;
+                        var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        console.log(' sum : ' + sum)
+                        console.log(' real sum : ' + real_sum)
+                        $("#sliptotalsum").val(real_sum);
+                        $("#msishareto").val(real_sum);
+                        $("#hemshareto").val(real_sum);
+                        $("#hemsharefrom").val(real_sum);
 
                         //$('#form-addlocation')[0].reset();
                       
@@ -1203,7 +1204,7 @@ $("body").on("click","#btn-danger2",function(){
                     }
                     else
                     {
-                        /*
+                        
                         var conv_total = totalsum.replace(/,/g, "");
                         console.log('conv total : ' + conv_total)
                         var real_total = parseInt(conv_total);
@@ -1215,8 +1216,9 @@ $("body").on("click","#btn-danger2",function(){
                         console.log(' sum : ' + sum)
                         console.log(' real sum : ' + real_sum)
                         $("#sliptotalsum").val(real_sum);
-                        $("#feshareto").val(real_sum);
-                        */
+                        $("#hemshareto").val(real_sum);
+                        $("#hemsharefrom").val(real_sum);
+                        
 
                         //$('#form-addlocation')[0].reset();
                     }

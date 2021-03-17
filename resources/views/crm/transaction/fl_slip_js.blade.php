@@ -1253,6 +1253,8 @@ $(document).ready(function() {
                     //var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amountlocation);
                     
                     $('#tcid'+insurednoloc+' > tbody:last-child').prepend('<tr id="riskdetailsid'+response.id+'">'+
+                                                    '<td>'+response.interest_name+'</td>'+
+                                                    '<td>'+response.interest_name+'</td>'+
                                                     '<td>'+response.cnno+'</td>'+
                                                     '<td>'+response.certno+'</td>'+
                                                     '<td>'+response.refno+'</td>'+
@@ -1269,14 +1271,15 @@ $(document).ready(function() {
                     var totalsum = $("#sliptotalsum").val();
                     if(totalsum == '')
                     {
-                        //var total_num = 0;
-                        //var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
-                        //var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        //console.log(' sum : ' + sum)
-                        //console.log(' real sum : ' + real_sum)
-                        //$("#sliptotalsum").val(real_sum);
-                        //$("#msishareto").val(real_sum);
-                        //$("#feshareto").val(real_sum);
+                        var total_num = 0;
+                        var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        console.log(' sum : ' + sum)
+                        console.log(' real sum : ' + real_sum)
+                        $("#sliptotalsum").val(real_sum);
+                        $("#msishareto").val(real_sum);
+                        $("#flshareto").val(real_sum);
+                        $("#flsharefrom").val(real_sum);
 
                         //$('#form-addlocation')[0].reset();
                       
@@ -1284,7 +1287,7 @@ $(document).ready(function() {
                     }
                     else
                     {
-                        /*
+                        
                         var conv_total = totalsum.replace(/,/g, "");
                         console.log('conv total : ' + conv_total)
                         var real_total = parseInt(conv_total);
@@ -1296,8 +1299,9 @@ $(document).ready(function() {
                         console.log(' sum : ' + sum)
                         console.log(' real sum : ' + real_sum)
                         $("#sliptotalsum").val(real_sum);
-                        $("#feshareto").val(real_sum);
-                        */
+                        $("#flshareto").val(real_sum);
+                        $("#flsharefrom").val(real_sum);
+                        
 
                         //$('#form-addlocation')[0].reset();
                     }
@@ -1329,7 +1333,6 @@ $(document).ready(function() {
         });
     }
 </script>
-
 
 
 <script type='text/javascript'>

@@ -352,7 +352,19 @@ class FeSlipController extends Controller
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
-        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        
+        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+        
+        $locationlist=array();
+        foreach($locationlist2 as $datadetail)
+        {
+
+            $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
+            $locationlist[]=$datadetail;
+        }
+
+
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
         
         if(count($interestlist) != null){
@@ -508,7 +520,24 @@ class FeSlipController extends Controller
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();       
-        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        
+        
+        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+        
+        $locationlist=[];
+
+        if(!empty($locationlist2))
+        {
+            foreach($locationlist2 as $datadetail)
+            {
+                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+           
+                array_push($locationlist,$datadetail);
+            }     
+        }  
+
+
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
             
 
@@ -632,7 +661,23 @@ class FeSlipController extends Controller
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();       
-        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        
+        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+        
+        $locationlist=[];
+
+        if(!empty($locationlist2))
+        {
+            foreach($locationlist2 as $datadetail)
+            {
+                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+           
+                array_push($locationlist,$datadetail);
+            }     
+        }  
+
+
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
             
 
@@ -680,7 +725,23 @@ class FeSlipController extends Controller
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();       
-        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        
+        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+        
+        $locationlist=[];
+
+        if(!empty($locationlist2))
+        {
+            foreach($locationlist2 as $datadetail)
+            {
+                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+           
+                array_push($locationlist,$datadetail);
+            }     
+        }  
+
+
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
             
 
@@ -1861,6 +1922,16 @@ class FeSlipController extends Controller
     public function destroysliplocationlist($id)
     {
         $sliplistlocation = TransLocationTemp::find($id);
+        $amountlocation = '0';
+        $sliplistlocation->delete();
+        
+        return response()->json(['success'=>'Data has been deleted','amountlocation'=>$amountlocation]);
+    }
+
+
+    public function destroysliplocationdetail($id)
+    {
+        $sliplistlocation = RiskLocationDetail::find($id);
         $amountlocation = $sliplistlocation->amountlocation;
         $sliplistlocation->delete();
         
