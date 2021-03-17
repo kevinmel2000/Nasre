@@ -1635,6 +1635,7 @@ $(document).ready(function() {
         var slipinterestid = $('#slipinterestlistlocation').val();
         var cnno = $('#cnno').val();
         var certno = $('#certno').val();
+        var ceding_id = $('#ceding_id').val();
         var refno = $('#refno').val();
         var amountlocation = $('#amountlocation').val();
         
@@ -1647,6 +1648,7 @@ $(document).ready(function() {
                 cnno:cnno,
                 certno:certno,
                 refno:refno,
+                ceding_id:ceding_id,
                 amountlocation:amountlocation,
                 insurednoloc:insurednoloc,
                 _token:token
@@ -1660,7 +1662,7 @@ $(document).ready(function() {
                     
                     $('#tcid'+insurednoloc+' > tbody:last-child').prepend('<tr id="riskdetailsid'+response.id+'">'+
                                                     '<td>'+response.interest_name+'</td>'+
-                                                    '<td>'+response.interest_name+'</td>'+
+                                                    '<td>'+response.cedingbroker+'</td>'+
                                                     '<td>'+response.cnno+'</td>'+
                                                     '<td>'+response.certno+'</td>'+
                                                     '<td>'+response.refno+'</td>'+

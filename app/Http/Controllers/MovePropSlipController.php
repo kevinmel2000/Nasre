@@ -294,11 +294,29 @@ class MovePropSlipController extends Controller
         {
             foreach($locationlist2 as $datadetail)
             {
-                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+                $risklocationdetaildata= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+                
+                $riskdetaillist=[];
+
+                foreach($risklocationdetaildata as $stt)
+                {
+                    
+                    $interestdata=InterestInsured::where('id','=',$stt->interest_id)->first();
+                    $cedingdata=CedingBroker::where('id','=',$stt->ceding_id)->first();
+
+                    $stt->interestdetail=$interestdata;
+                    $stt->cedingdetail=$cedingdata;
+
+                    array_push($riskdetaillist,$stt);
+                }
+
+
+                $datadetail->risklocationdetail=$riskdetaillist;
            
                 array_push($locationlist,$datadetail);
             }     
         }  
+
 
 
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
@@ -460,7 +478,24 @@ class MovePropSlipController extends Controller
         {
             foreach($locationlist2 as $datadetail)
             {
-                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+                $risklocationdetaildata= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+                
+                $riskdetaillist=[];
+
+                foreach($risklocationdetaildata as $stt)
+                {
+                    
+                    $interestdata=InterestInsured::where('id','=',$stt->interest_id)->first();
+                    $cedingdata=CedingBroker::where('id','=',$stt->ceding_id)->first();
+
+                    $stt->interestdetail=$interestdata;
+                    $stt->cedingdetail=$cedingdata;
+
+                    array_push($riskdetaillist,$stt);
+                }
+
+
+                $datadetail->risklocationdetail=$riskdetaillist;
            
                 array_push($locationlist,$datadetail);
             }     
@@ -604,11 +639,29 @@ class MovePropSlipController extends Controller
         {
             foreach($locationlist2 as $datadetail)
             {
-                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+                $risklocationdetaildata= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+                
+                $riskdetaillist=[];
+
+                foreach($risklocationdetaildata as $stt)
+                {
+                    
+                    $interestdata=InterestInsured::where('id','=',$stt->interest_id)->first();
+                    $cedingdata=CedingBroker::where('id','=',$stt->ceding_id)->first();
+
+                    $stt->interestdetail=$interestdata;
+                    $stt->cedingdetail=$cedingdata;
+
+                    array_push($riskdetaillist,$stt);
+                }
+
+
+                $datadetail->risklocationdetail=$riskdetaillist;
            
                 array_push($locationlist,$datadetail);
             }     
         }  
+
 
 
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
@@ -709,7 +762,24 @@ class MovePropSlipController extends Controller
         {
             foreach($locationlist2 as $datadetail)
             {
-                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+                $risklocationdetaildata= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+                
+                $riskdetaillist=[];
+
+                foreach($risklocationdetaildata as $stt)
+                {
+                    
+                    $interestdata=InterestInsured::where('id','=',$stt->interest_id)->first();
+                    $cedingdata=CedingBroker::where('id','=',$stt->ceding_id)->first();
+
+                    $stt->interestdetail=$interestdata;
+                    $stt->cedingdetail=$cedingdata;
+
+                    array_push($riskdetaillist,$stt);
+                }
+
+
+                $datadetail->risklocationdetail=$riskdetaillist;
            
                 array_push($locationlist,$datadetail);
             }     

@@ -164,14 +164,15 @@
                                                                                     </thead>
                                                                                     <tbody id="tbcid{{ $slt->id }}">
                                                                                   
+                                                                                       
                                                                                         @if(!empty($slt->risklocationdetail))
    
 
                                                                                             @foreach($slt->risklocationdetail as $detaillocrisk)
 
                                                                                                 <tr id="riskdetailsid{{ $detaillocrisk->id }}">
-                                                                                                <td>{{ $detaillocrisk->cnno }}</td>
-                                                                                                <td>{{ $detaillocrisk->cnno }}</td>
+                                                                                                <td>{{ $detaillocrisk->interestdetail->description }}</td>
+                                                                                                <td>{{ $detaillocrisk->cedingdetail->description }}</td>
                                                                                                 <td>{{ $detaillocrisk->cnno }}</td>
                                                                                                 <td>{{ $detaillocrisk->certno }}</td>
                                                                                                 <td>{{ $detaillocrisk->refno }}</td>
@@ -341,6 +342,20 @@
                                                     <option selected disabled>{{__('Interest list')}}</option>
                                                     @foreach($interestinsured as $ii)
                                                         <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
+                                                    @endforeach
+                                                </select>
+                                          </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-12">
+                                            <div class="form-group">
+                                                <label for="">{{__('Ceding / Broker')}}</label>
+                                                 <select id="ceding_id" name="ceding_id" class="e1 form-control form-control-sm ">
+                                                    <option value=""  selected disabled >Ceding or Broker</option>
+                                                    @foreach($cedingbroker as $cb)
+                                                        <option value="{{ $cb->id }}">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
                                                     @endforeach
                                                 </select>
                                           </div>

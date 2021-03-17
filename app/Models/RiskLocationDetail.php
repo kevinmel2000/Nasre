@@ -30,5 +30,5 @@ class RiskLocationDetail extends Model
     {
         return $this->belongsTo('App\Models\CedingBroker', 'ceding_id');
     }
-
+    
 }

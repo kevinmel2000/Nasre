@@ -338,6 +338,21 @@
                                         </div>
                                     </div>
 
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-12">
+                                            <div class="form-group">
+                                                <label for="">{{__('Ceding / Broker')}}</label>
+                                                 <select id="ceding_id" name="ceding_id" class="e1 form-control form-control-sm ">
+                                                    <option value=""  selected disabled >Ceding or Broker</option>
+                                                    @foreach($cedingbroker as $cb)
+                                                        <option value="{{ $cb->id }}">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                          </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row">
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
