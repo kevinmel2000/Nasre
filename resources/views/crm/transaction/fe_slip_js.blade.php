@@ -1520,7 +1520,9 @@ $(document).ready(function() {
                                                     '</tr>'+
                                                     
                                                     '<tr id="cid'+response.id+'">'+
-                                                        '<td></td>'+
+                                                        '<td>'+
+                                                    '<a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="'+response.id+'" data-target="#addrisklocdetailmodaldata5">'+
+                                                        '<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocdetailmodaldata5">Add detail</button>'+'</td>'+
                                                         '<td colspan="3">'+
                                                             '<table id="tcid'+response.id+'" width="600" class="table table-bordered table-striped">'+
                                                                 '<thead>'+
@@ -3504,6 +3506,7 @@ $(document).ready(function() {
        var fessharefrom  = $('#fesharefrom').val();
        var fesshareto = $('#feshareto').val();
        var fescoinsurance = $('#fecoinsurance').val();
+       var feuy = $('#feuy').val();
 
        var conv_fessharefrom = fessharefrom.replace(/,/g, "");
        console.log(conv_fessharefrom)
@@ -3540,7 +3543,8 @@ $(document).ready(function() {
                fesshare:fesshare,
                fessharefrom:real_fessharefrom,
                fesshareto:real_fesshareto,
-               fescoinsurance:fescoinsurance
+               fescoinsurance:fescoinsurance,
+               feuy:feuy
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },

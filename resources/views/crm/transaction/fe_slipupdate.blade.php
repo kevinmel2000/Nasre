@@ -140,7 +140,8 @@
                                                                             <td><a href="javascript:void(0)" onclick="deletelocationdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
                                                                     </tr>   
                                                                     <tr id="cid{{ $slt->id }}">
-                                                                    <td></td>
+                                                                    <td><a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="'+response.id+'" data-target="#addrisklocdetailmodaldata5">
+                                                                            <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocdetailmodaldata5">Addb Detail</button></td>
                                                                     <td colspan="3">
                                                                         <table id="tcid{{ $slt->id }}" width="600" class="table table-bordered table-striped">
                                                                             <thead>
@@ -166,6 +167,15 @@
                                                     
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">{{__('UY')}}</label>
+                                            <input type="number" id="feuy" name="feuy" value="{{$insureddata->uy}}" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-12" />
                                         </div>
                                     </div>
                                 </div>

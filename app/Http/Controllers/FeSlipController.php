@@ -1020,7 +1020,8 @@ class FeSlipController extends Controller
                     'share_from'=>$request->fessharefrom,
                     'share_to'=>$request->fesshareto,
                     'coincurance'=>$request->fescoincurance,
-                    'location'=>$locationlist->toJson()
+                    'location'=>$locationlist->toJson(),
+                    'uy'=>$request->feuy
                 ]);
 
                 $notification = array(
@@ -1040,6 +1041,7 @@ class FeSlipController extends Controller
                 $insureddataup->share_to=$request->fesshareto;
                 $insureddataup->coincurance=$request->fescoincurance;
                 $insureddataup->location=$locationlist->toJson();
+                $insureddataup->uy=$request->feuy;
                 $insureddataup->save();
 
 

@@ -39,6 +39,7 @@
                     <tr>
                       <th>{{__('Number')}}</th>
                       <th>{{__('Insured')}}</th>
+                      <th>{{__('UY')}}</th>
                       <th>{{__('Our Share')}}</th>
                       <th>{{__('National Reinsurance')}}</th>
                       <th>{{__('Total Sum Insurance')}}</th>
@@ -51,6 +52,7 @@
                             <tr>
                               <td ><a href="{{  url('transaction-data/updatefeslip', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
                               <td>{{@$insureddata->insured_prefix}} - {{@$insureddata->insured_name}} - {{@$insureddata->insured_suffix}}</td>
+                              <td>{{@$insureddata->uy }}</td>
                               <td>{{@$insureddata->share }}</td>
                               <td >@currency(@$insureddata->share_from)</td>
                               <td >@currency(@$insureddata->share_to)</td>
