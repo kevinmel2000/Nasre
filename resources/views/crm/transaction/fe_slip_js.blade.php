@@ -1548,41 +1548,7 @@ $(document).ready(function() {
                     $('#slipamount').val('');
                     $('#slipinterestlist').val('');
                     
-                    var totalsum = $("#sliptotalsum").val();
-                    if(totalsum == '')
-                    {
-                        //var total_num = 0;
-                        //var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
-                        //var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        //console.log(' sum : ' + sum)
-                        //console.log(' real sum : ' + real_sum)
-                        //$("#sliptotalsum").val(real_sum);
-                        //$("#msishareto").val(real_sum);
-                        //$("#feshareto").val(real_sum);
-
-                        //$('#form-addlocation')[0].reset();
-                      
-
-                    }
-                    else
-                    {
-                        /*
-                        var conv_total = totalsum.replace(/,/g, "");
-                        console.log('conv total : ' + conv_total)
-                        var real_total = parseInt(conv_total);
-                        console.log('real total : ' + real_total)
-                        var total =  parseFloat(real_total);
-                        console.log(' total : ' + total)
-                        var sum = isNaN(totalsum + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (totalsum + parseFloat(response.amountlocation)) ;
-                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        console.log(' sum : ' + sum)
-                        console.log(' real sum : ' + real_sum)
-                        $("#sliptotalsum").val(real_sum);
-                        $("#feshareto").val(real_sum);
-                        */
-
-                        //$('#form-addlocation')[0].reset();
-                    }
+                    
             }
         });
 
@@ -1685,9 +1651,9 @@ $(document).ready(function() {
                         console.log(' sum : ' + sum)
                         console.log(' real sum : ' + real_sum)
                         $("#sliptotalsum").val(real_sum);
-                        $("#msishareto").val(real_sum);
+                        // $("#msishareto").val(real_sum);
                         $("#fesharefrom").val(real_sum);
-                        $("#feshareto").val(real_sum);
+                        // $("#feshareto").val(real_sum);
 
                         //$('#form-addlocation')[0].reset();
                       
@@ -1707,7 +1673,7 @@ $(document).ready(function() {
                         console.log(' sum : ' + sum)
                         console.log(' real sum : ' + real_sum)
                         $("#sliptotalsum").val(real_sum);
-                        $("#fesharefrom").val(real_sum);
+                        // $("#fesharefrom").val(real_sum);
                         $("#feshareto").val(real_sum);
                         
 

@@ -147,8 +147,8 @@
                                                                             </td>
                                                                     </tr>   
                                                                     <tr id="cid{{ $slt->id }}">
-                                                                            <td><a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="'+response.id+'" data-target="#addrisklocdetailmodaldata5">
-                                                                                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocdetailmodaldata5">Addb Detail</button></td>
+                                                                            <td><a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="{{ $slt->id }}" data-target="#addrisklocdetailmodaldata5">
+                                                                                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocdetailmodaldata5">Add Detail</button></td>
                                                                             <td colspan="3">
                                                                                 <table id="tcid{{ $slt->id }}" width="600" class="table table-bordered table-striped">
                                                                                     <thead>
