@@ -168,9 +168,9 @@
 
                                                                                             @foreach($slt->risklocationdetail as $detaillocrisk)
 
-                                                                                                <tr id="riskdetailsid{{ $detaillocrisk->id }}">
-                                                                                                <td>{{ $detaillocrisk->cnno }}</td>
-                                                                                                <td>{{ $detaillocrisk->cnno }}</td>
+                                                                                            <tr id="riskdetailsid{{ $detaillocrisk->id }}">
+                                                                                                <td>{{ $detaillocrisk->interestdetail->description }}</td>
+                                                                                                <td>{{ $detaillocrisk->cedingdetail->name }}</td>
                                                                                                 <td>{{ $detaillocrisk->cnno }}</td>
                                                                                                 <td>{{ $detaillocrisk->certno }}</td>
                                                                                                 <td>{{ $detaillocrisk->refno }}</td>
@@ -251,6 +251,17 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">{{__('UY')}}</label>
+                                            <input type="number" id="hemuy" name="hemuy" value="{{$insureddata->uy}}" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-12" />
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">

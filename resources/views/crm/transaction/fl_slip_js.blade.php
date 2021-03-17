@@ -3060,6 +3060,7 @@ $(document).ready(function() {
        var flcoinsurance = $('#flcoinsurance').val();
        var flobligee = $('#flobligee').val();
        var flprincipal = $('#flprincipal').val();
+       var fluy = $('#fluy').val();
        
        var conv_flssharefrom = flsharefrom.replace(/,/g, "");
        console.log(conv_flssharefrom)
@@ -3093,7 +3094,8 @@ $(document).ready(function() {
                flshareto:real_flsshareto,
                flcoinsurance:flcoinsurance,
                flobligee:flobligee,
-               flprincipal:flprincipal
+               flprincipal:flprincipal,
+               fluy:fluy
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },

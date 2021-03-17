@@ -164,7 +164,7 @@
                                                                                     </thead>
                                                                                     <tbody id="tbcid{{ $slt->id }}">
                                                                                   
-                                                                                       
+                                                                                    
                                                                                         @if(!empty($slt->risklocationdetail))
    
 
@@ -172,7 +172,7 @@
 
                                                                                                 <tr id="riskdetailsid{{ $detaillocrisk->id }}">
                                                                                                 <td>{{ $detaillocrisk->interestdetail->description }}</td>
-                                                                                                <td>{{ $detaillocrisk->cedingdetail->description }}</td>
+                                                                                                <td>{{ $detaillocrisk->cedingdetail->name }}</td>
                                                                                                 <td>{{ $detaillocrisk->cnno }}</td>
                                                                                                 <td>{{ $detaillocrisk->certno }}</td>
                                                                                                 <td>{{ $detaillocrisk->refno }}</td>

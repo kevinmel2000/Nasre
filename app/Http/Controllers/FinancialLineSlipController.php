@@ -785,7 +785,8 @@ class FinancialLineSlipController extends Controller
                     'coincurance'=>$request->flcoinsurance,
                     'obligee'=>$request->flobligee,
                     'principal'=>$request->flprincipal,
-                    'location'=>$locationlist->toJson()
+                    'location'=>$locationlist->toJson(),
+                    'uy'=>$request->fluy
                 ]);
 
                 $notification = array(
@@ -808,6 +809,7 @@ class FinancialLineSlipController extends Controller
                 $insureddataup->obligee=$request->flobligee;
                 $insureddataup->principal=$request->flprincipal;
                 $insureddataup->location=$locationlist->toJson();
+                $insureddataup->uy=$request->fluy;
                 $insureddataup->save();
 
 

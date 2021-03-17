@@ -3109,6 +3109,7 @@ $.ajax({
        var mpsharefrom  = $('#mpsharefrom').val();
        var mpshareto = $('#mpshareto').val();
        var mpcoinsurance = $('#mpcoinsurance').val();
+       var mpuy = $('#mpuy').val();
        
 
        var conv_mpsharefrom = mpshare.replace(/,/g, "");
@@ -3140,7 +3141,8 @@ $.ajax({
                mpshare:mpshare,
                mpsharefrom:real_mpsharefrom,
                mpshareto:real_mpshareto,
-               mpcoinsurance:mpcoinsurance
+               mpcoinsurance:mpcoinsurance,
+               mpuy:mpuy
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },
