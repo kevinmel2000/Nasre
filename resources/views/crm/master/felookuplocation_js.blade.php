@@ -212,7 +212,7 @@ function GoogleGeocode() {
           result.longitude = results[0].geometry.location.lng();
           callbackFunction(result);
         } else {
-          alert("Geocode was not successful for the following reason: " + status);
+          //alert("Geocode was not successful for the following reason: " + status);
           callbackFunction(null);
         }
       });
@@ -230,7 +230,7 @@ function GoogleGeocode2() {
           result.longitude = results[0].geometry.location.lng();
           callbackFunction(result);
         } else {
-          alert("Geocode was not successful for the following reason: " + status);
+          //alert("Geocode was not successful for the following reason: " + status);
           callbackFunction(null);
         }
       });
@@ -246,23 +246,49 @@ $('input[name=address]').on('input',function(e){
     var userinput = $('form #address').val();
       if (userinput == "")
       {
-        alert("The input box is blank.");
+        //alert("The input box is blank.");
         return false;
       }
       var g = new GoogleGeocode2();
       var address = userinput;
       g.geocode(address, function(data) {
+        
         if(data != null) {
           olat = data.latitude;
           olng = data.longitude;
           //$('#result').append("<p><strong>"+userinput+" -> </strong> Latitude: " + olat + " , " + "Longitude: " + olng + "</p>")
           //alert(olat);
           var latLng2 = new google.maps.LatLng(olat,olng);
-          updateMarkerPosition(latLng2); 
-        } else {
+          
+
+          var addressarray = address.split(" ");
+
+          var firstWordsdata = [];
+          if(addressarray!=null)
+          {
+            for (var i = 0; i < 4; i++) {
+              //What to do here to get the first word of every spilt
+              var firstWord = addressarray[i].substr(0,1);
+              firstWordsdata.push(firstWord);
+            }
+
+            updateMarkerPosition2(latLng2); 
+          }
+
+          var firstWordsdata2 = firstWordsdata.join('');
+
+          var codenew=document.getElementById('code').value;
+          var codenew2=codenew.substring(0,6)+""+firstWordsdata2;
+
+          document.getElementById('code').value=codenew2;
+          
+        
+        } 
+        else {
           //Unable to geocode
-          alert('ERROR! Unable to geocode address');
+          //alert('ERROR! Unable to geocode address');
         }
+     
       });  
 
 });
@@ -285,10 +311,93 @@ function updateMarkerPosition(latLng)
       //alert('masuk1');
       //alert(results[4].formatted_address);
       console.log(results);
-      document.getElementById('address').value=results[0].formatted_address;
-      //alert(results[0].address_components[8].long_name);
-      document.getElementById('postal_code').value=results[0].address_components[9].long_name;
       
+      var addressstring=results[0].formatted_address;
+      var addressarray = addressstring.split(" ");
+
+      var firstWordsdata = [];
+
+      if(addressarray!=null)
+      {
+        for (var i = 0; i < 4; i++) {
+          //What to do here to get the first word of every spilt
+          var firstWord = addressarray[i].substr(0,1);
+          firstWordsdata.push(firstWord);
+        }
+      }
+
+      var firstWordsdata2 = firstWordsdata.join('');
+     
+      var codenew=document.getElementById('code').value;
+      var codenew2=codenew.substring(0,6)+""+firstWordsdata2;
+
+      document.getElementById('address').value=results[0].formatted_address;
+      
+      document.getElementById('code').value=codenew2;
+
+
+      //alert(results[0].address_components[8].long_name);
+      if(results[0].address_components[9].long_name!=null)
+      {
+      document.getElementById('postal_code').value=results[0].address_components[9].long_name;
+      }
+
+      var text1 = results[0].address_components[8].long_name;
+      $("#country option").filter(function() {
+          return this.text == text1; 
+      }).attr('selected', true);
+      
+  });
+
+   
+  var position = new google.maps.LatLng(latLng.lat(), latLng.lng());
+  marker.setPosition(position);
+
+}
+
+
+function updateMarkerPosition2(latLng) 
+{
+  document.getElementById('latitude').value = [latLng.lat()]
+  document.getElementById('longitude').value = [latLng.lng()]
+
+  geocoder.geocode({
+        'latLng': latLng
+    }, function(results, status) {
+      //alert('masuk1');
+      //alert(results[4].formatted_address);
+      console.log(results);
+      
+      var addressstring=results[0].formatted_address;
+      var addressarray = addressstring.split(" ");
+
+      var firstWordsdata = [];
+
+      if(addressarray!=null)
+      {
+        for (var i = 0; i < 4; i++) {
+          //What to do here to get the first word of every spilt
+          var firstWord = addressarray[i].substr(0,1);
+          firstWordsdata.push(firstWord);
+        }
+      }
+
+      var firstWordsdata2 = firstWordsdata.join('');
+     
+      var codenew=document.getElementById('code').value;
+      var codenew2=codenew.substring(0,6)+""+firstWordsdata2;
+
+      //document.getElementById('address').value=results[0].formatted_address;
+      
+      document.getElementById('code').value=codenew2;
+
+
+      //alert(results[0].address_components[8].long_name);
+      if(results[0].address_components[9].long_name!=null)
+      {
+      document.getElementById('postal_code').value=results[0].address_components[9].long_name;
+      }
+
       var text1 = results[0].address_components[8].long_name;
       $("#country option").filter(function() {
           return this.text == text1; 
@@ -394,7 +503,7 @@ geocoder.geocode({
     }, function(results, status) {
       //alert('masuk1');
       //alert(results[4].formatted_address);
-      document.getElementById('address').value=results[4].formatted_address;
+      //document.getElementById('address').value=results[4].formatted_address;
 });
 
 google.maps.event.addListener(marker, 'drag', function() {

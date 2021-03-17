@@ -111,11 +111,8 @@
                                                             <thead>
                                                             <tr>
                                                                 <th>{{__('Risk Location')}}</th>
-                                                                <th>{{__('Int Insured')}}</th>
-                                                                <th>{{__('CN NO')}}</th>
-                                                                <th>{{__('Cert No')}}</th>
-                                                                <th>{{__('Ref No')}}</th>
-                                                                <th>{{__('Amount')}}</th>
+                                                                <th>{{__('Address')}}</th>
+                                                                <th>{{__('Latitude Longitude')}}</th>
                                                                 <th width="20%">{{__('Actions')}}</th>
                                                             </tr>
                                                             </thead>
@@ -124,19 +121,35 @@
                                                                     @foreach($locationlist as $slt)
                                                                     <tr id="sid{{ $slt->id }}">
                                                                             <td >{{ $slt->felookuplocation->loc_code }}<br>
-                                                                                  {{ $slt->felookuplocation->address }}<br>
+                                                                                 <br>
+                                                                            </td>
+                                                                            <td> {{ $slt->felookuplocation->address }}<br>
                                                                                   {{@$slt->felookuplocation->state->id}} - {{@$slt->felookuplocation->state->name}}<br>
                                                                                   {{@$slt->felookuplocation->city->id}} - {{@$slt->felookuplocation->city->name}}<br>
-                                                                                  {{ $slt->felookuplocation->latitude , $slt->felookuplocation->longtitude  }}
-                                                                                  {{ $slt->felookuplocation->postal_code }}<br>
-                                                                            </td>
-                                                                            <td>{{@$slt->interestdata->code }} - {{ @$slt->interestdata->description}}</td>
-                                                                            <td>{{@$slt->cnno}}</td>
-                                                                            <td>{{@$slt->certno }}</td>
-                                                                            <td>{{@$slt->refno }}</td>
-                                                                            <td>@currency($slt->amountlocation)</td>
+                                                                                  {{ $slt->felookuplocation->postal_code }}</td>
+                                                                            <td>{{ $slt->felookuplocation->latitude , $slt->felookuplocation->longtitude  }}</td>
                                                                             <td><a href="javascript:void(0)" onclick="deletelocationdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
                                                                     </tr>   
+                                                                    <tr id="cid{{ $slt->id }}">
+                                                                    <td></td>
+                                                                    <td colspan="3">
+                                                                        <table id="tcid{{ $slt->id }}" width="600" class="table table-bordered table-striped">
+                                                                            <thead>
+                                                                            <tr>
+                                                                            <th>Interest Insured</th>
+                                                                            <th>Ceding/Broker</th>
+                                                                            <th>CN No</th>
+                                                                            <th>Cert No</th>
+                                                                            <th>Ref No</th>
+                                                                            <th>amount</th>
+                                                                            <th>Action</th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody id="tbcid{{ $slt->id }}">
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                    </tr>
                                                                     @endforeach
                                                             </tbody>
                                                             
@@ -233,7 +246,92 @@
                                     </div>
 
 
+                                    <!--div class="row">
+                                        <div class="col-md-6 col-md-12">
+                                            <div class="form-group">
+                                                <label for="">{{__('Interest list')}}</label>
+                                                <select id="slipinterestlistlocation" name="slipinterestlistlocation" class="form-control form-control-sm ">
+                                                    <option selected disabled>{{__('Interest list')}}</option>
+                                                    @foreach($interestinsured as $ii)
+                                                        <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
+                                                    @endforeach
+                                                </select>
+                                          </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row">
+                                        <div class="col-md-6 col-md-12">
+                                            <div class="form-group">
+                                                <label for="">{{__('CN No')}}</label>
+                                                <input type="text" id="cnno" name="cnno" class="form-control form-control-sm" value="" required/>
+                                          </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-12">
+                                            <div class="form-group">
+                                                <label for="">{{__('Cert No')}}</label>
+                                                <input type="text" id="certno" name="certno" class="form-control form-control-sm" value="" required/>
+                                          </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-12">
+                                            <div class="form-group">
+                                                <label for="">{{__('Ref No')}}</label>
+                                                <input type="text" id="refno" name="refno" class="form-control form-control-sm" value="" required/>
+                                          </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-12">
+                                            <div class="form-group">
+                                                <label for="">{{__('Amount')}}</label>
+                                                <input type="text" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-20"/>
+                                          </div>
+                                        </div>
+                                    </div-->
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                    <button type="submit" class="btn btn-info" id="addship-btn">Add Risk Location</button>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                    {{-- Edit Modal Ends --}}
+
+                    <div class="modal fade" id="addlocdetailmodaldata" tabindex="-1" user="dialog" aria-labelledby="addLocationLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" user="document">
+                    <div class="modal-content bg-light-gray">
+                                <div class="modal-header bg-gray">
+                                        <h5 class="modal-title" id="addDetailLabel">{{__('Add Detail Risk ')}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+
+                                <form id="form-addlocationdetail">
+                                @csrf
+                                <div class="modal-body">
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-12">
+                                            <div class="form-group">
+                                                <label for="">{{__('Insured Id')}}</label>
+                                                <input type="text" id="insurednoloc" name="insurednoloc" class="form-control form-control-sm" value="" readonly/>
+                                          </div>
+                                        </div>
+                                    </div>
+                            
+                                     <div class="row">
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Interest list')}}</label>
@@ -286,13 +384,14 @@
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                                    <button type="submit" class="btn btn-info" id="addship-btn">Add Risk Location</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                            <button type="submit" class="btn btn-info" id="addship-btn">Add Detail Risk Location</button>
                                 </div>
                             </form>
                         </div>
                         </div>
                     </div>
+
                     {{-- Edit Modal Ends --}}
 
                 
