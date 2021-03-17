@@ -304,7 +304,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for=""style="opacity: 0;">{{__('Type')}}</label>
-                                                                <input type="text" value="" id="sliptotalsumpctupdate" name="sliptotalsumpctupdate" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly" required/>
+                                                                <input type="text" value="" id="sliptotalsumpctupdate" name="sliptotalsumpctupdate" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly"/>
                                                             </div>
                                                         </div>
                                                     </div>

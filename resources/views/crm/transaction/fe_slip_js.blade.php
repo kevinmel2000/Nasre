@@ -76,6 +76,8 @@
             });
     });
 
+
+
     $(".money").click(function() {
     var inputLength = $(".money").val().length;
     setCaretToPos($(".money")[0], inputLength)
@@ -131,16 +133,7 @@
 
          //get data-id attribute of the clicked element
         var codesl = $(e.relatedTarget).data('book-id');
-        $('input .amount').val(function(event) {
-            // skip for arrow keys
-            if(event.which >= 37 && event.which <= 40) return;
-                console.log(event.which)
-                console.log($(this).val())
-                // format number
-                $(this).val(function(index, value) {
-                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            });
-        });
+        
         //alert(codesl);
         
         $.ajax({
@@ -157,7 +150,7 @@
                     $('#slipeddetail').val(response.endorsment);
                     $('#slipslsdetail').val(response.selisih);
                     $('#wpcdetail').val(response.wpc);
-                    $('#slipvbrokerdetail').val(response.v_broker);
+                    $('#slipvbrokerdetail').val(response.v_broker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
                     // if(response.interest_insured)
                     // {
@@ -325,10 +318,10 @@
                     $('#slipnodetail').val(response.slip_no);
                     $('#slipcndndetail').val(response.cn_dn);
                     $('#slippolicy_nodetail').val(response.policy_no);
-                    $('#sliptotalsumdetail').val(response.total_sum_insured);
+                    $('#sliptotalsumdetail').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 
                     $('#slippctdetail').val(response.insured_pct);
-                    $('#sliptotalsumpctdetail').val(response.total_sum_pct);
+                    $('#sliptotalsumpctdetail').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#sliptddetail').val(response.date_transfer);
                     $('#slipipfromdetail').val(response.insurance_period_from);
                     $('#slipiptodetail').val(response.insurance_period_to);
@@ -337,14 +330,14 @@
                     $('#switch-proportional').val(response.proportional);
                     $('#slipratedetail').val(response.rate);
                     $('#slipsharedetail').val(response.share);
-                    $('#slipsumsharedetail').val(response.sum_share);
-                    $('#slipbasicpremiumdetail').val(response.basic_premium);
-                    $('#slipgrossprmtonrdetail').val(response.grossprm_to_nr);
+                    $('#slipsumsharedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipbasicpremiumdetail').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipgrossprmtonrdetail').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#slipcommissiondetail').val(response.commission);
-                    $('#slipsumcommissiondetail').val(response.sum_commission);
-                    $('#slipnetprmtonrdetail').val(response.netprm_to_nr); 
+                    $('#slipsumcommissiondetail').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipnetprmtonrdetail').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
                     $('#slipordetail').val(response.own_retention);
-                    $('#slipsumordetail').val(response.sum_own_retention);
+                    $('#slipsumordetail').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     
                     
                     swal("Good job!", "Data Show")
@@ -438,7 +431,7 @@
                     $('#slipedupdate').val(response.endorsment);
                     $('#slipslsupdate').val(response.selisih);
                     $('#wpcupdate').val(response.wpc);
-                    $('#slipvbrokerupdate').val(response.v_broker);
+                    $('#slipvbrokerupdate').val(response.v_broker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
                     // if(response.interest_insured)
                     // {
@@ -607,10 +600,10 @@
                     $('#slipnoupdate').val(response.slip_no);
                     $('#slipcndnupdate').val(response.cn_dn);
                     $('#slippolicy_noupdate').val(response.policy_no);
-                    $('#sliptotalsumupdate').val(response.total_sum_insured);
+                    $('#sliptotalsumupdate').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#sliptdupdate').val(response.date_transfer);
                     $('#slippctupdate').val(response.insured_pct);
-                    $('#sliptotalsumpctupdate').val(response.total_sum_pct);
+                    $('#sliptotalsumpctupdate').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
                     $('#slipipfromupdate').val(response.insurance_period_from);
                     $('#slipiptoupdate').val(response.insurance_period_to);
@@ -621,16 +614,16 @@
 
                    $('#sliprateupdate').val(response.rate);
                     $('#slipshareupdate').val(response.share);
-                    $('#slipsumshareupdate').val(response.sum_share);
-                    $('#slipbasicpremiumupdate').val(response.basic_premium);
-                    $('#slipgrossprmtonrupdate').val(response.grossprm_to_nr);
+                    $('#slipsumshareupdate').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipbasicpremiumupdate').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipgrossprmtonrupdate').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#slipcommissionupdate').val(response.commission);
-                    $('#slipsumcommissionupdate').val(response.sum_commission);
-                    $('#slipnetprmtonrupdate').val(response.netprm_to_nr);
+                    $('#slipsumcommissionupdate').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipnetprmtonrupdate').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
                    
                     $('#sliporupdate').val(response.own_retention);
-                    $('#slipsumorupdate').val(response.sum_own_retention);
+                    $('#slipsumorupdate').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     
                     
                     swal("Good job!", "Data Show")
@@ -725,7 +718,7 @@
                     $('#slipedendorsement').val(response.endorsment);
                     $('#slipslsendorsement').val(response.selisih);
                     $('#wpcendorsement').val(response.wpc);
-                    $('#slipvbrokerendorsement').val(response.v_broker);
+                    $('#slipvbrokerendorsement').val(response.v_broker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
                     // if(response.interest_insured)
                     // {
@@ -891,10 +884,10 @@
                     $('#slipnoendorsement').val(response.slip_no);
                     $('#slipcndnendorsement').val(response.cn_dn);
                     $('#slippolicy_noendorsement').val(response.policy_no);
-                    $('#sliptotalsumendorsement').val(response.total_sum_insured);
+                    $('#sliptotalsumendorsement').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#sliptdendorsement').val(response.date_transfer);
                     $('#slippctendorsement').val(response.insured_pct);
-                    $('#sliptotalsumpctendorsement').val(response.total_sum_pct);
+                    $('#sliptotalsumpctendorsement').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#slipipfromendorsement').val(response.insurance_period_from);
                     $('#slipiptoendorsement').val(response.insurance_period_to);
                     $('#sliprpfromendorsement').val(response.reinsurance_period_from);
@@ -903,14 +896,14 @@
 
                     $('#sliprateendorsement').val(response.rate);
                     $('#slipshareendorsement').val(response.share);
-                    $('#slipsumshareendorsement').val(response.sum_share);
-                    $('#slipbasicpremiumendorsement').val(response.basic_premium);
-                    $('#slipgrossprmtonrendorsement').val(response.grossprm_to_nr);
+                    $('#slipsumshareendorsement').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipbasicpremiumendorsement').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipgrossprmtonrendorsement').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#slipcommissionendorsement').val(response.commission);
-                    $('#slipsumcommissionendorsement').val(response.sum_commission);
-                    $('#slipnetprmtonrendorsement').val(response.netprm_to_nr);
+                    $('#slipsumcommissionendorsement').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipnetprmtonrendorsement').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#sliporendorsement').val(response.own_retention);
-                    $('#slipsumorendorsement').val(response.sum_own_retention);
+                    $('#slipsumorendorsement').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     
                     
                     swal("Good job!", "Data Show")
@@ -963,6 +956,8 @@
                 }
             }
         });
+
+        console.log($('#slipnumberendorsement').val())
 
 
        var code_ms = $('#insuredIDtxt').val();
