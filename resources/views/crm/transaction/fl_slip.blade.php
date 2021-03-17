@@ -298,7 +298,7 @@
                                     <div class="row">
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
-                                                <label for="">{{__('Insured Id')}}</label>
+                                                <label for="">{{__('Risk Id')}}</label>
                                                 <input type="text" id="insurednoloc" name="insurednoloc" class="form-control form-control-sm" value="" readonly/>
                                           </div>
                                         </div>

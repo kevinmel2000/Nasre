@@ -1711,10 +1711,6 @@ class FeSlipController extends Controller
                 $locationlist->city_id=$request->city;
                 $locationlist->address_location_id=$adrress;
                 $locationlist->interest_id=$request->slipinterestid;
-                $locationlist->cnno=$request->cnno;
-                $locationlist->certno=$request->certno;
-                $locationlist->refno=$request->refno;
-                $locationlist->amountlocation=$request->amountlocation;
                 $locationlist->save();
 
                 $felookuplocations = FeLookupLocation::find($adrress);
@@ -1749,6 +1745,50 @@ class FeSlipController extends Controller
                 );
             }
     }
+
+    public function storedetaillocation(Request $request)
+    {
+
+            $amountlocation = $request->amountlocation;
+            $translocation_id = $request->insurednoloc;
+        
+            if($amountlocation !='' && $translocation_id != '')
+            {    
+                $locationlist = new RiskLocationDetail();
+                $locationlist->translocation_id = $translocation_id;
+                $locationlist->interest_id=$request->slipinterestid;
+                $locationlist->cnno=$request->cnno;
+                $locationlist->certno=$request->certno;
+                $locationlist->refno=$request->refno;
+                $locationlist->amountlocation=$request->amountlocation;
+                $locationlist->save();
+
+                //$felookuplocations = FeLookupLocation::find($adrress);
+                $locationlist2 = RiskLocationDetail::where('id','=',$locationlist->id);
+
+                return response()->json([
+                    'id' => $locationlist->id,
+                    'translocation_id'=>  $request->translocation_id,
+                    'interest_id'=> $request->slipinterestid,
+                    'interest_name'=> $locationlist->interestdata->code.'-'.$locationlist->interestdata->description,
+                    'cnno' => $request->cnno,
+                    'certno' => $request->certno,
+                    'refno' => $request->refno,
+                    'amountlocation' => $request->amountlocation,
+                ]);
+            }
+            else
+            {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Fill all fields'
+                    ]
+                );
+            }
+    }
+
+
 
     public function update(Request $request, $felookuplocation)
     {

@@ -20,4 +20,16 @@ class RiskLocationDetail extends Model
     {  
        return $this->belongsTo('App\Models\TransLocationTemp', 'translocation_id');
     }
+
+    public function interestdata()
+    {  
+       return $this->belongsTo('App\Models\InterestInsured', 'interest_id');
+    }
+
+    public function cedingbroker()
+    {
+        
+        return $this->belongsTo('App\Models\CedingBroker', 'ceding_id');
+    }
+
 }

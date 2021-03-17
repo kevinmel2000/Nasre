@@ -26,6 +26,10 @@ Route::delete('/delete-ship-list/{id}','TransactionController@destroyshiplist')-
 Route::post('/store-fe-sliplocation-list','FeSlipController@storelocationlist')->name('locationlist.store');
 Route::delete('/delete-sliplocation-list/{id}','FeSlipController@destroysliplocationlist')->name('sliplistlocation.delete');
 
+Route::post('/store-fe-sliplocationdetail-list','FeSlipController@storedetaillocation')->name('locationlistdetail.store');
+Route::delete('/delete-sliplocationdetail-list/{id}','FeSlipController@destroysliplocationdetail')->name('sliplistlocationdetail.delete');
+
+
 Route::get('get-interest-list','TransactionController@showinterestinsuredList');
 Route::post('/store-interest-list','TransactionController@storeinterestlist')->name('interestlist.store');
 Route::post('update-interest-list/{id}', 'TransactionController@updateinterestlist')->name('interestlist.update');
