@@ -1134,6 +1134,7 @@ class FeSlipController extends Controller
                     'coincurance'=>$request->fescoincurance,
                     'location'=>$locationlist->toJson(),
                     'uy'=>$request->feuy
+                    
                 ]);
 
                 $notification = array(

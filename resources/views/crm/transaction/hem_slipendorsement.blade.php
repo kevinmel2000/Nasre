@@ -252,6 +252,17 @@
                                     </div>
                                 </div>
 
+                                
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">{{__('UY')}}</label>
+                                            <input type="number" id="hemuy" name="hemuy" value="{{$insureddata->uy}}" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-12" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
                                         <button type="button" id="addinsuredsave-btn" class="btn btn-primary btn-block ">

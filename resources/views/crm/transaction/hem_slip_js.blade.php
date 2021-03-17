@@ -2990,6 +2990,7 @@ $("body").on("click","#btn-danger2",function(){
        var hemsharefrom  = $('#hemsharefrom').val();
        var hemshareto = $('#hemshareto').val();
        var hemcoinsurance = $('#hemcoinsurance').val();
+       var hemuy = $('#hemuy').val();
        
        var conv_hemsharefrom = hemsharefrom.replace(/,/g, "");
        console.log(conv_hemsharefrom)
@@ -3021,7 +3022,8 @@ $("body").on("click","#btn-danger2",function(){
                hemshare:hemshare,
                hemsharefrom:real_hemsharefrom,
                hemshareto:real_hemshareto,
-               hemcoinsurance:hemcoinsurance
+               hemcoinsurance:hemcoinsurance,
+               hemuy:hemuy
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },

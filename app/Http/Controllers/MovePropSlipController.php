@@ -839,7 +839,8 @@ class MovePropSlipController extends Controller
                     'share_to'=>$request->mpshareto,
                     'coincurance'=>$request->mpcoinsurance,
                     'location'=>$locationlist->toJson(),
-                    'property_type'=>$propertytypelist->toJson()
+                    'property_type'=>$propertytypelist->toJson(),
+                    'uy'=>$request->mpuy
                 ]);
 
                 $notification = array(
@@ -860,6 +861,7 @@ class MovePropSlipController extends Controller
                 $insureddataup->coincurance=$request->mpcoinsurance;
                 $insureddataup->location=$locationlist->toJson();
                 $insureddataup->property_type=$propertytypelist->toJson();
+                $insureddataup->uy=$request->mpuy;
                 $insureddataup->save();
 
 

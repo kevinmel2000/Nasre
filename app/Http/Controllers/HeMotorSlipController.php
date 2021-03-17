@@ -831,7 +831,8 @@ class HeMotorSlipController extends Controller
                     'share_from'=>$request->hemsharefrom,
                     'share_to'=>$request->hemshareto,
                     'coincurance'=>$request->hemcoinsurance,
-                    'location'=>$locationlist->toJson()
+                    'location'=>$locationlist->toJson(),
+                    'uy'=>$request->hemuy
                 ]);
 
                 $notification = array(
@@ -851,6 +852,7 @@ class HeMotorSlipController extends Controller
                 $insureddataup->share_to=$request->hemshareto;
                 $insureddataup->coincurance=$request->hemcoinsurance;
                 $insureddataup->location=$locationlist->toJson();
+                $insureddataup->uy=$request->hemuy;
                 $insureddataup->save();
 
 
