@@ -659,8 +659,9 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Retro Backup?')}}</label>
                                                         <select id="sliprbdetail" name="sliprbdetail" class="form-control form-control-sm ">
-                                                            <option value="AF" >YES</option>
-                                                            <option value="AN" >NO</option>
+                                                            <option value="NO" >NO</option>
+                                                            <option value="YES" >YES</option>
+                                                            
                                                         </select>
                                                     </div>   
                                                 </div>

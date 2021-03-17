@@ -69,9 +69,13 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <div class="form-group">
+                                                            {{-- <div class="form-group">
                                                                 <label for="">{{__('UY')}}</label>
                                                                 <input type="number" id="slipuyupdate" name="slipuyupdate" value="" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-4" required/>
+                                                            </div> --}}
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Transfer Date')}}</label>
+                                                                <input type="date" id="sliptdupdate" name="sliptdupdate" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-50" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -750,8 +754,8 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Retro Backup?')}}</label>
                                                         <select id="sliprbupdate" name="sliprbupdate" class="form-control form-control-sm ">
-                                                            <option value="AF" >YES</option>
-                                                            <option value="AN" >NO</option>
+                                                            <option value="NO" >NO</option>
+                                                            <option value="YES" >YES</option>
                                                         </select>
                                                     </div>   
                                                 </div>

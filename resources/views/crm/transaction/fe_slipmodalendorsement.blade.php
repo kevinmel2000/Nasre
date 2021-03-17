@@ -41,8 +41,9 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
+                                                            <input type="hidden" name="slipidendorsement" id="slipidendorsement" >
                                                             <label for="">{{__('Number')}} </label>
-                                                            <input type="text" id="slipnumberendorsement" name="slipnumberendorsement" class="form-control form-control-sm" value="{{ $code_sl }}" readonly="readonly" required/>
+                                                            <input type="text" id="slipnumberendorsement" name="slipnumberendorsement" class="form-control form-control-sm" value="" readonly="readonly" required/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -69,9 +70,13 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <div class="form-group">
+                                                            {{-- <div class="form-group">
                                                                 <label for="">{{__('UY')}}</label>
                                                                 <input type="number" id="slipuyendorsement" name="slipuyendorsement" value="" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-4" required/>
+                                                            </div> --}}
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Transfer Date')}}</label>
+                                                                <input type="date" id="sliptdendorsement" name="sliptdendorsement" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-50" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -746,8 +751,9 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Retro Backup?')}}</label>
                                                         <select id="sliprbendorsement" name="sliprbendorsement" class="form-control form-control-sm ">
-                                                            <option value="YES" >YES</option>
                                                             <option value="NO" >NO</option>
+                                                            <option value="YES" >YES</option>
+                                                            
                                                         </select>
                                                     </div>   
                                                 </div>

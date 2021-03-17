@@ -14,6 +14,8 @@ use App\Http\Controllers\TransactionController;
 Route::get('get-state-lookup','FeSlipController@getStateLookup');
 Route::get('get-city-lookup','FeSlipController@getCityLookup');
 Route::get('get-address-lookup','FeSlipController@getAddressLookup');
+Route::get('get-building-rate','FeSlipController@getBuildingRate');
+Route::get('get-ceding-detail','FeSlipController@getCedingDetail');
 
 Route::get('get-route-list','TransactionController@showRouteList');
 Route::get('get-ship-list','TransactionController@showShipList');

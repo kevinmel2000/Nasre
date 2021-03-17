@@ -313,7 +313,6 @@
                     <thead>
                     <tr>
                       <th>{{__('Number')}}</th>
-                      <th>{{__('UY')}}</th>
                       <th>{{__('Ceding/Broker')}}</th>
                       <th>{{__('Ceding')}}</th>
                       <th>{{__('Status')}}</th>
@@ -326,23 +325,32 @@
                     
                     <tr>
                     <td>{{ @$slipdatatadetail->number }}</td>
-                    <td>{{ @$slipdatatadetail->uy }}</td>
                     <td>{{ @$slipdatatadetail->cedingbroker->name }} - {{ @$slipdatatadetail->cedingbroker->company_name }}</td>
                     <td>{{ @$slipdatatadetail->ceding->name }} - {{ @$slipdatatadetail->ceding->company_name }}</td>
                     <td >{{ @$slipdatatadetail->status }}</td>
                     <td>
                     <div class="row">
-                        <a class="text-primary mr-3 float-right " data-toggle="modal"  data-book-id="{{  @$slipdatatadetail->number }}" data-target="#detailmodaldata" href="#detailmodaldata">
-                        <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">{{__('Detail')}}</button>
-                        </a>
+                        @if($slipdatatadetail->date_transfer == null)
+                            <a class="text-primary mr-3 float-right " data-toggle="modal"  data-book-id="{{  @$slipdatatadetail->number }}" data-target="#detailmodaldata" href="#detailmodaldata">
+                            <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">{{__('Detail')}}</button>
+                            </a>
 
-                        <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->number }}" data-target="#updatemodaldata">
-                            <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">{{__('Edit')}}</button>
-                        </a>
+                            <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->number }}" data-target="#updatemodaldata">
+                                <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">{{__('Edit')}}</button>
+                            </a>
 
-                        <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->number }}" data-target="#endorsementmodaldata">
-                            <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">{{__('Endorsement')}}</button>
-                        </a>
+                            <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->id }}" data-target="#endorsementmodaldata">
+                                <button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">{{__('Endorsement')}}</button>
+                            </a>
+                        @else
+                            <a class="text-primary mr-3 float-right " data-toggle="modal"  data-book-id="{{  @$slipdatatadetail->number }}" data-target="#detailmodaldata" href="#detailmodaldata">
+                                <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">{{__('Detail')}}</button>
+                            </a>
+
+                            <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->id }}" data-target="#endorsementmodaldata">
+                                <button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">{{__('Endorsement')}}</button>
+                            </a>
+                        @endif
                     </div>
                     </td>
                     </tr>
@@ -419,9 +427,13 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <div class="form-group">
+                                                        {{-- <div class="form-group">
                                                             <label for="">{{__('UY')}}</label>
                                                             <input type="number" id="slipuy" name="slipuy" value="" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-10" required/>
+                                                        </div> --}}
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Transfer Date')}}</label>
+                                                            <input type="date" id="sliptd" name="sliptd" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-50" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -551,55 +563,65 @@
                                                     </div>    
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
 
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Building Const')}}</label>
-                                                        <select id="slipbld_const" name="slipbld_const" class="e1 form-control form-control-sm ">
-                                                            <option selected disabled>{{__('Building Const list')}}</option>
-                                                            <option value="Building 1"  >Building 1</option>
-                                                            <option value="Building 2" >Building 2</option>
-                                                            <option value="Building 3"  >Building 3</option>
-                                                        </select>
-                                                    </div>    
-                                                    </div>
-                                                </div>
-
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">{{__('Building Const')}}</label>
+                                                    <select id="slipbld_const" name="slipbld_const" class="e1 form-control form-control-sm ">
+                                                        <option selected disabled>{{__('Building Const list')}}</option>
+                                                        <option value="Building 1">Building 1</option>
+                                                        <option value="Building 2">Building 2</option>
+                                                        <option value="Building 3">Building 3</option>
+                                                    
+                                                    </select>
+                                                </div>    
                                             </div>
                                             
                                             <div class="col-md-6">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="card">
-                                                                    <div class="card-header bg-gray">
-                                                                        {{__('Reference Number')}}
-                                                                    </div>
-                                                                    <div class="card-body bg-light-gray ">
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                <label for="">{{__('Slip No.')}}</label>
-                                                                                <input type="text" id="slipno" name="slipno" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                <label for="">{{__('CN/DN')}}</label>
-                                                                                <input type="text" id="slipcndn" name="slipcndn" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                <label for="">{{__('Policy No')}}</label>
-                                                                                <input type="text" id="slippolicy_no"  name="slippolicy_no" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
-                                                                            </div>
-                                                                        </div>
-                                                                        
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        {{-- <div class="card">
+                                                            <div class="card-header bg-gray">
+                                                                {{__('Reference Number')}}
+                                                            </div>
+                                                            <div class="card-body bg-light-gray ">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="">{{__('Slip No.')}}</label>
+                                                                        <input type="text" id="slipno" name="slipno" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="">{{__('CN/DN')}}</label>
+                                                                        <input type="text" id="slipcndn" name="slipcndn" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="">{{__('Policy No')}}</label>
+                                                                        <input type="text" id="slippolicy_no"  name="slippolicy_no" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
+                                                                    </div>
+                                                                </div>
+                                                                
                                                             </div>
+                                                        </div> --}}
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Build Const Upper Area')}}</label>
+                                                            <input type="text" id="slipbcua" name="slipbcua" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Build Const Lower Area')}}</label>
+                                                            <input type="text" id="slipbcla" name="slipbcla" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="row">
@@ -893,13 +915,22 @@
                                             </div>
 
                                             <div class="col-md-4">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <div class="form-group" id="daytotal">                         
-                                                            Total Days :0
-                                                            </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        {{-- <div class="form-group" id="daytotal">                         
+                                                        Total Days :0
+                                                        
+                                                        </div> --}}
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Total Days')}}</label>
+                                                            <input type="text"  id="slipdaytotal" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Total Summary Insurance Periode')}}</label>
+                                                            <input type="text"  id="sliptotalsumdate" name="sliptotalsumdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
                                                         </div>
                                                     </div>
+                                                </div>
                                             </div>
                                         </div>
                                         
