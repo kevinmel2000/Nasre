@@ -3002,6 +3002,16 @@ $("body").on("click","#btn-danger2",function(){
        var real_hemshareto = parseInt(conv_hemshareto);
        console.log(real_hemshareto)
        
+       if(isNaN(real_fesshareto))
+       {
+         real_fesshareto=0;
+       }
+
+       if(isNaN(real_fessharefrom))
+       {
+        real_fessharefrom=0;
+       }
+       
        
        var token2 = $('input[name=_token]').val();
        
