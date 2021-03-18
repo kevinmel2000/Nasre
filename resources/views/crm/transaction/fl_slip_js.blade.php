@@ -3072,6 +3072,17 @@ $(document).ready(function() {
        var real_flsshareto = parseInt(conv_flsshareto);
        console.log(real_flsshareto)
        
+
+       if(isNaN(real_fesshareto))
+       {
+         real_fesshareto=0;
+       }
+
+       if(isNaN(real_fessharefrom))
+       {
+        real_fessharefrom=0;
+       }
+       
        
        var token2 = $('input[name=_token]').val();
        

@@ -4622,6 +4622,16 @@ $(document).ready(function() {
        console.log(conv_fesshareto)
        var real_fesshareto = parseInt(conv_fesshareto);
        console.log(real_fesshareto)
+
+       if(isNaN(real_fesshareto))
+       {
+         real_fesshareto=0;
+       }
+
+       if(isNaN(real_fessharefrom))
+       {
+        real_fessharefrom=0;
+       }
        
        
        var token2 = $('input[name=_token]').val();

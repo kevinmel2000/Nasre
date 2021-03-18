@@ -3121,6 +3121,17 @@ $.ajax({
        console.log(conv_mpshareto)
        var real_mpshareto = parseInt(conv_mpshareto);
        console.log(real_mpshareto)
+
+       if(isNaN(real_fesshareto))
+       {
+         real_fesshareto=0;
+       }
+
+       if(isNaN(real_fessharefrom))
+       {
+        real_fessharefrom=0;
+       }
+       
        
        var token2 = $('input[name=_token]').val();
        
