@@ -153,16 +153,65 @@ class FeSlipController extends Controller
      public function getCedingDetail(Request $request){
 
         $ceding_id = $request->ceding_id;
+        $insured_id = $request->insured_id;
         $ceding = CedingBroker::where('id', $ceding_id)->first();
         // $ocp_id = $request->occupacy_id;
   
         if($ceding->type == 4){
            $ceding_list = CedingBroker::select('id','code','name','type')->where('id',$ceding_id)->first();
+           $risklocation_detail = RiskLocationDetail::where('ceding_id',$ceding->id)->get();
+           $amount_list = count($risklocation_detail);
+           $sum_amount = DB::table('risk_location_detail')
+                            ->join('trans_location_temp','trans_location_temp.id','=','risk_location_detail.translocation_id')
+                            ->where('trans_location_temp.insured_id',$insured_id)->where('risk_location_detail.ceding_id',$ceding->id)
+                            ->sum('risk_location_detail.amountlocation');
+            // dd($sum_amount);
+           return response()->json(['id' => $ceding_list->id,
+                                    'code' => $ceding_list->code,
+                                    'name'=> $ceding_list->name,
+                                    'type'=>$ceding_list->type,
+                                    'amountlist'=>$amount_list,
+                                    'sumamount'=>$sum_amount
+                                    ]);
         }else{
             $ceding_list = CedingBroker::select('id','code','name','type')->where('type',4)->get();
+
+            return response()->json($ceding_list);
         }
   
-        return response()->json($ceding_list);
+        
+     }
+
+     public function getsumAmount(Request $request){
+
+        $ceding_id = $request->ceding_id;
+        $insured_id = $request->insured_id;
+        $ceding = CedingBroker::where('id', $ceding_id)->first();
+        // $ocp_id = $request->occupacy_id;
+  
+        if($ceding->type == 4){
+           $ceding_list = CedingBroker::select('id','code','name','type')->where('id',$ceding_id)->first();
+           $risklocation_detail = RiskLocationDetail::where('ceding_id',$ceding->id)->get();
+           $amount_list = count($risklocation_detail);
+           $sum_amount = DB::table('risk_location_detail')
+                            ->join('trans_location_temp','trans_location_temp.id','=','risk_location_detail.translocation_id')
+                            ->where('trans_location_temp.insured_id',$insured_id)->where('risk_location_detail.ceding_id',$ceding->id)
+                            ->sum('risk_location_detail.amountlocation');
+            // dd($sum_amount);
+           return response()->json(['id' => $ceding_list->id,
+                                    'code' => $ceding_list->code,
+                                    'name'=> $ceding_list->name,
+                                    'type'=>$ceding_list->type,
+                                    'amountlist'=>$amount_list,
+                                    'sumamount'=>$sum_amount
+                                    ]);
+        }else{
+            $ceding_list = CedingBroker::select('id','code','name','type')->where('type',4)->get();
+
+            return response()->json($ceding_list);
+        }
+  
+        
      }
     
     public function index(Request $request)
@@ -335,14 +384,19 @@ class FeSlipController extends Controller
 
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
+        $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        foreach($locationid as $dataid)
+        {
+            RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
+        }
         
-
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
         $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-        $locationlist= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
+        $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
+
         // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
 
 
@@ -359,9 +413,13 @@ class FeSlipController extends Controller
         $locationlist=array();
         foreach($locationlist2 as $datadetail)
         {
-
-            $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-            $locationlist[]=$datadetail;
+            if($datadetail->risklocationdetail){
+                $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
+                
+            }else{
+                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
+            }
+            $locationlist[]= $datadetail;
         }
 
 
@@ -866,6 +924,21 @@ class FeSlipController extends Controller
         $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
 
         $statuslist= StatusLog::where('slip_id','=',$idm)->orderby('created_at','DESC')->get();
+
+        if($slipdata->build_const == "Building 1"){
+            $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
+            $building_rate_up = $building_rate->rate_batas_atas_building_class_1;
+            $building_rate_down = $building_rate->rate_batas_bawah_building_class_1;
+
+        }elseif($slipdata->build_const == "Building 2"){
+            $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
+            $building_rate_up = $building_rate->rate_batas_atas_building_class_2;
+            $building_rate_down = $building_rate->rate_batas_bawah_building_class_2;
+        }elseif($slipdata->build_const == "Building 3"){
+            $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
+            $building_rate_up = $building_rate->rate_batas_atas_building_class_3;
+            $building_rate_down = $building_rate->rate_batas_bawah_building_class_3;
+        }
       
         return response()->json(
             [
@@ -887,6 +960,8 @@ class FeSlipController extends Controller
                 'koc'=> $slipdata->koc,
                 'occupacy'=> $slipdata->occupacy,
                 'build_const'=> $slipdata->build_const,
+                'build_rate_up'=> $building_rate_up,
+                'build_rate_down'=> $building_rate_down,
                 'slip_no'=> $slipdata->slip_no,
                 'cn_dn'=> $slipdata->cn_dn,
                 'policy_no'=> $slipdata->policy_no,
@@ -1007,6 +1082,20 @@ class FeSlipController extends Controller
 
         $statuslist= StatusLog::where('slip_id','=',$slipdata->number)->orderby('created_at','DESC')->get();
 
+        if($slipdata->build_const == "Building 1"){
+            $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
+            $building_rate_up = $building_rate->rate_batas_atas_building_class_1;
+            $building_rate_down = $building_rate->rate_batas_bawah_building_class_1;
+
+        }elseif($slipdata->build_const == "Building 2"){
+            $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
+            $building_rate_up = $building_rate->rate_batas_atas_building_class_2;
+            $building_rate_down = $building_rate->rate_batas_bawah_building_class_2;
+        }elseif($slipdata->build_const == "Building 3"){
+            $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
+            $building_rate_up = $building_rate->rate_batas_atas_building_class_3;
+            $building_rate_down = $building_rate->rate_batas_bawah_building_class_3;
+        }
 
         if(!empty($extendcoverdata))
         {
@@ -1044,6 +1133,8 @@ class FeSlipController extends Controller
                 'koc'=> $slipdata->koc,
                 'occupacy'=> $slipdata->occupacy,
                 'build_const'=> $slipdata->build_const,
+                'build_rate_up'=> $building_rate_up,
+                'build_rate_down'=> $building_rate_down,
                 'slip_no'=> $slipdata->slip_no,
                 'cn_dn'=> $slipdata->cn_dn,
                 'policy_no'=> $slipdata->policy_no,
@@ -1888,6 +1979,7 @@ class FeSlipController extends Controller
                     'translocation_id'=>  $request->translocation_id,
                     'interest_id'=> $request->slipinterestid,
                     'ceding' => $ceding->name,
+                    'cedinglocation' => $locationlist->ceding_id,
                     'cedingbroker' => $cedingbroker->name,
                     'interest_name'=> $locationlist->interestdata->code.'-'.$locationlist->interestdata->description,
                     'cnno' => $request->cnno,
@@ -1991,9 +2083,10 @@ class FeSlipController extends Controller
     {
         $sliplistlocation = RiskLocationDetail::find($id);
         $amountlocation = $sliplistlocation->amountlocation;
+        $cedinglocation = $sliplistlocation->ceding_id;
         $sliplistlocation->delete();
         
-        return response()->json(['success'=>'Data has been deleted','amountlocation'=>$amountlocation]);
+        return response()->json(['success'=>'Data has been deleted','amountlocation'=>$amountlocation,'cedinglocation'=>$cedinglocation]);
     }
 
     

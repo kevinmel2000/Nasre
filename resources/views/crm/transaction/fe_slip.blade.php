@@ -146,7 +146,7 @@
                                                                                     <thead>
                                                                                     <tr>
                                                                                     <th>Interest Insured</th>
-                                                                                    <th>Ceding/Broker</th>
+                                                                                    <th>Ceding</th>
                                                                                     <th>CN No</th>
                                                                                     <th>Cert No</th>
                                                                                     <th>Ref No</th>
@@ -162,7 +162,7 @@
                                                                                             @foreach($slt->risklocationdetail as $detaillocrisk)
 
                                                                                                 <tr id="riskdetailsid{{ $detaillocrisk->id }}">
-                                                                                                <td>{{ $detaillocrisk->interestdetail->description }}</td>
+                                                                                                <td>{{ $detaillocrisk->interestdetail->code }} - {{ $detaillocrisk->interestdetail->description }}</td>
                                                                                                 <td>{{ $detaillocrisk->cedingdetail->name }}</td>
                                                                                                 <td>{{ $detaillocrisk->cnno }}</td>
                                                                                                 <td>{{ $detaillocrisk->certno }}</td>
@@ -391,7 +391,7 @@
                                                 <label for="">{{__('Ceding / Broker')}}</label>
                                                  <select id="ceding_id" name="ceding_id" class="e1 form-control form-control-sm ">
                                                     <option value=""  selected disabled >Ceding or Broker</option>
-                                                    @foreach($cedingbroker as $cb)
+                                                    @foreach($ceding as $cb)
                                                         <option value="{{ $cb->id }}">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
                                                     @endforeach
                                                 </select>
@@ -578,7 +578,7 @@
                                                                 </div> --}}
                                                                 <div class="form-group">
                                                                     <label for="">{{__('Transfer Date')}}</label>
-                                                                    <input type="date" id="sliptd" name="sliptd" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-50" />
+                                                                    <input type="date" id="sliptd" name="sliptd" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-50" readonly="readonly"/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -750,40 +750,14 @@
                                                     <div class="col-md-6">
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                {{-- <div class="card">
-                                                                    <div class="card-header bg-gray">
-                                                                        {{__('Reference Number')}}
-                                                                    </div>
-                                                                    <div class="card-body bg-light-gray ">
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                <label for="">{{__('Slip No.')}}</label>
-                                                                                <input type="text" id="slipno" name="slipno" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                <label for="">{{__('CN/DN')}}</label>
-                                                                                <input type="text" id="slipcndn" name="slipcndn" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                <label for="">{{__('Policy No')}}</label>
-                                                                                <input type="text" id="slippolicy_no"  name="slippolicy_no" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
-                                                                            </div>
-                                                                        </div>
-                                                                        
-                                                                    </div>
-                                                                </div> --}}
                                                                 <div class="form-group">
-                                                                    <label for="">{{__('Build Const Upper Area')}}</label>
+                                                                    <label for="">{{__('Rate Upper Area')}}</label>
                                                                     <input type="text" id="slipbcua" name="slipbcua" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="">{{__('Build Const Lower Area')}}</label>
+                                                                    <label for="">{{__('Rate Lower Area')}}</label>
                                                                     <input type="text" id="slipbcla" name="slipbcla" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                                 </div>
                                                             </div>
@@ -965,7 +939,7 @@
                                                                                 <th>{{__('Currency')}}</th>
                                                                                 <th>{{__('Percentage')}}</th>
                                                                                 <th>{{__('Amount')}}</th>
-                                                                                <th>{{__('MIn Claim Amount')}}</th>
+                                                                                <th>{{__('Min Claim Amount')}}</th>
                                                                                 <th width="20%">{{__('Actions')}}</th>
                                                                             </tr>
                                                                             </thead>
@@ -1221,13 +1195,22 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Rate (permil.. %)')}}</label>
-                                                                <input type="number" value="0" step=".0001" id="sliprate" name="sliprate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                <input type="number" value="" step=".0001" id="sliprate" name="sliprate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Fee Broker')}}</label>
-                                                                <input type="text" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="input-group">
+                                                                            <input type="number" value="" step=".0001" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                            <div class="input-group-append">
+                                                                                <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

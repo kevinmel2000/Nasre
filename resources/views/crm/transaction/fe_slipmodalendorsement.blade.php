@@ -76,7 +76,7 @@
                                                             </div> --}}
                                                             <div class="form-group">
                                                                 <label for="">{{__('Transfer Date')}}</label>
-                                                                <input type="date" id="sliptdendorsement" name="sliptdendorsement" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-50" />
+                                                                <input type="date" id="sliptdendorsement" name="sliptdendorsement" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-50" readonly="readonly"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -211,7 +211,7 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Building Const')}}</label>
                                                         <select id="slipbld_constendorsement" name="slipbld_constendorsement" class="e1 form-control form-control-sm ">
-                                                            <option selected disabled>{{__('Building Const list')}}</option>
+                                                            <option  disabled>{{__('Building Const list')}}</option>
                                                             <option value="Building 1">Building 1</option>
                                                             <option value="Building 2">Building 2</option>
                                                             <option value="Building 3">Building 3</option>
@@ -224,13 +224,13 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="">{{__('Build Const Upper Area')}}</label>
+                                                                <label for="">{{__('Rate Upper Area')}}</label>
                                                                 <input type="text" id="slipbcuaendorsement" name="slipbcuaendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="">{{__('Build Const Lower Area')}}</label>
+                                                                <label for="">{{__('Rate Lower Area')}}</label>
                                                                 <input type="text" id="slipbclaendorsement" name="slipbclaendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                             </div>
                                                         </div>
@@ -327,7 +327,7 @@
                                                                             <th>{{__('Currency')}}</th>
                                                                             <th>{{__('Percentage')}}</th>
                                                                             <th>{{__('Amount')}}</th>
-                                                                            <th>{{__('MIn Claim Amount')}}</th>
+                                                                            <th>{{__('Min Claim Amount')}}</th>
                                                                             <th width="20%">{{__('Actions')}}</th>
                                                                         </tr>
                                                                         </thead>
@@ -537,10 +537,8 @@
                                                 </div>
                                             </div>
                                             
-
-                                            
                                             <div class="row d-flex justify-content-start">
-                                                <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> non proportional panel</i>
+                                                <i class="fa fa-info-circle" id="labelnpendorsement" style="color: grey;" aria-hidden="true"> non proportional panel</i>
                                             </div>
                                             <div class="row d-flex justify-content-end">
                                                 <div class="col-md-4">
@@ -555,7 +553,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group d-flex justify-content-end">
                                                         <label style="opacity: 0;">{{__('p')}}:</label>
-                                                        <button type="button" class="btn plus-button" data-toggle="modal" data-target="#addLayerModal">
+                                                        <button type="button" id="btnaddlayerendorsement" class="btn plus-button" data-toggle="modal" data-target="#addLayerModal">
                                                             <span data-toggle="tooltip" data-placement="top" title="{{__('Add New layer')}}"> + add layer </span>
                                                         </button>
                                                     </div>
@@ -564,7 +562,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="">{{__('Layer for non proportional')}}</label>
+                                                        <label for="" id="labelnonpropendorsement">{{__('Layer for non proportional')}}</label>
                                                         <select id="sliplayerproportionalendorsement" name="sliplayerproportionalendorsement" class="form-control form-control-sm ">
                                                             <option selected disabled>{{__('Choose layer')}}</option>
                                                             <option value="Layer 1"  >Layer 1</option>
@@ -581,13 +579,22 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="">{{__('Rate (permil.. %)')}}</label>
-                                                            <input type="number"  value="" step=".0001" id="sliprateendorsement" name="sliprateendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" required/>
+                                                            <input type="number"  value="" step=".0001" id="sliprateendorsement" name="sliprateendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="">{{__('Fee Broker')}}</label>
-                                                            <input type="text" id="slipvbrokerendorsement" name="slipvbrokerendorsement" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <input type="number" value="" step=".0001" id="slipvbrokerendorsement" name="slipvbrokerendorsement" class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                        <div class="input-group-append">
+                                                                            <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -599,7 +606,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <div class="input-group">
-                                                                            <input type="number" value="" step=".0001" id="slipshareendorsement" name="slipshareendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="b" required/>
+                                                                            <input type="number" value="" step=".0001" id="slipshareendorsement" name="slipshareendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="b" />
                                                                             <div class="input-group-append">
                                                                                 <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                             </div>
@@ -644,7 +651,7 @@
                                                                 <div class="row d-flex flex-wrap">
                                                                     <div class="col-md-12">
                                                                         <div class="input-group">
-                                                                            <input type="number" value="" step=".0001" id="slipcommissionendorsement" name="slipcommissionendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="d" required/>
+                                                                            <input type="number" value="" step=".0001" id="slipcommissionendorsement" name="slipcommissionendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="d" />
                                                                             <div class="input-group-append">
                                                                                 <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                             </div>

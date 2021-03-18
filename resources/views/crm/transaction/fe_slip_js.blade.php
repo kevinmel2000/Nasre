@@ -6,7 +6,7 @@
         $(".e1").select2({ width: '100%' }); 
     
         $("#tabretro").attr('hidden','true');
-        $("#tabretrodetail").attr('hidden','true');
+        // $("#tabretrodetail").attr('hidden','true');
         // $("#tabretroupdate").attr('hidden','true');
         // $("#tabretroendorsement").attr('hidden','true');
         $("#sliptotalsum").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -150,7 +150,7 @@
                     $('#slipeddetail').val(response.endorsment);
                     $('#slipslsdetail').val(response.selisih);
                     $('#wpcdetail').val(response.wpc);
-                    $('#slipvbrokerdetail').val(response.v_broker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipvbrokerdetail').val(response.v_broker);
 
                     // if(response.interest_insured)
                     // {
@@ -286,8 +286,11 @@
 
                     if(response.build_const)
                     {
-                       //$("#slipbld_constdetail option[value=" + response.build_const + "]:first")[0].selected = true;
+                       $("#slipbld_constdetail option[value='" + response.build_const + "']:first")[0].selected = true;
                     }
+
+                    $("#slipbcuadetail").val(response.build_rate_up);
+                    $("#slipbcladetail").val(response.build_rate_down);
 
                     if(response.insured_type)
                     {
@@ -302,6 +305,13 @@
                     if(response.retro_backup)
                     {
                         $("#sliprbdetail option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                        if(response.retro_backup == "NO")
+                        {
+                            $("#tabretrodetail").attr('hidden');
+                        }
+                        else if(response.retro_backup == "YES"){
+                            $("#tabretrodetail").removeAttr('hidden');
+                        }
                     }
 
                     if(response.status_log){
@@ -318,26 +328,110 @@
                     $('#slipnodetail').val(response.slip_no);
                     $('#slipcndndetail').val(response.cn_dn);
                     $('#slippolicy_nodetail').val(response.policy_no);
-                    $('#sliptotalsumdetail').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    if(response.total_sum_insured){
+                        $('#sliptotalsumdetail').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }
+                    else
+                    {
+                        $('#sliptotalsumdetail').val("0");
+                    }
+                   
                 
                     $('#slippctdetail').val(response.insured_pct);
-                    $('#sliptotalsumpctdetail').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    if(response.total_sum_pct){
+                        $('#sliptotalsumpctdetail').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }
+                    else{
+                        $('#sliptotalsumpctdetail').val("0");
+                    }
+                    
+
                     $('#sliptddetail').val(response.date_transfer);
                     $('#slipipfromdetail').val(response.insurance_period_from);
                     $('#slipiptodetail').val(response.insurance_period_to);
+
+                    var insurance_period_from2 = response.insurance_period_from;
+                    var insurance_period_to2 = response.insurance_period_to;
+                    var days=daysBetween(insurance_period_from2, insurance_period_to2);
+                    var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+                    var constday = days.toString() + "/365";
+                    console.log(insurance_period_from2)
+                    console.log(insurance_period_to2)
+                    console.log(days)
+                    console.log(constday)
+                    console.log(parseFloat(sum))
+                    
+                    $('#slipdaytotaldetail').val(constday);
+                    $('#sliptotalsumdatedetail').val(parseFloat(sum));
+
                     $('#sliprpfromdetail').val(response.reinsurance_period_from);
                     $('#sliprptodetail').val(response.reinsurance_period_to);
-                    $('#switch-proportional').val(response.proportional);
+                    
+                    $('#switch-proportionaldetail').val(response.proportional);
+                    // if(response.proportional == ''){
+                        $("#btnaddlayerdetail").attr('hidden','true');
+                        $("#sliplayerproportionaldetail").attr('hidden','true');
+                        $("#labelnonpropdetail").attr('hidden','true');
+                        $("#labelnpdetail").attr('hidden','true');
+                    // }
+
                     $('#slipratedetail').val(response.rate);
                     $('#slipsharedetail').val(response.share);
-                    $('#slipsumsharedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipbasicpremiumdetail').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipgrossprmtonrdetail').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipcommissiondetail').val(response.commission);
-                    $('#slipsumcommissiondetail').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipnetprmtonrdetail').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
-                    $('#slipordetail').val(response.own_retention);
-                    $('#slipsumordetail').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    if(response.sum_share){
+                        $('#slipsumsharedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }
+                    else{
+                        $('#slipsumsharedetail').val("0");
+                    }
+                    if(response.basic_premium){
+                        $('#slipbasicpremiumdetail').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }else
+                    {
+                        $('#slipbasicpremiumdetail').val("0");
+                    }
+                    
+                    if(response.grossprm_to_nr){
+                        $('#slipgrossprmtonrdetail').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }
+                    else{
+                        $('#slipgrossprmtonrdetail').val("0");
+                    }
+                    if(response.commission){
+                        $('#slipcommissiondetail').val(response.commission);
+                    }
+                    else{
+                        $('#slipcommissiondetail').val(0);
+                    }
+                    
+
+                    if(response.sum_commission){
+                        $('#slipsumcommissiondetail').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }
+                    else{
+                        $('#slipsumcommissiondetail').val("0");
+
+                    }
+
+                    if(response.netprm_to_nr){
+                        $('#slipnetprmtonrdetail').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
+                    }
+                    else{
+                        $('#slipnetprmtonrdetail').val("0"); 
+                    }
+
+                    if(response.own_retention){
+                        $('#slipordetail').val(response.own_retention);
+                    }
+                    else{
+                        $('#slipordetail').val(0);
+                    }
+
+                    if(response.sum_own_retention){
+                        $('#slipsumordetail').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }
+                    else{
+                        $('#slipsumordetail').val("0");
+                    }
                     
                     
                     swal("Good job!", "Data Show")
@@ -361,36 +455,36 @@
             });
         });
 
-        var bld = $('#slipbld_constdetail').val();
-        var ocp_id = $('#slipoccupacydetail').val();
-        console.log(bld)
-        console.log(ocp_id)
-        $.ajax({
-            type:"GET",
-            url:"{{url('get-building-rate')}}",
-            data: {
-            building: bld,
-            occupacy_id:ocp_id
-            },
-            beforeSend: function() { $("body").addClass("loading");  },
-            complete: function() {  $("body").removeClass("loading"); },
-            success:function(res){  
-                console.log(res)      
-                console.log(bld)      
-                if(res.rate_batas_atas_building_class_1){
-                    $("#slipbcuadetail").val(res.rate_batas_atas_building_class_1);
-                    $("#slipbcladetail").val(res.rate_batas_bawah_building_class_1);
-                }
-                else if(res.rate_batas_atas_building_class_2){
-                    $("#slipbcuadetail").val(res.rate_batas_atas_building_class_2);
-                    $("#slipbcladetail").val(res.rate_batas_bawah_building_class_2);
-                }
-                else if(res.rate_batas_atas_building_class_3){
-                    $("#slipbcuadetail").val(res.rate_batas_atas_building_class_3);
-                    $("#slipbcladetail").val(res.rate_batas_bawah_building_class_3);
-                }
-            }
-        });
+        // var bld = $('#slipbld_constdetail').val();
+        // var ocp_id = $('#slipoccupacydetail').val();
+        // console.log(bld)
+        // console.log(ocp_id)
+        // $.ajax({
+        //     type:"GET",
+        //     url:"{{url('get-building-rate')}}",
+        //     data: {
+        //     building: bld,
+        //     occupacy_id:ocp_id
+        //     },
+        //     beforeSend: function() { $("body").addClass("loading");  },
+        //     complete: function() {  $("body").removeClass("loading"); },
+        //     success:function(res){  
+        //         console.log(res)      
+        //         console.log(bld)      
+        //         if(res.rate_batas_atas_building_class_1){
+        //             $("#slipbcuadetail").val(res.rate_batas_atas_building_class_1);
+        //             $("#slipbcladetail").val(res.rate_batas_bawah_building_class_1);
+        //         }
+        //         else if(res.rate_batas_atas_building_class_2){
+        //             $("#slipbcuadetail").val(res.rate_batas_atas_building_class_2);
+        //             $("#slipbcladetail").val(res.rate_batas_bawah_building_class_2);
+        //         }
+        //         else if(res.rate_batas_atas_building_class_3){
+        //             $("#slipbcuadetail").val(res.rate_batas_atas_building_class_3);
+        //             $("#slipbcladetail").val(res.rate_batas_bawah_building_class_3);
+        //         }
+        //     }
+        // });
         
 
     });
@@ -431,7 +525,7 @@
                     $('#slipedupdate').val(response.endorsment);
                     $('#slipslsupdate').val(response.selisih);
                     $('#wpcupdate').val(response.wpc);
-                    $('#slipvbrokerupdate').val(response.v_broker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipvbrokerupdate').val(response.v_broker);
 
                     // if(response.interest_insured)
                     // {
@@ -568,8 +662,12 @@
 
                     if(response.build_const)
                     {
-                       //$("#slipbld_constupdate option[value=" + response.build_const + "]:first")[0].selected = true;
+                        $("#slipbld_constupdate option[value='" + response.build_const + "']:first")[0].selected = true;
+                        $("#slipbcuaupdate").val(response.build_rate_up);
+                        $("#slipbclaupdate").val(response.build_rate_down);
                     }
+
+
 
                     if(response.insured_type)
                     {
@@ -584,6 +682,13 @@
                     if(response.retro_backup)
                     {
                         $("#sliprbupdate option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                        if(response.retro_backup == "NO")
+                        {
+                            $("#tabretroupdate").attr('hidden');
+                        }
+                        else if(response.retro_backup == "YES"){
+                            $("#tabretroupdate").removeAttr('hidden');
+                        }
                     }
 
                     if(response.status_log){
@@ -607,10 +712,31 @@
 
                     $('#slipipfromupdate').val(response.insurance_period_from);
                     $('#slipiptoupdate').val(response.insurance_period_to);
+
+                    var insurance_period_from2 = response.insurance_period_from;
+                    var insurance_period_to2 = response.insurance_period_to;
+                    var days=daysBetween(insurance_period_from2, insurance_period_to2);
+                    var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+                    var constday = days.toString() + "/365";
+                    console.log(insurance_period_from2)
+                    console.log(insurance_period_to2)
+                    console.log(days)
+                    console.log(constday)
+                    console.log(parseFloat(sum))
+                    
+                    $('#slipdaytotalupdate').val(constday);
+                    $('#sliptotalsumdateupdate').val(parseFloat(sum));
+
                     $('#sliprpfromupdate').val(response.reinsurance_period_from);
                     $('#sliprptoupdate').val(response.reinsurance_period_to);
 
-                    $('#switch-proportional').val(response.proportional);
+                    $('#switch-proportionalupdate').val(response.proportional);
+                    // if(response.proportional == ''){
+                        $("#btnaddlayerupdate").attr('hidden','true');
+                        $("#sliplayerproportionalupdate").attr('hidden','true');
+                        $("#labelnonpropupdate").attr('hidden','true');
+                        $("#labelnpupdate").attr('hidden','true');
+                    // }
 
                    $('#sliprateupdate').val(response.rate);
                     $('#slipshareupdate').val(response.share);
@@ -647,35 +773,35 @@
             });
         });
 
-        var bld = $('#slipbld_constupdate').val();
-        var ocp_id = $('#slipoccupacyupdate').val();
+        // var bld = $('#slipbld_constupdate').val();
+        // var ocp_id = $('#slipoccupacyupdate').val();
 
-        $.ajax({
-            type:"GET",
-            url:"{{url('get-building-rate')}}",
-            data: {
-            building: bld,
-            occupacy_id:ocp_id
-            },
-            beforeSend: function() { $("body").addClass("loading");  },
-            complete: function() {  $("body").removeClass("loading"); },
-            success:function(res){  
-                console.log(res)      
-                console.log(bld)      
-                if(res.rate_batas_atas_building_class_1){
-                    $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_1);
-                    $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_1);
-                }
-                else if(res.rate_batas_atas_building_class_2){
-                    $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_2);
-                    $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_2);
-                }
-                else if(res.rate_batas_atas_building_class_3){
-                    $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_3);
-                    $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_3);
-                }
-            }
-        });
+        // $.ajax({
+        //     type:"GET",
+        //     url:"{{url('get-building-rate')}}",
+        //     data: {
+        //     building: bld,
+        //     occupacy_id:ocp_id
+        //     },
+        //     beforeSend: function() { $("body").addClass("loading");  },
+        //     complete: function() {  $("body").removeClass("loading"); },
+        //     success:function(res){  
+        //         console.log(res)      
+        //         console.log(bld)      
+        //         if(res.rate_batas_atas_building_class_1){
+        //             $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_1);
+        //             $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_1);
+        //         }
+        //         else if(res.rate_batas_atas_building_class_2){
+        //             $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_2);
+        //             $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_2);
+        //         }
+        //         else if(res.rate_batas_atas_building_class_3){
+        //             $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_3);
+        //             $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_3);
+        //         }
+        //     }
+        // });
         
 
     });
@@ -718,7 +844,7 @@
                     $('#slipedendorsement').val(response.endorsment);
                     $('#slipslsendorsement').val(response.selisih);
                     $('#wpcendorsement').val(response.wpc);
-                    $('#slipvbrokerendorsement').val(response.v_broker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipvbrokerendorsement').val(response.v_broker);
 
                     // if(response.interest_insured)
                     // {
@@ -848,12 +974,14 @@
 
                     if(response.occupacy)
                     {
-                        //$("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
+                        $("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
                     }
 
                     if(response.build_const)
                     {
-                       //$("#slipbld_constendorsement option[value=" + response.build_const + "]:first")[0].selected = true;
+                       $("#slipbld_constendorsement option[value='" + response.build_const + "']:first")[0].selected = true;
+                       $("#slipbcuaendorsement").val(response.build_rate_up);
+                        $("#slipbclaendorsement").val(response.build_rate_down);
                     }
 
                     if(response.insured_type)
@@ -869,6 +997,13 @@
                     if(response.retro_backup)
                     {
                         $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                        if(response.retro_backup == "NO")
+                        {
+                            $("#tabretroendorsement").attr('hidden');
+                        }
+                        else if(response.retro_backup == "YES"){
+                            $("#tabretroendorsement").removeAttr('hidden');
+                        }
                     }
 
                     if(response.status_log){
@@ -890,9 +1025,30 @@
                     $('#sliptotalsumpctendorsement').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#slipipfromendorsement').val(response.insurance_period_from);
                     $('#slipiptoendorsement').val(response.insurance_period_to);
+
+                    var insurance_period_from2 = response.insurance_period_from;
+                    var insurance_period_to2 = response.insurance_period_to;
+                    var days=daysBetween(insurance_period_from2, insurance_period_to2);
+                    var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+                    var constday = days.toString() + "/365";
+                    console.log(insurance_period_from2)
+                    console.log(insurance_period_to2)
+                    console.log(days)
+                    console.log(constday)
+                    console.log(parseFloat(sum))
+                    
+                    $('#slipdaytotalendorsement').val(constday);
+                    $('#sliptotalsumdateendorsement').val(parseFloat(sum));
+
                     $('#sliprpfromendorsement').val(response.reinsurance_period_from);
                     $('#sliprptoendorsement').val(response.reinsurance_period_to);
-                    $('#switch-proportional').val(response.proportional);
+                    $('#switch-proportionalendorsement').val(response.proportional);
+                    // if(response.proportional == ''){
+                        $("#btnaddlayerendorsement").attr('hidden','true');
+                        $("#sliplayerproportionalendorsement").attr('hidden','true');
+                        $("#labelnonpropendorsement").attr('hidden','true');
+                        $("#labelnpendorsement").attr('hidden','true');
+                    // }
 
                     $('#sliprateendorsement').val(response.rate);
                     $('#slipshareendorsement').val(response.share);
@@ -927,35 +1083,35 @@
             });
         });
 
-        var bld = $('#slipbld_constendorsement').val();
-        var ocp_id = $('#slipoccupacyendorsement').val();
+        // var bld = $('#slipbld_constendorsement').val();
+        // var ocp_id = $('#slipoccupacyendorsement').val();
 
-        $.ajax({
-            type:"GET",
-            url:"{{url('get-building-rate')}}",
-            data: {
-            building: bld,
-            occupacy_id:ocp_id
-            },
-            beforeSend: function() { $("body").addClass("loading");  },
-            complete: function() {  $("body").removeClass("loading"); },
-            success:function(res){  
-                console.log(res)      
-                console.log(bld)      
-                if(res.rate_batas_atas_building_class_1){
-                    $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_1);
-                    $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_1);
-                }
-                else if(res.rate_batas_atas_building_class_2){
-                    $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_2);
-                    $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_2);
-                }
-                else if(res.rate_batas_atas_building_class_3){
-                    $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_3);
-                    $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_3);
-                }
-            }
-        });
+        // $.ajax({
+        //     type:"GET",
+        //     url:"{{url('get-building-rate')}}",
+        //     data: {
+        //     building: bld,
+        //     occupacy_id:ocp_id
+        //     },
+        //     beforeSend: function() { $("body").addClass("loading");  },
+        //     complete: function() {  $("body").removeClass("loading"); },
+        //     success:function(res){  
+        //         console.log(res)      
+        //         console.log(bld)      
+        //         if(res.rate_batas_atas_building_class_1){
+        //             $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_1);
+        //             $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_1);
+        //         }
+        //         else if(res.rate_batas_atas_building_class_2){
+        //             $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_2);
+        //             $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_2);
+        //         }
+        //         else if(res.rate_batas_atas_building_class_3){
+        //             $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_3);
+        //             $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_3);
+        //         }
+        //     }
+        // });
 
         console.log($('#slipnumberendorsement').val())
 
@@ -1251,17 +1407,69 @@
                 success:function(res){  
                     console.log(res)      
                     console.log(bld)      
-                    if(res.rate_batas_atas_building_class_1){
-                        $("#slipbcua").val(res.rate_batas_atas_building_class_1);
-                        $("#slipbcla").val(res.rate_batas_bawah_building_class_1);
+                    if(res.rate_batas_atas_building_class_1 && res.rate_batas_bawah_building_class_1){
+                        if(res.rate_batas_atas_building_class_1 != null){
+                            $("#slipbcua").val(res.rate_batas_atas_building_class_1);
+                        }else{
+                            $("#slipbcua").val(parseInt('0'));
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_1 != null){
+                            $("#slipbcla").val(res.rate_batas_bawah_building_class_1);
+                        }else{
+                            $("#slipbcla").val(parseInt('0'));
+                        }
+                        
+
                     }
-                    else if(res.rate_batas_atas_building_class_2){
-                        $("#slipbcua").val(res.rate_batas_atas_building_class_2);
-                        $("#slipbcla").val(res.rate_batas_bawah_building_class_2);
+                    else if(res.rate_batas_atas_building_class_2 && res.rate_batas_bawah_building_class_2){
+                        if(res.rate_batas_atas_building_class_2 != null){
+                            $("#slipbcua").val(res.rate_batas_atas_building_class_2);
+                        }else{
+                            $("#slipbcua").val(parseInt('0'));
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_2 != null){
+                            $("#slipbcla").val(res.rate_batas_bawah_building_class_2);
+                        }else{
+                            $("#slipbcla").val(parseInt('0'));
+                        }
+                        
                     }
-                    else if(res.rate_batas_atas_building_class_3){
-                        $("#slipbcua").val(res.rate_batas_atas_building_class_3);
-                        $("#slipbcla").val(res.rate_batas_bawah_building_class_3);
+                    else if(res.rate_batas_atas_building_class_3 && res.rate_batas_bawah_building_class_3){
+                        if(res.rate_batas_atas_building_class_3 != null){
+                            $("#slipbcua").val(res.rate_batas_atas_building_class_3); 
+                        }else{
+                            $("#slipbcua").val( parseInt('0'));
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_3 != null){
+                            $("#slipbcla").val(res.rate_batas_bawah_building_class_3);
+                        }else{
+                            $("#slipbcla").val( parseInt('0'));
+                        }
+                        
+                        
+                    }else{
+                        if(res.rate_batas_atas_building_class_1){
+                            $("#slipbcua").val(res.rate_batas_atas_building_class_1); 
+                            $("#slipbcla").val( parseInt('0'));
+                        }else if(res.rate_batas_bawah_building_class_1){
+                            $("#slipbcla").val(res.rate_batas_bawah_building_class_1); 
+                            $("#slipbcua").val( parseInt('0'));
+                        }else if(res.rate_batas_atas_building_class_2){
+                            $("#slipbcua").val(res.rate_batas_atas_building_class_2); 
+                            $("#slipbcla").val( parseInt('0'));
+                        }else if(res.rate_batas_bawah_building_class_2){
+                            $("#slipbcla").val(res.rate_batas_bawah_building_class_2); 
+                            $("#slipbcua").val( parseInt('0'));
+                        }else if(res.rate_batas_atas_building_class_3){
+                            $("#slipbcua").val(res.rate_batas_atas_building_class_3); 
+                            $("#slipbcla").val( parseInt('0'));
+                        }else if(res.rate_batas_bawah_building_class_3){
+                            $("#slipbcla").val(res.rate_batas_bawah_building_class_3); 
+                            $("#slipbcua").val( parseInt('0'));
+                        }
                     }
                 }
             });
@@ -1291,16 +1499,48 @@
                     console.log(res)      
                     console.log(bld)      
                     if(res.rate_batas_atas_building_class_1){
-                        $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_1);
-                        $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_1);
+                        if(res.rate_batas_atas_building_class_1 == ' ' || res.rate_batas_atas_building_class_1 == 0.000){
+                            $("#slipbcuaupdate").val( parseInt('0'));
+                        }else{
+                            $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_1);
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_1 == ' ' || res.rate_batas_bawah_building_class_1 == 0.000){
+                            $("#slipbclaupdate").val( parseInt('0'));
+                        }else{
+                            $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_1);
+                        }
+                        
+
                     }
                     else if(res.rate_batas_atas_building_class_2){
-                        $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_2);
-                        $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_2);
+                        if(res.rate_batas_atas_building_class_2 == ' ' || res.rate_batas_atas_building_class_2 == 0.000){
+                            $("#slipbcuaupdate").val( parseInt('0'));
+                        }else{
+                            $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_2);
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_2 == ' ' || res.rate_batas_bawah_building_class_2 == 0.000){
+                            $("#slipbclaupdate").val( parseInt('0'));
+                        }else{
+                            $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_2);
+                        }
+                        
                     }
                     else if(res.rate_batas_atas_building_class_3){
-                        $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_3);
-                        $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_3);
+                        if(res.rate_batas_atas_building_class_3 == ' ' || res.rate_batas_atas_building_class_3 == 0.000){
+                            $("#slipbcuaupdate").val( parseInt('0'));
+                        }else{
+                            $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_3);
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_3 == ' ' || res.rate_batas_bawah_building_class_3 == 0.000){
+                            $("#slipbclaupdate").val( parseInt('0'));
+                        }else{
+                            $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_3);
+                        }
+                        
+                        
                     }
                 }
             });
@@ -1330,16 +1570,48 @@
                     console.log(res)      
                     console.log(bld)      
                     if(res.rate_batas_atas_building_class_1){
-                        $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_1);
-                        $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_1);
+                        if(res.rate_batas_atas_building_class_1 == ' ' || res.rate_batas_atas_building_class_1 == 0.000){
+                            $("#slipbcuaendorsement").val( parseInt('0'));
+                        }else{
+                            $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_1);
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_1 == ' ' || res.rate_batas_bawah_building_class_1 == 0.000){
+                            $("#slipbclaendorsement").val( parseInt('0'));
+                        }else{
+                            $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_1);
+                        }
+                        
+
                     }
                     else if(res.rate_batas_atas_building_class_2){
-                        $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_2);
-                        $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_2);
+                        if(res.rate_batas_atas_building_class_2 == ' ' || res.rate_batas_atas_building_class_2 == 0.000){
+                            $("#slipbcuaendorsement").val( parseInt('0'));
+                        }else{
+                            $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_2);
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_2 == ' ' || res.rate_batas_bawah_building_class_2 == 0.000){
+                            $("#slipbclaendorsement").val( parseInt('0'));
+                        }else{
+                            $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_2);
+                        }
+                        
                     }
                     else if(res.rate_batas_atas_building_class_3){
-                        $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_3);
-                        $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_3);
+                        if(res.rate_batas_atas_building_class_3 == ' ' || res.rate_batas_atas_building_class_3 == 0.000){
+                            $("#slipbcuaendorsement").val( parseInt('0'));
+                        }else{
+                            $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_3);
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_3 == ' ' || res.rate_batas_bawah_building_class_3 == 0.000){
+                            $("#slipbclaendorsement").val( parseInt('0'));
+                        }else{
+                            $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_3);
+                        }
+                        
+                        
                     }
                 }
             });
@@ -1352,12 +1624,13 @@
 
 <script type="text/javascript">
     $('#slipcedingbroker').change(function(){
-        var cedbrok = $(this).val();  
+        var cedbrok = $(this).val();
+        var insuredid = $('#insuredIDtxt').val();  
         //alert(countryID);
         if(cedbrok){
         $.ajax({
             type:"GET",
-            url:"{{url('get-ceding-detail')}}?ceding_id="+cedbrok,
+            url:"{{url('get-ceding-detail')}}?ceding_id="+cedbrok+"&insured_id="+insuredid,
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(res){  
@@ -1375,6 +1648,43 @@
                     //     alert(value.name);
                         
                     // });
+
+                    var ceding_curr = $('#slipceding').val();
+                    var totalsum = $("#sliptotalsum").val();
+                        if(res.amountlist > 0)
+                        {
+                            console.log('sum amount ' + res.sumamount)
+                            var sum = res.sumamount;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log('convert sum ' + real_sum)
+                            // var total_num = 0;
+                            // var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            $("#sliptotalsum").val(real_sum);
+                            // // $("#msishareto").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            // // $("#feshareto").val(real_sum);
+                        }
+                        else
+                        {
+                            console.log('hasilnya ' + res)
+                            // var conv_total = totalsum.replace(/,/g, "");
+                            // console.log('conv total : ' + conv_total)
+                            // var real_total = parseInt(conv_total);
+                            // console.log('real total : ' + real_total)
+                            // var total =  parseFloat(real_total);
+                            // console.log(' total : ' + total)
+                            // var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            // $("#sliptotalsum").val(real_sum);
+                            // // $("#fesharefrom").val(real_sum);
+                            // $("#feshareto").val(real_sum);
+                        }
+                    
                 
                 }else{
                     $("#slipceding option").remove();
@@ -1384,6 +1694,415 @@
                     
 
                     $("#slipceding").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                        // $("#slipceding").append('<option value="'value.id'">' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    });
+                }
+            }
+        });
+        }else{
+            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+        }   
+    });
+
+    $('#slipceding').change(function(){
+        var ceding = $(this).val();
+        var insuredid = $('#insuredIDtxt').val();  
+        //alert(countryID);
+        if(ceding){
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(res){  
+                console.log(res)      
+                if(res.type == 4){
+                    // alert(res.name);
+                    // $("#slipceding option[value='placeholder']").removeAttr("selected");
+                    // $("#slipceding option[value='placeholder']").prop("selected", false);
+                    $("#slipceding option").remove();
+
+
+                    $("#slipceding").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                    // $("#slipceding").append('<option value="'value.id'" selected>' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    // $.each(res,function(key,value){
+                    //     alert(value.name);
+                        
+                    // });
+
+                    var ceding_curr = $('#slipceding').val();
+                    var totalsum = $("#sliptotalsum").val();
+                        if(res.amountlist > 0)
+                        {
+                            console.log('sum amount ' + res.sumamount)
+                            var sum = res.sumamount;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log('convert sum ' + real_sum)
+                            // var total_num = 0;
+                            // var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            $("#sliptotalsum").val(real_sum);
+                            // // $("#msishareto").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            // // $("#feshareto").val(real_sum);
+                        }
+                        else
+                        {
+                            console.log('hasilnya ' + res)
+                            // var conv_total = totalsum.replace(/,/g, "");
+                            // console.log('conv total : ' + conv_total)
+                            // var real_total = parseInt(conv_total);
+                            // console.log('real total : ' + real_total)
+                            // var total =  parseFloat(real_total);
+                            // console.log(' total : ' + total)
+                            // var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            // $("#sliptotalsum").val(real_sum);
+                            // // $("#fesharefrom").val(real_sum);
+                            // $("#feshareto").val(real_sum);
+                        }
+                    
+                
+                }else{
+                    $("#slipceding option").remove();
+
+                    $.each(res,function(key,value){
+                        // alert(value.name);
+                    
+
+                    $("#slipceding").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                        // $("#slipceding").append('<option value="'value.id'">' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    });
+                }
+            }
+        });
+        }else{
+            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+        }   
+    });
+</script>
+
+<script type="text/javascript">
+    $('#slipcedingbrokerupdate').change(function(){
+        var cedbrok = $(this).val();
+        var insuredid = $('#insuredIDtxtupdate').val();  
+        //alert(countryID);
+        if(cedbrok){
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-ceding-detail')}}?ceding_id="+cedbrok+"&insured_id="+insuredid,
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(res){  
+                console.log(res)      
+                if(res.type == 4){
+                    // alert(res.name);
+                    // $("#slipceding option[value='placeholder']").removeAttr("selected");
+                    // $("#slipceding option[value='placeholder']").prop("selected", false);
+                    $("#slipcedingupdate option").remove();
+
+
+                    $("#slipcedingupdate").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                    // $("#slipceding").append('<option value="'value.id'" selected>' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    // $.each(res,function(key,value){
+                    //     alert(value.name);
+                        
+                    // });
+
+                    var ceding_curr = $('#slipcedingupdate').val();
+                    var totalsum = $("#sliptotalsumupdate").val();
+                        if(res.amountlist > 0)
+                        {
+                            console.log('sum amount ' + res.sumamount)
+                            var sum = res.sumamount;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log('convert sum ' + real_sum)
+                            // var total_num = 0;
+                            // var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            $("#sliptotalsumupdate").val(real_sum);
+                            // // $("#msishareto").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            // // $("#feshareto").val(real_sum);
+                        }
+                        else
+                        {
+                            console.log('hasilnya ' + res)
+                            // var conv_total = totalsum.replace(/,/g, "");
+                            // console.log('conv total : ' + conv_total)
+                            // var real_total = parseInt(conv_total);
+                            // console.log('real total : ' + real_total)
+                            // var total =  parseFloat(real_total);
+                            // console.log(' total : ' + total)
+                            // var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            // $("#sliptotalsum").val(real_sum);
+                            // // $("#fesharefrom").val(real_sum);
+                            // $("#feshareto").val(real_sum);
+                        }
+                    
+                
+                }else{
+                    $("#slipcedingupdate option").remove();
+
+                    $.each(res,function(key,value){
+                        // alert(value.name);
+                    
+
+                    $("#slipcedingupdate").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                        // $("#slipceding").append('<option value="'value.id'">' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    });
+                }
+            }
+        });
+        }else{
+            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+        }   
+    });
+
+    $('#slipcedingupdate').change(function(){
+        var ceding = $(this).val();
+        var insuredid = $('#insuredIDtxtupdate').val();  
+        //alert(countryID);
+        if(ceding){
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(res){  
+                console.log(res)      
+                if(res.type == 4){
+                    // alert(res.name);
+                    // $("#slipceding option[value='placeholder']").removeAttr("selected");
+                    // $("#slipceding option[value='placeholder']").prop("selected", false);
+                    $("#slipcedingupdate option").remove();
+
+
+                    $("#slipcedingupdate").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                    // $("#slipceding").append('<option value="'value.id'" selected>' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    // $.each(res,function(key,value){
+                    //     alert(value.name);
+                        
+                    // });
+
+                    var ceding_curr = $('#slipcedingupdate').val();
+                    var totalsum = $("#sliptotalsumupdate").val();
+                        if(res.amountlist > 0)
+                        {
+                            console.log('sum amount ' + res.sumamount)
+                            var sum = res.sumamount;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log('convert sum ' + real_sum)
+                            // var total_num = 0;
+                            // var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            $("#sliptotalsumupdate").val(real_sum);
+                            // // $("#msishareto").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            // // $("#feshareto").val(real_sum);
+                        }
+                        else
+                        {
+                            console.log('hasilnya ' + res)
+                            // var conv_total = totalsum.replace(/,/g, "");
+                            // console.log('conv total : ' + conv_total)
+                            // var real_total = parseInt(conv_total);
+                            // console.log('real total : ' + real_total)
+                            // var total =  parseFloat(real_total);
+                            // console.log(' total : ' + total)
+                            // var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            // $("#sliptotalsum").val(real_sum);
+                            // // $("#fesharefrom").val(real_sum);
+                            // $("#feshareto").val(real_sum);
+                        }
+                    
+                
+                }else{
+                    $("#slipcedingupdate option").remove();
+
+                    $.each(res,function(key,value){
+                        // alert(value.name);
+                    
+
+                    $("#slipcedingupdate").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                        // $("#slipceding").append('<option value="'value.id'">' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    });
+                }
+            }
+        });
+        }else{
+            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+        }   
+    });
+</script>
+
+<script type="text/javascript">
+    $('#slipcedingbrokerendorsement').change(function(){
+        var cedbrok = $(this).val();
+        var insuredid = $('#insuredIDtxtendorsement').val();  
+        //alert(countryID);
+        if(cedbrok){
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-ceding-detail')}}?ceding_id="+cedbrok+"&insured_id="+insuredid,
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(res){  
+                console.log(res)      
+                if(res.type == 4){
+                    // alert(res.name);
+                    // $("#slipceding option[value='placeholder']").removeAttr("selected");
+                    // $("#slipceding option[value='placeholder']").prop("selected", false);
+                    $("#slipcedingendorsement option").remove();
+
+
+                    $("#slipcedingendorsement").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                    // $("#slipceding").append('<option value="'value.id'" selected>' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    // $.each(res,function(key,value){
+                    //     alert(value.name);
+                        
+                    // });
+
+                    var ceding_curr = $('#slipcedingendorsement').val();
+                    var totalsum = $("#sliptotalsumendorsement").val();
+                        if(res.amountlist > 0)
+                        {
+                            console.log('sum amount ' + res.sumamount)
+                            var sum = res.sumamount;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log('convert sum ' + real_sum)
+                            // var total_num = 0;
+                            // var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            $("#sliptotalsumendorsement").val(real_sum);
+                            // // $("#msishareto").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            // // $("#feshareto").val(real_sum);
+                        }
+                        else
+                        {
+                            console.log('hasilnya ' + res)
+                            // var conv_total = totalsum.replace(/,/g, "");
+                            // console.log('conv total : ' + conv_total)
+                            // var real_total = parseInt(conv_total);
+                            // console.log('real total : ' + real_total)
+                            // var total =  parseFloat(real_total);
+                            // console.log(' total : ' + total)
+                            // var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            // $("#sliptotalsum").val(real_sum);
+                            // // $("#fesharefrom").val(real_sum);
+                            // $("#feshareto").val(real_sum);
+                        }
+                    
+                
+                }else{
+                    $("#slipcedingendorsement option").remove();
+
+                    $.each(res,function(key,value){
+                        // alert(value.name);
+                    
+
+                    $("#slipcedingendorsement").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                        // $("#slipceding").append('<option value="'value.id'">' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    });
+                }
+            }
+        });
+        }else{
+            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+        }   
+    });
+
+    $('#slipcedingendorsement').change(function(){
+        var ceding = $(this).val();
+        var insuredid = $('#insuredIDtxtendorsement').val();  
+        //alert(countryID);
+        if(ceding){
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(res){  
+                console.log(res)      
+                if(res.type == 4){
+                    // alert(res.name);
+                    // $("#slipceding option[value='placeholder']").removeAttr("selected");
+                    // $("#slipceding option[value='placeholder']").prop("selected", false);
+                    $("#slipcedingendorsement option").remove();
+
+
+                    $("#slipcedingendorsement").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                    // $("#slipceding").append('<option value="'value.id'" selected>' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    // $.each(res,function(key,value){
+                    //     alert(value.name);
+                        
+                    // });
+
+                    var ceding_curr = $('#slipcedingendorsement').val();
+                    var totalsum = $("#sliptotalsumendorsement").val();
+                        if(res.amountlist > 0)
+                        {
+                            console.log('sum amount ' + res.sumamount)
+                            var sum = res.sumamount;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log('convert sum ' + real_sum)
+                            // var total_num = 0;
+                            // var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            $("#sliptotalsumendorsement").val(real_sum);
+                            // // $("#msishareto").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            // // $("#feshareto").val(real_sum);
+                        }
+                        else
+                        {
+                            console.log('hasilnya ' + res)
+                            // var conv_total = totalsum.replace(/,/g, "");
+                            // console.log('conv total : ' + conv_total)
+                            // var real_total = parseInt(conv_total);
+                            // console.log('real total : ' + real_total)
+                            // var total =  parseFloat(real_total);
+                            // console.log(' total : ' + total)
+                            // var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            // $("#sliptotalsum").val(real_sum);
+                            // // $("#fesharefrom").val(real_sum);
+                            // $("#feshareto").val(real_sum);
+                        }
+                    
+                
+                }else{
+                    $("#slipcedingendorsement option").remove();
+
+                    $.each(res,function(key,value){
+                        // alert(value.name);
+                    
+
+                    $("#slipcedingendorsement").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
                         // $("#slipceding").append('<option value="'value.id'">' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
                     });
                 }
@@ -1766,9 +2485,7 @@ $(document).ready(function() {
                                                     '</tr>'+
                                                     
                                                     '<tr id="cid'+response.id+'">'+
-                                                        '<td>'+
-                                                    '<a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="'+response.id+'" data-target="#addrisklocdetailmodaldata5">'+
-                                                        '<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocdetailmodaldata5">Add detail</button>'+'</td>'+
+                                                        '<td></td>'+
                                                         '<td colspan="3">'+
                                                             '<table id="tcid'+response.id+'" width="600" class="table table-bordered table-striped">'+
                                                                 '<thead>'+
@@ -1891,43 +2608,69 @@ $(document).ready(function() {
                     $('#addlocdetailmodaldata').modal('toggle');
                     $('#slipamount').val('');
                     $('#slipinterestlist').val('');
-                    
+                    var ceding_curr = $('#slipceding').val();
                     var totalsum = $("#sliptotalsum").val();
-                    if(totalsum == '')
-                    {
-                        var total_num = 0;
-                        var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
-                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        console.log(' sum : ' + sum)
-                        console.log(' real sum : ' + real_sum)
-                        $("#sliptotalsum").val(real_sum);
-                        // $("#msishareto").val(real_sum);
-                        $("#fesharefrom").val(real_sum);
-                        // $("#feshareto").val(real_sum);
-
-                        //$('#form-addlocation')[0].reset();
-                      
-
-                    }
-                    else
-                    {
-                        
-                        var conv_total = totalsum.replace(/,/g, "");
-                        console.log('conv total : ' + conv_total)
-                        var real_total = parseInt(conv_total);
-                        console.log('real total : ' + real_total)
-                        var total =  parseFloat(real_total);
-                        console.log(' total : ' + total)
-                        var sum = isNaN(totalsum + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (totalsum + parseFloat(response.amountlocation)) ;
-                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        console.log(' sum : ' + sum)
-                        console.log(' real sum : ' + real_sum)
-                        $("#sliptotalsum").val(real_sum);
-                        // $("#fesharefrom").val(real_sum);
-                        $("#feshareto").val(real_sum);
-                        
-
-                        //$('#form-addlocation')[0].reset();
+                    if(response.cedinglocation == ceding_curr){
+                        if(totalsum == '')
+                        {
+                            var total_num = 0;
+                            var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            console.log(' sum : ' + sum)
+                            console.log(' real sum : ' + real_sum)
+                            $("#sliptotalsum").val(real_sum);
+                            // $("#msishareto").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            $("#feshareto").val(real_sum);
+                        }
+                        else
+                        {
+                            
+                            var conv_total = totalsum.replace(/,/g, "");
+                            console.log('conv total : ' + conv_total)
+                            var real_total = parseInt(conv_total);
+                            console.log('real total : ' + real_total)
+                            var total =  parseFloat(real_total);
+                            console.log(' total : ' + total)
+                            var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            console.log(' sum : ' + sum)
+                            console.log(' real sum : ' + real_sum)
+                            $("#sliptotalsum").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            $("#feshareto").val(real_sum);
+                        }
+                    }else{
+                        swal("Warning!", "TSI not increase because this ceding is not same with ceding in slip", "Tsi not increase");
+                        if(totalsum == '')
+                        {
+                            var total_num = 0;
+                            var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            console.log(' sum : ' + sum)
+                            console.log(' real sum : ' + real_sum)
+                            // $("#sliptotalsum").val(real_sum);
+                            // $("#msishareto").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            $("#feshareto").val(real_sum);
+                        }
+                        else
+                        {
+                            
+                            var conv_total = totalsum.replace(/,/g, "");
+                            console.log('conv total : ' + conv_total)
+                            var real_total = parseInt(conv_total);
+                            console.log('real total : ' + real_total)
+                            var total =  parseFloat(real_total);
+                            console.log(' total : ' + total)
+                            var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            console.log(' sum : ' + sum)
+                            console.log(' real sum : ' + real_sum)
+                            // $("#sliptotalsum").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            $("#feshareto").val(real_sum);
+                        }
                     }
             }
         });
@@ -1950,7 +2693,34 @@ $(document).ready(function() {
                 console.log(response);
                 
                 $('#riskdetailsid'+id).remove();
+                var ceding_curr = $('#slipceding').val();
                 //$('#cid'+id).remove();
+                if(response.cedinglocation == ceding_curr){
+                    var total =  parseFloat($("#sliptotalsum").val());
+                    console.log(total)
+                    var conv_total = total.replace(/,/g, "");
+                    console.log(conv_total)
+                    var real_total = parseInt(conv_total);
+                    console.log(real_total)
+                    var sum = isNaN(real_total - parseFloat(response.amountlocation)) ? 0 :(real_total - parseFloat(response.amountlocation)) ;
+                    console.log(sum)
+                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    $("#sliptotalsum").val(real_sum);
+                    $("#feshareto").val(real_sum);
+                }else{
+                    swal("Warning!", "TSI not decrease because this ceding is not same with ceding in slip", "Tsi not decrease");
+                    var total =  parseFloat($("#sliptotalsum").val());
+                    console.log(total)
+                    var conv_total = total.replace(/,/g, "");
+                    console.log(conv_total)
+                    var real_total = parseInt(conv_total);
+                    console.log(real_total)
+                    var sum = isNaN(real_total - parseFloat(response.amountlocation)) ? 0 :(real_total - parseFloat(response.amountlocation)) ;
+                    console.log(sum)
+                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    // $("#sliptotalsum").val(real_sum);
+                    $("#feshareto").val(real_sum);
+                }
 
 
             }
@@ -2707,93 +3477,93 @@ $(document).ready(function() {
     
     $('#slipnilaiec').keyup(function () {
        var persentage =  parseFloat($('#slipnilaiec').val()) / 1000;
-       var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+       var sliptotalsum =  $('#sliptotalsum').val();
        var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
        //alert(premiumnr);
        //alert(persentage);
-       var sum = isNaN(conv_sliptotalsum * (persentage)) ? 0 :(conv_sliptotalsum * (persentage)) ;
+       var sum = isNaN(conv_sliptotalsum * persentage) ? 0 :(conv_sliptotalsum * persentage).toFixed(3) ;
        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
        //alert(sum);
        $('#slipamountec').val(real_sum);
     });
 
-    $('#slipnilaiec').change(function () {
-       var persentage =  parseFloat($('#slipnilaiec').val());
-       var sliptotalsum =  parseFloat($('#sliptotalsum').val());
-       //alert(premiumnr);
-       //alert(persentage);
-       var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
-       //alert(premiumnr);
-       //alert(persentage);
-       var sum = isNaN(conv_sliptotalsum * (persentage)) ? 0 :(conv_sliptotalsum * (persentage)) ;
-       var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-       //alert(sum);
-       $('#slipamountec').val(real_sum);
-    });
+    // $('#slipnilaiec').change(function () {
+    //    var persentage =  parseFloat($('#slipnilaiec').val());
+    //    var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+    //    //alert(premiumnr);
+    //    //alert(persentage);
+    //    var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
+    //    //alert(premiumnr);
+    //    //alert(persentage);
+    //    var sum = isNaN(conv_sliptotalsum * (persentage)) ? 0 :(conv_sliptotalsum * (persentage)) ;
+    //    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    //    //alert(sum);
+    //    $('#slipamountec').val(real_sum);
+    // });
 
 </script>
 
 <script type='text/javascript'>
    
     $('#slipnilaiecupdate').keyup(function () {
-       var persentage =  parseFloat($('#slipnilaiecupdate').val());
-       var sliptotalsum =  parseFloat($('#sliptotalsumupdate').val());
+       var persentage =  parseFloat($('#slipnilaiecupdate').val()) / 1000;
+       var sliptotalsum =  $('#sliptotalsumupdate').val();
        //alert(premiumnr);
        //alert(persentage);
        var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
        //alert(premiumnr);
        //alert(persentage);
-       var sum = isNaN(conv_sliptotalsum * (persentage)) ? 0 :(conv_sliptotalsum * (persentage)) ;
+       var sum = isNaN(conv_sliptotalsum * persentage) ? 0 :(conv_sliptotalsum * persentage).toFixed(3) ;
        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
        //alert(sum);
        $('#slipamountecupdate').val(real_sum);
     });
 
-    $('#slipnilaiecupdate').change(function () {
-       var persentage =  parseFloat($('#slipnilaiecupdate').val());
-       var sliptotalsum =  parseFloat($('#sliptotalsumupdate').val());
-       //alert(premiumnr);
-       //alert(persentage);
-       var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
-       //alert(premiumnr);
-       //alert(persentage);
-       var sum = isNaN(conv_sliptotalsum * (persentage)) ? 0 :(conv_sliptotalsum * (persentage)) ;
-       var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-       //alert(sum);
-       $('#slipamountecupdate').val(real_sum);
-    });
+    // $('#slipnilaiecupdate').change(function () {
+    //    var persentage =  parseFloat($('#slipnilaiecupdate').val());
+    //    var sliptotalsum =  parseFloat($('#sliptotalsumupdate').val());
+    //    //alert(premiumnr);
+    //    //alert(persentage);
+    //    var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
+    //    //alert(premiumnr);
+    //    //alert(persentage);
+    //    var sum = isNaN(conv_sliptotalsum * (persentage)) ? 0 :(conv_sliptotalsum * (persentage)) ;
+    //    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    //    //alert(sum);
+    //    $('#slipamountecupdate').val(real_sum);
+    // });
 
 </script>
 
 <script type='text/javascript'>
    
     $('#slipnilaiecendorsement').keyup(function () {
-       var persentage =  parseFloat($('#slipnilaiecendorsement').val());
-       var sliptotalsum =  parseFloat($('#sliptotalsumendorsement').val());
+       var persentage =  parseFloat($('#slipnilaiecendorsement').val()) / 1000;
+       var sliptotalsum =  $('#sliptotalsumendorsement').val();
        //alert(premiumnr);
        //alert(persentage);
        var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
        //alert(premiumnr);
        //alert(persentage);
-       var sum = isNaN(conv_sliptotalsum * (persentage)) ? 0 :(conv_sliptotalsum * (persentage)) ;
+       var sum = isNaN(conv_sliptotalsum * persentage) ? 0 :(conv_sliptotalsum * persentage).toFixed(3) ;
        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
        //alert(sum);
        $('#slipamountecendorsement').val(real_sum);
     });
 
-    $('#slipnilaiecendorsement').change(function () {
-       var persentage =  parseFloat($('#slipnilaiecendorsement').val());
-       var sliptotalsum =  parseFloat($('#sliptotalsumendorsement').val());
-       //alert(premiumnr);
-       //alert(persentage);
-       var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
-       //alert(premiumnr);
-       //alert(persentage);
-       var sum = isNaN(conv_sliptotalsum * (persentage)) ? 0 :(conv_sliptotalsum * (persentage)) ;
-       var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-       //alert(sum);
-       $('#slipamountecendorsement').val(real_sum);
-    });
+    // $('#slipnilaiecendorsement').change(function () {
+    //    var persentage =  parseFloat($('#slipnilaiecendorsement').val());
+    //    var sliptotalsum =  parseFloat($('#sliptotalsumendorsement').val());
+    //    //alert(premiumnr);
+    //    //alert(persentage);
+    //    var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
+    //    //alert(premiumnr);
+    //    //alert(persentage);
+    //    var sum = isNaN(conv_sliptotalsum * (persentage)) ? 0 :(conv_sliptotalsum * (persentage)) ;
+    //    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    //    //alert(sum);
+    //    $('#slipamountecendorsement').val(real_sum);
+    // });
 
 </script>
 
@@ -3987,10 +4757,7 @@ $(document).ready(function() {
        var real_slipsumor = parseInt(conv_slipsumor);
        console.log(real_slipsumor)
 
-       var conv_slipvbroker = slipvbroker.replace(/,/g, "");
-       console.log(conv_slipvbroker)
-       var real_slipsumor = parseInt(conv_slipvbroker);
-       console.log(real_slipvbroker)
+       
        
        //ajaxfilefunction(e);
 

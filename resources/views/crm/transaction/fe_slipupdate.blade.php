@@ -68,15 +68,14 @@
                                                 <div class="form-group">
                                                     <label for="">{{__('Our Share')}}</label>
                                                     <div class="row">
-                                                        <div class="col-md-10">
+                                                        <div class="col-md-12">
                                                             <div class="input-group">
                                                              <input type="number" min="0"  value="{{$insureddata->share}}" step=".01" id="feshare" name="feshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly/>
+                                                             <div class="input-group-append">
+                                                                <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="input-group-append">
-                                                                <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
                                                             </div>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -153,7 +152,7 @@
                                                                                     <thead>
                                                                                     <tr>
                                                                                     <th>Interest Insured</th>
-                                                                                    <th>Ceding/Broker</th>
+                                                                                    <th>Ceding</th>
                                                                                     <th>CN No</th>
                                                                                     <th>Cert No</th>
                                                                                     <th>Ref No</th>
@@ -170,7 +169,7 @@
                                                                                             @foreach($slt->risklocationdetail as $detaillocrisk)
 
                                                                                                 <tr id="riskdetailsid{{ $detaillocrisk->id }}">
-                                                                                                <td>{{ $detaillocrisk->interestdetail->description }}</td>
+                                                                                                <td>{{ $detaillocrisk->interestdetail->code }} - {{ $detaillocrisk->interestdetail->description }}</td>
                                                                                                 <td>{{ $detaillocrisk->cedingdetail->name }}</td>
                                                                                                 <td>{{ $detaillocrisk->cnno }}</td>
                                                                                                 <td>{{ $detaillocrisk->certno }}</td>
@@ -353,7 +352,7 @@
                                                 <label for="">{{__('Ceding / Broker')}}</label>
                                                  <select id="ceding_id" name="ceding_id" class="e1 form-control form-control-sm ">
                                                     <option value=""  selected disabled >Ceding or Broker</option>
-                                                    @foreach($cedingbroker as $cb)
+                                                    @foreach($ceding as $cb)
                                                         <option value="{{ $cb->id }}">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
                                                     @endforeach
                                                 </select>
@@ -540,7 +539,7 @@
                                                         </div> --}}
                                                         <div class="form-group">
                                                             <label for="">{{__('Transfer Date')}}</label>
-                                                            <input type="date" id="sliptd" name="sliptd" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-50" />
+                                                            <input type="date" id="sliptd" name="sliptd" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-50" readonly="readonly" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -691,13 +690,13 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="">{{__('Build Const Upper Area')}}</label>
+                                                            <label for="">{{__('Rate Upper Area')}}</label>
                                                             <input type="text" id="slipbcua" name="slipbcua" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="">{{__('Build Const Lower Area')}}</label>
+                                                            <label for="">{{__('Rate Lower Area')}}</label>
                                                             <input type="text" id="slipbcla" name="slipbcla" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                         </div>
                                                     </div>
@@ -768,11 +767,9 @@
                                                                 <div class="col-md-10">
                                                                     <div class="input-group">
                                                                         <input type="number" value="" step=".0001" id="slippct" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <div class="input-group-append">
-                                                                        <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                        <div class="input-group-append">
+                                                                            <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -899,7 +896,7 @@
                                                                             </tr>   
                                                                         @endforeach
                                                                         <tr>
-                                                                            <td colspan="2">
+                                                                            <td>
                                                                                 <div class="form-group">
                                                                                     <select id="slipcncode" name="slipcncode" class="form-control form-control-sm ">
                                                                                         <option selected readonly>{{__('Peril List')}}</option>
@@ -1065,7 +1062,16 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="">{{__('Fee Broker')}}</label>
-                                                        <input type="text"  id="slipvbroker" name="slipvbroker" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-150" placeholder="a" />
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group">
+                                                                    <input type="number" value="" step=".0001"  id="slipvbroker" name="slipvbroker" class="form-control form-control-sm" data-validation="length" data-validation-length="0-150" placeholder="a" />
+                                                                    <div class="input-group-append">
+                                                                        <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1075,15 +1081,14 @@
                                                         <div class="form-group">
                                                             <label for="">{{__('Share')}}</label>
                                                             <div class="row">
-                                                                <div class="col-md-10">
+                                                                <div class="col-md-12">
                                                                     <div class="input-group">
                                                                         <input type="number" value="" step=".0001" id="slipshare" name="slipshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="b" />
+                                                                        <div class="input-group-append">
+                                                                            <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <div class="input-group-append">
-                                                                        <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
-                                                                    </div>
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
