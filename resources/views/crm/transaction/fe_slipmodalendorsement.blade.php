@@ -194,7 +194,7 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Occupacy')}}</label>
-                                                            <select id="slipoccupacydetail" name="slipoccupacydetail" class="e1 form-control form-control-sm ">
+                                                            <select id="slipoccupacyendorsement" name="slipoccupacyendorsement" class="e1 form-control form-control-sm ">
                                                                 @foreach($ocp as $ocpy)
                                                                     <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
                                                                    
@@ -712,11 +712,9 @@
 
                                                                            <td>
                                                                                 <div class="form-group">
-                                                                                        <div class="input-group date" id="dateinstallment" data-target-input="nearest">
-                                                                                                <input type="date" id="dateinstallmentdataendorsement" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdateendorsement">
-                                                                                                <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
-                                                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                                                </div>
+                                                                                        <div class="input-group " id="dateinstallment">
+                                                                                                <input type="date" id="dateinstallmentdataendorsement" class="form-control form-control-sm " name="slipipdateendorsement">
+                                                                                                
                                                                                         </div>
                                                                                 </div>
                                                                             </td>

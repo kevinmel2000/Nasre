@@ -70,7 +70,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="input-group" lang="en-US">
-                                                             <input type="number" min="0"  value="{{$insureddata->share}}" step=".01" id="feshare" name="feshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly/>
+                                                             <input type="number" min="0"  value="{{$insureddata->share}}" step=".001" id="feshare" name="feshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly/>
                                                              <div class="input-group-append">
                                                                 <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                             </div>
@@ -83,13 +83,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                    <input id="fesharefrom" type="text"  name="fesharefrom" value="{{$insureddata->share_from}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                    <input id="fesharefrom" type="text"  name="fesharefrom" value="{{strval(number_format($insureddata->share_from, 3, '.', ','))}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total')}}</label>
-                                                    <input id="feshareto" type="text"  name="feshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly"/>
+                                                    <input id="feshareto" type="text"  name="feshareto" value="{{strval(number_format($insureddata->share_to, 3, '.', ','))}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly"/>
                                                 </div>
                                             </div>
 
@@ -708,7 +708,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('WPC')}}</label>
-                                                        <input type="text" value="" id="wpc" name="wpc" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-150" placeholder="" />
+                                                        <input type="number" min="0" value="" step=".001" id="wpc" name="wpc" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
                                                     </div>
                                                 </div>
                                         </div>
@@ -739,7 +739,7 @@
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured') }}</label>
-                                                    <input type="text" value="{{ $slipdata->total_sum_insured }}" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
+                                                    <input type="text" value="" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1042,11 +1042,11 @@
                                                     <label for="" id="labelnonprop">{{__('Layer for non proportional')}}</label>
                                                     <select id="sliplayerproportional" name="sliplayerproportional" class="form-control form-control-sm ">
                                                         <option selected disabled>{{__('Choose layer')}}</option>
-                                                        <option value="Layer 1"  @if($slipdata->layer_non_proportional == "Layer 1") selected="selected" @endif >Layer 1</option>
-                                                        <option value="Layer 2" @if($slipdata->layer_non_proportional == "Layer 2") selected="selected" @endif>Layer 2</option>
-                                                        <option value="Layer 3" @if($slipdata->layer_non_proportional == "Layer 3") selected="selected" @endif>Layer 3</option>
-                                                        <option value="Layer 4" @if($slipdata->layer_non_proportional == "Layer 4") selected="selected" @endif>Layer 4</option>
-                                                        <option value="Layer 5" @if($slipdata->layer_non_proportional == "Layer 5") selected="selected" @endif>Layer 5</option>
+                                                                <option value="Layer 1">Layer 1</option>
+                                                                <option value="Layer 2">Layer 2</option>
+                                                                <option value="Layer 3">Layer 3</option>
+                                                                <option value="Layer 4">Layer 4</option>
+                                                                <option value="Layer 5">Layer 5</option>
                                                     </select>
                                                 </div>  
                                             </div>
@@ -1107,7 +1107,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Basic Premium')}}</label>
-                                                        <input type="number" value=""  id="slipbasicpremium" name="slipbasicpremium" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a% * tsi" />
+                                                        <input type="text" value=""  id="slipbasicpremium" name="slipbasicpremium" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a% * tsi" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -1115,7 +1115,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Gross Prm to NR')}}</label>
-                                                        <input type="number" value="" id="slipgrossprmtonr" name="slipgrossprmtonr" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a% * b% * tsi" readonly="readonly" />
+                                                        <input type="text" value="" id="slipgrossprmtonr" name="slipgrossprmtonr" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a% * b% * tsi" readonly="readonly" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -1141,7 +1141,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="" style="opacity: 0;">{{__('Gross Prm to NR')}}</label>
-                                                            <input type="number"  value="" id="slipsumcommission" name="slipsumcommission" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" readonly="readonly" />
+                                                            <input type="text"  value="" id="slipsumcommission" name="slipsumcommission" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" readonly="readonly" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1191,11 +1191,9 @@
                                                                             @csrf
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                        <div class="input-group date" id="dateinstallment" data-target-input="nearest">
-                                                                                                <input type="text" id="dateinstallmentdata" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdate">
-                                                                                                <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
-                                                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                                                </div>
+                                                                                        <div class="input-group " id="dateinstallment" >
+                                                                                                <input type="date" id="slipipdate" class="form-control form-control-sm" name="slipipdate">
+                                                                                                
                                                                                         </div>
                                                                                 </div>
                                                                             </td>

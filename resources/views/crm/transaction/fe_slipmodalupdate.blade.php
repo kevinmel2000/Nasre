@@ -624,6 +624,7 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
+                                                                <input type="hidden" value="" id="slipoldsumshareupdate" name="slipoldsumshareupdate" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly"/>
                                                                 <input type="text" value="" id="slipsumshareupdate" name="slipsumshareupdate" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly"/>
                                                             </div>
                                                         </div>
@@ -716,11 +717,9 @@
                                                                         <tr>
                                                                            <td>
                                                                                 <div class="form-group">
-                                                                                        <div class="input-group date" id="dateinstallment" data-target-input="nearest">
-                                                                                                <input type="date" id="dateinstallmentdataupdate" class="form-control form-control-sm datetimepicker-input" data-target="#date" name="slipipdateupdate">
-                                                                                                <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
-                                                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                                                </div>
+                                                                                        <div class="input-group " id="dateinstallment" >
+                                                                                                <input type="date" id="dateinstallmentdataupdate" class="form-control form-control-sm " >
+                                                                                                
                                                                                         </div>
                                                                                 </div>
                                                                                 
@@ -766,13 +765,14 @@
                                                         <div class="form-group">
                                                             <label for="">{{__('Own Retention')}}</label>
                                                             <div class="row">
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-6">
                                                                     <div class="input-group">
                                                                         <input type="text" id="sliporupdate" value="" name="sliporupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                        <div class="input-group-append">
+                                                                            <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="input-group-append">
-                                                                        <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
-                                                                    </div>
+                                                                    
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">

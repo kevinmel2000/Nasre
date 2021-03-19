@@ -1335,7 +1335,7 @@
                                                                                     <td>
                                                                                         <div class="form-group">
                                                                                                 <div class="input-group" id="dateinstallment" >
-                                                                                                        <input type="date" id="dateinstallmentdata" class="form-control form-control-sm "  name="slipipdate">
+                                                                                                        <input type="date" id="slipipdate" class="form-control form-control-sm "  name="slipipdate">
                                                                                                         
                                                                                                 </div>
                                                                                         </div>

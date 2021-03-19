@@ -350,7 +350,7 @@ class FeSlipController extends Controller
             $code_sl = "FE".  $mydate . "0000" . strval(1);
         }
 
-        dd($code_sl);
+        // dd($code_sl);
 
         // $kondisi=false;
         // $i=1;
@@ -480,7 +480,7 @@ class FeSlipController extends Controller
         $koc = KOC::orderby('id','asc')->get();
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
-        $ceding = CedingBroker::orderby('id','asc')->where('type','ceding')->get();
+        $ceding = CedingBroker::orderby('id','asc')->where('type',4)->get();
         $felookup = FelookupLocation::orderby('id','asc')->get();
         $cnd = ConditionNeeded::orderby('id','asc')->get();
         $deductibletype= DeductibleType::orderby('id','asc')->get();
@@ -582,6 +582,7 @@ class FeSlipController extends Controller
             $slipdata=SlipTable::orderBy('id', 'desc')->first();
         }
 
+        
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
@@ -1491,90 +1492,108 @@ class FeSlipController extends Controller
             StatusLog::create([
                 'status'=>$request->slipstatus,
                 'user'=>Auth::user()->name,
+                'datetime'=>date('Y-m-d H:i:s '),
                 'insured_id'=>$request->code_ms,
                 'slip_id'=>$request->slipnumber,
             ]);
 
+            $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
 
-            $ceding = CedingBroker::where('id',$request->slipcedingbroker)->first();
-            $slip = SlipTable::orderby('id','asc')->get();            
-            $sliplastid = count($slip);
+            $old_sumshare = $request->slipoldsumshare;
+            $new_sumshare = $request->slipsumshare;
 
-            $mydate = date("Y").date("m").date("d");
-            $userid = Auth::user()->id;
-            if($sliplastid != null){
-                if($sliplastid < 9)
-                {
-                    $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + 1);
-                }   
-                elseif($sliplastid > 8 && $sliplastid < 99)
-                {
-                    $code_sl = "FE".  $mydate . "000" . strval($sliplastid + 1);
-                }
-                elseif($sliplastid > 98 && $sliplastid < 999)
-                {
-                    $code_sl = "FE".  $mydate . "00" . strval($sliplastid + 1);
-                }
-                elseif($sliplastid > 998 && $sliplastid < 9999)
-                {
-                    $code_sl = "FE".  $mydate . "0" . strval($sliplastid + 1);
-                }
-                elseif($sliplastid > 9998 && $sliplastid < 99999)
-                {
-                    $code_sl = "FE".  $mydate . strval($sliplastid + 1);
-                }
+            if($new_sumshare != $old_sumshare){
+                $msdata = Insured::findOrFail($insdata->id);
+
+                $sumshare = ($msdata->share_from - $old_sumshare) + $new_sumshare;
+                $ourshare = (($sumshare/$msdata->share_to) * 100);
+
+                $msdata->share_from=$sumshare;
+                $msdata->share=$ourshare;
+                $msdata->save();
+            }
+            
+
+            
+
+
+            // $ceding = CedingBroker::where('id',$request->slipcedingbroker)->first();
+            // $slip = SlipTable::orderby('id','asc')->get();            
+            // $sliplastid = count($slip);
+
+            // $mydate = date("Y").date("m").date("d");
+            // $userid = Auth::user()->id;
+            // if($sliplastid != null){
+            //     if($sliplastid < 9)
+            //     {
+            //         $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + 1);
+            //     }   
+            //     elseif($sliplastid > 8 && $sliplastid < 99)
+            //     {
+            //         $code_sl = "FE".  $mydate . "000" . strval($sliplastid + 1);
+            //     }
+            //     elseif($sliplastid > 98 && $sliplastid < 999)
+            //     {
+            //         $code_sl = "FE".  $mydate . "00" . strval($sliplastid + 1);
+            //     }
+            //     elseif($sliplastid > 998 && $sliplastid < 9999)
+            //     {
+            //         $code_sl = "FE".  $mydate . "0" . strval($sliplastid + 1);
+            //     }
+            //     elseif($sliplastid > 9998 && $sliplastid < 99999)
+            //     {
+            //         $code_sl = "FE".  $mydate . strval($sliplastid + 1);
+            //     }
 
                 
-            }
-            else{
-                $code_sl = "FE".  $mydate . "0000" . strval(1);
-            }
+            // }
+            // else{
+            //     $code_sl = "FE".  $mydate . "0000" . strval(1);
+            // }
 
-            $kondisi=false;
-            $i=1;
-            while($kondisi==false)
-            {
-                $slipdatatest=SlipTable::where('number',$code_sl)->first();
-                if(empty($slipdatatest) || $slipdatatest==NULL)
-                {
-                    $kondisi=true;
-                }
-                else
-                {
-                    if($sliplastid < 9)
-                    {
-                        $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + $i);
-                    }   
-                    elseif($sliplastid > 8 && $sliplastid < 99)
-                    {
-                        $code_sl = "FE".  $mydate . "000" . strval($sliplastid + $i);
-                    }
-                    elseif($sliplastid > 98 && $sliplastid < 999)
-                    {
-                        $code_sl = "FE".  $mydate . "00" . strval($sliplastid + $i);
-                    }
-                    elseif($sliplastid > 998 && $sliplastid < 9999)
-                    {
-                        $code_sl = "FE".  $mydate . "0" . strval($sliplastid + $i);
-                    }
-                    elseif($sliplastid > 9998 && $sliplastid < 99999)
-                    {
-                        $code_sl = "FE".  $mydate . strval($sliplastid + $i);
-                    }
-                }
+            // $kondisi=false;
+            // $i=1;
+            // while($kondisi==false)
+            // {
+            //     $slipdatatest=SlipTable::where('number',$code_sl)->first();
+            //     if(empty($slipdatatest) || $slipdatatest==NULL)
+            //     {
+            //         $kondisi=true;
+            //     }
+            //     else
+            //     {
+            //         if($sliplastid < 9)
+            //         {
+            //             $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + $i);
+            //         }   
+            //         elseif($sliplastid > 8 && $sliplastid < 99)
+            //         {
+            //             $code_sl = "FE".  $mydate . "000" . strval($sliplastid + $i);
+            //         }
+            //         elseif($sliplastid > 98 && $sliplastid < 999)
+            //         {
+            //             $code_sl = "FE".  $mydate . "00" . strval($sliplastid + $i);
+            //         }
+            //         elseif($sliplastid > 998 && $sliplastid < 9999)
+            //         {
+            //             $code_sl = "FE".  $mydate . "0" . strval($sliplastid + $i);
+            //         }
+            //         elseif($sliplastid > 9998 && $sliplastid < 99999)
+            //         {
+            //             $code_sl = "FE".  $mydate . strval($sliplastid + $i);
+            //         }
+            //     }
 
-                $i++;
-            }
+            //     $i++;
+            // }
 
             return response()->json(
                 [
                     'id' => $slipdataup->id,
                     'number' => $slipdataup->number,
-                    'slipuy' => $slipdataup->uy,
-                    'code_sl'=> $code_sl,
                     'slipstatus' => $slipdataup->status,
-                    'cedingid'=>$ceding->id,
-                    'cedingbroker'=>$ceding->name
+                    'cedingid'=>$slipdataup->source_2,
+                    'cedingbroker'=>$slipdataup->source
                 ]
             );
 
