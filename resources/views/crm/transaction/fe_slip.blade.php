@@ -63,8 +63,8 @@
                                                             <label for="">{{__('Our Share')}}</label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <div class="input-group">
-                                                                        <input type="number" id="feshare" min="0" value="0" step=".01" name="feshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly />
+                                                                    <div class="input-group" lang="en-US">
+                                                                        <input type="number" id="feshare" min="0" value="" step=".01" name="feshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly />
                                                                         <div class="input-group-append">
                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                         </div>
@@ -77,13 +77,13 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                            <input id="fesharefrom" type="text"   name="fesharefrom" class="form-control form-control-sm amount" value="0" data-validation="length" data-validation-length="0-50"  readonly />
+                                                            <input id="fesharefrom" type="text"   name="fesharefrom" class="form-control form-control-sm amount" value="" data-validation="length" data-validation-length="0-50"  readonly />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="">{{__('Total')}}</label>
-                                                            <input id="feshareto" type="text"  name="feshareto" class="form-control form-control-sm amount" value="0" data-validation="length" data-validation-length="0-50"  readonly/>
+                                                            <input id="feshareto" type="text"  name="feshareto" class="form-control form-control-sm amount" value="" data-validation="length" data-validation-length="0-50"  readonly/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -782,7 +782,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('WPC')}}</label>
-                                                            <input type="number" min="0" value="" step=".0001" id="wpc" name="wpc" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                            <input type="number" min="0" value="" step=".001" id="wpc" name="wpc" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
                                                       </div>
                                                     </div>
                                                 </div>
@@ -903,7 +903,7 @@
                                                                     <div class="row">
                                                                         <div class="col-md-12">
                                                                             <div class="input-group">
-                                                                                <input type="number" value="0" step=".0001" id="slippct" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
+                                                                                <input type="number" value="" step=".001" id="slippct" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
                                                                                 <div class="input-group-append">
                                                                                     <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                                 </div>
@@ -977,7 +977,7 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="form-group">
-                                                                                            <input type="number" value="0" step=".0001" id="slipdppercentage" name="slipdppercentage" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                                            <input type="number" value="" step=".001" id="slipdppercentage" name="slipdppercentage" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
@@ -1046,7 +1046,7 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="form-group">
-                                                                                            <input type="number" value="0" step=".0001" id="slipnilaiec" name="slipnilaiec" placeholder="y" class="form-control form-control-sm "/>
+                                                                                            <input type="number" value="" step=".001" id="slipnilaiec" name="slipnilaiec" placeholder="y" class="form-control form-control-sm "/>
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
@@ -1195,7 +1195,7 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Rate (permil.. %)')}}</label>
-                                                                <input type="number" value="" step=".0001" id="sliprate" name="sliprate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                <input type="number" value="" step=".001" id="sliprate" name="sliprate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -1204,7 +1204,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <div class="input-group">
-                                                                            <input type="number" value="" step=".0001" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                            <input type="number" value="" step=".001" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                                             <div class="input-group-append">
                                                                                 <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                             </div>
@@ -1223,7 +1223,7 @@
                                                                     <div class="row">
                                                                         <div class="col-md-12">
                                                                             <div class="input-group">
-                                                                                <input type="number" value="0" step=".0001" id="slipshare" name="slipshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="b" />
+                                                                                <input type="number" value="" step=".001" id="slipshare" name="slipshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="b" />
                                                                                 <div class="input-group-append">
                                                                                     <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                                 </div>
@@ -1269,7 +1269,7 @@
                                                                     <div class="row d-flex flex-wrap">
                                                                         <div class="col-md-12">
                                                                             <div class="input-group">
-                                                                                <input type="number" value="0" step=".0001" id="slipcommission" name="slipcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="d" />
+                                                                                <input type="number" value="" step=".001" id="slipcommission" name="slipcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="d" />
                                                                                 <div class="input-group-append">
                                                                                     <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                                 </div>
@@ -1334,11 +1334,9 @@
                                                                                     @csrf
                                                                                     <td>
                                                                                         <div class="form-group">
-                                                                                                <div class="input-group date" id="dateinstallment" data-target-input="nearest">
-                                                                                                        <input type="text" id="dateinstallmentdata" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipipdate">
-                                                                                                        <div class="input-group-append" data-target="#dateinstallment" data-toggle="datetimepicker">
-                                                                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                                                        </div>
+                                                                                                <div class="input-group" id="dateinstallment" >
+                                                                                                        <input type="date" id="dateinstallmentdata" class="form-control form-control-sm "  name="slipipdate">
+                                                                                                        
                                                                                                 </div>
                                                                                         </div>
                                                                                     </td>
@@ -1374,8 +1372,8 @@
                                                             <label for="">{{__('Retro Backup?')}}</label>
                                                             <select id="sliprb" name="sliprb" class="form-control form-control-sm ">
                                                                 {{-- <option selected readonly>{{__('Select Continent')}}</option> --}}
-                                                                <option value="AF" >YES</option>
-                                                                <option value="AN" selected >NO</option>
+                                                                <option value="YES" >YES</option>
+                                                                <option value="NO" selected >NO</option>
                                                             </select>
                                                         </div>   
                                                     </div>
@@ -1385,7 +1383,7 @@
                                                                 <label for="">{{__('Own Retention')}}</label>
                                                                 <div class="row">
                                                                     <div class="col-md-6">
-                                                                        <div class="input-group">
+                                                                        <div class="input-group" lang="en-US">
                                                                             <input type="number" step="0.001" value="100" id="slipor" name="slipor" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
                                                                             <div class="input-group-append">
                                                                                 <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
