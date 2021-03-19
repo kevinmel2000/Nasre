@@ -375,7 +375,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Interest list')}}</label>
-                                                <select id="slipinterestlistlocation" name="slipinterestlistlocation" class="form-control form-control-sm ">
+                                                <select id="slipinterestlistlocation" name="slipinterestlistlocation" class="form-control form-control-sm " aria-required="true">
                                                     <option selected disabled>{{__('Interest list')}}</option>
                                                     @foreach($interestinsured as $ii)
                                                         <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
@@ -389,7 +389,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Ceding / Broker')}}</label>
-                                                 <select id="ceding_id" name="ceding_id" class="e1 form-control form-control-sm ">
+                                                 <select id="ceding_id" name="ceding_id" class="e1 form-control form-control-sm " aria-required="true">
                                                     <option value=""  selected disabled >Ceding or Broker</option>
                                                     @foreach($ceding as $cb)
                                                         <option value="{{ $cb->id }}">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>

@@ -2453,7 +2453,7 @@ $(document).ready(function() {
         //console.log(conv_amount)
         //var real_amount = parseInt(conv_amount);
         //console.log(real_amount)
-
+        
         $.ajax({
             url:"{{ route('locationlist.store') }}",
             type:"POST",
