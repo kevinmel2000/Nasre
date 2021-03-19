@@ -258,12 +258,12 @@ class FeSlipController extends Controller
         $mydate = date("Y").date("m").date("d");
         $costumer=Customer::orderby('id','asc')->get();
 
-        $currdate = date("Y-m-d ");
+        $currdate = date("Y-m-d");
         // $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
         $insured_now = Insured::whereDate('created_at',$currdate)->orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
-        $slip_now = SlipTable::whereDate('created_at',$currdate)->orderby('id','asc')->get();
+        
         $currency = Currency::orderby('id','asc')->get();
         $cob = COB::where('form','fe')->orderby('id','asc')->get();
         $koc = Koc::where('parent_id',2)->orWhere('id',2)->orderby('id','asc')->get();
@@ -286,7 +286,7 @@ class FeSlipController extends Controller
 
         $fe_ids = response()->json($insured->modelKeys());
         $lastid = count($insured_now);
-        $sliplastid = count($slip_now);
+        
 
         if($lastid != null){
             if($lastid < 9)
@@ -318,6 +318,9 @@ class FeSlipController extends Controller
 
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
+        $slip_now = SlipTable::whereDate('created_at',$currdate)->where('slip_type','fe')->where('insured_id',$code_ms)->orderby('id','asc')->get();
+        $sliplastid = count($slip_now);
+        // dd($sliplastid);
 
         if($sliplastid != null){
             if($sliplastid < 9)
@@ -347,41 +350,43 @@ class FeSlipController extends Controller
             $code_sl = "FE".  $mydate . "0000" . strval(1);
         }
 
-        $kondisi=false;
-        $i=1;
-        while($kondisi==false)
-        {
-            $slipdatatest=SlipTable::where('number',$code_sl)->first();
-            if(empty($slipdatatest) || $slipdatatest==NULL)
-            {
-                $kondisi=true;
-            }
-            else
-            {
-                if($sliplastid < 9)
-                {
-                    $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + $i);
-                }   
-                elseif($sliplastid > 8 && $sliplastid < 99)
-                {
-                    $code_sl = "FE".  $mydate . "000" . strval($sliplastid + $i);
-                }
-                elseif($sliplastid > 98 && $sliplastid < 999)
-                {
-                    $code_sl = "FE".  $mydate . "00" . strval($sliplastid + $i);
-                }
-                elseif($sliplastid > 998 && $sliplastid < 9999)
-                {
-                    $code_sl = "FE".  $mydate . "0" . strval($sliplastid + $i);
-                }
-                elseif($sliplastid > 9998 && $sliplastid < 99999)
-                {
-                    $code_sl = "FE".  $mydate . strval($sliplastid + $i);
-                }
-            }
+        dd($code_sl);
 
-            $i++;
-        }
+        // $kondisi=false;
+        // $i=1;
+        // while($kondisi==false)
+        // {
+        //     $slipdatatest=SlipTable::where('number',$code_sl)->first();
+        //     if(empty($slipdatatest) || $slipdatatest==NULL)
+        //     {
+        //         $kondisi=true;
+        //     }
+        //     else
+        //     {
+        //         if($sliplastid < 9)
+        //         {
+        //             $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + $i);
+        //         }   
+        //         elseif($sliplastid > 8 && $sliplastid < 99)
+        //         {
+        //             $code_sl = "FE".  $mydate . "000" . strval($sliplastid + $i);
+        //         }
+        //         elseif($sliplastid > 98 && $sliplastid < 999)
+        //         {
+        //             $code_sl = "FE".  $mydate . "00" . strval($sliplastid + $i);
+        //         }
+        //         elseif($sliplastid > 998 && $sliplastid < 9999)
+        //         {
+        //             $code_sl = "FE".  $mydate . "0" . strval($sliplastid + $i);
+        //         }
+        //         elseif($sliplastid > 9998 && $sliplastid < 99999)
+        //         {
+        //             $code_sl = "FE".  $mydate . strval($sliplastid + $i);
+        //         }
+        //     }
+
+        //     $i++;
+        // }
 
 
 
@@ -494,7 +499,7 @@ class FeSlipController extends Controller
         {      
                 $code_sl=$slipdata->number;
                 $slip = SlipTable::orderby('id','asc')->get();
-                $slip_now = SlipTable::whereDate('created_at',$currdate)->orderby('id','asc')->get();
+                $slip_now = SlipTable::whereDate('created_at',$currdate)->where('slip_type','fe')->orderby('id','asc')->get();
                 $sliplastid = count($slip_now);
                 
                 $kondisi=false;
@@ -542,7 +547,7 @@ class FeSlipController extends Controller
         else
         {
             $slip = SlipTable::orderby('id','asc')->get();
-            $slip_now = SlipTable::whereDate('created_at',$currdate)->orderby('id','asc')->get();
+            $slip_now = SlipTable::whereDate('created_at',$currdate)->where('slip_type','fe')->orderby('id','asc')->get();
             $sliplastid = count($slip_now);
 
             if($sliplastid != null){
