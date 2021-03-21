@@ -149,7 +149,7 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Currency')}}</label>
-                                                            <select id="slipcurrencydetail" disabled="true" name="slipcurrencydetail" class=" form-control form-control-sm ">
+                                                            <select id="slipcurrencyendorsement" disabled="true" name="slipcurrencyendorsement" class=" form-control form-control-sm ">
                                                                 @foreach($currency as $crc)
                                                                     <option value="{{ $crc->id }}" hidden="true">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
                                                                     
@@ -163,7 +163,7 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('COB')}}</label>
-                                                            <select id="slipcobdetail" name="slipcobdetail" disabled="true" class=" form-control form-control-sm ">
+                                                            <select id="slipcobendorsement" name="slipcobendorsement" disabled="true" class=" form-control form-control-sm ">
                                                                 @foreach($cob as $boc)
                                                                     <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
                                                                    
@@ -177,7 +177,7 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('KOC')}}</label>
-                                                            <select id="slipkocdetail" name="slipkocdetail" disabled="true" class=" form-control form-control-sm ">
+                                                            <select id="slipkocendorsement" name="slipkocendorsement" disabled="true" class=" form-control form-control-sm ">
                                                                 @foreach($koc as $cok)
                                                                     <option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
                                                                     
@@ -191,7 +191,7 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Occupacy')}}</label>
-                                                            <select id="slipoccupacydetail" disabled="true" name="slipoccupacydetail"  class=" form-control form-control-sm ">
+                                                            <select id="slipoccupacyendorsement" disabled="true" name="slipoccupacyendorsement"  class=" form-control form-control-sm ">
                                                                 @foreach($ocp as $ocpy)
                                                                     <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
                                                                   
@@ -207,7 +207,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="">{{__('Building Const')}}</label>
-                                                        <select id="slipbld_constdetail" name="slipbld_constdetail" disabled="true" class=" form-control form-control-sm ">
+                                                        <select id="slipbld_constendorsement" name="slipbld_constendorsement" disabled="true" class=" form-control form-control-sm ">
                                                             <option  disabled>{{__('Building Const list')}}</option>
                                                             <option value="Building 1">Building 1</option>
                                                             <option value="Building 2">Building 2</option>
@@ -222,13 +222,13 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Rate Upper Area')}}</label>
-                                                                <input type="text" id="slipbcuadetail" name="slipbcuadetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
+                                                                <input type="text" id="slipbcuaendorsement" name="slipbcuaendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Rate Lower Area')}}</label>
-                                                                <input type="text" id="slipbcladetail" name="slipbcladetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
+                                                                <input type="text" id="slipbclaendorsement" name="slipbclaendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                             </div>
                                                         </div>
                                                     </div>
