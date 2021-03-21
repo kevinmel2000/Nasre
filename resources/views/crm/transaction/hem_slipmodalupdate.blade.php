@@ -517,7 +517,6 @@
                                                 </div>
                                             </div>
 
-
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <div class="row">
@@ -580,15 +579,24 @@
 
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-5">
-                                                            <div class="form-group" id="daytotalupdate">                         
+                                                        <div class="col-md-12">
+                                                            {{-- <div class="form-group" id="daytotal">                         
                                                             Total Days :0
+                                                            
+                                                            </div> --}}
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Total Days')}}</label>
+                                                                <input type="text"  id="slipdaytotalupdate" name="slipdaytotalupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Total Summary Insurance Periode')}}</label>
+                                                                <input type="text"  id="sliptotalsumdateupdate" name="sliptotalsumdateupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
-                                            
 
                                             
                                             <div class="row d-flex justify-content-start">

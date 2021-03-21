@@ -1002,7 +1002,7 @@
                                                         <div class="form-group">
                                                             <label>{{__('Insurance Periode')}}:</label>
                                                                 {{-- <div class="input-group date" id="dateinfrom" data-target-input="nearest"> --}}
-                                                                        <input type="date" class="form-control form-control-sm datepicker-input" value="{{ $slipdata->insurance_period_from }}" data-target="#date" id="slipipfrom" name="slipipfrom">
+                                                                        <input type="date" class="form-control form-control-sm datepicker-input" value="" data-target="#date" id="slipipfrom" name="slipipfrom">
                                                                         {{-- <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
@@ -1017,7 +1017,7 @@
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
                                                                 {{-- <div class="input-group date" id="dateinto" data-target-input="nearest"> --}}
-                                                                        <input type="date" class="form-control form-control-sm datepicker-input"  value="{{ $slipdata->insurance_perido_to }}" data-target="#date" id="slipipto" name="slipipto">
+                                                                        <input type="date" class="form-control form-control-sm datepicker-input"  value="" data-target="#date" id="slipipto" name="slipipto">
                                                                         {{-- <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
@@ -1030,7 +1030,7 @@
                                                         <div class="form-group">
                                                             <label>{{__('Reinsurance Periode')}}:</label>
                                                                 {{-- <div class="input-group date" id="daterefrom" data-target-input="nearest"> --}}
-                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" value="{{ $slipdata->reinsurance_period_from }}" data-target="#date" id="sliprpfrom" name="sliprpfrom">
+                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" value=""  id="sliprpfrom" name="sliprpfrom">
                                                                         {{-- <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
@@ -1045,7 +1045,7 @@
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
                                                                 {{-- <div class="input-group date" id="datereto" data-target-input="nearest"> --}}
-                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" value="{{ $slipdata->reinsurance_period_to }}"  data-target="#date" id="sliprpto" name="sliprpto">
+                                                                        <input type="date" class="form-control form-control-sm datetimepicker-input" value=""   id="sliprpto" name="sliprpto">
                                                                         {{-- <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                         </div>
@@ -1056,17 +1056,26 @@
                                             </div>
 
                                             <div class="col-md-4">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <div class="form-group" id="daytotal">                         
-                                                            Total Days :0
-                                                            </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        {{-- <div class="form-group" id="daytotal">                         
+                                                        Total Days :0
+                                                        
+                                                        </div> --}}
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Total Days')}}</label>
+                                                            <input type="text"  id="slipdaytotal" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Total Summary Insurance Periode')}}</label>
+                                                            <input type="text"  id="sliptotalsumdate" name="sliptotalsumdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
                                                         </div>
                                                     </div>
+                                                </div>
                                             </div>
                                         </div>
                                         
-
+                                        
 
                                         <div class="row d-flex justify-content-start">
                                             <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> non proportional panel</i>
