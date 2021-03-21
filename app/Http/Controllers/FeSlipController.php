@@ -1790,12 +1790,10 @@ class FeSlipController extends Controller
                     $slipdataup->retro_backup=$request->sliprb;
                     $slipdataup->own_retention=$request->slipor;
                     $slipdataup->wpc=$request->wpc;
-
-
+                    
                     $countendorsement = $slipdata->slip_idendorsementcount + 1;
 
                     $slipdataup->slip_idendorsementcount=$countendorsement;
-                    
                     
                     $slipdataup->prev_endorsement=$request->prevslipnumber;
                     $slipdataup->sum_own_retention=$request->slipsumor;
@@ -1821,76 +1819,6 @@ class FeSlipController extends Controller
                         'slip_id'=>$request->slipnumber,
                     ]);
     
-               
-                // $slip = SlipTable::orderby('id','asc')->get();            
-                // $sliplastid = count($slip);
-    
-                // $mydate = date("Y").date("m").date("d");
-                // $userid = Auth::user()->id;
-                // if($sliplastid != null){
-                //     if($sliplastid < 9)
-                //     {
-                //         $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + 1);
-                //     }   
-                //     elseif($sliplastid > 8 && $sliplastid < 99)
-                //     {
-                //         $code_sl = "FE".  $mydate . "000" . strval($sliplastid + 1);
-                //     }
-                //     elseif($sliplastid > 98 && $sliplastid < 999)
-                //     {
-                //         $code_sl = "FE".  $mydate . "00" . strval($sliplastid + 1);
-                //     }
-                //     elseif($sliplastid > 998 && $sliplastid < 9999)
-                //     {
-                //         $code_sl = "FE".  $mydate . "0" . strval($sliplastid + 1);
-                //     }
-                //     elseif($sliplastid > 9998 && $sliplastid < 99999)
-                //     {
-                //         $code_sl = "FE".  $mydate . strval($sliplastid + 1);
-                //     }
-    
-                    
-                // }
-                // else{
-                //     $code_sl = "FE".  $mydate . "0000" . strval(1);
-                // }
-    
-                // $kondisi=false;
-                // $i=1;
-                // while($kondisi==false)
-                // {
-                //     $slipdatatest=SlipTable::where('number',$code_sl)->first();
-                //     if(empty($slipdatatest) || $slipdatatest==NULL)
-                //     {
-                //         $kondisi=true;
-                //     }
-                //     else
-                //     {
-                //         if($sliplastid < 9)
-                //         {
-                //             $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + $i);
-                //         }   
-                //         elseif($sliplastid > 8 && $sliplastid < 99)
-                //         {
-                //             $code_sl = "FE".  $mydate . "000" . strval($sliplastid + $i);
-                //         }
-                //         elseif($sliplastid > 98 && $sliplastid < 999)
-                //         {
-                //             $code_sl = "FE".  $mydate . "00" . strval($sliplastid + $i);
-                //         }
-                //         elseif($sliplastid > 998 && $sliplastid < 9999)
-                //         {
-                //             $code_sl = "FE".  $mydate . "0" . strval($sliplastid + $i);
-                //         }
-                //         elseif($sliplastid > 9998 && $sliplastid < 99999)
-                //         {
-                //             $code_sl = "FE".  $mydate . strval($sliplastid + $i);
-                //         }
-                //     }
-    
-                //     $i++;
-                // }
-    
                 $cedingbroker = CedingBroker::where('id',$slipdataup->source)->first();
                     $ceding = CedingBroker::where('id',$slipdataup->source_2)->first();
 
@@ -1907,14 +1835,6 @@ class FeSlipController extends Controller
 
                 }
             }
-
-            
-
-            
-            
-            //return back()->with($notification);
-            //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
-            //return redirect()->route('liniusaha.index');
         
         }
         else

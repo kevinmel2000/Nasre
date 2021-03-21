@@ -1097,42 +1097,7 @@
             });
         });
 
-        // var bld = $('#slipbld_constendorsement').val();
-        // var ocp_id = $('#slipoccupacyendorsement').val();
-
-        // $.ajax({
-        //     type:"GET",
-        //     url:"{{url('get-building-rate')}}",
-        //     data: {
-        //     building: bld,
-        //     occupacy_id:ocp_id
-        //     },
-        //     beforeSend: function() { $("body").addClass("loading");  },
-        //     complete: function() {  $("body").removeClass("loading"); },
-        //     success:function(res){  
-        //         console.log(res)      
-        //         console.log(bld)      
-        //         if(res.rate_batas_atas_building_class_1){
-        //             $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_1);
-        //             $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_1);
-        //         }
-        //         else if(res.rate_batas_atas_building_class_2){
-        //             $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_2);
-        //             $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_2);
-        //         }
-        //         else if(res.rate_batas_atas_building_class_3){
-        //             $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_3);
-        //             $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_3);
-        //         }
-        //     }
-        // });
-
         console.log($('#slipnumberendorsement').val())
-
-
-       
-        
-
 
     });
 </script>
@@ -1140,89 +1105,92 @@
 <script type="text/javascript">
     function addendorsement(){
         var code_ms = $('#insuredIDtxt').val();
-       var slipid = $('#slipidendorsement').val();
-       var slipnumber = $('#slipnumberendorsement').val();
-       var prevslipnumber = $('#prevslipnumberendorsement').val();
-       var slipdatetransfer = $('#sliptdendorsement').val();
-       var slipstatus = $('#slipstatusendorsement').val();
-       var sliped = $('#slipedendorsement').val();
-       var slipsls = $('#slipslsendorsement').val();
-       var slipcedingbroker = $('#slipcedingbrokerendorsement').val();
-       var slipceding = $('#slipcedingendorsement').val();
-       var slipcurrency = $('#slipcurrencyendorsement').val();
-       var slipcob = $('#slipcobendorsement').val();
-       var slipkoc = $('#slipkocendorsement').val();
-       var slipoccupacy = $('#slipoccupacyendorsement').val();
-       var slipbld_const = $('#slipbld_constendorsement').val();
-       var slipno = $('#slipnoendorsement').val();
-       var slipcndn = $('#slipcndnendorsement').val();
-       var slippolicy_no = $('#slippolicy_noendorsement').val();
-       var sliptotalsum = $('#sliptotalsumendorsement').val();
-       var sliptype =  $('#sliptypeendorsement').val();
-       var slippct =  $('#slippctendorsement').val();
-       var sliptotalsumpct =  $('#sliptotalsumpctendorsement').val();
-       var slipipfrom =  $('#slipipfromendorsement').val();
-       var slipipto =  $('#slipiptoendorsement').val();
-       var sliprpfrom =  $('#sliprpfromendorsement').val();
-       var sliprpto =  $('#sliprptoendorsement').val();
-       var proportional =  $('#switch-proportionalendorsement').val();
-       var sliplayerproportional =  $('#sliplayerproportionalendorsement').val();
-       var sliprate =  $('#sliprateendorsement').val();
-       var slipvbroker =  $('#v_brokerendorsement').val();
-       var slipshare =  $('#slipshareendorsement').val();
-       var slipsumshare =  $('#slipsumshareendorsement').val();
-       var slipbasicpremium =  $('#slipbasicpremiumendorsement').val();
-       var slipgrossprmtonr =  $('#slipgrossprmtonrendorsement').val();
-       var slipsumcommission =  $('#slipsumcommissionendorsement').val();
-       var slipcommission =  $('#slipcommissionendorsement').val();
-       var slipnetprmtonr =  $('#slipnetprmtonrendorsement').val();
-       var sliprb =  $('#sliprbendorsement').val();
-       var slipor =  $('#sliporendorsement').val();
-       var slipsumor =  $('#slipsumorendorsement').val();
-       var wpc =  $('#wpcendorsement').val();
+        var slipid = $('#slipidendorsement').val();
+        var slipnumber = $('#slipnumberendorsement').val();
+        var prevslipnumber = $('#prevslipnumberendorsement').val();
+        var slipdatetransfer = $('#sliptdendorsement').val();
+        var slipstatus = $('#slipstatusendorsement').val();
+        var sliped = $('#slipedendorsement').val();
+        var slipsls = $('#slipslsendorsement').val();
+        var slipcedingbroker = $('#slipcedingbrokerendorsement').val();
+        var slipceding = $('#slipcedingendorsement').val();
+        var slipcurrency = $('#slipcurrencyendorsement').val();
+        var slipcob = $('#slipcobendorsement').val();
+        var slipkoc = $('#slipkocendorsement').val();
+        var slipoccupacy = $('#slipoccupacyendorsement').val();
+        var slipbld_const = $('#slipbld_constendorsement').val();
+        var slipno = $('#slipnoendorsement').val();
+        var slipcndn = $('#slipcndnendorsement').val();
+        var slippolicy_no = $('#slippolicy_noendorsement').val();
+        var sliptotalsum = $('#sliptotalsumendorsement').val();
+        var sliptype =  $('#sliptypeendorsement').val();
+        var slippct =  $('#slippctendorsement').val();
+        var sliptotalsumpct =  $('#sliptotalsumpctendorsement').val();
+        var slipipfrom =  $('#slipipfromendorsement').val();
+        var slipipto =  $('#slipiptoendorsement').val();
+        var sliprpfrom =  $('#sliprpfromendorsement').val();
+        var sliprpto =  $('#sliprptoendorsement').val();
+        var proportional =  $('#switch-proportionalendorsement').val();
+        var sliplayerproportional =  $('#sliplayerproportionalendorsement').val();
+        var sliprate =  $('#sliprateendorsement').val();
+        var slipvbroker =  $('#v_brokerendorsement').val();
+        var slipshare =  $('#slipshareendorsement').val();
+        var slipsumshare =  $('#slipsumshareendorsement').val();
+        var slipbasicpremium =  $('#slipbasicpremiumendorsement').val();
+        var slipgrossprmtonr =  $('#slipgrossprmtonrendorsement').val();
+        var slipsumcommission =  $('#slipsumcommissionendorsement').val();
+        var slipcommission =  $('#slipcommissionendorsement').val();
+        var slipnetprmtonr =  $('#slipnetprmtonrendorsement').val();
+        var sliprb =  $('#sliprbendorsement').val();
+        var slipor =  $('#sliporendorsement').val();
+        var slipsumor =  $('#slipsumorendorsement').val();
+        var wpc =  $('#wpcendorsement').val();
 
-       var token2 = $('input[name=_token]').val();
-       
+        var token2 = $('input[name=_token]').val();
+        
 
-       var conv_sliptotalsum = sliptotalsum.replace(/,/g, "");
-       console.log(conv_sliptotalsum)
-       var real_sliptotalsum = parseInt(conv_sliptotalsum);
-       console.log(real_sliptotalsum)
-       
-       var conv_sliptotalsumpct = sliptotalsumpct.replace(/,/g, "");
-       console.log(conv_sliptotalsumpct)
-       var real_sliptotalsumpct = parseInt(conv_sliptotalsumpct);
-       console.log(real_sliptotalsumpct)
+        console.log('code ms after add endorsement' + code_ms)
+        console.log('slip id after add endorsement' + slipid)
+        console.log('slip number after add endorsement' + slipnumber)
+        var conv_sliptotalsum = sliptotalsum.replace(/,/g, "");
+        console.log(conv_sliptotalsum)
+        var real_sliptotalsum = parseInt(conv_sliptotalsum);
+        console.log(real_sliptotalsum)
+        
+        var conv_sliptotalsumpct = sliptotalsumpct.replace(/,/g, "");
+        console.log(conv_sliptotalsumpct)
+        var real_sliptotalsumpct = parseInt(conv_sliptotalsumpct);
+        console.log(real_sliptotalsumpct)
 
-       var conv_slipsumshare = slipsumshare.replace(/,/g, "");
-       console.log(conv_slipsumshare)
-       var real_slipsumshare = parseInt(conv_slipsumshare);
-       console.log(real_slipsumshare)
+        var conv_slipsumshare = slipsumshare.replace(/,/g, "");
+        console.log(conv_slipsumshare)
+        var real_slipsumshare = parseInt(conv_slipsumshare);
+        console.log(real_slipsumshare)
 
-       var conv_slipbasicpremium = slipbasicpremium.replace(/,/g, "");
-       console.log(conv_slipbasicpremium)
-       var real_slipbasicpremium = parseInt(conv_slipbasicpremium);
-       console.log(real_slipbasicpremium)
+        var conv_slipbasicpremium = slipbasicpremium.replace(/,/g, "");
+        console.log(conv_slipbasicpremium)
+        var real_slipbasicpremium = parseInt(conv_slipbasicpremium);
+        console.log(real_slipbasicpremium)
 
-       var conv_slipgrossprmtonr = slipgrossprmtonr.replace(/,/g, "");
-       console.log(conv_slipgrossprmtonr)
-       var real_slipgrossprmtonr = parseInt(conv_slipgrossprmtonr);
-       console.log(real_slipgrossprmtonr)
+        var conv_slipgrossprmtonr = slipgrossprmtonr.replace(/,/g, "");
+        console.log(conv_slipgrossprmtonr)
+        var real_slipgrossprmtonr = parseInt(conv_slipgrossprmtonr);
+        console.log(real_slipgrossprmtonr)
 
-       var conv_slipsumcommission = slipsumcommission.replace(/,/g, "");
-       console.log(conv_slipsumcommission)
-       var real_slipsumcommission = parseInt(conv_slipsumcommission);
-       console.log(real_slipsumcommission)
+        var conv_slipsumcommission = slipsumcommission.replace(/,/g, "");
+        console.log(conv_slipsumcommission)
+        var real_slipsumcommission = parseInt(conv_slipsumcommission);
+        console.log(real_slipsumcommission)
 
-       var conv_slipnetprmtonr = slipnetprmtonr.replace(/,/g, "");
-       console.log(conv_slipnetprmtonr)
-       var real_slipnetprmtonr = parseInt(conv_slipnetprmtonr);
-       console.log(real_slipnetprmtonr)
+        var conv_slipnetprmtonr = slipnetprmtonr.replace(/,/g, "");
+        console.log(conv_slipnetprmtonr)
+        var real_slipnetprmtonr = parseInt(conv_slipnetprmtonr);
+        console.log(real_slipnetprmtonr)
 
-       var conv_slipsumor = slipsumor.replace(/,/g, "");
-       console.log(conv_slipsumor)
-       var real_slipsumor = parseInt(conv_slipsumor);
-       console.log(real_slipsumor)
+        var conv_slipsumor = slipsumor.replace(/,/g, "");
+        console.log(conv_slipsumor)
+        var real_slipsumor = parseInt(conv_slipsumor);
+        console.log(real_slipsumor)
        
        //ajaxfilefunction(e);
 
