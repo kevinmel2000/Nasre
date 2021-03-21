@@ -785,6 +785,736 @@
 </script>
 
 
+<script type="text/javascript">
+    $('#slipbld_const').change(function(){
+        var bld = $(this).val();
+        var ocp_id = $('#slipoccupacy').val();
+        // alert(bld);
+        console.log(bld)
+        console.log(ocp_id)
+
+        if(ocp_id){
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-building-rate')}}",
+                data: {
+                building: bld,
+                occupacy_id:ocp_id
+                },
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){  
+                    console.log(res)      
+                    console.log(bld)      
+                    if(res.rate_batas_atas_building_class_1 && res.rate_batas_bawah_building_class_1){
+                        if(res.rate_batas_atas_building_class_1 != null){
+                            $("#slipbcua").val(res.rate_batas_atas_building_class_1);
+                        }else{
+                            $("#slipbcua").val(parseInt('0'));
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_1 != null){
+                            $("#slipbcla").val(res.rate_batas_bawah_building_class_1);
+                        }else{
+                            $("#slipbcla").val(parseInt('0'));
+                        }
+                        
+
+                    }
+                    else if(res.rate_batas_atas_building_class_2 && res.rate_batas_bawah_building_class_2){
+                        if(res.rate_batas_atas_building_class_2 != null){
+                            $("#slipbcua").val(res.rate_batas_atas_building_class_2);
+                        }else{
+                            $("#slipbcua").val(parseInt('0'));
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_2 != null){
+                            $("#slipbcla").val(res.rate_batas_bawah_building_class_2);
+                        }else{
+                            $("#slipbcla").val(parseInt('0'));
+                        }
+                        
+                    }
+                    else if(res.rate_batas_atas_building_class_3 && res.rate_batas_bawah_building_class_3){
+                        if(res.rate_batas_atas_building_class_3 != null){
+                            $("#slipbcua").val(res.rate_batas_atas_building_class_3); 
+                        }else{
+                            $("#slipbcua").val( parseInt('0'));
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_3 != null){
+                            $("#slipbcla").val(res.rate_batas_bawah_building_class_3);
+                        }else{
+                            $("#slipbcla").val( parseInt('0'));
+                        }
+                        
+                        
+                    }else{
+                        if(res.rate_batas_atas_building_class_1){
+                            $("#slipbcua").val(res.rate_batas_atas_building_class_1); 
+                            $("#slipbcla").val( parseInt('0'));
+                        }else if(res.rate_batas_bawah_building_class_1){
+                            $("#slipbcla").val(res.rate_batas_bawah_building_class_1); 
+                            $("#slipbcua").val( parseInt('0'));
+                        }else if(res.rate_batas_atas_building_class_2){
+                            $("#slipbcua").val(res.rate_batas_atas_building_class_2); 
+                            $("#slipbcla").val( parseInt('0'));
+                        }else if(res.rate_batas_bawah_building_class_2){
+                            $("#slipbcla").val(res.rate_batas_bawah_building_class_2); 
+                            $("#slipbcua").val( parseInt('0'));
+                        }else if(res.rate_batas_atas_building_class_3){
+                            $("#slipbcua").val(res.rate_batas_atas_building_class_3); 
+                            $("#slipbcla").val( parseInt('0'));
+                        }else if(res.rate_batas_bawah_building_class_3){
+                            $("#slipbcla").val(res.rate_batas_bawah_building_class_3); 
+                            $("#slipbcua").val( parseInt('0'));
+                        }
+                    }
+                }
+            });
+        }else{
+            swal("Error!", "Please choose occupacy first", "Get Building Rate Error");
+        }   
+    });
+
+    $('#slipbld_constupdate').change(function(){
+        var bld = $(this).val();
+        var ocp_id = $('#slipoccupacyupdate').val();
+        // alert(bld);
+        console.log(bld)
+        console.log(ocp_id)
+
+        if(ocp_id){
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-building-rate')}}",
+                data: {
+                building: bld,
+                occupacy_id:ocp_id
+                },
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){  
+                    console.log(res)      
+                    console.log(bld)      
+                    if(res.rate_batas_atas_building_class_1){
+                        if(res.rate_batas_atas_building_class_1 == ' ' || res.rate_batas_atas_building_class_1 == 0.000){
+                            $("#slipbcuaupdate").val( parseInt('0'));
+                        }else{
+                            $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_1);
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_1 == ' ' || res.rate_batas_bawah_building_class_1 == 0.000){
+                            $("#slipbclaupdate").val( parseInt('0'));
+                        }else{
+                            $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_1);
+                        }
+                        
+
+                    }
+                    else if(res.rate_batas_atas_building_class_2){
+                        if(res.rate_batas_atas_building_class_2 == ' ' || res.rate_batas_atas_building_class_2 == 0.000){
+                            $("#slipbcuaupdate").val( parseInt('0'));
+                        }else{
+                            $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_2);
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_2 == ' ' || res.rate_batas_bawah_building_class_2 == 0.000){
+                            $("#slipbclaupdate").val( parseInt('0'));
+                        }else{
+                            $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_2);
+                        }
+                        
+                    }
+                    else if(res.rate_batas_atas_building_class_3){
+                        if(res.rate_batas_atas_building_class_3 == ' ' || res.rate_batas_atas_building_class_3 == 0.000){
+                            $("#slipbcuaupdate").val( parseInt('0'));
+                        }else{
+                            $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_3);
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_3 == ' ' || res.rate_batas_bawah_building_class_3 == 0.000){
+                            $("#slipbclaupdate").val( parseInt('0'));
+                        }else{
+                            $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_3);
+                        }
+                        
+                        
+                    }
+                }
+            });
+        }else{
+            swal("Error!", "Please choose occupacy first", "Get Building Rate Error");
+        }   
+    });
+
+    $('#slipbld_constendorsement').change(function(){
+        var bld = $(this).val();
+        var ocp_id = $('#slipoccupacyendorsement').val();
+        // alert(bld);
+        console.log(bld)
+        console.log(ocp_id)
+
+        if(ocp_id){
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-building-rate')}}",
+                data: {
+                building: bld,
+                occupacy_id:ocp_id
+                },
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){  
+                    console.log(res)      
+                    console.log(bld)      
+                    if(res.rate_batas_atas_building_class_1){
+                        if(res.rate_batas_atas_building_class_1 == ' ' || res.rate_batas_atas_building_class_1 == 0.000){
+                            $("#slipbcuaendorsement").val( parseInt('0'));
+                        }else{
+                            $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_1);
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_1 == ' ' || res.rate_batas_bawah_building_class_1 == 0.000){
+                            $("#slipbclaendorsement").val( parseInt('0'));
+                        }else{
+                            $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_1);
+                        }
+                        
+
+                    }
+                    else if(res.rate_batas_atas_building_class_2){
+                        if(res.rate_batas_atas_building_class_2 == ' ' || res.rate_batas_atas_building_class_2 == 0.000){
+                            $("#slipbcuaendorsement").val( parseInt('0'));
+                        }else{
+                            $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_2);
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_2 == ' ' || res.rate_batas_bawah_building_class_2 == 0.000){
+                            $("#slipbclaendorsement").val( parseInt('0'));
+                        }else{
+                            $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_2);
+                        }
+                        
+                    }
+                    else if(res.rate_batas_atas_building_class_3){
+                        if(res.rate_batas_atas_building_class_3 == ' ' || res.rate_batas_atas_building_class_3 == 0.000){
+                            $("#slipbcuaendorsement").val( parseInt('0'));
+                        }else{
+                            $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_3);
+                        }
+                        
+                        if(res.rate_batas_bawah_building_class_3 == ' ' || res.rate_batas_bawah_building_class_3 == 0.000){
+                            $("#slipbclaendorsement").val( parseInt('0'));
+                        }else{
+                            $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_3);
+                        }
+                        
+                        
+                    }
+                }
+            });
+        }else{
+            swal("Error!", "Please choose occupacy first", "Get Building Rate Error");
+        }   
+    });
+
+</script>
+
+<script type="text/javascript">
+    $('#slipcedingbroker').change(function(){
+        var cedbrok = $(this).val();
+        var insuredid = $('#insuredIDtxt').val();  
+        //alert(countryID);
+        if(cedbrok){
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-ceding-detail')}}?ceding_id="+cedbrok+"&insured_id="+insuredid,
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(res){  
+                console.log(res)      
+                if(res.type == 4){
+                    // alert(res.name);
+                    // $("#slipceding option[value='placeholder']").removeAttr("selected");
+                    // $("#slipceding option[value='placeholder']").prop("selected", false);
+                    $("#slipceding option").remove();
+
+
+                    $("#slipceding").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                    // $("#slipceding").append('<option value="'value.id'" selected>' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    // $.each(res,function(key,value){
+                    //     alert(value.name);
+                        
+                    // });
+
+                    var ceding_curr = $('#slipceding').val();
+                    var totalsum = $("#sliptotalsum").val();
+                        if(res.amountlist > 0)
+                        {
+                            console.log('sum amount ' + res.sumamount)
+                            var sum = res.sumamount;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log('convert sum ' + real_sum)
+                            // var total_num = 0;
+                            // var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            $("#sliptotalsum").val(real_sum);
+                            // // $("#msishareto").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            // // $("#feshareto").val(real_sum);
+                        }
+                        else
+                        {
+                            console.log('hasilnya ' + res)
+                            // var conv_total = totalsum.replace(/,/g, "");
+                            // console.log('conv total : ' + conv_total)
+                            // var real_total = parseInt(conv_total);
+                            // console.log('real total : ' + real_total)
+                            // var total =  parseFloat(real_total);
+                            // console.log(' total : ' + total)
+                            // var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            // $("#sliptotalsum").val(real_sum);
+                            // // $("#fesharefrom").val(real_sum);
+                            // $("#feshareto").val(real_sum);
+                        }
+                    
+                
+                }else{
+                    $("#slipceding option").remove();
+
+                    $.each(res,function(key,value){
+                        // alert(value.name);
+                    
+
+                    $("#slipceding").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                        // $("#slipceding").append('<option value="'value.id'">' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    });
+                }
+            }
+        });
+        }else{
+            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+        }   
+    });
+
+    $('#slipceding').change(function(){
+        var ceding = $(this).val();
+        var insuredid = $('#insuredIDtxt').val();  
+        //alert(countryID);
+        if(ceding){
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(res){  
+                console.log(res)      
+                if(res.type == 4){
+                    // alert(res.name);
+                    // $("#slipceding option[value='placeholder']").removeAttr("selected");
+                    // $("#slipceding option[value='placeholder']").prop("selected", false);
+                    $("#slipceding option").remove();
+
+
+                    $("#slipceding").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                    // $("#slipceding").append('<option value="'value.id'" selected>' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    // $.each(res,function(key,value){
+                    //     alert(value.name);
+                        
+                    // });
+
+                    var ceding_curr = $('#slipceding').val();
+                    var totalsum = $("#sliptotalsum").val();
+                        if(res.amountlist > 0)
+                        {
+                            console.log('sum amount ' + res.sumamount)
+                            var sum = res.sumamount;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log('convert sum ' + real_sum)
+                            // var total_num = 0;
+                            // var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            $("#sliptotalsum").val(real_sum);
+                            // // $("#msishareto").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            // // $("#feshareto").val(real_sum);
+                        }
+                        else
+                        {
+                            console.log('hasilnya ' + res)
+                            // var conv_total = totalsum.replace(/,/g, "");
+                            // console.log('conv total : ' + conv_total)
+                            // var real_total = parseInt(conv_total);
+                            // console.log('real total : ' + real_total)
+                            // var total =  parseFloat(real_total);
+                            // console.log(' total : ' + total)
+                            // var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            // $("#sliptotalsum").val(real_sum);
+                            // // $("#fesharefrom").val(real_sum);
+                            // $("#feshareto").val(real_sum);
+                        }
+                    
+                
+                }else{
+                    $("#slipceding option").remove();
+
+                    $.each(res,function(key,value){
+                        // alert(value.name);
+                    
+
+                    $("#slipceding").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                        // $("#slipceding").append('<option value="'value.id'">' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    });
+                }
+            }
+        });
+        }else{
+            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+        }   
+    });
+</script>
+
+<script type="text/javascript">
+    $('#slipcedingbrokerupdate').change(function(){
+        var cedbrok = $(this).val();
+        var insuredid = $('#insuredIDtxtupdate').val();  
+        //alert(countryID);
+        if(cedbrok){
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-ceding-detail')}}?ceding_id="+cedbrok+"&insured_id="+insuredid,
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(res){  
+                console.log(res)      
+                if(res.type == 4){
+                    // alert(res.name);
+                    // $("#slipceding option[value='placeholder']").removeAttr("selected");
+                    // $("#slipceding option[value='placeholder']").prop("selected", false);
+                    $("#slipcedingupdate option").remove();
+
+
+                    $("#slipcedingupdate").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                    // $("#slipceding").append('<option value="'value.id'" selected>' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    // $.each(res,function(key,value){
+                    //     alert(value.name);
+                        
+                    // });
+
+                    var ceding_curr = $('#slipcedingupdate').val();
+                    var totalsum = $("#sliptotalsumupdate").val();
+                        if(res.amountlist > 0)
+                        {
+                            console.log('sum amount ' + res.sumamount)
+                            var sum = res.sumamount;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log('convert sum ' + real_sum)
+                            // var total_num = 0;
+                            // var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            $("#sliptotalsumupdate").val(real_sum);
+                            // // $("#msishareto").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            // // $("#feshareto").val(real_sum);
+                        }
+                        else
+                        {
+                            console.log('hasilnya ' + res)
+                            // var conv_total = totalsum.replace(/,/g, "");
+                            // console.log('conv total : ' + conv_total)
+                            // var real_total = parseInt(conv_total);
+                            // console.log('real total : ' + real_total)
+                            // var total =  parseFloat(real_total);
+                            // console.log(' total : ' + total)
+                            // var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            // $("#sliptotalsum").val(real_sum);
+                            // // $("#fesharefrom").val(real_sum);
+                            // $("#feshareto").val(real_sum);
+                        }
+                    
+                
+                }else{
+                    $("#slipcedingupdate option").remove();
+
+                    $.each(res,function(key,value){
+                        // alert(value.name);
+                    
+
+                    $("#slipcedingupdate").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                        // $("#slipceding").append('<option value="'value.id'">' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    });
+                }
+            }
+        });
+        }else{
+            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+        }   
+    });
+
+    $('#slipcedingupdate').change(function(){
+        var ceding = $(this).val();
+        var insuredid = $('#insuredIDtxtupdate').val();  
+        //alert(countryID);
+        if(ceding){
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(res){  
+                console.log(res)      
+                if(res.type == 4){
+                    // alert(res.name);
+                    // $("#slipceding option[value='placeholder']").removeAttr("selected");
+                    // $("#slipceding option[value='placeholder']").prop("selected", false);
+                    $("#slipcedingupdate option").remove();
+
+
+                    $("#slipcedingupdate").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                    // $("#slipceding").append('<option value="'value.id'" selected>' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    // $.each(res,function(key,value){
+                    //     alert(value.name);
+                        
+                    // });
+
+                    var ceding_curr = $('#slipcedingupdate').val();
+                    var totalsum = $("#sliptotalsumupdate").val();
+                        if(res.amountlist > 0)
+                        {
+                            console.log('sum amount ' + res.sumamount)
+                            var sum = res.sumamount;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log('convert sum ' + real_sum)
+                            // var total_num = 0;
+                            // var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            $("#sliptotalsumupdate").val(real_sum);
+                            // // $("#msishareto").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            // // $("#feshareto").val(real_sum);
+                        }
+                        else
+                        {
+                            console.log('hasilnya ' + res)
+                            // var conv_total = totalsum.replace(/,/g, "");
+                            // console.log('conv total : ' + conv_total)
+                            // var real_total = parseInt(conv_total);
+                            // console.log('real total : ' + real_total)
+                            // var total =  parseFloat(real_total);
+                            // console.log(' total : ' + total)
+                            // var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            // $("#sliptotalsum").val(real_sum);
+                            // // $("#fesharefrom").val(real_sum);
+                            // $("#feshareto").val(real_sum);
+                        }
+                    
+                
+                }else{
+                    $("#slipcedingupdate option").remove();
+
+                    $.each(res,function(key,value){
+                        // alert(value.name);
+                    
+
+                    $("#slipcedingupdate").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                        // $("#slipceding").append('<option value="'value.id'">' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    });
+                }
+            }
+        });
+        }else{
+            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+        }   
+    });
+</script>
+
+<script type="text/javascript">
+    $('#slipcedingbrokerendorsement').change(function(){
+        var cedbrok = $(this).val();
+        var insuredid = $('#insuredIDtxtendorsement').val();  
+        //alert(countryID);
+        if(cedbrok){
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-ceding-detail')}}?ceding_id="+cedbrok+"&insured_id="+insuredid,
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(res){  
+                console.log(res)      
+                if(res.type == 4){
+                    // alert(res.name);
+                    // $("#slipceding option[value='placeholder']").removeAttr("selected");
+                    // $("#slipceding option[value='placeholder']").prop("selected", false);
+                    $("#slipcedingendorsement option").remove();
+
+
+                    $("#slipcedingendorsement").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                    // $("#slipceding").append('<option value="'value.id'" selected>' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    // $.each(res,function(key,value){
+                    //     alert(value.name);
+                        
+                    // });
+
+                    var ceding_curr = $('#slipcedingendorsement').val();
+                    var totalsum = $("#sliptotalsumendorsement").val();
+                        if(res.amountlist > 0)
+                        {
+                            console.log('sum amount ' + res.sumamount)
+                            var sum = res.sumamount;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log('convert sum ' + real_sum)
+                            // var total_num = 0;
+                            // var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            $("#sliptotalsumendorsement").val(real_sum);
+                            // // $("#msishareto").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            // // $("#feshareto").val(real_sum);
+                        }
+                        else
+                        {
+                            console.log('hasilnya ' + res)
+                            // var conv_total = totalsum.replace(/,/g, "");
+                            // console.log('conv total : ' + conv_total)
+                            // var real_total = parseInt(conv_total);
+                            // console.log('real total : ' + real_total)
+                            // var total =  parseFloat(real_total);
+                            // console.log(' total : ' + total)
+                            // var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            // $("#sliptotalsum").val(real_sum);
+                            // // $("#fesharefrom").val(real_sum);
+                            // $("#feshareto").val(real_sum);
+                        }
+                    
+                
+                }else{
+                    $("#slipcedingendorsement option").remove();
+
+                    $.each(res,function(key,value){
+                        // alert(value.name);
+                    
+
+                    $("#slipcedingendorsement").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                        // $("#slipceding").append('<option value="'value.id'">' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    });
+                }
+            }
+        });
+        }else{
+            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+        }   
+    });
+
+    $('#slipcedingendorsement').change(function(){
+        var ceding = $(this).val();
+        var insuredid = $('#insuredIDtxtendorsement').val();  
+        //alert(countryID);
+        if(ceding){
+        $.ajax({
+            type:"GET",
+            url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(res){  
+                console.log(res)      
+                if(res.type == 4){
+                    // alert(res.name);
+                    // $("#slipceding option[value='placeholder']").removeAttr("selected");
+                    // $("#slipceding option[value='placeholder']").prop("selected", false);
+                    $("#slipcedingendorsement option").remove();
+
+
+                    $("#slipcedingendorsement").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                    // $("#slipceding").append('<option value="'value.id'" selected>' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    // $.each(res,function(key,value){
+                    //     alert(value.name);
+                        
+                    // });
+
+                    var ceding_curr = $('#slipcedingendorsement').val();
+                    var totalsum = $("#sliptotalsumendorsement").val();
+                        if(res.amountlist > 0)
+                        {
+                            console.log('sum amount ' + res.sumamount)
+                            var sum = res.sumamount;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log('convert sum ' + real_sum)
+                            // var total_num = 0;
+                            // var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            $("#sliptotalsumendorsement").val(real_sum);
+                            // // $("#msishareto").val(real_sum);
+                            // $("#fesharefrom").val(real_sum);
+                            // // $("#feshareto").val(real_sum);
+                        }
+                        else
+                        {
+                            console.log('hasilnya ' + res)
+                            // var conv_total = totalsum.replace(/,/g, "");
+                            // console.log('conv total : ' + conv_total)
+                            // var real_total = parseInt(conv_total);
+                            // console.log('real total : ' + real_total)
+                            // var total =  parseFloat(real_total);
+                            // console.log(' total : ' + total)
+                            // var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                            // var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // console.log(' sum : ' + sum)
+                            // console.log(' real sum : ' + real_sum)
+                            // $("#sliptotalsum").val(real_sum);
+                            // // $("#fesharefrom").val(real_sum);
+                            // $("#feshareto").val(real_sum);
+                        }
+                    
+                
+                }else{
+                    $("#slipcedingendorsement option").remove();
+
+                    $.each(res,function(key,value){
+                        // alert(value.name);
+                    
+
+                    $("#slipcedingendorsement").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                        // $("#slipceding").append('<option value="'value.id'">' + value.type + ' - ' + value.code + ' - ' + value.name + '</option>');
+                    });
+                }
+            }
+        });
+        }else{
+            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+        }   
+    });
+</script>
+
+
+
 
 <script>
 $("#autocomplete").autocomplete({
