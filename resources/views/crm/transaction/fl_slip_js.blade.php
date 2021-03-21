@@ -743,14 +743,24 @@
         $('#sliprpfrom').val($(this).val());
     });
 
+   
     $('#slipipto').change(function(){
         $('#sliprpto').val($(this).val());
-
+        
         var insurance_period_from2 = $('#slipipfrom').val();
         var insurance_period_to2 = $('#slipipto').val();
         var days=daysBetween(insurance_period_from2, insurance_period_to2);
-
-        document.getElementById("daytotal").innerHTML = "Total Days :"+days;
+        var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+        var constday = days.toString() + "/365";
+        console.log(insurance_period_from2)
+        console.log(insurance_period_to2)
+        console.log(days)
+        console.log(constday)
+        console.log(parseFloat(sum))
+        
+        $('#slipdaytotal').val(constday);
+        $('#sliptotalsumdate').val(parseFloat(sum));
+        // document.getElementById("daytotal").innerHTML = "Total Days :"+days;
     });
 
     $('#slipipfromupdate').change(function(){
@@ -763,8 +773,12 @@
         var insurance_period_from2 = $('#slipipfrom').val();
         var insurance_period_to2 = $('#slipipto').val();
         var days=daysBetween(insurance_period_from2, insurance_period_to2);
+        var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+        var constday = days.toString() + "/365";
+        $('sliptotalsumdateupdate').val(sum);
 
-        document.getElementById("daytotalupdate").innerHTML = "Total Days :"+days;
+        $('slipdaytotalupdate').val(constday);
+        // document.getElementById("daytotalupdate").innerHTML = "Total Days :"+days;
     });
 
     $('#slipipfromendorsement').change(function(){
@@ -777,9 +791,15 @@
         var insurance_period_from2 = $('#slipipfrom').val();
         var insurance_period_to2 = $('#slipipto').val();
         var days=daysBetween(insurance_period_from2, insurance_period_to2);
+        var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+        var constday = days.toString() + "/365";
 
-        document.getElementById("daytotalendorsement").innerHTML = "Total Days :"+days;
+        $('sliptotalsumdateendorsement').val(sum);
+
+        $('slipdaytotalendorsement').val(constday);
+        // document.getElementById("daytotalendorsement").innerHTML = "Total Days :"+days;
     });
+
 
 
 </script>
