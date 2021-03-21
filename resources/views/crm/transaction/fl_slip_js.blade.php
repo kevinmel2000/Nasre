@@ -3062,6 +3062,7 @@ $(document).ready(function() {
        var flprincipal = $('#flprincipal').val();
        var fluy = $('#fluy').val();
        
+       
        var conv_flssharefrom = flsharefrom.replace(/,/g, "");
        console.log(conv_flssharefrom)
        var real_flssharefrom = parseInt(conv_flssharefrom);

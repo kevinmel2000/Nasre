@@ -633,113 +633,104 @@
                                                 </div>  
                                             </div>
                                         </div>
+
+                                        
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Currency')}}</label>
-                                                        <select id="slipcurrency" name="slipcurrency" class="e1 form-control form-control-sm ">
-                                                            <option selected readonly  value='0'>{{__('Select Currency')}}</option>
-                                                            @foreach($currency as $crc)
-                                                                <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>    
-                                                    </div>
-                                                </div>
-                        
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('COB')}}</label>
-                                                        <select id="slipcob" name="slipcob" class="e1 form-control form-control-sm ">
-                                                            <option selected readonly  value='0'>{{__('COB list')}}</option>
-                                                            @foreach($cob as $boc)
-                                                                <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>    
-                                                    </div>
-                                                </div>
-                        
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('KOC')}}</label>
-                                                        <select id="slipkoc" name="slipkoc" class="e1 form-control form-control-sm ">
-                                                            <option selected readonly  value='0'>{{__('KOC list')}}</option>
-                                                            @foreach($koc as $cok)
-                                                                <option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>    
-                                                    </div>
-                                                </div>
-                        
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Occupacy')}}</label>
-                                                        <select name="slipoccupacy" class="e1 form-control form-control-sm ">
-                                                            <option selected readonly>{{__('Occupation list')}}</option>
-                                                            @foreach($ocp as $ocpy)
-                                                                <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>    
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Building Const')}}</label>
-                                                        <select id="slipbld_const" name="slipbld_const" class="e1 form-control form-control-sm ">
-                                                            <option selected readonly  value='0'>{{__('Building Const list')}}</option>
-                                                            <option value="Building 1">Building 1</option>
-                                                            <option value="Building 2">Building 2</option>
-                                                            <option value="Building 3">Building 3</option>
-                                                            
-                                                        </select>
-                                                    </div>    
-                                                    </div>
-                                                </div>
-
-                                            </div>
                                                     <div class="col-md-6">
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <div class="card">
-                                                                    <div class="card-header bg-gray">
-                                                                        {{__('Reference Number')}}
-                                                                    </div>
-                                                                    <div class="card-body bg-light-gray ">
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                <label for="">{{__('Slip No.')}}</label>
-                                                                                <input type="text" id="slipno" name="slipno" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                <label for="">{{__('CN/DN')}}</label>
-                                                                                <input type="text" id="slipcndn" name="slipcndn" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                <label for="">{{__('Policy No')}}</label>
-                                                                                <input type="text" id="slippolicy_no"  name="slippolicy_no" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
-                                                                            </div>
-                                                                        </div>
-                                                                        
-                                                                    </div>
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Currency')}}</label>
+                                                                <select id="slipcurrency" name="slipcurrency" class="e1 form-control form-control-sm ">
+                                                                    <option selected readonly value='0'>{{__('Select Currency')}}</option>
+                                                                    @foreach($currency as $crc)
+                                                                        <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>    
+                                                            </div>
+                                                        </div>
+                                
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('COB')}}</label>
+                                                                <select id="slipcob" name="slipcob" class="e1 form-control form-control-sm ">
+                                                                    <option selected readonly  value='0'>{{__('COB list')}}</option>
+                                                                    @foreach($cob as $boc)
+                                                                        <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>    
+                                                            </div>
+                                                        </div>
+                                
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('KOC')}}</label>
+                                                                <select id="slipkoc" name="slipkoc" class="e1 form-control form-control-sm ">
+                                                                    <option selected readonly  value='0'>{{__('KOC list')}}</option>
+                                                                    @foreach($koc as $cok)
+                                                                        <option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>    
+                                                            </div>
+                                                        </div>
+                                
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Occupacy')}}</label>
+                                                                <select id="slipoccupacy" name="slipoccupacy" class="e1 form-control form-control-sm ">
+                                                                    <option selected disabled>{{__('Occupation list')}}</option>
+                                                                    @foreach($ocp as $ocpy)
+                                                                        <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>    
+                                                            </div>
+                                                        </div>
+
+                                                        {{-- <div class="row">
+                                                            
+                                                        </div> --}}
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Building Const')}}</label>
+                                                            <select id="slipbld_const" name="slipbld_const" class="e1 form-control form-control-sm ">
+                                                                <option selected disabled>{{__('Building Const list')}}</option>
+                                                                <option value="Building 1">Building 1</option>
+                                                                <option value="Building 2">Building 2</option>
+                                                                <option value="Building 3">Building 3</option>
+                                                            
+                                                            </select>
+                                                        </div>    
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="">{{__('Rate Upper Area')}}</label>
+                                                                    <input type="text" id="slipbcua" name="slipbcua" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="">{{__('Rate Lower Area')}}</label>
+                                                                    <input type="text" id="slipbcla" name="slipbcla" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                        </div>
+                                                </div>
+                                                
                                         
                                         <div class="row">
                                                 <div class="col-md-12">
