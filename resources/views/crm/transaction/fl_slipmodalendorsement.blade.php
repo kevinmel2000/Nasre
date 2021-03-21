@@ -141,15 +141,17 @@
                                                     </div>  
                                                 </div>
                                             </div>
+                                            
+                                            
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Currency')}}</label>
-                                                            <select id="slipcurrencyendorsement" name="slipcurrencyendorsement" class="e1 form-control form-control-sm ">
+                                                            <select id="slipcurrencyendorsement" disabled="true" name="slipcurrencyendorsement" class=" form-control form-control-sm ">
                                                                 @foreach($currency as $crc)
-                                                                    <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
+                                                                    <option value="{{ $crc->id }}" hidden="true">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
                                                                     
                                                                 @endforeach
                                                             </select>
@@ -161,10 +163,10 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('COB')}}</label>
-                                                            <select id="slipcobendorsement" name="slipcobendorsement" class="e1 form-control form-control-sm ">
+                                                            <select id="slipcobendorsement" name="slipcobendorsement" disabled="true" class=" form-control form-control-sm ">
                                                                 @foreach($cob as $boc)
                                                                     <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
-                                                                    
+                                                                   
                                                                 @endforeach
                                                             </select>
                                                         </div>    
@@ -175,7 +177,7 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('KOC')}}</label>
-                                                            <select id="slipkocendorsement" name="slipkocendorsement" class="e1 form-control form-control-sm ">
+                                                            <select id="slipkocendorsement" name="slipkocendorsement" disabled="true" class=" form-control form-control-sm ">
                                                                 @foreach($koc as $cok)
                                                                     <option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
                                                                     
@@ -189,59 +191,44 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Occupacy')}}</label>
-                                                            <select id="slipoccupacydetail" name="slipoccupacydetail" class="e1 form-control form-control-sm ">
+                                                            <select id="slipoccupacyendorsement" disabled="true" name="slipoccupacyendorsement"  class=" form-control form-control-sm ">
                                                                 @foreach($ocp as $ocpy)
                                                                     <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
-                                                                   
+                                                                  
                                                                 @endforeach
                                                             </select>
                                                         </div>    
                                                         </div>
                                                     </div>
-
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="">{{__('Building Const')}}</label>
-                                                            <select id="slipbld_constendorsement" name="slipbld_constendorsement" class="e1 form-control form-control-sm ">
-                                                                <option value="Building 1" >Building 1</option>
-                                                                <option value="Building 2" >Building 2</option>
-                                                                <option value="Building 3" >Building 3</option>
-                                                                
-                                                            </select>
-                                                        </div>    
-                                                        </div>
-                                                    </div>
-
                                                 </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Building Const')}}</label>
+                                                        <select id="slipbld_constendorsement" name="slipbld_constendorsement" disabled="true" class=" form-control form-control-sm ">
+                                                            <option  disabled>{{__('Building Const list')}}</option>
+                                                            <option value="Building 1">Building 1</option>
+                                                            <option value="Building 2">Building 2</option>
+                                                            <option value="Building 3">Building 3</option>
+                                                        
+                                                        </select>
+                                                    </div>    
+                                                </div>
+                                                
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="card">
-                                                                <div class="card-header bg-gray">
-                                                                    {{__('Reference Number')}}
-                                                                </div>
-                                                                <div class="card-body bg-light-gray ">
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-group">
-                                                                            <label for="">{{__('Slip No.')}}</label>
-                                                                            <input type="text" id="slipnoendorsement"  value=""  name="slipnoendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-group">
-                                                                            <label for="">{{__('CN/DN')}}</label>
-                                                                            <input type="text" id="slipcndnendorsement" name="slipcndnendorsement" value=""  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-group">
-                                                                            <label for="">{{__('Policy No')}}</label>
-                                                                            <input type="text" id="slippolicy_noendorsement" value="" name="slippolicy_noendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Rate Upper Area')}}</label>
+                                                                <input type="text" id="slipbcuaendorsement" name="slipbcuaendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Rate Lower Area')}}</label>
+                                                                <input type="text" id="slipbclaendorsement" name="slipbclaendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -589,15 +576,24 @@
                                                     </div>
                                                 </div>
 
-                                                    <div class="col-md-4">
-                                                        <div class="row">
-                                                            <div class="col-md-5">
-                                                                <div class="form-group" id="daytotalendorsement">                         
-                                                                Total Days :0
-                                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            {{-- <div class="form-group" id="daytotal">                         
+                                                            Total Days :0
+                                                            
+                                                            </div> --}}
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Total Days')}}</label>
+                                                                <input type="text"  id="slipdaytotalendorsement" name="slipdaytotalendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Total Summary Insurance Periode')}}</label>
+                                                                <input type="text"  id="sliptotalsumdateendorsement" name="sliptotalsumdateendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
                                             </div>
                                             
 

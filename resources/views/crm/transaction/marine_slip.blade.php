@@ -828,7 +828,8 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                
+                                                        
+
                                                         <div class="row">
                                                             <div class="col-md-8">
                                                                 <div class="row">
@@ -865,6 +866,7 @@
                                                                             <label>{{__('Reinsurance Periode')}}:</label>
                                                                                 {{-- <div class="input-group date" id="daterefrom" data-target-input="nearest"> --}}
                                                                                         <input type="date" class="form-control form-control-sm datetimepicker-input" data-target="#date" id="sliprpfrom" name="sliprpfrom">
+                                                                                        
                                                                                         {{-- <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
                                                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                                         </div>
@@ -888,8 +890,28 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        {{-- <div class="form-group" id="daytotal">                         
+                                                                        Total Days :0
+                                                                        
+                                                                        </div> --}}
+                                                                        <div class="form-group">
+                                                                            <label for="">{{__('Total Days')}}</label>
+                                                                            <input type="text"  id="slipdaytotal" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="">{{__('Total Summary Insurance Periode')}}</label>
+                                                                            <input type="text"  id="sliptotalsumdate" name="sliptotalsumdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
-                                                        
+                                                                
                                                         <div class="row d-flex justify-content-start">
                                                             <i class="fa fa-info-circle" style="color: grey;" id="labelnp" aria-hidden="true"> non proportional panel</i>
                                                         </div>
