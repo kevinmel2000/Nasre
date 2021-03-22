@@ -487,6 +487,7 @@
                                             <button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">{{__('Endorsement')}}</button>
                                         </a> --}}
 
+
                                         <button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" onclick="addendorsement({{  @$slipdatatadetail->id }})">{{__('Endorsement')}}</button>
 
                                     @else
@@ -498,11 +499,13 @@
                                             <button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">{{__('Endorsement')}}</button>
                                         </a> --}}
 
+
                                         <button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" onclick="addendorsement({{  @$slipdatatadetail->id }})">{{__('Endorsement')}}</button>
 
                                     @endif
                                 </td>
                                 </tr>
+
 
                                 @endforeach
 
