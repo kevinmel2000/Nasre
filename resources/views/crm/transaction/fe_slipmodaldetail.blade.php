@@ -251,7 +251,10 @@
                                                     <div class="form-group">
                                                         <label>{{__('Attachment')}} </label>
                                                         <div class="input-group">
-                                                    
+                                                            <ul id="aidlistdetail">
+
+
+                                                            </ul>
                                                         </div>
                                                     </div>
                                                 </div>

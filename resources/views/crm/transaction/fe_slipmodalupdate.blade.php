@@ -41,7 +41,7 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
-                                                            <input type="hidden" name="insuredIDtxtupdate" id="token" value="{{ csrf_token() }}">
+                                                            <input type="hidden" name="insuredIDtxtupdate" id="insuredIDtxtupdate" value="">
                                                             <label for="">{{__('Number')}} </label>
                                                             <input type="text" id="slipnumberupdate" name="slipnumberupdate" class="form-control form-control-sm" readonly="readonly" required/>
                                                             </div>
@@ -70,10 +70,6 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            {{-- <div class="form-group">
-                                                                <label for="">{{__('UY')}}</label>
-                                                                <input type="number" id="slipuyupdate" name="slipuyupdate" value="" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-4" required/>
-                                                            </div> --}}
                                                             <div class="form-group">
                                                                 <label for="">{{__('Transfer Date')}}</label>
                                                                 <input type="date" id="sliptdupdate" name="sliptdupdate" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-50" readonly="readonly"/>
@@ -254,10 +250,14 @@
                                                     <div class="form-group">
                                                         <label>{{__('Attachment')}} </label>
                                                         <div class="input-group">
-                                                             <div class="input-group control-group increment2" >
-                                                            <input type="file" name="filesupdate[]" id="attachmentupdate" class="form-control" multiple>
+                                                            <div class="input-group control-group increment2" >
+                                                                <input type="file" name="filesupdate[]" id="attachmentupdate" class="form-control" multiple>
+                                                            </div>
+                                                            <ul id="aidlistupdate">
+
+
+                                                            </ul>
                                                         </div>
-                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
