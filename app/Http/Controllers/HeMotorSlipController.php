@@ -1137,213 +1137,273 @@ class HeMotorSlipController extends Controller
 
     public function storeendorsementhemslip(Request $request,$code_ms)
     {
+       
+        
         $validator = $request->validate([
-            'slipnumber'=>'required'
+            'slipid'=>'required'
         ]);
+        
 
-              
         if($validator)
         {
             $user = Auth::user();
             
-            $slipdata= SlipTable::where('number','=',$request->prevslipnumber)->first();
+            $slipdata= SlipTable::where('id','=',$request->slipid)->first();
+            $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->get();
+            $insureddata = Insured::where('number','=',$slipdata->insured_id)->first();
 
-            $interestlist= InterestInsuredTemp::where('slip_id','=',$request->prevslipnumber)->orderby('id','desc')->get();
-            $installmentlist= InstallmentTemp::where('slip_id','=',$request->prevslipnumber)->orderby('id','desc')->get();
-            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$request->prevslipnumber)->orderby('id','desc')->get();
-            $deductiblelist= DeductibleTemp::where('slip_id','=',$request->prevslipnumber)->orderby('id','desc')->get();
-            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$request->prevslipnumber)->orderby('id','desc')->get();             
+            $id_ed = $slipdata->id + 1;
 
+            $slipdatalast= SlipTable::where('id','=',$id_ed)->first();
+            
+            // $interestlist= InterestInsuredTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
+            $installmentlist= InstallmentTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
+            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
+            $deductiblelist= DeductibleTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
+            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
+            $locationlist= TransLocationTemp::where('insured_id','=',$slipdata->insured_id)->orderby('id','desc')->get();
+            $attachmentlist=SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
+
+            
 
             if($slipdata==null)
             {
-                
                 $notification = array(
-                    'message' => 'Hem & Motor Slip added fail!',
+                    'message' => 'Fire & Engginering Slip Endorsement Fail!',
                     'alert-type' => 'danger'
                 );
             }
             else
             {
-               $currdate = date("Y-m-d");
-
-                $slipdataid=$slipdata->id;
-                $slipdataup = SlipTable::findOrFail($slipdataid);
-                
-                $slipdataup->number=$request->slipnumber;
-                $slipdataup->username=Auth::user()->name;
-                $slipdataup->insured_id=$request->code_ms;
-                $slipdataup->prod_year=$currdate;
-                $slipdataup->uy=$request->slipuy;
-                $slipdataup->status=$request->slipstatus;
-                $slipdataup->endorsment=$request->sliped;
-                $slipdataup->selisih=$request->slipsls;
-                $slipdataup->source=$request->slipcedingbroker;
-                $slipdataup->source_2=$request->slipceding;
-                $slipdataup->currency=$request->slipcurrency;
-                $slipdataup->cob=$request->slipcob;
-                $slipdataup->koc=$request->slipkoc;
-                $slipdataup->occupacy=$request->slipoccupacy;
-                $slipdataup->build_const=$request->slipbld_const;
-                $slipdataup->slip_no=$request->slipno; 
-                $slipdataup->cn_dn=$request->slipcndn; 
-                $slipdataup->policy_no=$request->slippolicy_no; 
-                $slipdataup->attacment_file=''; 
-                $slipdataup->interest_insured=$interestlist->toJSon();
-                $slipdataup->total_sum_insured=$request->sliptotalsum; 
-                $slipdataup->insured_type=$request->sliptype; 
-                $slipdataup->insured_pct=$request->slippct; 
-                $slipdataup->total_sum_pct=$request->sliptotalsumpct; 
-                $slipdataup->deductible_panel=$deductiblelist->toJson(); 
-                $slipdataup->extend_coverage=$extendcoveragelist->toJson();  
-                $slipdataup->insurance_period_from=$request->slipipfrom;  
-                $slipdataup->insurance_period_to=$request->slipipto;  
-                $slipdataup->reinsurance_period_from=$request->sliprpfrom;  
-                $slipdataup->reinsurance_period_to=$request->sliprpto;
-                $slipdataup->proportional=$request->slipproportional;
-                $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
-                $slipdataup->rate=$request->sliprate;  
-                $slipdataup->v_broker=$request->slipvbroker;
-                $slipdataup->share=$request->slipshare;
-                $slipdataup->sum_share=$request->slipsumshare;
-                $slipdataup->basic_premium=$request->slipbasicpremium;
-                $slipdataup->commission=$request->slipcommission; 
-                $slipdataup->grossprm_to_nr=$request->slipgrossprmtonr; 
-                $slipdataup->netprm_to_nr=$request->slipnetprmtonr; 
-                $slipdataup->sum_commission=$request->slipsumcommission;  
-                $slipdataup->installment_panel=$installmentlist->toJson();   
-                $slipdataup->retrocession_panel=$retrocessionlist->toJson(); 
-                $slipdataup->retro_backup=$request->sliprb;
-                $slipdataup->own_retention=$request->slipor;
-                $slipdataup->prev_endorsement=$request->prevslipnumber;
-                $slipdataup->wpc=$request->wpc;
-
-                if($slipdataup->slip_idendorsementcount==NULL || $slipdataup->slip_idendorsementcount=="")
+                if($slipdatalast == null)
                 {
-                    $countendorsement=1;
-                }
-                else 
-                {
-                    $countendorsement=$slipdataup->slip_idendorsementcount+1;
-                }
+                    foreach($locationlist as $ll){
+                        $locationlistup = TransLocationTemp::create([
+                            'insured_id'=>$ll->insured_id,
+                            'lookup_location_id'=>$ll->lookup_location_id,
+                            'count_endorsement' => ($ll->count_endorsement + 1)
+                        ]);
 
-                $slipdataup->slip_idendorsementcount=$countendorsement;
+                        $lookuplocationlist = DB::table('trans_location_temp')
+                                                ->join('fe_lookup_location', 'fe_lookup_location.id', '=', 'trans_location_temp.lookup_location_id')
+                                                ->select('trans_location_temp.*', 'fe_lookup_location.address','fe_lookup_location.loc_code','fe_lookup_location.latitude','fe_lookup_location.longtitude','fe_lookup_location.postal_code')
+                                                ->where('trans_location_temp.id',$ll->id)
+                                                ->get();
+                        
+                        $risklocationlist= RiskLocationDetail::where('translocation_id','=',$ll->id)->orderby('id','desc')->get();
+                        foreach($risklocationlist as $rl){
+                            $risklocationlistup = RiskLocationDetail::create([
+                                'ceding_id'=>$rl->ceding_id,
+                                'translocation_id'=>$locationlistup->id,
+                                'interest_id'=>$rl->interest_id,
+                                'cnno'=>$rl->cnno,
+                                'certno'=>$rl->certno,
+                                'refno'=>$rl->refno,
+                                'amountlocation'=>$rl->amountlocation,
+                                'count_endorsement' => ($rl->count_endorsement + 1)
+                            ]);
 
-                $slipdataup->sum_own_retention=$request->slipsumor;
-                
-                $slipdataup->save();
+                            $rldata =  RiskLocationDetail::findOrFail($rl->id);
+                            $rldata->amountlocation = ($rl->amountlocation * (-1));
+                            $rldata->save();
 
-                InterestInsuredTemp::where('slip_id','=',$request->prevslipnumber)->update(array('slip_id' => $request->slipnumber));
-                InstallmentTemp::where('slip_id','=',$request->prevslipnumber)->update(array('slip_id' => $request->slipnumber));
-                ExtendCoverageTemp::where('slip_id','=',$request->prevslipnumber)->update(array('slip_id' => $request->slipnumber));
-                DeductibleTemp::where('slip_id','=',$request->prevslipnumber)->update(array('slip_id' => $request->slipnumber));
-                RetrocessionTemp::where('slip_id','=',$request->prevslipnumber)->update(array('slip_id' => $request->slipnumber));          
+                            $risklocationlistdetail = DB::table('risk_location_detail')
+                                                    ->join('interest_insured', 'interest_insured.id', '=', 'risk_location_detail.interest_id')
+                                                    ->join('ceding_broker', 'ceding_broker.id', '=', 'risk_location_detail.ceding_id')
+                                                    ->select('risk_location_detail.*', 'interest_insured.description','ceding_broker.name')
+                                                    ->where('risk_location_detail.id',$rl->id)
+                                                    ->get();
+                        }
+
+                    }
+
+                    foreach($deductiblelist as $dt){
+                        $dtlistup = DeductibleTemp::create([
+                            'deductibletype_id'=>$dt->deductibletype_id,
+                            'currency_id'=>$dt->currency_id,
+                            'min_claimamount'=>$dt->min_claimamount,
+                            'amount'=>$dt->amount,
+                            'slip_id'=>$dt->slip_id,
+                            'count_endorsement' => ($dt->count_endorsement + 1)
+                        ]);
+
+                        $dtdata =  DeductibleTemp::findOrFail($dt->id);
+                        $dtdata->min_claimamount = ($dt->min_claimamount * (-1));
+                        $dtdata->amount = ($dt->amount * (-1));
+                        $dtdata->save();
+                    }
+
+                    foreach($extendcoveragelist as $ect){
+                        $ectlistup = ExtendCoverageTemp::create([
+                            'extendcoverage_id'=>$ect->extendcoverage_id,
+                            'percentage'=>$ect->percentage,
+                            'amount'=>$ect->amount,
+                            'slip_id'=>$ect->slip_id,
+                            'count_endorsement' => ($ect->count_endorsement + 1)
+                        ]);
+
+                        $ectdata =  ExtendCoverageTemp::findOrFail($ect->id);
+                        $ectdata->amount = ($ect->amount * (-1));
+                        $ectdata->save();
+                    }
+
+                    foreach($installmentlist as $ipt){
+                        $iptlistup = InstallmentTemp::create([
+                            'installment_date'=>$ipt->installment_date,
+                            'percentage'=>$ipt->percentage,
+                            'amount'=>$ipt->amount,
+                            'slip_id'=>$ipt->slip_id,
+                            'count_endorsement' => ($ect->count_endorsement + 1)
+                        ]);
+
+                        $iptdata =  InstallmentTemp::findOrFail($ipt->id);
+                        $iptdata->amount = ($ipt->amount * (-1));
+                        $iptdata->save();
+                    }
+
+                    foreach($retrocessionlist as $rct){
+                        $rctlistup = RetrocessionTemp::create([
+                            'type'=>$rct->type,
+                            'contract'=>$rct->contract,
+                            'percentage'=>$rct->percentage,
+                            'amount'=>$rct->amount,
+                            'slip_id'=>$rct->slip_id,
+                            'count_endorsement' => ($ect->count_endorsement + 1)
+                        ]);
+
+                        $rctdata =  RetrocessionTemp::findOrFail($rct->id);
+                        $rctdata->amount = ($rct->amount * (-1));
+                        $rctdata->save();
+                    }
+
+                    foreach($slipdatalist as $slt)
+                    {
+                        $slipdataup = SlipTable::create([
+                            'number'=>$slt->number,
+                            'username'=>$slt->username,
+                            'insured_id'=>$slt->insured_id,
+                            'slip_type'=>'fe',
+                            'prod_year' => $slt->prod_year,
+                            'date_transfer'=>$slt->slipdatetransfer,
+                            'status'=>$slt->status,
+                            'endorsment'=>($slt->endorsement + 1),
+                            'selisih'=>'true',
+                            'source'=>$slt->source,
+                            'source_2'=>$slt->source_2,
+                            'currency'=>$slt->currency,
+                            'cob'=>$slt->cob,
+                            'koc'=>$slt->koc,
+                            'occupacy'=>$slt->occupacy,
+                            'build_const'=>$slt->build_const,
+                            'attacment_file'=>$slt->toJson(),
+                            'total_sum_insured'=>$slt->total_sum_insured,
+                            'insured_type'=>$slt->insured_type,
+                            'insured_pct'=>$slt->insured_pct,
+                            'total_sum_pct'=>$slt->total_sum_pct,
+                            'deductible_panel'=>$dtlistup->toJson(),
+                            'extend_coverage'=>$ectlistup->toJson(),
+                            'insurance_period_from'=>$slt->insurance_period_from,
+                            'insurance_period_to'=>$slt->insurance_period_to,
+                            'reinsurance_period_from'=>$slt->reinsurance_period_from,
+                            'reinsurance_period_to'=>$slt->reinsurance_period_to,
+                            'proportional'=>$slt->proportional,
+                            'layer_non_proportional'=>$slt->layer_non_proportional,
+                            'rate'=>$slt->rate,
+                            'v_broker'=>$slt->v_broker,
+                            'share'=>$slt->share,
+                            'sum_share'=>$slt->sum_share,
+                            'basic_premium'=>$slt->basic_premium,
+                            'commission'=>$slt->commission,
+                            'grossprm_to_nr'=>$slt->grossprm_to_nr,
+                            'netprm_to_nr'=>$slt->netprm_to_nr,
+                            'sum_commission'=>$slt->sum_commission,
+                            'installment_panel'=>$iptlistup->toJson(),
+                            'retrocession_panel'=>$rctlistup->toJson(),
+                            'retro_backup'=>$slt->retro_backup,
+                            'own_retention'=>$slt->own_retention,
+                            'sum_own_retention'=>$slt->sum_own_retention,
+                            'wpc'=>$slt->wpc
+        
+                        ]);
+                    }
+
+                    
+
+                    $insureddataup = Insured::create([
+                        'number'=>$request->fesnumber,
+                        'slip_type'=>'fe',
+                        'insured_prefix' => $request->fesinsured,
+                        'insured_name'=>$request->fessuggestinsured,
+                        'insured_suffix'=>$request->fessuffix,
+                        'share'=>$request->fesshare,
+                        'share_from'=>$request->fessharefrom,
+                        'share_to'=>$request->fesshareto,
+                        'coincurance'=>$request->fescoincurance,
+                        'location'=>$locationlistup->toJson(),
+                        'uy'=>$request->feuy,
+                        'count_endorsement' => ($insureddata->count_endorsement + 1)
+                    ]);
     
+                    $notification = array(
+                        'message' => 'Fire & Enginering Slip added Endorsement successfully!',
+                        'alert-type' => 'success'
+                    );
 
-                $notification = array(
-                    'message' => 'Hem & Motor Slip Update successfully!',
-                    'alert-type' => 'success'
-                );
-            }
+                    
 
-           
-            StatusLog::create([
-                'status'=>$request->slipstatus,
-                'user'=>Auth::user()->name,
-                'insured_id'=>$request->code_ms,
-                'slip_id'=>$request->slipnumber,
-            ]);
+                    $msdata = SlipTable::findOrFail($slipdata->id);
+                    $msdata->total_sum_insured=($slipdata->total_sum_insured * (-1));
+                    $msdata->total_sum_pct=($slipdata->total_sum_pct * (-1));
+                    $msdata->sum_share=($slipdata->sum_share * (-1));
+                    $msdata->basic_premium=($slipdata->basic_premium * (-1));
+                    $msdata->commission=($slipdata->commission * (-1));
+                    $msdata->grossprm_to_nr=($slipdata->grossprm_to_nr * (-1));
+                    $msdata->netprm_to_nr=($slipdata->netprm_to_nr * (-1));
+                    $msdata->sum_commission=($slipdata->sum_commission * (-1));
+                    $msdata->wpc=($slipdata->wpc * (-1)); 
+                    $msdata->sum_own_retention=($slipdata->sum_own_retention * (-1));
+                    $msdata->selisih="false"; 
+                    $msdata->save();
 
-            $slip = SlipTable::orderby('id','asc')->get();            
-            $sliplastid = count($slip);
 
-            $mydate = date("Y").date("m").date("d");
-            $userid = Auth::user()->id;
-            if($sliplastid != null){
-                if($sliplastid < 9)
-                {
-                    $code_sl = "HEM".  $mydate . "0000" . strval($sliplastid + 1);
-                }   
-                elseif($sliplastid > 8 && $sliplastid < 99)
-                {
-                    $code_sl = "HEM".  $mydate . "000" . strval($sliplastid + 1);
-                }
-                elseif($sliplastid > 98 && $sliplastid < 999)
-                {
-                    $code_sl = "HEM".  $mydate . "00" . strval($sliplastid + 1);
-                }
-                elseif($sliplastid > 998 && $sliplastid < 9999)
-                {
-                    $code_sl = "HEM".  $mydate . "0" . strval($sliplastid + 1);
-                }
-                elseif($sliplastid > 9998 && $sliplastid < 99999)
-                {
-                    $code_sl = "HEM".  $mydate . strval($sliplastid + 1);
-                }
+                    $insdata =  Insured::findOrFail($insureddata->id);
+                    $insdata->share_from = ($insureddata->share_from * (-1));
+                    $insdata->share_to = ($insureddata->share_to * (-1));
+                    $insdata->save();
 
-                
-            }
-            else{
-                $code_sl = "HEM".  $mydate . "0000" . strval(1);
-            }
+                    $cedingbroker = CedingBroker::where('id',$slipdataup->source)->first();
+                    $ceding = CedingBroker::where('id',$slipdataup->source_2)->first();
 
-            $kondisi=false;
-            $i=1;
-            while($kondisi==false)
-            {
-                $slipdatatest=SlipTable::where('number',$code_sl)->first();
-                if(empty($slipdatatest) || $slipdatatest==NULL)
-                {
-                    $kondisi=true;
+                    return response()->json(
+                        [
+                            'slip_data' => $slipdataup->toJson(),
+                            'insured_data' => $insureddataup->toJson(),
+                            'location_data' => $lookuplocationlist->toJson(),
+                            'risklocation_data' => $risklocationlistdetail->toJson(),
+                        ]
+                    );
+
                 }
                 else
                 {
-                    if($sliplastid < 9)
-                    {
-                        $code_sl = "HEM".  $mydate . "0000" . strval($sliplastid + $i);
-                    }   
-                    elseif($sliplastid > 8 && $sliplastid < 99)
-                    {
-                        $code_sl = "HEM".  $mydate . "000" . strval($sliplastid + $i);
-                    }
-                    elseif($sliplastid > 98 && $sliplastid < 999)
-                    {
-                        $code_sl = "HEM".  $mydate . "00" . strval($sliplastid + $i);
-                    }
-                    elseif($sliplastid > 998 && $sliplastid < 9999)
-                    {
-                        $code_sl = "HEM".  $mydate . "0" . strval($sliplastid + $i);
-                    }
-                    elseif($sliplastid > 9998 && $sliplastid < 99999)
-                    {
-                        $code_sl = "HEM".  $mydate . strval($sliplastid + $i);
-                    }
+                    $notification = array(
+                        'message' => 'Fire & Enginering Slip added Endorsement Failed! data already endorsed!',
+                        'alert-type' => 'success'
+                    );
+
+                    return response()->json(
+                        $notification
+                    );
+
                 }
-
-                $i++;
             }
-
-            return response()->json(
-                [
-                    'id' => $slipdataup->id,
-                    'number' => $slipdataup->number,
-                    'slipuy' => $slipdataup->uy,
-                    'code_sl'=> $code_sl,
-                    'slipstatus' => $slipdataup->status
-                ]
-            );
-
-
-            //return back()->with($notification);
-            //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
-            //return redirect()->route('liniusaha.index');
         
         }
         else
         {
 
             $notification = array(
-                'message' => 'Hem & Motor Slip added Failed!',
+                'message' => 'Fire & Engginering Slip added Failed!',
                 'alert-type' => 'success'
             );
 

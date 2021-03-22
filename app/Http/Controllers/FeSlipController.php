@@ -1793,7 +1793,8 @@ class FeSlipController extends Controller
                     );
 
                 }
-                else{
+                else
+                {
                     $notification = array(
                         'message' => 'Fire & Enginering Slip added Endorsement Failed! data already endorsed!',
                         'alert-type' => 'success'
