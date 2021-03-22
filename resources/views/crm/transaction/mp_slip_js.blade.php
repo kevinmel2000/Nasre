@@ -2138,6 +2138,7 @@ $.ajax({
     });
 
 
+    
     function deletelocationriskdetail(id){
         var token = $('input[name=_token]').val();
 
@@ -2166,15 +2167,19 @@ $.ajax({
                 //$('#cid'+id).remove();
                 if(response.cedinglocation == ceding_curr){
                     var total =  parseFloat($("#sliptotalsum").val());
-                    console.log(total)
-                    var conv_total = total.replace(/,/g, "");
-                    console.log(conv_total)
-                    var real_total = parseInt(conv_total);
-                    console.log(real_total)
-                    var sum = isNaN(real_total - parseFloat(response.amountlocation)) ? 0 :(real_total - parseFloat(response.amountlocation)) ;
-                    console.log(sum)
-                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    $("#sliptotalsum").val(real_sum);
+                    
+                    if(total)
+                    {
+                        console.log(total)
+                        var conv_total = total.replace(/,/g, "");
+                        console.log(conv_total)
+                        var real_total = parseInt(conv_total);
+                        console.log(real_total)
+                        var sum = isNaN(real_total - parseFloat(response.amountlocation)) ? 0 :(real_total - parseFloat(response.amountlocation)) ;
+                        console.log(sum)
+                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $("#sliptotalsum").val(real_sum);
+                    }
                     // $("#feshareto").val(real_sum);
                 }else{
                     swal("Warning!", "TSI not decrease because this ceding is not same with ceding in slip", "Tsi not decrease");
