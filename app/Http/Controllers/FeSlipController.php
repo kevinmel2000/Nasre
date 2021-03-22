@@ -1509,7 +1509,8 @@ class FeSlipController extends Controller
             $old_sumshare = $request->slipoldsumshare;
             $new_sumshare = $request->slipsumshare;
 
-            if($new_sumshare != $old_sumshare){
+            if($new_sumshare != $old_sumshare)
+            {
                 $msdata = Insured::findOrFail($insdata->id);
 
                 $sumshare = ($msdata->share_from - $old_sumshare) + $new_sumshare;
@@ -1585,6 +1586,7 @@ class FeSlipController extends Controller
             {
                 if($slipdatalast == null)
                 {
+
                     $slipdataup = SlipTable::create([
                         'number'=>$slipdata->number,
                         'username'=>Auth::user()->name,
@@ -1634,6 +1636,7 @@ class FeSlipController extends Controller
     
                     ]);
 
+                    
                     $insureddataup = Insured::create([
                         'number'=>$request->fesnumber,
                         'slip_type'=>'fe',
@@ -1649,13 +1652,15 @@ class FeSlipController extends Controller
                         'count_endorsement' => ($insureddata->count_endorsement + 1)
                     ]);
     
+                    
+
                     $notification = array(
                         'message' => 'Fire & Enginering Slip added Endorsement successfully!',
                         'alert-type' => 'success'
                     );
 
-                    
 
+                    
                     $msdata = SlipTable::findOrFail($slipdata->id);
                     $msdata->total_sum_insured=($slipdata->total_sum_insured * (-1));
                     $msdata->total_sum_pct=($slipdata->total_sum_pct * (-1));
@@ -1670,14 +1675,24 @@ class FeSlipController extends Controller
                     $msdata->selisih="false"; 
                     $msdata->save();
 
+                    
 
                     $insdata =  Insured::findOrFail($insureddata->id);
                     $insdata->share_from = ($insureddata->share_from * (-1));
                     $insdata->share_to = ($insureddata->share_to * (-1));
                     $insdata->save();
 
+
                     $cedingbroker = CedingBroker::where('id',$slipdataup->source)->first();
                     $ceding = CedingBroker::where('id',$slipdataup->source_2)->first();
+
+
+                    StatusLog::create([
+                        'status'=>$request->slipstatus,
+                        'user'=>Auth::user()->name,
+                        'insured_id'=>$request->code_ms,
+                        'slip_id'=>$request->slipnumber,
+                    ]);
 
                     return response()->json(
                         [
@@ -1691,7 +1706,9 @@ class FeSlipController extends Controller
                     );
 
                 }
-                else{
+                else
+                {
+
                     $currdate = date("Y-m-d");
 
                     $slipdataid=$slipdata->id;
@@ -1752,6 +1769,8 @@ class FeSlipController extends Controller
                     $slipdataup->sum_own_retention=$request->slipsumor;
 
                     $slipdataup->save();
+
+                    
 
                     InterestInsuredTemp::where('slip_id','=',$request->prevslipnumber)->update(array('slip_id' => $request->slipnumber));
                     InstallmentTemp::where('slip_id','=',$request->prevslipnumber)->update(array('slip_id' => $request->slipnumber));

@@ -169,7 +169,7 @@
                                                                                             @foreach($slt->risklocationdetail as $detaillocrisk)
 
                                                                                                 <tr id="riskdetailsid{{ $detaillocrisk->id }}">
-                                                                                                <td>{{ $detaillocrisk->interestdetail->code }} - {{ $detaillocrisk->interestdetail->description }}</td>
+                                                                                                <td>{{ @$detaillocrisk->interestdetail->code }} - {{ @$detaillocrisk->interestdetail->description }}</td>
                                                                                                 <td>{{ $detaillocrisk->cedingdetail->name }}</td>
                                                                                                 <td>{{ $detaillocrisk->cnno }}</td>
                                                                                                 <td>{{ $detaillocrisk->certno }}</td>
