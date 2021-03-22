@@ -43,7 +43,7 @@
                       <th>{{__('Our Share')}}</th>
                       <th>{{__('National Reinsurance')}}</th>
                       <th>{{__('Total Sum Insurance')}}</th>
-                      <th>{{__('Coincurance')}}</th>
+                      <th>{{__('Endorsement Count')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
@@ -56,7 +56,7 @@
                               <td>{{@$insureddata->share }}</td>
                               <td >@currency(@$insureddata->share_from)</td>
                               <td >@currency(@$insureddata->share_to)</td>
-                              <td>{{@$insureddata->coincurance}}</td>
+                              <td>{{@$insureddata->count_endorsement}}</td>
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$insureddata->created_at}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>

@@ -601,26 +601,6 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         
-                                                        {{-- <!--div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <div class="row">
-                                                                        <div class="col-md-4">
-                                                                            <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                            <label for="" class="d-flex justify-content-center">{{__('Endorsement / Selisih')}}</label>
-                                                                        </div>
-                                                                        <div class="col-md-4">
-                                                                            <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                            <input type="text" id="sliped"  name="sliped" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"/>
-                                                                        </div>
-                                                                        <div class="col-md-4">
-                                                                            <label for="" class="d-flex justify-content-center" style="opacity: 0;">{{__('Endorsement / Selisih')}}</label>
-                                                                            <input type="text" id="slipsls" name="slipsls" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"/>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div--> --}}
 
                                                         <div class="row">
                                                             <div class="col-md-12 com-sm-12 mt-3">
@@ -643,7 +623,7 @@
                                                                 </tbody>
                                                                 
                                                                 </table>
-                                                                <i class="fa fa-info-circle" style="color: grey;" hidden="true" aria-hidden="true"> Data is Transferred!</i>
+                                                                <i class="fa fa-info-circle" style="color: grey;"  aria-hidden="true"> Data is Transferred!</i>
                                                             </div>
                                                         </div>
                                                     </div>

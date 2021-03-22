@@ -37,13 +37,20 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                <div class="row">
-                                                        <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
-                                                            <input type="hidden" name="slipidendorsement" id="slipidendorsement" >
-                                                            <label for="">{{__('Number')}} </label>
-                                                            <input type="text" id="slipnumberendorsement" name="slipnumberendorsement" class="form-control form-control-sm" value="" readonly="readonly" required/>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <div class="form-group">
+                                                                <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
+                                                                <input type="hidden" name="slipidendorsement" id="slipidendorsement" >
+                                                                <input type="hidden" name="insuredIDtxtendorsement" id="insuredIDtxtendorsement" value="">
+                                                                <label for="">{{__('Number')}} </label>
+                                                                <input type="text" id="slipnumberendorsement" name="slipnumberendorsement" class="form-control form-control-sm" value="" readonly="readonly" required/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Count Endorsement')}} </label>
+                                                                <input type="text" id="slipcountedendorsement" name="slipcountedendorsement" class="form-control form-control-sm" value="" readonly="readonly"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -253,10 +260,15 @@
                                                     <div class="form-group">
                                                         <label>{{__('Attachment')}} </label>
                                                         <div class="input-group">
-                                                        <div class="input-group control-group increment2" >
-                                                            <input type="file" name="filesendorsement[]" id="attachmentendorsement" class="form-control" multiple>
+                                                            <div class="input-group control-group increment2" >
+                                                                <input type="file" name="filesendorsement[]" id="attachmentendorsement" class="form-control" multiple>
+                                                                
+                                                            </div>
+                                                            <ul id="aidlistendorsement">
+
+
+                                                            </ul>
                                                         </div>
-                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
