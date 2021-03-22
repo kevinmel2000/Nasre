@@ -5027,5 +5027,201 @@ $(document).ready(function() {
 
 
    });
-</script>
 
+   function addendorsement(slipid){
+    var slipid = slipid;
+    var token2 = $('input[name=_token]').val();
+
+    console.log(slipid)
+
+    $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{url('transaction-data/fe-slip/endorsementstore')}}",
+           type:"POST",
+           data:{
+                slipid:slipid
+               
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                
+
+             if(response){
+                swal("Success!", "Insured Fire & Engineering Slip Endorsement Success", "Endorsement Success")
+                console.log(response)
+                if(response.insured_data)
+                    {
+
+                        var insured_list = JSON.parse(response.insured_data); 
+
+                        for(var i = 0; i < insured_list.length; i++) 
+                        {
+                            var obj = insured_list[i];
+
+                            $('#fesnumber').val('');
+                            $('#fesinsured').val('');
+                            $('#autocomplete').val('');
+                            $('#autocomplete2').val('');
+                            $('#feshare').val('');
+                            $('#fesharefrom').val('');
+                            $('#feuy').val('');
+                            $('#feshareto').val('');
+
+                            $('#fesnumber').val(obj.number);
+                            $('#fesinsured').val(obj.insured_prefix);
+                            $('#autocomplete').val(obj.insured_name);
+                            $('#autocomplete2').val(obj.insured_suffix);
+                            $('#feshare').val(obj.share);
+                            $('#fesharefrom').val(obj.share_from);
+                            $('#feuy').val(obj.uy);
+                            $('#feshareto').val(obj.share_to);
+
+                            
+                        }
+                    }
+
+                    if(response.location_data)
+                    {
+
+                        var location_list = JSON.parse(response.location_data); 
+
+                        for(var i = 0; i < location_list.length; i++) 
+                        {
+                            var obj = location_list[i];
+                            $('#locRiskTable > tbody:last-child').empty();
+                            $('#locRiskTable > tbody:last-child').prepend('<tr id="sid'+obj.id+'">'+
+                                                    '<td>'+obj.loc_code+'</td>'+
+                                                    '<td>'+obj.address+ obj.latitude+' , '+obj.longtitude+'<br>'+ obj.postal_code+'</td>'+
+                                                    '<td>'+obj.latitude+' , '+obj.longtitude+'<br></td>'+
+                                                    '<td>'+
+                                                    '<a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="'+obj.id+'" data-target="#addlocdetailmodaldata">'+
+                                                        '<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addlocdetailmodaldata2">Add</button>'+
+                                                    '</a>'+
+                                                    '<a href="javascript:void(0)" onclick="deletelocationdetail('+obj.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
+                                                    '</tr>'+
+                                                    
+                                                    '<tr id="cid'+obj.id+'">'+
+                                                        '<td></td>'+
+                                                        '<td colspan="3">'+
+                                                            '<table id="tcid'+obj.id+'" width="600" class="table table-bordered table-striped">'+
+                                                                '<thead>'+
+                                                                '<tr>'+
+                                                                '<th>Interest Insured</th>'+
+                                                                '<th>Ceding/Broker</th>'+
+                                                                '<th>CN No</th>'+
+                                                                '<th>Cert No</th>'+
+                                                                '<th>Ref No</th>'+
+                                                                '<th>amount</th>'+
+                                                                '<th>Action</th>'+
+                                                                '</tr>'+
+                                                                '</thead>'+
+                                                                '<tbody id="tbcid'+obj.id+'">'+
+                                                                '</tbody>'+
+                                                            '</table>'+
+                                                        '</td>'+
+                                                    '</tr>');
+                            
+                            
+                            if(response.risklocation_data)
+                            {
+
+                                var risklocation_list = JSON.parse(response.risklocation_data); 
+
+                                for(var i = 0; i < risklocation_list.length; i++) 
+                                {
+                                    var obj2 = risklocation_list[i];
+
+                                    $('#tcid'+obj2.id+' > tbody:last-child').empty();
+                                    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj2.amountlocation);
+
+                                    $('#tcid'+obj.id+' > tbody:last-child').prepend('<tr id="riskdetailsid'+obj2.id+'">'+
+                                                            '<td>'+obj2.description+'</td>'+
+                                                            '<td>'+obj2.name+'</td>'+
+                                                            '<td>'+obj2.cnno+'</td>'+
+                                                            '<td>'+obj2.certno+'</td>'+
+                                                            '<td>'+obj2.refno+'</td>'+
+                                                            '<td>'+curr_amount+'</td>'+
+                                                            '<td>'+
+                                                            '<a href="javascript:void(0)" onclick="deletelocationriskdetail('+obj2.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
+                                                            '</tr>');
+
+                                   
+                                    // +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+obj.number+'" data-target="#endorsementmodaldata">'
+                                    // +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
+                                    // +'</a>'
+                                    // +'<button type="button" class="btn btn-sm btn-primary float-right" onclick="'+obj.id+'">Endorsement</button>'
+                                    // +'<td></td></tr>');
+
+                                    
+                                }
+                            }
+
+
+
+                        }
+                    }
+
+                    
+
+                
+                if(response.slip_data)
+                    {
+
+                        var slip_list = JSON.parse(response.slip_data); 
+
+                        for(var i = 0; i < slip_list.length; i++) 
+                        {
+                            var obj = slip_list[i];
+
+                            $('#SlipInsuredTableData tbody').empty();
+                            $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+obj.id+'" data-name="slipvalue[]"><td data-name="'+obj.number+'">'+obj.number+'</td><td data-name="'+obj.source+'">"'+obj.source+'"</td><td data-name="'+obj.source_2+'">'+obj.source_2+'</td><td data-name="'+obj.status+'">"'+obj.status+'"</td>'
+                            +'<td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+obj.number+'" data-target="#detailmodaldata" href="#detailmodaldata">'
+                            +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
+                            +'</a>'
+                            +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+obj.number+'" data-target="#updatemodaldata">'
+                            +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
+                            +'</a>'
+                            // +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+obj.number+'" data-target="#endorsementmodaldata">'
+                            // +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
+                            // +'</a>'
+                            +'<button type="button" class="btn btn-sm btn-primary float-right" onclick="'+obj.id+'">Endorsement</button>'
+                            +'<td></td></tr>');
+                            // $('#ExtendCoveragePaneldetail tbody').prepend('<tr id="iidextendcoveragedetail'+obj.id+'" data-name="extendcoveragedetailvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragetype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
+                            
+                        }
+                    }
+             }   
+                
+
+            else{
+                swal("Error!", "Insured Fire & Engineering Slip Endorsement Data Error", "Endorsement Data Error");
+            }
+                // $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">"'+response.cedingbroker+'"</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
+                //     +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
+                //     +'</a>'
+                //     +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#updatemodaldata">'
+                //     +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
+                //     +'</a>'
+                //     +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#endorsementmodaldata">'
+                //     +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
+                //     +'</a><td></td></tr>');
+
+
+                // $('#slipnumberendorsement').val(response.number);
+
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", "Insured Fire & Engineering Slip Endorsement Error", "Endorsement Error");
+           }
+       });
+
+   }
+</script>
