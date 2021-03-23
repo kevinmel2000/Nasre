@@ -1675,6 +1675,8 @@ class FeSlipController extends Controller
                             $dtdata->amount = ($dt->amount * (-1));
                             $dtdata->save();
                         }
+                    }else{
+                        $dtlistup = ' ';
                     }
 
                     if($extendcoveragelist){
@@ -1691,6 +1693,8 @@ class FeSlipController extends Controller
                             $ectdata->amount = ($ect->amount * (-1));
                             $ectdata->save();
                         }
+                    }else{
+                        $ectlistup = ' ';
                     }
 
                     if($installmentlist){
@@ -1708,6 +1712,9 @@ class FeSlipController extends Controller
                             $iptdata->save();
                         }
                     }
+                    else{
+                        $iptlistup = ' ';
+                    }
 
                     if(retrocessionlist){
                         foreach($retrocessionlist as $rct){
@@ -1724,6 +1731,9 @@ class FeSlipController extends Controller
                             $rctdata->amount = ($rct->amount * (-1));
                             $rctdata->save();
                         }
+                    }
+                    else{
+                        $rctlistup = ' ';
                     }
 
                     if($slipdatalist){
