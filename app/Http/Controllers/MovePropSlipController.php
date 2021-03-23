@@ -1191,6 +1191,10 @@ class MovePropSlipController extends Controller
                             $locationlistup = TransLocationTemp::create([
                                 'insured_id'=>$ll->insured_id,
                                 'lookup_location_id'=>$ll->lookup_location_id,
+                                'country_id'=>$ll->country_id,
+                                'state_id'=>$ll->state_id,
+                                'city_id'=>$ll->city_id,
+                                'address_location_id'=>$ll->address_location_id,
                                 'count_endorsement' => ($ll->count_endorsement + 1)
                             ]);
     
@@ -1199,6 +1203,8 @@ class MovePropSlipController extends Controller
                                                     ->select('trans_location_temp.*', 'fe_lookup_location.address','fe_lookup_location.loc_code','fe_lookup_location.latitude','fe_lookup_location.longtitude','fe_lookup_location.postal_code')
                                                     ->where('trans_location_temp.id',$locationlistup->id)
                                                     ->get();
+
+                            
                             
                             $risklocationlist= RiskLocationDetail::where('translocation_id','=',$ll->id)->orderby('id','desc')->get();
                             if($risklocationlist != null){
@@ -1241,6 +1247,8 @@ class MovePropSlipController extends Controller
                                 'slip_id'=>$dt->slip_id,
                                 'count_endorsement' => ($dt->count_endorsement + 1)
                             ]);
+
+                            $jsondtlistup = DeductibleTemp::where('slip_id','=',$dtlistup->slip_id)->where('count_endorsement',$dtlistup->count_endorsement)->orderby('id','desc')->get();
     
                             $dtdata =  DeductibleTemp::findOrFail($dt->id);
                             $dtdata->min_claimamount = ($dt->min_claimamount * (-1));
@@ -1263,6 +1271,9 @@ class MovePropSlipController extends Controller
                                 'slip_id'=>$ect->slip_id,
                                 'count_endorsement' => ($ect->count_endorsement + 1)
                             ]);
+
+                            $jsonectlistup = ExtendCoverageTemp::where('slip_id','=',$ectlistup->slip_id)->where('count_endorsement',$ectlistup->count_endorsement)->orderby('id','desc')->get();
+
     
                             $ectdata =  ExtendCoverageTemp::findOrFail($ect->id);
                             $ectdata->amount = ($ect->amount * (-1));
@@ -1284,6 +1295,9 @@ class MovePropSlipController extends Controller
                                 'slip_id'=>$ipt->slip_id,
                                 'count_endorsement' => ($ect->count_endorsement + 1)
                             ]);
+
+                            $jsoniptlistup = InstallmentTemp::where('slip_id','=',$iptlistup->slip_id)->where('count_endorsement',$iptlistup->count_endorsement)->orderby('id','desc')->get();
+
     
                             $iptdata =  InstallmentTemp::findOrFail($ipt->id);
                             $iptdata->amount = ($ipt->amount * (-1));
@@ -1315,12 +1329,16 @@ class MovePropSlipController extends Controller
                                 'slip_id'=>$rct->slip_id,
                                 'count_endorsement' => ($ect->count_endorsement + 1)
                             ]);
+
+                            $jsonrctlistup = RetrocessionTemp::where('slip_id','=',$rctlistup->slip_id)->where('count_endorsement',$rctlistup->count_endorsement)->orderby('id','desc')->get();
+
     
                             $rctdata =  RetrocessionTemp::findOrFail($rct->id);
                             $rctdata->amount = ($rct->amount * (-1));
                             $rctdata->save();
                         }
                     }
+                    
 
                     if($slipdatalist != null){
                         foreach($slipdatalist as $slt)
@@ -1342,13 +1360,13 @@ class MovePropSlipController extends Controller
                                 'koc'=>$slt->koc,
                                 'occupacy'=>$slt->occupacy,
                                 'build_const'=>$slt->build_const,
-                                'attacment_file'=>json_encode($attachmentlist->toJson()),
+                                'attacment_file'=>$attachmentlist->toJson(),
                                 'total_sum_insured'=>$slt->total_sum_insured,
                                 'insured_type'=>$slt->insured_type,
                                 'insured_pct'=>$slt->insured_pct,
                                 'total_sum_pct'=>$slt->total_sum_pct,
-                                'deductible_panel'=>json_encode($dtlistup->toJson()),
-                                'extend_coverage'=>json_encode($ectlistup->toJson()),
+                                'deductible_panel'=>$jsondtlistup->toJson(),
+                                'extend_coverage'=>$jsonectlistup->toJson(),
                                 'insurance_period_from'=>$slt->insurance_period_from,
                                 'insurance_period_to'=>$slt->insurance_period_to,
                                 'reinsurance_period_from'=>$slt->reinsurance_period_from,
@@ -1364,8 +1382,8 @@ class MovePropSlipController extends Controller
                                 'grossprm_to_nr'=>$slt->grossprm_to_nr,
                                 'netprm_to_nr'=>$slt->netprm_to_nr,
                                 'sum_commission'=>$slt->sum_commission,
-                                'installment_panel'=>json_encode($iptlistup->toJson()),
-                                'retrocession_panel'=>json_encode($rctlistup->toJson()),
+                                'installment_panel'=>$jsoniptlistup->toJson(),
+                                'retrocession_panel'=>$jsonrctlistup->toJson(),
                                 'retro_backup'=>$slt->retro_backup,
                                 'own_retention'=>$slt->own_retention,
                                 'sum_own_retention'=>$slt->sum_own_retention,
@@ -1387,7 +1405,7 @@ class MovePropSlipController extends Controller
                         'share_from'=>$insureddata->share_from,
                         'share_to'=>$insureddata->share_to,
                         'coincurance'=>$insureddata->coincurance,
-                        'location'=>json_encode($locationlistup->toJson()),
+                        'location'=>$lookuplocationlist->toJson(),
                         'uy'=>$insureddata->uy,
                         'count_endorsement' => ($insureddata->count_endorsement + 1)
                     ]);
