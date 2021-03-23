@@ -37,6 +37,7 @@ use App\Models\DeductibleTemp;
 use App\Models\StatusLog;
 use App\Models\RetrocessionTemp;
 use App\Models\RiskLocationDetail;
+use App\Models\CurrencyExchange;
 
 
 class FeSlipController extends Controller
@@ -149,6 +150,32 @@ class FeSlipController extends Controller
   
         return response()->json($rate_building);
      }
+
+
+     public function getCurrencyKurs(Request $request)
+     {
+
+        $search = $request->search;
+  
+        //CurrencyExchange
+       
+        if($search == ''){
+           $currency = Currency::where('code', '=', $search)->first();
+        }
+        else
+        {
+           $currency = Currency::where('code', '=', 'IDR')->where('country','=','102')->first();
+        }
+  
+        $response = array();
+        foreach($costumers as $costumer){
+           $response[] = array("value"=>$costumer->id,"label"=>$costumer->company_name);
+        }
+  
+        return response()->json($response);
+     }
+
+
 
      public function getCedingDetail(Request $request){
 
@@ -1900,6 +1927,15 @@ class FeSlipController extends Controller
                 $cedingbroker = CedingBroker::where('id',$request->ceding_id)->first();
                 $ceding = CedingBroker::where('id',$request->ceding_id)->first();
 
+                if($request->kurs == '' || empty($request->kurs))
+                {
+                    $currency = Currency::where('code', '=', 'IDR')->where('country','=','102')->first();
+                }
+                else
+                {
+                    $currency = Currency::where('id', '=', $request->kurs)->first();
+                }
+
                 return response()->json([
                     'id' => $locationlist->id,
                     'translocation_id'=>  $request->translocation_id,
@@ -1912,6 +1948,7 @@ class FeSlipController extends Controller
                     'certno' => $request->certno,
                     'refno' => $request->refno,
                     'amountlocation' => $request->amountlocation,
+                    'kurs'=> $currency->code
                 ]);
             }
             else

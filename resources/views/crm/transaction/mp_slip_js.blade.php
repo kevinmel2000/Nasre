@@ -2022,6 +2022,16 @@ $.ajax({
 
         var insurednoloc = $('#insurednoloc').val();
         var token = $('input[name=_token]').val();
+
+        var kurs = $('#slipcurrency').val();
+
+        if(kurs)
+        {
+        }
+        else
+        {
+            kurs=3;
+        }
         
         var slipinterestid = $('#slipinterestlistlocation').val();
         var cnno = $('#cnno').val();
@@ -2047,6 +2057,7 @@ $.ajax({
                 ceding_id:ceding_id,
                 amountlocation:real_amount,
                 insurednoloc:insurednoloc,
+                kurs:kurs,
                 _token:token
             },
             beforeSend: function() { $("body").addClass("loading");  },
@@ -2054,8 +2065,16 @@ $.ajax({
             success:function(response){
             console.log(response)
                     
-                    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amountlocation);
-                    
+                    if(response.kurs)
+                    {
+                        var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: response.kurs,}).format(response.amountlocation);
+                  
+                    }
+                    else
+                    {
+                        var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amountlocation);
+                    }
+
                     $('#tcid'+insurednoloc+' > tbody:last-child').prepend('<tr id="riskdetailsid'+response.id+'">'+
                                                     '<td>'+response.interest_name+'</td>'+
                                                     '<td>'+response.cedingbroker+'</td>'+
