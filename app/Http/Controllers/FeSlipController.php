@@ -1278,6 +1278,8 @@ class FeSlipController extends Controller
                     'alert-type' => 'success',
                     'count_endorsement' => $insureddataup->count_endorsement
                 );
+
+
             }
             else
             {
@@ -1304,7 +1306,7 @@ class FeSlipController extends Controller
 
            
 
-            return back()->with($notification);
+            return response($notification);
             //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
             //return redirect()->route('liniusaha.index');
         
