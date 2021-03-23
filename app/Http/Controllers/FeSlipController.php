@@ -1526,8 +1526,8 @@ class FeSlipController extends Controller
                     'id' => $slipdataup->id,
                     'number' => $slipdataup->number,
                     'slipstatus' => $slipdataup->status,
-                    'cedingid'=>$slipdataup->source_2,
-                    'cedingbroker'=>$slipdataup->source,
+                    'ceding'=>$slipdataup->ceding->name,
+                    'cedingbroker'=>$slipdataup->cedingbroker->name,
                     'count_endorsement'=>$slipdataup->endorsment
                 ]
             );
