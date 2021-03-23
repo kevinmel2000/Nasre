@@ -4730,6 +4730,8 @@ $(document).ready(function() {
        var token2 = $('input[name=_token]').val();
 
        var conv_sliptotalsum = sliptotalsum.replace(/,/g, "");
+       console.log(code_ms)
+       console.log(slipnumber)
        console.log(conv_sliptotalsum)
        var real_sliptotalsum = parseInt(conv_sliptotalsum);
        console.log(real_sliptotalsum)
@@ -4911,34 +4913,34 @@ $(document).ready(function() {
        console.log(fessuffix)
 
        
-       $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+    //    $.ajaxSetup({
+    //             headers: {
+    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //             }
+    //         });
 
-       $.ajax({
-           url:"{{ url('transaction-data/fe-insured/store') }}",
-           type:"POST",
-           data:{
-               fesnumber:fesnumber,
-               fesshare:fesshare,
-               fessharefrom:real_fessharefrom,
-               fesshareto:real_fesshareto
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-                swal("Success!", "Insured Fire & Engineering Insert Success", "success")
-                console.log(response)
+    //    $.ajax({
+    //        url:"{{ url('transaction-data/fe-insured/store') }}",
+    //        type:"POST",
+    //        data:{
+    //            fesnumber:fesnumber,
+    //            fesshare:fesshare,
+    //            fessharefrom:real_fessharefrom,
+    //            fesshareto:real_fesshareto
+    //        },
+    //        beforeSend: function() { $("body").addClass("loading");  },
+    //        complete: function() {  $("body").removeClass("loading"); },
+    //        success:function(response)
+    //        {
+    //             swal("Success!", "Insured Fire & Engineering Insert Success", "success")
+    //             console.log(response)
 
-           },
-           error: function (request, status, error) {
-                //alert(request.responseText);
-                swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
-           }
-       });
+    //        },
+    //        error: function (request, status, error) {
+    //             //alert(request.responseText);
+    //             swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
+    //        }
+    //    });
 
  
        $('#installmentPanel tbody').empty();
