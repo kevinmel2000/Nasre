@@ -1716,7 +1716,7 @@ class FeSlipController extends Controller
                         $iptlistup = ' ';
                     }
 
-                    if(!retrocessionlist){
+                    if(!$retrocessionlist){
                         $rctlistup = array(
                             'message' => ' data not found ',
                             'value' => ' '
