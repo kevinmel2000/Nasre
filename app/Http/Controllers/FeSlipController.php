@@ -1257,7 +1257,7 @@ class FeSlipController extends Controller
             
             if($insureddata==null)
             {
-                Insured::create([
+                $insureddataup = Insured::create([
                     'number'=>$request->fesnumber,
                     'slip_type'=>'fe',
                     'insured_prefix' => $request->fesinsured,
@@ -1275,7 +1275,8 @@ class FeSlipController extends Controller
 
                 $notification = array(
                     'message' => 'Fire & Engginering Insured added successfully!',
-                    'alert-type' => 'success'
+                    'alert-type' => 'success',
+                    'count_endorsement' => $insureddataup->count_endorsement
                 );
             }
             else
@@ -1296,7 +1297,8 @@ class FeSlipController extends Controller
 
                 $notification = array(
                     'message' => 'Fire & Engginering Insured Update successfully!',
-                    'alert-type' => 'success'
+                    'alert-type' => 'success',
+                    'count_endorsement' => $insureddataup->count_endorsement
                 );
             }
 
