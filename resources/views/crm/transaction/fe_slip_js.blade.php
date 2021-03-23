@@ -4839,9 +4839,8 @@ $(document).ready(function() {
                     +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#updatemodaldata">'
                     +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
                     +'</a>'
-                    +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#endorsementmodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
-                    +'</a><td></td></tr>');
+                    +'<button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" onclick="addendorsement('+response.id+')">Endorsement</button>'
+                    +'<td></td></tr>');
                     
                 $('#slipnumber').val(response.code_sl);
 
