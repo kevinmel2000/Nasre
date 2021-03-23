@@ -1630,7 +1630,7 @@ class FeSlipController extends Controller
                                                     ->get();
                             
                             $risklocationlist= RiskLocationDetail::where('translocation_id','=',$ll->id)->orderby('id','desc')->get();
-                            if($risklocationlist){
+                            if($risklocationlist != null){
                                 foreach($risklocationlist as $rl){
                                     $risklocationlistup = RiskLocationDetail::create([
                                         'ceding_id'=>$rl->ceding_id,
@@ -1659,7 +1659,7 @@ class FeSlipController extends Controller
                         }
                     }
 
-                    if($deductiblelist){
+                    if($deductiblelist != null){
                         foreach($deductiblelist as $dt){
                             $dtlistup = DeductibleTemp::create([
                                 'deductibletype_id'=>$dt->deductibletype_id,
@@ -1679,7 +1679,7 @@ class FeSlipController extends Controller
                         $dtlistup = ' ';
                     }
 
-                    if($extendcoveragelist){
+                    if($extendcoveragelist != null){
                         foreach($extendcoveragelist as $ect){
                             $ectlistup = ExtendCoverageTemp::create([
                                 'extendcoverage_id'=>$ect->extendcoverage_id,
@@ -1697,7 +1697,7 @@ class FeSlipController extends Controller
                         $ectlistup = ' ';
                     }
 
-                    if($installmentlist){
+                    if($installmentlist != null){
                         foreach($installmentlist as $ipt){
                             $iptlistup = InstallmentTemp::create([
                                 'installment_date'=>$ipt->installment_date,
@@ -1716,7 +1716,7 @@ class FeSlipController extends Controller
                         $iptlistup = ' ';
                     }
 
-                    if(retrocessionlist){
+                    if(retrocessionlist != null){
                         foreach($retrocessionlist as $rct){
                             $rctlistup = RetrocessionTemp::create([
                                 'type'=>$rct->type,
@@ -1736,7 +1736,7 @@ class FeSlipController extends Controller
                         $rctlistup = ' ';
                     }
 
-                    if($slipdatalist){
+                    if($slipdatalist != null){
                         foreach($slipdatalist as $slt)
                     {
                         $slipdataup = SlipTable::create([
