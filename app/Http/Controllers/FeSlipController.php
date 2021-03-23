@@ -1632,6 +1632,8 @@ class FeSlipController extends Controller
                                                     ->select('trans_location_temp.*', 'fe_lookup_location.address','fe_lookup_location.loc_code','fe_lookup_location.latitude','fe_lookup_location.longtitude','fe_lookup_location.postal_code')
                                                     ->where('trans_location_temp.id',$locationlistup->id)
                                                     ->get();
+
+                            
                             
                             $risklocationlist= RiskLocationDetail::where('translocation_id','=',$ll->id)->orderby('id','desc')->get();
                             if($risklocationlist != null){
@@ -1674,6 +1676,8 @@ class FeSlipController extends Controller
                                 'slip_id'=>$dt->slip_id,
                                 'count_endorsement' => ($dt->count_endorsement + 1)
                             ]);
+
+                            $jsondtlistup = DeductibleTemp::where('slip_id','=',$dtlistup->slip_id)->where('count_endorsement',$dtlistup->count_endorsement)->orderby('id','desc')->get();
     
                             $dtdata =  DeductibleTemp::findOrFail($dt->id);
                             $dtdata->min_claimamount = ($dt->min_claimamount * (-1));
@@ -1696,6 +1700,9 @@ class FeSlipController extends Controller
                                 'slip_id'=>$ect->slip_id,
                                 'count_endorsement' => ($ect->count_endorsement + 1)
                             ]);
+
+                            $jsonectlistup = DeductibleTemp::where('slip_id','=',$ectlistup->slip_id)->where('count_endorsement',$ectlistup->count_endorsement)->orderby('id','desc')->get();
+
     
                             $ectdata =  ExtendCoverageTemp::findOrFail($ect->id);
                             $ectdata->amount = ($ect->amount * (-1));
@@ -1717,6 +1724,9 @@ class FeSlipController extends Controller
                                 'slip_id'=>$ipt->slip_id,
                                 'count_endorsement' => ($ect->count_endorsement + 1)
                             ]);
+
+                            $jsoniptlistup = DeductibleTemp::where('slip_id','=',$iptlistup->slip_id)->where('count_endorsement',$iptlistup->count_endorsement)->orderby('id','desc')->get();
+
     
                             $iptdata =  InstallmentTemp::findOrFail($ipt->id);
                             $iptdata->amount = ($ipt->amount * (-1));
@@ -1749,6 +1759,7 @@ class FeSlipController extends Controller
                                 'count_endorsement' => ($ect->count_endorsement + 1)
                             ]);
 
+                            $jsonrctlistup = DeductibleTemp::where('slip_id','=',$rctlistup->slip_id)->where('count_endorsement',$rctlistup->count_endorsement)->orderby('id','desc')->get();
 
     
                             $rctdata =  RetrocessionTemp::findOrFail($rct->id);
@@ -1756,13 +1767,7 @@ class FeSlipController extends Controller
                             $rctdata->save();
                         }
                     }
-                    $jsonlocationlistup = json_encode($locationlistup);
-                    $jsonrisklocationlistup = json_encode($risklocationlistup);
-                    $jsonattachment = json_encode($attachmentlist);
-                    $jsondtlistup = json_encode($dtlistup);
-                    $jsonectlistup = json_encode($ectlistup);
-                    $jsoniptlistup = json_encode($iptlistup);
-                    $jsonrctlistup = json_encode($rctlistup);
+                    
 
                     if($slipdatalist != null){
                         foreach($slipdatalist as $slt)
@@ -1784,13 +1789,13 @@ class FeSlipController extends Controller
                                 'koc'=>$slt->koc,
                                 'occupacy'=>$slt->occupacy,
                                 'build_const'=>$slt->build_const,
-                                'attacment_file'=>$jsonattachment,
+                                'attacment_file'=>$attachmentlist->toJson(),
                                 'total_sum_insured'=>$slt->total_sum_insured,
                                 'insured_type'=>$slt->insured_type,
                                 'insured_pct'=>$slt->insured_pct,
                                 'total_sum_pct'=>$slt->total_sum_pct,
-                                'deductible_panel'=>$jsondtlistup,
-                                'extend_coverage'=>$jsonectlistup,
+                                'deductible_panel'=>$jsondtlistup->toJson(),
+                                'extend_coverage'=>$jsonectlistup->toJson(),
                                 'insurance_period_from'=>$slt->insurance_period_from,
                                 'insurance_period_to'=>$slt->insurance_period_to,
                                 'reinsurance_period_from'=>$slt->reinsurance_period_from,
@@ -1806,8 +1811,8 @@ class FeSlipController extends Controller
                                 'grossprm_to_nr'=>$slt->grossprm_to_nr,
                                 'netprm_to_nr'=>$slt->netprm_to_nr,
                                 'sum_commission'=>$slt->sum_commission,
-                                'installment_panel'=>$jsoniptlistup,
-                                'retrocession_panel'=>$jsonrctlistup,
+                                'installment_panel'=>$jsoniptlistup->toJson(),
+                                'retrocession_panel'=>$jsonrctlistup->toJson(),
                                 'retro_backup'=>$slt->retro_backup,
                                 'own_retention'=>$slt->own_retention,
                                 'sum_own_retention'=>$slt->sum_own_retention,
@@ -1829,7 +1834,7 @@ class FeSlipController extends Controller
                         'share_from'=>$insureddata->share_from,
                         'share_to'=>$insureddata->share_to,
                         'coincurance'=>$insureddata->coincurance,
-                        'location'=>$jsonlocationlistup,
+                        'location'=>$lookuplocationlist->toJson(),
                         'uy'=>$insureddata->uy,
                         'count_endorsement' => ($insureddata->count_endorsement + 1)
                     ]);
