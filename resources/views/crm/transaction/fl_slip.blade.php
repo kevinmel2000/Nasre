@@ -420,7 +420,7 @@
 
                     {{-- Edit Modal Ends --}}
 
-                
+
                     <div class="card ">
                         <div class="card-header bg-gray">
                             {{__('Slip Detail')}}
