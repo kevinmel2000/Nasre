@@ -1227,6 +1227,7 @@ class HeMotorSlipController extends Controller
                             $dtlistup = DeductibleTemp::create([
                                 'deductibletype_id'=>$dt->deductibletype_id,
                                 'currency_id'=>$dt->currency_id,
+                                'percentage'=>$dt->percentage,
                                 'min_claimamount'=>$dt->min_claimamount,
                                 'amount'=>$dt->amount,
                                 'slip_id'=>$dt->slip_id,
@@ -1333,13 +1334,13 @@ class HeMotorSlipController extends Controller
                                 'koc'=>$slt->koc,
                                 'occupacy'=>$slt->occupacy,
                                 'build_const'=>$slt->build_const,
-                                'attacment_file'=>$attachmentlist->toJson(),
+                                'attacment_file'=>json_encode($attachmentlist->toJson()),
                                 'total_sum_insured'=>$slt->total_sum_insured,
                                 'insured_type'=>$slt->insured_type,
                                 'insured_pct'=>$slt->insured_pct,
                                 'total_sum_pct'=>$slt->total_sum_pct,
-                                'deductible_panel'=>$dtlistup->toJson(),
-                                'extend_coverage'=>$ectlistup->toJson(),
+                                'deductible_panel'=>json_encode($dtlistup->toJson()),
+                                'extend_coverage'=>json_encode($ectlistup->toJson()),
                                 'insurance_period_from'=>$slt->insurance_period_from,
                                 'insurance_period_to'=>$slt->insurance_period_to,
                                 'reinsurance_period_from'=>$slt->reinsurance_period_from,
@@ -1355,8 +1356,8 @@ class HeMotorSlipController extends Controller
                                 'grossprm_to_nr'=>$slt->grossprm_to_nr,
                                 'netprm_to_nr'=>$slt->netprm_to_nr,
                                 'sum_commission'=>$slt->sum_commission,
-                                'installment_panel'=>$iptlistup->toJson(),
-                                'retrocession_panel'=>$rctlistup->toJson(),
+                                'installment_panel'=>json_encode($iptlistup->toJson()),
+                                'retrocession_panel'=>json_encode($rctlistup->toJson()),
                                 'retro_backup'=>$slt->retro_backup,
                                 'own_retention'=>$slt->own_retention,
                                 'sum_own_retention'=>$slt->sum_own_retention,
@@ -1378,7 +1379,7 @@ class HeMotorSlipController extends Controller
                         'share_from'=>$insureddata->share_from,
                         'share_to'=>$insureddata->share_to,
                         'coincurance'=>$insureddata->coincurance,
-                        'location'=>$locationlistup->toJson(),
+                        'location'=>json_encode($locationlistup->toJson()),
                         'uy'=>$insureddata->uy,
                         'count_endorsement' => ($insureddata->count_endorsement + 1)
                     ]);
@@ -1450,6 +1451,7 @@ class HeMotorSlipController extends Controller
             //Session::flash('Failed', 'Fire & Engginering Insured Failed added', 'danger');
             //return redirect()->route('liniusaha.index');
         }
+
     }
 
 
