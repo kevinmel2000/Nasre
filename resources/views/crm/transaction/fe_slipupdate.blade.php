@@ -435,7 +435,7 @@
                     <td>{{ @$slipdatatadetail->cedingbroker->name }} - {{ @$slipdatatadetail->cedingbroker->company_name }}</td>
                     <td>{{ @$slipdatatadetail->ceding->name }} - {{ @$slipdatatadetail->ceding->company_name }}</td>
                     <td >{{ @$slipdatatadetail->status }}</td>
-                    <td >{{ @$slipdatatadetail->status }}</td>
+                    <td >{{ @$slipdatatadetail->endorsment }}</td>
                     <td>
                     <div class="row">
                         @if($slipdatatadetail->date_transfer == null)

@@ -4831,7 +4831,7 @@ $(document).ready(function() {
                 console.log(response)
 
                 
-                $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">"'+response.cedingbroker+'"</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.number+'" data-target="#detailmodaldata" href="#detailmodaldata">'
+                $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">"'+response.cedingbroker+'"</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">"'+response.slipstatus+'"</td><td data-name="'+response.count_endorsement+'">"'+response.count_endorsement+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.number+'" data-target="#detailmodaldata" href="#detailmodaldata">'
                     +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
                     +'</a>'
                     +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#updatemodaldata">'
@@ -5810,11 +5810,8 @@ $(document).ready(function() {
                 
 
              if(response){
-                swal("Success!", "Insured Fire & Engineering Slip Endorsement Success", "Endorsement Success")
                 console.log(response)
-                if(response.insured_data)
-                    {
-
+                if(response.insured_data){
                         var insured_list = JSON.parse(response.insured_data); 
 
                         for(var i = 0; i < insured_list.length; i++) 
@@ -5842,9 +5839,11 @@ $(document).ready(function() {
                             
                         }
                     }
+                    else{
+                        swal("Failed!", "Insured Fire & Engineering Insured Data Endorsement Failed", "Endorsement Failed")
+                    }
 
-                    if(response.location_data)
-                    {
+                if(response.location_data){
 
                         var location_list = JSON.parse(response.location_data); 
 
@@ -5917,18 +5916,22 @@ $(document).ready(function() {
 
                                     
                                 }
+                            }else{
+                                swal("Failed!", "Insured Fire & Engineering Risk Location Data Endorsement Failed", "Endorsement Failed")
                             }
 
 
 
                         }
-                    }
+                }
+                else{
+                    swal("Failed!", "Insured Fire & Engineering Location Data Endorsement Failed", "Endorsement Failed")
+                }
 
                     
 
                 
-                if(response.slip_data)
-                    {
+                if(response.slip_data){
 
                         var slip_list = JSON.parse(response.slip_data); 
 
@@ -5952,11 +5955,15 @@ $(document).ready(function() {
                             // $('#ExtendCoveragePaneldetail tbody').prepend('<tr id="iidextendcoveragedetail'+obj.id+'" data-name="extendcoveragedetailvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragetype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
                             
                         }
-                    }
-             }   
-                
+                }
+                else{
+                    swal("Failed!", "Insured Fire & Engineering Slip Data Endorsement Failed", "Endorsement Failed")
 
-            else{
+                }
+                window.location.replace("{{url('transaction-data/fe-slipindex')}}");
+                swal("Success!", "Insured Fire & Engineering Slip Endorsement Success", "Endorsement Success")
+             
+             }else{
                 swal("Error!", "Insured Fire & Engineering Slip Endorsement Data Error", "Endorsement Data Error");
             }
                 // $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">"'+response.cedingbroker+'"</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'

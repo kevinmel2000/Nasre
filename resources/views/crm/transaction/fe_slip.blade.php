@@ -461,6 +461,7 @@
                                 <th>{{__('Ceding/Broker')}}</th>
                                 <th>{{__('Ceding')}}</th>
                                 <th>{{__('Status')}}</th>
+                                <th>{{__('Count Endorsement')}}</th>
                                 <th width="20%">{{__('Actions')}}</th>
                                 </tr>
                                 </thead>
@@ -473,6 +474,7 @@
                                 <td>{{ @$slipdatatadetail->cedingbroker->name }} - {{ @$slipdatatadetail->cedingbroker->company_name }}</td>
                                 <td>{{ @$slipdatatadetail->ceding->name }} - {{ @$slipdatatadetail->ceding->company_name }}</td>
                                 <td >{{ @$slipdatatadetail->status }}</td>
+                                <td >{{ @$slipdatatadetail->endorsment }}</td>
                                 <td>
                                     @if($slipdatatadetail->date_transfer == null)
                                         <a class="text-primary mr-3 float-right " data-toggle="modal"  data-book-id="{{  @$slipdatatadetail->number }}" data-target="#detailmodaldata" href="#detailmodaldata">
