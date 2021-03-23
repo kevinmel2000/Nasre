@@ -1624,6 +1624,10 @@ class FeSlipController extends Controller
                             $locationlistup = TransLocationTemp::create([
                                 'insured_id'=>$ll->insured_id,
                                 'lookup_location_id'=>$ll->lookup_location_id,
+                                'country_id'=>$ll->country_id,
+                                'state_id'=>$ll->state_id,
+                                'city_id'=>$ll->city_id,
+                                'address_location_id'=>$ll->address_location_id,
                                 'count_endorsement' => ($ll->count_endorsement + 1)
                             ]);
     
@@ -1701,7 +1705,7 @@ class FeSlipController extends Controller
                                 'count_endorsement' => ($ect->count_endorsement + 1)
                             ]);
 
-                            $jsonectlistup = DeductibleTemp::where('slip_id','=',$ectlistup->slip_id)->where('count_endorsement',$ectlistup->count_endorsement)->orderby('id','desc')->get();
+                            $jsonectlistup = ExtendCoverageTemp::where('slip_id','=',$ectlistup->slip_id)->where('count_endorsement',$ectlistup->count_endorsement)->orderby('id','desc')->get();
 
     
                             $ectdata =  ExtendCoverageTemp::findOrFail($ect->id);
@@ -1725,7 +1729,7 @@ class FeSlipController extends Controller
                                 'count_endorsement' => ($ect->count_endorsement + 1)
                             ]);
 
-                            $jsoniptlistup = DeductibleTemp::where('slip_id','=',$iptlistup->slip_id)->where('count_endorsement',$iptlistup->count_endorsement)->orderby('id','desc')->get();
+                            $jsoniptlistup = InstallmentTemp::where('slip_id','=',$iptlistup->slip_id)->where('count_endorsement',$iptlistup->count_endorsement)->orderby('id','desc')->get();
 
     
                             $iptdata =  InstallmentTemp::findOrFail($ipt->id);
@@ -1759,7 +1763,7 @@ class FeSlipController extends Controller
                                 'count_endorsement' => ($ect->count_endorsement + 1)
                             ]);
 
-                            $jsonrctlistup = DeductibleTemp::where('slip_id','=',$rctlistup->slip_id)->where('count_endorsement',$rctlistup->count_endorsement)->orderby('id','desc')->get();
+                            $jsonrctlistup = RetrocessionTemp::where('slip_id','=',$rctlistup->slip_id)->where('count_endorsement',$rctlistup->count_endorsement)->orderby('id','desc')->get();
 
     
                             $rctdata =  RetrocessionTemp::findOrFail($rct->id);
