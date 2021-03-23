@@ -4750,6 +4750,8 @@ $(document).ready(function() {
        var token2 = $('input[name=_token]').val();
 
        var conv_sliptotalsum = sliptotalsum.replace(/,/g, "");
+       console.log(code_ms)
+       console.log(slipnumber)
        console.log(conv_sliptotalsum)
        var real_sliptotalsum = parseInt(conv_sliptotalsum);
        console.log(real_sliptotalsum)
@@ -4851,15 +4853,14 @@ $(document).ready(function() {
                 console.log(response)
 
                 
-                $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">"'+response.cedingbroker+'"</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">"'+response.slipstatus+'"</td><td data-name="'+response.count_endorsement+'">"'+response.count_endorsement+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.number+'" data-target="#detailmodaldata" href="#detailmodaldata">'
+                $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">'+response.cedingbroker+'</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">'+response.slipstatus+'</td><td data-name="'+response.count_endorsement+'">'+response.count_endorsement+'</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.number+'" data-target="#detailmodaldata" href="#detailmodaldata">'
                     +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
                     +'</a>'
                     +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#updatemodaldata">'
                     +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
                     +'</a>'
-                    +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#endorsementmodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
-                    +'</a><td></td></tr>');
+                    +'<button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" onclick="addendorsement('+response.id+')">Endorsement</button>'
+                    +'<td></td></tr>');
                     
                 $('#slipnumber').val(response.code_sl);
 
@@ -4926,40 +4927,39 @@ $(document).ready(function() {
        
        var token2 = $('input[name=_token]').val();
 
-       console.log(fesinsured)
-       console.log(fessuggestinsured)
+       
        console.log(fesnumber)
        console.log(fessuffix)
 
        
-       $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+    //    $.ajaxSetup({
+    //             headers: {
+    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //             }
+    //         });
 
-       $.ajax({
-           url:"{{ url('transaction-data/fe-insured/store') }}",
-           type:"POST",
-           data:{
-               fesnumber:fesnumber,
-               fesshare:fesshare,
-               fessharefrom:real_fessharefrom,
-               fesshareto:real_fesshareto
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-                swal("Success!", "Insured Fire & Engineering Insert Success", "success")
-                console.log(response)
+    //    $.ajax({
+    //        url:"{{ url('transaction-data/fe-insured/store') }}",
+    //        type:"POST",
+    //        data:{
+    //            fesnumber:fesnumber,
+    //            fesshare:fesshare,
+    //            fessharefrom:real_fessharefrom,
+    //            fesshareto:real_fesshareto
+    //        },
+    //        beforeSend: function() { $("body").addClass("loading");  },
+    //        complete: function() {  $("body").removeClass("loading"); },
+    //        success:function(response)
+    //        {
+    //             swal("Success!", "Insured Fire & Engineering Insert Success", "success")
+    //             console.log(response)
 
-           },
-           error: function (request, status, error) {
-                //alert(request.responseText);
-                swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
-           }
-       });
+    //        },
+    //        error: function (request, status, error) {
+    //             //alert(request.responseText);
+    //             swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
+    //        }
+    //    });
 
  
        $('#installmentPanel tbody').empty();
