@@ -1716,7 +1716,15 @@ class FeSlipController extends Controller
                         $iptlistup = ' ';
                     }
 
-                    if(retrocessionlist != null){
+                    if(!retrocessionlist){
+                        $rctlistup = array(
+                            'message' => ' data not found ',
+                            'value' => ' '
+                        );
+
+                    }
+                    else{
+                       
                         foreach($retrocessionlist as $rct){
                             $rctlistup = RetrocessionTemp::create([
                                 'type'=>$rct->type,
@@ -1731,9 +1739,6 @@ class FeSlipController extends Controller
                             $rctdata->amount = ($rct->amount * (-1));
                             $rctdata->save();
                         }
-                    }
-                    else{
-                        $rctlistup = ' ';
                     }
 
                     if($slipdatalist != null){
@@ -1756,7 +1761,7 @@ class FeSlipController extends Controller
                                 'koc'=>$slt->koc,
                                 'occupacy'=>$slt->occupacy,
                                 'build_const'=>$slt->build_const,
-                                'attacment_file'=>$slt->toJson(),
+                                'attacment_file'=>$attachmentlist->toJson(),
                                 'total_sum_insured'=>$slt->total_sum_insured,
                                 'insured_type'=>$slt->insured_type,
                                 'insured_pct'=>$slt->insured_pct,
