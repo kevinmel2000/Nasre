@@ -623,7 +623,7 @@ class FeSlipController extends Controller
         
         
         $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->where('count_endorsement',$insureddata->count_endorsement)->orderby('id','desc')->get();
-        dd($locationlist2);
+        // dd($locationlist2);
         
         $locationlist=[];
 
