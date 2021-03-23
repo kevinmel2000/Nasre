@@ -1748,12 +1748,21 @@ class FeSlipController extends Controller
                                 'slip_id'=>$rct->slip_id,
                                 'count_endorsement' => ($ect->count_endorsement + 1)
                             ]);
+
+
     
                             $rctdata =  RetrocessionTemp::findOrFail($rct->id);
                             $rctdata->amount = ($rct->amount * (-1));
                             $rctdata->save();
                         }
                     }
+                    $jsonlocationlistup = json_encode($locationlistup);
+                    $jsonrisklocationlistup = json_encode($risklocationlistup);
+                    $jsonattachment = json_encode($attachmentlist);
+                    $jsondtlistup = json_encode($dtlistup);
+                    $jsonectlistup = json_encode($ectlistup);
+                    $jsoniptlistup = json_encode($iptlistup);
+                    $jsonrctlistup = json_encode($rctlistup);
 
                     if($slipdatalist != null){
                         foreach($slipdatalist as $slt)
@@ -1775,13 +1784,13 @@ class FeSlipController extends Controller
                                 'koc'=>$slt->koc,
                                 'occupacy'=>$slt->occupacy,
                                 'build_const'=>$slt->build_const,
-                                'attacment_file'=>json_encode($attachmentlist->toJson()),
+                                'attacment_file'=>$jsonattachment,
                                 'total_sum_insured'=>$slt->total_sum_insured,
                                 'insured_type'=>$slt->insured_type,
                                 'insured_pct'=>$slt->insured_pct,
                                 'total_sum_pct'=>$slt->total_sum_pct,
-                                'deductible_panel'=>json_encode($dtlistup->toJson()),
-                                'extend_coverage'=>json_encode($ectlistup->toJson()),
+                                'deductible_panel'=>$jsondtlistup,
+                                'extend_coverage'=>$jsonectlistup,
                                 'insurance_period_from'=>$slt->insurance_period_from,
                                 'insurance_period_to'=>$slt->insurance_period_to,
                                 'reinsurance_period_from'=>$slt->reinsurance_period_from,
@@ -1797,8 +1806,8 @@ class FeSlipController extends Controller
                                 'grossprm_to_nr'=>$slt->grossprm_to_nr,
                                 'netprm_to_nr'=>$slt->netprm_to_nr,
                                 'sum_commission'=>$slt->sum_commission,
-                                'installment_panel'=>json_encode($iptlistup->toJson()),
-                                'retrocession_panel'=>json_encode($rctlistup->toJson()),
+                                'installment_panel'=>$jsoniptlistup,
+                                'retrocession_panel'=>$jsonrctlistup,
                                 'retro_backup'=>$slt->retro_backup,
                                 'own_retention'=>$slt->own_retention,
                                 'sum_own_retention'=>$slt->sum_own_retention,
@@ -1820,7 +1829,7 @@ class FeSlipController extends Controller
                         'share_from'=>$insureddata->share_from,
                         'share_to'=>$insureddata->share_to,
                         'coincurance'=>$insureddata->coincurance,
-                        'location'=>json_encode($locationlistup->toJson()),
+                        'location'=>$jsonlocationlistup,
                         'uy'=>$insureddata->uy,
                         'count_endorsement' => ($insureddata->count_endorsement + 1)
                     ]);
