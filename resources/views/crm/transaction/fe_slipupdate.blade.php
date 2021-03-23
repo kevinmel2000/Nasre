@@ -208,6 +208,15 @@
                                 </div>
 
                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">{{__('Count Endorsement')}}</label>
+                                            <input type="number" id="fecountendorsement" name="fecountendorsement" value="{{$insureddata->count_endorsement}}" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-12" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
                                         <button type="button" id="addinsuredsave-btn" class="btn btn-primary btn-block ">
                                             {{__('UPDATE')}}
@@ -422,7 +431,7 @@
                       <th>{{__('Ceding/Broker')}}</th>
                       <th>{{__('Ceding')}}</th>
                       <th>{{__('Status')}}</th>
-                      <th>{{__('Count Endorsement')}}</th>
+                      {{-- <th>{{__('Count Endorsement')}}</th> --}}
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
@@ -435,15 +444,15 @@
                     <td>{{ @$slipdatatadetail->cedingbroker->name }} - {{ @$slipdatatadetail->cedingbroker->company_name }}</td>
                     <td>{{ @$slipdatatadetail->ceding->name }} - {{ @$slipdatatadetail->ceding->company_name }}</td>
                     <td >{{ @$slipdatatadetail->status }}</td>
-                    <td >{{ @$slipdatatadetail->endorsment }}</td>
+                    {{-- <td >{{ @$slipdatatadetail->endorsment }}</td> --}}
                     <td>
                     <div class="row">
                         @if($slipdatatadetail->date_transfer == null)
-                            <a class="text-primary mr-3 float-right " data-toggle="modal"  data-book-id="{{  @$slipdatatadetail->number }}" data-target="#detailmodaldata" href="#detailmodaldata">
+                            <a class="text-primary mr-3 float-right " data-toggle="modal"  data-book-id="{{  @$slipdatatadetail->id }}" data-target="#detailmodaldata" href="#detailmodaldata">
                             <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">{{__('Detail')}}</button>
                             </a>
 
-                            <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->number }}" data-target="#updatemodaldata">
+                            <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->id }}" data-target="#updatemodaldata">
                                 <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">{{__('Edit')}}</button>
                             </a>
 

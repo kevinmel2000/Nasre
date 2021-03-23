@@ -520,7 +520,7 @@ class FeSlipController extends Controller
         $code_ms=$insureddata->number;
         $slipdata=SlipTable::where('insured_id',$insureddata->number)->where('endorsment',$insureddata->count_endorsement)->first();
         $slipdata2=SlipTable::where('insured_id',$insureddata->number)->where('endorsment',$insureddata->count_endorsement)->get();
-        // dd($slipdata);
+        // dd($slipdata2);
 
         if(!empty($slipdata))
         {      
@@ -904,7 +904,7 @@ class FeSlipController extends Controller
     public function getdetailSlip($idm)
     {
         $user = Auth::user();
-        $slipdata=SlipTable::where('number',$idm)->first();
+        $slipdata=SlipTable::where('id',$idm)->first();
     
        
 
@@ -965,8 +965,8 @@ class FeSlipController extends Controller
 
         $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
 
-        $statuslist= StatusLog::where('slip_id','=',$idm)->orderby('created_at','DESC')->take(5)->get();
-        $attachmentlist= SlipTableFile::where('slip_id','=',$idm)->orderby('id','DESC')->get();
+        $statuslist= StatusLog::where('slip_id','=',$slipdata->number)->orderby('created_at','DESC')->take(5)->get();
+        $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','DESC')->get();
 
         if($slipdata->build_const == "Building 1"){
             $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
@@ -1124,7 +1124,7 @@ class FeSlipController extends Controller
         $newarrayextend=[];
 
         $statuslist= StatusLog::where('slip_id','=',$slipdata->number)->orderby('created_at','DESC')->get();
-        $attachmentlist= SlipTableFile::where('slip_id','=',$idm)->orderby('id','DESC')->get();
+        $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','DESC')->get();
 
         if($slipdata->build_const == "Building 1"){
             $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
@@ -1257,7 +1257,7 @@ class FeSlipController extends Controller
             
             if($insureddata==null)
             {
-                Insured::create([
+                $insureddataup = Insured::create([
                     'number'=>$request->fesnumber,
                     'slip_type'=>'fe',
                     'insured_prefix' => $request->fesinsured,
@@ -1275,8 +1275,11 @@ class FeSlipController extends Controller
 
                 $notification = array(
                     'message' => 'Fire & Engginering Insured added successfully!',
-                    'alert-type' => 'success'
+                    'alert-type' => 'success',
+                    'count_endorsement' => $insureddataup->count_endorsement
                 );
+
+
             }
             else
             {
@@ -1296,13 +1299,14 @@ class FeSlipController extends Controller
 
                 $notification = array(
                     'message' => 'Fire & Engginering Insured Update successfully!',
-                    'alert-type' => 'success'
+                    'alert-type' => 'success',
+                    'count_endorsement' => $insureddataup->count_endorsement
                 );
             }
 
            
 
-            return back()->with($notification);
+            return response($notification);
             //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
             //return redirect()->route('liniusaha.index');
         
@@ -1664,6 +1668,7 @@ class FeSlipController extends Controller
                             $dtlistup = DeductibleTemp::create([
                                 'deductibletype_id'=>$dt->deductibletype_id,
                                 'currency_id'=>$dt->currency_id,
+                                'percentage'=>$dt->percentage,
                                 'min_claimamount'=>$dt->min_claimamount,
                                 'amount'=>$dt->amount,
                                 'slip_id'=>$dt->slip_id,
@@ -1770,13 +1775,13 @@ class FeSlipController extends Controller
                                 'koc'=>$slt->koc,
                                 'occupacy'=>$slt->occupacy,
                                 'build_const'=>$slt->build_const,
-                                'attacment_file'=>$attachmentlist->toJson(),
+                                'attacment_file'=>json_encode($attachmentlist->toJson()),
                                 'total_sum_insured'=>$slt->total_sum_insured,
                                 'insured_type'=>$slt->insured_type,
                                 'insured_pct'=>$slt->insured_pct,
                                 'total_sum_pct'=>$slt->total_sum_pct,
-                                'deductible_panel'=>$dtlistup->toJson(),
-                                'extend_coverage'=>$ectlistup->toJson(),
+                                'deductible_panel'=>json_encode($dtlistup->toJson()),
+                                'extend_coverage'=>json_encode($ectlistup->toJson()),
                                 'insurance_period_from'=>$slt->insurance_period_from,
                                 'insurance_period_to'=>$slt->insurance_period_to,
                                 'reinsurance_period_from'=>$slt->reinsurance_period_from,
@@ -1792,8 +1797,8 @@ class FeSlipController extends Controller
                                 'grossprm_to_nr'=>$slt->grossprm_to_nr,
                                 'netprm_to_nr'=>$slt->netprm_to_nr,
                                 'sum_commission'=>$slt->sum_commission,
-                                'installment_panel'=>$iptlistup->toJson(),
-                                'retrocession_panel'=>$rctlistup->toJson(),
+                                'installment_panel'=>json_encode($iptlistup->toJson()),
+                                'retrocession_panel'=>json_encode($rctlistup->toJson()),
                                 'retro_backup'=>$slt->retro_backup,
                                 'own_retention'=>$slt->own_retention,
                                 'sum_own_retention'=>$slt->sum_own_retention,
@@ -1815,7 +1820,7 @@ class FeSlipController extends Controller
                         'share_from'=>$insureddata->share_from,
                         'share_to'=>$insureddata->share_to,
                         'coincurance'=>$insureddata->coincurance,
-                        'location'=>$locationlistup->toJson(),
+                        'location'=>json_encode($locationlistup->toJson()),
                         'uy'=>$insureddata->uy,
                         'count_endorsement' => ($insureddata->count_endorsement + 1)
                     ]);
