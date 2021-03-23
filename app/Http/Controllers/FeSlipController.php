@@ -1676,7 +1676,10 @@ class FeSlipController extends Controller
                             $dtdata->save();
                         }
                     }else{
-                        $dtlistup = ' ';
+                        $dtlistup = json([
+                            'message' => ' data not found ',
+                            'value' => ' '
+                        ]);
                     }
 
                     if($extendcoveragelist != null){
@@ -1694,7 +1697,10 @@ class FeSlipController extends Controller
                             $ectdata->save();
                         }
                     }else{
-                        $ectlistup = ' ';
+                        $ectlistup = json([
+                            'message' => ' data not found ',
+                            'value' => ' '
+                        ]);
                     }
 
                     if($installmentlist != null){
@@ -1713,14 +1719,17 @@ class FeSlipController extends Controller
                         }
                     }
                     else{
-                        $iptlistup = ' ';
+                        $iptlistup = json([
+                            'message' => ' data not found ',
+                            'value' => ' '
+                        ]);
                     }
 
                     if(!$retrocessionlist){
-                        $rctlistup = array(
+                        $rctlistup = json([
                             'message' => ' data not found ',
                             'value' => ' '
-                        );
+                        ]);
 
                     }
                     else{
