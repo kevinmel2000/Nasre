@@ -1995,7 +1995,7 @@ $("body").on("click","#btn-danger2",function(){
                         {
                             var total_num = 0;
                             var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
-                            var real_sum = sum.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             console.log(' sum : ' + sum)
                             console.log(' real sum : ' + real_sum)
                             $("#sliptotalsum").val(real_sum);

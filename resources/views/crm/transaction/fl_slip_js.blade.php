@@ -2098,7 +2098,7 @@ $(document).ready(function() {
                             var total =  parseFloat(real_total);
                             console.log(' total : ' + total)
                             var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)).toFixed(2) ;
-                            var real_sum = sum.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             console.log(' sum : ' + sum)
                             console.log(' real sum : ' + real_sum)
                             $("#sliptotalsum").val(real_sum);

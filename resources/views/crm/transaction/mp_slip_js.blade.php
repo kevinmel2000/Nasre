@@ -2099,7 +2099,7 @@ $.ajax({
                     if(totalnre){
                         var conv_totalnre = totalnre.replace(/,/g, "");
                         var sumtotalnre = isNaN(conv_totalnre + parseFloat(response.amountlocation)) ? (conv_totalnre + parseFloat(response.amountlocation)) : (conv_totalnre + parseFloat(response.amountlocation)) ;
-                        var real_sumtotalnre = sumtotalnre.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         
                         console.log(conv_totalnre)
                         console.log(real_sumtotalnre)
