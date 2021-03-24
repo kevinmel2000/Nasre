@@ -2970,7 +2970,7 @@ $(document).ready(function() {
         var tsi = $("#sliptotalsum").val();
         var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
-        var sum = isNaN(pct * parseFloat(conv_tsi)) ? 0 :(pct * parseFloat(conv_tsi)).toFixed(3) ;
+        var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(3) ;
         console.log(sum)
         var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
          $('#sliptotalsumpct').val(real_sum);
