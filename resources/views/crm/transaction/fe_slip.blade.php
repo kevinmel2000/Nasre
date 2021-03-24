@@ -384,7 +384,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Interest list')}}</label>
-                                                <select id="slipinterestlistlocation" name="slipinterestlistlocation" class="form-control form-control-sm " aria-required="true">
+                                                <select id="slipinterestlistlocation" name="slipinterestlistlocation" class="e1 form-control form-control-sm " aria-required="true">
                                                     <option selected disabled>{{__('Interest list')}}</option>
                                                     @foreach($interestinsured as $ii)
                                                         <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
@@ -652,7 +652,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Source')}}</label>
-                                                            <select id="slipcedingbroker" name="slipcedingbroker" class="e1 form-control form-control-sm ">
+                                                            <select id="slipcedingbroker" name="slipcedingbroker" class=" form-control form-control-sm ">
                                                                 <option value=""  selected disabled >Ceding or Broker</option>
                                                                 @foreach($cedingbroker as $cb)
                                                                     <option value="{{ $cb->id }}">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
@@ -660,7 +660,7 @@
                                                             </select>
                                                         </div>    
                                                         <div class="form-group">
-                                                            <select id="slipceding" name="slipceding" class="e1 form-control form-control-sm ">
+                                                            <select id="slipceding" name="slipceding" class=" form-control form-control-sm ">
                                                                 <option value="placehoder" selected disabled>Ceding </option>
                                                                 {{-- @foreach($ceding as $cd)
                                                                     <option value="{{ $cd->id }}">{{ $cd->code }} - {{ $cd->name }}</option>
@@ -677,7 +677,7 @@
                                                             <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Currency')}}</label>
-                                                                <select id="slipcurrency" name="slipcurrency" class="e1 form-control form-control-sm ">
+                                                                <select id="slipcurrency" name="slipcurrency" class=" form-control form-control-sm ">
                                                                     <option selected readonly value='0'>{{__('Select Currency')}}</option>
                                                                     @foreach($currency as $crc)
                                                                         <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
@@ -691,7 +691,7 @@
                                                             <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">{{__('COB')}}</label>
-                                                                <select id="slipcob" name="slipcob" class="e1 form-control form-control-sm ">
+                                                                <select id="slipcob" name="slipcob" class=" form-control form-control-sm ">
                                                                     <option selected readonly  value='0'>{{__('COB list')}}</option>
                                                                     @foreach($cob as $boc)
                                                                         <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
@@ -705,7 +705,7 @@
                                                             <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">{{__('KOC')}}</label>
-                                                                <select id="slipkoc" name="slipkoc" class="e1 form-control form-control-sm ">
+                                                                <select id="slipkoc" name="slipkoc" class=" form-control form-control-sm ">
                                                                     <option selected readonly  value='0'>{{__('KOC list')}}</option>
                                                                     @foreach($koc as $cok)
                                                                         <option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
@@ -719,7 +719,7 @@
                                                             <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Occupacy')}}</label>
-                                                                <select id="slipoccupacy" name="slipoccupacy" class="e1 form-control form-control-sm ">
+                                                                <select id="slipoccupacy" name="slipoccupacy" class=" form-control form-control-sm ">
                                                                     <option selected disabled>{{__('Occupation list')}}</option>
                                                                     @foreach($ocp as $ocpy)
                                                                         <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
@@ -740,7 +740,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="">{{__('Building Const')}}</label>
-                                                            <select id="slipbld_const" name="slipbld_const" class="e1 form-control form-control-sm ">
+                                                            <select id="slipbld_const" name="slipbld_const" class=" form-control form-control-sm ">
                                                                 <option selected disabled>{{__('Building Const list')}}</option>
                                                                 <option value="Building 1">Building 1</option>
                                                                 <option value="Building 2">Building 2</option>
@@ -956,49 +956,52 @@
                                                                                             <td><a href="#" onclick="deletedeductibledetail({{ $isl->id }})">delete</i></a></td>
                                                                                     </tr>   
                                                                                 @endforeach
-                                                                                    <tr>
-                                                                                    <td>
-                                                                                        <div class="form-group">
-                                                                                            <select id="slipdptype" name="slipdptype" class="form-control form-control-sm ">
-                                                                                                <option selected disabled>{{__('Type')}}</option>
-                                                                                                @foreach($deductibletype as $dt)
-                                                                                                    <option value="{{ $dt->id }}">{{ $dt->abbreviation }} - {{ $dt->description }}</option>
-                                                                                                @endforeach
-                                                                                            </select>
-                                                                                        </div>  
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="form-group">
-                                                                                            <select  id="slipdpcurrency" name="slipdpcurrency" class="form-control form-control-sm ">
-                                                                                                <option selected disabled>{{__('Currency')}}</option>
-                                                                                                @foreach($currency as $crc)
-                                                                                                    <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name}}</option>
-                                                                                                @endforeach
-                                                                                            </select>
-                                                                                        </div>  
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="form-group">
-                                                                                            <input type="number" value="" step=".001" id="slipdppercentage" name="slipdppercentage" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="form-group">
-                                                                                            <input type="text" id="slipdpamount" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="form-group">
-                                                                                            <input type="text"   id="slipdpminamount" name="slipdpminamount" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" />
-                                                                                        </div>
-                                                                                    </td> 
-                                                                                    <td>
-                                                                                        <div class="form-group">
-                                                                                            <button type="button" id="adddeductibleinsured-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
+                                                                                
                                                                             </tbody>
+                                                                            <tfoot>
+                                                                                <tr>
+                                                                                        <td>
+                                                                                            <div class="form-group">
+                                                                                                <select id="slipdptype" name="slipdptype" class="form-control form-control-sm ">
+                                                                                                    <option selected disabled>{{__('Type')}}</option>
+                                                                                                    @foreach($deductibletype as $dt)
+                                                                                                        <option value="{{ $dt->id }}">{{ $dt->abbreviation }} - {{ $dt->description }}</option>
+                                                                                                    @endforeach
+                                                                                                </select>
+                                                                                            </div>  
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="form-group">
+                                                                                                <select  id="slipdpcurrency" name="slipdpcurrency" class="form-control form-control-sm ">
+                                                                                                    <option selected disabled>{{__('Currency')}}</option>
+                                                                                                    @foreach($currency as $crc)
+                                                                                                        <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name}}</option>
+                                                                                                    @endforeach
+                                                                                                </select>
+                                                                                            </div>  
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="form-group">
+                                                                                                <input type="number" value="" step=".001" id="slipdppercentage" name="slipdppercentage" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="form-group">
+                                                                                                <input type="text" id="slipdpamount" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="form-group">
+                                                                                                <input type="text"   id="slipdpminamount" name="slipdpminamount" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" />
+                                                                                            </div>
+                                                                                        </td> 
+                                                                                        <td>
+                                                                                            <div class="form-group">
+                                                                                                <button type="button" id="adddeductibleinsured-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                </tr>
+                                                                            </tfoot>
                                                                             </table>
                                                                         </div>
                                                                     </div>
@@ -1035,6 +1038,9 @@
                                                                                             <td><a href="#" onclick="deleteextendcoveragedetail({{ $isl->id }})">delete</i></a></td>
                                                                                     </tr>   
                                                                                 @endforeach
+                                                                                
+                                                                            </tbody>
+                                                                            <tfoot>
                                                                                 <tr>
                                                                                     <td >
                                                                                         <div class="form-group">
@@ -1062,7 +1068,7 @@
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
-                                                                            </tbody>
+                                                                            </tfoot>
                                                                             </table>
                                                                         </div>
                                                                     </div>
@@ -1332,6 +1338,9 @@
                                                                                             <td><a href="#" onclick="deleteinstallmentdetail({{ $isl->id }})">delete</i></a></td>
                                                                                     </tr>   
                                                                                 @endforeach
+                                                                                
+                                                                            </tbody>
+                                                                            <tfoot>
                                                                                 <tr>
                                                                                     <form id="addinstallmentinsured">
                                                                                     @csrf
@@ -1360,7 +1369,7 @@
                                                                                     </td>
                                                                                     </form>
                                                                                 </tr>
-                                                                            </tbody>
+                                                                            </tfoot>
                                                                             </table>
                                                                         </div>
                                                                     </div>
@@ -1434,6 +1443,9 @@
                                                                                             <td><a href="#" onclick="deleteretrocessiondetail({{ $isl->id }})">delete</i></a></td>
                                                                                     </tr>   
                                                                                 @endforeach
+                                                                                
+                                                                            </tbody>
+                                                                            <tfoot>
                                                                                 <tr>
                                                                                     <td>
                                                                                         <div class="form-group">
@@ -1477,7 +1489,7 @@
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
-                                                                            </tbody>
+                                                                            </tfoot>
                                                                             </table>
                                                                         </div>
                                                                     </div>

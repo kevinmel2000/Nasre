@@ -908,21 +908,21 @@ class FeSlipController extends Controller
     
        
 
-        $interestdata=json_decode($slipdata->interest_insured);   
-        $newarray=[];
+        // $interestdata=json_decode($slipdata->interest_insured);   
+        // $newarray=[];
 
-        if(!empty($interestdata))
-        {
-            foreach($interestdata as $mydata)
-            {
-                $interestdatadesc= InterestInsured::where('id','=',$mydata->interest_id)->first();
-                $mydata->description=$interestdatadesc->description;     
+        // if(!empty($interestdata))
+        // {
+        //     foreach($interestdata as $mydata)
+        //     {
+        //         $interestdatadesc= InterestInsured::where('id','=',$mydata->interest_id)->first();
+        //         $mydata->description=$interestdatadesc->description;     
                 
-                array_push($newarray,$mydata);
-            }  
-        }     
+        //         array_push($newarray,$mydata);
+        //     }  
+        // }     
 
-        $newinterestdata=json_encode($newarray);
+        // $newinterestdata=json_encode($newarray);
 
 
         $deductibledata=json_decode($slipdata->deductible_panel);   
@@ -1009,7 +1009,6 @@ class FeSlipController extends Controller
                 'cn_dn'=> $slipdata->cn_dn,
                 'policy_no'=> $slipdata->policy_no,
                 'attacment_file'=> $attachmentlist,
-                'interest_insured'=> $newinterestdata,
                 'total_sum_insured'=> $slipdata->total_sum_insured,
                 'insured_type'=>$slipdata->insured_type,
                 'insured_pct'=>$slipdata->insured_pct,
@@ -2186,14 +2185,14 @@ class FeSlipController extends Controller
                 $cedingbroker = CedingBroker::where('id',$request->ceding_id)->first();
                 $ceding = CedingBroker::where('id',$request->ceding_id)->first();
 
-                if($request->kurs == '' || empty($request->kurs))
-                {
-                    $currency = Currency::where('code', '=', 'IDR')->where('country','=','102')->first();
-                }
-                else
-                {
-                    $currency = Currency::where('id', '=', $request->kurs)->first();
-                }
+                // if($request->kurs == '' || empty($request->kurs))
+                // {
+                //     $currency = Currency::where('code', '=', 'IDR')->where('country','=','102')->first();
+                // }
+                // else
+                // {
+                //     $currency = Currency::where('id', '=', $request->kurs)->first();
+                // }
 
                 return response()->json([
                     'id' => $locationlist->id,
@@ -2206,8 +2205,8 @@ class FeSlipController extends Controller
                     'cnno' => $request->cnno,
                     'certno' => $request->certno,
                     'refno' => $request->refno,
-                    'amountlocation' => $request->amountlocation,
-                    'kurs'=> $currency->code
+                    'amountlocation' => $request->amountlocation
+                    // 'kurs'=> $currency->code
                 ]);
             }
             else

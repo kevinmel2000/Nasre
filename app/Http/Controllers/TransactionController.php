@@ -2028,7 +2028,7 @@ class TransactionController extends Controller
             $amount = $request->slipamount;
             $slip_id = $request->id_slip;
 
-            $checkit = DB::table('installment_temp')->where('slip_id',$slip_id)->sum('risk_location_detail.percentage');
+            $checkit = DB::table('installment_temp')->where('installment_temp.slip_id',$slip_id)->sum('installment_temp.percentage');
             $totalpercent = $checkit + $percentage;
         
             if($percentage !='' && $amount !='' && $slip_id != '')

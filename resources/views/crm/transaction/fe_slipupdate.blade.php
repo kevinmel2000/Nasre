@@ -835,7 +835,10 @@
                                                                                     <td><a href="#" onclick="deletedeductibledetail({{ $isl->id }})">delete</i></a></td>
                                                                             </tr>   
                                                                         @endforeach
-                                                                         <tr>
+                                                                         
+                                                                    </tbody>
+                                                                    <tfoot>
+                                                                        <tr>
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                     <select id="slipdptype" name="slipdptype" class="form-control form-control-sm ">
@@ -877,7 +880,7 @@
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
-                                                                    </tbody>
+                                                                    </tfoot>
                                                                     </table>
                                                                 </div>
                                                             </div>
@@ -914,6 +917,9 @@
                                                                                     <td><a href="#" onclick="deleteextendcoveragedetail({{ $isl->id }})">delete</i></a></td>
                                                                             </tr>   
                                                                         @endforeach
+                                                                        
+                                                                    </tbody>
+                                                                    <tfoot>
                                                                         <tr>
                                                                             <td>
                                                                                 <div class="form-group">
@@ -941,7 +947,7 @@
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
-                                                                    </tbody>
+                                                                    </tfoot>
                                                                     </table>
                                                                 </div>
                                                             </div>
@@ -1205,6 +1211,9 @@
                                                                                     <td><a href="#" onclick="deleteinstallmentdetail({{ $isl->id }})">delete</i></a></td>
                                                                             </tr>   
                                                                         @endforeach
+                                                                        
+                                                                    </tbody>
+                                                                    <tfoot>
                                                                         <tr>
                                                                             <form id="addinstallmentinsured">
                                                                             @csrf
@@ -1233,7 +1242,7 @@
                                                                             </td>
                                                                             </form>
                                                                         </tr>
-                                                                    </tbody>
+                                                                    </tfoot>
                                                                     </table>
                                                                 </div>
                                                             </div>
@@ -1305,6 +1314,9 @@
                                                                                     <td><a href="#" onclick="deleteretrocessiondetail({{ $isl->id }})">delete</i></a></td>
                                                                             </tr>   
                                                                         @endforeach
+                                                                        
+                                                                    </tbody>
+                                                                    <tfoot>
                                                                         <tr>
                                                                             <td>
                                                                                 <div class="form-group">
@@ -1350,7 +1362,7 @@
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
-                                                                    </tbody>
+                                                                    </tfoot>
                                                                     </table>
                                                                 </div>
                                                             </div>
