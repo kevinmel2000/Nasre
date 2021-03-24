@@ -54,8 +54,8 @@
                               <td>{{@$insureddata->insured_prefix}} - {{@$insureddata->insured_name}} - {{@$insureddata->insured_suffix}}</td>
                               <td>{{@$insureddata->uy }}</td>
                               <td>{{@$insureddata->share }}</td>
-                              <td >@currency(@$insureddata->share_from)</td>
-                              <td >@currency(@$insureddata->share_to)</td>
+                              <td >@currency($insureddata->share_from)</td>
+                              <td >@currency($insureddata->share_to)</td>
                               <td>{{@$insureddata->count_endorsement}}</td>
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$insureddata->created_at}}" class="mr-3">
