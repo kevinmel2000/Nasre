@@ -2632,8 +2632,8 @@ $(document).ready(function() {
                     
                     if(totalnre){
                         var conv_totalnre = totalnre.replace(/,/g, "");
-                        var sumtotalnre = isNaN(conv_totalnre + response.amountlocation) ? (conv_totalnre + response.amountlocation) : (conv_totalnre + response.amountlocation).toFixed(2) ;
-                        var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        var sumtotalnre = isNaN(conv_totalnre + parseFloat(response.amountlocation)) ? (conv_totalnre + parseFloat(response.amountlocation)) : (conv_totalnre + parseFloat(response.amountlocation)) ;
+                        var real_sumtotalnre = sumtotalnre.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         
                         console.log(conv_totalnre)
                         console.log(real_sumtotalnre)
@@ -2642,8 +2642,8 @@ $(document).ready(function() {
                     }
                     else{
                         var conv_totalnre = totalnre.replace(/,/g, "");
-                        var sumtotalnre = isNaN(0 + response.amountlocation) ? (0 + response.amountlocation) : (0 + response.amountlocation).toFixed(2) ;
-                        var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        var sumtotalnre = isNaN(0 + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (0 + parseFloat(response.amountlocation)) ;
+                        var real_sumtotalnre = sumtotalnre.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         
                         console.log(conv_totalnre)
                         console.log(real_sumtotalnre)
@@ -2660,7 +2660,7 @@ $(document).ready(function() {
                         {
                             var total_num = 0;
                             var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
-                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            var real_sum = sum.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             console.log(' sum : ' + sum)
                             console.log(' real sum : ' + real_sum)
                             $("#sliptotalsum").val(real_sum);
@@ -2678,7 +2678,7 @@ $(document).ready(function() {
                             var total =  parseFloat(real_total);
                             console.log(' total : ' + total)
                             var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)).toFixed(2) ;
-                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            var real_sum = sum.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             console.log(' sum : ' + sum)
                             console.log(' real sum : ' + real_sum)
                             $("#sliptotalsum").val(real_sum);
