@@ -1077,8 +1077,8 @@
                             // console.log(' real sum : ' + real_sum)
                             $("#sliptotalsum").val(real_sum);
                             // // $("#msishareto").val(real_sum);
-                            // $("#fesharefrom").val(real_sum);
-                            // // $("#feshareto").val(real_sum);
+                            // $("#mpsharefrom").val(real_sum);
+                            // // $("#mpshareto").val(real_sum);
                         }
                         else
                         {
@@ -1094,8 +1094,8 @@
                             // console.log(' sum : ' + sum)
                             // console.log(' real sum : ' + real_sum)
                             // $("#sliptotalsum").val(real_sum);
-                            // // $("#fesharefrom").val(real_sum);
-                            // $("#feshareto").val(real_sum);
+                            // // $("#mpsharefrom").val(real_sum);
+                            // $("#mpshareto").val(real_sum);
                         }
                     
                 
@@ -1158,8 +1158,8 @@
                             // console.log(' real sum : ' + real_sum)
                             $("#sliptotalsum").val(real_sum);
                             // // $("#msishareto").val(real_sum);
-                            // $("#fesharefrom").val(real_sum);
-                            // // $("#feshareto").val(real_sum);
+                            // $("#mpsharefrom").val(real_sum);
+                            // // $("#mpshareto").val(real_sum);
                         }
                         else
                         {
@@ -1175,8 +1175,8 @@
                             // console.log(' sum : ' + sum)
                             // console.log(' real sum : ' + real_sum)
                             // $("#sliptotalsum").val(real_sum);
-                            // // $("#fesharefrom").val(real_sum);
-                            // $("#feshareto").val(real_sum);
+                            // // $("#mpsharefrom").val(real_sum);
+                            // $("#mpshareto").val(real_sum);
                         }
                     
                 
@@ -1241,8 +1241,8 @@
                             // console.log(' real sum : ' + real_sum)
                             $("#sliptotalsumupdate").val(real_sum);
                             // // $("#msishareto").val(real_sum);
-                            // $("#fesharefrom").val(real_sum);
-                            // // $("#feshareto").val(real_sum);
+                            // $("#mpsharefrom").val(real_sum);
+                            // // $("#mpshareto").val(real_sum);
                         }
                         else
                         {
@@ -1258,8 +1258,8 @@
                             // console.log(' sum : ' + sum)
                             // console.log(' real sum : ' + real_sum)
                             // $("#sliptotalsum").val(real_sum);
-                            // // $("#fesharefrom").val(real_sum);
-                            // $("#feshareto").val(real_sum);
+                            // // $("#mpsharefrom").val(real_sum);
+                            // $("#mpshareto").val(real_sum);
                         }
                     
                 
@@ -1322,8 +1322,8 @@
                             // console.log(' real sum : ' + real_sum)
                             $("#sliptotalsumupdate").val(real_sum);
                             // // $("#msishareto").val(real_sum);
-                            // $("#fesharefrom").val(real_sum);
-                            // // $("#feshareto").val(real_sum);
+                            // $("#mpsharefrom").val(real_sum);
+                            // // $("#mpshareto").val(real_sum);
                         }
                         else
                         {
@@ -1339,8 +1339,8 @@
                             // console.log(' sum : ' + sum)
                             // console.log(' real sum : ' + real_sum)
                             // $("#sliptotalsum").val(real_sum);
-                            // // $("#fesharefrom").val(real_sum);
-                            // $("#feshareto").val(real_sum);
+                            // // $("#mpsharefrom").val(real_sum);
+                            // $("#mpshareto").val(real_sum);
                         }
                     
                 
@@ -1405,8 +1405,8 @@
                             // console.log(' real sum : ' + real_sum)
                             $("#sliptotalsumendorsement").val(real_sum);
                             // // $("#msishareto").val(real_sum);
-                            // $("#fesharefrom").val(real_sum);
-                            // // $("#feshareto").val(real_sum);
+                            // $("#mpsharefrom").val(real_sum);
+                            // // $("#mpshareto").val(real_sum);
                         }
                         else
                         {
@@ -1422,8 +1422,8 @@
                             // console.log(' sum : ' + sum)
                             // console.log(' real sum : ' + real_sum)
                             // $("#sliptotalsum").val(real_sum);
-                            // // $("#fesharefrom").val(real_sum);
-                            // $("#feshareto").val(real_sum);
+                            // // $("#mpsharefrom").val(real_sum);
+                            // $("#mpshareto").val(real_sum);
                         }
                     
                 
@@ -1486,8 +1486,8 @@
                             // console.log(' real sum : ' + real_sum)
                             $("#sliptotalsumendorsement").val(real_sum);
                             // // $("#msishareto").val(real_sum);
-                            // $("#fesharefrom").val(real_sum);
-                            // // $("#feshareto").val(real_sum);
+                            // $("#mpsharefrom").val(real_sum);
+                            // // $("#mpshareto").val(real_sum);
                         }
                         else
                         {
@@ -1503,8 +1503,8 @@
                             // console.log(' sum : ' + sum)
                             // console.log(' real sum : ' + real_sum)
                             // $("#sliptotalsum").val(real_sum);
-                            // // $("#fesharefrom").val(real_sum);
-                            // $("#feshareto").val(real_sum);
+                            // // $("#mpsharefrom").val(real_sum);
+                            // $("#mpshareto").val(real_sum);
                         }
                     
                 
@@ -1950,7 +1950,7 @@ $.ajax({
                         //console.log(' real sum : ' + real_sum)
                         //$("#sliptotalsum").val(real_sum);
                         //$("#msishareto").val(real_sum);
-                        //$("#feshareto").val(real_sum);
+                        //$("#mpshareto").val(real_sum);
 
                         //$('#form-addlocation')[0].reset();
                       
@@ -1970,7 +1970,7 @@ $.ajax({
                         console.log(' sum : ' + sum)
                         console.log(' real sum : ' + real_sum)
                         $("#sliptotalsum").val(real_sum);
-                        $("#feshareto").val(real_sum);
+                        $("#mpshareto").val(real_sum);
                         */
 
                         //$('#form-addlocation')[0].reset();
@@ -2008,7 +2008,7 @@ $.ajax({
                 //console.log(sum)
                 //var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 //$("#sliptotalsum").val(real_sum);
-                //$("#feshareto").val(real_sum);
+                //$("#mpshareto").val(real_sum);
 
             }
         });
@@ -2094,7 +2094,7 @@ $.ajax({
                     $('#slipamount').val('');
                     $('#slipinterestlist').val('');
                     
-                    var totalnre = $('#feshareto').val();
+                    var totalnre = $('#mpshareto').val();
                     
                     if(totalnre){
                         var conv_totalnre = totalnre.replace(/,/g, "");
@@ -2104,17 +2104,17 @@ $.ajax({
                         console.log(conv_totalnre)
                         console.log(real_sumtotalnre)
 
-                        $('#feshareto').val(real_sumtotalnre);
+                        $('#mpshareto').val(real_sumtotalnre);
                     }
                     else{
                         var conv_totalnre = totalnre.replace(/,/g, "");
                         var sumtotalnre = isNaN(0 + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (0 + parseFloat(response.amountlocation)) ;
-                        var real_sumtotalnre = sumtotalnre.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         
                         console.log(conv_totalnre)
                         console.log(real_sumtotalnre)
 
-                        $('#feshareto').val(real_sumtotalnre)
+                        $('#mpshareto').val(real_sumtotalnre)
                     }
                     
 
@@ -2131,8 +2131,8 @@ $.ajax({
                             console.log(' real sum : ' + real_sum)
                             $("#sliptotalsum").val(real_sum);
                             // $("#msishareto").val(real_sum);
-                            // $("#fesharefrom").val(real_sum);
-                            // $("#feshareto").val(real_sum);
+                            // $("#mpsharefrom").val(real_sum);
+                            // $("#mpshareto").val(real_sum);
                         }
                         else
                         {
@@ -2144,12 +2144,12 @@ $.ajax({
                             var total =  parseFloat(real_total);
                             console.log(' total : ' + total)
                             var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)).toFixed(2) ;
-                            var real_sum = sum.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             console.log(' sum : ' + sum)
                             console.log(' real sum : ' + real_sum)
                             $("#sliptotalsum").val(real_sum);
-                            // $("#fesharefrom").val(real_sum);
-                            // $("#feshareto").val(real_sum);
+                            // $("#mpsharefrom").val(real_sum);
+                            // $("#mpshareto").val(real_sum);
                         }
                     }else{
                         swal("Warning!", "TSI not increase because this ceding is not same with ceding in slip", "Tsi not increase");
@@ -2178,13 +2178,13 @@ $.ajax({
                 $('#riskdetailsid'+id).remove();
                 var ceding_curr = $('#slipceding').val();
 
-                var totalnre = $('#feshareto').val();
+                var totalnre = $('#mpshareto').val();
                 var conv_totalnre = totalnre.replace(/,/g, "");
                 
                 var sumtotalnre = isNaN(parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ? (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) : (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ;
                 var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 
-                $('#feshareto').val(real_sumtotalnre);
+                $('#mpshareto').val(real_sumtotalnre);
 
                 //$('#cid'+id).remove();
                 if(response.cedinglocation == ceding_curr){
@@ -2202,12 +2202,12 @@ $.ajax({
                         var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         $("#sliptotalsum").val(real_sum);
                     }
-                    // $("#feshareto").val(real_sum);
+                    // $("#mpshareto").val(real_sum);
                 }else{
                     swal("Warning!", "TSI not decrease because this ceding is not same with ceding in slip", "Tsi not decrease");
                     
                     // $("#sliptotalsum").val(real_sum);
-                    // $("#feshareto").val(real_sum);
+                    // $("#mpshareto").val(real_sum);
                 }
 
 
@@ -2314,7 +2314,7 @@ $.ajax({
                var total =  parseFloat($("#sliptotalsumupdate").val());
                var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
                $("#sliptotalsumupdate").val(sum);
-               $("#fesharetoupdate").val(sum);
+               $("#mpsharetoupdate").val(sum);
 
                
 
@@ -2355,7 +2355,7 @@ $.ajax({
                var total =  parseFloat($("#sliptotalsumendorsement").val());
                var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
                $("#sliptotalsumendorsement").val(sum);
-               $("#fesharetoendorsement").val(sum);
+               $("#mpsharetoendorsement").val(sum);
 
                
 
@@ -2407,7 +2407,7 @@ $.ajax({
                 var total =  parseFloat($("#sliptotalsumupdate").val());
                 var sum = isNaN(total - parseFloat(response.amount)) ? 0 :(total - parseFloat(response.amount)) ;
                 $("#sliptotalsumupdate").val(sum);
-                $("#fesharetoupdate").val(sum);
+                $("#mpsharetoupdate").val(sum);
             }
         });
     }
@@ -2434,7 +2434,7 @@ $.ajax({
                 var total =  parseFloat($("#sliptotalsumendorsement").val());
                 var sum = isNaN(total - parseFloat(response.amount)) ? 0 :(total - parseFloat(response.amount)) ;
                 $("#sliptotalsumendorsement").val(sum);
-                $("#fesharetoendorsement").val(sum);
+                $("#mpsharetoendorsement").val(sum);
             }
         });
     }
@@ -2462,7 +2462,7 @@ $.ajax({
         var tsi = parseFloat($("#sliptotalsumupdate").val());
         var sum = isNaN(shareslip * tsi/100) ? 0 :(shareslip * tsi/100) ;
         $('#slipsumshareupdate').val(sum);
-        $('#feshareupdate').val(shareslip);
+        $('#mpshareupdate').val(shareslip);
      });
 
      $('#sliprateupdate').keyup(function () {
@@ -2475,12 +2475,12 @@ $.ajax({
      $('#slipshareupdate').change(function () {
         var rateslip =  parseFloat($('#sliprateupdate').val()) / 100 ;
         var shareslip =  parseFloat($('#slipshareupdate').val()) / 100 ;
-        var ourshare =  parseFloat($('#feshareupdate').val()) / 100 ;
+        var ourshare =  parseFloat($('#mpshareupdate').val()) / 100 ;
         var tsi = parseFloat($("#sliptotalsumupdate").val());
         var sum = isNaN(rateslip * shareslip * tsi/100) ? 0 :(rateslip * shareslip * tsi/100) ;
         var sumourshare = isNaN(ourshare * tsi ) ? 0 :(ourshare * tsi) ;
         $('#slipgrossprmtonrupdate').val(sum);
-        $('#fesharefromupdate').val(sumourshare);
+        $('#mpsharefromupdate').val(sumourshare);
      });
 
      $('#slipcommissionupdate').keyup(function () {
@@ -2537,7 +2537,7 @@ $.ajax({
         var tsi = parseFloat($("#sliptotalsumendorsement").val());
         var sum = isNaN(shareslip * tsi/100) ? 0 :(shareslip * tsi/100) ;
         $('#slipsumshareendorsement').val(sum);
-        $('#feshareendorsement').val(shareslip);
+        $('#mpshareendorsement').val(shareslip);
      });
 
      $('#sliprateendorsement').keyup(function () {
@@ -2550,12 +2550,12 @@ $.ajax({
      $('#slipshareendorsement').change(function () {
         var rateslip =  parseFloat($('#sliprateendorsement').val()) / 100 ;
         var shareslip =  parseFloat($('#slipshareendorsement').val()) / 100 ;
-        var ourshare =  parseFloat($('#feshareendorsement').val()) / 100 ;
+        var ourshare =  parseFloat($('#mpshareendorsement').val()) / 100 ;
         var tsi = parseFloat($("#sliptotalsumendorsement").val());
         var sum = isNaN(rateslip * shareslip * tsi/100) ? 0 :(rateslip * shareslip * tsi/100) ;
         var sumourshare = isNaN(ourshare * tsi ) ? 0 :(ourshare * tsi) ;
         $('#slipgrossprmtonrendorsement').val(sum);
-        $('#fesharefromendorsement').val(sumourshare);
+        $('#mpsharefromendorsement').val(sumourshare);
      });
 
      $('#slipcommissionendorsement').keyup(function () {
@@ -2658,8 +2658,8 @@ $.ajax({
      $('#slipshare').change(function () {
         var rateslip =  $('#sliprate').val() / 1000 ;
         var shareslip =  $('#slipshare').val() / 100 ;
-        var nasionalreinsurance =  $('#fesharefrom').val();
-        var totalnre =  $('#feshareto').val();
+        var nasionalreinsurance =  $('#mpsharefrom').val();
+        var totalnre =  $('#mpshareto').val();
         var conv_totalnre =  parseInt(totalnre.replace(/,/g, ""));
 
         console.log('nre' + nasionalreinsurance)
@@ -2700,8 +2700,8 @@ $.ajax({
 
         $('#slipgrossprmtonr').val(real_sum);
         $('#slipsumor').val(real_sumor);
-        $('#feshare').val(sumourshare.replace(/,/g, "."));
-        $('#fesharefrom').val(real_sumnre);
+        $('#mpshare').val(sumourshare.replace(/,/g, "."));
+        $('#mpsharefrom').val(real_sumnre);
 
         // $('#slipsumshare').val(real_sum);
         // $('#msisharev').val(shareslip);
@@ -3967,14 +3967,14 @@ $.ajax({
        var real_mpshareto = parseInt(conv_mpshareto);
        console.log(real_mpshareto)
 
-       if(isNaN(real_fesshareto))
+       if(isNaN(real_mpshareto))
        {
-         real_fesshareto=0;
+        real_mpshareto=0;
        }
 
-       if(isNaN(real_fessharefrom))
+       if(isNaN(real_mpsharefrom))
        {
-        real_fessharefrom=0;
+        real_mpsharefrom=0;
        }
        
        
@@ -5137,19 +5137,19 @@ $.ajax({
                             $('#fesinsured').val('');
                             $('#autocomplete').val('');
                             $('#autocomplete2').val('');
-                            $('#feshare').val('');
-                            $('#fesharefrom').val('');
+                            $('#mpshare').val('');
+                            $('#mpsharefrom').val('');
                             $('#feuy').val('');
-                            $('#feshareto').val('');
+                            $('#mpshareto').val('');
 
                             $('#fesnumber').val(obj.number);
                             $('#fesinsured').val(obj.insured_prefix);
                             $('#autocomplete').val(obj.insured_name);
                             $('#autocomplete2').val(obj.insured_suffix);
-                            $('#feshare').val(obj.share);
-                            $('#fesharefrom').val(obj.share_from);
+                            $('#mpshare').val(obj.share);
+                            $('#mpsharefrom').val(obj.share_from);
                             $('#feuy').val(obj.uy);
-                            $('#feshareto').val(obj.share_to);
+                            $('#mpshareto').val(obj.share_to);
 
                             
                         }
