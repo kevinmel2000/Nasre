@@ -1910,6 +1910,7 @@ class FeSlipController extends Controller
             //Session::flash('Failed', 'Fire & Engginering Insured Failed added', 'danger');
             //return redirect()->route('liniusaha.index');
         }
+        
     }
 
     
