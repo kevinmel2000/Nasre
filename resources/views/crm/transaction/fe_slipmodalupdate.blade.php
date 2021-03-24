@@ -125,7 +125,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Source')}}</label>
-                                                        <select id="slipcedingbrokerupdate" name="slipcedingbrokerupdate" class="e1 form-control form-control-sm ">
+                                                        <select id="slipcedingbrokerupdate" name="slipcedingbrokerupdate" class=" form-control form-control-sm ">
                                                             @foreach($cedingbroker as $cb)
                                                                 <option value="{{ $cb->id }}">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
                                                                
@@ -133,7 +133,7 @@
                                                         </select>
                                                     </div>    
                                                     <div class="form-group">
-                                                        <select id="slipcedingupdate" name="slipcedingupdate" class="e1 form-control form-control-sm ">
+                                                        <select id="slipcedingupdate" name="slipcedingupdate" class=" form-control form-control-sm ">
                                                             <option value="" readonly selected  value='0'>Ceding </option>
                                                             @foreach($ceding as $cd)
                                                                 <option value="{{ $cd->id }}">{{ $cd->code }} - {{ $cd->name }}</option>
@@ -149,7 +149,7 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Currency')}}</label>
-                                                            <select id="slipcurrencyupdate" name="slipcurrencyupdate" class="e1 form-control form-control-sm ">
+                                                            <select id="slipcurrencyupdate" name="slipcurrencyupdate" class=" form-control form-control-sm ">
                                                                 @foreach($currency as $crc)
                                                                    <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
                                                                    
@@ -163,7 +163,7 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('COB')}}</label>
-                                                            <select id="slipcobupdate" name="slipcobupdate" class="e1 form-control form-control-sm ">
+                                                            <select id="slipcobupdate" name="slipcobupdate" class=" form-control form-control-sm ">
                                                                 @foreach($cob as $boc)
                                                                    <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
                                                                 
@@ -177,7 +177,7 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('KOC')}}</label>
-                                                            <select id="slipkocupdate" name="slipkocupdate" class="e1 form-control form-control-sm ">
+                                                            <select id="slipkocupdate" name="slipkocupdate" class=" form-control form-control-sm ">
                                                                 @foreach($koc as $cok)
                                                                     <option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
                                                                    
@@ -191,7 +191,7 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Occupacy')}}</label>
-                                                            <select id="slipoccupacyupdate" name="slipoccupacyupdate" class="e1 form-control form-control-sm ">
+                                                            <select id="slipoccupacyupdate" name="slipoccupacyupdate" class=" form-control form-control-sm ">
                                                                 @foreach($ocp as $ocpy)
                                                                    <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
                                                                    
@@ -207,7 +207,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="">{{__('Building Const')}}</label>
-                                                        <select id="slipbld_constupdate" name="slipbld_constupdate" class="e1 form-control form-control-sm ">
+                                                        <select id="slipbld_constupdate" name="slipbld_constupdate" class=" form-control form-control-sm ">
                                                             <option  disabled>{{__('Building Const list')}}</option>
                                                             <option value="Building 1">Building 1</option>
                                                             <option value="Building 2">Building 2</option>
