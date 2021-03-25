@@ -6056,7 +6056,7 @@ $(document).ready(function() {
                     swal("Failed!", "Insured Fire & Engineering Slip Data Endorsement Failed", "Endorsement Failed")
 
                 }
-                window.location.replace("{{url('transaction-data/fe-slipindex')}}");
+                // window.location.replace("{{url('transaction-data/fe-slipindex')}}");
                 swal("Success!", "Insured Fire & Engineering Slip Endorsement Success", "Endorsement Success")
              
              }else{
