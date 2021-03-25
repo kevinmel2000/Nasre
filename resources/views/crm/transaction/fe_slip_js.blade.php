@@ -3165,17 +3165,28 @@ $(document).ready(function() {
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 
-            var sumnetprmtonr = isNaN( conv_sumgrossprmtonr * (100/100 - commision - feebroker)) ? 0 :(conv_sumgrossprmtonr * (100/100 - commision - feebroker)).toFixed(2);
-            var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            
 
 
             $('#slipsumcommission').val(real_sum);
             $('#slipsumcommission2').val(real_sum);
+            
+        }
+    });
+
+    $('#slipvbroker').keyup(function(){
+        var feebroker = $('#slipvbroker').val() / 100;
+        var commision =  $('#slipcommission').val() / 100;
+        var sumgrossprmtonr = $("#slipgrossprmtonr").val();
+        var conv_sumgrossprmtonr = parseInt(sumgrossprmtonr.replace(/,/g, ""));
+
+        var sumnetprmtonr = isNaN( conv_sumgrossprmtonr * (100/100 - commision - feebroker)) ? 0 :(conv_sumgrossprmtonr * (100/100 - commision - feebroker)).toFixed(2);
+            var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
             $('#slipnetprmtonr').val(real_sumnetprmtonr);
             $('#slipnetprmtonr2').val(real_sumnetprmtonr);
             $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
 
-        }
     });
 
     $('#slipippercentage').keyup(function (e) {
@@ -3396,10 +3407,24 @@ $(document).ready(function() {
             $('#slipnetprmtonrupdate').val(real_sumnetprmtonr);
             $('#slipnetprmtonrupdate2').val(real_sumnetprmtonr);
 
-            $('#slipsumfeeupdate').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
-
+            
         }
    });
+
+   $('#slipvbrokerupdate').keyup(function(){
+        var feebroker = $('#slipvbrokerupdate').val() / 100;
+        var commision =  $('#slipcommissionupdate').val() / 100;
+        var sumgrossprmtonr = $("#slipgrossprmtonrupdate").val();
+        var conv_sumgrossprmtonr = parseInt(sumgrossprmtonr.replace(/,/g, ""));
+
+        var sumnetprmtonr = isNaN( conv_sumgrossprmtonr * (100/100 - commision - feebroker)) ? 0 :(conv_sumgrossprmtonr * (100/100 - commision - feebroker)).toFixed(2);
+            var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+            $('#slipnetprmtonrupdate').val(real_sumnetprmtonr);
+            $('#slipnetprmtonrupdate2').val(real_sumnetprmtonr);
+            $('#slipsumfeeupdate').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
+
+    });
 
    $('#slipippercentageupdate').keyup(function (e) {
         if(e.keyCode != 9){

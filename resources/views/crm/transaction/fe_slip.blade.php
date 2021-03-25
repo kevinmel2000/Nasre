@@ -1311,9 +1311,7 @@
                                                                                 <div class="col-md-12">
                                                                                     <div class="input-group">
                                                                                         <input type="text"  id="slipsumfee" name="slipsumfee" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" disabled placeholder="a" />
-                                                                                        <div class="input-group-append">
-                                                                                            <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
-                                                                                        </div>
+                                                                                        
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
