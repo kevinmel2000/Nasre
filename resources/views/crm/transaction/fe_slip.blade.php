@@ -1154,12 +1154,12 @@
                                                                         </div> --}}
                                                                         <div class="form-group">
                                                                             <label for="">{{__('Total Days')}}</label>
-                                                                            <input type="text"  id="slipdaytotal" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
+                                                                            <input type="hidden"  id="slipdaytotal" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
                                                                             <input type="text"  id="slipdaytotal2" name="slipdaytotal2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" disabled />
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="">{{__('Total Summary Insurance Periode')}}</label>
-                                                                            <input type="text"  id="sliptotalsumdate" name="sliptotalsumdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
+                                                                            <input type="hidden"  id="sliptotalsumdate" name="sliptotalsumdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
                                                                             <input type="text"  id="sliptotalsumdate2" name="sliptotalsumdate2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" disabled />
                                                                         </div>
                                                                     </div>

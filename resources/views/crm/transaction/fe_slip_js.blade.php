@@ -1381,7 +1381,9 @@
         console.log(parseFloat(sum))
         
         $('#slipdaytotal').val(constday);
+        $('#slipdaytotal2').val(constday);
         $('#sliptotalsumdate').val(parseFloat(sum));
+        $('#sliptotalsumdate2').val(parseFloat(sum));
         // document.getElementById("daytotal").innerHTML = "Total Days :"+days;
     });
 
@@ -1398,8 +1400,10 @@
         var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
         var constday = days.toString() + "/365";
         $('sliptotalsumdateupdate').val(sum);
+        $('sliptotalsumdateupdate2').val(sum);
 
         $('slipdaytotalupdate').val(constday);
+        $('slipdaytotalupdate2').val(constday);
         // document.getElementById("daytotalupdate").innerHTML = "Total Days :"+days;
     });
 
