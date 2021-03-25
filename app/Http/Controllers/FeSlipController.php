@@ -929,6 +929,8 @@ class FeSlipController extends Controller
 
         $newarraydeduct=[];
 
+        dd($deductibledata);
+
         if(!empty($deductibledata))
         {
             foreach($deductibledata as $mydata)
