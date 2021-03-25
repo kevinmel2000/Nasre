@@ -504,7 +504,7 @@ class FeSlipController extends Controller
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
         $cob = COB::orderby('id','asc')->get();
-        $koc = KOC::orderby('id','asc')->get();
+        $koc = KOC::where('parent_id',2)->orWhere('id',2)->orderby('id','asc')->get();
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
         $ceding = CedingBroker::orderby('id','asc')->where('type',4)->get();
