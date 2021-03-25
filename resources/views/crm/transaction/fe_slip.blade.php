@@ -1063,7 +1063,7 @@
                                                                                                 <td>
                                                                                                     <div class="form-group">
                                                                                                         <input type="hidden" id="slipamountec" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm amount" />
-                                                                                                        <input type="text" id="slipamountec" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm amount" disabled/>
+                                                                                                        <input type="text" id="slipamountec2" name="slipamountec2" placeholder="=y*tsi" class="form-control form-control-sm amount" disabled/>
                                                                                                     </div>
                                                                                                 </td>
                                                                                                 <td>
