@@ -825,16 +825,7 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        @foreach($deductiblelist as $isl)
-                                                                            <tr id="iiddeductible{{ $isl->id }}">
-                                                                                    <td>{{ $isl->DeductibleType->description }}</td>
-                                                                                    <td>{{ @$isl->currency->code}} - {{@$isl->currency->symbol_name }}</td>
-                                                                                    <td>{{ $isl->percentage }}</td>
-                                                                                    <td  class="uang">{{ $isl->amount }}</td>
-                                                                                    <td  class="uang">{{ $isl->min_claimamount }}</td>
-                                                                                    <td><a href="#" onclick="deletedeductibledetail({{ $isl->id }})">delete</i></a></td>
-                                                                            </tr>   
-                                                                        @endforeach
+                                                                       
                                                                          
                                                                     </tbody>
                                                                     <tfoot>
@@ -909,14 +900,7 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        @foreach($extendcoveragelist as $isl)
-                                                                            <tr id="iidextendcoverage{{ $isl->id }}">
-                                                                                    <td>{{ @$isl->extendcoveragedata->code}} - {{ @$isl->extendcoveragedata->name}} - {{@$isl->extendcoveragedata->description }}</td>
-                                                                                    <td>{{ $isl->percentage }}</td>
-                                                                                    <td  class="uang">{{ $isl->amount }}</td>
-                                                                                    <td><a href="#" onclick="deleteextendcoveragedetail({{ $isl->id }})">delete</i></a></td>
-                                                                            </tr>   
-                                                                        @endforeach
+                                                                        
                                                                         
                                                                     </tbody>
                                                                     <tfoot>
@@ -1203,14 +1187,6 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        @foreach($installmentlist as $isl)
-                                                                            <tr id="iidinstallment{{ $isl->id }}">
-                                                                                    <td>{{ $isl->installment_date }}</td>
-                                                                                    <td>{{ $isl->percentage }}</td>
-                                                                                    <td  class="uang">{{ $isl->amount }}</td>
-                                                                                    <td><a href="#" onclick="deleteinstallmentdetail({{ $isl->id }})">delete</i></a></td>
-                                                                            </tr>   
-                                                                        @endforeach
                                                                         
                                                                     </tbody>
                                                                     <tfoot>
@@ -1305,15 +1281,6 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        @foreach($retrocessionlist as $isl)
-                                                                            <tr id="iidretrocession{{ $isl->id }}">
-                                                                                    <td>{{ $isl->type }}</td>
-                                                                                    <td>{{ $isl->contract }}</td>
-                                                                                    <td>{{ $isl->percentage }}</td>
-                                                                                    <td >@currency($isl->amount)</td>
-                                                                                    <td><a href="#" onclick="deleteretrocessiondetail({{ $isl->id }})">delete</i></a></td>
-                                                                            </tr>   
-                                                                        @endforeach
                                                                         
                                                                     </tbody>
                                                                     <tfoot>
