@@ -1467,7 +1467,35 @@ class FeSlipController extends Controller
                     'alert-type' => 'success'
                 );
 
-                 
+                $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+
+                // $old_sumshare = $request->slipoldsumshare;
+                $new_sumshare = $request->slipsumshare;
+    
+                // if($new_sumshare != $old_sumshare){
+                    $msdata = Insured::findOrFail($insdata->id);
+    
+                    $sumshare = ($msdata->share_from  + $new_sumshare);
+                    $ourshare = (($sumshare/$msdata->share_to) * 100);
+    
+                    $msdata->share_from=$sumshare;
+                    $msdata->share=$ourshare;
+                    $msdata->save();
+                /* } */
+                
+    
+                return response()->json(
+                    [
+                        'id' => $slipdataup->id,
+                        'number' => $slipdataup->number,
+                        'slipstatus' => $slipdataup->status,
+                        'ourshare' => $ourshare,
+                        'sumshare' => $sumshare,
+                        'ceding'=>$slipdataup->ceding->name,
+                        'cedingbroker'=>$slipdataup->cedingbroker->name,
+                        'count_endorsement'=>$slipdataup->endorsment
+                    ]
+                );
             }
             else
             {
@@ -1542,42 +1570,42 @@ class FeSlipController extends Controller
                     'alert-type' => 'success'
                 );
 
+                $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+
+                $old_sumshare = $request->slipoldsumshare;
+                $new_sumshare = $request->slipsumshare;
+
+                $ourshare = $insdata->share;
+                $sumshare = $insdata->share_from;
+    
+                if($new_sumshare != $old_sumshare){
+                    $msdata = Insured::findOrFail($insdata->id);
+    
+                    $sumshare = ($msdata->share_from - $old_sumshare) + $new_sumshare;
+                    $ourshare = (($sumshare/$msdata->share_to) * 100);
+    
+                    $msdata->share_from=$sumshare;
+                    $msdata->share=$ourshare;
+                    $msdata->save();
+                }
                 
+    
+                return response()->json(
+                    [
+                        'id' => $slipdataup->id,
+                        'number' => $slipdataup->number,
+                        'ourshare' => $ourshare,
+                        'sumshare' => $sumshare,
+                        'slipstatus' => $slipdataup->status,
+                        'ceding'=>$slipdataup->ceding->name,
+                        'cedingbroker'=>$slipdataup->cedingbroker->name,
+                        'count_endorsement'=>$slipdataup->endorsment
+                    ]
+                );
             }
 
             
-            $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
 
-            $old_sumshare = $request->slipoldsumshare;
-            $new_sumshare = $request->slipsumshare;
-
-            $ourshare = $insdata->share;
-            $sumshare = $insdata->share_from;
-
-            if($new_sumshare != $old_sumshare){
-                $msdata = Insured::findOrFail($insdata->id);
-
-                $sumshare = ($msdata->share_from - $old_sumshare) + $new_sumshare;
-                $ourshare = (($sumshare/$msdata->share_to) * 100);
-
-                $msdata->share_from=$sumshare;
-                $msdata->share=$ourshare;
-                $msdata->save();
-            }
-            
-
-            return response()->json(
-                [
-                    'id' => $slipdataup->id,
-                    'number' => $slipdataup->number,
-                    'ourshare' => $ourshare,
-                    'sumshare' => $sumshare,
-                    'slipstatus' => $slipdataup->status,
-                    'ceding'=>$slipdataup->ceding->name,
-                    'cedingbroker'=>$slipdataup->cedingbroker->name,
-                    'count_endorsement'=>$slipdataup->endorsment
-                ]
-            );
            
         
         }
@@ -1803,7 +1831,7 @@ class FeSlipController extends Controller
                     
 
                     if($slipdatalist != null){
-                        if(!$jsondtlistup){
+                        if($jsondtlistup == ' '){
                             foreach($slipdatalist as $slt){
                                 $slipdataup = SlipTable::create([
                                         'number'=>$slt->number,
@@ -1852,7 +1880,7 @@ class FeSlipController extends Controller
                     
                                     ]);
                             }
-                        }elseif(!$jsonectlistup){
+                        }elseif($jsonectlistup == ' ' ){
                             foreach($slipdatalist as $slt){
                                 $slipdataup = SlipTable::create([
                                         'number'=>$slt->number,
@@ -1901,7 +1929,7 @@ class FeSlipController extends Controller
                     
                                     ]);
                             }
-                        }elseif(!$jsoniptlistup){
+                        }elseif($jsoniptlistup == ' '){
                             foreach($slipdatalist as $slt){
                                 $slipdataup = SlipTable::create([
                                         'number'=>$slt->number,
@@ -1950,7 +1978,7 @@ class FeSlipController extends Controller
                     
                                     ]);
                             }
-                        }elseif(!$jsonrctlistup){
+                        }elseif($jsonrctlistup == ' '){
                             foreach($slipdatalist as $slt){
                                 $slipdataup = SlipTable::create([
                                         'number'=>$slt->number,
