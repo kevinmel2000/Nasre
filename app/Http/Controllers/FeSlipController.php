@@ -87,7 +87,7 @@ class FeSlipController extends Controller
     {
         $statestable = collect( DB::table("fe_lookup_location")
         ->join('states', 'fe_lookup_location.province_id', '=', 'states.id')
-        ->where("fe_lookup_location.country_id",$request->country_id)
+        ->where("fe_lookup_location.country_id","=",$request->country_id)
         ->pluck("states.name","fe_lookup_location.province_id"));
         $states = $statestable->unique('fe_lookup_location.province_id');
         $states->values()->all();
