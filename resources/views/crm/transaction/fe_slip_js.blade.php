@@ -2667,6 +2667,7 @@ $(document).ready(function() {
                             console.log(' sum : ' + sum)
                             console.log(' real sum : ' + real_sum)
                             $("#sliptotalsum").val(real_sum);
+                            $("#sliptotalsum2").val(real_sum);
                             // $("#msishareto").val(real_sum);
                             // $("#fesharefrom").val(real_sum);
                             // $("#feshareto").val(real_sum);
@@ -2685,6 +2686,7 @@ $(document).ready(function() {
                             console.log(' sum : ' + sum)
                             console.log(' real sum : ' + real_sum)
                             $("#sliptotalsum").val(real_sum);
+                            $("#sliptotalsum2").val(real_sum);
                             // $("#fesharefrom").val(real_sum);
                             // $("#feshareto").val(real_sum);
                         }
@@ -2738,6 +2740,7 @@ $(document).ready(function() {
                         console.log(sum)
                         var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         $("#sliptotalsum").val(real_sum);
+                        $("#sliptotalsum2").val(real_sum);
                     }
                     // $("#feshareto").val(real_sum);
                 }else{
@@ -2795,6 +2798,7 @@ $(document).ready(function() {
                         console.log(' sum : ' + sum)
                         console.log(' real sum : ' + real_sum)
                     $("#sliptotalsum").val(real_sum);
+                    $("#sliptotalsum2").val(real_sum);
                     $("#feshareto").val(real_sum);
                }
                else
@@ -2811,6 +2815,7 @@ $(document).ready(function() {
                     console.log(' real sum : ' + real_sum)
                     
                     $("#sliptotalsum").val(real_sum);
+                    $("#sliptotalsum2").val(real_sum);
                     //    $("#msishareto").val(sum);
                     $("#feshareto").val(real_sum);
                }
@@ -2999,6 +3004,7 @@ $(document).ready(function() {
             console.log(sum)
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             $('#sliptotalsumpct').val(real_sum);
+            $('#sliptotalsumpct2').val(real_sum);
         }
      });
 
@@ -3010,6 +3016,7 @@ $(document).ready(function() {
             var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             $('#slipdpamount').val(real_sum);
+            $('#slipdpamount2').val(real_sum);
         }
      });
 
@@ -3024,6 +3031,7 @@ $(document).ready(function() {
 
 
             $('#slipsumshare').val(real_sumshare);
+            $('#slipsumshare2').val(real_sumshare);
         }
      });
 
@@ -3103,7 +3111,9 @@ $(document).ready(function() {
             console.log('sumourshare' + sumourshare)
 
             $('#slipgrossprmtonr').val(real_sum);
+            $('#slipgrossprmtonr2').val(real_sum);
             $('#slipsumor').val(real_sumor);
+            $('#slipsumor2').val(real_sumor);
             $('#feshare').val(sumourshare.replace(/,/g, "."));
             $('#fesharefrom').val(real_sumnre);
 
@@ -3130,7 +3140,9 @@ $(document).ready(function() {
 
 
             $('#slipsumcommission').val(real_sum);
+            $('#slipsumcommission2').val(real_sum);
             $('#slipnetprmtonr').val(real_sumnetprmtonr);
+            $('#slipnetprmtonr2').val(real_sumnetprmtonr);
         }
     });
 
@@ -3145,6 +3157,7 @@ $(document).ready(function() {
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamount').val(real_sum);
+            $('#slipipamount2').val(real_sum);
         }
     });
 
@@ -3158,6 +3171,7 @@ $(document).ready(function() {
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipsumor').val(real_sum);
+            $('#slipsumor2').val(real_sum);
         }
     });
 
@@ -3172,6 +3186,7 @@ $(document).ready(function() {
             // var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval); 
             // $('#slipor').val(sumpercentor);
             $('#sliprpamount').val(real_sumrpamount);
+            $('#sliprpamount2').val(real_sumrpamount);
         }
     });
 
@@ -3190,6 +3205,7 @@ $(document).ready(function() {
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipsumor').val(real_sum);
+            $('#slipsumor2').val(real_sum);
         }
     });
 </script>
@@ -3207,6 +3223,7 @@ $(document).ready(function() {
             console.log(sum)
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 $('#sliptotalsumpctupdate').val(real_sum);
+                $('#sliptotalsumpctupdate2').val(real_sum);
         }
     });
 
@@ -3218,6 +3235,7 @@ $(document).ready(function() {
             var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             $('#slipdpamountupdate').val(real_sum);
+            $('#slipdpamountupdate2').val(real_sum);
         }
     });
 
@@ -3232,6 +3250,7 @@ $(document).ready(function() {
 
 
             $('#slipsumshareupdate').val(real_sumshare);
+            $('#slipsumshareupdate2').val(real_sumshare);
         }
     });
 
@@ -3311,7 +3330,9 @@ $(document).ready(function() {
             console.log('sumourshare' + sumourshare)
 
             $('#slipgrossprmtonrupdate').val(real_sum);
+            $('#slipgrossprmtonrupdate2').val(real_sum);
             $('#slipsumorupdate').val(real_sumor);
+            $('#slipsumorupdate2').val(real_sumor);
             $('#feshareupdate').val(sumourshare.replace(/,/g, "."));
             $('#fesharefromupdate').val(real_sumnre);
 
@@ -3339,7 +3360,9 @@ $(document).ready(function() {
 
 
             $('#slipsumcommissionupdate').val(real_sum);
+            $('#slipsumcommissionupdate2').val(real_sum);
             $('#slipnetprmtonrupdate').val(real_sumnetprmtonr);
+            $('#slipnetprmtonrupdate2').val(real_sumnetprmtonr);
         }
    });
 
@@ -3354,6 +3377,7 @@ $(document).ready(function() {
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountupdate').val(real_sum);
+            $('#slipipamountupdate2').val(real_sum);
         }
    });
 
@@ -3367,6 +3391,7 @@ $(document).ready(function() {
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipsumorupdate').val(real_sum);
+            $('#slipsumorupdate2').val(real_sum);
         }
    });
 
@@ -3381,6 +3406,7 @@ $(document).ready(function() {
             // var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval); 
             // $('#slipor').val(sumpercentor);
             $('#sliprpamountupdate').val(real_sumrpamount);
+            $('#sliprpamountupdate2').val(real_sumrpamount);
     }
    });
 
@@ -3399,6 +3425,7 @@ $(document).ready(function() {
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipsumorupdate').val(real_sum);
+            $('#slipsumorupdate2').val(real_sum);
     }
    });
 </script>
@@ -3605,6 +3632,7 @@ $(document).ready(function() {
        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
        //alert(sum);
        $('#slipamountec').val(real_sum);
+       $('#slipamountec2').val(real_sum);
     });
 
 
@@ -3622,6 +3650,7 @@ $(document).ready(function() {
        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
        //alert(sum);
        $('#slipamountecupdate').val(real_sum);
+       $('#slipamountecupdate2').val(real_sum);
     });
 
 
@@ -3669,7 +3698,7 @@ $(document).ready(function() {
 
 </script> --}}
 
-<script type='text/javascript'>
+{{-- <script type='text/javascript'>
     
      $('#slipdppercentageupdate').keyup(function () {
         var persentage =  parseFloat($('#slipdppercentageupdate').val());
@@ -3691,10 +3720,10 @@ $(document).ready(function() {
         $('#slipdpamountupdate').val(sum);
      });
 
-</script>
+</script> --}}
 
 
-<script type='text/javascript'>
+{{-- <script type='text/javascript'>
     
      $('#slipdppercentageendorsement').keyup(function () {
         var persentage =  parseFloat($('#slipdppercentageendorsement').val());
@@ -3716,7 +3745,7 @@ $(document).ready(function() {
         $('#slipdpamountendorsement').val(sum);
      });
 
-</script>
+</script> --}}
 
 
 
@@ -3768,6 +3797,7 @@ $(document).ready(function() {
                     $('#dateinstallment').val('');
                     $('#slipippercentage').val('');
                     $('#slipipamount').val('');
+                    $('#slipipamount2').val('');
                }
                
                //var total =  parseFloat($("#sliptotalsum").val());
@@ -3824,6 +3854,7 @@ $(document).ready(function() {
                $('#dateinstallmentupdate').val('');
                $('#slipippercentageupdate').val('');
                $('#slipipamountupdate').val('');
+               $('#slipipamountupdate2').val('');
                
                //var total =  parseFloat($("#sliptotalsum").val());
                //var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
@@ -4016,6 +4047,7 @@ $(document).ready(function() {
                $('#deductiblePanel tbody').prepend('<tr id="iiddeductible'+response.id+'" data-name="deductiblevalue[]"><td data-name="'+response.deductibletype+'">'+response.deductibletype+'</td><td data-name="'+response.currencydata+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibledetail('+response.id+')">delete</a></td></tr>');
                $('#slipdppercentage').val('');
                $('#slipdpamount').val('');
+               $('#slipdpamount2').val('');
                $('#slipdpminamount').val('');
                
            }
@@ -4078,6 +4110,7 @@ $(document).ready(function() {
                $('#deductiblePanelupdate tbody').prepend('<tr id="iiddeductibleupdate'+response.id+'" data-name="deductibleupdatevalue[]"><td data-name="'+response.deductibletype+'">'+response.deductibletype+'</td><td data-name="'+response.currencydata+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleupdate('+response.id+')">delete</a></td></tr>');
                $('#slipdppercentageupdate').val('');
                $('#slipdpamountupdate').val('');
+               $('#slipdpamountupdate2').val('');
                $('#slipdpminamountupdate').val('');
                
            }
@@ -4263,6 +4296,7 @@ $(document).ready(function() {
                $('#ExtendCoveragePanel tbody').prepend('<tr id="iidextendcoverage'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoveragedetail('+response.id+')">delete</a></td></tr>');
                $('#slipnilaiec').val('');
                $('#slipamountec').val('');
+               $('#slipamountec2').val('');
                
            }
        });
@@ -4315,6 +4349,7 @@ $(document).ready(function() {
                $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+response.id+'" data-name="extendcoverageupdatevalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageupdate('+response.id+')">delete</a></td></tr>');
                $('#slipnilaiecupdate').val('');
                $('#slipamountecupdate').val('');
+               $('#slipamountecupdate2').val('');
                
            }
        });
@@ -4490,6 +4525,7 @@ $(document).ready(function() {
                $('#retrocessionPanel tbody').prepend('<tr id="iidretrocession'+response.id+'" data-name="retrocessionvalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessiondetail('+response.id+')">delete</a></td></tr>');
                $('#sliprppercentage').val('');
                $('#sliprpamount').val('');
+               $('#sliprpamount2').val('');
                
            }
        });
@@ -4543,6 +4579,7 @@ $(document).ready(function() {
                $('#retrocessionPanelupdate tbody').prepend('<tr id="iidretrocessionupdate'+response.id+'" data-name="retrocessionupdatevalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+')</td><td><a href="javascript:void(0)" onclick="deleteretrocessionupdate('+response.id+')">delete</a></td></tr>');
                $('#sliprppercentageupdate').val('');
                $('#sliprpamountupdate').val('');
+               $('#sliprpamountupdate2').val('');
                
            }
        });
