@@ -47,7 +47,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                         <label for="">{{__('Company Name')}}</label>
-                        <input type="text" id="companynamefield" name="companyname" class="form-control form-control-sm " placeholder="please input with Uppercase letter in the beginning" data-validation="length" data-validation-length="2-50" required/>
+                        <input type="text" id="companynamefield" name="companyname" class="form-control form-control-sm " placeholder="please input with Uppercase letter in the beginning" data-validation="length" data-validation-length="0-50" required/>
                     </div>
                   </div>
                 </div>
@@ -56,7 +56,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Name')}}</label>
-                          <input type="text" name="name" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                          <input type="text" name="name" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>
                       </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                           <label for="">{{__('Address')}}</label>
-                          <textarea name="address" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/></textarea>
+                          <textarea name="address" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/></textarea>
                       </div>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
                                                     <div class="col-md-6 col-md-12">
                                                       <div class="form-group">
                                                         <label for="">{{__('Address')}}</label>
-                                                        <textarea name="address" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>{{$ceding->address}}</textarea>
+                                                        <textarea name="address" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" required/>{{$ceding->address}}</textarea>
                                                       </div>
                                                     </div>
                                                   </div>
