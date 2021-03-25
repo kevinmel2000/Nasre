@@ -1166,7 +1166,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="">{{__('Total Fee broker / RI comm')}}</label>
+                                                            <label for="">{{__('Fee broker / RI comm')}}</label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="input-group">
