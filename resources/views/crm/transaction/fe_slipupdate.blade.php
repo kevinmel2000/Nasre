@@ -464,7 +464,7 @@
                                 <button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" onclick="addendorsement({{  @$slipdatatadetail->id }})">{{__('Endorsement')}}</button>
                             {{-- </a> --}}
                         @else
-                            <a class="text-primary mr-3 float-right " data-toggle="modal"  data-book-id="{{  @$slipdatatadetail->number }}" data-target="#detailmodaldata" href="#detailmodaldata">
+                            <a class="text-primary mr-3 float-right " data-toggle="modal"  data-book-id="{{  @$slipdatatadetail->id }}" data-target="#detailmodaldata" href="#detailmodaldata">
                                 <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">{{__('Detail')}}</button>
                             </a>
 
@@ -727,7 +727,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('WPC')}}</label>
-                                                        <input type="number" min="0" value="" step=".001" id="wpc" name="wpc" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                        <input type="number" min="0" value=""  id="wpc" name="wpc" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
                                                     </div>
                                                 </div>
                                         </div>
@@ -758,7 +758,8 @@
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured') }}</label>
-                                                    <input type="text" value="" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
+                                                    <input type="hidden" value="" id="sliptotalsum" name="sliptotalsum" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="tsi(*total/sum from interest insured)" />
+                                                    <input type="text" value="" id="sliptotalsum2" name="sliptotalsum2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="tsi(*total/sum from interest insured)" />
                                                 </div>
                                             </div>
                                         </div>
@@ -797,7 +798,8 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for=""style="opacity: 0;">{{__('Type')}}</label>
-                                                            <input type="text" value="" id="sliptotalsumpct" name="sliptotalsumpct" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" readonly="readonly"/>
+                                                            <input type="hidden" value="" id="sliptotalsumpct" name="sliptotalsumpct" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" />
+                                                            <input type="text" value="" id="sliptotalsumpct2" name="sliptotalsumpct2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="=pct*tsi" disabled/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -825,16 +827,7 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        @foreach($deductiblelist as $isl)
-                                                                            <tr id="iiddeductible{{ $isl->id }}">
-                                                                                    <td>{{ $isl->DeductibleType->description }}</td>
-                                                                                    <td>{{ @$isl->currency->code}} - {{@$isl->currency->symbol_name }}</td>
-                                                                                    <td>{{ $isl->percentage }}</td>
-                                                                                    <td  class="uang">{{ $isl->amount }}</td>
-                                                                                    <td  class="uang">{{ $isl->min_claimamount }}</td>
-                                                                                    <td><a href="#" onclick="deletedeductibledetail({{ $isl->id }})">delete</i></a></td>
-                                                                            </tr>   
-                                                                        @endforeach
+                                                                       
                                                                          
                                                                     </tbody>
                                                                     <tfoot>
@@ -866,7 +859,8 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" id="slipdpamount" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled />
+                                                                                    <input type="hidden" id="slipdpamount" name="slipdpamount" placeholder="=x*tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  />
+                                                                                    <input type="text" id="slipdpamount2" name="slipdpamount2" placeholder="=x*tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled />
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -909,14 +903,7 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        @foreach($extendcoveragelist as $isl)
-                                                                            <tr id="iidextendcoverage{{ $isl->id }}">
-                                                                                    <td>{{ @$isl->extendcoveragedata->code}} - {{ @$isl->extendcoveragedata->name}} - {{@$isl->extendcoveragedata->description }}</td>
-                                                                                    <td>{{ $isl->percentage }}</td>
-                                                                                    <td  class="uang">{{ $isl->amount }}</td>
-                                                                                    <td><a href="#" onclick="deleteextendcoveragedetail({{ $isl->id }})">delete</i></a></td>
-                                                                            </tr>   
-                                                                        @endforeach
+                                                                        
                                                                         
                                                                     </tbody>
                                                                     <tfoot>
@@ -938,7 +925,8 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" value="" id="slipamountec" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm amount" readonly="readonly"/>
+                                                                                    <input type="hidden" value="" id="slipamountec" name="slipamountec" placeholder="=y*tsi" class="form-control form-control-sm amount" />
+                                                                                    <input type="text" value="" id="slipamountec2" name="slipamountec2" placeholder="=y*tsi" class="form-control form-control-sm amount" disabled/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -1026,11 +1014,13 @@
                                                         </div> --}}
                                                         <div class="form-group">
                                                             <label for="">{{__('Total Days')}}</label>
-                                                            <input type="text"  id="slipdaytotal" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
+                                                            <input type="hidden"  id="slipdaytotal" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                            <input type="text"  id="slipdaytotal2" name="slipdaytotal2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" disabled />
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="">{{__('Total Summary Insurance Periode')}}</label>
-                                                            <input type="text"  id="sliptotalsumdate" name="sliptotalsumdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
+                                                            <input type="hidden"  id="sliptotalsumdate" name="sliptotalsumdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
+                                                            <input type="text"  id="sliptotalsumdate2" name="sliptotalsumdate2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1121,7 +1111,8 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
-                                                            <input type="text" value="" id="slipsumshare" name="slipsumshare" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                            <input type="hidden" value="" id="slipsumshare" name="slipsumshare" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  />
+                                                            <input type="text" value="" id="slipsumshare2" name="slipsumshare2" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1140,7 +1131,8 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Gross Prm to NR')}}</label>
-                                                        <input type="text" value="" id="slipgrossprmtonr" name="slipgrossprmtonr" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a% * b% * tsi" readonly="readonly" />
+                                                        <input type="hidden" value="" id="slipgrossprmtonr" name="slipgrossprmtonr" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a% * b% * tsi"  />
+                                                        <input type="text" value="" id="slipgrossprmtonr2" name="slipgrossprmtonr2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a% * b% * tsi" disabled />
                                                     </div>
                                                 </div>
                                             </div>
@@ -1166,7 +1158,8 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="" style="opacity: 0;">{{__('Gross Prm to NR')}}</label>
-                                                            <input type="text"  value="" id="slipsumcommission" name="slipsumcommission" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" readonly="readonly" />
+                                                            <input type="hidden"  value="" id="slipsumcommission" name="slipsumcommission" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" />
+                                                            <input type="text"  value="" id="slipsumcommission2" name="slipsumcommission2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1175,7 +1168,8 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Net Prm to NR')}}</label>
-                                                        <input type="text"  value="" id="slipnetprmtonr" name="slipnetprmtonr" class="form-control form-control-sm amount" data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="0-50" readonly="readonly"/>
+                                                        <input type="hidden"  value="" id="slipnetprmtonr" name="slipnetprmtonr" class="form-control form-control-sm amount" data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="0-50" />
+                                                        <input type="text"  value="" id="slipnetprmtonr2" name="slipnetprmtonr2" class="form-control form-control-sm amount" data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="0-50" disabled/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1203,14 +1197,6 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        @foreach($installmentlist as $isl)
-                                                                            <tr id="iidinstallment{{ $isl->id }}">
-                                                                                    <td>{{ $isl->installment_date }}</td>
-                                                                                    <td>{{ $isl->percentage }}</td>
-                                                                                    <td  class="uang">{{ $isl->amount }}</td>
-                                                                                    <td><a href="#" onclick="deleteinstallmentdetail({{ $isl->id }})">delete</i></a></td>
-                                                                            </tr>   
-                                                                        @endforeach
                                                                         
                                                                     </tbody>
                                                                     <tfoot>
@@ -1232,7 +1218,8 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" value="" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" readonly/>
+                                                                                    <input type="hidden" value="" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" />
+                                                                                    <input type="text" value="" id="slipipamount2" name="slipipamount2" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" disabled/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -1256,8 +1243,9 @@
                                                 <div class="form-group">
                                                     <label for="">{{__('Retro Backup?')}}</label>
                                                     <select id="sliprb" name="sliprb" class="form-control form-control-sm ">
+                                                        <option value="NO" >NO</option>
                                                         <option value="YES" >YES</option>
-                                                        <option value="NO" selected>NO</option>
+                                                        
                                                     </select>
                                                 </div>   
                                             </div>
@@ -1276,7 +1264,8 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <input type="text" id="slipsumor" value=""   name="slipsumor" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly/>
+                                                                    <input type="hidden" id="slipsumor" value=""   name="slipsumor" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" />
+                                                                    <input type="text" id="slipsumor2" value=""   name="slipsumor2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1305,15 +1294,6 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        @foreach($retrocessionlist as $isl)
-                                                                            <tr id="iidretrocession{{ $isl->id }}">
-                                                                                    <td>{{ $isl->type }}</td>
-                                                                                    <td>{{ $isl->contract }}</td>
-                                                                                    <td>{{ $isl->percentage }}</td>
-                                                                                    <td >@currency($isl->amount)</td>
-                                                                                    <td><a href="#" onclick="deleteretrocessiondetail({{ $isl->id }})">delete</i></a></td>
-                                                                            </tr>   
-                                                                        @endforeach
                                                                         
                                                                     </tbody>
                                                                     <tfoot>
@@ -1353,7 +1333,8 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" id="sliprpamount" name="sliprpamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" readonly/>
+                                                                                    <input type="hidden" id="sliprpamount" name="sliprpamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" />
+                                                                                    <input type="text" id="sliprpamount2" name="sliprpamount2" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" disabled/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
