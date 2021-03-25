@@ -936,10 +936,15 @@ class FeSlipController extends Controller
             foreach($deductibledata as $mydata)
             {
                 $deductdatadesc= DeductibleType::where('id','=',$mydata->deductibletype_id)->first();
-                $mydata->deductibletype=$deductdatadesc->description;
+                if($deductdatadesc){
+                    $mydata->deductibletype=$deductdatadesc->description;
+                }
+               
                 
                 $currencydesc=Currency::where('id','=',$mydata->currency_id)->first();
-                $mydata->currencydata=$currencydesc->symbol_name;
+                if($currencydesc){
+                    $mydata->currencydata=$currencydesc->symbol_name;
+                }
                 
                 
                 array_push($newarraydeduct,$mydata);
@@ -958,7 +963,9 @@ class FeSlipController extends Controller
             foreach($extendcoverdata as $mydata)
             {
                 $extenddesc= ExtendedCoverage::where('id','=',$mydata->extendcoverage_id)->first();
-                $mydata->coveragetype=$extenddesc->description;
+                if($extenddesc){
+                    $mydata->coveragetype=$extenddesc->description;
+                }
                 
                 array_push($newarrayextend,$mydata);
             }       
