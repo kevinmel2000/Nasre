@@ -2665,7 +2665,7 @@ $(document).ready(function() {
                     
                     if(totalnre){
                         var conv_totalnre = totalnre.replace(/,/g, "");
-                        var sumtotalnre = isNaN(conv_totalnre + parseFloat(response.amountlocation)) ? (conv_totalnre + parseFloat(response.amountlocation)) : (conv_totalnre + parseFloat(response.amountlocation)) ;
+                        var sumtotalnre = isNaN(conv_totalnre + response.amountlocation) ? (conv_totalnre + response.amountlocation) : (conv_totalnre + response.amountlocation) ;
                         var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         
                         console.log(conv_totalnre)
@@ -2692,7 +2692,7 @@ $(document).ready(function() {
                         if(totalsum == '')
                         {
                             var total_num = 0;
-                            var sum = isNaN(total_num + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total_num + parseFloat(response.amountlocation)) ;
+                            var sum = isNaN(total_num + response.amountlocation) ? (0 + response.amountlocation) : (total_num + response.amountlocation) ;
                             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             console.log(' sum : ' + sum)
                             console.log(' real sum : ' + real_sum)
@@ -2711,7 +2711,7 @@ $(document).ready(function() {
                             console.log('real total : ' + real_total)
                             var total =  parseFloat(real_total);
                             console.log(' total : ' + total)
-                            var sum = isNaN(total + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (total + parseFloat(response.amountlocation)) ;
+                            var sum = isNaN(total + response.amountlocation) ? (0 + response.amountlocation) : (total + response.amountlocation) ;
                             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             console.log(' sum : ' + sum)
                             console.log(' real sum : ' + real_sum)
@@ -3173,6 +3173,8 @@ $(document).ready(function() {
             $('#slipsumcommission2').val(real_sum);
             $('#slipnetprmtonr').val(real_sumnetprmtonr);
             $('#slipnetprmtonr2').val(real_sumnetprmtonr);
+            $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
+
         }
     });
 
@@ -3393,6 +3395,9 @@ $(document).ready(function() {
             $('#slipsumcommissionupdate2').val(real_sum);
             $('#slipnetprmtonrupdate').val(real_sumnetprmtonr);
             $('#slipnetprmtonrupdate2').val(real_sumnetprmtonr);
+
+            $('#slipsumfeeupdate').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
+
         }
    });
 
@@ -4854,6 +4859,7 @@ $(document).ready(function() {
        var slipdatetransfer = $('#sliptd').val();
        var slipstatus = $('#slipstatus').val();
        var sliped = $('#sliped').val();
+       
        var slipsls = $('#slipsls').val();
        var slipcedingbroker = $('#slipcedingbroker').val();
        var slipceding = $('#slipceding').val();
@@ -4866,6 +4872,7 @@ $(document).ready(function() {
        var slipcndn = $('#slipcndn').val();
        var slippolicy_no =  $('#slippolicy_no').val();
        var sliptotalsum = $('#sliptotalsum').val();
+    //    var slipoldsumshare = $()
        var sliptype =  $('#sliptype').val();
        var slippct =  $('#slippct').val();
        var sliptotalsumpct =  $('#sliptotalsumpct').val();
@@ -5005,6 +5012,8 @@ $(document).ready(function() {
                     +'<td></td></tr>');
                     
                 $('#slipnumber').val(response.code_sl);
+                $('#feshare').val(response.ourshare);
+                $('#fesharefrom').val(response.sumshare);
 
            },
            error: function (request, status, error) {
