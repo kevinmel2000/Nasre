@@ -141,7 +141,7 @@ class MasterController extends Controller
 
         if(empty($search))
          {
-            $occupation = Occupation::orderby('code','desc')->get();
+            $occupation = Occupation::orderby('code','desc')->take(10)->get();
             // $ocpparent = Occupation::orderby('code')->get();
             $ocpparent = Occupation::whereRaw('LENGTH(code) < 9')->orderby('code','desc')->get();
             $countparent= Occupation::where('parent_id',null)->whereRaw('LENGTH(code) < 5')->orderby('code','desc')->get();
