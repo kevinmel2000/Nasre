@@ -89,9 +89,11 @@ class FeSlipController extends Controller
         ->join('states', 'fe_lookup_location.province_id', '=', 'states.id')
         ->where("fe_lookup_location.country_id","=",$request->country_id)
         ->pluck("states.name","fe_lookup_location.province_id"));
-        $states = $statestable->unique('fe_lookup_location.province_id');
-        $states->values()->all();
-        return response()->json($states);
+
+        //$statestable2 = $statestable->unique('fe_lookup_location.province_id');
+        $statestable->values()->all();
+
+        return response()->json($statestable);
     }
 
     public function getCityLookup(Request $request)
@@ -104,9 +106,10 @@ class FeSlipController extends Controller
         ->join('cities', 'fe_lookup_location.city_id', '=', 'cities.id')
         ->where("fe_lookup_location.province_id",$request->state_id)
         ->pluck("cities.name","fe_lookup_location.city_id"));
-        $cities = $citiestable->unique('fe_lookup_location.province_id');
-        $cities->values()->all();
-        return response()->json($cities);
+        
+        //$cities = $citiestable->unique('fe_lookup_location.province_id');
+        $citiestable->values()->all();
+        return response()->json($citiestable);
     }
 
     public function getAddressLookup(Request $request)
