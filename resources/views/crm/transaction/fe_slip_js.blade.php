@@ -2,21 +2,21 @@
 <script src="{{asset('/js/select2.js')}}"></script>
 <style type="text/css">
     /* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
 
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
+  /* Firefox */
+  input[type=number] {
+      -moz-appearance: textfield;
+  }
 </style>
 
 <script>
     $(document).ready(function() { 
-        
+
         $(".e1").select2({ width: '100%' }); 
 
         $("#tabretro").attr('hidden','true');
@@ -34,31 +34,31 @@ input[type=number] {
         var countryID = 102; 
         //alert(countryID);
         if(countryID){
-        $.ajax({
-            type:"GET",
-            url:"{{url('get-state-lookup')}}?country_id="+countryID,
-            beforeSend: function() { $("body").addClass("loading");  },
-            complete: function() {  $("body").removeClass("loading"); },
-            success:function(res){  
-                console.log(res)      
-                if(res){
-                    $("#state_location").empty();
-                    $("#state_location").append('<option selected disabled>Select States/Province</option>');
-                    $.each(res,function(key,value){
-                    $("#state_location").append('<option value="'+key+'">'+value+'</option>');
-                    });
-                
-                }else{
-                    $("#state_location").append('<option value="" selected disabled>get value error</option>');
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-state-lookup')}}?country_id="+countryID,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){  
+                    console.log(res)      
+                    if(res){
+                        $("#state_location").empty();
+                        $("#state_location").append('<option selected disabled>Select States/Province</option>');
+                        $.each(res,function(key,value){
+                            $("#state_location").append('<option value="'+key+'">'+value+'</option>');
+                        });
+
+                    }else{
+                        $("#state_location").append('<option value="" selected disabled>get value error</option>');
+                    }
                 }
-            }
-        });
+            });
         }else{
           $("#state_location").append('<option value="" selected disabled>countryID null</option>');
           $("#city_location").empty();
-        }  
-        
-    });
+      }  
+
+  });
 
     function treatAsUTC(date) {
         var result = new Date(date);
@@ -73,7 +73,7 @@ input[type=number] {
 </script>
 
 <script type="text/javascript">
-        
+
 </script>
 
 <script type="text/javascript">
@@ -88,35 +88,26 @@ input[type=number] {
 </script>
 
 <script type="text/javascript">
-    // $('#slipamount').keyup(function(){
-    //     var currenc = $(this).val();
-    //     console.log(currenc)
-    //     currenc.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // });
+   
 
     $('input.amount').keyup(function(event) {
             // skip for arrow keys
             if(event.which >= 37 && event.which <= 40) return;
-                console.log(event.which)
-                console.log($(this).val())
+            console.log(event.which)
+            console.log($(this).val())
                 // format number
                 $(this).val(function(index, value) {
-                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                });
             });
-    });
 
 
 
     $(".money").click(function() {
-    var inputLength = $(".money").val().length;
-    setCaretToPos($(".money")[0], inputLength)
+        var inputLength = $(".money").val().length;
+        setCaretToPos($(".money")[0], inputLength)
     });
 
-    // $(".uang").keyup(function() {
-    // var inputLength = $(".uang").val().length;
-    // setCaretToPos($(".uang")[0], inputLength)
-    
-    // });
 
     $(".uang").keyup(function() {
         $('.uang').mask("#,##0.00", {reverse: true});
@@ -124,34 +115,9 @@ input[type=number] {
 
     });
 
-   
 
-    // $('#slipvbroker').change(function(){
-    //     var amount = $('#slipvbroker').val();
-    //     var conv_amount = amount.replace(/,/g, "");
-    //    console.log(conv_amount)
-    //     console.log($('#slipvbroker').val())
-    // });
 
-    // var options = {
-    // onKeyPress: function(cep, e, field, options){
-    //     if (cep.length<=6)
-    //     {
-        
-    //         var inputVal = parseFloat(cep);
-    //         jQuery('.uang').val(inputVal.toFixed(2));
-    //     }
-        
-    //     // setCaretToPos(jQuery('#money')[0], 4);
-                    
-    //     var masks = ['#,##0.00', '0.00'];
-    //     mask = (cep == 0) ? masks[1] : masks[0];
-    //     $('.uang').mask(mask, options);
-    // },
-    // reverse: true
-    // };
 
-    // $('.money').mask('#,##0.00', options);
 </script>
 
 
@@ -161,8 +127,8 @@ input[type=number] {
     $('#detailmodaldata').on('show.bs.modal', function(e) {
 
          //get data-id attribute of the clicked element
-        var codesl = $(e.relatedTarget).data('book-id');
-        
+         var codesl = $(e.relatedTarget).data('book-id');
+
         //alert(codesl);
         
         $.ajax({
@@ -172,25 +138,25 @@ input[type=number] {
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response)
             {
-                    console.log(response);
-                    $('#slipnumberdetail').val(response.number);
-                    $('#slipusernamedetail').val(response.username);
-                    $('#slipprodyeardetail').val(response.prod_year);
-                    $('#slipuydetail').val(response.uy);
-                    $('#slipeddetail').val(response.endorsment);
-                    $('#slipslsdetail').val(response.selisih);
-                    $('#wpcdetail').val(response.wpc);
-                    $('#slipvbrokerdetail').val(response.v_broker);
+                console.log(response);
+                $('#slipnumberdetail').val(response.number);
+                $('#slipusernamedetail').val(response.username);
+                $('#slipprodyeardetail').val(response.prod_year);
+                $('#slipuydetail').val(response.uy);
+                $('#slipeddetail').val(response.endorsment);
+                $('#slipslsdetail').val(response.selisih);
+                $('#wpcdetail').val(response.wpc);
+                $('#slipvbrokerdetail').val(response.v_broker);
 
 
-                    if(response.deductible_panel)
+                if(response.deductible_panel)
+                {
+
+                    var deductibledata = JSON.parse(response.deductible_panel); 
+
+                    for(var i = 0; i < deductibledata.length; i++) 
                     {
-
-                        var deductibledata = JSON.parse(response.deductible_panel); 
-
-                        for(var i = 0; i < deductibledata.length; i++) 
-                        {
-                            var obj = deductibledata[i];
+                        var obj = deductibledata[i];
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
@@ -200,7 +166,7 @@ input[type=number] {
                             var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             $('#deductiblePaneldetail tbody').empty();
                             $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.currencydata+'">'+obj.currencydata+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td></td></tr>');
-              
+
                         }
                     }
 
@@ -238,9 +204,9 @@ input[type=number] {
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
-                           $('#installmentPaneldetail tbody').empty();
-                           $('#installmentPaneldetail tbody').prepend('<tr id="iidinstallmentdetail'+obj.id+'" data-name="installmentdetailvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>')
-               
+                            $('#installmentPaneldetail tbody').empty();
+                            $('#installmentPaneldetail tbody').prepend('<tr id="iidinstallmentdetail'+obj.id+'" data-name="installmentdetailvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>')
+
                         }
                     }
 
@@ -262,7 +228,7 @@ input[type=number] {
                             $('#retrocessionPaneldetail tbody').empty();
                             
                             $('#retrocessionPaneldetail tbody').prepend('<tr id="iidretrocessiondetail'+obj.id+'" data-name="retrocessiondetailvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
-              
+
                         }
                     }
                     
@@ -311,8 +277,8 @@ input[type=number] {
                     if(response.build_const)
                     {
                         $("#slipbld_constdetail option").attr('hidden',true);
-                       $("#slipbld_constdetail option[value='" + response.build_const + "']:first")[0].hidden = false;
-                       $("#slipbld_constdetail option[value='" + response.build_const + "']:first")[0].selected = true;
+                        $("#slipbld_constdetail option[value='" + response.build_const + "']:first")[0].hidden = false;
+                        $("#slipbld_constdetail option[value='" + response.build_const + "']:first")[0].selected = true;
                     }
 
                     $("#slipbcuadetail").val(response.build_rate_up);
@@ -343,73 +309,73 @@ input[type=number] {
 
                     if(response.status_log){
                         var status_log = response.status_log;
-                                for (var i = 0; i < 5; i++){
+                        for (var i = 0; i < 5; i++){
 
-                                  if(status_log[i])
-                                  {
-                                    var status = status_log[i].status;
-                                    var datetime = status_log[i].datetime;
-                                    var user = status_log[i].user;
-                                    $('#stlid'+status_log[i].id).remove();
-                                    $('#slipStatusTabledetail tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
-                                  }
+                          if(status_log[i])
+                          {
+                            var status = status_log[i].status;
+                            var datetime = status_log[i].datetime;
+                            var user = status_log[i].user;
+                            $('#stlid'+status_log[i].id).remove();
+                            $('#slipStatusTabledetail tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
+                        }
 
-                                };
-                    }
+                    };
+                }
 
-                    if(response.attacment_file){
-                        $('#aidlistdetail li').remove();
-                        var attacment_file = response.attacment_file;
-                                for (var i = 0; i < attacment_file.length; i++){
-                                    var filename = attacment_file[i].filename;
-                                    $('#aidlistdetail').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
-                                };
-                    }
+                if(response.attacment_file){
+                    $('#aidlistdetail li').remove();
+                    var attacment_file = response.attacment_file;
+                    for (var i = 0; i < attacment_file.length; i++){
+                        var filename = attacment_file[i].filename;
+                        $('#aidlistdetail').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
+                    };
+                }
 
 
-                    $('#slipnodetail').val(response.slip_no);
-                    $('#slipcndndetail').val(response.cn_dn);
-                    $('#slippolicy_nodetail').val(response.policy_no);
-                    if(response.total_sum_insured){
-                        $('#sliptotalsumdetail').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    }
-                    else
-                    {
-                        $('#sliptotalsumdetail').val("0");
-                    }
-                   
+                $('#slipnodetail').val(response.slip_no);
+                $('#slipcndndetail').val(response.cn_dn);
+                $('#slippolicy_nodetail').val(response.policy_no);
+                if(response.total_sum_insured){
+                    $('#sliptotalsumdetail').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                }
+                else
+                {
+                    $('#sliptotalsumdetail').val("0");
+                }
+
                 
-                    $('#slippctdetail').val(response.insured_pct);
-                    if(response.total_sum_pct){
-                        $('#sliptotalsumpctdetail').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    }
-                    else{
-                        $('#sliptotalsumpctdetail').val("0");
-                    }
-                    
+                $('#slippctdetail').val(response.insured_pct);
+                if(response.total_sum_pct){
+                    $('#sliptotalsumpctdetail').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                }
+                else{
+                    $('#sliptotalsumpctdetail').val("0");
+                }
 
-                    $('#sliptddetail').val(response.date_transfer);
-                    $('#slipipfromdetail').val(response.insurance_period_from);
-                    $('#slipiptodetail').val(response.insurance_period_to);
 
-                    var insurance_period_from2 = response.insurance_period_from;
-                    var insurance_period_to2 = response.insurance_period_to;
-                    var days=daysBetween(insurance_period_from2, insurance_period_to2);
-                    var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
-                    var constday = days.toString() + "/365";
-                    console.log(insurance_period_from2)
-                    console.log(insurance_period_to2)
-                    console.log(days)
-                    console.log(constday)
-                    console.log(parseFloat(sum))
-                    
-                    $('#slipdaytotaldetail').val(constday);
-                    $('#sliptotalsumdatedetail').val(parseFloat(sum));
+                $('#sliptddetail').val(response.date_transfer);
+                $('#slipipfromdetail').val(response.insurance_period_from);
+                $('#slipiptodetail').val(response.insurance_period_to);
 
-                    $('#sliprpfromdetail').val(response.reinsurance_period_from);
-                    $('#sliprptodetail').val(response.reinsurance_period_to);
-                    
-                    $('#switch-proportionaldetail').val(response.proportional);
+                var insurance_period_from2 = response.insurance_period_from;
+                var insurance_period_to2 = response.insurance_period_to;
+                var days=daysBetween(insurance_period_from2, insurance_period_to2);
+                var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+                var constday = days.toString() + "/365";
+                console.log(insurance_period_from2)
+                console.log(insurance_period_to2)
+                console.log(days)
+                console.log(constday)
+                console.log(parseFloat(sum))
+
+                $('#slipdaytotaldetail').val(constday);
+                $('#sliptotalsumdatedetail').val(parseFloat(sum));
+
+                $('#sliprpfromdetail').val(response.reinsurance_period_from);
+                $('#sliprptodetail').val(response.reinsurance_period_to);
+
+                $('#switch-proportionaldetail').val(response.proportional);
                     // if(response.proportional == ''){
                         $("#btnaddlayerdetail").attr('hidden','true');
                         $("#sliplayerproportionaldetail").attr('hidden','true');
@@ -479,54 +445,15 @@ input[type=number] {
                     swal("Success!", "Data Show")
                     console.log(response)
 
-            },
-            error: function (request, status, error) {
+                },
+                error: function (request, status, error) {
                     //alert(request.responseText);
                     swal("Error!", "Get Slip Data Error", "Get Data Error");
-            }
-        });
-
-        $('input .amount').val(function(event) {
-            // skip for arrow keys
-            if(event.which >= 37 && event.which <= 40) return;
-                console.log(event.which)
-                console.log($(this).val())
-                // format number
-                $(this).val(function(index, value) {
-                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
             });
-        });
 
-        // var bld = $('#slipbld_constdetail').val();
-        // var ocp_id = $('#slipoccupacydetail').val();
-        // console.log(bld)
-        // console.log(ocp_id)
-        // $.ajax({
-        //     type:"GET",
-        //     url:"{{url('get-building-rate')}}",
-        //     data: {
-        //     building: bld,
-        //     occupacy_id:ocp_id
-        //     },
-        //     beforeSend: function() { $("body").addClass("loading");  },
-        //     complete: function() {  $("body").removeClass("loading"); },
-        //     success:function(res){  
-        //         console.log(res)      
-        //         console.log(bld)      
-        //         if(res.rate_batas_atas_building_class_1){
-        //             $("#slipbcuadetail").val(res.rate_batas_atas_building_class_1);
-        //             $("#slipbcladetail").val(res.rate_batas_bawah_building_class_1);
-        //         }
-        //         else if(res.rate_batas_atas_building_class_2){
-        //             $("#slipbcuadetail").val(res.rate_batas_atas_building_class_2);
-        //             $("#slipbcladetail").val(res.rate_batas_bawah_building_class_2);
-        //         }
-        //         else if(res.rate_batas_atas_building_class_3){
-        //             $("#slipbcuadetail").val(res.rate_batas_atas_building_class_3);
-        //             $("#slipbcladetail").val(res.rate_batas_bawah_building_class_3);
-        //         }
-        //     }
-        // });
+
+       
         
 
     });
@@ -537,20 +464,20 @@ input[type=number] {
 
     //triggered when modal is about to be shown
     $('#updatemodaldata').on('show.bs.modal', function(e) {
-        
+
          //get data-id attribute of the clicked element
-        var codesl = $(e.relatedTarget).data('book-id');
+         var codesl = $(e.relatedTarget).data('book-id');
         //alert(codesl);
         $('input .amount').val(function(event) {
             // skip for arrow keys
             if(event.which >= 37 && event.which <= 40) return;
-                console.log(event.which)
-                console.log($(this).val())
+            console.log(event.which)
+            console.log($(this).val())
                 // format number
                 $(this).val(function(index, value) {
-                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                });
             });
-        });
         
         $.ajax({
             url:'{{ url("/") }}/transaction-data/detailslip/'+codesl,
@@ -559,16 +486,16 @@ input[type=number] {
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response)
             {
-                
-                    $('#insuredIDtxtupdate').val(response.insured_id);
-                    $('#slipnumberupdate').val(response.number);
-                    $('#slipusernameupdate').val(response.username);
-                    $('#slipprodyearupdate').val(response.prod_year);
-                    $('#slipuyupdate').val(response.uy);
-                    $('#slipedupdate').val(response.endorsment);
-                    $('#slipslsupdate').val(response.selisih);
-                    $('#wpcupdate').val(response.wpc);
-                    $('#slipvbrokerupdate').val(response.v_broker);
+
+                $('#insuredIDtxtupdate').val(response.insured_id);
+                $('#slipnumberupdate').val(response.number);
+                $('#slipusernameupdate').val(response.username);
+                $('#slipprodyearupdate').val(response.prod_year);
+                $('#slipuyupdate').val(response.uy);
+                $('#slipedupdate').val(response.endorsment);
+                $('#slipslsupdate').val(response.selisih);
+                $('#wpcupdate').val(response.wpc);
+                $('#slipvbrokerupdate').val(response.v_broker);
 
                     // if(response.interest_insured)
                     // {
@@ -582,7 +509,7 @@ input[type=number] {
                     //         //$('#interestInsuredTabledetail tbody').prepend('');
                     //         $('#interestInsuredTableupdate tbody').empty();
                     //         $('#interestInsuredTableupdate tbody').prepend('<tr id="iidupdate'+obj.id+'" data-name="interestupdatevalue[]"><td data-name="'+obj.description+'">'+obj.description+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestupdate('+obj.id+')">delete</a></td></tr>')
-                
+
                     //     }
                     // }
 
@@ -605,7 +532,7 @@ input[type=number] {
 
                             $('#deductiblePanelupdate tbody').empty();
                             $('#deductiblePanelupdate tbody').prepend('<tr id="iiddeductibleupdate'+obj.id+'" data-name="deductibleupdatevalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.currencydata+'">'+obj.currencydata+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleupdate('+obj.id+')">delete</a></td></tr>');
-              
+
                         }
                     }
 
@@ -644,8 +571,8 @@ input[type=number] {
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
                             $('#installmentPanelupdate tbody').empty();
-                           $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+obj.id+'" data-name="installmentupdatevalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+obj.id+')">delete</a></td></tr>')
-               
+                            $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+obj.id+'" data-name="installmentupdatevalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+obj.id+')">delete</a></td></tr>')
+
                         }
                     }
 
@@ -667,7 +594,7 @@ input[type=number] {
                             $('#retrocessionPanelupdate tbody').empty();
                             
                             $('#retrocessionPanelupdate tbody').prepend('<tr id="iidretrocessionupdate'+obj.id+'" data-name="retrocessionupdatevalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessionupdate('+obj.id+')">delete</a></td></tr>');
-              
+
                         }
                     }
                     
@@ -675,124 +602,124 @@ input[type=number] {
 
                     if(response.status)
                     {
-                     $("#slipstatusupdate option[value=" + response.status + "]:first")[0].selected = true;
-                    }
+                       $("#slipstatusupdate option[value=" + response.status + "]:first")[0].selected = true;
+                   }
 
-                    if(response.source)
+                   if(response.source)
+                   {
+                    $("#slipcedingbrokerupdate option[value=" + response.source + "]:first")[0].selected = true;
+                }
+
+                if(response.source_2)
+                {
+                    $("#slipcedingupdate option[value=" + response.source_2 + "]:first")[0].selected = true;
+                }
+
+                if(response.currency)
+                {
+                    $("#slipcurrencyupdate option[value=" + response.currency + "]:first")[0].selected = true;
+                }
+
+                if(response.cob)
+                {
+                    $("#slipcobupdate option[value=" + response.cob + "]:first")[0].selected = true;
+                }
+
+                if(response.koc)
+                {
+                    $("#slipkocupdate option[value=" + response.koc + "]:first")[0].selected = true;
+                }
+
+                if(response.occupacy)
+                {
+                    $("#slipoccupacyupdate option[value=" + response.occupacy + "]:first")[0].selected = true;
+                }
+
+                if(response.build_const)
+                {
+                    $("#slipbld_constupdate option[value='" + response.build_const + "']:first")[0].selected = true;
+                    $("#slipbcuaupdate").val(response.build_rate_up);
+                    $("#slipbclaupdate").val(response.build_rate_down);
+                }
+
+
+
+                if(response.insured_type)
+                {
+                    $("#sliptypeupdate option[value=" + response.insured_type + "]:first")[0].selected = true;
+                }
+
+                if(response.layer_non_proportional)
+                {
+                    $("#sliplayerproportionalupdate option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
+                }
+
+                if(response.retro_backup)
+                {
+                    $("#sliprbupdate option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                    if(response.retro_backup == "NO")
                     {
-                        $("#slipcedingbrokerupdate option[value=" + response.source + "]:first")[0].selected = true;
+                        $("#tabretroupdate").attr('hidden');
                     }
-
-                    if(response.source_2)
-                    {
-                        $("#slipcedingupdate option[value=" + response.source_2 + "]:first")[0].selected = true;
+                    else if(response.retro_backup == "YES"){
+                        $("#tabretroupdate").removeAttr('hidden');
                     }
+                }
 
-                    if(response.currency)
-                    {
-                        $("#slipcurrencyupdate option[value=" + response.currency + "]:first")[0].selected = true;
-                    }
-                    
-                    if(response.cob)
-                    {
-                        $("#slipcobupdate option[value=" + response.cob + "]:first")[0].selected = true;
-                    }
+                if(response.status_log){
+                    var status_log = response.status_log;
+                    for (var i = 0; i < 5; i++){
 
-                    if(response.koc)
-                    {
-                        $("#slipkocupdate option[value=" + response.koc + "]:first")[0].selected = true;
-                    }
-
-                    if(response.occupacy)
-                    {
-                        $("#slipoccupacyupdate option[value=" + response.occupacy + "]:first")[0].selected = true;
-                    }
-
-                    if(response.build_const)
-                    {
-                        $("#slipbld_constupdate option[value='" + response.build_const + "']:first")[0].selected = true;
-                        $("#slipbcuaupdate").val(response.build_rate_up);
-                        $("#slipbclaupdate").val(response.build_rate_down);
-                    }
-
-
-
-                    if(response.insured_type)
-                    {
-                        $("#sliptypeupdate option[value=" + response.insured_type + "]:first")[0].selected = true;
-                    }
-
-                    if(response.layer_non_proportional)
-                    {
-                        $("#sliplayerproportionalupdate option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
-                    }
-
-                    if(response.retro_backup)
-                    {
-                        $("#sliprbupdate option[value=" + response.retro_backup + "]:first")[0].selected = true;
-                        if(response.retro_backup == "NO")
+                        if(status_log[i])
                         {
-                            $("#tabretroupdate").attr('hidden');
+                            var status = status_log[i].status;
+                            var datetime = status_log[i].datetime;
+                            var user = status_log[i].user;
+                            $('#stlid'+status_log[i].id).remove();
+                            $('#slipStatusTableupdate tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
                         }
-                        else if(response.retro_backup == "YES"){
-                            $("#tabretroupdate").removeAttr('hidden');
-                        }
-                    }
+                    };
+                }
 
-                    if(response.status_log){
-                        var status_log = response.status_log;
-                                for (var i = 0; i < 5; i++){
+                if(response.attacment_file){
+                    $('#aidlistupdate li').remove();
+                    var attacment_file = response.attacment_file;
+                    for (var i = 0; i < attacment_file.length; i++){
+                        var filename = attacment_file[i].filename;
+                        $('#aidlistupdate').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
+                    };
+                }
 
-                                    if(status_log[i])
-                                    {
-                                        var status = status_log[i].status;
-                                        var datetime = status_log[i].datetime;
-                                        var user = status_log[i].user;
-                                        $('#stlid'+status_log[i].id).remove();
-                                        $('#slipStatusTableupdate tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
-                                    }
-                                };
-                    }
 
-                    if(response.attacment_file){
-                        $('#aidlistupdate li').remove();
-                        var attacment_file = response.attacment_file;
-                                for (var i = 0; i < attacment_file.length; i++){
-                                    var filename = attacment_file[i].filename;
-                                    $('#aidlistupdate').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
-                                };
-                    }
-                   
-                    
-                    $('#slipnoupdate').val(response.slip_no);
-                    $('#slipcndnupdate').val(response.cn_dn);
-                    $('#slippolicy_noupdate').val(response.policy_no);
-                    $('#sliptotalsumupdate').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#sliptdupdate').val(response.date_transfer);
-                    $('#slippctupdate').val(response.insured_pct);
-                    $('#sliptotalsumpctupdate').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#slipnoupdate').val(response.slip_no);
+                $('#slipcndnupdate').val(response.cn_dn);
+                $('#slippolicy_noupdate').val(response.policy_no);
+                $('#sliptotalsumupdate').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#sliptdupdate').val(response.date_transfer);
+                $('#slippctupdate').val(response.insured_pct);
+                $('#sliptotalsumpctupdate').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
-                    $('#slipipfromupdate').val(response.insurance_period_from);
-                    $('#slipiptoupdate').val(response.insurance_period_to);
+                $('#slipipfromupdate').val(response.insurance_period_from);
+                $('#slipiptoupdate').val(response.insurance_period_to);
 
-                    var insurance_period_from2 = response.insurance_period_from;
-                    var insurance_period_to2 = response.insurance_period_to;
-                    var days=daysBetween(insurance_period_from2, insurance_period_to2);
-                    var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
-                    var constday = days.toString() + "/365";
-                    console.log(insurance_period_from2)
-                    console.log(insurance_period_to2)
-                    console.log(days)
-                    console.log(constday)
-                    console.log(parseFloat(sum))
-                    
-                    $('#slipdaytotalupdate').val(constday);
-                    $('#sliptotalsumdateupdate').val(parseFloat(sum));
+                var insurance_period_from2 = response.insurance_period_from;
+                var insurance_period_to2 = response.insurance_period_to;
+                var days=daysBetween(insurance_period_from2, insurance_period_to2);
+                var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+                var constday = days.toString() + "/365";
+                console.log(insurance_period_from2)
+                console.log(insurance_period_to2)
+                console.log(days)
+                console.log(constday)
+                console.log(parseFloat(sum))
 
-                    $('#sliprpfromupdate').val(response.reinsurance_period_from);
-                    $('#sliprptoupdate').val(response.reinsurance_period_to);
+                $('#slipdaytotalupdate').val(constday);
+                $('#sliptotalsumdateupdate').val(parseFloat(sum));
 
-                    $('#switch-proportionalupdate').val(response.proportional);
+                $('#sliprpfromupdate').val(response.reinsurance_period_from);
+                $('#sliprptoupdate').val(response.reinsurance_period_to);
+
+                $('#switch-proportionalupdate').val(response.proportional);
                     // if(response.proportional == ''){
                         $("#btnaddlayerupdate").attr('hidden','true');
                         $("#sliplayerproportionalupdate").attr('hidden','true');
@@ -800,7 +727,7 @@ input[type=number] {
                         $("#labelnpupdate").attr('hidden','true');
                     // }
 
-                   $('#sliprateupdate').val(response.rate);
+                    $('#sliprateupdate').val(response.rate);
                     $('#slipshareupdate').val(response.share);
                     $('#slipoldsumshareupdate').val(response.sum_share);
                     $('#slipsumshareupdate').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -810,7 +737,7 @@ input[type=number] {
                     $('#slipsumcommissionupdate').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#slipnetprmtonrupdate').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
-                   
+
                     $('#sliporupdate').val(response.own_retention);
                     $('#slipsumorupdate').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     
@@ -818,53 +745,14 @@ input[type=number] {
                     swal("Success!", "Data Show")
                     console.log(response)
 
-            },
-            error: function (request, status, error) {
+                },
+                error: function (request, status, error) {
                     //alert(request.responseText);
                     swal("Error!", "Get Slip Data Error", "Get Data Error");
-            }
-        });
-
-        $('input.amount').val(function(event) {
-            // skip for arrow keys
-            if(event.which >= 37 && event.which <= 40) return;
-                console.log(event.which)
-                console.log($(this).val())
-                // format number
-                $(this).val(function(index, value) {
-                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
             });
-        });
 
-        // var bld = $('#slipbld_constupdate').val();
-        // var ocp_id = $('#slipoccupacyupdate').val();
-
-        // $.ajax({
-        //     type:"GET",
-        //     url:"{{url('get-building-rate')}}",
-        //     data: {
-        //     building: bld,
-        //     occupacy_id:ocp_id
-        //     },
-        //     beforeSend: function() { $("body").addClass("loading");  },
-        //     complete: function() {  $("body").removeClass("loading"); },
-        //     success:function(res){  
-        //         console.log(res)      
-        //         console.log(bld)      
-        //         if(res.rate_batas_atas_building_class_1){
-        //             $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_1);
-        //             $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_1);
-        //         }
-        //         else if(res.rate_batas_atas_building_class_2){
-        //             $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_2);
-        //             $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_2);
-        //         }
-        //         else if(res.rate_batas_atas_building_class_3){
-        //             $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_3);
-        //             $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_3);
-        //         }
-        //     }
-        // });
+            
         
 
     });
@@ -876,20 +764,20 @@ input[type=number] {
 
     //triggered when modal is about to be shown
     $('#endorsementmodaldata').on('show.bs.modal', function(e) {
-        
+
          //get data-id attribute of the clicked element
-        var codesl = $(e.relatedTarget).data('book-id');
+         var codesl = $(e.relatedTarget).data('book-id');
         //alert(codesl);
         $('input .amount').val(function(event) {
             // skip for arrow keys
             if(event.which >= 37 && event.which <= 40) return;
-                console.log(event.which)
-                console.log($(this).val())
+            console.log(event.which)
+            console.log($(this).val())
                 // format number
                 $(this).val(function(index, value) {
-                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                });
             });
-        });
         
         $.ajax({
             url:'{{ url("/") }}/transaction-data/detailendorsementslip/'+codesl,
@@ -910,21 +798,7 @@ input[type=number] {
                     $('#wpcendorsement').val(response.wpc);
                     $('#slipvbrokerendorsement').val(response.v_broker);
 
-                    // if(response.interest_insured)
-                    // {
-                    //     var interestdata = JSON.parse(response.interest_insured); 
-
-                    //     for(var i = 0; i < interestdata.length; i++) 
-                    //     {
-                    //         var obj = interestdata[i];
-
-                    //         //console.log(obj.id);
-                    //         //$('#interestInsuredTabledetail tbody').prepend('');
-                    //         $('#interestInsuredTableendorsement tbody').empty();
-                    //         $('#interestInsuredTableendorsement tbody').prepend('<tr id="iidendorsement'+obj.id+'" data-name="interestendorsementvalue[]"><td data-name="'+obj.description+'">'+obj.description+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestendorsement('+obj.id+')">delete</a></td></tr>')
-                
-                    //     }
-                    // }
+                   
 
 
                     if(response.deductible_panel)
@@ -944,7 +818,7 @@ input[type=number] {
                             //$('#interestInsuredTabledetail tbody').prepend('');
                             $('#deductiblePanelendorsement tbody').empty();
                             $('#deductiblePanelendorsement tbody').prepend('<tr id="iiddeductibleendorsement'+obj.id+'" data-name="deductibleendorsementvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.currencydata+'">'+obj.currencydata+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleendorsement('+obj.id+')">delete</a></td></tr>');
-              
+
                         }
                     }
 
@@ -984,7 +858,7 @@ input[type=number] {
                             //$('#interestInsuredTabledetail tbody').prepend('');
                             $('#installmentPanelendorsement tbody').empty();
                             $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+obj.id+'" data-name="installmentendorsementvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+obj.id+')">delete</a></td></tr>')
-               
+
                         }
                     }
 
@@ -1006,126 +880,126 @@ input[type=number] {
                             $('#retrocessionPanelendorsement tbody').empty();
                             
                             $('#retrocessionPanelendorsement tbody').prepend('<tr id="iidretrocessionendorsement'+obj.id+'" data-name="retrocessionendorsementvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessionendorsement('+obj.id+')">delete</a></td></tr>');
-              
+
                         }
                     }
                     
                     
                     if(response.status)
                     {
-                     $("#slipstatusendorsement option[value=" + response.status + "]:first")[0].selected = true;
-                    }
+                       $("#slipstatusendorsement option[value=" + response.status + "]:first")[0].selected = true;
+                   }
 
-                    if(response.source)
+                   if(response.source)
+                   {
+                    $("#slipcedingbrokerendorsement option[value=" + response.source + "]:first")[0].selected = true;
+                }
+
+                if(response.source_2)
+                {
+                    $("#slipcedingendorsement option[value=" + response.source_2 + "]:first")[0].selected = true;
+                }
+
+                if(response.currency)
+                {
+                    $("#slipcurrencyendorsement option[value=" + response.currency + "]:first")[0].selected = true;
+                }
+
+                if(response.cob)
+                {
+                    $("#slipcobendorsement option[value=" + response.cob + "]:first")[0].selected = true;
+                }
+
+                if(response.koc)
+                {
+                    $("#slipkocendorsement option[value=" + response.koc + "]:first")[0].selected = true;
+                }
+
+                if(response.occupacy)
+                {
+                    $("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
+                }
+
+                if(response.build_const)
+                {
+                 $("#slipbld_constendorsement option[value='" + response.build_const + "']:first")[0].selected = true;
+                 $("#slipbcuaendorsement").val(response.build_rate_up);
+                 $("#slipbclaendorsement").val(response.build_rate_down);
+             }
+
+             if(response.insured_type)
+             {
+                $("#sliptypeendorsement option[value=" + response.insured_type + "]:first")[0].selected = true;
+            }
+
+            if(response.layer_non_proportional)
+            {
+                $("#sliplayerproportionalendorsement option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
+            }
+
+            if(response.retro_backup)
+            {
+                $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                if(response.retro_backup == "NO")
+                {
+                    $("#tabretroendorsement").attr('hidden');
+                }
+                else if(response.retro_backup == "YES"){
+                    $("#tabretroendorsement").removeAttr('hidden');
+                }
+            }
+
+            if(response.status_log){
+                var status_log = response.status_log;
+                for (var i = 0; i < 5; i++){
+                    if(status_log[i])
                     {
-                        $("#slipcedingbrokerendorsement option[value=" + response.source + "]:first")[0].selected = true;
+                        var status = status_log[i].status;
+                        var datetime = status_log[i].datetime;
+                        var user = status_log[i].user;
+                        $('#stlid'+status_log[i].id).remove();
+                        $('#slipStatusTableendorsement tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
                     }
+                };
+            }
 
-                    if(response.source_2)
-                    {
-                        $("#slipcedingendorsement option[value=" + response.source_2 + "]:first")[0].selected = true;
-                    }
+            if(response.attacment_file){
+                $('#aidlistendorsement li').remove();
+                var attacment_file = response.attacment_file;
+                for (var i = 0; i < attacment_file.length; i++){
+                    var filename = attacment_file[i].filename;
 
-                    if(response.currency)
-                    {
-                        $("#slipcurrencyendorsement option[value=" + response.currency + "]:first")[0].selected = true;
-                    }
-                    
-                    if(response.cob)
-                    {
-                        $("#slipcobendorsement option[value=" + response.cob + "]:first")[0].selected = true;
-                    }
+                    $('#aidlistendorsement').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
+                };
+            }
 
-                    if(response.koc)
-                    {
-                        $("#slipkocendorsement option[value=" + response.koc + "]:first")[0].selected = true;
-                    }
+            $('#slipnoendorsement').val(response.slip_no);
+            $('#slipcndnendorsement').val(response.cn_dn);
+            $('#slippolicy_noendorsement').val(response.policy_no);
+            $('#sliptotalsumendorsement').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $('#sliptdendorsement').val(response.date_transfer);
+            $('#slippctendorsement').val(response.insured_pct);
+            $('#sliptotalsumpctendorsement').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $('#slipipfromendorsement').val(response.insurance_period_from);
+            $('#slipiptoendorsement').val(response.insurance_period_to);
 
-                    if(response.occupacy)
-                    {
-                        $("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
-                    }
+            var insurance_period_from2 = response.insurance_period_from;
+            var insurance_period_to2 = response.insurance_period_to;
+            var days=daysBetween(insurance_period_from2, insurance_period_to2);
+            var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+            var constday = days.toString() + "/365";
+            console.log(insurance_period_from2)
+            console.log(insurance_period_to2)
+            console.log(days)
+            console.log(constday)
+            console.log(parseFloat(sum))
 
-                    if(response.build_const)
-                    {
-                       $("#slipbld_constendorsement option[value='" + response.build_const + "']:first")[0].selected = true;
-                       $("#slipbcuaendorsement").val(response.build_rate_up);
-                        $("#slipbclaendorsement").val(response.build_rate_down);
-                    }
+            $('#slipdaytotalendorsement').val(constday);
+            $('#sliptotalsumdateendorsement').val(parseFloat(sum));
 
-                    if(response.insured_type)
-                    {
-                        $("#sliptypeendorsement option[value=" + response.insured_type + "]:first")[0].selected = true;
-                    }
-
-                    if(response.layer_non_proportional)
-                    {
-                        $("#sliplayerproportionalendorsement option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
-                    }
-
-                    if(response.retro_backup)
-                    {
-                        $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
-                        if(response.retro_backup == "NO")
-                        {
-                            $("#tabretroendorsement").attr('hidden');
-                        }
-                        else if(response.retro_backup == "YES"){
-                            $("#tabretroendorsement").removeAttr('hidden');
-                        }
-                    }
-
-                    if(response.status_log){
-                        var status_log = response.status_log;
-                                for (var i = 0; i < 5; i++){
-                                    if(status_log[i])
-                                    {
-                                        var status = status_log[i].status;
-                                        var datetime = status_log[i].datetime;
-                                        var user = status_log[i].user;
-                                        $('#stlid'+status_log[i].id).remove();
-                                        $('#slipStatusTableendorsement tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
-                                    }
-                                };
-                    }
-
-                    if(response.attacment_file){
-                        $('#aidlistendorsement li').remove();
-                        var attacment_file = response.attacment_file;
-                                for (var i = 0; i < attacment_file.length; i++){
-                                    var filename = attacment_file[i].filename;
-                                    
-                                    $('#aidlistendorsement').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
-                                };
-                    }
-
-                    $('#slipnoendorsement').val(response.slip_no);
-                    $('#slipcndnendorsement').val(response.cn_dn);
-                    $('#slippolicy_noendorsement').val(response.policy_no);
-                    $('#sliptotalsumendorsement').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#sliptdendorsement').val(response.date_transfer);
-                    $('#slippctendorsement').val(response.insured_pct);
-                    $('#sliptotalsumpctendorsement').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipipfromendorsement').val(response.insurance_period_from);
-                    $('#slipiptoendorsement').val(response.insurance_period_to);
-
-                    var insurance_period_from2 = response.insurance_period_from;
-                    var insurance_period_to2 = response.insurance_period_to;
-                    var days=daysBetween(insurance_period_from2, insurance_period_to2);
-                    var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
-                    var constday = days.toString() + "/365";
-                    console.log(insurance_period_from2)
-                    console.log(insurance_period_to2)
-                    console.log(days)
-                    console.log(constday)
-                    console.log(parseFloat(sum))
-                    
-                    $('#slipdaytotalendorsement').val(constday);
-                    $('#sliptotalsumdateendorsement').val(parseFloat(sum));
-
-                    $('#sliprpfromendorsement').val(response.reinsurance_period_from);
-                    $('#sliprptoendorsement').val(response.reinsurance_period_to);
-                    $('#switch-proportionalendorsement').val(response.proportional);
+            $('#sliprpfromendorsement').val(response.reinsurance_period_from);
+            $('#sliprptoendorsement').val(response.reinsurance_period_to);
+            $('#switch-proportionalendorsement').val(response.proportional);
                     // if(response.proportional == ''){
                         $("#btnaddlayerendorsement").attr('hidden','true');
                         $("#sliplayerproportionalendorsement").attr('hidden','true');
@@ -1149,30 +1023,19 @@ input[type=number] {
                     console.log(response)
                     // addendorsement();
 
-            },
-            error: function (request, status, error) {
+                },
+                error: function (request, status, error) {
                     //alert(request.responseText);
                     swal("Error!", "Get Slip Data Error", "Get Data Error");
-            }
-        });
-
-        $('input.amount').val(function(event) {
-            // skip for arrow keys
-            if(event.which >= 37 && event.which <= 40) return;
-                console.log(event.which)
-                console.log($(this).val())
-                // format number
-                $(this).val(function(index, value) {
-                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
             });
-        });
 
-        console.log($('#slipnumberendorsement').val())
 
-    });
+
+});
 </script>
 
-{{-- <script type="text/javascript">
+<!-- <script type="text/javascript">
     function addendorsement(){
         var code_ms = $('#insuredIDtxt').val();
         var slipid = $('#slipidendorsement').val();
@@ -1261,97 +1124,97 @@ input[type=number] {
         console.log(conv_slipsumor)
         var real_slipsumor = parseInt(conv_slipsumor);
         console.log(real_slipsumor)
-       
+
        //ajaxfilefunction(e);
 
-        $.ajaxSetup({
-                    headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-        });
+       $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{url('transaction-data/fe-slip/endorsementstore')}}",
-           type:"POST",
-           data:{
-               code_ms:code_ms,
-               slipnumber:slipnumber,
-               slipdatetransfer:slipdatetransfer,
-               slipstatus:slipstatus,
-               sliped:sliped,
-               slipsls:slipsls,
-               slipcedingbroker:slipcedingbroker,
-               slipceding:slipceding,
-               slipcurrency:slipcurrency,
-               slipcob:slipcob,
-               slipkoc:slipkoc,
-               slipoccupacy:slipoccupacy,
-               slipbld_const:slipbld_const,
-               slipno:slipno,
-               slipcndn:slipcndn,
-               slippolicy_no:slippolicy_no,
-               sliptotalsum:real_sliptotalsum,
-               sliptype:sliptype,
-               slippct:slippct,
-               sliptotalsumpct:real_sliptotalsumpct,
-               slipipfrom:slipipfrom,
-               slipipto:slipipto,
-               sliprpfrom:sliprpfrom,
-               sliprpto:sliprpto,
-               proportional:proportional,
-               sliplayerproportional:sliplayerproportional,
-               sliprate:sliprate,
-               slipvbroker:slipvbroker,
-               slipshare:slipshare,
-               slipsumshare:real_slipsumshare,
-               slipbasicpremium:real_slipbasicpremium,
-               slipgrossprmtonr:real_slipgrossprmtonr,
-               slipcommission:slipcommission,
-               slipsumcommission:real_slipsumcommission,
-               slipnetprmtonr:real_slipnetprmtonr,
-               sliprb:sliprb,
-               slipor:slipor,
-               slipsumor:real_slipsumor,
-               wpc:wpc
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-                swal("Success!", "Insured Fire & Engineering Slip Insert Success", "success")
-                console.log(response)
-
-                
-                $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">"'+response.cedingbroker+'"</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
-                    +'</a>'
-                    +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#updatemodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
-                    +'</a>'
-                    +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#endorsementmodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
-                    +'</a><td></td></tr>');
+         url:"{{url('transaction-data/fe-slip/endorsementstore')}}",
+         type:"POST",
+         data:{
+             code_ms:code_ms,
+             slipnumber:slipnumber,
+             slipdatetransfer:slipdatetransfer,
+             slipstatus:slipstatus,
+             sliped:sliped,
+             slipsls:slipsls,
+             slipcedingbroker:slipcedingbroker,
+             slipceding:slipceding,
+             slipcurrency:slipcurrency,
+             slipcob:slipcob,
+             slipkoc:slipkoc,
+             slipoccupacy:slipoccupacy,
+             slipbld_const:slipbld_const,
+             slipno:slipno,
+             slipcndn:slipcndn,
+             slippolicy_no:slippolicy_no,
+             sliptotalsum:real_sliptotalsum,
+             sliptype:sliptype,
+             slippct:slippct,
+             sliptotalsumpct:real_sliptotalsumpct,
+             slipipfrom:slipipfrom,
+             slipipto:slipipto,
+             sliprpfrom:sliprpfrom,
+             sliprpto:sliprpto,
+             proportional:proportional,
+             sliplayerproportional:sliplayerproportional,
+             sliprate:sliprate,
+             slipvbroker:slipvbroker,
+             slipshare:slipshare,
+             slipsumshare:real_slipsumshare,
+             slipbasicpremium:real_slipbasicpremium,
+             slipgrossprmtonr:real_slipgrossprmtonr,
+             slipcommission:slipcommission,
+             slipsumcommission:real_slipsumcommission,
+             slipnetprmtonr:real_slipnetprmtonr,
+             sliprb:sliprb,
+             slipor:slipor,
+             slipsumor:real_slipsumor,
+             wpc:wpc
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+            swal("Success!", "Insured Fire & Engineering Slip Insert Success", "success")
+            console.log(response)
 
 
-                $('#slipnumberendorsement').val(response.number);
+            $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">"'+response.cedingbroker+'"</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
+                +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
+                +'</a>'
+                +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#updatemodaldata">'
+                +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
+                +'</a>'
+                +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#endorsementmodaldata">'
+                +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
+                +'</a><td></td></tr>');
 
-           },
-           error: function (request, status, error) {
+
+            $('#slipnumberendorsement').val(response.number);
+
+        },
+        error: function (request, status, error) {
                 //alert(request.responseText);
                 swal("Error!", "Insured Fire & Engineering Slip Insert Error", "Insert Error");
-           }
-       });
-    }
-</script> --}}
+            }
+        });
+   }
+</script> -->
 
 
 <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
 <script src="{{asset('js/sweetalert2.all.min.js')}}"></script>
 
 <style>
-.hide {
-    display: none;
-}
+    .hide {
+        display: none;
+    }
 </style>
 
 
@@ -1360,26 +1223,26 @@ input[type=number] {
        // Bootstrap DateTimePicker v4
        
 
-       $('#dateinstallment').datetimepicker({
-             format: 'DD/MM/YYYY'
+       $('#dateinstallment').datepicker({
+           dateFormat: 'DD/MM/YYYY'
        });
 
-       $('#dateinfrom').datetimepicker({
-             format: 'DD/MM/YYYY'
+       $('#dateinfrom').datepicker({
+           dateFormat: 'DD/MM/YYYY'
        });
 
-       $('#dateinto').datetimepicker({
-             format: 'DD/MM/YYYY'
+       $('#dateinto').datepicker({
+           dateFormat: 'DD/MM/YYYY'
        });
 
-       $('#daterefrom').datetimepicker({
-             format: 'DD/MM/YYYY'
+       $('#daterefrom').datepicker({
+           dateFormat: 'DD/MM/YYYY'
        });
 
-       $('#datereto').datetimepicker({
-             format: 'DD/MM/YYYY'
+       $('#datereto').datepicker({
+           dateFormat: 'DD/MM/YYYY'
        });
-    });      
+   });      
 
     $('#slipipfrom').change(function(){
         $('#sliprpfrom').val($(this).val());
@@ -1461,8 +1324,8 @@ input[type=number] {
                 type:"GET",
                 url:"{{url('get-building-rate')}}",
                 data: {
-                building: bld,
-                occupacy_id:ocp_id
+                    building: bld,
+                    occupacy_id:ocp_id
                 },
                 beforeSend: function() { $("body").addClass("loading");  },
                 complete: function() {  $("body").removeClass("loading"); },
@@ -1535,14 +1398,14 @@ input[type=number] {
                     }
                 }
             });
-        }else{
-            swal("Error!", "Please choose occupacy first", "Get Building Rate Error");
-        }   
-    });
+}else{
+    swal("Error!", "Please choose occupacy first", "Get Building Rate Error");
+}   
+});
 
-    $('#slipbld_constupdate').change(function(){
-        var bld = $(this).val();
-        var ocp_id = $('#slipoccupacyupdate').val();
+$('#slipbld_constupdate').change(function(){
+    var bld = $(this).val();
+    var ocp_id = $('#slipoccupacyupdate').val();
         // alert(bld);
         console.log(bld)
         console.log(ocp_id)
@@ -1552,8 +1415,8 @@ input[type=number] {
                 type:"GET",
                 url:"{{url('get-building-rate')}}",
                 data: {
-                building: bld,
-                occupacy_id:ocp_id
+                    building: bld,
+                    occupacy_id:ocp_id
                 },
                 beforeSend: function() { $("body").addClass("loading");  },
                 complete: function() {  $("body").removeClass("loading"); },
@@ -1611,9 +1474,9 @@ input[type=number] {
         }   
     });
 
-    $('#slipbld_constendorsement').change(function(){
-        var bld = $(this).val();
-        var ocp_id = $('#slipoccupacyendorsement').val();
+$('#slipbld_constendorsement').change(function(){
+    var bld = $(this).val();
+    var ocp_id = $('#slipoccupacyendorsement').val();
         // alert(bld);
         console.log(bld)
         console.log(ocp_id)
@@ -1623,8 +1486,8 @@ input[type=number] {
                 type:"GET",
                 url:"{{url('get-building-rate')}}",
                 data: {
-                building: bld,
-                occupacy_id:ocp_id
+                    building: bld,
+                    occupacy_id:ocp_id
                 },
                 beforeSend: function() { $("body").addClass("loading");  },
                 complete: function() {  $("body").removeClass("loading"); },
@@ -1690,21 +1553,21 @@ input[type=number] {
         var insuredid = $('#insuredIDtxt').val();  
         //alert(countryID);
         if(cedbrok){
-        $.ajax({
-            type:"GET",
-            url:"{{url('get-ceding-detail')}}?ceding_id="+cedbrok+"&insured_id="+insuredid,
-            beforeSend: function() { $("body").addClass("loading");  },
-            complete: function() {  $("body").removeClass("loading"); },
-            success:function(res){  
-                console.log(res)      
-                if(res.type == 4){
-                    $("#slipceding option").remove();
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-ceding-detail')}}?ceding_id="+cedbrok+"&insured_id="+insuredid,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){  
+                    console.log(res)      
+                    if(res.type == 4){
+                        $("#slipceding option").remove();
 
 
-                    $("#slipceding").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                        $("#slipceding").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
 
-                    var ceding_curr = $('#slipceding').val();
-                    var totalsum = $("#sliptotalsum").val();
+                        var ceding_curr = $('#slipceding').val();
+                        var totalsum = $("#sliptotalsum").val();
                         if(res.amountlist > 0)
                         {
                             console.log('sum amount ' + res.sumamount)
@@ -1717,20 +1580,20 @@ input[type=number] {
                         {
                             console.log('hasilnya ' + res)
                         }
-                    
-                
-                }else{
-                    $("#slipceding option").remove();
-                    $("#slipceding").append('<option value="#" selected disabled> select ceding </option>');
-                    $("#sliptotalsum").val('');
-                    $("#sliptotalsum2").val('');
-                    $.each(res,function(key,value){
-                    $("#slipceding").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
-                        
-                    });
+
+
+                    }else{
+                        $("#slipceding option").remove();
+                        $("#slipceding").append('<option value="#" selected disabled> select ceding </option>');
+                        $("#sliptotalsum").val('');
+                        $("#sliptotalsum2").val('');
+                        $.each(res,function(key,value){
+                            $("#slipceding").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+
+                        });
+                    }
                 }
-            }
-        });
+            });
         }else{
             swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
         }   
@@ -1740,41 +1603,41 @@ input[type=number] {
         var ceding = $(this).val();
         var insuredid = $('#insuredIDtxt').val();  
         if(ceding){
-        $.ajax({
-            type:"GET",
-            url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
-            beforeSend: function() { $("body").addClass("loading");  },
-            complete: function() {  $("body").removeClass("loading"); },
-            success:function(res){  
-                console.log(res)      
-                if(res.type == 4){
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){  
+                    console.log(res)      
+                    if(res.type == 4){
                     // $("#slipceding option").remove();
 
 
                     $("#slipceding").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
                     var ceding_curr = $('#slipceding').val();
                     var totalsum = $("#sliptotalsum").val();
-                        if(res.amountlist > 0)
-                        {
-                            console.log('sum amount ' + res.sumamount)
-                            var sum = res.sumamount;
-                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $("#sliptotalsum").val(real_sum);
-                            $("#sliptotalsum2").val(real_sum);
-                        }
-                        else
-                        {
-                            console.log('hasilnya ' + res)
-                        }
+                    if(res.amountlist > 0)
+                    {
+                        console.log('sum amount ' + res.sumamount)
+                        var sum = res.sumamount;
+                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $("#sliptotalsum").val(real_sum);
+                        $("#sliptotalsum2").val(real_sum);
+                    }
+                    else
+                    {
+                        console.log('hasilnya ' + res)
+                    }
                     
-                
+
                 }else{
                     $("#slipceding option").remove();
 
                     $.each(res,function(key,value){
-                         $("#slipceding").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                       $("#slipceding").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
                        
-                    });
+                   });
                 }
             }
         });
@@ -1790,21 +1653,21 @@ input[type=number] {
         var insuredid = $('#insuredIDtxtupdate').val();  
         //alert(countryID);
         if(cedbrok){
-        $.ajax({
-            type:"GET",
-            url:"{{url('get-ceding-detail')}}?ceding_id="+cedbrok+"&insured_id="+insuredid,
-            beforeSend: function() { $("body").addClass("loading");  },
-            complete: function() {  $("body").removeClass("loading"); },
-            success:function(res){  
-                console.log(res)      
-                if(res.type == 4){
-                    $("#slipcedingupdate option").remove();
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-ceding-detail')}}?ceding_id="+cedbrok+"&insured_id="+insuredid,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){  
+                    console.log(res)      
+                    if(res.type == 4){
+                        $("#slipcedingupdate option").remove();
 
 
-                    $("#slipcedingupdate").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                        $("#slipcedingupdate").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
 
-                    var ceding_curr = $('#slipcedingupdate').val();
-                    var totalsum = $("#sliptotalsumupdate").val();
+                        var ceding_curr = $('#slipcedingupdate').val();
+                        var totalsum = $("#sliptotalsumupdate").val();
                         if(res.amountlist > 0)
                         {
                             console.log('sum amount ' + res.sumamount)
@@ -1908,29 +1771,29 @@ input[type=number] {
                         {
                             console.log('hasilnya ' + res)
                         }
-                    
-                
-                }else{
-                    $("#slipcedingupdate option").remove();
-                    $("#slipcedingupdate").append('<option value="#" selected disabled> select ceding </option>');
-                    $("#sliptotalsumupdate").val('');
-                    $("#sliptotalsumupdate2").val('');
-                    $.each(res,function(key,value){
-                        $("#slipcedingupdate").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
-                        
-                    });
-                }
-            }
-        });
-        }else{
-            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
-        }   
-    });
 
-    $('#slipcedingupdate').change(function(){
-        var ceding = $(this).val();
-        var insuredid = $('#insuredIDtxtupdate').val();  
-        if(ceding){
+
+                    }else{
+                        $("#slipcedingupdate option").remove();
+                        $("#slipcedingupdate").append('<option value="#" selected disabled> select ceding </option>');
+                        $("#sliptotalsumupdate").val('');
+                        $("#sliptotalsumupdate2").val('');
+                        $.each(res,function(key,value){
+                            $("#slipcedingupdate").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+
+                        });
+                    }
+                }
+            });
+}else{
+    swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+}   
+});
+
+$('#slipcedingupdate').change(function(){
+    var ceding = $(this).val();
+    var insuredid = $('#insuredIDtxtupdate').val();  
+    if(ceding){
         $.ajax({
             type:"GET",
             url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
@@ -1944,126 +1807,126 @@ input[type=number] {
                     $("#slipcedingupdate").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
                     var ceding_curr = $('#slipcedingupdate').val();
                     var totalsum = $("#sliptotalsumupdate").val();
-                        if(res.amountlist > 0)
-                        {
-                            console.log('sum amount ' + res.sumamount)
-                            var sum = res.sumamount;
-                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $("#sliptotalsumupdate").val(real_sum);
-                            $("#sliptotalsumupdate2").val(real_sum);
+                    if(res.amountlist > 0)
+                    {
+                        console.log('sum amount ' + res.sumamount)
+                        var sum = res.sumamount;
+                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $("#sliptotalsumupdate").val(real_sum);
+                        $("#sliptotalsumupdate2").val(real_sum);
 
-                            var tsi = $("#sliptotalsumupdate").val();
-                            var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+                        var tsi = $("#sliptotalsumupdate").val();
+                        var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
-                            var pct =  parseFloat($('#slippctupdate').val())/100;
-                            var sumpct = isNaN(pct * parseFloat(conv_tsi)) ? 0 :(pct * parseFloat(conv_tsi)).toFixed(2) ;
-                            console.log(sumpct)
-                            var real_sumpct = sumpct.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#sliptotalsumpctupdate').val(real_sumpct);
-                            $('#sliptotalsumpctupdate2').val(real_sumpct);
+                        var pct =  parseFloat($('#slippctupdate').val())/100;
+                        var sumpct = isNaN(pct * parseFloat(conv_tsi)) ? 0 :(pct * parseFloat(conv_tsi)).toFixed(2) ;
+                        console.log(sumpct)
+                        var real_sumpct = sumpct.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#sliptotalsumpctupdate').val(real_sumpct);
+                        $('#sliptotalsumpctupdate2').val(real_sumpct);
 
-                            var percent =  parseFloat($('#slipdppercentageupdate').val()) / 100;
-                            var sumdpamount = isNaN(percent * parseFloat(conv_tsi)) ? 0 :(percent * parseFloat(conv_tsi)) ;
-                            var real_sumdpamount = sumdpamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipdpamountupdate').val(real_sumdpamount);
-                            $('#slipdpamountupdate2').val(real_sumdpamount);
+                        var percent =  parseFloat($('#slipdppercentageupdate').val()) / 100;
+                        var sumdpamount = isNaN(percent * parseFloat(conv_tsi)) ? 0 :(percent * parseFloat(conv_tsi)) ;
+                        var real_sumdpamount = sumdpamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#slipdpamountupdate').val(real_sumdpamount);
+                        $('#slipdpamountupdate2').val(real_sumdpamount);
 
-                            var shareslip =  parseFloat($('#slipshareupdate').val()) / 100 ;
-                            var sumshare =isNaN( shareslip * parseFloat(conv_tsi)) ? 0 :( shareslip * parseFloat(conv_tsi)).toFixed(2) ;
-                            var real_sumshare = sumshare.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipsumshareupdate').val(real_sumshare);
-                            $('#slipsumshareupdate2').val(real_sumshare);
+                        var shareslip =  parseFloat($('#slipshareupdate').val()) / 100 ;
+                        var sumshare =isNaN( shareslip * parseFloat(conv_tsi)) ? 0 :( shareslip * parseFloat(conv_tsi)).toFixed(2) ;
+                        var real_sumshare = sumshare.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#slipsumshareupdate').val(real_sumshare);
+                        $('#slipsumshareupdate2').val(real_sumshare);
 
-                            var insurance_period_from = $('#slipipfromupdate').val().split('-');
-                            var insurance_period_to = $('#slipiptoupdate').val().split('-');
-                            var insurance_period_from2 = $('#slipipfromupdate').val();
-                            var insurance_period_to2 = $('#slipiptoupdate').val();
-                            var month_from = parseInt(insurance_period_from[1]);
-                            var month_to = parseInt(insurance_period_to[1]);
-                            var month = (month_to - month_from);
-                            var days=daysBetween(insurance_period_from2, insurance_period_to2);
-                            var insurance = (days/365);
-                            var rateslip =  parseFloat($('#sliprateupdate').val()) / 1000;
-                            var sumbp = isNaN((rateslip * parseFloat(conv_tsi)) * insurance) ? 0 :((rateslip * parseFloat(conv_tsi)) * insurance).toFixed(2) ;
-                            var real_sumbp = sumbp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipbasicpremiumupdate').val(real_sumbp);
+                        var insurance_period_from = $('#slipipfromupdate').val().split('-');
+                        var insurance_period_to = $('#slipiptoupdate').val().split('-');
+                        var insurance_period_from2 = $('#slipipfromupdate').val();
+                        var insurance_period_to2 = $('#slipiptoupdate').val();
+                        var month_from = parseInt(insurance_period_from[1]);
+                        var month_to = parseInt(insurance_period_to[1]);
+                        var month = (month_to - month_from);
+                        var days=daysBetween(insurance_period_from2, insurance_period_to2);
+                        var insurance = (days/365);
+                        var rateslip =  parseFloat($('#sliprateupdate').val()) / 1000;
+                        var sumbp = isNaN((rateslip * parseFloat(conv_tsi)) * insurance) ? 0 :((rateslip * parseFloat(conv_tsi)) * insurance).toFixed(2) ;
+                        var real_sumbp = sumbp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#slipbasicpremiumupdate').val(real_sumbp);
 
-                            var sumgrossprmtonr = isNaN(rateslip * shareslip * parseFloat(conv_tsi)) ? 0 :(rateslip * shareslip * parseFloat(conv_tsi)).toFixed(2);
-                            var real_sumgrossprmtonr = sumgrossprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipgrossprmtonrupdate').val(real_sumgrossprmtonr);
-                            $('#slipgrossprmtonrupdate2').val(real_sumgrossprmtonr);
+                        var sumgrossprmtonr = isNaN(rateslip * shareslip * parseFloat(conv_tsi)) ? 0 :(rateslip * shareslip * parseFloat(conv_tsi)).toFixed(2);
+                        var real_sumgrossprmtonr = sumgrossprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#slipgrossprmtonrupdate').val(real_sumgrossprmtonr);
+                        $('#slipgrossprmtonrupdate2').val(real_sumgrossprmtonr);
 
-                            var sumshare = $('#slipsumshareupdate').val() ;
-                            var conv_sumshare = parseInt(sumshare.replace(/,/g, ""));
-                            var orpercent = parseFloat($('#sliporupdate').val()) / 100;
-                            var sumor = isNaN(orpercent * parseFloat(conv_sumshare)) ? 0 :(orpercent * parseFloat(conv_sumshare)).toFixed(2);
-                            var real_sumor = sumor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipsumorupdate').val(real_sumor);
-                            $('#slipsumorupdate2').val(real_sumor);
+                        var sumshare = $('#slipsumshareupdate').val() ;
+                        var conv_sumshare = parseInt(sumshare.replace(/,/g, ""));
+                        var orpercent = parseFloat($('#sliporupdate').val()) / 100;
+                        var sumor = isNaN(orpercent * parseFloat(conv_sumshare)) ? 0 :(orpercent * parseFloat(conv_sumshare)).toFixed(2);
+                        var real_sumor = sumor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#slipsumorupdate').val(real_sumor);
+                        $('#slipsumorupdate2').val(real_sumor);
 
-                            var commision =  parseFloat($('#slipcommissionupdate').val()) / 100;
-                            var feebroker = $('#slipvbrokerupdate').val() / 100;
+                        var commision =  parseFloat($('#slipcommissionupdate').val()) / 100;
+                        var feebroker = $('#slipvbrokerupdate').val() / 100;
 
-                            var sumgrossprmtonr2 = $("#slipgrossprmtonrupdate").val();
-                            var conv_sumgrossprmtonr2 = parseInt(sumgrossprmtonr.replace(/,/g, ""));
-                            var sum_commision = isNaN(commision * parseFloat(conv_sumgrossprmtonr2)) ? 0 :(commision * parseFloat(conv_sumgrossprmtonr2)).toFixed(2);
-                            var real_sum_commision = sum_commision.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            var sumnetprmtonr = isNaN( parseFloat(conv_sumgrossprmtonr2) * (100/100 - commision - feebroker)) ? 0 :(parseFloat(conv_sumgrossprmtonr2) * (100/100 - commision - feebroker)).toFixed(2);
-                            var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipsumcommissionupdate').val(real_sum_commision);
-                            $('#slipsumcommissionupdate2').val(real_sum_commision);
-                            $('#slipnetprmtonrupdate').val(real_sumnetprmtonr);
-                            $('#slipnetprmtonrupdate2').val(real_sumnetprmtonr);
+                        var sumgrossprmtonr2 = $("#slipgrossprmtonrupdate").val();
+                        var conv_sumgrossprmtonr2 = parseInt(sumgrossprmtonr.replace(/,/g, ""));
+                        var sum_commision = isNaN(commision * parseFloat(conv_sumgrossprmtonr2)) ? 0 :(commision * parseFloat(conv_sumgrossprmtonr2)).toFixed(2);
+                        var real_sum_commision = sum_commision.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        var sumnetprmtonr = isNaN( parseFloat(conv_sumgrossprmtonr2) * (100/100 - commision - feebroker)) ? 0 :(parseFloat(conv_sumgrossprmtonr2) * (100/100 - commision - feebroker)).toFixed(2);
+                        var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#slipsumcommissionupdate').val(real_sum_commision);
+                        $('#slipsumcommissionupdate2').val(real_sum_commision);
+                        $('#slipnetprmtonrupdate').val(real_sumnetprmtonr);
+                        $('#slipnetprmtonrupdate2').val(real_sumnetprmtonr);
 
-                            var ippercent =  parseFloat($('#slipippercentageupdate').val()) / 100;
-                            var sumnetprtonr2 = $("#slipnetprmtonrupdate").val();
-                            var conv_sumnetprtonr = parseInt(sumnetprtonr2.replace(/,/g, ""));
-                            var sumip = isNaN(ippercent *  parseFloat(conv_sumnetprtonr)) ? 0 :(ippercent *  parseFloat(conv_sumnetprtonr)).toFixed(2);
-                            var real_sumip = sumip.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipipamountupdate').val(real_sumip);
-                            $('#slipipamountupdate2').val(real_sumip);
+                        var ippercent =  parseFloat($('#slipippercentageupdate').val()) / 100;
+                        var sumnetprtonr2 = $("#slipnetprmtonrupdate").val();
+                        var conv_sumnetprtonr = parseInt(sumnetprtonr2.replace(/,/g, ""));
+                        var sumip = isNaN(ippercent *  parseFloat(conv_sumnetprtonr)) ? 0 :(ippercent *  parseFloat(conv_sumnetprtonr)).toFixed(2);
+                        var real_sumip = sumip.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#slipipamountupdate').val(real_sumip);
+                        $('#slipipamountupdate2').val(real_sumip);
 
-                            var percentval =  parseFloat($('#sliprppercentageupdate').val()) / 100;
-                            var sumor2 = $('#slipsumorupdate').val() ;
-                            var conv_sumor = parseInt(sumor2.replace(/,/g, ""));
-                            var sumrpamount = isNaN(percentval * parseFloat(conv_sumor)) ? 0 :(percentval * parseFloat(conv_sumor)).toFixed(2);
-                            var real_sumrpamount = sumrpamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#sliprpamountupdate').val(real_sumrpamount);
-                            $('#sliprpamountupdate2').val(real_sumrpamount);
+                        var percentval =  parseFloat($('#sliprppercentageupdate').val()) / 100;
+                        var sumor2 = $('#slipsumorupdate').val() ;
+                        var conv_sumor = parseInt(sumor2.replace(/,/g, ""));
+                        var sumrpamount = isNaN(percentval * parseFloat(conv_sumor)) ? 0 :(percentval * parseFloat(conv_sumor)).toFixed(2);
+                        var real_sumrpamount = sumrpamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#sliprpamountupdate').val(real_sumrpamount);
+                        $('#sliprpamountupdate2').val(real_sumrpamount);
 
-                            var percentval2 =  parseFloat($('#sliprppercentageupdate').val());
-                            var orpercent = parseFloat($('#sliporupdate').val());
-                            var sumpercentor = isNaN(orpercent - percentval2) ? 0 :(orpercent - percentval2);
-                            $('#sliporupdate').val(sumpercentor);
+                        var percentval2 =  parseFloat($('#sliprppercentageupdate').val());
+                        var orpercent = parseFloat($('#sliporupdate').val());
+                        var sumpercentor = isNaN(orpercent - percentval2) ? 0 :(orpercent - percentval2);
+                        $('#sliporupdate').val(sumpercentor);
 
-                            var persentageec =  parseFloat($('#slipnilaiecupdate').val()) / 1000;
-                            var sliptotalsum =  $('#sliptotalsumupdate').val();
-                            var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
-                            var sumec = isNaN(conv_sliptotalsum * persentageec) ? 0 :(conv_sliptotalsum * persentageec).toFixed(2) ;
-                            var real_sumec = sumec.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipamountecupdate').val(real_sumec);
-                            $('#slipamountecupdate2').val(real_sumec);
-                        }
-                        else
-                        {
-                            console.log('hasilnya ' + res)
-                        }
+                        var persentageec =  parseFloat($('#slipnilaiecupdate').val()) / 1000;
+                        var sliptotalsum =  $('#sliptotalsumupdate').val();
+                        var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
+                        var sumec = isNaN(conv_sliptotalsum * persentageec) ? 0 :(conv_sliptotalsum * persentageec).toFixed(2) ;
+                        var real_sumec = sumec.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#slipamountecupdate').val(real_sumec);
+                        $('#slipamountecupdate2').val(real_sumec);
+                    }
+                    else
+                    {
+                        console.log('hasilnya ' + res)
+                    }
                     
-                
+
                 }else{
                     // $("#slipceding option").remove();
                     $("#slipcedingupdate").append('<option value="#" selected disabled> select ceding </option>');
                     $("#sliptotalsumupdate").val('');
                     $.each(res,function(key,value){
-                         $("#slipcedingupdate").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
-                    });
+                       $("#slipcedingupdate").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                   });
                 }
             }
         });
-        }else{
-            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
-        }   
-    });
+}else{
+    swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+}   
+});
 </script>
 
 <script type="text/javascript">
@@ -2072,21 +1935,21 @@ input[type=number] {
         var insuredid = $('#insuredIDtxtendorsement').val();  
         //alert(countryID);
         if(cedbrok){
-        $.ajax({
-            type:"GET",
-            url:"{{url('get-ceding-detail')}}?ceding_id="+cedbrok+"&insured_id="+insuredid,
-            beforeSend: function() { $("body").addClass("loading");  },
-            complete: function() {  $("body").removeClass("loading"); },
-            success:function(res){  
-                console.log(res)      
-                if(res.type == 4){
-                    $("#slipcedingendorsement option").remove();
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-ceding-detail')}}?ceding_id="+cedbrok+"&insured_id="+insuredid,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){  
+                    console.log(res)      
+                    if(res.type == 4){
+                        $("#slipcedingendorsement option").remove();
 
 
-                    $("#slipcedingendorsement").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                        $("#slipcedingendorsement").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
 
-                    var ceding_curr = $('#slipcedingendorsement').val();
-                    var totalsum = $("#sliptotalsumendorsement").val();
+                        var ceding_curr = $('#slipcedingendorsement').val();
+                        var totalsum = $("#sliptotalsumendorsement").val();
                         if(res.amountlist > 0)
                         {
                             console.log('sum amount ' + res.sumamount)
@@ -2098,9 +1961,9 @@ input[type=number] {
                         {
                             console.log('hasilnya ' + res)
                         }
-                    
-                
-                }else{
+
+
+                    }else{
                     // $("#slipcedingendorsement option").remove();
                     $("#slipcedingendorsement").append('<option value="#" selected disabled> select ceding </option>');
                     $("#sliptotalsumendorsement").val('');
@@ -2119,40 +1982,40 @@ input[type=number] {
         var ceding = $(this).val();
         var insuredid = $('#insuredIDtxtendorsement').val();  
         if(ceding){
-        $.ajax({
-            type:"GET",
-            url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
-            beforeSend: function() { $("body").addClass("loading");  },
-            complete: function() {  $("body").removeClass("loading"); },
-            success:function(res){  
-                console.log(res)      
-                if(res.type == 4){
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){  
+                    console.log(res)      
+                    if(res.type == 4){
                     // $("#slipcedingendorsement option").remove();
 
 
                     $("#slipcedingendorsement").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
                     var ceding_curr = $('#slipcedingendorsement').val();
                     var totalsum = $("#sliptotalsumendorsement").val();
-                        if(res.amountlist > 0)
-                        {
-                            console.log('sum amount ' + res.sumamount)
-                            var sum = res.sumamount;
-                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $("#sliptotalsumendorsement").val(real_sum);
-                        }
-                        else
-                        {
-                            console.log('hasilnya ' + res)
-                        }
+                    if(res.amountlist > 0)
+                    {
+                        console.log('sum amount ' + res.sumamount)
+                        var sum = res.sumamount;
+                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $("#sliptotalsumendorsement").val(real_sum);
+                    }
+                    else
+                    {
+                        console.log('hasilnya ' + res)
+                    }
                     
-                
+
                 }else{
                     $("#slipceding option").remove();
 
                     $.each(res,function(key,value){
-                         $("#slipcedingendorsement").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                       $("#slipcedingendorsement").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
                        
-                    });
+                   });
                 }
             }
         });
@@ -2164,31 +2027,31 @@ input[type=number] {
 
 
 <script>
-$( "#autocomplete" ).autocomplete({
-  source: [
-  @foreach (@$costumer as $costumerdata)
-   "{{@$costumerdata->company_name }}",
-  @endforeach
-  ]
-});
+    $( "#autocomplete" ).autocomplete({
+      source: [
+      @foreach (@$costumer as $costumerdata)
+      "{{@$costumerdata->company_name }}",
+      @endforeach
+      ]
+  });
 </script>
 
 <script>
     $( "#autocomplete2" ).autocomplete({
       source: [
       @foreach (@$costumer as $costumerdata)
-       "{{@$costumerdata->company_name }}",
+      "{{@$costumerdata->company_name }}",
       @endforeach
       ]
-    });
+  });
 </script>
 
 <script>
- var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-$(document).ready(function() { 
-        
-        
-        
+   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+   $(document).ready(function() { 
+
+
+
         // $('.uang').mask("#,##0.00", {reverse: true});
         console.log($('#feshareto').val())
 
@@ -2210,48 +2073,48 @@ $(document).ready(function() {
         
         
         $("#btn-success2").click(function(){ 
-        var html = $(".clone2").html();
-        $(".increment2").after(html);
+            var html = $(".clone2").html();
+            $(".increment2").after(html);
         });
 
         $("body").on("click","#btn-danger2",function(){ 
-        $(this).parents("#control-group2").remove();
+            $(this).parents("#control-group2").remove();
         });
 
 
         $( "#employee_search" ).autocomplete({
-        source: function( request, response ) {
+            source: function( request, response ) {
           // Fetch data
           $.ajax({
             url:"{{route('customer.getCostumers')}}",
             type: 'post',
             dataType: "json",
             data: {
-               _token: CSRF_TOKEN,
-               search: request.term
-            },
-            success: function( data ) {
-               response( data );
+             _token: CSRF_TOKEN,
+             search: request.term
+         },
+         success: function( data ) {
+             response( data );
               // alert(data[0].label);
-            },
-            fail : function ( jqXHR, textStatus, errorThrown ) {
-                console.log(jqXHR);
-                console.log(textStatus);
-                console.log(errorThrown);
-            }
-          });
-        },
-        select: function (event, ui) {
+          },
+          fail : function ( jqXHR, textStatus, errorThrown ) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        }
+    });
+      },
+      select: function (event, ui) {
            // Set selection
            //alert(ui.item.label);
 
            $('#employee_search').val(ui.item.label); // display the selected text
            //$('#employeeid').val(ui.item.value); // save selected id to input
            return false;
-        }
-      });
+       }
+   });
         
-});
+    });
 </script>
 
 
@@ -2378,88 +2241,88 @@ $(document).ready(function() {
         var countryID = $(this).val();  
         //alert(countryID);
         if(countryID){
-        $.ajax({
-            type:"GET",
-            url:"{{url('get-state-lookup')}}?country_id="+countryID,
-            beforeSend: function() { $("body").addClass("loading");  },
-            complete: function() {  $("body").removeClass("loading"); },
-            success:function(res){  
-                console.log(res)      
-                if(res){
-                    $("#state_location").empty();
-                    $("#state_location").append('<option selected disabled>Select States/Province</option>');
-                    $.each(res,function(key,value){
-                    $("#state_location").append('<option value="'+key+'">'+value+'</option>');
-                    });
-                
-                }else{
-                    $("#state_location").append('<option value="" selected disabled>get value error</option>');
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-state-lookup')}}?country_id="+countryID,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){  
+                    console.log(res)      
+                    if(res){
+                        $("#state_location").empty();
+                        $("#state_location").append('<option selected disabled>Select States/Province</option>');
+                        $.each(res,function(key,value){
+                            $("#state_location").append('<option value="'+key+'">'+value+'</option>');
+                        });
+
+                    }else{
+                        $("#state_location").append('<option value="" selected disabled>get value error</option>');
+                    }
                 }
-            }
-        });
+            });
         }else{
-        $("#state_location").append('<option value="" selected disabled>countryID null</option>');
-        $("#city_location").empty();
+            $("#state_location").append('<option value="" selected disabled>countryID null</option>');
+            $("#city_location").empty();
         }   
     });
 
     $('#state_location').on('change',function(){
         var stateID = $(this).val();  
         //alert(stateID);
-            if(stateID){
-                $.ajax({
-                    type:"GET",
-                    url:"{{url('get-city-lookup')}}?state_id="+stateID,
-                    beforeSend: function() { $("body").addClass("loading");  },
-                    complete: function() {  $("body").removeClass("loading"); },
-                    success:function(res){        
-                        if(res){
-                            $("#city_location").empty();
-                            $("#city_location").append('<option selected disabled>Select City</option>');
-                            $.each(res,function(key,value){
-                                $("#city_location").append('<option value="'+key+'">'+value+'</option>');
-                            });
+        if(stateID){
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-city-lookup')}}?state_id="+stateID,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){        
+                    if(res){
+                        $("#city_location").empty();
+                        $("#city_location").append('<option selected disabled>Select City</option>');
+                        $.each(res,function(key,value){
+                            $("#city_location").append('<option value="'+key+'">'+value+'</option>');
+                        });
                         
-                        }else{
-                            $("#city_location").append('<option value="" selected disabled>get value error</option>');
-                        }
+                    }else{
+                        $("#city_location").append('<option value="" selected disabled>get value error</option>');
                     }
-                });
-            }else{
-                $("#city_location").append('<option value="" selected disabled>countryID null</option>');
-                $("#address_location").empty();
-            }
-            
+                }
+            });
+        }else{
+            $("#city_location").append('<option value="" selected disabled>countryID null</option>');
+            $("#address_location").empty();
+        }
+
     });
 
 
     $('#city_location').on('change',function(){
         var cityID = $(this).val();  
         //alert(stateID);
-            if(cityID){
-                $.ajax({
-                    type:"GET",
-                    url:"{{url('get-address-lookup')}}?city_id="+cityID,
-                    beforeSend: function() { $("body").addClass("loading");  },
-                    complete: function() {  $("body").removeClass("loading"); },
-                    success:function(res){        
-                        if(res){
-                            $("#address_location").empty();
-                            $("#address_location").append('<option selected disabled>Select Address</option>');
-                            $.each(res,function(key,value){
-                                $("#address_location").append('<option value="'+key+'">'+value+'</option>');
-                            });
+        if(cityID){
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-address-lookup')}}?city_id="+cityID,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){        
+                    if(res){
+                        $("#address_location").empty();
+                        $("#address_location").append('<option selected disabled>Select Address</option>');
+                        $.each(res,function(key,value){
+                            $("#address_location").append('<option value="'+key+'">'+value+'</option>');
+                        });
                         
-                        }else{
-                            $("#address_location").append('<option value="" selected disabled>get value error</option>');
-                        }
+                    }else{
+                        $("#address_location").append('<option value="" selected disabled>get value error</option>');
                     }
-                });
-            }else{
-                $("#address_location").append('<option value="" selected disabled>countryID null</option>');
-                
-            }
-            
+                }
+            });
+        }else{
+            $("#address_location").append('<option value="" selected disabled>countryID null</option>');
+
+        }
+
     });
 </script>
 
@@ -2471,7 +2334,7 @@ $(document).ready(function() {
 
          //get data-id attribute of the clicked element
 
-        var codesl = $(e.relatedTarget).data('look-id');
+         var codesl = $(e.relatedTarget).data('look-id');
         //alert(codesl);
         $('#insurednoloc').val(codesl);
     });
@@ -2480,18 +2343,18 @@ $(document).ready(function() {
 
 
 <script type='text/javascript'>
-     $('#form-addlocation').submit(function(e){
-        e.preventDefault();
+   $('#form-addlocation').submit(function(e){
+    e.preventDefault();
 
-        var lookupcode = $('#address_location').val();
-        var insured_id = $('#insuredIDtxt').val();
-        var token = $('input[name=_token]').val();
-        
-        var country = $('#country_location').val();
-        var state = $('#state_location').val();
-        var city = $('#city_location').val();        
-        var adrress = $('#address_location').val();
-        
+    var lookupcode = $('#address_location').val();
+    var insured_id = $('#insuredIDtxt').val();
+    var token = $('input[name=_token]').val();
+
+    var country = $('#country_location').val();
+    var state = $('#state_location').val();
+    var city = $('#city_location').val();        
+    var adrress = $('#address_location').val();
+
         //var slipinterestid = $('#slipinterestlistlocation').val();
         //var cnno = $('#cnno').val();
         //var certno = $('#certno').val();
@@ -2518,70 +2381,70 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-            console.log(response)
-                    
+                console.log(response)
+
                     //var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amountlocation);
                     
                     $('#locRiskTable > tbody:last-child').prepend('<tr id="sid'+response.id+'">'+
-                                                    '<td>'+response.loc_code+'</td>'+
-                                                    '<td>'+response.address+'<br>'+response.city_name+'<br>'+response.state_name+'<br>'+response.latitude+' , '+response.longtitude+'<br>'+ response.postal_code+'</td>'+
-                                                    '<td>'+response.latitude+' , '+response.longtitude+'<br></td>'+
-                                                    '<td>'+
-                                                    '<a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="'+response.id+'" data-target="#addlocdetailmodaldata">'+
-                                                        '<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addlocdetailmodaldata2">Add</button>'+
-                                                    '</a>'+
-                                                    '<a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
-                                                    '</tr>'+
-                                                    
-                                                    '<tr id="cid'+response.id+'">'+
-                                                        '<td></td>'+
-                                                        '<td colspan="3">'+
-                                                            '<table id="tcid'+response.id+'" width="600" class="table table-bordered table-striped">'+
-                                                                '<thead>'+
-                                                                '<tr>'+
-                                                                '<th>Interest Insured</th>'+
-                                                                '<th>Ceding/Broker</th>'+
-                                                                '<th>CN No</th>'+
-                                                                '<th>Cert No</th>'+
-                                                                '<th>Ref No</th>'+
-                                                                '<th>amount</th>'+
-                                                                '<th>Action</th>'+
-                                                                '</tr>'+
-                                                                '</thead>'+
-                                                                '<tbody id="tbcid'+response.id+'">'+
-                                                                '</tbody>'+
-                                                            '</table>'+
-                                                        '</td>'+
-                                                    '</tr>');
-                                                    
+                        '<td>'+response.loc_code+'</td>'+
+                        '<td>'+response.address+'<br>'+response.city_name+'<br>'+response.state_name+'<br>'+response.latitude+' , '+response.longtitude+'<br>'+ response.postal_code+'</td>'+
+                        '<td>'+response.latitude+' , '+response.longtitude+'<br></td>'+
+                        '<td>'+
+                        '<a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="'+response.id+'" data-target="#addlocdetailmodaldata">'+
+                        '<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addlocdetailmodaldata2">Add</button>'+
+                        '</a>'+
+                        '<a href="javascript:void(0)" onclick="deletelocationdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
+                        '</tr>'+
+
+                        '<tr id="cid'+response.id+'">'+
+                        '<td></td>'+
+                        '<td colspan="3">'+
+                        '<table id="tcid'+response.id+'" width="600" class="table table-bordered table-striped">'+
+                        '<thead>'+
+                        '<tr>'+
+                        '<th>Interest Insured</th>'+
+                        '<th>Ceding/Broker</th>'+
+                        '<th>CN No</th>'+
+                        '<th>Cert No</th>'+
+                        '<th>Ref No</th>'+
+                        '<th>amount</th>'+
+                        '<th>Action</th>'+
+                        '</tr>'+
+                        '</thead>'+
+                        '<tbody id="tbcid'+response.id+'">'+
+                        '</tbody>'+
+                        '</table>'+
+                        '</td>'+
+                        '</tr>');
+
                     
                     $('#addlocation').modal('toggle');
                     $('#slipamount').val('');
                     $('#slipinterestlist').val('');
                     
                     
-            }
-        });
+                }
+            });
 
     });
 
 
-    function deletelocationdetail(id){
-        var token = $('input[name=_token]').val();
+   function deletelocationdetail(id){
+    var token = $('input[name=_token]').val();
 
-        $.ajax({
-            url:'{{ url("/") }}/delete-sliplocation-list/'+id,
-            type:"DELETE",
-            data:{
-                _token:token
-            },
-            beforeSend: function() { $("body").addClass("loading");  },
-            complete: function() {  $("body").removeClass("loading"); },
-            success:function(response){
-                console.log(response);
-                
-                $('#sid'+id).remove();
-                $('#cid'+id).remove();
+    $.ajax({
+        url:'{{ url("/") }}/delete-sliplocation-list/'+id,
+        type:"DELETE",
+        data:{
+            _token:token
+        },
+        beforeSend: function() { $("body").addClass("loading");  },
+        complete: function() {  $("body").removeClass("loading"); },
+        success:function(response){
+            console.log(response);
+
+            $('#sid'+id).remove();
+            $('#cid'+id).remove();
 
                 //var total =  parseFloat($("#sliptotalsum").val());
                 //console.log(total)
@@ -2597,17 +2460,17 @@ $(document).ready(function() {
 
             }
         });
-    }
+}
 </script>
 
 
 
 <script type='text/javascript'>
-     $('#form-addlocationdetail').submit(function(e){
-        e.preventDefault();
+   $('#form-addlocationdetail').submit(function(e){
+    e.preventDefault();
 
-        var insurednoloc = $('#insurednoloc').val();
-        var token = $('input[name=_token]').val();
+    var insurednoloc = $('#insurednoloc').val();
+    var token = $('input[name=_token]').val();
         // var kurs = $('#slipcurrency').val();
 
         // if(kurs)
@@ -2649,32 +2512,32 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-            console.log(response)
-                    
+                console.log(response)
+
                     // if(response.kurs)
                     // {
                     //     var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: response.kurs,}).format(response.amountlocation);
-                  
+
                     // }
                     // else
                     // {
                     //     var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amountlocation);
                     // }
 
-                        var curr_amount = response.amountlocation.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    var curr_amount = response.amountlocation.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     
                     $('#tcid'+insurednoloc+' > tbody:last-child').prepend('<tr id="riskdetailsid'+response.id+'">'+
-                                                    '<td>'+response.interest_name+'</td>'+
-                                                    '<td>'+response.cedingbroker+'</td>'+
-                                                    '<td>'+response.cnno+'</td>'+
-                                                    '<td>'+response.certno+'</td>'+
-                                                    '<td>'+response.refno+'</td>'+
-                                                    '<td>'+curr_amount+'</td>'+
-                                                    '<td>'+
-                                                    '<a href="javascript:void(0)" onclick="deletelocationriskdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
-                                                    '</tr>');
-                                                    
+                        '<td>'+response.interest_name+'</td>'+
+                        '<td>'+response.cedingbroker+'</td>'+
+                        '<td>'+response.cnno+'</td>'+
+                        '<td>'+response.certno+'</td>'+
+                        '<td>'+response.refno+'</td>'+
+                        '<td>'+curr_amount+'</td>'+
+                        '<td>'+
+                        '<a href="javascript:void(0)" onclick="deletelocationriskdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
+                        '</tr>');
+
                     
                     $('#addlocdetailmodaldata').modal('toggle');
                     $('#slipamount').val('');
@@ -2723,7 +2586,7 @@ $(document).ready(function() {
                         }
                         else
                         {
-                            
+
                             var conv_total = totalsum.replace(/,/g, "");
                             console.log('conv total : ' + conv_total)
                             var real_total = parseInt(conv_total);
@@ -2743,36 +2606,36 @@ $(document).ready(function() {
                         swal("Warning!", "TSI not increase because this ceding is not same with ceding in slip", "Tsi not increase");
                         
                     }
-            }
-        });
+                }
+            });
 
-    });
+});
 
 
-    function deletelocationriskdetail(id){
-        var token = $('input[name=_token]').val();
+function deletelocationriskdetail(id){
+    var token = $('input[name=_token]').val();
 
-        $.ajax({
-            url:'{{ url("/") }}/delete-sliplocationdetail-list/'+id,
-            type:"DELETE",
-            data:{
-                _token:token
-            },
-            beforeSend: function() { $("body").addClass("loading");  },
-            complete: function() {  $("body").removeClass("loading"); },
-            success:function(response){
-                console.log(response);
-                
-                $('#riskdetailsid'+id).remove();
-                var ceding_curr = $('#slipceding').val();
+    $.ajax({
+        url:'{{ url("/") }}/delete-sliplocationdetail-list/'+id,
+        type:"DELETE",
+        data:{
+            _token:token
+        },
+        beforeSend: function() { $("body").addClass("loading");  },
+        complete: function() {  $("body").removeClass("loading"); },
+        success:function(response){
+            console.log(response);
 
-                var totalnre = $('#feshareto').val();
-                var conv_totalnre = totalnre.replace(/,/g, "");
-                
-                var sumtotalnre = isNaN(parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ? (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) : (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ;
-                var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                
-                $('#feshareto').val(real_sumtotalnre);
+            $('#riskdetailsid'+id).remove();
+            var ceding_curr = $('#slipceding').val();
+
+            var totalnre = $('#feshareto').val();
+            var conv_totalnre = totalnre.replace(/,/g, "");
+
+            var sumtotalnre = isNaN(parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ? (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) : (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ;
+            var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+            $('#feshareto').val(real_sumtotalnre);
 
                 //$('#cid'+id).remove();
                 if(response.cedinglocation == ceding_curr){
@@ -2802,164 +2665,164 @@ $(document).ready(function() {
 
             }
         });
-    }
+}
 </script>
 
 
 <script type='text/javascript'>
     $('#addinterestinsured-btn').click(function(e){
-       e.preventDefault();
+     e.preventDefault();
 
-       var interest = $('#slipinterestlist').val();
-       var amount = $('#slipamount').val();
-       var slip_id = $('#slipnumber').val();
-       var token2 = $('input[name=_token]').val();
+     var interest = $('#slipinterestlist').val();
+     var amount = $('#slipamount').val();
+     var slip_id = $('#slipnumber').val();
+     var token2 = $('input[name=_token]').val();
 
-       var conv_amount = amount.replace(/,/g, "");
-       console.log(conv_amount)
-       var real_amount = parseInt(conv_amount);
-       console.log(real_amount)
-       
-       $.ajax({
-           url:"{{ route('interestlist.store') }}",
-           type:"POST",
-           data:{
-               interest_insured:interest,
-               slipamount:real_amount,
-               id_slip:slip_id,
-               _token:token2
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response){
-            
-               console.log(response)
+     var conv_amount = amount.replace(/,/g, "");
+     console.log(conv_amount)
+     var real_amount = parseInt(conv_amount);
+     console.log(real_amount)
+
+     $.ajax({
+         url:"{{ route('interestlist.store') }}",
+         type:"POST",
+         data:{
+             interest_insured:interest,
+             slipamount:real_amount,
+             id_slip:slip_id,
+             _token:token2
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response){
+
+             console.log(response)
             //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               $('#interestInsuredTable tbody').prepend('<tr id="iid'+response.id+'" data-name="interestvalue[]"><td data-name="'+response.description+'">'+response.description+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestdetail('+response.id+')">delete</a></td></tr>')
-               $('#slipamount').val('');
-               $('#slipinterestlist').val('');
-               var totalsum = $("#sliptotalsum").val();
-               if(totalsum == '')
-               {
-                    var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
-                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        console.log(' sum : ' + sum)
-                        console.log(' real sum : ' + real_sum)
-                    $("#sliptotalsum").val(real_sum);
-                    $("#sliptotalsum2").val(real_sum);
-                    $("#feshareto").val(real_sum);
-               }
-               else
-               {
-                    var conv_total = totalsum.replace(/,/g, "");
-                    console.log('conv total : ' + conv_total)
-                    var real_total = parseInt(conv_total);
-                    console.log('real total : ' + real_total)
-                    var total =  parseFloat(real_total);
-                    console.log(' total : ' + total)
-                    var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
-                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    console.log(' sum : ' + sum)
-                    console.log(' real sum : ' + real_sum)
-                    
-                    $("#sliptotalsum").val(real_sum);
-                    $("#sliptotalsum2").val(real_sum);
+            var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+            $('#interestInsuredTable tbody').prepend('<tr id="iid'+response.id+'" data-name="interestvalue[]"><td data-name="'+response.description+'">'+response.description+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestdetail('+response.id+')">delete</a></td></tr>')
+            $('#slipamount').val('');
+            $('#slipinterestlist').val('');
+            var totalsum = $("#sliptotalsum").val();
+            if(totalsum == '')
+            {
+                var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
+                var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                console.log(' sum : ' + sum)
+                console.log(' real sum : ' + real_sum)
+                $("#sliptotalsum").val(real_sum);
+                $("#sliptotalsum2").val(real_sum);
+                $("#feshareto").val(real_sum);
+            }
+            else
+            {
+                var conv_total = totalsum.replace(/,/g, "");
+                console.log('conv total : ' + conv_total)
+                var real_total = parseInt(conv_total);
+                console.log('real total : ' + real_total)
+                var total =  parseFloat(real_total);
+                console.log(' total : ' + total)
+                var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
+                var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                console.log(' sum : ' + sum)
+                console.log(' real sum : ' + real_sum)
+
+                $("#sliptotalsum").val(real_sum);
+                $("#sliptotalsum2").val(real_sum);
                     //    $("#msishareto").val(sum);
                     $("#feshareto").val(real_sum);
-               }
-               
+                }
 
-           }
-       });
 
-   });
+            }
+        });
+
+ });
 </script>
-    
+
 
 <script type='text/javascript'>
     $('#addinterestinsuredupdate-btn').click(function(e){
-       e.preventDefault();
+     e.preventDefault();
 
-       var interest = $('#slipinterestlistupdate').val();
-       var amount = $('#slipamountupdate').val();
-       var slip_id = $('#slipnumberupdate').val();
-       var token2 = $('input[name=_token]').val();
-       
-       $.ajax({
-           url:"{{ route('interestlist.store') }}",
-           type:"POST",
-           data:{
-               interest_insured:interest,
-               slipamount:amount,
-               id_slip:slip_id,
-               _token:token2
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response){
-            
-               console.log(response)
+     var interest = $('#slipinterestlistupdate').val();
+     var amount = $('#slipamountupdate').val();
+     var slip_id = $('#slipnumberupdate').val();
+     var token2 = $('input[name=_token]').val();
+
+     $.ajax({
+         url:"{{ route('interestlist.store') }}",
+         type:"POST",
+         data:{
+             interest_insured:interest,
+             slipamount:amount,
+             id_slip:slip_id,
+             _token:token2
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response){
+
+             console.log(response)
             //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-               $('#interestInsuredTableupdate tbody').prepend('<tr id="iidupdate'+response.id+'" data-name="interestupdatevalue[]"><td data-name="'+response.description+'">'+response.description+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestupdate('+response.id+')">delete</a></td></tr>')
-               $('#slipamountupdate').val('');
-               $('#slipinterestlistupdate').val('');
-               var total =  parseFloat($("#sliptotalsumupdate").val());
-               var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
-               $("#sliptotalsumupdate").val(sum);
-               $("#fesharetoupdate").val(sum);
+            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#interestInsuredTableupdate tbody').prepend('<tr id="iidupdate'+response.id+'" data-name="interestupdatevalue[]"><td data-name="'+response.description+'">'+response.description+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestupdate('+response.id+')">delete</a></td></tr>')
+            $('#slipamountupdate').val('');
+            $('#slipinterestlistupdate').val('');
+            var total =  parseFloat($("#sliptotalsumupdate").val());
+            var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
+            $("#sliptotalsumupdate").val(sum);
+            $("#fesharetoupdate").val(sum);
 
-               
 
-           }
-       });
 
-   });
+        }
+    });
+
+ });
 </script>
 
 
 <script type='text/javascript'>
     $('#addinterestinsuredendorsement-btn').click(function(e){
-       e.preventDefault();
+     e.preventDefault();
 
-       var interest = $('#slipinterestlistendorsement').val();
-       var amount = $('#slipamountendorsement').val();
-       var slip_id = $('#slipnumberendorsement').val();
-       var token2 = $('input[name=_token]').val();
-       
-       $.ajax({
-           url:"{{ route('interestlist.store') }}",
-           type:"POST",
-           data:{
-               interest_insured:interest,
-               slipamount:amount,
-               id_slip:slip_id,
-               _token:token2
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response){
-            
-               console.log(response)
+     var interest = $('#slipinterestlistendorsement').val();
+     var amount = $('#slipamountendorsement').val();
+     var slip_id = $('#slipnumberendorsement').val();
+     var token2 = $('input[name=_token]').val();
+
+     $.ajax({
+         url:"{{ route('interestlist.store') }}",
+         type:"POST",
+         data:{
+             interest_insured:interest,
+             slipamount:amount,
+             id_slip:slip_id,
+             _token:token2
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response){
+
+             console.log(response)
             //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-               $('#interestInsuredTableendorsement tbody').prepend('<tr id="iidendorsement'+response.id+'" data-name="interestendorsementvalue[]"><td data-name="'+response.description+'">'+response.description+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestendorsement('+response.id+')">delete</a></td></tr>')
-               $('#slipamountendorsement').val('');
-               $('#slipinterestlistendorsement').val('');
-               var total =  parseFloat($("#sliptotalsumendorsement").val());
-               var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
-               $("#sliptotalsumendorsement").val(sum);
-               $("#fesharetoendorsement").val(sum);
+            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#interestInsuredTableendorsement tbody').prepend('<tr id="iidendorsement'+response.id+'" data-name="interestendorsementvalue[]"><td data-name="'+response.description+'">'+response.description+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestendorsement('+response.id+')">delete</a></td></tr>')
+            $('#slipamountendorsement').val('');
+            $('#slipinterestlistendorsement').val('');
+            var total =  parseFloat($("#sliptotalsumendorsement").val());
+            var sum = isNaN(total + parseFloat(response.amount)) ? (0 + parseFloat(response.amount)) : (total + parseFloat(response.amount)) ;
+            $("#sliptotalsumendorsement").val(sum);
+            $("#fesharetoendorsement").val(sum);
 
-               
 
-           }
-       });
 
-   });
+        }
+    });
+
+ });
 </script>
-    
+
 
 
 <script type='text/javascript'>
@@ -2975,7 +2838,7 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
+
                 $('#iid'+id).remove();
                 console.log(response);
                 var total =  parseFloat($("#sliptotalsum").val());
@@ -3001,7 +2864,7 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
+
                 $('#iidupdate'+id).remove();
                 console.log(response);
                 var total =  parseFloat($("#sliptotalsumupdate").val());
@@ -3028,7 +2891,7 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
+
                 $('#iidendorsement'+id).remove();
                 console.log(response);
                 var total =  parseFloat($("#sliptotalsumendorsement").val());
@@ -3042,88 +2905,88 @@ $(document).ready(function() {
 
 
 <script  type='text/javascript'>
-     $('#slippct').keyup(function (e) {
-        if(e.keyCode != 9){
-            var pct =  parseFloat($(this).val())/100;
-            
-            var tsi = $("#sliptotalsum").val();
-            var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+   $('#slippct').keyup(function (e) {
+    if(e.keyCode != 9){
+        var pct =  parseFloat($(this).val())/100;
 
-            var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
-            console.log(sum)
-            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            $('#sliptotalsumpct').val(real_sum);
-            $('#sliptotalsumpct2').val(real_sum);
-        }
-     });
+        var tsi = $("#sliptotalsum").val();
+        var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
-     $('#slipdppercentage').keyup(function (e) {
-        if(e.keyCode != 9){
-            var percent =  $(this).val() / 100;
-            var tsi = $("#sliptotalsum").val();
-            var conv_tsi = parseInt(tsi.replace(/,/g, ""));
-            var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
-            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            $('#slipdpamount').val(real_sum);
-            $('#slipdpamount2').val(real_sum);
-        }
-     });
+        var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
+        console.log(sum)
+        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $('#sliptotalsumpct').val(real_sum);
+        $('#sliptotalsumpct2').val(real_sum);
+    }
+});
 
-     $('#slipshare').keyup(function (e) 
-     {
-        if(e.keyCode != 9){
-            var shareslip =  $(this).val() / 100 ;
-            var tsi = $("#sliptotalsum").val();
-            var conv_tsi = parseInt(tsi.replace(/,/g, ""));
-            var sumshare =isNaN( shareslip * conv_tsi) ? 0 :( shareslip * conv_tsi).toFixed(2) ;
-            var real_sumshare = sumshare.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   $('#slipdppercentage').keyup(function (e) {
+    if(e.keyCode != 9){
+        var percent =  $(this).val() / 100;
+        var tsi = $("#sliptotalsum").val();
+        var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+        var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
+        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $('#slipdpamount').val(real_sum);
+        $('#slipdpamount2').val(real_sum);
+    }
+});
 
-
-            $('#slipsumshare').val(real_sumshare);
-            $('#slipsumshare2').val(real_sumshare);
-        }
-     });
+   $('#slipshare').keyup(function (e) 
+   {
+    if(e.keyCode != 9){
+        var shareslip =  $(this).val() / 100 ;
+        var tsi = $("#sliptotalsum").val();
+        var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+        var sumshare =isNaN( shareslip * conv_tsi) ? 0 :( shareslip * conv_tsi).toFixed(2) ;
+        var real_sumshare = sumshare.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 
-     $('#sliprate').keyup(function (e) {
-        if(e.keyCode != 9){
-            var insurance_period_from = $('#slipipfrom').val().split('-');
-            var insurance_period_to = $('#slipipto').val().split('-');
-            var insurance_period_from2 = $('#slipipfrom').val();
-            var insurance_period_to2 = $('#slipipto').val();
-            var month_from = parseInt(insurance_period_from[1]);
-            var month_to = parseInt(insurance_period_to[1]);
-            var month = (month_to - month_from);
-            var days=daysBetween(insurance_period_from2, insurance_period_to2);
-            var insurance = (days/365);
+        $('#slipsumshare').val(real_sumshare);
+        $('#slipsumshare2').val(real_sumshare);
+    }
+});
+
+
+   $('#sliprate').keyup(function (e) {
+    if(e.keyCode != 9){
+        var insurance_period_from = $('#slipipfrom').val().split('-');
+        var insurance_period_to = $('#slipipto').val().split('-');
+        var insurance_period_from2 = $('#slipipfrom').val();
+        var insurance_period_to2 = $('#slipipto').val();
+        var month_from = parseInt(insurance_period_from[1]);
+        var month_to = parseInt(insurance_period_to[1]);
+        var month = (month_to - month_from);
+        var days=daysBetween(insurance_period_from2, insurance_period_to2);
+        var insurance = (days/365);
         
-            console.log(insurance_period_from2)
-            console.log(insurance_period_to2)
-            console.log(days)
-            console.log(month_from)
-            console.log(month_to)
-            console.log(month)
-            console.log(insurance)
-            
-            var rateslip =  $(this).val() / 1000;
-            var tsi = $("#sliptotalsum").val();
-            var conv_tsi = parseInt(tsi.replace(/,/g, ""));
-            var sum = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
-            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            
-            $('#slipbasicpremium').val(real_sum);
-        }
-     });
+        console.log(insurance_period_from2)
+        console.log(insurance_period_to2)
+        console.log(days)
+        console.log(month_from)
+        console.log(month_to)
+        console.log(month)
+        console.log(insurance)
 
-     $('#slipshare').change(function (e) {
-        if(e.keyCode != 9){
-            var rateslip =  $('#sliprate').val() / 1000 ;
-            var shareslip =  $('#slipshare').val() / 100 ;
-            var nasionalreinsurance =  $('#fesharefrom').val();
-            var totalnre =  $('#feshareto').val();
-            var conv_totalnre =  parseInt(totalnre.replace(/,/g, ""));
+        var rateslip =  $(this).val() / 1000;
+        var tsi = $("#sliptotalsum").val();
+        var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+        var sum = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
+        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            console.log('nre' + nasionalreinsurance)
+        $('#slipbasicpremium').val(real_sum);
+    }
+});
+
+   $('#slipshare').change(function (e) {
+    if(e.keyCode != 9){
+        var rateslip =  $('#sliprate').val() / 1000 ;
+        var shareslip =  $('#slipshare').val() / 100 ;
+        var nasionalreinsurance =  $('#fesharefrom').val();
+        var totalnre =  $('#feshareto').val();
+        var conv_totalnre =  parseInt(totalnre.replace(/,/g, ""));
+
+        console.log('nre' + nasionalreinsurance)
             // console.log(conv_nasionalreinsurance)
             console.log('totalnre' + totalnre)
             console.log('convtotnre' + conv_totalnre)
@@ -3135,7 +2998,7 @@ $(document).ready(function() {
             var conv_sumshare = parseInt(sumshare.replace(/,/g, ""));
 
             var orpercent = $('#slipor').val() / 100;
-        
+
             var sumor = isNaN(orpercent * conv_sumshare) ? 0 :(orpercent * conv_sumshare).toFixed(2);
             var real_sumor = sumor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             
@@ -3154,7 +3017,7 @@ $(document).ready(function() {
             
             
             var sumourshare = isNaN((sumnre / conv_totalnre) * 100 ) ? 0 :((sumnre / conv_totalnre) * 100 ).toFixed(2) ;
-        
+
             console.log('sumnre' + sumnre)
             console.log('realnre' + real_sumnre)
             console.log('sumourshare' + sumourshare)
@@ -3171,79 +3034,79 @@ $(document).ready(function() {
             // $('#msisharefrom').val(real_sumourshare);
             // $('#msisumsharev').val(sumourshare);
         }
-     });
-
-     $('#slipcommission').keyup(function (e) {
-        if(e.keyCode != 9){
-            var commision =  $(this).val() / 100;
-            var feebroker = $('#slipvbroker').val() / 100;
-            var sumgrossprmtonr = $("#slipgrossprmtonr").val();
-            var conv_sumgrossprmtonr = parseInt(sumgrossprmtonr.replace(/,/g, ""));
-            
-            var sum = isNaN(commision * conv_sumgrossprmtonr) ? 0 :(commision * conv_sumgrossprmtonr).toFixed(2);
-            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-
-            
-
-
-            $('#slipsumcommission').val(real_sum);
-            $('#slipsumcommission2').val(real_sum);
-            
-        }
     });
 
-    $('#slipvbroker').keyup(function(){
+   $('#slipcommission').keyup(function (e) {
+    if(e.keyCode != 9){
+        var commision =  $(this).val() / 100;
         var feebroker = $('#slipvbroker').val() / 100;
-        var commision =  $('#slipcommission').val() / 100;
         var sumgrossprmtonr = $("#slipgrossprmtonr").val();
         var conv_sumgrossprmtonr = parseInt(sumgrossprmtonr.replace(/,/g, ""));
 
-        var sumnetprmtonr = isNaN( conv_sumgrossprmtonr * (100/100 - commision - feebroker)) ? 0 :(conv_sumgrossprmtonr * (100/100 - commision - feebroker)).toFixed(2);
-            var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var sum = isNaN(commision * conv_sumgrossprmtonr) ? 0 :(commision * conv_sumgrossprmtonr).toFixed(2);
+        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            $('#slipnetprmtonr').val(real_sumnetprmtonr);
-            $('#slipnetprmtonr2').val(real_sumnetprmtonr);
-            $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
 
-    });
 
-    $('#slipippercentage').keyup(function (e) {
-        if(e.keyCode != 9){
-            var percent =  $(this).val() / 100;
-            
-            var sumnetprtonr = $("#slipnetprmtonr").val();
-            var conv_sumnetprtonr = parseInt(sumnetprtonr.replace(/,/g, ""));
 
-            var sum = isNaN(percent *  conv_sumnetprtonr) ? 0 :(percent *  conv_sumnetprtonr).toFixed(2);
-            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            $('#slipipamount').val(real_sum);
-            $('#slipipamount2').val(real_sum);
-        }
-    });
+        $('#slipsumcommission').val(real_sum);
+        $('#slipsumcommission2').val(real_sum);
 
-    $('#slipor').keyup(function(e) {
-        if(e.keyCode != 9){
-            var percent =  $(this).val() / 100;
-            var sumshare = $("#slipsumshare").val();
-            var conv_sumshare = parseInt(sumshare.replace(/,/g, ""));
+    }
+});
 
-            var sum = isNaN(percent * conv_sumshare) ? 0 :(percent * conv_sumshare).toFixed(2);
-            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   $('#slipvbroker').keyup(function(){
+    var feebroker = $('#slipvbroker').val() / 100;
+    var commision =  $('#slipcommission').val() / 100;
+    var sumgrossprmtonr = $("#slipgrossprmtonr").val();
+    var conv_sumgrossprmtonr = parseInt(sumgrossprmtonr.replace(/,/g, ""));
 
-            $('#slipsumor').val(real_sum);
-            $('#slipsumor2').val(real_sum);
-        }
-    });
+    var sumnetprmtonr = isNaN( conv_sumgrossprmtonr * (100/100 - commision - feebroker)) ? 0 :(conv_sumgrossprmtonr * (100/100 - commision - feebroker)).toFixed(2);
+    var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-    $('#sliprppercentage').keyup(function (e) {
-        if(e.keyCode != 9){
-            var percentval =  $(this).val() / 100;
-            var sumor = $('#slipsumor').val() ;
-            var conv_sumor = parseInt(sumor.replace(/,/g, ""));
-            var sumrpamount = isNaN(percentval * conv_sumor) ? 0 :(percentval * conv_sumor).toFixed(2);
-            var real_sumrpamount = sumrpamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    $('#slipnetprmtonr').val(real_sumnetprmtonr);
+    $('#slipnetprmtonr2').val(real_sumnetprmtonr);
+    $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
+
+});
+
+   $('#slipippercentage').keyup(function (e) {
+    if(e.keyCode != 9){
+        var percent =  $(this).val() / 100;
+
+        var sumnetprtonr = $("#slipnetprmtonr").val();
+        var conv_sumnetprtonr = parseInt(sumnetprtonr.replace(/,/g, ""));
+
+        var sum = isNaN(percent *  conv_sumnetprtonr) ? 0 :(percent *  conv_sumnetprtonr).toFixed(2);
+        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        $('#slipipamount').val(real_sum);
+        $('#slipipamount2').val(real_sum);
+    }
+});
+
+   $('#slipor').keyup(function(e) {
+    if(e.keyCode != 9){
+        var percent =  $(this).val() / 100;
+        var sumshare = $("#slipsumshare").val();
+        var conv_sumshare = parseInt(sumshare.replace(/,/g, ""));
+
+        var sum = isNaN(percent * conv_sumshare) ? 0 :(percent * conv_sumshare).toFixed(2);
+        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        $('#slipsumor').val(real_sum);
+        $('#slipsumor2').val(real_sum);
+    }
+});
+
+   $('#sliprppercentage').keyup(function (e) {
+    if(e.keyCode != 9){
+        var percentval =  $(this).val() / 100;
+        var sumor = $('#slipsumor').val() ;
+        var conv_sumor = parseInt(sumor.replace(/,/g, ""));
+        var sumrpamount = isNaN(percentval * conv_sumor) ? 0 :(percentval * conv_sumor).toFixed(2);
+        var real_sumrpamount = sumrpamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             // var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval); 
             // $('#slipor').val(sumpercentor);
@@ -3252,24 +3115,24 @@ $(document).ready(function() {
         }
     });
 
-    $('#sliprppercentage').change(function (e) {
-        if(e.keyCode != 9){
-            var percentval =  $(this).val();
-            var orpercent = $('#slipor').val();
-            var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval).toFixed(2);
-            $('#slipor').val(sumpercentor);
+   $('#sliprppercentage').change(function (e) {
+    if(e.keyCode != 9){
+        var percentval =  $(this).val();
+        var orpercent = $('#slipor').val();
+        var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval).toFixed(2);
+        $('#slipor').val(sumpercentor);
 
-            var percent =  $('#slipor').val() / 100;
-            var sumshare = $("#slipsumshare").val();
-            var conv_sumshare = parseInt(sumshare.replace(/,/g, ""));
+        var percent =  $('#slipor').val() / 100;
+        var sumshare = $("#slipsumshare").val();
+        var conv_sumshare = parseInt(sumshare.replace(/,/g, ""));
 
-            var sum = isNaN(percent * conv_sumshare) ? 0 :(percent * conv_sumshare).toFixed(2);
-            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var sum = isNaN(percent * conv_sumshare) ? 0 :(percent * conv_sumshare).toFixed(2);
+        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            $('#slipsumor').val(real_sum);
-            $('#slipsumor2').val(real_sum);
-        }
-    });
+        $('#slipsumor').val(real_sum);
+        $('#slipsumor2').val(real_sum);
+    }
+});
 </script>
 
 
@@ -3284,8 +3147,8 @@ $(document).ready(function() {
             var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
             console.log(sum)
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                $('#sliptotalsumpctupdate').val(real_sum);
-                $('#sliptotalsumpctupdate2').val(real_sum);
+            $('#sliptotalsumpctupdate').val(real_sum);
+            $('#sliptotalsumpctupdate2').val(real_sum);
         }
     });
 
@@ -3428,24 +3291,24 @@ $(document).ready(function() {
 
             
         }
-   });
+    });
 
-   $('#slipvbrokerupdate').keyup(function(){
+    $('#slipvbrokerupdate').keyup(function(){
         var feebroker = $('#slipvbrokerupdate').val() / 100;
         var commision =  $('#slipcommissionupdate').val() / 100;
         var sumgrossprmtonr = $("#slipgrossprmtonrupdate").val();
         var conv_sumgrossprmtonr = parseInt(sumgrossprmtonr.replace(/,/g, ""));
 
         var sumnetprmtonr = isNaN( conv_sumgrossprmtonr * (100/100 - commision - feebroker)) ? 0 :(conv_sumgrossprmtonr * (100/100 - commision - feebroker)).toFixed(2);
-            var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            $('#slipnetprmtonrupdate').val(real_sumnetprmtonr);
-            $('#slipnetprmtonrupdate2').val(real_sumnetprmtonr);
-            $('#slipsumfeeupdate').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
+        $('#slipnetprmtonrupdate').val(real_sumnetprmtonr);
+        $('#slipnetprmtonrupdate2').val(real_sumnetprmtonr);
+        $('#slipsumfeeupdate').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
 
     });
 
-   $('#slipippercentageupdate').keyup(function (e) {
+    $('#slipippercentageupdate').keyup(function (e) {
         if(e.keyCode != 9){
             var percent =  $(this).val() / 100;
             
@@ -3458,9 +3321,9 @@ $(document).ready(function() {
             $('#slipipamountupdate').val(real_sum);
             $('#slipipamountupdate2').val(real_sum);
         }
-   });
+    });
 
-   $('#sliporupdate').keyup(function (e) {
+    $('#sliporupdate').keyup(function (e) {
         if(e.keyCode != 9){
             var percent =  $(this).val() / 100;
             var sumshare = $("#slipsumshareupdate").val();
@@ -3472,10 +3335,10 @@ $(document).ready(function() {
             $('#slipsumorupdate').val(real_sum);
             $('#slipsumorupdate2').val(real_sum);
         }
-   });
+    });
 
-   $('#sliprppercentageupdate').keyup(function (e) {
-    if(e.keyCode != 9){
+    $('#sliprppercentageupdate').keyup(function (e) {
+        if(e.keyCode != 9){
             var percentval =  $(this).val() / 100;
             var sumor = $('#slipsumorupdate').val() ;
             var conv_sumor = parseInt(sumor.replace(/,/g, ""));
@@ -3486,11 +3349,11 @@ $(document).ready(function() {
             // $('#slipor').val(sumpercentor);
             $('#sliprpamountupdate').val(real_sumrpamount);
             $('#sliprpamountupdate2').val(real_sumrpamount);
-    }
-   });
+        }
+    });
 
-   $('#sliprppercentageupdate').change(function (e) {
-    if(e.keyCode != 9){
+    $('#sliprppercentageupdate').change(function (e) {
+        if(e.keyCode != 9){
             var percentval =  $(this).val();
             var orpercent = $('#sliporupdate').val();
             var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval).toFixed(2);
@@ -3505,8 +3368,8 @@ $(document).ready(function() {
 
             $('#slipsumorupdate').val(real_sum);
             $('#slipsumorupdate2').val(real_sum);
-    }
-   });
+        }
+    });
 </script>
 
 <script  type='text/javascript'>
@@ -3520,68 +3383,68 @@ $(document).ready(function() {
             var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
             console.log(sum)
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                $('#sliptotalsumpctendorsement').val(real_sum);
+            $('#sliptotalsumpctendorsement').val(real_sum);
         }
     });
 
     $('#slipdppercentageendorsement').keyup(function () {
-       var percent =  $(this).val() / 100;
-       var tsi = $("#sliptotalsumendorsement").val();
-       var conv_tsi = parseInt(tsi.replace(/,/g, ""));
-       var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
-       var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-       $('#slipdpamountendorsement').val(real_sum);
-    });
+     var percent =  $(this).val() / 100;
+     var tsi = $("#sliptotalsumendorsement").val();
+     var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+     var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
+     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     $('#slipdpamountendorsement').val(real_sum);
+ });
 
     $('#slipshareendorsement').keyup(function () 
     {
-       var shareslip =  $(this).val() / 100 ;
-       var tsi = $("#sliptotalsumendorsement").val();
-       var conv_tsi = parseInt(tsi.replace(/,/g, ""));
-       var sumshare =isNaN( shareslip * conv_tsi) ? 0 :( shareslip * conv_tsi).toFixed(2) ;
-       var real_sumshare = sumshare.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     var shareslip =  $(this).val() / 100 ;
+     var tsi = $("#sliptotalsumendorsement").val();
+     var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+     var sumshare =isNaN( shareslip * conv_tsi) ? 0 :( shareslip * conv_tsi).toFixed(2) ;
+     var real_sumshare = sumshare.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 
-       $('#slipsumshareendorsement').val(real_sumshare);
-    });
+     $('#slipsumshareendorsement').val(real_sumshare);
+ });
 
 
     $('#sliprateendorsement').keyup(function () {
-       var insurance_period_from = $('#slipipfromendorsement').val().split('-');
-       var insurance_period_to = $('#slipiptoendorsement').val().split('-');
-       var insurance_period_from2 = $('#slipipfromendorsement').val();
-       var insurance_period_to2 = $('#slipiptoendorsement').val();
-       var month_from = parseInt(insurance_period_from[1]);
-       var month_to = parseInt(insurance_period_to[1]);
-       var month = (month_to - month_from);
-       var days=daysBetween(insurance_period_from2, insurance_period_to2);
-       var insurance = (days/365);
-      
-       console.log(insurance_period_from2)
-       console.log(insurance_period_to2)
-       console.log(days)
-       console.log(month_from)
-       console.log(month_to)
-       console.log(month)
-       console.log(insurance)
-       
-       var rateslip =  $(this).val() / 1000;
-       var tsi = $("#sliptotalsumendorsement").val();
-       var conv_tsi = parseInt(tsi.replace(/,/g, ""));
-       var sum = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
-       var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-       
-       $('#slipbasicpremiumendorsement').val(real_sum);
-    });
+     var insurance_period_from = $('#slipipfromendorsement').val().split('-');
+     var insurance_period_to = $('#slipiptoendorsement').val().split('-');
+     var insurance_period_from2 = $('#slipipfromendorsement').val();
+     var insurance_period_to2 = $('#slipiptoendorsement').val();
+     var month_from = parseInt(insurance_period_from[1]);
+     var month_to = parseInt(insurance_period_to[1]);
+     var month = (month_to - month_from);
+     var days=daysBetween(insurance_period_from2, insurance_period_to2);
+     var insurance = (days/365);
+
+     console.log(insurance_period_from2)
+     console.log(insurance_period_to2)
+     console.log(days)
+     console.log(month_from)
+     console.log(month_to)
+     console.log(month)
+     console.log(insurance)
+
+     var rateslip =  $(this).val() / 1000;
+     var tsi = $("#sliptotalsumendorsement").val();
+     var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+     var sum = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
+     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+     $('#slipbasicpremiumendorsement').val(real_sum);
+ });
 
     $('#slipshareendorsement').change(function () {
-       var rateslip =  $('#sliprateendorsement').val() / 1000 ;
-       var shareslip =  $('#slipshareendorsement').val() / 100 ;
-       var nasionalreinsurance =  $('#fesharefromendorsement').val();
-       var totalnre =  $('#fesharetoendorsement').val();
-       var conv_totalnre =  parseInt(totalnre.replace(/,/g, ""));
+     var rateslip =  $('#sliprateendorsement').val() / 1000 ;
+     var shareslip =  $('#slipshareendorsement').val() / 100 ;
+     var nasionalreinsurance =  $('#fesharefromendorsement').val();
+     var totalnre =  $('#fesharetoendorsement').val();
+     var conv_totalnre =  parseInt(totalnre.replace(/,/g, ""));
 
-       console.log('nre' + nasionalreinsurance)
+     console.log('nre' + nasionalreinsurance)
        // console.log(conv_nasionalreinsurance)
        console.log('totalnre' + totalnre)
        console.log('convtotnre' + conv_totalnre)
@@ -3593,7 +3456,7 @@ $(document).ready(function() {
        var conv_sumshare = parseInt(sumshare.replace(/,/g, ""));
 
        var orpercent = $('#sliporendorsement').val() / 100;
-      
+
        var sumor = isNaN(orpercent * conv_sumshare) ? 0 :(orpercent * conv_sumshare).toFixed(2);
        var real_sumor = sumor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
        
@@ -3601,110 +3464,110 @@ $(document).ready(function() {
        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
        
        if(nasionalreinsurance){
-           var conv_nasionalreinsurance =  parseInt(nasionalreinsurance.replace(/,/g, ""));
-           var sumnre = isNaN(conv_nasionalreinsurance + conv_sumshare ) ? 0 :(conv_nasionalreinsurance + conv_sumshare).toFixed(2) ;
-           var real_sumnre = sumnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-       }else{
-           var conv_nasionalreinsurance =  parseInt(nasionalreinsurance.replace(/,/g, ""));
-           var sumnre = isNaN(0 + conv_sumshare ) ? 0 :(0 + conv_sumshare).toFixed(2) ;
-           var real_sumnre = sumnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-       }
-       
-       
-       var sumourshare = isNaN((sumnre / conv_totalnre) * 100 ) ? 0 :((sumnre / conv_totalnre) * 100 ).toFixed(2) ;
-      
-      console.log('sumnre' + sumnre)
-      console.log('realnre' + real_sumnre)
-      console.log('sumourshare' + sumourshare)
+         var conv_nasionalreinsurance =  parseInt(nasionalreinsurance.replace(/,/g, ""));
+         var sumnre = isNaN(conv_nasionalreinsurance + conv_sumshare ) ? 0 :(conv_nasionalreinsurance + conv_sumshare).toFixed(2) ;
+         var real_sumnre = sumnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     }else{
+         var conv_nasionalreinsurance =  parseInt(nasionalreinsurance.replace(/,/g, ""));
+         var sumnre = isNaN(0 + conv_sumshare ) ? 0 :(0 + conv_sumshare).toFixed(2) ;
+         var real_sumnre = sumnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     }
 
-       $('#slipgrossprmtonrendorsement').val(real_sum);
-       $('#slipsumorendorsement').val(real_sumor);
-       $('#feshareendorsement').val(sumourshare.replace(/,/g, "."));
-       $('#fesharefromendorsement').val(real_sumnre);
+
+     var sumourshare = isNaN((sumnre / conv_totalnre) * 100 ) ? 0 :((sumnre / conv_totalnre) * 100 ).toFixed(2) ;
+
+     console.log('sumnre' + sumnre)
+     console.log('realnre' + real_sumnre)
+     console.log('sumourshare' + sumourshare)
+
+     $('#slipgrossprmtonrendorsement').val(real_sum);
+     $('#slipsumorendorsement').val(real_sumor);
+     $('#feshareendorsement').val(sumourshare.replace(/,/g, "."));
+     $('#fesharefromendorsement').val(real_sumnre);
 
        // $('#slipsumshare').val(real_sum);
        // $('#msisharev').val(shareslip);
         // $('#msisharefrom').val(real_sumourshare);
        // $('#msisumsharev').val(sumourshare);
-    });
+   });
 
     $('#slipcommissionendorsement').keyup(function () {
-       var commision =  $(this).val() / 100;
-       var feebroker = $('#slipvbrokerendorsement').val() / 100;
+     var commision =  $(this).val() / 100;
+     var feebroker = $('#slipvbrokerendorsement').val() / 100;
 
-       var sumgrossprmtonr = $("#slipgrossprmtonrendorsement").val();
-       var conv_sumgrossprmtonr = parseInt(sumgrossprmtonr.replace(/,/g, ""));
-       
-       var sum = isNaN(commision * conv_sumgrossprmtonr) ? 0 :(commision * conv_sumgrossprmtonr).toFixed(2);
-       var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     var sumgrossprmtonr = $("#slipgrossprmtonrendorsement").val();
+     var conv_sumgrossprmtonr = parseInt(sumgrossprmtonr.replace(/,/g, ""));
 
-
-       var sumnetprmtonr = isNaN( conv_sumgrossprmtonr * (100/100 - commision - feebroker)) ? 0 :(conv_sumgrossprmtonr * (100/100 - commision - feebroker)).toFixed(2);
-       var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     var sum = isNaN(commision * conv_sumgrossprmtonr) ? 0 :(commision * conv_sumgrossprmtonr).toFixed(2);
+     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 
-       $('#slipsumcommissionendorsement').val(real_sum);
-       $('#slipnetprmtonrendorsement').val(real_sumnetprmtonr);
-   });
+     var sumnetprmtonr = isNaN( conv_sumgrossprmtonr * (100/100 - commision - feebroker)) ? 0 :(conv_sumgrossprmtonr * (100/100 - commision - feebroker)).toFixed(2);
+     var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-   $('#slipippercentageendorsement').keyup(function () {
-       var percent =  $(this).val() / 100;
-       
-       var sumnetprtonr = $("#slipnetprmtonrendorsement").val();
-       var conv_sumnetprtonr = parseInt(sumnetprtonr.replace(/,/g, ""));
 
-       var sum = isNaN(percent *  conv_sumnetprtonr) ? 0 :(percent *  conv_sumnetprtonr).toFixed(2);
-       var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     $('#slipsumcommissionendorsement').val(real_sum);
+     $('#slipnetprmtonrendorsement').val(real_sumnetprmtonr);
+ });
 
-       $('#slipipamountendorsement').val(real_sum);
-   });
+    $('#slipippercentageendorsement').keyup(function () {
+     var percent =  $(this).val() / 100;
 
-   $('#sliporendorsement').keyup(function () {
-       var percent =  $(this).val() / 100;
-       var sumshare = $("#slipsumshareendorsement").val();
-       var conv_sumshare = parseInt(sumshare.replace(/,/g, ""));
+     var sumnetprtonr = $("#slipnetprmtonrendorsement").val();
+     var conv_sumnetprtonr = parseInt(sumnetprtonr.replace(/,/g, ""));
 
-       var sum = isNaN(percent * conv_sumshare) ? 0 :(percent * conv_sumshare).toFixed(2);
-       var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     var sum = isNaN(percent *  conv_sumnetprtonr) ? 0 :(percent *  conv_sumnetprtonr).toFixed(2);
+     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-       $('#slipsumorendorsement').val(real_sum);
-   });
+     $('#slipipamountendorsement').val(real_sum);
+ });
 
-   $('#sliprppercentageendorsement').keyup(function () {
-       var percentval =  $(this).val() / 100;
-       var sumor = $('#slipsumorendorsement').val() ;
-       var conv_sumor = parseInt(sumor.replace(/,/g, ""));
-       var sumrpamount = isNaN(percentval * conv_sumor) ? 0 :(percentval * conv_sumor).toFixed(2);
-       var real_sumrpamount = sumrpamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    $('#sliporendorsement').keyup(function () {
+     var percent =  $(this).val() / 100;
+     var sumshare = $("#slipsumshareendorsement").val();
+     var conv_sumshare = parseInt(sumshare.replace(/,/g, ""));
+
+     var sum = isNaN(percent * conv_sumshare) ? 0 :(percent * conv_sumshare).toFixed(2);
+     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+     $('#slipsumorendorsement').val(real_sum);
+ });
+
+    $('#sliprppercentageendorsement').keyup(function () {
+     var percentval =  $(this).val() / 100;
+     var sumor = $('#slipsumorendorsement').val() ;
+     var conv_sumor = parseInt(sumor.replace(/,/g, ""));
+     var sumrpamount = isNaN(percentval * conv_sumor) ? 0 :(percentval * conv_sumor).toFixed(2);
+     var real_sumrpamount = sumrpamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
        // var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval); 
        // $('#slipor').val(sumpercentor);
        $('#sliprpamountendorsement').val(real_sumrpamount);
    });
 
-   $('#sliprppercentageendorsement').change(function () {
-       var percentval =  $(this).val();
-       var orpercent = $('#sliporendorsement').val();
-       var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval).toFixed(2);
-       $('#sliporendorsement').val(sumpercentor);
+    $('#sliprppercentageendorsement').change(function () {
+     var percentval =  $(this).val();
+     var orpercent = $('#sliporendorsement').val();
+     var sumpercentor = isNaN(orpercent - percentval) ? 0 :(orpercent - percentval).toFixed(2);
+     $('#sliporendorsement').val(sumpercentor);
 
-       var percent =  $('#sliporendorsement').val() / 100;
-       var sumshare = $("#slipsumshareendorsement").val();
-       var conv_sumshare = parseInt(sumshare.replace(/,/g, ""));
+     var percent =  $('#sliporendorsement').val() / 100;
+     var sumshare = $("#slipsumshareendorsement").val();
+     var conv_sumshare = parseInt(sumshare.replace(/,/g, ""));
 
-       var sum = isNaN(percent * conv_sumshare) ? 0 :(percent * conv_sumshare).toFixed(2);
-       var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     var sum = isNaN(percent * conv_sumshare) ? 0 :(percent * conv_sumshare).toFixed(2);
+     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-       $('#slipsumorendorsement').val(real_sum);
-   });
+     $('#slipsumorendorsement').val(real_sum);
+ });
 </script>
 
 <script type='text/javascript'>
-    
+
     $('#slipnilaiec').keyup(function () {
-       var persentage =  $('#slipnilaiec').val() / 1000;
-       var sliptotalsum =  $('#sliptotalsum').val();
-       var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
+     var persentage =  $('#slipnilaiec').val() / 1000;
+     var sliptotalsum =  $('#sliptotalsum').val();
+     var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
        //alert(premiumnr);
        //alert(persentage);
        var sum = isNaN(conv_sliptotalsum * persentage) ? 0 :(conv_sliptotalsum * persentage).toFixed(2) ;
@@ -3712,17 +3575,17 @@ $(document).ready(function() {
        //alert(sum);
        $('#slipamountec').val(real_sum);
        $('#slipamountec2').val(real_sum);
-    });
+   });
 
 
 </script>
 
 <script type='text/javascript'>
-    
+
     $('#slipnilaiecupdate').keyup(function () {
-       var persentage =  $('#slipnilaiecupdate').val() / 1000;
-       var sliptotalsum =  $('#sliptotalsumupdate').val();
-       var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
+     var persentage =  $('#slipnilaiecupdate').val() / 1000;
+     var sliptotalsum =  $('#sliptotalsumupdate').val();
+     var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
        //alert(premiumnr);
        //alert(persentage);
        var sum = isNaN(conv_sliptotalsum * persentage) ? 0 :(conv_sliptotalsum * persentage).toFixed(2) ;
@@ -3730,99 +3593,99 @@ $(document).ready(function() {
        //alert(sum);
        $('#slipamountecupdate').val(real_sum);
        $('#slipamountecupdate2').val(real_sum);
-    });
+   });
 
 
 </script>
 
 <script type='text/javascript'>
-    
+
     $('#slipnilaiecendorsement').keyup(function () {
-       var persentage =  $('#slipnilaiecendorsement').val() / 1000;
-       var sliptotalsum =  $('#sliptotalsumendorsement').val();
-       var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
+     var persentage =  $('#slipnilaiecendorsement').val() / 1000;
+     var sliptotalsum =  $('#sliptotalsumendorsement').val();
+     var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
        //alert(premiumnr);
        //alert(persentage);
        var sum = isNaN(conv_sliptotalsum * persentage) ? 0 :(conv_sliptotalsum * persentage).toFixed(2) ;
        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
        //alert(sum);
        $('#slipamountecendorsement').val(real_sum);
-    });
+   });
 
 
 </script>
 
 
 {{-- <script type='text/javascript'>
-    
-     $('#slipdppercentage').keyup(function () {
-        var persentage =  parseFloat($('#slipdppercentage').val());
-        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+
+   $('#slipdppercentage').keyup(function () {
+    var persentage =  parseFloat($('#slipdppercentage').val());
+    var sliptotalsum =  parseFloat($('#sliptotalsum').val());
         //alert(premiumnr);
         //alert(persentage);
         var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
         //alert(sum);
         $('#slipdpamount').val(sum);
-     });
+    });
 
-     $('#slipdppercentage').change(function () {
-        var persentage =  parseFloat($('#slipdppercentage').val());
-        var sliptotalsum =  parseFloat($('#sliptotalsum').val());
+   $('#slipdppercentage').change(function () {
+    var persentage =  parseFloat($('#slipdppercentage').val());
+    var sliptotalsum =  parseFloat($('#sliptotalsum').val());
         //alert(premiumnr);
         //alert(persentage);
         var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
         //alert(sum);
         $('#slipdpamount').val(sum);
-     });
+    });
 
 </script> --}}
 
 {{-- <script type='text/javascript'>
-    
-     $('#slipdppercentageupdate').keyup(function () {
-        var persentage =  parseFloat($('#slipdppercentageupdate').val());
-        var sliptotalsum =  parseFloat($('#sliptotalsumupdate').val());
+
+   $('#slipdppercentageupdate').keyup(function () {
+    var persentage =  parseFloat($('#slipdppercentageupdate').val());
+    var sliptotalsum =  parseFloat($('#sliptotalsumupdate').val());
         //alert(premiumnr);
         //alert(persentage);
         var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
         //alert(sum);
         $('#slipdpamountupdate').val(sum);
-     });
+    });
 
-     $('#slipdppercentageupdate').change(function () {
-        var persentage =  parseFloat($('#slipdppercentageupdate').val());
-        var sliptotalsum =  parseFloat($('#sliptotalsumupdate').val());
+   $('#slipdppercentageupdate').change(function () {
+    var persentage =  parseFloat($('#slipdppercentageupdate').val());
+    var sliptotalsum =  parseFloat($('#sliptotalsumupdate').val());
         //alert(premiumnr);
         //alert(persentage);
         var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
         //alert(sum);
         $('#slipdpamountupdate').val(sum);
-     });
+    });
 
 </script> --}}
 
 
 {{-- <script type='text/javascript'>
-    
-     $('#slipdppercentageendorsement').keyup(function () {
-        var persentage =  parseFloat($('#slipdppercentageendorsement').val());
-        var sliptotalsum =  parseFloat($('#sliptotalsumendorsement').val());
-        //alert(premiumnr);
-        //alert(persentage);
-        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
-        //alert(sum);
-        $('#slipdpamountendorsement').val(sum);
-     });
 
-     $('#slipdppercentageendorsement').change(function () {
-        var persentage =  parseFloat($('#slipdppercentageendorsement').val());
-        var sliptotalsum =  parseFloat($('#sliptotalsumendorsement').val());
+   $('#slipdppercentageendorsement').keyup(function () {
+    var persentage =  parseFloat($('#slipdppercentageendorsement').val());
+    var sliptotalsum =  parseFloat($('#sliptotalsumendorsement').val());
         //alert(premiumnr);
         //alert(persentage);
         var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
         //alert(sum);
         $('#slipdpamountendorsement').val(sum);
-     });
+    });
+
+   $('#slipdppercentageendorsement').change(function () {
+    var persentage =  parseFloat($('#slipdppercentageendorsement').val());
+    var sliptotalsum =  parseFloat($('#sliptotalsumendorsement').val());
+        //alert(premiumnr);
+        //alert(persentage);
+        var sum = isNaN(sliptotalsum * (persentage/100)) ? 0 :(sliptotalsum * (persentage/100)) ;
+        //alert(sum);
+        $('#slipdpamountendorsement').val(sum);
+    });
 
 </script> --}}
 
@@ -3847,29 +3710,29 @@ $(document).ready(function() {
        console.log(real_amount)
        
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{ route('installment.store') }}",
-           type:"POST",
-           data:{
-               installmentdate:installmentdate,
-               percentage:percentage,
-               slipamount:real_amount,
-               id_slip:slip_id
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-            
-               console.log(response)
-               if(response.message){
+         url:"{{ route('installment.store') }}",
+         type:"POST",
+         data:{
+             installmentdate:installmentdate,
+             percentage:percentage,
+             slipamount:real_amount,
+             id_slip:slip_id
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+
+             console.log(response)
+             if(response.message){
                 swal("Error!", response.message , "Insert Error");
-               }else{
+            }else{
                     // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
                     var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
@@ -3877,8 +3740,8 @@ $(document).ready(function() {
                     $('#slipippercentage').val('');
                     $('#slipipamount').val('');
                     $('#slipipamount2').val('');
-               }
-               
+                }
+
                //var total =  parseFloat($("#sliptotalsum").val());
                //var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
                //$("#sliptotalsum").val(sum);
@@ -3907,34 +3770,34 @@ $(document).ready(function() {
        console.log(real_amount)
        
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{ route('installment.store') }}",
-           type:"POST",
-           data:{
-               installmentdate:installmentdate,
-               percentage:percentage,
-               slipamount:real_amount,
-               id_slip:slip_id
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-            
-               console.log(response)
+         url:"{{ route('installment.store') }}",
+         type:"POST",
+         data:{
+             installmentdate:installmentdate,
+             percentage:percentage,
+             slipamount:real_amount,
+             id_slip:slip_id
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+
+             console.log(response)
             //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-               $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+response.id+'" data-name="installmentupdatevalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+response.id+')">delete</a></td></tr>')
-               $('#dateinstallmentupdate').val('');
-               $('#slipippercentageupdate').val('');
-               $('#slipipamountupdate').val('');
-               $('#slipipamountupdate2').val('');
-               
+            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+response.id+'" data-name="installmentupdatevalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+response.id+')">delete</a></td></tr>')
+            $('#dateinstallmentupdate').val('');
+            $('#slipippercentageupdate').val('');
+            $('#slipipamountupdate').val('');
+            $('#slipipamountupdate2').val('');
+
                //var total =  parseFloat($("#sliptotalsum").val());
                //var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
                //$("#sliptotalsum").val(sum);
@@ -3964,33 +3827,33 @@ $(document).ready(function() {
        console.log(real_amount)
        
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{ route('installment.store') }}",
-           type:"POST",
-           data:{
-               installmentdate:installmentdate,
-               percentage:percentage,
-               slipamount:real_amount,
-               id_slip:slip_id
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-            
-               console.log(response)
+         url:"{{ route('installment.store') }}",
+         type:"POST",
+         data:{
+             installmentdate:installmentdate,
+             percentage:percentage,
+             slipamount:real_amount,
+             id_slip:slip_id
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+
+             console.log(response)
             //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-               $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+response.id+'" data-name="installmentendorsementvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+response.id+')">delete</a></td></tr>')
-               $('#dateinstallmentendorsement').val('');
-               $('#slipippercentageendorsement').val('');
-               $('#slipipamountendorsement').val('');
-               
+            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+response.id+'" data-name="installmentendorsementvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+response.id+')">delete</a></td></tr>')
+            $('#dateinstallmentendorsement').val('');
+            $('#slipippercentageendorsement').val('');
+            $('#slipipamountendorsement').val('');
+
                //var total =  parseFloat($("#sliptotalsum").val());
                //var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
                //$("#sliptotalsum").val(sum);
@@ -4016,7 +3879,7 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
+
                 $('#iidinstallment'+id).remove();
                 console.log(response);
             }
@@ -4039,7 +3902,7 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
+
                 $('#iidinstallmentupdate'+id).remove();
                 console.log(response);
             }
@@ -4062,7 +3925,7 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
+
                 $('#iidinstallmentendorsement'+id).remove();
                 console.log(response);
             }
@@ -4097,40 +3960,40 @@ $(document).ready(function() {
        console.log(real_minamount)
        
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{ route('deductible.store') }}",
-           type:"POST",
-           data:{
-               slipdptype:slipdptype,
-               slipdpcurrency:slipdpcurrency,
-               percentage:percentage,
-               amount:real_amount,
-               minamount:real_minamount,
-               id_slip:slip_id
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-            
-               console.log(response)
+         url:"{{ route('deductible.store') }}",
+         type:"POST",
+         data:{
+             slipdptype:slipdptype,
+             slipdpcurrency:slipdpcurrency,
+             percentage:percentage,
+             amount:real_amount,
+             minamount:real_minamount,
+             id_slip:slip_id
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+
+             console.log(response)
             //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             //    var curr_minamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.min_claimamount);
-               var curr_minamount = response.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-               $('#deductiblePanel tbody').prepend('<tr id="iiddeductible'+response.id+'" data-name="deductiblevalue[]"><td data-name="'+response.deductibletype+'">'+response.deductibletype+'</td><td data-name="'+response.currencydata+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibledetail('+response.id+')">delete</a></td></tr>');
-               $('#slipdppercentage').val('');
-               $('#slipdpamount').val('');
-               $('#slipdpamount2').val('');
-               $('#slipdpminamount').val('');
-               
-           }
-       });
+            var curr_minamount = response.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#deductiblePanel tbody').prepend('<tr id="iiddeductible'+response.id+'" data-name="deductiblevalue[]"><td data-name="'+response.deductibletype+'">'+response.deductibletype+'</td><td data-name="'+response.currencydata+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibledetail('+response.id+')">delete</a></td></tr>');
+            $('#slipdppercentage').val('');
+            $('#slipdpamount').val('');
+            $('#slipdpamount2').val('');
+            $('#slipdpminamount').val('');
+
+        }
+    });
 
    });
 </script>
@@ -4162,38 +4025,38 @@ $(document).ready(function() {
        console.log(real_minamount)
        
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{ route('deductible.store') }}",
-           type:"POST",
-           data:{
-               slipdptype:slipdptype,
-               slipdpcurrency:slipdpcurrency,
-               percentage:percentage,
-               amount:real_amount,
-               minamount:real_minamount,
-               id_slip:slip_id
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-            
-               console.log(response)
+         url:"{{ route('deductible.store') }}",
+         type:"POST",
+         data:{
+             slipdptype:slipdptype,
+             slipdpcurrency:slipdpcurrency,
+             percentage:percentage,
+             amount:real_amount,
+             minamount:real_minamount,
+             id_slip:slip_id
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+
+             console.log(response)
             //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-               $('#deductiblePanelupdate tbody').prepend('<tr id="iiddeductibleupdate'+response.id+'" data-name="deductibleupdatevalue[]"><td data-name="'+response.deductibletype+'">'+response.deductibletype+'</td><td data-name="'+response.currencydata+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleupdate('+response.id+')">delete</a></td></tr>');
-               $('#slipdppercentageupdate').val('');
-               $('#slipdpamountupdate').val('');
-               $('#slipdpamountupdate2').val('');
-               $('#slipdpminamountupdate').val('');
-               
-           }
-       });
+            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#deductiblePanelupdate tbody').prepend('<tr id="iiddeductibleupdate'+response.id+'" data-name="deductibleupdatevalue[]"><td data-name="'+response.deductibletype+'">'+response.deductibletype+'</td><td data-name="'+response.currencydata+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleupdate('+response.id+')">delete</a></td></tr>');
+            $('#slipdppercentageupdate').val('');
+            $('#slipdpamountupdate').val('');
+            $('#slipdpamountupdate2').val('');
+            $('#slipdpminamountupdate').val('');
+
+        }
+    });
 
    });
 </script>
@@ -4224,37 +4087,37 @@ $(document).ready(function() {
        console.log(real_minamount)
        
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{ route('deductible.store') }}",
-           type:"POST",
-           data:{
-               slipdptype:slipdptype,
-               slipdpcurrency:slipdpcurrency,
-               percentage:percentage,
-               amount:real_amount,
-               minamount:real_minamount,
-               id_slip:slip_id
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-            
-               console.log(response)
+         url:"{{ route('deductible.store') }}",
+         type:"POST",
+         data:{
+             slipdptype:slipdptype,
+             slipdpcurrency:slipdpcurrency,
+             percentage:percentage,
+             amount:real_amount,
+             minamount:real_minamount,
+             id_slip:slip_id
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+
+             console.log(response)
             //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-               $('#deductiblePanelendorsement tbody').prepend('<tr id="iiddeductibleendorsement'+response.id+'" data-name="deductibleendorsementvalue[]"><td data-name="'+response.deductibletype+'">'+response.deductibletype+'</td><td data-name="'+response.currencydata+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleendorsement('+response.id+')">delete</a></td></tr>');
-               $('#slipdppercentageendorsement').val('');
-               $('#slipdpamountendorsement').val('');
-               $('#slipdpminamountendorsement').val('');
-               
-           }
-       });
+            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#deductiblePanelendorsement tbody').prepend('<tr id="iiddeductibleendorsement'+response.id+'" data-name="deductibleendorsementvalue[]"><td data-name="'+response.deductibletype+'">'+response.deductibletype+'</td><td data-name="'+response.currencydata+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleendorsement('+response.id+')">delete</a></td></tr>');
+            $('#slipdppercentageendorsement').val('');
+            $('#slipdpamountendorsement').val('');
+            $('#slipdpminamountendorsement').val('');
+
+        }
+    });
 
    });
 </script>
@@ -4274,7 +4137,7 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
+
                 $('#iiddeductible'+id).remove();
                 console.log(response);
             }
@@ -4298,7 +4161,7 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
+
                 $('#iiddeductibleupdate'+id).remove();
                 console.log(response);
             }
@@ -4321,7 +4184,7 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
+
                 $('#iiddeductibleendorsement'+id).remove();
                 console.log(response);
             }
@@ -4349,36 +4212,36 @@ $(document).ready(function() {
 
        
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{ route('extendcoverage.store') }}",
-           type:"POST",
-           data:{
-               slipcncode:slipcncode,
-               percentage:percentage,
-               amount:real_amount,
-               id_slip:slip_id
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-            
-        
-               console.log(response)
+         url:"{{ route('extendcoverage.store') }}",
+         type:"POST",
+         data:{
+             slipcncode:slipcncode,
+             percentage:percentage,
+             amount:real_amount,
+             id_slip:slip_id
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+
+
+             console.log(response)
             //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-               $('#ExtendCoveragePanel tbody').prepend('<tr id="iidextendcoverage'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoveragedetail('+response.id+')">delete</a></td></tr>');
-               $('#slipnilaiec').val('');
-               $('#slipamountec').val('');
-               $('#slipamountec2').val('');
-               
-           }
-       });
+            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#ExtendCoveragePanel tbody').prepend('<tr id="iidextendcoverage'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoveragedetail('+response.id+')">delete</a></td></tr>');
+            $('#slipnilaiec').val('');
+            $('#slipamountec').val('');
+            $('#slipamountec2').val('');
+
+        }
+    });
 
    });
 </script>
@@ -4403,35 +4266,35 @@ $(document).ready(function() {
        console.log(real_amount)
        
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{ route('extendcoverage.store') }}",
-           type:"POST",
-           data:{
-               slipcncode:slipcncode,
-               percentage:percentage,
-               amount:real_amount,
-               id_slip:slip_id
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-            
-               console.log(response)
+         url:"{{ route('extendcoverage.store') }}",
+         type:"POST",
+         data:{
+             slipcncode:slipcncode,
+             percentage:percentage,
+             amount:real_amount,
+             id_slip:slip_id
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+
+             console.log(response)
             //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-               $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+response.id+'" data-name="extendcoverageupdatevalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageupdate('+response.id+')">delete</a></td></tr>');
-               $('#slipnilaiecupdate').val('');
-               $('#slipamountecupdate').val('');
-               $('#slipamountecupdate2').val('');
-               
-           }
-       });
+            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+response.id+'" data-name="extendcoverageupdatevalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageupdate('+response.id+')">delete</a></td></tr>');
+            $('#slipnilaiecupdate').val('');
+            $('#slipamountecupdate').val('');
+            $('#slipamountecupdate2').val('');
+
+        }
+    });
 
    });
 </script>
@@ -4455,34 +4318,34 @@ $(document).ready(function() {
        console.log(real_amount)
        
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{ route('extendcoverage.store') }}",
-           type:"POST",
-           data:{
-               slipcncode:slipcncode,
-               percentage:percentage,
-               amount:real_amount,
-               id_slip:slip_id
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-            
-               console.log(response)
+         url:"{{ route('extendcoverage.store') }}",
+         type:"POST",
+         data:{
+             slipcncode:slipcncode,
+             percentage:percentage,
+             amount:real_amount,
+             id_slip:slip_id
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+
+             console.log(response)
             //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-               $('#ExtendCoveragePanelendorsement tbody').prepend('<tr id="iidextendcoverageendorsement'+response.id+'" data-name="extendcoverageendorsementvalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageendorsement('+response.id+')">delete</a></td></tr>');
-               $('#slipnilaiecendorsement').val('');
-               $('#slipamountecendorsement').val('');
-               
-           }
-       });
+            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#ExtendCoveragePanelendorsement tbody').prepend('<tr id="iidextendcoverageendorsement'+response.id+'" data-name="extendcoverageendorsementvalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageendorsement('+response.id+')">delete</a></td></tr>');
+            $('#slipnilaiecendorsement').val('');
+            $('#slipamountecendorsement').val('');
+
+        }
+    });
 
    });
 </script>
@@ -4502,7 +4365,7 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
+
                 $('#iidextendcoverage'+id).remove();
                 console.log(response);
             }
@@ -4526,7 +4389,7 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
+
                 $('#iidextendcoverageupdate'+id).remove();
                 console.log(response);
             }
@@ -4550,7 +4413,7 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
+
                 $('#iidextendcoverageendorsement'+id).remove();
                 console.log(response);
             }
@@ -4578,36 +4441,36 @@ $(document).ready(function() {
        console.log(real_amount)
        
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{ route('retrocession.store') }}",
-           type:"POST",
-           data:{
-               type:type,
-               contract:contract,
-               percentage:percentage,
-               amount:real_amount,
-               id_slip:slip_id
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-            
-               console.log(response)
+         url:"{{ route('retrocession.store') }}",
+         type:"POST",
+         data:{
+             type:type,
+             contract:contract,
+             percentage:percentage,
+             amount:real_amount,
+             id_slip:slip_id
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+
+             console.log(response)
             //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-               $('#retrocessionPanel tbody').prepend('<tr id="iidretrocession'+response.id+'" data-name="retrocessionvalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessiondetail('+response.id+')">delete</a></td></tr>');
-               $('#sliprppercentage').val('');
-               $('#sliprpamount').val('');
-               $('#sliprpamount2').val('');
-               
-           }
-       });
+            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#retrocessionPanel tbody').prepend('<tr id="iidretrocession'+response.id+'" data-name="retrocessionvalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessiondetail('+response.id+')">delete</a></td></tr>');
+            $('#sliprppercentage').val('');
+            $('#sliprpamount').val('');
+            $('#sliprpamount2').val('');
+
+        }
+    });
 
    });
 </script>
@@ -4632,36 +4495,36 @@ $(document).ready(function() {
        console.log(real_amount)
        
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{ route('retrocession.store') }}",
-           type:"POST",
-           data:{
-               type:type,
-               contract:contract,
-               percentage:percentage,
-               amount:real_amount,
-               id_slip:slip_id
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-            
-               console.log(response)
+         url:"{{ route('retrocession.store') }}",
+         type:"POST",
+         data:{
+             type:type,
+             contract:contract,
+             percentage:percentage,
+             amount:real_amount,
+             id_slip:slip_id
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+
+             console.log(response)
             //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-               $('#retrocessionPanelupdate tbody').prepend('<tr id="iidretrocessionupdate'+response.id+'" data-name="retrocessionupdatevalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+')</td><td><a href="javascript:void(0)" onclick="deleteretrocessionupdate('+response.id+')">delete</a></td></tr>');
-               $('#sliprppercentageupdate').val('');
-               $('#sliprpamountupdate').val('');
-               $('#sliprpamountupdate2').val('');
-               
-           }
-       });
+            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#retrocessionPanelupdate tbody').prepend('<tr id="iidretrocessionupdate'+response.id+'" data-name="retrocessionupdatevalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+')</td><td><a href="javascript:void(0)" onclick="deleteretrocessionupdate('+response.id+')">delete</a></td></tr>');
+            $('#sliprppercentageupdate').val('');
+            $('#sliprpamountupdate').val('');
+            $('#sliprpamountupdate2').val('');
+
+        }
+    });
 
    });
 </script>
@@ -4686,35 +4549,35 @@ $(document).ready(function() {
        console.log(real_amount)
        
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{ route('retrocession.store') }}",
-           type:"POST",
-           data:{
-               type:type,
-               contract:contract,
-               percentage:percentage,
-               amount:real_amount,
-               id_slip:slip_id
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-            
-               console.log(response)
+         url:"{{ route('retrocession.store') }}",
+         type:"POST",
+         data:{
+             type:type,
+             contract:contract,
+             percentage:percentage,
+             amount:real_amount,
+             id_slip:slip_id
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+
+             console.log(response)
             //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-               $('#retrocessionPanelendorsement tbody').prepend('<tr id="iidretrocessionendorsement'+response.id+'" data-name="retrocessionendorsementvalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+')</td><td><a href="javascript:void(0)" onclick="deleteretrocessionendorsement('+response.id+')">delete</a></td></tr>');
-               $('#sliprppercentageendorsement').val('');
-               $('#sliprpamountendorsement').val('');
-               
-           }
-       });
+            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#retrocessionPanelendorsement tbody').prepend('<tr id="iidretrocessionendorsement'+response.id+'" data-name="retrocessionendorsementvalue[]"><td data-name="'+response.type+'">'+response.type+'</td><td data-name="'+response.contract+'">'+response.contract+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+')</td><td><a href="javascript:void(0)" onclick="deleteretrocessionendorsement('+response.id+')">delete</a></td></tr>');
+            $('#sliprppercentageendorsement').val('');
+            $('#sliprpamountendorsement').val('');
+
+        }
+    });
 
    });
 </script>
@@ -4735,7 +4598,7 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
+
                 $('#iidretrocession'+id).remove();
                 console.log(response);
             }
@@ -4757,7 +4620,7 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
+
                 $('#iidretrocessionupdate'+id).remove();
                 console.log(response);
             }
@@ -4779,7 +4642,7 @@ $(document).ready(function() {
             beforeSend: function() { $("body").addClass("loading");  },
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response){
-                
+
                 $('#iidretrocessionendorsement'+id).remove();
                 console.log(response);
             }
@@ -4836,60 +4699,60 @@ $(document).ready(function() {
 
        if(isNaN(real_fesshareto))
        {
-         real_fesshareto=0;
+           real_fesshareto=0;
        }
 
        if(isNaN(real_fessharefrom))
        {
         real_fessharefrom=0;
-       }
-       
-       
-       var token2 = $('input[name=_token]').val();
+    }
 
-       console.log(fesinsured)
-       console.log(fessuggestinsured)
-       console.log(fesnumber)
-       console.log(fessuffix)
 
-       
-       $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+    var token2 = $('input[name=_token]').val();
 
-       $.ajax({
-           url:"{{ url('transaction-data/fe-insured/store') }}",
-           type:"POST",
-           data:{
-               fesnumber:fesnumber,
-               fesinsured:fesinsured,
-               fessuggestinsured:fessuggestinsured,
-               fessuffix:fessuffix,
-               fesshare:fesshare,
-               fessharefrom:real_fessharefrom,
-               fesshareto:real_fesshareto,
-               fescoinsurance:fescoinsurance,
-               feuy:feuy
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-                swal("Success!", "Insured Fire & Engineering Insert Success", "success")
-                console.log(response)
-                $('#fecountendorsement').val(response.count_endorsement);
+    console.log(fesinsured)
+    console.log(fessuggestinsured)
+    console.log(fesnumber)
+    console.log(fessuffix)
 
-           },
-           error: function (request, status, error) {
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+     url:"{{ url('transaction-data/fe-insured/store') }}",
+     type:"POST",
+     data:{
+         fesnumber:fesnumber,
+         fesinsured:fesinsured,
+         fessuggestinsured:fessuggestinsured,
+         fessuffix:fessuffix,
+         fesshare:fesshare,
+         fessharefrom:real_fessharefrom,
+         fesshareto:real_fesshareto,
+         fescoinsurance:fescoinsurance,
+         feuy:feuy
+     },
+     beforeSend: function() { $("body").addClass("loading");  },
+     complete: function() {  $("body").removeClass("loading"); },
+     success:function(response)
+     {
+        swal("Success!", "Insured Fire & Engineering Insert Success", "success")
+        console.log(response)
+        $('#fecountendorsement').val(response.count_endorsement);
+
+    },
+    error: function (request, status, error) {
                 //alert(request.responseText);
                 swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
-           }
-       });
+            }
+        });
 
 
-   });
+});
 </script>
 
 
@@ -4917,157 +4780,157 @@ $(document).ready(function() {
        var slippolicy_no =  $('#slippolicy_no').val();
        var sliptotalsum = $('#sliptotalsum').val();
     //    var slipoldsumshare = $()
-       var sliptype =  $('#sliptype').val();
-       var slippct =  $('#slippct').val();
-       var sliptotalsumpct =  $('#sliptotalsumpct').val();
-       var slipipfrom =  $('#slipipfrom').val();
-       var slipipto =  $('#slipipto').val();
-       var sliprpfrom =  $('#sliprpfrom').val();
-       var sliprpto =  $('#sliprpto').val();
-       var proportional =  $('#switch-proportional').val();
-       var sliplayerproportional =  $('#sliplayerproportional').val();
-       var sliprate =  $('#sliprate').val();
-       var slipvbroker =  $('#slipvbroker').val();
-       var slipshare =  $('#slipshare').val();
-       var slipsumshare =  $('#slipsumshare').val();
-       var slipbasicpremium =  $('#slipbasicpremium').val();
-       var slipgrossprmtonr =  $('#slipgrossprmtonr').val();
-       var slipsumcommission =  $('#slipsumcommission').val();
-       var slipcommission =  $('#slipcommission').val();
-       var slipnetprmtonr =  $('#slipnetprmtonr').val();
-       var sliprb =  $('#sliprb').val();
-       var slipor =  $('#slipor').val();
-       var slipsumor =  $('#slipsumor').val();
-       var wpc =  $('#wpc').val();
+    var sliptype =  $('#sliptype').val();
+    var slippct =  $('#slippct').val();
+    var sliptotalsumpct =  $('#sliptotalsumpct').val();
+    var slipipfrom =  $('#slipipfrom').val();
+    var slipipto =  $('#slipipto').val();
+    var sliprpfrom =  $('#sliprpfrom').val();
+    var sliprpto =  $('#sliprpto').val();
+    var proportional =  $('#switch-proportional').val();
+    var sliplayerproportional =  $('#sliplayerproportional').val();
+    var sliprate =  $('#sliprate').val();
+    var slipvbroker =  $('#slipvbroker').val();
+    var slipshare =  $('#slipshare').val();
+    var slipsumshare =  $('#slipsumshare').val();
+    var slipbasicpremium =  $('#slipbasicpremium').val();
+    var slipgrossprmtonr =  $('#slipgrossprmtonr').val();
+    var slipsumcommission =  $('#slipsumcommission').val();
+    var slipcommission =  $('#slipcommission').val();
+    var slipnetprmtonr =  $('#slipnetprmtonr').val();
+    var sliprb =  $('#sliprb').val();
+    var slipor =  $('#slipor').val();
+    var slipsumor =  $('#slipsumor').val();
+    var wpc =  $('#wpc').val();
 
-       var token2 = $('input[name=_token]').val();
+    var token2 = $('input[name=_token]').val();
 
-       var conv_sliptotalsum = sliptotalsum.replace(/,/g, "");
-       console.log(code_ms)
-       console.log(slipnumber)
-       console.log(conv_sliptotalsum)
-       var real_sliptotalsum = parseInt(conv_sliptotalsum);
-       console.log(real_sliptotalsum)
-       
-       var conv_sliptotalsumpct = sliptotalsumpct.replace(/,/g, "");
-       console.log(conv_sliptotalsumpct)
-       var real_sliptotalsumpct = parseInt(conv_sliptotalsumpct);
-       console.log(real_sliptotalsumpct)
+    var conv_sliptotalsum = sliptotalsum.replace(/,/g, "");
+    console.log(code_ms)
+    console.log(slipnumber)
+    console.log(conv_sliptotalsum)
+    var real_sliptotalsum = parseInt(conv_sliptotalsum);
+    console.log(real_sliptotalsum)
 
-       var conv_slipsumshare = slipsumshare.replace(/,/g, "");
-       console.log(conv_slipsumshare)
-       var real_slipsumshare = parseInt(conv_slipsumshare);
-       console.log(real_slipsumshare)
+    var conv_sliptotalsumpct = sliptotalsumpct.replace(/,/g, "");
+    console.log(conv_sliptotalsumpct)
+    var real_sliptotalsumpct = parseInt(conv_sliptotalsumpct);
+    console.log(real_sliptotalsumpct)
 
-       var conv_slipbasicpremium = slipbasicpremium.replace(/,/g, "");
-       console.log(conv_slipbasicpremium)
-       var real_slipbasicpremium = parseInt(conv_slipbasicpremium);
-       console.log(real_slipbasicpremium)
+    var conv_slipsumshare = slipsumshare.replace(/,/g, "");
+    console.log(conv_slipsumshare)
+    var real_slipsumshare = parseInt(conv_slipsumshare);
+    console.log(real_slipsumshare)
 
-       var conv_slipgrossprmtonr = slipgrossprmtonr.replace(/,/g, "");
-       console.log(conv_slipgrossprmtonr)
-       var real_slipgrossprmtonr = parseInt(conv_slipgrossprmtonr);
-       console.log(real_slipgrossprmtonr)
+    var conv_slipbasicpremium = slipbasicpremium.replace(/,/g, "");
+    console.log(conv_slipbasicpremium)
+    var real_slipbasicpremium = parseInt(conv_slipbasicpremium);
+    console.log(real_slipbasicpremium)
 
-       var conv_slipsumcommission = slipsumcommission.replace(/,/g, "");
-       console.log(conv_slipsumcommission)
-       var real_slipsumcommission = parseInt(conv_slipsumcommission);
-       console.log(real_slipsumcommission)
+    var conv_slipgrossprmtonr = slipgrossprmtonr.replace(/,/g, "");
+    console.log(conv_slipgrossprmtonr)
+    var real_slipgrossprmtonr = parseInt(conv_slipgrossprmtonr);
+    console.log(real_slipgrossprmtonr)
 
-       var conv_slipnetprmtonr = slipnetprmtonr.replace(/,/g, "");
-       console.log(conv_slipnetprmtonr)
-       var real_slipnetprmtonr = parseInt(conv_slipnetprmtonr);
-       console.log(real_slipnetprmtonr)
+    var conv_slipsumcommission = slipsumcommission.replace(/,/g, "");
+    console.log(conv_slipsumcommission)
+    var real_slipsumcommission = parseInt(conv_slipsumcommission);
+    console.log(real_slipsumcommission)
 
-       var conv_slipsumor = slipsumor.replace(/,/g, "");
-       console.log(conv_slipsumor)
-       var real_slipsumor = parseInt(conv_slipsumor);
-       console.log(real_slipsumor)
+    var conv_slipnetprmtonr = slipnetprmtonr.replace(/,/g, "");
+    console.log(conv_slipnetprmtonr)
+    var real_slipnetprmtonr = parseInt(conv_slipnetprmtonr);
+    console.log(real_slipnetprmtonr)
 
-       
-       
+    var conv_slipsumor = slipsumor.replace(/,/g, "");
+    console.log(conv_slipsumor)
+    var real_slipsumor = parseInt(conv_slipsumor);
+    console.log(real_slipsumor)
+
+
+
        //ajaxfilefunction(e);
 
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{url('transaction-data/fe-slip/store')}}",
-           type:"POST",
-           data:{
-               code_ms:code_ms,
-               slipnumber:slipnumber,
-               slipdatetransfer:slipdatetransfer,
-               slipstatus:slipstatus,
-               sliped:sliped,
-               slipsls:slipsls,
-               slipcedingbroker:slipcedingbroker,
-               slipceding:slipceding,
-               slipcurrency:slipcurrency,
-               slipcob:slipcob,
-               slipkoc:slipkoc,
-               slipoccupacy:slipoccupacy,
-               slipbld_const:slipbld_const,
-               slipno:slipno,
-               slipcndn:slipcndn,
-               slippolicy_no:slippolicy_no,
-               sliptotalsum:real_sliptotalsum,
-               sliptype:sliptype,
-               slippct:slippct,
-               sliptotalsumpct:real_sliptotalsumpct,
-               slipipfrom:slipipfrom,
-               slipipto:slipipto,
-               sliprpfrom:sliprpfrom,
-               sliprpto:sliprpto,
-               proportional:proportional,
-               sliplayerproportional:sliplayerproportional,
-               sliprate:sliprate,
-               slipvbroker:slipvbroker,
-               slipshare:slipshare,
-               slipsumshare:real_slipsumshare,
-               slipbasicpremium:real_slipbasicpremium,
-               slipgrossprmtonr:real_slipgrossprmtonr,
-               slipcommission:slipcommission,
-               slipsumcommission:real_slipsumcommission,
-               slipnetprmtonr:real_slipnetprmtonr,
-               sliprb:sliprb,
-               slipor:slipor,
-               slipsumor:real_slipsumor,
-               wpc:wpc
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-                swal("Success!", "Insured Fire & Engineering Slip Insert Success", "success")
-                console.log(response)
+         url:"{{url('transaction-data/fe-slip/store')}}",
+         type:"POST",
+         data:{
+             code_ms:code_ms,
+             slipnumber:slipnumber,
+             slipdatetransfer:slipdatetransfer,
+             slipstatus:slipstatus,
+             sliped:sliped,
+             slipsls:slipsls,
+             slipcedingbroker:slipcedingbroker,
+             slipceding:slipceding,
+             slipcurrency:slipcurrency,
+             slipcob:slipcob,
+             slipkoc:slipkoc,
+             slipoccupacy:slipoccupacy,
+             slipbld_const:slipbld_const,
+             slipno:slipno,
+             slipcndn:slipcndn,
+             slippolicy_no:slippolicy_no,
+             sliptotalsum:real_sliptotalsum,
+             sliptype:sliptype,
+             slippct:slippct,
+             sliptotalsumpct:real_sliptotalsumpct,
+             slipipfrom:slipipfrom,
+             slipipto:slipipto,
+             sliprpfrom:sliprpfrom,
+             sliprpto:sliprpto,
+             proportional:proportional,
+             sliplayerproportional:sliplayerproportional,
+             sliprate:sliprate,
+             slipvbroker:slipvbroker,
+             slipshare:slipshare,
+             slipsumshare:real_slipsumshare,
+             slipbasicpremium:real_slipbasicpremium,
+             slipgrossprmtonr:real_slipgrossprmtonr,
+             slipcommission:slipcommission,
+             slipsumcommission:real_slipsumcommission,
+             slipnetprmtonr:real_slipnetprmtonr,
+             sliprb:sliprb,
+             slipor:slipor,
+             slipsumor:real_slipsumor,
+             wpc:wpc
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+            swal("Success!", "Insured Fire & Engineering Slip Insert Success", "success")
+            console.log(response)
 
-                
-                $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">'+response.cedingbroker+'</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">'+response.slipstatus+'</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
-                    +'</a>'
-                    +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.id+'" data-target="#updatemodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
-                    +'</a>'
-                    +'<button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" onclick="addendorsement('+response.id+')">Endorsement</button>'
-                    +'<td></td></tr>');
-                    
-                $('#slipnumber').val(response.code_sl);
-                $('#feshare').val(response.ourshare);
-                $('#fesharefrom').val(response.sumshare);
 
-           },
-           error: function (request, status, error) {
+            $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">'+response.cedingbroker+'</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">'+response.slipstatus+'</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
+                +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
+                +'</a>'
+                +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.id+'" data-target="#updatemodaldata">'
+                +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
+                +'</a>'
+                +'<button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" onclick="addendorsement('+response.id+')">Endorsement</button>'
+                +'<td></td></tr>');
+
+            $('#slipnumber').val(response.code_sl);
+            $('#feshare').val(response.ourshare);
+            $('#fesharefrom').val(response.sumshare);
+
+        },
+        error: function (request, status, error) {
                 //alert(request.responseText);
                 swal("Error!", "Insured Fire & Engineering Slip Insert Error", "Insert Error");
-           }
-       });
+            }
+        });
 
 
-      
+
        var formData = new FormData(this);
        let TotalFiles = $('#attachment')[0].files.length; //Total files
        let files = $('#attachment')[0];
@@ -5076,57 +4939,57 @@ $(document).ready(function() {
        for (let i = 0; i < TotalFiles; i++) 
        {
         formData.append('files' + i, files.files[i]);
-       }
-       
-       formData.append('TotalFiles', TotalFiles);
-       formData.append('slip_id', slip_id);
-     
-       $.ajax({
-                    type:'POST',
-                    url: "{{ url('store-multi-file-ajax')}}",
-                    data: formData,
-                    cache:false,
-                    contentType: false,
-                    processData: false,
-                    dataType: 'json',
-                    success: (data) => {
+    }
+
+    formData.append('TotalFiles', TotalFiles);
+    formData.append('slip_id', slip_id);
+
+    $.ajax({
+        type:'POST',
+        url: "{{ url('store-multi-file-ajax')}}",
+        data: formData,
+        cache:false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: (data) => {
                     //this.reset();
                     //alert('Files has been uploaded using jQuery ajax');
-                      swal("Success!", "Files has been uploaded", "success")
-                    },
-                    error: function(data){
+                    swal("Success!", "Files has been uploaded", "success")
+                },
+                error: function(data){
                      //alert(data.responseJSON.errors.files[0]);
                      //swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
                      //console.log(data.responseJSON.errors);
-                    }
-        });
+                 }
+             });
 
 
       // insured save
-       var fesnumber = $('#insuredIDtxt').val();
-       var fessuffix = $('#autocomplete2').val();
-       var fesshare = $('#feshare').val();
-       var fessharefrom  = $('#fesharefrom').val();
-       var fesshareto = $('#feshareto').val();
-       
-       
-       var conv_fessharefrom = fessharefrom.replace(/,/g, "");
-       console.log(conv_fessharefrom)
-       var real_fessharefrom = parseInt(conv_fessharefrom);
-       console.log(real_fessharefrom)
-       var conv_fesshareto = fesshareto.replace(/,/g, "");
-       console.log(conv_fesshareto)
-       var real_fesshareto = parseInt(conv_fesshareto);
-       console.log(real_fesshareto)
-       
-       
-       var token2 = $('input[name=_token]').val();
+      var fesnumber = $('#insuredIDtxt').val();
+      var fessuffix = $('#autocomplete2').val();
+      var fesshare = $('#feshare').val();
+      var fessharefrom  = $('#fesharefrom').val();
+      var fesshareto = $('#feshareto').val();
 
-       
-       console.log(fesnumber)
-       console.log(fessuffix)
 
-       
+      var conv_fessharefrom = fessharefrom.replace(/,/g, "");
+      console.log(conv_fessharefrom)
+      var real_fessharefrom = parseInt(conv_fessharefrom);
+      console.log(real_fessharefrom)
+      var conv_fesshareto = fesshareto.replace(/,/g, "");
+      console.log(conv_fesshareto)
+      var real_fesshareto = parseInt(conv_fesshareto);
+      console.log(real_fesshareto)
+
+
+      var token2 = $('input[name=_token]').val();
+
+
+      console.log(fesnumber)
+      console.log(fessuffix)
+
+
     //    $.ajaxSetup({
     //             headers: {
     //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -5156,15 +5019,15 @@ $(document).ready(function() {
     //        }
     //    });
 
- 
-       $('#installmentPanel tbody').empty();
-       $('#ExtendCoveragePanel tbody').empty();
-       $('#deductiblePanel tbody').empty();
-       $('#retrocessionPanel tbody').empty();
-       
 
-       
-   });
+    $('#installmentPanel tbody').empty();
+    $('#ExtendCoveragePanel tbody').empty();
+    $('#deductiblePanel tbody').empty();
+    $('#retrocessionPanel tbody').empty();
+
+
+
+});
 </script>
 
 <script type='text/javascript'>
@@ -5259,83 +5122,83 @@ $(document).ready(function() {
        //ajaxfilefunction(e);
 
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{url('transaction-data/fe-slip/endorsementstore')}}",
-           type:"POST",
-           data:{
-               code_ms:code_ms,
-               slipnumber:slipnumber,
-               slipdatetransfer:slipdatetransfer,
-               slipstatus:slipstatus,
-               sliped:sliped,
-               slipsls:slipsls,
-               slipcedingbroker:slipcedingbroker,
-               slipceding:slipceding,
-               slipcurrency:slipcurrency,
-               slipcob:slipcob,
-               slipkoc:slipkoc,
-               slipoccupacy:slipoccupacy,
-               slipbld_const:slipbld_const,
-               slipno:slipno,
-               slipcndn:slipcndn,
-               slippolicy_no:slippolicy_no,
-               sliptotalsum:real_sliptotalsum,
-               sliptype:sliptype,
-               slippct:slippct,
-               sliptotalsumpct:real_sliptotalsumpct,
-               slipipfrom:slipipfrom,
-               slipipto:slipipto,
-               sliprpfrom:sliprpfrom,
-               sliprpto:sliprpto,
-               proportional:proportional,
-               sliplayerproportional:sliplayerproportional,
-               sliprate:sliprate,
-               slipvbroker:slipvbroker,
-               slipshare:slipshare,
-               slipsumshare:real_slipsumshare,
-               slipbasicpremium:real_slipbasicpremium,
-               slipgrossprmtonr:real_slipgrossprmtonr,
-               slipcommission:slipcommission,
-               slipsumcommission:real_slipsumcommission,
-               slipnetprmtonr:real_slipnetprmtonr,
-               sliprb:sliprb,
-               slipor:slipor,
-               slipsumor:real_slipsumor,
-               wpc:wpc
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-                swal("Success!", "Insured Fire & Engineering Slip Insert Success", "success")
-                console.log(response)
+         url:"{{url('transaction-data/fe-slip/endorsementstore')}}",
+         type:"POST",
+         data:{
+             code_ms:code_ms,
+             slipnumber:slipnumber,
+             slipdatetransfer:slipdatetransfer,
+             slipstatus:slipstatus,
+             sliped:sliped,
+             slipsls:slipsls,
+             slipcedingbroker:slipcedingbroker,
+             slipceding:slipceding,
+             slipcurrency:slipcurrency,
+             slipcob:slipcob,
+             slipkoc:slipkoc,
+             slipoccupacy:slipoccupacy,
+             slipbld_const:slipbld_const,
+             slipno:slipno,
+             slipcndn:slipcndn,
+             slippolicy_no:slippolicy_no,
+             sliptotalsum:real_sliptotalsum,
+             sliptype:sliptype,
+             slippct:slippct,
+             sliptotalsumpct:real_sliptotalsumpct,
+             slipipfrom:slipipfrom,
+             slipipto:slipipto,
+             sliprpfrom:sliprpfrom,
+             sliprpto:sliprpto,
+             proportional:proportional,
+             sliplayerproportional:sliplayerproportional,
+             sliprate:sliprate,
+             slipvbroker:slipvbroker,
+             slipshare:slipshare,
+             slipsumshare:real_slipsumshare,
+             slipbasicpremium:real_slipbasicpremium,
+             slipgrossprmtonr:real_slipgrossprmtonr,
+             slipcommission:slipcommission,
+             slipsumcommission:real_slipsumcommission,
+             slipnetprmtonr:real_slipnetprmtonr,
+             sliprb:sliprb,
+             slipor:slipor,
+             slipsumor:real_slipsumor,
+             wpc:wpc
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+            swal("Success!", "Insured Fire & Engineering Slip Insert Success", "success")
+            console.log(response)
 
-                $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">"'+response.cedingbroker+'"</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.number+'" data-target="#detailmodaldata" href="#detailmodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
-                    +'</a>'
-                    +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#updatemodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
-                    +'</a>'
-                    +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#endorsementmodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
-                    +'</a><td></td></tr>');
+            $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">"'+response.cedingbroker+'"</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.number+'" data-target="#detailmodaldata" href="#detailmodaldata">'
+                +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
+                +'</a>'
+                +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#updatemodaldata">'
+                +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
+                +'</a>'
+                +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#endorsementmodaldata">'
+                +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
+                +'</a><td></td></tr>');
 
-                $('#slipnumber').val(response.code_sl);
+            $('#slipnumber').val(response.code_sl);
 
-           },
-           error: function (request, status, error) {
+        },
+        error: function (request, status, error) {
                 //alert(request.responseText);
                 swal("Error!", "Insured Fire & Engineering Slip Insert Error", "Insert Error");
-           }
-       });
+            }
+        });
 
 
-      
+
        var formData = new FormData(this);
        let TotalFiles = $('#attachment')[0].files.length; //Total files
        let files = $('#attachment')[0];
@@ -5344,110 +5207,110 @@ $(document).ready(function() {
        for (let i = 0; i < TotalFiles; i++) 
        {
         formData.append('files' + i, files.files[i]);
-       }
-       
-       formData.append('TotalFiles', TotalFiles);
-       formData.append('slip_id', slip_id);
-     
-       $.ajax({
-                    type:'POST',
-                    url: "{{ url('store-multi-file-ajax')}}",
-                    data: formData,
-                    cache:false,
-                    contentType: false,
-                    processData: false,
-                    dataType: 'json',
-                    success: (data) => {
+    }
+
+    formData.append('TotalFiles', TotalFiles);
+    formData.append('slip_id', slip_id);
+
+    $.ajax({
+        type:'POST',
+        url: "{{ url('store-multi-file-ajax')}}",
+        data: formData,
+        cache:false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: (data) => {
                     //this.reset();
                     //alert('Files has been uploaded using jQuery ajax');
-                      swal("Success!", "Files has been uploaded", "success")
-                    },
-                    error: function(data){
+                    swal("Success!", "Files has been uploaded", "success")
+                },
+                error: function(data){
                      //alert(data.responseJSON.errors.files[0]);
                      //swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
                      //console.log(data.responseJSON.errors);
-                    }
-        });
+                 }
+             });
 
 
       // insured save
-       var fesnumber = $('#insuredIDtxt').val();
-       var fesinsured = $('#feinsured').val();
-       var fessuggestinsured = $('#autocomplete').val();
-       var fessuffix = $('#autocomplete2').val();
-       var fesshare = $('#feshare').val();
-       var fessharefrom  = $('#fesharefrom').val();
-       var fesshareto = $('#feshareto').val();
-       var fescoinsurance = $('#fecoinsurance').val();
-       
-       
-       var conv_fessharefrom = fessharefrom.replace(/,/g, "");
-       console.log(conv_fessharefrom)
-       var real_fessharefrom = parseInt(conv_fessharefrom);
-       console.log(real_fessharefrom)
-       var conv_fesshareto = fesshareto.replace(/,/g, "");
-       console.log(conv_fesshareto)
-       var real_fesshareto = parseInt(conv_fesshareto);
-       console.log(real_fesshareto)
-       
-       
-       var token2 = $('input[name=_token]').val();
-
-       console.log(fesinsured)
-       console.log(fessuggestinsured)
-       console.log(fesnumber)
-       console.log(fessuffix)
-
-       
-       $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+      var fesnumber = $('#insuredIDtxt').val();
+      var fesinsured = $('#feinsured').val();
+      var fessuggestinsured = $('#autocomplete').val();
+      var fessuffix = $('#autocomplete2').val();
+      var fesshare = $('#feshare').val();
+      var fessharefrom  = $('#fesharefrom').val();
+      var fesshareto = $('#feshareto').val();
+      var fescoinsurance = $('#fecoinsurance').val();
 
 
-       $.ajax({
-           url:"{{ url('transaction-data/fe-insured/store') }}",
-           type:"POST",
-           data:{
-               fesnumber:fesnumber,
-               fesinsured:fesinsured,
-               fessuggestinsured:fessuggestinsured,
-               fessuffix:fessuffix,
-               fesshare:fesshare,
-               fessharefrom:real_fessharefrom,
-               fesshareto:real_fesshareto,
-               fescoinsurance:fescoinsurance
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-                swal("Success!", "Insured Fire & Engineering Insert Success", "success")
-                console.log(response)
+      var conv_fessharefrom = fessharefrom.replace(/,/g, "");
+      console.log(conv_fessharefrom)
+      var real_fessharefrom = parseInt(conv_fessharefrom);
+      console.log(real_fessharefrom)
+      var conv_fesshareto = fesshareto.replace(/,/g, "");
+      console.log(conv_fesshareto)
+      var real_fesshareto = parseInt(conv_fesshareto);
+      console.log(real_fesshareto)
 
-           },
-           error: function (request, status, error) {
+
+      var token2 = $('input[name=_token]').val();
+
+      console.log(fesinsured)
+      console.log(fessuggestinsured)
+      console.log(fesnumber)
+      console.log(fessuffix)
+
+
+      $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+      $.ajax({
+         url:"{{ url('transaction-data/fe-insured/store') }}",
+         type:"POST",
+         data:{
+             fesnumber:fesnumber,
+             fesinsured:fesinsured,
+             fessuggestinsured:fessuggestinsured,
+             fessuffix:fessuffix,
+             fesshare:fesshare,
+             fessharefrom:real_fessharefrom,
+             fesshareto:real_fesshareto,
+             fescoinsurance:fescoinsurance
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+            swal("Success!", "Insured Fire & Engineering Insert Success", "success")
+            console.log(response)
+
+        },
+        error: function (request, status, error) {
                 //alert(request.responseText);
                 swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
-           }
-       });
+            }
+        });
 
 
-       $('#installmentPanel tbody').empty();
-       $('#ExtendCoveragePanel tbody').empty();
-       $('#deductiblePanel tbody').empty();
-       $('#retrocessionPanel tbody').empty();
+      $('#installmentPanel tbody').empty();
+      $('#ExtendCoveragePanel tbody').empty();
+      $('#deductiblePanel tbody').empty();
+      $('#retrocessionPanel tbody').empty();
 
 
-   });
+  });
 </script>
 
 <script type='text/javascript'>
     $('#multi-file-upload-ajaxupdate').submit(function(e){
        //alert('masuk');
        e.preventDefault();
-    
+
 
        var code_ms = $('#insuredIDtxt').val();
        var slipnumber = $('#slipnumberupdate').val();
@@ -5536,62 +5399,62 @@ $(document).ready(function() {
        //ajaxfilefunction(e);
 
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{url('transaction-data/fe-slip/store')}}",
-           type:"POST",
-           data:{
-               code_ms:code_ms,
-               slipnumber:slipnumber,
-               slipdatetransfer:slipdatetransfer,
-               slipstatus:slipstatus,
-               sliped:sliped,
-               slipsls:slipsls,
-               slipcedingbroker:slipcedingbroker,
-               slipceding:slipceding,
-               slipcurrency:slipcurrency,
-               slipcob:slipcob,
-               slipkoc:slipkoc,
-               slipoccupacy:slipoccupacy,
-               slipbld_const:slipbld_const,
-               slipno:slipno,
-               slipcndn:slipcndn,
-               slippolicy_no:slippolicy_no,
-               sliptotalsum:real_sliptotalsum,
-               sliptype:sliptype,
-               slippct:slippct,
-               sliptotalsumpct:real_sliptotalsumpct,
-               slipipfrom:slipipfrom,
-               slipipto:slipipto,
-               sliprpfrom:sliprpfrom,
-               sliprpto:sliprpto,
-               proportional:proportional,
-               sliplayerproportional:sliplayerproportional,
-               sliprate:sliprate,
-               slipvbroker:slipvbroker,
-               slipshare:slipshare,
-               slipsumshare:real_slipsumshare,
-               slipoldsumshare:slipoldsumshare,
-               slipbasicpremium:real_slipbasicpremium,
-               slipgrossprmtonr:real_slipgrossprmtonr,
-               slipcommission:slipcommission,
-               slipsumcommission:real_slipsumcommission,
-               slipnetprmtonr:real_slipnetprmtonr,
-               sliprb:sliprb,
-               slipor:slipor,
-               slipsumor:real_slipsumor,
-               wpc:wpc
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-                swal("Success!", "Insured Fire & Engineering Slip Insert Success", "success")
-                console.log(response)
+         url:"{{url('transaction-data/fe-slip/store')}}",
+         type:"POST",
+         data:{
+             code_ms:code_ms,
+             slipnumber:slipnumber,
+             slipdatetransfer:slipdatetransfer,
+             slipstatus:slipstatus,
+             sliped:sliped,
+             slipsls:slipsls,
+             slipcedingbroker:slipcedingbroker,
+             slipceding:slipceding,
+             slipcurrency:slipcurrency,
+             slipcob:slipcob,
+             slipkoc:slipkoc,
+             slipoccupacy:slipoccupacy,
+             slipbld_const:slipbld_const,
+             slipno:slipno,
+             slipcndn:slipcndn,
+             slippolicy_no:slippolicy_no,
+             sliptotalsum:real_sliptotalsum,
+             sliptype:sliptype,
+             slippct:slippct,
+             sliptotalsumpct:real_sliptotalsumpct,
+             slipipfrom:slipipfrom,
+             slipipto:slipipto,
+             sliprpfrom:sliprpfrom,
+             sliprpto:sliprpto,
+             proportional:proportional,
+             sliplayerproportional:sliplayerproportional,
+             sliprate:sliprate,
+             slipvbroker:slipvbroker,
+             slipshare:slipshare,
+             slipsumshare:real_slipsumshare,
+             slipoldsumshare:slipoldsumshare,
+             slipbasicpremium:real_slipbasicpremium,
+             slipgrossprmtonr:real_slipgrossprmtonr,
+             slipcommission:slipcommission,
+             slipsumcommission:real_slipsumcommission,
+             slipnetprmtonr:real_slipnetprmtonr,
+             sliprb:sliprb,
+             slipor:slipor,
+             slipsumor:real_slipsumor,
+             wpc:wpc
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+            swal("Success!", "Insured Fire & Engineering Slip Insert Success", "success")
+            console.log(response)
 
                 /*
                 $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.slipuy+'">'+slipuy+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.number+'" data-target="#detailmodaldata" href="#detailmodaldata">'
@@ -5607,15 +5470,15 @@ $(document).ready(function() {
                     
                 //$('#slipnumberupdate').val(response.code_sl);
 
-           },
-           error: function (request, status, error) {
+            },
+            error: function (request, status, error) {
                 //alert(request.responseText);
                 swal("Error!", "Insured Fire & Engineering Slip Insert Error", "Insert Error");
-           }
-       });
+            }
+        });
 
 
-      
+
        var formData = new FormData(this);
        let TotalFiles = $('#attachmentupdate')[0].files.length; //Total files
        let files = $('#attachmentupdate')[0];
@@ -5624,30 +5487,30 @@ $(document).ready(function() {
        for (let i = 0; i < TotalFiles; i++) 
        {
         formData.append('files' + i, files.files[i]);
-       }
-       
-       formData.append('TotalFiles', TotalFiles);
-       formData.append('slip_id', slip_id);
-     
-       $.ajax({
-                    type:'POST',
-                    url: "{{ url('store-multi-file-ajax')}}",
-                    data: formData,
-                    cache:false,
-                    contentType: false,
-                    processData: false,
-                    dataType: 'json',
-                    success: (data) => {
+    }
+
+    formData.append('TotalFiles', TotalFiles);
+    formData.append('slip_id', slip_id);
+
+    $.ajax({
+        type:'POST',
+        url: "{{ url('store-multi-file-ajax')}}",
+        data: formData,
+        cache:false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: (data) => {
                     //this.reset();
                     //alert('Files has been uploaded using jQuery ajax');
-                      swal("Success!", "Files has been uploaded", "success")
-                    },
-                    error: function(data){
+                    swal("Success!", "Files has been uploaded", "success")
+                },
+                error: function(data){
                      //alert(data.responseJSON.errors.files[0]);
                      // swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
                      //console.log(data.responseJSON.errors);
-                    }
-        });
+                 }
+             });
 
 
       // insured save
@@ -5659,8 +5522,8 @@ $(document).ready(function() {
     //    var fessharefrom  = $('#fesharefrom').val();
     //    var fesshareto = $('#feshareto').val();
     //    var fescoinsurance = $('#fecoinsurance').val();
-       
-       
+
+
     //    var conv_fessharefrom = fessharefrom.replace(/,/g, "");
     //    console.log(conv_fessharefrom)
     //    var real_fessharefrom = parseInt(conv_fessharefrom);
@@ -5669,8 +5532,8 @@ $(document).ready(function() {
     //    console.log(conv_fesshareto)
     //    var real_fesshareto = parseInt(conv_fesshareto);
     //    console.log(real_fesshareto)
-       
-       
+
+
     //    var token2 = $('input[name=_token]').val();
 
     //    console.log(fesinsured)
@@ -5678,7 +5541,7 @@ $(document).ready(function() {
     //    console.log(fesnumber)
     //    console.log(fessuffix)
 
-       
+
     //    $.ajaxSetup({
     //             headers: {
     //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -5719,7 +5582,7 @@ $(document).ready(function() {
     //    $('#retrocessionPanelupdate tbody').empty();
 
 
-   });
+});
 </script>
 
 <script type='text/javascript'>
@@ -5815,63 +5678,63 @@ $(document).ready(function() {
        //ajaxfilefunction(e);
 
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{url('transaction-data/fe-slip/endorsementstore')}}",
-           type:"POST",
-           data:{
-               code_ms:code_ms,
-               slipnumber:slipnumber,
-               slipdatetransfer:slipdatetransfer,
-               slipstatus:slipstatus,
-               sliped:sliped,
-               slipsls:slipsls,
-               slipcedingbroker:slipcedingbroker,
-               slipceding:slipceding,
-               slipcurrency:slipcurrency,
-               slipcob:slipcob,
-               slipkoc:slipkoc,
-               slipoccupacy:slipoccupacy,
-               slipbld_const:slipbld_const,
-               slipno:slipno,
-               slipcndn:slipcndn,
-               slippolicy_no:slippolicy_no,
-               sliptotalsum:real_sliptotalsum,
-               sliptype:sliptype,
-               slippct:slippct,
-               sliptotalsumpct:real_sliptotalsumpct,
-               slipipfrom:slipipfrom,
-               slipipto:slipipto,
-               sliprpfrom:sliprpfrom,
-               sliprpto:sliprpto,
-               proportional:proportional,
-               sliplayerproportional:sliplayerproportional,
-               sliprate:sliprate,
-               slipvbroker:slipvbroker,
-               slipshare:slipshare,
-               slipsumshare:real_slipsumshare,
-               slipbasicpremium:real_slipbasicpremium,
-               slipgrossprmtonr:real_slipgrossprmtonr,
-               slipcommission:slipcommission,
-               slipsumcommission:real_slipsumcommission,
-               slipnetprmtonr:real_slipnetprmtonr,
-               sliprb:sliprb,
-               slipor:slipor,
-               slipsumor:real_slipsumor,
-               wpc:wpc
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-                swal("Success!", "Insured Fire & Engineering Slip Endorsement Success", "success")
-                console.log(response)
+         url:"{{url('transaction-data/fe-slip/endorsementstore')}}",
+         type:"POST",
+         data:{
+             code_ms:code_ms,
+             slipnumber:slipnumber,
+             slipdatetransfer:slipdatetransfer,
+             slipstatus:slipstatus,
+             sliped:sliped,
+             slipsls:slipsls,
+             slipcedingbroker:slipcedingbroker,
+             slipceding:slipceding,
+             slipcurrency:slipcurrency,
+             slipcob:slipcob,
+             slipkoc:slipkoc,
+             slipoccupacy:slipoccupacy,
+             slipbld_const:slipbld_const,
+             slipno:slipno,
+             slipcndn:slipcndn,
+             slippolicy_no:slippolicy_no,
+             sliptotalsum:real_sliptotalsum,
+             sliptype:sliptype,
+             slippct:slippct,
+             sliptotalsumpct:real_sliptotalsumpct,
+             slipipfrom:slipipfrom,
+             slipipto:slipipto,
+             sliprpfrom:sliprpfrom,
+             sliprpto:sliprpto,
+             proportional:proportional,
+             sliplayerproportional:sliplayerproportional,
+             sliprate:sliprate,
+             slipvbroker:slipvbroker,
+             slipshare:slipshare,
+             slipsumshare:real_slipsumshare,
+             slipbasicpremium:real_slipbasicpremium,
+             slipgrossprmtonr:real_slipgrossprmtonr,
+             slipcommission:slipcommission,
+             slipsumcommission:real_slipsumcommission,
+             slipnetprmtonr:real_slipnetprmtonr,
+             sliprb:sliprb,
+             slipor:slipor,
+             slipsumor:real_slipsumor,
+             wpc:wpc
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+            swal("Success!", "Insured Fire & Engineering Slip Endorsement Success", "success")
+            console.log(response)
 
-                
+
                 // $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">"'+response.cedingbroker+'"</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
                 //     +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
                 //     +'</a>'
@@ -5885,15 +5748,15 @@ $(document).ready(function() {
 
                 // $('#slipnumberendorsement').val(response.number);
 
-           },
-           error: function (request, status, error) {
+            },
+            error: function (request, status, error) {
                 //alert(request.responseText);
                 swal("Error!", "Insured Fire & Engineering Slip Endorsement Error", "Insert Error");
-           }
-       });
+            }
+        });
 
 
-      
+
        var formData = new FormData(this);
        let TotalFiles = $('#attachmentendorsement')[0].files.length; //Total files
        let files = $('#attachmentendorsement')[0];
@@ -5902,228 +5765,228 @@ $(document).ready(function() {
        for (let i = 0; i < TotalFiles; i++) 
        {
         formData.append('files' + i, files.files[i]);
-       }
-       
-       formData.append('TotalFiles', TotalFiles);
-       formData.append('slip_id', slip_id);
-     
-       $.ajax({
-                    type:'POST',
-                    url: "{{ url('store-multi-file-ajax')}}",
-                    data: formData,
-                    cache:false,
-                    contentType: false,
-                    processData: false,
-                    dataType: 'json',
-                    success: (data) => {
+    }
+
+    formData.append('TotalFiles', TotalFiles);
+    formData.append('slip_id', slip_id);
+
+    $.ajax({
+        type:'POST',
+        url: "{{ url('store-multi-file-ajax')}}",
+        data: formData,
+        cache:false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: (data) => {
                     //this.reset();
                     //alert('Files has been uploaded using jQuery ajax');
-                      swal("Success!", "Files has been uploaded", "success")
-                    },
-                    error: function(data){
+                    swal("Success!", "Files has been uploaded", "success")
+                },
+                error: function(data){
                      //alert(data.responseJSON.errors.files[0]);
                      //swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
                      //console.log(data.responseJSON.errors);
-                    }
-        });
+                 }
+             });
 
 
       // insured save
-       var fesnumber = $('#insuredIDtxt').val();
-       var fesinsured = $('#feinsured').val();
-       var fessuggestinsured = $('#autocomplete').val();
-       var fessuffix = $('#autocomplete2').val();
-       var fesshare = $('#feshare').val();
-       var fessharefrom  = $('#fesharefrom').val();
-       var fesshareto = $('#feshareto').val();
-       var fescoinsurance = $('#fecoinsurance').val();
-       
-       
-       var conv_fessharefrom = fessharefrom.replace(/,/g, "");
-       console.log(conv_fessharefrom)
-       var real_fessharefrom = parseInt(conv_fessharefrom);
-       console.log(real_fessharefrom)
-       var conv_fesshareto = fesshareto.replace(/,/g, "");
-       console.log(conv_fesshareto)
-       var real_fesshareto = parseInt(conv_fesshareto);
-       console.log(real_fesshareto)
-       
-       
-       var token2 = $('input[name=_token]').val();
+      var fesnumber = $('#insuredIDtxt').val();
+      var fesinsured = $('#feinsured').val();
+      var fessuggestinsured = $('#autocomplete').val();
+      var fessuffix = $('#autocomplete2').val();
+      var fesshare = $('#feshare').val();
+      var fessharefrom  = $('#fesharefrom').val();
+      var fesshareto = $('#feshareto').val();
+      var fescoinsurance = $('#fecoinsurance').val();
 
-       console.log(fesinsured)
-       console.log(fessuggestinsured)
-       console.log(fesnumber)
-       console.log(fessuffix)
 
-       
-       $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+      var conv_fessharefrom = fessharefrom.replace(/,/g, "");
+      console.log(conv_fessharefrom)
+      var real_fessharefrom = parseInt(conv_fessharefrom);
+      console.log(real_fessharefrom)
+      var conv_fesshareto = fesshareto.replace(/,/g, "");
+      console.log(conv_fesshareto)
+      var real_fesshareto = parseInt(conv_fesshareto);
+      console.log(real_fesshareto)
 
-       $.ajax({
-           url:"{{ url('transaction-data/fe-insured/store') }}",
-           type:"POST",
-           data:{
-               fesnumber:fesnumber,
-               fesinsured:fesinsured,
-               fessuggestinsured:fessuggestinsured,
-               fessuffix:fessuffix,
-               fesshare:fesshare,
-               fessharefrom:real_fessharefrom,
-               fesshareto:real_fesshareto,
-               fescoinsurance:fescoinsurance
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-                swal("Success!", "Insured Fire & Engineering Insert Success", "success")
-                console.log(response)
 
-           },
-           error: function (request, status, error) {
+      var token2 = $('input[name=_token]').val();
+
+      console.log(fesinsured)
+      console.log(fessuggestinsured)
+      console.log(fesnumber)
+      console.log(fessuffix)
+
+
+      $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+      $.ajax({
+         url:"{{ url('transaction-data/fe-insured/store') }}",
+         type:"POST",
+         data:{
+             fesnumber:fesnumber,
+             fesinsured:fesinsured,
+             fessuggestinsured:fessuggestinsured,
+             fessuffix:fessuffix,
+             fesshare:fesshare,
+             fessharefrom:real_fessharefrom,
+             fesshareto:real_fesshareto,
+             fescoinsurance:fescoinsurance
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+            swal("Success!", "Insured Fire & Engineering Insert Success", "success")
+            console.log(response)
+
+        },
+        error: function (request, status, error) {
                 //alert(request.responseText);
                 swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
-           }
-       });
+            }
+        });
 
-       $('#installmentPanelendorsement tbody').empty();
-       $('#ExtendCoveragePanelendorsement tbody').empty();
-       $('#deductiblePanelendorsement tbody').empty();
-       $('#retrocessionPanelendorsement tbody').empty();
+      $('#installmentPanelendorsement tbody').empty();
+      $('#ExtendCoveragePanelendorsement tbody').empty();
+      $('#deductiblePanelendorsement tbody').empty();
+      $('#retrocessionPanelendorsement tbody').empty();
 
 
 
-   });
+  });
 
-   function addendorsement(slipid){
+function addendorsement(slipid){
     var slipid = slipid;
     var token2 = $('input[name=_token]').val();
 
     console.log(slipid)
 
     $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
-       $.ajax({
-           url:"{{url('transaction-data/fe-slip/endorsementstore')}}",
-           type:"POST",
-           data:{
-                slipid:slipid
-               
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-                
+    $.ajax({
+     url:"{{url('transaction-data/fe-slip/endorsementstore')}}",
+     type:"POST",
+     data:{
+        slipid:slipid
 
-             if(response){
-                console.log(response)
-                if(response.insured_data){
-                        var insured_list = JSON.parse(response.insured_data); 
+    },
+    beforeSend: function() { $("body").addClass("loading");  },
+    complete: function() {  $("body").removeClass("loading"); },
+    success:function(response)
+    {
 
-                        for(var i = 0; i < insured_list.length; i++) 
-                        {
-                            var obj = insured_list[i];
 
-                            $('#fesnumber').val('');
-                            $('#fesinsured').val('');
-                            $('#autocomplete').val('');
-                            $('#autocomplete2').val('');
-                            $('#feshare').val('');
-                            $('#fesharefrom').val('');
-                            $('#feuy').val('');
-                            $('#feshareto').val('');
+       if(response){
+        console.log(response)
+        if(response.insured_data){
+            var insured_list = JSON.parse(response.insured_data); 
 
-                            $('#fesnumber').val(obj.number);
-                            $('#fesinsured').val(obj.insured_prefix);
-                            $('#autocomplete').val(obj.insured_name);
-                            $('#autocomplete2').val(obj.insured_suffix);
-                            $('#feshare').val(obj.share);
-                            $('#fesharefrom').val(obj.share_from);
-                            $('#feuy').val(obj.uy);
-                            $('#feshareto').val(obj.share_to);
+            for(var i = 0; i < insured_list.length; i++) 
+            {
+                var obj = insured_list[i];
 
-                            
-                        }
-                    }
-                    else{
-                        swal("Failed!", "Insured Fire & Engineering Insured Data Endorsement Failed", "Endorsement Failed")
-                    }
+                $('#fesnumber').val('');
+                $('#fesinsured').val('');
+                $('#autocomplete').val('');
+                $('#autocomplete2').val('');
+                $('#feshare').val('');
+                $('#fesharefrom').val('');
+                $('#feuy').val('');
+                $('#feshareto').val('');
 
-                if(response.location_data){
+                $('#fesnumber').val(obj.number);
+                $('#fesinsured').val(obj.insured_prefix);
+                $('#autocomplete').val(obj.insured_name);
+                $('#autocomplete2').val(obj.insured_suffix);
+                $('#feshare').val(obj.share);
+                $('#fesharefrom').val(obj.share_from);
+                $('#feuy').val(obj.uy);
+                $('#feshareto').val(obj.share_to);
 
-                        var location_list = JSON.parse(response.location_data); 
 
-                        for(var i = 0; i < location_list.length; i++) 
-                        {
-                            var obj = location_list[i];
-                            $('#locRiskTable > tbody:last-child').empty();
-                            $('#locRiskTable > tbody:last-child').prepend('<tr id="sid'+obj.id+'">'+
-                                                    '<td>'+obj.loc_code+'</td>'+
-                                                    '<td>'+obj.address+ obj.latitude+' , '+obj.longtitude+'<br>'+ obj.postal_code+'</td>'+
-                                                    '<td>'+obj.latitude+' , '+obj.longtitude+'<br></td>'+
-                                                    '<td>'+
-                                                    '<a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="'+obj.id+'" data-target="#addlocdetailmodaldata">'+
-                                                        '<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addlocdetailmodaldata2">Add</button>'+
-                                                    '</a>'+
-                                                    '<a href="javascript:void(0)" onclick="deletelocationdetail('+obj.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
-                                                    '</tr>'+
-                                                    
-                                                    '<tr id="cid'+obj.id+'">'+
-                                                        '<td></td>'+
-                                                        '<td colspan="3">'+
-                                                            '<table id="tcid'+obj.id+'" width="600" class="table table-bordered table-striped">'+
-                                                                '<thead>'+
-                                                                '<tr>'+
-                                                                '<th>Interest Insured</th>'+
-                                                                '<th>Ceding/Broker</th>'+
-                                                                '<th>CN No</th>'+
-                                                                '<th>Cert No</th>'+
-                                                                '<th>Ref No</th>'+
-                                                                '<th>amount</th>'+
-                                                                '<th>Action</th>'+
-                                                                '</tr>'+
-                                                                '</thead>'+
-                                                                '<tbody id="tbcid'+obj.id+'">'+
-                                                                '</tbody>'+
-                                                            '</table>'+
-                                                        '</td>'+
-                                                    '</tr>');
-                            
-                            
-                            if(response.risklocation_data)
-                            {
+            }
+        }
+        else{
+            swal("Failed!", "Insured Fire & Engineering Insured Data Endorsement Failed", "Endorsement Failed")
+        }
 
-                                var risklocation_list = JSON.parse(response.risklocation_data); 
+        if(response.location_data){
 
-                                for(var i = 0; i < risklocation_list.length; i++) 
-                                {
-                                    var obj2 = risklocation_list[i];
+            var location_list = JSON.parse(response.location_data); 
 
-                                    $('#tcid'+obj2.id+' > tbody:last-child').empty();
+            for(var i = 0; i < location_list.length; i++) 
+            {
+                var obj = location_list[i];
+                $('#locRiskTable > tbody:last-child').empty();
+                $('#locRiskTable > tbody:last-child').prepend('<tr id="sid'+obj.id+'">'+
+                    '<td>'+obj.loc_code+'</td>'+
+                    '<td>'+obj.address+ obj.latitude+' , '+obj.longtitude+'<br>'+ obj.postal_code+'</td>'+
+                    '<td>'+obj.latitude+' , '+obj.longtitude+'<br></td>'+
+                    '<td>'+
+                    '<a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="'+obj.id+'" data-target="#addlocdetailmodaldata">'+
+                    '<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addlocdetailmodaldata2">Add</button>'+
+                    '</a>'+
+                    '<a href="javascript:void(0)" onclick="deletelocationdetail('+obj.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
+                    '</tr>'+
+
+                    '<tr id="cid'+obj.id+'">'+
+                    '<td></td>'+
+                    '<td colspan="3">'+
+                    '<table id="tcid'+obj.id+'" width="600" class="table table-bordered table-striped">'+
+                    '<thead>'+
+                    '<tr>'+
+                    '<th>Interest Insured</th>'+
+                    '<th>Ceding/Broker</th>'+
+                    '<th>CN No</th>'+
+                    '<th>Cert No</th>'+
+                    '<th>Ref No</th>'+
+                    '<th>amount</th>'+
+                    '<th>Action</th>'+
+                    '</tr>'+
+                    '</thead>'+
+                    '<tbody id="tbcid'+obj.id+'">'+
+                    '</tbody>'+
+                    '</table>'+
+                    '</td>'+
+                    '</tr>');
+
+
+                if(response.risklocation_data)
+                {
+
+                    var risklocation_list = JSON.parse(response.risklocation_data); 
+
+                    for(var i = 0; i < risklocation_list.length; i++) 
+                    {
+                        var obj2 = risklocation_list[i];
+
+                        $('#tcid'+obj2.id+' > tbody:last-child').empty();
                                     // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj2.amountlocation);
                                     var curr_amount =obj2.amountlocation.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                                     $('#tcid'+obj.id+' > tbody:last-child').prepend('<tr id="riskdetailsid'+obj2.id+'">'+
-                                                            '<td>'+obj2.description+'</td>'+
-                                                            '<td>'+obj2.name+'</td>'+
-                                                            '<td>'+obj2.cnno+'</td>'+
-                                                            '<td>'+obj2.certno+'</td>'+
-                                                            '<td>'+obj2.refno+'</td>'+
-                                                            '<td>'+curr_amount+'</td>'+
-                                                            '<td>'+
-                                                            '<a href="javascript:void(0)" onclick="deletelocationriskdetail('+obj2.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
-                                                            '</tr>');
+                                        '<td>'+obj2.description+'</td>'+
+                                        '<td>'+obj2.name+'</td>'+
+                                        '<td>'+obj2.cnno+'</td>'+
+                                        '<td>'+obj2.certno+'</td>'+
+                                        '<td>'+obj2.refno+'</td>'+
+                                        '<td>'+curr_amount+'</td>'+
+                                        '<td>'+
+                                        '<a href="javascript:void(0)" onclick="deletelocationriskdetail('+obj2.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
+                                        '</tr>');
 
-                                   
+
                                     // +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+obj.number+'" data-target="#endorsementmodaldata">'
                                     // +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
                                     // +'</a>'
@@ -6139,15 +6002,15 @@ $(document).ready(function() {
 
 
                         }
-                }
-                else{
-                    swal("Failed!", "Insured Fire & Engineering Location Data Endorsement Failed", "Endorsement Failed")
-                }
+                    }
+                    else{
+                        swal("Failed!", "Insured Fire & Engineering Location Data Endorsement Failed", "Endorsement Failed")
+                    }
 
                     
 
-                
-                if(response.slip_data){
+
+                    if(response.slip_data){
 
                         var slip_list = JSON.parse(response.slip_data); 
 
@@ -6157,12 +6020,12 @@ $(document).ready(function() {
 
                             $('#SlipInsuredTableData tbody').empty();
                             $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+obj.id+'" data-name="slipvalue[]"><td data-name="'+obj.number+'">'+obj.number+'</td><td data-name="'+obj.source+'">"'+obj.source+'"</td><td data-name="'+obj.source_2+'">'+obj.source_2+'</td><td data-name="'+obj.status+'">"'+obj.status+'"</td>'
-                            +'<td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+obj.number+'" data-target="#detailmodaldata" href="#detailmodaldata">'
-                            +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
-                            +'</a>'
-                            +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+obj.number+'" data-target="#updatemodaldata">'
-                            +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
-                            +'</a>'
+                                +'<td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+obj.number+'" data-target="#detailmodaldata" href="#detailmodaldata">'
+                                +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
+                                +'</a>'
+                                +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+obj.number+'" data-target="#updatemodaldata">'
+                                +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
+                                +'</a>'
                             // +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+obj.number+'" data-target="#endorsementmodaldata">'
                             // +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
                             // +'</a>'
@@ -6171,17 +6034,17 @@ $(document).ready(function() {
                             // $('#ExtendCoveragePaneldetail tbody').prepend('<tr id="iidextendcoveragedetail'+obj.id+'" data-name="extendcoveragedetailvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragetype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
                             
                         }
-                }
-                else{
-                    swal("Failed!", "Insured Fire & Engineering Slip Data Endorsement Failed", "Endorsement Failed")
+                    }
+                    else{
+                        swal("Failed!", "Insured Fire & Engineering Slip Data Endorsement Failed", "Endorsement Failed")
 
+                    }
+                    window.location.replace("{{url('transaction-data/fe-slipindex')}}");
+                    swal("Success!", "Insured Fire & Engineering Slip Endorsement Success", "Endorsement Success")
+
+                }else{
+                    swal("Error!", "Insured Fire & Engineering Slip Endorsement Data Error", "Endorsement Data Error");
                 }
-                window.location.replace("{{url('transaction-data/fe-slipindex')}}");
-                swal("Success!", "Insured Fire & Engineering Slip Endorsement Success", "Endorsement Success")
-             
-             }else{
-                swal("Error!", "Insured Fire & Engineering Slip Endorsement Data Error", "Endorsement Data Error");
-            }
                 // $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">"'+response.cedingbroker+'"</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
                 //     +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
                 //     +'</a>'
@@ -6195,14 +6058,14 @@ $(document).ready(function() {
 
                 // $('#slipnumberendorsement').val(response.number);
 
-           },
-           error: function (request, status, error) {
+            },
+            error: function (request, status, error) {
                 //alert(request.responseText);
                 swal("Error!", "Insured Fire & Engineering Slip Endorsement Error", "Endorsement Error");
-           }
-       });
+            }
+        });
 
-   }
+}
 </script>
 
 
