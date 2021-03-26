@@ -15,6 +15,14 @@
         var datetimedef =  dtdef.getFullYear() + "-" + dtdef.getMonth() + "-" + dtdef.getDate() + " " + dtdef.getHours() + ":" + dtdef.getMinutes() + ":" + dtdef.getSeconds();
         $('#slipStatusTable tbody').append('<tr id="stlid"><td >'+ $("#slipstatus").val() +'</td><td >'+datetimedef+'</td><td >'+ $("#slipusername").val() +'</td></tr>')
 
+        $('form').on('focus', 'input[type=number]', function (e) {
+            $(this).on('wheel.disableScroll', function (e) {
+                e.preventDefault()
+            })
+        })
+        $('form').on('blur', 'input[type=number]', function (e) {
+            $(this).off('wheel.disableScroll')
+        })
 
         var countryID = 102; 
         //alert(countryID);
