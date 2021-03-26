@@ -4,6 +4,20 @@
         $(document).ready(function() { $(".e1").select2({ width: '100%' }); });
 </script>
 
+<style type="text/css">
+    /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style>
+
 
 
 <script>
