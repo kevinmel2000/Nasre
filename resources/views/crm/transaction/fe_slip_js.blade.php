@@ -1,14 +1,24 @@
 <link href="{{asset('css/select2.css')}}" rel="stylesheet"/>
 <script src="{{asset('/js/select2.js')}}"></script>
+<style type="text/css">
+    /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style>
+
 <script>
     $(document).ready(function() { 
         
         $(".e1").select2({ width: '100%' }); 
 
-        $('input[type=number]').on("wheel", function (e) {
-                $(this).blur();
-            });
-    
         $("#tabretro").attr('hidden','true');
         // $("#tabretrodetail").attr('hidden','true');
         // $("#tabretroupdate").attr('hidden','true');
