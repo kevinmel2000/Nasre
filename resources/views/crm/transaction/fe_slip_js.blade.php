@@ -4,6 +4,10 @@
     $(document).ready(function() { 
         
         $(".e1").select2({ width: '100%' }); 
+
+        $('input[type=number]').on("wheel", function (e) {
+                $(this).blur();
+            });
     
         $("#tabretro").attr('hidden','true');
         // $("#tabretrodetail").attr('hidden','true');
@@ -59,9 +63,7 @@
 </script>
 
 <script type="text/javascript">
-        $('input[type=number]').on("wheel", function (e) {
-                $(this).blur();
-            });
+        
 </script>
 
 <script type="text/javascript">
