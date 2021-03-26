@@ -15,6 +15,7 @@
         var datetimedef =  dtdef.getFullYear() + "-" + dtdef.getMonth() + "-" + dtdef.getDate() + " " + dtdef.getHours() + ":" + dtdef.getMinutes() + ":" + dtdef.getSeconds();
         $('#slipStatusTable tbody').append('<tr id="stlid"><td >'+ $("#slipstatus").val() +'</td><td >'+datetimedef+'</td><td >'+ $("#slipusername").val() +'</td></tr>')
 
+        
 
         var countryID = 102; 
         //alert(countryID);
@@ -55,6 +56,12 @@
         var millisecondsPerDay = 24 * 60 * 60 * 1000;
         return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
     }
+</script>
+
+<script type="text/javascript">
+        $('input[type=number]').on("wheel", function (e) {
+                $(this).blur();
+            });
 </script>
 
 <script type="text/javascript">
