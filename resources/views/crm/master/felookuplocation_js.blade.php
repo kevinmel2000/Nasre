@@ -281,6 +281,185 @@ $('input[name=address]').on('input',function(e){
           var codenew2=codenew.substring(0,6)+""+firstWordsdata2;
 
           document.getElementById('code').value=codenew2;
+
+          
+            var arraystring=results[0].formatted_address.split(","); 
+
+            //alert(arraystring);
+            var country=arraystring[arraystring.length-1];
+
+            var stastecodepos=arraystring[arraystring.length-2];
+            var stastecodeposarray=stastecodepos.split(" ");
+            var codepos=stastecodeposarray[stastecodeposarray.length-1];
+            var citydata=arraystring[arraystring.length-3];
+
+            //var arraystate=stastecodeposarray.splice(-1,1);
+            stastecodeposarray.pop();
+            var arraystate=stastecodeposarray;
+            var state=arraystate.toString();
+
+
+            //alert(country);
+
+            var statefix=state.replace(/,/g, ' ');
+            //alert(statefix.trim());
+            //alert(codepos);
+            //alert(citydata);
+            document.getElementById('postal_code').value=codepos;
+            var idcountry=102;
+            var idstate='';
+
+            if(country)
+            {
+              //alert(results[0].address_components[8].long_name);
+              
+              //document.getElementById('country').value=results[0].address_components[8].long_name;
+
+              var dd = document.getElementById('country');
+              for (var i = 0; i < dd.options.length; i++) 
+              {
+                  if (dd.options[i].text == country.trim()) 
+                  {
+                      dd.selectedIndex = i;
+                      break;
+                  }
+              }
+
+              //alert(i);
+              idcountry=i;
+              //document.getElementById('country').value=i;
+              $('#country').select2('data', {id: i, a_key: country.trim()});
+              $('#country').val(i);
+              $('#country').select2().trigger('change');
+
+            }
+
+
+
+            if(statefix)
+            {
+
+              if(idcountry)
+              {
+                var statedataup=statefix.toUpperCase();
+                $.ajax({
+                  type:"GET",
+                  url:"{{url('get-state-list')}}?country_id="+idcountry,
+                  beforeSend: function() { $("body").addClass("loading");  },
+                  complete: function() {  $("body").removeClass("loading"); },
+                  success:function(res)
+                  {       
+
+                    if(res)
+                    {
+                      // $("#state").empty();
+                      $("#province").removeAttr('disabled');
+                      $("#province").append('<option selected disabled>Select Province</option>');
+                      $.each(res,function(key,value){
+                        $("#province").append('<option value="'+key+'">'+value+'</option>');
+                      });
+
+                      //alert(results[0].address_components[7].long_name);
+                      //4131
+                      //"Daerah Khusus Ibukota Jakarta"
+                      //"Daerah Khusus Ibukota Jakarta"
+                      
+                        var dd = document.getElementById('province');
+                        for (var i = 0; i < dd.options.length; i++) 
+                        {
+                            //alert('hasil sama -1 :'+dd.options[i].text);
+
+                            if(dd.options[i].text == statedataup.trim()) 
+                            {
+                                dd.selectedIndex = dd.options[i].value;
+                                //alert('hasil sama :'+dd.options[i].value);
+                                idstate=dd.options[i].value;
+                                break;
+                            }
+                        }
+
+                        //alert('hasil sama2 :'+dd.options[i].value);
+                        //var textdata=dd.options[4131].text;
+                        idstate=dd.options[i].value;
+
+                        $('#province').select2('data', {id: dd.options[i].value, a_key: dd.options[i].text});
+                        $('#province').val(dd.options[i].value);
+                        $('#province').select2().trigger('change');
+
+                    
+                    }
+                    else
+                    {
+                      //$("#province").empty();
+                    }
+
+                  }
+                });
+
+              }
+
+            }
+
+
+            var idcity='';
+            if(citydata)
+            {
+              if(idstate)
+              { 
+                var citydataup=citydata.toUpperCase();
+                
+                  $.ajax({
+                    type:"GET",
+                    url:"{{url('get-city-list')}}?state_id="+idstate,
+                    beforeSend: function() { $("body").addClass("loading");  },
+                    complete: function() {  $("body").removeClass("loading"); },
+                    success:function(res)
+                    {        
+                      if(res)
+                      {
+
+                        $("#city").empty();
+                        $("#city").removeAttr('disabled');
+                        $("#city").append('<option selected disabled>Select City</option>');
+                        $.each(res,function(key,value){
+                          $("#city").append('<option value="'+key+'">'+value+'</option>');
+                        });
+                        
+
+                        var dd = document.getElementById('city');
+                        for (var i = 0; i < dd.options.length; i++) 
+                        {
+                          // alert('hasil sama -1 :'+dd.options[i].text);
+                          // alert('hasil sama -2 :'+citydataup);
+
+                            if(dd.options[i].text.trim() == citydataup.trim()) 
+                            {
+                                dd.selectedIndex = dd.options[i].value;
+                                //alert('hasil sama 3:'+dd.options[i].text);
+                                //alert('hasil sama 2:'+dd.options[i].value);
+                                idcity=dd.options[i].value;
+                                break;
+                            }
+                        }
+
+                        
+                        //var textdata=dd.options[4131].text;
+                        idcity=dd.options[i].value;
+                        //alert('hasil sama2 :'+idcity);
+
+                        $('#city').select2('data', {id: dd.options[i].value, a_key: dd.options[i].text});
+                        $('#city').val(dd.options[i].value);
+                        $('#city').select2().trigger('change');
+
+                      }
+
+                    }
+                  });
+
+              } 
+            }
+
+          
           
         
         } 
@@ -335,18 +514,184 @@ function updateMarkerPosition(latLng)
       
       document.getElementById('code').value=codenew2;
 
+      var arraystring=results[0].formatted_address.split(","); 
 
-      //alert(results[0].address_components[8].long_name);
-      if(results[0].address_components[9].long_name!=null)
+      //alert(arraystring);
+      var country=arraystring[arraystring.length-1];
+      
+      var stastecodepos=arraystring[arraystring.length-2];
+      var stastecodeposarray=stastecodepos.split(" ");
+      var codepos=stastecodeposarray[stastecodeposarray.length-1];
+      var citydata=arraystring[arraystring.length-3];
+
+      //var arraystate=stastecodeposarray.splice(-1,1);
+      stastecodeposarray.pop();
+      var arraystate=stastecodeposarray;
+      var state=arraystate.toString();
+     
+      
+      //alert(country);
+     
+      var statefix=state.replace(/,/g, ' ');
+      //alert(statefix.trim());
+      //alert(codepos);
+      //alert(citydata);
+      document.getElementById('postal_code').value=codepos;
+      var idcountry=102;
+      var idstate='';
+
+      if(country)
       {
-      document.getElementById('postal_code').value=results[0].address_components[9].long_name;
+        //alert(results[0].address_components[8].long_name);
+        
+        //document.getElementById('country').value=results[0].address_components[8].long_name;
+
+        var dd = document.getElementById('country');
+        for (var i = 0; i < dd.options.length; i++) 
+        {
+            if (dd.options[i].text == country.trim()) 
+            {
+                dd.selectedIndex = i;
+                break;
+            }
+        }
+
+        //alert(i);
+        idcountry=i;
+        //document.getElementById('country').value=i;
+        $('#country').select2('data', {id: i, a_key: country.trim()});
+        $('#country').val(i);
+        $('#country').select2().trigger('change');
+
       }
 
-      var text1 = results[0].address_components[8].long_name;
-      $("#country option").filter(function() {
-          return this.text == text1; 
-      }).attr('selected', true);
       
+      
+      if(statefix)
+      {
+
+        if(idcountry)
+        {
+
+          var statedataup=statefix.toUpperCase();
+          $.ajax({
+            type:"GET",
+            url:"{{url('get-state-list')}}?country_id="+idcountry,
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(res)
+            {       
+
+              if(res)
+              {
+                // $("#state").empty();
+                $("#province").removeAttr('disabled');
+                $("#province").append('<option selected disabled>Select Province</option>');
+                $.each(res,function(key,value){
+                  $("#province").append('<option value="'+key+'">'+value+'</option>');
+                });
+
+                 //alert(results[0].address_components[7].long_name);
+                 //4131
+                 //"Daerah Khusus Ibukota Jakarta"
+                 //"Daerah Khusus Ibukota Jakarta"
+                 
+                  var dd = document.getElementById('province');
+                  for (var i = 0; i < dd.options.length; i++) 
+                  {
+                      //alert('hasil sama -1 :'+dd.options[i].text);
+
+                      if(dd.options[i].text == statedataup.trim()) 
+                      {
+                           dd.selectedIndex = dd.options[i].value;
+                           //alert('hasil sama :'+dd.options[i].value);
+                           idstate=dd.options[i].value;
+                           break;
+                      }
+                  }
+
+                  //alert('hasil sama2 :'+dd.options[i].value);
+                  //var textdata=dd.options[4131].text;
+                  idstate=dd.options[i].value;
+
+                  $('#province').select2('data', {id: dd.options[i].value, a_key: dd.options[i].text});
+                  $('#province').val(dd.options[i].value);
+                  $('#province').select2().trigger('change');
+
+              
+              }
+              else
+              {
+                //$("#province").empty();
+              }
+
+            }
+          });
+
+        }
+
+      }
+
+
+      var idcity='';
+      if(citydata)
+      {
+        if(idstate)
+        { 
+           var citydataup=citydata.toUpperCase();
+          
+            $.ajax({
+              type:"GET",
+              url:"{{url('get-city-list')}}?state_id="+idstate,
+              beforeSend: function() { $("body").addClass("loading");  },
+              complete: function() {  $("body").removeClass("loading"); },
+              success:function(res)
+              {        
+                if(res)
+                {
+
+                  $("#city").empty();
+                  $("#city").removeAttr('disabled');
+                  $("#city").append('<option selected disabled>Select City</option>');
+                  $.each(res,function(key,value){
+                    $("#city").append('<option value="'+key+'">'+value+'</option>');
+                  });
+                  
+
+                  var dd = document.getElementById('city');
+                  for (var i = 0; i < dd.options.length; i++) 
+                  {
+                     // alert('hasil sama -1 :'+dd.options[i].text);
+                     // alert('hasil sama -2 :'+citydataup);
+
+                      if(dd.options[i].text.trim() == citydataup.trim()) 
+                      {
+                           dd.selectedIndex = dd.options[i].value;
+                           //alert('hasil sama 3:'+dd.options[i].text);
+                           //alert('hasil sama 2:'+dd.options[i].value);
+                           idcity=dd.options[i].value;
+                           break;
+                      }
+                  }
+
+                  
+                  //var textdata=dd.options[4131].text;
+                  idcity=dd.options[i].value;
+                  //alert('hasil sama2 :'+idcity);
+
+                  $('#city').select2('data', {id: dd.options[i].value, a_key: dd.options[i].text});
+                  $('#city').val(dd.options[i].value);
+                  $('#city').select2().trigger('change');
+
+                }
+
+              }
+            });
+
+        } 
+      }
+    
+    
   });
 
    
@@ -389,20 +734,191 @@ function updateMarkerPosition2(latLng)
 
       //document.getElementById('address').value=results[0].formatted_address;
       
-      document.getElementById('code').value=codenew2;
+       document.getElementById('code').value=codenew2;
+
+        var arraystring=results[0].formatted_address.split(","); 
+
+        //alert(arraystring);
+        var country=arraystring[arraystring.length-1];
+
+        var stastecodepos=arraystring[arraystring.length-2];
+        var stastecodeposarray=stastecodepos.split(" ");
+        var codepos=stastecodeposarray[stastecodeposarray.length-1];
+        var citydata=arraystring[arraystring.length-3];
+
+        //var arraystate=stastecodeposarray.splice(-1,1);
+        stastecodeposarray.pop();
+        var arraystate=stastecodeposarray;
+        var state=arraystate.toString();
 
 
-      //alert(results[0].address_components[8].long_name);
-      if(results[0].address_components[9].long_name!=null)
-      {
-      document.getElementById('postal_code').value=results[0].address_components[9].long_name;
-      }
+        //alert(country);
 
-      var text1 = results[0].address_components[8].long_name;
-      $("#country option").filter(function() {
-          return this.text == text1; 
-      }).attr('selected', true);
+        var statefix=state.replace(/,/g, ' ');
+        //alert(statefix.trim());
+        //alert(codepos);
+        //alert(citydata);
+        document.getElementById('postal_code').value=codepos;
+        var idcountry=102;
+        var idstate='';
+
+        if(country)
+        {
+          //alert(results[0].address_components[8].long_name);
+          
+          //document.getElementById('country').value=results[0].address_components[8].long_name;
+
+          var dd = document.getElementById('country');
+          for (var i = 0; i < dd.options.length; i++) 
+          {
+              if (dd.options[i].text == country.trim()) 
+              {
+                  dd.selectedIndex = i;
+                  break;
+              }
+          }
+
+          //alert(i);
+          idcountry=i;
+          //document.getElementById('country').value=i;
+          $('#country').select2('data', {id: i, a_key: country.trim()});
+          $('#country').val(i);
+          $('#country').select2().trigger('change');
+
+        }
+
+
+
+        if(statefix)
+        {
+
+          var statedataup=statefix.toUpperCase();
+          if(idcountry)
+          {
+            $.ajax({
+              type:"GET",
+              url:"{{url('get-state-list')}}?country_id="+idcountry,
+              beforeSend: function() { $("body").addClass("loading");  },
+              complete: function() {  $("body").removeClass("loading"); },
+              success:function(res)
+              {       
+
+                if(res)
+                {
+                  // $("#state").empty();
+                  $("#province").removeAttr('disabled');
+                  $("#province").append('<option selected disabled>Select Province</option>');
+                  $.each(res,function(key,value){
+                    $("#province").append('<option value="'+key+'">'+value+'</option>');
+                  });
+
+                  //alert(results[0].address_components[7].long_name);
+                  //4131
+                  //"Daerah Khusus Ibukota Jakarta"
+                  //"Daerah Khusus Ibukota Jakarta"
+                  
+                    var dd = document.getElementById('province');
+                    for (var i = 0; i < dd.options.length; i++) 
+                    {
+                        //alert('hasil sama -1 :'+dd.options[i].text);
+
+                        if(dd.options[i].text == statedataup.trim()) 
+                        {
+                            dd.selectedIndex = dd.options[i].value;
+                            //alert('hasil sama :'+dd.options[i].value);
+                            idstate=dd.options[i].value;
+                            break;
+                        }
+                    }
+
+                    //alert('hasil sama2 :'+dd.options[i].value);
+                    //var textdata=dd.options[4131].text;
+                    idstate=dd.options[i].value;
+
+                    $('#province').select2('data', {id: dd.options[i].value, a_key: dd.options[i].text});
+                    $('#province').val(dd.options[i].value);
+                    $('#province').select2().trigger('change');
+
+                
+                }
+                else
+                {
+                  //$("#province").empty();
+                }
+
+              }
+            });
+
+          }
+
+        }
+
+
+        var idcity='';
+        if(citydata)
+        {
+          if(idstate)
+          { 
+            var citydataup=citydata.toUpperCase();
+            
+              $.ajax({
+                type:"GET",
+                url:"{{url('get-city-list')}}?state_id="+idstate,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res)
+                {        
+                  if(res)
+                  {
+
+                    $("#city").empty();
+                    $("#city").removeAttr('disabled');
+                    $("#city").append('<option selected disabled>Select City</option>');
+                    $.each(res,function(key,value){
+                      $("#city").append('<option value="'+key+'">'+value+'</option>');
+                    });
+                    
+
+                    var dd = document.getElementById('city');
+                    for (var i = 0; i < dd.options.length; i++) 
+                    {
+                      // alert('hasil sama -1 :'+dd.options[i].text);
+                      // alert('hasil sama -2 :'+citydataup);
+
+                        if(dd.options[i].text.trim() == citydataup.trim()) 
+                        {
+                            dd.selectedIndex = dd.options[i].value;
+                            //alert('hasil sama 3:'+dd.options[i].text);
+                            //alert('hasil sama 2:'+dd.options[i].value);
+                            idcity=dd.options[i].value;
+                            break;
+                        }
+                    }
+
+                    
+                    //var textdata=dd.options[4131].text;
+                    idcity=dd.options[i].value;
+                    //alert('hasil sama2 :'+idcity);
+
+                    $('#city').select2('data', {id: dd.options[i].value, a_key: dd.options[i].text});
+                    $('#city').val(dd.options[i].value);
+                    $('#city').select2().trigger('change');
+
+                  }
+
+                }
+              });
+
+          } 
+        }
+     
+
+      //var text1 = results[0].address_components[8].long_name;
+      //$("#country option").filter(function() {
+          //return this.text == text1; 
+     // }).attr('selected', true);
       
+  
   });
 
    

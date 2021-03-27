@@ -112,6 +112,7 @@ class FeSlipController extends Controller
         return response()->json($citiestable);
     }
 
+    
     public function getAddressLookup(Request $request)
     {
         $address = DB::table("fe_lookup_location")
@@ -119,6 +120,7 @@ class FeSlipController extends Controller
         ->pluck("address","id");
         return response()->json($address);
     }
+
 
     public function getCostumers(Request $request){
 
@@ -137,6 +139,7 @@ class FeSlipController extends Controller
   
         return response()->json($response);
      }
+
 
      public function getBuildingRate(Request $request){
 
