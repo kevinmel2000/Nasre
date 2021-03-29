@@ -2406,9 +2406,10 @@ $('#slipcedingupdate').change(function(){
                         '<tr>'+
                         '<th>Interest Insured</th>'+
                         '<th>Ceding/Broker</th>'+
-                        '<th>CN No</th>'+
+                        '<th>CN/DN</th>'+
                         '<th>Cert No</th>'+
-                        '<th>Ref No</th>'+
+                        '<th>Slip No</th>'+
+                        '<th>Policy No</th>'+
                         '<th>amount</th>'+
                         '<th>Action</th>'+
                         '</tr>'+
@@ -2534,9 +2535,10 @@ $('#slipcedingupdate').change(function(){
                     $('#tcid'+insurednoloc+' > tbody:last-child').prepend('<tr id="riskdetailsid'+response.id+'">'+
                         '<td>'+response.interest_name+'</td>'+
                         '<td>'+response.cedingbroker+'</td>'+
-                        '<td>'+response.cnno+'</td>'+
+                        '<td>'+response.cndn+'</td>'+
                         '<td>'+response.certno+'</td>'+
-                        '<td>'+response.refno+'</td>'+
+                        '<td>'+response.slipno+'</td>'+
+                        '<td>'+response.policyno+'</td>'+
                         '<td>'+curr_amount+'</td>'+
                         '<td>'+
                         '<a href="javascript:void(0)" onclick="deletelocationriskdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
