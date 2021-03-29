@@ -1253,22 +1253,87 @@
     $('#slipipto').change(function(){
         $('#sliprpto').val($(this).val());
         
-        var insurance_period_from2 = $('#slipipfrom').val();
-        var insurance_period_to2 = $('#slipipto').val();
+       
+        // document.getElementById("daytotal").innerHTML = "Total Days :"+days;
+    });
+
+    $('#sliprpto').change(function(){
+        var insurance_period_from2 = $('#sliprpfrom').val();
+        var insurance_period_to2 = $('#sliprpto').val();
         var days=daysBetween(insurance_period_from2, insurance_period_to2);
         var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
-        var constday = days.toString() + "/365";
+        // var constday = days.toString() + "/365";
+        var constday1 = days.toString();
+        var constday2 = "365";
         console.log(insurance_period_from2)
         console.log(insurance_period_to2)
         console.log(days)
         console.log(constday)
         console.log(parseFloat(sum))
         
-        $('#slipdaytotal').val(constday);
-        $('#slipdaytotal2').val(constday);
+        $('#slipdaytotal').val(constday1);
+        $('#slipdaytotal2').val(constday1);
+        $('#slipdaytotal3').val(constday2);
+        $('#slipdaytotal4').val(constday2);
         $('#sliptotalsumdate').val(parseFloat(sum));
         $('#sliptotalsumdate2').val(parseFloat(sum));
-        // document.getElementById("daytotal").innerHTML = "Total Days :"+days;
+    });
+
+    $('#sliprpfrom').change(function(){
+        var date_to = $('#slipipto').val();
+        if(date_to){
+            var insurance_period_from2 = $('#sliprpfrom').val();
+            var insurance_period_to2 = $('#sliprpto').val();
+            var days=daysBetween(insurance_period_from2, insurance_period_to2);
+            var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+            // var constday = days.toString() + "/365";
+            var constday1 = days.toString();
+            var constday2 = "365";
+            console.log(insurance_period_from2)
+            console.log(insurance_period_to2)
+            console.log(days)
+            console.log(constday)
+            console.log(parseFloat(sum))
+            
+            $('#slipdaytotal').val(constday1);
+            $('#slipdaytotal2').val(constday1);
+            $('#slipdaytotal3').val(constday2);
+            $('#slipdaytotal4').val(constday2);
+            $('#sliptotalsumdate').val(parseFloat(sum));
+            $('#sliptotalsumdate2').val(parseFloat(sum));
+        }
+    });
+
+    $('#slipdaytotal2').keyup(function(){
+        var day = $(this).val();
+        $('#slipdaytotal').val(day);
+
+    });
+
+    $('#slipdaytotal2').change(function(){
+        var day = $(this).val();
+
+        var sum = isNaN(day / 365) ? 0 :(day / 365).toFixed(3);
+
+        $('#sliptotalsumdate').val(parseFloat(sum));
+        $('#sliptotalsumdate2').val(parseFloat(sum));
+    });
+
+    $('#slipdaytotal4').keyup(function(){
+        var day = $(this).val();
+        $('#slipdaytotal3').val(day);
+        
+    });
+
+    $('#slipdaytotal4').change(function(){
+        var day = $('#slipdaytotal2').val();
+        var year = $(this).val();
+
+        var sum = isNaN(day / year) ? 0 :(day / year).toFixed(3);
+
+        $('#sliptotalsumdate').val(parseFloat(sum));
+        $('#sliptotalsumdate2').val(parseFloat(sum));
+        
     });
 
     $('#slipipfromupdate').change(function(){
@@ -1549,7 +1614,88 @@ $('#slipbld_constendorsement').change(function(){
 
 </script>
 
-<!-- <script type="text/javascript">
+<script type="text/javascript">
+    $('#sliptypetsi').change(function(){
+        var choice = $(this).val();
+        if(choice == '1'){
+            var tsi = $('#feshareto').val();
+            $('#sliptotalsum').val(tsi);
+            $('#sliptotalsum2').val(tsi);
+        }else if(choice == '2')
+        {
+            var ceding_share = $('#feshare').val();
+            $('#sliptotalsum').val(ceding_share);
+            $('#sliptotalsum2').val(ceding_share);
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    $('#sharetypetsi').change(function(){
+        var choice = $(this).val();
+        if(choice == '1'){
+            var tsi = $('#feshareto').val();
+            $('#sharetotalsum').val(tsi);
+            $('#sharetotalsum2').val(tsi);
+        }else if(choice == '2')
+        {
+            var insuredid = $('#insuredIDtxt').val(); 
+            var cedbrok = $('#slipcedingbroker').val();
+            var ceding = $('#slipceding').val();
+            if(cedbrok != null && ceding != null){
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){  
+                    console.log(res)      
+                    if(res.type == 4){
+                        // $("#slipceding option").remove();
+
+
+                        // $("#slipceding").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+
+                        var ceding_curr = $('#slipceding').val();
+                        var totalsum = $("#sliptotalsum").val();
+                        if(res.amountlist > 0)
+                        {
+                            console.log('sum amount ' + res.sumamount)
+                            var sum = res.sumamount;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            $("#sharetotalsum").val(real_sum);
+                            $("#sharetotalsum2").val(real_sum);
+                        }
+                        else
+                        {
+                            console.log('hasilnya ' + res)
+                        }
+
+
+                    }else{
+                        // $("#slipceding option").remove();
+                        // $("#slipceding").append('<option value="#" selected disabled> select ceding </option>');
+                        // $("#sliptotalsum").val('');
+                        // $("#sliptotalsum2").val('');
+                        // $.each(res,function(key,value){
+                        //     $("#slipceding").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+
+                        // });
+
+                    }
+                }
+            });
+        }else{
+            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+        }  
+            var ceding_share = $('#feshare').val();
+            $('#sharetotalsum').val(ceding_share);
+            $('#sharetotalsum2').val(ceding_share);
+        }
+    });
+</script>
+
+<script type="text/javascript">
     $('#slipcedingbroker').change(function(){
         var cedbrok = $(this).val();
         var insuredid = $('#insuredIDtxt').val();  
@@ -1568,20 +1714,20 @@ $('#slipbld_constendorsement').change(function(){
 
                         $("#slipceding").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
 
-                        var ceding_curr = $('#slipceding').val();
-                        var totalsum = $("#sliptotalsum").val();
-                        if(res.amountlist > 0)
-                        {
-                            console.log('sum amount ' + res.sumamount)
-                            var sum = res.sumamount;
-                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $("#sliptotalsum").val(real_sum);
-                            $("#sliptotalsum2").val(real_sum);
-                        }
-                        else
-                        {
-                            console.log('hasilnya ' + res)
-                        }
+                        // var ceding_curr = $('#slipceding').val();
+                        // var totalsum = $("#sliptotalsum").val();
+                        // if(res.amountlist > 0)
+                        // {
+                        //     console.log('sum amount ' + res.sumamount)
+                        //     var sum = res.sumamount;
+                        //     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        //     $("#sliptotalsum").val(real_sum);
+                        //     $("#sliptotalsum2").val(real_sum);
+                        // }
+                        // else
+                        // {
+                        //     console.log('hasilnya ' + res)
+                        // }
 
 
                     }else{
@@ -1619,18 +1765,18 @@ $('#slipbld_constendorsement').change(function(){
                     $("#slipceding").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
                     var ceding_curr = $('#slipceding').val();
                     var totalsum = $("#sliptotalsum").val();
-                    if(res.amountlist > 0)
-                    {
-                        console.log('sum amount ' + res.sumamount)
-                        var sum = res.sumamount;
-                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $("#sliptotalsum").val(real_sum);
-                        $("#sliptotalsum2").val(real_sum);
-                    }
-                    else
-                    {
-                        console.log('hasilnya ' + res)
-                    }
+                    // if(res.amountlist > 0)
+                    // {
+                    //     console.log('sum amount ' + res.sumamount)
+                    //     var sum = res.sumamount;
+                    //     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    //     $("#sliptotalsum").val(real_sum);
+                    //     $("#sliptotalsum2").val(real_sum);
+                    // }
+                    // else
+                    // {
+                    //     console.log('hasilnya ' + res)
+                    // }
                     
 
                 }else{
@@ -1649,7 +1795,7 @@ $('#slipbld_constendorsement').change(function(){
     });
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $('#slipcedingbrokerupdate').change(function(){
         var cedbrok = $(this).val();
         var insuredid = $('#insuredIDtxtupdate').val();  
@@ -3102,9 +3248,14 @@ function deletelocationriskdetail(id){
     var sumnetprmtonr = isNaN( conv_sumgrossprmtonr * (100/100 - commision - feebroker)) ? 0 :(conv_sumgrossprmtonr * (100/100 - commision - feebroker)).toFixed(2);
     var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+    var sumfeebroker = isNaN( conv_sumgrossprmtonr * feebroker) ? 0 :(conv_sumgrossprmtonr * feebroker).toFixed(2);
+    var real_sumfeebroker = sumfeebroker.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
     $('#slipnetprmtonr').val(real_sumnetprmtonr);
     $('#slipnetprmtonr2').val(real_sumnetprmtonr);
-    $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
+    // $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
+    $('#slipsumfee').val(real_sumfeebroker);
 
 });
 
@@ -4808,9 +4959,7 @@ function deletelocationriskdetail(id){
        var slipnumber = $('#slipnumber').val();
        var slipdatetransfer = $('#sliptd').val();
        var slipstatus = $('#slipstatus').val();
-       var sliped = $('#sliped').val();
        
-       var slipsls = $('#slipsls').val();
        var slipcedingbroker = $('#slipcedingbroker').val();
        var slipceding = $('#slipceding').val();
        var slipcurrency = $('#slipcurrency').val();
@@ -4822,7 +4971,13 @@ function deletelocationriskdetail(id){
        var slipcndn = $('#slipcndn').val();
        var slippolicy_no =  $('#slippolicy_no').val();
        var sliptotalsum = $('#sliptotalsum').val();
-    //    var slipoldsumshare = $()
+       var slipsharetotalsum = $('#sharetotalsum').val();
+       var sliptypetotalsum = $('#sliptypetsi').val();
+       var sliptypetsishare = $('#sharetypetsi').val();
+       var sliptotalday = $('#slipdaytotal').val();
+       var sliptotalyear = $('#slipdaytotal3').val();
+       var slipdatesum = $('#sliptotalsumdate').val();
+
     var sliptype =  $('#sliptype').val();
     var slippct =  $('#slippct').val();
     var sliptotalsumpct =  $('#sliptotalsumpct').val();
@@ -4942,6 +5097,12 @@ function deletelocationriskdetail(id){
                sliprb:sliprb,
                slipor:slipor,
                slipsumor:real_slipsumor,
+               slipsharetotalsum:slipsharetotalsum,
+               sliptypetotalsum:sliptypetotalsum,
+               sliptypetsishare:sliptypetsishare,
+               sliptotalday:sliptotalday,
+               sliptotalyear:sliptotalyear,
+               slipdatesum:slipdatesum,
                wpc:wpc
            },
            beforeSend: function() { $("body").addClass("loading");  },

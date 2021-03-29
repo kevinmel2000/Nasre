@@ -1189,7 +1189,7 @@
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label for="">{{__('TSI/Ceding Shared') }}</label>
-                                                                            <select id="sharetypetsi" name="sliptype" class="form-control form-control-sm ">
+                                                                            <select id="sharetypetsi" name="sharetypetsi" class="form-control form-control-sm ">
                                                                                 <option selected disabled>{{__('Select Share')}}</option>
                                                                                 <option value="1">Total Sum Insured</option>
                                                                                 <option value="2">Ceding Share</option>
