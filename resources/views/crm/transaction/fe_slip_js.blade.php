@@ -2532,13 +2532,14 @@ $('#slipcedingupdate').change(function(){
                     var amount = response.amountlocation;
                     var ceding_share = $('#feshare').val();
                     if(ceding_share == ''){
-                        var sum_ceding = isNaN(0 + amount) ? 0 :(0 + amount);
+                        var sum_ceding = isNaN(parseFloat(0) + parseFloat(amount)) ? 0 :(parseFloat(0) + parseFloat(amount));
                         var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         $('#feshare').val(conv_sum_ceding);
                         console.log('ceding awal' + conv_sum_ceding)
                     }else{
                         var conv_ceding_share = ceding_share.replace(/,/g, "");
-                        var sum_ceding = isNaN(parseInt(conv_ceding_share) + amount) ? 0 :(parseInt(conv_ceding_share) + amount);
+                        var real_ceding_share = parseInt(conv_ceding_share);
+                        var sum_ceding = isNaN(parseFloat(real_ceding_share) + parseFloat(amount)) ? 0 :(real_ceding_share) + parseFloat(amount));
                         var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         $('#feshare').val(conv_sum_ceding);
                         console.log('ceding bertambah' + conv_sum_ceding)
