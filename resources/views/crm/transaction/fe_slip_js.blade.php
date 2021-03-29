@@ -4764,6 +4764,7 @@ function deletelocationriskdetail(id){
         swal("Success!", "Insured Fire & Engineering Insert Success", "success")
         console.log(response)
         $('#fecountendorsement').val(response.count_endorsement);
+        $('#feshare').val(response.ceding_share);
 
     },
     error: function (request, status, error) {
