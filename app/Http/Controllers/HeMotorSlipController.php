@@ -928,7 +928,7 @@ class HeMotorSlipController extends Controller
                     'slip_no'=>$request->slipno,
                     'cn_dn'=>$request->slipcndn,
                     'policy_no'=>$request->slippolicy_no,
-                    'attacment_file'=>'',
+                    'attacment_file'=>json_encode($attachmentlist),
                     'interest_insured'=>$interestlist->toJSon(),
                     'total_sum_insured'=>$request->sliptotalsum,
                     'insured_type'=>$request->sliptype,
@@ -1137,8 +1137,6 @@ class HeMotorSlipController extends Controller
 
     public function storeendorsementhemslip(Request $request,$code_ms)
     {
-       
-        
         $validator = $request->validate([
             'slipid'=>'required'
         ]);
@@ -1170,7 +1168,7 @@ class HeMotorSlipController extends Controller
             if($slipdata==null)
             {
                 $notification = array(
-                    'message' => 'Fire & Engineering Slip Endorsement Fail!',
+                    'message' => 'He & Motor Slip Endorsement Fail!',
                     'alert-type' => 'danger'
                 );
             }
@@ -1178,6 +1176,18 @@ class HeMotorSlipController extends Controller
             {
                 if($slipdatalast == null)
                 {
+
+                    $locationlistup = ' ';
+                    $risklocationlistup = ' ';
+                    $dtlistup = ' ';
+                    $jsondtlistup = ' ';
+                    $ectlistup = ' ';
+                    $jsonectlistup = ' ';
+                    $iptlistup = ' ';
+                    $jsoniptlistup = ' ';
+                    $rctlistup = ' ';
+                    $jsonrctlistup = ' ';
+
                     if($locationlist){
                         foreach($locationlist as $ll){
                             $locationlistup = TransLocationTemp::create([
@@ -1333,13 +1343,13 @@ class HeMotorSlipController extends Controller
                     
 
                     if($slipdatalist != null){
-                        if(!$jsondtlistup){
+                        if($jsondtlistup == ' '){
                             foreach($slipdatalist as $slt){
                                 $slipdataup = SlipTable::create([
                                         'number'=>$slt->number,
                                         'username'=>$slt->username,
                                         'insured_id'=>$slt->insured_id,
-                                        'slip_type'=>'fe',
+                                        'slip_type'=>'hem',
                                         'prod_year' => $slt->prod_year,
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
@@ -1352,12 +1362,13 @@ class HeMotorSlipController extends Controller
                                         'koc'=>$slt->koc,
                                         'occupacy'=>$slt->occupacy,
                                         'build_const'=>$slt->build_const,
-                                        'attacment_file'=>$attachmentlist->toJson(),
+                                        'attacment_file'=>json_encode($attachmentlist),
                                         'total_sum_insured'=>$slt->total_sum_insured,
                                         'insured_type'=>$slt->insured_type,
                                         'insured_pct'=>$slt->insured_pct,
                                         'total_sum_pct'=>$slt->total_sum_pct,
-                                        'extend_coverage'=>$jsonectlistup->toJson(),
+                                        'deductible_panel'=>json_encode($jsondtlistup),
+                                        'extend_coverage'=>json_encode($jsonectlistup),
                                         'insurance_period_from'=>$slt->insurance_period_from,
                                         'insurance_period_to'=>$slt->insurance_period_to,
                                         'reinsurance_period_from'=>$slt->reinsurance_period_from,
@@ -1373,8 +1384,8 @@ class HeMotorSlipController extends Controller
                                         'grossprm_to_nr'=>$slt->grossprm_to_nr,
                                         'netprm_to_nr'=>$slt->netprm_to_nr,
                                         'sum_commission'=>$slt->sum_commission,
-                                        'installment_panel'=>$jsoniptlistup->toJson(),
-                                        'retrocession_panel'=>$jsonrctlistup->toJson(),
+                                        'installment_panel'=>json_encode($jsoniptlistup),
+                                        'retrocession_panel'=>json_encode($jsonrctlistup),
                                         'retro_backup'=>$slt->retro_backup,
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
@@ -1382,13 +1393,13 @@ class HeMotorSlipController extends Controller
                     
                                     ]);
                             }
-                        }elseif(!$jsonectlistup){
+                        }elseif($jsonectlistup == ' ' ){
                             foreach($slipdatalist as $slt){
                                 $slipdataup = SlipTable::create([
                                         'number'=>$slt->number,
                                         'username'=>$slt->username,
                                         'insured_id'=>$slt->insured_id,
-                                        'slip_type'=>'fe',
+                                        'slip_type'=>'hem',
                                         'prod_year' => $slt->prod_year,
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
@@ -1401,12 +1412,13 @@ class HeMotorSlipController extends Controller
                                         'koc'=>$slt->koc,
                                         'occupacy'=>$slt->occupacy,
                                         'build_const'=>$slt->build_const,
-                                        'attacment_file'=>$attachmentlist->toJson(),
+                                        'attacment_file'=>json_encode($attachmentlist),
                                         'total_sum_insured'=>$slt->total_sum_insured,
                                         'insured_type'=>$slt->insured_type,
                                         'insured_pct'=>$slt->insured_pct,
                                         'total_sum_pct'=>$slt->total_sum_pct,
-                                        'deductible_panel'=>$jsondtlistup->toJson(),
+                                        'deductible_panel'=>json_encode($jsondtlistup),
+                                        'extend_coverage'=>json_encode($jsonectlistup),
                                         'insurance_period_from'=>$slt->insurance_period_from,
                                         'insurance_period_to'=>$slt->insurance_period_to,
                                         'reinsurance_period_from'=>$slt->reinsurance_period_from,
@@ -1422,8 +1434,8 @@ class HeMotorSlipController extends Controller
                                         'grossprm_to_nr'=>$slt->grossprm_to_nr,
                                         'netprm_to_nr'=>$slt->netprm_to_nr,
                                         'sum_commission'=>$slt->sum_commission,
-                                        'installment_panel'=>$jsoniptlistup->toJson(),
-                                        'retrocession_panel'=>$jsonrctlistup->toJson(),
+                                        'installment_panel'=>json_encode($jsoniptlistup),
+                                        'retrocession_panel'=>json_encode($jsonrctlistup),
                                         'retro_backup'=>$slt->retro_backup,
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
@@ -1431,13 +1443,13 @@ class HeMotorSlipController extends Controller
                     
                                     ]);
                             }
-                        }elseif(!$jsoniptlistup){
+                        }elseif($jsoniptlistup == ' '){
                             foreach($slipdatalist as $slt){
                                 $slipdataup = SlipTable::create([
                                         'number'=>$slt->number,
                                         'username'=>$slt->username,
                                         'insured_id'=>$slt->insured_id,
-                                        'slip_type'=>'fe',
+                                        'slip_type'=>'hem',
                                         'prod_year' => $slt->prod_year,
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
@@ -1450,13 +1462,13 @@ class HeMotorSlipController extends Controller
                                         'koc'=>$slt->koc,
                                         'occupacy'=>$slt->occupacy,
                                         'build_const'=>$slt->build_const,
-                                        'attacment_file'=>$attachmentlist->toJson(),
+                                        'attacment_file'=>json_encode($attachmentlist),
                                         'total_sum_insured'=>$slt->total_sum_insured,
                                         'insured_type'=>$slt->insured_type,
                                         'insured_pct'=>$slt->insured_pct,
                                         'total_sum_pct'=>$slt->total_sum_pct,
-                                        'deductible_panel'=>$jsondtlistup->toJson(),
-                                        'extend_coverage'=>$jsonectlistup->toJson(),
+                                        'deductible_panel'=>json_encode($jsondtlistup),
+                                        'extend_coverage'=>json_encode($jsonectlistup),
                                         'insurance_period_from'=>$slt->insurance_period_from,
                                         'insurance_period_to'=>$slt->insurance_period_to,
                                         'reinsurance_period_from'=>$slt->reinsurance_period_from,
@@ -1472,7 +1484,7 @@ class HeMotorSlipController extends Controller
                                         'grossprm_to_nr'=>$slt->grossprm_to_nr,
                                         'netprm_to_nr'=>$slt->netprm_to_nr,
                                         'sum_commission'=>$slt->sum_commission,
-                                        'retrocession_panel'=>$jsonrctlistup->toJson(),
+                                        'retrocession_panel'=>json_encode($jsonrctlistup),
                                         'retro_backup'=>$slt->retro_backup,
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
@@ -1480,13 +1492,13 @@ class HeMotorSlipController extends Controller
                     
                                     ]);
                             }
-                        }elseif(!$jsonrctlistup){
+                        }elseif($jsonrctlistup == ' '){
                             foreach($slipdatalist as $slt){
                                 $slipdataup = SlipTable::create([
                                         'number'=>$slt->number,
                                         'username'=>$slt->username,
                                         'insured_id'=>$slt->insured_id,
-                                        'slip_type'=>'fe',
+                                        'slip_type'=>'hem',
                                         'prod_year' => $slt->prod_year,
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
@@ -1499,13 +1511,13 @@ class HeMotorSlipController extends Controller
                                         'koc'=>$slt->koc,
                                         'occupacy'=>$slt->occupacy,
                                         'build_const'=>$slt->build_const,
-                                        'attacment_file'=>$attachmentlist->toJson(),
+                                        'attacment_file'=>json_encode($attachmentlist),
                                         'total_sum_insured'=>$slt->total_sum_insured,
                                         'insured_type'=>$slt->insured_type,
                                         'insured_pct'=>$slt->insured_pct,
                                         'total_sum_pct'=>$slt->total_sum_pct,
-                                        'deductible_panel'=>$jsondtlistup->toJson(),
-                                        'extend_coverage'=>$jsonectlistup->toJson(),
+                                        'deductible_panel'=>json_encode($jsondtlistup),
+                                        'extend_coverage'=>json_encode($jsonectlistup),
                                         'insurance_period_from'=>$slt->insurance_period_from,
                                         'insurance_period_to'=>$slt->insurance_period_to,
                                         'reinsurance_period_from'=>$slt->reinsurance_period_from,
@@ -1535,7 +1547,7 @@ class HeMotorSlipController extends Controller
                                         'number'=>$slt->number,
                                         'username'=>$slt->username,
                                         'insured_id'=>$slt->insured_id,
-                                        'slip_type'=>'fe',
+                                        'slip_type'=>'hem',
                                         'prod_year' => $slt->prod_year,
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
@@ -1548,13 +1560,13 @@ class HeMotorSlipController extends Controller
                                         'koc'=>$slt->koc,
                                         'occupacy'=>$slt->occupacy,
                                         'build_const'=>$slt->build_const,
-                                        'attacment_file'=>$attachmentlist->toJson(),
+                                        'attacment_file'=>json_encode($attachmentlist),
                                         'total_sum_insured'=>$slt->total_sum_insured,
                                         'insured_type'=>$slt->insured_type,
                                         'insured_pct'=>$slt->insured_pct,
                                         'total_sum_pct'=>$slt->total_sum_pct,
-                                        'deductible_panel'=>$jsondtlistup->toJson(),
-                                        'extend_coverage'=>$jsonectlistup->toJson(),
+                                        'deductible_panel'=>json_encode($jsondtlistup),
+                                        'extend_coverage'=>json_encode($jsonectlistup),
                                         'insurance_period_from'=>$slt->insurance_period_from,
                                         'insurance_period_to'=>$slt->insurance_period_to,
                                         'reinsurance_period_from'=>$slt->reinsurance_period_from,
@@ -1586,7 +1598,7 @@ class HeMotorSlipController extends Controller
 
                         $insureddataup = Insured::create([
                             'number'=>$insureddata->number,
-                            'slip_type'=>'fe',
+                            'slip_type'=>'hem',
                             'insured_prefix' => $insureddata->insured_prefix,
                             'insured_name'=>$insureddata->insured_name,
                             'insured_suffix'=>$insureddata->insured_suffix,
@@ -1600,7 +1612,7 @@ class HeMotorSlipController extends Controller
                         ]);
     
                     $notification = array(
-                        'message' => 'Fire & Enginering Slip added Endorsement successfully!',
+                        'message' => 'He & Motor Slip added Endorsement successfully!',
                         'alert-type' => 'success'
                     );
 
@@ -1642,7 +1654,7 @@ class HeMotorSlipController extends Controller
                 else
                 {
                     $notification = array(
-                        'message' => 'Fire & Enginering Slip added Endorsement Failed! data already endorsed!',
+                        'message' => 'He & Motor Slip added Endorsement Failed! data already endorsed!',
                         'alert-type' => 'error'
                     );
 
@@ -1658,7 +1670,7 @@ class HeMotorSlipController extends Controller
         {
 
             $notification = array(
-                'message' => 'Fire & Engginering Slip added Failed!',
+                'message' => 'He & Motor Slip added Failed!',
                 'alert-type' => 'success'
             );
 
@@ -1667,7 +1679,6 @@ class HeMotorSlipController extends Controller
             //return redirect()->route('liniusaha.index');
         }
         
-
     }
 
 

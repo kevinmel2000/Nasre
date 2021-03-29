@@ -1436,7 +1436,7 @@ class FeSlipController extends Controller
                     'slip_no'=>$request->slipno,
                     'cn_dn'=>$request->slipcndn,
                     'policy_no'=>$request->slippolicy_no,
-                    'attacment_file'=>'',
+                    'attacment_file'=>json_encode($attachmentlist),
                     'interest_insured'=>$interestlist->toJSon(),
                     'total_sum_insured'=>$request->sliptotalsum,
                     'insured_type'=>$request->sliptype,
@@ -1861,6 +1861,7 @@ class FeSlipController extends Controller
                                         'insured_type'=>$slt->insured_type,
                                         'insured_pct'=>$slt->insured_pct,
                                         'total_sum_pct'=>$slt->total_sum_pct,
+                                        'deductible_panel'=>json_encode($jsondtlistup),
                                         'extend_coverage'=>json_encode($jsonectlistup),
                                         'insurance_period_from'=>$slt->insurance_period_from,
                                         'insurance_period_to'=>$slt->insurance_period_to,
@@ -1911,6 +1912,7 @@ class FeSlipController extends Controller
                                         'insured_pct'=>$slt->insured_pct,
                                         'total_sum_pct'=>$slt->total_sum_pct,
                                         'deductible_panel'=>json_encode($jsondtlistup),
+                                        'extend_coverage'=>json_encode($jsonectlistup),
                                         'insurance_period_from'=>$slt->insurance_period_from,
                                         'insurance_period_to'=>$slt->insurance_period_to,
                                         'reinsurance_period_from'=>$slt->reinsurance_period_from,
@@ -2009,7 +2011,7 @@ class FeSlipController extends Controller
                                         'insured_pct'=>$slt->insured_pct,
                                         'total_sum_pct'=>$slt->total_sum_pct,
                                         'deductible_panel'=>json_encode($jsondtlistup),
-                                        'extend_coverage'=>$jsonectlistup->toJson(),
+                                        'extend_coverage'=>json_encode($jsonectlistup),
                                         'insurance_period_from'=>$slt->insurance_period_from,
                                         'insurance_period_to'=>$slt->insurance_period_to,
                                         'reinsurance_period_from'=>$slt->reinsurance_period_from,
@@ -2052,13 +2054,13 @@ class FeSlipController extends Controller
                                         'koc'=>$slt->koc,
                                         'occupacy'=>$slt->occupacy,
                                         'build_const'=>$slt->build_const,
-                                        'attacment_file'=>$attachmentlist->toJson(),
+                                        'attacment_file'=>json_encode($attachmentlist),
                                         'total_sum_insured'=>$slt->total_sum_insured,
                                         'insured_type'=>$slt->insured_type,
                                         'insured_pct'=>$slt->insured_pct,
                                         'total_sum_pct'=>$slt->total_sum_pct,
-                                        'deductible_panel'=>$jsondtlistup->toJson(),
-                                        'extend_coverage'=>$jsonectlistup->toJson(),
+                                        'deductible_panel'=>json_encode($jsondtlistup),
+                                        'extend_coverage'=>json_encode($jsonectlistup),
                                         'insurance_period_from'=>$slt->insurance_period_from,
                                         'insurance_period_to'=>$slt->insurance_period_to,
                                         'reinsurance_period_from'=>$slt->reinsurance_period_from,
@@ -2328,6 +2330,7 @@ class FeSlipController extends Controller
         }
     }
 
+    
     public function updateendorsement(Request $request){
 
         $slipdata= SlipTable::where('id','=',$request->slipid)->first();
