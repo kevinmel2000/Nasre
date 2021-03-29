@@ -733,9 +733,9 @@
 <script type="text/javascript">
     $(function() {              
        // Bootstrap DateTimePicker v4
-       $('#dateinstallment').datetimepicker({
-             format: 'DD/MM/YYYY'
-       });
+       //$('#dateinstallment').datetimepicker({
+         //    format: 'DD/MM/YYYY'
+       //});
 
        $('#dateinfrom').datetimepicker({
              format: 'DD/MM/YYYY'

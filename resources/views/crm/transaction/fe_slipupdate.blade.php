@@ -979,8 +979,7 @@
                                                         <div class="form-group">
                                                             <label>{{__('Insurance Periode')}}:</label>
                                                             <input type="date" class="form-control form-control-sm datepicker-input" value="" data-target="#date" id="slipipfrom" name="slipipfrom">
-                                                                        
-                                                        </div>
+                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <label style="opacity: 0;">{{__('p')}}:</label>
