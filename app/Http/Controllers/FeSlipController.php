@@ -1242,8 +1242,6 @@ class FeSlipController extends Controller
     {   
         
         $validator = $request->validate([
-            'fesnumber'=>'required',
-            'fesinsured'=>'required',
             'fessuggestinsured'=>'required'
         ]);
         
@@ -1268,6 +1266,11 @@ class FeSlipController extends Controller
             
             $insureddata= Insured::where('number','=',$request->fesnumber)->first();
             $locationlist= TransLocationTemp::where('insured_id','=',$request->fesnumber)->orderby('id','desc')->get();
+
+            $sum_amount = DB::table('risk_location_detail')
+                            ->join('trans_location_temp','trans_location_temp.id','=','risk_location_detail.translocation_id')
+                            ->where('trans_location_temp.insured_id',$request->fesnumber)
+                            ->sum('risk_location_detail.amountlocation');
             
             if($insureddata==null)
             {
@@ -1277,7 +1280,7 @@ class FeSlipController extends Controller
                     'insured_prefix' => $request->fesinsured,
                     'insured_name'=>$request->fessuggestinsured,
                     'insured_suffix'=>$request->fessuffix,
-                    'share'=>$request->fesshare,
+                    'share'=>$sum_amount,
                     'share_from'=>$request->fessharefrom,
                     'share_to'=>$request->fesshareto,
                     'coincurance'=>$request->fescoincurance,
@@ -1287,10 +1290,13 @@ class FeSlipController extends Controller
                     
                 ]);
 
+                
+
                 $notification = array(
                     'message' => 'Fire & Engginering Insured added successfully!',
                     'alert-type' => 'success',
-                    'count_endorsement' => $insureddataup->count_endorsement
+                    'count_endorsement' => $insureddataup->count_endorsement,
+                    'ceding_share' => $sum_amount
                 );
 
 
@@ -1302,7 +1308,7 @@ class FeSlipController extends Controller
                 $insureddataup->insured_prefix=$request->fesinsured;
                 $insureddataup->insured_name=$request->fessuggestinsured;
                 $insureddataup->insured_suffix=$request->fessuffix;
-                $insureddataup->share=$request->fesshare;
+                $insureddataup->share=$sum_amount;
                 $insureddataup->share_from=$request->fessharefrom;
                 $insureddataup->share_to=$request->fesshareto;
                 $insureddataup->coincurance=$request->fescoincurance;
@@ -1314,7 +1320,8 @@ class FeSlipController extends Controller
                 $notification = array(
                     'message' => 'Fire & Engginering Insured Update successfully!',
                     'alert-type' => 'success',
-                    'count_endorsement' => $insureddataup->count_endorsement
+                    'count_endorsement' => $insureddataup->count_endorsement,
+                    'ceding_share' => $sum_amount
                 );
             }
 
@@ -2239,9 +2246,10 @@ class FeSlipController extends Controller
                 $locationlist->translocation_id = $translocation_id;
                 $locationlist->ceding_id=$request->ceding_id;
                 $locationlist->interest_id=$request->slipinterestid;
-                $locationlist->cnno=$request->cnno;
+                $locationlist->cndn=$request->cndn;
                 $locationlist->certno=$request->certno;
-                $locationlist->refno=$request->refno;
+                $locationlist->slipno=$request->slipno;
+                $locationlist->policyno=$request->policyno;
                 $locationlist->amountlocation=$request->amountlocation;
                 $locationlist->save();
 
@@ -2268,9 +2276,10 @@ class FeSlipController extends Controller
                     'cedinglocation' => $locationlist->ceding_id,
                     'cedingbroker' => $cedingbroker->name,
                     'interest_name'=> $locationlist->interestdata->code.'-'.$locationlist->interestdata->description,
-                    'cnno' => $request->cnno,
+                    'cndn' => $request->cndn,
                     'certno' => $request->certno,
-                    'refno' => $request->refno,
+                    'slipno' => $request->slipno,
+                    'policyno' => $request->policyno,
                     'amountlocation' => $request->amountlocation
                     // 'kurs'=> $currency->code
                 ]);

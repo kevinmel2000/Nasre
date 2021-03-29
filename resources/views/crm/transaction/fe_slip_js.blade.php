@@ -75,7 +75,7 @@
 </script>
 
 <script type="text/javascript">
-    
+
 </script>
 
 <script type="text/javascript">
@@ -90,7 +90,7 @@
 </script>
 
 <script type="text/javascript">
- 
+
 
     $('input.amount').keyup(function(event) {
             // skip for arrow keys
@@ -800,7 +800,7 @@
                     $('#wpcendorsement').val(response.wpc);
                     $('#slipvbrokerendorsement').val(response.v_broker);
 
-                    
+
 
 
                     if(response.deductible_panel)
@@ -1225,9 +1225,9 @@
        // Bootstrap DateTimePicker v4
        
 
-     //   $('#dateinstallment').datepicker({
-     //     dateFormat: 'DD/MM/YYYY'
-     // });
+       $('#slipipdate').datepicker({
+         dateFormat: 'DD/MM/YYYY'
+     });
 
        $('#dateinfrom').datepicker({
          dateFormat: 'DD/MM/YYYY'
@@ -1638,7 +1638,7 @@ $('#slipbld_constendorsement').change(function(){
 
                     $.each(res,function(key,value){
                      $("#slipceding").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
-                     
+
                  });
                 }
             }
@@ -2016,7 +2016,7 @@ $('#slipcedingupdate').change(function(){
 
                     $.each(res,function(key,value){
                      $("#slipcedingendorsement").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
-                     
+
                  });
                 }
             }
@@ -2485,10 +2485,11 @@ $('#slipcedingupdate').change(function(){
         
         
         var slipinterestid = $('#slipinterestlistlocation').val();
-        var cnno = $('#cnno').val();
+        var cndn = $('#cndn').val();
         var certno = $('#certno').val();
         var ceding_id = $('#ceding_id').val();
-        var refno = $('#refno').val();
+        var slipno = $('#slipno').val();
+        var policyno = $('#policyno').val();
         var amountlocation = $('#amountlocation').val();
 
         var conv_amount = amountlocation.replace(/,/g, "");
@@ -2502,9 +2503,10 @@ $('#slipcedingupdate').change(function(){
             type:"POST",
             data:{
                 slipinterestid:slipinterestid,
-                cnno:cnno,
+                cndn:cndn,
                 certno:certno,
-                refno:refno,
+                slipno:slipno,
+                policyno:policyno,
                 ceding_id:ceding_id,
                 amountlocation:real_amount,
                 insurednoloc:insurednoloc,
@@ -2541,73 +2543,73 @@ $('#slipcedingupdate').change(function(){
                         '</tr>');
 
                     
-                    $('#addlocdetailmodaldata').modal('toggle');
-                    $('#slipamount').val('');
-                    $('#slipinterestlist').val('');
+                    // $('#addlocdetailmodaldata').modal('toggle');
+                    // $('#slipamount').val('');
+                    // $('#slipinterestlist').val('');
                     
-                    var totalnre = $('#feshareto').val();
+                    // var totalnre = $('#feshareto').val();
                     
-                    if(totalnre){
-                        var conv_totalnre = parseFloat(totalnre.replace(/,/g, ""));
-                        var sumtotalnre = isNaN(conv_totalnre +  parseFloat(response.amountlocation)) ? (conv_totalnre +  parseFloat(response.amountlocation)) : (conv_totalnre +  parseFloat(response.amountlocation)) ;
-                        var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    // if(totalnre){
+                    //     var conv_totalnre = parseFloat(totalnre.replace(/,/g, ""));
+                    //     var sumtotalnre = isNaN(conv_totalnre +  parseFloat(response.amountlocation)) ? (conv_totalnre +  parseFloat(response.amountlocation)) : (conv_totalnre +  parseFloat(response.amountlocation)) ;
+                    //     var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         
-                        console.log(conv_totalnre)
-                        console.log(real_sumtotalnre)
+                    //     console.log(conv_totalnre)
+                    //     console.log(real_sumtotalnre)
 
-                        $('#feshareto').val(real_sumtotalnre);
-                    }
-                    else{
-                        var conv_totalnre = totalnre.replace(/,/g, "");
-                        var sumtotalnre = isNaN(0 + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (0 + parseFloat(response.amountlocation)) ;
-                        var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    //     $('#feshareto').val(real_sumtotalnre);
+                    // }
+                    // else{
+                    //     var conv_totalnre = totalnre.replace(/,/g, "");
+                    //     var sumtotalnre = isNaN(0 + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (0 + parseFloat(response.amountlocation)) ;
+                    //     var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         
-                        console.log(conv_totalnre)
-                        console.log(real_sumtotalnre)
+                    //     console.log(conv_totalnre)
+                    //     console.log(real_sumtotalnre)
 
-                        $('#feshareto').val(real_sumtotalnre)
-                    }
+                    //     $('#feshareto').val(real_sumtotalnre)
+                    // }
                     
 
-                    var ceding_curr = $('#slipceding').val();
-                    var totalsum = $("#sliptotalsum").val();
-                    if(response.cedinglocation == ceding_curr)
-                    {
-                        if(totalsum == '')
-                        {
-                            var total_num = 0;
-                            var sum = isNaN(total_num + response.amountlocation) ? (0 + response.amountlocation) : (total_num + response.amountlocation) ;
-                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            console.log(' sum : ' + sum)
-                            console.log(' real sum : ' + real_sum)
-                            $("#sliptotalsum").val(real_sum);
-                            $("#sliptotalsum2").val(real_sum);
-                            // $("#msishareto").val(real_sum);
-                            // $("#fesharefrom").val(real_sum);
-                            // $("#feshareto").val(real_sum);
-                        }
-                        else
-                        {
+                    // var ceding_curr = $('#slipceding').val();
+                    // var totalsum = $("#sliptotalsum").val();
+                    // if(response.cedinglocation == ceding_curr)
+                    // {
+                    //     if(totalsum == '')
+                    //     {
+                    //         var total_num = 0;
+                    //         var sum = isNaN(total_num + response.amountlocation) ? (0 + response.amountlocation) : (total_num + response.amountlocation) ;
+                    //         var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    //         console.log(' sum : ' + sum)
+                    //         console.log(' real sum : ' + real_sum)
+                    //         $("#sliptotalsum").val(real_sum);
+                    //         $("#sliptotalsum2").val(real_sum);
+                    //         // $("#msishareto").val(real_sum);
+                    //         // $("#fesharefrom").val(real_sum);
+                    //         // $("#feshareto").val(real_sum);
+                    //     }
+                    //     else
+                    //     {
 
-                            var conv_total = totalsum.replace(/,/g, "");
-                            console.log('conv total : ' + conv_total)
-                            var real_total = parseInt(conv_total);
-                            console.log('real total : ' + real_total)
-                            var total =  parseFloat(real_total);
-                            console.log(' total : ' + total)
-                            var sum = isNaN(total + response.amountlocation) ? (0 + response.amountlocation) : (total + response.amountlocation) ;
-                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            console.log(' sum : ' + sum)
-                            console.log(' real sum : ' + real_sum)
-                            $("#sliptotalsum").val(real_sum);
-                            $("#sliptotalsum2").val(real_sum);
-                            // $("#fesharefrom").val(real_sum);
-                            // $("#feshareto").val(real_sum);
-                        }
-                    }else{
-                        swal("Warning!", "TSI not increase because this ceding is not same with ceding in slip", "Tsi not increase");
+                    //         var conv_total = totalsum.replace(/,/g, "");
+                    //         console.log('conv total : ' + conv_total)
+                    //         var real_total = parseInt(conv_total);
+                    //         console.log('real total : ' + real_total)
+                    //         var total =  parseFloat(real_total);
+                    //         console.log(' total : ' + total)
+                    //         var sum = isNaN(total + response.amountlocation) ? (0 + response.amountlocation) : (total + response.amountlocation) ;
+                    //         var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    //         console.log(' sum : ' + sum)
+                    //         console.log(' real sum : ' + real_sum)
+                    //         $("#sliptotalsum").val(real_sum);
+                    //         $("#sliptotalsum2").val(real_sum);
+                    //         // $("#fesharefrom").val(real_sum);
+                    //         // $("#feshareto").val(real_sum);
+                    //     }
+                    // }else{
+                    //     swal("Warning!", "TSI not increase because this ceding is not same with ceding in slip", "Tsi not increase");
                         
-                    }
+                    // }
                 }
             });
 
@@ -2905,6 +2907,19 @@ function deletelocationriskdetail(id){
     }
 </script>
 
+<script type="text/javascript">
+    $('#percentceding').keyup(function(){
+        var percentceding = parseFloat($(this).val() / 100) ;
+        var tsi = $('#feshareto').val();
+        var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+        var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
+        var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $('#amountlocation').val(real_sum);
+
+
+    });
+</script>
 
 <script  type='text/javascript'>
  $('#slippct').keyup(function (e) {
@@ -4690,6 +4705,10 @@ function deletelocationriskdetail(id){
        var fescoinsurance = $('#fecoinsurance').val();
        var feuy = $('#feuy').val();
 
+       var conv_fesshare = fesshare.replace(/,/g, "");
+       console.log(conv_fesshare)
+       var real_fesshare = parseInt(conv_fesshare);
+       console.log(real_fesshare)
        var conv_fessharefrom = fessharefrom.replace(/,/g, "");
        console.log(conv_fessharefrom)
        var real_fessharefrom = parseInt(conv_fessharefrom);
@@ -4732,7 +4751,7 @@ function deletelocationriskdetail(id){
            fesinsured:fesinsured,
            fessuggestinsured:fessuggestinsured,
            fessuffix:fessuffix,
-           fesshare:fesshare,
+           fesshare:real_fesshare,
            fessharefrom:real_fessharefrom,
            fesshareto:real_fesshareto,
            fescoinsurance:fescoinsurance,
@@ -4745,6 +4764,7 @@ function deletelocationriskdetail(id){
         swal("Success!", "Insured Fire & Engineering Insert Success", "success")
         console.log(response)
         $('#fecountendorsement').val(response.count_endorsement);
+        $('#feshare').val(response.ceding_share);
 
     },
     error: function (request, status, error) {
