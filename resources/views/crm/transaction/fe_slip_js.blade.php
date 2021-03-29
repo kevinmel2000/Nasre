@@ -2532,12 +2532,12 @@ $('#slipcedingupdate').change(function(){
                     var amount = response.amountlocation;
                     var ceding_share = $('#feshare').val();
                     if(ceding_share == ' '){
-                        var sum_ceding = isNaN(0 + amount) ? 0 :(0 + amount).toFixed(2);
+                        var sum_ceding = isNaN(0 + amount) ? 0 :(0 + amount);
                         var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         $('#feshare').val(conv_sum_ceding);
                     }else{
                         var conv_ceding_share = ceding_share.replace(/,/g, "");
-                        var sum_ceding = isNaN(conv_ceding_share + amount) ? 0 :(conv_ceding_share + amount).toFixed(2);
+                        var sum_ceding = isNaN(conv_ceding_share + amount) ? 0 :(conv_ceding_share + amount);
                         var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         $('#feshare').val(conv_sum_ceding);
 
@@ -2650,13 +2650,13 @@ function deletelocationriskdetail(id){
             $('#riskdetailsid'+id).remove();
             var ceding_curr = $('#slipceding').val();
 
-            var totalnre = $('#feshareto').val();
-            var conv_totalnre = totalnre.replace(/,/g, "");
+            // var totalnre = $('#feshareto').val();
+            // var conv_totalnre = totalnre.replace(/,/g, "");
 
-            var sumtotalnre = isNaN(parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ? (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) : (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ;
-            var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            // var sumtotalnre = isNaN(parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ? (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) : (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ;
+            // var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            $('#feshareto').val(real_sumtotalnre);
+            // $('#feshareto').val(real_sumtotalnre);
 
                 //$('#cid'+id).remove();
             var total =  $("#feshare").val();
@@ -2668,7 +2668,7 @@ function deletelocationriskdetail(id){
                 console.log(conv_total)
                 var real_total = parseInt(conv_total);
                 console.log(real_total)
-                var sum = isNaN(real_total - response.amountlocation) ? 0 :(real_total - response.amountlocation).toFixed(2) ;
+                var sum = isNaN(real_total - response.amountlocation) ? 0 :(real_total - response.amountlocation) ;
                 console.log(sum)
                 var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 $("#feshare").val(real_sum);
