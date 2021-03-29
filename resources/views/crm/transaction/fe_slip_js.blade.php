@@ -1549,7 +1549,7 @@ $('#slipbld_constendorsement').change(function(){
 
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $('#slipcedingbroker').change(function(){
         var cedbrok = $(this).val();
         var insuredid = $('#insuredIDtxt').val();  
@@ -2025,7 +2025,7 @@ $('#slipcedingupdate').change(function(){
             swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
         }   
     });
-</script>
+</script> -->
 
 
 <script>
