@@ -1400,6 +1400,7 @@
                                                                                                         <div class="form-group">
                                                                                                             <div class="input-group" id="dateinstallment" >
                                                                                                                 <input type="date" id="slipipdate" class="form-control form-control-sm datetimepicker-input"  name="slipipdate">
+                                                                                                                
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </td>
