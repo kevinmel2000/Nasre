@@ -1118,7 +1118,7 @@
                                                                                     <input type="text"  id="slipdaytotal2" name="slipdaytotal2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" disabled />
                                                                                 </div>
                                                                                 <div class="col-md-2">
-                                                                                    <label for="">/</label>
+                                                                                    <h2>/</h2>
                                                                                 </div>
                                                                                 <div class="col-md-5">
                                                                                     <input type="hidden"  id="slipdaytotal3" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
