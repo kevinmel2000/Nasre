@@ -147,9 +147,10 @@
                                                                         <tr>
                                                                             <th>Interest Insured</th>
                                                                             <th>Ceding</th>
-                                                                            <th>CN No</th>
+                                                                            <th>CN/DN</th>
                                                                             <th>Cert No</th>
-                                                                            <th>Ref No</th>
+                                                                            <th>Slip No</th>
+                                                                            <th>Policy No</th>
                                                                             <th>amount</th>
                                                                             <th>Action</th>
                                                                         </tr>
@@ -164,9 +165,10 @@
                                                                         <tr id="riskdetailsid{{ $detaillocrisk->id }}">
                                                                             <td>{{ $detaillocrisk->interestdetail->code }} - {{ $detaillocrisk->interestdetail->description }}</td>
                                                                             <td>{{ $detaillocrisk->cedingdetail->name }}</td>
-                                                                            <td>{{ $detaillocrisk->cnno }}</td>
+                                                                            <td>{{ $detaillocrisk->cndn }}</td>
                                                                             <td>{{ $detaillocrisk->certno }}</td>
-                                                                            <td>{{ $detaillocrisk->refno }}</td>
+                                                                            <td>{{ $detaillocrisk->slipno }}</td>
+                                                                            <td>{{ $detaillocrisk->policyno }}</td>
                                                                             <td>@currency($detaillocrisk->amountlocation)</td>
                                                                             <td>
                                                                                 <a href="javascript:void(0)" onclick="deletelocationriskdetail({{ $detaillocrisk->id }})"><i class="fas fa-trash text-danger"></i></a>
