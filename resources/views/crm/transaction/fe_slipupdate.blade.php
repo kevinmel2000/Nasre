@@ -391,7 +391,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Ref No')}}</label>
-                                                <input type="text" id="refno" name="refno" class="form-control form-control-sm" value="" required/>
+                                                <input type="text" id="refno" name="refno" class="form-control form-control-sm" value=""/>
                                           </div>
                                         </div>
                                     </div>

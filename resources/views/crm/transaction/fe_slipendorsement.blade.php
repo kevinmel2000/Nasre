@@ -357,7 +357,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('CN No')}}</label>
-                                                <input type="text" id="cnno" name="cnno" class="form-control form-control-sm" value="" required/>
+                                                <input type="text" id="cnno" name="cnno" class="form-control form-control-sm" value="" />
                                           </div>
                                         </div>
                                     </div>
@@ -366,7 +366,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Cert No')}}</label>
-                                                <input type="text" id="certno" name="certno" class="form-control form-control-sm" value="" required/>
+                                                <input type="text" id="certno" name="certno" class="form-control form-control-sm" value="" />
                                           </div>
                                         </div>
                                     </div>
@@ -375,7 +375,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Ref No')}}</label>
-                                                <input type="text" id="refno" name="refno" class="form-control form-control-sm" value="" required/>
+                                                <input type="text" id="refno" name="refno" class="form-control form-control-sm" value="" />
                                           </div>
                                         </div>
                                     </div>

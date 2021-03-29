@@ -15,52 +15,52 @@
 </style>
 
 <script>
-    $(document).ready(function() { 
+        $(document).ready(function() 
+        { 
 
-        $(".e1").select2({ width: '100%' }); 
+            $(".e1").select2({ width: '100%' }); 
 
-        document.getElementByTagName("html").setAttribute("lang","id-ID");
+            document.getElementByTagName("html").setAttribute("lang","id-ID");
 
-        $("#tabretro").attr('hidden','true');
-        // $("#tabretrodetail").attr('hidden','true');
-        // $("#tabretroupdate").attr('hidden','true');
-        // $("#tabretroendorsement").attr('hidden','true');
-        $("#sliptotalsum").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $("#tabretro").attr('hidden','true');
+            // $("#tabretrodetail").attr('hidden','true');
+            // $("#tabretroupdate").attr('hidden','true');
+            // $("#tabretroendorsement").attr('hidden','true');
+            $("#sliptotalsum").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-        var dtdef = new Date($.now());
-        var datetimedef =  dtdef.getFullYear() + "-" + dtdef.getMonth() + "-" + dtdef.getDate() + " " + dtdef.getHours() + ":" + dtdef.getMinutes() + ":" + dtdef.getSeconds();
-        $('#slipStatusTable tbody').append('<tr id="stlid"><td >'+ $("#slipstatus").val() +'</td><td >'+datetimedef+'</td><td >'+ $("#slipusername").val() +'</td></tr>')
+            var dtdef = new Date($.now());
+            var datetimedef =  dtdef.getFullYear() + "-" + dtdef.getMonth() + "-" + dtdef.getDate() + " " + dtdef.getHours() + ":" + dtdef.getMinutes() + ":" + dtdef.getSeconds();
+            $('#slipStatusTable tbody').append('<tr id="stlid"><td >'+ $("#slipstatus").val() +'</td><td >'+datetimedef+'</td><td >'+ $("#slipusername").val() +'</td></tr>')
 
-        
+            
+            var countryID = 102; 
+            //alert(countryID);
+            if(countryID){
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('get-state-lookup')}}?country_id="+countryID,
+                    beforeSend: function() { $("body").addClass("loading");  },
+                    complete: function() {  $("body").removeClass("loading"); },
+                    success:function(res){  
+                        console.log(res)      
+                        if(res){
+                            $("#state_location").empty();
+                            $("#state_location").append('<option selected disabled>Select States/Province</option>');
+                            $.each(res,function(key,value){
+                                $("#state_location").append('<option value="'+key+'">'+value+'</option>');
+                            });
 
-        var countryID = 102; 
-        //alert(countryID);
-        if(countryID){
-            $.ajax({
-                type:"GET",
-                url:"{{url('get-state-lookup')}}?country_id="+countryID,
-                beforeSend: function() { $("body").addClass("loading");  },
-                complete: function() {  $("body").removeClass("loading"); },
-                success:function(res){  
-                    console.log(res)      
-                    if(res){
-                        $("#state_location").empty();
-                        $("#state_location").append('<option selected disabled>Select States/Province</option>');
-                        $.each(res,function(key,value){
-                            $("#state_location").append('<option value="'+key+'">'+value+'</option>');
-                        });
-
-                    }else{
-                        $("#state_location").append('<option value="" selected disabled>get value error</option>');
+                        }else{
+                            $("#state_location").append('<option value="" selected disabled>get value error</option>');
+                        }
                     }
-                }
-            });
-        }else{
-          $("#state_location").append('<option value="" selected disabled>countryID null</option>');
-          $("#city_location").empty();
-      }  
+                });
+            }else{
+            $("#state_location").append('<option value="" selected disabled>countryID null</option>');
+            $("#city_location").empty();
+        }  
 
-  });
+    });
 
     function treatAsUTC(date) {
         var result = new Date(date);
@@ -75,7 +75,7 @@
 </script>
 
 <script type="text/javascript">
-
+    
 </script>
 
 <script type="text/javascript">
