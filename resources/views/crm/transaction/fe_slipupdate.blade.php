@@ -1038,7 +1038,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-5">
                                                                     <input type="hidden"  id="slipdaytotal" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
-                                                                    <input type="text"  id="slipdaytotal2" name="slipdaytotal2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" disabled />
+                                                                    <input type="text"  id="slipdaytotal2" name="slipdaytotal2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     <label style="opacity: 0;">{{__('p')}}:</label>
@@ -1046,14 +1046,14 @@
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <input type="hidden"  id="slipdaytotal3" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
-                                                                    <input type="text"  id="slipdaytotal4" name="slipdaytotal2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" disabled />
+                                                                    <input type="text"  id="slipdaytotal4" name="slipdaytotal2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
                                                                 </div>
                                                             </div>       
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="">{{__('Total Summary Insurance Periode')}}</label>
                                                             <input type="hidden"  id="sliptotalsumdate" name="sliptotalsumdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
-                                                            <input type="text"  id="sliptotalsumdate2" name="sliptotalsumdate2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" disabled />
+                                                            <input type="text"  id="sliptotalsumdate2" name="sliptotalsumdate2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" disabled/>
                                                         </div>
                                                     </div>
                                                 </div>
