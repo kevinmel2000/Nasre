@@ -1242,8 +1242,6 @@ class FeSlipController extends Controller
     {   
         
         $validator = $request->validate([
-            'fesnumber'=>'required',
-            'fesinsured'=>'required',
             'fessuggestinsured'=>'required'
         ]);
         
@@ -2239,9 +2237,10 @@ class FeSlipController extends Controller
                 $locationlist->translocation_id = $translocation_id;
                 $locationlist->ceding_id=$request->ceding_id;
                 $locationlist->interest_id=$request->slipinterestid;
-                $locationlist->cnno=$request->cnno;
+                $locationlist->cndn=$request->cndn;
                 $locationlist->certno=$request->certno;
-                $locationlist->refno=$request->refno;
+                $locationlist->slipno=$request->slipno;
+                $locationlist->policyno=$request->policyno;
                 $locationlist->amountlocation=$request->amountlocation;
                 $locationlist->save();
 
@@ -2268,9 +2267,10 @@ class FeSlipController extends Controller
                     'cedinglocation' => $locationlist->ceding_id,
                     'cedingbroker' => $cedingbroker->name,
                     'interest_name'=> $locationlist->interestdata->code.'-'.$locationlist->interestdata->description,
-                    'cnno' => $request->cnno,
+                    'cndn' => $request->cndn,
                     'certno' => $request->certno,
-                    'refno' => $request->refno,
+                    'slipno' => $request->slipno,
+                    'policyno' => $request->policyno,
                     'amountlocation' => $request->amountlocation
                     // 'kurs'=> $currency->code
                 ]);
