@@ -1225,9 +1225,9 @@
        // Bootstrap DateTimePicker v4
        
 
-       $('#dateinstallment').datepicker({
-         dateFormat: 'DD/MM/YYYY'
-     });
+     //   $('#dateinstallment').datepicker({
+     //     dateFormat: 'DD/MM/YYYY'
+     // });
 
        $('#dateinfrom').datepicker({
          dateFormat: 'DD/MM/YYYY'
