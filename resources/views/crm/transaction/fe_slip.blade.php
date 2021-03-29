@@ -60,7 +60,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">{{__('Our Share')}}</label>
+                                                <label for="">{{__('Cedong Share')}}</label>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="input-group" lang="en-US">
@@ -82,7 +82,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">{{__('Total')}}</label>
+                                                <label for="">{{__('Total Sum Insured')}}</label>
                                                 <input id="feshareto" type="text"  name="feshareto" class="form-control form-control-sm amount" value="" data-validation="length" data-validation-length="0-50"  readonly/>
                                             </div>
                                         </div>
@@ -411,8 +411,8 @@
                                     <div class="row">
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
-                                                <label for="">{{__('CN No')}}</label>
-                                                <input type="text" id="cnno" name="cnno" class="form-control form-control-sm" value="" />
+                                                <label for="">{{__('CN/DN')}}</label>
+                                                <input type="text" id="cndn" name="cndn" class="form-control form-control-sm" value="" />
                                             </div>
                                         </div>
                                     </div>
@@ -429,8 +429,35 @@
                                     <div class="row">
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
-                                                <label for="">{{__('Ref No')}}</label>
-                                                <input type="text" id="refno" name="refno" class="form-control form-control-sm" value="" />
+                                                <label for="">{{__('Slip No')}}</label>
+                                                <input type="text" id="slipno" name="slipno" class="form-control form-control-sm" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-12">
+                                            <div class="form-group">
+                                                <label for="">{{__('Policy No')}}</label>
+                                                <input type="text" id="policyno" name="policyno" class="form-control form-control-sm" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-12">
+                                            <div class="form-group">
+                                                <label for="">{{__('Percentage')}}</label>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="input-group" lang="en-US">
+                                                            <input type="number" id="percentceding" name="percentceding" min="0" value="" step=".001" name="feshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  />
+                                                            <div class="input-group-append">
+                                                                <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -439,7 +466,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Amount')}}</label>
-                                                <input type="text" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-20"/>
+                                                <input type="text" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                             </div>
                                         </div>
                                     </div>
@@ -766,6 +793,15 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('WPC')}}</label>
+                                                                <input type="number" min="0" value=""  id="wpc" name="wpc" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     
                                                     <div class="row">
                                                         <div class="col-md-12">
@@ -780,15 +816,6 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="">{{__('WPC')}}</label>
-                                                                <input type="number" min="0" value=""  id="wpc" name="wpc" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    
                                                 <!--div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
@@ -1373,7 +1400,6 @@
                                                                                                         <div class="form-group">
                                                                                                             <div class="input-group" id="dateinstallment" >
                                                                                                                 <input type="date" id="slipipdate" class="form-control form-control-sm "  name="slipipdate">
-                                                                                                                
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </td>
