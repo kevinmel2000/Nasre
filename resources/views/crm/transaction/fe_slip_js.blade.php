@@ -2539,7 +2539,7 @@ $('#slipcedingupdate').change(function(){
                     }else{
                         var conv_ceding_share = ceding_share.replace(/,/g, "");
                         var real_ceding_share = parseInt(conv_ceding_share);
-                        var sum_ceding = isNaN(parseFloat(real_ceding_share) + parseFloat(amount)) ? 0 :(real_ceding_share) + parseFloat(amount));
+                        var sum_ceding = isNaN(parseFloat(real_ceding_share) + parseFloat(amount)) ? 0 :(parseFloat(real_ceding_share) + parseFloat(amount));
                         var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         $('#feshare').val(conv_sum_ceding);
                         console.log('ceding bertambah' + conv_sum_ceding)
