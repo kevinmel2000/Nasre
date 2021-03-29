@@ -66,7 +66,7 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="">{{__('Our Share')}}</label>
+                                                    <label for="">{{__('Ceding Share')}}</label>
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
@@ -89,7 +89,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="">{{__('Total')}}</label>
+                                                    <label for="">{{__('Total Sum Insured')}}</label>
                                                     <input id="mpshareto" type="text"  name="mpshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly/>
                                                 </div>
                                             </div>
@@ -405,9 +405,9 @@
                                     <div class="row">
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
-                                                <label for="">{{__('CN No')}}</label>
-                                                <input type="text" id="cnno" name="cnno" class="form-control form-control-sm" value="" />
-                                          </div>
+                                                <label for="">{{__('CN/DN')}}</label>
+                                                <input type="text" id="cndn" name="cndn" class="form-control form-control-sm" value="" />
+                                            </div>
                                         </div>
                                     </div>
 
@@ -416,16 +416,43 @@
                                             <div class="form-group">
                                                 <label for="">{{__('Cert No')}}</label>
                                                 <input type="text" id="certno" name="certno" class="form-control form-control-sm" value="" />
-                                          </div>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
-                                                <label for="">{{__('Ref No')}}</label>
-                                                <input type="text" id="refno" name="refno" class="form-control form-control-sm" value="" />
-                                          </div>
+                                                <label for="">{{__('Slip No')}}</label>
+                                                <input type="text" id="slipno" name="slipno" class="form-control form-control-sm" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-12">
+                                            <div class="form-group">
+                                                <label for="">{{__('Policy No')}}</label>
+                                                <input type="text" id="policyno" name="policyno" class="form-control form-control-sm" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-12">
+                                            <div class="form-group">
+                                                <label for="">{{__('Percentage')}}</label>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="input-group" lang="en-US">
+                                                            <input type="number" id="percentceding" name="percentceding" min="0" value="" step=".001" name="feshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  />
+                                                            <div class="input-group-append">
+                                                                <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -433,7 +460,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Amount')}}</label>
-                                                <input type="text" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-20"/>
+                                                <input type="text" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-20" readonly="readonly" />
                                           </div>
                                         </div>
                                     </div>

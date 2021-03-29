@@ -60,7 +60,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">{{__('Cedong Share')}}</label>
+                                                <label for="">{{__('Ceding Share')}}</label>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="input-group" lang="en-US">
@@ -461,6 +461,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
 
                                     <div class="row">
                                         <div class="col-md-6 col-md-12">
