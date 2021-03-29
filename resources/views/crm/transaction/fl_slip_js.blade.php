@@ -2754,6 +2754,20 @@ $(document).ready(function() {
             
         }
         
+        
+        document.getElementByTagName("html").setAttribute("lang","id-ID");
+
+        $("#tabretro").attr('hidden','true');
+        // $("#tabretrodetail").attr('hidden','true');
+        // $("#tabretroupdate").attr('hidden','true');
+        // $("#tabretroendorsement").attr('hidden','true');
+        $("#sliptotalsum").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        var dtdef = new Date($.now());
+        var datetimedef =  dtdef.getFullYear() + "-" + dtdef.getMonth() + "-" + dtdef.getDate() + " " + dtdef.getHours() + ":" + dtdef.getMinutes() + ":" + dtdef.getSeconds();
+        $('#slipStatusTable tbody').append('<tr id="stlid"><td >'+ $("#slipstatus").val() +'</td><td >'+datetimedef+'</td><td >'+ $("#slipusername").val() +'</td></tr>')
+
+
         var countryID = 102; 
         //alert(countryID);
         if(countryID){

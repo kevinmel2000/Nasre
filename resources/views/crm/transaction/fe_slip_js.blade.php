@@ -19,7 +19,7 @@
 
         $(".e1").select2({ width: '100%' }); 
 
-        document.getElementByTagName("html").setAttribute("lang","id-ID")
+        document.getElementByTagName("html").setAttribute("lang","id-ID");
 
         $("#tabretro").attr('hidden','true');
         // $("#tabretrodetail").attr('hidden','true');
