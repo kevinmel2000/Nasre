@@ -2537,7 +2537,7 @@ $('#slipcedingupdate').change(function(){
                         $('#feshare').val(conv_sum_ceding);
                     }else{
                         var conv_ceding_share = ceding_share.replace(/,/g, "");
-                        var sum_ceding = isNaN(conv_ceding_share + amount) ? 0 :(conv_ceding_share + amount);
+                        var sum_ceding = isNaN(parseInt(conv_ceding_share) + amount) ? 0 :(parseInt(conv_ceding_share) + amount);
                         var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         $('#feshare').val(conv_sum_ceding);
 
