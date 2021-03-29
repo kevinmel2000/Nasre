@@ -69,7 +69,7 @@
                                                     <div class="row">
                                                         <div class="col-md-10">
                                                             <div class="input-group">
-                                                             <input type="number" id="feshare" min="0" step=".01" name="feshare" value="{{$insureddata->share}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
+                                                             <input type="number" id="feshare" min="0" step=".01" name="feshare" value="{{$insureddata->share}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-250" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -407,7 +407,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="input-group" lang="en-US">
-                                                            <input type="number" id="percentceding" name="percentceding" min="0" value="" step=".001" name="feshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  />
+                                                            <input type="number" id="percentceding" name="percentceding" min="0" value="" step=".001" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  />
                                                             <div class="input-group-append">
                                                                 <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                             </div>

@@ -424,7 +424,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="input-group" lang="en-US">
-                                                            <input type="number" id="percentceding" name="percentceding" min="0" value="" step=".001" name="feshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  />
+                                                            <input type="number" id="percentceding" name="percentceding" min="0" value="" step=".001" class="form-control form-control-sm " data-validation="length" data-validation-length="0-250"  />
                                                             <div class="input-group-append">
                                                                 <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                             </div>

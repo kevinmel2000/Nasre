@@ -2267,7 +2267,7 @@ function deletelocationriskdetail(id){
                 var sum = isNaN(real_total - response.amountlocation) ? 0 :(real_total - response.amountlocation) ;
                 console.log(sum)
                 var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                $("#feshare").val(real_sum);
+                $("#mpshare").val(real_sum);
             }
                     // $("#feshareto").val(real_sum);
                
