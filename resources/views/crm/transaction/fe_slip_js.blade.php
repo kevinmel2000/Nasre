@@ -2914,7 +2914,7 @@ function deletelocationriskdetail(id){
         var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
         var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
-        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         $('#amountlocation').val(real_sum);
 
 
