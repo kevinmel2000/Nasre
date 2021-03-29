@@ -1041,7 +1041,8 @@
                                                                     <input type="text"  id="slipdaytotal2" name="slipdaytotal2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" disabled />
                                                                 </div>
                                                                 <div class="col-md-2">
-                                                                    <h2>/</h2>
+                                                                    <label style="opacity: 0;">{{__('p')}}:</label>
+                                                                    /
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <input type="hidden"  id="slipdaytotal3" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
