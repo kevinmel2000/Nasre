@@ -2782,7 +2782,7 @@ $(document).ready(function() {
                     $("#state_location").empty();
                     $("#state_location").append('<option selected disabled>Select States/Province</option>');
                     $.each(res,function(key,value){
-                    $("#state_location").append('<option value="'+key+'">'+value+'</option>');
+                        $("#state_location").append('<option value="'+key+'">'+value+'</option>');
                     });
                 
                 }else{

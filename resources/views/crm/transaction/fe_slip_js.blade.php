@@ -22,7 +22,7 @@
 
         // document.getElementByTagName("html").setAttribute("lang","id-ID");
 
-        $("#tabretro").attr('hidden','true');
+             $("#tabretro").attr('hidden','true');
             // $("#tabretrodetail").attr('hidden','true');
             // $("#tabretroupdate").attr('hidden','true');
             // $("#tabretroendorsement").attr('hidden','true');
