@@ -1518,6 +1518,7 @@ class FeSlipController extends Controller
             }
             else
             {
+                
                 $currdate = date("Y-m-d");
 
                 $slipdataid=$slipdata->id;
