@@ -2073,7 +2073,7 @@ class TransactionController extends Controller
                 }else{
                     return response()->json(
                         [
-                            'code_error' => '404'
+                            'code_error' => '404',
                             'message' => 'sorry percent cannot more than 100%'
                         ]
                     );
@@ -2291,7 +2291,7 @@ class TransactionController extends Controller
                 else{
                     return response()->json(
                         [
-                            'code_error' => '404'
+                            'code_error' => '404',
                             'message' => 'sorry percent cannot more than 100%'
                         ]
                     );
