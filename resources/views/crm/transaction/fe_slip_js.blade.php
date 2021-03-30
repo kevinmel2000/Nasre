@@ -4206,27 +4206,28 @@ function deletelocationriskdetail(id){
        var percentage = $('#slipdppercentage').val();
        var amount = $('#slipdpamount').val();
        var minamount = $('#slipdpminamount').val();
-       var real_amount = 0;
+       var real_minamount = 0;
        if(minamount == ''){
-           real_amount = 0;
+           real_minamount = 0;
        }
        else{
-        var conv_amount = amount.replace(/,/g, "");
-        console.log(conv_amount)
-        real_amount = parseInt(conv_amount);
+        var conv_minamount = minamount.replace(/,/g, "");
+        console.log(conv_minamount)
+        real_minamount = parseInt(conv_minamount);
     }
 
     var slip_id = $('#slipnumber').val();
     var token2 = $('input[name=_token2]').val();
 
 
+    
+
+    var conv_amount = amount.replace(/,/g, "");
+    console.log(conv_amount)
+    var real_amount = parseInt(conv_amount);
     console.log(real_amount)
 
-
-
-    var conv_minamount = minamount.replace(/,/g, "");
-    console.log(conv_minamount)
-    var real_minamount = parseInt(conv_minamount);
+    
     console.log(real_minamount)
 
     $.ajaxSetup({
