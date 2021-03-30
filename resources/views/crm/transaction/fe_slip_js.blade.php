@@ -1248,11 +1248,55 @@
 
     $('#slipipfrom').change(function(){
         $('#sliprpfrom').val($(this).val());
+
+        var date_to = $('#slipipto').val();
+        if(date_to){
+            var insurance_period_from2 = $('#sliprpfrom').val();
+            var insurance_period_to2 = $('#sliprpto').val();
+            var days=daysBetween(insurance_period_from2, insurance_period_to2);
+            var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+            // var constday = days.toString() + "/365";
+            var constday1 = days.toString();
+            var constday2 = "365";
+            console.log(insurance_period_from2)
+            console.log(insurance_period_to2)
+            console.log(days)
+            console.log(constday1)
+            console.log(constday2)
+            console.log(parseFloat(sum))
+            
+            $('#slipdaytotal').val(constday1);
+            $('#slipdaytotal2').val(constday1);
+            $('#slipdaytotal3').val(constday2);
+            $('#slipdaytotal4').val(constday2);
+            $('#sliptotalsumdate').val(parseFloat(sum));
+            $('#sliptotalsumdate2').val(parseFloat(sum));
+        }
     });
 
     $('#slipipto').change(function(){
         $('#sliprpto').val($(this).val());
         
+        var insurance_period_from2 = $('#sliprpfrom').val();
+        var insurance_period_to2 = $('#sliprpto').val();
+        var days=daysBetween(insurance_period_from2, insurance_period_to2);
+        var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+        // var constday = days.toString() + "/365";
+        var constday1 = days.toString();
+        var constday2 = "365";
+        console.log(insurance_period_from2)
+        console.log(insurance_period_to2)
+        console.log(days)
+        console.log(constday1)
+        console.log(constday2)
+        console.log(parseFloat(sum))
+        
+        $('#slipdaytotal').val(constday1);
+        $('#slipdaytotal2').val(constday1);
+        $('#slipdaytotal3').val(constday2);
+        $('#slipdaytotal4').val(constday2);
+        $('#sliptotalsumdate').val(parseFloat(sum));
+        $('#sliptotalsumdate2').val(parseFloat(sum));
        
         // document.getElementById("daytotal").innerHTML = "Total Days :"+days;
     });
@@ -1268,7 +1312,8 @@
         console.log(insurance_period_from2)
         console.log(insurance_period_to2)
         console.log(days)
-        console.log(constday)
+        console.log(constday1)
+        console.log(constday2)  
         console.log(parseFloat(sum))
         
         $('#slipdaytotal').val(constday1);
@@ -1280,7 +1325,7 @@
     });
 
     $('#sliprpfrom').change(function(){
-        var date_to = $('#slipipto').val();
+        var date_to = $('#sliprpto').val();
         if(date_to){
             var insurance_period_from2 = $('#sliprpfrom').val();
             var insurance_period_to2 = $('#sliprpto').val();
@@ -1292,7 +1337,8 @@
             console.log(insurance_period_from2)
             console.log(insurance_period_to2)
             console.log(days)
-            console.log(constday)
+            console.log(constday1)
+            console.log(constday2)
             console.log(parseFloat(sum))
             
             $('#slipdaytotal').val(constday1);

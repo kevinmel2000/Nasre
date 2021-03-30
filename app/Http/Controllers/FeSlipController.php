@@ -1369,7 +1369,7 @@ class FeSlipController extends Controller
 
                             $extension = $file->getClientOriginalExtension(); 
                             
-                            if($extension=="csv" || $extension=="txt" || $extension=="xlx" || $extension=="xls" || $extension=="pdf")
+                            if($extension=="csv" || $extension=="txt" || $extension=="xlx" || $extension=="xls" || $extension=="pdf" || $extension=="ppt" || $extension=="pptx" || $extension=="doc" || $extension=="docx" || $extension=="jpg" || $extension=="jpeg" || $extension=="png")
                             {  
                                 $name =  time() . rand(11111,99999).''.$file->getClientOriginalName();
                                 $file->move(base_path('\public\files'),$name);
