@@ -820,8 +820,17 @@
                                                     </div>
 
                                             </div>
+                                            
                                             <div class="tab-pane fade" id="insured-details-id" role="tabpanel" aria-labelledby="insured-details">
-                                               
+                                                        
+                                                        <input type="hidden" name="msitsi" id="msitsi" value="">
+                                                        <input type="hidden" name="msisharev" id="msisharev" value="">
+                                                        <input type="hidden" name="msisumsharev" id="msisumsharev" value="">
+                                          
+                                                        <input type="hidden" name="msitsi" id="msitsi" value="">
+                                                        <input type="hidden" name="msisharev" id="msisharev" value="">
+                                                        <input type="hidden" name="msisumsharev" id="msisumsharev" value="">
+                                        
                                                         
                                                         <div class="row">
                                                             <div class="col-md-12 d-flex justify-content-end">
@@ -846,6 +855,73 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-12 d-flex justify-content-end">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label for="">{{__('Type')}}</label>
+                                                                            <select id="sliptype" name="sliptype" class="form-control form-control-sm ">
+                                                                                {{-- <option selected disabled>{{__('Select Type')}}</option> --}}
+                                                                                <option value="PML" selected >PML</option>
+                                                                                <option value="LOL">LOL</option>
+                                                                                <option value="TSI">TSI</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label for="" style="opacity: 0;">{{__('Type')}}</label>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="input-group">
+                                                                                        <input type="number" value="" step=".001" id="slippct" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
+                                                                                        <div class="input-group-append">
+                                                                                            <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label for=""style="opacity: 0;">{{__('Type')}}</label>
+                                                                            <input type="hidden"  id="sliptotalsumpct" name="sliptotalsumpct" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-150" placeholder="=pct*tsi"  />
+                                                                            <input type="text"  id="sliptotalsumpct2" name="sliptotalsumpct2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-150" placeholder="=pct*tsi" disabled />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="row">
+                                                            <div class="col-md-12 d-flex justify-content-end">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="">{{__('Total Sum Insured/Ceding Shared') }}</label>
+                                                                            <select id="sliptypetsi" name="sliptype" class="form-control form-control-sm ">
+                                                                                <option selected disabled>{{__('Select Share')}}</option>
+                                                                                <option value="1">Total Sum Insured</option>
+                                                                                <option value="2">Ceding Share</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for=""  style="opacity: 0;" >{{__('Total Sum Insured') }}</label>
+                                                                            <input type="hidden" id="sliptotalsum" value="" name="sliptotalsum" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="tsi(*total/sum from interest insured)" />
+                                                                            <input type="text" id="sliptotalsum2" value="" name="sliptotalsum2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="tsi(*total/sum from interest insured)" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                         <div class="row">
                                                             <div class="col-md-12 d-flex justify-content-end">
                                                                 <div class="row">
@@ -1140,6 +1216,7 @@
                                                         <div class="row d-flex justify-content-start">
                                                             <i class="fa fa-info-circle" id="labelnp" style="color: grey;" aria-hidden="true"> non proportional panel</i>
                                                         </div>
+                                                        
                                                         <div class="row d-flex justify-content-end">
                                                             <div class="col-md-4">
                                                                 <label class="cl-switch cl-switch-green">
@@ -1242,6 +1319,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                         <div class="row">
 
                                                             <div class="col-md-6">

@@ -885,6 +885,12 @@ class FinancialLineSlipController extends Controller
                     'attacment_file'=>json_encode($attachmentlist),
                     'interest_insured'=>$interestlist->toJSon(),
                     'total_sum_insured'=>$request->sliptotalsum,
+                    'share_tsi'=>$request->slipsharetotalsum,
+                    'type_tsi'=>$request->sliptypetotalsum,
+                    'type_share_tsi'=>$request->sliptypetsishare,
+                    'total_day'=>$request->sliptotalday,
+                    'total_year'=>$request->sliptotalyear,
+                    'sum_total_date'=>$request->slipdatesum,
                     'insured_type'=>$request->sliptype,
                     'insured_pct'=>$request->slippct,
                     'total_sum_pct'=>$request->sliptotalsumpct,
@@ -948,6 +954,12 @@ class FinancialLineSlipController extends Controller
                 $slipdataup->attacment_file=''; 
                 $slipdataup->interest_insured=$interestlist->toJSon();
                 $slipdataup->total_sum_insured=$request->sliptotalsum; 
+                $slipdataup->share_tsi=$request->slipsharetotalsum; 
+                $slipdataup->type_tsi=$request->sliptypetotalsum; 
+                $slipdataup->type_share_tsi=$request->sliptypetsishare; 
+                $slipdataup->total_day=$request->sliptotalday; 
+                $slipdataup->total_year=$request->sliptotalyear; 
+                $slipdataup->sum_total_date=$request->slipdatesum; 
                 $slipdataup->insured_type=$request->sliptype; 
                 $slipdataup->insured_pct=$request->slippct; 
                 $slipdataup->total_sum_pct=$request->sliptotalsumpct; 
