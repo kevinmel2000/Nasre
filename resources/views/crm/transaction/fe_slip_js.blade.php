@@ -5292,7 +5292,7 @@ function deletelocationriskdetail(id){
                 $('#deductiblePanel tbody').empty();
                 $('#retrocessionPanel tbody').empty();
        }else{
-        swal("Error!", "Please input installment panel and Total own retention plus retrocession until 100%", "Insert Error");
+        swal("Error!", "Please input installment panel and Total own retention until 100%", "Insert Error");
        }
 
 
