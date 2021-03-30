@@ -70,7 +70,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="input-group" lang="en-US">
-                                                             <input type="text" id="feshare" name="feshare" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly/>
+                                                             <input type="text" id="feshare" name="feshare" value="{{strval(number_format($insureddata->share, 3, '.', ','))}}" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly/>
                                                              <!-- <div class="input-group-append">
                                                                 <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                             </div> -->
