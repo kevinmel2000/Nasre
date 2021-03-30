@@ -5049,7 +5049,7 @@ function deletelocationriskdetail(id){
 
        //ajaxfilefunction(e);
 
-       $.ajaxSetup({
+    $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
@@ -5059,12 +5059,13 @@ function deletelocationriskdetail(id){
            url:"{{url('transaction-data/fe-slip/store')}}",
            type:"POST",
            data:{
+
+               //sliped:sliped,
+               //slipsls:slipsls,
                code_ms:code_ms,
                slipnumber:slipnumber,
                slipdatetransfer:slipdatetransfer,
                slipstatus:slipstatus,
-               sliped:sliped,
-               slipsls:slipsls,
                slipcedingbroker:slipcedingbroker,
                slipceding:slipceding,
                slipcurrency:slipcurrency,
@@ -5244,8 +5245,8 @@ function deletelocationriskdetail(id){
        var prevslipnumber = $('#prevslipnumber').val();
        var slipdatetransfer = $('#sliptd').val();
        var slipstatus = $('#slipstatus').val();
-       var sliped = $('#sliped').val();
-       var slipsls = $('#slipsls').val();
+       //var sliped = $('#sliped').val();
+       //var slipsls = $('#slipsls').val();
        var slipcedingbroker = $('#slipcedingbroker').val();
        var slipceding = $('#slipceding').val();
        var slipcurrency = $('#slipcurrency').val();
@@ -5335,12 +5336,12 @@ function deletelocationriskdetail(id){
            url:"{{url('transaction-data/fe-slip/endorsementstore')}}",
            type:"POST",
            data:{
+            //sliped:sliped,
+               //slipsls:slipsls,
                code_ms:code_ms,
                slipnumber:slipnumber,
                slipdatetransfer:slipdatetransfer,
                slipstatus:slipstatus,
-               sliped:sliped,
-               slipsls:slipsls,
                slipcedingbroker:slipcedingbroker,
                slipceding:slipceding,
                slipcurrency:slipcurrency,
