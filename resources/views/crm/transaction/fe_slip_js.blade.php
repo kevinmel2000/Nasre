@@ -4133,14 +4133,23 @@ function deletelocationriskdetail(id){
        var percentage = $('#slipdppercentage').val();
        var amount = $('#slipdpamount').val();
        var minamount = $('#slipdpminamount').val();
-       
+       var real_amount = 0;
+        if(minamount == null){
+         real_amount = 0;
+       }
+       else{
+        var conv_amount = amount.replace(/,/g, "");
+       console.log(conv_amount)
+       real_amount = parseInt(conv_amount);
+       }
+
        var slip_id = $('#slipnumber').val();
        var token2 = $('input[name=_token2]').val();
 
-       var conv_amount = amount.replace(/,/g, "");
-       console.log(conv_amount)
-       var real_amount = parseInt(conv_amount);
+       
        console.log(real_amount)
+
+
 
        var conv_minamount = minamount.replace(/,/g, "");
        console.log(conv_minamount)
@@ -5045,6 +5054,16 @@ function deletelocationriskdetail(id){
     var real_slipsumor = parseInt(conv_slipsumor);
     console.log(real_slipsumor)
 
+    var conv_slipsharetotalsum = slipsharetotalsum.replace(/,/g, "");
+    console.log(conv_slipsharetotalsum)
+    var real_slipsharetotalsum = parseInt(conv_slipsharetotalsum);
+    console.log(real_slipsharetotalsum)
+
+    var conv_slipdatesum = slipdatesum.replace(/,/g, "");
+    console.log(conv_slipdatesum)
+    var real_slipdatesum = parseInt(conv_slipdatesum);
+    console.log(real_slipdatesum)
+
 
 
        //ajaxfilefunction(e);
@@ -5098,12 +5117,12 @@ function deletelocationriskdetail(id){
                sliprb:sliprb,
                slipor:slipor,
                slipsumor:real_slipsumor,
-               slipsharetotalsum:slipsharetotalsum,
+               slipsharetotalsum:real_slipsharetotalsum,
                sliptypetotalsum:sliptypetotalsum,
                sliptypetsishare:sliptypetsishare,
                sliptotalday:sliptotalday,
                sliptotalyear:sliptotalyear,
-               slipdatesum:slipdatesum,
+               slipdatesum:real_slipdatesum,
                wpc:wpc
            },
            beforeSend: function() { $("body").addClass("loading");  },
