@@ -4123,10 +4123,9 @@ function deletelocationriskdetail(id){
 
        var code_ms = $('#insuredIDtxt').val();
        var slipnumber = $('#slipnumber').val();
-       var slipuy = $('#slipuy').val();
+       var slipdatetransfer = $('#sliptd').val();
        var slipstatus = $('#slipstatus').val();
-       var sliped = $('#sliped').val();
-       var slipsls = $('#slipsls').val();
+       
        var slipcedingbroker = $('#slipcedingbroker').val();
        var slipceding = $('#slipceding').val();
        var slipcurrency = $('#slipcurrency').val();
@@ -4138,7 +4137,6 @@ function deletelocationriskdetail(id){
        var slipcndn = $('#slipcndn').val();
        var slippolicy_no =  $('#slippolicy_no').val();
        var sliptotalsum = $('#sliptotalsum').val();
-
        var slipsharetotalsum = $('#sharetotalsum').val();
        var sliptypetotalsum = $('#sliptypetsi').val();
        var sliptypetsishare = $('#sharetypetsi').val();
@@ -4225,12 +4223,13 @@ function deletelocationriskdetail(id){
            url:"{{url('transaction-data/fl-slip/store')}}",
            type:"POST",
            data:{
+
+               //sliped:sliped,
+               //slipsls:slipsls,
                code_ms:code_ms,
                slipnumber:slipnumber,
                slipuy:slipuy,
                slipstatus:slipstatus,
-               sliped:sliped,
-               slipsls:slipsls,
                slipcedingbroker:slipcedingbroker,
                slipceding:slipceding,
                slipcurrency:slipcurrency,
@@ -4405,13 +4404,12 @@ function deletelocationriskdetail(id){
        //alert('masuk');
        e.preventDefault();
 
+       
        var code_ms = $('#insuredIDtxt').val();
-       var prevslipnumber = $('#prevslipnumber').val();
        var slipnumber = $('#slipnumber').val();
-       var slipuy = $('#slipuy').val();
+       var slipdatetransfer = $('#sliptd').val();
        var slipstatus = $('#slipstatus').val();
-       var sliped = $('#sliped').val();
-       var slipsls = $('#slipsls').val();
+       
        var slipcedingbroker = $('#slipcedingbroker').val();
        var slipceding = $('#slipceding').val();
        var slipcurrency = $('#slipcurrency').val();
@@ -4423,6 +4421,13 @@ function deletelocationriskdetail(id){
        var slipcndn = $('#slipcndn').val();
        var slippolicy_no =  $('#slippolicy_no').val();
        var sliptotalsum = $('#sliptotalsum').val();
+       var slipsharetotalsum = $('#sharetotalsum').val();
+       var sliptypetotalsum = $('#sliptypetsi').val();
+       var sliptypetsishare = $('#sharetypetsi').val();
+       var sliptotalday = $('#slipdaytotal').val();
+       var sliptotalyear = $('#slipdaytotal3').val();
+       var slipdatesum = $('#sliptotalsumdate').val();
+
        var sliptype =  $('#sliptype').val();
        var slippct =  $('#slippct').val();
        var sliptotalsumpct =  $('#sliptotalsumpct').val();
