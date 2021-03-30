@@ -811,12 +811,56 @@
    
     $('#slipipfrom').change(function(){
         $('#sliprpfrom').val($(this).val());
+
+        var date_to = $('#slipipto').val();
+        if(date_to){
+            var insurance_period_from2 = $('#sliprpfrom').val();
+            var insurance_period_to2 = $('#sliprpto').val();
+            var days=daysBetween(insurance_period_from2, insurance_period_to2);
+            var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+            // var constday = days.toString() + "/365";
+            var constday1 = days.toString();
+            var constday2 = "365";
+            console.log(insurance_period_from2)
+            console.log(insurance_period_to2)
+            console.log(days)
+            console.log(constday1)
+            console.log(constday2)
+            console.log(parseFloat(sum))
+            
+            $('#slipdaytotal').val(constday1);
+            $('#slipdaytotal2').val(constday1);
+            $('#slipdaytotal3').val(constday2);
+            $('#slipdaytotal4').val(constday2);
+            $('#sliptotalsumdate').val(parseFloat(sum));
+            $('#sliptotalsumdate2').val(parseFloat(sum));
+        }
     });
 
     $('#slipipto').change(function(){
         $('#sliprpto').val($(this).val());
         
-       
+        var insurance_period_from2 = $('#sliprpfrom').val();
+        var insurance_period_to2 = $('#sliprpto').val();
+        var days=daysBetween(insurance_period_from2, insurance_period_to2);
+        var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+        // var constday = days.toString() + "/365";
+        var constday1 = days.toString();
+        var constday2 = "365";
+        console.log(insurance_period_from2)
+        console.log(insurance_period_to2)
+        console.log(days)
+        console.log(constday1)
+        console.log(constday2)
+        console.log(parseFloat(sum))
+        
+        $('#slipdaytotal').val(constday1);
+        $('#slipdaytotal2').val(constday1);
+        $('#slipdaytotal3').val(constday2);
+        $('#slipdaytotal4').val(constday2);
+        $('#sliptotalsumdate').val(parseFloat(sum));
+        $('#sliptotalsumdate2').val(parseFloat(sum));
+
         // document.getElementById("daytotal").innerHTML = "Total Days :"+days;
     });
 
@@ -831,7 +875,8 @@
         console.log(insurance_period_from2)
         console.log(insurance_period_to2)
         console.log(days)
-        console.log(constday)
+        console.log(constday1)
+        console.log(constday2)  
         console.log(parseFloat(sum))
         
         $('#slipdaytotal').val(constday1);
@@ -843,7 +888,7 @@
     });
 
     $('#sliprpfrom').change(function(){
-        var date_to = $('#slipipto').val();
+        var date_to = $('#sliprpto').val();
         if(date_to){
             var insurance_period_from2 = $('#sliprpfrom').val();
             var insurance_period_to2 = $('#sliprpto').val();
@@ -855,7 +900,8 @@
             console.log(insurance_period_from2)
             console.log(insurance_period_to2)
             console.log(days)
-            console.log(constday)
+            console.log(constday1)
+            console.log(constday2)
             console.log(parseFloat(sum))
             
             $('#slipdaytotal').val(constday1);
@@ -866,6 +912,7 @@
             $('#sliptotalsumdate2').val(parseFloat(sum));
         }
     });
+
 
     $('#slipdaytotal2').keyup(function(){
         var day = $(this).val();
@@ -3339,28 +3386,38 @@ function deletelocationriskdetail(id){
 
 <script type='text/javascript'>
     $('#adddeductibleinsured-btn').click(function(e){
-       //alert('masuk');
-       e.preventDefault();
+        //alert('masuk');
+        e.preventDefault();
 
-       var slipdptype = $('#slipdptype').val();
-       var slipdpcurrency = $('#slipdpcurrency').val();
-       
-       var percentage = $('#slipdppercentage').val();
-       var amount = $('#slipdpamount').val();
-       var minamount = $('#slipdpminamount').val();
-       
-       var slip_id = $('#slipnumber').val();
-       var token2 = $('input[name=_token2]').val();
-       
-       var conv_amount = amount.replace(/,/g, "");
-       console.log(conv_amount)
-       var real_amount = parseInt(conv_amount);
-       console.log(real_amount)
+        var slipdptype = $('#slipdptype').val();
+        var slipdpcurrency = $('#slipdpcurrency').val();
 
-       var conv_minamount = minamount.replace(/,/g, "");
-       console.log(conv_minamount)
-       var real_minamount = parseInt(conv_minamount);
-       console.log(real_minamount)
+        var percentage = $('#slipdppercentage').val();
+        var amount = $('#slipdpamount').val();
+        var minamount = $('#slipdpminamount').val();
+        var real_minamount = 0;
+        if(minamount == ''){
+            real_minamount = 0;
+        }
+        else{
+        var conv_minamount = minamount.replace(/,/g, "");
+        console.log(conv_minamount)
+        real_minamount = parseInt(conv_minamount);
+        }
+
+        var slip_id = $('#slipnumber').val();
+        var token2 = $('input[name=_token2]').val();
+
+
+
+
+        var conv_amount = amount.replace(/,/g, "");
+        console.log(conv_amount)
+        var real_amount = parseInt(conv_amount);
+        console.log(real_amount)
+
+
+        console.log(real_minamount)
        
        $.ajaxSetup({
                 headers: {
@@ -4291,6 +4348,20 @@ function deletelocationriskdetail(id){
        console.log(conv_slipsumor)
        var real_slipsumor = parseInt(conv_slipsumor);
        console.log(real_slipsumor)
+
+       var conv_slipsharetotalsum = slipsharetotalsum.replace(/,/g, "");
+       console.log(conv_slipsharetotalsum)
+       var real_slipsharetotalsum = parseInt(conv_slipsharetotalsum);
+       console.log(real_slipsharetotalsum)
+
+       var conv_slipdatesum = slipdatesum.replace(/,/g, "");
+       console.log(conv_slipdatesum)
+       var real_slipdatesum = parseInt(conv_slipdatesum);
+       console.log(real_slipdatesum)
+
+
+       var current_percent = $('#sliptotalpercentinspan').val();
+       var current_percent_rp = $('#sliptotalpercentrpor').val();
        
        //ajaxfilefunction(e);
 
@@ -4343,12 +4414,12 @@ function deletelocationriskdetail(id){
                sliprb:sliprb,
                slipor:slipor,
                slipsumor:real_slipsumor,
-               slipsharetotalsum:slipsharetotalsum,
-               sliptypetotalsum:sliptypetotalsum,
-               sliptypetsishare:sliptypetsishare,
-               sliptotalday:sliptotalday,
-               sliptotalyear:sliptotalyear,
-               slipdatesum:slipdatesum,
+               slipsharetotalsum:real_slipsharetotalsum,
+                sliptypetotalsum:sliptypetotalsum,
+                sliptypetsishare:sliptypetsishare,
+                sliptotalday:sliptotalday,
+                sliptotalyear:sliptotalyear,
+                slipdatesum:real_slipdatesum,
                wpc:wpc
            },
            beforeSend: function() { $("body").addClass("loading");  },
