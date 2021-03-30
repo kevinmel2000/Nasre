@@ -1476,7 +1476,8 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <button type="button" id="addretrocessioninsured-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                    <input type="hidden" id="sliptotalpercentrpor" name="sliptotalpercentrpor">
+                                                                                     <button type="button" id="addretrocessioninsured-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
