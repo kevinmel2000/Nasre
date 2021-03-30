@@ -3330,7 +3330,7 @@ function deletelocationriskdetail(id){
         var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
         if($(this).val() > 100){
-            .swal('warning!','percentage cannot more than 100%','sum value error');
+            swal('warning!','percentage cannot more than 100%','sum value error');
             $('#slipsumor').empty();
             $('#slipsumor2').empty();
         }else{
@@ -4207,7 +4207,7 @@ function deletelocationriskdetail(id){
        var amount = $('#slipdpamount').val();
        var minamount = $('#slipdpminamount').val();
        var real_amount = 0;
-       if(minamount == null){
+       if(minamount == ''){
            real_amount = 0;
        }
        else{
