@@ -2272,7 +2272,7 @@ class TransactionController extends Controller
                                 'type' => $retrocessionlist->type,
                                 'amount' => $retrocessionlist->amount,
                                 'slip_id' => $retrocessionlist->slip_id
-                                'message' => 'sorry percent must 100%, your percent minus '+ $minpercent2
+                                'message' => 'sorry percent must 100%, your percent minus '+ $minpercent2 +'percent'
                             ]
                         );
                     }elseif($totalpercent2 == 100){
