@@ -2259,7 +2259,7 @@ class TransactionController extends Controller
                     $retrocessionlist->slip_id = $slip_id; 
                     $retrocessionlist->save();
 
-                    $checkit2 = DB::table('installment_temp')->where('installment_temp.slip_id',$installmentlist->slip_id)->sum('installment_temp.percentage');
+                    $checkit2 = DB::table('retrocession_temp')->where('retrocession_temp.slip_id',$retrocessionlist->slip_id)->sum('retrocession_temp.percentage');
                     $totalpercent2 = $percentage_or + $checkit2;
                     $minpercent2 = 100 - $totalpercent2;
 
