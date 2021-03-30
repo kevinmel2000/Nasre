@@ -4747,7 +4747,18 @@ function deletelocationriskdetail(id){
                 $('#sliprpamount2').val('');
                 if(response.message){
                         swal("Success!", response.message, "success")
-                    } 
+                    }
+                var or = $('#slipor').val();
+                var total_percent = $('#sliptotalpercentrpor').val();
+
+                if(total_percent == null){
+                        var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage) + parseInt(or)) ? 0 :(parseInt(0) + parseInt(response.percentage) + parseInt(or)) ;
+                        $('#sliptotalpercentrpor').val(sum_percent);
+                    }else{
+                        var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage) + parseInt(or)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage) + parseInt(or))
+                        $('#sliptotalpercentrpor').val(sum_percent);
+                    }
+
             }
 
         }
@@ -5150,11 +5161,12 @@ function deletelocationriskdetail(id){
 
 
        var current_percent = $('#sliptotalpercentinspan').val();
+       var current_percent_rp = $('#sliptotalpercentrpor').val();
 
 
        //ajaxfilefunction(e);
 
-       if(current_percent == 100){
+       if(current_percent == 100 && current_percent_rp == 100){
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -5280,7 +5292,7 @@ function deletelocationriskdetail(id){
                 $('#deductiblePanel tbody').empty();
                 $('#retrocessionPanel tbody').empty();
        }else{
-        swal("Error!", "Please input installment panel until 100%", "Insert Error");
+        swal("Error!", "Please input installment panel and Total own retention plus retrocession until 100%", "Insert Error");
        }
 
 
