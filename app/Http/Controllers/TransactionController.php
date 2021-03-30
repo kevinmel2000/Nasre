@@ -2271,7 +2271,7 @@ class TransactionController extends Controller
                                 'contract' => $retrocessionlist->contract,
                                 'type' => $retrocessionlist->type,
                                 'amount' => $retrocessionlist->amount,
-                                'slip_id' => $retrocessionlist->slip_id
+                                'slip_id' => $retrocessionlist->slip_id,
                                 'message' => 'sorry percent must 100%, your percent minus '.$minpercent2.'percent'
                             ]
                         );
