@@ -2044,18 +2044,36 @@ class TransactionController extends Controller
                     $installmentlist->slip_id = $slip_id; 
                     $installmentlist->save();
 
-                    return response()->json(
-                        [
-                            'id' => $installmentlist->id,
-                            'percentage' => $installmentlist->percentage,
-                            'installment_date' => $installmentlist->installment_date,
-                            'amount' => $installmentlist->amount,
-                            'slip_id' => $installmentlist->slip_id
-                        ]
-                    );
+                    $checkit2 = DB::table('installment_temp')->where('installment_temp.slip_id',$installmentlist->slip_id)->sum('installment_temp.percentage');
+                    $minpercent2 = 100 - $checkit2;
+
+                    if($checkit2 < 100){
+                            return response()->json(
+                                [
+                                    'id' => $installmentlist->id,
+                                    'percentage' => $installmentlist->percentage,
+                                    'installment_date' => $installmentlist->installment_date,
+                                    'amount' => $installmentlist->amount,
+                                    'slip_id' => $installmentlist->slip_id,
+                                    'message' => 'sorry percent must 100%, your percent minus '+ $minpercent2
+                                ]
+                            );
+                        }
+                    elseif ($checkit2 == 100) {
+                        return response()->json(
+                                [
+                                    'id' => $installmentlist->id,
+                                    'percentage' => $installmentlist->percentage,
+                                    'installment_date' => $installmentlist->installment_date,
+                                    'amount' => $installmentlist->amount,
+                                    'slip_id' => $installmentlist->slip_id
+                                ]
+                            );
+                    }
                 }else{
                     return response()->json(
                         [
+                            'code_error' => '404'
                             'message' => 'sorry percent cannot more than 100%'
                         ]
                     );
@@ -2224,28 +2242,60 @@ class TransactionController extends Controller
             $type = $request->type;
             $amount = $request->amount;
             $slip_id = $request->id_slip;
+            $percentage_or = $request->or_percent;
+
+            $checkit = DB::table('retrocession_temp')->where('retrocession_temp.slip_id',$slip_id)->sum('retrocession_temp.percentage');
+            $totalpercent = $checkit + $percentage + $percentage_or;
         
             if($percentage !='' && $amount !='' && $slip_id != '')
             {
             
-                $retrocessionlist = new RetrocessionTemp();
-                $retrocessionlist->type  = $type;
-                $retrocessionlist->contract  = $contract;
-                $retrocessionlist->percentage  = $percentage;
-                $retrocessionlist->amount = $amount;
-                $retrocessionlist->slip_id = $slip_id; 
-                $retrocessionlist->save();
+                if($totalpercent <= 100){
+                    $retrocessionlist = new RetrocessionTemp();
+                    $retrocessionlist->type  = $type;
+                    $retrocessionlist->contract  = $contract;
+                    $retrocessionlist->percentage  = $percentage;
+                    $retrocessionlist->amount = $amount;
+                    $retrocessionlist->slip_id = $slip_id; 
+                    $retrocessionlist->save();
 
-                return response()->json(
-                    [
-                        'id' => $retrocessionlist->id,
-                        'percentage' => $retrocessionlist->percentage,
-                        'contract' => $retrocessionlist->contract,
-                        'type' => $retrocessionlist->type,
-                        'amount' => $retrocessionlist->amount,
-                        'slip_id' => $retrocessionlist->slip_id
-                    ]
-                );
+                    $checkit2 = DB::table('installment_temp')->where('installment_temp.slip_id',$installmentlist->slip_id)->sum('installment_temp.percentage');
+                    $totalpercent2 = $percentage_or + $checkit2;
+                    $minpercent2 = 100 - $totalpercent2;
+
+                    if($totalpercent2 < 100){
+                        return response()->json(
+                            [
+                                'id' => $retrocessionlist->id,
+                                'percentage' => $retrocessionlist->percentage,
+                                'contract' => $retrocessionlist->contract,
+                                'type' => $retrocessionlist->type,
+                                'amount' => $retrocessionlist->amount,
+                                'slip_id' => $retrocessionlist->slip_id
+                                'message' => 'sorry percent must 100%, your percent minus '+ $minpercent2
+                            ]
+                        );
+                    }elseif($totalpercent2 == 100){
+                        return response()->json(
+                        [
+                            'id' => $retrocessionlist->id,
+                            'percentage' => $retrocessionlist->percentage,
+                            'contract' => $retrocessionlist->contract,
+                            'type' => $retrocessionlist->type,
+                            'amount' => $retrocessionlist->amount,
+                            'slip_id' => $retrocessionlist->slip_id
+                        ]
+                    );
+                    }
+                }
+                else{
+                    return response()->json(
+                        [
+                            'code_error' => '404'
+                            'message' => 'sorry percent cannot more than 100%'
+                        ]
+                    );
+                }
         
             }
             else
