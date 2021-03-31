@@ -3281,7 +3281,7 @@ function deletelocationriskdetail(id){
 </script>
 
 <script type="text/javascript">
-    $('#percentceding').keyup(function(){
+    $('#feshareto').keyup(function(){
         var tsislip = $('#sliptotalsum').val();
         var typetsi = $('#sliptypetsi').val();
         
@@ -3293,7 +3293,7 @@ function deletelocationriskdetail(id){
         }
     });
 
-     $('#percentceding').change(function(){
+     $('#feshareto').change(function(){
         var sumpct = $('#sliptotalsumpct').val();
         var typetsi = $('#sliptypetsi').val();
 
