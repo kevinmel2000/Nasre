@@ -1280,6 +1280,7 @@
                                                                                     <td><a href="#" onclick="deleteinstallmentdetail({{ $isl->id }})">delete</i></a></td>
                                                                             </tr>   
                                                                         @endforeach
+                                                                        
                                                                         <tr>
                                                                             <form id="addinstallmentinsured">
                                                                             @csrf
