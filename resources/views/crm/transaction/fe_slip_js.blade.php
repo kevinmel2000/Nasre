@@ -1789,7 +1789,10 @@ $('#slipbld_constendorsement').change(function(){
         var valcedshare = $('#feshare').val();
 
         if(choice == '1'){
-            if(valtsi != null){
+            if(valtsi == null){
+                    swal('warning','please fill tsi insured value first','error')
+                }else{
+                    
                     var tsi = $('#feshareto').val();
                     $('#sliptotalsum').val(tsi);
                     $('#sliptotalsum2').val(tsi);
@@ -1845,15 +1848,13 @@ $('#slipbld_constendorsement').change(function(){
                         }
 
                     }
-                }else{
-                    swal('warning','please fill tsi insured value first','error')
                 }
 
 
 
         }else if(choice == '2')
         {
-            if(valcedshare != null){
+            if(valcedshare == null){
                 var ceding_share = $('#feshare').val();
                 $('#sliptotalsum').val(ceding_share);
                 $('#sliptotalsum2').val(ceding_share);
