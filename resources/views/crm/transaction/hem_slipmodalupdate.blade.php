@@ -742,12 +742,8 @@
                                                                         <tr>
                                                                            <td>
                                                                                 <div class="form-group">
-                                                                                        <div class="input-group " id="dateinstallment" >
-                                                                                                <input type="text" id="dateinstallmentdataupdate" class="form-control form-control-sm datepicker-input" >
-                                                                                                
-                                                                                        </div>
-                                                                                </div>
-                                                                                
+                                                                                        <input type="text" id="dateinstallmentdataupdate" class="form-control form-control-sm datepicker-input" >
+                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">

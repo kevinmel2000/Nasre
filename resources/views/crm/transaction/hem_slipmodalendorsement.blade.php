@@ -49,8 +49,9 @@
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label for="">{{__('Count Endorsement')}} </label>
+                                                                <!-- label for="">{{__('Count Endorsement')}} </label>
                                                                 <input type="text" id="slipcountedendorsement" name="slipcountedendorsement" class="form-control form-control-sm" value="" readonly="readonly"/>
+                                                                -->
                                                             </div>
                                                         </div>
                                                     </div>
@@ -726,10 +727,7 @@
 
                                                                            <td>
                                                                                 <div class="form-group">
-                                                                                        <div class="input-group " id="dateinstallment">
-                                                                                                <input type="text" id="dateinstallmentdataendorsement" class="form-control form-control-sm datepicker-input" name="slipipdateendorsement">
-                                                                                                
-                                                                                        </div>
+                                                                                <input type="text" class="form-control form-control-sm datepicker-input" value="" data-target="#date" id="dateinstallmentdataendorsement" name="slipipdateendorsement">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
