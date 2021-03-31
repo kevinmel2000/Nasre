@@ -1864,7 +1864,7 @@ $('#slipbld_constendorsement').change(function(){
                 var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 $('#sliptotalsumpct').val(real_sum);
                 $('#sliptotalsumpct2').val(real_sum);
-                .swal('success','changed to ceding share','success')
+                swal('success','changed to ceding share','success')
 
                 var dpamount = $('#slipdpamount').val();
                 var ecamount = $('#slipamountec').val();
