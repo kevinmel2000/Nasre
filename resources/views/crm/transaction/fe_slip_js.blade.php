@@ -1803,7 +1803,7 @@ $('#slipbld_constendorsement').change(function(){
                 var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 $('#sliptotalsumpct').val(real_sum);
                 $('#sliptotalsumpct2').val(real_sum);
-                .swal('success','changed to tsi','success')
+                swal('success','changed to tsi','success')
 
 
                 var dpamount = $('#slipdpamount').val();
