@@ -1281,7 +1281,9 @@
         if(date_to){
             var insurance_period_from2 = $('#sliprpfrom').val();
             var insurance_period_to2 = $('#sliprpto').val();
-            var days=daysBetween(insurance_period_from2, insurance_period_to2);
+            var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+            var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+            var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
             var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(2);
             // var constday = days.toString() + "/365";
             var constday1 = days.toString();
@@ -1334,7 +1336,9 @@
     $('#sliprpto').change(function(){
         var insurance_period_from2 = $('#sliprpfrom').val();
         var insurance_period_to2 = $('#sliprpto').val();
-        var days=daysBetween(insurance_period_from2, insurance_period_to2);
+        var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+        var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+        var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
         var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
         // var constday = days.toString() + "/365";
         var constday1 = days.toString();
@@ -1359,7 +1363,9 @@
         if(date_to){
             var insurance_period_from2 = $('#sliprpfrom').val();
             var insurance_period_to2 = $('#sliprpto').val();
-            var days=daysBetween(insurance_period_from2, insurance_period_to2);
+            var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+            var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+            var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
             var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
             // var constday = days.toString() + "/365";
             var constday1 = days.toString();
@@ -2772,14 +2778,43 @@ $('#slipcedingupdate').change(function(){
 
                     var curr_amount = response.amountlocation.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+                    var cndn = '';
+                    var certno = '';
+                    var slipno = '';
+                    var policyno = '';
+
+                    if(response.cndn == ''){
+                        cndn = '-';
+                    }else{
+                        cndn = response.cndn;
+                    }
+
+                    if(response.certno == ''){
+                        certno = '-';
+                    }else{
+                        certno = response.certno;
+                    }
+
+                    if(response.slipno == ''){
+                        slipno = '-';
+                    }else{
+                        slipno = response.slipno;
+                    }
+
+                    if(response.policyno == ''){
+                        policyno = '-';
+                    }else{
+                        policyno = response.policyno;
+                    }
+
                     
                     $('#tcid'+insurednoloc+' > tbody:last-child').prepend('<tr id="riskdetailsid'+response.id+'">'+
                         '<td>'+response.interest_name+'</td>'+
                         '<td>'+response.cedingbroker+'</td>'+
-                        '<td>'+response.cndn+'</td>'+
-                        '<td>'+response.certno+'</td>'+
-                        '<td>'+response.slipno+'</td>'+
-                        '<td>'+response.policyno+'</td>'+
+                        '<td>'+cndn+'</td>'+
+                        '<td>'+certno+'</td>'+
+                        '<td>'+slipno+'</td>'+
+                        '<td>'+policyno+'</td>'+
                         '<td>'+curr_amount+'</td>'+
                         '<td>'+
                         '<a href="javascript:void(0)" onclick="deletelocationriskdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
@@ -2850,7 +2885,7 @@ $('#slipcedingupdate').change(function(){
                     //         // $("#feshareto").val(real_sum);
                     //     }
                     // }else{
-                        swal("success!", "ceding share has increase", "ceding share increase");
+                        swal("success!", "ceding share has increase", "success");
                         
                     // }
                 }
@@ -3285,7 +3320,7 @@ function deletelocationriskdetail(id){
             $('#slipgrossprmtonr2').val(real_sum);
             $('#slipsumor').val(real_sumor);
             $('#slipsumor2').val(real_sumor);
-            $('#feshare').val(sumourshare.replace(/,/g, "."));
+            // $('#feshare').val(sumourshare.replace(/,/g, "."));
             $('#fesharefrom').val(real_sumnre);
 
             // $('#slipsumshare').val(real_sum);
