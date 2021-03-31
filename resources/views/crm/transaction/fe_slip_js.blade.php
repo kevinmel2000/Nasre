@@ -3385,7 +3385,7 @@ function deletelocationriskdetail(id){
     var keyCode = e.keyCode || e.which; 
 
       if (keyCode == 9) { 
-        e.preventDefault(); 
+        // e.preventDefault(); 
 
         var insurance_period_from2 = $('#sliprpfrom').val();
         var insurance_period_to2 = $('#sliprpto').val();
@@ -3412,41 +3412,41 @@ function deletelocationriskdetail(id){
       } 
     });
 
-   // $("#slipbasicpremium").keyup(function(e) { 
-   //  var keyCode = e.keyCode || e.which; 
+   $("#slipbasicpremium").keyup(function(e) { 
+    var keyCode = e.keyCode || e.which; 
 
-   //    if (keyCode == 9) { 
-   //      e.preventDefault(); 
-   //      // call custom function here
-   //      var insurance_period_from2 = $('#sliprpfrom').val();
-   //      var insurance_period_to2 = $('#sliprpto').val();
-   //      var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
-   //      var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
-   //      var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
-   //      var insurance = (days/365);
+      if (keyCode == 9) { 
+        // e.preventDefault(); 
+        // call custom function here
+        var insurance_period_from2 = $('#sliprpfrom').val();
+        var insurance_period_to2 = $('#sliprpto').val();
+        var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+        var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+        var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
+        var insurance = (days/365);
         
-   //      console.log(insurance_period_from2)
-   //      console.log(insurance_period_to2)
-   //      console.log(newinsurance_period_from2)
-   //      console.log(newinsurance_period_to2)
-   //      console.log(days)
-   //      console.log(insurance)
+        console.log(insurance_period_from2)
+        console.log(insurance_period_to2)
+        console.log(newinsurance_period_from2)
+        console.log(newinsurance_period_to2)
+        console.log(days)
+        console.log(insurance)
 
-   //      var rateslip =  parseFloat($('#sliprate').val()) / 1000;
-   //      var tsi = $("#sliptotalsum").val();
-   //      var conv_tsi = parseInt(tsi.replace(/,/g, ""));
-   //      var sum = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
-   //      var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var rateslip =  parseFloat($('#sliprate').val()) / 1000;
+        var tsi = $("#sliptotalsum").val();
+        var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+        var sum = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
+        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-   //      $('#slipbasicpremium').val(real_sum);
-   //    } 
-   //  });
+        $('#slipbasicpremium').val(real_sum);
+      } 
+    });
 
    $("#slipbasicpremium").keypress(function(e) { 
     var keyCode = e.keyCode || e.which; 
 
       if (keyCode == 9) { 
-        e.preventDefault(); 
+        // e.preventDefault(); 
         // call custom function here
         var insurance_period_from2 = $('#sliprpfrom').val();
         var insurance_period_to2 = $('#sliprpto').val();
