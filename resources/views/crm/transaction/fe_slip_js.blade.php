@@ -1271,6 +1271,10 @@
           dateFormat: 'dd/mm/yy'
        });
 
+       $('#sliptddetail').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });       
+
     });      
 
 
