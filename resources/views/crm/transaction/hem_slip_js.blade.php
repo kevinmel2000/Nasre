@@ -5463,20 +5463,27 @@ function deletelocationriskdetail(id){
 
                 var insured_data2=JSON.parse(response.insured_data);
                 $('#fecountendorsement').val(insured_data2.count_endorsement);
+                //alert(insured_data2.count_endorsement);
 
+                var slip_data2array=JSON.parse(response.slip_dataarray);
                 
-                $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.slipuy+'">'+slipuy+'</td><td data-name="'+response.cedingbroker+'">"'+response.cedingbroker+'"</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.number+'" data-target="#detailmodaldata" href="#detailmodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
-                    +'</a>'
-                    +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#updatemodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
-                    +'</a>'
-                    +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#endorsementmodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
-                    +'</a><td></td></tr>');
+                $('#SlipInsuredTableData tbody').empty();
                 
+                slip_data2array.forEach(function (arrayItem) 
+                {
+                    //var x = arrayItem.prop1 + 2;
+                    
+                    $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+arrayItem.id+'" data-name="slipvalue[]"><td data-name="'+arrayItem.number+'">'+arrayItem.number+'</td><td data-name="'+arrayItem.cedingbroker.name+'">"'+arrayItem.cedingbroker.name+'"</td><td data-name="'+arrayItem.ceding+'">'+arrayItem.ceding+'</td><td data-name="'+arrayItem.status+'">"'+arrayItem.status+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+arrayItem.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
+                        +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
+                        +'</a>'
+                        +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+arrayItem.id+'" data-target="#updatemodaldata">'
+                        +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
+                        +'</a>'
+                        +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+arrayItem.id+'" data-target="#endorsementmodaldata">'
+                        +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
+                        +'</a><td></td></tr>');
 
-                $('#slipnumberendorsement').val(response.code_sl);
+                });
 
            },
            error: function (request, status, error) {

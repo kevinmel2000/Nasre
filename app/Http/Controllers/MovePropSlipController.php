@@ -890,7 +890,7 @@ class MovePropSlipController extends Controller
         {
 
             $notification = array(
-                'message' => 'Fire & Engginering Insured added Failed!',
+                'message' => 'Moveable Property Insured added Failed!',
                 'alert-type' => 'success'
             );
 
@@ -1189,7 +1189,7 @@ class MovePropSlipController extends Controller
             $user = Auth::user();
             
             $slipdata= SlipTable::where('id','=',$request->slipid)->first();
-            $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->get();
+            $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->where('selisih','=','false')->get();
             $insureddata = Insured::where('number','=',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->first();
 
             // $id_ed = ($slipdata->id + 1);
@@ -1210,7 +1210,7 @@ class MovePropSlipController extends Controller
             if($slipdata==null)
             {
                 $notification = array(
-                    'message' => 'Fire & Engineering Slip Endorsement Fail!',
+                    'message' => 'Moveable Property Slip Endorsement Fail!',
                     'alert-type' => 'danger'
                 );
             }
@@ -1230,6 +1230,7 @@ class MovePropSlipController extends Controller
                     $jsoniptlistup = ' ';
                     $rctlistup = ' ';
                     $jsonrctlistup = ' ';
+                    $risklocationlistdetail = '';
 
                     if(!empty($locationlist))
                     {
@@ -1394,8 +1395,9 @@ class MovePropSlipController extends Controller
                                         'number'=>$slt->number,
                                         'username'=>$slt->username,
                                         'insured_id'=>$slt->insured_id,
-                                        'slip_type'=>'fe',
+                                        'slip_type'=>'mp',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1444,8 +1446,9 @@ class MovePropSlipController extends Controller
                                         'number'=>$slt->number,
                                         'username'=>$slt->username,
                                         'insured_id'=>$slt->insured_id,
-                                        'slip_type'=>'fe',
+                                        'slip_type'=>'mp',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1494,8 +1497,9 @@ class MovePropSlipController extends Controller
                                         'number'=>$slt->number,
                                         'username'=>$slt->username,
                                         'insured_id'=>$slt->insured_id,
-                                        'slip_type'=>'fe',
+                                        'slip_type'=>'mp',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1543,8 +1547,9 @@ class MovePropSlipController extends Controller
                                         'number'=>$slt->number,
                                         'username'=>$slt->username,
                                         'insured_id'=>$slt->insured_id,
-                                        'slip_type'=>'fe',
+                                        'slip_type'=>'mp',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1586,14 +1591,17 @@ class MovePropSlipController extends Controller
                     
                                     ]);
                             }
-                        }else{
+                        }
+                        else
+                        {
                             foreach($slipdatalist as $slt){
                                 $slipdataup = SlipTable::create([
                                         'number'=>$slt->number,
                                         'username'=>$slt->username,
                                         'insured_id'=>$slt->insured_id,
-                                        'slip_type'=>'fe',
+                                        'slip_type'=>'mp',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1657,10 +1665,10 @@ class MovePropSlipController extends Controller
                     ]);
     
                     $notification = array(
-                        'message' => 'Moveable Property Slip added Endorsement successfully!',
+                        'message' => 'Fire & Enginering Slip added Endorsement successfully!',
                         'alert-type' => 'success'
                     );
-                    
+
 
                     
 
@@ -1687,10 +1695,40 @@ class MovePropSlipController extends Controller
 
                     $cedingbroker = CedingBroker::where('id',$slipdataup->source)->first();
                     $ceding = CedingBroker::where('id',$slipdataup->source_2)->first();
+                    
+                    $slipdatalist2= SlipTable::where('insured_id','=',$slipdata->insured_id)->get();
 
+                    //$locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+        
+                    $slipdatalist=array();
+                    foreach($slipdatalist2 as $datadetail)
+                    {
+                        if($datadetail->cedingbroker)
+                        {
+                            $dataceding=CedingBroker::where('id','=',$datadetail->source)->first();
+                            $datadetail->cedingbroker = $dataceding->name;
+                            $datadetail->ceding = $dataceding->name;
+                            
+                        }
+                        else
+                        {
+                            $dataceding=CedingBroker::where('id','=',$datadetail->source)->first();
+                            $datadetail->cedingbroker = $dataceding->name;
+                            $datadetail->ceding = $dataceding->name;
+                        }
+
+
+                       
+
+                        $slipdatalist[]= $datadetail;
+                    }
+
+                
                     return response()->json(
                         [
                             'slip_data' => $slipdataup->toJson(),
+                            'slip_dataarray' => json_encode($slipdatalist),
                             'insured_data' => $insureddataup->toJson(),
                             'location_data' => $lookuplocationlist->toJson(),
                             'risklocation_data' => $risklocationlistdetail->toJson(),
@@ -1701,7 +1739,7 @@ class MovePropSlipController extends Controller
                 else
                 {
                     $notification = array(
-                        'message' => 'Moveable Property Slip added Endorsement Failed! data already endorsed!',
+                        'message' => 'Fire & Enginering Slip added Endorsement Failed! data already endorsed!',
                         'alert-type' => 'error'
                     );
 
@@ -1717,7 +1755,7 @@ class MovePropSlipController extends Controller
         {
 
             $notification = array(
-                'message' => 'Fire & Engginering Slip added Failed!',
+                'message' => 'Moveable Property Slip added Failed!',
                 'alert-type' => 'success'
             );
 
@@ -1725,6 +1763,7 @@ class MovePropSlipController extends Controller
             //Session::flash('Failed', 'Fire & Engginering Insured Failed added', 'danger');
             //return redirect()->route('liniusaha.index');
         }
+        
     }
 
 
