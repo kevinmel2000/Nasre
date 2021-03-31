@@ -63,6 +63,7 @@
   }   
   });
 
+
   $('#province').on('change',function(){
   var stateID = $(this).val();  
   //alert(stateID);
@@ -73,7 +74,8 @@
       beforeSend: function() { $("body").addClass("loading");  },
       complete: function() {  $("body").removeClass("loading"); },
       success:function(res){        
-      if(res){
+      if(res)
+      {
         $("#city").empty();
         $("#city").removeAttr('disabled');
         $("#city").append('<option selected disabled>Select City</option>');
@@ -81,13 +83,50 @@
           $("#city").append('<option value="'+key+'">'+value+'</option>');
         });
       
+        var arraystring=$("#address").val().split(","); 
+
+        var citydata=arraystring[arraystring.length-3];
+        var citydataup=citydata.toUpperCase();
+        //alert(arraystring);
+        //alert(citydata);
+
+        var dd = document.getElementById('city');
+        for (var i = 0; i < dd.options.length; i++) 
+        {
+              //alert('hasil sama -1 :'+dd.options[i].text);
+              //alert('hasil sama -2 :'+citydataup);
+            
+
+            if(dd.options[i].text.trim() == citydataup.trim()) 
+            {
+                dd.selectedIndex = dd.options[i].value;
+                //alert('hasil sama 3:'+dd.options[i].text);
+                //alert('hasil sama 2:'+dd.options[i].value);
+                idcity=dd.options[i].value;
+
+                $('#city').select2('data', {id: dd.options[i].value, a_key: dd.options[i].text});
+                $('#city').val(dd.options[i].value);
+                $('#city').select2().trigger('change');
+
+                break;
+            }
+        }
+
+        
+        //var textdata=dd.options[4131].text;
+        idcity=dd.options[i].value;
+        //alert('hasil sama2 :'+idcity);
+
+      
+
+
       }else{
-        $("#city").empty();
+        //$("#city").empty();
       }
       }
     });
   }else{
-    $("#city").empty();
+    //$("#city").empty();
   }
     
   });
@@ -143,7 +182,7 @@
             });
           
           }else{
-            $("#city2").empty();
+           $("#city2").empty();
           }
         }
       });
@@ -404,59 +443,60 @@ $('input[name=address]').on('input',function(e){
             var idcity='';
             if(citydata)
             {
-              if(idstate)
-              { 
+
                 var citydataup=citydata.toUpperCase();
                 
-                  $.ajax({
-                    type:"GET",
-                    url:"{{url('get-city-list')}}?state_id="+idstate,
-                    beforeSend: function() { $("body").addClass("loading");  },
-                    complete: function() {  $("body").removeClass("loading"); },
-                    success:function(res)
-                    {        
-                      if(res)
-                      {
-
-                        $("#city").empty();
-                        $("#city").removeAttr('disabled');
-                        $("#city").append('<option selected disabled>Select City</option>');
-                        $.each(res,function(key,value){
-                          $("#city").append('<option value="'+key+'">'+value+'</option>');
-                        });
-                        
-
-                        var dd = document.getElementById('city');
-                        for (var i = 0; i < dd.options.length; i++) 
+                if(!empty(idstate))
+                {
+                    $.ajax({
+                      type:"GET",
+                      url:"{{url('get-city-list')}}?state_id="+idstate,
+                      beforeSend: function() { $("body").addClass("loading");  },
+                      complete: function() {  $("body").removeClass("loading"); },
+                      success:function(res)
+                      {        
+                        if(res)
                         {
-                          // alert('hasil sama -1 :'+dd.options[i].text);
-                          // alert('hasil sama -2 :'+citydataup);
 
-                            if(dd.options[i].text.trim() == citydataup.trim()) 
-                            {
-                                dd.selectedIndex = dd.options[i].value;
-                                //alert('hasil sama 3:'+dd.options[i].text);
-                                //alert('hasil sama 2:'+dd.options[i].value);
-                                idcity=dd.options[i].value;
-                                break;
-                            }
+                          $("#city").empty();
+                          $("#city").removeAttr('disabled');
+                          $("#city").append('<option selected disabled>Select City</option>');
+                          $.each(res,function(key,value){
+                            $("#city").append('<option value="'+key+'">'+value+'</option>');
+                          });
+                          
+
+                          var dd = document.getElementById('city');
+                          for (var i = 0; i < dd.options.length; i++) 
+                          {
+                            // alert('hasil sama -1 :'+dd.options[i].text);
+                            // alert('hasil sama -2 :'+citydataup);
+
+                              if(dd.options[i].text.trim() == citydataup.trim()) 
+                              {
+                                  dd.selectedIndex = dd.options[i].value;
+                                  //alert('hasil sama 3:'+dd.options[i].text);
+                                  //alert('hasil sama 2:'+dd.options[i].value);
+                                  idcity=dd.options[i].value;
+                                  break;
+                              }
+                          }
+
+                          
+                          //var textdata=dd.options[4131].text;
+                          idcity=dd.options[i].value;
+                          //alert('hasil sama2 :'+idcity);
+
+                          $('#city').select2('data', {id: dd.options[i].value, a_key: dd.options[i].text});
+                          $('#city').val(dd.options[i].value);
+                          $('#city').select2().trigger('change');
+
                         }
 
-                        
-                        //var textdata=dd.options[4131].text;
-                        idcity=dd.options[i].value;
-                        //alert('hasil sama2 :'+idcity);
-
-                        $('#city').select2('data', {id: dd.options[i].value, a_key: dd.options[i].text});
-                        $('#city').val(dd.options[i].value);
-                        $('#city').select2().trigger('change');
-
                       }
+                    });
+                }
 
-                    }
-                  });
-
-              } 
             }
 
           
@@ -634,62 +674,64 @@ function updateMarkerPosition(latLng)
 
 
       var idcity='';
+      
       if(citydata)
-      {
-        if(idstate)
-        { 
-           var citydataup=citydata.toUpperCase();
+      { 
+           var citydataup=citydata.toUpperCase().trim();
+           //alert(citydataup);
+
           
-            $.ajax({
-              type:"GET",
-              url:"{{url('get-city-list')}}?state_id="+idstate,
-              beforeSend: function() { $("body").addClass("loading");  },
-              complete: function() {  $("body").removeClass("loading"); },
-              success:function(res)
-              {        
-                if(res)
-                {
-
-                  $("#city").empty();
-                  $("#city").removeAttr('disabled');
-                  $("#city").append('<option selected disabled>Select City</option>');
-                  $.each(res,function(key,value){
-                    $("#city").append('<option value="'+key+'">'+value+'</option>');
-                  });
-                  
-
-                  var dd = document.getElementById('city');
-                  for (var i = 0; i < dd.options.length; i++) 
+              $.ajax({
+                type:"GET",
+                url:"{{url('get-city-list')}}?state_id="+idstate,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res)
+                {        
+                  if(res)
                   {
-                     // alert('hasil sama -1 :'+dd.options[i].text);
-                     // alert('hasil sama -2 :'+citydataup);
 
-                      if(dd.options[i].text.trim() == citydataup.trim()) 
-                      {
-                           dd.selectedIndex = dd.options[i].value;
-                           //alert('hasil sama 3:'+dd.options[i].text);
-                           //alert('hasil sama 2:'+dd.options[i].value);
-                           idcity=dd.options[i].value;
-                           break;
-                      }
+                    $("#city").empty();
+                    $("#city").removeAttr('disabled');
+                    $("#city").append('<option selected disabled>Select City</option>');
+                    $.each(res,function(key,value){
+                      $("#city").append('<option value="'+key+'">'+value+'</option>');
+                    });
+                    
+
+                    var dd = document.getElementById('city');
+                    for (var i = 0; i < dd.options.length; i++) 
+                    {
+                        //alert('hasil sama -1 :'+dd.options[i].text);
+                        //alert('hasil sama -2 :'+citydataup);
+
+                        if(dd.options[i].text.trim() == citydataup.trim()) 
+                        {
+                            dd.selectedIndex = dd.options[i].value;
+                            //alert('hasil sama 3:'+dd.options[i].text);
+                            //alert('hasil sama 2:'+dd.options[i].value);
+                            idcity=dd.options[i].value;
+                            break;
+                        }
+                    }
+
+                    
+                    //var textdata=dd.options[4131].text;
+                    idcity=dd.options[i].value;
+                    //alert('hasil sama2 :'+idcity);
+
+                    $('#city').select2('data', {id: dd.options[i].value, a_key: dd.options[i].text});
+                    $('#city').val(dd.options[i].value);
+                    $('#city').select2().trigger('change');
+
                   }
 
-                  
-                  //var textdata=dd.options[4131].text;
-                  idcity=dd.options[i].value;
-                  //alert('hasil sama2 :'+idcity);
-
-                  $('#city').select2('data', {id: dd.options[i].value, a_key: dd.options[i].text});
-                  $('#city').val(dd.options[i].value);
-                  $('#city').select2().trigger('change');
-
                 }
-
-              }
-            });
+              });
+          
 
         } 
-      }
+      
     
     
   });
@@ -854,63 +896,65 @@ function updateMarkerPosition2(latLng)
         }
 
 
-        var idcity='';
-        if(citydata)
-        {
-          if(idstate)
+          var idcity='';
+        
+          if(citydata)
           { 
-            var citydataup=citydata.toUpperCase();
-            
-              $.ajax({
-                type:"GET",
-                url:"{{url('get-city-list')}}?state_id="+idstate,
-                beforeSend: function() { $("body").addClass("loading");  },
-                complete: function() {  $("body").removeClass("loading"); },
-                success:function(res)
-                {        
-                  if(res)
-                  {
+              var citydataup=citydata.toUpperCase().trim();
+              //alert(citydataup);
 
-                    $("#city").empty();
-                    $("#city").removeAttr('disabled');
-                    $("#city").append('<option selected disabled>Select City</option>');
-                    $.each(res,function(key,value){
-                      $("#city").append('<option value="'+key+'">'+value+'</option>');
-                    });
-                    
+              
+                  $.ajax({
+                    type:"GET",
+                    url:"{{url('get-city-list')}}?state_id="+idstate,
+                    beforeSend: function() { $("body").addClass("loading");  },
+                    complete: function() {  $("body").removeClass("loading"); },
+                    success:function(res)
+                    {        
+                      if(res)
+                      {
 
-                    var dd = document.getElementById('city');
-                    for (var i = 0; i < dd.options.length; i++) 
-                    {
-                      // alert('hasil sama -1 :'+dd.options[i].text);
-                      // alert('hasil sama -2 :'+citydataup);
+                        $("#city").empty();
+                        $("#city").removeAttr('disabled');
+                        $("#city").append('<option selected disabled>Select City</option>');
+                        $.each(res,function(key,value){
+                          $("#city").append('<option value="'+key+'">'+value+'</option>');
+                        });
+                        
 
-                        if(dd.options[i].text.trim() == citydataup.trim()) 
+                        var dd = document.getElementById('city');
+                        for (var i = 0; i < dd.options.length; i++) 
                         {
-                            dd.selectedIndex = dd.options[i].value;
-                            //alert('hasil sama 3:'+dd.options[i].text);
-                            //alert('hasil sama 2:'+dd.options[i].value);
-                            idcity=dd.options[i].value;
-                            break;
+                             //alert('hasil sama -1 :'+dd.options[i].text);
+                             //alert('hasil sama -2 :'+citydataup);
+
+                            if(dd.options[i].text.trim() == citydataup.trim()) 
+                            {
+                                dd.selectedIndex = dd.options[i].value;
+                                //alert('hasil sama 3:'+dd.options[i].text);
+                                //alert('hasil sama 2:'+dd.options[i].value);
+                                idcity=dd.options[i].value;
+                                break;
+                            }
                         }
+
+                        
+                        //var textdata=dd.options[4131].text;
+                        idcity=dd.options[i].value;
+                        //alert('hasil sama2 :'+idcity);
+
+                        $('#city').select2('data', {id: dd.options[i].value, a_key: dd.options[i].text});
+                        $('#city').val(dd.options[i].value);
+                        $('#city').select2().trigger('change');
+
+                      }
+
                     }
-
-                    
-                    //var textdata=dd.options[4131].text;
-                    idcity=dd.options[i].value;
-                    //alert('hasil sama2 :'+idcity);
-
-                    $('#city').select2('data', {id: dd.options[i].value, a_key: dd.options[i].text});
-                    $('#city').val(dd.options[i].value);
-                    $('#city').select2().trigger('change');
-
-                  }
-
-                }
-              });
+                  });
+              
 
           } 
-        }
+        
      
 
       //var text1 = results[0].address_components[8].long_name;
