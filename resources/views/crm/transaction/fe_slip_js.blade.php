@@ -1785,123 +1785,135 @@ $('#slipbld_constendorsement').change(function(){
 <script type="text/javascript">
     $('#sliptypetsi').change(function(){
         var choice = $(this).val();
+        var valtsi = $('#feshareto').val();
+        var valcedshare = $('#feshare').val();
+
         if(choice == '1'){
-            var tsi = $('#feshareto').val();
-            $('#sliptotalsum').val(tsi);
-            $('#sliptotalsum2').val(tsi);
+            if(valtsi != null){
+                    var tsi = $('#feshareto').val();
+                    $('#sliptotalsum').val(tsi);
+                    $('#sliptotalsum2').val(tsi);
 
-            var pctval = $('#sliptotalsumpct').val();
+                    var pctval = $('#sliptotalsumpct').val();
 
-            if(pctval != null){
-                var pct =  parseFloat($('#slippct').val())/100;
+                    if(pctval != null){
+                        var pct =  parseFloat($('#slippct').val())/100;
 
-            // var tsi = $("#sliptotalsum").val();
-                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
-
-                var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
-                console.log(sum)
-                var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                $('#sliptotalsumpct').val(real_sum);
-                $('#sliptotalsumpct2').val(real_sum);
-                swal('success','changed to tsi','success')
-
-
-                var dpamount = $('#slipdpamount').val();
-                var ecamount = $('#slipamountec').val();
-
-                if(dpamount != null){
-
-                    var percent =  parseFloat($('#slipdppercentage').val()) / 100;
                     
-                    var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
-                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    console.log($('#slipdppercentage').val())
-                    console.log(percent)
-                    console.log(sum)
-                    console.log(real_sum)
+                        var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
-                    $('#slipdpamount').val(real_sum);
-                    $('#slipdpamount2').val(real_sum);
+                        var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
+                        console.log(sum)
+                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#sliptotalsumpct').val(real_sum);
+                        $('#sliptotalsumpct2').val(real_sum);
+                        swal('success','changed to tsi','success')
 
+
+                        var dpamount = $('#slipdpamount').val();
+                        var ecamount = $('#slipamountec').val();
+
+                        if(dpamount != null){
+
+                            var percent =  parseFloat($('#slipdppercentage').val()) / 100;
+                            
+                            var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            console.log($('#slipdppercentage').val())
+                            console.log(percent)
+                            console.log(sum)
+                            console.log(real_sum)
+
+                            $('#slipdpamount').val(real_sum);
+                            $('#slipdpamount2').val(real_sum);
+
+                        }
+
+                        if(ecamount != null){
+
+                            var persentage =  parseFloat($('#slipnilaiec').val()) / 1000;
+                            var sum = isNaN(conv_tsi * persentage) ? 0 :(conv_tsi * persentage).toFixed(2) ;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            console.log($('#slipnilaiec').val())
+                            console.log(persentage)
+                            console.log(sum)
+                            console.log(real_sum)
+
+                            $('#slipamountec').val(real_sum);
+                            $('#slipamountec2').val(real_sum);
+
+                        }
+
+                    }
+                }else{
+                    swal('warning','please fill tsi insured value first','error')
                 }
-
-                if(ecamount != null){
-
-                    var persentage =  parseFloat($('#slipnilaiec').val()) / 1000;
-                    var sum = isNaN(conv_tsi * persentage) ? 0 :(conv_tsi * persentage).toFixed(2) ;
-                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    console.log($('#slipnilaiec').val())
-                    console.log(persentage)
-                    console.log(sum)
-                    console.log(real_sum)
-
-                    $('#slipamountec').val(real_sum);
-                    $('#slipamountec2').val(real_sum);
-
-                }
-
-            }
 
 
 
         }else if(choice == '2')
         {
-            var ceding_share = $('#feshare').val();
-            $('#sliptotalsum').val(ceding_share);
-            $('#sliptotalsum2').val(ceding_share);
+            if(valcedshare != null){
+                var ceding_share = $('#feshare').val();
+                $('#sliptotalsum').val(ceding_share);
+                $('#sliptotalsum2').val(ceding_share);
 
-             var pctval = $('#sliptotalsumpct').val();
+                 var pctval = $('#sliptotalsumpct').val();
 
-            if(pctval != null){
+                if(pctval != null){
 
-                var pct =  parseFloat($('#slippct').val())/100;
+                    var pct =  parseFloat($('#slippct').val())/100;
 
-                // var tsi = $("#sliptotalsum").val();
-                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+                    // var tsi = $("#sliptotalsum").val();
+                    var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
-                var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
-                console.log(sum)
-                var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                $('#sliptotalsumpct').val(real_sum);
-                $('#sliptotalsumpct2').val(real_sum);
-                swal('success','changed to ceding share','success')
-
-                var dpamount = $('#slipdpamount').val();
-                var ecamount = $('#slipamountec').val();
-
-                if(dpamount != null){
-                    var percent =  parseFloat($('#slipdppercentage').val()) / 100;
-                    
-                    var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
-                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    console.log($('#slipdppercentage').val())
-                    console.log(percent)
+                    var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
                     console.log(sum)
-                    console.log(real_sum)
-
-                    $('#slipdpamount').val(real_sum);
-                    $('#slipdpamount2').val(real_sum);
-                }
-
-                if(ecamount != null){
-
-                    var persentage =  parseFloat($('#slipnilaiec').val()) / 1000;
-                    var sum = isNaN(conv_tsi * persentage) ? 0 :(conv_tsi * persentage).toFixed(2) ;
                     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    console.log($('#slipnilaiec').val())
-                    console.log(persentage)
-                    console.log(sum)
-                    console.log(real_sum)
+                    $('#sliptotalsumpct').val(real_sum);
+                    $('#sliptotalsumpct2').val(real_sum);
+                    swal('success','changed to ceding share','success')
 
-                    $('#slipamountec').val(real_sum);
-                    $('#slipamountec2').val(real_sum);
-                    
+                    var dpamount = $('#slipdpamount').val();
+                    var ecamount = $('#slipamountec').val();
+
+                    if(dpamount != null){
+                        var percent =  parseFloat($('#slipdppercentage').val()) / 100;
+                        
+                        var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
+                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        console.log($('#slipdppercentage').val())
+                        console.log(percent)
+                        console.log(sum)
+                        console.log(real_sum)
+
+                        $('#slipdpamount').val(real_sum);
+                        $('#slipdpamount2').val(real_sum);
+                    }
+
+                    if(ecamount != null){
+
+                        var persentage =  parseFloat($('#slipnilaiec').val()) / 1000;
+                        var sum = isNaN(conv_tsi * persentage) ? 0 :(conv_tsi * persentage).toFixed(2) ;
+                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        console.log($('#slipnilaiec').val())
+                        console.log(persentage)
+                        console.log(sum)
+                        console.log(real_sum)
+
+                        $('#slipamountec').val(real_sum);
+                        $('#slipamountec2').val(real_sum);
+                        
+                    }
+
                 }
-
+            }else{
+                swal('warning','please fill ceding share first','error')
             }
 
 
         }
+
     });
 </script>
 
@@ -3376,12 +3388,18 @@ function deletelocationriskdetail(id){
 <script type="text/javascript">
     $('#percentceding').keyup(function(){
         var percentceding = parseFloat($(this).val()) / 100 ;
-        var tsi = $('#feshareto').val();
-        var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+        var valtsi = $('#feshareto').val();
 
-        var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
-        var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        $('#amountlocation').val(real_sum);
+        if(valtsi != null){
+            var tsi = $('#feshareto').val();
+            var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+            var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
+            var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#amountlocation').val(real_sum);
+        }else{
+            swal('warning!','please fill TSI insured first','error')
+        }
 
 
     });
