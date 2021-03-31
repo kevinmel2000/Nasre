@@ -1029,7 +1029,7 @@
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <div class="form-group">
-                                                                                                        <input type="number" value="" step=".001" id="slipnilaiec" name="slipnilaiec" placeholder="y" class="form-control form-control-sm "/>
+                                                                                                        <input type="text" id="slipnilaiec" name="slipnilaiec" placeholder="y" class="form-control form-control-sm floatTextBox"/>
                                                                                                     </div>
                                                                                                 </td>
                                                                                                 <td>

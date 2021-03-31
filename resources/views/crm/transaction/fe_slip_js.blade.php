@@ -3239,7 +3239,7 @@ function deletelocationriskdetail(id){
 
    $('#slipdppercentage').keyup(function (e) {
     if(e.keyCode != 9){
-        var percent =  parseInt($(this).val()) / 100;
+        var percent =  parseFloat($(this).val()) / 100;
         var tsi = $("#sliptotalsum").val();
         var conv_tsi = parseInt(tsi.replace(/,/g, ""));
         var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
@@ -3902,16 +3902,21 @@ function deletelocationriskdetail(id){
 <script type='text/javascript'>
 
     $('#slipnilaiec').keyup(function () {
-     var persentage =  $('#slipnilaiec').val() / 1000;
-     var sliptotalsum =  $('#sliptotalsum').val();
-     var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
+        var persentage =  parseFloat($('#slipnilaiec').val()) / 1000;
+        var sliptotalsum =  $('#sliptotalsum').val();
+        var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
        //alert(premiumnr);
        //alert(persentage);
-       var sum = isNaN(conv_sliptotalsum * persentage) ? 0 :(conv_sliptotalsum * persentage).toFixed(2) ;
-       var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var sum = isNaN(conv_sliptotalsum * persentage) ? 0 :(conv_sliptotalsum * persentage).toFixed(2) ;
+        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
        //alert(sum);
-       $('#slipamountec').val(real_sum);
-       $('#slipamountec2').val(real_sum);
+        console.log($(this).val())
+        console.log(persentage)
+        console.log(sum)
+        console.log(real_sum)
+
+        $('#slipamountec').val(real_sum);
+        $('#slipamountec2').val(real_sum);
    });
 
 
