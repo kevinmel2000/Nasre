@@ -1292,7 +1292,66 @@
 
        $('#sliptddetail').datepicker({
           dateFormat: 'dd/mm/yy'
-       });       
+       });  
+
+
+       $('#slipprodyearendorsement').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#sliptdendorsement').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#slipipfromendorsement').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#slipiptoendorsement').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#sliprpfromendorsement').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#sliprptoendorsement').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#dateinstallmentdataendorsement').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+           
+
+       $('#slipprodyearupdate').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#sliptdupdate').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#slipipfromupdate').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#slipiptoupdate').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#sliprpfromupdate').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#sliprptoupdate').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#dateinstallmentdataupdate').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+           
 
     });      
 
