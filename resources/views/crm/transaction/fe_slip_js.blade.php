@@ -75,6 +75,25 @@
 </script>
 
 <script type="text/javascript">
+    function setInputFilter(textbox, inputFilter) {
+      ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+        textbox.addEventListener(event, function() {
+          if (inputFilter(this.value)) {
+            this.oldValue = this.value;
+            this.oldSelectionStart = this.selectionStart;
+            this.oldSelectionEnd = this.selectionEnd;
+          } else if (this.hasOwnProperty("oldValue")) {
+            this.value = this.oldValue;
+            this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+          } else {
+            this.value = "";
+          }
+        });
+      });
+    }
+
+    setInputFilter(document.getElementsByClassName("floatTextBox"), function(value) {
+        return /^-?\d*[.,]?\d*$/.test(value); });
 
 </script>
 
@@ -3220,11 +3239,16 @@ function deletelocationriskdetail(id){
 
    $('#slipdppercentage').keyup(function (e) {
     if(e.keyCode != 9){
-        var percent =  $(this).val() / 100;
+        var percent =  parseInt($(this).val()) / 100;
         var tsi = $("#sliptotalsum").val();
         var conv_tsi = parseInt(tsi.replace(/,/g, ""));
         var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
         var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        console.log($(this).val())
+        console.log(percent)
+        console.log(sum)
+        console.log(real_sum)
+
         $('#slipdpamount').val(real_sum);
         $('#slipdpamount2').val(real_sum);
     }
