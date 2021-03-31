@@ -153,7 +153,12 @@ class HeMotorSlipController extends Controller
 
 
         $currdate = date("d/m/Y");
+        $currdate2 = date("Y-m-d");
+
         $insured = Insured::orderby('id','asc')->get();
+        $insured_now = Insured::whereDate('created_at',$currdate2)->orderby('id','asc')->get();
+
+
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
         $cob = COB::where('form','hem')->orderby('id','asc')->get();
@@ -167,7 +172,9 @@ class HeMotorSlipController extends Controller
         $deductibletype= DeductibleType::orderby('id','asc')->get();
         $extendedcoverage= ExtendedCoverage::orderby('id','asc')->get();
 
-        $lastid = count($insured);
+        //$lastid = count($insured);
+        //$hem_ids = response()->json($insured->modelKeys());
+        $lastid = count($insured_now);
         $sliplastid = count($slip);
 
         if($lastid != null){
@@ -200,6 +207,8 @@ class HeMotorSlipController extends Controller
 
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
+        $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','hem')->where('insured_id',$code_ms)->orderby('id','asc')->get();
+        $sliplastid = count($slip_now);
 
         if($sliplastid != null){
             if($sliplastid < 9)

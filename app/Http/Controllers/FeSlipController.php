@@ -292,9 +292,10 @@ class FeSlipController extends Controller
         $costumer=Customer::orderby('id','asc')->get();
 
         $currdate = date("d/m/Y");
+        $currdate2 = date("Y-m-d");
         // $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
-        $insured_now = Insured::whereDate('created_at',$currdate)->orderby('id','asc')->get();
+        $insured_now = Insured::whereDate('created_at',$currdate2)->orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         
         $currency = Currency::orderby('id','asc')->get();
@@ -307,12 +308,14 @@ class FeSlipController extends Controller
         $felookuptable = collect(FelookupLocation::orderby('id','asc')->get());
         $felookup = $felookuptable->unique('country_id');
         $felookup->values()->all();
+        
         // $felookup = DB::table('fe_lookup_location')
         //             ->join('countries','countries.id','=','fe_lookup_location.country_id')
         //             ->select('fe_lookup_location.*','countries.code','countries.name')        
         //             ->orderby('id','asc')
         //             ->distinct('fe_lookup_location.country_id')
         //             ->get();
+        
         $cnd = ConditionNeeded::orderby('id','asc')->get();
         $deductibletype= DeductibleType::orderby('id','asc')->get();
         $extendedcoverage= ExtendedCoverage::orderby('id','asc')->get();
@@ -321,7 +324,8 @@ class FeSlipController extends Controller
         $lastid = count($insured_now);
         
 
-        if($lastid != null){
+        if($lastid != null)
+        {
             if($lastid < 9)
             {
                 $code_ms = "IN". $mydate . "0000" . strval($lastid + 1);
@@ -351,11 +355,12 @@ class FeSlipController extends Controller
 
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
-        $slip_now = SlipTable::whereDate('created_at',$currdate)->where('slip_type','fe')->where('insured_id',$code_ms)->orderby('id','asc')->get();
+        $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','fe')->where('insured_id',$code_ms)->orderby('id','asc')->get();
         $sliplastid = count($slip_now);
         // dd($sliplastid);
 
-        if($sliplastid != null){
+        if($sliplastid != null)
+        {
             if($sliplastid < 9)
             {
                 $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + 1);
@@ -379,7 +384,8 @@ class FeSlipController extends Controller
 
             
         }
-        else{
+        else
+        {
             $code_sl = "FE".  $mydate . "0000" . strval(1);
         }
 
@@ -2150,7 +2156,7 @@ class FeSlipController extends Controller
                         'message' => 'Fire & Enginering Slip added Endorsement successfully!',
                         'alert-type' => 'success'
                     );
-                    
+
 
                     
 

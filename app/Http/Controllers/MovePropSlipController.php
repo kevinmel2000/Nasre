@@ -151,7 +151,11 @@ class MovePropSlipController extends Controller
 
         
         $currdate = date("d/m/Y");
+        $currdate2 = date("Y-m-d");
+
         $insured = Insured::orderby('id','asc')->get();
+        $insured_now = Insured::whereDate('created_at',$currdate2)->orderby('id','asc')->get();
+
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
         $cob = COB::where('form','mp')->orderby('id','asc')->get();
@@ -166,7 +170,7 @@ class MovePropSlipController extends Controller
         $propertytype= PropertyType::orderby('id','asc')->get();
         
         $mp_ids = response()->json($insured->modelKeys());
-        $lastid = count($insured);
+        $lastid = count($insured_now);
         $sliplastid = count($slip);
 
        
@@ -200,6 +204,8 @@ class MovePropSlipController extends Controller
 
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
+        $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','mp')->where('insured_id',$code_ms)->orderby('id','asc')->get();
+        $sliplastid = count($slip_now);
 
         if($sliplastid != null){
             if($sliplastid < 9)
