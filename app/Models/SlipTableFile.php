@@ -11,6 +11,8 @@ class SlipTableFile extends Model
 
     protected $table = 'slip_table_file';
 
+    protected $timestamp = true;
+
     public function sliptable() 
     {
 		return $this->belongsTo('App\Models\SlipTable','slip_id'); 
