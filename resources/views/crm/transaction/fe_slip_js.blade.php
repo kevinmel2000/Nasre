@@ -3006,24 +3006,20 @@ function deletelocationriskdetail(id){
             // $('#feshareto').val(real_sumtotalnre);
 
                 //$('#cid'+id).remove();
-                var total =  $("#feshare").val();
-
-                if(total)
-                {
-                    console.log(total)
-                    var conv_total = total.replace(/,/g, "");
-                    console.log(conv_total)
-                    var real_total = parseInt(conv_total);
-                    console.log(real_total)
-                    var sum = isNaN(real_total - response.amountlocation) ? 0 :(real_total - response.amountlocation) ;
-                    console.log(sum)
-                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    $("#feshare").val(real_sum);
-                }
+                var amount = response.amountlocation;
+                var ceding_share = $('#feshare').val();
+                
+                var conv_ceding_share = ceding_share.replace(/,/g, "");
+                var real_ceding_share = parseInt(conv_ceding_share);
+                var sum_ceding = isNaN(parseFloat(real_ceding_share) - parseFloat(amount)) ? 0 :(parseFloat(real_ceding_share) - parseFloat(amount));
+                var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#feshare').val(conv_sum_ceding);
+                console.log('ceding bertambah' + conv_sum_ceding)
+                
                     // $("#feshareto").val(real_sum);
 
             // swal("Warning!", "TSI not decrease because this ceding is not same with ceding in slip", "Tsi not decrease");
-            swal("success!", "ceding share has decrease", "ceding share decrease");
+            swal("success!", "ceding share has decrease", "success");
 
                     // $("#sliptotalsum").val(real_sum);
                     // $("#feshareto").val(real_sum);
@@ -3282,6 +3278,41 @@ function deletelocationriskdetail(id){
 
 
     });
+</script>
+
+<script type="text/javascript">
+    $('#percentceding').keyup(function(){
+        var tsislip = $('#sliptotalsum').val();
+        var typetsi = $('#sliptypetsi').val();
+        
+
+        if(tsislip != null && typetsi == '1'){
+            $('#sliptotalsum').val($(this).val());
+                    
+        }
+    });
+
+     $('#percentceding').change(function(){
+        var sumpct = $('#sliptotalsumpct').val();
+        var typetsi = $('#sliptypetsi').val();
+
+
+        if(sumpct != null && typetsi == '1'){
+                var pct =  parseFloat($('#slippct').val())/100;
+
+                var tsi = $("#sliptotalsum").val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
+                console.log(sum)
+                var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#sliptotalsumpct').val(real_sum);
+                $('#sliptotalsumpct2').val(real_sum);
+
+                swal('Success!','tsi in slip changed, please change value in risk detail, deductible and extendcoverage manually','success')
+
+            }    
+     });
 </script>
 
 <script  type='text/javascript'>
