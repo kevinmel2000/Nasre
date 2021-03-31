@@ -1789,11 +1789,118 @@ $('#slipbld_constendorsement').change(function(){
             var tsi = $('#feshareto').val();
             $('#sliptotalsum').val(tsi);
             $('#sliptotalsum2').val(tsi);
+
+            var pctval = $('#sliptotalsumpct').val();
+
+            if(pctval != null){
+                var pct =  parseFloat($('#slippct').val())/100;
+
+            // var tsi = $("#sliptotalsum").val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
+                console.log(sum)
+                var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#sliptotalsumpct').val(real_sum);
+                $('#sliptotalsumpct2').val(real_sum);
+                .swal('success','changed to tsi','success')
+
+
+                var dpamount = $('#slipdpamount').val();
+                var ecamount = $('#slipamountec').val();
+
+                if(dpamount != null){
+
+                    var percent =  parseFloat($('#slipdppercentage').val()) / 100;
+                    
+                    var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
+                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    console.log($('#slipdppercentage').val())
+                    console.log(percent)
+                    console.log(sum)
+                    console.log(real_sum)
+
+                    $('#slipdpamount').val(real_sum);
+                    $('#slipdpamount2').val(real_sum);
+
+                }
+
+                if(ecamount != null){
+
+                    var persentage =  parseFloat($('#slipnilaiec').val()) / 1000;
+                    var sum = isNaN(conv_tsi * persentage) ? 0 :(conv_tsi * persentage).toFixed(2) ;
+                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    console.log($('#slipnilaiec').val())
+                    console.log(persentage)
+                    console.log(sum)
+                    console.log(real_sum)
+
+                    $('#slipamountec').val(real_sum);
+                    $('#slipamountec2').val(real_sum);
+
+                }
+
+            }
+
+
+
         }else if(choice == '2')
         {
             var ceding_share = $('#feshare').val();
             $('#sliptotalsum').val(ceding_share);
             $('#sliptotalsum2').val(ceding_share);
+
+             var pctval = $('#sliptotalsumpct').val();
+
+            if(pctval != null){
+
+                var pct =  parseFloat($('#slippct').val())/100;
+
+                // var tsi = $("#sliptotalsum").val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
+                console.log(sum)
+                var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#sliptotalsumpct').val(real_sum);
+                $('#sliptotalsumpct2').val(real_sum);
+                .swal('success','changed to ceding share','success')
+
+                var dpamount = $('#slipdpamount').val();
+                var ecamount = $('#slipamountec').val();
+
+                if(dpamount != null){
+                    var percent =  parseFloat($('#slipdppercentage').val()) / 100;
+                    
+                    var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
+                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    console.log($('#slipdppercentage').val())
+                    console.log(percent)
+                    console.log(sum)
+                    console.log(real_sum)
+
+                    $('#slipdpamount').val(real_sum);
+                    $('#slipdpamount2').val(real_sum);
+                }
+
+                if(ecamount != null){
+
+                    var persentage =  parseFloat($('#slipnilaiec').val()) / 1000;
+                    var sum = isNaN(conv_tsi * persentage) ? 0 :(conv_tsi * persentage).toFixed(2) ;
+                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    console.log($('#slipnilaiec').val())
+                    console.log(persentage)
+                    console.log(sum)
+                    console.log(real_sum)
+
+                    $('#slipamountec').val(real_sum);
+                    $('#slipamountec2').val(real_sum);
+                    
+                }
+
+            }
+
+
         }
     });
 </script>
@@ -3310,8 +3417,44 @@ function deletelocationriskdetail(id){
                 $('#sliptotalsumpct').val(real_sum);
                 $('#sliptotalsumpct2').val(real_sum);
 
+                var dpamount = $('#slipdpamount').val();
+                var ecamount = $('#slipamountec').val();
+
+                if(dpamount != null){
+                    var percent =  parseFloat($('#slipdppercentage').val()) / 100;
+                    
+                    var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
+                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    console.log($('#slipdppercentage').val())
+                    console.log(percent)
+                    console.log(sum)
+                    console.log(real_sum)
+
+                    $('#slipdpamount').val(real_sum);
+                    $('#slipdpamount2').val(real_sum);
+                }
+
+                if(ecamount != null){
+
+                    var persentage =  parseFloat($('#slipnilaiec').val()) / 1000;
+                    var sum = isNaN(conv_tsi * persentage) ? 0 :(conv_tsi * persentage).toFixed(2) ;
+                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    console.log($('#slipnilaiec').val())
+                    console.log(persentage)
+                    console.log(sum)
+                    console.log(real_sum)
+
+                    $('#slipamountec').val(real_sum);
+                    $('#slipamountec2').val(real_sum);
+                    
+                }
+
                 swal('Success!','tsi in slip changed, please change value in risk detail, deductible and extendcoverage manually','success')
 
+
+            }
+            else{
+                swal('Success!','tsi in slip changed, please change value in risk detail','success')
             }    
      });
 </script>
