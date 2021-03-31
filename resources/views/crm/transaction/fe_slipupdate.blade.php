@@ -49,11 +49,11 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 1')}}</label>
-                                                    <input type="text" name="fesuggestinsured" id='autocomplete'  value="{{$insureddata->insured_name}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="search for insured suggestion" required/>
+                                                    <input type="text" name="fesuggestinsured" id='autocomplete'  value="{{$insureddata->insured_name}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="search for insured suggestion" required/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 2')}}</label>
-                                                    <input type="text" name="fesuffix" id='autocomplete2'  value="{{$insureddata->insured_suffix}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" placeholder="suffix: QQ or TBk" required/>
+                                                    <input type="text" name="fesuffix" id='autocomplete2'  value="{{$insureddata->insured_suffix}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="suffix: QQ or TBk" required/>
                                                
                                                 </div>
                                             </div>
@@ -204,7 +204,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('UY')}}</label>
-                                            <input type="number" id="feuy" name="feuy" value="{{$insureddata->uy}}" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-12" />
+                                            <input type="text" id="feuy" name="feuy" value="{{$insureddata->uy}}" class="form-control form-control-sm intTextBox" data-validation="length"  data-validation-length="0-12" />
                                         </div>
                                     </div>
                                 </div>
@@ -414,7 +414,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="input-group">
-                                                            <input type="number" id="percentceding" name="percentceding" min="0" value="" step=".001"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"  />
+                                                            <input type="text" id="percentceding" name="percentceding" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50"  />
                                                             <div class="input-group-append">
                                                                 <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                             </div>
@@ -757,7 +757,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('WPC')}}</label>
-                                                        <input type="number" min="0" value=""  id="wpc" name="wpc" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                        <input type="text" id="wpc" name="wpc" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="" />
                                                     </div>
                                                 </div>
                                         </div>
@@ -830,7 +830,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-10">
                                                                     <div class="input-group">
-                                                                        <input type="number" value="" step=".0001" id="slippct" name="slippct" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
+                                                                        <input type="text" id="slippct" name="slippct" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="pct" />
                                                                         <div class="input-group-append">
                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                         </div>
@@ -899,7 +899,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" value="" step=".001" id="slipdppercentage" name="slipdppercentage" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                                    <input type="text"  id="slipdppercentage" name="slipdppercentage" placeholder="x" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" />
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -965,7 +965,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" value="" step=".001" id="slipnilaiec" name="slipnilaiec" placeholder="y" class="form-control form-control-sm "/>
+                                                                                    <input type="text" id="slipnilaiec" name="slipnilaiec" placeholder="y" class="form-control form-control-sm floatTextBox"/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -1039,7 +1039,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-5">
                                                                     <input type="hidden"  id="slipdaytotal" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
-                                                                    <input type="text"  id="slipdaytotal2" name="slipdaytotal2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
+                                                                    <input type="text"  id="slipdaytotal2" name="slipdaytotal2" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="a"  />
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     <label style="opacity: 0;">{{__('p')}}:</label>
@@ -1047,7 +1047,7 @@
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <input type="hidden"  id="slipdaytotal3" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
-                                                                    <input type="text"  id="slipdaytotal4" name="slipdaytotal2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
+                                                                    <input type="text"  id="slipdaytotal4" name="slipdaytotal2" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="a"  />
                                                                 </div>
                                                             </div>       
                                                         </div>
@@ -1105,7 +1105,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Rate (permil.. %)')}}</label>
-                                                        <input type="number"  value="" step=".001" id="sliprate" name="sliprate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" placeholder="a" />
+                                                        <input type="text"  value="" step=".001" id="sliprate" name="sliprate" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-150" placeholder="a" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -1148,7 +1148,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="input-group">
-                                                                        <input type="number" value="" step=".001" id="slipshare" name="slipshare" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="b" />
+                                                                        <input type="text" id="slipshare" name="slipshare" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="b" />
                                                                         <div class="input-group-append">
                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                         </div>
@@ -1177,7 +1177,7 @@
                                                             <div class="row d-flex flex-wrap">
                                                                 <div class="col-md-12">
                                                                     <div class="input-group">
-                                                                        <input type="number" value="" id="slipcommission" name="slipcommission" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="d" />
+                                                                        <input type="text" id="slipcommission" name="slipcommission" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="d" />
                                                                         <div class="input-group-append">
                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                         </div>
@@ -1201,7 +1201,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="input-group">
-                                                                        <input type="number" value="" step=".001" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                        <input type="text" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                                         <div class="input-group-append">
                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                         </div>
@@ -1285,7 +1285,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" min="0" max="100" value="" step=".01"  id="slipippercentage" name="slipippercentage" placeholder="w" class="form-control form-control-sm " />
+                                                                                    <input type="text" id="slipippercentage" name="slipippercentage" placeholder="w" class="form-control form-control-sm floatTextBox" />
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -1329,7 +1329,7 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="input-group" lang="en-US">
-                                                                    <input type="number" id="slipor" step="0.001" value="100" name="slipor" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                    <input type="text" id="slipor" name="slipor" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" />
                                                                     <div class="input-group-append">
                                                                         <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                     </div>
@@ -1393,7 +1393,7 @@
                                                                                     <div class="row">
                                                                                         <div class="col-md-8">
                                                                                             <div class="input-group">
-                                                                                                <input type="number" min="0" max="100" value="" step=".01" id="sliprppercentage" name="sliprppercentage" class="form-control form-control-sm " />
+                                                                                                <input type="text" id="sliprppercentage" name="sliprppercentage" class="form-control form-control-sm floatTextBox" />
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="col-md-2">
