@@ -785,28 +785,58 @@
 </style>
 
 <script type="text/javascript">
-    $(function() {              
+  $(function() {              
        // Bootstrap DateTimePicker v4
-       //$('#dateinstallment').datetimepicker({
-         //    format: 'DD/MM/YYYY'
-       // });
+       
 
-       $('#dateinfrom').datetimepicker({
-             format: 'DD/MM/YYYY'
+       $('#slipipdate').datepicker({
+           dateFormat: 'dd/mm/yy'
        });
 
-       $('#dateinto').datetimepicker({
-             format: 'DD/MM/YYYY'
+     
+       $('#dateinfrom').datepicker({
+          dateFormat: 'dd/mm/yy'
        });
 
-       $('#daterefrom').datetimepicker({
-             format: 'DD/MM/YYYY'
+       $('#dateinto').datepicker({
+          dateFormat: 'dd/mm/yy'
        });
 
-       $('#datereto').datetimepicker({
-             format: 'DD/MM/YYYY'
+       $('#daterefrom').datepicker({
+          dateFormat: 'dd/mm/yy'
        });
+
+       $('#datereto').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#slipipfrom').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#slipipto').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#sliprpfrom').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#sliprpto').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       
+       $('#slipprodyear').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#sliptd').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+    
     });      
+   
 
    
     $('#slipipfrom').change(function(){

@@ -574,7 +574,7 @@
                                                         <div class="form-group">
                                                             <label>{{__('Prod Year')}}:</label>
                                                                 <div class="input-group ">
-                                                                        <input type="date" id="slipprodyear" class="form-control form-control-sm "  name="slipprodyear" value="{{$currdate}}" readonly="readonly">
+                                                                        <input type="text" id="slipprodyear" class="form-control form-control-sm datetimepicker-input"  name="slipprodyear" value="{{$currdate}}" readonly="readonly">
                                                                         
                                                                 </div>
                                                         </div>
@@ -588,7 +588,7 @@
                                                         </div> --}}
                                                         <div class="form-group">
                                                             <label for="">{{__('Transfer Date')}}</label>
-                                                            <input type="date" id="sliptd" name="sliptd" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-50" readonly="readonly" />
+                                                            <input type="text" id="sliptd" name="sliptd" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" readonly="readonly" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -996,7 +996,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Insurance Periode')}}:</label>
-                                                            <input type="date" class="form-control form-control-sm datepicker-input" value="" data-target="#date" id="slipipfrom" name="slipipfrom">
+                                                            <input type="text" class="form-control form-control-sm datepicker-input" value="" data-target="#date" id="slipipfrom" name="slipipfrom">
                                                          </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -1006,7 +1006,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                            <input type="date" class="form-control form-control-sm datepicker-input"  value="" data-target="#date" id="slipipto" name="slipipto">
+                                                            <input type="text" class="form-control form-control-sm datepicker-input"  value="" data-target="#date" id="slipipto" name="slipipto">
                                                                         
                                                         </div>
                                                     </div>
@@ -1015,7 +1015,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Reinsurance Periode')}}:</label>
-                                                            <input type="date" class="form-control form-control-sm datetimepicker-input" value=""  id="sliprpfrom" name="sliprpfrom">               
+                                                            <input type="text" class="form-control form-control-sm datetimepicker-input" value=""  id="sliprpfrom" name="sliprpfrom">               
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -1025,7 +1025,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                            <input type="date" class="form-control form-control-sm datetimepicker-input" value=""   id="sliprpto" name="sliprpto">       
+                                                            <input type="text" class="form-control form-control-sm datetimepicker-input" value=""   id="sliprpto" name="sliprpto">       
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1279,7 +1279,7 @@
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                         <div class="input-group " id="dateinstallment" >
-                                                                                                <input type="date" id="slipipdate" class="form-control form-control-sm datetimepicker-input" name="slipipdate">
+                                                                                                <input type="text" id="slipipdate" class="form-control form-control-sm datetimepicker-input" name="slipipdate">
                                                                                         </div>
                                                                                 </div>
                                                                             </td>

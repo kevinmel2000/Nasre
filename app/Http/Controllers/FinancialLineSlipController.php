@@ -860,7 +860,7 @@ class FinancialLineSlipController extends Controller
 
             if($slipdata==null)
             {
-               $currdate = date("Y-m-d");
+                $currdate = date("d/m/Y");
 
                $slipdataup=SlipTable::create([
                     'number'=>$request->slipnumber,
@@ -928,7 +928,7 @@ class FinancialLineSlipController extends Controller
             }
             else
             {
-               $currdate = date("Y-m-d");
+                $currdate = date("d/m/Y");
 
                 $slipdataid=$slipdata->id;
                 $slipdataup = SlipTable::findOrFail($slipdataid);

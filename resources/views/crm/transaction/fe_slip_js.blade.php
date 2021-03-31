@@ -1226,25 +1226,55 @@
        
 
        $('#slipipdate').datepicker({
-           dateFormat: 'DD/MM/YYYY'
+           dateFormat: 'dd/mm/yy'
        });
 
+     
        $('#dateinfrom').datepicker({
-           dateFormat: 'DD/MM/YYYY'
+          dateFormat: 'dd/mm/yy'
        });
 
        $('#dateinto').datepicker({
-           dateFormat: 'DD/MM/YYYY'
+          dateFormat: 'dd/mm/yy'
        });
 
        $('#daterefrom').datepicker({
-           dateFormat: 'DD/MM/YYYY'
+          dateFormat: 'dd/mm/yy'
        });
 
        $('#datereto').datepicker({
-           dateFormat: 'DD/MM/YYYY'
+          dateFormat: 'dd/mm/yy'
        });
-   });      
+
+       $('#slipipfrom').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#slipipto').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#sliprpfrom').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#sliprpto').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       
+       $('#slipprodyear').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+       $('#sliptd').datepicker({
+          dateFormat: 'dd/mm/yy'
+       });
+
+
+    
+    });      
+
 
     $('#slipipfrom').change(function(){
         $('#sliprpfrom').val($(this).val());
