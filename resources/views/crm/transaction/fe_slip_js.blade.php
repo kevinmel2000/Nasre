@@ -1284,7 +1284,7 @@
             var insurance_period_from2 = $('#sliprpfrom').val();
             var insurance_period_to2 = $('#sliprpto').val();
             var days=daysBetween(insurance_period_from2, insurance_period_to2);
-            var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+            var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(2);
             // var constday = days.toString() + "/365";
             var constday1 = days.toString();
             var constday2 = "365";

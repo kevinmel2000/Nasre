@@ -627,7 +627,7 @@
                                                                 </div> --}}
                                                                 <div class="form-group">
                                                                     <label for="">{{__('Transfer Date')}}</label>
-                                                                    <input type="text" id="sliptd" name="sliptd" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" />
+                                                                    <input type="text" id="sliptd" name="sliptd" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" readonly="readonly" />
                                                                 </div>
                                                             </div>
                                                         </div>
