@@ -269,13 +269,15 @@ class FinancialLineSlipController extends Controller
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+        $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+
 
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
+        
 
         $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
 
@@ -337,6 +339,8 @@ class FinancialLineSlipController extends Controller
         if(count($retrocessionlist) != null){
             //RetrocessionTemp::where('slip_id', $code_sl)->delete();
         }
+
+        
 
         return view('crm.transaction.fl_slip', compact(['user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','deductibletype','extendcoveragelist','deductiblelist','extendedcoverage','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fl_ids','code_ms','code_sl','costumer']));
     
