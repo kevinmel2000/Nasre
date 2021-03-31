@@ -436,6 +436,7 @@ class FeSlipController extends Controller
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
         $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
+        $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
 
         // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
 
@@ -981,7 +982,7 @@ class FeSlipController extends Controller
         $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
 
         $statuslist= StatusLog::where('slip_id','=',$slipdata->number)->orderby('created_at','DESC')->take(5)->get();
-        $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','DESC')->get();
+        $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->orderby('id','DESC')->get();
 
         if($slipdata->build_const == "Building 1"){
             $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
@@ -1378,6 +1379,7 @@ class FeSlipController extends Controller
                                 $insert[$x]['path'] = $path;
                                 $insert[$x]['user_id'] = Auth::user()->name;
                                 $insert[$x]['slip_id'] = $request->slip_id;
+                                $insert[$x]['insured_id'] = $request->code_ms;
                                 SlipTableFile::insert($insert);
                             }
                             else{
