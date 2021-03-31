@@ -2118,9 +2118,8 @@ $(document).ready(function() {
 
 
 
-
 <script type='text/javascript'>
- $('#form-addlocationdetail').submit(function(e){
+   $('#form-addlocationdetail').submit(function(e){
     e.preventDefault();
 
     var insurednoloc = $('#insurednoloc').val();
@@ -2201,14 +2200,43 @@ $(document).ready(function() {
 
                     var curr_amount = response.amountlocation.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+                    var cndn = '';
+                    var certno = '';
+                    var slipno = '';
+                    var policyno = '';
+
+                    if(response.cndn == ''){
+                        cndn = '-';
+                    }else{
+                        cndn = response.cndn;
+                    }
+
+                    if(response.certno == ''){
+                        certno = '-';
+                    }else{
+                        certno = response.certno;
+                    }
+
+                    if(response.slipno == ''){
+                        slipno = '-';
+                    }else{
+                        slipno = response.slipno;
+                    }
+
+                    if(response.policyno == ''){
+                        policyno = '-';
+                    }else{
+                        policyno = response.policyno;
+                    }
+
                     
                     $('#tcid'+insurednoloc+' > tbody:last-child').prepend('<tr id="riskdetailsid'+response.id+'">'+
                         '<td>'+response.interest_name+'</td>'+
                         '<td>'+response.cedingbroker+'</td>'+
-                        '<td>'+response.cndn+'</td>'+
-                        '<td>'+response.certno+'</td>'+
-                        '<td>'+response.slipno+'</td>'+
-                        '<td>'+response.policyno+'</td>'+
+                        '<td>'+cndn+'</td>'+
+                        '<td>'+certno+'</td>'+
+                        '<td>'+slipno+'</td>'+
+                        '<td>'+policyno+'</td>'+
                         '<td>'+curr_amount+'</td>'+
                         '<td>'+
                         '<a href="javascript:void(0)" onclick="deletelocationriskdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
@@ -2225,7 +2253,7 @@ $(document).ready(function() {
                     //     var conv_totalnre = parseFloat(totalnre.replace(/,/g, ""));
                     //     var sumtotalnre = isNaN(conv_totalnre +  parseFloat(response.amountlocation)) ? (conv_totalnre +  parseFloat(response.amountlocation)) : (conv_totalnre +  parseFloat(response.amountlocation)) ;
                     //     var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        
+
                     //     console.log(conv_totalnre)
                     //     console.log(real_sumtotalnre)
 
@@ -2235,7 +2263,7 @@ $(document).ready(function() {
                     //     var conv_totalnre = totalnre.replace(/,/g, "");
                     //     var sumtotalnre = isNaN(0 + parseFloat(response.amountlocation)) ? (0 + parseFloat(response.amountlocation)) : (0 + parseFloat(response.amountlocation)) ;
                     //     var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        
+
                     //     console.log(conv_totalnre)
                     //     console.log(real_sumtotalnre)
 
@@ -2279,7 +2307,7 @@ $(document).ready(function() {
                     //         // $("#feshareto").val(real_sum);
                     //     }
                     // }else{
-                        swal("success!", "ceding share has increase", "ceding share increase");
+                        swal("success!", "ceding share has increase", "success");
                         
                     // }
                 }
@@ -2314,34 +2342,35 @@ function deletelocationriskdetail(id){
             // $('#feshareto').val(real_sumtotalnre);
 
                 //$('#cid'+id).remove();
-            var total =  $("#feshare").val();
-            
-            if(total)
-            {
-                console.log(total)
-                var conv_total = total.replace(/,/g, "");
-                console.log(conv_total)
-                var real_total = parseInt(conv_total);
-                console.log(real_total)
-                var sum = isNaN(real_total - response.amountlocation) ? 0 :(real_total - response.amountlocation) ;
-                console.log(sum)
-                var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                $("#flshare").val(real_sum);
-            }
+                var total =  $("#feshare").val();
+
+                if(total)
+                {
+                    console.log(total)
+                    var conv_total = total.replace(/,/g, "");
+                    console.log(conv_total)
+                    var real_total = parseInt(conv_total);
+                    console.log(real_total)
+                    var sum = isNaN(real_total - response.amountlocation) ? 0 :(real_total - response.amountlocation) ;
+                    console.log(sum)
+                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    $("#feshare").val(real_sum);
+                }
                     // $("#feshareto").val(real_sum);
-               
+
             // swal("Warning!", "TSI not decrease because this ceding is not same with ceding in slip", "Tsi not decrease");
             swal("success!", "ceding share has decrease", "ceding share decrease");
-                    
+
                     // $("#sliptotalsum").val(real_sum);
                     // $("#feshareto").val(real_sum);
-                
 
 
-            }
-        });
+
+                }
+            });
 }
 </script>
+
 
 
 
