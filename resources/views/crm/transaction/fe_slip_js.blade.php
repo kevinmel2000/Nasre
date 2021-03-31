@@ -3288,6 +3288,7 @@ function deletelocationriskdetail(id){
 
         if(tsislip != null && typetsi == '1'){
             $('#sliptotalsum').val($(this).val());
+            $('#sliptotalsum2').val($(this).val());
                     
         }
     });
