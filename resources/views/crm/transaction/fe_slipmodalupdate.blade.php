@@ -72,7 +72,7 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Transfer Date')}}</label>
-                                                                <input type="date" id="sliptdupdate" name="sliptdupdate" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-50" readonly="readonly"/>
+                                                                <input type="text" id="sliptdupdate" name="sliptdupdate" class="form-control form-control-sm datepicker-input" data-validation="length"  data-validation-length="0-50" readonly="readonly"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -471,7 +471,7 @@
                                                             <div class="form-group">
                                                                 <label>{{__('Insurance Periode')}}:</label>
                                                                     {{-- <div class="input-group date" id="dateinfrom" data-target-input="nearest"> --}}
-                                                                            <input type="date" class="form-control form-control-sm datepicker-input" value="" data-target="#date" id="slipipfromupdate" name="slipipfromupdate">
+                                                                            <input type="text" class="form-control form-control-sm datepicker-input" value="" data-target="#date" id="slipipfromupdate" name="slipipfromupdate">
                                                                             {{-- <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
                                                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                             </div>
@@ -486,7 +486,7 @@
                                                             <div class="form-group">
                                                                 <label style="opacity: 0;">{{__('p')}}:</label>
                                                                     {{-- <div class="input-group date" id="dateinto" data-target-input="nearest"> --}}
-                                                                            <input type="date" class="form-control form-control-sm datepicker-input"  value="" data-target="#date" id="slipiptoupdate" name="slipiptoupdate">
+                                                                            <input type="text" class="form-control form-control-sm datepicker-input"  value="" data-target="#date" id="slipiptoupdate" name="slipiptoupdate">
                                                                             {{-- <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
                                                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                             </div>
@@ -499,7 +499,7 @@
                                                             <div class="form-group">
                                                                 <label>{{__('Reinsurance Periode')}}:</label>
                                                                     {{-- <div class="input-group date" id="daterefrom" data-target-input="nearest"> --}}
-                                                                            <input type="date" class="form-control form-control-sm datetimepicker-input" value="" data-target="#date" id="sliprpfromupdate" name="sliprpfromupdate">
+                                                                            <input type="text" class="form-control form-control-sm datetimepicker-input" value="" data-target="#date" id="sliprpfromupdate" name="sliprpfromupdate">
                                                                             {{-- <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
                                                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                             </div>
@@ -514,7 +514,7 @@
                                                             <div class="form-group">
                                                                 <label style="opacity: 0;">{{__('p')}}:</label>
                                                                     {{-- <div class="input-group date" id="datereto" data-target-input="nearest"> --}}
-                                                                            <input type="date" class="form-control form-control-sm datetimepicker-input" value=""  data-target="#date" id="sliprptoupdate" name="sliprptoupdate">
+                                                                            <input type="text" class="form-control form-control-sm datetimepicker-input" value=""  data-target="#date" id="sliprptoupdate" name="sliprptoupdate">
                                                                             {{-- <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
                                                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                             </div>
@@ -743,7 +743,7 @@
                                                                            <td>
                                                                                 <div class="form-group">
                                                                                         <div class="input-group " id="dateinstallment" >
-                                                                                                <input type="date" id="dateinstallmentdataupdate" class="form-control form-control-sm " >
+                                                                                                <input type="text" id="dateinstallmentdataupdate" class="form-control form-control-sm datepicker-input" >
                                                                                                 
                                                                                         </div>
                                                                                 </div>
