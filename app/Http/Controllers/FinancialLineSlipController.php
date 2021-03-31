@@ -860,18 +860,18 @@ class FinancialLineSlipController extends Controller
 
             if($slipdata==null)
             {
-                $currdate = date("d/m/Y");
+                $currdate = date("Y-m-d");
 
-               $slipdataup=SlipTable::create([
+                $slipdataup=SlipTable::create([
                     'number'=>$request->slipnumber,
                     'username'=>Auth::user()->name,
                     'insured_id'=>$request->code_ms,
-                    'slip_type'=>'fl',
+                    'slip_type'=>'fe',
                     'prod_year' => $currdate,
-                    'uy'=>$request->slipuy,
+                    'date_transfer'=> date("Y-m-d", strtotime($request->slipdatetransfer)),
                     'status'=>$request->slipstatus,
-                    'endorsment'=>$request->sliped,
-                    'selisih'=>$request->slipsls,
+                    'endorsment'=>0,
+                    'selisih'=>'false',
                     'source'=>$request->slipcedingbroker,
                     'source_2'=>$request->slipceding,
                     'currency'=>$request->slipcurrency,
@@ -897,10 +897,10 @@ class FinancialLineSlipController extends Controller
                     'total_sum_pct'=>$request->sliptotalsumpct,
                     'deductible_panel'=>$deductiblelist->toJson(),
                     'extend_coverage'=>$extendcoveragelist->toJson(),
-                    'insurance_period_from'=>$request->slipipfrom,
-                    'insurance_period_to'=>$request->slipipto,
-                    'reinsurance_period_from'=>$request->sliprpfrom,
-                    'reinsurance_period_to'=>$request->sliprpto,
+                    'insurance_period_from'=>date("Y-m-d", strtotime($request->slipipfrom)),
+                    'insurance_period_to'=>date("Y-m-d", strtotime($request->slipipto)),
+                    'reinsurance_period_from'=>date("Y-m-d", strtotime($request->sliprpfrom)),
+                    'reinsurance_period_to'=>date("Y-m-d", strtotime($request->sliprpto)),
                     'proportional'=>$request->slipproportional,
                     'layer_non_proportional'=>$request->sliplayerproportional,
                     'rate'=>$request->sliprate,
@@ -928,20 +928,29 @@ class FinancialLineSlipController extends Controller
             }
             else
             {
-                $currdate = date("d/m/Y");
+                $currdate = date("Y-m-d");
 
                 $slipdataid=$slipdata->id;
                 $slipdataup = SlipTable::findOrFail($slipdataid);
                 
+                if($slipdataup->status != $request->slipstatus){
+                    StatusLog::create([
+                        'status'=>$request->slipstatus,
+                        'user'=>Auth::user()->name,
+                        'datetime'=>date('Y-m-d H:i:s '),
+                        'insured_id'=>$request->code_ms,
+                        'slip_id'=>$request->slipnumber,
+                    ]);
+                }
+
                 $slipdataup->number=$request->slipnumber;
                 $slipdataup->username=Auth::user()->name;
                 $slipdataup->insured_id=$request->code_ms;
-                $slipdataup->slip_type='fl';
                 $slipdataup->prod_year=$currdate;
-                $slipdataup->uy=$request->slipuy;
+                $slipdataup->date_transfer=date("Y-m-d", strtotime($request->slipdatetransfer));
                 $slipdataup->status=$request->slipstatus;
-                $slipdataup->endorsment=$request->sliped;
-                $slipdataup->selisih=$request->slipsls;
+                $slipdataup->endorsment=0;
+                $slipdataup->selisih="false";
                 $slipdataup->source=$request->slipcedingbroker;
                 $slipdataup->source_2=$request->slipceding;
                 $slipdataup->currency=$request->slipcurrency;
@@ -966,10 +975,10 @@ class FinancialLineSlipController extends Controller
                 $slipdataup->total_sum_pct=$request->sliptotalsumpct; 
                 $slipdataup->deductible_panel=$deductiblelist->toJson(); 
                 $slipdataup->extend_coverage=$extendcoveragelist->toJson();  
-                $slipdataup->insurance_period_from=$request->slipipfrom;  
-                $slipdataup->insurance_period_to=$request->slipipto;  
-                $slipdataup->reinsurance_period_from=$request->sliprpfrom;  
-                $slipdataup->reinsurance_period_to=$request->sliprpto;
+                $slipdataup->insurance_period_from=date("Y-m-d", strtotime($request->slipipfrom));  
+                $slipdataup->insurance_period_to=date("Y-m-d", strtotime($request->slipipto));  
+                $slipdataup->reinsurance_period_from=date("Y-m-d", strtotime($request->sliprpfrom));  
+                $slipdataup->reinsurance_period_to=date("Y-m-d", strtotime($request->sliprpto));
                 $slipdataup->proportional=$request->slipproportional;
                 $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
                 $slipdataup->rate=$request->sliprate;  
@@ -980,14 +989,14 @@ class FinancialLineSlipController extends Controller
                 $slipdataup->commission=$request->slipcommission; 
                 $slipdataup->grossprm_to_nr=$request->slipgrossprmtonr; 
                 $slipdataup->netprm_to_nr=$request->slipnetprmtonr; 
-                $slipdataup->sum_commission=$request->slipsumcommission;  
+                $slipdataup->sum_commission=$request->slipsumcommission; 
                 $slipdataup->installment_panel=$installmentlist->toJson();   
-                $slipdataup->retrocession_panel=$retrocessionlist->toJson(); 
+                $slipdataup->retrocession_panel=$retrocessionlist->toJson();  
                 $slipdataup->retro_backup=$request->sliprb;
                 $slipdataup->own_retention=$request->slipor;
                 $slipdataup->sum_own_retention=$request->slipsumor;
                 $slipdataup->wpc=$request->wpc;
-  
+
                 
                 $slipdataup->save();
 

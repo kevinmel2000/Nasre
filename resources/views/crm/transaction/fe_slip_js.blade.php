@@ -1271,8 +1271,6 @@
           dateFormat: 'dd/mm/yy'
        });
 
-
-    
     });      
 
 
@@ -5196,14 +5194,15 @@ function deletelocationriskdetail(id){
 
        //ajaxfilefunction(e);
 
-       if(current_percent == 100 && current_percent_rp == 100){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+       if(current_percent <= 100 && current_percent_rp <= 100)
+       {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
-       $.ajax({
+            $.ajax({
                  url:"{{url('transaction-data/fe-slip/store')}}",
                  type:"POST",
                  data:{
@@ -5321,7 +5320,9 @@ function deletelocationriskdetail(id){
                 $('#ExtendCoveragePanel tbody').empty();
                 $('#deductiblePanel tbody').empty();
                 $('#retrocessionPanel tbody').empty();
-       }else{
+       }
+       else
+       {
         swal("Error!", "Please input installment panel and Total own retention until 100%", "Insert Error");
        }
 
