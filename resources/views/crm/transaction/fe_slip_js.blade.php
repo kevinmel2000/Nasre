@@ -2783,25 +2783,25 @@ $('#slipcedingupdate').change(function(){
                     var slipno = '';
                     var policyno = '';
 
-                    if(response.cndn == ''){
+                    if(response.cndn == null){
                         cndn = '-';
                     }else{
                         cndn = response.cndn;
                     }
 
-                    if(response.certno == ''){
+                    if(response.certno == null){
                         certno = '-';
                     }else{
                         certno = response.certno;
                     }
 
-                    if(response.slipno == ''){
+                    if(response.slipno == null){
                         slipno = '-';
                     }else{
                         slipno = response.slipno;
                     }
 
-                    if(response.policyno == ''){
+                    if(response.policyno == null){
                         policyno = '-';
                     }else{
                         policyno = response.policyno;
