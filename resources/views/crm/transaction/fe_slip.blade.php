@@ -532,6 +532,7 @@
                                         {{--<button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" onclick="addendorsement({{  @$slipdatatadetail->id }})">{{__('Endorsement')}}</button>
                                         --}}
 
+
                                         @else
                                         <a class="text-primary mr-3 float-right " data-toggle="modal"  data-book-id="{{  @$slipdatatadetail->id }}" data-target="#detailmodaldata" href="#detailmodaldata">
                                             <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">{{__('Detail')}}</button>

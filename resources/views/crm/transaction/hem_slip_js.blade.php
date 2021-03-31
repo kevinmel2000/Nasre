@@ -4659,7 +4659,6 @@ function deletelocationriskdetail(id){
                         +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.id+'" data-target="#updatemodaldata">'
                         +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
                         +'</a>'
-                        +'<button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" onclick="addendorsement('+response.id+')">Endorsement</button>'
                         +'<td></td></tr>');
 
                     $('#slipnumber').val(response.code_sl);
@@ -4859,7 +4858,7 @@ function deletelocationriskdetail(id){
             });
 
        $.ajax({
-           url:"{{url('transaction-data/hem-slip/endorsementstore')}}",
+           url:"{{url('transaction-data/hem-slip/store')}}",
            type:"POST",
            data:{
                code_ms:code_ms,
@@ -5318,6 +5317,7 @@ function deletelocationriskdetail(id){
        e.preventDefault();
 
        var code_ms = $('#insuredIDtxt').val();
+       var slipid = $('#slipidendorsement').val();
        var slipnumber = $('#slipnumberendorsement').val();
        var prevslipnumber = $('#prevslipnumberendorsement').val();
        var slipuy = $('#slipuyendorsement').val();
@@ -5413,6 +5413,7 @@ function deletelocationriskdetail(id){
            url:"{{url('transaction-data/hem-slip/endorsementstore')}}",
            type:"POST",
            data:{
+               slipid:slipid
                code_ms:code_ms,
                slipnumber:slipnumber,
                slipuy:slipuy,
@@ -5459,6 +5460,9 @@ function deletelocationriskdetail(id){
            {
                 swal("Good job!", "Insured Fire & Engineering Slip Insert Success", "success")
                 console.log(response)
+
+                var insured_data2=JSON.parse(response.insured_data);
+                $('#fecountendorsement').val(insured_data2.count_endorsement);
 
                 
                 $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.slipuy+'">'+slipuy+'</td><td data-name="'+response.cedingbroker+'">"'+response.cedingbroker+'"</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.number+'" data-target="#detailmodaldata" href="#detailmodaldata">'

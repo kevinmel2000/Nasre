@@ -5710,7 +5710,6 @@ function deletelocationriskdetail(id){
                         +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.id+'" data-target="#endorsementmodaldata">'
                         +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsment</button>'
                         +'</a>'
-                        +'<button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" onclick="addendorsement('+response.id+')">Endorsement</button>'
                         +'<td></td></tr>');
 
                     $('#slipnumber').val(response.code_sl);
@@ -6515,6 +6514,9 @@ function deletelocationriskdetail(id){
             swal("Success!", "Insured Fire & Engineering Slip Endorsement Success", "success")
             console.log(response)
 
+            var insured_data2=JSON.parse(response.insured_data);
+            $('#fecountendorsement').val(insured_data2.count_endorsement);
+            //alert(insured_data2.count_endorsement);
 
                 // $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">"'+response.cedingbroker+'"</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
                 //     +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'

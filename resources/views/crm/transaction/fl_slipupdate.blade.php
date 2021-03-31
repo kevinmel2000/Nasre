@@ -228,6 +228,14 @@
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">{{__('Count Endorsement')}}</label>
+                                            <input type="number" id="fecountendorsement" name="fecountendorsement" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-12" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="row">
                                     <div class="col-md-12 com-sm-12 mt-3">
@@ -514,6 +522,7 @@
                             {{-- <button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" onclick="addendorsement({{  @$slipdatatadetail->id }})">{{__('Endorsement')}}</button>
                             --}}
                         @endif
+                        
                     </div>
                     </td>
                     </tr>

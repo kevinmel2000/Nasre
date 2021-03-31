@@ -629,8 +629,10 @@ class FeSlipController extends Controller
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('count_endorsement',$insureddata->count_endorsement)->orderby('id','desc')->get();       
         
         
-        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->where('count_endorsement',$insureddata->count_endorsement)->orderby('id','desc')->get();
-        // dd($locationlist2);
+        //$locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->where('count_endorsement',$insureddata->count_endorsement)->orderby('id','desc')->get();
+        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+         
+        //dd($locationlist2);
         
         $locationlist=[];
 
@@ -638,7 +640,8 @@ class FeSlipController extends Controller
         {
             foreach($locationlist2 as $datadetail)
             {
-                $risklocationdetaildata= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->where('count_endorsement',$insureddata->count_endorsement)->get();
+                //$risklocationdetaildata= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->where('count_endorsement',$insureddata->count_endorsement)->get();
+                $risklocationdetaildata= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
                 
                 $riskdetaillist=[];
 
@@ -2147,6 +2150,7 @@ class FeSlipController extends Controller
                         'message' => 'Fire & Enginering Slip added Endorsement successfully!',
                         'alert-type' => 'success'
                     );
+                    
 
                     
 
@@ -2163,6 +2167,7 @@ class FeSlipController extends Controller
                     $msdata->sum_own_retention=($slipdata->sum_own_retention * (-1));
                     $msdata->selisih="false"; 
                     $msdata->save();
+
 
 
                     $insdata =  Insured::findOrFail($insureddata->id);
