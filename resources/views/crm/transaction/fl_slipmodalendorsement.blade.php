@@ -43,6 +43,7 @@
                                                                 <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
                                                                 <input type="hidden" name="slipidendorsement" id="slipidendorsement" >
                                                                 <input type="hidden" name="insuredIDtxtendorsement" id="insuredIDtxtendorsement" value="">
+                                                                <input type="hidden" name="codeslreal" id="codeslreal">
                                                                 <label for="">{{__('Number')}} </label>
                                                                 <input type="text" id="slipnumberendorsement" name="slipnumberendorsement" class="form-control form-control-sm" value="" readonly="readonly" required/>
                                                             </div>

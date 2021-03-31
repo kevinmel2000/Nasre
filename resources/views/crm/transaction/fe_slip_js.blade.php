@@ -815,6 +815,9 @@
                     $('#insuredIDtxtendorsement').val(response.insured_id);
                     $('#slipidendorsement').val(response.id);
                     $('#slipnumberendorsement').val(response.code_sl);
+                    
+                    $('#codeslreal').val(response.code_slreal);
+
                     $('#slipusernameendorsement').val(response.username);
                     $('#slipprodyearendorsement').val(response.prod_year);
                     // $('#slipuyendorsement').val(response.uy);
@@ -1358,6 +1361,7 @@
            
 
     });      
+
 
 
     $('#slipipfrom').change(function(){
@@ -5900,10 +5904,10 @@ function deletelocationriskdetail(id){
     });
 
        $.ajax({
-         url:"{{url('transaction-data/fe-slip/endorsementstore')}}",
+         url:"{{url('transaction-data/fe-slip/store')}}",
          type:"POST",
          data:{
-            //sliped:sliped,
+               //sliped:sliped,
                //slipsls:slipsls,
                code_ms:code_ms,
                slipnumber:slipnumber,
@@ -6463,6 +6467,7 @@ function deletelocationriskdetail(id){
          url:"{{url('transaction-data/fe-slip/endorsementstore')}}",
          type:"POST",
          data:{
+             slipid:slipid,
              code_ms:code_ms,
              slipnumber:slipnumber,
              slipdatetransfer:slipdatetransfer,
@@ -6524,12 +6529,13 @@ function deletelocationriskdetail(id){
 
                 // $('#slipnumberendorsement').val(response.number);
 
-            },
-            error: function (request, status, error) {
-                //alert(request.responseText);
-                swal("Error!", "Insured Fire & Engineering Slip Endorsement Error", "Insert Error");
-            }
-        });
+        },
+        error: function (request, status, error) {
+            //alert(request.responseText);
+            swal("Error!", "Insured Fire & Engineering Slip Endorsement Error", "Insert Error");
+        }
+    
+      });
 
 
 
@@ -6570,6 +6576,7 @@ function deletelocationriskdetail(id){
 
 
       // insured save
+      /*
       var fesnumber = $('#insuredIDtxt').val();
       var fesinsured = $('#feinsured').val();
       var fessuggestinsured = $('#autocomplete').val();
@@ -6630,6 +6637,8 @@ function deletelocationriskdetail(id){
                 swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
             }
         });
+
+      */
 
       $('#installmentPanelendorsement tbody').empty();
       $('#ExtendCoveragePanelendorsement tbody').empty();

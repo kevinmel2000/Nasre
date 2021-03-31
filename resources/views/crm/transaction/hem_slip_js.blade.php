@@ -532,10 +532,15 @@
             success:function(response)
             {
                     //$('#slipnumberendorsement').val(response.number);
+                    $('#insuredIDtxtendorsement').val(response.insured_id);
+                    $('#slipidendorsement').val(response.id);
                     $('#slipnumberendorsement').val(response.code_sl);
+                    
+                    $('#codeslreal').val(response.code_slreal);
+
                     $('#slipusernameendorsement').val(response.username);
                     $('#slipprodyearendorsement').val(response.prod_year);
-                    $('#slipuyendorsement').val(response.uy);
+                    // $('#slipuyendorsement').val(response.uy);
                     $('#slipedendorsement').val(response.endorsment);
                     $('#slipslsendorsement').val(response.selisih);
                     $('#wpcendorsement').val(response.wpc);
