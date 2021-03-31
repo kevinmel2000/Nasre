@@ -982,7 +982,18 @@ class FeSlipController extends Controller
         $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
 
         $statuslist= StatusLog::where('slip_id','=',$slipdata->number)->orderby('created_at','DESC')->take(5)->get();
-        $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->orderby('id','DESC')->get();
+        
+        if(empty($slipdata->insured_id) || $slipdata->insured_id==NULL)
+        {
+            $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','DESC')->get();
+            
+        }
+        else
+        {
+            //$attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','DESC')->get();
+            
+            $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orWhere('insured_id','=',$slipdata->insured_id)->orderby('id','DESC')->get();
+        }
 
         if($slipdata->build_const == "Building 1"){
             $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
@@ -1008,7 +1019,7 @@ class FeSlipController extends Controller
                 'prod_year' => $dateyeardata,
                 'number' => $slipdata->number,
                 'slipuy' => $slipdata->uy,
-                'date_transfer' => $slipdata->date_transfer,
+                'date_transfer' => date("d/m/Y", strtotime($slipdata->date_transfer)),
                 'status' => $slipdata->status,
                 'endorsment' => $slipdata->endorsment,
                 'selisih' => $slipdata->selisih,
@@ -1031,10 +1042,10 @@ class FeSlipController extends Controller
                 'total_sum_pct'=>$slipdata->total_sum_pct,
                 'deductible_panel'=>$newdeductdata,
                 'extend_coverage'=>$newextenddata,
-                'insurance_period_from'=>$slipdata->insurance_period_from,
-                'insurance_period_to'=>$slipdata->insurance_period_to,
-                'reinsurance_period_from'=>$slipdata->reinsurance_period_from,
-                'reinsurance_period_to'=>$slipdata->reinsurance_period_to,
+                'insurance_period_from'=>date("d/m/Y", strtotime($slipdata->insurance_period_from)),
+                'insurance_period_to'=>date("d/m/Y", strtotime($slipdata->insurance_period_to)),
+                'reinsurance_period_from'=>date("d/m/Y", strtotime($slipdata->reinsurance_period_from)),
+                'reinsurance_period_to'=>date("d/m/Y", strtotime($slipdata->reinsurance_period_to)),
                 'proportional'=>$slipdata->proportional,
                 'layer_non_proportional'=>$slipdata->layer_non_proportional,
                 'rate'=>$slipdata->rate,
@@ -1181,7 +1192,7 @@ class FeSlipController extends Controller
                 'prod_year' => $dateyeardata,
                 'number' => $slipdata->number,
                 'slipuy' => $slipdata->uy,
-                'date_transfer' => $slipdata->date_transfer,
+                'date_transfer' => date("d/m/Y", strtotime($slipdata->date_transfer)),
                 'status' => $slipdata->status,
                 'endorsment' => $slipdata->endorsment,
                 'selisih' => $slipdata->selisih,
@@ -1205,10 +1216,10 @@ class FeSlipController extends Controller
                 'total_sum_pct'=>$slipdata->total_sum_pct,
                 'deductible_panel'=>$newdeductdata,
                 'extend_coverage'=>$newextenddata,
-                'insurance_period_from'=>$slipdata->insurance_period_from,
-                'insurance_period_to'=>$slipdata->insurance_period_to,
-                'reinsurance_period_from'=>$slipdata->reinsurance_period_from,
-                'reinsurance_period_to'=>$slipdata->reinsurance_period_to,
+                'insurance_period_from'=>date("d/m/Y", strtotime($slipdata->insurance_period_from)),
+                'insurance_period_to'=>date("d/m/Y", strtotime($slipdata->insurance_period_to)),
+                'reinsurance_period_from'=>date("d/m/Y", strtotime($slipdata->reinsurance_period_from)),
+                'reinsurance_period_to'=>date("d/m/Y", strtotime($slipdata->reinsurance_period_to)),
                 'proportional'=>$slipdata->proportional,
                 'layer_non_proportional'=>$slipdata->layer_non_proportional,
                 'rate'=>$slipdata->rate,

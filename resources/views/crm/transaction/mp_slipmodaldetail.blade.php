@@ -75,7 +75,7 @@
                                                             </div> --}}
                                                             <div class="form-group">
                                                                 <label for="">{{__('Transfer Date')}}</label>
-                                                                <input type="date" id="sliptddetail" name="sliptddetail" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-50" readonly="readonly"/>
+                                                                <input type="text" id="sliptddetail" name="sliptddetail" class="form-control form-control-sm datepicker-input" data-validation="length"  data-validation-length="0-50" readonly="readonly"/>
                                                             </div>
                                                         </div>
                                                     </div>
