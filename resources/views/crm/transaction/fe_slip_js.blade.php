@@ -1865,7 +1865,7 @@ $('#slipbld_constendorsement').change(function(){
                     var pct =  parseFloat($('#slippct').val())/100;
 
                     // var tsi = $("#sliptotalsum").val();
-                    var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+                    var conv_tsi = parseInt(ceding_share.replace(/,/g, ""));
 
                     var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
                     console.log(sum)
