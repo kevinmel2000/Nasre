@@ -1421,7 +1421,7 @@ class FeSlipController extends Controller
 
             if($slipdata==null)
             {
-                $currdate = date("d/m/Y");
+                $currdate = date("Y-m-d");
 
                 $slipdataup=SlipTable::create([
                     'number'=>$request->slipnumber,
@@ -1429,7 +1429,7 @@ class FeSlipController extends Controller
                     'insured_id'=>$request->code_ms,
                     'slip_type'=>'fe',
                     'prod_year' => $currdate,
-                    'date_transfer'=>$request->slipdatetransfer,
+                    'date_transfer'=> date("Y-m-d", strtotime($request->slipdatetransfer)),
                     'status'=>$request->slipstatus,
                     'endorsment'=>0,
                     'selisih'=>'false',
@@ -1458,10 +1458,10 @@ class FeSlipController extends Controller
                     'total_sum_pct'=>$request->sliptotalsumpct,
                     'deductible_panel'=>$deductiblelist->toJson(),
                     'extend_coverage'=>$extendcoveragelist->toJson(),
-                    'insurance_period_from'=>$request->slipipfrom,
-                    'insurance_period_to'=>$request->slipipto,
-                    'reinsurance_period_from'=>$request->sliprpfrom,
-                    'reinsurance_period_to'=>$request->sliprpto,
+                    'insurance_period_from'=>date("Y-m-d", strtotime($request->slipipfrom)),
+                    'insurance_period_to'=>date("Y-m-d", strtotime($request->slipipto)),
+                    'reinsurance_period_from'=>date("Y-m-d", strtotime($request->sliprpfrom)),
+                    'reinsurance_period_to'=>date("Y-m-d", strtotime($request->sliprpto)),
                     'proportional'=>$request->slipproportional,
                     'layer_non_proportional'=>$request->sliplayerproportional,
                     'rate'=>$request->sliprate,
@@ -1520,7 +1520,7 @@ class FeSlipController extends Controller
             else
             {
                 
-                $currdate = date("d/m/Y");
+                $currdate = date("Y-m-d");
 
                 $slipdataid=$slipdata->id;
                 $slipdataup = SlipTable::findOrFail($slipdataid);
@@ -1539,7 +1539,7 @@ class FeSlipController extends Controller
                 $slipdataup->username=Auth::user()->name;
                 $slipdataup->insured_id=$request->code_ms;
                 $slipdataup->prod_year=$currdate;
-                $slipdataup->date_transfer=$request->slipdatetransfer;
+                $slipdataup->date_transfer=date("Y-m-d", strtotime($request->slipdatetransfer));
                 $slipdataup->status=$request->slipstatus;
                 $slipdataup->endorsment=0;
                 $slipdataup->selisih="false";
@@ -1567,10 +1567,10 @@ class FeSlipController extends Controller
                 $slipdataup->total_sum_pct=$request->sliptotalsumpct; 
                 $slipdataup->deductible_panel=$deductiblelist->toJson(); 
                 $slipdataup->extend_coverage=$extendcoveragelist->toJson();  
-                $slipdataup->insurance_period_from=$request->slipipfrom;  
-                $slipdataup->insurance_period_to=$request->slipipto;  
-                $slipdataup->reinsurance_period_from=$request->sliprpfrom;  
-                $slipdataup->reinsurance_period_to=$request->sliprpto;
+                $slipdataup->insurance_period_from=date("Y-m-d", strtotime($request->slipipfrom));  
+                $slipdataup->insurance_period_to=date("Y-m-d", strtotime($request->slipipto));  
+                $slipdataup->reinsurance_period_from=date("Y-m-d", strtotime($request->sliprpfrom));  
+                $slipdataup->reinsurance_period_to=date("Y-m-d", strtotime($request->sliprpto));
                 $slipdataup->proportional=$request->slipproportional;
                 $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
                 $slipdataup->rate=$request->sliprate;  
