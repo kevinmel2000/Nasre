@@ -77,7 +77,7 @@
 <script type="text/javascript">
     function setInputFilter(textbox, inputFilter) {
       ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
-        textbox.addEventListener(event, function() {
+        textbox[0].addEventListener(event, function() {
           if (inputFilter(this.value)) {
             this.oldValue = this.value;
             this.oldSelectionStart = this.selectionStart;
