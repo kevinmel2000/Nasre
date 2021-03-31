@@ -4647,6 +4647,8 @@ function deletelocationriskdetail(id){
 
             formData.append('TotalFiles', TotalFiles);
             formData.append('slip_id', slip_id);
+            formData.append('insured_id', code_ms);
+
 
             $.ajax({
                 type:'POST',
@@ -4899,6 +4901,8 @@ function deletelocationriskdetail(id){
        
        formData.append('TotalFiles', TotalFiles);
        formData.append('slip_id', slip_id);
+       formData.append('insured_id', code_ms);
+
      
        $.ajax({
                     type:'POST',
@@ -5448,6 +5452,8 @@ function deletelocationriskdetail(id){
        
        formData.append('TotalFiles', TotalFiles);
        formData.append('slip_id', slip_id);
+       formData.append('insured_id', code_ms);
+
      
        $.ajax({
                     type:'POST',
