@@ -354,12 +354,12 @@ class FeSlipController extends Controller
         $checkinsured = Insured::where('number',$code_ms)->first();
 
         if($checkinsured){
+                // $deleteinsured= Insured::where('number','=',$code_ms)->delete();
+            if($checkinsured->share_to != null){
                 $deleteinsured= Insured::where('number','=',$code_ms)->delete();
-            // if($checkinsured->share_to != null){
-            //     $deleteinsured= Insured::where('number','=',$code_ms)->delete();
-            // }else{
+            }else{
 
-            // }
+            }
         }
 
         $insureddataup = Insured::create([
