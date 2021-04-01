@@ -5963,7 +5963,7 @@ function deletelocationriskdetail(id){
 
        //ajaxfilefunction(e);
 
-       if(current_percent == 100 && current_percent_rp == 100)
+       if(current_percent == 100)
        {
             $.ajaxSetup({
                 headers: {
@@ -6099,7 +6099,7 @@ function deletelocationriskdetail(id){
        }
        else
        {
-        swal("Error!", "Please input installment panel and Total own retention until 100%", "Insert Error");
+        swal("Error!", "Please input installment panel until 100%", "Insert Error");
        }
 
 
