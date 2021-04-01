@@ -5963,7 +5963,7 @@ function deletelocationriskdetail(id){
 
        //ajaxfilefunction(e);
 
-       if(current_percent <= 100 && current_percent_rp <= 100)
+       if(current_percent == 100 && current_percent_rp == 100)
        {
             $.ajaxSetup({
                 headers: {

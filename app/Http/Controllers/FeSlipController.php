@@ -364,6 +364,7 @@ class FeSlipController extends Controller
 
         $insureddataup = Insured::create([
                     'number'=>$code_ms,
+                    'slip_type'=>'fe',
                     'count_endorsement'=>0
                     
                 ]);
@@ -456,7 +457,9 @@ class FeSlipController extends Controller
         }
 
         $slipdataup=SlipTable::create([
-                    'number'=>$code_sl
+                    'insured_id'=>$insureddataup->number,
+                    'number'=>$code_sl,
+                    'slip_type'=>'fe'
                     
                 ]);
 
@@ -661,7 +664,9 @@ class FeSlipController extends Controller
         }
 
         $slipdataup=SlipTable::create([
-                    'number'=>$code_sl
+                    'insured_id'=>$code_ms,
+                    'number'=>$code_sl,
+                    'slip_type'=>'fe'
                     
                 ]);
 
@@ -1608,8 +1613,9 @@ class FeSlipController extends Controller
                 }
 
                 $slipdataup2 =SlipTable::create([
-                            'number'=>$new_number
-                            
+                            'insured_id'=>$slipdataup->insured_id,
+                            'number'=>$new_number,
+                            'slip_type'=>'fe'
                         ]);
                 
     
@@ -1760,7 +1766,9 @@ class FeSlipController extends Controller
                 }
 
                 $slipdataup2=SlipTable::create([
-                            'number'=>$new_number
+                            'insured_id'=>$slipdataup->insured_id,
+                            'number'=>$new_number,
+                            'slip_type'=>'fe'
                             
                         ]);
 
