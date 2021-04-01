@@ -3211,7 +3211,10 @@ $('#slipcedingupdate').change(function(){
         console.log(real_amount)
         
 
-        $.ajax({
+        if(slipinterestid == null || ceding_id == null){
+            swal('warning','please choose interest or ceding first','insert error')
+        }else{
+            $.ajax({
             url:"{{ route('locationlistdetail.store') }}",
             type:"POST",
             data:{
@@ -3376,6 +3379,7 @@ $('#slipcedingupdate').change(function(){
                     // }
                 }
             });
+        }
 
 });
 

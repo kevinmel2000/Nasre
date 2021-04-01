@@ -1632,7 +1632,7 @@ class FeSlipController extends Controller
                 $currdate = date("Y-m-d");
 
                 $slipdataid=$slipdata->number;
-                $slipdataup = SlipTable::where('slip_id',$slipdataid)->orderby('created_at','desc')->first();
+                $slipdataup = SlipTable::where('number',$slipdataid)->orderby('created_at','desc')->first();
 
                 if($slipdataup->status != $request->slipstatus){
                     StatusLog::create([
