@@ -1607,7 +1607,7 @@ class FeSlipController extends Controller
                     }
                 }
 
-                $slipdataup=SlipTable::create([
+                $slipdataup2 =SlipTable::create([
                             'number'=>$new_number
                             
                         ]);
@@ -1759,7 +1759,7 @@ class FeSlipController extends Controller
                     }
                 }
 
-                $slipdataup=SlipTable::create([
+                $slipdataup2=SlipTable::create([
                             'number'=>$new_number
                             
                         ]);
