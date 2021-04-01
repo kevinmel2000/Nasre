@@ -1722,7 +1722,7 @@ class FeSlipController extends Controller
 
                 $old_number = $slipdataup->number;
                 $newnumber = substr($old_number, 10,15);
-                $codenumber = substr($old_number, 0,10)
+                $codenumber = substr($old_number, 0,10);
 
                 if(intval($newnumber) < 9)
                 {
