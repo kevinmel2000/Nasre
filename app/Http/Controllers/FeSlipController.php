@@ -342,12 +342,27 @@ class FeSlipController extends Controller
             {
                 $code_ms = "IN". $mydate  . strval($lastid + 1);
             }
-
-
         }
         else{
             $code_ms = "IN" . $mydate . "0000" . strval(1);
         }
+
+        $checkinsured = Insured::where('number',$code_ms)->first();
+
+        if($checkinsured->share_to == null){
+            $deleteinsured= Insured::where('number','=',$code_ms)->delete();
+        }else{
+
+        }
+
+        $insureddataup = Insured::create([
+                    'number'=>$code_ms,
+                    'count_endorsement'=>0
+                    
+                ]);
+
+
+
 
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
@@ -421,7 +436,18 @@ class FeSlipController extends Controller
         //     $i++;
         // }
 
+        $checkdataslip= SlipTable::where('number',$code_sl)->first();
 
+        if($checkdataslip->total_sum_insured == null){
+            $deleteinsured= SlipTable::where('number','=',$code_sl)->delete();
+        }else{
+
+        }
+
+        $slipdataup=SlipTable::create([
+                    'number'=>$code_sl
+                    
+                ]);
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
@@ -616,7 +642,18 @@ class FeSlipController extends Controller
             $slipdata=SlipTable::orderBy('id', 'desc')->first();
         }
 
-        
+        $checkdataslip= SlipTable::where('number',$code_sl)->first();
+
+        if($checkdataslip->total_sum_insured == null){
+            $deleteinsured= SlipTable::where('number','=',$code_sl)->delete();
+        }else{
+
+        }
+
+        $slipdataup=SlipTable::create([
+                    'number'=>$code_sl
+                    
+                ]);
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
