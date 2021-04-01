@@ -545,7 +545,7 @@ function updateMarkerPosition(latLng)
       var firstWordsdata2 = firstWordsdata.join('');
      
       var codenew=document.getElementById('code').value;
-      var codenew2=codenew.substring(0,6)+""+firstWordsdata2;
+      var codenew2=firstWordsdata2+""+codenew.substring(0,6);
 
       document.getElementById('address').value=results[0].formatted_address;
       
@@ -769,7 +769,7 @@ function updateMarkerPosition2(latLng)
       var firstWordsdata2 = firstWordsdata.join('');
      
       var codenew=document.getElementById('code').value;
-      var codenew2=codenew.substring(0,6)+""+firstWordsdata2;
+      var codenew2=firstWordsdata2+""+codenew.substring(0,6);
 
       //document.getElementById('address').value=results[0].formatted_address;
       
