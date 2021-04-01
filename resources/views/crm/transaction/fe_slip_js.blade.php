@@ -126,6 +126,17 @@
                 });
             });
 
+    $('input.tanggal').keyup(function(event) {
+            // skip for arrow keys
+            if(event.which >= 37 && event.which <= 40) return;
+            console.log(event.which)
+            console.log($(this).val())
+                // format number
+                $(this).val(function(index, value) {
+                    return value.replace(/\D/g, "").replace(/\B(?=(\d{2})+(?!\d))/g, "/");
+                });
+            });
+
 
 
     $(".money").click(function() {
@@ -3802,11 +3813,12 @@ function deletelocationriskdetail(id){
 </script>
 
 <script type="text/javascript">
-    $('#amountlocation').keyup(function(e){
+    $('#amountlocation').change(function(e){
         if(e.keyCode != 9){
-            var amountlocation = $(this).val() / 100 ;
+            var amountlocation = $(this).val();
             var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
-
+            console.log(amountlocation)
+            console.log(conv_amountlocation)
             var valtsi = $('#feshareto').val();
 
             if(valtsi != null){
@@ -3815,15 +3827,19 @@ function deletelocationriskdetail(id){
 
                 var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
                 var real_sum = sum_amount.toString();
+                console.log(sum_amount)
+                console.log(real_sum)
                 $('#percentceding').val(real_sum);
             }else{
                 swal('warning!','please fill TSI insured first','error')
             }
         }
         else{
-            var amountlocation = $(this).val() / 100 ;
+            var amountlocation = $(this).val() ;
             var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
 
+            console.log(amountlocation)
+            console.log(conv_amountlocation)
             var valtsi = $('#feshareto').val();
 
             if(valtsi != null){
@@ -3832,6 +3848,8 @@ function deletelocationriskdetail(id){
 
                 var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
                 var real_sum = sum_amount.toString();
+                console.log(sum_amount)
+                console.log(real_sum)
                 $('#percentceding').val(real_sum);
             }else{
                 swal('warning!','please fill TSI insured first','error')
@@ -4015,14 +4033,16 @@ function deletelocationriskdetail(id){
    $('#sliprate').change(function(){
         var rate_lower = $('#slipbcla').val();
         var rate_upper = $('#slipbcua').val();
-        var rate = $(this).val();
-        if(rate_upper != null || rate_lower != null){
+        var rate = $('#sliprate').val();
+        if(rate_upper != '' || rate_lower != ''){
             var rate_lower_val = parseFloat(rate_lower);
             var rate_upper_val = parseFloat(rate_upper);
-            var rate_val = parseFloat(rate);
+            var rate_val = parseFloat(rate) / 1000;
             if(rate_val < rate_lower_val && rate_val > rate_upper_val ){
                 swal('warning','please input rate between rate lower and rate upper building','input error')
             }
+        }else{
+            swal('warning','please choose building const first','error')
         }
    });
 
@@ -4281,29 +4301,34 @@ function deletelocationriskdetail(id){
     }
 });
 
-   $('#slipipamount').keyup(function(e){
+   $('#slipipamount').change(function(e){
         if(e.keyCode != 9){
                 var amount =  $(this).val();
                 var conv_amount = parseFloat(amount.replace(/,/g, ""));
-
+                console.log(amount)
+                console.log(conv_amount)
                 var sumnetprtonr = $("#slipnetprmtonr").val();
                 var conv_sumnetprtonr = parseInt(sumnetprtonr.replace(/,/g, ""));
 
                 var sum = isNaN((conv_amount /  conv_sumnetprtonr) * 100) ? 0 :((conv_amount /  conv_sumnetprtonr) * 100).toFixed(2);
                 var real_sum = sum.toString();
+                console.log(sum)
+                console.log(real_sum)
 
                 $('#slipippercentage').val(real_sum);
                 // $('#slipipamount2').val(real_sum);
             }else{
                  var amount =  $(this).val();
                 var conv_amount = parseFloat(amount.replace(/,/g, ""));
-
+                console.log(amount)
+                console.log(conv_amount)
                 var sumnetprtonr = $("#slipnetprmtonr").val();
                 var conv_sumnetprtonr = parseInt(sumnetprtonr.replace(/,/g, ""));
-
+                
                 var sum = isNaN((conv_amount /  conv_sumnetprtonr) * 100) ? 0 :((conv_amount /  conv_sumnetprtonr) * 100).toFixed(2);
                 var real_sum = sum.toString();
-
+                console.log(sum)
+                console.log(real_sum)
                 $('#slipippercentage').val(real_sum);
             }
    });

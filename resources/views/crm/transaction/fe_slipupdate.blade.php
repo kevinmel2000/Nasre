@@ -1007,7 +1007,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Insurance Periode')}}:</label> 
-                                                            <input type="text" class="form-control form-control-sm datepicker-input" value="" data-target="#date" id="slipipfrom" name="slipipfrom" pattern="\d{2}/?\d{2}/?\d{4}">
+                                                            <input type="text" class="form-control form-control-sm datepicker-input tanggal" value="" data-target="#date" id="slipipfrom" name="slipipfrom" >
                                                          </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -1017,7 +1017,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                            <input type="text" class="form-control form-control-sm datepicker-input"  value="" data-target="#date" id="slipipto" name="slipipto" pattern="\d{2}/?\d{2}/?\d{4}">
+                                                            <input type="text" class="form-control form-control-sm datepicker-input tanggal"  value="" data-target="#date" id="slipipto" name="slipipto" >
                                                                         
                                                         </div>
                                                     </div>
@@ -1026,7 +1026,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Reinsurance Periode')}}:</label>
-                                                            <input type="text" class="form-control form-control-sm datetimepicker-input" value=""  id="sliprpfrom" name="sliprpfrom" pattern="\d{2}/?\d{2}/?\d{4}">               
+                                                            <input type="text" class="form-control form-control-sm datetimepicker-input tanggal" value=""  id="sliprpfrom" name="sliprpfrom" >               
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -1036,7 +1036,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                            <input type="text" class="form-control form-control-sm datetimepicker-input" value=""   id="sliprpto" name="sliprpto" pattern="\d{2}/?\d{2}/?\d{4}">       
+                                                            <input type="text" class="form-control form-control-sm datetimepicker-input tanggal" value=""   id="sliprpto" name="sliprpto" >       
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1291,7 +1291,7 @@
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                         <div class="input-group " id="dateinstallment" >
-                                                                                                <input type="text" id="slipipdate" class="form-control form-control-sm datetimepicker-input" name="slipipdate" pattern="\d{2}/?\d{2}/?\d{4}">
+                                                                                                <input type="text" id="slipipdate" class="form-control form-control-sm datetimepicker-input tanggal" name="slipipdate" >
                                                                                         </div>
                                                                                 </div>
                                                                             </td>
