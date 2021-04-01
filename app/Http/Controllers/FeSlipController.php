@@ -1559,7 +1559,7 @@ class FeSlipController extends Controller
                 $new_nasre_share = $request->insured_share;
 
     
-                if($new_nasre_share != $old_sumshare){
+                if($new_nasre_share != $new_nasre_share){
                     $msdata = Insured::findOrFail($insdata->id);
     
                     $msdata->share_from=$new_nasre_share;
@@ -1711,7 +1711,7 @@ class FeSlipController extends Controller
                 $new_nasre_share = $request->insured_share;
 
     
-                if($new_nasre_share != $old_sumshare){
+                if($new_nasre_share != $old_nasre_share){
                     $msdata = Insured::findOrFail($insdata->id);
     
                     $msdata->share_from=$new_nasre_share;
