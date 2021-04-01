@@ -146,7 +146,11 @@ class FinancialLineSlipController extends Controller
         $costumer=Customer::orderby('id','asc')->get();
         
         $currdate = date("d/m/Y");
+        $currdate2 = date("Y-m-d");
+
         $insured = Insured::orderby('id','asc')->get();
+        $insured_now = Insured::whereDate('created_at',$currdate2)->orderby('id','asc')->get();
+
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
         $cob = COB::where('form','fl')->orderby('id','asc')->get();
@@ -162,7 +166,7 @@ class FinancialLineSlipController extends Controller
 
 
         $fl_ids = response()->json($insured->modelKeys());
-        $lastid = count($insured);
+        $lastid = count($insured_now);
         $sliplastid = count($slip);
 
         
@@ -196,6 +200,8 @@ class FinancialLineSlipController extends Controller
 
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
+        $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','fl')->where('insured_id',$code_ms)->orderby('id','asc')->get();
+        $sliplastid = count($slip_now);
 
         if($sliplastid != null){
             if($sliplastid < 9)
@@ -468,7 +474,7 @@ class FinancialLineSlipController extends Controller
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();       
     
         $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
+        
         $locationlist=[];
 
         if(!empty($locationlist2))
@@ -1131,13 +1137,13 @@ class FinancialLineSlipController extends Controller
             $user = Auth::user();
             
             $slipdata= SlipTable::where('id','=',$request->slipid)->first();
-            $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->get();
+            $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->where('selisih','=','false')->get();
             $insureddata = Insured::where('number','=',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->first();
 
             // $id_ed = ($slipdata->id + 1);
             $id_ed = ($slipdata->endorsment + 1);
             
-            $slipdatalast= SlipTable::where('endorsment',$id_ed)->first();
+            $slipdatalast= SlipTable::where('endorsment',$id_ed)->where('id','=',$request->slipid)->first();
             // dd($slipdatalast);
             // $interestlist= InterestInsuredTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
             $installmentlist= InstallmentTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
@@ -1158,6 +1164,7 @@ class FinancialLineSlipController extends Controller
             }
             else
             {
+                
                 if($slipdatalast == null)
                 {
 
@@ -1171,9 +1178,12 @@ class FinancialLineSlipController extends Controller
                     $jsoniptlistup = ' ';
                     $rctlistup = ' ';
                     $jsonrctlistup = ' ';
+                    $risklocationlistdetail = '';
 
-                    if($locationlist){
-                        foreach($locationlist as $ll){
+                    if(!empty($locationlist))
+                    {
+                        foreach($locationlist as $ll)
+                        {
                             $locationlistup = TransLocationTemp::create([
                                 'insured_id'=>$ll->insured_id,
                                 'lookup_location_id'=>$ll->lookup_location_id,
@@ -1335,6 +1345,7 @@ class FinancialLineSlipController extends Controller
                                         'insured_id'=>$slt->insured_id,
                                         'slip_type'=>'fl',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1385,6 +1396,7 @@ class FinancialLineSlipController extends Controller
                                         'insured_id'=>$slt->insured_id,
                                         'slip_type'=>'fl',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1435,6 +1447,7 @@ class FinancialLineSlipController extends Controller
                                         'insured_id'=>$slt->insured_id,
                                         'slip_type'=>'fl',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1484,6 +1497,7 @@ class FinancialLineSlipController extends Controller
                                         'insured_id'=>$slt->insured_id,
                                         'slip_type'=>'fl',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1525,7 +1539,9 @@ class FinancialLineSlipController extends Controller
                     
                                     ]);
                             }
-                        }else{
+                        }
+                        else
+                        {
                             foreach($slipdatalist as $slt){
                                 $slipdataup = SlipTable::create([
                                         'number'=>$slt->number,
@@ -1533,6 +1549,7 @@ class FinancialLineSlipController extends Controller
                                         'insured_id'=>$slt->insured_id,
                                         'slip_type'=>'fl',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1580,25 +1597,26 @@ class FinancialLineSlipController extends Controller
 
                     
 
-                        $insureddataup = Insured::create([
-                            'number'=>$insureddata->number,
-                            'slip_type'=>'fl',
-                            'insured_prefix' => $insureddata->insured_prefix,
-                            'insured_name'=>$insureddata->insured_name,
-                            'insured_suffix'=>$insureddata->insured_suffix,
-                            'share'=>$insureddata->share,
-                            'share_from'=>$insureddata->share_from,
-                            'share_to'=>$insureddata->share_to,
-                            'coincurance'=>$insureddata->coincurance,
-                            'location'=>$lookuplocationlist->toJson(),
-                            'uy'=>$insureddata->uy,
-                            'count_endorsement' => ($insureddata->count_endorsement + 1)
-                        ]);
+                    $insureddataup = Insured::create([
+                        'number'=>$insureddata->number,
+                        'slip_type'=>'fe',
+                        'insured_prefix' => $insureddata->insured_prefix,
+                        'insured_name'=>$insureddata->insured_name,
+                        'insured_suffix'=>$insureddata->insured_suffix,
+                        'share'=>$insureddata->share,
+                        'share_from'=>$insureddata->share_from,
+                        'share_to'=>$insureddata->share_to,
+                        'coincurance'=>$insureddata->coincurance,
+                        'location'=>$lookuplocationlist->toJson(),
+                        'uy'=>$insureddata->uy,
+                        'count_endorsement' => ($insureddata->count_endorsement + 1)
+                    ]);
     
                     $notification = array(
-                        'message' => 'Financial Line Slip added Endorsement successfully!',
+                        'message' => 'Fire & Enginering Slip added Endorsement successfully!',
                         'alert-type' => 'success'
                     );
+
 
                     
 
@@ -1617,6 +1635,7 @@ class FinancialLineSlipController extends Controller
                     $msdata->save();
 
 
+
                     $insdata =  Insured::findOrFail($insureddata->id);
                     $insdata->share_from = ($insureddata->share_from * (-1));
                     $insdata->share_to = ($insureddata->share_to * (-1));
@@ -1624,10 +1643,40 @@ class FinancialLineSlipController extends Controller
 
                     $cedingbroker = CedingBroker::where('id',$slipdataup->source)->first();
                     $ceding = CedingBroker::where('id',$slipdataup->source_2)->first();
+                    
+                    $slipdatalist2= SlipTable::where('insured_id','=',$slipdata->insured_id)->get();
 
+                    //$locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+        
+                    $slipdatalist=array();
+                    foreach($slipdatalist2 as $datadetail)
+                    {
+                        if($datadetail->cedingbroker)
+                        {
+                            $dataceding=CedingBroker::where('id','=',$datadetail->source)->first();
+                            $datadetail->cedingbroker = $dataceding->name;
+                            $datadetail->ceding = $dataceding->name;
+                            
+                        }
+                        else
+                        {
+                            $dataceding=CedingBroker::where('id','=',$datadetail->source)->first();
+                            $datadetail->cedingbroker = $dataceding->name;
+                            $datadetail->ceding = $dataceding->name;
+                        }
+
+
+                       
+
+                        $slipdatalist[]= $datadetail;
+                    }
+
+                
                     return response()->json(
                         [
                             'slip_data' => $slipdataup->toJson(),
+                            'slip_dataarray' => json_encode($slipdatalist),
                             'insured_data' => $insureddataup->toJson(),
                             'location_data' => $lookuplocationlist->toJson(),
                             'risklocation_data' => $risklocationlistdetail->toJson(),
@@ -1638,7 +1687,7 @@ class FinancialLineSlipController extends Controller
                 else
                 {
                     $notification = array(
-                        'message' => 'Financial Line Slip added Endorsement Failed! data already endorsed!',
+                        'message' => 'Fire & Enginering Slip added Endorsement Failed! data already endorsed!',
                         'alert-type' => 'error'
                     );
 
@@ -1664,7 +1713,6 @@ class FinancialLineSlipController extends Controller
         }
         
     }
-
 
     public function update(Request $request, $felookuplocation)
     {
@@ -1699,7 +1747,7 @@ class FinancialLineSlipController extends Controller
             $felookuplocations->update($data);
 
             $notification = array(
-                'message' => 'Fire & Engineering Lookup Location updated successfully!',
+                'message' => 'Financial Line Lookup Location updated successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);

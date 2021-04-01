@@ -292,9 +292,10 @@ class FeSlipController extends Controller
         $costumer=Customer::orderby('id','asc')->get();
 
         $currdate = date("d/m/Y");
+        $currdate2 = date("Y-m-d");
         // $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
-        $insured_now = Insured::whereDate('created_at',$currdate)->orderby('id','asc')->get();
+        $insured_now = Insured::whereDate('created_at',$currdate2)->orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         
         $currency = Currency::orderby('id','asc')->get();
@@ -307,12 +308,14 @@ class FeSlipController extends Controller
         $felookuptable = collect(FelookupLocation::orderby('id','asc')->get());
         $felookup = $felookuptable->unique('country_id');
         $felookup->values()->all();
+        
         // $felookup = DB::table('fe_lookup_location')
         //             ->join('countries','countries.id','=','fe_lookup_location.country_id')
         //             ->select('fe_lookup_location.*','countries.code','countries.name')        
         //             ->orderby('id','asc')
         //             ->distinct('fe_lookup_location.country_id')
         //             ->get();
+        
         $cnd = ConditionNeeded::orderby('id','asc')->get();
         $deductibletype= DeductibleType::orderby('id','asc')->get();
         $extendedcoverage= ExtendedCoverage::orderby('id','asc')->get();
@@ -321,7 +324,8 @@ class FeSlipController extends Controller
         $lastid = count($insured_now);
         
 
-        if($lastid != null){
+        if($lastid != null)
+        {
             if($lastid < 9)
             {
                 $code_ms = "IN". $mydate . "0000" . strval($lastid + 1);
@@ -366,11 +370,12 @@ class FeSlipController extends Controller
 
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
-        $slip_now = SlipTable::whereDate('created_at',$currdate)->where('slip_type','fe')->where('insured_id',$code_ms)->orderby('id','asc')->get();
+        $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','fe')->where('insured_id',$code_ms)->orderby('id','asc')->get();
         $sliplastid = count($slip_now);
         // dd($sliplastid);
 
-        if($sliplastid != null){
+        if($sliplastid != null)
+        {
             if($sliplastid < 9)
             {
                 $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + 1);
@@ -394,7 +399,8 @@ class FeSlipController extends Controller
 
             
         }
-        else{
+        else
+        {
             $code_sl = "FE".  $mydate . "0000" . strval(1);
         }
 
@@ -666,8 +672,10 @@ class FeSlipController extends Controller
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('count_endorsement',$insureddata->count_endorsement)->orderby('id','desc')->get();       
         
         
-        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->where('count_endorsement',$insureddata->count_endorsement)->orderby('id','desc')->get();
-        // dd($locationlist2);
+        //$locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->where('count_endorsement',$insureddata->count_endorsement)->orderby('id','desc')->get();
+        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+         
+        //dd($locationlist2);
         
         $locationlist=[];
 
@@ -675,7 +683,8 @@ class FeSlipController extends Controller
         {
             foreach($locationlist2 as $datadetail)
             {
-                $risklocationdetaildata= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->where('count_endorsement',$insureddata->count_endorsement)->get();
+                //$risklocationdetaildata= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->where('count_endorsement',$insureddata->count_endorsement)->get();
+                $risklocationdetaildata= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
                 
                 $riskdetaillist=[];
 
@@ -1222,7 +1231,8 @@ class FeSlipController extends Controller
         return response()->json(
             [
                 'id' => $slipdata->id,
-                'code_sl'=>$slipdata->number,
+                'code_slreal'=>$slipdata->number,
+                'code_sl'=>$code_sl,
                 'insured_id' => $slipdata->insured_id,
                 'slip_type' => $slipdata->slip_type,
                 'username' => $slipdata->username,
@@ -1712,13 +1722,13 @@ class FeSlipController extends Controller
             $user = Auth::user();
             
             $slipdata= SlipTable::where('id','=',$request->slipid)->first();
-            $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->get();
+            $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->where('selisih','=','false')->get();
             $insureddata = Insured::where('number','=',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->first();
 
             // $id_ed = ($slipdata->id + 1);
             $id_ed = ($slipdata->endorsment + 1);
             
-            $slipdatalast= SlipTable::where('endorsment',$id_ed)->first();
+            $slipdatalast= SlipTable::where('endorsment',$id_ed)->where('id','=',$request->slipid)->first();
             // dd($slipdatalast);
             // $interestlist= InterestInsuredTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
             $installmentlist= InstallmentTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
@@ -1739,6 +1749,7 @@ class FeSlipController extends Controller
             }
             else
             {
+                
                 if($slipdatalast == null)
                 {
 
@@ -1752,9 +1763,12 @@ class FeSlipController extends Controller
                     $jsoniptlistup = ' ';
                     $rctlistup = ' ';
                     $jsonrctlistup = ' ';
+                    $risklocationlistdetail = '';
 
-                    if($locationlist){
-                        foreach($locationlist as $ll){
+                    if(!empty($locationlist))
+                    {
+                        foreach($locationlist as $ll)
+                        {
                             $locationlistup = TransLocationTemp::create([
                                 'insured_id'=>$ll->insured_id,
                                 'lookup_location_id'=>$ll->lookup_location_id,
@@ -1916,6 +1930,7 @@ class FeSlipController extends Controller
                                         'insured_id'=>$slt->insured_id,
                                         'slip_type'=>'fe',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1966,6 +1981,7 @@ class FeSlipController extends Controller
                                         'insured_id'=>$slt->insured_id,
                                         'slip_type'=>'fe',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -2016,6 +2032,7 @@ class FeSlipController extends Controller
                                         'insured_id'=>$slt->insured_id,
                                         'slip_type'=>'fe',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -2065,6 +2082,7 @@ class FeSlipController extends Controller
                                         'insured_id'=>$slt->insured_id,
                                         'slip_type'=>'fe',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -2106,7 +2124,9 @@ class FeSlipController extends Controller
                     
                                     ]);
                             }
-                        }else{
+                        }
+                        else
+                        {
                             foreach($slipdatalist as $slt){
                                 $slipdataup = SlipTable::create([
                                         'number'=>$slt->number,
@@ -2114,6 +2134,7 @@ class FeSlipController extends Controller
                                         'insured_id'=>$slt->insured_id,
                                         'slip_type'=>'fe',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -2161,25 +2182,26 @@ class FeSlipController extends Controller
 
                     
 
-                        $insureddataup = Insured::create([
-                            'number'=>$insureddata->number,
-                            'slip_type'=>'fe',
-                            'insured_prefix' => $insureddata->insured_prefix,
-                            'insured_name'=>$insureddata->insured_name,
-                            'insured_suffix'=>$insureddata->insured_suffix,
-                            'share'=>$insureddata->share,
-                            'share_from'=>$insureddata->share_from,
-                            'share_to'=>$insureddata->share_to,
-                            'coincurance'=>$insureddata->coincurance,
-                            'location'=>$lookuplocationlist->toJson(),
-                            'uy'=>$insureddata->uy,
-                            'count_endorsement' => ($insureddata->count_endorsement + 1)
-                        ]);
+                    $insureddataup = Insured::create([
+                        'number'=>$insureddata->number,
+                        'slip_type'=>'fe',
+                        'insured_prefix' => $insureddata->insured_prefix,
+                        'insured_name'=>$insureddata->insured_name,
+                        'insured_suffix'=>$insureddata->insured_suffix,
+                        'share'=>$insureddata->share,
+                        'share_from'=>$insureddata->share_from,
+                        'share_to'=>$insureddata->share_to,
+                        'coincurance'=>$insureddata->coincurance,
+                        'location'=>$lookuplocationlist->toJson(),
+                        'uy'=>$insureddata->uy,
+                        'count_endorsement' => ($insureddata->count_endorsement + 1)
+                    ]);
     
                     $notification = array(
                         'message' => 'Fire & Enginering Slip added Endorsement successfully!',
                         'alert-type' => 'success'
                     );
+
 
                     
 
@@ -2198,6 +2220,7 @@ class FeSlipController extends Controller
                     $msdata->save();
 
 
+
                     $insdata =  Insured::findOrFail($insureddata->id);
                     $insdata->share_from = ($insureddata->share_from * (-1));
                     $insdata->share_to = ($insureddata->share_to * (-1));
@@ -2205,10 +2228,40 @@ class FeSlipController extends Controller
 
                     $cedingbroker = CedingBroker::where('id',$slipdataup->source)->first();
                     $ceding = CedingBroker::where('id',$slipdataup->source_2)->first();
+                    
+                    $slipdatalist2= SlipTable::where('insured_id','=',$slipdata->insured_id)->get();
 
+                    //$locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+        
+                    $slipdatalist=array();
+                    foreach($slipdatalist2 as $datadetail)
+                    {
+                        if($datadetail->cedingbroker)
+                        {
+                            $dataceding=CedingBroker::where('id','=',$datadetail->source)->first();
+                            $datadetail->cedingbroker = $dataceding->name;
+                            $datadetail->ceding = $dataceding->name;
+                            
+                        }
+                        else
+                        {
+                            $dataceding=CedingBroker::where('id','=',$datadetail->source)->first();
+                            $datadetail->cedingbroker = $dataceding->name;
+                            $datadetail->ceding = $dataceding->name;
+                        }
+
+
+                       
+
+                        $slipdatalist[]= $datadetail;
+                    }
+
+                
                     return response()->json(
                         [
                             'slip_data' => $slipdataup->toJson(),
+                            'slip_dataarray' => json_encode($slipdatalist),
                             'insured_data' => $insureddataup->toJson(),
                             'location_data' => $lookuplocationlist->toJson(),
                             'risklocation_data' => $risklocationlistdetail->toJson(),

@@ -153,7 +153,12 @@ class HeMotorSlipController extends Controller
 
 
         $currdate = date("d/m/Y");
+        $currdate2 = date("Y-m-d");
+
         $insured = Insured::orderby('id','asc')->get();
+        $insured_now = Insured::whereDate('created_at',$currdate2)->orderby('id','asc')->get();
+
+
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
         $cob = COB::where('form','hem')->orderby('id','asc')->get();
@@ -167,7 +172,9 @@ class HeMotorSlipController extends Controller
         $deductibletype= DeductibleType::orderby('id','asc')->get();
         $extendedcoverage= ExtendedCoverage::orderby('id','asc')->get();
 
-        $lastid = count($insured);
+        //$lastid = count($insured);
+        //$hem_ids = response()->json($insured->modelKeys());
+        $lastid = count($insured_now);
         $sliplastid = count($slip);
 
         if($lastid != null){
@@ -200,6 +207,8 @@ class HeMotorSlipController extends Controller
 
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
+        $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','hem')->where('insured_id',$code_ms)->orderby('id','asc')->get();
+        $sliplastid = count($slip_now);
 
         if($sliplastid != null){
             if($sliplastid < 9)
@@ -875,7 +884,7 @@ class HeMotorSlipController extends Controller
         {
 
             $notification = array(
-                'message' => 'Fire & Engginering Insured added Failed!',
+                'message' => 'Hem & Motor Insured added Failed!',
                 'alert-type' => 'success'
             );
 
@@ -1164,6 +1173,7 @@ class HeMotorSlipController extends Controller
 
     public function storeendorsementhemslip(Request $request,$code_ms)
     {
+       
         $validator = $request->validate([
             'slipid'=>'required'
         ]);
@@ -1174,13 +1184,13 @@ class HeMotorSlipController extends Controller
             $user = Auth::user();
             
             $slipdata= SlipTable::where('id','=',$request->slipid)->first();
-            $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->get();
+            $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->where('selisih','=','false')->get();
             $insureddata = Insured::where('number','=',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->first();
 
             // $id_ed = ($slipdata->id + 1);
             $id_ed = ($slipdata->endorsment + 1);
             
-            $slipdatalast= SlipTable::where('endorsment',$id_ed)->first();
+            $slipdatalast= SlipTable::where('endorsment',$id_ed)->where('id','=',$request->slipid)->first();
             // dd($slipdatalast);
             // $interestlist= InterestInsuredTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
             $installmentlist= InstallmentTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
@@ -1195,12 +1205,13 @@ class HeMotorSlipController extends Controller
             if($slipdata==null)
             {
                 $notification = array(
-                    'message' => 'He & Motor Slip Endorsement Fail!',
+                    'message' => 'Fire & Engineering Slip Endorsement Fail!',
                     'alert-type' => 'danger'
                 );
             }
             else
             {
+                
                 if($slipdatalast == null)
                 {
 
@@ -1214,9 +1225,12 @@ class HeMotorSlipController extends Controller
                     $jsoniptlistup = ' ';
                     $rctlistup = ' ';
                     $jsonrctlistup = ' ';
+                    $risklocationlistdetail = '';
 
-                    if($locationlist){
-                        foreach($locationlist as $ll){
+                    if(!empty($locationlist))
+                    {
+                        foreach($locationlist as $ll)
+                        {
                             $locationlistup = TransLocationTemp::create([
                                 'insured_id'=>$ll->insured_id,
                                 'lookup_location_id'=>$ll->lookup_location_id,
@@ -1378,6 +1392,7 @@ class HeMotorSlipController extends Controller
                                         'insured_id'=>$slt->insured_id,
                                         'slip_type'=>'hem',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1428,6 +1443,7 @@ class HeMotorSlipController extends Controller
                                         'insured_id'=>$slt->insured_id,
                                         'slip_type'=>'hem',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1478,6 +1494,7 @@ class HeMotorSlipController extends Controller
                                         'insured_id'=>$slt->insured_id,
                                         'slip_type'=>'hem',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1527,6 +1544,7 @@ class HeMotorSlipController extends Controller
                                         'insured_id'=>$slt->insured_id,
                                         'slip_type'=>'hem',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1568,7 +1586,9 @@ class HeMotorSlipController extends Controller
                     
                                     ]);
                             }
-                        }else{
+                        }
+                        else
+                        {
                             foreach($slipdatalist as $slt){
                                 $slipdataup = SlipTable::create([
                                         'number'=>$slt->number,
@@ -1576,6 +1596,7 @@ class HeMotorSlipController extends Controller
                                         'insured_id'=>$slt->insured_id,
                                         'slip_type'=>'hem',
                                         'prod_year' => $slt->prod_year,
+                                        'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
                                         'status'=>$slt->status,
                                         'endorsment'=>($slt->endorsement + 1),
@@ -1623,25 +1644,26 @@ class HeMotorSlipController extends Controller
 
                     
 
-                        $insureddataup = Insured::create([
-                            'number'=>$insureddata->number,
-                            'slip_type'=>'hem',
-                            'insured_prefix' => $insureddata->insured_prefix,
-                            'insured_name'=>$insureddata->insured_name,
-                            'insured_suffix'=>$insureddata->insured_suffix,
-                            'share'=>$insureddata->share,
-                            'share_from'=>$insureddata->share_from,
-                            'share_to'=>$insureddata->share_to,
-                            'coincurance'=>$insureddata->coincurance,
-                            'location'=>$lookuplocationlist->toJson(),
-                            'uy'=>$insureddata->uy,
-                            'count_endorsement' => ($insureddata->count_endorsement + 1)
-                        ]);
+                    $insureddataup = Insured::create([
+                        'number'=>$insureddata->number,
+                        'slip_type'=>'fe',
+                        'insured_prefix' => $insureddata->insured_prefix,
+                        'insured_name'=>$insureddata->insured_name,
+                        'insured_suffix'=>$insureddata->insured_suffix,
+                        'share'=>$insureddata->share,
+                        'share_from'=>$insureddata->share_from,
+                        'share_to'=>$insureddata->share_to,
+                        'coincurance'=>$insureddata->coincurance,
+                        'location'=>$lookuplocationlist->toJson(),
+                        'uy'=>$insureddata->uy,
+                        'count_endorsement' => ($insureddata->count_endorsement + 1)
+                    ]);
     
                     $notification = array(
-                        'message' => 'He & Motor Slip added Endorsement successfully!',
+                        'message' => 'Fire & Enginering Slip added Endorsement successfully!',
                         'alert-type' => 'success'
                     );
+
 
                     
 
@@ -1660,6 +1682,7 @@ class HeMotorSlipController extends Controller
                     $msdata->save();
 
 
+
                     $insdata =  Insured::findOrFail($insureddata->id);
                     $insdata->share_from = ($insureddata->share_from * (-1));
                     $insdata->share_to = ($insureddata->share_to * (-1));
@@ -1667,10 +1690,40 @@ class HeMotorSlipController extends Controller
 
                     $cedingbroker = CedingBroker::where('id',$slipdataup->source)->first();
                     $ceding = CedingBroker::where('id',$slipdataup->source_2)->first();
+                    
+                    $slipdatalist2= SlipTable::where('insured_id','=',$slipdata->insured_id)->get();
 
+                    //$locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+        
+                    $slipdatalist=array();
+                    foreach($slipdatalist2 as $datadetail)
+                    {
+                        if($datadetail->cedingbroker)
+                        {
+                            $dataceding=CedingBroker::where('id','=',$datadetail->source)->first();
+                            $datadetail->cedingbroker = $dataceding->name;
+                            $datadetail->ceding = $dataceding->name;
+                            
+                        }
+                        else
+                        {
+                            $dataceding=CedingBroker::where('id','=',$datadetail->source)->first();
+                            $datadetail->cedingbroker = $dataceding->name;
+                            $datadetail->ceding = $dataceding->name;
+                        }
+
+
+                       
+
+                        $slipdatalist[]= $datadetail;
+                    }
+
+                
                     return response()->json(
                         [
                             'slip_data' => $slipdataup->toJson(),
+                            'slip_dataarray' => json_encode($slipdatalist),
                             'insured_data' => $insureddataup->toJson(),
                             'location_data' => $lookuplocationlist->toJson(),
                             'risklocation_data' => $risklocationlistdetail->toJson(),
@@ -1681,7 +1734,7 @@ class HeMotorSlipController extends Controller
                 else
                 {
                     $notification = array(
-                        'message' => 'He & Motor Slip added Endorsement Failed! data already endorsed!',
+                        'message' => 'Fire & Enginering Slip added Endorsement Failed! data already endorsed!',
                         'alert-type' => 'error'
                     );
 
@@ -1697,7 +1750,7 @@ class HeMotorSlipController extends Controller
         {
 
             $notification = array(
-                'message' => 'He & Motor Slip added Failed!',
+                'message' => 'Hem & Motor Slip added Failed!',
                 'alert-type' => 'success'
             );
 
