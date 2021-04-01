@@ -159,7 +159,8 @@
                                                                                     <th>Cert No</th>
                                                                                     <th>Slip No</th>
                                                                                     <th>Policy No</th>
-                                                                                    <th>amount</th>
+                                                                                    <th>Share</th>
+                                                                                    <th>Amount</th>
                                                                                     <th>Action</th>
                                                                                     </tr>
                                                                                     </thead>
@@ -178,6 +179,7 @@
                                                                                                 <td>{{ $detaillocrisk->certno }}</td>
                                                                                                 <td>{{ $detaillocrisk->slipno }}</td>
                                                                                                 <td>{{ $detaillocrisk->policyno }}</td>
+                                                                                                <td>{{ $detaillocrisk->percentage }}</td>
                                                                                                 <td>@currency($detaillocrisk->amountlocation)</td>
                                                                                                 <td>
                                                                                                 <a href="javascript:void(0)" onclick="deletelocationriskdetail({{ $detaillocrisk->id }})"><i class="fas fa-trash text-danger"></i></a>

@@ -1567,12 +1567,58 @@ class FeSlipController extends Controller
                     $msdata->share_from=$new_nasre_share;
                     $msdata->save();
                 }
+
+                $old_number = $slipdataup->number;
+                $newnumber = substr($old_number, 10,15);
+                $codenumber = substr($old_number, 0,10)
+
+                if(intval($newnumber) < 9)
+                {
+                    $count = substr($newnumber,14);
+                    $new_number = $codenumber . "0000" . strval(intval($count) + 1);
+                }   
+                elseif(intval($newnumber) > 8 && intval($newnumber) < 99)
+                {
+                    $count = substr($newnumber,13);
+                    $new_number = $codenumber . "000" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 98 && intval($newnumber) < 999)
+                {
+                    $count = substr($newnumber,12);
+                    $new_number = $codenumber . "00" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 998 && intval($newnumber) < 9999)
+                {
+                    $count = substr($newnumber,11);
+                    $new_number = $codenumber . "0" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 9998 && intval($newnumber) < 99999)
+                {
+                    $count = substr($newnumber,10);
+                    $new_number = $codenumber  . strval(intval($count) + 1);
+                }
+
+                $checkdataslip= SlipTable::where('number',$new_number)->first();
+
+                if($checkdataslip){
+                    if($checkdataslip->total_sum_insured != null){
+                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
+                    }else{
+                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
+                        
+                    }
+                }
+
+                $slipdataup=SlipTable::create([
+                            'number'=>$new_number
+                            
+                        ]);
                 
     
                 return response()->json(
                     [
                         'id' => $slipdataup->id,
-                        'number' => $slipdataup->number,
+                        'number' => $slipdataup->new_number,
                         'slipstatus' => $slipdataup->status,
                         'ceding'=>$slipdataup->ceding->name,
                         'cedingbroker'=>$slipdataup->cedingbroker->name,
@@ -1673,12 +1719,59 @@ class FeSlipController extends Controller
                     $msdata->share_from=$new_nasre_share;
                     $msdata->save();
                 }
+
+                $old_number = $slipdataup->number;
+                $newnumber = substr($old_number, 10,15);
+                $codenumber = substr($old_number, 0,10)
+
+                if(intval($newnumber) < 9)
+                {
+                    $count = substr($newnumber,14);
+                    $new_number = $codenumber . "0000" . strval(intval($count) + 1);
+                }   
+                elseif(intval($newnumber) > 8 && intval($newnumber) < 99)
+                {
+                    $count = substr($newnumber,13);
+                    $new_number = $codenumber . "000" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 98 && intval($newnumber) < 999)
+                {
+                    $count = substr($newnumber,12);
+                    $new_number = $codenumber . "00" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 998 && intval($newnumber) < 9999)
+                {
+                    $count = substr($newnumber,11);
+                    $new_number = $codenumber . "0" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 9998 && intval($newnumber) < 99999)
+                {
+                    $count = substr($newnumber,10);
+                    $new_number = $codenumber  . strval(intval($count) + 1);
+                }
+
+                $checkdataslip= SlipTable::where('number',$new_number)->first();
+
+                if($checkdataslip){
+                    if($checkdataslip->total_sum_insured != null){
+                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
+                    }else{
+                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
+
+                    }
+                }
+
+                $slipdataup=SlipTable::create([
+                            'number'=>$new_number
+                            
+                        ]);
+
                 
     
                 return response()->json(
                     [
                         'id' => $slipdataup->id,
-                        'number' => $slipdataup->number,
+                        'number' => $new_number,
                         'slipstatus' => $slipdataup->status,
                         'ceding'=>$slipdataup->ceding->name,
                         'cedingbroker'=>$slipdataup->cedingbroker->name,
@@ -2363,6 +2456,7 @@ class FeSlipController extends Controller
                 $locationlist->certno=$request->certno;
                 $locationlist->slipno=$request->slipno;
                 $locationlist->policyno=$request->policyno;
+                $locationlist->percentage=$request->percent_ceding;
                 $locationlist->amountlocation=$request->amountlocation;
                 $locationlist->save();
 
@@ -2393,6 +2487,7 @@ class FeSlipController extends Controller
                     'certno' => $request->certno,
                     'slipno' => $request->slipno,
                     'policyno' => $request->policyno,
+                    'percent' => $request->percent_ceding,
                     'amountlocation' => $request->amountlocation
                     // 'kurs'=> $currency->code
                 ]);

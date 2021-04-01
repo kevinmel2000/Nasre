@@ -3066,6 +3066,7 @@ $('#slipcedingupdate').change(function(){
     var city = $('#city_location').val();        
     var adrress = $('#address_location').val();
 
+
         //var slipinterestid = $('#slipinterestlistlocation').val();
         //var cnno = $('#cnno').val();
         //var certno = $('#certno').val();
@@ -3119,6 +3120,7 @@ $('#slipcedingupdate').change(function(){
                         '<th>Cert No</th>'+
                         '<th>Slip No</th>'+
                         '<th>Policy No</th>'+
+                        '<th>Share</th>'+
                         '<th>amount</th>'+
                         '<th>Action</th>'+
                         '</tr>'+
@@ -3200,6 +3202,7 @@ $('#slipcedingupdate').change(function(){
         var ceding_id = $('#ceding_id').val();
         var slipno = $('#slipno').val();
         var policyno = $('#policyno').val();
+        var percent = $('#percentceding').val();
         var amountlocation = $('#amountlocation').val();
 
         var conv_amount = amountlocation.replace(/,/g, "");
@@ -3218,6 +3221,7 @@ $('#slipcedingupdate').change(function(){
                 slipno:slipno,
                 policyno:policyno,
                 ceding_id:ceding_id,
+                percent_ceding:percent,
                 amountlocation:real_amount,
                 insurednoloc:insurednoloc,
                 // kurs:kurs,
@@ -3296,6 +3300,7 @@ $('#slipcedingupdate').change(function(){
                         '<td>'+certno+'</td>'+
                         '<td>'+slipno+'</td>'+
                         '<td>'+policyno+'</td>'+
+                        '<td>'+response.percent+'</td>'+
                         '<td>'+curr_amount+'</td>'+
                         '<td>'+
                         '<a href="javascript:void(0)" onclick="deletelocationriskdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
@@ -4050,11 +4055,11 @@ function deletelocationriskdetail(id){
     }
 });
 
+
+
    $('#slipvbroker').keyup(function(){
         var netprm_to_nr = $('#slipnetprmtonr').val();
-        if(netprm_to_nr != null){
-            swal('warning','net prm changed please change installment panel amount manually','success')
-
+        
             var feebroker = parseFloat($('#slipvbroker').val()) / 100;
             var commision =  parseFloat($('#slipcommission').val()) / 100;
             var sumgrossprmtonr = $("#slipgrossprmtonr").val();
@@ -4071,26 +4076,16 @@ function deletelocationriskdetail(id){
             $('#slipnetprmtonr2').val(real_sumnetprmtonr);
             // $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
             $('#slipsumfee').val(real_sumfeebroker);
-        }else{
-            var feebroker = parseFloat($('#slipvbroker').val()) / 100;
-            var commision =  parseFloat($('#slipcommission').val()) / 100;
-            var sumgrossprmtonr = $("#slipgrossprmtonr").val();
-            var conv_sumgrossprmtonr = parseInt(sumgrossprmtonr.replace(/,/g, ""));
-
-            var sumnetprmtonr = isNaN( conv_sumgrossprmtonr * (100/100 - commision - feebroker)) ? 0 :(conv_sumgrossprmtonr * (100/100 - commision - feebroker)).toFixed(2);
-            var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-            var sumfeebroker = isNaN( conv_sumgrossprmtonr * feebroker) ? 0 :(conv_sumgrossprmtonr * feebroker).toFixed(2);
-            var real_sumfeebroker = sumfeebroker.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-
-            $('#slipnetprmtonr').val(real_sumnetprmtonr);
-            $('#slipnetprmtonr2').val(real_sumnetprmtonr);
-            // $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
-            $('#slipsumfee').val(real_sumfeebroker);
-        }
 
 });
+
+   $('#slipvbroker').change(function(){
+
+        if( $('#installmentPanel tbody').find('tr').val().length > 0){
+            swal('warning!','netprm to nr changed, please change installment amount manually','success')
+        }
+
+   });
 
    $('#slipippercentage').keyup(function (e) {
     if(e.keyCode != 9){
@@ -6043,7 +6038,7 @@ function deletelocationriskdetail(id){
                         +'</a>'
                         +'<td></td></tr>');
 
-                    $('#slipnumber').val(response.code_sl);
+                    $('#slipnumber').val(response.number);
                     // $('#feshare').val(response.ourshare);
                     // $('#fesharefrom').val(response.sumshare);
 
