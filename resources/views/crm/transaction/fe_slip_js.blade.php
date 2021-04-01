@@ -5542,7 +5542,7 @@ function deletelocationriskdetail(id){
                 var or = $('#slipor').val();
                 var total_percent = $('#sliptotalpercentrpor').val();
 
-                if(total_percent == null){
+                if(total_percent == 100){
                         var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage) + parseInt(or)) ? 0 :(parseInt(0) + parseInt(response.percentage) + parseInt(or)) ;
                         $('#sliptotalpercentrpor').val(sum_percent);
                     }else{
