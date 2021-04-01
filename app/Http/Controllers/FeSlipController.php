@@ -354,11 +354,12 @@ class FeSlipController extends Controller
         $checkinsured = Insured::where('number',$code_ms)->first();
 
         if($checkinsured){
-            if($checkinsured->share_to != null){
-                $deleteinsured= Insured::where('number','=',$code_ms)->delete();
-            }else{
+                $deleteinsured= SlipTable::where('number','=',$code_sl)->delete();
+            // if($checkinsured->share_to != null){
+            //     $deleteinsured= Insured::where('number','=',$code_ms)->delete();
+            // }else{
 
-            }
+            // }
         }
 
         $insureddataup = Insured::create([
@@ -655,11 +656,8 @@ class FeSlipController extends Controller
         $checkdataslip= SlipTable::where('number',$code_sl)->first();
 
         if($checkdataslip){
-            if($checkdataslip->total_sum_insured != null){
                 $deleteinsured= SlipTable::where('number','=',$code_sl)->delete();
-            }else{
-
-            }
+            
         }
 
         $slipdataup=SlipTable::create([
