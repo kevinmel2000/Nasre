@@ -43,11 +43,11 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="" style="opacity: 0">{{__('insured 1')}}</label>
-                                                <input type="text"name="fesuggestinsured" id='autocomplete'  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="search for insured suggestion" required/>
+                                                <input type="text"name="fesuggestinsured" id='autocomplete' style="text-transform:uppercase;"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="search for insured suggestion" required/>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="" style="opacity: 0">{{__('insured 2')}}</label>
-                                                <input type="text" name="fesuffix" id='autocomplete2' class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="suffix: QQ or TBk" />
+                                                <input type="text" name="fesuffix" id='autocomplete2' style="text-transform:uppercase;" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="suffix: QQ or TBk" />
                                                 
                                             </div>
                                         </div>
@@ -473,7 +473,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Amount')}}</label>
-                                                <input type="text" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                <input type="text" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  />
                                             </div>
                                         </div>
                                     </div>
@@ -686,7 +686,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label for="">{{__('Source')}}</label>
+                                                            <label for="">{{__('Ceding/Broker')}}</label>
                                                             <select id="slipcedingbroker" name="slipcedingbroker" class="e1 form-control form-control-sm ">
                                                                 <option value=""  selected disabled >Ceding or Broker</option>
                                                                 @foreach($cedingbroker as $cb)
@@ -695,6 +695,7 @@
                                                             </select>
                                                         </div>    
                                                         <div class="form-group">
+                                                            <label for="">{{__('Source')}}</label>
                                                             <select id="slipceding" name="slipceding" class="e1 form-control form-control-sm ">
                                                                 <option value="placehoder" selected disabled>Ceding </option>
                                                                 {{-- @foreach($ceding as $cd)
@@ -1065,7 +1066,7 @@
                                                                         <div class="form-group">
                                                                             <label>{{__('Insurance Periode')}}:</label>
                                                                             {{-- <div class="input-group date" id="dateinfrom" data-target-input="nearest"> --}}
-                                                                                <input type="text" class="form-control form-control-sm" data-target="#date" id="slipipfrom" name="slipipfrom">
+                                                                                <input type="text" class="form-control form-control-sm" data-target="#date" id="slipipfrom" name="slipipfrom" pattern="\d{2}/?\d{2}/?\d{4}">
                                                                                 {{-- <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
                                                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                                 </div>
@@ -1080,7 +1081,7 @@
                                                                         <div class="form-group">
                                                                             <label style="opacity: 0;">{{__('p')}}:</label>
                                                                             {{-- <div class="input-group date" id="dateinto" data-target-input="nearest"> --}}
-                                                                                <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipipto" name="slipipto">
+                                                                                <input type="text" class="form-control form-control-sm datepicker-input" data-target="#date" id="slipipto" name="slipipto" pattern="\d{2}/?\d{2}/?\d{4}">
                                                                                 {{-- <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
                                                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                                 </div>
@@ -1093,7 +1094,7 @@
                                                                         <div class="form-group">
                                                                             <label>{{__('Reinsurance Periode')}}:</label>
                                                                             {{-- <div class="input-group date" id="daterefrom" data-target-input="nearest"> --}}
-                                                                                <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" id="sliprpfrom" name="sliprpfrom">
+                                                                                <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" id="sliprpfrom" name="sliprpfrom" pattern="\d{2}/?\d{2}/?\d{4}">
                                                                                 
                                                                                 {{-- <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
                                                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -1109,7 +1110,7 @@
                                                                         <div class="form-group">
                                                                             <label style="opacity: 0;">{{__('p')}}:</label>
                                                                             {{-- <div class="input-group date" id="datereto" data-target-input="nearest"> --}}
-                                                                                <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" id="sliprpto" name="sliprpto">
+                                                                                <input type="text" class="form-control form-control-sm datetimepicker-input" data-target="#date" id="sliprpto" name="sliprpto" pattern="\d{2}/?\d{2}/?\d{4}">
                                                                                 {{-- <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
                                                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                                 </div>
@@ -1388,7 +1389,7 @@
                                                                                                     <td>
                                                                                                         <div class="form-group">
                                                                                                             <div class="input-group" id="dateinstallment" >
-                                                                                                                <input type="text" id="slipipdate" class="form-control form-control-sm datetimepicker-input"  name="slipipdate">
+                                                                                                                <input type="text" id="slipipdate" class="form-control form-control-sm datetimepicker-input"  name="slipipdate" pattern="\d{2}/?\d{2}/?\d{4}">
                                                                                                                 
                                                                                                             </div>
                                                                                                         </div>
@@ -1400,8 +1401,8 @@
                                                                                                     </td>
                                                                                                     <td>
                                                                                                         <div class="form-group">
-                                                                                                            <input type="hidden" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" />
-                                                                                                            <input type="text" id="slipipamount2" name="slipipamount2" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" disabled/>
+                                                                                                            <input type="text" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" />
+                                                                                                            <!-- <input type="text" id="slipipamount2" name="slipipamount2" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" /> -->
                                                                                                         </div>
                                                                                                     </td>
                                                                                                     <td>

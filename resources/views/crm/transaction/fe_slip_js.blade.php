@@ -1551,6 +1551,101 @@
 </script>
 
 <script type="text/javascript">
+    $('#slipoccupacy').change(function(){
+         var bld = $('#slipbld_const').val();
+        var ocp_id = $('#slipoccupacy').val();
+        console.log(bld)
+        console.log(ocp_id)
+        if(bld != ''){
+
+
+            if(ocp_id){
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('get-building-rate')}}",
+                    data: {
+                        building: bld,
+                        occupacy_id:ocp_id
+                    },
+                    beforeSend: function() { $("body").addClass("loading");  },
+                    complete: function() {  $("body").removeClass("loading"); },
+                    success:function(res){  
+                        console.log(res)      
+                        console.log(bld)      
+                        if(res.rate_batas_atas_building_class_1 && res.rate_batas_bawah_building_class_1){
+                            if(res.rate_batas_atas_building_class_1 != null){
+                                $("#slipbcua").val(res.rate_batas_atas_building_class_1);
+                            }else{
+                                $("#slipbcua").val(parseInt('0'));
+                            }
+                            
+                            if(res.rate_batas_bawah_building_class_1 != null){
+                                $("#slipbcla").val(res.rate_batas_bawah_building_class_1);
+                            }else{
+                                $("#slipbcla").val(parseInt('0'));
+                            }
+                            
+
+                        }
+                        else if(res.rate_batas_atas_building_class_2 && res.rate_batas_bawah_building_class_2){
+                            if(res.rate_batas_atas_building_class_2 != null){
+                                $("#slipbcua").val(res.rate_batas_atas_building_class_2);
+                            }else{
+                                $("#slipbcua").val(parseInt('0'));
+                            }
+                            
+                            if(res.rate_batas_bawah_building_class_2 != null){
+                                $("#slipbcla").val(res.rate_batas_bawah_building_class_2);
+                            }else{
+                                $("#slipbcla").val(parseInt('0'));
+                            }
+                            
+                        }
+                        else if(res.rate_batas_atas_building_class_3 && res.rate_batas_bawah_building_class_3){
+                            if(res.rate_batas_atas_building_class_3 != null){
+                                $("#slipbcua").val(res.rate_batas_atas_building_class_3); 
+                            }else{
+                                $("#slipbcua").val( parseInt('0'));
+                            }
+                            
+                            if(res.rate_batas_bawah_building_class_3 != null){
+                                $("#slipbcla").val(res.rate_batas_bawah_building_class_3);
+                            }else{
+                                $("#slipbcla").val( parseInt('0'));
+                            }
+                            
+                            
+                        }else{
+                            if(res.rate_batas_atas_building_class_1){
+                                $("#slipbcua").val(res.rate_batas_atas_building_class_1); 
+                                $("#slipbcla").val( parseInt('0'));
+                            }else if(res.rate_batas_bawah_building_class_1){
+                                $("#slipbcla").val(res.rate_batas_bawah_building_class_1); 
+                                $("#slipbcua").val( parseInt('0'));
+                            }else if(res.rate_batas_atas_building_class_2){
+                                $("#slipbcua").val(res.rate_batas_atas_building_class_2); 
+                                $("#slipbcla").val( parseInt('0'));
+                            }else if(res.rate_batas_bawah_building_class_2){
+                                $("#slipbcla").val(res.rate_batas_bawah_building_class_2); 
+                                $("#slipbcua").val( parseInt('0'));
+                            }else if(res.rate_batas_atas_building_class_3){
+                                $("#slipbcua").val(res.rate_batas_atas_building_class_3); 
+                                $("#slipbcla").val( parseInt('0'));
+                            }else if(res.rate_batas_bawah_building_class_3){
+                                $("#slipbcla").val(res.rate_batas_bawah_building_class_3); 
+                                $("#slipbcua").val( parseInt('0'));
+                            }
+                        }
+                    }
+                });
+            }else{
+                swal("Error!", "Please choose occupacy first", "Get Building Rate Error");
+            }   
+        }
+    });
+</script>
+
+<script type="text/javascript">
     $('#slipbld_const').change(function(){
         var bld = $(this).val();
         var ocp_id = $('#slipoccupacy').val();
@@ -1637,10 +1732,10 @@
                     }
                 }
             });
-}else{
-    swal("Error!", "Please choose occupacy first", "Get Building Rate Error");
-}   
-});
+        }else{
+            swal("Error!", "Please choose occupacy first", "Get Building Rate Error");
+        }   
+        });
 
 $('#slipbld_constupdate').change(function(){
     var bld = $(this).val();
@@ -2748,13 +2843,13 @@ $('#slipcedingupdate').change(function(){
 </script>
 
 <script>
-    $( "#autocomplete2" ).autocomplete({
-      source: [
-      @foreach (@$costumer as $costumerdata)
-      "{{@$costumerdata->company_name }}",
-      @endforeach
-      ]
-  });
+  //   $( "#autocomplete2" ).autocomplete({
+  //     source: [
+  //     @foreach (@$costumer as $costumerdata)
+  //     "{{@$costumerdata->company_name }}",
+  //     @endforeach
+  //     ]
+  // });
 </script>
 
 <script>
@@ -3671,21 +3766,77 @@ function deletelocationriskdetail(id){
 </script>
 
 <script type="text/javascript">
-    $('#percentceding').keyup(function(){
-        var percentceding = parseFloat($(this).val()) / 100 ;
-        var valtsi = $('#feshareto').val();
+    $('#percentceding').keyup(function(e){
+        if(e.keyCode != 9){
+            var percentceding = parseFloat($(this).val()) / 100 ;
+            var valtsi = $('#feshareto').val();
 
-        if(valtsi != null){
-            var tsi = $('#feshareto').val();
-            var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
-            var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
-            var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            $('#amountlocation').val(real_sum);
-        }else{
-            swal('warning!','please fill TSI insured first','error')
+                var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
+                var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#amountlocation').val(real_sum);
+            }else{
+                swal('warning!','please fill TSI insured first','error')
+            }
+        }
+        else{
+            var percentceding = parseFloat($(this).val()) / 100 ;
+            var valtsi = $('#feshareto').val();
+
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
+                var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#amountlocation').val(real_sum);
+            }else{
+                swal('warning!','please fill TSI insured first','error')
+            }
         }
 
+    });
+</script>
+
+<script type="text/javascript">
+    $('#amountlocation').keyup(function(e){
+        if(e.keyCode != 9){
+            var amountlocation = $(this).val() / 100 ;
+            var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
+
+            var valtsi = $('#feshareto').val();
+
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
+                var real_sum = sum_amount.toString();
+                $('#percentceding').val(real_sum);
+            }else{
+                swal('warning!','please fill TSI insured first','error')
+            }
+        }
+        else{
+            var amountlocation = $(this).val() / 100 ;
+            var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
+
+            var valtsi = $('#feshareto').val();
+
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
+                var real_sum = sum_amount.toString();
+                $('#percentceding').val(real_sum);
+            }else{
+                swal('warning!','please fill TSI insured first','error')
+            }
+        }
 
     });
 </script>
@@ -3860,6 +4011,20 @@ function deletelocationriskdetail(id){
         $('#slipbasicpremium').val(real_sum);
     }
 });
+
+   $('#sliprate').change(function(){
+        var rate_lower = $('#slipbcla').val();
+        var rate_upper = $('#slipbcua').val();
+        var rate = $(this).val();
+        if(rate_upper != null || rate_lower != null){
+            var rate_lower_val = parseFloat(rate_lower);
+            var rate_upper_val = parseFloat(rate_upper);
+            var rate_val = parseFloat(rate);
+            if(rate_val < rate_lower_val && rate_val > rate_upper_val ){
+                swal('warning','please input rate between rate lower and rate upper building','input error')
+            }
+        }
+   });
 
    $("#slipbasicpremium").keydown(function(e) { 
     var keyCode = e.keyCode || e.which; 
@@ -4102,9 +4267,46 @@ function deletelocationriskdetail(id){
         var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
         $('#slipipamount').val(real_sum);
-        $('#slipipamount2').val(real_sum);
+        // $('#slipipamount2').val(real_sum);
+    }else{
+        var percent =  parseFloat($(this).val()) / 100;
+
+        var sumnetprtonr = $("#slipnetprmtonr").val();
+        var conv_sumnetprtonr = parseInt(sumnetprtonr.replace(/,/g, ""));
+
+        var sum = isNaN(percent *  conv_sumnetprtonr) ? 0 :(percent *  conv_sumnetprtonr).toFixed(2);
+        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        $('#slipipamount').val(real_sum);
     }
 });
+
+   $('#slipipamount').keyup(function(e){
+        if(e.keyCode != 9){
+                var amount =  $(this).val();
+                var conv_amount = parseFloat(amount.replace(/,/g, ""));
+
+                var sumnetprtonr = $("#slipnetprmtonr").val();
+                var conv_sumnetprtonr = parseInt(sumnetprtonr.replace(/,/g, ""));
+
+                var sum = isNaN((conv_amount /  conv_sumnetprtonr) * 100) ? 0 :((conv_amount /  conv_sumnetprtonr) * 100).toFixed(2);
+                var real_sum = sum.toString();
+
+                $('#slipippercentage').val(real_sum);
+                // $('#slipipamount2').val(real_sum);
+            }else{
+                 var amount =  $(this).val();
+                var conv_amount = parseFloat(amount.replace(/,/g, ""));
+
+                var sumnetprtonr = $("#slipnetprmtonr").val();
+                var conv_sumnetprtonr = parseInt(sumnetprtonr.replace(/,/g, ""));
+
+                var sum = isNaN((conv_amount /  conv_sumnetprtonr) * 100) ? 0 :((conv_amount /  conv_sumnetprtonr) * 100).toFixed(2);
+                var real_sum = sum.toString();
+
+                $('#slipippercentage').val(real_sum);
+            }
+   });
 
    $('#slipor').keyup(function(e) {
     if(e.keyCode != 9){

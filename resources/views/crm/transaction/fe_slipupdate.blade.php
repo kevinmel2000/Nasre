@@ -49,11 +49,11 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 1')}}</label>
-                                                    <input type="text" name="fesuggestinsured" id='autocomplete'  value="{{$insureddata->insured_name}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="search for insured suggestion" required/>
+                                                    <input type="text" name="fesuggestinsured" id='autocomplete' style="text-transform:uppercase;"  value="{{$insureddata->insured_name}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="search for insured suggestion" required/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 2')}}</label>
-                                                    <input type="text" name="fesuffix" id='autocomplete2'  value="{{$insureddata->insured_suffix}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="suffix: QQ or TBk" required/>
+                                                    <input type="text" name="fesuffix" id='autocomplete2' style="text-transform:uppercase;"  value="{{$insureddata->insured_suffix}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="suffix: QQ or TBk" required/>
                                                
                                                 </div>
                                             </div>
@@ -433,7 +433,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Amount')}}</label>
-                                                <input type="text" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-20" readonly="readonly" />
+                                                <input type="text" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-20"  />
                                           </div>
                                         </div>
                                     </div>
@@ -644,7 +644,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="">{{__('Source')}}</label>
+                                                    <label for="">{{__('Ceding/Broker')}}</label>
                                                     <select id="slipcedingbroker" name="slipcedingbroker" class="e1 form-control form-control-sm ">
                                                         <option value=""  selected disabled >Ceding or Broker</option>
                                                         @foreach($cedingbroker as $cb)
@@ -654,6 +654,8 @@
                                                     </select>
                                                 </div>    
                                                 <div class="form-group">
+                                                    <label for="">{{__('Source')}}</label>
+
                                                     <select id="slipceding" name="slipceding" class="e1 form-control form-control-sm ">
                                                         <option value="" selected  disabled>Ceding </option>
                                                         @foreach($ceding as $cd)
@@ -1004,8 +1006,8 @@
                                                 <div class="row">
                                                     <div class="col-md-5">
                                                         <div class="form-group">
-                                                            <label>{{__('Insurance Periode')}}:</label>
-                                                            <input type="text" class="form-control form-control-sm datepicker-input" value="" data-target="#date" id="slipipfrom" name="slipipfrom">
+                                                            <label>{{__('Insurance Periode')}}:</label> 
+                                                            <input type="text" class="form-control form-control-sm datepicker-input" value="" data-target="#date" id="slipipfrom" name="slipipfrom" pattern="\d{2}/?\d{2}/?\d{4}">
                                                          </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -1015,7 +1017,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                            <input type="text" class="form-control form-control-sm datepicker-input"  value="" data-target="#date" id="slipipto" name="slipipto">
+                                                            <input type="text" class="form-control form-control-sm datepicker-input"  value="" data-target="#date" id="slipipto" name="slipipto" pattern="\d{2}/?\d{2}/?\d{4}">
                                                                         
                                                         </div>
                                                     </div>
@@ -1024,7 +1026,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Reinsurance Periode')}}:</label>
-                                                            <input type="text" class="form-control form-control-sm datetimepicker-input" value=""  id="sliprpfrom" name="sliprpfrom">               
+                                                            <input type="text" class="form-control form-control-sm datetimepicker-input" value=""  id="sliprpfrom" name="sliprpfrom" pattern="\d{2}/?\d{2}/?\d{4}">               
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -1034,7 +1036,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                            <input type="text" class="form-control form-control-sm datetimepicker-input" value=""   id="sliprpto" name="sliprpto">       
+                                                            <input type="text" class="form-control form-control-sm datetimepicker-input" value=""   id="sliprpto" name="sliprpto" pattern="\d{2}/?\d{2}/?\d{4}">       
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1289,7 +1291,7 @@
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                         <div class="input-group " id="dateinstallment" >
-                                                                                                <input type="text" id="slipipdate" class="form-control form-control-sm datetimepicker-input" name="slipipdate">
+                                                                                                <input type="text" id="slipipdate" class="form-control form-control-sm datetimepicker-input" name="slipipdate" pattern="\d{2}/?\d{2}/?\d{4}">
                                                                                         </div>
                                                                                 </div>
                                                                             </td>
@@ -1300,8 +1302,8 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="hidden" value="" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" />
-                                                                                    <input type="text" value="" id="slipipamount2" name="slipipamount2" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" disabled/>
+                                                                                    <input type="text" value="" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" />
+                                                                                    <!-- <input type="text" value="" id="slipipamount2" name="slipipamount2" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" disabled/> -->
                                                                                 </div>
                                                                             </td>
                                                                             <td>
