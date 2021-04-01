@@ -1556,18 +1556,17 @@ class FeSlipController extends Controller
                 $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
 
                 // $old_sumshare = $request->slipoldsumshare;
-                $new_sumshare = $request->slipsumshare;
     
-                // if($new_sumshare != $old_sumshare){
+                $old_nasre_share = $insdata->share_from;
+                $new_nasre_share = $request->insured_share;
+
+    
+                if($new_sumshare != $old_sumshare){
                     $msdata = Insured::findOrFail($insdata->id);
     
-                    $sumshare = ($msdata->share_from  + $new_sumshare);
-                    $ourshare = (($sumshare/$msdata->share_to) * 100);
-    
-                    $msdata->share_from=$sumshare;
-                    $msdata->share=$ourshare;
+                    $msdata->share_from=$new_nasre_share;
                     $msdata->save();
-                /* } */
+                }
                 
     
                 return response()->json(
@@ -1575,8 +1574,6 @@ class FeSlipController extends Controller
                         'id' => $slipdataup->id,
                         'number' => $slipdataup->number,
                         'slipstatus' => $slipdataup->status,
-                        'ourshare' => $ourshare,
-                        'sumshare' => $sumshare,
                         'ceding'=>$slipdataup->ceding->name,
                         'cedingbroker'=>$slipdataup->cedingbroker->name,
                         'count_endorsement'=>$slipdataup->endorsment
@@ -1588,8 +1585,8 @@ class FeSlipController extends Controller
                 
                 $currdate = date("Y-m-d");
 
-                $slipdataid=$slipdata->id;
-                $slipdataup = SlipTable::findOrFail($slipdataid);
+                $slipdataid=$slipdata->number;
+                $slipdataup = SlipTable::where('slip_id',$slipdataid)->orderby('created_at','desc')->first();
 
                 if($slipdataup->status != $request->slipstatus){
                     StatusLog::create([
@@ -1604,6 +1601,7 @@ class FeSlipController extends Controller
                 $slipdataup->number=$request->slipnumber;
                 $slipdataup->username=Auth::user()->name;
                 $slipdataup->insured_id=$request->code_ms;
+                $slipdataup->slip_type= 'fe';
                 $slipdataup->prod_year=$currdate;
                 $slipdataup->date_transfer=date("Y-m-d", strtotime($request->slipdatetransfer));
                 $slipdataup->status=$request->slipstatus;
@@ -1665,20 +1663,14 @@ class FeSlipController extends Controller
 
                 $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
 
-                $old_sumshare = $request->slipoldsumshare;
-                $new_sumshare = $request->slipsumshare;
+                $old_nasre_share = $insdata->share_from;
+                $new_nasre_share = $request->insured_share;
 
-                $ourshare = $insdata->share;
-                $sumshare = $insdata->share_from;
     
                 if($new_sumshare != $old_sumshare){
                     $msdata = Insured::findOrFail($insdata->id);
     
-                    $sumshare = ($msdata->share_from - $old_sumshare) + $new_sumshare;
-                    $ourshare = (($sumshare/$msdata->share_to) * 100);
-    
-                    $msdata->share_from=$sumshare;
-                    $msdata->share=$ourshare;
+                    $msdata->share_from=$new_nasre_share;
                     $msdata->save();
                 }
                 
@@ -1687,8 +1679,6 @@ class FeSlipController extends Controller
                     [
                         'id' => $slipdataup->id,
                         'number' => $slipdataup->number,
-                        'ourshare' => $ourshare,
-                        'sumshare' => $sumshare,
                         'slipstatus' => $slipdataup->status,
                         'ceding'=>$slipdataup->ceding->name,
                         'cedingbroker'=>$slipdataup->cedingbroker->name,

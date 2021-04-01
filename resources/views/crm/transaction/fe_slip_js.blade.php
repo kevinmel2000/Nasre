@@ -1858,7 +1858,7 @@ $('#slipbld_constendorsement').change(function(){
 
         }else if(choice == '2')
         {
-            if(valcedshare == null){
+            if(valcedshare != null){
                 var ceding_share = $('#feshare').val();
                 $('#sliptotalsum').val(ceding_share);
                 $('#sliptotalsum2').val(ceding_share);
@@ -3699,7 +3699,7 @@ function deletelocationriskdetail(id){
         var typetsi = $('#sliptypetsi').val();
 
 
-        if(sumpct != null && typetsi == '1'){
+        if(sumpct != '' && typetsi == '1'){
                 var pct =  parseFloat($('#slippct').val())/100;
 
                 var tsi = $("#sliptotalsum").val();
@@ -3713,6 +3713,8 @@ function deletelocationriskdetail(id){
 
                 var dpamount = $('#slipdpamount').val();
                 var ecamount = $('#slipamountec').val();
+
+                swal('Success!','tsi in slip changed, please change value in risk detail, deductible and extendcoverage manually','success')
 
                 if(dpamount != null){
                     var percent =  parseFloat($('#slipdppercentage').val()) / 100;
@@ -3743,7 +3745,7 @@ function deletelocationriskdetail(id){
                     
                 }
 
-                swal('Success!','tsi in slip changed, please change value in risk detail, deductible and extendcoverage manually','success')
+                
 
 
             }
@@ -5894,6 +5896,7 @@ function deletelocationriskdetail(id){
        var slipor =  $('#slipor').val();
        var slipsumor =  $('#slipsumor').val();
        var wpc =  $('#wpc').val();
+       var insuredshare = $('#fesharefrom').val();
 
        var token2 = $('input[name=_token]').val();
 
@@ -5948,6 +5951,11 @@ function deletelocationriskdetail(id){
        console.log(conv_slipdatesum)
        var real_slipdatesum = parseInt(conv_slipdatesum);
        console.log(real_slipdatesum)
+
+       var conv_insuredshare = insuredshare.replace(/,/g, "");
+       console.log(conv_insuredshare)
+       var real_insuredshare = parseInt(conv_insuredshare);
+       console.log(real_insuredshare)
 
 
        var current_percent = $('#sliptotalpercentinspan').val();
@@ -6013,6 +6021,7 @@ function deletelocationriskdetail(id){
                        sliptotalday:sliptotalday,
                        sliptotalyear:sliptotalyear,
                        slipdatesum:real_slipdatesum,
+                       insured_share:real_insuredshare,
                        wpc:wpc
                    },
                    beforeSend: function() { $("body").addClass("loading");  },
@@ -6035,8 +6044,8 @@ function deletelocationriskdetail(id){
                         +'<td></td></tr>');
 
                     $('#slipnumber').val(response.code_sl);
-                    $('#feshare').val(response.ourshare);
-                    $('#fesharefrom').val(response.sumshare);
+                    // $('#feshare').val(response.ourshare);
+                    // $('#fesharefrom').val(response.sumshare);
 
                 },
                 error: function (request, status, error) {
@@ -6047,40 +6056,43 @@ function deletelocationriskdetail(id){
 
 
 
-               var formData = new FormData(this);
-               let TotalFiles = $('#attachment')[0].files.length; //Total files
-               let files = $('#attachment')[0];
-               var slip_id = $('#slipnumber').val();
+                var formData = new FormData(this);
+                let TotalFiles = $('#attachment')[0].files.length; //Total files
+                let files = $('#attachment')[0];
+                var slip_id = $('#slipnumber').val();
 
-               for (let i = 0; i < TotalFiles; i++) 
-               {
-                formData.append('files' + i, files.files[i]);
-            }
+                if(TotalFiles > 0){
+                    for (let i = 0; i < TotalFiles; i++){
+                        formData.append('files' + i, files.files[i]);
+                    }
 
-            formData.append('TotalFiles', TotalFiles);
-            formData.append('slip_id', slip_id);
-            formData.append('insured_id', code_ms);
+                    formData.append('TotalFiles', TotalFiles);
+                    formData.append('slip_id', slip_id);
+                    formData.append('insured_id', code_ms);
 
-            $.ajax({
-                type:'POST',
-                url: "{{ url('store-multi-file-ajax')}}",
-                data: formData,
-                cache:false,
-                contentType: false,
-                processData: false,
-                dataType: 'json',
-                success: (data) => {
-                            //this.reset();
-                            //alert('Files has been uploaded using jQuery ajax');
-                            swal("Success!", "Files has been uploaded", "success")
-                        },
-                        error: function(data){
-                             //alert(data.responseJSON.errors.files[0]);
-                             //swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
-                             //console.log(data.responseJSON.errors);
-                         }
-                     });
+                    $.ajax({
+                        type:'POST',
+                        url: "{{ url('store-multi-file-ajax')}}",
+                        data: formData,
+                        cache:false,
+                        contentType: false,
+                        processData: false,
+                        dataType: 'json',
+                        success: (data) => {
+                                    //this.reset();
+                                    //alert('Files has been uploaded using jQuery ajax');
+                                    swal("Success!", "Files has been uploaded", "success")
+                                },
+                                error: function(data){
+                                     //alert(data.responseJSON.errors.files[0]);
+                                     //swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
+                                     //console.log(data.responseJSON.errors);
+                                 }
+                             });
 
+                }
+
+               
                 $('#installmentPanel tbody').empty();
                 $('#ExtendCoveragePanel tbody').empty();
                 $('#deductiblePanel tbody').empty();

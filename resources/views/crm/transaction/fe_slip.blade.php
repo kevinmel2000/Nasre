@@ -60,6 +60,13 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
+                                                <label for="">{{__('Nasional Reinsurance Share')}}</label>
+                                                <input id="fesharefrom" type="text"   name="fesharefrom" class="form-control form-control-sm amount" value="" data-validation="length" data-validation-length="0-50"  readonly />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
                                                 <label for="">{{__('Ceding Share')}}</label>
                                                 <div class="row">
                                                     <div class="col-md-12">
@@ -74,12 +81,7 @@
                                             </div>
                                         </div>
                                         
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="">{{__('Nasional Reinsurance Share')}}</label>
-                                                <input id="fesharefrom" type="text"   name="fesharefrom" class="form-control form-control-sm amount" value="" data-validation="length" data-validation-length="0-50"  readonly />
-                                            </div>
-                                        </div>
+                                        
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">{{__('Total Sum Insured')}}</label>
@@ -745,25 +747,23 @@
                                                                     </div>    
                                                                 </div>
                                                             </div>
-                                                            
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <label for="">{{__('Occupacy')}}</label>
-                                                                        <select id="slipoccupacy" name="slipoccupacy" class="e1 form-control form-control-sm ">
-                                                                            <option selected disabled>{{__('Occupation list')}}</option>
-                                                                            @foreach($ocp as $ocpy)
-                                                                            <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
-                                                                            @endforeach
-                                                                        </select>
-                                                                    </div>    
-                                                                </div>
-                                                            </div>
 
-                                                            {{-- <div class="row">
-                                                                
-                                                            </div> --}}
 
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Occupacy')}}</label>
+                                                                <select id="slipoccupacy" name="slipoccupacy" class="e1 form-control form-control-sm ">
+                                                                    <option selected disabled>{{__('Occupation list')}}</option>
+                                                                    @foreach($ocp as $ocpy)
+                                                                    <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>    
                                                         </div>
                                                     </div>
 
@@ -784,14 +784,14 @@
                                                             <div class="row">
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
-                                                                        <label for="">{{__('Rate Upper Area')}}</label>
-                                                                        <input type="text" id="slipbcua" name="slipbcua" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
+                                                                        <label for="">{{__('Rate Lower Area')}}</label>
+                                                                        <input type="text" id="slipbcla" name="slipbcla" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
-                                                                        <label for="">{{__('Rate Lower Area')}}</label>
-                                                                        <input type="text" id="slipbcla" name="slipbcla" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
+                                                                        <label for="">{{__('Rate Upper Area')}}</label>
+                                                                        <input type="text" id="slipbcua" name="slipbcua" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1188,15 +1188,6 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-6 d-flex justify-content-start">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <label for="">{{__('Rate (permil.. %)')}}</label>
-                                                                        <input type="text"  id="sliprate" name="sliprate" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="a" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            
-                                                            <div class="col-md-6">
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
@@ -1217,6 +1208,17 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="">{{__('Rate (permil.. %)')}}</label>
+                                                                        <input type="text"  id="sliprate" name="sliprate" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-6">
@@ -1436,7 +1438,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-6">
                                                                                 <div class="input-group" lang="en-US">
-                                                                                    <input type="text" id="slipor" name="slipor" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" />
+                                                                                    <input type="text" id="slipor" value="100" name="slipor" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" />
                                                                                     <div class="input-group-append">
                                                                                         <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                                     </div>
@@ -1542,25 +1544,25 @@
                                                             </div>
                                                         </div>
 
-                                                        
+                                                         <div class="card card-primary">
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-12 com-sm-12 mt-3">
+                                                                        <button type="submit" id="addslipinsured-btn" class="btn btn-primary btn-block ">
+                                                                            {{__('Save')}}
+                                                                        </button>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div> 
 
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         
-                                        <div class="card card-primary">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-12 com-sm-12 mt-3">
-                                                        <button type="submit" id="addslipinsured-btn" class="btn btn-primary btn-block ">
-                                                            {{__('Save')}}
-                                                        </button>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div> 
+                                       
 
                                         
                                     </form>
