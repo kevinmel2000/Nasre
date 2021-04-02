@@ -202,6 +202,19 @@ class MovePropSlipController extends Controller
             $code_ms = "IN" .  $mydate . "0000" . strval(1);
         }
 
+        $checkinsured = Insured::where('number',$code_ms)->first();
+
+        if($checkinsured){
+                // $deleteinsured= Insured::where('number','=',$code_ms)->delete();
+            if($checkinsured->share_to != null){
+                
+                $deleteinsured= Insured::where('number','=',$code_ms)->delete();
+            }else{
+                $deleteinsured= Insured::where('number','=',$code_ms)->delete();
+            }
+        }
+
+
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
         $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','mp')->where('insured_id',$code_ms)->orderby('id','asc')->get();
@@ -273,6 +286,15 @@ class MovePropSlipController extends Controller
         }
 
         
+        $checkdataslip= SlipTable::where('number',$code_sl)->first();
+
+        if($checkdataslip){
+            if($checkdataslip->total_sum_insured != null){
+                $deleteinsured= SlipTable::where('number','=',$code_sl)->delete();
+            }
+        }
+
+
         $interestinsured= InterestInsured::orderby('id','asc')->get();
 
           
@@ -466,6 +488,16 @@ class MovePropSlipController extends Controller
 
             $slipdata=SlipTable::orderBy('id', 'desc')->first();
         }
+        
+
+        $checkdataslip= SlipTable::where('number',$code_sl)->first();
+
+        if($checkdataslip){
+            if($checkdataslip->total_sum_insured != null){
+                $deleteinsured= SlipTable::where('number','=',$code_sl)->delete();
+            }
+        }
+
         
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
@@ -987,6 +1019,80 @@ class MovePropSlipController extends Controller
                     'alert-type' => 'success'
                 );
 
+                $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+
+                // $old_sumshare = $request->slipoldsumshare;
+    
+                $old_nasre_share = $insdata->share_from;
+                $new_nasre_share = $request->insured_share;
+
+    
+                if($new_nasre_share != $new_nasre_share){
+                    $msdata = Insured::findOrFail($insdata->id);
+    
+                    $msdata->share_from=$new_nasre_share;
+                    $msdata->save();
+                }
+
+                $old_number = $slipdataup->number;
+                $newnumber = substr($old_number, 10,15);
+                $codenumber = substr($old_number, 0,10);
+
+                if(intval($newnumber) < 9)
+                {
+                    $count = substr($newnumber,14);
+                    $new_number = $codenumber . "0000" . strval(intval($count) + 1);
+                }   
+                elseif(intval($newnumber) > 8 && intval($newnumber) < 99)
+                {
+                    $count = substr($newnumber,13);
+                    $new_number = $codenumber . "000" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 98 && intval($newnumber) < 999)
+                {
+                    $count = substr($newnumber,12);
+                    $new_number = $codenumber . "00" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 998 && intval($newnumber) < 9999)
+                {
+                    $count = substr($newnumber,11);
+                    $new_number = $codenumber . "0" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 9998 && intval($newnumber) < 99999)
+                {
+                    $count = substr($newnumber,10);
+                    $new_number = $codenumber  . strval(intval($count) + 1);
+                }
+
+                $checkdataslip= SlipTable::where('number',$new_number)->first();
+
+                if($checkdataslip){
+                    if($checkdataslip->total_sum_insured != null){
+                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
+                    }else{
+                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
+                        
+                    }
+                }
+
+                $slipdataup2 =SlipTable::create([
+                            'insured_id'=>$slipdataup->insured_id,
+                            'number'=>$new_number,
+                            'slip_type'=>'fe'
+                        ]);
+                
+    
+                return response()->json(
+                    [
+                        'id' => $slipdataup->id,
+                        'number' => $slipdataup->new_number,
+                        'slipstatus' => $slipdataup->status,
+                        'ceding'=>$slipdataup->ceding->name,
+                        'cedingbroker'=>$slipdataup->cedingbroker->name,
+                        'count_endorsement'=>$slipdataup->endorsment
+                    ]
+                );
+
             }
             else
             {
@@ -1066,96 +1172,83 @@ class MovePropSlipController extends Controller
                     'message' => 'Moveable Property Slip Update successfully!',
                     'alert-type' => 'success'
                 );
-            }
 
-           
-            StatusLog::create([
-                'status'=>$request->slipstatus,
-                'user'=>Auth::user()->name,
-                'insured_id'=>$request->code_ms,
-                'slip_id'=>$request->slipnumber,
-            ]);
 
-            
+                $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
 
-            $slip = SlipTable::orderby('id','asc')->get();            
-            $sliplastid = count($slip);
+                $old_nasre_share = $insdata->share_from;
+                $new_nasre_share = $request->insured_share;
 
-            $mydate = date("Y").date("m").date("d");
-            $userid = Auth::user()->id;
-            if($sliplastid != null){
-                if($sliplastid < 9)
+    
+                if($new_nasre_share != $old_nasre_share){
+                    $msdata = Insured::findOrFail($insdata->id);
+    
+                    $msdata->share_from=$new_nasre_share;
+                    $msdata->save();
+                }
+
+                $old_number = $slipdataup->number;
+                $newnumber = substr($old_number, 10,15);
+                $codenumber = substr($old_number, 0,10);
+
+                if(intval($newnumber) < 9)
                 {
-                    $code_sl = "MP".  $mydate . "0000" . strval($sliplastid + 1);
+                    $count = substr($newnumber,14);
+                    $new_number = $codenumber . "0000" . strval(intval($count) + 1);
                 }   
-                elseif($sliplastid > 8 && $sliplastid < 99)
+                elseif(intval($newnumber) > 8 && intval($newnumber) < 99)
                 {
-                    $code_sl = "MP".  $mydate . "000" . strval($sliplastid + 1);
+                    $count = substr($newnumber,13);
+                    $new_number = $codenumber . "000" . strval(intval($count) + 1);
                 }
-                elseif($sliplastid > 98 && $sliplastid < 999)
+                elseif(intval($newnumber) > 98 && intval($newnumber) < 999)
                 {
-                    $code_sl = "MP".  $mydate . "00" . strval($sliplastid + 1);
+                    $count = substr($newnumber,12);
+                    $new_number = $codenumber . "00" . strval(intval($count) + 1);
                 }
-                elseif($sliplastid > 998 && $sliplastid < 9999)
+                elseif(intval($newnumber) > 998 && intval($newnumber) < 9999)
                 {
-                    $code_sl = "MP".  $mydate . "0" . strval($sliplastid + 1);
+                    $count = substr($newnumber,11);
+                    $new_number = $codenumber . "0" . strval(intval($count) + 1);
                 }
-                elseif($sliplastid > 9998 && $sliplastid < 99999)
+                elseif(intval($newnumber) > 9998 && intval($newnumber) < 99999)
                 {
-                    $code_sl = "MP".  $mydate . strval($sliplastid + 1);
+                    $count = substr($newnumber,10);
+                    $new_number = $codenumber  . strval(intval($count) + 1);
                 }
+
+                $checkdataslip= SlipTable::where('number',$new_number)->first();
+
+                if($checkdataslip){
+                    if($checkdataslip->total_sum_insured != null){
+                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
+                    }else{
+                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
+
+                    }
+                }
+
+                $slipdataup2=SlipTable::create([
+                            'insured_id'=>$slipdataup->insured_id,
+                            'number'=>$new_number,
+                            'slip_type'=>'fe'
+                            
+                        ]);
 
                 
+    
+                return response()->json(
+                    [
+                        'id' => $slipdataup->id,
+                        'number' => $new_number,
+                        'slipstatus' => $slipdataup->status,
+                        'ceding'=>$slipdataup->ceding->name,
+                        'cedingbroker'=>$slipdataup->cedingbroker->name,
+                        'count_endorsement'=>$slipdataup->endorsment
+                    ]
+                );
+                
             }
-            else{
-                $code_sl = "MP".  $mydate . "0000" . strval(1);
-            }
-
-            $kondisi=false;
-            $i=1;
-            while($kondisi==false)
-            {
-                $slipdatatest=SlipTable::where('number',$code_sl)->first();
-                if(empty($slipdatatest) || $slipdatatest==NULL)
-                {
-                    $kondisi=true;
-                }
-                else
-                {
-                    if($sliplastid < 9)
-                    {
-                        $code_sl = "MP".  $mydate . "0000" . strval($sliplastid + $i);
-                    }   
-                    elseif($sliplastid > 8 && $sliplastid < 99)
-                    {
-                        $code_sl = "MP".  $mydate . "000" . strval($sliplastid + $i);
-                    }
-                    elseif($sliplastid > 98 && $sliplastid < 999)
-                    {
-                        $code_sl = "MP".  $mydate . "00" . strval($sliplastid + $i);
-                    }
-                    elseif($sliplastid > 998 && $sliplastid < 9999)
-                    {
-                        $code_sl = "MP".  $mydate . "0" . strval($sliplastid + $i);
-                    }
-                    elseif($sliplastid > 9998 && $sliplastid < 99999)
-                    {
-                        $code_sl = "MP".  $mydate . strval($sliplastid + $i);
-                    }
-                }
-
-                $i++;
-            }
-
-            return response()->json(
-                [
-                    'id' => $slipdataup->id,
-                    'number' => $slipdataup->number,
-                    'slipuy' => $slipdataup->uy,
-                    'code_sl'=> $code_sl,
-                    'slipstatus' => $slipdataup->status
-                ]
-            );
 
             //return back()->with($notification);
             //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');

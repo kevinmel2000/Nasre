@@ -198,6 +198,21 @@ class FinancialLineSlipController extends Controller
             $code_ms = "IN" .  $mydate . "0000" . strval(1);
         }
 
+
+        $checkinsured = Insured::where('number',$code_ms)->first();
+
+        if($checkinsured){
+                // $deleteinsured= Insured::where('number','=',$code_ms)->delete();
+            if($checkinsured->share_to != null){
+                
+                $deleteinsured= Insured::where('number','=',$code_ms)->delete();
+            }else{
+                $deleteinsured= Insured::where('number','=',$code_ms)->delete();
+            }
+        }
+
+        
+
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
         $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','fl')->where('insured_id',$code_ms)->orderby('id','asc')->get();
@@ -266,6 +281,14 @@ class FinancialLineSlipController extends Controller
             }
 
             $i++;
+        }
+
+        $checkdataslip= SlipTable::where('number',$code_sl)->first();
+
+        if($checkdataslip){
+            if($checkdataslip->total_sum_insured != null){
+                $deleteinsured= SlipTable::where('number','=',$code_sl)->delete();
+            }
         }
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
@@ -461,6 +484,15 @@ class FinancialLineSlipController extends Controller
             }
 
             $slipdata=SlipTable::orderBy('id', 'desc')->first();
+        }
+
+
+        $checkdataslip= SlipTable::where('number',$code_sl)->first();
+
+        if($checkdataslip){
+            if($checkdataslip->total_sum_insured != null){
+                $deleteinsured= SlipTable::where('number','=',$code_sl)->delete();
+            }
         }
 
 
@@ -935,6 +967,83 @@ class FinancialLineSlipController extends Controller
                     'message' => 'Financial Line Slip added successfully!',
                     'alert-type' => 'success'
                 );
+
+                $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+
+                // $old_sumshare = $request->slipoldsumshare;
+    
+                $old_nasre_share = $insdata->share_from;
+                $new_nasre_share = $request->insured_share;
+
+    
+                if($new_nasre_share != $new_nasre_share){
+                    $msdata = Insured::findOrFail($insdata->id);
+    
+                    $msdata->share_from=$new_nasre_share;
+                    $msdata->save();
+                }
+
+                $old_number = $slipdataup->number;
+                $newnumber = substr($old_number, 10,15);
+                $codenumber = substr($old_number, 0,10);
+
+                if(intval($newnumber) < 9)
+                {
+                    $count = substr($newnumber,14);
+                    $new_number = $codenumber . "0000" . strval(intval($count) + 1);
+                }   
+                elseif(intval($newnumber) > 8 && intval($newnumber) < 99)
+                {
+                    $count = substr($newnumber,13);
+                    $new_number = $codenumber . "000" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 98 && intval($newnumber) < 999)
+                {
+                    $count = substr($newnumber,12);
+                    $new_number = $codenumber . "00" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 998 && intval($newnumber) < 9999)
+                {
+                    $count = substr($newnumber,11);
+                    $new_number = $codenumber . "0" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 9998 && intval($newnumber) < 99999)
+                {
+                    $count = substr($newnumber,10);
+                    $new_number = $codenumber  . strval(intval($count) + 1);
+                }
+
+                $checkdataslip= SlipTable::where('number',$new_number)->first();
+
+                if($checkdataslip){
+                    if($checkdataslip->total_sum_insured != null){
+                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
+                    }else{
+                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
+                        
+                    }
+                }
+
+                $slipdataup2 =SlipTable::create([
+                            'insured_id'=>$slipdataup->insured_id,
+                            'number'=>$new_number,
+                            'slip_type'=>'fe'
+                        ]);
+                
+    
+                return response()->json(
+                    [
+                        'id' => $slipdataup->id,
+                        'number' => $slipdataup->new_number,
+                        'slipstatus' => $slipdataup->status,
+                        'ceding'=>$slipdataup->ceding->name,
+                        'cedingbroker'=>$slipdataup->cedingbroker->name,
+                        'count_endorsement'=>$slipdataup->endorsment
+                    ]
+                );
+
+
+
             }
             else
             {
@@ -1015,9 +1124,83 @@ class FinancialLineSlipController extends Controller
                     'message' => 'Financial Line Slip Update successfully!',
                     'alert-type' => 'success'
                 );
-            
+                
+                $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+
+                $old_nasre_share = $insdata->share_from;
+                $new_nasre_share = $request->insured_share;
+
+    
+                if($new_nasre_share != $old_nasre_share){
+                    $msdata = Insured::findOrFail($insdata->id);
+    
+                    $msdata->share_from=$new_nasre_share;
+                    $msdata->save();
+                }
+
+                $old_number = $slipdataup->number;
+                $newnumber = substr($old_number, 10,15);
+                $codenumber = substr($old_number, 0,10);
+
+                if(intval($newnumber) < 9)
+                {
+                    $count = substr($newnumber,14);
+                    $new_number = $codenumber . "0000" . strval(intval($count) + 1);
+                }   
+                elseif(intval($newnumber) > 8 && intval($newnumber) < 99)
+                {
+                    $count = substr($newnumber,13);
+                    $new_number = $codenumber . "000" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 98 && intval($newnumber) < 999)
+                {
+                    $count = substr($newnumber,12);
+                    $new_number = $codenumber . "00" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 998 && intval($newnumber) < 9999)
+                {
+                    $count = substr($newnumber,11);
+                    $new_number = $codenumber . "0" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 9998 && intval($newnumber) < 99999)
+                {
+                    $count = substr($newnumber,10);
+                    $new_number = $codenumber  . strval(intval($count) + 1);
+                }
+
+                $checkdataslip= SlipTable::where('number',$new_number)->first();
+
+                if($checkdataslip){
+                    if($checkdataslip->total_sum_insured != null){
+                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
+                    }else{
+                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
+
+                    }
+                }
+
+                $slipdataup2=SlipTable::create([
+                            'insured_id'=>$slipdataup->insured_id,
+                            'number'=>$new_number,
+                            'slip_type'=>'fe'
+                            
+                        ]);
+
+                
+    
+                return response()->json(
+                    [
+                        'id' => $slipdataup->id,
+                        'number' => $new_number,
+                        'slipstatus' => $slipdataup->status,
+                        'ceding'=>$slipdataup->ceding->name,
+                        'cedingbroker'=>$slipdataup->cedingbroker->name,
+                        'count_endorsement'=>$slipdataup->endorsment
+                    ]
+                );
             }
 
+            /*
             StatusLog::create([
                 'status'=>$request->slipstatus,
                 'user'=>Auth::user()->name,
@@ -1103,7 +1286,9 @@ class FinancialLineSlipController extends Controller
                     'slipstatus' => $slipdataup->status
                 ]
             );
+            */
 
+            
             //return back()->with($notification);
             
             //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');

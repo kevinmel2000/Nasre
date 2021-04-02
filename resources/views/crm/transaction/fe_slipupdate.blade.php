@@ -64,6 +64,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
+
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Nasional Reinsurance Share')}}</label>
@@ -665,6 +666,7 @@
                                                 </div>  
                                             </div>
                                         </div>
+                                        
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="row">

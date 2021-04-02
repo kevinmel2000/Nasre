@@ -64,6 +64,14 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="">{{__('Nasional Reinsurance')}}</label>
+                                                    <input id="mpsharefrom" type="text"  name="mpsharefrom" value="{{$insureddata->share_from}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                </div>
+                                            </div>
+
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Ceding Share')}}</label>
@@ -81,12 +89,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="">{{__('Nasional Reinsurance')}}</label>
-                                                    <input id="mpsharefrom" type="text"  name="mpsharefrom" value="{{$insureddata->share_from}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
-                                                </div>
-                                            </div>
+
+                                           
+                                            
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured')}}</label>
@@ -748,20 +753,23 @@
                                                     </div>
                                                 </div>
                         
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Occupacy')}}</label>
-                                                        <select id="slipoccupacy" name="slipoccupacy" class="e1 form-control form-control-sm ">
-                                                            <option selected disabled>{{__('Occupation list')}}</option>
-                                                            @foreach($ocp as $ocpy)
-                                                                <option value="{{ $ocpy->id }}" >{{ $ocpy->code }} - {{ $ocpy->description }}</option>
-                                                                
-                                                            @endforeach
-                                                        </select>
-                                                    </div>    
-                                                    </div>
-                                                </div>
+                                                
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="">{{__('Occupacy')}}</label>
+                                                    <select id="slipoccupacy" name="slipoccupacy" class="e1 form-control form-control-sm ">
+                                                        <option selected disabled>{{__('Occupation list')}}</option>
+                                                        @foreach($ocp as $ocpy)
+                                                            <option value="{{ $ocpy->id }}" >{{ $ocpy->code }} - {{ $ocpy->description }}</option>
+                                                            
+                                                        @endforeach
+                                                    </select>
+                                                </div>    
                                             </div>
                                         </div>
 
@@ -1164,15 +1172,8 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                            
                                             <div class="col-md-6 d-flex justify-content-start">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Rate (permil.. %)')}}</label>
-                                                        <input type="number"  value="" step=".001" id="sliprate" name="sliprate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" placeholder="a" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -1190,6 +1191,14 @@
                                                             <input type="hidden" id="sharetotalsum" value="" name="sharetotalsum" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="tsi(*total/sum from interest insured)" />
                                                             <input type="text" id="sharetotalsum2" value="" name="sharetotalsum2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="tsi(*total/sum from interest insured)" />
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Rate (permil.. %)')}}</label>
+                                                        <input type="text"  value="" step=".001" id="sliprate" name="sliprate" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-150" placeholder="a" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -1386,8 +1395,9 @@
                                                 <div class="form-group">
                                                     <label for="">{{__('Retro Backup?')}}</label>
                                                     <select id="sliprb" name="sliprb" class="form-control form-control-sm ">
-                                                        <option value="AF" @if($slipdata->retro_backup == "AF") selected="selected" @endif >YES</option>
-                                                        <option value="AN" @if($slipdata->retro_backup == "AN") selected="selected" @endif >NO</option>
+                                                        <option value="NO" >NO</option>
+                                                        <option value="YES" >YES</option>
+                                                        
                                                     </select>
                                                 </div>   
                                             </div>
@@ -1396,19 +1406,18 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('Own Retention')}}</label>
                                                         <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="input-group">
-                                                                    <input type="text" id="slipor" value="{{$slipdata->own_retention}}" name="slipor" class="form-control form-control-sm " data-validation="length" data-validation-length="2-50" required/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="input-group-append">
-                                                                    <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                            <div class="col-md-6">
+                                                                <div class="input-group" lang="en-US">
+                                                                    <input type="text" id="slipor" name="slipor" value="100" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" />
+                                                                    <div class="input-group-append">
+                                                                        <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <input type="text" id="slipsumor" value="{{$slipdata->sum_own_retention}}"   name="slipsumor" class="form-control form-control-sm amount" data-validation="length" data-validation-length="2-50" readonly/>
+                                                                    <input type="hidden" id="slipsumor" value=""   name="slipsumor" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" />
+                                                                    <input type="text" id="slipsumor2" value=""   name="slipsumor2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled/>
                                                                 </div>
                                                             </div>
                                                         </div>
