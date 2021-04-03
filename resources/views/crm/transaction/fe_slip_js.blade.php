@@ -4266,7 +4266,7 @@ function deletelocationriskdetail(id){
             // $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
             $('#slipsumfee').val(real_sumfeebroker);
 
-});
+    });
 
    $('#slipvbroker').change(function(){
 

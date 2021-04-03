@@ -211,6 +211,12 @@ class FinancialLineSlipController extends Controller
             }
         }
 
+        $insureddataup = Insured::create([
+            'number'=>$code_ms,
+            'slip_type'=>'fl',
+            'count_endorsement'=>0
+            
+        ]);
         
 
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
@@ -1049,8 +1055,12 @@ class FinancialLineSlipController extends Controller
             {
                 $currdate = date("Y-m-d");
 
-                $slipdataid=$slipdata->id;
-                $slipdataup = SlipTable::findOrFail($slipdataid);
+                //$slipdataid=$slipdata->id;
+                //$slipdataup = SlipTable::findOrFail($slipdataid);
+
+                $slipdataid=$slipdata->number;
+                $slipdataup = SlipTable::where('number',$slipdataid)->orderby('created_at','desc')->first();
+
                 
                 if($slipdataup->status != $request->slipstatus){
                     StatusLog::create([

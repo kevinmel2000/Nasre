@@ -215,8 +215,8 @@ class FeSlipController extends Controller
         
      }
 
-     public function getsumAmount(Request $request){
-
+     public function getsumAmount(Request $request)
+     {
         $ceding_id = $request->ceding_id;
         $insured_id = $request->insured_id;
         $ceding = CedingBroker::where('id', $ceding_id)->first();
@@ -238,7 +238,9 @@ class FeSlipController extends Controller
                                     'amountlist'=>$amount_list,
                                     'sumamount'=>$sum_amount
                                     ]);
-        }else{
+        }
+        else
+        {
             $ceding_list = CedingBroker::select('id','code','name','type')->where('type',4)->get();
 
             return response()->json($ceding_list);

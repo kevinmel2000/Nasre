@@ -746,13 +746,24 @@
     $('input.amount').keyup(function(event) {
             // skip for arrow keys
             if(event.which >= 37 && event.which <= 40) return;
-                console.log(event.which)
-                console.log($(this).val())
+            console.log(event.which)
+            console.log($(this).val())
                 // format number
                 $(this).val(function(index, value) {
-                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                });
             });
-    });
+
+    $('input.tanggal').keyup(function(event) {
+            // skip for arrow keys
+            if(event.which >= 37 && event.which <= 40) return;
+            console.log(event.which)
+            console.log($(this).val())
+                // format number
+                $(this).val(function(index, value) {
+                    return value.replace(/\D/g, "").replace(/\B(?=(\d{2})+(?!\d))/g, "/");
+                });
+            });
 
     $(".money").click(function() {
     var inputLength = $(".money").val().length;
@@ -1078,6 +1089,103 @@
 
 
 </script>
+
+
+<script type="text/javascript">
+    $('#slipoccupacy').change(function(){
+         var bld = $('#slipbld_const').val();
+        var ocp_id = $('#slipoccupacy').val();
+        console.log(bld)
+        console.log(ocp_id)
+        if(bld != ''){
+
+
+            if(ocp_id){
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('get-building-rate')}}",
+                    data: {
+                        building: bld,
+                        occupacy_id:ocp_id
+                    },
+                    beforeSend: function() { $("body").addClass("loading");  },
+                    complete: function() {  $("body").removeClass("loading"); },
+                    success:function(res){  
+                        console.log(res)      
+                        console.log(bld)      
+                        if(res.rate_batas_atas_building_class_1 && res.rate_batas_bawah_building_class_1){
+                            if(res.rate_batas_atas_building_class_1 != null){
+                                $("#slipbcua").val(res.rate_batas_atas_building_class_1);
+                            }else{
+                                $("#slipbcua").val(parseInt('0'));
+                            }
+                            
+                            if(res.rate_batas_bawah_building_class_1 != null){
+                                $("#slipbcla").val(res.rate_batas_bawah_building_class_1);
+                            }else{
+                                $("#slipbcla").val(parseInt('0'));
+                            }
+                            
+
+                        }
+                        else if(res.rate_batas_atas_building_class_2 && res.rate_batas_bawah_building_class_2){
+                            if(res.rate_batas_atas_building_class_2 != null){
+                                $("#slipbcua").val(res.rate_batas_atas_building_class_2);
+                            }else{
+                                $("#slipbcua").val(parseInt('0'));
+                            }
+                            
+                            if(res.rate_batas_bawah_building_class_2 != null){
+                                $("#slipbcla").val(res.rate_batas_bawah_building_class_2);
+                            }else{
+                                $("#slipbcla").val(parseInt('0'));
+                            }
+                            
+                        }
+                        else if(res.rate_batas_atas_building_class_3 && res.rate_batas_bawah_building_class_3){
+                            if(res.rate_batas_atas_building_class_3 != null){
+                                $("#slipbcua").val(res.rate_batas_atas_building_class_3); 
+                            }else{
+                                $("#slipbcua").val( parseInt('0'));
+                            }
+                            
+                            if(res.rate_batas_bawah_building_class_3 != null){
+                                $("#slipbcla").val(res.rate_batas_bawah_building_class_3);
+                            }else{
+                                $("#slipbcla").val( parseInt('0'));
+                            }
+                            
+                            
+                        }else{
+                            if(res.rate_batas_atas_building_class_1){
+                                $("#slipbcua").val(res.rate_batas_atas_building_class_1); 
+                                $("#slipbcla").val( parseInt('0'));
+                            }else if(res.rate_batas_bawah_building_class_1){
+                                $("#slipbcla").val(res.rate_batas_bawah_building_class_1); 
+                                $("#slipbcua").val( parseInt('0'));
+                            }else if(res.rate_batas_atas_building_class_2){
+                                $("#slipbcua").val(res.rate_batas_atas_building_class_2); 
+                                $("#slipbcla").val( parseInt('0'));
+                            }else if(res.rate_batas_bawah_building_class_2){
+                                $("#slipbcla").val(res.rate_batas_bawah_building_class_2); 
+                                $("#slipbcua").val( parseInt('0'));
+                            }else if(res.rate_batas_atas_building_class_3){
+                                $("#slipbcua").val(res.rate_batas_atas_building_class_3); 
+                                $("#slipbcla").val( parseInt('0'));
+                            }else if(res.rate_batas_bawah_building_class_3){
+                                $("#slipbcla").val(res.rate_batas_bawah_building_class_3); 
+                                $("#slipbcua").val( parseInt('0'));
+                            }
+                        }
+                    }
+                });
+            }else{
+                swal("Error!", "Please choose occupacy first", "Get Building Rate Error");
+            }   
+        }
+    });
+</script>
+
 
 
 
@@ -2418,9 +2526,8 @@ $("body").on("click","#btn-danger2",function(){
 
 </script>
 
-
 <script type='text/javascript'>
- $('#form-addlocation').submit(function(e){
+   $('#form-addlocation').submit(function(e){
     e.preventDefault();
 
     var lookupcode = $('#address_location').val();
@@ -2431,6 +2538,7 @@ $("body").on("click","#btn-danger2",function(){
     var state = $('#state_location').val();
     var city = $('#city_location').val();        
     var adrress = $('#address_location').val();
+
 
         //var slipinterestid = $('#slipinterestlistlocation').val();
         //var cnno = $('#cnno').val();
@@ -2485,6 +2593,7 @@ $("body").on("click","#btn-danger2",function(){
                         '<th>Cert No</th>'+
                         '<th>Slip No</th>'+
                         '<th>Policy No</th>'+
+                        '<th>Share</th>'+
                         '<th>amount</th>'+
                         '<th>Action</th>'+
                         '</tr>'+
@@ -2507,7 +2616,7 @@ $("body").on("click","#btn-danger2",function(){
     });
 
 
- function deletelocationdetail(id){
+   function deletelocationdetail(id){
     var token = $('input[name=_token]').val();
 
     $.ajax({
@@ -2534,14 +2643,12 @@ $("body").on("click","#btn-danger2",function(){
                 //console.log(sum)
                 //var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 //$("#sliptotalsum").val(real_sum);
-                //$("#hemshareto").val(real_sum);
+                //$("#feshareto").val(real_sum);
 
             }
         });
 }
 </script>
-
-
 
 
 
@@ -2568,6 +2675,7 @@ $("body").on("click","#btn-danger2",function(){
         var ceding_id = $('#ceding_id').val();
         var slipno = $('#slipno').val();
         var policyno = $('#policyno').val();
+        var percent = $('#percentceding').val();
         var amountlocation = $('#amountlocation').val();
 
         var conv_amount = amountlocation.replace(/,/g, "");
@@ -2576,7 +2684,10 @@ $("body").on("click","#btn-danger2",function(){
         console.log(real_amount)
         
 
-        $.ajax({
+        if(slipinterestid == null || ceding_id == null){
+            swal('warning','please choose interest or ceding first','insert error')
+        }else{
+            $.ajax({
             url:"{{ route('locationlistdetail.store') }}",
             type:"POST",
             data:{
@@ -2586,6 +2697,7 @@ $("body").on("click","#btn-danger2",function(){
                 slipno:slipno,
                 policyno:policyno,
                 ceding_id:ceding_id,
+                percent_ceding:percent,
                 amountlocation:real_amount,
                 insurednoloc:insurednoloc,
                 // kurs:kurs,
@@ -2607,18 +2719,18 @@ $("body").on("click","#btn-danger2",function(){
                     // }
 
                     var amount = response.amountlocation;
-                    var ceding_share = $('#hemshare').val();
+                    var ceding_share = $('#feshare').val();
                     if(ceding_share == ''){
                         var sum_ceding = isNaN(parseFloat(0) + parseFloat(amount)) ? 0 :(parseFloat(0) + parseFloat(amount));
                         var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#hemshare').val(conv_sum_ceding);
+                        $('#feshare').val(conv_sum_ceding);
                         console.log('ceding awal' + conv_sum_ceding)
                     }else{
                         var conv_ceding_share = ceding_share.replace(/,/g, "");
                         var real_ceding_share = parseInt(conv_ceding_share);
                         var sum_ceding = isNaN(parseFloat(real_ceding_share) + parseFloat(amount)) ? 0 :(parseFloat(real_ceding_share) + parseFloat(amount));
                         var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#hemshare').val(conv_sum_ceding);
+                        $('#feshare').val(conv_sum_ceding);
                         console.log('ceding bertambah' + conv_sum_ceding)
 
 
@@ -2632,25 +2744,25 @@ $("body").on("click","#btn-danger2",function(){
                     var slipno = '';
                     var policyno = '';
 
-                    if(response.cndn == ''){
+                    if(response.cndn == null){
                         cndn = '-';
                     }else{
                         cndn = response.cndn;
                     }
 
-                    if(response.certno == ''){
+                    if(response.certno == null){
                         certno = '-';
                     }else{
                         certno = response.certno;
                     }
 
-                    if(response.slipno == ''){
+                    if(response.slipno == null){
                         slipno = '-';
                     }else{
                         slipno = response.slipno;
                     }
 
-                    if(response.policyno == ''){
+                    if(response.policyno == null){
                         policyno = '-';
                     }else{
                         policyno = response.policyno;
@@ -2664,6 +2776,7 @@ $("body").on("click","#btn-danger2",function(){
                         '<td>'+certno+'</td>'+
                         '<td>'+slipno+'</td>'+
                         '<td>'+policyno+'</td>'+
+                        '<td>'+response.percent+'</td>'+
                         '<td>'+curr_amount+'</td>'+
                         '<td>'+
                         '<a href="javascript:void(0)" onclick="deletelocationriskdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
@@ -2674,7 +2787,7 @@ $("body").on("click","#btn-danger2",function(){
                     // $('#slipamount').val('');
                     // $('#slipinterestlist').val('');
                     
-                    // var totalnre = $('#hemshareto').val();
+                    // var totalnre = $('#feshareto').val();
                     
                     // if(totalnre){
                     //     var conv_totalnre = parseFloat(totalnre.replace(/,/g, ""));
@@ -2684,7 +2797,7 @@ $("body").on("click","#btn-danger2",function(){
                     //     console.log(conv_totalnre)
                     //     console.log(real_sumtotalnre)
 
-                    //     $('#hemshareto').val(real_sumtotalnre);
+                    //     $('#feshareto').val(real_sumtotalnre);
                     // }
                     // else{
                     //     var conv_totalnre = totalnre.replace(/,/g, "");
@@ -2694,7 +2807,7 @@ $("body").on("click","#btn-danger2",function(){
                     //     console.log(conv_totalnre)
                     //     console.log(real_sumtotalnre)
 
-                    //     $('#hemshareto').val(real_sumtotalnre)
+                    //     $('#feshareto').val(real_sumtotalnre)
                     // }
                     
 
@@ -2712,8 +2825,8 @@ $("body").on("click","#btn-danger2",function(){
                     //         $("#sliptotalsum").val(real_sum);
                     //         $("#sliptotalsum2").val(real_sum);
                     //         // $("#msishareto").val(real_sum);
-                    //         // $("#hemsharefrom").val(real_sum);
-                    //         // $("#hemshareto").val(real_sum);
+                    //         // $("#fesharefrom").val(real_sum);
+                    //         // $("#feshareto").val(real_sum);
                     //     }
                     //     else
                     //     {
@@ -2730,8 +2843,8 @@ $("body").on("click","#btn-danger2",function(){
                     //         console.log(' real sum : ' + real_sum)
                     //         $("#sliptotalsum").val(real_sum);
                     //         $("#sliptotalsum2").val(real_sum);
-                    //         // $("#hemsharefrom").val(real_sum);
-                    //         // $("#hemshareto").val(real_sum);
+                    //         // $("#fesharefrom").val(real_sum);
+                    //         // $("#feshareto").val(real_sum);
                     //     }
                     // }else{
                         swal("success!", "ceding share has increase", "success");
@@ -2739,6 +2852,7 @@ $("body").on("click","#btn-danger2",function(){
                     // }
                 }
             });
+        }
 
 });
 
@@ -2760,36 +2874,32 @@ function deletelocationriskdetail(id){
             $('#riskdetailsid'+id).remove();
             var ceding_curr = $('#slipceding').val();
 
-            // var totalnre = $('#hemshareto').val();
+            // var totalnre = $('#feshareto').val();
             // var conv_totalnre = totalnre.replace(/,/g, "");
 
             // var sumtotalnre = isNaN(parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ? (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) : (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ;
             // var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            // $('#hemshareto').val(real_sumtotalnre);
+            // $('#feshareto').val(real_sumtotalnre);
 
                 //$('#cid'+id).remove();
-                var total =  $("#hemshare").val();
-
-                if(total)
-                {
-                    console.log(total)
-                    var conv_total = total.replace(/,/g, "");
-                    console.log(conv_total)
-                    var real_total = parseInt(conv_total);
-                    console.log(real_total)
-                    var sum = isNaN(real_total - response.amountlocation) ? 0 :(real_total - response.amountlocation) ;
-                    console.log(sum)
-                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    $("#hemshare").val(real_sum);
-                }
-                    // $("#hemshareto").val(real_sum);
+                var amount = response.amountlocation;
+                var ceding_share = $('#feshare').val();
+                
+                var conv_ceding_share = ceding_share.replace(/,/g, "");
+                var real_ceding_share = parseInt(conv_ceding_share);
+                var sum_ceding = isNaN(parseFloat(real_ceding_share) - parseFloat(amount)) ? 0 :(parseFloat(real_ceding_share) - parseFloat(amount));
+                var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#feshare').val(conv_sum_ceding);
+                console.log('ceding bertambah' + conv_sum_ceding)
+                
+                    // $("#feshareto").val(real_sum);
 
             // swal("Warning!", "TSI not decrease because this ceding is not same with ceding in slip", "Tsi not decrease");
-            swal("success!", "ceding share has decrease", "ceding share decrease");
+            swal("success!", "ceding share has decrease", "success");
 
                     // $("#sliptotalsum").val(real_sum);
-                    // $("#hemshareto").val(real_sum);
+                    // $("#feshareto").val(real_sum);
 
 
 
@@ -3089,10 +3199,10 @@ function deletelocationriskdetail(id){
     $('#percentceding').keyup(function(e){
         if(e.keyCode != 9){
             var percentceding = parseFloat($(this).val()) / 100 ;
-            var valtsi = $('#hemshareto').val();
+            var valtsi = $('#feshareto').val();
 
             if(valtsi != null){
-                var tsi = $('#hemshareto').val();
+                var tsi = $('#feshareto').val();
                 var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
                 var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
@@ -3104,10 +3214,10 @@ function deletelocationriskdetail(id){
         }
         else{
             var percentceding = parseFloat($(this).val()) / 100 ;
-            var valtsi = $('#hemshareto').val();
+            var valtsi = $('#feshareto').val();
 
             if(valtsi != null){
-                var tsi = $('#hemshareto').val();
+                var tsi = $('#feshareto').val();
                 var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
                 var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
@@ -3128,10 +3238,10 @@ function deletelocationriskdetail(id){
             var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
             console.log(amountlocation)
             console.log(conv_amountlocation)
-            var valtsi = $('#hemshareto').val();
+            var valtsi = $('#feshareto').val();
 
             if(valtsi != null){
-                var tsi = $('#hemshareto').val();
+                var tsi = $('#feshareto').val();
                 var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
                 var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
@@ -3149,10 +3259,10 @@ function deletelocationriskdetail(id){
 
             console.log(amountlocation)
             console.log(conv_amountlocation)
-            var valtsi = $('#hemshareto').val();
+            var valtsi = $('#feshareto').val();
 
             if(valtsi != null){
-                var tsi = $('#hemshareto').val();
+                var tsi = $('#feshareto').val();
                 var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
                 var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
@@ -5280,7 +5390,7 @@ function deletelocationriskdetail(id){
                 var or = $('#slipor').val();
                 var total_percent = $('#sliptotalpercentrpor').val();
 
-                if(total_percent == null){
+                if(total_percent == 100){
                         var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage) + parseInt(or)) ? 0 :(parseInt(0) + parseInt(response.percentage) + parseInt(or)) ;
                         $('#sliptotalpercentrpor').val(sum_percent);
                     }else{
@@ -5689,7 +5799,9 @@ function deletelocationriskdetail(id){
 
        //ajaxfilefunction(e);
 
-       if(current_percent == 100 && current_percent_rp == 100){
+       //if(current_percent == 100 && current_percent_rp == 100)
+       if(current_percent == 100)
+       {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -5764,9 +5876,11 @@ function deletelocationriskdetail(id){
                         +'</a>'
                         +'<td></td></tr>');
 
-                    $('#slipnumber').val(response.code_sl);
-                    $('#hemshare').val(response.ourshare);
-                    $('#hemsharefrom').val(response.sumshare);
+                    
+                    
+                    $('#slipnumber').val(response.number);
+                    //$('#hemshare').val(response.ourshare);
+                    //$('#hemsharefrom').val(response.sumshare);
 
                 },
                 error: function (request, status, error) {

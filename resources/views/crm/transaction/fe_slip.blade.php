@@ -146,6 +146,7 @@
                                                         <tr id="cid{{ $slt->id }}">
                                                             <td></td>
                                                             <td colspan="3">
+                                                            
                                                                 <table id="tcid{{ $slt->id }}" width="600" class="table table-bordered table-striped">
                                                                     <thead>
                                                                         <tr>

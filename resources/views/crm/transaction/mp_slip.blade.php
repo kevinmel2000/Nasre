@@ -150,49 +150,51 @@
                                                                             <td><a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="'+response.id+'" data-target="#addrisklocdetailmodaldata5">
                                                                                     <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocdetailmodaldata5">Addb Detail</button></td>
                                                                             <td colspan="3">
-                                                                                <table id="tcid{{ $slt->id }}" width="600" class="table table-bordered table-striped">
-                                                                                    <thead>
+                                                                            <table id="tcid{{ $slt->id }}" width="600" class="table table-bordered table-striped">
+                                                                                <thead>
                                                                                     <tr>
-                                                                                    <th>Interest Insured</th>
-                                                                                    <th>Ceding/Broker</th>
-                                                                                    <th>CN/DN</th>
-                                                                                    <th>Cert No</th>
-                                                                                    <th>Slip No</th>
-                                                                                    <th>Policy No</th>
-                                                                                    <th>amount</th>
-                                                                                    <th>Action</th>
+                                                                                        <th>Interest Insured</th>
+                                                                                        <th>Ceding</th>
+                                                                                        <th>CN/DN</th>
+                                                                                        <th>Cert No</th>
+                                                                                        <th>Slip No</th>
+                                                                                        <th>Policy No</th>
+                                                                                        <th>Percentage</th>
+                                                                                        <th>Amount</th>
+                                                                                        <th>Action</th>
                                                                                     </tr>
-                                                                                    </thead>
-                                                                                    <tbody id="tbcid{{ $slt->id }}">
-                                                                                  
-                                                                                        @if(!empty($slt->risklocationdetail))
-   
+                                                                                </thead>
+                                                                                <tbody id="tbcid{{ $slt->id }}">
+                                                                                
+                                                                                    @if(!empty($slt->risklocationdetail))
+                                                                                    
 
-                                                                                            @foreach($slt->risklocationdetail as $detaillocrisk)
+                                                                                    @foreach($slt->risklocationdetail as $detaillocrisk)
 
-                                                                                            <tr id="riskdetailsid{{ $detaillocrisk->id }}">
-                                                                                                <td>{{ $detaillocrisk->interestdetail->description }}</td>
-                                                                                                <td>{{ $detaillocrisk->cedingdetail->name }}</td>
-                                                                                                <td>{{ $detaillocrisk->cndn }}</td>
-                                                                                                <td>{{ $detaillocrisk->certno }}</td>
-                                                                                                <td>{{ $detaillocrisk->slipno }}</td>
-                                                                                                <td>{{ $detaillocrisk->policyno }}</td>
-                                                                                                <td>{{ $detaillocrisk->amountlocation }}</td>
-                                                                                                <td>
-                                                                                                <a href="javascript:void(0)" onclick="deletelocationriskdetail({{ $detaillocrisk->id }})"><i class="fas fa-trash text-danger"></i></a>
-                                                                                                </td>
-                                                                                                </tr>
+                                                                                    <tr id="riskdetailsid{{ $detaillocrisk->id }}">
+                                                                                        <td>{{ $detaillocrisk->interestdetail->code }} - {{ $detaillocrisk->interestdetail->description }}</td>
+                                                                                        <td>{{ $detaillocrisk->cedingdetail->name }}</td>
+                                                                                        <td>{{ $detaillocrisk->cndn }}</td>
+                                                                                        <td>{{ $detaillocrisk->certno }}</td>
+                                                                                        <td>{{ $detaillocrisk->slipno }}</td>
+                                                                                        <td>{{ $detaillocrisk->policyno }}</td>
+                                                                                        <td>{{ $detaillocrisk->percentage }}</td>
+                                                                                        <td>@currency($detaillocrisk->amountlocation)</td>
+                                                                                        <td>
+                                                                                            <a href="javascript:void(0)" onclick="deletelocationriskdetail({{ $detaillocrisk->id }})"><i class="fas fa-trash text-danger"></i></a>
+                                                                                        </td>
+                                                                                    </tr>
 
-                                                                                            @endforeach
+                                                                                    @endforeach
 
-                                                                                        @endif
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </td>
+                                                                                    @endif
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
                                                                     </tr>
                                                                     @endforeach
-                                                            </tbody>
-                                                            
+                                                                </tbody>
+                                                                
                                                             </table>
                                                 </div>
                                             </div>
@@ -1369,9 +1371,9 @@
                                                                             @csrf
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <div class="input-group" id="dateinstallment" >
-                                                                                        <input type="text" id="slipipdate" class="form-control form-control-sm datetimepicker-input"  name="slipipdate">
-                                                                                    </div>
+                                                                                        <div class="input-group " id="dateinstallment" >
+                                                                                                <input type="text" id="slipipdate" class="form-control form-control-sm datetimepicker-input tanggal" name="slipipdate" >
+                                                                                        </div>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -1381,12 +1383,13 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" value="" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" readonly/>
+                                                                                    <input type="text" value="" id="slipipamount" name="slipipamount" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" />
+                                                                                    <!-- <input type="text" value="" id="slipipamount2" name="slipipamount2" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" disabled/> -->
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                     <input type="hidden" id="sliptotalpercentinspan" name="sliptotalpercentinspan">
+                                                                                     <input type="text" id="sliptotalpercentinspan" name="sliptotalpercentinspan">
                                                                                     <button type="button" id="addinstallmentinsured-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>

@@ -146,50 +146,52 @@
                                                                             <td><a class="text-primary mr-3 float-right " data-toggle="modal" data-look-id="'+response.id+'" data-target="#addrisklocdetailmodaldata5">
                                                                                     <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addrisklocdetailmodaldata5">Addb Detail</button></td>
                                                                             <td colspan="3">
-                                                                                <table id="tcid{{ $slt->id }}" width="600" class="table table-bordered table-striped">
-                                                                                    <thead>
-                                                                                    <tr>
+                                                                            <table id="tcid{{ $slt->id }}" width="600" class="table table-bordered table-striped">
+                                                                            <thead>
+                                                                                <tr>
                                                                                     <th>Interest Insured</th>
-                                                                                    <th>Ceding/Broker</th>
+                                                                                    <th>Ceding</th>
                                                                                     <th>CN/DN</th>
                                                                                     <th>Cert No</th>
                                                                                     <th>Slip No</th>
                                                                                     <th>Policy No</th>
-                                                                                    <th>amount</th>
+                                                                                    <th>Percentage</th>
+                                                                                    <th>Amount</th>
                                                                                     <th>Action</th>
-                                                                                    </tr>
-                                                                                    </thead>
-                                                                                    <tbody id="tbcid{{ $slt->id }}">
-                                                                                  
-                                                                                        @if(!empty($slt->risklocationdetail))
-   
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="tbcid{{ $slt->id }}">
+                                                                            
+                                                                                @if(!empty($slt->risklocationdetail))
+                                                                                
 
-                                                                                            @foreach($slt->risklocationdetail as $detaillocrisk)
+                                                                                @foreach($slt->risklocationdetail as $detaillocrisk)
 
-                                                                                                <tr id="riskdetailsid{{ $detaillocrisk->id }}">
-                                                                                                <td>{{ $detaillocrisk->interestdetail->description }}</td>
-                                                                                                <td>{{ $detaillocrisk->cedingdetail->name }}</td>
-                                                                                                <td>{{ $detaillocrisk->cndn }}</td>
-                                                                                                <td>{{ $detaillocrisk->certno }}</td>
-                                                                                                <td>{{ $detaillocrisk->slipno }}</td>
-                                                                                                <td>{{ $detaillocrisk->policyno }}</td>
-                                                                                                <td>{{ $detaillocrisk->amountlocation }}</td>
-                                                                                                <td>
-                                                                                                <a href="javascript:void(0)" onclick="deletelocationriskdetail({{ $detaillocrisk->id }})"><i class="fas fa-trash text-danger"></i></a>
-                                                                                                </td>
-                                                                                                </tr>
+                                                                                <tr id="riskdetailsid{{ $detaillocrisk->id }}">
+                                                                                    <td>{{ $detaillocrisk->interestdetail->code }} - {{ $detaillocrisk->interestdetail->description }}</td>
+                                                                                    <td>{{ $detaillocrisk->cedingdetail->name }}</td>
+                                                                                    <td>{{ $detaillocrisk->cndn }}</td>
+                                                                                    <td>{{ $detaillocrisk->certno }}</td>
+                                                                                    <td>{{ $detaillocrisk->slipno }}</td>
+                                                                                    <td>{{ $detaillocrisk->policyno }}</td>
+                                                                                    <td>{{ $detaillocrisk->percentage }}</td>
+                                                                                    <td>@currency($detaillocrisk->amountlocation)</td>
+                                                                                    <td>
+                                                                                        <a href="javascript:void(0)" onclick="deletelocationriskdetail({{ $detaillocrisk->id }})"><i class="fas fa-trash text-danger"></i></a>
+                                                                                    </td>
+                                                                                </tr>
 
-                                                                                            @endforeach
+                                                                                @endforeach
 
-                                                                                        @endif
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </td>
-                                                                    </tr>
-                                                                    @endforeach
+                                                                                @endif
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                                @endforeach
                                                             </tbody>
                                                             
-                                                            </table>
+                                                        </table>
                                                 </div>
                                             </div>
                                         </div>
@@ -918,45 +920,65 @@
 
 
                                         <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="row">
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <label>{{__('Insurance Periode')}}:</label>
-                                                            <input type="text" class="form-control form-control-sm datepicker-input" value="" data-target="#date" id="slipipfrom" name="slipipfrom">
-                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label style="opacity: 0;">{{__('p')}}:</label>
-                                                        <p class="d-flex justify-content-center">to</p>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <label style="opacity: 0;">{{__('p')}}:</label>
-                                                            <input type="text" class="form-control form-control-sm datepicker-input"  value="" data-target="#date" id="slipipto" name="slipipto">
-                                                                        
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <label>{{__('Reinsurance Periode')}}:</label>
-                                                            <input type="text" class="form-control form-control-sm datetimepicker-input" value=""  id="sliprpfrom" name="sliprpfrom">               
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label style="opacity: 0;">{{__('p')}}:</label>
-                                                        <p class="d-flex justify-content-center">to</p>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <label style="opacity: 0;">{{__('p')}}:</label>
-                                                            <input type="text" class="form-control form-control-sm datetimepicker-input" value=""   id="sliprpto" name="sliprpto">       
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="row">
+                                                                    <div class="col-md-5">
+                                                                        <div class="form-group">
+                                                                            <label>{{__('Insurance Periode')}}:</label>
+                                                                            {{-- <div class="input-group date" id="dateinfrom" data-target-input="nearest"> --}}
+                                                                                <input type="text" class="form-control form-control-sm tanggal" data-target="#date" id="slipipfrom" name="slipipfrom" >
+                                                                                {{-- <div class="input-group-append datepickerinfrom" data-target="#dateinfrom" data-toggle="datetimepicker">
+                                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                                </div>
+                                                                            </div> --}}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <label style="opacity: 0;">{{__('p')}}:</label>
+                                                                        <p class="d-flex justify-content-center">to</p>
+                                                                    </div>
+                                                                    <div class="col-md-5">
+                                                                        <div class="form-group">
+                                                                            <label style="opacity: 0;">{{__('p')}}:</label>
+                                                                            {{-- <div class="input-group date" id="dateinto" data-target-input="nearest"> --}}
+                                                                                <input type="text" class="form-control form-control-sm datepicker-input tanggal" data-target="#date" id="slipipto" name="slipipto" >
+                                                                                {{-- <div class="input-group-append datepickerinto" data-target="#dateinto" data-toggle="datetimepicker">
+                                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                                </div>
+                                                                            </div> --}}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-5">
+                                                                        <div class="form-group">
+                                                                            <label>{{__('Reinsurance Periode')}}:</label>
+                                                                            {{-- <div class="input-group date" id="daterefrom" data-target-input="nearest"> --}}
+                                                                                <input type="text" class="form-control form-control-sm datetimepicker-input tanggal" data-target="#date" id="sliprpfrom" name="sliprpfrom" >
+                                                                                
+                                                                                {{-- <div class="input-group-append" data-target="#daterefrom" data-toggle="datetimepicker">
+                                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                                </div>
+                                                                            </div> --}}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <label style="opacity: 0;">{{__('p')}}:</label>
+                                                                        <p class="d-flex justify-content-center">to</p>
+                                                                    </div>
+                                                                    <div class="col-md-5">
+                                                                        <div class="form-group">
+                                                                            <label style="opacity: 0;">{{__('p')}}:</label>
+                                                                            {{-- <div class="input-group date" id="datereto" data-target-input="nearest"> --}}
+                                                                                <input type="text" class="form-control form-control-sm datetimepicker-input tanggal" data-target="#date" id="sliprpto" name="sliprpto" >
+                                                                                {{-- <div class="input-group-append" data-target="#datereto" data-toggle="datetimepicker">
+                                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                                </div>
+                                                                            </div> --}}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
                                             <div class="col-md-4">
                                                 <div class="row">
