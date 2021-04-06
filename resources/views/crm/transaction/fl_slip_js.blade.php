@@ -3735,7 +3735,7 @@ function deletelocationriskdetail(id){
     }
 });
 
-   $('#sliprate').change(function(){
+$('#sliprate').change(function(){
         var rate_lower = $('#slipbcla').val();
         var rate_upper = $('#slipbcua').val();
         var rate = $('#sliprate').val();
@@ -3743,7 +3743,10 @@ function deletelocationriskdetail(id){
             var rate_lower_val = parseFloat(rate_lower);
             var rate_upper_val = parseFloat(rate_upper);
             var rate_val = parseFloat(rate) / 1000;
-            if(rate_val < rate_lower_val && rate_val > rate_upper_val ){
+            console.log(rate_lower_val)
+            console.log(rate_upper_val)
+            console.log(rate_val)
+            if(rate_val < rate_lower_val || rate_val > rate_upper_val ){
                 swal('warning','please input rate between rate lower and rate upper building','input error')
             }
         }else{

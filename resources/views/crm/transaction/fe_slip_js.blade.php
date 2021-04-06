@@ -4031,6 +4031,7 @@ function deletelocationriskdetail(id){
     }
 });
 
+
    $('#sliprate').change(function(){
         var rate_lower = $('#slipbcla').val();
         var rate_upper = $('#slipbcua').val();
