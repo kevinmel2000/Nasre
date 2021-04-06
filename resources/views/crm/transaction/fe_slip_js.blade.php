@@ -6195,7 +6195,7 @@ function deletelocationriskdetail(id){
 
        //ajaxfilefunction(e);
 
-       if(current_percent == 100)
+       if(current_percent == '100')
        {
             $.ajaxSetup({
                 headers: {
