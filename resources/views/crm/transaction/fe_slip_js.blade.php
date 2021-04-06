@@ -127,16 +127,16 @@
                 });
             });
 
-    $('input.tanggal').keyup(function(event) {
-            // skip for arrow keys
-            if(event.which >= 37 && event.which <= 40) return;
-            console.log(event.which)
-            console.log($(this).val())
-                // format number
-                $(this).val(function(index, value) {
-                    return value.replace(/\D/g, "").replace(/\B(?=(\d{2})+(?!\d))/g, "/");
-                });
-            });
+    // $('input.tanggal').keyup(function(event) {
+    //         // skip for arrow keys
+    //         if(event.which >= 37 && event.which <= 40) return;
+    //         console.log(event.which)
+    //         console.log($(this).val())
+    //             // format number
+    //             $(this).val(function(index, value) {
+    //                 return value.replace(/\D/g, "").replace(/\B(?=(\d{2})+(?!\d))/g, "/");
+    //             });
+    //         });
 
 
 
