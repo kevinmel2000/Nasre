@@ -2033,7 +2033,8 @@ class TransactionController extends Controller
         
             if($percentage !='' && $amount !='' && $slip_id != '')
             {
-                if($totalpercent <= 100){
+                if($totalpercent <= 100)
+                {
                     $old_date_timestamp = strtotime($installmentdate);
                     $new_date = date('Y-m-d', $old_date_timestamp); 
 
@@ -2052,7 +2053,7 @@ class TransactionController extends Controller
                                 [
                                     'id' => $installmentlist->id,
                                     'percentage' => $installmentlist->percentage,
-                                    'installment_date' => date("d/m/Y", strtotime($installmentlist->installment_date)),
+                                    'installment_date' => date("d/m/Y", strtotime($new_date)),
                                     'amount' => $installmentlist->amount,
                                     'slip_id' => $installmentlist->slip_id,
                                     'message' => 'sorry percent must 100%, your percent minus '. $minpercent2.'percent'
@@ -2064,13 +2065,15 @@ class TransactionController extends Controller
                                 [
                                     'id' => $installmentlist->id,
                                     'percentage' => $installmentlist->percentage,
-                                    'installment_date' => date("d/m/Y", strtotime($installmentlist->installment_date)),
+                                    'installment_date' => date("d/m/Y", strtotime($new_date)),
                                     'amount' => $installmentlist->amount,
                                     'slip_id' => $installmentlist->slip_id
                                 ]
                             );
                     }
-                }else{
+                }
+                else
+                {
                     return response()->json(
                         [
                             'code_error' => '404',
