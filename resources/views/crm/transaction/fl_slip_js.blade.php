@@ -34,16 +34,17 @@
                 });
             });
 
-    $('input.tanggal').keyup(function(event) {
-            // skip for arrow keys
-            if(event.which >= 37 && event.which <= 40) return;
-            console.log(event.which)
-            console.log($(this).val())
-                // format number
-                $(this).val(function(index, value) {
-                    return value.replace(/\D/g, "").replace(/\B(?=(\d{2})+(?!\d))/g, "/");
-                });
-            });
+     // $('input.tanggal').keyup(function(event) {
+    //         // skip for arrow keys
+    //         if(event.which >= 37 && event.which <= 40) return;
+    //         console.log(event.which)
+    //         console.log($(this).val())
+    //             // format number
+    //             $(this).val(function(index, value) {
+    //                 return value.replace(/\D/g, "").replace(/\B(?=(\d{2})+(?!\d))/g, "/");
+    //             });
+    //         });
+
 
     $(".money").click(function() {
     var inputLength = $(".money").val().length;
@@ -4336,8 +4337,7 @@ $('#sliprate').change(function(){
        //alert('masuk');
        e.preventDefault();
 
-       var installmentdate = $('#dateinstallmentdata').val();
-       
+       var installmentdate = $('#slipipdate').val();
        var percentage = $('#slipippercentage').val();
        var amount = $('#slipipamount').val();
        var slip_id = $('#slipnumber').val();
@@ -4349,32 +4349,57 @@ $('#sliprate').change(function(){
        console.log(real_amount)
        
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{ route('installment.store') }}",
-           type:"POST",
-           data:{
-               installmentdate:installmentdate,
-               percentage:percentage,
-               slipamount:real_amount,
-               id_slip:slip_id
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-            
-               console.log(response)
-               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
-               $('#dateinstallment').val('');
-               $('#slipippercentage').val('');
-               $('#slipipamount').val('');
-               
+         url:"{{ route('installment.store') }}",
+         type:"POST",
+         data:{
+             installmentdate:installmentdate,
+             percentage:percentage,
+             slipamount:real_amount,
+             id_slip:slip_id
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+
+             console.log(response)
+             if(response.code_error){
+                swal("Error!", response.message , "Insert Error");
+                $('#addinstallmentinsured-btn').attr('hidden','true')
+            }else{
+                    // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+                    var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
+                    $('#dateinstallment').val('');
+                    $('#slipippercentage').val('');
+                    $('#slipipamount').val('');
+                    $('#slipipamount2').val('');
+
+                    if(response.message){
+                        swal("Success!", response.message, "success")
+                    }       
+                    
+
+                    var total_percent =  $('#sliptotalpercentinspan').val();
+
+                    if(total_percent == ''){
+                        var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
+                        $('#sliptotalpercentinspan').val(sum_percent.toString());
+                        console.log($('#sliptotalpercentinspan').val())
+                    }else{
+                        var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
+                        $('#sliptotalpercentinspan').val(sum_percent.toString());
+                        console.log($('#sliptotalpercentinspan').val())
+                        
+                    }
+                }
+
                //var total =  parseFloat($("#sliptotalsum").val());
                //var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
                //$("#sliptotalsum").val(sum);
@@ -5523,7 +5548,7 @@ $('#sliprate').change(function(){
        //ajaxfilefunction(e);
 
        //if(current_percent == 100 && current_percent_rp == 100)
-       if(current_percent == 100)
+       if(current_percent == '100')
        {
         $.ajaxSetup({
             headers: {

@@ -1391,8 +1391,8 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                     <input type="text" id="sliptotalpercentinspan" name="sliptotalpercentinspan">
-                                                                                    <button type="button" id="addinstallmentinsured-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                    <input type="text" id="sliptotalpercentinspan" name="sliptotalpercentinspan" hidden="true">
+                                                                                     <button type="button" id="addinstallmentinsured-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>
                                                                             </form>
