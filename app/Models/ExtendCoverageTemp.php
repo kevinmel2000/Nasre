@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExtendCoverageTemp extends Model
 {
-    protected $table = "extendcoverage_temp";
+    protected $table = "extended_coverage_detail";
 
     protected $guarded = [];
 

@@ -195,8 +195,8 @@ class FeSlipController extends Controller
            $risklocation_detail = RiskLocationDetail::where('ceding_id',$ceding->id)->get();
            $amount_list = count($risklocation_detail);
            $sum_amount = DB::table('risk_location_detail')
-                            ->join('trans_location_temp','trans_location_temp.id','=','risk_location_detail.translocation_id')
-                            ->where('trans_location_temp.insured_id',$insured_id)->where('risk_location_detail.ceding_id',$ceding->id)
+                            ->join('trans_location_detail','trans_location_detail.id','=','risk_location_detail.translocation_id')
+                            ->where('trans_location_detail.insured_id',$insured_id)->where('risk_location_detail.ceding_id',$ceding->id)
                             ->sum('risk_location_detail.amountlocation');
             // dd($sum_amount);
            return response()->json(['id' => $ceding_list->id,
@@ -227,8 +227,8 @@ class FeSlipController extends Controller
            $risklocation_detail = RiskLocationDetail::where('ceding_id',$ceding->id)->get();
            $amount_list = count($risklocation_detail);
            $sum_amount = DB::table('risk_location_detail')
-                            ->join('trans_location_temp','trans_location_temp.id','=','risk_location_detail.translocation_id')
-                            ->where('trans_location_temp.insured_id',$insured_id)->where('risk_location_detail.ceding_id',$ceding->id)
+                            ->join('trans_location_detail','trans_location_detail.id','=','risk_location_detail.translocation_id')
+                            ->where('trans_location_detail.insured_id',$insured_id)->where('risk_location_detail.ceding_id',$ceding->id)
                             ->sum('risk_location_detail.amountlocation');
             // dd($sum_amount);
            return response()->json(['id' => $ceding_list->id,
@@ -1339,8 +1339,8 @@ class FeSlipController extends Controller
             $locationlist= TransLocationTemp::where('insured_id','=',$request->fesnumber)->orderby('id','desc')->get();
 
             $sum_amount = DB::table('risk_location_detail')
-                            ->join('trans_location_temp','trans_location_temp.id','=','risk_location_detail.translocation_id')
-                            ->where('trans_location_temp.insured_id',$request->fesnumber)
+                            ->join('trans_location_detail','trans_location_detail.id','=','risk_location_detail.translocation_id')
+                            ->where('trans_location_detail.insured_id',$request->fesnumber)
                             ->sum('risk_location_detail.amountlocation');
             
             if($insureddata==null)
@@ -1877,10 +1877,10 @@ class FeSlipController extends Controller
                                 'count_endorsement' => ($ll->count_endorsement + 1)
                             ]);
     
-                            $lookuplocationlist = DB::table('trans_location_temp')
+                            $lookuplocationlist = DB::table('trans_location_detail')
                                                     ->join('fe_lookup_location', 'fe_lookup_location.id', '=', 'trans_location_temp.lookup_location_id')
-                                                    ->select('trans_location_temp.*', 'fe_lookup_location.address','fe_lookup_location.loc_code','fe_lookup_location.latitude','fe_lookup_location.longtitude','fe_lookup_location.postal_code')
-                                                    ->where('trans_location_temp.id',$locationlistup->id)
+                                                    ->select('trans_location_detail.*', 'fe_lookup_location.address','fe_lookup_location.loc_code','fe_lookup_location.latitude','fe_lookup_location.longtitude','fe_lookup_location.postal_code')
+                                                    ->where('trans_location_detail.id',$locationlistup->id)
                                                     ->get();
 
                             

@@ -9,7 +9,7 @@ class TransLocationTemp extends Model
     //
     protected $guarded = [];
 
-    protected $table = 'trans_location_temp';
+    protected $table = 'trans_location_detail';
 
     public function insured() 
     {

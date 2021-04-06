@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PropertyTypeTemp extends Model
 {
-    protected $table = "property_type_temp";
+    protected $table = "property_type_detail";
 
     protected $guarded = [];
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class InterestInsuredTemp extends Model
 {
-    protected $table = "interestinsured_temp";
+    protected $table = "interest_insured_detail";
 
     protected $guarded = [];
 

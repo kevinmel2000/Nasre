@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DeductibleTemp extends Model
 {
-    protected $table = "deductible_temp";
+    protected $table = "deductible_type_detail";
 
     protected $guarded = [];
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ShipListTemp extends Model
 {
     protected $guarded = [];
-    protected $table = 'shiplist_temp';
+    protected $table = 'shiplist_detail';
     protected $fillable = ['insured_id','ship_code','ship_name'];
 
     public function insured(){

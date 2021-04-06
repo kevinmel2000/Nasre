@@ -2028,7 +2028,7 @@ class TransactionController extends Controller
             $amount = $request->slipamount;
             $slip_id = $request->id_slip;
 
-            $checkit = DB::table('installment_temp')->where('installment_temp.slip_id',$slip_id)->sum('installment_temp.percentage');
+            $checkit = DB::table('installment_panel_detail')->where('installment_panel_detail.slip_id',$slip_id)->sum('installment_panel_detail.percentage');
             $totalpercent = $checkit + $percentage;
         
             if($percentage !='' && $amount !='' && $slip_id != '')
@@ -2044,7 +2044,7 @@ class TransactionController extends Controller
                     $installmentlist->slip_id = $slip_id; 
                     $installmentlist->save();
 
-                    $checkit2 = DB::table('installment_temp')->where('installment_temp.slip_id',$installmentlist->slip_id)->sum('installment_temp.percentage');
+                    $checkit2 = DB::table('installment_panel_detail')->where('installment_panel_detail.slip_id',$installmentlist->slip_id)->sum('installment_panel_detail.percentage');
                     $minpercent2 = 100 - $checkit2;
 
                     if($checkit2 < 100){
@@ -2244,7 +2244,7 @@ class TransactionController extends Controller
             $slip_id = $request->id_slip;
             $percentage_or = $request->or_percent;
 
-            $checkit = DB::table('retrocession_temp')->where('retrocession_temp.slip_id',$slip_id)->sum('retrocession_temp.percentage');
+            $checkit = DB::table('retrocession_panel_detail')->where('retrocession_panel_detail.slip_id',$slip_id)->sum('retrocession_panel_detail.percentage');
             $totalpercent = $checkit + $percentage + $percentage_or;
         
             if($percentage !='' && $amount !='' && $slip_id != '')
@@ -2259,7 +2259,7 @@ class TransactionController extends Controller
                     $retrocessionlist->slip_id = $slip_id; 
                     $retrocessionlist->save();
 
-                    $checkit2 = DB::table('retrocession_temp')->where('retrocession_temp.slip_id',$retrocessionlist->slip_id)->sum('retrocession_temp.percentage');
+                    $checkit2 = DB::table('retrocession_panel_detail')->where('retrocession_panel_detail.slip_id',$retrocessionlist->slip_id)->sum('retrocession_panel_detail.percentage');
                     $totalpercent2 = $percentage_or + $checkit2;
                     $minpercent2 = 100 - $totalpercent2;
 
@@ -2465,7 +2465,7 @@ class TransactionController extends Controller
 
     public function showdeductibleList(Request $request)
     {
-        $deductibletemp = DB::table("deductible_temp")
+        $deductibletemp = DB::table("deductible_type_detail")
         ->where("id",$request->deductible_code)
         ->first();
         return response()->json($deductibletemp);
@@ -2473,7 +2473,7 @@ class TransactionController extends Controller
 
     public function showconditionneededList(Request $request)
     {
-        $conditionneeded = DB::table("condition_needed_temp")
+        $conditionneeded = DB::table("condition_needed_detail")
         ->where("id",$request->cn_code)
         ->first();
         return response()->json($conditionneeded);
@@ -2481,7 +2481,7 @@ class TransactionController extends Controller
 
     public function showextendcoverageList(Request $request)
     {
-        $extendcoverage = DB::table("extendedcoverage_temp")
+        $extendcoverage = DB::table("extended_coverage_detail")
         ->where("id",$request->ec_code)
         ->first();
         return response()->json($extendcoverage);
@@ -2489,7 +2489,7 @@ class TransactionController extends Controller
 
     public function showinstallmentList(Request $request)
     {
-        $installmenttemp = DB::table("installment_temp")
+        $installmenttemp = DB::table("installment_panel_detail")
         ->where("id",$request->intem_code)
         ->first();
         return response()->json($installmenttemp);
@@ -2497,7 +2497,7 @@ class TransactionController extends Controller
 
     public function showretrocessionList(Request $request)
     {
-        $retrocessionlist = DB::table("retrocession_temp")
+        $retrocessionlist = DB::table("retrocession_panel_detail")
         ->where("id",$request->rsc_code)
         ->first();
         return response()->json($retrocessionlist);
@@ -2505,7 +2505,7 @@ class TransactionController extends Controller
 
     public function showholedetailList(Request $request)
     {
-        $holedetaillist = DB::table("hole_detail_temp")
+        $holedetaillist = DB::table("golf_field_hole_detail")
         ->where("id",$request->hd_code)
         ->first();
         return response()->json($holedetaillist);
@@ -2670,23 +2670,23 @@ class TransactionController extends Controller
 
         $filelist=SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         // $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-        $interestlist = DB::table('interestinsured_temp')
-            ->join('interest_insured', 'interest_insured.id', '=', 'interestinsured_temp.interest_id')
-            ->select('interestinsured_temp.*', 'interest_insured.code', 'interest_insured.description')
-            ->where('interestinsured_temp.slip_id',$code_sl)
+        $interestlist = DB::table('interest_insured_detail')
+            ->join('interest_insured', 'interest_insured.id', '=', 'interest_insured_detail.interest_id')
+            ->select('interest_insured_detail.*', 'interest_insured.code', 'interest_insured.description')
+            ->where('interest_insured_detail.slip_id',$code_sl)
             ->get();
         // $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
         $deductibletemp = DB::table('deductible_temp')
-            ->join('deductible_type', 'deductible_type.id', '=', 'deductible_temp.deductibletype_id')
-            ->join('currencies', 'currencies.id', '=', 'deductible_temp.currency_id')
-            ->select('deductible_temp.*', 'currencies.code','currencies.symbol_name','deductible_type.abbreviation', 'deductible_type.description')
-            ->where('deductible_temp.slip_id',$code_sl)
+            ->join('deductible_type', 'deductible_type.id', '=', 'deductible_type_detail.deductibletype_id')
+            ->join('currencies', 'currencies.id', '=', 'deductible_type_detail.currency_id')
+            ->select('deductible_type_detail.*', 'currencies.code','currencies.symbol_name','deductible_type.abbreviation', 'deductible_type.description')
+            ->where('deductible_type_detail.slip_id',$code_sl)
             ->get();
         // $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-        $conditionneededtemp = DB::table('condition_needed_temp')
-        ->join('condition_needed', 'condition_needed.id', '=', 'condition_needed_temp.condition_id')
-        ->select('condition_needed_temp.*', 'condition_needed.name','condition_needed.code' ,'condition_needed.description')
-        ->where('condition_needed_temp.slip_id',$code_sl)
+        $conditionneededtemp = DB::table('condition_needed_detail')
+        ->join('condition_needed', 'condition_needed.id', '=', 'condition_needed_detail.condition_id')
+        ->select('condition_needed_detail.*', 'condition_needed.name','condition_needed.code' ,'condition_needed.description')
+        ->where('condition_needed_detail.slip_id',$code_sl)
         ->get();
         $installmentpanel= InstallmentTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
         $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
@@ -3889,23 +3889,23 @@ class TransactionController extends Controller
 
         $filelist=SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         // $interestlist= InterestInsuredTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-        $interestlist = DB::table('interestinsured_temp')
-            ->join('interest_insured', 'interest_insured.id', '=', 'interestinsured_temp.interest_id')
-            ->select('interestinsured_temp.*', 'interest_insured.code', 'interest_insured.description')
-            ->where('interestinsured_temp.slip_id',$code_sl)
+        $interestlist = DB::table('interest_insured_detail')
+            ->join('interest_insured', 'interest_insured.id', '=', 'interest_insured_detail.interest_id')
+            ->select('interest_insured_detail.*', 'interest_insured.code', 'interest_insured.description')
+            ->where('interest_insured_detail.slip_id',$code_sl)
             ->get();
         // $deductibletemp= DeductibleTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-        $deductibletemp = DB::table('deductible_temp')
-            ->join('deductible_type', 'deductible_type.id', '=', 'deductible_temp.deductibletype_id')
-            ->join('currencies', 'currencies.id', '=', 'deductible_temp.currency_id')
-            ->select('deductible_temp.*', 'currencies.code','currencies.symbol_name','deductible_type.abbreviation', 'deductible_type.description')
-            ->where('deductible_temp.slip_id',$code_sl)
+        $deductibletemp = DB::table('deductible_type_detail')
+            ->join('deductible_type', 'deductible_type.id', '=', 'deductible_type_detail.deductibletype_id')
+            ->join('currencies', 'currencies.id', '=', 'deductible_type_detail.currency_id')
+            ->select('deductible_type_detail.*', 'currencies.code','currencies.symbol_name','deductible_type.abbreviation', 'deductible_type.description')
+            ->where('deductible_type_detail.slip_id',$code_sl)
             ->get();
         // $conditionneededtemp= ConditionNeededTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
-        $conditionneededtemp = DB::table('condition_needed_temp')
-        ->join('condition_needed', 'condition_needed.id', '=', 'condition_needed_temp.condition_id')
-        ->select('condition_needed_temp.*', 'condition_needed.name','condition_needed.code' ,'condition_needed.description')
-        ->where('condition_needed_temp.slip_id',$code_sl)
+        $conditionneededtemp = DB::table('condition_needed_detail')
+        ->join('condition_needed', 'condition_needed.id', '=', 'condition_needed_detail.condition_id')
+        ->select('condition_needed_detail.*', 'condition_needed.name','condition_needed.code' ,'condition_needed.description')
+        ->where('condition_needed_detail.slip_id',$code_sl)
         ->get();
         $installmentpanel= InstallmentTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();
         $retrocessiontemp= RetrocessionTemp::where('slip_id',$code_sl)->orderby('id','desc')->get();

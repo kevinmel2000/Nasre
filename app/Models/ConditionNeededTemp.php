@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ConditionNeededTemp extends Model
 {
-    protected $table = "condition_needed_temp";
+    protected $table = "condition_needed_detail";
     protected $guarded = [];
 
     public function conditionneeded()

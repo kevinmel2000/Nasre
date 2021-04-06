@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RetrocessionTemp extends Model
 {
-    protected $table = "retrocession_temp";
+    protected $table = "retrocession_panel_detail";
 
     protected $guarded = [];
 
