@@ -112,6 +112,7 @@
     });
 </script>
 
+
 <script type="text/javascript">
 
 
@@ -4029,6 +4030,7 @@ function deletelocationriskdetail(id){
         $('#slipbasicpremium').val(real_sum);
     }
 });
+
 
    $('#sliprate').change(function(){
         var rate_lower = $('#slipbcla').val();
