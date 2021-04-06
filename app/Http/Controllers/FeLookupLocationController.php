@@ -79,7 +79,8 @@ class FeLookupLocationController extends Controller
 
           $lastid = count(FeLookupLocation::all());
 
-          if($lastid != null){
+          if($lastid != null)
+          {
               // $code_st = $mydate . strval($lastid + 1);
 
               if($lastid < 9){
