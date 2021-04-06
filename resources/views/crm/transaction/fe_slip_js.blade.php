@@ -4041,7 +4041,7 @@ function deletelocationriskdetail(id){
             console.log(rate_lower_val)
             console.log(rate_upper_val)
             console.log(rate_val)
-            if(rate_val < rate_upper_val && rate_val > rate_lower_val ){
+            if(rate_val < rate_lower_val || rate_val > rate_upper_val ){
                 swal('warning','please input rate between rate lower and rate upper building','input error')
             }
         }else{
