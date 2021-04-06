@@ -5019,9 +5019,12 @@ function deletelocationriskdetail(id){
                     if(total_percent == ''){
                         var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
                         $('#sliptotalpercentinspan').val(sum_percent.toString());
+                        console.log($('#sliptotalpercentinspan').val())
                     }else{
                         var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
                         $('#sliptotalpercentinspan').val(sum_percent.toString());
+                        console.log($('#sliptotalpercentinspan').val())
+                        
                     }
                 }
 
