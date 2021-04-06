@@ -5016,12 +5016,12 @@ function deletelocationriskdetail(id){
 
                     var total_percent =  $('#sliptotalpercentinspan').val();
 
-                    if(total_percent == null){
+                    if(total_percent == ''){
                         var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
-                        $('#sliptotalpercentinspan').val(sum_percent);
+                        $('#sliptotalpercentinspan').val(sum_percent.toString());
                     }else{
                         var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
-                        $('#sliptotalpercentinspan').val(sum_percent);
+                        $('#sliptotalpercentinspan').val(sum_percent.toString());
                     }
                 }
 
