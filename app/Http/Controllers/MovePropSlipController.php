@@ -869,8 +869,13 @@ class MovePropSlipController extends Controller
             $user = Auth::user();
             
             $insureddata= Insured::where('number','=',$request->mpnumber)->first();
-            $locationlist= TransLocationTemp::where('insured_id','=',$request->flnumber)->orderby('id','desc')->get();
-            $propertytypelist= PropertyTypeTemp::where('insured_id','=',$request->flnumber)->orderby('id','desc')->get();
+            $locationlist= TransLocationTemp::where('insured_id','=',$request->mpnumber)->orderby('id','desc')->get();
+            $propertytypelist= PropertyTypeTemp::where('insured_id','=',$request->mpnumber)->orderby('id','desc')->get();
+
+            $sum_amount = DB::table('risk_location_detail')
+            ->join('trans_location_detail','trans_location_detail.id','=','risk_location_detail.translocation_id')
+            ->where('trans_location_detail.insured_id',$request->mpnumber)
+            ->sum('risk_location_detail.amountlocation');
 
             if($insureddata==null)
             {
@@ -880,18 +885,21 @@ class MovePropSlipController extends Controller
                     'insured_prefix' => $request->mpinsured,
                     'insured_name'=>$request->mpsuggestinsured,
                     'insured_suffix'=>$request->mpsuffix,
-                    'share'=>$request->mpshare,
+                    'share'=>$sum_amount,
                     'share_from'=>$request->mpsharefrom,
                     'share_to'=>$request->mpshareto,
                     'coincurance'=>$request->mpcoinsurance,
                     'location'=>$locationlist->toJson(),
                     'property_type'=>$propertytypelist->toJson(),
-                    'uy'=>$request->mpuy
+                    'uy'=>$request->mpuy,
+                    'count_endorsement'=>0
                 ]);
 
                 $notification = array(
                     'message' => 'Moveable Property Insured added successfully!',
-                    'alert-type' => 'success'
+                    'alert-type' => 'success',
+                    'count_endorsement' => $insureddataup->count_endorsement,
+                    'ceding_share' => $sum_amount
                 );
             }
             else
@@ -901,7 +909,7 @@ class MovePropSlipController extends Controller
                 $insureddataup->insured_prefix=$request->mpinsured;
                 $insureddataup->insured_name=$request->mpsuggestinsured;
                 $insureddataup->insured_suffix=$request->mpsuffix;
-                $insureddataup->share=$request->mpshare;
+                $insureddataup->share=$sum_amount;
                 $insureddataup->share_from=$request->mpsharefrom;
                 $insureddataup->share_to=$request->mpshareto;
                 $insureddataup->coincurance=$request->mpcoinsurance;
@@ -913,13 +921,15 @@ class MovePropSlipController extends Controller
 
                 $notification = array(
                     'message' => 'Moveable Property Insured Update successfully!',
-                    'alert-type' => 'success'
+                    'alert-type' => 'success',
+                    'count_endorsement' => $insureddataup->count_endorsement,
+                    'ceding_share' => $sum_amount
                 );
             }
 
            
-
-            return back()->with($notification);
+            return response($notification);
+            //return back()->with($notification);
             //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
             //return redirect()->route('liniusaha.index');
         

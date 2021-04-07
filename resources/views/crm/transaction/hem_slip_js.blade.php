@@ -2644,7 +2644,7 @@ $("body").on("click","#btn-danger2",function(){
                 //console.log(sum)
                 //var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 //$("#sliptotalsum").val(real_sum);
-                //$("#feshareto").val(real_sum);
+                //$("#hemshareto").val(real_sum);
 
             }
         });
@@ -2720,18 +2720,18 @@ $("body").on("click","#btn-danger2",function(){
                     // }
 
                     var amount = response.amountlocation;
-                    var ceding_share = $('#feshare').val();
+                    var ceding_share = $('#hemshare').val();
                     if(ceding_share == ''){
                         var sum_ceding = isNaN(parseFloat(0) + parseFloat(amount)) ? 0 :(parseFloat(0) + parseFloat(amount));
                         var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#feshare').val(conv_sum_ceding);
+                        $('#hemshare').val(conv_sum_ceding);
                         console.log('ceding awal' + conv_sum_ceding)
                     }else{
                         var conv_ceding_share = ceding_share.replace(/,/g, "");
                         var real_ceding_share = parseInt(conv_ceding_share);
                         var sum_ceding = isNaN(parseFloat(real_ceding_share) + parseFloat(amount)) ? 0 :(parseFloat(real_ceding_share) + parseFloat(amount));
                         var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#feshare').val(conv_sum_ceding);
+                        $('#hemshare').val(conv_sum_ceding);
                         console.log('ceding bertambah' + conv_sum_ceding)
 
 
@@ -2788,7 +2788,7 @@ $("body").on("click","#btn-danger2",function(){
                     // $('#slipamount').val('');
                     // $('#slipinterestlist').val('');
                     
-                    // var totalnre = $('#feshareto').val();
+                    // var totalnre = $('#hemshareto').val();
                     
                     // if(totalnre){
                     //     var conv_totalnre = parseFloat(totalnre.replace(/,/g, ""));
@@ -2798,7 +2798,7 @@ $("body").on("click","#btn-danger2",function(){
                     //     console.log(conv_totalnre)
                     //     console.log(real_sumtotalnre)
 
-                    //     $('#feshareto').val(real_sumtotalnre);
+                    //     $('#hemshareto').val(real_sumtotalnre);
                     // }
                     // else{
                     //     var conv_totalnre = totalnre.replace(/,/g, "");
@@ -2808,7 +2808,7 @@ $("body").on("click","#btn-danger2",function(){
                     //     console.log(conv_totalnre)
                     //     console.log(real_sumtotalnre)
 
-                    //     $('#feshareto').val(real_sumtotalnre)
+                    //     $('#hemshareto').val(real_sumtotalnre)
                     // }
                     
 
@@ -2826,8 +2826,8 @@ $("body").on("click","#btn-danger2",function(){
                     //         $("#sliptotalsum").val(real_sum);
                     //         $("#sliptotalsum2").val(real_sum);
                     //         // $("#msishareto").val(real_sum);
-                    //         // $("#fesharefrom").val(real_sum);
-                    //         // $("#feshareto").val(real_sum);
+                    //         // $("#hemsharefrom").val(real_sum);
+                    //         // $("#hemshareto").val(real_sum);
                     //     }
                     //     else
                     //     {
@@ -2844,8 +2844,8 @@ $("body").on("click","#btn-danger2",function(){
                     //         console.log(' real sum : ' + real_sum)
                     //         $("#sliptotalsum").val(real_sum);
                     //         $("#sliptotalsum2").val(real_sum);
-                    //         // $("#fesharefrom").val(real_sum);
-                    //         // $("#feshareto").val(real_sum);
+                    //         // $("#hemsharefrom").val(real_sum);
+                    //         // $("#hemshareto").val(real_sum);
                     //     }
                     // }else{
                         swal("success!", "ceding share has increase", "success");
@@ -2875,32 +2875,32 @@ function deletelocationriskdetail(id){
             $('#riskdetailsid'+id).remove();
             var ceding_curr = $('#slipceding').val();
 
-            // var totalnre = $('#feshareto').val();
+            // var totalnre = $('#hemshareto').val();
             // var conv_totalnre = totalnre.replace(/,/g, "");
 
             // var sumtotalnre = isNaN(parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ? (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) : (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ;
             // var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            // $('#feshareto').val(real_sumtotalnre);
+            // $('#hemshareto').val(real_sumtotalnre);
 
                 //$('#cid'+id).remove();
                 var amount = response.amountlocation;
-                var ceding_share = $('#feshare').val();
+                var ceding_share = $('#hemshare').val();
                 
                 var conv_ceding_share = ceding_share.replace(/,/g, "");
                 var real_ceding_share = parseInt(conv_ceding_share);
                 var sum_ceding = isNaN(parseFloat(real_ceding_share) - parseFloat(amount)) ? 0 :(parseFloat(real_ceding_share) - parseFloat(amount));
                 var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                $('#feshare').val(conv_sum_ceding);
+                $('#hemshare').val(conv_sum_ceding);
                 console.log('ceding bertambah' + conv_sum_ceding)
                 
-                    // $("#feshareto").val(real_sum);
+                    // $("#hemshareto").val(real_sum);
 
             // swal("Warning!", "TSI not decrease because this ceding is not same with ceding in slip", "Tsi not decrease");
             swal("success!", "ceding share has decrease", "success");
 
                     // $("#sliptotalsum").val(real_sum);
-                    // $("#feshareto").val(real_sum);
+                    // $("#hemshareto").val(real_sum);
 
 
 
@@ -3200,10 +3200,10 @@ function deletelocationriskdetail(id){
     $('#percentceding').keyup(function(e){
         if(e.keyCode != 9){
             var percentceding = parseFloat($(this).val()) / 100 ;
-            var valtsi = $('#feshareto').val();
+            var valtsi = $('#hemshareto').val();
 
             if(valtsi != null){
-                var tsi = $('#feshareto').val();
+                var tsi = $('#hemshareto').val();
                 var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
                 var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
@@ -3215,10 +3215,10 @@ function deletelocationriskdetail(id){
         }
         else{
             var percentceding = parseFloat($(this).val()) / 100 ;
-            var valtsi = $('#feshareto').val();
+            var valtsi = $('#hemshareto').val();
 
             if(valtsi != null){
-                var tsi = $('#feshareto').val();
+                var tsi = $('#hemshareto').val();
                 var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
                 var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
@@ -3239,10 +3239,10 @@ function deletelocationriskdetail(id){
             var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
             console.log(amountlocation)
             console.log(conv_amountlocation)
-            var valtsi = $('#feshareto').val();
+            var valtsi = $('#hemshareto').val();
 
             if(valtsi != null){
-                var tsi = $('#feshareto').val();
+                var tsi = $('#hemshareto').val();
                 var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
                 var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
@@ -3260,10 +3260,10 @@ function deletelocationriskdetail(id){
 
             console.log(amountlocation)
             console.log(conv_amountlocation)
-            var valtsi = $('#feshareto').val();
+            var valtsi = $('#hemshareto').val();
 
             if(valtsi != null){
-                var tsi = $('#feshareto').val();
+                var tsi = $('#hemshareto').val();
                 var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
                 var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
@@ -5756,7 +5756,7 @@ function deletelocationriskdetail(id){
        var slipor =  $('#slipor').val();
        var slipsumor =  $('#slipsumor').val();
        var wpc =  $('#wpc').val();
-       var insuredshare = $('#fesharefrom').val();
+       var insuredshare = $('#hemsharefrom').val();
     
        var token2 = $('input[name=_token]').val();
 
@@ -6878,22 +6878,22 @@ function deletelocationriskdetail(id){
                         {
                             var obj = insured_list[i];
 
-                            $('#fesnumber').val('');
-                            $('#fesinsured').val('');
+                            $('#hemsnumber').val('');
+                            $('#heminsured').val('');
                             $('#autocomplete').val('');
                             $('#autocomplete2').val('');
                             $('#hemshare').val('');
                             $('#hemsharefrom').val('');
-                            $('#feuy').val('');
+                            $('#hemuy').val('');
                             $('#hemshareto').val('');
 
-                            $('#fesnumber').val(obj.number);
-                            $('#fesinsured').val(obj.insured_prefix);
+                            $('#hemsnumber').val(obj.number);
+                            $('#heminsured').val(obj.insured_prefix);
                             $('#autocomplete').val(obj.insured_name);
                             $('#autocomplete2').val(obj.insured_suffix);
                             $('#hemshare').val(obj.share);
                             $('#hemsharefrom').val(obj.share_from);
-                            $('#feuy').val(obj.uy);
+                            $('#hemuy').val(obj.uy);
                             $('#hemshareto').val(obj.share_to);
 
                             

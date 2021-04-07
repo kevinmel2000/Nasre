@@ -90,7 +90,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured')}}</label>
-                                                    <input id="flshareto" type="text"  name="flshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly/>
+                                                    <input id="flshareto" type="text"  name="flshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"/>
                                                 </div>
                                             </div>
                                         </div>

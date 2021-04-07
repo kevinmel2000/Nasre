@@ -865,7 +865,12 @@ class HeMotorSlipController extends Controller
             $user = Auth::user();
             
             $insureddata= Insured::where('number','=',$request->hemnumber)->first();
-            $locationlist= TransLocationTemp::where('insured_id','=',$request->flnumber)->orderby('id','desc')->get();
+            $locationlist= TransLocationTemp::where('insured_id','=',$request->hemnumber)->orderby('id','desc')->get();
+
+            $sum_amount = DB::table('risk_location_detail')
+            ->join('trans_location_detail','trans_location_detail.id','=','risk_location_detail.translocation_id')
+            ->where('trans_location_detail.insured_id',$request->hemnumber)
+            ->sum('risk_location_detail.amountlocation');
 
             if($insureddata==null)
             {
@@ -875,17 +880,20 @@ class HeMotorSlipController extends Controller
                     'insured_prefix' => $request->heminsured,
                     'insured_name'=>$request->hemsuggestinsured,
                     'insured_suffix'=>$request->hemsuffix,
-                    'share'=>$request->hemshare,
+                    'share'=>$sum_amount,
                     'share_from'=>$request->hemsharefrom,
                     'share_to'=>$request->hemshareto,
                     'coincurance'=>$request->hemcoinsurance,
                     'location'=>$locationlist->toJson(),
-                    'uy'=>$request->hemuy
+                    'uy'=>$request->hemuy,
+                    'count_endorsement'=>0
                 ]);
 
                 $notification = array(
                     'message' => 'He & Motor Insured added successfully!',
-                    'alert-type' => 'success'
+                    'alert-type' => 'success',
+                    'count_endorsement' => $insureddataup->count_endorsement,
+                    'ceding_share' => $sum_amount
                 );
             }
             else
@@ -895,7 +903,7 @@ class HeMotorSlipController extends Controller
                 $insureddataup->insured_prefix=$request->hemsinsured;
                 $insureddataup->insured_name=$request->hemsuggestinsured;
                 $insureddataup->insured_suffix=$request->hemsuffix;
-                $insureddataup->share=$request->hemshare;
+                $insureddataup->share=$sum_amount;
                 $insureddataup->share_from=$request->hemsharefrom;
                 $insureddataup->share_to=$request->hemshareto;
                 $insureddataup->coincurance=$request->hemcoinsurance;
@@ -906,13 +914,16 @@ class HeMotorSlipController extends Controller
 
                 $notification = array(
                     'message' => 'He & Motor Insured Update successfully!',
-                    'alert-type' => 'success'
+                    'alert-type' => 'success',
+                    'count_endorsement' => $insureddataup->count_endorsement,
+                    'ceding_share' => $sum_amount
                 );
             }
 
            
 
-            return back()->with($notification);
+            return response($notification);
+            //return back()->with($notification);
             //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
             //return redirect()->route('liniusaha.index');
         

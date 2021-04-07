@@ -87,7 +87,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured')}}</label>
-                                                    <input id="hemshareto" type="text" name="hemshareto" value="0" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly/>
+                                                    <input id="hemshareto" type="text" name="hemshareto" value="0" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" />
                                                 </div>
                                             </div>
                                         </div>

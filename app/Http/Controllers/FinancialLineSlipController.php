@@ -819,6 +819,11 @@ class FinancialLineSlipController extends Controller
             $insureddata= Insured::where('number','=',$request->flnumber)->first();
             $locationlist= TransLocationTemp::where('insured_id','=',$request->flnumber)->orderby('id','desc')->get();
 
+            $sum_amount = DB::table('risk_location_detail')
+                            ->join('trans_location_detail','trans_location_detail.id','=','risk_location_detail.translocation_id')
+                            ->where('trans_location_detail.insured_id',$request->flnumber)
+                            ->sum('risk_location_detail.amountlocation');
+
             if($insureddata==null)
             {
                 Insured::create([
@@ -827,30 +832,34 @@ class FinancialLineSlipController extends Controller
                     'insured_prefix' => $request->flinsured,
                     'insured_name'=>$request->flsuggestinsured,
                     'insured_suffix'=>$request->flsuffix,
-                    'share'=>$request->flshare,
+                    'share'=>$sum_amount,
                     'share_from'=>$request->flsharefrom,
                     'share_to'=>$request->flshareto,
                     'coincurance'=>$request->flcoinsurance,
                     'obligee'=>$request->flobligee,
                     'principal'=>$request->flprincipal,
                     'location'=>$locationlist->toJson(),
-                    'uy'=>$request->fluy
+                    'uy'=>$request->fluy,
+                    'count_endorsement'=>0
                 ]);
 
                 $notification = array(
                     'message' => 'Financial Line  Insured added successfully!',
-                    'alert-type' => 'success'
+                    'alert-type' => 'success',
+                    'count_endorsement' => $insureddataup->count_endorsement,
+                    'ceding_share' => $sum_amount
                 );
             }
             else
             {
+
                 $insureddataid=$insureddata->id;
                 $insureddataup = Insured::findOrFail($insureddataid);
                 $insureddataup->insured_prefix=$request->flinsured;
                 $insureddataup->slip_type='fl';
                 $insureddataup->insured_name=$request->flsuggestinsured;
                 $insureddataup->insured_suffix=$request->flsuffix;
-                $insureddataup->share=$request->flshare;
+                $insureddataup->share=$sum_amount;
                 $insureddataup->share_from=$request->flsharefrom;
                 $insureddataup->share_to=$request->flshareto;
                 $insureddataup->coincurance=$request->flcoinsurance;
@@ -861,15 +870,19 @@ class FinancialLineSlipController extends Controller
                 $insureddataup->save();
 
 
+
                 $notification = array(
                     'message' => 'Financial Line Insured Update successfully!',
-                    'alert-type' => 'success'
+                    'alert-type' => 'success',
+                    'count_endorsement' => $insureddataup->count_endorsement,
+                    'ceding_share' => $sum_amount
                 );
             }
 
            
 
-            return back()->with($notification);
+            return response($notification);
+            //return back()->with($notification);
             //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
             //return redirect()->route('liniusaha.index');
         
@@ -881,6 +894,7 @@ class FinancialLineSlipController extends Controller
                 'message' => 'Financial Line Insured added Failed!',
                 'alert-type' => 'success'
             );
+
 
             return back()->with($validator)->withInput();
             //Session::flash('Failed', 'Fire & Engginering Insured Failed added', 'danger');
