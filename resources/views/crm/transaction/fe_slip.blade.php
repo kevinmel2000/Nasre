@@ -1300,7 +1300,7 @@
                                                                             <div class="row">
                                                                                 <div class="col-md-12">
                                                                                     <div class="input-group">
-                                                                                        <input type="text" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                                        <input type="text" id="slipvbroker" name="slipvbroker" value="0" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                                                         <div class="input-group-append">
                                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                                         </div>
@@ -1315,7 +1315,7 @@
                                                                             <div class="row">
                                                                                 <div class="col-md-12">
                                                                                     <div class="input-group">
-                                                                                        <input type="text"  id="slipsumfee" name="slipsumfee" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" disabled placeholder="a" />
+                                                                                        <input type="text"  id="slipsumfee" name="slipsumfee"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" disabled placeholder="a" />
                                                                                         
                                                                                     </div>
                                                                                 </div>
