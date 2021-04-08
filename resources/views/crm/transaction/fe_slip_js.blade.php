@@ -3790,7 +3790,9 @@ function deletelocationriskdetail(id){
                 var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
                 var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 $('#amountlocation').val(real_sum);
-            }else{
+            }
+            else
+            {
                 swal('warning!','please fill TSI insured first','error')
             }
         }
@@ -3805,7 +3807,9 @@ function deletelocationriskdetail(id){
                 var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
                 var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 $('#amountlocation').val(real_sum);
-            }else{
+            }
+            else
+            {
                 swal('warning!','please fill TSI insured first','error')
             }
         }
