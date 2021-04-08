@@ -644,13 +644,10 @@
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <label for="">{{__('Status')}}</label>
-                                                                    <select name="slipstatus" id="slipstatus" class="form-control form-control-sm ">
+                                                                    <select name="slipstatus" id="slipstatus" class="form-control form-control-sm " readonly>
                                                                         {{-- <option selected readonly>{{__('Select Status')}}</option> --}}
-                                                                        <option value="offer" selected>Offer</option>
-                                                                        <option value="binding">Binding</option>
-                                                                        <option value="slip">Slip</option>
+                                                                        <option value="slip" selected>Slip</option>
                                                                         <option value="endorsement">Endorsement</option>
-                                                                        <option value="decline">Decline</option>
                                                                         <option value="cancel">Cancel</option>
                                                                     </select>
                                                                 </div>    

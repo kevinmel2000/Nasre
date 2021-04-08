@@ -988,8 +988,8 @@ class FinancialLineSlipController extends Controller
                     'alert-type' => 'success'
                 );
 
-                $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
-
+                //$insdata = Insured::where('number',$request->code_ms)->where('slip_type','fl')->first();
+                $insdata = Insured::where('number',$request->code_ms)->first();
                 // $old_sumshare = $request->slipoldsumshare;
     
                 $old_nasre_share = $insdata->share_from;
@@ -1149,7 +1149,8 @@ class FinancialLineSlipController extends Controller
                     'alert-type' => 'success'
                 );
                 
-                $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+                //$insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+                $insdata = Insured::where('number',$request->code_ms)->first();
 
                 $old_nasre_share = $insdata->share_from;
                 $new_nasre_share = $request->insured_share;

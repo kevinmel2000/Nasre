@@ -84,12 +84,9 @@
                                                         <div class="form-group">
                                                             <label for="">{{__('Status')}}</label>
                                                             <select name="slipstatusdetail" id="slipstatusdetail" class="form-control form-control-sm " disabled="true">
-                                                                <option value="offer" >Offer</option>
-                                                                <option value="binding" >Binding</option>
                                                                 <option value="slip">Slip</option>
                                                                 <option value="endorsement" >Endorsement</option>
-                                                                <option value="decline"> Decline</option>
-                                                                <option value="cancel">Cancel</option>
+                                                                 <option value="cancel">Cancel</option>
                                                             </select>
                                                         </div>    
                                                         </div>

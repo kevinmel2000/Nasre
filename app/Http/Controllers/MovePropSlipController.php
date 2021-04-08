@@ -1035,7 +1035,8 @@ class MovePropSlipController extends Controller
                     'alert-type' => 'success'
                 );
 
-                $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+                //$insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+                $insdata = Insured::where('number',$request->code_ms)->first();
 
                 // $old_sumshare = $request->slipoldsumshare;
     
@@ -1194,7 +1195,8 @@ class MovePropSlipController extends Controller
                 );
 
 
-                $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+                //$insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+                $insdata = Insured::where('number',$request->code_ms)->first();
 
                 $old_nasre_share = $insdata->share_from;
                 $new_nasre_share = $request->insured_share;

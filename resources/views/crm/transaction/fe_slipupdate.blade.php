@@ -602,12 +602,9 @@
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Status')}}</label>
-                                                        <select name="slipstatus" id="slipstatus" class="form-control form-control-sm ">
-                                                            <option value="offer"  >Offer</option>
-                                                            <option value="binding"  >Binding</option>
+                                                        <select name="slipstatus" id="slipstatus" class="form-control form-control-sm " readonly>
                                                             <option value="slip" >Slip</option>
                                                             <option value="endorsement">Endorsement</option>
-                                                            <option value="decline" > Decline</option>
                                                             <option value="cancel" >Cancel</option>
                                                         </select>
                                                     </div>    
