@@ -1782,7 +1782,7 @@ class FeSlipController extends Controller
     
                 return response()->json(
                     [
-                        'id' => $slipdataup->id,
+                        'id' => $checkdataslip->id,
                         'number' => $new_number,
                         'slipstatus' => $slipdataup->status,
                         'ceding'=>$slipdataup->ceding->name,
