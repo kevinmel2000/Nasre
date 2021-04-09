@@ -1273,11 +1273,11 @@ class MovePropSlipController extends Controller
                                 'count_endorsement' => ($ll->count_endorsement + 1)
                             ]);
     
-                            $lookuplocationlist = DB::table('trans_location')
-                                                    ->join('fe_lookup_location', 'fe_lookup_location.id', '=', 'trans_location.lookup_location_id')
-                                                    ->select('trans_location.*', 'fe_lookup_location.address','fe_lookup_location.loc_code','fe_lookup_location.latitude','fe_lookup_location.longtitude','fe_lookup_location.postal_code')
-                                                    ->where('trans_location.id',$locationlistup->id)
-                                                    ->get();
+                            $lookuplocationlist = DB::table('trans_location_detail')
+                                                ->join('fe_lookup_location', 'fe_lookup_location.id', '=', 'trans_location_detail.lookup_location_id')
+                                                ->select('trans_location_detail.*', 'fe_lookup_location.address','fe_lookup_location.loc_code','fe_lookup_location.latitude','fe_lookup_location.longtitude','fe_lookup_location.postal_code')
+                                                ->where('trans_location_detail.id',$locationlistup->id)
+                                                ->get();
 
                             
                             
