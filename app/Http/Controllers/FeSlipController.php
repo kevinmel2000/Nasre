@@ -1647,50 +1647,6 @@ class FeSlipController extends Controller
                 }
 
 
-                $kondisi=0;
-                while($kondisi==0)
-                {
-                    $checkdataslip= SlipTable::where('number',$new_number)->first();
-                    
-                    if($checkdataslip->total_sum_insured == null)
-                    {
-                        $newnumber2 = substr($new_number, 10,15);
-                        $codenumber = substr($new_number, 0,10);
-
-                        if(intval($newnumber2) < 9)
-                        {
-                            $count = substr($newnumber2,14);
-                            $new_number = $codenumber . "0000" . strval(intval($count) + 1);
-                        }   
-                        elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
-                        {
-                            $count = substr($newnumber2,13);
-                            $new_number = $codenumber . "000" . strval(intval($count) + 1);
-                        }
-                        elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
-                        {
-                            $count = substr($newnumber2,12);
-                            $new_number = $codenumber . "00" . strval(intval($count) + 1);
-                        }
-                        elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
-                        {
-                            $count = substr($newnumber2,11);
-                            $new_number = $codenumber . "0" . strval(intval($count) + 1);
-                        }
-                        elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
-                        {
-                            $count = substr($newnumber2,10);
-                            $new_number = $codenumber  . strval(intval($count) + 1);
-                        }
-                       
-                    }
-                    else
-                    {
-                        $kondisi=1;
-                    }    
-                }
-                
-
                 return response()->json(
                     [
                         'id' => $slipdataup->id,
@@ -1848,6 +1804,7 @@ class FeSlipController extends Controller
                 }
                 */
 
+                /*
                 $kondisi=0;
                 while($kondisi==0)
                 {
@@ -1890,6 +1847,7 @@ class FeSlipController extends Controller
                         $kondisi=1;
                     }    
                 }
+                */
                 
             
     
