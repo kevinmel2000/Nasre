@@ -353,6 +353,8 @@ class FeSlipController extends Controller
             $code_ms = "IN" . $mydate . "0000" . strval(1);
         }
 
+        
+        /*
         $kondisi=0;
         while($kondisi==0)
         {
@@ -360,14 +362,6 @@ class FeSlipController extends Controller
                 
                 if($checkinsured)
                 {
-                        // $deleteinsured= Insured::where('number','=',$code_ms)->delete();
-                    if($checkinsured->share_to != null){
-                        //$deleteinsured= Insured::where('number','=',$code_ms)->delete();
-                    }
-                    else
-                    {
-                        //$deleteinsured= Insured::where('number','=',$code_ms)->delete();
-                    }
                     
                     $newnumber2 = substr($code_ms, 10,15);
                     $codenumber = substr($code_ms, 0,10);
@@ -397,19 +391,21 @@ class FeSlipController extends Controller
                         $count = substr($newnumber2,10);
                         $code_ms = $codenumber  . strval(intval($count) + 1);
                     }
-
+                    
                 }
                 else
                 {
                     $kondisi=1;
                 }
         }
+        */
 
         $insureddataup = Insured::create([
                     'number'=>$code_ms,
                     'slip_type'=>'fe',
                     'count_endorsement'=>0     
         ]);
+
 
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
