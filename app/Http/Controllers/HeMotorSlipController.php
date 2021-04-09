@@ -1077,22 +1077,22 @@ class HeMotorSlipController extends Controller
                 }
 
                 $checkdataslip= SlipTable::where('number',$new_number)->first();
-
+                
                 if($checkdataslip){
                     if($checkdataslip->total_sum_insured != null){
-                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
-                    }else{
-                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
-                        
+                        //$deleteinsured= SlipTable::where('number','=',$new_number)->delete();
                     }
-                }
-
-                $slipdataup2 =SlipTable::create([
+                    else
+                    {
+                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();  
+                        $slipdataup2 =SlipTable::create([
                             'insured_id'=>$slipdataup->insured_id,
                             'number'=>$new_number,
                             'slip_type'=>'fe'
-                        ]);
-                
+                        ]); 
+                    }
+                }
+            
     
                 return response()->json(
                     [
@@ -1234,23 +1234,22 @@ class HeMotorSlipController extends Controller
                 }
 
                 $checkdataslip= SlipTable::where('number',$new_number)->first();
-
+                
                 if($checkdataslip){
                     if($checkdataslip->total_sum_insured != null){
-                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
-                    }else{
-                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
-
+                        //$deleteinsured= SlipTable::where('number','=',$new_number)->delete();
                     }
-                }
-
-                $slipdataup2=SlipTable::create([
+                    else
+                    {
+                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();  
+                        $slipdataup2 =SlipTable::create([
                             'insured_id'=>$slipdataup->insured_id,
                             'number'=>$new_number,
                             'slip_type'=>'fe'
-                            
-                        ]);
-
+                        ]); 
+                    }
+                }
+            
                 
     
                 return response()->json(
