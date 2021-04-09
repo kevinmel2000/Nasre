@@ -353,7 +353,7 @@ class FeSlipController extends Controller
             $code_ms = "IN" . $mydate . "0000" . strval(1);
         }
 
-        
+
         /*
         $kondisi=0;
         while($kondisi==0)
@@ -443,7 +443,7 @@ class FeSlipController extends Controller
             $code_sl = "FE".  $mydate . "0000" . strval(1);
         }
 
-            
+        /*
         $kondisi=0;
         while($kondisi==0)
         {
