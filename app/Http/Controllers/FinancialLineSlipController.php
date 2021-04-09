@@ -1333,7 +1333,7 @@ class FinancialLineSlipController extends Controller
                                         'interest_id'=>$rl->interest_id,
                                         'cndn'=>$rl->cndn,
                                         'certno'=>$rl->certno,
-                                        'refno'=>$rl->refno,
+                                        'slipno'=>$rl->slipno,
                                         'amountlocation'=>$rl->amountlocation,
                                         'count_endorsement' => ($rl->count_endorsement + 1)
                                     ]);
