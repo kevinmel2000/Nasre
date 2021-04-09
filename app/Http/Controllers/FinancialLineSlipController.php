@@ -198,6 +198,53 @@ class FinancialLineSlipController extends Controller
             $code_ms = "IN" .  $mydate . "0000" . strval(1);
         }
 
+        $kondisi=0;
+        $im=1;
+        while($kondisi==0)
+        {
+                $checkinsured = Insured::where('number',$code_ms)->first();
+                
+                if(!empty($checkinsured))
+                {
+                    
+                    $newnumber2 = substr($code_ms, 10,15);
+                    $codenumber = substr($code_ms, 0,10);
+
+                    if(intval($newnumber2) < 9)
+                    {
+                        $count = substr($newnumber2,14);
+                        $code_ms = $codenumber . "0000" . strval(intval($count) + $im);
+                    }   
+                    elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+                    {
+                        $count = substr($newnumber2,13);
+                        $code_ms = $codenumber . "000" . strval(intval($count) + $im);
+                    }
+                    elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+                    {
+                        $count = substr($newnumber2,12);
+                        $code_ms = $codenumber . "00" . strval(intval($count) + $im);
+                    }
+                    elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+                    {
+                        $count = substr($newnumber2,11);
+                        $code_ms = $codenumber . "0" . strval(intval($count) + $im);
+                    }
+                    elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+                    {
+                        $count = substr($newnumber2,10);
+                        $code_ms = $codenumber  . strval(intval($count) + $im);
+                    }
+                    
+                    $im++;
+                }
+                else
+                {
+                    $kondisi=1;
+                }
+        }
+
+
 
         $insureddataup = Insured::create([
             'number'=>$code_ms,
@@ -241,6 +288,51 @@ class FinancialLineSlipController extends Controller
         }
 
         
+        $kondisi=0;
+        $im=1;
+        while($kondisi==0)
+        {
+            $checkdataslip= SlipTable::where('number',$code_sl)->first();
+
+            if(!empty($checkdataslip))
+            {
+                $newnumber2 = substr($code_sl, 10,15);
+                $codenumber = substr($code_sl, 0,10);
+
+                if(intval($newnumber2) < 9)
+                {
+                    $count = substr($newnumber2,14);
+                    $code_sl = $codenumber . "0000" . strval(intval($count) + $im);
+                }   
+                elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+                {
+                    $count = substr($newnumber2,13);
+                    $code_sl = $codenumber . "000" . strval(intval($count) + $im);
+                }
+                elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+                {
+                    $count = substr($newnumber2,12);
+                    $code_sl = $codenumber . "00" . strval(intval($count) + $im);
+                }
+                elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+                {
+                    $count = substr($newnumber2,11);
+                    $code_sl = $codenumber . "0" . strval(intval($count) + $im);
+                }
+                elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+                {
+                    $count = substr($newnumber2,10);
+                    $code_sl = $codenumber  . strval(intval($count) + $im);
+                }
+                
+                $im++;
+            }
+            else
+            {
+                $kondisi=1;
+            }    
+        }
+
         $slipdataup=SlipTable::create([
             'insured_id'=>$insureddataup->number,
             'number'=>$code_sl,
@@ -982,6 +1074,52 @@ class FinancialLineSlipController extends Controller
                     $count = substr($newnumber,10);
                     $new_number = $codenumber  . strval(intval($count) + 1);
                 }
+
+                $kondisi=0;
+                $im=1;
+                while($kondisi==0)
+                {
+                    $checkdataslip= SlipTable::where('number',$new_number)->first();
+
+                   if(!empty($checkdataslip))
+                    {
+                        $newnumber2 = substr($new_number, 10,15);
+                        $codenumber = substr($new_number, 0,10);
+
+                        if(intval($newnumber2) < 9)
+                        {
+                            $count = substr($newnumber2,14);
+                            $new_number = $codenumber . "0000" . strval(intval($count) + $im);
+                        }   
+                        elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+                        {
+                            $count = substr($newnumber2,13);
+                            $new_number = $codenumber . "000" . strval(intval($count) + $im);
+                        }
+                        elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+                        {
+                            $count = substr($newnumber2,12);
+                            $new_number = $codenumber . "00" . strval(intval($count) + $im);
+                        }
+                        elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+                        {
+                            $count = substr($newnumber2,11);
+                            $new_number = $codenumber . "0" . strval(intval($count) + $im);
+                        }
+                        elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+                        {
+                            $count = substr($newnumber2,10);
+                            $new_number = $codenumber  . strval(intval($count) + $im);
+                        }
+                        
+                        $im++;
+
+                    }
+                    else
+                    {
+                        $kondisi=1;
+                    }    
+                } 
             
                 return response()->json(
                     [
@@ -1124,7 +1262,56 @@ class FinancialLineSlipController extends Controller
                     $count = substr($newnumber,10);
                     $new_number = $codenumber  . strval(intval($count) + 1);
                 }
+
+
     
+                $kondisi=0;
+                $im=1;
+                while($kondisi==0)
+                {
+                    $checkdataslip= SlipTable::where('number',$new_number)->first();
+
+                   if(!empty($checkdataslip))
+                    {
+                        $newnumber2 = substr($new_number, 10,15);
+                        $codenumber = substr($new_number, 0,10);
+
+                        if(intval($newnumber2) < 9)
+                        {
+                            $count = substr($newnumber2,14);
+                            $new_number = $codenumber . "0000" . strval(intval($count) + $im);
+                        }   
+                        elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+                        {
+                            $count = substr($newnumber2,13);
+                            $new_number = $codenumber . "000" . strval(intval($count) + $im);
+                        }
+                        elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+                        {
+                            $count = substr($newnumber2,12);
+                            $new_number = $codenumber . "00" . strval(intval($count) + $im);
+                        }
+                        elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+                        {
+                            $count = substr($newnumber2,11);
+                            $new_number = $codenumber . "0" . strval(intval($count) + $im);
+                        }
+                        elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+                        {
+                            $count = substr($newnumber2,10);
+                            $new_number = $codenumber  . strval(intval($count) + $im);
+                        }
+                        
+                        $im++;
+
+                    }
+                    else
+                    {
+                        $kondisi=1;
+                    }    
+                } 
+
+
                 return response()->json(
                     [
                         'id' => $slipdataup->id,
@@ -1136,6 +1323,8 @@ class FinancialLineSlipController extends Controller
                     ]
                 );
             }
+
+           
 
             /*
             StatusLog::create([
