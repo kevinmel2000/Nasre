@@ -259,8 +259,17 @@ class FeSlipController extends Controller
          $fe_ids = response()->json($country->modelKeys());
          $search = @$request->input('search');
 
-         if(empty($search))
-         {
+         
+        $checkdatainsured= Insured::where('statmodified','=',1)->whereNull('share_to')->orWhere('share_to','=',0)->get();
+
+        foreach ($checkdatainsured as $insureddata)
+        {   
+            $deleteinsured= SlipTable::where('insured_id','=',$insureddata->number)->delete();
+            $deleteinsured= Insured::where('number','=',$insureddata->number)->delete();  
+        }
+
+        if(empty($search))
+        {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
           $insured = Insured::where('slip_type', '=', 'fe')->orderby('id','desc')->paginate(10);
           $insured_ids = response()->json($insured->modelKeys());
@@ -405,6 +414,7 @@ class FeSlipController extends Controller
         $insureddataup = Insured::create([
                     'number'=>$code_ms,
                     'slip_type'=>'fe',
+                    'share_to'=>0,
                     'count_endorsement'=>0     
         ]);
 
@@ -1385,6 +1395,7 @@ class FeSlipController extends Controller
                     'insured_suffix'=>$request->fessuffix,
                     'share'=>$sum_amount,
                     'share_from'=>$request->fessharefrom,
+                    'statmodified'=>1,
                     'share_to'=>$request->fesshareto,
                     'coincurance'=>$request->fescoincurance,
                     'location'=>$locationlist->toJson(),
@@ -1412,6 +1423,7 @@ class FeSlipController extends Controller
                 $insureddataup->insured_name=$request->fessuggestinsured;
                 $insureddataup->insured_suffix=$request->fessuffix;
                 $insureddataup->share=$sum_amount;
+                $insureddataup->statmodified=1;
                 $insureddataup->share_from=$request->fessharefrom;
                 $insureddataup->share_to=$request->fesshareto;
                 $insureddataup->coincurance=$request->fescoincurance;

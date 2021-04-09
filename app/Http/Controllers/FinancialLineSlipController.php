@@ -109,6 +109,16 @@ class FinancialLineSlipController extends Controller
          $fe_ids = response()->json($country->modelKeys());
          
         
+         $checkdatainsured= Insured::where('statmodified','=',1)->whereNull('share_to')->orWhere('share_to','=',0)->get();
+
+
+        foreach ($checkdatainsured as $insureddata)
+        {
+            
+            $deleteinsured= SlipTable::where('insured_id','=',$insureddata->number)->delete();
+            $deleteinsured= Insured::where('number','=',$insureddata->number)->delete();  
+        }
+
          $search = @$request->input('search');
 
          if(empty($search))
@@ -875,6 +885,7 @@ class FinancialLineSlipController extends Controller
                     'insured_name'=>$request->flsuggestinsured,
                     'insured_suffix'=>$request->flsuffix,
                     'share'=>$sum_amount,
+                    'statmodified'=>1,
                     'share_from'=>$request->flsharefrom,
                     'share_to'=>$request->flshareto,
                     'coincurance'=>$request->flcoinsurance,
@@ -902,6 +913,7 @@ class FinancialLineSlipController extends Controller
                 $insureddataup->insured_name=$request->flsuggestinsured;
                 $insureddataup->insured_suffix=$request->flsuffix;
                 $insureddataup->share=$sum_amount;
+                $insureddataup->statmodified=1;
                 $insureddataup->share_from=$request->flsharefrom;
                 $insureddataup->share_to=$request->flshareto;
                 $insureddataup->coincurance=$request->flcoinsurance;

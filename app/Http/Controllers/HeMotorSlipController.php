@@ -113,6 +113,18 @@ class HeMotorSlipController extends Controller
          $mydate = date("Y").date("m").date("d");
          $fe_ids = response()->json($country->modelKeys());
 
+        
+         $checkdatainsured= Insured::where('statmodified','=',1)->whereNull('share_to')->orWhere('share_to','=',0)->get();
+
+
+        foreach ($checkdatainsured as $insureddata)
+        {
+            
+            $deleteinsured= SlipTable::where('insured_id','=',$insureddata->number)->delete();
+            $deleteinsured= Insured::where('number','=',$insureddata->number)->delete();  
+        }
+
+
          $search = @$request->input('search');
 
          if(empty($search))
@@ -924,6 +936,7 @@ class HeMotorSlipController extends Controller
                     'insured_name'=>$request->hemsuggestinsured,
                     'insured_suffix'=>$request->hemsuffix,
                     'share'=>$sum_amount,
+                    'statmodified'=>1,
                     'share_from'=>$request->hemsharefrom,
                     'share_to'=>$request->hemshareto,
                     'coincurance'=>$request->hemcoinsurance,
@@ -947,6 +960,7 @@ class HeMotorSlipController extends Controller
                 $insureddataup->insured_name=$request->hemsuggestinsured;
                 $insureddataup->insured_suffix=$request->hemsuffix;
                 $insureddataup->share=$sum_amount;
+                $insureddataup->statmodified=1;
                 $insureddataup->share_from=$request->hemsharefrom;
                 $insureddataup->share_to=$request->hemshareto;
                 $insureddataup->coincurance=$request->hemcoinsurance;
