@@ -767,8 +767,8 @@ class FeSlipController extends Controller
             $slipdata=SlipTable::where('insured_id',$insureddata->number)->orderby('id','desc')->first();
             
             $code_ms=$insureddata->number;
-            $countendorsement =$slipdata->slip_idendorsementcount;
-            if($slipdata->slip_idendorsementcount==NULL || $slipdata->slip_idendorsementcount=="")
+            $countendorsement =$slipdata->endorsment;
+            if($slipdata->endorsment==NULL || $slipdata->endorsment=="")
             {
                 $code_sl = $slipdata->number . '-END' . '000' . '1';
             }
@@ -802,8 +802,8 @@ class FeSlipController extends Controller
         else
         {
 
-            $countendorsement =$slipdata->slip_idendorsementcount;
-            if($slipdata->slip_idendorsementcount==NULL || $slipdata->slip_idendorsementcount=="")
+            $countendorsement =$slipdata->endorsment;
+            if($slipdata->endorsment==NULL || $slipdata->endorsment=="")
             {
                 $code_sl = $slipdata->number . '-END' . '000' . '1';
             }
@@ -1119,7 +1119,7 @@ class FeSlipController extends Controller
                 'own_retention'=>$slipdata->own_retention,
                 'sum_own_retention'=>$slipdata->sum_own_retention,
                 'retrocession_panel'=>$slipdata->retrocession_panel,
-                'slip_idendorsementcount'=>$slipdata->slip_idendorsementcount,
+                'endorsment'=>$slipdata->endorsment,
                 'prev_endorsement'=>$slipdata->prev_endorsement,
                 'condition_needed'=>$slipdata->condition_needed,
                 'created_at'=>$slipdata->created_at,
@@ -1138,9 +1138,9 @@ class FeSlipController extends Controller
         $user = Auth::user();
         $slipdata=SlipTable::where('id',$idm)->orderBy('id','desc')->first();
 
-        $countendorsement =$slipdata->slip_idendorsementcount;
+        $countendorsement =$slipdata->endorsment;
 
-        if($slipdata->slip_idendorsementcount==NULL || $slipdata->slip_idendorsementcount=="")
+        if($slipdata->endorsment==NULL || $slipdata->endorsment=="")
         {
             $code_sl = $slipdata->number . '-END' . '000' . '1';
         }
@@ -1294,7 +1294,7 @@ class FeSlipController extends Controller
                 'own_retention'=>$slipdata->own_retention,
                 'sum_own_retention'=>$slipdata->sum_own_retention,
                 'retrocession_panel'=>$slipdata->retrocession_panel,
-                'slip_idendorsementcount'=>$slipdata->slip_idendorsementcount,
+                'endorsment'=>$slipdata->endorsment,
                 'prev_endorsement'=>$slipdata->prev_endorsement,
                 'condition_needed'=>$slipdata->condition_needed,
                 'created_at'=>$slipdata->created_at,
@@ -2623,9 +2623,9 @@ class FeSlipController extends Controller
         $slipdataup->own_retention=$request->slipor;
         $slipdataup->wpc=$request->wpc;
         
-        $countendorsement = $slipdata->slip_idendorsementcount + 1;
+        $countendorsement = $slipdata->endorsment + 1;
 
-        $slipdataup->slip_idendorsementcount=$countendorsement;
+        $slipdataup->endorsment=$countendorsement;
         
         $slipdataup->prev_endorsement=$request->prevslipnumber;
         $slipdataup->sum_own_retention=$request->slipsumor;
