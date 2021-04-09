@@ -444,13 +444,14 @@ class FeSlipController extends Controller
             $code_sl = "FE".  $mydate . "0000" . strval(1);
         }
 
-        /*
+        
         $kondisi=0;
+        $im=1;
         while($kondisi==0)
         {
             $checkdataslip= SlipTable::where('number',$code_sl)->first();
 
-            if($checkdataslip)
+            if(!empty($checkdataslip))
             {
                 $newnumber2 = substr($code_sl, 10,15);
                 $codenumber = substr($code_sl, 0,10);
@@ -458,29 +459,30 @@ class FeSlipController extends Controller
                 if(intval($newnumber2) < 9)
                 {
                     $count = substr($newnumber2,14);
-                    $code_sl = $codenumber . "0000" . strval(intval($count) + 1);
+                    $code_sl = $codenumber . "0000" . strval(intval($count) + $im);
                 }   
                 elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
                 {
                     $count = substr($newnumber2,13);
-                    $code_sl = $codenumber . "000" . strval(intval($count) + 1);
+                    $code_sl = $codenumber . "000" . strval(intval($count) + $im);
                 }
                 elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
                 {
                     $count = substr($newnumber2,12);
-                    $code_sl = $codenumber . "00" . strval(intval($count) + 1);
+                    $code_sl = $codenumber . "00" . strval(intval($count) + $im);
                 }
                 elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
                 {
                     $count = substr($newnumber2,11);
-                    $code_sl = $codenumber . "0" . strval(intval($count) + 1);
+                    $code_sl = $codenumber . "0" . strval(intval($count) + $im);
                 }
                 elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
                 {
                     $count = substr($newnumber2,10);
-                    $code_sl = $codenumber  . strval(intval($count) + 1);
+                    $code_sl = $codenumber  . strval(intval($count) + $im);
                 }
                 
+                $im++;
             }
             else
             {
