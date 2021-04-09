@@ -1800,7 +1800,7 @@ class FeSlipController extends Controller
                 {
                     $checkdataslip= SlipTable::where('number',$new_number)->first();
 
-                    if($checkdataslip)
+                   if(!empty($checkdataslip))
                     {
                         $newnumber2 = substr($new_number, 10,15);
                         $codenumber = substr($new_number, 0,10);
