@@ -704,20 +704,6 @@ class FeSlipController extends Controller
             $slipdata=SlipTable::orderBy('id', 'desc')->first();
         }
 
-        $checkdataslip= SlipTable::where('number',$code_sl)->first();
-
-        if($checkdataslip){
-                $deleteinsured= SlipTable::where('number','=',$code_sl)->delete();
-            
-        }
-
-        $slipdataup=SlipTable::create([
-                    'insured_id'=>$code_ms,
-                    'number'=>$code_sl,
-                    'slip_type'=>'fe'
-                    
-                ]);
-
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
         
@@ -1807,8 +1793,9 @@ class FeSlipController extends Controller
                 }
                 */
 
-                /*
+                
                 $kondisi=0;
+                $im=1;
                 while($kondisi==0)
                 {
                     $checkdataslip= SlipTable::where('number',$new_number)->first();
@@ -1821,38 +1808,37 @@ class FeSlipController extends Controller
                         if(intval($newnumber2) < 9)
                         {
                             $count = substr($newnumber2,14);
-                            $new_number = $codenumber . "0000" . strval(intval($count) + 1);
+                            $new_number = $codenumber . "0000" . strval(intval($count) + $im);
                         }   
                         elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
                         {
                             $count = substr($newnumber2,13);
-                            $new_number = $codenumber . "000" . strval(intval($count) + 1);
+                            $new_number = $codenumber . "000" . strval(intval($count) + $im);
                         }
                         elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
                         {
                             $count = substr($newnumber2,12);
-                            $new_number = $codenumber . "00" . strval(intval($count) + 1);
+                            $new_number = $codenumber . "00" . strval(intval($count) + $im);
                         }
                         elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
                         {
                             $count = substr($newnumber2,11);
-                            $new_number = $codenumber . "0" . strval(intval($count) + 1);
+                            $new_number = $codenumber . "0" . strval(intval($count) + $im);
                         }
                         elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
                         {
                             $count = substr($newnumber2,10);
-                            $new_number = $codenumber  . strval(intval($count) + 1);
+                            $new_number = $codenumber  . strval(intval($count) + $im);
                         }
-                       
+                        
+                        $im++;
+
                     }
                     else
                     {
                         $kondisi=1;
                     }    
-                }
-                */
-                
-            
+                } 
     
                 return response()->json(
                     [
