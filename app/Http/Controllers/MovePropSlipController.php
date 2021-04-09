@@ -1288,7 +1288,7 @@ class MovePropSlipController extends Controller
                                         'ceding_id'=>$rl->ceding_id,
                                         'translocation_id'=>$locationlistup->id,
                                         'interest_id'=>$rl->interest_id,
-                                        'cnno'=>$rl->cnno,
+                                        'cndn'=>$rl->cndn,
                                         'certno'=>$rl->certno,
                                         'refno'=>$rl->refno,
                                         'amountlocation'=>$rl->amountlocation,

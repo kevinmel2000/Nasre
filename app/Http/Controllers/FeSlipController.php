@@ -194,6 +194,7 @@ class FeSlipController extends Controller
            $ceding_list = CedingBroker::select('id','code','name','type')->where('id',$ceding_id)->first();
            $risklocation_detail = RiskLocationDetail::where('ceding_id',$ceding->id)->get();
            $amount_list = count($risklocation_detail);
+
            $sum_amount = DB::table('risk_location_detail')
                             ->join('trans_location_detail','trans_location_detail.id','=','risk_location_detail.translocation_id')
                             ->where('trans_location_detail.insured_id',$insured_id)->where('risk_location_detail.ceding_id',$ceding->id)
@@ -1954,7 +1955,7 @@ class FeSlipController extends Controller
                                         'ceding_id'=>$rl->ceding_id,
                                         'translocation_id'=>$locationlistup->id,
                                         'interest_id'=>$rl->interest_id,
-                                        'cnno'=>$rl->cnno,
+                                        'cndn'=>$rl->cndn,
                                         'certno'=>$rl->certno,
                                         'refno'=>$rl->refno,
                                         'amountlocation'=>$rl->amountlocation,
