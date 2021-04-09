@@ -1647,12 +1647,12 @@ class FeSlipController extends Controller
                 }
 
 
-              $kondisi=0;
+                $kondisi=0;
                 while($kondisi==0)
                 {
                     $checkdataslip= SlipTable::where('number',$new_number)->first();
-
-                    if($checkdataslip)
+                    
+                    if($checkdataslip->total_sum_insured == null)
                     {
                         $newnumber2 = substr($new_number, 10,15);
                         $codenumber = substr($new_number, 0,10);
