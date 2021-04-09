@@ -1248,12 +1248,14 @@ class MovePropSlipController extends Controller
                     }
                     else
                     {
+                        /*
                         $deleteinsured= SlipTable::where('number','=',$new_number)->delete();  
                         $slipdataup2 =SlipTable::create([
                             'insured_id'=>$slipdataup->insured_id,
                             'number'=>$new_number,
                             'slip_type'=>'fe'
                         ]); 
+                        */
                     }
                 }
             
