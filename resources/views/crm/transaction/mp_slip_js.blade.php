@@ -6175,7 +6175,7 @@ function deletelocationriskdetail(id){
            complete: function() {  $("body").removeClass("loading"); },
            success:function(response)
            {
-                swal("Good job!", "Moveable Property Insert Success", "success")
+                //swal("Good job!", "Moveable Property Insert Success", "success")
                 console.log(response)
 
                 var real_ceding_share = response.ceding_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

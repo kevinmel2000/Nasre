@@ -5746,7 +5746,7 @@ $('#sliprate').change(function(){
            complete: function() {  $("body").removeClass("loading"); },
            success:function(response)
            {
-                swal("Good job!", "Financial Line Insert Success", "success")
+                //swal("Good job!", "Financial Line Insert Success", "success")
                 console.log(response)
                 var real_ceding_share = response.ceding_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 $('#flshare').val(real_ceding_share);
