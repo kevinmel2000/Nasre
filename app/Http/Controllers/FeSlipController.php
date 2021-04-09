@@ -357,7 +357,7 @@ class FeSlipController extends Controller
         while($kondisi==0)
         {
                 $checkinsured = Insured::where('number',$code_ms)->first();
-
+                
                 if($checkinsured)
                 {
                         // $deleteinsured= Insured::where('number','=',$code_ms)->delete();
@@ -368,20 +368,48 @@ class FeSlipController extends Controller
                     {
                         //$deleteinsured= Insured::where('number','=',$code_ms)->delete();
                     }
+                    
+                    $newnumber2 = substr($code_ms, 10,15);
+                    $codenumber = substr($code_ms, 0,10);
 
+                    if(intval($newnumber2) < 9)
+                    {
+                        $count = substr($newnumber2,14);
+                        $code_ms = $codenumber . "0000" . strval(intval($count) + 1);
+                    }   
+                    elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+                    {
+                        $count = substr($newnumber2,13);
+                        $code_ms = $codenumber . "000" . strval(intval($count) + 1);
+                    }
+                    elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+                    {
+                        $count = substr($newnumber2,12);
+                        $code_ms = $codenumber . "00" . strval(intval($count) + 1);
+                    }
+                    elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+                    {
+                        $count = substr($newnumber2,11);
+                        $code_ms = $codenumber . "0" . strval(intval($count) + 1);
+                    }
+                    elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+                    {
+                        $count = substr($newnumber2,10);
+                        $code_ms = $codenumber  . strval(intval($count) + 1);
+                    }
 
                 }
                 else
                 {
                     $kondisi=1;
-                    $insureddataup = Insured::create([
-                                'number'=>$code_ms,
-                                'slip_type'=>'fe',
-                                'count_endorsement'=>0     
-                    ]);
                 }
         }
 
+        $insureddataup = Insured::create([
+                    'number'=>$code_ms,
+                    'slip_type'=>'fe',
+                    'count_endorsement'=>0     
+        ]);
 
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
@@ -419,60 +447,70 @@ class FeSlipController extends Controller
             $code_sl = "FE".  $mydate . "0000" . strval(1);
         }
 
-        // dd($code_sl);
+            
+        $kondisi=0;
+        while($kondisi==0)
+        {
+            $checkdataslip= SlipTable::where('number',$code_sl)->first();
 
-        // $kondisi=false;
-        // $i=1;
-        // while($kondisi==false)
-        // {
-        //     $slipdatatest=SlipTable::where('number',$code_sl)->first();
-        //     if(empty($slipdatatest) || $slipdatatest==NULL)
-        //     {
-        //         $kondisi=true;
-        //     }
-        //     else
-        //     {
-        //         if($sliplastid < 9)
-        //         {
-        //             $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + $i);
-        //         }   
-        //         elseif($sliplastid > 8 && $sliplastid < 99)
-        //         {
-        //             $code_sl = "FE".  $mydate . "000" . strval($sliplastid + $i);
-        //         }
-        //         elseif($sliplastid > 98 && $sliplastid < 999)
-        //         {
-        //             $code_sl = "FE".  $mydate . "00" . strval($sliplastid + $i);
-        //         }
-        //         elseif($sliplastid > 998 && $sliplastid < 9999)
-        //         {
-        //             $code_sl = "FE".  $mydate . "0" . strval($sliplastid + $i);
-        //         }
-        //         elseif($sliplastid > 9998 && $sliplastid < 99999)
-        //         {
-        //             $code_sl = "FE".  $mydate . strval($sliplastid + $i);
-        //         }
-        //     }
+            if($checkdataslip)
+            {
+                $newnumber2 = substr($code_sl, 10,15);
+                $codenumber = substr($code_sl, 0,10);
 
-        //     $i++;
-        // }
-
+                if(intval($newnumber2) < 9)
+                {
+                    $count = substr($newnumber2,14);
+                    $code_sl = $codenumber . "0000" . strval(intval($count) + 1);
+                }   
+                elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+                {
+                    $count = substr($newnumber2,13);
+                    $code_sl = $codenumber . "000" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+                {
+                    $count = substr($newnumber2,12);
+                    $code_sl = $codenumber . "00" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+                {
+                    $count = substr($newnumber2,11);
+                    $code_sl = $codenumber . "0" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+                {
+                    $count = substr($newnumber2,10);
+                    $code_sl = $codenumber  . strval(intval($count) + 1);
+                }
+                
+            }
+            else
+            {
+                $kondisi=1;
+            }    
+        }
+                
+        /*
         $checkdataslip= SlipTable::where('number',$code_sl)->first();
 
         if($checkdataslip){
-            if($checkdataslip->total_sum_insured != null){
+            if($checkdataslip->total_sum_insured == null || $checkdataslip->total_sum_insured == "")
+            {
                 $deleteinsured= SlipTable::where('number','=',$code_sl)->delete();
-            }else{
-
+            }
+            else
+            {
             }
         }
+        */
 
         $slipdataup=SlipTable::create([
                     'insured_id'=>$insureddataup->number,
                     'number'=>$code_sl,
                     'slip_type'=>'fe'
-                    
-                ]);
+        ]);
+        
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();

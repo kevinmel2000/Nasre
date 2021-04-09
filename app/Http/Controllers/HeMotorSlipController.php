@@ -206,16 +206,56 @@ class HeMotorSlipController extends Controller
         }
 
         
-        $checkinsured = Insured::where('number',$code_ms)->first();
-
-        if($checkinsured){
-                // $deleteinsured= Insured::where('number','=',$code_ms)->delete();
-            if($checkinsured->share_to != null){
+        $kondisi=0;
+        while($kondisi==0)
+        {
+                $checkinsured = Insured::where('number',$code_ms)->first();
                 
-                $deleteinsured= Insured::where('number','=',$code_ms)->delete();
-            }else{
-                $deleteinsured= Insured::where('number','=',$code_ms)->delete();
-            }
+                if($checkinsured)
+                {
+                        // $deleteinsured= Insured::where('number','=',$code_ms)->delete();
+                    if($checkinsured->share_to != null){
+                        //$deleteinsured= Insured::where('number','=',$code_ms)->delete();
+                    }
+                    else
+                    {
+                        //$deleteinsured= Insured::where('number','=',$code_ms)->delete();
+                    }
+                    
+                    $newnumber2 = substr($code_ms, 10,15);
+                    $codenumber = substr($code_ms, 0,10);
+
+                    if(intval($newnumber2) < 9)
+                    {
+                        $count = substr($newnumber2,14);
+                        $code_ms = $codenumber . "0000" . strval(intval($count) + 1);
+                    }   
+                    elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+                    {
+                        $count = substr($newnumber2,13);
+                        $code_ms = $codenumber . "000" . strval(intval($count) + 1);
+                    }
+                    elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+                    {
+                        $count = substr($newnumber2,12);
+                        $code_ms = $codenumber . "00" . strval(intval($count) + 1);
+                    }
+                    elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+                    {
+                        $count = substr($newnumber2,11);
+                        $code_ms = $codenumber . "0" . strval(intval($count) + 1);
+                    }
+                    elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+                    {
+                        $count = substr($newnumber2,10);
+                        $code_ms = $codenumber  . strval(intval($count) + 1);
+                    }
+
+                }
+                else
+                {
+                    $kondisi=1;
+                }
         }
 
         $insureddataup = Insured::create([
@@ -260,49 +300,58 @@ class HeMotorSlipController extends Controller
         }
 
 
-        $kondisi=false;
-        $i=1;
-        while($kondisi==false)
+      
+        $kondisi=0;
+        while($kondisi==0)
         {
-            $slipdatatest=SlipTable::where('number',$code_sl)->first();
-            if(empty($slipdatatest) || $slipdatatest==NULL)
+            $checkdataslip= SlipTable::where('number',$code_sl)->first();
+
+            if($checkdataslip)
             {
-                $kondisi=true;
+                $newnumber2 = substr($code_sl, 10,15);
+                $codenumber = substr($code_sl, 0,10);
+
+                if(intval($newnumber2) < 9)
+                {
+                    $count = substr($newnumber2,14);
+                    $code_sl = $codenumber . "0000" . strval(intval($count) + 1);
+                }   
+                elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+                {
+                    $count = substr($newnumber2,13);
+                    $code_sl = $codenumber . "000" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+                {
+                    $count = substr($newnumber2,12);
+                    $code_sl = $codenumber . "00" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+                {
+                    $count = substr($newnumber2,11);
+                    $code_sl = $codenumber . "0" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+                {
+                    $count = substr($newnumber2,10);
+                    $code_sl = $codenumber  . strval(intval($count) + 1);
+                }
+                
             }
             else
             {
-                if($sliplastid < 9)
-                {
-                    $code_sl = "HEM".  $mydate . "0000" . strval($sliplastid + $i);
-                }   
-                elseif($sliplastid > 8 && $sliplastid < 99)
-                {
-                    $code_sl = "HEM".  $mydate . "000" . strval($sliplastid + $i);
-                }
-                elseif($sliplastid > 98 && $sliplastid < 999)
-                {
-                    $code_sl = "HEM".  $mydate . "00" . strval($sliplastid + $i);
-                }
-                elseif($sliplastid > 998 && $sliplastid < 9999)
-                {
-                    $code_sl = "HEM".  $mydate . "0" . strval($sliplastid + $i);
-                }
-                elseif($sliplastid > 9998 && $sliplastid < 99999)
-                {
-                    $code_sl = "HEM".  $mydate . strval($sliplastid + $i);
-                }
-            }
-
-            $i++;
+                $kondisi=1;
+            }    
         }
+                
 
-        $checkdataslip= SlipTable::where('number',$code_sl)->first();
+        
+        $slipdataup=SlipTable::create([
+            'insured_id'=>$insureddataup->number,
+            'number'=>$code_sl,
+            'slip_type'=>'hem'   
+        ]);
 
-        if($checkdataslip){
-            if($checkdataslip->total_sum_insured != null){
-                $deleteinsured= SlipTable::where('number','=',$code_sl)->delete();
-            }
-        }
         
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         
