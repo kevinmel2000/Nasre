@@ -5683,34 +5683,82 @@ $('#sliprate').change(function(){
 
 
       // // insured save
-      // var flsnumber = $('#insuredIDtxt').val();
-      // var fessuffix = $('#autocomplete2').val();
-      // var fesshare = $('#flshare').val();
-      // var fessharefrom  = $('#flsharefrom').val();
-      // var fesshareto = $('#flshareto').val();
+      var flnumber = $('#insuredIDtxt').val();
+       var flinsured = $('#flinsured').val();
+       var flsuggestinsured = $('#autocomplete').val();
+       var flsuffix = $('#autocomplete2').val();
+       var flshare = $('#flshare').val();
+       var flsharefrom  = $('#flsharefrom').val();
+       var flshareto = $('#flshareto').val();
+       var flcoinsurance = $('#flcoinsurance').val();
+       var flobligee = $('#flobligee').val();
+       var flprincipal = $('#flprincipal').val();
+       var fluy = $('#fluy').val();
+       
+       
+       var conv_flssharefrom = flsharefrom.replace(/,/g, "");
+       console.log(conv_flssharefrom)
+       var real_flssharefrom = parseInt(conv_flssharefrom);
+       console.log(real_flssharefrom)
 
+       var conv_flsshareto = flshareto.replace(/,/g, "");
+       console.log(conv_flsshareto)
+       var real_flsshareto = parseInt(conv_flsshareto);
+       console.log(real_flsshareto)
+       
 
-      // var conv_fessharefrom = fessharefrom.replace(/,/g, "");
-      // console.log(conv_fessharefrom)
-      // var real_fessharefrom = parseInt(conv_fessharefrom);
-      // console.log(real_fessharefrom)
-      // var conv_fesshareto = fesshareto.replace(/,/g, "");
-      // console.log(conv_fesshareto)
-      // var real_fesshareto = parseInt(conv_fesshareto);
-      // console.log(real_fesshareto)
+       if(isNaN(real_flsshareto))
+       {
+        real_flsshareto=0;
+       }
 
+       if(isNaN(real_flssharefrom))
+       {
+        real_flssharefrom=0;
+       }
+       
+       
+       var token2 = $('input[name=_token]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
-      // var token2 = $('input[name=_token]').val();
+       $.ajax({
+           url:"{{ url('transaction-data/fl-insured/store') }}",
+           type:"POST",
+           data:{
+               flnumber:flnumber,
+               flinsured:flinsured,
+               flsuggestinsured:flsuggestinsured,
+               flsuffix:flsuffix,
+               flshare:flshare,
+               flsharefrom:real_flssharefrom,
+               flshareto:real_flsshareto,
+               flcoinsurance:flcoinsurance,
+               flobligee:flobligee,
+               flprincipal:flprincipal,
+               fluy:fluy
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                swal("Good job!", "Financial Line Insert Success", "success")
+                console.log(response)
+                var real_ceding_share = response.ceding_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#flshare').val(real_ceding_share);
+                $('#flcountendorsement').val(response.count_endorsement);
+       
 
-
-      // console.log(flsnumber)
-      // console.log(fessuffix)
-
-
-   
-
-
-    
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", request.responseText, "Insert Error");
+           }
+       });
 
 
 

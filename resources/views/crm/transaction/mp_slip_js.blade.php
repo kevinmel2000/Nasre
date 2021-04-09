@@ -6117,34 +6117,77 @@ function deletelocationriskdetail(id){
 
 
       // // insured save
-      // var fesnumber = $('#insuredIDtxt').val();
-      // var fessuffix = $('#autocomplete2').val();
-      // var fesshare = $('#mpshare').val();
-      // var fessharefrom  = $('#mpsharefrom').val();
-      // var fesshareto = $('#mpshareto').val();
+      var mpnumber = $('#insuredIDtxt').val();
+       var mpinsured = $('#mpinsured').val();
+       var mpsuggestinsured = $('#autocomplete').val();
+       var mpsuffix = $('#autocomplete2').val();
+       var mpshare = $('#mpshare').val();
+       var mpsharefrom  = $('#mpsharefrom').val();
+       var mpshareto = $('#mpshareto').val();
+       var mpcoinsurance = $('#mpcoinsurance').val();
+       var mpuy = $('#mpuy').val();
+       
 
+       var conv_mpsharefrom = mpshare.replace(/,/g, "");
+       console.log(conv_mpsharefrom)
+       var real_mpsharefrom = parseInt(conv_mpsharefrom);
+       console.log(real_mpsharefrom)
 
-      // var conv_fessharefrom = fessharefrom.replace(/,/g, "");
-      // console.log(conv_fessharefrom)
-      // var real_fessharefrom = parseInt(conv_fessharefrom);
-      // console.log(real_fessharefrom)
-      // var conv_fesshareto = fesshareto.replace(/,/g, "");
-      // console.log(conv_fesshareto)
-      // var real_fesshareto = parseInt(conv_fesshareto);
-      // console.log(real_fesshareto)
+       var conv_mpshareto = mpsharefrom.replace(/,/g, "");
+       console.log(conv_mpshareto)
+       var real_mpshareto = parseInt(conv_mpshareto);
+       console.log(real_mpshareto)
 
+       if(isNaN(real_mpshareto))
+       {
+        real_mpshareto=0;
+       }
 
-      // var token2 = $('input[name=_token]').val();
+       if(isNaN(real_mpsharefrom))
+       {
+        real_mpsharefrom=0;
+       }
+       
+       
+       var token2 = $('input[name=_token]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
+       $.ajax({
+           url:"{{ url('transaction-data/mp-insured/store') }}",
+           type:"POST",
+           data:{
+               mpnumber:mpnumber,
+               mpinsured:mpinsured,
+               mpsuggestinsured:mpsuggestinsured,
+               mpsuffix:mpsuffix,
+               mpshare:mpshare,
+               mpsharefrom:real_mpsharefrom,
+               mpshareto:real_mpshareto,
+               mpcoinsurance:mpcoinsurance,
+               mpuy:mpuy
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                swal("Good job!", "Moveable Property Insert Success", "success")
+                console.log(response)
 
-      // console.log(fesnumber)
-      // console.log(fessuffix)
+                var real_ceding_share = response.ceding_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#mpshare').val(real_ceding_share);
+                $('#mpcountendorsement').val(response.count_endorsement);
 
-
-   
-
-
-    
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", request.responseText, "Insert Error");
+           }
+       });
 
 
 

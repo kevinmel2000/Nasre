@@ -5962,34 +5962,76 @@ function deletelocationriskdetail(id){
 
 
       // // insured save
-      // var fesnumber = $('#insuredIDtxt').val();
-      // var fessuffix = $('#autocomplete2').val();
-      // var fesshare = $('#hemshare').val();
-      // var fessharefrom  = $('#hemsharefrom').val();
-      // var fesshareto = $('#hemshareto').val();
+      var hemnumber = $('#insuredIDtxt').val();
+       var heminsured = $('#heminsured').val();
+       var hemsuggestinsured = $('#autocomplete').val();
+       var hemsuffix = $('#autocomplete2').val();
+       var hemshare = $('#hemshare').val();
+       var hemsharefrom  = $('#hemsharefrom').val();
+       var hemshareto = $('#hemshareto').val();
+       var hemcoinsurance = $('#hemcoinsurance').val();
+       var hemuy = $('#hemuy').val();
+       
+       var conv_hemsharefrom = hemsharefrom.replace(/,/g, "");
+       console.log(conv_hemsharefrom)
+       var real_hemsharefrom = parseInt(conv_hemsharefrom);
+       console.log(real_hemsharefrom)
 
+       var conv_hemshareto = hemshareto.replace(/,/g, "");
+       console.log(conv_hemshareto)
+       var real_hemshareto = parseInt(conv_hemshareto);
+       console.log(real_hemshareto)
+       
+       if(isNaN(real_hemshareto))
+       {
+        real_hemshareto=0;
+       }
 
-      // var conv_fessharefrom = fessharefrom.replace(/,/g, "");
-      // console.log(conv_fessharefrom)
-      // var real_fessharefrom = parseInt(conv_fessharefrom);
-      // console.log(real_fessharefrom)
-      // var conv_fesshareto = fesshareto.replace(/,/g, "");
-      // console.log(conv_fesshareto)
-      // var real_fesshareto = parseInt(conv_fesshareto);
-      // console.log(real_fesshareto)
+       if(isNaN(conv_hemsharefrom))
+       {
+        conv_hemsharefrom=0;
+       }
+       
+       
+       var token2 = $('input[name=_token]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
+       $.ajax({
+           url:"{{ url('transaction-data/hem-insured/store') }}",
+           type:"POST",
+           data:{
+               hemnumber:hemnumber,
+               heminsured:heminsured,
+               hemsuggestinsured:hemsuggestinsured,
+               hemsuffix:hemsuffix,
+               hemshare:hemshare,
+               hemsharefrom:real_hemsharefrom,
+               hemshareto:real_hemshareto,
+               hemcoinsurance:hemcoinsurance,
+               hemuy:hemuy
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                swal("Good job!", "HE & Motor Insert Success", "success")
+                console.log(response)
 
-      // var token2 = $('input[name=_token]').val();
+                var real_ceding_share = response.ceding_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#hemshare').val(real_ceding_share);
+                $('#hemcountendorsement').val(response.count_endorsement);
 
-
-      // console.log(fesnumber)
-      // console.log(fessuffix)
-
-
-   
-
-
-    
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", request.responseText, "Insert Error");
+           }
+       });
 
 
 
