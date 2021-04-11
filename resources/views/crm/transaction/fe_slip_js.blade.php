@@ -77,27 +77,31 @@
 <script type="text/javascript">
     function setInputFilter(textbox, inputFilter) {
       ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
-        for (var i = 0 ; i < textbox.length; i++) {
-            textbox[i].addEventListener(event, function() {
-              if (inputFilter(this.value)) {
-                this.oldValue = this.value;
-                this.oldSelectionStart = this.selectionStart;
-                this.oldSelectionEnd = this.selectionEnd;
-              } else if (this.hasOwnProperty("oldValue")) {
-                this.value = this.oldValue;
-                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-              } else {
-                this.value = "";
-              }
-            });
-        }
+            var i;
+            for (i = 0 ; i < textbox.length; i++) {
+                textbox[i].addEventListener(event, function() {
+                  if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                  } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                  } else {
+                    this.value = "";
+                  }
+                });
+            }
       });
     }
 
     setInputFilter(document.getElementsByClassName("floatTextBox"), function(value) {
         return /^-?\d*[.,]?\d{0,3}$/.test(value) });
-    setInputFilter(document.getElementById("intTextBox"), function(value) {
+    setInputFilter(document.getElementsByClassName("intTextBox"), function(value) {
         return /^-?\d*$/.test(value); });
+
+        // setInputFilter(document.getElementsByClassName("tanggalBox"), function(value) {
+        // return /^-?\d*[/]?\d{0,2}$/.test(value) });
 
 </script>
 
@@ -127,6 +131,16 @@
                 });
             });
 
+    
+      $('.tanggal').mask("##/##/####",{
+        mask: "1/2/y", 
+        placeholder: "dd/mm/yyyy", 
+        leapday: "-02-29", 
+        separator: "/", 
+        alias: "dd/mm/yyyy"
+      });  
+    
+
     // $('input.tanggal').keyup(function(event) {
     //         // skip for arrow keys
     //         if(event.which >= 37 && event.which <= 40) return;
@@ -134,11 +148,10 @@
     //         console.log($(this).val())
     //             // format number
     //             $(this).val(function(index, value) {
-    //                 return value.replace(/\D/g, "").replace(/\B(?=(\d{2})+(?!\d))/g, "/");
+    //                 console.log(index)
+    //                    return value.replace(/\D/g, "").replace(/\B(?=(\d{2})+(?!\d))/g, "/");
     //             });
     //         });
-
-
 
     $(".money").click(function() {
         var inputLength = $(".money").val().length;
@@ -3893,7 +3906,7 @@ function deletelocationriskdetail(id){
                 var dpamount = $('#slipdpamount').val();
                 var ecamount = $('#slipamountec').val();
 
-                swal('Success!','tsi in slip changed, please change value in risk detail, deductible and extendcoverage manually','success')
+                // swal('Success!','tsi in slip changed, please change value in risk detail, deductible and extendcoverage manually','success')
 
                 if(dpamount != null){
                     var percent =  parseFloat($('#slipdppercentage').val()) / 100;
@@ -3929,7 +3942,8 @@ function deletelocationriskdetail(id){
 
             }
             else{
-                swal('Success!','tsi in slip changed, please change value in risk detail','success')
+                // swal('Success!','tsi in slip changed, please change value in risk detail','success')
+                console.log('tsi in slip changed, please change value in risk detail')
             }    
      });
 </script>
@@ -5024,7 +5038,7 @@ function deletelocationriskdetail(id){
                         var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
                         $('#sliptotalpercentinspan').val(sum_percent.toString());
                         console.log($('#sliptotalpercentinspan').val())
-                        
+
                     }
                 }
 

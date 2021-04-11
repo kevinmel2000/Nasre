@@ -360,17 +360,23 @@ class FeSlipController extends Controller
             if($checkinsured->share_to != null){
                 
                 $deleteinsured= Insured::where('number','=',$code_ms)->delete();
-            }else{
-                $deleteinsured= Insured::where('number','=',$code_ms)->delete();
-            }
-        }
-
-        $insureddataup = Insured::create([
+                $insureddataup = Insured::create([
                     'number'=>$code_ms,
                     'slip_type'=>'fe',
                     'count_endorsement'=>0
                     
                 ]);
+            }else{
+                $insureddataup = Insured::create([
+                    'number'=>$code_ms,
+                    'slip_type'=>'fe',
+                    'count_endorsement'=>0
+                    
+                ]);
+            }
+        }
+
+        
 
 
 
@@ -454,17 +460,23 @@ class FeSlipController extends Controller
         if($checkdataslip){
             if($checkdataslip->total_sum_insured != null){
                 $deleteinsured= SlipTable::where('number','=',$code_sl)->delete();
-            }else{
-
-            }
-        }
-
-        $slipdataup=SlipTable::create([
-                    'insured_id'=>$insureddataup->number,
+                $slipdataup=SlipTable::create([
+                    'insured_id'=>$code_ms,
                     'number'=>$code_sl,
                     'slip_type'=>'fe'
                     
                 ]);
+            }else{
+                $slipdataup=SlipTable::create([
+                    'insured_id'=>$code_ms,
+                    'number'=>$code_sl,
+                    'slip_type'=>'fe'
+                    
+                ]);
+            }
+        }
+
+        
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
