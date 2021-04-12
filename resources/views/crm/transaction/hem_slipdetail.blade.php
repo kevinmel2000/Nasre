@@ -90,7 +90,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured')}}</label>
-                                                    <input id="hemshareto" type="text"  name="hemshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly/>
+                                                    <input id="hemshareto" type="text"  name="hemshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -584,12 +584,9 @@
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Status')}}</label>
-                                                        <select name="slipstatus" id="slipstatus" class="form-control form-control-sm ">
-                                                            <option value="offer"    @if($slipdata->status == "offer") selected="selected" @endif >Offer</option>
-                                                            <option value="binding"  @if($slipdata->status == "binding")  selected="selected" @endif >Binding</option>
+                                                        <select name="slipstatus" id="slipstatus" class="form-control form-control-sm " readonly>
                                                             <option value="slip" @if($slipdata->status == "slip")  selected="selected" @endif >Slip</option>
                                                             <option value="endorsement" @if($slipdata->status == "endorsement")  selected="selected" @endif >Endorsement</option>
-                                                            <option value="decline" @if($slipdata->status == "decline")  selected="selected" @endif > Decline</option>
                                                             <option value="cancel" @if($slipdata->status == "cancel")  selected="selected" @endif >Cancel</option>
                                                         </select>
                                                     </div>    

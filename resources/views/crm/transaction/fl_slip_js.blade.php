@@ -34,16 +34,17 @@
                 });
             });
 
-    $('input.tanggal').keyup(function(event) {
-            // skip for arrow keys
-            if(event.which >= 37 && event.which <= 40) return;
-            console.log(event.which)
-            console.log($(this).val())
-                // format number
-                $(this).val(function(index, value) {
-                    return value.replace(/\D/g, "").replace(/\B(?=(\d{2})+(?!\d))/g, "/");
-                });
-            });
+     // $('input.tanggal').keyup(function(event) {
+    //         // skip for arrow keys
+    //         if(event.which >= 37 && event.which <= 40) return;
+    //         console.log(event.which)
+    //         console.log($(this).val())
+    //             // format number
+    //             $(this).val(function(index, value) {
+    //                 return value.replace(/\D/g, "").replace(/\B(?=(\d{2})+(?!\d))/g, "/");
+    //             });
+    //         });
+
 
     $(".money").click(function() {
     var inputLength = $(".money").val().length;
@@ -2448,96 +2449,96 @@ $(document).ready(function() {
         }
     });
 </script>
-
 <script type='text/javascript'>
     $('#country_location').change(function(){
-    var countryID = $(this).val();  
-    //alert(countryID);
+        var countryID = $(this).val();  
+        //alert(countryID);
         if(countryID){
-        $.ajax({
-            type:"GET",
-            url:"{{url('get-state-lookup')}}?country_id="+countryID,
-            beforeSend: function() { $("body").addClass("loading");  },
-            complete: function() {  $("body").removeClass("loading"); },
-            success:function(res){  
-                console.log(res)      
-                if(res){
-                    $("#state_location").empty();
-                    $("#state_location").append('<option selected disabled>Select States/Province</option>');
-                    $.each(res,function(key,value){
-                    $("#state_location").append('<option value="'+key+'">'+value+'</option>');
-                    });
-                
-                }else{
-                    $("#state_location").append('<option value="" selected disabled>get value error</option>');
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-state-lookup')}}?country_id="+countryID,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){  
+                    console.log(res)      
+                    if(res){
+                        $("#state_location").empty();
+                        $("#state_location").append('<option selected disabled>Select States/Province</option>');
+                        $.each(res,function(key,value){
+                            $("#state_location").append('<option value="'+key+'">'+value+'</option>');
+                        });
+
+                    }else{
+                        $("#state_location").append('<option value="" selected disabled>get value error</option>');
+                    }
                 }
-            }
-        });
+            });
         }else{
-        $("#state_location").append('<option value="" selected disabled>countryID null</option>');
-        $("#city_location").empty();
+            $("#state_location").append('<option value="" selected disabled>countryID null</option>');
+            $("#city_location").empty();
         }   
     });
 
     $('#state_location').on('change',function(){
         var stateID = $(this).val();  
         //alert(stateID);
-            if(stateID){
-                $.ajax({
-                    type:"GET",
-                    url:"{{url('get-city-lookup')}}?state_id="+stateID,
-                    beforeSend: function() { $("body").addClass("loading");  },
-                    complete: function() {  $("body").removeClass("loading"); },
-                    success:function(res){        
-                        if(res){
-                            $("#city_location").empty();
-                            $("#city_location").append('<option selected disabled>Select City</option>');
-                            $.each(res,function(key,value){
-                                $("#city_location").append('<option value="'+key+'">'+value+'</option>');
-                            });
+        if(stateID){
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-city-lookup')}}?state_id="+stateID,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){        
+                    if(res){
+                        $("#city_location").empty();
+                        $("#city_location").append('<option selected disabled>Select City</option>');
+                        $.each(res,function(key,value){
+                            $("#city_location").append('<option value="'+key+'">'+value+'</option>');
+                        });
                         
-                        }else{
-                            $("#city_location").append('<option value="" selected disabled>get value error</option>');
-                        }
+                    }else{
+                        $("#city_location").append('<option value="" selected disabled>get value error</option>');
                     }
-                });
-            }else{
-                $("#city_location").append('<option value="" selected disabled>countryID null</option>');
-                $("#address_location").empty();
-            }
-            
+                }
+            });
+        }else{
+            $("#city_location").append('<option value="" selected disabled>countryID null</option>');
+            $("#address_location").empty();
+        }
+
     });
 
 
     $('#city_location').on('change',function(){
         var cityID = $(this).val();  
         //alert(stateID);
-            if(cityID){
-                $.ajax({
-                    type:"GET",
-                    url:"{{url('get-address-lookup')}}?city_id="+cityID,
-                    beforeSend: function() { $("body").addClass("loading");  },
-                    complete: function() {  $("body").removeClass("loading"); },
-                    success:function(res){        
-                        if(res){
-                            $("#address_location").empty();
-                            $("#address_location").append('<option selected disabled>Select Address</option>');
-                            $.each(res,function(key,value){
-                                $("#address_location").append('<option value="'+key+'">'+value+'</option>');
-                            });
+        if(cityID){
+            $.ajax({
+                type:"GET",
+                url:"{{url('get-address-lookup')}}?city_id="+cityID,
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(res){        
+                    if(res){
+                        $("#address_location").empty();
+                        $("#address_location").append('<option selected disabled>Select Address</option>');
+                        $.each(res,function(key,value){
+                            $("#address_location").append('<option value="'+key+'">'+value+'</option>');
+                        });
                         
-                        }else{
-                            $("#address_location").append('<option value="" selected disabled>get value error</option>');
-                        }
+                    }else{
+                        $("#address_location").append('<option value="" selected disabled>get value error</option>');
                     }
-                });
-            }else{
-                $("#address_location").append('<option value="" selected disabled>countryID null</option>');
-                
-            }
-            
+                }
+            });
+        }else{
+            $("#address_location").append('<option value="" selected disabled>countryID null</option>');
+
+        }
+
     });
 </script>
+
 
 <script type="text/javascript">
 
@@ -2671,7 +2672,7 @@ $(document).ready(function() {
                 //console.log(sum)
                 //var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 //$("#sliptotalsum").val(real_sum);
-                //$("#feshareto").val(real_sum);
+                //$("#flshareto").val(real_sum);
 
             }
         });
@@ -2747,18 +2748,18 @@ $(document).ready(function() {
                     // }
 
                     var amount = response.amountlocation;
-                    var ceding_share = $('#feshare').val();
+                    var ceding_share = $('#flshare').val();
                     if(ceding_share == ''){
                         var sum_ceding = isNaN(parseFloat(0) + parseFloat(amount)) ? 0 :(parseFloat(0) + parseFloat(amount));
                         var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#feshare').val(conv_sum_ceding);
+                        $('#flshare').val(conv_sum_ceding);
                         console.log('ceding awal' + conv_sum_ceding)
                     }else{
                         var conv_ceding_share = ceding_share.replace(/,/g, "");
                         var real_ceding_share = parseInt(conv_ceding_share);
                         var sum_ceding = isNaN(parseFloat(real_ceding_share) + parseFloat(amount)) ? 0 :(parseFloat(real_ceding_share) + parseFloat(amount));
                         var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#feshare').val(conv_sum_ceding);
+                        $('#flshare').val(conv_sum_ceding);
                         console.log('ceding bertambah' + conv_sum_ceding)
 
 
@@ -2815,7 +2816,7 @@ $(document).ready(function() {
                     // $('#slipamount').val('');
                     // $('#slipinterestlist').val('');
                     
-                    // var totalnre = $('#feshareto').val();
+                    // var totalnre = $('#flshareto').val();
                     
                     // if(totalnre){
                     //     var conv_totalnre = parseFloat(totalnre.replace(/,/g, ""));
@@ -2825,7 +2826,7 @@ $(document).ready(function() {
                     //     console.log(conv_totalnre)
                     //     console.log(real_sumtotalnre)
 
-                    //     $('#feshareto').val(real_sumtotalnre);
+                    //     $('#flshareto').val(real_sumtotalnre);
                     // }
                     // else{
                     //     var conv_totalnre = totalnre.replace(/,/g, "");
@@ -2835,7 +2836,7 @@ $(document).ready(function() {
                     //     console.log(conv_totalnre)
                     //     console.log(real_sumtotalnre)
 
-                    //     $('#feshareto').val(real_sumtotalnre)
+                    //     $('#flshareto').val(real_sumtotalnre)
                     // }
                     
 
@@ -2853,8 +2854,8 @@ $(document).ready(function() {
                     //         $("#sliptotalsum").val(real_sum);
                     //         $("#sliptotalsum2").val(real_sum);
                     //         // $("#msishareto").val(real_sum);
-                    //         // $("#fesharefrom").val(real_sum);
-                    //         // $("#feshareto").val(real_sum);
+                    //         // $("#flsharefrom").val(real_sum);
+                    //         // $("#flshareto").val(real_sum);
                     //     }
                     //     else
                     //     {
@@ -2871,8 +2872,8 @@ $(document).ready(function() {
                     //         console.log(' real sum : ' + real_sum)
                     //         $("#sliptotalsum").val(real_sum);
                     //         $("#sliptotalsum2").val(real_sum);
-                    //         // $("#fesharefrom").val(real_sum);
-                    //         // $("#feshareto").val(real_sum);
+                    //         // $("#flsharefrom").val(real_sum);
+                    //         // $("#flshareto").val(real_sum);
                     //     }
                     // }else{
                         swal("success!", "ceding share has increase", "success");
@@ -2902,32 +2903,32 @@ function deletelocationriskdetail(id){
             $('#riskdetailsid'+id).remove();
             var ceding_curr = $('#slipceding').val();
 
-            // var totalnre = $('#feshareto').val();
+            // var totalnre = $('#flshareto').val();
             // var conv_totalnre = totalnre.replace(/,/g, "");
 
             // var sumtotalnre = isNaN(parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ? (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) : (parseFloat(conv_totalnre) - parseFloat(response.amountlocation)) ;
             // var real_sumtotalnre = sumtotalnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            // $('#feshareto').val(real_sumtotalnre);
+            // $('#flshareto').val(real_sumtotalnre);
 
                 //$('#cid'+id).remove();
                 var amount = response.amountlocation;
-                var ceding_share = $('#feshare').val();
+                var ceding_share = $('#flshare').val();
                 
                 var conv_ceding_share = ceding_share.replace(/,/g, "");
                 var real_ceding_share = parseInt(conv_ceding_share);
                 var sum_ceding = isNaN(parseFloat(real_ceding_share) - parseFloat(amount)) ? 0 :(parseFloat(real_ceding_share) - parseFloat(amount));
                 var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                $('#feshare').val(conv_sum_ceding);
+                $('#flshare').val(conv_sum_ceding);
                 console.log('ceding bertambah' + conv_sum_ceding)
                 
-                    // $("#feshareto").val(real_sum);
+                    // $("#flshareto").val(real_sum);
 
             // swal("Warning!", "TSI not decrease because this ceding is not same with ceding in slip", "Tsi not decrease");
             swal("success!", "ceding share has decrease", "success");
 
                     // $("#sliptotalsum").val(real_sum);
-                    // $("#feshareto").val(real_sum);
+                    // $("#flshareto").val(real_sum);
 
 
 
@@ -3166,10 +3167,10 @@ function deletelocationriskdetail(id){
     $('#percentceding').keyup(function(e){
         if(e.keyCode != 9){
             var percentceding = parseFloat($(this).val()) / 100 ;
-            var valtsi = $('#feshareto').val();
+            var valtsi = $('#flshareto').val();
 
             if(valtsi != null){
-                var tsi = $('#feshareto').val();
+                var tsi = $('#flshareto').val();
                 var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
                 var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
@@ -3181,10 +3182,10 @@ function deletelocationriskdetail(id){
         }
         else{
             var percentceding = parseFloat($(this).val()) / 100 ;
-            var valtsi = $('#feshareto').val();
+            var valtsi = $('#flshareto').val();
 
             if(valtsi != null){
-                var tsi = $('#feshareto').val();
+                var tsi = $('#flshareto').val();
                 var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
                 var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
@@ -3205,10 +3206,10 @@ function deletelocationriskdetail(id){
             var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
             console.log(amountlocation)
             console.log(conv_amountlocation)
-            var valtsi = $('#feshareto').val();
+            var valtsi = $('#flshareto').val();
 
             if(valtsi != null){
-                var tsi = $('#feshareto').val();
+                var tsi = $('#flshareto').val();
                 var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
                 var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
@@ -3226,10 +3227,10 @@ function deletelocationriskdetail(id){
 
             console.log(amountlocation)
             console.log(conv_amountlocation)
-            var valtsi = $('#feshareto').val();
+            var valtsi = $('#flshareto').val();
 
             if(valtsi != null){
-                var tsi = $('#feshareto').val();
+                var tsi = $('#flshareto').val();
                 var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
                 var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
@@ -4336,8 +4337,7 @@ $('#sliprate').change(function(){
        //alert('masuk');
        e.preventDefault();
 
-       var installmentdate = $('#dateinstallmentdata').val();
-       
+       var installmentdate = $('#slipipdate').val();
        var percentage = $('#slipippercentage').val();
        var amount = $('#slipipamount').val();
        var slip_id = $('#slipnumber').val();
@@ -4349,32 +4349,57 @@ $('#sliprate').change(function(){
        console.log(real_amount)
        
        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
        $.ajax({
-           url:"{{ route('installment.store') }}",
-           type:"POST",
-           data:{
-               installmentdate:installmentdate,
-               percentage:percentage,
-               slipamount:real_amount,
-               id_slip:slip_id
-           },
-           beforeSend: function() { $("body").addClass("loading");  },
-           complete: function() {  $("body").removeClass("loading"); },
-           success:function(response)
-           {
-            
-               console.log(response)
-               var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
-               $('#dateinstallment').val('');
-               $('#slipippercentage').val('');
-               $('#slipipamount').val('');
-               
+         url:"{{ route('installment.store') }}",
+         type:"POST",
+         data:{
+             installmentdate:installmentdate,
+             percentage:percentage,
+             slipamount:real_amount,
+             id_slip:slip_id
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+
+             console.log(response)
+             if(response.code_error){
+                swal("Error!", response.message , "Insert Error");
+                $('#addinstallmentinsured-btn').attr('hidden','true')
+            }else{
+                    // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+                    var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
+                    $('#dateinstallment').val('');
+                    $('#slipippercentage').val('');
+                    $('#slipipamount').val('');
+                    $('#slipipamount2').val('');
+
+                    if(response.message){
+                        swal("Success!", response.message, "success")
+                    }       
+                    
+
+                    var total_percent =  $('#sliptotalpercentinspan').val();
+
+                    if(total_percent == ''){
+                        var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
+                        $('#sliptotalpercentinspan').val(sum_percent.toString());
+                        console.log($('#sliptotalpercentinspan').val())
+                    }else{
+                        var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
+                        $('#sliptotalpercentinspan').val(sum_percent.toString());
+                        console.log($('#sliptotalpercentinspan').val())
+                        
+                    }
+                }
+
                //var total =  parseFloat($("#sliptotalsum").val());
                //var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
                //$("#sliptotalsum").val(sum);
@@ -5454,7 +5479,7 @@ $('#sliprate').change(function(){
        var slipor =  $('#slipor').val();
        var slipsumor =  $('#slipsumor').val();
        var wpc =  $('#wpc').val();
-       var insuredshare = $('#fesharefrom').val();
+       var insuredshare = $('#flsharefrom').val();
 
        var token2 = $('input[name=_token]').val();
 
@@ -5523,7 +5548,7 @@ $('#sliprate').change(function(){
        //ajaxfilefunction(e);
 
        //if(current_percent == 100 && current_percent_rp == 100)
-       if(current_percent == 100)
+       if(current_percent == '100')
        {
         $.ajaxSetup({
             headers: {
@@ -5658,34 +5683,82 @@ $('#sliprate').change(function(){
 
 
       // // insured save
-      // var fesnumber = $('#insuredIDtxt').val();
-      // var fessuffix = $('#autocomplete2').val();
-      // var fesshare = $('#flshare').val();
-      // var fessharefrom  = $('#flsharefrom').val();
-      // var fesshareto = $('#flshareto').val();
+      var flnumber = $('#insuredIDtxt').val();
+       var flinsured = $('#flinsured').val();
+       var flsuggestinsured = $('#autocomplete').val();
+       var flsuffix = $('#autocomplete2').val();
+       var flshare = $('#flshare').val();
+       var flsharefrom  = $('#flsharefrom').val();
+       var flshareto = $('#flshareto').val();
+       var flcoinsurance = $('#flcoinsurance').val();
+       var flobligee = $('#flobligee').val();
+       var flprincipal = $('#flprincipal').val();
+       var fluy = $('#fluy').val();
+       
+       
+       var conv_flssharefrom = flsharefrom.replace(/,/g, "");
+       console.log(conv_flssharefrom)
+       var real_flssharefrom = parseInt(conv_flssharefrom);
+       console.log(real_flssharefrom)
 
+       var conv_flsshareto = flshareto.replace(/,/g, "");
+       console.log(conv_flsshareto)
+       var real_flsshareto = parseInt(conv_flsshareto);
+       console.log(real_flsshareto)
+       
 
-      // var conv_fessharefrom = fessharefrom.replace(/,/g, "");
-      // console.log(conv_fessharefrom)
-      // var real_fessharefrom = parseInt(conv_fessharefrom);
-      // console.log(real_fessharefrom)
-      // var conv_fesshareto = fesshareto.replace(/,/g, "");
-      // console.log(conv_fesshareto)
-      // var real_fesshareto = parseInt(conv_fesshareto);
-      // console.log(real_fesshareto)
+       if(isNaN(real_flsshareto))
+       {
+        real_flsshareto=0;
+       }
 
+       if(isNaN(real_flssharefrom))
+       {
+        real_flssharefrom=0;
+       }
+       
+       
+       var token2 = $('input[name=_token]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
-      // var token2 = $('input[name=_token]').val();
+       $.ajax({
+           url:"{{ url('transaction-data/fl-insured/store') }}",
+           type:"POST",
+           data:{
+               flnumber:flnumber,
+               flinsured:flinsured,
+               flsuggestinsured:flsuggestinsured,
+               flsuffix:flsuffix,
+               flshare:flshare,
+               flsharefrom:real_flssharefrom,
+               flshareto:real_flsshareto,
+               flcoinsurance:flcoinsurance,
+               flobligee:flobligee,
+               flprincipal:flprincipal,
+               fluy:fluy
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+                //swal("Good job!", "Financial Line Insert Success", "success")
+                console.log(response)
+                var real_ceding_share = response.ceding_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#flshare').val(real_ceding_share);
+                $('#flcountendorsement').val(response.count_endorsement);
+       
 
-
-      // console.log(fesnumber)
-      // console.log(fessuffix)
-
-
-   
-
-
-    
+           },
+           error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", request.responseText, "Insert Error");
+           }
+       });
 
 
 
@@ -6571,22 +6644,22 @@ $('#sliprate').change(function(){
                         {
                             var obj = insured_list[i];
 
-                            $('#fesnumber').val('');
-                            $('#fesinsured').val('');
+                            $('#flsnumber').val('');
+                            $('#flinsured').val('');
                             $('#autocomplete').val('');
                             $('#autocomplete2').val('');
                             $('#flshare').val('');
                             $('#flsharefrom').val('');
-                            $('#feuy').val('');
+                            $('#fluy').val('');
                             $('#flshareto').val('');
 
-                            $('#fesnumber').val(obj.number);
-                            $('#fesinsured').val(obj.insured_prefix);
+                            $('#flsnumber').val(obj.number);
+                            $('#flinsured').val(obj.insured_prefix);
                             $('#autocomplete').val(obj.insured_name);
                             $('#autocomplete2').val(obj.insured_suffix);
                             $('#flshare').val(obj.share);
                             $('#flsharefrom').val(obj.share_from);
-                            $('#feuy').val(obj.uy);
+                            $('#fluy').val(obj.uy);
                             $('#flshareto').val(obj.share_to);
 
                             

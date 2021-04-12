@@ -3803,7 +3803,9 @@ function deletelocationriskdetail(id){
                 var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
                 var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 $('#amountlocation').val(real_sum);
-            }else{
+            }
+            else
+            {
                 swal('warning!','please fill TSI insured first','error')
             }
         }
@@ -3818,7 +3820,9 @@ function deletelocationriskdetail(id){
                 var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
                 var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 $('#amountlocation').val(real_sum);
-            }else{
+            }
+            else
+            {
                 swal('warning!','please fill TSI insured first','error')
             }
         }
@@ -6350,38 +6354,88 @@ function deletelocationriskdetail(id){
        {
         swal("Error!", "Please input installment panel until 100%", "Insert Error");
        }
-
-
-      // // insured save
-      // var fesnumber = $('#insuredIDtxt').val();
-      // var fessuffix = $('#autocomplete2').val();
-      // var fesshare = $('#feshare').val();
-      // var fessharefrom  = $('#fesharefrom').val();
-      // var fesshareto = $('#feshareto').val();
-
-
-      // var conv_fessharefrom = fessharefrom.replace(/,/g, "");
-      // console.log(conv_fessharefrom)
-      // var real_fessharefrom = parseInt(conv_fessharefrom);
-      // console.log(real_fessharefrom)
-      // var conv_fesshareto = fesshareto.replace(/,/g, "");
-      // console.log(conv_fesshareto)
-      // var real_fesshareto = parseInt(conv_fesshareto);
-      // console.log(real_fesshareto)
-
-
-      // var token2 = $('input[name=_token]').val();
-
-
-      // console.log(fesnumber)
-      // console.log(fessuffix)
-
-
-   
-
-
     
 
+      
+
+        var fesnumber = $('#insuredIDtxt').val();
+        var fesinsured = $('#feinsured').val();
+        var fessuggestinsured = $('#autocomplete').val();
+        var fessuffix = $('#autocomplete2').val();
+        var fesshare = $('#feshare').val();
+        var fessharefrom  = $('#fesharefrom').val();
+        var fesshareto = $('#feshareto').val();
+        var fescoinsurance = $('#fecoinsurance').val();
+        var feuy = $('#feuy').val();
+
+        var conv_fesshare = fesshare.replace(/,/g, "");
+        console.log(conv_fesshare)
+        var real_fesshare = parseInt(conv_fesshare);
+        console.log(real_fesshare)
+        var conv_fessharefrom = fessharefrom.replace(/,/g, "");
+        console.log(conv_fessharefrom)
+        var real_fessharefrom = parseInt(conv_fessharefrom);
+        console.log(real_fessharefrom)
+        var conv_fesshareto = fesshareto.replace(/,/g, "");
+        console.log(conv_fesshareto)
+        var real_fesshareto = parseInt(conv_fesshareto);
+        console.log(real_fesshareto)
+
+        if(isNaN(real_fesshareto))
+        {
+            real_fesshareto=0;
+        }
+
+        if(isNaN(real_fessharefrom))
+        {
+        real_fessharefrom=0;
+        }
+
+
+        var token2 = $('input[name=_token]').val();
+
+        console.log(fesinsured)
+        console.log(fessuggestinsured)
+        console.log(fesnumber)
+        console.log(fessuffix)
+
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+        url:"{{ url('transaction-data/fe-insured/store') }}",
+        type:"POST",
+        data:{
+            fesnumber:fesnumber,
+            fesinsured:fesinsured,
+            fessuggestinsured:fessuggestinsured,
+            fessuffix:fessuffix,
+            fesshare:real_fesshare,
+            fessharefrom:real_fessharefrom,
+            fesshareto:real_fesshareto,
+            fescoinsurance:fescoinsurance,
+            feuy:feuy
+        },
+        beforeSend: function() { $("body").addClass("loading");  },
+        complete: function() {  $("body").removeClass("loading"); },
+        success:function(response)
+        {
+            //swal("Success!", "Insured Fire & Engineering Insert Success", "success")
+            console.log(response)
+            $('#fecountendorsement').val(response.count_endorsement);
+            var real_ceding_share = response.ceding_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#feshare').val(real_ceding_share);
+
+        },
+        error: function (request, status, error) {
+                    //alert(request.responseText);
+                    swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
+                }
+        });
 
 
 });

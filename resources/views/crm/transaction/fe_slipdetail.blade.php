@@ -246,7 +246,7 @@
                                 <div class="col-md-6 col-md-12">
                                     <div class="form-group">
                                         <label for="">{{__('Country')}}</label>
-                                        <select name="country_location_id" id="country_location" class="e1 form-control form-control-sm " >
+                                        <select name="country_location_id" id="country_location" class="e1 form-control form-control-sm " required>
                                             <option selected readonly>{{__('Select Country ')}}</option>
                                             @foreach($felookup as $felookuplocationdata)
                                                         @if($felookuplocationdata->country_id  == 102 || $felookuplocationdata->country_id=="102")
@@ -263,7 +263,7 @@
                                 <div class="col-md-6 col-md-12">
                                     <div class="form-group">
                                         <label for="">{{__('State/Province')}}</label>
-                                        <select name="state_location_id" id="state_location" class="e1 form-control form-control-sm " >
+                                        <select name="state_location_id" id="state_location" class="e1 form-control form-control-sm " required>
                                             {{-- <option selected readonly>{{__('Select State/Province ')}}</option>
                                             @foreach($felookup as $felookuplocationdata)
                                                 <option value="{{ $felookuplocationdata->state_id }}">{{ $felookuplocationdata->state->name }}</option>
@@ -276,7 +276,7 @@
                                 <div class="col-md-6 col-md-12">
                                     <div class="form-group">
                                         <label for="">{{__('City')}}</label>
-                                        <select name="city_location_id" id="city_location" class="e1 form-control form-control-sm " >
+                                        <select name="city_location_id" id="city_location" class="e1 form-control form-control-sm " required>
                                             {{-- <option selected readonly>{{__('Select City ')}}</option>
                                             @foreach($felookup as $felookuplocationdata)
                                                 <option value="{{ $felookuplocationdata->city_id }}">{{ $felookuplocationdata->city->name }}</option>
@@ -571,12 +571,9 @@
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Status')}}</label>
-                                                        <select name="slipstatus" id="slipstatus" class="form-control form-control-sm ">
-                                                            <option value="offer"    @if($slipdata->status == "offer") selected="selected" @endif >Offer</option>
-                                                            <option value="binding"  @if($slipdata->status == "binding")  selected="selected" @endif >Binding</option>
+                                                        <select name="slipstatus" id="slipstatus" class="form-control form-control-sm " readonly>
                                                             <option value="slip" @if($slipdata->status == "slip")  selected="selected" @endif >Slip</option>
                                                             <option value="endorsement" @if($slipdata->status == "endorsement")  selected="selected" @endif >Endorsement</option>
-                                                            <option value="decline" @if($slipdata->status == "decline")  selected="selected" @endif > Decline</option>
                                                             <option value="cancel" @if($slipdata->status == "cancel")  selected="selected" @endif >Cancel</option>
                                                         </select>
                                                     </div>    

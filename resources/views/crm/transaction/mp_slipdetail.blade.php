@@ -90,7 +90,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured')}}</label>
-                                                    <input id="mpshareto" type="text"  name="mpshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly/>
+                                                    <input id="mpshareto" type="text"  name="mpshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -262,7 +262,7 @@
                                 <div class="col-md-6 col-md-12">
                                     <div class="form-group">
                                         <label for="">{{__('Country')}}</label>
-                                        <select name="country_location_id" id="country_location" class="e1 form-control form-control-sm " >
+                                        <select name="country_location_id" id="country_location" class="e1 form-control form-control-sm " required>
                                             <option selected readonly>{{__('Select Country ')}}</option>
                                             @foreach($felookup as $felookuplocationdata)
                                                 @if($felookuplocationdata->country_id  == 102 || $felookuplocationdata->country_id=="102")
@@ -279,7 +279,7 @@
                                 <div class="col-md-6 col-md-12">
                                     <div class="form-group">
                                         <label for="">{{__('State/Province')}}</label>
-                                        <select name="state_location_id" id="state_location" class="e1 form-control form-control-sm " >
+                                        <select name="state_location_id" id="state_location" class="e1 form-control form-control-sm " required>
                                             {{-- <option selected readonly>{{__('Select State/Province ')}}</option>
                                             @foreach($felookup as $felookuplocationdata)
                                                 <option value="{{ $felookuplocationdata->state_id }}">{{ $felookuplocationdata->state->name }}</option>
@@ -292,7 +292,7 @@
                                 <div class="col-md-6 col-md-12">
                                     <div class="form-group">
                                         <label for="">{{__('City')}}</label>
-                                        <select name="city_location_id" id="city_location" class="e1 form-control form-control-sm " >
+                                        <select name="city_location_id" id="city_location" class="e1 form-control form-control-sm " required>
                                             {{-- <option selected readonly>{{__('Select City ')}}</option>
                                             @foreach($felookup as $felookuplocationdata)
                                                 <option value="{{ $felookuplocationdata->city_id }}">{{ $felookuplocationdata->city->name }}</option>
@@ -305,7 +305,7 @@
                                 <div class="col-md-6 col-md-12">
                                     <div class="form-group">
                                         <label for="">{{__('Address')}}</label>
-                                        <select name="address_location_id" id="address_location" class="e1 form-control form-control-sm " >
+                                        <select name="address_location_id" id="address_location" class="e1 form-control form-control-sm " required>
                                             {{-- <option selected readonly>{{__('Select Address ')}}</option>
                                             @foreach($felookup as $felookuplocationdata)
                                                 <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->address }}</option>
@@ -583,12 +583,9 @@
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Status')}}</label>
-                                                        <select name="slipstatus" id="slipstatus" class="form-control form-control-sm ">
-                                                            <option value="offer"    @if($slipdata->status == "offer") selected="selected" @endif >Offer</option>
-                                                            <option value="binding"  @if($slipdata->status == "binding")  selected="selected" @endif >Binding</option>
+                                                        <select name="slipstatus" id="slipstatus" class="form-control form-control-sm " readonly>
                                                             <option value="slip" @if($slipdata->status == "slip")  selected="selected" @endif >Slip</option>
                                                             <option value="endorsement" @if($slipdata->status == "endorsement")  selected="selected" @endif >Endorsement</option>
-                                                            <option value="decline" @if($slipdata->status == "decline")  selected="selected" @endif > Decline</option>
                                                             <option value="cancel" @if($slipdata->status == "cancel")  selected="selected" @endif >Cancel</option>
                                                         </select>
                                                     </div>    

@@ -87,7 +87,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="">{{__('Total Sum Insured')}}</label>
-                                                            <input id="flshareto" type="text" name="flshareto" value="0" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly/>
+                                                            <input id="flshareto" type="text" name="flshareto" value="0" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" />
                                                         </div>
                                                     </div>
 
@@ -269,7 +269,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Country')}}</label>
-                                                <select name="country_location_id" id="country_location" class="e1 form-control form-control-sm " >
+                                                <select name="country_location_id" id="country_location" class="e1 form-control form-control-sm " required>
                                                     <option selected readonly>{{__('Select Country ')}}</option>
                                                     @foreach($felookup as $felookuplocationdata)
                                                         @if($felookuplocationdata->country_id  == 102 || $felookuplocationdata->country_id=="102")
@@ -286,7 +286,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('State/Province')}}</label>
-                                                <select name="state_location_id" id="state_location" class="e1 form-control form-control-sm " >
+                                                <select name="state_location_id" id="state_location" class="e1 form-control form-control-sm " required>
                                                     {{-- <option selected readonly>{{__('Select State/Province ')}}</option>
                                                     @foreach($felookup as $felookuplocationdata)
                                                         <option value="{{ $felookuplocationdata->state_id }}">{{ $felookuplocationdata->state->name }}</option>
@@ -299,7 +299,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('City')}}</label>
-                                                <select name="city_location_id" id="city_location" class="e1 form-control form-control-sm " >
+                                                <select name="city_location_id" id="city_location" class="e1 form-control form-control-sm " required>
                                                     {{-- <option selected readonly>{{__('Select City ')}}</option>
                                                     @foreach($felookup as $felookuplocationdata)
                                                         <option value="{{ $felookuplocationdata->city_id }}">{{ $felookuplocationdata->city->name }}</option>
@@ -312,7 +312,7 @@
                                         <div class="col-md-6 col-md-12">
                                             <div class="form-group">
                                                 <label for="">{{__('Address')}}</label>
-                                                <select name="address_location_id" id="address_location" class="e1 form-control form-control-sm " >
+                                                <select name="address_location_id" id="address_location" class="e1 form-control form-control-sm " required>
                                                     {{-- <option selected readonly>{{__('Select Address ')}}</option>
                                                     @foreach($felookup as $felookuplocationdata)
                                                         <option value="{{ $felookuplocationdata->id }}">{{ $felookuplocationdata->loc_code }} - {{ $felookuplocationdata->address }}</option>
@@ -614,13 +614,10 @@
                                                             <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Status')}}</label>
-                                                                <select name="slipstatus" id="slipstatus" class="form-control form-control-sm ">
+                                                                <select name="slipstatus" id="slipstatus" class="form-control form-control-sm " readonly>
                                                                     {{-- <option selected readonly>{{__('Select Status')}}</option> --}}
-                                                                    <option value="offer" selected>Offer</option>
-                                                                    <option value="binding">Binding</option>
                                                                     <option value="slip">Slip</option>
                                                                     <option value="endorsement">Endorsement</option>
-                                                                    <option value="decline">Decline</option>
                                                                     <option value="cancel">Cancel</option>
                                                                 </select>
                                                             </div>    
@@ -1291,7 +1288,7 @@
                                                                             <div class="row">
                                                                                 <div class="col-md-12">
                                                                                     <div class="input-group">
-                                                                                        <input type="number" value="" step=".001" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                                        <input type="number" value="" step=".001" value="0"  id="slipvbroker" name="slipvbroker" class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                                                         <div class="input-group-append">
                                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                                         </div>
@@ -1395,8 +1392,9 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="form-group">
-                                                                                                <input type="text" id="sliptotalpercentinspan" name="sliptotalpercentinspan">
-                                                                                                 <button type="button" id="addinstallmentinsured-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                            <input type="text" id="sliptotalpercentinspan" name="sliptotalpercentinspan" hidden="true">
+                                                                                                            
+                                                                                            <button type="button" id="addinstallmentinsured-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                         </div>
                                                                                     </td>
                                                                                     </form>

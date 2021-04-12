@@ -87,7 +87,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured')}}</label>
-                                                    <input id="hemshareto" type="text" name="hemshareto" value="0" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  readonly/>
+                                                    <input id="hemshareto" type="text" name="hemshareto" value="0" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" />
                                                 </div>
                                             </div>
                                         </div>
@@ -634,14 +634,11 @@
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Status')}}</label>
-                                                        <select id="slipstatus" name="slipstatus" class="form-control form-control-sm ">
+                                                        <select id="slipstatus" name="slipstatus" class="form-control form-control-sm " readonly>
                                                            {{-- <option selected readonly>{{__('Select Status')}}</option> --}}
-                                                            <option value="offer" selected>Offer</option>
-                                                            <option value="binding">Binding</option>
                                                             <option value="slip">Slip</option>
                                                             <option value="endorsement">Endorsement</option>
-                                                            <option value="decline">Decline</option>
-                                                            <option value="cancel">Cancel</option>
+                                                             <option value="cancel">Cancel</option>
                                                         </select>
                                                     </div>    
                                                     </div>
@@ -1290,7 +1287,7 @@
                                                                             <div class="row">
                                                                                 <div class="col-md-12">
                                                                                     <div class="input-group">
-                                                                                        <input type="number" value="" step=".001" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                                        <input type="number" value="" step=".001" value="0" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                                                         <div class="input-group-append">
                                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                                         </div>
@@ -1394,7 +1391,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" id="sliptotalpercentinspan" name="sliptotalpercentinspan">
+                                                                                    <input type="text" id="sliptotalpercentinspan" name="sliptotalpercentinspan" hidden="true">
                                                                                     <button type="button" id="addinstallmentinsured-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>

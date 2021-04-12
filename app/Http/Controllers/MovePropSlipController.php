@@ -112,6 +112,18 @@ class MovePropSlipController extends Controller
          $mydate = date("Y").date("m").date("d");
          $fe_ids = response()->json($country->modelKeys());
 
+        
+         $checkdatainsured= Insured::where('statmodified','=',1)->whereNull('share_to')->orWhere('share_to','=',0)->get();
+
+
+        foreach ($checkdatainsured as $insureddata)
+        {
+            
+            $deleteinsured= SlipTable::where('insured_id','=',$insureddata->number)->delete();
+            $deleteinsured= Insured::where('number','=',$insureddata->number)->delete();  
+        }
+
+
          $search = @$request->input('search');
 
          if(empty($search))
@@ -202,17 +214,52 @@ class MovePropSlipController extends Controller
             $code_ms = "IN" .  $mydate . "0000" . strval(1);
         }
 
-        $checkinsured = Insured::where('number',$code_ms)->first();
-
-        if($checkinsured){
-                // $deleteinsured= Insured::where('number','=',$code_ms)->delete();
-            if($checkinsured->share_to != null){
+        $kondisi=0;
+        $im=1;
+        while($kondisi==0)
+        {
+                $checkinsured = Insured::where('number',$code_ms)->first();
                 
-                $deleteinsured= Insured::where('number','=',$code_ms)->delete();
-            }else{
-                $deleteinsured= Insured::where('number','=',$code_ms)->delete();
-            }
+                if(!empty($checkinsured))
+                {
+                    
+                    $newnumber2 = substr($code_ms, 10,15);
+                    $codenumber = substr($code_ms, 0,10);
+
+                    if(intval($newnumber2) < 9)
+                    {
+                        $count = substr($newnumber2,14);
+                        $code_ms = $codenumber . "0000" . strval(intval($count) + $im);
+                    }   
+                    elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+                    {
+                        $count = substr($newnumber2,13);
+                        $code_ms = $codenumber . "000" . strval(intval($count) + $im);
+                    }
+                    elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+                    {
+                        $count = substr($newnumber2,12);
+                        $code_ms = $codenumber . "00" . strval(intval($count) + $im);
+                    }
+                    elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+                    {
+                        $count = substr($newnumber2,11);
+                        $code_ms = $codenumber . "0" . strval(intval($count) + $im);
+                    }
+                    elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+                    {
+                        $count = substr($newnumber2,10);
+                        $code_ms = $codenumber  . strval(intval($count) + $im);
+                    }
+                    
+                    $im++;
+                }
+                else
+                {
+                    $kondisi=1;
+                }
         }
+
 
         $insureddataup = Insured::create([
             'number'=>$code_ms,
@@ -254,52 +301,56 @@ class MovePropSlipController extends Controller
             $code_sl = "MP".  $mydate . "0000" . strval(1);
         }
 
-
-        $kondisi=false;
-        $i=1;
-        while($kondisi==false)
+        $kondisi=0;
+        $im=1;
+        while($kondisi==0)
         {
-            $slipdatatest=SlipTable::where('number',$code_sl)->first();
-            if(empty($slipdatatest) || $slipdatatest==NULL)
+            $checkdataslip= SlipTable::where('number',$code_sl)->first();
+
+            if(!empty($checkdataslip))
             {
-                $kondisi=true;
+                $newnumber2 = substr($code_sl, 10,15);
+                $codenumber = substr($code_sl, 0,10);
+
+                if(intval($newnumber2) < 9)
+                {
+                    $count = substr($newnumber2,14);
+                    $code_sl = $codenumber . "0000" . strval(intval($count) + $im);
+                }   
+                elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+                {
+                    $count = substr($newnumber2,13);
+                    $code_sl = $codenumber . "000" . strval(intval($count) + $im);
+                }
+                elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+                {
+                    $count = substr($newnumber2,12);
+                    $code_sl = $codenumber . "00" . strval(intval($count) + $im);
+                }
+                elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+                {
+                    $count = substr($newnumber2,11);
+                    $code_sl = $codenumber . "0" . strval(intval($count) + $im);
+                }
+                elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+                {
+                    $count = substr($newnumber2,10);
+                    $code_sl = $codenumber  . strval(intval($count) + $im);
+                }
+                
+                $im++;
             }
             else
             {
-                if($sliplastid < 9)
-                {
-                    $code_sl = "MP".  $mydate . "0000" . strval($sliplastid + $i);
-                }   
-                elseif($sliplastid > 8 && $sliplastid < 99)
-                {
-                    $code_sl = "MP".  $mydate . "000" . strval($sliplastid + $i);
-                }
-                elseif($sliplastid > 98 && $sliplastid < 999)
-                {
-                    $code_sl = "MP".  $mydate . "00" . strval($sliplastid + $i);
-                }
-                elseif($sliplastid > 998 && $sliplastid < 9999)
-                {
-                    $code_sl = "MP".  $mydate . "0" . strval($sliplastid + $i);
-                }
-                elseif($sliplastid > 9998 && $sliplastid < 99999)
-                {
-                    $code_sl = "MP".  $mydate . strval($sliplastid + $i);
-                }
-            }
-
-            $i++;
+                $kondisi=1;
+            }    
         }
-
         
-        $checkdataslip= SlipTable::where('number',$code_sl)->first();
-
-        if($checkdataslip){
-            if($checkdataslip->total_sum_insured != null){
-                $deleteinsured= SlipTable::where('number','=',$code_sl)->delete();
-            }
-        }
-
+        $slipdataup=SlipTable::create([
+            'insured_id'=>$insureddataup->number,
+            'number'=>$code_sl,
+            'slip_type'=>'mp'   
+        ]);
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
 
@@ -869,8 +920,13 @@ class MovePropSlipController extends Controller
             $user = Auth::user();
             
             $insureddata= Insured::where('number','=',$request->mpnumber)->first();
-            $locationlist= TransLocationTemp::where('insured_id','=',$request->flnumber)->orderby('id','desc')->get();
-            $propertytypelist= PropertyTypeTemp::where('insured_id','=',$request->flnumber)->orderby('id','desc')->get();
+            $locationlist= TransLocationTemp::where('insured_id','=',$request->mpnumber)->orderby('id','desc')->get();
+            $propertytypelist= PropertyTypeTemp::where('insured_id','=',$request->mpnumber)->orderby('id','desc')->get();
+
+            $sum_amount = DB::table('risk_location_detail')
+            ->join('trans_location_detail','trans_location_detail.id','=','risk_location_detail.translocation_id')
+            ->where('trans_location_detail.insured_id',$request->mpnumber)
+            ->sum('risk_location_detail.amountlocation');
 
             if($insureddata==null)
             {
@@ -880,18 +936,22 @@ class MovePropSlipController extends Controller
                     'insured_prefix' => $request->mpinsured,
                     'insured_name'=>$request->mpsuggestinsured,
                     'insured_suffix'=>$request->mpsuffix,
-                    'share'=>$request->mpshare,
+                    'share'=>$sum_amount,
+                    'statmodified'=>1,
                     'share_from'=>$request->mpsharefrom,
                     'share_to'=>$request->mpshareto,
                     'coincurance'=>$request->mpcoinsurance,
                     'location'=>$locationlist->toJson(),
                     'property_type'=>$propertytypelist->toJson(),
-                    'uy'=>$request->mpuy
+                    'uy'=>$request->mpuy,
+                    'count_endorsement'=>0
                 ]);
 
                 $notification = array(
                     'message' => 'Moveable Property Insured added successfully!',
-                    'alert-type' => 'success'
+                    'alert-type' => 'success',
+                    'count_endorsement' => $insureddataup->count_endorsement,
+                    'ceding_share' => $sum_amount
                 );
             }
             else
@@ -901,7 +961,8 @@ class MovePropSlipController extends Controller
                 $insureddataup->insured_prefix=$request->mpinsured;
                 $insureddataup->insured_name=$request->mpsuggestinsured;
                 $insureddataup->insured_suffix=$request->mpsuffix;
-                $insureddataup->share=$request->mpshare;
+                $insureddataup->share=$sum_amount;
+                $insureddataup->statmodified=1;
                 $insureddataup->share_from=$request->mpsharefrom;
                 $insureddataup->share_to=$request->mpshareto;
                 $insureddataup->coincurance=$request->mpcoinsurance;
@@ -913,13 +974,15 @@ class MovePropSlipController extends Controller
 
                 $notification = array(
                     'message' => 'Moveable Property Insured Update successfully!',
-                    'alert-type' => 'success'
+                    'alert-type' => 'success',
+                    'count_endorsement' => $insureddataup->count_endorsement,
+                    'ceding_share' => $sum_amount
                 );
             }
 
            
-
-            return back()->with($notification);
+            return response($notification);
+            //return back()->with($notification);
             //Session::flash('Success', 'Fire & Engginering Insured added successfully', 'success');
             //return redirect()->route('liniusaha.index');
         
@@ -1025,7 +1088,8 @@ class MovePropSlipController extends Controller
                     'alert-type' => 'success'
                 );
 
-                $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+                //$insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+                $insdata = Insured::where('number',$request->code_ms)->first();
 
                 // $old_sumshare = $request->slipoldsumshare;
     
@@ -1070,22 +1134,97 @@ class MovePropSlipController extends Controller
                     $new_number = $codenumber  . strval(intval($count) + 1);
                 }
 
-                $checkdataslip= SlipTable::where('number',$new_number)->first();
+                $kondisi=0;
+                $im=1;
+                while($kondisi==0)
+                {
+                    $checkdataslip= SlipTable::where('number',$new_number)->first();
 
-                if($checkdataslip){
-                    if($checkdataslip->total_sum_insured != null){
-                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
-                    }else{
-                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
+                   if(!empty($checkdataslip))
+                    {
+                        $newnumber2 = substr($new_number, 10,15);
+                        $codenumber = substr($new_number, 0,10);
+
+                        if(intval($newnumber2) < 9)
+                        {
+                            $count = substr($newnumber2,14);
+                            $new_number = $codenumber . "0000" . strval(intval($count) + $im);
+                        }   
+                        elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+                        {
+                            $count = substr($newnumber2,13);
+                            $new_number = $codenumber . "000" . strval(intval($count) + $im);
+                        }
+                        elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+                        {
+                            $count = substr($newnumber2,12);
+                            $new_number = $codenumber . "00" . strval(intval($count) + $im);
+                        }
+                        elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+                        {
+                            $count = substr($newnumber2,11);
+                            $new_number = $codenumber . "0" . strval(intval($count) + $im);
+                        }
+                        elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+                        {
+                            $count = substr($newnumber2,10);
+                            $new_number = $codenumber  . strval(intval($count) + $im);
+                        }
                         
-                    }
-                }
+                        $im++;
 
-                $slipdataup2 =SlipTable::create([
-                            'insured_id'=>$slipdataup->insured_id,
-                            'number'=>$new_number,
-                            'slip_type'=>'fe'
-                        ]);
+                    }
+                    else
+                    {
+                        $kondisi=1;
+                    }    
+                } 
+
+                $kondisi=0;
+                $im=1;
+                while($kondisi==0)
+                {
+                    $checkdataslip= SlipTable::where('number',$new_number)->first();
+
+                   if(!empty($checkdataslip))
+                    {
+                        $newnumber2 = substr($new_number, 10,15);
+                        $codenumber = substr($new_number, 0,10);
+
+                        if(intval($newnumber2) < 9)
+                        {
+                            $count = substr($newnumber2,14);
+                            $new_number = $codenumber . "0000" . strval(intval($count) + $im);
+                        }   
+                        elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+                        {
+                            $count = substr($newnumber2,13);
+                            $new_number = $codenumber . "000" . strval(intval($count) + $im);
+                        }
+                        elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+                        {
+                            $count = substr($newnumber2,12);
+                            $new_number = $codenumber . "00" . strval(intval($count) + $im);
+                        }
+                        elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+                        {
+                            $count = substr($newnumber2,11);
+                            $new_number = $codenumber . "0" . strval(intval($count) + $im);
+                        }
+                        elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+                        {
+                            $count = substr($newnumber2,10);
+                            $new_number = $codenumber  . strval(intval($count) + $im);
+                        }
+                        
+                        $im++;
+
+                    }
+                    else
+                    {
+                        $kondisi=1;
+                    }    
+                } 
                 
     
                 return response()->json(
@@ -1184,7 +1323,8 @@ class MovePropSlipController extends Controller
                 );
 
 
-                $insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+                //$insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+                $insdata = Insured::where('number',$request->code_ms)->first();
 
                 $old_nasre_share = $insdata->share_from;
                 $new_nasre_share = $request->insured_share;
@@ -1226,27 +1366,53 @@ class MovePropSlipController extends Controller
                     $count = substr($newnumber,10);
                     $new_number = $codenumber  . strval(intval($count) + 1);
                 }
+    
+                $kondisi=0;
+                $im=1;
+                while($kondisi==0)
+                {
+                    $checkdataslip= SlipTable::where('number',$new_number)->first();
 
-                $checkdataslip= SlipTable::where('number',$new_number)->first();
+                   if(!empty($checkdataslip))
+                    {
+                        $newnumber2 = substr($new_number, 10,15);
+                        $codenumber = substr($new_number, 0,10);
 
-                if($checkdataslip){
-                    if($checkdataslip->total_sum_insured != null){
-                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
-                    }else{
-                        $deleteinsured= SlipTable::where('number','=',$new_number)->delete();
+                        if(intval($newnumber2) < 9)
+                        {
+                            $count = substr($newnumber2,14);
+                            $new_number = $codenumber . "0000" . strval(intval($count) + $im);
+                        }   
+                        elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+                        {
+                            $count = substr($newnumber2,13);
+                            $new_number = $codenumber . "000" . strval(intval($count) + $im);
+                        }
+                        elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+                        {
+                            $count = substr($newnumber2,12);
+                            $new_number = $codenumber . "00" . strval(intval($count) + $im);
+                        }
+                        elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+                        {
+                            $count = substr($newnumber2,11);
+                            $new_number = $codenumber . "0" . strval(intval($count) + $im);
+                        }
+                        elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+                        {
+                            $count = substr($newnumber2,10);
+                            $new_number = $codenumber  . strval(intval($count) + $im);
+                        }
+                        
+                        $im++;
 
                     }
-                }
+                    else
+                    {
+                        $kondisi=1;
+                    }    
+                } 
 
-                $slipdataup2=SlipTable::create([
-                            'insured_id'=>$slipdataup->insured_id,
-                            'number'=>$new_number,
-                            'slip_type'=>'fe'
-                            
-                        ]);
-
-                
-    
                 return response()->json(
                     [
                         'id' => $slipdataup->id,
@@ -1349,11 +1515,11 @@ class MovePropSlipController extends Controller
                                 'count_endorsement' => ($ll->count_endorsement + 1)
                             ]);
     
-                            $lookuplocationlist = DB::table('trans_location_temp')
-                                                    ->join('fe_lookup_location', 'fe_lookup_location.id', '=', 'trans_location_temp.lookup_location_id')
-                                                    ->select('trans_location_temp.*', 'fe_lookup_location.address','fe_lookup_location.loc_code','fe_lookup_location.latitude','fe_lookup_location.longtitude','fe_lookup_location.postal_code')
-                                                    ->where('trans_location_temp.id',$locationlistup->id)
-                                                    ->get();
+                            $lookuplocationlist = DB::table('trans_location_detail')
+                                                ->join('fe_lookup_location', 'fe_lookup_location.id', '=', 'trans_location_detail.lookup_location_id')
+                                                ->select('trans_location_detail.*', 'fe_lookup_location.address','fe_lookup_location.loc_code','fe_lookup_location.latitude','fe_lookup_location.longtitude','fe_lookup_location.postal_code')
+                                                ->where('trans_location_detail.id',$locationlistup->id)
+                                                ->get();
 
                             
                             
@@ -1364,9 +1530,9 @@ class MovePropSlipController extends Controller
                                         'ceding_id'=>$rl->ceding_id,
                                         'translocation_id'=>$locationlistup->id,
                                         'interest_id'=>$rl->interest_id,
-                                        'cnno'=>$rl->cnno,
+                                        'cndn'=>$rl->cndn,
                                         'certno'=>$rl->certno,
-                                        'refno'=>$rl->refno,
+                                        'slipno'=>$rl->slipno,
                                         'amountlocation'=>$rl->amountlocation,
                                         'count_endorsement' => ($rl->count_endorsement + 1)
                                     ]);

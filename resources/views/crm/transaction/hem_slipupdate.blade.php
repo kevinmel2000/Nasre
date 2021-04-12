@@ -93,7 +93,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured')}}</label>
-                                                    <input id="hemshareto" type="text"  name="hemshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly/>
+                                                    <input id="hemshareto" type="text"  name="hemshareto" value="{{$insureddata->share_to}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -654,12 +654,9 @@
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Status')}}</label>
-                                                        <select name="slipstatus" id="slipstatus" class="form-control form-control-sm ">
-                                                            <option value="offer"    @if($slipdata->status == "offer") selected="selected" @endif >Offer</option>
-                                                            <option value="binding"  @if($slipdata->status == "binding")  selected="selected" @endif >Binding</option>
+                                                        <select name="slipstatus" id="slipstatus" class="form-control form-control-sm " readonly>
                                                             <option value="slip" @if($slipdata->status == "slip")  selected="selected" @endif >Slip</option>
                                                             <option value="endorsement" @if($slipdata->status == "endorsement")  selected="selected" @endif >Endorsement</option>
-                                                            <option value="decline" @if($slipdata->status == "decline")  selected="selected" @endif > Decline</option>
                                                             <option value="cancel" @if($slipdata->status == "cancel")  selected="selected" @endif >Cancel</option>
                                                         </select>
                                                     </div>    
@@ -1290,7 +1287,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="input-group">
-                                                                        <input type="number" value="" step=".001" id="slipvbroker" name="slipvbroker" class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                        <input type="number" value="" step=".001" id="slipvbroker" name="slipvbroker" value="0"  class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                                         <div class="input-group-append">
                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                         </div>
@@ -1391,8 +1388,8 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                     <input type="text" id="sliptotalpercentinspan" name="sliptotalpercentinspan">
-                                                                                    <button type="button" id="addinstallmentinsured-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+                                                                                    <input type="text" id="sliptotalpercentinspan" name="sliptotalpercentinspan" hidden="true">
+                                                                                     <button type="button" id="addinstallmentinsured-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>
                                                                             </form>
