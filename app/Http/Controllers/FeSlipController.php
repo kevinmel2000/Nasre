@@ -1511,8 +1511,8 @@ class FeSlipController extends Controller
                 ]);
 
                 $insurednumberdata = InsuredNumber::where('number',$request->fesnumber)->orderby('id','desc')->first();
-                $insurednumberdata->status = 'active';
-
+                $insurednumberdata->status='active';
+                $insurednumberdata->save();
 
 
                 $notification = array(
