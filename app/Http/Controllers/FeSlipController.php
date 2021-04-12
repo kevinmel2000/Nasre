@@ -365,12 +365,9 @@ class FeSlipController extends Controller
 
 
         
-        $kondisi=0;
-        $im=1;
-        while($kondisi==0)
-        {
+        
                 $checkinsured = Insured::where('number',$code_ms)->first();
-             if(){   
+             if($checkinsured){   
                 $deleteinsured = Insured::where('number','=',$code_ms)->delete();
                 $insureddataup = Insured::create([
                     'number'=>$code_ms,
@@ -386,7 +383,7 @@ class FeSlipController extends Controller
                     
                 ]);
             }
-        }
+        
 
         
 
@@ -475,7 +472,7 @@ class FeSlipController extends Controller
             }    
         }
                 
-        /*
+        
         $checkdataslip= SlipTable::where('number',$code_sl)->first();
 
         if($checkdataslip){
@@ -519,10 +516,7 @@ class FeSlipController extends Controller
         // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
         $koc = KOC::orderby('id','asc')->get();
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
-            }
-                elseif($countendorsement > 998 && $countendorsement < 9999)
-
-                }
+            
 
         $locationlist=[];
 
@@ -532,28 +526,10 @@ class FeSlipController extends Controller
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
            
-            }     
-        $slipdata=SlipTable::where('id',$idm)->first();
+            
+        // $slipdata=SlipTable::where('id',$idm)->first();
     
        
-
-        // $interestdata=json_decode($slipdata->interest_insured);   
-        // $newarray=[];
-
-        // if(!empty($interestdata))
-        // {
-        //     foreach($interestdata as $mydata)
-        //     {
-        //         $interestdatadesc= InterestInsured::where('id','=',$mydata->interest_id)->first();
-        //         $mydata->description=$interestdatadesc->description;     
-                
-        //         array_push($newarray,$mydata);
-        //     }  
-        // }     
-
-        // $newinterestdata=json_encode($newarray);
-
-
         $deductibledata=json_decode($slipdata->deductible_panel);   
 
         $newarraydeduct=[];
