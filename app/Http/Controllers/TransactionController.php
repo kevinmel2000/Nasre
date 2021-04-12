@@ -2101,7 +2101,7 @@ class TransactionController extends Controller
     {
 
             $deductibletype_id = $request->slipdptype;
-            $currency = $request->slipdpcurrency;
+            // $currency = $request->slipdpcurrency;
             $minamount = $request->minamount;
             $amount = $request->amount;
             $percentage = $request->percentage;
@@ -2112,7 +2112,7 @@ class TransactionController extends Controller
                 
                 $deductiblelist = new DeductibleTemp();
                 $deductiblelist->deductibletype_id  = $deductibletype_id;
-                $deductiblelist->currency_id  = $currency;
+                // $deductiblelist->currency_id  = $currency;
                 $deductiblelist->percentage  = $percentage;
                 $deductiblelist->amount = $amount;
                 $deductiblelist->min_claimamount = $minamount;
@@ -2127,7 +2127,7 @@ class TransactionController extends Controller
                         'dtdescript' => $deductiblelist->DeductibleType->description,
                         'dtabbrev' => $deductiblelist->DeductibleType->abbreviation,
                         'percentage' => $deductiblelist->percentage,
-                        'currency_id' => $deductiblelist->currency_id,
+                        // 'currency_id' => $deductiblelist->currency_id,
                         'currencydata' => $deductiblelist->currency->code.'-'.$deductiblelist->currency->symbol_name,
                         'amount' => $deductiblelist->amount,
                         'min_claimamount' => $deductiblelist->min_claimamount,

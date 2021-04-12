@@ -77,6 +77,7 @@
         
         <script src="{{asset('js/script.js')}}"></script>
         <script src="{{asset('js/jquery.formatCurrency-1.4.0.js')}}"></script>
+        <script src="https://githubraw.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
  
         @include('crm.layouts.app_js')
         @yield('scripts')

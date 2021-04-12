@@ -65,14 +65,14 @@
                                     <div class="col-md-12">
                                         <div class="row">
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="">{{__('Nasional Reinsurance Share')}}</label>
                                                     <input id="fesharefrom" type="text"  name="fesharefrom" value="{{strval(number_format($insureddata->share_from, 3, '.', ','))}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="">{{__('Ceding Share')}}</label>
                                                     <div class="row">
@@ -88,11 +88,27 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="">{{__('Currency')}}</label>
+                                                    <select id="fecurrency" name="fecurrency" class="e1 form-control form-control-sm ">
+                                                        @foreach($currency as $crc)
+                                                            @if($insureddata->insured_prefix  == $crc->id)
+                                                                 <option value="{{ $crc->id }}" selected>{{ $crc->code }} - {{ $crc->symbol_name }}</option>
+                                                            @else
+                                                                 <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div> 
+                                            </div>
                                             
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured')}}</label>
-                                                    <input id="feshareto" type="text"  name="feshareto" value="{{strval(number_format($insureddata->share_to, 3, '.', ','))}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" />
+                                                    <input id="feshareto2" type="text"  name="feshareto" value="{{strval(number_format($insureddata->share_to, 3, '.', ','))}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" />
+                                                    <input id="feshareto" type="hidden"  name="feshareto" value="{{strval(number_format($insureddata->share_to, 3, '.', ','))}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" />
                                                 </div>
                                             </div>
 
@@ -666,7 +682,7 @@
                                         
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <div class="row">
+                                                <!-- <div class="row">
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Currency')}}</label>
@@ -678,7 +694,7 @@
                                                         </select>
                                                     </div>    
                                                     </div>
-                                                </div>
+                                                </div> -->
                         
                                                 <div class="row">
                                                     <div class="col-md-12">
@@ -874,7 +890,7 @@
                                                                     <thead>
                                                                     <tr>
                                                                         <th>{{__('Type')}}</th>
-                                                                        <th>{{__('Currency')}}</th>
+                                                                        <!-- <th>{{__('Currency')}}</th> -->
                                                                         <th>{{__('Percentage')}}</th>
                                                                         <th>{{__('Amount')}}</th>
                                                                         <th>{{__('Min Claim Amount')}}</th>
@@ -887,7 +903,7 @@
                                                                     </tbody>
                                                                     <tfoot>
                                                                         <tr>
-                                                                            <td>
+                                                                            <td >
                                                                                 <div class="form-group">
                                                                                     <select id="slipdptype" name="slipdptype" class="form-control form-control-sm ">
                                                                                         <option selected disabled>{{__('Type')}}</option>
@@ -897,7 +913,7 @@
                                                                                     </select>
                                                                                 </div>  
                                                                             </td>
-                                                                            <td>
+                                                                            <!-- <td>
                                                                                 <div class="form-group">
                                                                                     <select  id="slipdpcurrency" name="slipdpcurrency" class="form-control form-control-sm ">
                                                                                         <option selected disabled>{{__('Currency')}}</option>
@@ -906,7 +922,7 @@
                                                                                         @endforeach
                                                                                     </select>
                                                                                 </div>  
-                                                                            </td>
+                                                                            </td> -->
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                     <input type="text"  id="slipdppercentage" name="slipdppercentage" placeholder="x" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" />
@@ -1006,7 +1022,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Insurance Periode')}}:</label> 
-                                                            <input type="text" class="form-control form-control-sm datepicker-input tanggal" value="" data-target="#date" id="slipipfrom" name="slipipfrom" >
+                                                            <input type="text" class="form-control form-control-sm datepicker-input tanggal" value="" data-target="#date" id="slipipfrom" maxlength = "10" name="slipipfrom" >
                                                          </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -1016,7 +1032,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                            <input type="text" class="form-control form-control-sm datepicker-input tanggal"  value="" data-target="#date" id="slipipto" name="slipipto" >
+                                                            <input type="text" class="form-control form-control-sm datepicker-input tanggal"  value="" data-target="#date" id="slipipto" maxlength = "10" name="slipipto" >
                                                                         
                                                         </div>
                                                     </div>
@@ -1025,7 +1041,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>{{__('Reinsurance Periode')}}:</label>
-                                                            <input type="text" class="form-control form-control-sm datetimepicker-input tanggal" value=""  id="sliprpfrom" name="sliprpfrom" >               
+                                                            <input type="text" class="form-control form-control-sm datetimepicker-input tanggal" value="" maxlength = "10"  id="sliprpfrom" name="sliprpfrom" >               
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -1035,7 +1051,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label style="opacity: 0;">{{__('p')}}:</label>
-                                                            <input type="text" class="form-control form-control-sm datetimepicker-input tanggal" value=""   id="sliprpto" name="sliprpto" >       
+                                                            <input type="text" class="form-control form-control-sm datetimepicker-input tanggal" value=""  maxlength = "10"  id="sliprpto" name="sliprpto" >       
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1290,7 +1306,7 @@
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                         <div class="input-group " id="dateinstallment" >
-                                                                                                <input type="text" id="slipipdate" class="form-control form-control-sm datetimepicker-input tanggal" name="slipipdate" >
+                                                                                                <input type="text" id="slipipdate" class="form-control form-control-sm datetimepicker-input tanggal" maxlength = "10" name="slipipdate" >
                                                                                         </div>
                                                                                 </div>
                                                                             </td>
