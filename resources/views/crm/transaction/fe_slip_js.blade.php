@@ -110,7 +110,7 @@
 
     setInputFilter(document.getElementsByClassName("floatTextBox"), function(value) {
         return /^-?\d*[.,]?\d{0,3}$/.test(value) });
-    setInputFilter(document.getElementById("intTextBox"), function(value) {
+    setInputFilter(document.getElementsByClassName("intTextBox"), function(value) {
         return /^-?\d*$/.test(value); });
 
 </script>
@@ -5042,7 +5042,7 @@ function deletelocationriskdetail(id){
                     $('#slipipamount2').val('');
 
                     if(response.message){
-                        swal("Success!", response.message, "success")
+                        // swal("Success!", response.message, "success")
                     }       
                     
 

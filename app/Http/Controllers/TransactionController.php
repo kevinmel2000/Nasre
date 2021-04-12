@@ -2128,7 +2128,7 @@ class TransactionController extends Controller
                         'dtabbrev' => $deductiblelist->DeductibleType->abbreviation,
                         'percentage' => $deductiblelist->percentage,
                         // 'currency_id' => $deductiblelist->currency_id,
-                        'currencydata' => $deductiblelist->currency->code.'-'.$deductiblelist->currency->symbol_name,
+                        // 'currencydata' => $deductiblelist->currency->code.'-'.$deductiblelist->currency->symbol_name,
                         'amount' => $deductiblelist->amount,
                         'min_claimamount' => $deductiblelist->min_claimamount,
                         'slip_id' => $deductiblelist->slip_id
