@@ -414,13 +414,15 @@ class FeSlipController extends Controller
         // }
 
         $checkinsurednumber = InsuredNumber::where('number',$code_ms)->first();
-
+        $insurednumform = '';
         if($checkinsurednumber != null){
             if($code_ms != $checkinsurednumber->number ){
                 $reservedinsurednumber = InsuredNumber::create([
                             'number'=>$code_ms,
                             'status'=>'passive'     
                 ]);
+
+                $insurednumform = $reservedinsurednumber->number;
             }else{
                  if($checkinsurednumber->status == 'passive'){
                     InsuredNumber::where('number','=',$code_ms)->orderby('id','desc')->delete();
@@ -429,6 +431,8 @@ class FeSlipController extends Controller
                                 'number'=>$code_ms,
                                 'status'=>'passive'     
                     ]);
+
+                    $insurednumform = $reservedinsurednumber->number;
                  }elseif($checkinsurednumber->status == 'active'){
                     $newnumber2 = substr($code_ms, 10,15);
                     $codenumber = substr($code_ms, 0,10);
@@ -464,11 +468,13 @@ class FeSlipController extends Controller
                                 'number'=>$code_ms2,
                                 'status'=>'passive'     
                     ]);
+
+                    $insurednumform = $reservedinsurednumber->number;
                  }
             }
         }
 
-        $insurednumform = $reservedinsurednumber->number;
+        
 
 
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
@@ -557,7 +563,7 @@ class FeSlipController extends Controller
 
         $checkslipnumber= SlipNumber::where('number',$code_sl)->first();
 
-
+        $slipnumform = '';
         if($checkslipnumber != null){
             if($code_ms != $checkslipnumber->number ){
                 $reservedslipnumber = SlipNumber::create([
@@ -565,6 +571,7 @@ class FeSlipController extends Controller
                             'slip_type'=>'fe',
                             'status'=>'passive'     
                 ]);
+                $slipnumform = $reservedslipnumber->number;
             }else{
                  if($checkslipnumber->status == 'passive'){
                     SlipNumber::where('number','=',$code_ms)->orderby('id','desc')->delete();
@@ -574,6 +581,7 @@ class FeSlipController extends Controller
                                 'slip_type'=>'fe',
                                 'status'=>'passive'     
                     ]);
+                     $slipnumform = $reservedslipnumber->number;
                  }elseif($checkslipnumber->status == 'active'){
                     $newnumber2 = substr($code_sl, 10,15);
                     $codenumber = substr($code_sl, 0,10);
@@ -610,11 +618,13 @@ class FeSlipController extends Controller
                                 'slip_type'=>'fe',
                                 'status'=>'passive'     
                     ]);
+
+                    $slipnumform = $reservedslipnumber->number;
                  }
             }
         }
 
-        $slipnumform = $reservedslipnumber->number;
+        
         
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
