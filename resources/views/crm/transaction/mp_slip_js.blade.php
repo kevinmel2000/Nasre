@@ -807,111 +807,137 @@
        
 
        $('#slipipdate').datepicker({
-           dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
      
        $('#dateinfrom').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#dateinto').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#daterefrom').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#datereto').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#slipipfrom').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#slipipto').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#sliprpfrom').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#sliprpto').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        
        $('#slipprodyear').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#sliptd').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#sliptddetail').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });  
 
-       
+
        $('#slipprodyearendorsement').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#sliptdendorsement').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#slipipfromendorsement').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#slipiptoendorsement').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#sliprpfromendorsement').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#sliprptoendorsement').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#dateinstallmentdataendorsement').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
            
 
        $('#slipprodyearupdate').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#sliptdupdate').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#slipipfromupdate').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#slipiptoupdate').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#sliprpfromupdate').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#sliprptoupdate').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
 
        $('#dateinstallmentdataupdate').datepicker({
-          dateFormat: 'dd/mm/yy'
+           dateFormat: 'dd/mm/yy',
+           changeYear: true
        });
     
     });      
