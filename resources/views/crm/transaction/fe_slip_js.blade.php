@@ -5196,65 +5196,83 @@ function deletelocationriskdetail(id){
        console.log(conv_amount)
        var real_amount = parseInt(conv_amount);
        console.log(real_amount)
+
+       var d2=new Date(installmentdate.split("/").reverse().join("-"));
+       var dd2=d2.getDate();
+       var mm2=d2.getMonth()+1;
+       var yy2=d2.getFullYear();
+       var newinstallmentdate=yy2+"-"+mm2+"-"+dd2;
+
+       var prod_date = $('#slipprodyear').val();
+       var d=new Date(prod_date.split("/").reverse().join("-"));
+       var dd=d.getDate();
+       var mm=d.getMonth()+1;
+       var yy=d.getFullYear();
+       var newproddate=yy+"-"+mm+"-"+dd;
+
        
-       $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-       $.ajax({
-         url:"{{ route('installment.store') }}",
-         type:"POST",
-         data:{
-             installmentdate:installmentdate,
-             percentage:percentage,
-             slipamount:real_amount,
-             id_slip:slip_id
-         },
-         beforeSend: function() { $("body").addClass("loading");  },
-         complete: function() {  $("body").removeClass("loading"); },
-         success:function(response)
-         {
-
-             console.log(response)
-             if(response.code_error){
-                swal("Error!", response.message , "Insert Error");
-                $('#addinstallmentinsured-btn').attr('hidden','true')
-            }else{
-                    // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-                    var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
-                    $('#dateinstallment').val('');
-                    $('#slipippercentage').val('');
-                    $('#slipipamount').val('');
-                    $('#slipipamount2').val('');
-
-                    if(response.message){
-                        // swal("Success!", response.message, "success")
-                    }       
-                    
-
-                    var total_percent =  $('#sliptotalpercentinspan').val();
-
-                    if(total_percent == ''){
-                        var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
-                        $('#sliptotalpercentinspan').val(sum_percent.toString());
-                        console.log($('#sliptotalpercentinspan').val())
-                    }else{
-                        var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
-                        $('#sliptotalpercentinspan').val(sum_percent.toString());
-                        console.log($('#sliptotalpercentinspan').val())
-                        
-                    }
+       if(new Date(newinstallmentdate) >= new Date(newproddate)){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
+            });
 
-               //var total =  parseFloat($("#sliptotalsum").val());
-               //var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
-               //$("#sliptotalsum").val(sum);
+           $.ajax({
+             url:"{{ route('installment.store') }}",
+             type:"POST",
+             data:{
+                 installmentdate:installmentdate,
+                 percentage:percentage,
+                 slipamount:real_amount,
+                 id_slip:slip_id
+             },
+             beforeSend: function() { $("body").addClass("loading");  },
+             complete: function() {  $("body").removeClass("loading"); },
+             success:function(response)
+             {
 
-           }
-       });
+                 console.log(response)
+                 if(response.code_error){
+                    swal("Error!", response.message , "Insert Error");
+                    $('#addinstallmentinsured-btn').attr('hidden','true')
+                }else{
+                        // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+                        var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
+                        $('#dateinstallment').val('');
+                        $('#slipippercentage').val('');
+                        $('#slipipamount').val('');
+                        $('#slipipamount2').val('');
+
+                        if(response.message){
+                            // swal("Success!", response.message, "success")
+                        }       
+                        
+
+                        var total_percent =  $('#sliptotalpercentinspan').val();
+
+                        if(total_percent == ''){
+                            var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
+                            $('#sliptotalpercentinspan').val(sum_percent.toString());
+                            console.log($('#sliptotalpercentinspan').val())
+                        }else{
+                            var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
+                            $('#sliptotalpercentinspan').val(sum_percent.toString());
+                            console.log($('#sliptotalpercentinspan').val())
+                            
+                        }
+                    }
+
+                   //var total =  parseFloat($("#sliptotalsum").val());
+                   //var sum = isNaN(total + parseFloat(response.amount)) ? 0 :(total + parseFloat(response.amount)) ;
+                   //$("#sliptotalsum").val(sum);
+
+               }
+           });
+       }else{
+        swal('warning!','installmentdate cannot be lower than prod date / document date','validation error');
+       }
 
    });
 </script>

@@ -1573,21 +1573,7 @@
                                                 </div> 
                                             </div>
 
-                                            <div class="card-header p-0 pt-1 border-bottom-0">
-                                                <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
-                                                    <li class="pt-1 px-3"><h3 class="card-title">{{__('Slip Form')}}</h3></li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link active" id="general-details" data-toggle="pill" href="#general-details-id" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" id="insured-details" data-toggle="pill" href="#insured-details-id" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data & Insurance Measurement')}}</a>
-                                                    </li>
-                                                    
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" id="installment-details" data-toggle="pill" href="#installment-details-id" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            
 
                                         </div>
                                         </div>
@@ -1597,6 +1583,24 @@
 
                                         
                             </form>
+
+                            <div class="card card-primary">
+                                <div class="card-body">
+                                    <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                        <li class="pt-1 px-3"><h3 class="card-title">{{__('Slip Form')}}</h3></li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="general-details" data-toggle="pill" href="#general-details-id" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="insured-details" data-toggle="pill" href="#insured-details-id" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data & Insurance Measurement')}}</a>
+                                        </li>
+                                        
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="installment-details" data-toggle="pill" href="#installment-details-id" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                                     
                                 </div> 
                             </div> 
