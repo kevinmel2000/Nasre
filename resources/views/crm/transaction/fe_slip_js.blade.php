@@ -1293,136 +1293,162 @@
 
        $('#slipipdate').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
      
        $('#dateinfrom').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#dateinto').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#daterefrom').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#datereto').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#slipipfrom').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#slipipto').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#sliprpfrom').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#sliprpto').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        
        $('#slipprodyear').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#sliptd').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#sliptddetail').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });  
 
 
        $('#slipprodyearendorsement').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#sliptdendorsement').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#slipipfromendorsement').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#slipiptoendorsement').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#sliprpfromendorsement').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#sliprptoendorsement').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#dateinstallmentdataendorsement').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
            
 
        $('#slipprodyearupdate').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#sliptdupdate').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#slipipfromupdate').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#slipiptoupdate').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#sliprpfromupdate').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#sliprptoupdate').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
 
        $('#dateinstallmentdataupdate').datepicker({
            dateFormat: 'dd/mm/yy',
-           changeYear: true
+           changeYear: true,
+           yearRange: '-50:+100',
        });
            
 
