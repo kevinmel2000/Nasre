@@ -6523,8 +6523,8 @@ function deletelocationriskdetail(id){
 
             if(current_percent == '100'){
                 var jumlah_tgl = $('#slipdaytotal').val();
-                console.log('jumlah_tgl'+jumlah_tgl)
-                if(parseInt(jumlah_tgl) < 0){
+                console.log('jumlah_tgl '+jumlah_tgl)
+                if(parseInt(jumlah_tgl) > 0){
                     var type_tsi = $('#sliptypetsi').val();
                     var tsislipval = $('#sliptotalsum').val();
                     var tsiinsval = $('#feshareto').val();

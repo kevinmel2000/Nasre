@@ -2033,9 +2033,9 @@ class TransactionController extends Controller
         
             if($percentage !='' && $amount !='' && $slip_id != '')
             {
-                $checkdateins = InstallmentTemp::where('slip_id',$slip_id)->orderby('id','desc')->first();
+                $checkdateins = InstallmentTemp::where('slip_id',$slip_id)->orderby('id','desc')->get();
 
-                $dateins = $checkdateins->installment_date;
+                $dateins = $checkdateins[0]->installment_date;
 
                 if($dateins == $installmentdate){
                     return response()->json(
