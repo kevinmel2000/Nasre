@@ -2035,17 +2035,20 @@ class TransactionController extends Controller
             {
                 $checkdateins = InstallmentTemp::where('slip_id',$slip_id)->orderby('id','desc')->get();
 
-                $dateins = $checkdateins[0]->installment_date;
+                // $dateins = $checkdateins[0]->installment_date;
 
-                if($dateins == $installmentdate){
-                    return response()->json(
-                            [
-                                'code_error' => '404',
-                                'message' => 'sorry date cannot duplicate'
-                            ]
-                        );
-                }else{
-                    if($totalpercent <= 100)
+                // if($dateins == $installmentdate){
+                //     return response()->json(
+                //             [
+                //                 'code_error' => '404',
+                //                 'message' => 'sorry date cannot duplicate'
+                //             ]
+                //         );
+                // }else{
+                    
+                // }
+
+                if($totalpercent <= 100)
                     {
                         $old_date_timestamp = strtotime($installmentdate);
                         $new_date = date('Y-m-d', $old_date_timestamp); 
@@ -2093,7 +2096,6 @@ class TransactionController extends Controller
                             ]
                         );
                     }
-                }
         
             }
             else
