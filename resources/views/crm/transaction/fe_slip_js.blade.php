@@ -6523,11 +6523,17 @@ function deletelocationriskdetail(id){
 
             if(current_percent == '100'){
                 var jumlah_tgl = $('#slipdaytotal').val();
-                if(jumlah_tgl < 0){
+                console.log('jumlah_tgl'+jumlah_tgl)
+                if(parseInt(jumlah_tgl) < 0){
                     var type_tsi = $('#sliptypetsi').val();
                     var tsislipval = $('#sliptotalsum').val();
                     var tsiinsval = $('#feshareto').val();
                     var cedshareins = $('#feshare').val();
+                    console.log('type_tsi'+ type_tsi)
+                    console.log('tsislipval'+ tsislipval)
+                    console.log('tsiinsval'+ tsiinsval)
+                    console.log('cedshareins'+ cedshareins)
+
                     if(type_tsi == 1){
                         if(tsislipval == tsiinsval){
                                 $.ajaxSetup({
