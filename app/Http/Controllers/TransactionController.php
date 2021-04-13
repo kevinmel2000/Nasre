@@ -2175,6 +2175,8 @@ class TransactionController extends Controller
                         'percentage' => $extendcoveragelist->percentage,
                         'extendcoverage_id' => $extendcoveragelist->extendcoverage_id,
                         'coveragetype' => $extendcoveragelist->extendcoveragedata->description,
+                        'coveragename' => $extendcoveragelist->extendcoveragedata->name,
+                        'coveragecode' => $extendcoveragelist->extendcoveragedata->code,
                         'amount' => $extendcoveragelist->amount,
                         'slip_id' => $extendcoveragelist->slip_id
                     ]

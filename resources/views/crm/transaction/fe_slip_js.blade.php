@@ -167,6 +167,24 @@
 
 </script>
 
+<script type="text/javascript">
+    $('#sliptd2').keyup(function(){
+        $('#sliptd').val($(this).val());
+    });
+
+    $('#sliptd2').change(function(){
+        $('#sliptd').val($(this).val());
+    });
+
+    $('#slipprodyear2').keyup(function(){
+        $('#slipprodyear').val($(this).val());
+    });
+
+    $('#slipprodyear2').change(function(){
+        $('#slipprodyear').val($(this).val());
+    });
+</script>
+
 
 <script type="text/javascript">
 
@@ -3421,9 +3439,17 @@ $('#slipcedingupdate').change(function(){
 
 
                     }
+                    console.log('amount' + amount)
+                    var fl_amount = parseFloat(amount);
+                    console.log('amount float' + fl_amount)
+                    var new_amount = fl_amount.toFixed(2);
+                    console.log('amount to fixed' + new_amount)
+                    var curr_amount = new_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    console.log('current amount' + curr_amount)
 
-
-                    var curr_amount = response.amountlocation.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    var percent = response.percent;
+                    var percentfl = parseFloat(percent);
+                    var new_percent = percentfl.toFixed(2);
 
                     var cndn = '';
                     var certno = '';
@@ -3462,7 +3488,7 @@ $('#slipcedingupdate').change(function(){
                         '<td>'+certno+'</td>'+
                         '<td>'+slipno+'</td>'+
                         '<td>'+policyno+'</td>'+
-                        '<td>'+response.percent+'</td>'+
+                        '<td>'+new_percent+'</td>'+
                         '<td>'+curr_amount+'</td>'+
                         '<td>'+
                         '<a href="javascript:void(0)" onclick="deletelocationriskdetail('+response.id+')"><i class="fas fa-trash text-danger"></i></a></td>'+
@@ -5797,7 +5823,7 @@ function deletelocationriskdetail(id){
              console.log(response)
             //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
             var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            $('#ExtendCoveragePanel tbody').prepend('<tr id="iidextendcoverage'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">'+response.coveragetype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoveragedetail('+response.id+')">delete</a></td></tr>');
+            $('#ExtendCoveragePanel tbody').prepend('<tr id="iidextendcoverage'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">' +response.coveragecode+ ' - ' +response.coveragename+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoveragedetail('+response.id+')">delete</a></td></tr>');
             $('#slipnilaiec').val('');
             $('#slipamountec').val('');
             $('#slipamountec2').val('');
@@ -6304,43 +6330,47 @@ function deletelocationriskdetail(id){
     console.log(fessuffix)
 
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    $.ajax({
-     url:"{{ url('transaction-data/fe-insured/store') }}",
-     type:"POST",
-     data:{
-         fesnumber:fesnumber,
-         fesinsured:fesinsured,
-         fessuggestinsured:fessuggestinsured,
-         fessuffix:fessuffix,
-         fesshare:real_fesshare,
-         fessharefrom:real_fessharefrom,
-         fesshareto:real_fesshareto,
-         fecurrency:fecurrency,
-         fescoinsurance:fescoinsurance,
-         feuy:feuy
-     },
-     beforeSend: function() { $("body").addClass("loading");  },
-     complete: function() {  $("body").removeClass("loading"); },
-     success:function(response)
-     {
-        swal("Success!", "Insured Fire & Engineering Insert Success", "success")
-        console.log(response)
-        $('#fecountendorsement').val(response.count_endorsement);
-        var real_ceding_share = response.ceding_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        $('#feshare').val(real_ceding_share);
-
-    },
-    error: function (request, status, error) {
-                //alert(request.responseText);
-                swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
+    if(fessuggestinsured == '' || fesshareto == ''){
+        swal('given data was invalid!','please check input field','error input')
+    }else{
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        $.ajax({
+         url:"{{ url('transaction-data/fe-insured/store') }}",
+         type:"POST",
+         data:{
+             fesnumber:fesnumber,
+             fesinsured:fesinsured,
+             fessuggestinsured:fessuggestinsured,
+             fessuffix:fessuffix,
+             fesshare:real_fesshare,
+             fessharefrom:real_fessharefrom,
+             fesshareto:real_fesshareto,
+             fecurrency:fecurrency,
+             fescoinsurance:fescoinsurance,
+             feuy:feuy
+         },
+         beforeSend: function() { $("body").addClass("loading");  },
+         complete: function() {  $("body").removeClass("loading"); },
+         success:function(response)
+         {
+            swal("Success!", "Insured Fire & Engineering Insert Success", "success")
+            console.log(response)
+            $('#fecountendorsement').val(response.count_endorsement);
+            var real_ceding_share = response.ceding_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#feshare').val(real_ceding_share);
+
+        },
+        error: function (request, status, error) {
+                    //alert(request.responseText);
+                    swal("Error!"+ request.responseText , "Insured Fire & Engineering Insured Insert Error, please check input", "Insert Error");
+                }
+            });
+    }
 
 
 });

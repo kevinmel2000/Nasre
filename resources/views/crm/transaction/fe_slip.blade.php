@@ -43,7 +43,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="" style="opacity: 0">{{__('insured 1')}}</label>
-                                                <input type="text"name="fesuggestinsured" id='autocomplete' style="text-transform:uppercase;"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="search for insured suggestion" required/>
+                                                <input type="text"name="fesuggestinsured" id='autocomplete' style="text-transform:uppercase;"  class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" placeholder="search for insured suggestion" required/>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="" style="opacity: 0">{{__('insured 2')}}</label>
@@ -98,7 +98,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="">{{__('Total Sum Insured')}}</label>
-                                                <input id="feshareto2" type="text"  name="feshareto" class="form-control form-control-sm amount" value="" data-validation="length" data-validation-length="0-50" />
+                                                <input id="feshareto2" type="text"  name="feshareto" class="form-control form-control-sm amount" value="" data-validation="length" data-validation-length="1-50" />
                                                 <input id="feshareto" type="hidden"  name="feshareto" class="form-control form-control-sm amount" value="" data-validation="length" data-validation-length="0-50" />
                                             </div>
                                         </div>
@@ -635,7 +635,8 @@
                                                                 <div class="form-group">
                                                                     <label>{{__('Prod Year')}}:</label>
                                                                     <div class="input-group " >
-                                                                        <input type="text" id="slipprodyear" class="form-control form-control-sm datetimepicker-input"  name="slipprodyear" value="{{ $currdate }}" readonly="readonly">
+                                                                        <input type="hidden" id="slipprodyear" class="form-control form-control-sm "  name="slipprodyear" value="{{ $currdate }}" >
+                                                                        <input type="text" id="slipprodyear2" class="form-control form-control-sm "  name="slipprodyear2" value="{{ $currdate }}" disabled>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -648,7 +649,8 @@
                                                                 </div> --}}
                                                                 <div class="form-group">
                                                                     <label for="">{{__('Transfer Date')}}</label>
-                                                                    <input type="text" id="sliptd" name="sliptd" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" readonly="readonly" />
+                                                                    <input type="hidden" id="sliptd" name="sliptd" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" />
+                                                                    <input type="text" id="sliptd2" name="sliptd" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" disabled />
                                                                 </div>
                                                             </div>
                                                         </div>

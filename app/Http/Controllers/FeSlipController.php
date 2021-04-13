@@ -2428,6 +2428,224 @@ class FeSlipController extends Controller
     
     }
 
+    public function updatefeslipmodal(Request $request){
+
+        $validator = $request->validate([
+            'slipnumber'=>'required'
+        ]);
+
+        if($validator){
+            $user = Auth::user();
+                
+                $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
+                
+                $interestlist= InterestInsuredTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+                $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+                $deductiblelist= DeductibleTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+
+                $currdate = date("Y-m-d");
+
+                $slipdataid=$slipdata->number;
+                $slipdataup = SlipTable::where('number',$slipdataid)->orderby('created_at','desc')->first();
+
+                if($slipdataup->status != $request->slipstatus){
+                    StatusLog::create([
+                        'status'=>$request->slipstatus,
+                        'user'=>Auth::user()->name,
+                        'datetime'=>date('Y-m-d H:i:s '),
+                        'insured_id'=>$request->code_ms,
+                        'slip_id'=>$request->slipnumber,
+                    ]);
+                }
+
+                $slipdataup->number=$request->slipnumber;
+                $slipdataup->username=Auth::user()->name;
+                $slipdataup->insured_id=$request->code_ms;
+                $slipdataup->slip_type= 'fe';
+                $slipdataup->prod_year=$currdate;
+                $slipdataup->date_transfer=date("Y-m-d", strtotime($request->slipdatetransfer));
+                $slipdataup->status=$request->slipstatus;
+                $slipdataup->endorsment=0;
+                $slipdataup->selisih="false";
+                $slipdataup->source=$request->slipcedingbroker;
+                $slipdataup->source_2=$request->slipceding;
+                // $slipdataup->currency=$request->slipcurrency;
+                $slipdataup->cob=$request->slipcob;
+                $slipdataup->koc=$request->slipkoc;
+                $slipdataup->occupacy=$request->slipoccupacy;
+                $slipdataup->build_const=$request->slipbld_const;
+                $slipdataup->slip_no=$request->slipno; 
+                $slipdataup->cn_dn=$request->slipcndn; 
+                $slipdataup->policy_no=$request->slippolicy_no; 
+                $slipdataup->attacment_file=''; 
+                $slipdataup->interest_insured=$interestlist->toJSon();
+                $slipdataup->total_sum_insured=$request->sliptotalsum; 
+                $slipdataup->share_tsi=$request->slipsharetotalsum; 
+                $slipdataup->type_tsi=$request->sliptypetotalsum; 
+                $slipdataup->type_share_tsi=$request->sliptypetsishare; 
+                $slipdataup->total_day=$request->sliptotalday; 
+                $slipdataup->total_year=$request->sliptotalyear; 
+                $slipdataup->sum_total_date=$request->slipdatesum; 
+                $slipdataup->insured_type=$request->sliptype; 
+                $slipdataup->insured_pct=$request->slippct; 
+                $slipdataup->total_sum_pct=$request->sliptotalsumpct; 
+                $slipdataup->deductible_panel=$deductiblelist->toJson(); 
+                $slipdataup->extend_coverage=$extendcoveragelist->toJson();  
+                $slipdataup->insurance_period_from=date("Y-m-d", strtotime($request->slipipfrom));  
+                $slipdataup->insurance_period_to=date("Y-m-d", strtotime($request->slipipto));  
+                $slipdataup->reinsurance_period_from=date("Y-m-d", strtotime($request->sliprpfrom));  
+                $slipdataup->reinsurance_period_to=date("Y-m-d", strtotime($request->sliprpto));
+                $slipdataup->proportional=$request->slipproportional;
+                $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
+                $slipdataup->rate=$request->sliprate;  
+                $slipdataup->v_broker=$request->slipvbroker;
+                $slipdataup->share=$request->slipshare;
+                $slipdataup->sum_share=$request->slipsumshare;
+                $slipdataup->basic_premium=$request->slipbasicpremium;
+                $slipdataup->commission=$request->slipcommission; 
+                $slipdataup->grossprm_to_nr=$request->slipgrossprmtonr; 
+                $slipdataup->netprm_to_nr=$request->slipnetprmtonr; 
+                $slipdataup->sum_commission=$request->slipsumcommission; 
+                $slipdataup->installment_panel=$installmentlist->toJson();   
+                $slipdataup->retrocession_panel=$retrocessionlist->toJson();  
+                $slipdataup->retro_backup=$request->sliprb;
+                $slipdataup->own_retention=$request->slipor;
+                $slipdataup->sum_own_retention=$request->slipsumor;
+                $slipdataup->wpc=$request->wpc;
+
+                $slipdataup->save();
+
+
+                $notification = array(
+                    'message' => 'Fire & Engginering Slip Update successfully!',
+                    'alert-type' => 'success'
+                );
+
+                //$insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
+                $insdata = Insured::where('number',$request->code_ms)->first();
+
+                $old_nasre_share = $insdata->share_from;
+                $current_share = $request->slipshare;
+                $new_nasre_share = parseFloat($old_nasre_share + $current_share);
+
+    
+                if($new_nasre_share != $old_nasre_share){
+                    $msdata = Insured::findOrFail($insdata->id);
+    
+                    $msdata->share_from=$new_nasre_share;
+                    $msdata->save();
+                }
+
+                $slipnumberdata = SlipNumber::where('number',$request->slipnumber)->where('slip_type','fe')->orderby('id','desc')->first();
+                $slipnumberdata->status = 'active';
+                $slipnumberdata->save();
+
+                $old_number = $slipdataup->number;
+                $newnumber = substr($old_number, 10,15);
+                $codenumber = substr($old_number, 0,10);
+
+                if(intval($newnumber) < 9)
+                {
+                    $count = substr($newnumber,14);
+                    $new_number = $codenumber . "0000" . strval(intval($count) + 1);
+                }   
+                elseif(intval($newnumber) > 8 && intval($newnumber) < 99)
+                {
+                    $count = substr($newnumber,13);
+                    $new_number = $codenumber . "000" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 98 && intval($newnumber) < 999)
+                {
+                    $count = substr($newnumber,12);
+                    $new_number = $codenumber . "00" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 998 && intval($newnumber) < 9999)
+                {
+                    $count = substr($newnumber,11);
+                    $new_number = $codenumber . "0" . strval(intval($count) + 1);
+                }
+                elseif(intval($newnumber) > 9998 && intval($newnumber) < 99999)
+                {
+                    $count = substr($newnumber,10);
+                    $new_number = $codenumber  . strval(intval($count) + 1);
+                }
+
+                $reservedslipnumber = SlipNumber::create([
+                            'number'=>$new_number,
+                            'slip_type'=>'fe',
+                            'status'=>'passive'     
+                ]);
+
+                
+                // $kondisi=0;
+                // $im=1;
+                // while($kondisi==0)
+                // {
+                //     $checkdataslip= SlipTable::where('number',$new_number)->first();
+
+                //    if(!empty($checkdataslip))
+                //     {
+                //         $newnumber2 = substr($new_number, 10,15);
+                //         $codenumber = substr($new_number, 0,10);
+
+                //         if(intval($newnumber2) < 9)
+                //         {
+                //             $count = substr($newnumber2,14);
+                //             $new_number = $codenumber . "0000" . strval(intval($count) + $im);
+                //         }   
+                //         elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+                //         {
+                //             $count = substr($newnumber2,13);
+                //             $new_number = $codenumber . "000" . strval(intval($count) + $im);
+                //         }
+                //         elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+                //         {
+                //             $count = substr($newnumber2,12);
+                //             $new_number = $codenumber . "00" . strval(intval($count) + $im);
+                //         }
+                //         elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+                //         {
+                //             $count = substr($newnumber2,11);
+                //             $new_number = $codenumber . "0" . strval(intval($count) + $im);
+                //         }
+                //         elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+                //         {
+                //             $count = substr($newnumber2,10);
+                //             $new_number = $codenumber  . strval(intval($count) + $im);
+                //         }
+                        
+                //         $im++;
+
+                //     }
+                //     else
+                //     {
+                //         $kondisi=1;
+                //     }    
+                // } 
+
+                return response()->json(
+                    [
+                        'id' => $slipdataup->id,
+                        'number' => $reservedslipnumber->number,
+                        'slipstatus' => $slipdataup->status,
+                        'ceding'=>$slipdataup->ceding->name,
+                        'cedingbroker'=>$slipdataup->cedingbroker->name,
+                        'count_endorsement'=>$slipdataup->endorsment
+                    ]
+                );
+        }else{
+            $notification = array(
+                'message' => 'Fire & Engginering Slip added Failed!, missing data',
+                'alert-type' => 'Failed'
+            );
+
+            return response($notification);
+        }
+
+    }
+
 
     public function endorsementfeslip($ms,$sl)
     {
@@ -3287,6 +3505,7 @@ class FeSlipController extends Controller
 
                 $slipnumberdata = SlipNumber::where('number',$request->slipnumber)->where('slip_type','fe')->orderby('id','desc')->first();
                 $slipnumberdata->status = 'active';
+                $slipnumberdata->save();
 
                 $old_number = $slipdataup->number;
                 $newnumber = substr($old_number, 10,15);
@@ -3478,6 +3697,7 @@ class FeSlipController extends Controller
 
                 $slipnumberdata = SlipNumber::where('number',$request->slipnumber)->where('slip_type','fe')->orderby('id','desc')->first();
                 $slipnumberdata->status = 'active';
+                $slipnumberdata->save();
 
                 $old_number = $slipdataup->number;
                 $newnumber = substr($old_number, 10,15);
@@ -3586,11 +3806,11 @@ class FeSlipController extends Controller
 
 
             $notification = array(
-                'message' => 'Fire & Engginering Slip added Failed!',
-                'alert-type' => 'success'
+                'message' => 'Fire & Engginering Slip added Failed!, missing data',
+                'alert-type' => 'Failed'
             );
 
-            return back()->with($validator)->withInput();
+            return response($notification);
         }
     }
 
