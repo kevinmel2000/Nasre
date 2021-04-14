@@ -4109,97 +4109,97 @@ function deletelocationriskdetail(id){
 
     });
 
-    $('#percentceding').keydown(function(e){
-         var keyCode = e.keyCode || e.which;
-        if(keyCode != 9){
-            var amountlocation = $('#amountlocation').val();
-            var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
-            console.log(amountlocation)
-            console.log(conv_amountlocation)
-            var valtsi = $('#feshareto').val();
+    // $('#percentceding').keydown(function(e){
+    //      var keyCode = e.keyCode || e.which;
+    //     if(keyCode != 9){
+    //         var amountlocation = $('#amountlocation').val();
+    //         var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
+    //         console.log(amountlocation)
+    //         console.log(conv_amountlocation)
+    //         var valtsi = $('#feshareto').val();
 
-            if(valtsi != null){
-                var tsi = $('#feshareto').val();
-                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+    //         if(valtsi != null){
+    //             var tsi = $('#feshareto').val();
+    //             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
-                var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
-                var real_sum = sum_amount.toString();
-                console.log(sum_amount)
-                console.log(real_sum)
-                $('#percentceding').val(real_sum);
-            }else{
-                swal('warning!','please fill TSI insured first','error')
-            }
-        }
-        else{
-            var amountlocation = $('#amountlocation').val() ;
-            var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
+    //             var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
+    //             var real_sum = sum_amount.toString();
+    //             console.log(sum_amount)
+    //             console.log(real_sum)
+    //             $('#percentceding').val(real_sum);
+    //         }else{
+    //             swal('warning!','please fill TSI insured first','error')
+    //         }
+    //     }
+    //     else{
+    //         var amountlocation = $('#amountlocation').val() ;
+    //         var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
 
-            console.log(amountlocation)
-            console.log(conv_amountlocation)
-            var valtsi = $('#feshareto').val();
+    //         console.log(amountlocation)
+    //         console.log(conv_amountlocation)
+    //         var valtsi = $('#feshareto').val();
 
-            if(valtsi != null){
-                var tsi = $('#feshareto').val();
-                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+    //         if(valtsi != null){
+    //             var tsi = $('#feshareto').val();
+    //             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
-                var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
-                var real_sum = sum_amount.toString();
-                console.log(sum_amount)
-                console.log(real_sum)
-                $('#percentceding').val(real_sum);
-            }else{
-                swal('warning!','please fill TSI insured first','error')
-            }
-        }
+    //             var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
+    //             var real_sum = sum_amount.toString();
+    //             console.log(sum_amount)
+    //             console.log(real_sum)
+    //             $('#percentceding').val(real_sum);
+    //         }else{
+    //             swal('warning!','please fill TSI insured first','error')
+    //         }
+    //     }
 
-    });
+    // });
 
-    $('#percentceding').keypress(function(e){
-         var keyCode = e.keyCode || e.which;
-        if(keyCode != 9){
-            var amountlocation = $('#amountlocation').val();
-            var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
-            console.log(amountlocation)
-            console.log(conv_amountlocation)
-            var valtsi = $('#feshareto').val();
+    // $('#percentceding').keypress(function(e){
+    //      var keyCode = e.keyCode || e.which;
+    //     if(keyCode != 9){
+    //         var amountlocation = $('#amountlocation').val();
+    //         var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
+    //         console.log(amountlocation)
+    //         console.log(conv_amountlocation)
+    //         var valtsi = $('#feshareto').val();
 
-            if(valtsi != null){
-                var tsi = $('#feshareto').val();
-                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+    //         if(valtsi != null){
+    //             var tsi = $('#feshareto').val();
+    //             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
-                var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
-                var real_sum = sum_amount.toString();
-                console.log(sum_amount)
-                console.log(real_sum)
-                $('#percentceding').val(real_sum);
-            }else{
-                swal('warning!','please fill TSI insured first','error')
-            }
-        }
-        else{
-            var amountlocation = $('#amountlocation').val() ;
-            var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
+    //             var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
+    //             var real_sum = sum_amount.toString();
+    //             console.log(sum_amount)
+    //             console.log(real_sum)
+    //             $('#percentceding').val(real_sum);
+    //         }else{
+    //             swal('warning!','please fill TSI insured first','error')
+    //         }
+    //     }
+    //     else{
+    //         var amountlocation = $('#amountlocation').val() ;
+    //         var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
 
-            console.log(amountlocation)
-            console.log(conv_amountlocation)
-            var valtsi = $('#feshareto').val();
+    //         console.log(amountlocation)
+    //         console.log(conv_amountlocation)
+    //         var valtsi = $('#feshareto').val();
 
-            if(valtsi != null){
-                var tsi = $('#feshareto').val();
-                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+    //         if(valtsi != null){
+    //             var tsi = $('#feshareto').val();
+    //             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
-                var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
-                var real_sum = sum_amount.toString();
-                console.log(sum_amount)
-                console.log(real_sum)
-                $('#percentceding').val(real_sum);
-            }else{
-                swal('warning!','please fill TSI insured first','error')
-            }
-        }
+    //             var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
+    //             var real_sum = sum_amount.toString();
+    //             console.log(sum_amount)
+    //             console.log(real_sum)
+    //             $('#percentceding').val(real_sum);
+    //         }else{
+    //             swal('warning!','please fill TSI insured first','error')
+    //         }
+    //     }
 
-    });
+    // });
 </script>
 
 <script type="text/javascript">
