@@ -14,6 +14,47 @@
   }
 </style>
 
+
+
+<script>
+
+//var $tabsTop = $(".nav-tabs");
+//var $tabsBottom = $tabsTop.clone().addClass("nav-tabs-bottom").insertAfter(".tab-contentbottom");
+//$tabsTop.addClass("nav-tabs-top");
+
+$('.nav-tabs-top a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+    console.log("click top");
+    var target = $(e.target).attr("href") // activated tab
+     alert(target);
+    $('.nav-tabs-bottom a.active').removeClass('active');
+    $('.nav-tabs-bottom a[href="'+$(this).attr('href')+'"]').addClass('active');
+})
+
+
+$('#custom-tabs-three-tab a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+    console.log("click top");
+    var target = $(e.target).attr("href") // activated tab
+     alert(target);
+    $('.nav-tabs-bottom a.active').removeClass('active');
+    $('.nav-tabs-bottom a[href="'+$(this).attr('href')+'"]').addClass('active');
+})
+
+$('.nav-tabs-bottom a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+    var target = $(e.target).attr("href") // activated tab
+     alert(target);
+    $('.nav-tabs-top a.active').removeClass('active');
+    $('.nav-tabs-top a[href="'+$(this).attr('href')+'"]').addClass('active');
+});
+
+$('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+    var target = $(e.target).attr("href") // activated tab
+     alert(target);
+    $('.nav-tabs-top a.active').removeClass('active');
+    $('.nav-tabs-top a[href="'+$(this).attr('href')+'"]').addClass('active');
+});
+
+</script>
+
 <script>
     $(document).ready(function() 
     { 
@@ -70,6 +111,7 @@
                 $("#city_location").empty();
             }  
 
+
         });
 
     function treatAsUTC(date) {
@@ -82,6 +124,7 @@
         var millisecondsPerDay = 24 * 60 * 60 * 1000;
         return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
     }
+
 </script>
 
 <script type="text/javascript">
