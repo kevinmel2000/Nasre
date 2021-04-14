@@ -56,9 +56,9 @@
                                    @php echo strtoupper($insureddata->insured_suffix);  @endphp
                               </td>
                               <td>{{@$insureddata->uy }}</td>
-                              <td>{{@$insureddata->share }}</td>
-                              <td >@currency($insureddata->share_from)</td>
-                              <td >@currency($insureddata->share_to)</td>
+                              <td>{{ number_format($insureddata->share,0) }}</td>
+                              <td> {{ number_format($insureddata->share_from,0) }}</td>
+                              <td> {{ number_format($insureddata->share_to,0) }}</td>
                               <td>{{@$insureddata->count_endorsement}}</td>
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$insureddata->created_at}}" class="mr-3">

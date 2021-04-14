@@ -40,10 +40,11 @@
                     <tr>
                       <th>{{__('Number')}}</th>
                       <th>{{__('Insured')}}</th>
+                      <th>{{__('UY')}}</th>
                       <th>{{__('Our Share')}}</th>
                       <th>{{__('National Reinsurance')}}</th>
                       <th>{{__('Total Sum Insurance')}}</th>
-                      <th>{{__('Coincurance')}}</th>
+                      <th>{{__('Endorsement Count')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
@@ -55,10 +56,11 @@
                                    @php echo strtoupper($insureddata->insured_name);    @endphp- 
                                    @php echo strtoupper($insureddata->insured_suffix);  @endphp
                               </td>
-                              <td>{{@$insureddata->share }}</td>
-                              <td >@currency(@$insureddata->share_from)</td>
-                              <td >@currency(@$insureddata->share_to)</td>
-                              <td>{{@$insureddata->coincurance}}</td>
+                              <td>{{@$insureddata->uy }}</td>
+                              <td>{{ number_format($insureddata->share,0) }}</td>
+                              <td> {{ number_format($insureddata->share_from,0) }}</td>
+                              <td> {{ number_format($insureddata->share_to,0) }}</td>
+                              <td>{{@$insureddata->count_endorsement}}</td>
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$insureddata->created_at}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>
