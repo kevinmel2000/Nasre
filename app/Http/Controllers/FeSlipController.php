@@ -542,7 +542,7 @@ class FeSlipController extends Controller
 
                 $slipnumform = '';
                 if($checkslipnumber != null){
-                    if($code_ms != $checkslipnumber->number ){
+                    if($code_sl != $checkslipnumber->number ){
                         $reservedslipnumber = SlipNumber::create([
                                     'number'=>$code_sl,
                                     'slip_type'=>'fe',
@@ -811,7 +811,7 @@ class FeSlipController extends Controller
                     }
                 }else{
                     $reservedslipnumber = SlipNumber::create([
-                                    'number'=>$code_ms,
+                                    'number'=>$code_sl,
                                     'slip_type'=>'fe',
                                     'status'=>'passive'     
                         ]);
@@ -1336,10 +1336,7 @@ class FeSlipController extends Controller
 
                     }
 
-                    
-                    
-
-                                    
+                       
 
                  }elseif($checkinsurednumber->status == 'active'){
                     $newnumber2 = substr($code_ms, 10,15);
@@ -3545,33 +3542,119 @@ class FeSlipController extends Controller
                 {
                     $count = substr($newnumber,14);
                     $new_number = $codenumber . "0000" . strval(intval($count) + 1);
+
+                    $reservedslipnumber = SlipNumber::create([
+                            'number'=>$new_number,
+                            'slip_type'=>'fe',
+                            'status'=>'passive'     
+                    ]);
+
+                    return response()->json(
+                        [
+                            'id' => $slipdataup->id,
+                            'number' => $slipdataup->number,
+                            'slipnumber' => $reservedslipnumber->number,
+                            'slipstatus' => $slipdataup->status,
+                            'ceding'=>$slipdataup->ceding->name,
+                            'cedingbroker'=>$slipdataup->cedingbroker->name,
+                            'count_endorsement'=>$slipdataup->endorsment
+                        ]
+                    );
                 }   
                 elseif(intval($newnumber) > 8 && intval($newnumber) < 99)
                 {
                     $count = substr($newnumber,13);
                     $new_number = $codenumber . "000" . strval(intval($count) + 1);
+
+                    $reservedslipnumber = SlipNumber::create([
+                            'number'=>$new_number,
+                            'slip_type'=>'fe',
+                            'status'=>'passive'     
+                    ]);
+
+                    return response()->json(
+                        [
+                            'id' => $slipdataup->id,
+                            'number' => $slipdataup->number,
+                            'slipnumber' => $reservedslipnumber->number,
+                            'slipstatus' => $slipdataup->status,
+                            'ceding'=>$slipdataup->ceding->name,
+                            'cedingbroker'=>$slipdataup->cedingbroker->name,
+                            'count_endorsement'=>$slipdataup->endorsment
+                        ]
+                    );
                 }
                 elseif(intval($newnumber) > 98 && intval($newnumber) < 999)
                 {
                     $count = substr($newnumber,12);
                     $new_number = $codenumber . "00" . strval(intval($count) + 1);
+
+                    $reservedslipnumber = SlipNumber::create([
+                            'number'=>$new_number,
+                            'slip_type'=>'fe',
+                            'status'=>'passive'     
+                    ]);
+
+                    return response()->json(
+                        [
+                            'id' => $slipdataup->id,
+                            'number' => $slipdataup->number,
+                            'slipnumber' => $reservedslipnumber->number,
+                            'slipstatus' => $slipdataup->status,
+                            'ceding'=>$slipdataup->ceding->name,
+                            'cedingbroker'=>$slipdataup->cedingbroker->name,
+                            'count_endorsement'=>$slipdataup->endorsment
+                        ]
+                    );
                 }
                 elseif(intval($newnumber) > 998 && intval($newnumber) < 9999)
                 {
                     $count = substr($newnumber,11);
                     $new_number = $codenumber . "0" . strval(intval($count) + 1);
+
+                    $reservedslipnumber = SlipNumber::create([
+                            'number'=>$new_number,
+                            'slip_type'=>'fe',
+                            'status'=>'passive'     
+                    ]);
+
+                    return response()->json(
+                        [
+                            'id' => $slipdataup->id,
+                            'number' => $slipdataup->number,
+                            'slipnumber' => $reservedslipnumber->number,
+                            'slipstatus' => $slipdataup->status,
+                            'ceding'=>$slipdataup->ceding->name,
+                            'cedingbroker'=>$slipdataup->cedingbroker->name,
+                            'count_endorsement'=>$slipdataup->endorsment
+                        ]
+                    );
                 }
                 elseif(intval($newnumber) > 9998 && intval($newnumber) < 99999)
                 {
                     $count = substr($newnumber,10);
                     $new_number = $codenumber  . strval(intval($count) + 1);
-                }
 
-                $reservedslipnumber = SlipNumber::create([
+                    $reservedslipnumber = SlipNumber::create([
                             'number'=>$new_number,
                             'slip_type'=>'fe',
                             'status'=>'passive'     
-                ]);
+                    ]);
+
+                    return response()->json(
+                        [
+                            'id' => $slipdataup->id,
+                            'number' => $slipdataup->number,
+                            'slipnumber' => $reservedslipnumber->number,
+                            'slipstatus' => $slipdataup->status,
+                            'ceding'=>$slipdataup->ceding->name,
+                            'cedingbroker'=>$slipdataup->cedingbroker->name,
+                            'count_endorsement'=>$slipdataup->endorsment
+                        ]
+                    );
+                }
+
+
 
                 // $kondisi=0;
                 // $im=1;
@@ -3619,16 +3702,7 @@ class FeSlipController extends Controller
                 //     }    
                 // } 
 
-                return response()->json(
-                    [
-                        'id' => $slipdataup->id,
-                        'number' => $reservedslipnumber->number,
-                        'slipstatus' => $slipdataup->status,
-                        'ceding'=>$slipdataup->ceding->name,
-                        'cedingbroker'=>$slipdataup->cedingbroker->name,
-                        'count_endorsement'=>$slipdataup->endorsment
-                    ]
-                );
+                
             }
             else
             {
@@ -3737,33 +3811,119 @@ class FeSlipController extends Controller
                 {
                     $count = substr($newnumber,14);
                     $new_number = $codenumber . "0000" . strval(intval($count) + 1);
+
+                    $reservedslipnumber = SlipNumber::create([
+                            'number'=>$new_number,
+                            'slip_type'=>'fe',
+                            'status'=>'passive'     
+                    ]);
+
+                    return response()->json(
+                        [
+                            'id' => $slipdataup->id,
+                            'number' => $slipdataup->number,
+                            'slipnumber' => $reservedslipnumber->number,
+                            'slipstatus' => $slipdataup->status,
+                            'ceding'=>$slipdataup->ceding->name,
+                            'cedingbroker'=>$slipdataup->cedingbroker->name,
+                            'count_endorsement'=>$slipdataup->endorsment
+                        ]
+                    );
                 }   
                 elseif(intval($newnumber) > 8 && intval($newnumber) < 99)
                 {
                     $count = substr($newnumber,13);
                     $new_number = $codenumber . "000" . strval(intval($count) + 1);
+
+                    $reservedslipnumber = SlipNumber::create([
+                            'number'=>$new_number,
+                            'slip_type'=>'fe',
+                            'status'=>'passive'     
+                    ]);
+
+                    return response()->json(
+                        [
+                            'id' => $slipdataup->id,
+                            'number' => $slipdataup->number,
+                            'slipnumber' => $reservedslipnumber->number,
+                            'slipstatus' => $slipdataup->status,
+                            'ceding'=>$slipdataup->ceding->name,
+                            'cedingbroker'=>$slipdataup->cedingbroker->name,
+                            'count_endorsement'=>$slipdataup->endorsment
+                        ]
+                    );
                 }
                 elseif(intval($newnumber) > 98 && intval($newnumber) < 999)
                 {
                     $count = substr($newnumber,12);
                     $new_number = $codenumber . "00" . strval(intval($count) + 1);
+
+                    $reservedslipnumber = SlipNumber::create([
+                            'number'=>$new_number,
+                            'slip_type'=>'fe',
+                            'status'=>'passive'     
+                    ]);
+
+                    return response()->json(
+                        [
+                            'id' => $slipdataup->id,
+                            'number' => $slipdataup->number,
+                            'slipnumber' => $reservedslipnumber->number,
+                            'slipstatus' => $slipdataup->status,
+                            'ceding'=>$slipdataup->ceding->name,
+                            'cedingbroker'=>$slipdataup->cedingbroker->name,
+                            'count_endorsement'=>$slipdataup->endorsment
+                        ]
+                    );
                 }
                 elseif(intval($newnumber) > 998 && intval($newnumber) < 9999)
                 {
                     $count = substr($newnumber,11);
                     $new_number = $codenumber . "0" . strval(intval($count) + 1);
+
+                    $reservedslipnumber = SlipNumber::create([
+                            'number'=>$new_number,
+                            'slip_type'=>'fe',
+                            'status'=>'passive'     
+                    ]);
+
+                    return response()->json(
+                        [
+                            'id' => $slipdataup->id,
+                            'number' => $slipdataup->number,
+                            'slipnumber' => $reservedslipnumber->number,
+                            'slipstatus' => $slipdataup->status,
+                            'ceding'=>$slipdataup->ceding->name,
+                            'cedingbroker'=>$slipdataup->cedingbroker->name,
+                            'count_endorsement'=>$slipdataup->endorsment
+                        ]
+                    );
                 }
                 elseif(intval($newnumber) > 9998 && intval($newnumber) < 99999)
                 {
                     $count = substr($newnumber,10);
                     $new_number = $codenumber  . strval(intval($count) + 1);
-                }
 
-                $reservedslipnumber = SlipNumber::create([
+                    $reservedslipnumber = SlipNumber::create([
                             'number'=>$new_number,
                             'slip_type'=>'fe',
                             'status'=>'passive'     
-                ]);
+                    ]);
+
+                    return response()->json(
+                        [
+                            'id' => $slipdataup->id,
+                            'number' => $slipdataup->number,
+                            'slipnumber' => $reservedslipnumber->number,
+                            'slipstatus' => $slipdataup->status,
+                            'ceding'=>$slipdataup->ceding->name,
+                            'cedingbroker'=>$slipdataup->cedingbroker->name,
+                            'count_endorsement'=>$slipdataup->endorsment
+                        ]
+                    );
+                }
+
+                
 
                 
                 // $kondisi=0;
@@ -3816,16 +3976,7 @@ class FeSlipController extends Controller
 
 
     
-                return response()->json(
-                    [
-                        'id' => $slipdataup->id,
-                        'number' => $reservedslipnumber->number,
-                        'slipstatus' => $slipdataup->status,
-                        'ceding'=>$slipdataup->ceding->name,
-                        'cedingbroker'=>$slipdataup->cedingbroker->name,
-                        'count_endorsement'=>$slipdataup->endorsment
-                    ]
-                );
+                
             }
 
             

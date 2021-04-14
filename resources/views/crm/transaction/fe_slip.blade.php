@@ -18,7 +18,7 @@
                 
                 <div class="card-body bg-light-gray ">
                     <div class="tab-content" id="custom-tabs-three-tabContent">
-                        <div class="tab-pane fade show active" id="l" role="tabpanel" aria-labelledby="lead-details">
+                        <!-- <div class="tab-pane fade show active" id="l" role="tabpanel" aria-labelledby="lead-details"> -->
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -238,7 +238,7 @@
                                 </div>
                             </div>
                             
-                        </div>
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>
@@ -594,14 +594,14 @@
                                     <div class="card-header p-0 pt-1 border-bottom-0">
                                         <ul class="nav nav-tabs nav-tabs-top" id="custom-tabs-three-tab" role="tablist">
                                             <li class="pt-1 px-3"><h3 class="card-title">{{__('Slip Form')}}</h3></li>
-                                            <li class="nav-item active">
+                                            <li class="nav-item active" href="#general-details-id">
                                                 <a class="nav-link active" id="general-details" data-toggle="pill" href="#general-details-id" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
                                             </li>
-                                            <li class="nav-item">
+                                            <li class="nav-item" href="#insured-details-id">
                                                 <a class="nav-link" id="insured-details" data-toggle="pill" href="#insured-details-id" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data & Insurance Measurement')}}</a>
                                             </li>
                                             
-                                            <li class="nav-item">
+                                            <li class="nav-item" href="#installment-details-id">
                                                 <a class="nav-link" id="installment-details" data-toggle="pill" href="#installment-details-id" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
                                             </li>
                                         </ul>
@@ -609,7 +609,7 @@
                                     
                                     <div class="card-body bg-light-gray">
                                         <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
-                                            <div class="tab-pane fade show active" id="general-details-id" role="tabpanel" aria-labelledby="general-details">
+                                            <div class="tab-pane fade show active" id="general-details-id" href="#general-details-id" role="tabpanel" aria-labelledby="general-details">
                                                 <div class="row">
                                                 </div>
                                                 <div class="row">
@@ -840,7 +840,7 @@
 
                                             </div>
                                             
-                                            <div class="tab-pane fade" id="insured-details-id" role="tabpanel" aria-labelledby="insured-details">
+                                            <div class="tab-pane fade" id="insured-details-id" href="#insured-details-id" role="tabpanel" aria-labelledby="insured-details">
                                                         
                                                         <input type="hidden" name="msitsi" id="msitsi" value="">
                                                         <input type="hidden" name="msisharev" id="msisharev" value="">
@@ -974,7 +974,7 @@
                                                                                                 </td> -->
                                                                                                 <td>
                                                                                                     <div class="form-group">
-                                                                                                        <input type="text" id="slipdppercentage" name="slipdppercentage" placeholder="x" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" />
+                                                                                                        <input type="text" id="slipdppercentage" name="slipdppercentage" placeholder="x" class="form-control form-control-sm floatTextBox2" data-validation="length" data-validation-length="0-50" />
                                                                                                     </div>
                                                                                                 </td>
                                                                                                 <td>
@@ -1048,7 +1048,7 @@
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <div class="form-group">
-                                                                                                        <input type="text" id="slipnilaiec" name="slipnilaiec" placeholder="y" class="form-control form-control-sm floatTextBox"/>
+                                                                                                        <input type="text" id="slipnilaiec" name="slipnilaiec" placeholder="y" class="form-control form-control-sm floatTextBox2"/>
                                                                                                     </div>
                                                                                                 </td>
                                                                                                 <td>
@@ -1365,7 +1365,7 @@
                                                     
                                                     
 
-                                            <div class="tab-pane fade" id="installment-details-id" role="tabpanel" aria-labelledby="installment-details">
+                                            <div class="tab-pane fade" id="installment-details-id" href="#installment-details-id" role="tabpanel" aria-labelledby="installment-details">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="card">
@@ -1590,15 +1590,15 @@
                                                 
                                                 <li class="pt-1 px-3"><h3 class="card-title">{{__('Slip Form')}}</h3></li>
                                                 
-                                                <li class="nav-item active">
-                                                    <a class="nav-link " id="general-details" data-toggle="pill" href="#general-details-id" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
+                                                <li class="nav-item active" href="#general-details-id">
+                                                    <a class="nav-link active" id="general-details" data-toggle="pill" href="#general-details-id" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
                                                 </li>
 
-                                                <li class="nav-item">
+                                                <li class="nav-item" href="#insured-details-id">
                                                     <a class="nav-link" id="insured-details" data-toggle="pill" href="#insured-details-id" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data & Insurance Measurement')}}</a>
                                                 </li>
                                                 
-                                                <li class="nav-item">
+                                                <li class="nav-item" href="#installment-details-id">
                                                     <a class="nav-link" id="installment-details" data-toggle="pill" href="#installment-details-id" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
                                                 </li>
                                             </ul>

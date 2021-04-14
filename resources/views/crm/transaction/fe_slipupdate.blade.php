@@ -19,7 +19,7 @@
                 
                 <div class="card-body bg-light-gray ">
                     <div class="tab-content" id="custom-tabs-three-tabContent">
-                            <div class="tab-pane fade show active" id="l" role="tabpanel" aria-labelledby="lead-details">
+                            <!-- <div class="tab-pane fade show active" id="l" role="tabpanel" aria-labelledby="lead-details"> -->
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -247,7 +247,7 @@
                                     </div>
                                 </div>
                                 
-                            </div>
+                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
@@ -554,13 +554,13 @@
                             <div class="card-header p-0 pt-1 border-bottom-0">
                                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                                     <li class="pt-1 px-3"><h3 class="card-title">{{__('Slip Form')}}</h3></li>
-                                    <li class="nav-item">
+                                    <li class="nav-item" href="#general-details-id">
                                     <a class="nav-link active" id="general-details" data-toggle="pill" href="#general-details-id" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item" href="#insured-details-id">
                                     <a class="nav-link" id="insured-details" data-toggle="pill" href="#insured-details-id" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data & Insurance Measurement')}}</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item" href="#installment-details-id">
                                         <a class="nav-link" id="installment-details" data-toggle="pill" href="#installment-details-id" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
                                     </li>
                                 </ul>
@@ -926,7 +926,7 @@
                                                                             </td> -->
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text"  id="slipdppercentage" name="slipdppercentage" placeholder="x" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" />
+                                                                                    <input type="text"  id="slipdppercentage" name="slipdppercentage" placeholder="x" class="form-control form-control-sm floatTextBox2" data-validation="length" data-validation-length="0-50" />
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -992,7 +992,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" id="slipnilaiec" name="slipnilaiec" placeholder="y" class="form-control form-control-sm floatTextBox"/>
+                                                                                    <input type="text" id="slipnilaiec" name="slipnilaiec" placeholder="y" class="form-control form-control-sm floatTextBox2"/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -1479,14 +1479,14 @@
                         <div class="card-body">
                             <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                                 <li class="pt-1 px-3"><h3 class="card-title">{{__('Slip Form')}}</h3></li>
-                                <li class="nav-item">
+                                <li class="nav-item" href="#general-details-id">
                                     <a class="nav-link active" id="general-details" data-toggle="pill" href="#general-details-id" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" href="#insured-details-id">
                                     <a class="nav-link" id="insured-details" data-toggle="pill" href="#insured-details-id" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data & Insurance Measurement')}}</a>
                                 </li>
                                 
-                                <li class="nav-item">
+                                <li class="nav-item" href="#installment-details-id">
                                     <a class="nav-link" id="installment-details" data-toggle="pill" href="#installment-details-id" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
                                 </li>
                             </ul>
