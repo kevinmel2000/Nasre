@@ -176,6 +176,8 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
     setInputFilter(document.getElementsByClassName("floatTextBox"), function(value) {
         return /^-?\d*[.,]?\d{0,3}$/.test(value) });
+    setInputFilter(document.getElementsByClassName("floatTextBox2"), function(value) {
+        return /^-?\d*[.,]?\d{0,10}$/.test(value) });
     setInputFilter(document.getElementsByClassName("intTextBox"), function(value) {
         return /^-?\d*$/.test(value); });
 
@@ -4512,7 +4514,7 @@ function deletelocationriskdetail(id){
         console.log(days)
         console.log(insurance)
 
-        var rateslip =  parseFloat($(this).val()) / 1000;
+        var rateslip =  parseFloat($(this).val()) ;
         var tsi = $("#sharetotalsum").val();
         var conv_tsi = parseInt(tsi.replace(/,/g, ""));
         var sum = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
@@ -4534,7 +4536,7 @@ function deletelocationriskdetail(id){
         console.log(days)
         console.log(insurance)
 
-        var rateslip =  parseFloat($(this).val()) / 1000;
+        var rateslip =  parseFloat($(this).val());
         var tsi = $("#sharetotalsum").val();
         var conv_tsi = parseInt(tsi.replace(/,/g, ""));
         var sum = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
@@ -4552,7 +4554,7 @@ function deletelocationriskdetail(id){
         if(rate_upper != '' || rate_lower != ''){
             var rate_lower_val = parseFloat(rate_lower);
             var rate_upper_val = parseFloat(rate_upper);
-            var rate_val = parseFloat(rate) / 1000;
+            var rate_val = parseFloat(rate);
             console.log(rate_lower_val)
             console.log(rate_upper_val)
             console.log(rate_val)
@@ -5508,7 +5510,7 @@ function deletelocationriskdetail(id){
 <script type='text/javascript'>
 
     $('#slipnilaiec').keyup(function () {
-        var persentage =  parseFloat($('#slipnilaiec').val()) / 1000;
+        var persentage =  parseFloat($('#slipnilaiec').val());
         var sliptotalsum =  $('#sliptotalsum').val();
         var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
        //alert(premiumnr);
@@ -5531,7 +5533,7 @@ function deletelocationriskdetail(id){
 <script type='text/javascript'>
 
     $('#slipnilaiecupdate').keyup(function () {
-     var persentage =  $('#slipnilaiecupdate').val() / 1000;
+     var persentage =  $('#slipnilaiecupdate').val() ;
      var sliptotalsum =  $('#sliptotalsumupdate').val();
      var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
        //alert(premiumnr);
@@ -5549,7 +5551,7 @@ function deletelocationriskdetail(id){
 <script type='text/javascript'>
 
     $('#slipnilaiecendorsement').keyup(function () {
-     var persentage =  $('#slipnilaiecendorsement').val() / 1000;
+     var persentage =  $('#slipnilaiecendorsement').val() ;
      var sliptotalsum =  $('#sliptotalsumendorsement').val();
      var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
        //alert(premiumnr);
