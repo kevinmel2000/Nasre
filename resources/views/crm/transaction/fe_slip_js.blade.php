@@ -4030,7 +4030,8 @@ function deletelocationriskdetail(id){
 
 <script type="text/javascript">
     $('#percentceding').keyup(function(e){
-        if(e.keyCode != 9){
+         var keyCode = e.keyCode || e.which;
+        if(keyCode != 9){
             var percentceding = parseFloat($(this).val()) / 100 ;
             var valtsi = $('#feshareto').val();
 
@@ -4066,11 +4067,143 @@ function deletelocationriskdetail(id){
         }
 
     });
+
+    $('#percentceding').change(function(e){
+         var keyCode = e.keyCode || e.which;
+        if(keyCode != 9){
+            var percentceding = parseFloat($(this).val()) / 100 ;
+            var valtsi = $('#feshareto').val();
+
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
+                var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#amountlocation').val(real_sum);
+            }
+            else
+            {
+                swal('warning!','please fill TSI insured first','error')
+            }
+        }
+        else{
+            var percentceding = parseFloat($(this).val()) / 100 ;
+            var valtsi = $('#feshareto').val();
+
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
+                var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#amountlocation').val(real_sum);
+            }
+            else
+            {
+                swal('warning!','please fill TSI insured first','error')
+            }
+        }
+
+    });
+
+    $('#percentceding').keydown(function(e){
+         var keyCode = e.keyCode || e.which;
+        if(keyCode != 9){
+            var amountlocation = $('#amountlocation').val();
+            var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
+            console.log(amountlocation)
+            console.log(conv_amountlocation)
+            var valtsi = $('#feshareto').val();
+
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
+                var real_sum = sum_amount.toString();
+                console.log(sum_amount)
+                console.log(real_sum)
+                $('#percentceding').val(real_sum);
+            }else{
+                swal('warning!','please fill TSI insured first','error')
+            }
+        }
+        else{
+            var amountlocation = $('#amountlocation').val() ;
+            var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
+
+            console.log(amountlocation)
+            console.log(conv_amountlocation)
+            var valtsi = $('#feshareto').val();
+
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
+                var real_sum = sum_amount.toString();
+                console.log(sum_amount)
+                console.log(real_sum)
+                $('#percentceding').val(real_sum);
+            }else{
+                swal('warning!','please fill TSI insured first','error')
+            }
+        }
+
+    });
+
+    $('#percentceding').keypress(function(e){
+         var keyCode = e.keyCode || e.which;
+        if(keyCode != 9){
+            var amountlocation = $('#amountlocation').val();
+            var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
+            console.log(amountlocation)
+            console.log(conv_amountlocation)
+            var valtsi = $('#feshareto').val();
+
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
+                var real_sum = sum_amount.toString();
+                console.log(sum_amount)
+                console.log(real_sum)
+                $('#percentceding').val(real_sum);
+            }else{
+                swal('warning!','please fill TSI insured first','error')
+            }
+        }
+        else{
+            var amountlocation = $('#amountlocation').val() ;
+            var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
+
+            console.log(amountlocation)
+            console.log(conv_amountlocation)
+            var valtsi = $('#feshareto').val();
+
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
+                var real_sum = sum_amount.toString();
+                console.log(sum_amount)
+                console.log(real_sum)
+                $('#percentceding').val(real_sum);
+            }else{
+                swal('warning!','please fill TSI insured first','error')
+            }
+        }
+
+    });
 </script>
 
 <script type="text/javascript">
     $('#amountlocation').change(function(e){
-        if(e.keyCode != 9){
+         var keyCode = e.keyCode || e.which;
+        if(keyCode != 9){
             var amountlocation = $(this).val();
             var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
             console.log(amountlocation)
@@ -4108,6 +4241,130 @@ function deletelocationriskdetail(id){
                 console.log(real_sum)
                 $('#percentceding').val(real_sum);
             }else{
+                swal('warning!','please fill TSI insured first','error')
+            }
+        }
+
+    });
+
+    $('#amountlocation').keyup(function(e){
+         var keyCode = e.keyCode || e.which;
+        if(keyCode != 9){
+            var amountlocation = $(this).val();
+            var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
+            console.log(amountlocation)
+            console.log(conv_amountlocation)
+            var valtsi = $('#feshareto').val();
+
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
+                var real_sum = sum_amount.toString();
+                console.log(sum_amount)
+                console.log(real_sum)
+                $('#percentceding').val(real_sum);
+            }else{
+                swal('warning!','please fill TSI insured first','error')
+            }
+        }
+        else{
+            var amountlocation = $(this).val() ;
+            var conv_amountlocation = parseInt(amountlocation.replace(/,/g, ""));
+
+            console.log(amountlocation)
+            console.log(conv_amountlocation)
+            var valtsi = $('#feshareto').val();
+
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum_amount = isNaN((conv_amountlocation / conv_tsi)*100) ? 0 :((conv_amountlocation / conv_tsi)*100).toFixed(2);
+                var real_sum = sum_amount.toString();
+                console.log(sum_amount)
+                console.log(real_sum)
+                $('#percentceding').val(real_sum);
+            }else{
+                swal('warning!','please fill TSI insured first','error')
+            }
+        }
+
+    });
+
+    $('#amountlocation').keypress(function(e){
+         var keyCode = e.keyCode || e.which;
+        if(keyCode != 9){
+            var percentceding = parseFloat($('#percentceding').val()) / 100 ;
+            var valtsi = $('#feshareto').val();
+
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
+                var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#amountlocation').val(real_sum);
+            }
+            else
+            {
+                swal('warning!','please fill TSI insured first','error')
+            }
+        }
+        else{
+            var percentceding = parseFloat($('#percentceding').val()) / 100 ;
+            var valtsi = $('#feshareto').val();
+
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
+                var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#amountlocation').val(real_sum);
+            }
+            else
+            {
+                swal('warning!','please fill TSI insured first','error')
+            }
+        }
+
+    });
+
+    $('#amountlocation').keydown(function(e){
+         var keyCode = e.keyCode || e.which;
+        if(keyCode != 9){
+            var percentceding = parseFloat($('#percentceding').val()) / 100 ;
+            var valtsi = $('#feshareto').val();
+
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
+                var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#amountlocation').val(real_sum);
+            }
+            else
+            {
+                swal('warning!','please fill TSI insured first','error')
+            }
+        }
+        else{
+            var percentceding = parseFloat($('#percentceding').val()) / 100 ;
+            var valtsi = $('#feshareto').val();
+
+            if(valtsi != null){
+                var tsi = $('#feshareto').val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum_amount = isNaN(percentceding * conv_tsi) ? 0 :(percentceding * conv_tsi).toFixed(2);
+                var real_sum = sum_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#amountlocation').val(real_sum);
+            }
+            else
+            {
                 swal('warning!','please fill TSI insured first','error')
             }
         }
