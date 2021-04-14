@@ -16,7 +16,7 @@
 
 
 
-<script>
+<!-- <script>
 
 //var $tabsTop = $(".nav-tabs");
 //var $tabsBottom = $tabsTop.clone().addClass("nav-tabs-bottom").insertAfter(".tab-contentbottom");
@@ -53,6 +53,29 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
     $('.nav-tabs-top a[href="'+$(this).attr('href')+'"]').addClass('active');
 });
 
+</script> -->
+
+<script type="text/javascript">
+    $('.nav-tabs li a').click(function (e) {     
+    //get selected href
+    var href = $(this).attr('href');    
+    var id = href.substring(1);  
+    console.log('id = '+id)  
+    
+    //set all nav tabs to inactive
+    $('.nav-tabs li').removeClass('active');
+    $('.nav-tabs li a').removeClass('active');
+    
+    //get all nav tabs matching the href and set to active
+    $('.nav-tabs li[href="'+href+'"]').addClass('active');
+    $('.nav-tabs li a[href="'+href+'"]').addClass('active');
+
+    //active tab
+    $('.tab-pane').removeClass('show');
+    $('.tab-pane').removeClass('active');
+    $('.tab-pane[id="'+id+'"]').addClass('show');
+    $('.tab-pane[id="'+id+'"]').addClass('active');
+});
 </script>
 
 <script>
