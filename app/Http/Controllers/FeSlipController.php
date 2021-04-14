@@ -512,7 +512,7 @@ class FeSlipController extends Controller
 
                 $slipnumform = '';
                 if($checkslipnumber != null){
-                    if($code_ms != $checkslipnumber->number ){
+                    if($code_sl != $checkslipnumber->number ){
                         $reservedslipnumber = SlipNumber::create([
                                     'number'=>$code_sl,
                                     'slip_type'=>'fe',
@@ -781,7 +781,7 @@ class FeSlipController extends Controller
                     }
                 }else{
                     $reservedslipnumber = SlipNumber::create([
-                                    'number'=>$code_ms,
+                                    'number'=>$code_sl,
                                     'slip_type'=>'fe',
                                     'status'=>'passive'     
                         ]);
@@ -1306,10 +1306,7 @@ class FeSlipController extends Controller
 
                     }
 
-                    
-                    
-
-                                    
+                       
 
                  }elseif($checkinsurednumber->status == 'active'){
                     $newnumber2 = substr($code_ms, 10,15);

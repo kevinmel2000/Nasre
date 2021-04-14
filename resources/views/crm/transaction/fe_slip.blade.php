@@ -18,7 +18,7 @@
                 
                 <div class="card-body bg-light-gray ">
                     <div class="tab-content" id="custom-tabs-three-tabContent">
-                        <div class="tab-pane fade show active" id="l" role="tabpanel" aria-labelledby="lead-details">
+                        <!-- <div class="tab-pane fade show active" id="l" role="tabpanel" aria-labelledby="lead-details"> -->
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -238,7 +238,7 @@
                                 </div>
                             </div>
                             
-                        </div>
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>
