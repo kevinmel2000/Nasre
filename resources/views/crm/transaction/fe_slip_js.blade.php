@@ -1553,6 +1553,9 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
             if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
                 swal("Warning","Date Format not valid, Please check again","format error")
+              }else if(month == 2 && tgl > 28){
+                swal("Warning","Date Format not valid, Please check again","format error")
+
               } 
             
             $('#slipdaytotal').val(constday1);
@@ -1573,7 +1576,10 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
         if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
             swal("Warning","Date Format not valid, Please check again","format error")
-          } 
+          }else if(month == 2 && tgl > 28){
+            swal("Warning","Date Format not valid, Please check again","format error")
+            
+          }
 
     });
 
@@ -1608,6 +1614,9 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
         if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
             swal("Warning","Date Format not valid, Please check again","format error")
+          }else if(month == 2 && tgl > 28){
+            swal("Warning","Date Format not valid, Please check again","format error")
+            
           } 
         
         $('#slipdaytotal').val(constday1);
@@ -1647,6 +1656,9 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
         if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
             swal("Warning","Date Format not valid, Please check again","format error")
+          }else if(month == 2 && tgl > 28){
+            swal("Warning","Date Format not valid, Please check again","format error")
+            
           } 
         
         $('#slipdaytotal').val(constday1);
@@ -1686,6 +1698,9 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
             if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
                 swal("Warning","Date Format not valid, Please check again","format error")
+              }else if(month == 2 && tgl > 28){
+                swal("Warning","Date Format not valid, Please check again","format error")
+                
               } 
             
             $('#slipdaytotal').val(constday1);
@@ -2355,6 +2370,7 @@ $('#slipbld_constendorsement').change(function(){
                             $('#slipnetprmtonr2').val(real_sumnetprmtonr);
                             // $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
                             $('#slipsumfee').val(real_sumfeebroker);
+                            $('#slipsumfee2').val(real_sumfeebroker);
 
                             var sumipamountval = $('#slipipamount').val();
 
@@ -2544,6 +2560,7 @@ $('#slipbld_constendorsement').change(function(){
                             $('#slipnetprmtonr2').val(real_sumnetprmtonr);
                             // $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
                             $('#slipsumfee').val(real_sumfeebroker);
+                            $('#slipsumfee2').val(real_sumfeebroker);
 
                             var sumipamountval = $('#slipipamount').val();
 
@@ -4460,6 +4477,7 @@ function deletelocationriskdetail(id){
                     $('#slipnetprmtonr2').val(real_sumnetprmtonr);
                     // $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
                     $('#slipsumfee').val(real_sumfeebroker);
+                    $('#slipsumfee2').val(real_sumfeebroker);
 
                     var retro_backup = $('#sliprb').val();
                     if(retro_backup == 'YES'){
@@ -4509,6 +4527,7 @@ function deletelocationriskdetail(id){
             $('#slipnetprmtonr2').val(real_sumnetprmtonr);
             // $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
             $('#slipsumfee').val(real_sumfeebroker);
+            $('#slipsumfee2').val(real_sumfeebroker);
 
     });
 
@@ -4970,6 +4989,7 @@ function deletelocationriskdetail(id){
 
         $('#slipnetprmtonrupdate').val(real_sumnetprmtonr);
         $('#slipnetprmtonrupdate2').val(real_sumnetprmtonr);
+        $('#slipsumfeeupdate').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
         $('#slipsumfeeupdate').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
 
     });
@@ -6639,8 +6659,13 @@ function deletelocationriskdetail(id){
 
 
        var current_percent = $('#sliptotalpercentinspan').val();
+       console.log('jumlah installment panel ' + current_percent)
        var current_percent_rp = $('#sliptotalpercentrpor').val();
+       console.log('jumlah total or ' + current_percent_rp)
+
        var count_endorsement_ins = $('#fecountendorsement').val();
+       console.log('count endorsement ' + count_endorsement_ins)
+
 
 
        //ajaxfilefunction(e);
