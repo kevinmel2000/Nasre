@@ -2033,54 +2033,69 @@ class TransactionController extends Controller
         
             if($percentage !='' && $amount !='' && $slip_id != '')
             {
+                $checkdateins = InstallmentTemp::where('slip_id',$slip_id)->orderby('id','desc')->get();
+
+                // $dateins = $checkdateins[0]->installment_date;
+
+                // if($dateins == $installmentdate){
+                //     return response()->json(
+                //             [
+                //                 'code_error' => '404',
+                //                 'message' => 'sorry date cannot duplicate'
+                //             ]
+                //         );
+                // }else{
+                    
+                // }
+
                 if($totalpercent <= 100)
-                {
-                    $old_date_timestamp = strtotime($installmentdate);
-                    $new_date = date('Y-m-d', $old_date_timestamp); 
+                    {
+                        $old_date_timestamp = strtotime($installmentdate);
+                        $new_date = date('Y-m-d', $old_date_timestamp); 
 
-                    $installmentlist = new InstallmentTemp();
-                    $installmentlist->installment_date  = $new_date;
-                    $installmentlist->percentage  = $percentage;
-                    $installmentlist->amount = $amount;
-                    $installmentlist->slip_id = $slip_id; 
-                    $installmentlist->save();
+                        $installmentlist = new InstallmentTemp();
+                        $installmentlist->installment_date  = $new_date;
+                        $installmentlist->percentage  = $percentage;
+                        $installmentlist->amount = $amount;
+                        $installmentlist->slip_id = $slip_id; 
+                        $installmentlist->save();
 
-                    $checkit2 = DB::table('installment_panel_detail')->where('installment_panel_detail.slip_id',$installmentlist->slip_id)->sum('installment_panel_detail.percentage');
-                    $minpercent2 = 100 - $checkit2;
+                        $checkit2 = DB::table('installment_panel_detail')->where('installment_panel_detail.slip_id',$installmentlist->slip_id)->sum('installment_panel_detail.percentage');
+                        $minpercent2 = 100 - $checkit2;
 
-                    if($checkit2 < 100){
+                        if($checkit2 < 100){
+                                return response()->json(
+                                    [
+                                        'id' => $installmentlist->id,
+                                        'percentage' => $installmentlist->percentage,
+                                        'installment_date' => date("d/m/Y", strtotime($new_date)),
+                                        'amount' => $installmentlist->amount,
+                                        'slip_id' => $installmentlist->slip_id,
+                                        'message' => 'sorry percent must 100%, your percent minus '. $minpercent2.'percent'
+                                    ]
+                                );
+                            }
+                        elseif ($checkit2 == 100) {
                             return response()->json(
-                                [
-                                    'id' => $installmentlist->id,
-                                    'percentage' => $installmentlist->percentage,
-                                    'installment_date' => date("d/m/Y", strtotime($new_date)),
-                                    'amount' => $installmentlist->amount,
-                                    'slip_id' => $installmentlist->slip_id,
-                                    'message' => 'sorry percent must 100%, your percent minus '. $minpercent2.'percent'
-                                ]
-                            );
+                                    [
+                                        'id' => $installmentlist->id,
+                                        'percentage' => $installmentlist->percentage,
+                                        'installment_date' => date("d/m/Y", strtotime($new_date)),
+                                        'amount' => $installmentlist->amount,
+                                        'slip_id' => $installmentlist->slip_id
+                                    ]
+                                );
                         }
-                    elseif ($checkit2 == 100) {
-                        return response()->json(
-                                [
-                                    'id' => $installmentlist->id,
-                                    'percentage' => $installmentlist->percentage,
-                                    'installment_date' => date("d/m/Y", strtotime($new_date)),
-                                    'amount' => $installmentlist->amount,
-                                    'slip_id' => $installmentlist->slip_id
-                                ]
-                            );
                     }
-                }
-                else
-                {
-                    return response()->json(
-                        [
-                            'code_error' => '404',
-                            'message' => 'sorry percent cannot more than 100%'
-                        ]
-                    );
-                }
+                    else
+                    {
+                        return response()->json(
+                            [
+                                'code_error' => '404',
+                                'message' => 'sorry percent cannot more than 100%'
+                            ]
+                        );
+                    }
         
             }
             else
