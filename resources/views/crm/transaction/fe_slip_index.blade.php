@@ -48,7 +48,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach (@$insured as $insureddata)
+                        @foreach (@$insuredlist as $insureddata)
                             <tr>
                               <td ><a href="{{  url('transaction-data/updatefeslip', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
                               <td>{{@$insureddata->insured_prefix}} - {{@$insureddata->insured_name}} - {{@$insureddata->insured_suffix}}</td>
@@ -97,6 +97,30 @@
                               </td>
 
                             </tr>
+                            
+                            <tr>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th>{{__('Slip Number')}}</th>
+                              <th>{{__('Cob')}}</th>
+                              <th>{{__('Ceding/Broker')}}</th>
+                              <th>{{__('Ceding')}}</th>
+                              <th>{{__('Actions')}}</th>
+                            </tr>
+                            @foreach (@$insureddata->slipdata as $slipdata)
+                            <tr>
+                              
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td>{{@$slipdata['number'] }}</td>
+                              <td>{{@$slipdata['cobdata']->code }} - {{@$slipdata['cobdata']->description }}</td>
+                              <td>{{@$slipdata['brokerdata']->name}} - {{@$slipdata['brokerdata']->company_name }}</td>
+                              <td>{{@$slipdata['cedingdata']->name}} - {{@$slipdata['cedingdata']->company_name }}</td>
+                            </tr>
+                            @endforeach
+                        
                         @endforeach
                     </tbody>
                     
