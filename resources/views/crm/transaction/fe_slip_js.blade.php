@@ -6742,7 +6742,7 @@ function deletelocationriskdetail(id){
                                             +'</a>'
                                             +'<td></td></tr>');
 
-                                        $('#slipnumber').val(response.number);
+                                        $('#slipnumber').val(response.slipnumber);
                                         // $('#feshare').val(response.ourshare);
                                         // $('#fesharefrom').val(response.sumshare);
 
