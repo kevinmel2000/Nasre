@@ -62,14 +62,14 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="">{{__('Nasional Reinsurance Share')}}</label>
+                                                <label for="">{{__('NASIONAL RE Share')}}</label>
                                                 <input id="fesharefrom" type="text"   name="fesharefrom" class="form-control form-control-sm amount" value="" data-validation="length" data-validation-length="0-50"  readonly />
                                             </div>
                                         </div>
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="">{{__('Ceding Share')}}</label>
+                                                <label for="">{{__('All Ceding Share')}}</label>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="input-group" lang="en-US">
@@ -422,7 +422,7 @@
                                                 <select id="ceding_id" name="ceding_id" class="e1 form-control form-control-sm " aria-required="true">
                                                     <option value=""  selected disabled >Ceding or Broker</option>
                                                     @foreach($ceding as $cb)
-                                                    <option value="{{ $cb->id }}">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
+                                                    <option value="{{ $cb->id }}"> {{ $cb->code }} - {{ $cb->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -704,7 +704,7 @@
                                                                 <select id="slipcedingbroker" name="slipcedingbroker" class="e1 form-control form-control-sm ">
                                                                     <option value=""  selected disabled >Ceding or Broker</option>
                                                                     @foreach($cedingbroker as $cb)
-                                                                    <option value="{{ $cb->id }}">{{ $cb->type }} - {{ $cb->code }} - {{ $cb->name }}</option>
+                                                                    <option value="{{ $cb->id }}"> {{ $cb->code }} - {{ $cb->name }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>    
@@ -1295,9 +1295,9 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label for="" style="opacity: 0;">{{__('Gross Prm to NR')}}</label>
+                                                                            <label for="">{{__('RI Com Amount')}}</label>
                                                                             <input type="hidden" id="slipsumcommission" name="slipsumcommission" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)"  />
-                                                                            <input type="text" id="slipsumcommission2" name="slipsumcommission2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a% * b% * tsi * (100% - d%)" disabled />
+                                                                            <input type="text" id="slipsumcommission2" name="slipsumcommission2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a / 1000 * b% * tsi * (100% - d%)" disabled />
                                                                         </div>
                                                                     </div>
 
@@ -1322,11 +1322,12 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label for="">{{__('Fee broker / RI comm')}}</label>
+                                                                            <label for="">{{__('Fee Broker Amount')}}</label>
                                                                             <div class="row">
                                                                                 <div class="col-md-12">
                                                                                     <div class="input-group">
-                                                                                        <input type="text"  id="slipsumfee" name="slipsumfee"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" disabled placeholder="a" />
+                                                                                        <input type="hidden"  id="slipsumfee" name="slipsumfee"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="= a / 1000 * b% * tsi * (100% - e%)" />
+                                                                                        <input type="text"  id="slipsumfee2" name="slipsumfee"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" disabled placeholder="= a / 1000 * b% * tsi * (100% - e%)" />
                                                                                         
                                                                                     </div>
                                                                                 </div>
@@ -1352,7 +1353,7 @@
                                                                         <div class="form-group">
                                                                             <label for="">{{__('Net Prm to NR')}}</label>
                                                                             <input type="hidden" id="slipnetprmtonr" name="slipnetprmtonr" class="form-control form-control-sm amount" data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="0-50" />
-                                                                            <input type="text" id="slipnetprmtonr2" name="slipnetprmtonr2" class="form-control form-control-sm amount" data-validation="length" placeholder="=a%. * b% * tsi * (100% - d%)" data-validation-length="0-50" disabled/>
+                                                                            <input type="text" id="slipnetprmtonr2" name="slipnetprmtonr2" class="form-control form-control-sm amount" data-validation="length" placeholder="= a / 1000 * b% * tsi * (100% - d% - e%)" data-validation-length="0-50" disabled/>
                                                                         </div>
                                                                     </div>
                                                                 </div>

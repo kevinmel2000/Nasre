@@ -1476,6 +1476,18 @@
             console.log(constday1)
             console.log(constday2)
             console.log(parseFloat(sum))
+
+            var fulltgl = $(this).val();
+
+            var tgl = parseInt(fulltgl.substring(0,2));
+            console.log(tgl)
+            var month = parseInt(fulltgl.substring(3,5));
+            console.log(month)
+            // var year = full.substring(6,12);
+
+            if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
+                swal("Warning","Date Format not valid, Please check again","format error")
+              } 
             
             $('#slipdaytotal').val(constday1);
             $('#slipdaytotal2').val(constday1);
@@ -1484,6 +1496,19 @@
             $('#sliptotalsumdate').val(parseFloat(sum));
             $('#sliptotalsumdate2').val(parseFloat(sum));
         }
+
+        var fulltgl = $(this).val();
+
+        var tgl = parseInt(fulltgl.substring(0,2));
+        console.log('ini tgl' + tgl)
+        var month = parseInt(fulltgl.substring(3,5));
+        console.log('ini bln' + month)
+        // var year = full.substring(6,12);
+
+        if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
+            swal("Warning","Date Format not valid, Please check again","format error")
+          } 
+
     });
 
     $('#slipipto').change(function(){
@@ -1504,6 +1529,20 @@
         console.log(constday1)
         console.log(constday2)
         console.log(parseFloat(sum))
+
+        var fulltgl = $(this).val();
+
+        var tgl = parseInt(fulltgl.substring(0,2));
+        console.log('ini tgl' + tgl)
+        
+        var month = parseInt(fulltgl.substring(3,5));
+        console.log('ini bln' + month)
+        
+        // var year = full.substring(6,12);
+
+        if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
+            swal("Warning","Date Format not valid, Please check again","format error")
+          } 
         
         $('#slipdaytotal').val(constday1);
         $('#slipdaytotal2').val(constday1);
@@ -1531,6 +1570,18 @@
         console.log(constday1)
         console.log(constday2)  
         console.log(parseFloat(sum))
+
+        var fulltgl = $(this).val();
+
+        var tgl = parseInt(fulltgl.substring(0,2));
+        console.log('ini tgl' + tgl)
+        var month = parseInt(fulltgl.substring(3,5));
+        console.log('ini bln' + month)
+        // var year = full.substring(6,12);
+
+        if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
+            swal("Warning","Date Format not valid, Please check again","format error")
+          } 
         
         $('#slipdaytotal').val(constday1);
         $('#slipdaytotal2').val(constday1);
@@ -1558,6 +1609,18 @@
             console.log(constday1)
             console.log(constday2)
             console.log(parseFloat(sum))
+
+            var fulltgl = $(this).val();
+
+            var tgl = parseInt(fulltgl.substring(0,2));
+            console.log('ini tgl' + tgl)
+            var month = parseInt(fulltgl.substring(3,5));
+            console.log('ini bln' + month)
+            // var year = full.substring(6,12);
+
+            if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
+                swal("Warning","Date Format not valid, Please check again","format error")
+              } 
             
             $('#slipdaytotal').val(constday1);
             $('#slipdaytotal2').val(constday1);
