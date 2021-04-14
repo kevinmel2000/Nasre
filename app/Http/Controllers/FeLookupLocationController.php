@@ -96,6 +96,7 @@ class FeLookupLocationController extends Controller
             'codecount' => $code_felookuplocation
         ];
 
+        
         return response()->json($data2);
     }
   

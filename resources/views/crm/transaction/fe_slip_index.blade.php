@@ -51,7 +51,10 @@
                         @foreach (@$insuredlist as $insureddata)
                             <tr>
                               <td ><a href="{{  url('transaction-data/updatefeslip', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
-                              <td>{{@$insureddata->insured_prefix}} - {{@$insureddata->insured_name}} - {{@$insureddata->insured_suffix}}</td>
+                              <td> @php echo strtoupper($insureddata->insured_prefix); @endphp - 
+                                   @php echo strtoupper($insureddata->insured_name);    @endphp- 
+                                   @php echo strtoupper($insureddata->insured_suffix);  @endphp
+                              </td>
                               <td>{{@$insureddata->uy }}</td>
                               <td>{{@$insureddata->share }}</td>
                               <td >@currency($insureddata->share_from)</td>

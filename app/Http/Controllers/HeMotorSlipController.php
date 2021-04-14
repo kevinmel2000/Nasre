@@ -932,9 +932,9 @@ class HeMotorSlipController extends Controller
                 Insured::create([
                     'number'=>$request->hemnumber,
                     'slip_type'=>'hem',
-                    'insured_prefix' => $request->heminsured,
-                    'insured_name'=>$request->hemsuggestinsured,
-                    'insured_suffix'=>$request->hemsuffix,
+                    'insured_prefix' => strtoupper($request->heminsured),
+                    'insured_name'=> strtoupper($request->hemsuggestinsured),
+                    'insured_suffix'=> strtoupper($request->hemsuffix),
                     'share'=>$sum_amount,
                     'statmodified'=>1,
                     'share_from'=>$request->hemsharefrom,
@@ -956,9 +956,9 @@ class HeMotorSlipController extends Controller
             {
                 $insureddataid=$insureddata->id;
                 $insureddataup = Insured::findOrFail($insureddataid);
-                $insureddataup->insured_prefix=$request->hemsinsured;
-                $insureddataup->insured_name=$request->hemsuggestinsured;
-                $insureddataup->insured_suffix=$request->hemsuffix;
+                $insureddataup->insured_prefix= strtoupper($request->hemsinsured);
+                $insureddataup->insured_name= strtoupper($request->hemsuggestinsured);
+                $insureddataup->insured_suffix= strtoupper($request->hemsuffix);
                 $insureddataup->share=$sum_amount;
                 $insureddataup->statmodified=1;
                 $insureddataup->share_from=$request->hemsharefrom;

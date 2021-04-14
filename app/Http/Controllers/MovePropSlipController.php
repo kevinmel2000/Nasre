@@ -958,9 +958,9 @@ class MovePropSlipController extends Controller
             {
                 $insureddataid=$insureddata->id;
                 $insureddataup = Insured::findOrFail($insureddataid);
-                $insureddataup->insured_prefix=$request->mpinsured;
-                $insureddataup->insured_name=$request->mpsuggestinsured;
-                $insureddataup->insured_suffix=$request->mpsuffix;
+                $insureddataup->insured_prefix= strtoupper($request->mpinsured);
+                $insureddataup->insured_name= strtoupper($request->mpsuggestinsured);
+                $insureddataup->insured_suffix= strtoupper($request->mpsuffix);
                 $insureddataup->share=$sum_amount;
                 $insureddataup->statmodified=1;
                 $insureddataup->share_from=$request->mpsharefrom;

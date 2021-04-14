@@ -3294,9 +3294,9 @@ class FeSlipController extends Controller
                 $insureddataup = Insured::create([
                     'number'=>$request->fesnumber,
                     'slip_type'=>'fe',
-                    'insured_prefix' => $request->fesinsured,
-                    'insured_name'=>$request->fessuggestinsured,
-                    'insured_suffix'=>$request->fessuffix,
+                    'insured_prefix' => strtoupper($request->fesinsured),
+                    'insured_name'=> strtoupper($request->fessuggestinsured),
+                    'insured_suffix'=> strtoupper($request->fessuffix),
                     'share'=>$sum_amount,
                     'share_from'=>$request->fessharefrom,
                     'statmodified'=>1,
@@ -3327,9 +3327,9 @@ class FeSlipController extends Controller
             {
                 $insureddataid=$insureddata->id;
                 $insureddataup = Insured::findOrFail($insureddataid);
-                $insureddataup->insured_prefix=$request->fesinsured;
-                $insureddataup->insured_name=$request->fessuggestinsured;
-                $insureddataup->insured_suffix=$request->fessuffix;
+                $insureddataup->insured_prefix= strtoupper($request->fesinsured);
+                $insureddataup->insured_name= strtoupper($request->fessuggestinsured);
+                $insureddataup->insured_suffix= strtoupper($request->fessuffix);
                 $insureddataup->share=$sum_amount;
                 $insureddataup->statmodified=1;
                 $insureddataup->share_from=$request->fessharefrom;
