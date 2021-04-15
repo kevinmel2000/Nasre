@@ -266,7 +266,7 @@ class FeSlipController extends Controller
 
         foreach ($checkdatainsured as $insureddata)
         {   
-            $deleteinsured= SlipTable::where('insured_id','=',$insureddata->number)->delete();
+            //$deleteinsured= SlipTable::where('insured_id','=',$insureddata->number)->delete();
             $deleteinsured= Insured::where('number','=',$insureddata->number)->delete();  
         }
 
@@ -1654,7 +1654,9 @@ class FeSlipController extends Controller
                     
                  }
             }
-        }else{
+        }
+        else
+        {
             $reservedinsurednumber = InsuredNumber::create([
                             'number'=>$code_ms,
                             'status'=>'passive'     
@@ -1938,7 +1940,9 @@ class FeSlipController extends Controller
 
                          }
                     }
-                }else{
+                }
+                else
+                {
                     $reservedslipnumber = SlipNumber::create([
                                 'number'=>$code_sl,
                                 'slip_type'=>'fe',
@@ -2018,17 +2022,8 @@ class FeSlipController extends Controller
                 
 
                 }
-
                 
-                
-
-                
-        }
-
-        
-
-
-        
+        }        
     }
 
 
@@ -2213,7 +2208,8 @@ class FeSlipController extends Controller
             'slipnumber'=>'required'
         ]);
 
-        if($validator){
+        if($validator)
+        {
             $user = Auth::user();
                 
                 $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
@@ -2414,7 +2410,9 @@ class FeSlipController extends Controller
                         'count_endorsement'=>$slipdataup->endorsment
                     ]
                 );
-        }else{
+        }
+        else
+        {
             $notification = array(
                 'message' => 'Fire & Engginering Slip added Failed!, missing data',
                 'alert-type' => 'Failed'
@@ -2687,8 +2685,15 @@ class FeSlipController extends Controller
 
         // $newinterestdata=json_encode($newarray);
 
-
-        $deductibledata=json_decode($slipdata->deductible_panel);   
+        
+        if(!empty($slipdata->deductible_panel))
+        {
+            $deductibledata=json_decode($slipdata->deductible_panel);   
+        }
+        else
+        {
+            $deductibledata=null;
+        }
 
         $newarraydeduct=[];
 
@@ -2834,9 +2839,9 @@ class FeSlipController extends Controller
     public function getdetailEndorsementSlip($idm)
     {
         $user = Auth::user();
-        $slipdata=SlipTable::where('id',$idm)->orderBy('id','desc')->first();
+        $slipdata=SlipTable::where('id',$idm)->first();
 
-        $countendorsement =$slipdata->endorsment;
+        $countendorsement=$slipdata->endorsment;
 
         if($slipdata->endorsment==NULL || $slipdata->endorsment=="")
         {
