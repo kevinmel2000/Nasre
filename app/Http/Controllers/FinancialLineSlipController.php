@@ -881,9 +881,9 @@ class FinancialLineSlipController extends Controller
                 Insured::create([
                     'number'=>$request->flnumber,
                     'slip_type'=>'fl',
-                    'insured_prefix' => $request->flinsured,
-                    'insured_name'=>$request->flsuggestinsured,
-                    'insured_suffix'=>$request->flsuffix,
+                    'insured_prefix' => strtoupper($request->flinsured),
+                    'insured_name'=> strtoupper($request->flsuggestinsured),
+                    'insured_suffix'=> strtoupper($request->flsuffix),
                     'share'=>$sum_amount,
                     'statmodified'=>1,
                     'share_from'=>$request->flsharefrom,
@@ -908,10 +908,10 @@ class FinancialLineSlipController extends Controller
 
                 $insureddataid=$insureddata->id;
                 $insureddataup = Insured::findOrFail($insureddataid);
-                $insureddataup->insured_prefix=$request->flinsured;
+                $insureddataup->insured_prefix= strtoupper($request->flinsured);
                 $insureddataup->slip_type='fl';
-                $insureddataup->insured_name=$request->flsuggestinsured;
-                $insureddataup->insured_suffix=$request->flsuffix;
+                $insureddataup->insured_name= strtoupper($request->flsuggestinsured);
+                $insureddataup->insured_suffix= strtoupper($request->flsuffix);
                 $insureddataup->share=$sum_amount;
                 $insureddataup->statmodified=1;
                 $insureddataup->share_from=$request->flsharefrom;
