@@ -2,7 +2,7 @@
 
 return [
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'PT. REASURANSI NASIONAL INDONESIA'),
     'file_path' => 'storage/mediafiles/',
  
     'env' => env('APP_ENV', 'production'),
