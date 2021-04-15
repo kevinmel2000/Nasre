@@ -338,12 +338,13 @@ class FeSlipController extends Controller
         $currdate2 = date("Y-m-d");
         // $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
-        $insured_now = Insured::whereDate('created_at',$currdate2)->orderby('id','asc')->get();
+        // $insured_now = Insured::whereDate('created_at',$currdate2)->orderby('id','asc')->get();
+        $insured_now = InsuredNumber::whereDate('created_at',$currdate2)->orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         
         $currency = Currency::orderby('id','asc')->get();
         $cob = COB::where('form','fe')->orderby('id','asc')->get();
-        $koc = Koc::where('parent_id',2)->orWhere('id',2)->orderby('id','asc')->get();
+        $koc = Koc::where('parent_id',2)->orWhere('code', 'like', '%' . 02 . '%')->orderby('code','asc')->get();
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
         $ceding = CedingBroker::orderby('id','asc')->where('type','4')->get();
@@ -2097,6 +2098,7 @@ class FeSlipController extends Controller
                     'proportional'=>$request->slipproportional,
                     'layer_non_proportional'=>$request->sliplayerproportional,
                     'rate'=>$request->sliprate,
+                    'sliptotalrate'=>$request->sliptotalrate,
                     'v_broker'=>$request->slipvbroker,
                     'share'=>$request->slipshare,
                     'sum_share'=>$request->slipsumshare,
@@ -2110,7 +2112,8 @@ class FeSlipController extends Controller
                     'retro_backup'=>$request->sliprb,
                     'own_retention'=>$request->slipor,
                     'sum_own_retention'=>$request->slipsumor,
-                    'wpc'=>$request->wpc
+                    'wpc'=>$request->wpc,
+                    'remarks'=>$request->remarks
 
                 ]);
 
@@ -2379,7 +2382,8 @@ class FeSlipController extends Controller
                 $slipdataup->reinsurance_period_to=date("Y-m-d", strtotime($request->sliprpto));
                 $slipdataup->proportional=$request->slipproportional;
                 $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
-                $slipdataup->rate=$request->sliprate;  
+                $slipdataup->rate=$request->sliprate;
+                $slipdataup->sliptotalrate=$request->sliptotalrate;  
                 $slipdataup->v_broker=$request->slipvbroker;
                 $slipdataup->share=$request->slipshare;
                 $slipdataup->sum_share=$request->slipsumshare;
@@ -2394,6 +2398,7 @@ class FeSlipController extends Controller
                 $slipdataup->own_retention=$request->slipor;
                 $slipdataup->sum_own_retention=$request->slipsumor;
                 $slipdataup->wpc=$request->wpc;
+                $slipdataup->remarks=$request->remarks;
 
                 $slipdataup->save();
 
