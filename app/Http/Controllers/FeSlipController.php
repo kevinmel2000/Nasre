@@ -444,39 +444,44 @@ class FeSlipController extends Controller
 
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
         $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
-        $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','fe')->where('insured_id',$code_ms)->orderby('id','asc')->get();
+        // $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','fe')->where('insured_id',$code_ms)->orderby('id','asc')->get();
+        $slip_now = SlipNumber::whereDate('created_at',$currdate2)->where('slip_type','fe')->where('insured_number',$code_ms)->orderby('id','asc')->get();
         $sliplastid = count($slip_now);
         // dd($sliplastid);
 
         if($sliplastid != null)
-        {
-            if($sliplastid < 9)
-            {
-                $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + 1);
-            }   
-            elseif($sliplastid > 8 && $sliplastid < 99)
-            {
-                $code_sl = "FE".  $mydate . "000" . strval($sliplastid + 1);
-            }
-            elseif($sliplastid > 98 && $sliplastid < 999)
-            {
-                $code_sl = "FE".  $mydate . "00" . strval($sliplastid + 1);
-            }
-            elseif($sliplastid > 998 && $sliplastid < 9999)
-            {
-                $code_sl = "FE".  $mydate . "0" . strval($sliplastid + 1);
-            }
-            elseif($sliplastid > 9998 && $sliplastid < 99999)
-            {
-                $code_sl = "FE".  $mydate . strval($sliplastid + 1);
-            }
+                {
+                    if($sliplastid < 9)
+                    {
+                        $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + 1);
+                    }   
+                    elseif($sliplastid > 8 && $sliplastid < 99)
+                    {
+                        $code_sl = "FE".  $mydate . "000" . strval($sliplastid + 1);
+                    }
+                    elseif($sliplastid > 98 && $sliplastid < 999)
+                    {
+                        $code_sl = "FE".  $mydate . "00" . strval($sliplastid + 1);
+                    }
+                    elseif($sliplastid > 998 && $sliplastid < 9999)
+                    {
+                        $code_sl = "FE".  $mydate . "0" . strval($sliplastid + 1);
+                    }
+                    elseif($sliplastid > 9998 && $sliplastid < 99999)
+                    {
+                        $code_sl = "FE".  $mydate . strval($sliplastid + 1);
+                    }
 
-            
-        }
-        else
-        {
-            $code_sl = "FE".  $mydate . "0000" . strval(1);
-        }
+                    
+                }
+                else
+                {
+                    $code_sl = "FE".  $mydate . "0000" . strval(1);
+                }
+
+                
+
+        
         // $kondisi=0;
         // $im=1;
         // while($kondisi==0)
@@ -536,353 +541,69 @@ class FeSlipController extends Controller
                 //slip number
                 $checkslipnumber= SlipNumber::where('number',$code_sl)->first();
 
-                $slipnumform = '';
-                if($checkslipnumber != null){
-                    if($code_sl != $checkslipnumber->number ){
-                        $reservedslipnumber = SlipNumber::create([
-                                    'number'=>$code_sl,
-                                    'slip_type'=>'fe',
-                                    'status'=>'passive'     
-                        ]);
-                        $slipnumform = $reservedslipnumber->number;
+                
+                $reservedslipnumber = SlipNumber::create([
+                            'number'=>$code_sl,
+                            'slip_type'=>'fe',
+                            'status'=>'passive',
+                            'insured_number'=>$code_ms     
+                    ]);
 
-                        $interestinsured= InterestInsured::orderby('id','asc')->get();
-                        $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-                        foreach($locationid as $dataid)
-                        {
-                            RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
-                        }
-                        
-                        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                        $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-
-                        // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-
-
-                        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
-                        
-                        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
-                        
-                        $locationlist=array();
-                        foreach($locationlist2 as $datadetail)
-                        {
-                            if($datadetail->risklocationdetail){
-                                $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
-                                
-                            }else{
-                                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-                            }
-                            $locationlist[]= $datadetail;
-                        }
-
-
-                        $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-                        
-                        if(count($interestlist) != null){
-                            InterestInsuredTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        if(count($locationlist) != null){
-                            TransLocationTemp::where('insured_id', $code_ms)->delete();
-                        }
-
-                        if(count($deductiblelist) != null){
-                            //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        if(count($extendcoveragelist) != null){
-                            //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        if(count($installmentlist) != null){
-                            //InstallmentTemp::where('slip_id', $code_sl)->delete();
-                        }
-                        
-                        if(count($retrocessionlist) != null){
-                           //RetrocessionTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-                    
-                    }else{
-                         if($checkslipnumber->status == 'passive'){
-                            SlipNumber::where('number','=',$checkslipnumber->number)->orderby('id','desc')->delete();
-
-                             $reservedslipnumber = SlipNumber::create([
-                                        'number'=>$code_sl,
-                                        'slip_type'=>'fe',
-                                        'status'=>'passive'     
-                            ]);
-                             $slipnumform = $reservedslipnumber->number;
-
-                             $interestinsured= InterestInsured::orderby('id','asc')->get();
-                            $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-                            foreach($locationid as $dataid)
-                            {
-                                RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
-                            }
-                            
-                            $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                            $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-
-                            // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-
-
-                            $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
-                            
-                            $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
-                            
-                            $locationlist=array();
-                            foreach($locationlist2 as $datadetail)
-                            {
-                                if($datadetail->risklocationdetail){
-                                    $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
-                                    
-                                }else{
-                                    $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-                                }
-                                $locationlist[]= $datadetail;
-                            }
-
-
-                            $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-                            
-                            if(count($interestlist) != null){
-                                InterestInsuredTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            if(count($locationlist) != null){
-                                TransLocationTemp::where('insured_id', $code_ms)->delete();
-                            }
-
-                            if(count($deductiblelist) != null){
-                                //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            if(count($extendcoveragelist) != null){
-                                //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            if(count($installmentlist) != null){
-                                //InstallmentTemp::where('slip_id', $code_sl)->delete();
-                            }
-                            
-                            if(count($retrocessionlist) != null){
-                               //RetrocessionTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-                        
-                         }elseif($checkslipnumber->status == 'active'){
-
-                            $newnumber2 = substr($checkslipnumber->number, 10,15);
-                            $codenumber = substr($checkslipnumber->number, 0,10);
-
-                            if(intval($newnumber2) < 9)
-                            {
-                                $count = substr($newnumber2,14);
-                                $code_sl2 = $codenumber . "0000" . strval(intval($count) + 1);
-                            }   
-                            elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
-                            {
-                                $count = substr($newnumber2,13);
-                                $code_sl2 = $codenumber . "000" . strval(intval($count) + 1);
-                            }
-                            elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
-                            {
-                                $count = substr($newnumber2,12);
-                                $code_sl2 = $codenumber . "00" . strval(intval($count) + 1);
-                            }
-                            elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
-                            {
-                                $count = substr($newnumber2,11);
-                                $code_sl2 = $codenumber . "0" . strval(intval($count) + 1);
-                            }
-                            elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
-                            {
-                                $count = substr($newnumber2,10);
-                                $code_sl2 = $codenumber  . strval(intval($count) + 1);
-                            }
-
-
-                            $reservedslipnumber = SlipNumber::create([
-                                        'number'=>$code_sl2,
-                                        'slip_type'=>'fe',
-                                        'status'=>'passive'     
-                            ]);
-
-                            $slipnumform = $reservedslipnumber->number;
-
-                            $interestinsured= InterestInsured::orderby('id','asc')->get();
-                            $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-                            foreach($locationid as $dataid)
-                            {
-                                RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
-                            }
-                            
-                            $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                            $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-
-                            // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-
-
-                            $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
-                            
-                            $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
-                            
-                            $locationlist=array();
-                            foreach($locationlist2 as $datadetail)
-                            {
-                                if($datadetail->risklocationdetail){
-                                    $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
-                                    
-                                }else{
-                                    $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-                                }
-                                $locationlist[]= $datadetail;
-                            }
-
-
-                            $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-                            
-                            if(count($interestlist) != null){
-                                InterestInsuredTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            if(count($locationlist) != null){
-                                TransLocationTemp::where('insured_id', $code_ms)->delete();
-                            }
-
-                            if(count($deductiblelist) != null){
-                                //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            if(count($extendcoveragelist) != null){
-                                //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            if(count($installmentlist) != null){
-                                //InstallmentTemp::where('slip_id', $code_sl)->delete();
-                            }
-                            
-                            if(count($retrocessionlist) != null){
-                               //RetrocessionTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-                        
-                         }
-                    }
-                }else{
-                        $reservedslipnumber = SlipNumber::create([
-                                    'number'=>$code_sl,
-                                    'slip_type'=>'fe',
-                                    'status'=>'passive'     
-                        ]);
-                        $slipnumform = $reservedslipnumber->number;
-
-                        $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-                        foreach($locationid as $dataid)
-                        {
-                            RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
-                        }
-                        
-                        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                        $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-
-                        // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-
-
-                        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
-                        
-                        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
-                        
-                        $locationlist=array();
-                        foreach($locationlist2 as $datadetail)
-                        {
-                            if($datadetail->risklocationdetail){
-                                $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
-                                
-                            }else{
-                                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-                            }
-                            $locationlist[]= $datadetail;
-                        }
-
-
-                        $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-                        
-                        if(count($interestlist) != null){
-                            InterestInsuredTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        if(count($locationlist) != null){
-                            TransLocationTemp::where('insured_id', $code_ms)->delete();
-                        }
-
-                        if(count($deductiblelist) != null){
-                            //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        if(count($extendcoveragelist) != null){
-                            //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        if(count($installmentlist) != null){
-                            //InstallmentTemp::where('slip_id', $code_sl)->delete();
-                        }
-                        
-                        if(count($retrocessionlist) != null){
-                           //RetrocessionTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-                    
+                $interestinsured= InterestInsured::orderby('id','asc')->get();
+                $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+                foreach($locationid as $dataid)
+                {
+                    RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
                 }
+                
+                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
+                $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+
+                // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+
+
+                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+
+                
+                $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+                
+                $locationlist=array();
+                foreach($locationlist2 as $datadetail)
+                {
+                    if($datadetail->risklocationdetail){
+                        $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
+                        
+                    }else{
+                        $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
+                    }
+                    $locationlist[]= $datadetail;
+                }
+
+
+                $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+                
+                // if(count($interestlist) != null){
+                //     InterestInsuredTemp::where('slip_id', $code_sl)->delete();
+                // }
+
+                // if(count($locationlist) != null){
+                //     TransLocationTemp::where('insured_id', $code_ms)->delete();
+                // }
+
+                return view('crm.transaction.fe_slip', compact(['insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+
+
+                
             }else{
                  if($checkinsurednumber->status == 'passive'){
                     InsuredNumber::where('number','=',$code_ms)->orderby('id','desc')->delete();
@@ -899,1056 +620,12 @@ class FeSlipController extends Controller
 
                     $checkslipnumber= SlipNumber::where('number',$code_sl)->first();
 
-                    $slipnumform = '';
-                    if($checkslipnumber != null){
-                        if($code_sl != $checkslipnumber->number ){
-                            $reservedslipnumber = SlipNumber::create([
-                                        'number'=>$code_sl,
-                                        'slip_type'=>'fe',
-                                        'status'=>'passive'     
-                            ]);
-                            $slipnumform = $reservedslipnumber->number;
-
-                            $interestinsured= InterestInsured::orderby('id','asc')->get();
-                            $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-                            foreach($locationid as $dataid)
-                            {
-                                RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
-                            }
-                            
-                            $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                            $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-
-                            // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-
-
-                            $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
-                            
-                            $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
-                            
-                            $locationlist=array();
-                            foreach($locationlist2 as $datadetail)
-                            {
-                                if($datadetail->risklocationdetail){
-                                    $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
-                                    
-                                }else{
-                                    $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-                                }
-                                $locationlist[]= $datadetail;
-                            }
-
-
-                            $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-                            
-                            if(count($interestlist) != null){
-                                InterestInsuredTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            if(count($locationlist) != null){
-                                TransLocationTemp::where('insured_id', $code_ms)->delete();
-                            }
-
-                            if(count($deductiblelist) != null){
-                                //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            if(count($extendcoveragelist) != null){
-                                //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            if(count($installmentlist) != null){
-                                //InstallmentTemp::where('slip_id', $code_sl)->delete();
-                            }
-                            
-                            if(count($retrocessionlist) != null){
-                               //RetrocessionTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-
-
-                        }else{
-                             if($checkslipnumber->status == 'passive'){
-                                SlipNumber::where('number','=',$code_sl)->orderby('id','desc')->delete();
-
-                                 $reservedslipnumber = SlipNumber::create([
-                                            'number'=>$code_sl,
-                                            'slip_type'=>'fe',
-                                            'status'=>'passive'     
-                                ]);
-                                 $slipnumform = $reservedslipnumber->number;
-
-                                 $interestinsured= InterestInsured::orderby('id','asc')->get();
-                                    $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-                                    foreach($locationid as $dataid)
-                                    {
-                                        RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
-                                    }
-                                    
-                                    $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                    $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                    $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                    $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                    $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                    $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                                    $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-
-                                    // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-
-
-                                    $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                    $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                    $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                    $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                    $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
-                                    
-                                    $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
-                                    
-                                    $locationlist=array();
-                                    foreach($locationlist2 as $datadetail)
-                                    {
-                                        if($datadetail->risklocationdetail){
-                                            $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
-                                            
-                                        }else{
-                                            $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-                                        }
-                                        $locationlist[]= $datadetail;
-                                    }
-
-
-                                    $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-                                    
-                                    if(count($interestlist) != null){
-                                        InterestInsuredTemp::where('slip_id', $code_sl)->delete();
-                                    }
-
-                                    if(count($locationlist) != null){
-                                        TransLocationTemp::where('insured_id', $code_ms)->delete();
-                                    }
-
-                                    if(count($deductiblelist) != null){
-                                        //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                                    }
-
-                                    if(count($extendcoveragelist) != null){
-                                        //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                                    }
-
-                                    if(count($installmentlist) != null){
-                                        //InstallmentTemp::where('slip_id', $code_sl)->delete();
-                                    }
-                                    
-                                    if(count($retrocessionlist) != null){
-                                       //RetrocessionTemp::where('slip_id', $code_sl)->delete();
-                                    }
-
-                                    return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-
-
-                             }elseif($checkslipnumber->status == 'active'){
-                                $newnumber2 = substr($checkslipnumber->number, 10,15);
-                                $codenumber = substr($checkslipnumber->number, 0,10);
-
-                                if(intval($newnumber2) < 9)
-                                {
-                                    $count = substr($newnumber2,14);
-                                    $code_sl2 = $codenumber . "0000" . strval(intval($count) + 1);
-                                }   
-                                elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
-                                {
-                                    $count = substr($newnumber2,13);
-                                    $code_sl2 = $codenumber . "000" . strval(intval($count) + 1);
-                                }
-                                elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
-                                {
-                                    $count = substr($newnumber2,12);
-                                    $code_sl2 = $codenumber . "00" . strval(intval($count) + 1);
-                                }
-                                elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
-                                {
-                                    $count = substr($newnumber2,11);
-                                    $code_sl2 = $codenumber . "0" . strval(intval($count) + 1);
-                                }
-                                elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
-                                {
-                                    $count = substr($newnumber2,10);
-                                    $code_sl2 = $codenumber  . strval(intval($count) + 1);
-                                }
-
-
-                                $reservedslipnumber = SlipNumber::create([
-                                            'number'=>$code_sl2,
-                                            'slip_type'=>'fe',
-                                            'status'=>'passive'     
-                                ]);
-
-                                $slipnumform = $reservedslipnumber->number;
-
-                                $interestinsured= InterestInsured::orderby('id','asc')->get();
-                                $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-                                foreach($locationid as $dataid)
-                                {
-                                    RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
-                                }
-                                
-                                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                                $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-
-                                // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-
-
-                                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
-                                
-                                $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
-                                
-                                $locationlist=array();
-                                foreach($locationlist2 as $datadetail)
-                                {
-                                    if($datadetail->risklocationdetail){
-                                        $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
-                                        
-                                    }else{
-                                        $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-                                    }
-                                    $locationlist[]= $datadetail;
-                                }
-
-
-                                $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-                                
-                                if(count($interestlist) != null){
-                                    InterestInsuredTemp::where('slip_id', $code_sl)->delete();
-                                }
-
-                                if(count($locationlist) != null){
-                                    TransLocationTemp::where('insured_id', $code_ms)->delete();
-                                }
-
-                                if(count($deductiblelist) != null){
-                                    //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                                }
-
-                                if(count($extendcoveragelist) != null){
-                                    //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                                }
-
-                                if(count($installmentlist) != null){
-                                    //InstallmentTemp::where('slip_id', $code_sl)->delete();
-                                }
-                                
-                                if(count($retrocessionlist) != null){
-                                   //RetrocessionTemp::where('slip_id', $code_sl)->delete();
-                                }
-
-                                return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-
-
-                             }
-                        }
-                    }else{
-                        $reservedslipnumber = SlipNumber::create([
-                                    'number'=>$code_sl,
-                                    'slip_type'=>'fe',
-                                    'status'=>'passive'     
-                        ]);
-
-                        $slipnumform = $reservedslipnumber->number;
-
-                        $interestinsured= InterestInsured::orderby('id','asc')->get();
-                        $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-                        foreach($locationid as $dataid)
-                        {
-                            RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
-                        }
-                        
-                        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                        $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-
-                        // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-
-
-                        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
-                        
-                        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
-                        
-                        $locationlist=array();
-                        foreach($locationlist2 as $datadetail)
-                        {
-                            if($datadetail->risklocationdetail){
-                                $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
-                                
-                            }else{
-                                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-                            }
-                            $locationlist[]= $datadetail;
-                        }
-
-
-                        $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-                        
-                        if(count($interestlist) != null){
-                            InterestInsuredTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        if(count($locationlist) != null){
-                            TransLocationTemp::where('insured_id', $code_ms)->delete();
-                        }
-
-                        if(count($deductiblelist) != null){
-                            //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        if(count($extendcoveragelist) != null){
-                            //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        if(count($installmentlist) != null){
-                            //InstallmentTemp::where('slip_id', $code_sl)->delete();
-                        }
-                        
-                        if(count($retrocessionlist) != null){
-                           //RetrocessionTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-
-
-                    }
-
-                       
-
-                 }elseif($checkinsurednumber->status == 'active'){
-                    $newnumber2 = substr($code_ms, 10,15);
-                    $codenumber = substr($code_ms, 0,10);
-
-                    if(intval($newnumber2) < 9)
-                    {
-                        $count = substr($newnumber2,14);
-                        $code_ms2 = $codenumber . "0000" . strval(intval($count) + 1);
-                    }   
-                    elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
-                    {
-                        $count = substr($newnumber2,13);
-                        $code_ms2 = $codenumber . "000" . strval(intval($count) + 1);
-                    }
-                    elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
-                    {
-                        $count = substr($newnumber2,12);
-                        $code_ms2 = $codenumber . "00" . strval(intval($count) + 1);
-                    }
-                    elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
-                    {
-                        $count = substr($newnumber2,11);
-                        $code_ms2 = $codenumber . "0" . strval(intval($count) + 1);
-                    }
-                    elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
-                    {
-                        $count = substr($newnumber2,10);
-                        $code_ms2 = $codenumber  . strval(intval($count) + 1);
-                    }
-
-
-                    $reservedinsurednumber = InsuredNumber::create([
-                                'number'=>$code_ms2,
-                                'status'=>'passive'     
-                    ]);
-
-                    $insurednumform = $reservedinsurednumber->number;
-
-                    
-                    $checkslipnumber= SlipNumber::where('number',$code_sl)->first();
-
-                    $slipnumform = '';
-                    if($checkslipnumber != null){
-                        if($code_sl != $checkslipnumber->number ){
-                            $reservedslipnumber = SlipNumber::create([
-                                        'number'=>$code_sl,
-                                        'slip_type'=>'fe',
-                                        'status'=>'passive'     
-                            ]);
-                            $slipnumform = $reservedslipnumber->number;
-
-                            $interestinsured= InterestInsured::orderby('id','asc')->get();
-                            $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-                            foreach($locationid as $dataid)
-                            {
-                                RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
-                            }
-                            
-                            $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                            $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-
-                            // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-
-
-                            $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
-                            
-                            $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
-                            
-                            $locationlist=array();
-                            foreach($locationlist2 as $datadetail)
-                            {
-                                if($datadetail->risklocationdetail){
-                                    $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
-                                    
-                                }else{
-                                    $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-                                }
-                                $locationlist[]= $datadetail;
-                            }
-
-
-                            $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-                            
-                            if(count($interestlist) != null){
-                                InterestInsuredTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            if(count($locationlist) != null){
-                                TransLocationTemp::where('insured_id', $code_ms)->delete();
-                            }
-
-                            if(count($deductiblelist) != null){
-                                //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            if(count($extendcoveragelist) != null){
-                                //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            if(count($installmentlist) != null){
-                                //InstallmentTemp::where('slip_id', $code_sl)->delete();
-                            }
-                            
-                            if(count($retrocessionlist) != null){
-                               //RetrocessionTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-                        
-
-                        }else{
-                             if($checkslipnumber->status == 'passive'){
-                                SlipNumber::where('number','=',$code_sl)->orderby('id','desc')->delete();
-
-                                 $reservedslipnumber = SlipNumber::create([
-                                            'number'=>$code_sl,
-                                            'slip_type'=>'fe',
-                                            'status'=>'passive'     
-                                ]);
-                                 $slipnumform = $reservedslipnumber->number;
-
-                                 $interestinsured= InterestInsured::orderby('id','asc')->get();
-                                    $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-                                    foreach($locationid as $dataid)
-                                    {
-                                        RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
-                                    }
-                                    
-                                    $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                    $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                    $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                    $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                    $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                    $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                                    $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-
-                                    // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-
-
-                                    $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                    $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                    $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                    $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                    $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
-                                    
-                                    $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
-                                    
-                                    $locationlist=array();
-                                    foreach($locationlist2 as $datadetail)
-                                    {
-                                        if($datadetail->risklocationdetail){
-                                            $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
-                                            
-                                        }else{
-                                            $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-                                        }
-                                        $locationlist[]= $datadetail;
-                                    }
-
-
-                                    $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-                                    
-                                    if(count($interestlist) != null){
-                                        InterestInsuredTemp::where('slip_id', $code_sl)->delete();
-                                    }
-
-                                    if(count($locationlist) != null){
-                                        TransLocationTemp::where('insured_id', $code_ms)->delete();
-                                    }
-
-                                    if(count($deductiblelist) != null){
-                                        //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                                    }
-
-                                    if(count($extendcoveragelist) != null){
-                                        //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                                    }
-
-                                    if(count($installmentlist) != null){
-                                        //InstallmentTemp::where('slip_id', $code_sl)->delete();
-                                    }
-                                    
-                                    if(count($retrocessionlist) != null){
-                                       //RetrocessionTemp::where('slip_id', $code_sl)->delete();
-                                    }
-
-                                    return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-                                
-
-                             }elseif($checkslipnumber->status == 'active'){
-                                $newnumber2 = substr($checkslipnumber->number, 10,15);
-                                $codenumber = substr($checkslipnumber->number, 0,10);
-
-                                if(intval($newnumber2) < 9)
-                                {
-                                    $count = substr($newnumber2,14);
-                                    $code_sl2 = $codenumber . "0000" . strval(intval($count) + 1);
-                                }   
-                                elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
-                                {
-                                    $count = substr($newnumber2,13);
-                                    $code_sl2 = $codenumber . "000" . strval(intval($count) + 1);
-                                }
-                                elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
-                                {
-                                    $count = substr($newnumber2,12);
-                                    $code_sl2 = $codenumber . "00" . strval(intval($count) + 1);
-                                }
-                                elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
-                                {
-                                    $count = substr($newnumber2,11);
-                                    $code_sl2 = $codenumber . "0" . strval(intval($count) + 1);
-                                }
-                                elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
-                                {
-                                    $count = substr($newnumber2,10);
-                                    $code_sl2 = $codenumber  . strval(intval($count) + 1);
-                                }
-
-
-                                $reservedslipnumber = SlipNumber::create([
-                                            'number'=>$code_sl2,
-                                            'slip_type'=>'fe',
-                                            'status'=>'passive'     
-                                ]);
-
-                                $slipnumform = $reservedslipnumber->number;
-
-                                $interestinsured= InterestInsured::orderby('id','asc')->get();
-                                $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-                                foreach($locationid as $dataid)
-                                {
-                                    RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
-                                }
-                                
-                                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                                $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-
-                                // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-
-
-                                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
-                                
-                                $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
-                                
-                                $locationlist=array();
-                                foreach($locationlist2 as $datadetail)
-                                {
-                                    if($datadetail->risklocationdetail){
-                                        $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
-                                        
-                                    }else{
-                                        $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-                                    }
-                                    $locationlist[]= $datadetail;
-                                }
-
-
-                                $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-                                
-                                if(count($interestlist) != null){
-                                    InterestInsuredTemp::where('slip_id', $code_sl)->delete();
-                                }
-
-                                if(count($locationlist) != null){
-                                    TransLocationTemp::where('insured_id', $code_ms)->delete();
-                                }
-
-                                if(count($deductiblelist) != null){
-                                    //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                                }
-
-                                if(count($extendcoveragelist) != null){
-                                    //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                                }
-
-                                if(count($installmentlist) != null){
-                                    //InstallmentTemp::where('slip_id', $code_sl)->delete();
-                                }
-                                
-                                if(count($retrocessionlist) != null){
-                                   //RetrocessionTemp::where('slip_id', $code_sl)->delete();
-                                }
-
-                                return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-                            
-
-                             }
-                        }
-                    }else{
-                        $reservedslipnumber = SlipNumber::create([
-                                    'number'=>$code_sl,
-                                    'slip_type'=>'fe',
-                                    'status'=>'passive'     
-                        ]);
-
-                        $slipnumform = $reservedslipnumber->number;
-
-                        $interestinsured= InterestInsured::orderby('id','asc')->get();
-                        $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-                        foreach($locationid as $dataid)
-                        {
-                            RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
-                        }
-                        
-                        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                        $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-
-                        // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-
-
-                        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
-                        
-                        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
-                        
-                        $locationlist=array();
-                        foreach($locationlist2 as $datadetail)
-                        {
-                            if($datadetail->risklocationdetail){
-                                $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
-                                
-                            }else{
-                                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-                            }
-                            $locationlist[]= $datadetail;
-                        }
-
-
-                        $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-                        
-                        if(count($interestlist) != null){
-                            InterestInsuredTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        if(count($locationlist) != null){
-                            TransLocationTemp::where('insured_id', $code_ms)->delete();
-                        }
-
-                        if(count($deductiblelist) != null){
-                            //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        if(count($extendcoveragelist) != null){
-                            //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        if(count($installmentlist) != null){
-                            //InstallmentTemp::where('slip_id', $code_sl)->delete();
-                        }
-                        
-                        if(count($retrocessionlist) != null){
-                           //RetrocessionTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-                    
-                    }
-
-                    
-                    
-
-                    
-                 }
-            }
-        }
-        else
-        {
-            $reservedinsurednumber = InsuredNumber::create([
-                            'number'=>$code_ms,
-                            'status'=>'passive'     
-                ]);
-
-                $insurednumform = $reservedinsurednumber->number;
-
-                
-
-                $checkslipnumber= SlipNumber::where('number',$code_sl)->first();
-
-                $slipnumform = '';
-                if($checkslipnumber != null){
-                    if($code_sl != $checkslipnumber->number ){
-                        $reservedslipnumber = SlipNumber::create([
-                                    'number'=>$code_sl,
-                                    'slip_type'=>'fe',
-                                    'status'=>'passive'     
-                        ]);
-                        $slipnumform = $reservedslipnumber->number;
-
-                        $interestinsured= InterestInsured::orderby('id','asc')->get();
-                        $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-                        foreach($locationid as $dataid)
-                        {
-                            RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
-                        }
-                        
-                        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                        $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                        $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-
-                        // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-
-
-                        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
-                        
-                        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
-                        
-                        $locationlist=array();
-                        foreach($locationlist2 as $datadetail)
-                        {
-                            if($datadetail->risklocationdetail){
-                                $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
-                                
-                            }else{
-                                $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-                            }
-                            $locationlist[]= $datadetail;
-                        }
-
-
-                        $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-                        
-                        if(count($interestlist) != null){
-                            InterestInsuredTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        if(count($locationlist) != null){
-                            TransLocationTemp::where('insured_id', $code_ms)->delete();
-                        }
-
-                        if(count($deductiblelist) != null){
-                            //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        if(count($extendcoveragelist) != null){
-                            //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        if(count($installmentlist) != null){
-                            //InstallmentTemp::where('slip_id', $code_sl)->delete();
-                        }
-                        
-                        if(count($retrocessionlist) != null){
-                           //RetrocessionTemp::where('slip_id', $code_sl)->delete();
-                        }
-
-                        return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-                    
-
-                    }else{
-                         if($checkslipnumber->status == 'passive'){
-                            SlipNumber::where('number','=',$checkslipnumber->number)->orderby('id','desc')->delete();
-
-                             $reservedslipnumber = SlipNumber::create([
-                                        'number'=>$code_sl,
-                                        'slip_type'=>'fe',
-                                        'status'=>'passive'     
-                            ]);
-                             $slipnumform = $reservedslipnumber->number;
-
-                             $interestinsured= InterestInsured::orderby('id','asc')->get();
-                                $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-                                foreach($locationid as $dataid)
-                                {
-                                    RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
-                                }
-                                
-                                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                                $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                                $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-
-                                // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-
-
-                                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
-                                
-                                $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
-                                
-                                $locationlist=array();
-                                foreach($locationlist2 as $datadetail)
-                                {
-                                    if($datadetail->risklocationdetail){
-                                        $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
-                                        
-                                    }else{
-                                        $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-                                    }
-                                    $locationlist[]= $datadetail;
-                                }
-
-
-                                $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-                                
-                                if(count($interestlist) != null){
-                                    InterestInsuredTemp::where('slip_id', $code_sl)->delete();
-                                }
-
-                                if(count($locationlist) != null){
-                                    TransLocationTemp::where('insured_id', $code_ms)->delete();
-                                }
-
-                                if(count($deductiblelist) != null){
-                                    //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                                }
-
-                                if(count($extendcoveragelist) != null){
-                                    //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                                }
-
-                                if(count($installmentlist) != null){
-                                    //InstallmentTemp::where('slip_id', $code_sl)->delete();
-                                }
-                                
-                                if(count($retrocessionlist) != null){
-                                   //RetrocessionTemp::where('slip_id', $code_sl)->delete();
-                                }
-
-                                return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-                            
-
-                         }elseif($checkslipnumber->status == 'active'){
-                            $newnumber2 = substr($checkslipnumber->number, 10,15);
-                            $codenumber = substr($checkslipnumber->number, 0,10);
-
-                            if(intval($newnumber2) < 9)
-                            {
-                                $count = substr($newnumber2,14);
-                                $code_sl2 = $codenumber . "0000" . strval(intval($count) + 1);
-                            }   
-                            elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
-                            {
-                                $count = substr($newnumber2,13);
-                                $code_sl2 = $codenumber . "000" . strval(intval($count) + 1);
-                            }
-                            elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
-                            {
-                                $count = substr($newnumber2,12);
-                                $code_sl2 = $codenumber . "00" . strval(intval($count) + 1);
-                            }
-                            elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
-                            {
-                                $count = substr($newnumber2,11);
-                                $code_sl2 = $codenumber . "0" . strval(intval($count) + 1);
-                            }
-                            elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
-                            {
-                                $count = substr($newnumber2,10);
-                                $code_sl2 = $codenumber  . strval(intval($count) + 1);
-                            }
-
-
-                            $reservedslipnumber = SlipNumber::create([
-                                        'number'=>$code_sl2,
-                                        'slip_type'=>'fe',
-                                        'status'=>'passive'     
-                            ]);
-
-                            $slipnumform = $reservedslipnumber->number;
-
-                            $interestinsured= InterestInsured::orderby('id','asc')->get();
-                            $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-                            foreach($locationid as $dataid)
-                            {
-                                RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
-                            }
-                            
-                            $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                            $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                            $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-
-                            // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-
-
-                            $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-
-                            
-                            $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
-
-                            
-                            $locationlist=array();
-                            foreach($locationlist2 as $datadetail)
-                            {
-                                if($datadetail->risklocationdetail){
-                                    $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
-                                    
-                                }else{
-                                    $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
-                                }
-                                $locationlist[]= $datadetail;
-                            }
-
-
-                            $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
-                            
-                            if(count($interestlist) != null){
-                                InterestInsuredTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            if(count($locationlist) != null){
-                                TransLocationTemp::where('insured_id', $code_ms)->delete();
-                            }
-
-                            if(count($deductiblelist) != null){
-                                //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            if(count($extendcoveragelist) != null){
-                                //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            if(count($installmentlist) != null){
-                                //InstallmentTemp::where('slip_id', $code_sl)->delete();
-                            }
-                            
-                            if(count($retrocessionlist) != null){
-                               //RetrocessionTemp::where('slip_id', $code_sl)->delete();
-                            }
-
-                            return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
-                        
-
-                         }
-                    }
-                }
-                else
-                {
                     $reservedslipnumber = SlipNumber::create([
-                                'number'=>$code_sl,
-                                'slip_type'=>'fe',
-                                'status'=>'passive'     
+                            'number'=>$code_sl,
+                            'slip_type'=>'fe',
+                            'status'=>'passive',
+                            'insured_number'=>$code_ms       
                     ]);
-
-                    $slipnumform = $reservedslipnumber->number;
 
                     $interestinsured= InterestInsured::orderby('id','asc')->get();
                     $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
@@ -1993,34 +670,202 @@ class FeSlipController extends Controller
 
                     $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
                     
-                    if(count($interestlist) != null){
-                        InterestInsuredTemp::where('slip_id', $code_sl)->delete();
+                    // if(count($interestlist) != null){
+                    //     InterestInsuredTemp::where('slip_id', $code_sl)->delete();
+                    // }
+
+                    // if(count($locationlist) != null){
+                    //     TransLocationTemp::where('insured_id', $code_ms)->delete();
+                    // }
+
+                    return view('crm.transaction.fe_slip', compact(['insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+
+
+                       
+
+                 }elseif($checkinsurednumber->status == 'active'){
+                    $newnumber2 = substr($code_ms, 10,15);
+                    $codenumber = substr($code_ms, 0,10);
+
+                    if(intval($newnumber2) < 9)
+                    {
+                        $count = substr($newnumber2,14);
+                        $code_ms2 = $codenumber . "0000" . strval(intval($count) + 1);
+                    }   
+                    elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+                    {
+                        $count = substr($newnumber2,13);
+                        $code_ms2 = $codenumber . "000" . strval(intval($count) + 1);
+                    }
+                    elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+                    {
+                        $count = substr($newnumber2,12);
+                        $code_ms2 = $codenumber . "00" . strval(intval($count) + 1);
+                    }
+                    elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+                    {
+                        $count = substr($newnumber2,11);
+                        $code_ms2 = $codenumber . "0" . strval(intval($count) + 1);
+                    }
+                    elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+                    {
+                        $count = substr($newnumber2,10);
+                        $code_ms2 = $codenumber  . strval(intval($count) + 1);
                     }
 
-                    if(count($locationlist) != null){
-                        TransLocationTemp::where('insured_id', $code_ms)->delete();
-                    }
 
-                    if(count($deductiblelist) != null){
-                        //DeductibleTemp::where('slip_id', $code_sl)->delete();
-                    }
+                    $reservedinsurednumber = InsuredNumber::create([
+                                'number'=>$code_ms2,
+                                'status'=>'passive'     
+                    ]);
 
-                    if(count($extendcoveragelist) != null){
-                        //ExtendCoverageTemp::where('slip_id', $code_sl)->delete();
-                    }
+                    $insurednumform = $reservedinsurednumber->number;
 
-                    if(count($installmentlist) != null){
-                        //InstallmentTemp::where('slip_id', $code_sl)->delete();
+                    
+                    $checkslipnumber= SlipNumber::where('number',$code_sl)->first();
+
+                    $reservedslipnumber = SlipNumber::create([
+                            'number'=>$code_sl,
+                            'slip_type'=>'fe',
+                            'status'=>'passive',
+                            'insured_number'=>$code_ms       
+                    ]);
+
+                    $interestinsured= InterestInsured::orderby('id','asc')->get();
+                    $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+                    foreach($locationid as $dataid)
+                    {
+                        RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
                     }
                     
-                    if(count($retrocessionlist) != null){
-                       //RetrocessionTemp::where('slip_id', $code_sl)->delete();
+                    $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                    $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                    $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                    $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                    $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                    $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
+                    $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+
+                    // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+
+
+                    $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                    $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                    $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                    $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                    $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+
+                    
+                    $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+                    
+                    $locationlist=array();
+                    foreach($locationlist2 as $datadetail)
+                    {
+                        if($datadetail->risklocationdetail){
+                            $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
+                            
+                        }else{
+                            $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
+                        }
+                        $locationlist[]= $datadetail;
                     }
 
-                    return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+
+                    $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+                    
+                    // if(count($interestlist) != null){
+                    //     InterestInsuredTemp::where('slip_id', $code_sl)->delete();
+                    // }
+
+                    // if(count($locationlist) != null){
+                    //     TransLocationTemp::where('insured_id', $code_ms)->delete();
+                    // }
+
+                    return view('crm.transaction.fe_slip', compact(['insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+
+
+                    
+                    
+
+                    
+                 }
+            }
+        }
+        else
+        {
+            $reservedinsurednumber = InsuredNumber::create([
+                            'number'=>$code_ms,
+                            'status'=>'passive'     
+                ]);
+
+                $insurednumform = $reservedinsurednumber->number;
+
                 
 
+                $checkslipnumber= SlipNumber::where('number',$code_sl)->first();
+
+                $slipnumform = '';
+                $reservedslipnumber = SlipNumber::create([
+                            'number'=>$code_sl,
+                            'slip_type'=>'fe',
+                            'status'=>'passive',
+                            'insured_number'=>$code_ms       
+                    ]);
+
+                $interestinsured= InterestInsured::orderby('id','asc')->get();
+                $locationid = TransLocationTemp::select('id')->where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+                foreach($locationid as $dataid)
+                {
+                    RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
                 }
+                
+                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
+                $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+
+                // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+
+
+                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+
+                
+                $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+
+                
+                $locationlist=array();
+                foreach($locationlist2 as $datadetail)
+                {
+                    if($datadetail->risklocationdetail){
+                        $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
+                        
+                    }else{
+                        $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
+                    }
+                    $locationlist[]= $datadetail;
+                }
+
+
+                $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+                
+                // if(count($interestlist) != null){
+                //     InterestInsuredTemp::where('slip_id', $code_sl)->delete();
+                // }
+
+                // if(count($locationlist) != null){
+                //     TransLocationTemp::where('insured_id', $code_ms)->delete();
+                // }
+
+                return view('crm.transaction.fe_slip', compact(['insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+
                 
         }        
     }
@@ -3294,167 +2139,187 @@ class FeSlipController extends Controller
                 $slipnumberdata->status = 'active';
                 $slipnumberdata->save();
 
-                $old_number = $request->slipnumber;
-                $newnumber = substr($old_number, 10,15);
-                $codenumber = substr($old_number, 0,10);
 
-                if(intval($newnumber) < 9)
+                $currdate2 = date("Y-m-d");
+                $mydate = date("Y").date("m").date("d");
+                $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','fe')->where('insured_id',$request->code_ms)->orderby('id','asc')->get();
+                $sliplastid = count($slip_now);
+                // dd($sliplastid);
+
+                if($sliplastid != null)
                 {
+                    if($sliplastid < 9)
+                    {
+                        $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + 1);
+                    }   
+                    elseif($sliplastid > 8 && $sliplastid < 99)
+                    {
+                        $code_sl = "FE".  $mydate . "000" . strval($sliplastid + 1);
+                    }
+                    elseif($sliplastid > 98 && $sliplastid < 999)
+                    {
+                        $code_sl = "FE".  $mydate . "00" . strval($sliplastid + 1);
+                    }
+                    elseif($sliplastid > 998 && $sliplastid < 9999)
+                    {
+                        $code_sl = "FE".  $mydate . "0" . strval($sliplastid + 1);
+                    }
+                    elseif($sliplastid > 9998 && $sliplastid < 99999)
+                    {
+                        $code_sl = "FE".  $mydate . strval($sliplastid + 1);
+                    }
 
-
-                    $count = substr($newnumber,14);
-                    $new_number = $codenumber . "0000" . strval(intval($count) + 1);
-
-                    // $notification = array(
-                    //     'number' => $newnumber,
-                    //     'count' => $count,
-                    //     'slipnumber' => $new_number
-                    // );
-
-                    // dd($notification);
-
-                    $reservedslipnumber = SlipNumber::create([
-                            'number'=>$new_number,
-                            'slip_type'=>'fe',
-                            'status'=>'passive'     
-                    ]);
-
-                    return response()->json(
-                        [
-                            'id' => $slipdataup->id,
-                            'number' => $request->slipnumber,
-                            'slipnumber' => $new_number,
-                            'slipstatus' => $slipdataup->status,
-                            'ceding'=>$slipdataup->ceding->name,
-                            'cedingbroker'=>$slipdataup->cedingbroker->name,
-                            'count_endorsement'=>$slipdataup->endorsment
-                        ]
-                    );
-                }   
-                elseif(intval($newnumber) > 8 && intval($newnumber) < 99)
-                {
-                    $count = substr($newnumber,13);
-                    $new_number = $codenumber . "000" . strval(intval($count) + 1);
-
-                    $reservedslipnumber = SlipNumber::create([
-                            'number'=>$new_number,
-                            'slip_type'=>'fe',
-                            'status'=>'passive'     
-                    ]);
-
-                    // $notification = array(
-                    //     'number' => $newnumber,
-                    //     'count' => $count,
-                    //     'slipnumber' => $new_number
-                    // );
-
-                    // dd($notification);
-
-                    return response()->json(
-                        [
-                            'id' => $slipdataup->id,
-                            'number' => $request->slipnumber,
-                            'slipnumber' => $new_number,
-                            'slipstatus' => $slipdataup->status,
-                            'ceding'=>$slipdataup->ceding->name,
-                            'cedingbroker'=>$slipdataup->cedingbroker->name,
-                            'count_endorsement'=>$slipdataup->endorsment
-                        ]
-                    );
+                    
                 }
-                elseif(intval($newnumber) > 98 && intval($newnumber) < 999)
+                else
                 {
-                    $count = substr($newnumber,12);
-                    $new_number = $codenumber . "00" . strval(intval($count) + 1);
+                    $code_sl = "FE".  $mydate . "0000" . strval(1);
+                }
 
-                    // $notification = array(
-                    //     'number' => $newnumber,
-                    //     'count' => $count,
-                    //     'slipnumber' => $new_number
-                    // );
-
-                    // dd($notification);
-
-                    $reservedslipnumber = SlipNumber::create([
-                            'number'=>$new_number,
+                $reservedslipnumber = SlipNumber::create([
+                            'number'=>$code_sl,
                             'slip_type'=>'fe',
-                            'status'=>'passive'     
+                            'status'=>'passive',
+                            'insured_number'=>$request->code_ms     
                     ]);
 
-                    return response()->json(
-                        [
-                            'id' => $slipdataup->id,
-                            'number' => $request->slipnumber,
-                            'slipnumber' => $new_number,
-                            'slipstatus' => $slipdataup->status,
-                            'ceding'=>$slipdataup->ceding->name,
-                            'cedingbroker'=>$slipdataup->cedingbroker->name,
-                            'count_endorsement'=>$slipdataup->endorsment
-                        ]
-                    );
-                }
-                elseif(intval($newnumber) > 998 && intval($newnumber) < 9999)
-                {
-                    $count = substr($newnumber,11);
-                    $new_number = $codenumber . "0" . strval(intval($count) + 1);
+                return response()->json(
+                    [
+                        'id' => $slipdataup->id,
+                        'number' => $request->slipnumber,
+                        'slipnumber' => $code_sl,
+                        'slipstatus' => $slipdataup->status,
+                        'ceding'=>$slipdataup->ceding->name,
+                        'cedingbroker'=>$slipdataup->cedingbroker->name,
+                        'count_endorsement'=>$slipdataup->endorsment
+                    ]
+                );
 
-                    // $notification = array(
-                    //     'number' => $newnumber,
-                    //     'count' => $count,
-                    //     'slipnumber' => $new_number
-                    // );
+                // $old_number = $request->slipnumber;
+                // $newnumber = substr($old_number, 10,15);
+                // $codenumber = substr($old_number, 0,10);
 
-                    // dd($notification);
+                // if(intval($newnumber) < 9)
+                // {
 
-                    $reservedslipnumber = SlipNumber::create([
-                            'number'=>$new_number,
-                            'slip_type'=>'fe',
-                            'status'=>'passive'     
-                    ]);
 
-                    return response()->json(
-                        [
-                            'id' => $slipdataup->id,
-                            'number' => $request->slipnumber,
-                            'slipnumber' => $new_number,
-                            'slipstatus' => $slipdataup->status,
-                            'ceding'=>$slipdataup->ceding->name,
-                            'cedingbroker'=>$slipdataup->cedingbroker->name,
-                            'count_endorsement'=>$slipdataup->endorsment
-                        ]
-                    );
-                }
-                elseif(intval($newnumber) > 9998 && intval($newnumber) < 99999)
-                {
-                    $count = substr($newnumber,10);
-                    $new_number = $codenumber  . strval(intval($count) + 1);
+                //     $count = substr($newnumber,14);
+                //     $new_number = $codenumber . "0000" . strval(intval($count) + 1);
 
-                    // $notification = array(
-                    //     'number' => $newnumber,
-                    //     'count' => $count,
-                    //     'slipnumber' => $new_number
-                    // );
+                //     $reservedslipnumber = SlipNumber::create([
+                //             'number'=>$new_number,
+                //             'slip_type'=>'fe',
+                //             'status'=>'passive'     
+                //     ]);
 
-                    // dd($notification);
+                //     return response()->json(
+                //         [
+                //             'id' => $slipdataup->id,
+                //             'number' => $request->slipnumber,
+                //             'slipnumber' => $new_number,
+                //             'slipstatus' => $slipdataup->status,
+                //             'ceding'=>$slipdataup->ceding->name,
+                //             'cedingbroker'=>$slipdataup->cedingbroker->name,
+                //             'count_endorsement'=>$slipdataup->endorsment
+                //         ]
+                //     );
+                // }   
+                // elseif(intval($newnumber) > 8 && intval($newnumber) < 99)
+                // {
+                //     $count = substr($newnumber,13);
+                //     $new_number = $codenumber . "000" . strval(intval($count) + 1);
 
-                    $reservedslipnumber = SlipNumber::create([
-                            'number'=>$new_number,
-                            'slip_type'=>'fe',
-                            'status'=>'passive'     
-                    ]);
+                //     $reservedslipnumber = SlipNumber::create([
+                //             'number'=>$new_number,
+                //             'slip_type'=>'fe',
+                //             'status'=>'passive'     
+                //     ]);
 
-                    return response()->json(
-                        [
-                            'id' => $slipdataup->id,
-                            'number' => $request->slipnumber,
-                            'slipnumber' => $new_number,
-                            'slipstatus' => $slipdataup->status,
-                            'ceding'=>$slipdataup->ceding->name,
-                            'cedingbroker'=>$slipdataup->cedingbroker->name,
-                            'count_endorsement'=>$slipdataup->endorsment
-                        ]
-                    );
-                }
+                //     return response()->json(
+                //         [
+                //             'id' => $slipdataup->id,
+                //             'number' => $request->slipnumber,
+                //             'slipnumber' => $new_number,
+                //             'slipstatus' => $slipdataup->status,
+                //             'ceding'=>$slipdataup->ceding->name,
+                //             'cedingbroker'=>$slipdataup->cedingbroker->name,
+                //             'count_endorsement'=>$slipdataup->endorsment
+                //         ]
+                //     );
+                // }
+                // elseif(intval($newnumber) > 98 && intval($newnumber) < 999)
+                // {
+                //     $count = substr($newnumber,12);
+                //     $new_number = $codenumber . "00" . strval(intval($count) + 1);
+
+
+                //     $reservedslipnumber = SlipNumber::create([
+                //             'number'=>$new_number,
+                //             'slip_type'=>'fe',
+                //             'status'=>'passive'     
+                //     ]);
+
+                //     return response()->json(
+                //         [
+                //             'id' => $slipdataup->id,
+                //             'number' => $request->slipnumber,
+                //             'slipnumber' => $new_number,
+                //             'slipstatus' => $slipdataup->status,
+                //             'ceding'=>$slipdataup->ceding->name,
+                //             'cedingbroker'=>$slipdataup->cedingbroker->name,
+                //             'count_endorsement'=>$slipdataup->endorsment
+                //         ]
+                //     );
+                // }
+                // elseif(intval($newnumber) > 998 && intval($newnumber) < 9999)
+                // {
+                //     $count = substr($newnumber,11);
+                //     $new_number = $codenumber . "0" . strval(intval($count) + 1);
+
+
+                //     $reservedslipnumber = SlipNumber::create([
+                //             'number'=>$new_number,
+                //             'slip_type'=>'fe',
+                //             'status'=>'passive'     
+                //     ]);
+
+                //     return response()->json(
+                //         [
+                //             'id' => $slipdataup->id,
+                //             'number' => $request->slipnumber,
+                //             'slipnumber' => $new_number,
+                //             'slipstatus' => $slipdataup->status,
+                //             'ceding'=>$slipdataup->ceding->name,
+                //             'cedingbroker'=>$slipdataup->cedingbroker->name,
+                //             'count_endorsement'=>$slipdataup->endorsment
+                //         ]
+                //     );
+                // }
+                // elseif(intval($newnumber) > 9998 && intval($newnumber) < 99999)
+                // {
+                //     $count = substr($newnumber,10);
+                //     $new_number = $codenumber  . strval(intval($count) + 1);
+
+                
+
+                //     $reservedslipnumber = SlipNumber::create([
+                //             'number'=>$new_number,
+                //             'slip_type'=>'fe',
+                //             'status'=>'passive'     
+                //     ]);
+
+                //     return response()->json(
+                //         [
+                //             'id' => $slipdataup->id,
+                //             'number' => $request->slipnumber,
+                //             'slipnumber' => $new_number,
+                //             'slipstatus' => $slipdataup->status,
+                //             'ceding'=>$slipdataup->ceding->name,
+                //             'cedingbroker'=>$slipdataup->cedingbroker->name,
+                //             'count_endorsement'=>$slipdataup->endorsment
+                //         ]
+                //     );
+                // }
                 
             }
             else
@@ -3556,125 +2421,180 @@ class FeSlipController extends Controller
                 $slipnumberdata->status = 'active';
                 $slipnumberdata->save();
 
-                $old_number = $request->slipnumber;
-                $newnumber = substr($old_number, 10,15);
-                $codenumber = substr($old_number, 0,10);
+                $currdate2 = date("Y-m-d");
+                $mydate = date("Y").date("m").date("d");
+                $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','fe')->where('insured_id',$request->code_ms)->orderby('id','asc')->get();
+                $sliplastid = count($slip_now);
+                // dd($sliplastid);
 
-                if(intval($newnumber) < 9)
+                if($sliplastid != null)
                 {
-                    $count = substr($newnumber,14);
-                    $new_number = $codenumber . "0000" . strval(intval($count) + 1);
+                    if($sliplastid < 9)
+                    {
+                        $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + 1);
+                    }   
+                    elseif($sliplastid > 8 && $sliplastid < 99)
+                    {
+                        $code_sl = "FE".  $mydate . "000" . strval($sliplastid + 1);
+                    }
+                    elseif($sliplastid > 98 && $sliplastid < 999)
+                    {
+                        $code_sl = "FE".  $mydate . "00" . strval($sliplastid + 1);
+                    }
+                    elseif($sliplastid > 998 && $sliplastid < 9999)
+                    {
+                        $code_sl = "FE".  $mydate . "0" . strval($sliplastid + 1);
+                    }
+                    elseif($sliplastid > 9998 && $sliplastid < 99999)
+                    {
+                        $code_sl = "FE".  $mydate . strval($sliplastid + 1);
+                    }
 
-                    $reservedslipnumber = SlipNumber::create([
-                            'number'=>$new_number,
-                            'slip_type'=>'fe',
-                            'status'=>'passive'     
-                    ]);
-
-                    return response()->json(
-                        [
-                            'id' => $slipdataup->id,
-                            'number' => $request->slipnumber,
-                            'slipnumber' => $new_number,
-                            'slipstatus' => $slipdataup->status,
-                            'ceding'=>$slipdataup->ceding->name,
-                            'cedingbroker'=>$slipdataup->cedingbroker->name,
-                            'count_endorsement'=>$slipdataup->endorsment
-                        ]
-                    );
-                }   
-                elseif(intval($newnumber) > 8 && intval($newnumber) < 99)
-                {
-                    $count = substr($newnumber,13);
-                    $new_number = $codenumber . "000" . strval(intval($count) + 1);
-
-                    $reservedslipnumber = SlipNumber::create([
-                            'number'=>$new_number,
-                            'slip_type'=>'fe',
-                            'status'=>'passive'     
-                    ]);
-
-                    return response()->json(
-                        [
-                            'id' => $slipdataup->id,
-                            'number' => $request->slipnumber,
-                            'slipnumber' => $new_number,
-                            'slipstatus' => $slipdataup->status,
-                            'ceding'=>$slipdataup->ceding->name,
-                            'cedingbroker'=>$slipdataup->cedingbroker->name,
-                            'count_endorsement'=>$slipdataup->endorsment
-                        ]
-                    );
+                    
                 }
-                elseif(intval($newnumber) > 98 && intval($newnumber) < 999)
+                else
                 {
-                    $count = substr($newnumber,12);
-                    $new_number = $codenumber . "00" . strval(intval($count) + 1);
+                    $code_sl = "FE".  $mydate . "0000" . strval(1);
+                }
 
-                    $reservedslipnumber = SlipNumber::create([
-                            'number'=>$new_number,
+                $reservedslipnumber = SlipNumber::create([
+                            'number'=>$code_sl,
                             'slip_type'=>'fe',
-                            'status'=>'passive'     
+                            'status'=>'passive',
+                            'insured_number' => $request->code_ms     
                     ]);
 
-                    return response()->json(
-                        [
-                            'id' => $slipdataup->id,
-                            'number' => $request->slipnumber,
-                            'slipnumber' => $new_number,
-                            'slipstatus' => $slipdataup->status,
-                            'ceding'=>$slipdataup->ceding->name,
-                            'cedingbroker'=>$slipdataup->cedingbroker->name,
-                            'count_endorsement'=>$slipdataup->endorsment
-                        ]
-                    );
-                }
-                elseif(intval($newnumber) > 998 && intval($newnumber) < 9999)
-                {
-                    $count = substr($newnumber,11);
-                    $new_number = $codenumber . "0" . strval(intval($count) + 1);
+                return response()->json(
+                    [
+                        'id' => $slipdataup->id,
+                        'number' => $request->slipnumber,
+                        'slipnumber' => $code_sl,
+                        'slipstatus' => $slipdataup->status,
+                        'ceding'=>$slipdataup->ceding->name,
+                        'cedingbroker'=>$slipdataup->cedingbroker->name,
+                        'count_endorsement'=>$slipdataup->endorsment
+                    ]
+                );
 
-                    $reservedslipnumber = SlipNumber::create([
-                            'number'=>$new_number,
-                            'slip_type'=>'fe',
-                            'status'=>'passive'     
-                    ]);
+                // $old_number = $request->slipnumber;
+                // $newnumber = substr($old_number, 10,15);
+                // $codenumber = substr($old_number, 0,10);
 
-                    return response()->json(
-                        [
-                            'id' => $slipdataup->id,
-                            'number' => $request->slipnumber,
-                            'slipnumber' => $new_number,
-                            'slipstatus' => $slipdataup->status,
-                            'ceding'=>$slipdataup->ceding->name,
-                            'cedingbroker'=>$slipdataup->cedingbroker->name,
-                            'count_endorsement'=>$slipdataup->endorsment
-                        ]
-                    );
-                }
-                elseif(intval($newnumber) > 9998 && intval($newnumber) < 99999)
-                {
-                    $count = substr($newnumber,10);
-                    $new_number = $codenumber  . strval(intval($count) + 1);
+                // if(intval($newnumber) < 9)
+                // {
+                //     $count = substr($newnumber,14);
+                //     $new_number = $codenumber . "0000" . strval(intval($count) + 1);
 
-                    $reservedslipnumber = SlipNumber::create([
-                            'number'=>$new_number,
-                            'slip_type'=>'fe',
-                            'status'=>'passive'     
-                    ]);
+                //     $reservedslipnumber = SlipNumber::create([
+                //             'number'=>$new_number,
+                //             'slip_type'=>'fe',
+                //             'status'=>'passive'     
+                //     ]);
 
-                    return response()->json(
-                        [
-                            'id' => $slipdataup->id,
-                            'number' => $request->slipnumber,
-                            'slipnumber' => $new_number,
-                            'slipstatus' => $slipdataup->status,
-                            'ceding'=>$slipdataup->ceding->name,
-                            'cedingbroker'=>$slipdataup->cedingbroker->name,
-                            'count_endorsement'=>$slipdataup->endorsment
-                        ]
-                    );
-                }
+                //     return response()->json(
+                //         [
+                //             'id' => $slipdataup->id,
+                //             'number' => $request->slipnumber,
+                //             'slipnumber' => $new_number,
+                //             'slipstatus' => $slipdataup->status,
+                //             'ceding'=>$slipdataup->ceding->name,
+                //             'cedingbroker'=>$slipdataup->cedingbroker->name,
+                //             'count_endorsement'=>$slipdataup->endorsment
+                //         ]
+                //     );
+                // }   
+                // elseif(intval($newnumber) > 8 && intval($newnumber) < 99)
+                // {
+                //     $count = substr($newnumber,13);
+                //     $new_number = $codenumber . "000" . strval(intval($count) + 1);
+
+                //     $reservedslipnumber = SlipNumber::create([
+                //             'number'=>$new_number,
+                //             'slip_type'=>'fe',
+                //             'status'=>'passive'     
+                //     ]);
+
+                //     return response()->json(
+                //         [
+                //             'id' => $slipdataup->id,
+                //             'number' => $request->slipnumber,
+                //             'slipnumber' => $new_number,
+                //             'slipstatus' => $slipdataup->status,
+                //             'ceding'=>$slipdataup->ceding->name,
+                //             'cedingbroker'=>$slipdataup->cedingbroker->name,
+                //             'count_endorsement'=>$slipdataup->endorsment
+                //         ]
+                //     );
+                // }
+                // elseif(intval($newnumber) > 98 && intval($newnumber) < 999)
+                // {
+                //     $count = substr($newnumber,12);
+                //     $new_number = $codenumber . "00" . strval(intval($count) + 1);
+
+                //     $reservedslipnumber = SlipNumber::create([
+                //             'number'=>$new_number,
+                //             'slip_type'=>'fe',
+                //             'status'=>'passive'     
+                //     ]);
+
+                //     return response()->json(
+                //         [
+                //             'id' => $slipdataup->id,
+                //             'number' => $request->slipnumber,
+                //             'slipnumber' => $new_number,
+                //             'slipstatus' => $slipdataup->status,
+                //             'ceding'=>$slipdataup->ceding->name,
+                //             'cedingbroker'=>$slipdataup->cedingbroker->name,
+                //             'count_endorsement'=>$slipdataup->endorsment
+                //         ]
+                //     );
+                // }
+                // elseif(intval($newnumber) > 998 && intval($newnumber) < 9999)
+                // {
+                //     $count = substr($newnumber,11);
+                //     $new_number = $codenumber . "0" . strval(intval($count) + 1);
+
+                //     $reservedslipnumber = SlipNumber::create([
+                //             'number'=>$new_number,
+                //             'slip_type'=>'fe',
+                //             'status'=>'passive'     
+                //     ]);
+
+                //     return response()->json(
+                //         [
+                //             'id' => $slipdataup->id,
+                //             'number' => $request->slipnumber,
+                //             'slipnumber' => $new_number,
+                //             'slipstatus' => $slipdataup->status,
+                //             'ceding'=>$slipdataup->ceding->name,
+                //             'cedingbroker'=>$slipdataup->cedingbroker->name,
+                //             'count_endorsement'=>$slipdataup->endorsment
+                //         ]
+                //     );
+                // }
+                // elseif(intval($newnumber) > 9998 && intval($newnumber) < 99999)
+                // {
+                //     $count = substr($newnumber,10);
+                //     $new_number = $codenumber  . strval(intval($count) + 1);
+
+                //     $reservedslipnumber = SlipNumber::create([
+                //             'number'=>$new_number,
+                //             'slip_type'=>'fe',
+                //             'status'=>'passive'     
+                //     ]);
+
+                //     return response()->json(
+                //         [
+                //             'id' => $slipdataup->id,
+                //             'number' => $request->slipnumber,
+                //             'slipnumber' => $new_number,
+                //             'slipstatus' => $slipdataup->status,
+                //             'ceding'=>$slipdataup->ceding->name,
+                //             'cedingbroker'=>$slipdataup->cedingbroker->name,
+                //             'count_endorsement'=>$slipdataup->endorsment
+                //         ]
+                //     );
+                // }
 
                 
 

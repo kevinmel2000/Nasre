@@ -317,55 +317,7 @@
                             </div>
 
 
-                                    <!--div class="row">
-                                        <div class="col-md-6 col-md-12">
-                                            <div class="form-group">
-                                                <label for="">{{__('Interest list')}}</label>
-                                                <select id="slipinterestlistlocation" name="slipinterestlistlocation" class="form-control form-control-sm ">
-                                                    <option selected disabled>{{__('Interest list')}}</option>
-                                                    @foreach($interestinsured as $ii)
-                                                        <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
-                                                    @endforeach
-                                                </select>
-                                          </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6 col-md-12">
-                                            <div class="form-group">
-                                                <label for="">{{__('CN No')}}</label>
-                                                <input type="text" id="cnno" name="cnno" class="form-control form-control-sm" value="" required/>
-                                          </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6 col-md-12">
-                                            <div class="form-group">
-                                                <label for="">{{__('Cert No')}}</label>
-                                                <input type="text" id="certno" name="certno" class="form-control form-control-sm" value="" required/>
-                                          </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6 col-md-12">
-                                            <div class="form-group">
-                                                <label for="">{{__('Ref No')}}</label>
-                                                <input type="text" id="refno" name="refno" class="form-control form-control-sm" value="" required/>
-                                          </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6 col-md-12">
-                                            <div class="form-group">
-                                                <label for="">{{__('Amount')}}</label>
-                                                <input type="text" id="amountlocation" name="amountlocation" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-20"/>
-                                          </div>
-                                        </div>
-                                    </div-->
+                                    
 
                                 </div>
 
@@ -620,7 +572,7 @@
                                                                 <div class="form-group">
                                                                     <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
                                                                     <label for="">{{__('Number')}} </label>
-                                                                    <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" value="{{ $slipnumform }}" readonly="readonly" required/>
+                                                                    <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" value="{{ $code_sl }}" readonly="readonly" required/>
                                                                 </div>
                                                             </div>
                                                         </div>
