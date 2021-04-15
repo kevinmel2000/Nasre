@@ -23,7 +23,7 @@
  
                         @if(file_exists(STORAGE_PATH('INSTALLED')))
                             {{-- If CRM is installed --}}
-                            <a href="{{ url('client/login') }}">{{__('auth.client_login')}}</a>
+                            <!-- <a href="{{ url('client/login') }}">{{__('auth.client_login')}}</a> -->
                             <a href="{{ route('login') }}">{{__('auth.login')}}</a>
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}">{{__('auth.register')}}</a>

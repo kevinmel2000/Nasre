@@ -37,7 +37,7 @@
                             @enderror
                         </div>
                     
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -45,18 +45,18 @@
                                     {{ __('auth.remember') }}
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group  mb-0">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('auth.login') }}
                             </button>
 
-                            @if (Route::has('password.request'))
+                           <!--  @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('auth.forgot_password') }}
                                 </a>
-                            @endif
+                            @endif -->
                         </div>
                     </form>
                 </div>
