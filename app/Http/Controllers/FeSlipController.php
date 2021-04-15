@@ -443,6 +443,86 @@ class FeSlipController extends Controller
         //         }
         // }
 
+        $slipdata=SlipTable::where('insured_id',$code_ms)->first();
+        $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
+        $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','fe')->where('insured_id',$code_ms)->orderby('id','asc')->get();
+        $sliplastid = count($slip_now);
+        // dd($sliplastid);
+
+        if($sliplastid != null)
+        {
+            if($sliplastid < 9)
+            {
+                $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + 1);
+            }   
+            elseif($sliplastid > 8 && $sliplastid < 99)
+            {
+                $code_sl = "FE".  $mydate . "000" . strval($sliplastid + 1);
+            }
+            elseif($sliplastid > 98 && $sliplastid < 999)
+            {
+                $code_sl = "FE".  $mydate . "00" . strval($sliplastid + 1);
+            }
+            elseif($sliplastid > 998 && $sliplastid < 9999)
+            {
+                $code_sl = "FE".  $mydate . "0" . strval($sliplastid + 1);
+            }
+            elseif($sliplastid > 9998 && $sliplastid < 99999)
+            {
+                $code_sl = "FE".  $mydate . strval($sliplastid + 1);
+            }
+
+            
+        }
+        else
+        {
+            $code_sl = "FE".  $mydate . "0000" . strval(1);
+        }
+        // $kondisi=0;
+        // $im=1;
+        // while($kondisi==0)
+        // {
+        //     $checkdataslip= SlipTable::where('number',$code_sl)->first();
+
+        //     if(!empty($checkdataslip))
+        //     {
+        //         $newnumber2 = substr($code_sl, 10,15);
+        //         $codenumber = substr($code_sl, 0,10);
+
+        //         if(intval($newnumber2) < 9)
+        //         {
+        //             $count = substr($newnumber2,14);
+        //             $code_sl = $codenumber . "0000" . strval(intval($count) + $im);
+        //         }   
+        //         elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
+        //         {
+        //             $count = substr($newnumber2,13);
+        //             $code_sl = $codenumber . "000" . strval(intval($count) + $im);
+        //         }
+        //         elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
+        //         {
+        //             $count = substr($newnumber2,12);
+        //             $code_sl = $codenumber . "00" . strval(intval($count) + $im);
+        //         }
+        //         elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
+        //         {
+        //             $count = substr($newnumber2,11);
+        //             $code_sl = $codenumber . "0" . strval(intval($count) + $im);
+        //         }
+        //         elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
+        //         {
+        //             $count = substr($newnumber2,10);
+        //             $code_sl = $codenumber  . strval(intval($count) + $im);
+        //         }
+                
+        //         $im++;
+        //     }
+        //     else
+        //     {
+        //         $kondisi=1;
+        //     }    
+        // }
+
         $checkinsurednumber = InsuredNumber::where('number',$code_ms)->first();
         $insurednumform = '';
         if($checkinsurednumber != null){
@@ -454,90 +534,7 @@ class FeSlipController extends Controller
 
                 $insurednumform = $reservedinsurednumber->number;
 
-                $slipdata=SlipTable::where('insured_id',$code_ms)->first();
-                $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
-                $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','fe')->where('insured_id',$code_ms)->orderby('id','asc')->get();
-                $sliplastid = count($slip_now);
-                // dd($sliplastid);
-
-                if($sliplastid != null)
-                {
-                    if($sliplastid < 9)
-                    {
-                        $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + 1);
-                    }   
-                    elseif($sliplastid > 8 && $sliplastid < 99)
-                    {
-                        $code_sl = "FE".  $mydate . "000" . strval($sliplastid + 1);
-                    }
-                    elseif($sliplastid > 98 && $sliplastid < 999)
-                    {
-                        $code_sl = "FE".  $mydate . "00" . strval($sliplastid + 1);
-                    }
-                    elseif($sliplastid > 998 && $sliplastid < 9999)
-                    {
-                        $code_sl = "FE".  $mydate . "0" . strval($sliplastid + 1);
-                    }
-                    elseif($sliplastid > 9998 && $sliplastid < 99999)
-                    {
-                        $code_sl = "FE".  $mydate . strval($sliplastid + 1);
-                    }
-
-                    
-                }
-                else
-                {
-                    $code_sl = "FE".  $mydate . "0000" . strval(1);
-                }
-
-                
-                // $kondisi=0;
-                // $im=1;
-                // while($kondisi==0)
-                // {
-                //     $checkdataslip= SlipTable::where('number',$code_sl)->first();
-
-                //     if(!empty($checkdataslip))
-                //     {
-                //         $newnumber2 = substr($code_sl, 10,15);
-                //         $codenumber = substr($code_sl, 0,10);
-
-                //         if(intval($newnumber2) < 9)
-                //         {
-                //             $count = substr($newnumber2,14);
-                //             $code_sl = $codenumber . "0000" . strval(intval($count) + $im);
-                //         }   
-                //         elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
-                //         {
-                //             $count = substr($newnumber2,13);
-                //             $code_sl = $codenumber . "000" . strval(intval($count) + $im);
-                //         }
-                //         elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
-                //         {
-                //             $count = substr($newnumber2,12);
-                //             $code_sl = $codenumber . "00" . strval(intval($count) + $im);
-                //         }
-                //         elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
-                //         {
-                //             $count = substr($newnumber2,11);
-                //             $code_sl = $codenumber . "0" . strval(intval($count) + $im);
-                //         }
-                //         elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
-                //         {
-                //             $count = substr($newnumber2,10);
-                //             $code_sl = $codenumber  . strval(intval($count) + $im);
-                //         }
-                        
-                //         $im++;
-                //     }
-                //     else
-                //     {
-                //         $kondisi=1;
-                //     }    
-                // }
-                        
-                
-
+                //slip number
                 $checkslipnumber= SlipNumber::where('number',$code_sl)->first();
 
                 $slipnumform = '';
@@ -621,7 +618,7 @@ class FeSlipController extends Controller
                     
                     }else{
                          if($checkslipnumber->status == 'passive'){
-                            SlipNumber::where('number','=',$code_sl)->orderby('id','desc')->delete();
+                            SlipNumber::where('number','=',$checkslipnumber->number)->orderby('id','desc')->delete();
 
                              $reservedslipnumber = SlipNumber::create([
                                         'number'=>$code_sl,
@@ -700,8 +697,9 @@ class FeSlipController extends Controller
                             return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
                         
                          }elseif($checkslipnumber->status == 'active'){
-                            $newnumber2 = substr($code_sl, 10,15);
-                            $codenumber = substr($code_sl, 0,10);
+
+                            $newnumber2 = substr($checkslipnumber->number, 10,15);
+                            $codenumber = substr($checkslipnumber->number, 0,10);
 
                             if(intval($newnumber2) < 9)
                             {
@@ -810,7 +808,7 @@ class FeSlipController extends Controller
                          }
                     }
                 }else{
-                    $reservedslipnumber = SlipNumber::create([
+                        $reservedslipnumber = SlipNumber::create([
                                     'number'=>$code_sl,
                                     'slip_type'=>'fe',
                                     'status'=>'passive'     
@@ -897,88 +895,7 @@ class FeSlipController extends Controller
 
                     $insurednumform = $reservedinsurednumber->number;
 
-                    $slipdata=SlipTable::where('insured_id',$code_ms)->first();
-                    $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
-                    $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','fe')->where('insured_id',$code_ms)->orderby('id','asc')->get();
-                    $sliplastid = count($slip_now);
-                    // dd($sliplastid);
-
-                    if($sliplastid != null)
-                    {
-                        if($sliplastid < 9)
-                        {
-                            $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + 1);
-                        }   
-                        elseif($sliplastid > 8 && $sliplastid < 99)
-                        {
-                            $code_sl = "FE".  $mydate . "000" . strval($sliplastid + 1);
-                        }
-                        elseif($sliplastid > 98 && $sliplastid < 999)
-                        {
-                            $code_sl = "FE".  $mydate . "00" . strval($sliplastid + 1);
-                        }
-                        elseif($sliplastid > 998 && $sliplastid < 9999)
-                        {
-                            $code_sl = "FE".  $mydate . "0" . strval($sliplastid + 1);
-                        }
-                        elseif($sliplastid > 9998 && $sliplastid < 99999)
-                        {
-                            $code_sl = "FE".  $mydate . strval($sliplastid + 1);
-                        }
-
-                        
-                    }
-                    else
-                    {
-                        $code_sl = "FE".  $mydate . "0000" . strval(1);
-                    }
-
-                    
-                    // $kondisi=0;
-                    // $im=1;
-                    // while($kondisi==0)
-                    // {
-                    //     $checkdataslip= SlipTable::where('number',$code_sl)->first();
-
-                    //     if(!empty($checkdataslip))
-                    //     {
-                    //         $newnumber2 = substr($code_sl, 10,15);
-                    //         $codenumber = substr($code_sl, 0,10);
-
-                    //         if(intval($newnumber2) < 9)
-                    //         {
-                    //             $count = substr($newnumber2,14);
-                    //             $code_sl = $codenumber . "0000" . strval(intval($count) + $im);
-                    //         }   
-                    //         elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
-                    //         {
-                    //             $count = substr($newnumber2,13);
-                    //             $code_sl = $codenumber . "000" . strval(intval($count) + $im);
-                    //         }
-                    //         elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
-                    //         {
-                    //             $count = substr($newnumber2,12);
-                    //             $code_sl = $codenumber . "00" . strval(intval($count) + $im);
-                    //         }
-                    //         elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
-                    //         {
-                    //             $count = substr($newnumber2,11);
-                    //             $code_sl = $codenumber . "0" . strval(intval($count) + $im);
-                    //         }
-                    //         elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
-                    //         {
-                    //             $count = substr($newnumber2,10);
-                    //             $code_sl = $codenumber  . strval(intval($count) + $im);
-                    //         }
-                            
-                    //         $im++;
-                    //     }
-                    //     else
-                    //     {
-                    //         $kondisi=1;
-                    //     }    
-                    // }
-                            
+                     
                     
 
                     $checkslipnumber= SlipNumber::where('number',$code_sl)->first();
@@ -1145,8 +1062,8 @@ class FeSlipController extends Controller
 
 
                              }elseif($checkslipnumber->status == 'active'){
-                                $newnumber2 = substr($code_sl, 10,15);
-                                $codenumber = substr($code_sl, 0,10);
+                                $newnumber2 = substr($checkslipnumber->number, 10,15);
+                                $codenumber = substr($checkslipnumber->number, 0,10);
 
                                 if(intval($newnumber2) < 9)
                                 {
@@ -1376,90 +1293,7 @@ class FeSlipController extends Controller
 
                     $insurednumform = $reservedinsurednumber->number;
 
-                    $slipdata=SlipTable::where('insured_id',$code_ms)->first();
-                    $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
-                    $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','fe')->where('insured_id',$code_ms)->orderby('id','asc')->get();
-                    $sliplastid = count($slip_now);
-                    // dd($sliplastid);
-
-                    if($sliplastid != null)
-                    {
-                        if($sliplastid < 9)
-                        {
-                            $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + 1);
-                        }   
-                        elseif($sliplastid > 8 && $sliplastid < 99)
-                        {
-                            $code_sl = "FE".  $mydate . "000" . strval($sliplastid + 1);
-                        }
-                        elseif($sliplastid > 98 && $sliplastid < 999)
-                        {
-                            $code_sl = "FE".  $mydate . "00" . strval($sliplastid + 1);
-                        }
-                        elseif($sliplastid > 998 && $sliplastid < 9999)
-                        {
-                            $code_sl = "FE".  $mydate . "0" . strval($sliplastid + 1);
-                        }
-                        elseif($sliplastid > 9998 && $sliplastid < 99999)
-                        {
-                            $code_sl = "FE".  $mydate . strval($sliplastid + 1);
-                        }
-
-                        
-                    }
-                    else
-                    {
-                        $code_sl = "FE".  $mydate . "0000" . strval(1);
-                    }
-
                     
-                    // $kondisi=0;
-                    // $im=1;
-                    // while($kondisi==0)
-                    // {
-                    //     $checkdataslip= SlipTable::where('number',$code_sl)->first();
-
-                    //     if(!empty($checkdataslip))
-                    //     {
-                    //         $newnumber2 = substr($code_sl, 10,15);
-                    //         $codenumber = substr($code_sl, 0,10);
-
-                    //         if(intval($newnumber2) < 9)
-                    //         {
-                    //             $count = substr($newnumber2,14);
-                    //             $code_sl = $codenumber . "0000" . strval(intval($count) + $im);
-                    //         }   
-                    //         elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
-                    //         {
-                    //             $count = substr($newnumber2,13);
-                    //             $code_sl = $codenumber . "000" . strval(intval($count) + $im);
-                    //         }
-                    //         elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
-                    //         {
-                    //             $count = substr($newnumber2,12);
-                    //             $code_sl = $codenumber . "00" . strval(intval($count) + $im);
-                    //         }
-                    //         elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
-                    //         {
-                    //             $count = substr($newnumber2,11);
-                    //             $code_sl = $codenumber . "0" . strval(intval($count) + $im);
-                    //         }
-                    //         elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
-                    //         {
-                    //             $count = substr($newnumber2,10);
-                    //             $code_sl = $codenumber  . strval(intval($count) + $im);
-                    //         }
-                            
-                    //         $im++;
-                    //     }
-                    //     else
-                    //     {
-                    //         $kondisi=1;
-                    //     }    
-                    // }
-                            
-                    
-
                     $checkslipnumber= SlipNumber::where('number',$code_sl)->first();
 
                     $slipnumform = '';
@@ -1624,8 +1458,8 @@ class FeSlipController extends Controller
                                 
 
                              }elseif($checkslipnumber->status == 'active'){
-                                $newnumber2 = substr($code_sl, 10,15);
-                                $codenumber = substr($code_sl, 0,10);
+                                $newnumber2 = substr($checkslipnumber->number, 10,15);
+                                $codenumber = substr($checkslipnumber->number, 0,10);
 
                                 if(intval($newnumber2) < 9)
                                 {
@@ -1828,88 +1662,6 @@ class FeSlipController extends Controller
 
                 $insurednumform = $reservedinsurednumber->number;
 
-                $slipdata=SlipTable::where('insured_id',$code_ms)->first();
-                $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
-                $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','fe')->where('insured_id',$code_ms)->orderby('id','asc')->get();
-                $sliplastid = count($slip_now);
-                // dd($sliplastid);
-
-                if($sliplastid != null)
-                {
-                    if($sliplastid < 9)
-                    {
-                        $code_sl = "FE".  $mydate . "0000" . strval($sliplastid + 1);
-                    }   
-                    elseif($sliplastid > 8 && $sliplastid < 99)
-                    {
-                        $code_sl = "FE".  $mydate . "000" . strval($sliplastid + 1);
-                    }
-                    elseif($sliplastid > 98 && $sliplastid < 999)
-                    {
-                        $code_sl = "FE".  $mydate . "00" . strval($sliplastid + 1);
-                    }
-                    elseif($sliplastid > 998 && $sliplastid < 9999)
-                    {
-                        $code_sl = "FE".  $mydate . "0" . strval($sliplastid + 1);
-                    }
-                    elseif($sliplastid > 9998 && $sliplastid < 99999)
-                    {
-                        $code_sl = "FE".  $mydate . strval($sliplastid + 1);
-                    }
-
-                    
-                }
-                else
-                {
-                    $code_sl = "FE".  $mydate . "0000" . strval(1);
-                }
-
-                
-                // $kondisi=0;
-                // $im=1;
-                // while($kondisi==0)
-                // {
-                //     $checkdataslip= SlipTable::where('number',$code_sl)->first();
-
-                //     if(!empty($checkdataslip))
-                //     {
-                //         $newnumber2 = substr($code_sl, 10,15);
-                //         $codenumber = substr($code_sl, 0,10);
-
-                //         if(intval($newnumber2) < 9)
-                //         {
-                //             $count = substr($newnumber2,14);
-                //             $code_sl = $codenumber . "0000" . strval(intval($count) + $im);
-                //         }   
-                //         elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
-                //         {
-                //             $count = substr($newnumber2,13);
-                //             $code_sl = $codenumber . "000" . strval(intval($count) + $im);
-                //         }
-                //         elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
-                //         {
-                //             $count = substr($newnumber2,12);
-                //             $code_sl = $codenumber . "00" . strval(intval($count) + $im);
-                //         }
-                //         elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
-                //         {
-                //             $count = substr($newnumber2,11);
-                //             $code_sl = $codenumber . "0" . strval(intval($count) + $im);
-                //         }
-                //         elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
-                //         {
-                //             $count = substr($newnumber2,10);
-                //             $code_sl = $codenumber  . strval(intval($count) + $im);
-                //         }
-                        
-                //         $im++;
-                //     }
-                //     else
-                //     {
-                //         $kondisi=1;
-                //     }    
-                // }
-                        
                 
 
                 $checkslipnumber= SlipNumber::where('number',$code_sl)->first();
@@ -1996,7 +1748,7 @@ class FeSlipController extends Controller
 
                     }else{
                          if($checkslipnumber->status == 'passive'){
-                            SlipNumber::where('number','=',$code_sl)->orderby('id','desc')->delete();
+                            SlipNumber::where('number','=',$checkslipnumber->number)->orderby('id','desc')->delete();
 
                              $reservedslipnumber = SlipNumber::create([
                                         'number'=>$code_sl,
@@ -2076,8 +1828,8 @@ class FeSlipController extends Controller
                             
 
                          }elseif($checkslipnumber->status == 'active'){
-                            $newnumber2 = substr($code_sl, 10,15);
-                            $codenumber = substr($code_sl, 0,10);
+                            $newnumber2 = substr($checkslipnumber->number, 10,15);
+                            $codenumber = substr($checkslipnumber->number, 0,10);
 
                             if(intval($newnumber2) < 9)
                             {
@@ -3295,8 +3047,8 @@ class FeSlipController extends Controller
                     'number'=>$request->fesnumber,
                     'slip_type'=>'fe',
                     'insured_prefix' => $request->fesinsured,
-                    'insured_name'=>$request->fessuggestinsured,
-                    'insured_suffix'=>$request->fessuffix,
+                    'insured_name'=>strtoupper($request->fessuggestinsured),
+                    'insured_suffix'=>strtoupper($request->fessuffix),
                     'share'=>$sum_amount,
                     'share_from'=>$request->fessharefrom,
                     'statmodified'=>1,
@@ -3328,8 +3080,8 @@ class FeSlipController extends Controller
                 $insureddataid=$insureddata->id;
                 $insureddataup = Insured::findOrFail($insureddataid);
                 $insureddataup->insured_prefix=$request->fesinsured;
-                $insureddataup->insured_name=$request->fessuggestinsured;
-                $insureddataup->insured_suffix=$request->fessuffix;
+                $insureddataup->insured_name=strtoupper($request->fessuggestinsured);
+                $insureddataup->insured_suffix=strtoupper($request->fessuffix);
                 $insureddataup->share=$sum_amount;
                 $insureddataup->statmodified=1;
                 $insureddataup->share_from=$request->fessharefrom;
@@ -3456,7 +3208,7 @@ class FeSlipController extends Controller
                     'insured_id'=>$request->code_ms,
                     'slip_type'=>'fe',
                     'prod_year' => $currdate,
-                    'date_transfer'=> date("Y-m-d", strtotime($request->slipdatetransfer)),
+                    // 'date_transfer'=> date("Y-m-d", strtotime($request->slipdatetransfer)),
                     'status'=>$request->slipstatus,
                     'endorsment'=>0,
                     'selisih'=>'false',
@@ -3534,14 +3286,24 @@ class FeSlipController extends Controller
                 $slipnumberdata->status = 'active';
                 $slipnumberdata->save();
 
-                $old_number = $slipdataup->number;
+                $old_number = $request->slipnumber;
                 $newnumber = substr($old_number, 10,15);
                 $codenumber = substr($old_number, 0,10);
 
                 if(intval($newnumber) < 9)
                 {
+
+
                     $count = substr($newnumber,14);
                     $new_number = $codenumber . "0000" . strval(intval($count) + 1);
+
+                    // $notification = array(
+                    //     'number' => $newnumber,
+                    //     'count' => $count,
+                    //     'slipnumber' => $new_number
+                    // );
+
+                    // dd($notification);
 
                     $reservedslipnumber = SlipNumber::create([
                             'number'=>$new_number,
@@ -3552,8 +3314,8 @@ class FeSlipController extends Controller
                     return response()->json(
                         [
                             'id' => $slipdataup->id,
-                            'number' => $slipdataup->number,
-                            'slipnumber' => $reservedslipnumber->number,
+                            'number' => $request->slipnumber,
+                            'slipnumber' => $new_number,
                             'slipstatus' => $slipdataup->status,
                             'ceding'=>$slipdataup->ceding->name,
                             'cedingbroker'=>$slipdataup->cedingbroker->name,
@@ -3572,11 +3334,19 @@ class FeSlipController extends Controller
                             'status'=>'passive'     
                     ]);
 
+                    // $notification = array(
+                    //     'number' => $newnumber,
+                    //     'count' => $count,
+                    //     'slipnumber' => $new_number
+                    // );
+
+                    // dd($notification);
+
                     return response()->json(
                         [
                             'id' => $slipdataup->id,
-                            'number' => $slipdataup->number,
-                            'slipnumber' => $reservedslipnumber->number,
+                            'number' => $request->slipnumber,
+                            'slipnumber' => $new_number,
                             'slipstatus' => $slipdataup->status,
                             'ceding'=>$slipdataup->ceding->name,
                             'cedingbroker'=>$slipdataup->cedingbroker->name,
@@ -3589,6 +3359,14 @@ class FeSlipController extends Controller
                     $count = substr($newnumber,12);
                     $new_number = $codenumber . "00" . strval(intval($count) + 1);
 
+                    // $notification = array(
+                    //     'number' => $newnumber,
+                    //     'count' => $count,
+                    //     'slipnumber' => $new_number
+                    // );
+
+                    // dd($notification);
+
                     $reservedslipnumber = SlipNumber::create([
                             'number'=>$new_number,
                             'slip_type'=>'fe',
@@ -3598,8 +3376,8 @@ class FeSlipController extends Controller
                     return response()->json(
                         [
                             'id' => $slipdataup->id,
-                            'number' => $slipdataup->number,
-                            'slipnumber' => $reservedslipnumber->number,
+                            'number' => $request->slipnumber,
+                            'slipnumber' => $new_number,
                             'slipstatus' => $slipdataup->status,
                             'ceding'=>$slipdataup->ceding->name,
                             'cedingbroker'=>$slipdataup->cedingbroker->name,
@@ -3612,6 +3390,14 @@ class FeSlipController extends Controller
                     $count = substr($newnumber,11);
                     $new_number = $codenumber . "0" . strval(intval($count) + 1);
 
+                    // $notification = array(
+                    //     'number' => $newnumber,
+                    //     'count' => $count,
+                    //     'slipnumber' => $new_number
+                    // );
+
+                    // dd($notification);
+
                     $reservedslipnumber = SlipNumber::create([
                             'number'=>$new_number,
                             'slip_type'=>'fe',
@@ -3621,8 +3407,8 @@ class FeSlipController extends Controller
                     return response()->json(
                         [
                             'id' => $slipdataup->id,
-                            'number' => $slipdataup->number,
-                            'slipnumber' => $reservedslipnumber->number,
+                            'number' => $request->slipnumber,
+                            'slipnumber' => $new_number,
                             'slipstatus' => $slipdataup->status,
                             'ceding'=>$slipdataup->ceding->name,
                             'cedingbroker'=>$slipdataup->cedingbroker->name,
@@ -3635,6 +3421,14 @@ class FeSlipController extends Controller
                     $count = substr($newnumber,10);
                     $new_number = $codenumber  . strval(intval($count) + 1);
 
+                    // $notification = array(
+                    //     'number' => $newnumber,
+                    //     'count' => $count,
+                    //     'slipnumber' => $new_number
+                    // );
+
+                    // dd($notification);
+
                     $reservedslipnumber = SlipNumber::create([
                             'number'=>$new_number,
                             'slip_type'=>'fe',
@@ -3644,8 +3438,8 @@ class FeSlipController extends Controller
                     return response()->json(
                         [
                             'id' => $slipdataup->id,
-                            'number' => $slipdataup->number,
-                            'slipnumber' => $reservedslipnumber->number,
+                            'number' => $request->slipnumber,
+                            'slipnumber' => $new_number,
                             'slipstatus' => $slipdataup->status,
                             'ceding'=>$slipdataup->ceding->name,
                             'cedingbroker'=>$slipdataup->cedingbroker->name,
@@ -3653,55 +3447,6 @@ class FeSlipController extends Controller
                         ]
                     );
                 }
-
-
-
-                // $kondisi=0;
-                // $im=1;
-                // while($kondisi==0)
-                // {
-                //     $checkdataslip= SlipTable::where('number',$new_number)->first();
-
-                //    if(!empty($checkdataslip))
-                //     {
-                //         $newnumber2 = substr($new_number, 10,15);
-                //         $codenumber = substr($new_number, 0,10);
-
-                //         if(intval($newnumber2) < 9)
-                //         {
-                //             $count = substr($newnumber2,14);
-                //             $new_number = $codenumber . "0000" . strval(intval($count) + $im);
-                //         }   
-                //         elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
-                //         {
-                //             $count = substr($newnumber2,13);
-                //             $new_number = $codenumber . "000" . strval(intval($count) + $im);
-                //         }
-                //         elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
-                //         {
-                //             $count = substr($newnumber2,12);
-                //             $new_number = $codenumber . "00" . strval(intval($count) + $im);
-                //         }
-                //         elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
-                //         {
-                //             $count = substr($newnumber2,11);
-                //             $new_number = $codenumber . "0" . strval(intval($count) + $im);
-                //         }
-                //         elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
-                //         {
-                //             $count = substr($newnumber2,10);
-                //             $new_number = $codenumber  . strval(intval($count) + $im);
-                //         }
-                        
-                //         $im++;
-
-                //     }
-                //     else
-                //     {
-                //         $kondisi=1;
-                //     }    
-                // } 
-
                 
             }
             else
@@ -3727,7 +3472,7 @@ class FeSlipController extends Controller
                 $slipdataup->insured_id=$request->code_ms;
                 $slipdataup->slip_type= 'fe';
                 $slipdataup->prod_year=$currdate;
-                $slipdataup->date_transfer=date("Y-m-d", strtotime($request->slipdatetransfer));
+                // $slipdataup->date_transfer=date("Y-m-d", strtotime($request->slipdatetransfer));
                 $slipdataup->status=$request->slipstatus;
                 $slipdataup->endorsment=0;
                 $slipdataup->selisih="false";
@@ -3803,7 +3548,7 @@ class FeSlipController extends Controller
                 $slipnumberdata->status = 'active';
                 $slipnumberdata->save();
 
-                $old_number = $slipdataup->number;
+                $old_number = $request->slipnumber;
                 $newnumber = substr($old_number, 10,15);
                 $codenumber = substr($old_number, 0,10);
 
@@ -3821,8 +3566,8 @@ class FeSlipController extends Controller
                     return response()->json(
                         [
                             'id' => $slipdataup->id,
-                            'number' => $slipdataup->number,
-                            'slipnumber' => $reservedslipnumber->number,
+                            'number' => $request->slipnumber,
+                            'slipnumber' => $new_number,
                             'slipstatus' => $slipdataup->status,
                             'ceding'=>$slipdataup->ceding->name,
                             'cedingbroker'=>$slipdataup->cedingbroker->name,
@@ -3844,8 +3589,8 @@ class FeSlipController extends Controller
                     return response()->json(
                         [
                             'id' => $slipdataup->id,
-                            'number' => $slipdataup->number,
-                            'slipnumber' => $reservedslipnumber->number,
+                            'number' => $request->slipnumber,
+                            'slipnumber' => $new_number,
                             'slipstatus' => $slipdataup->status,
                             'ceding'=>$slipdataup->ceding->name,
                             'cedingbroker'=>$slipdataup->cedingbroker->name,
@@ -3867,8 +3612,8 @@ class FeSlipController extends Controller
                     return response()->json(
                         [
                             'id' => $slipdataup->id,
-                            'number' => $slipdataup->number,
-                            'slipnumber' => $reservedslipnumber->number,
+                            'number' => $request->slipnumber,
+                            'slipnumber' => $new_number,
                             'slipstatus' => $slipdataup->status,
                             'ceding'=>$slipdataup->ceding->name,
                             'cedingbroker'=>$slipdataup->cedingbroker->name,
@@ -3890,8 +3635,8 @@ class FeSlipController extends Controller
                     return response()->json(
                         [
                             'id' => $slipdataup->id,
-                            'number' => $slipdataup->number,
-                            'slipnumber' => $reservedslipnumber->number,
+                            'number' => $request->slipnumber,
+                            'slipnumber' => $new_number,
                             'slipstatus' => $slipdataup->status,
                             'ceding'=>$slipdataup->ceding->name,
                             'cedingbroker'=>$slipdataup->cedingbroker->name,
@@ -3913,8 +3658,8 @@ class FeSlipController extends Controller
                     return response()->json(
                         [
                             'id' => $slipdataup->id,
-                            'number' => $slipdataup->number,
-                            'slipnumber' => $reservedslipnumber->number,
+                            'number' => $request->slipnumber,
+                            'slipnumber' => $new_number,
                             'slipstatus' => $slipdataup->status,
                             'ceding'=>$slipdataup->ceding->name,
                             'cedingbroker'=>$slipdataup->cedingbroker->name,

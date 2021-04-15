@@ -664,6 +664,7 @@
                                                                         <option value="slip" selected>Slip</option>
                                                                         <option value="endorsement">Endorsement</option>
                                                                         <option value="cancel">Cancel</option>
+                                                                        <option value="decline">Decline</option>
                                                                     </select>
                                                                 </div>    
                                                             </div>

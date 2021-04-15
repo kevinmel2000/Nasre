@@ -1282,7 +1282,6 @@ class MasterController extends Controller
         $validator = $request->validate([
             'eccode'=>'required|max:12|unique:extended_coverage,code',
             'ecname'=>'required',
-            'eccob'=>'required',
         ]);
         if($validator){
             $user = Auth::user();

@@ -2610,7 +2610,7 @@ $('#slipbld_constendorsement').change(function(){
                         $("#slipceding option").remove();
 
 
-                        $("#slipceding").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                        $("#slipceding").append('<option value="'+res.id+'">'+res.code+' - '+res.name+'</option>');
 
                         // var ceding_curr = $('#slipceding').val();
                         // var totalsum = $("#sliptotalsum").val();
@@ -2634,7 +2634,7 @@ $('#slipbld_constendorsement').change(function(){
                         $("#sliptotalsum").val('');
                         $("#sliptotalsum2").val('');
                         $.each(res,function(key,value){
-                            $("#slipceding").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                            $("#slipceding").append('<option value="'+value.id+'">'+value.code+' - '+value.name+'</option>');
 
                         });
                     }
@@ -2660,7 +2660,7 @@ $('#slipbld_constendorsement').change(function(){
                     // $("#slipceding option").remove();
 
 
-                    $("#slipceding").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+                    $("#slipceding").append('<option value="'+res.id+'">'+res.code+' - '+res.name+'</option>');
                     var ceding_curr = $('#slipceding').val();
                     var totalsum = $("#sliptotalsum").val();
                     // if(res.amountlist > 0)
@@ -2681,7 +2681,7 @@ $('#slipbld_constendorsement').change(function(){
                     $("#slipceding option").remove();
 
                     $.each(res,function(key,value){
-                       $("#slipceding").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+                       $("#slipceding").append('<option value="'+value.id+'">'+value.code+' - '+value.name+'</option>');
 
                    });
                 }
@@ -3671,6 +3671,9 @@ $('#slipcedingupdate').change(function(){
                     
                     
                     $('#addlocdetailmodaldata').modal('toggle');
+
+                    $('#percentceding').val('');
+                    $('#amountlocation').val('');
                     // $('#slipamount').val('');
                     // $('#slipinterestlist').val('');
                     
@@ -6840,6 +6843,55 @@ function deletelocationriskdetail(id){
 
        var token2 = $('input[name=_token]').val();
 
+       console.log("slipipfrom date " + slipipfrom)
+       var d=new Date(slipipfrom.split("/").reverse().join("-"));
+       console.log('conv date' + d)
+       var dd=d.getDate();
+       console.log('conv date' + dd)
+       var mm=d.getMonth()+1;
+       console.log('conv date' + mm)
+       var yy=d.getFullYear();
+       console.log('conv date' + yy)
+       var newslipipfrom=yy+"-"+mm+"-"+dd;
+       console.log('slipipfrom ' + newslipipfrom)
+
+       console.log("slipipto date " + slipipto)
+       var d2=new Date(slipipto.split("/").reverse().join("-"));
+       console.log('conv date' + d2)
+       var dd2=d2.getDate();
+       console.log('conv date' + dd2)
+       var mm2=d2.getMonth()+1;
+       console.log('conv date' + mm2)
+       var yy2=d2.getFullYear();
+       console.log('conv date' + yy2)
+       var newslipipto=yy2+"-"+mm2+"-"+dd2;
+       console.log('slipipto ' + newslipipto)
+
+       console.log("sliprpfrom date " + sliprpfrom)
+       var d3=new Date(sliprpfrom.split("/").reverse().join("-"));
+       console.log('conv date' + d3)
+       var dd3=d3.getDate();
+       console.log('conv date' + dd3)
+       var mm3=d3.getMonth()+1;
+       console.log('conv date' + mm3)
+       var yy3=d3.getFullYear();
+       console.log('conv date' + yy3)
+       var newsliprpfrom=yy3+"-"+mm3+"-"+dd3;
+       console.log('sliprpfrom ' + newsliprpfrom)
+
+       console.log("sliprpto date " + sliprpto)
+       var d4=new Date(sliprpto.split("/").reverse().join("-"));
+       console.log('conv date' + d4)
+       var dd4=d4.getDate();
+       console.log('conv date' + dd2)
+       var mm4=d4.getMonth()+1;
+       console.log('conv date' + mm4)
+       var yy4=d4.getFullYear();
+       console.log('conv date' + yy4)
+       var newsliprpto=yy4+"-"+mm4+"-"+dd4;
+       console.log('sliprpto ' + newsliprpto)
+
+
        var conv_sliptotalsum = sliptotalsum.replace(/,/g, "");
        console.log(code_ms)
        console.log(slipnumber)
@@ -6961,10 +7013,10 @@ function deletelocationriskdetail(id){
                                            sliptype:sliptype,
                                            slippct:slippct,
                                            sliptotalsumpct:real_sliptotalsumpct,
-                                           slipipfrom:slipipfrom,
-                                           slipipto:slipipto,
-                                           sliprpfrom:sliprpfrom,
-                                           sliprpto:sliprpto,
+                                           slipipfrom:newslipipfrom,
+                                           slipipto:newslipipto,
+                                           sliprpfrom:newsliprpfrom,
+                                           sliprpto:newsliprpto,
                                            proportional:proportional,
                                            sliplayerproportional:sliplayerproportional,
                                            sliprate:sliprate,
@@ -7097,10 +7149,10 @@ function deletelocationriskdetail(id){
                                            sliptype:sliptype,
                                            slippct:slippct,
                                            sliptotalsumpct:real_sliptotalsumpct,
-                                           slipipfrom:slipipfrom,
-                                           slipipto:slipipto,
-                                           sliprpfrom:sliprpfrom,
-                                           sliprpto:sliprpto,
+                                           slipipfrom:newslipipfrom,
+                                           slipipto:newslipipto,
+                                           sliprpfrom:newsliprpfrom,
+                                           sliprpto:newsliprpto,
                                            proportional:proportional,
                                            sliplayerproportional:sliplayerproportional,
                                            sliprate:sliprate,
