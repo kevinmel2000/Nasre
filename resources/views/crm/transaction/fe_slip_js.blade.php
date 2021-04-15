@@ -501,7 +501,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 console.log(days)
                 console.log(constday)
                 console.log(parseFloat(sum))
-                
+
                 /*
                 var fulltgl = $(this).val();
 
@@ -838,15 +838,18 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#slipcndnupdate').val(response.cn_dn);
                 $('#slippolicy_noupdate').val(response.policy_no);
                 $('#sliptotalsumupdate').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#sliptotalsumupdate2').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 $('#sliptdupdate').val(response.date_transfer);
                 $('#slippctupdate').val(response.insured_pct);
                 $('#sliptotalsumpctupdate').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#sliptotalsumpctupdate2').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
 
                 $('#slipipfromupdate').val(response.insurance_period_from);
                 $('#slipiptoupdate').val(response.insurance_period_to);
 
-                var insurance_period_from2 = response.insurance_period_from;
-                var insurance_period_to2 = response.insurance_period_to;
+                var insurance_period_from2 = response.insurance_period_from.split("/").reverse().join("-");
+                var insurance_period_to2 = response.insurance_period_to.split("/").reverse().join("-");
                 var days=daysBetween(insurance_period_from2, insurance_period_to2);
                 var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
                 var constday = days.toString() + "/365";
@@ -858,6 +861,8 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                 $('#slipdaytotalupdate').val(constday);
                 $('#sliptotalsumdateupdate').val(parseFloat(sum));
+                $('#slipdaytotalupdate2').val(constday);
+                $('#sliptotalsumdateupdate2').val(parseFloat(sum));
 
                 $('#sliprpfromupdate').val(response.reinsurance_period_from);
                 $('#sliprptoupdate').val(response.reinsurance_period_to);
@@ -880,9 +885,19 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     $('#slipsumcommissionupdate').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#slipnetprmtonrupdate').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
+                    $('#slipoldsumshareupdate2').val(response.sum_share);
+                    $('#slipsumshareupdate2').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipbasicpremiumupdate2').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipgrossprmtonrupdate2').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipcommissionupdate2').val(response.commission);
+                    $('#slipsumcommissionupdate2').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipnetprmtonrupdate2').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    
+
 
                     $('#sliporupdate').val(response.own_retention);
                     $('#slipsumorupdate').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumorupdate2').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     
                     
                     swal("Success!", "Data Show")
@@ -1129,8 +1144,8 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             $('#slipipfromendorsement').val(response.insurance_period_from);
             $('#slipiptoendorsement').val(response.insurance_period_to);
 
-            var insurance_period_from2 = response.insurance_period_from;
-            var insurance_period_to2 = response.insurance_period_to;
+            var insurance_period_from2 = response.insurance_period_from.split("/").reverse().join("-");
+            var insurance_period_to2 = response.insurance_period_to.split("/").reverse().join("-");
             var days=daysBetween(insurance_period_from2, insurance_period_to2);
             var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
             var constday = days.toString() + "/365";
@@ -1763,8 +1778,8 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
     $('#slipiptoupdate').change(function(){
         $('#sliprptoupdate').val($(this).val());
 
-        var insurance_period_from2 = $('#slipipfrom').val();
-        var insurance_period_to2 = $('#slipipto').val();
+        var insurance_period_from2 = $('#slipipfrom').val().split("/").reverse().join("-");
+        var insurance_period_to2 = $('#slipipto').val().split("/").reverse().join("-");
         var days=daysBetween(insurance_period_from2, insurance_period_to2);
         var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
         var constday = days.toString() + "/365";
@@ -1783,8 +1798,8 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
     $('#slipiptoendorsement').change(function(){
         $('#sliprptoendorsement').val($(this).val());
 
-        var insurance_period_from2 = $('#slipipfrom').val();
-        var insurance_period_to2 = $('#slipipto').val();
+        var insurance_period_from2 = $('#slipipfrom').val().split("/").reverse().join("-");
+        var insurance_period_to2 = $('#slipipto').val().split("/").reverse().join("-");
         var days=daysBetween(insurance_period_from2, insurance_period_to2);
         var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
         var constday = days.toString() + "/365";
@@ -5193,7 +5208,8 @@ function deletelocationriskdetail(id){
     });
 
 
-    $('#sliprateupdate').keyup(function (e) {
+    $('#sliprateupdate').keyup(function (e) 
+    {
         if(e.keyCode != 9){
             var insurance_period_from = $('#slipipfromupdate').val().split('-');
             var insurance_period_to = $('#slipiptoupdate').val().split('-');
