@@ -42,7 +42,7 @@
                                                             <div class="form-group">
                                                                 <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
                                                                 <input type="hidden" name="slipidendorsement" id="slipidendorsement" >
-                                                                <input type="hidden" name="insuredIDtxtendorsement" id="insuredIDtxtendorsement" value="">
+                                                                <input type="hidden" name="insuredIDtxtendorsement" id="insuredIDtxtendorsement">
                                                                 <input type="hidden" name="codeslreal" id="codeslreal">
                                                                 <label for="">{{__('Number')}} </label>
                                                                 <input type="text" id="slipnumberendorsement" name="slipnumberendorsement" class="form-control form-control-sm" value="" readonly="readonly" required/>
@@ -102,6 +102,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-md-12">
@@ -539,7 +540,19 @@
                                                             </div> --}}
                                                             <div class="form-group">
                                                                 <label for="">{{__('Total Days')}}</label>
-                                                                <input type="text"  id="slipdaytotalendorsement" name="slipdaytotalendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
+                                                                <div class="row">
+                                                                    <div class="col-md-5">
+                                                                        <input type="hidden"  id="slipdaytotalendorsement" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
+                                                                        <input type="text"  id="slipdaytotalendorsement2" name="slipdaytotal2" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="a"  />
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <h2>/</h2>
+                                                                    </div>
+                                                                    <div class="col-md-5">
+                                                                        <input type="hidden"  id="slipdaytotalendorsement3" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
+                                                                        <input type="text"  id="slipdaytotalendorsement4" name="slipdaytotal2" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="a"  />
+                                                                    </div>
+                                                                </div>                                                                       
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="">{{__('Total Summary Insurance Periode')}}</label>

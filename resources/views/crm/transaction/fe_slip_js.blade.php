@@ -494,8 +494,10 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 var insurance_period_from2 = response.insurance_period_from.split("/").reverse().join("-");
                 var insurance_period_to2 = response.insurance_period_to.split("/").reverse().join("-");
                 var days=daysBetween(insurance_period_from2, insurance_period_to2);
+                
                 var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
                 var constday = days.toString() + "/365";
+
                 console.log(insurance_period_from2)
                 console.log(insurance_period_to2)
                 console.log(days)
@@ -512,8 +514,13 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 */
                 
 
-                $('#slipdaytotaldetail').val(constday);
+                $('#slipdaytotaldetail').val(days);
+                $('#slipdaytotaldetail2').val(days);
+                $('#slipdaytotaldetail3').val("365");
+                $('#slipdaytotaldetail4').val("365");
+                
                 $('#sliptotalsumdatedetail').val(parseFloat(sum));
+
 
                 $('#sliprpfromdetail').val(response.reinsurance_period_from);
                 $('#sliprptodetail').val(response.reinsurance_period_to);
@@ -859,13 +866,22 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 console.log(constday)
                 console.log(parseFloat(sum))
 
-                $('#slipdaytotalupdate').val(constday);
+                //$('#slipdaytotalupdate').val(constday);
+                //$('#slipdaytotalupdate2').val(constday);
+
+
+                $('#slipdaytotalupdate').val(days);
+                $('#slipdaytotalupdate2').val(days);
+                $('#slipdaytotalupdate3').val("365");
+                $('#slipdaytotalupdate4').val("365");
+
+
                 $('#sliptotalsumdateupdate').val(parseFloat(sum));
-                $('#slipdaytotalupdate2').val(constday);
                 $('#sliptotalsumdateupdate2').val(parseFloat(sum));
 
                 $('#sliprpfromupdate').val(response.reinsurance_period_from);
                 $('#sliprptoupdate').val(response.reinsurance_period_to);
+
 
                 $('#switch-proportionalupdate').val(response.proportional);
                     // if(response.proportional == ''){
@@ -1155,7 +1171,14 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             console.log(constday)
             console.log(parseFloat(sum))
 
-            $('#slipdaytotalendorsement').val(constday);
+            //$('#slipdaytotalendorsement').val(constday);
+
+            $('#slipdaytotalendorsement').val(days);
+            $('#slipdaytotalendorsement2').val(days);
+            $('#slipdaytotalendorsement3').val("365");
+            $('#slipdaytotalendorsement4').val("365");
+                
+
             $('#sliptotalsumdateendorsement').val(parseFloat(sum));
 
             $('#sliprpfromendorsement').val(response.reinsurance_period_from);
@@ -1783,11 +1806,16 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
         var days=daysBetween(insurance_period_from2, insurance_period_to2);
         var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
         var constday = days.toString() + "/365";
+       
+
+        $('slipdaytotalupdate').val(days);
+        $('slipdaytotalupdate2').val(days);
+
+        $('slipdaytotalupdate3').val("365");
+        $('slipdaytotalupdate4').val("365");
+
         $('sliptotalsumdateupdate').val(sum);
         $('sliptotalsumdateupdate2').val(sum);
-
-        $('slipdaytotalupdate').val(constday);
-        $('slipdaytotalupdate2').val(constday);
         // document.getElementById("daytotalupdate").innerHTML = "Total Days :"+days;
     });
 
@@ -1805,8 +1833,14 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
         var constday = days.toString() + "/365";
 
         $('sliptotalsumdateendorsement').val(sum);
+        
+       // $('slipdaytotalendorsement').val(constday);
+        $('slipdaytotalendorsement').val(days);
+        $('slipdaytotalendorsement2').val(days);
 
-        $('slipdaytotalendorsement').val(constday);
+        $('slipdaytotalendorsement3').val("365");
+        $('slipdaytotalendorsement4').val("365");
+
         // document.getElementById("daytotalendorsement").innerHTML = "Total Days :"+days;
     });
 

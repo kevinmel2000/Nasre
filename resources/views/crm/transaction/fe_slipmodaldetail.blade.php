@@ -443,7 +443,19 @@
                                                             </div> --}}
                                                             <div class="form-group">
                                                                 <label for="">{{__('Total Days')}}</label>
-                                                                <input type="text"  id="slipdaytotaldetail" name="slipdaytotaldetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a" readonly="readonly" />
+                                                                <div class="row">
+                                                                    <div class="col-md-5">
+                                                                        <input type="hidden"  id="slipdaytotaldetail" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
+                                                                        <input type="text"  id="slipdaytotaldetail2" name="slipdaytotal2" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="a"  />
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <h2>/</h2>
+                                                                    </div>
+                                                                    <div class="col-md-5">
+                                                                        <input type="hidden"  id="slipdaytotaldetail3" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
+                                                                        <input type="text"  id="slipdaytotaldetail4" name="slipdaytotal2" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="a"  />
+                                                                    </div>
+                                                                </div>                                                                       
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="">{{__('Total Summary Insurance Periode')}}</label>
