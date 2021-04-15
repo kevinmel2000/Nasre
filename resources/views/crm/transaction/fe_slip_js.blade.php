@@ -491,8 +491,8 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#slipipfromdetail').val(response.insurance_period_from);
                 $('#slipiptodetail').val(response.insurance_period_to);
 
-                var insurance_period_from2 = response.insurance_period_from.split("/").reverse().join("-");
-                var insurance_period_to2 = response.insurance_period_to.split("/").reverse().join("-");
+                var insurance_period_from2 = response.insurance_period_from;
+                var insurance_period_to2 = response.insurance_period_to;
                 var days=daysBetween(insurance_period_from2, insurance_period_to2);
                 var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
                 var constday = days.toString() + "/365";
@@ -501,15 +501,6 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 console.log(days)
                 console.log(constday)
                 console.log(parseFloat(sum))
-
-                var fulltgl = $(this).val();
-
-                var tgl = parseInt(fulltgl.substring(0,2));
-                console.log(tgl)
-                var month = parseInt(fulltgl.substring(3,5));
-                console.log(month)
-
-                
 
                 $('#slipdaytotaldetail').val(constday);
                 $('#sliptotalsumdatedetail').val(parseFloat(sum));
@@ -5698,13 +5689,7 @@ function deletelocationriskdetail(id){
                     $('#addinstallmentinsured-btn').attr('hidden','true')
                 }else{
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-                        var amount = response.amount;
-                        console.log('amount' + amount)
-                        var fl_amount = parseFloat(amount);
-                        console.log('amount float' + fl_amount)
-                        var new_amount = fl_amount.toFixed(2);
-                        console.log('amount to fixed' + new_amount)
-                        var curr_amount = new_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
                         $('#dateinstallment').val('');
                         $('#slipippercentage').val('');
