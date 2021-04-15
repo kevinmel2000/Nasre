@@ -31,8 +31,6 @@
                                     <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
                                         <div class="tab-pane fade show active" id="general-details-id2" role="tabpanel" aria-labelledby="general-details">
                                             <div class="row">
-                                                
-                                             
                                             
                                             </div>
                                             <div class="row">
@@ -518,6 +516,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-md-6">

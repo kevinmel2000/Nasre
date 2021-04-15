@@ -260,9 +260,8 @@ class FeSlipController extends Controller
          $mydate = date("Y").date("m").date("d");
          $fe_ids = response()->json($country->modelKeys());
          $search = @$request->input('search');
-
          
-        $checkdatainsured= Insured::where('statmodified','=',1)->whereNull('share_to')->orWhere('share_to','=',0)->get();
+        $checkdatainsured= Insured::where('statmodified','=',1)->whereNull('share_to')->Where('share_to','=',0)->get();
 
         foreach ($checkdatainsured as $insureddata)
         {   

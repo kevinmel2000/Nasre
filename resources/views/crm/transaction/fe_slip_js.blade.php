@@ -491,8 +491,8 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#slipipfromdetail').val(response.insurance_period_from);
                 $('#slipiptodetail').val(response.insurance_period_to);
 
-                var insurance_period_from2 = response.insurance_period_from;
-                var insurance_period_to2 = response.insurance_period_to;
+                var insurance_period_from2 = response.insurance_period_from.split("/").reverse().join("-");
+                var insurance_period_to2 = response.insurance_period_to.split("/").reverse().join("-");
                 var days=daysBetween(insurance_period_from2, insurance_period_to2);
                 var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
                 var constday = days.toString() + "/365";
@@ -501,6 +501,15 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 console.log(days)
                 console.log(constday)
                 console.log(parseFloat(sum))
+
+                var fulltgl = $(this).val();
+
+                var tgl = parseInt(fulltgl.substring(0,2));
+                console.log(tgl)
+                var month = parseInt(fulltgl.substring(3,5));
+                console.log(month)
+
+                
 
                 $('#slipdaytotaldetail').val(constday);
                 $('#sliptotalsumdatedetail').val(parseFloat(sum));
