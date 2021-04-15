@@ -501,14 +501,15 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 console.log(days)
                 console.log(constday)
                 console.log(parseFloat(sum))
-
+                
+                /*
                 var fulltgl = $(this).val();
 
                 var tgl = parseInt(fulltgl.substring(0,2));
                 console.log(tgl)
                 var month = parseInt(fulltgl.substring(3,5));
                 console.log(month)
-
+                */
                 
 
                 $('#slipdaytotaldetail').val(constday);
