@@ -360,7 +360,7 @@ class FeSlipController extends Controller
         
         $currency = Currency::orderby('id','asc')->get();
         $cob = COB::where('form','fe')->orderby('id','asc')->get();
-        $koc = Koc::where('parent_id',2)->orWhere('code', 'like', '%' . 02 . '%')->orderby('code','asc')->get();
+        $koc = Koc::where('parent_id',2)->orWhere('code', 'like',  02 . '%')->orderby('code','asc')->get();
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
         $ceding = CedingBroker::orderby('id','asc')->where('type','4')->get();
