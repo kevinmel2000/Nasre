@@ -109,13 +109,12 @@ class FinancialLineSlipController extends Controller
          $fe_ids = response()->json($country->modelKeys());
          
         
-         $checkdatainsured= Insured::where('statmodified','=',1)->whereNull('share_to')->orWhere('share_to','=',0)->get();
+         $checkdatainsured= Insured::where('statmodified','=',1)->whereNull('share_to')->Where('share_to','=',0)->get();
 
 
         foreach ($checkdatainsured as $insureddata)
         {
-            
-            $deleteinsured= SlipTable::where('insured_id','=',$insureddata->number)->delete();
+            //$deleteinsured= SlipTable::where('insured_id','=',$insureddata->number)->delete();
             $deleteinsured= Insured::where('number','=',$insureddata->number)->delete();  
         }
 
@@ -123,11 +122,34 @@ class FinancialLineSlipController extends Controller
 
          if(empty($search))
          {
-          //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $insured = Insured::where('slip_type', '=', 'fl')->orderby('id','desc')->paginate(10);
-          $insured_ids = response()->json($insured->modelKeys());
+            //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
+            $insured = Insured::where('slip_type', '=', 'fl')->orderby('id','desc')->paginate(10);
+            $insured_ids = response()->json($insured->modelKeys());
 
-          return view('crm.transaction.fl_slip_index', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+            $slip = SlipTable::where('slip_type', '=', 'fe')->orderby('id','desc')->paginate(10);
+            $slip_ids = response()->json($insured->modelKeys());
+            
+            $insuredlist=[];
+            foreach (@$insured as $insureddata)
+            {
+                   $slipdata=SlipTable::where('insured_id', '=', $insureddata->number)->get()->toArray();
+                   
+                   $sliplist=[];
+                   foreach($slipdata as $value)
+                   {
+                     $value['cobdata']=COB::where('id','=',$value['cob'])->first();
+                     $value['brokerdata']=CedingBroker::where('id','=',$value['source'])->first();
+                     $value['cedingdata']=CedingBroker::where('id','=',$value['source_2'])->first();
+
+                     array_push($sliplist,$value);
+                   }
+                
+                   $insureddata->slipdata=$sliplist;
+                
+                array_push($insuredlist,$insureddata);
+            }
+
+          return view('crm.transaction.fl_slip_index', compact('insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
         
          }
          else
@@ -137,8 +159,32 @@ class FinancialLineSlipController extends Controller
           $insured = Insured::where('slip_type', '=', 'fl')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
           $insured_ids = response()->json($insured->modelKeys());
 
+          $slip = SlipTable::where('slip_type', '=', 'fe')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
+          $slip_ids = response()->json($insured->modelKeys());
+          
+          $insuredlist=[];
+          foreach (@$insured as $insureddata)
+          {
+                 $slipdata=SlipTable::where('insured_id', '=', $insureddata->number)->get()->toArray();
+                 
+                 $sliplist=[];
+                 foreach($slipdata as $value)
+                 {
+                   $value['cobdata']=COB::where('id','=',$value['cob'])->first();
+                   $value['brokerdata']=CedingBroker::where('id','=',$value['source'])->first();
+                   $value['cedingdata']=CedingBroker::where('id','=',$value['source_2'])->first();
+
+                   array_push($sliplist,$value);
+                 }
+              
+                 $insureddata->slipdata=$sliplist;
+              
+              array_push($insuredlist,$insureddata);
+          }
+
+
         
-          return view('crm.transaction.fl_slip_index', compact('user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.transaction.fl_slip_index', compact('insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
         
         }
     }

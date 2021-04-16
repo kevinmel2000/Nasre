@@ -28,15 +28,14 @@
             <div class="row">
                 <div class="col-md-12 com-sm-12 mt-3">
                 
-                  {!! link_to('transaction-data/fl-slip','Add Data',['class'=>'btn btn-primary']) !!}
+                  {!! link_to('transaction-data/fe-slip','Add Data',['class'=>'btn btn-primary']) !!}
                   <hr>
-                  {{-- {!! Form::open(array('url'=>'transaction-data/fl-slipindex')) !!}
-                  {!! Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari Financial Lines Number, ketik lalu tekan enter']) !!}
+                  {{-- {!! Form::open(array('url'=>'transaction-data/fe-slipindex')) !!}
+                  {!! Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari FIRE & ENGINEERING Number, ketik lalu tekan enter']) !!}
                   {!! Form::close() !!} --}}
                   <hr>
-                  <table id="fllookupTable" class="table table-bordered table-striped">
+                  <table id="felookupTable2" class="table table-bordered table-striped">
                     <thead>
-
                     <tr>
                       <th>{{__('Number')}}</th>
                       <th>{{__('Insured')}}</th>
@@ -49,9 +48,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach (@$insured as $insureddata)
+                        @foreach (@$insuredlist as $insureddata)
                             <tr>
-                              <td><a href="{{  url('transaction-data/updateflslip', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
+                              <td ><a href="{{  url('transaction-data/updatefeslip', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
                               <td> @php echo strtoupper($insureddata->insured_prefix); @endphp - 
                                    @php echo strtoupper($insureddata->insured_name);    @endphp- 
                                    @php echo strtoupper($insureddata->insured_suffix);  @endphp
@@ -69,38 +68,62 @@
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
-
-                                @can('update-felookup', User::class)
-                                {{--<a class="text-primary mr-3" href="{{ url('transaction-data/detailflslip', $insureddata->id) }}">
+                                
+                                {{-- @can('update-felookup', User::class) --}}
+                                {{--<a class="text-primary mr-3" href="{{ url('transaction-data/detailfeslip', $insureddata->id) }}">
                                   <i class="fas fa-file"></i>
                                 </a>--}}
-                                {{-- {!! link_to('transaction-data/detailflslip/'.@$insureddata->id,'Detail Data',['class'=>'btn btn-primary']) !!} --}}
-                                @endcan  
+                                {{-- {!! link_to('transaction-data/detailfeslip/'.@$insureddata->id,'Detail Data',['class'=>'btn btn-primary']) !!} --}}
+                                {{-- @endcan   --}}
 
-                              
-                                @can('update-felookup', User::class)
-                                {{--<a class="text-primary mr-3" href="{{ url('transaction-data/updateflslip', $insureddata->id) }}">
+                                {{-- @can('update-felookup', User::class) --}}
+                                {{--<a class="text-primary mr-3" href="{{ url('transaction-data/updatefeslip', $insureddata->id) }}">
                                   <i class="fas fa-edit"></i>
                                 </a>--}}
-                                {{-- {!! link_to('transaction-data/updateflslip/'.@$insureddata->id,'Edit Data',['class'=>'btn btn-primary']) !!} --}}
-                                @endcan  
+                                {{-- {!! link_to('transaction-data/updatefeslip/'.@$insureddata->id,'Edit Data',['class'=>'btn btn-primary']) !!} --}}
+                                {{-- @endcan   --}}
 
+                                  
 
-                                  @can('delete-felookup', User::class)
+                                   {{-- @can('delete-felookup', User::class) --}}
 
-                                  {{--<span id="delbtn{{@$insureddata->id}}"></span>
+                                   {{--<span id="delbtn{{@$insureddata->id}}"></span>
                                 
                                     <form id="delete-felookuplocation-{{$insureddata->id}}"
-                                        action="{{ url('transaction-data/fl-slip/destroy', $insureddata->id) }}"
+                                        action="{{ url('transaction-data/fe-slip/destroy', $insureddata->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
-                                    </form>--}}
-                                    @endcan  
+                                    </form>>--}}
+                                  {{-- @endcan   --}}
                                 </span>
                               </td>
 
                             </tr>
+                            
+                            <tr>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th>{{__('Slip Number')}}</th>
+                              <th>{{__('Cob')}}</th>
+                              <th>{{__('Ceding/Broker')}}</th>
+                              <th>{{__('Ceding')}}</th>
+                              <th>{{__('Actions')}}</th>
+                            </tr>
+                            @foreach (@$insureddata->slipdata as $slipdata)
+                            <tr>
+                              
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td>{{@$slipdata['number'] }}</td>
+                              <td>{{@$slipdata['cobdata']->code }} - {{@$slipdata['cobdata']->description }}</td>
+                              <td>{{@$slipdata['brokerdata']->name}} - {{@$slipdata['brokerdata']->company_name }}</td>
+                              <td>{{@$slipdata['cedingdata']->name}} - {{@$slipdata['cedingdata']->company_name }}</td>
+                            </tr>
+                            @endforeach
+                        
                         @endforeach
                     </tbody>
                     
