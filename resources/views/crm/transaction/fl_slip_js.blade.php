@@ -464,6 +464,7 @@
     $('#updatemodaldata').on('show.bs.modal', function(e) {
 
         //get data-id attribute of the clicked element
+        $("#tabretroupdate").attr('hidden','true');
         var codesl = $(e.relatedTarget).data('book-id');
         //alert(codesl);
         $('input .amount').val(function(event) {
@@ -788,6 +789,7 @@
     $('#endorsementmodaldata').on('show.bs.modal', function(e) {
 
          //get data-id attribute of the clicked element
+         $("#tabretroendorsement").attr('hidden','true');
          var codesl = $(e.relatedTarget).data('book-id');
         //alert(codesl);
         $('input .amount').val(function(event) {

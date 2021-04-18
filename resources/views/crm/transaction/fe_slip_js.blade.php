@@ -615,6 +615,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
     //triggered when modal is about to be shown
     $('#updatemodaldata').on('show.bs.modal', function(e) {
 
+        $("#tabretroupdate").attr('hidden','true');
          //get data-id attribute of the clicked element
          var codesl = $(e.relatedTarget).data('book-id');
         //alert(codesl);
@@ -940,6 +941,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
     $('#endorsementmodaldata').on('show.bs.modal', function(e) {
 
          //get data-id attribute of the clicked element
+         $("#tabretroendorsement").attr('hidden','true');
          var codesl = $(e.relatedTarget).data('book-id');
         //alert(codesl);
         $('input .amount').val(function(event) {
@@ -1117,6 +1119,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             if(response.retro_backup)
             {
                 $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
+                
                 if(response.retro_backup == "NO")
                 {
                     $("#tabretroendorsement").attr('hidden');

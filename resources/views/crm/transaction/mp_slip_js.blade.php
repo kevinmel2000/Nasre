@@ -528,6 +528,7 @@
     //triggered when modal is about to be shown
     $('#updatemodaldata').on('show.bs.modal', function(e) {
 
+        $("#tabretroupdate").attr('hidden','true');
         //get data-id attribute of the clicked element
         var codesl = $(e.relatedTarget).data('book-id');
         //alert(codesl);
@@ -852,6 +853,7 @@
     $('#endorsementmodaldata').on('show.bs.modal', function(e) {
 
          //get data-id attribute of the clicked element
+         $("#tabretroendorsement").attr('hidden','true');
          var codesl = $(e.relatedTarget).data('book-id');
         //alert(codesl);
         $('input .amount').val(function(event) {
