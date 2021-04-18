@@ -1689,6 +1689,7 @@ class FeSlipController extends Controller
                 'created_at'=>$slipdata->created_at,
                 'updated_at'=>$slipdata->updated_at,
                 'wpc'=>$slipdata->wpc,
+                'remarks'=>$slipdata->remarks,
                 'v_broker'=>$slipdata->v_broker,
                 'coinsurance_slip'=>$slipdata->coinsurance_slip,
                 'status_log'=>$statuslist
@@ -1864,6 +1865,7 @@ class FeSlipController extends Controller
                 'created_at'=>$slipdata->created_at,
                 'updated_at'=>$slipdata->updated_at,
                 'wpc'=>$slipdata->wpc,
+                'remarks'=>$slipdata->remarks,
                 'v_broker'=>$slipdata->v_broker,
                 'coinsurance_slip'=>$slipdata->coinsurance_slip,
                 'status_log'=>$statuslist

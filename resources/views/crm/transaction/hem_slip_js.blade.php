@@ -444,6 +444,8 @@
                     $('#slipsumordetail').val("0");
                 }
                 
+                $('#countendorsmentdetail').val(response.endorsment);
+                $('#remarksdetail').val(response.remarks);
                 
                 swal("Success!", "Data Show")
                 console.log(response)
@@ -701,6 +703,8 @@
             $('#sliptotalsumpctupdate').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $('#sliptotalsumpctupdate2').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
+            $('#remarksupdate').val(response.remarks);
+            $('#countendorsmentupdate').val(response.endorsment);
 
             $('#slipipfromupdate').val(response.insurance_period_from);
             $('#slipiptoupdate').val(response.insurance_period_to);
@@ -1027,6 +1031,11 @@
             $('#slipdaytotalendorsement2').val(days);
             $('#slipdaytotalendorsement3').val("365");
             $('#slipdaytotalendorsement4').val("365");
+
+            
+            $('#countendorsmentdata').val(response.endorsment);
+            $('#remarksendorsement').val(response.remarks);
+           
                 
 
             $('#sliptotalsumdateendorsement').val(parseFloat(sum));

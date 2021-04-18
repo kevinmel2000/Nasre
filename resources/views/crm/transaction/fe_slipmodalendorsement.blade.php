@@ -272,6 +272,25 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Count Endorsement')}}</label>
+                                                        <input type="text" min="0" value="" step=".0001" id="countendorsmentdata" name="countendorsmentdata" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Remarks')}}</label>
+                                                        <textarea type="text"  id="remarksendorsement" name="remarksendorsement" class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder=""></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <div class="tab-pane fade" id="insured-details-id3" role="tabpanel" aria-labelledby="insured-details">
                                             

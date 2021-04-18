@@ -590,6 +590,9 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     else{
                         $('#slipsumordetail').val("0");
                     }
+
+                    $('#countendorsmentdetail').val(response.endorsment);
+                    $('#remarksdetail').val(response.remarks);
                     
                     
                     swal("Success!", "Data Show")
@@ -883,6 +886,10 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#sliprpfromupdate').val(response.reinsurance_period_from);
                 $('#sliprptoupdate').val(response.reinsurance_period_to);
 
+                $('#remarksupdate').val(response.remarks);
+                $('#countendorsmentupdate').val(response.endorsment);
+
+
 
                 $('#switch-proportionalupdate').val(response.proportional);
                     // if(response.proportional == ''){
@@ -910,7 +917,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     $('#slipsumcommissionupdate2').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#slipnetprmtonrupdate2').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     
-
+                  
 
                     $('#sliporupdate').val(response.own_retention);
                     $('#slipsumorupdate').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -1180,8 +1187,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             $('#slipdaytotalendorsement2').val(days);
             $('#slipdaytotalendorsement3').val("365");
             $('#slipdaytotalendorsement4').val("365");
-                
 
+            $('#countendorsmentdata').val(response.endorsment);
+            $('#remarksendorsement').val(response.remarks);
+                
+            
             $('#sliptotalsumdateendorsement').val(parseFloat(sum));
 
             $('#sliprpfromendorsement').val(response.reinsurance_period_from);
