@@ -321,7 +321,6 @@
                                                                         <thead>
                                                                         <tr>
                                                                             <th>{{__('Type')}}</th>
-                                                                            <th>{{__('Currency')}}</th>
                                                                             <th>{{__('Percentage')}}</th>
                                                                             <th>{{__('Amount')}}</th>
                                                                             <th>{{__('Min Claim Amount')}}</th>

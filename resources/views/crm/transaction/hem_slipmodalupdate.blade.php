@@ -326,7 +326,6 @@
                                                                         <thead>
                                                                         <tr>
                                                                             <th>{{__('Type')}}</th>
-                                                                            <th>{{__('Currency')}}</th>
                                                                             <th>{{__('Percentage')}}</th>
                                                                             <th>{{__('Amount')}}</th>
                                                                             <th>{{__('Min Claim Amount')}}</th>
@@ -352,16 +351,7 @@
                                                                                     </select>
                                                                                 </div>  
                                                                             </td>
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <select  id="slipdpcurrencyupdate" name="slipdpcurrencyupdate" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Currency')}}</option>
-                                                                                        @foreach($currency as $crc)
-                                                                                            <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name}}</option>
-                                                                                        @endforeach
-                                                                                    </select>
-                                                                                </div>  
-                                                                            </td>
+                                                                           
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                     <input type="number" value="" step=".0001" id="slipdppercentageupdate" name="slipdppercentageupdate" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />

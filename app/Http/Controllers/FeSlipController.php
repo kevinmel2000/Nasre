@@ -1706,25 +1706,25 @@ class FeSlipController extends Controller
 
         if($slipdata->endorsment==NULL || $slipdata->endorsment=="")
         {
-            $code_sl = $slipdata->number . '-END' . '000' . '1';
+            $code_sl = $slipdata->number . '000' . '1';
         }
         else 
         {
             if($countendorsement < 9)
             {
-                $code_sl = substr($slipdata->number,0,15) . '-END' . '000' . ($countendorsement + 1);
+                $code_sl = substr($slipdata->number,0,15) . '000' . ($countendorsement + 1);
             }
             elseif($countendorsement > 8 && $countendorsement < 99)
             {
-                $code_sl = substr($slipdata->number,0,15) . '-END' . '00' . ($countendorsement + 1);
+                $code_sl = substr($slipdata->number,0,15) .  '00' . ($countendorsement + 1);
             }
             elseif($countendorsement > 98 && $countendorsement < 999)
             {
-                $code_sl = substr($slipdata->number,0,15) . '-END' . '0' . ($countendorsement + 1);
+                $code_sl = substr($slipdata->number,0,15) . '0' . ($countendorsement + 1);
             }
             elseif($countendorsement > 998 && $countendorsement < 9999)
             {
-                $code_sl = substr($slipdata->number,0,15) . '-END' . ($countendorsement + 1);
+                $code_sl = substr($slipdata->number,0,15) . ($countendorsement + 1);
             }
         }
 
