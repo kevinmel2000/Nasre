@@ -792,6 +792,7 @@
                                                     </div>
                                                 </div>
 
+
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
@@ -1151,6 +1152,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
@@ -1168,7 +1170,6 @@
                                                         </div>
 
                                                         <div class="row">
-                                                            
                                                             <div class="col-md-6 ">
                                                                 <div class="row">
                                                                     <div class="col-md-6">
@@ -1248,10 +1249,8 @@
                                                         </div>
 
                                                         <div class="row">
-
                                                             <div class="col-md-6">
                                                                 <div class="row">
-
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label for="">{{__('RI Com')}}</label>
@@ -1278,7 +1277,6 @@
                                                                 </div>
 
                                                                 <div class="row">
-
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label for="">{{__('Fee Broker')}}</label>
@@ -1333,7 +1331,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                             </div>
                                                     
                                                     

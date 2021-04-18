@@ -8109,6 +8109,7 @@ function deletelocationriskdetail(id){
 });
 </script>
 
+
 <script type='text/javascript'>
     $('#multi-file-upload-ajaxendorsement').submit(function(e){
        //alert('masuk');
