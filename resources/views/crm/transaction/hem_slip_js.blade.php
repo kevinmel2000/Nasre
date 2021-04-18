@@ -6764,6 +6764,7 @@ function deletelocationriskdetail(id){
        var slipor =  $('#sliporupdate').val();
        var slipsumor =  $('#slipsumorupdate').val();
        var wpc =  $('#wpcupdate').val();
+       var remarks =  $('#remarksupdate').val();
 
        var token2 = $('input[name=_token]').val();
 
@@ -6858,7 +6859,8 @@ function deletelocationriskdetail(id){
                sliprb:sliprb,
                slipor:slipor,
                slipsumor:real_slipsumor,
-               wpc:wpc
+               wpc:wpc,
+               remarks:remarks
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },
@@ -7041,6 +7043,7 @@ function deletelocationriskdetail(id){
        var slipor =  $('#sliporendorsement').val();
        var slipsumor =  $('#slipsumorendorsement').val();
        var wpc =  $('#wpcendorsement').val();
+       var remarks =  $('#remarksendorsement').val();
 
        var token2 = $('input[name=_token]').val();
        
@@ -7136,7 +7139,8 @@ function deletelocationriskdetail(id){
                sliprb:sliprb,
                slipor:slipor,
                slipsumor:real_slipsumor,
-               wpc:wpc
+               wpc:wpc,
+               remarks:remarks
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },
