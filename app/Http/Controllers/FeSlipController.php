@@ -1546,6 +1546,7 @@ class FeSlipController extends Controller
             $building_rate_down = $building_rate->rate_batas_bawah_building_class_3;
         }
       
+
         return response()->json(
             [
                 'id' => $slipdata->id,
@@ -1614,7 +1615,8 @@ class FeSlipController extends Controller
                 'total_year'=>$slipdata->total_year,
                 'sum_total_date'=>$slipdata->sum_total_date,
                 'coinsurance_slip'=>$slipdata->coinsurance_slip,
-                'status_log'=>$statuslist
+                'status_log'=>$statuslist,
+                'sum_feebroker'=>$slipdata->sum_feebroker
             ]
         );
 
@@ -1629,25 +1631,25 @@ class FeSlipController extends Controller
 
         if($slipdata->endorsment==NULL || $slipdata->endorsment=="")
         {
-            $code_sl = $slipdata->number . '-END' . '000' . '1';
+            $code_sl = $slipdata->number . '000' . '1';
         }
         else 
         {
             if($countendorsement < 9)
             {
-                $code_sl = substr($slipdata->number,0,15) . '-END' . '000' . ($countendorsement + 1);
+                $code_sl = substr($slipdata->number,0,15) . '000' . ($countendorsement + 1);
             }
             elseif($countendorsement > 8 && $countendorsement < 99)
             {
-                $code_sl = substr($slipdata->number,0,15) . '-END' . '00' . ($countendorsement + 1);
+                $code_sl = substr($slipdata->number,0,15) .  '00' . ($countendorsement + 1);
             }
             elseif($countendorsement > 98 && $countendorsement < 999)
             {
-                $code_sl = substr($slipdata->number,0,15) . '-END' . '0' . ($countendorsement + 1);
+                $code_sl = substr($slipdata->number,0,15) . '0' . ($countendorsement + 1);
             }
             elseif($countendorsement > 998 && $countendorsement < 9999)
             {
-                $code_sl = substr($slipdata->number,0,15) . '-END' . ($countendorsement + 1);
+                $code_sl = substr($slipdata->number,0,15) . ($countendorsement + 1);
             }
         }
 
@@ -1787,9 +1789,11 @@ class FeSlipController extends Controller
                 'created_at'=>$slipdata->created_at,
                 'updated_at'=>$slipdata->updated_at,
                 'wpc'=>$slipdata->wpc,
+                'remarks'=>$slipdata->remarks,
                 'v_broker'=>$slipdata->v_broker,
                 'coinsurance_slip'=>$slipdata->coinsurance_slip,
-                'status_log'=>$statuslist
+                'status_log'=>$statuslist,
+                'sum_feebroker'=>$slipdata->sum_feebroker
             ]
         );
 
@@ -2835,7 +2839,8 @@ class FeSlipController extends Controller
                     }
                     
 
-                    if($slipdatalist != null){
+                    if($slipdatalist != null)
+                    {
                         if($jsondtlistup == ' '){
                             foreach($slipdatalist as $slt){
                                 $slipdataup = SlipTable::create([
@@ -2883,7 +2888,8 @@ class FeSlipController extends Controller
                                         'retro_backup'=>$slt->retro_backup,
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
-                                        'wpc'=>$slt->wpc
+                                        'wpc'=>$slt->wpc,
+                                        'remarks'=>$slt->$remarks
                     
                                     ]);
                             }
@@ -2934,11 +2940,14 @@ class FeSlipController extends Controller
                                         'retro_backup'=>$slt->retro_backup,
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
-                                        'wpc'=>$slt->wpc
+                                        'wpc'=>$slt->wpc,
+                                        'remarks'=>$slt->$remarks
                     
                                     ]);
                             }
-                        }elseif($jsoniptlistup == ' '){
+                        }
+                        elseif($jsoniptlistup == ' ')
+                        {
                             foreach($slipdatalist as $slt){
                                 $slipdataup = SlipTable::create([
                                         'number'=>$slt->number,
@@ -2984,12 +2993,16 @@ class FeSlipController extends Controller
                                         'retro_backup'=>$slt->retro_backup,
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
-                                        'wpc'=>$slt->wpc
+                                        'wpc'=>$slt->wpc,
+                                        'remarks'=>$slt->$remarks
                     
                                     ]);
                             }
-                        }elseif($jsonrctlistup == ' '){
-                            foreach($slipdatalist as $slt){
+                        }
+                        elseif($jsonrctlistup == ' ')
+                        {
+                            foreach($slipdatalist as $slt)
+                            {
                                 $slipdataup = SlipTable::create([
                                         'number'=>$slt->number,
                                         'username'=>$slt->username,
@@ -3034,14 +3047,17 @@ class FeSlipController extends Controller
                                         'retro_backup'=>$slt->retro_backup,
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
-                                        'wpc'=>$slt->wpc
+                                        'wpc'=>$slt->wpc,
+                                        'remarks'=>$slt->$remarks
                     
                                     ]);
                             }
+                        
                         }
                         else
                         {
-                            foreach($slipdatalist as $slt){
+                            foreach($slipdatalist as $slt)
+                            {
                                 $slipdataup = SlipTable::create([
                                         'number'=>$slt->number,
                                         'username'=>$slt->username,
@@ -3087,7 +3103,8 @@ class FeSlipController extends Controller
                                         'retro_backup'=>$slt->retro_backup,
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
-                                        'wpc'=>$slt->wpc
+                                        'wpc'=>$slt->wpc,
+                                        'remarks'=>$slt->$remarks
                     
                                     ]);
                             }
@@ -3439,6 +3456,7 @@ class FeSlipController extends Controller
         $countendorsement = $slipdata->endorsment + 1;
 
         $slipdataup->endorsment=$countendorsement;
+        $slipdataup->remarks=@$request->$remarks;
         
         $slipdataup->prev_endorsement=$request->prevslipnumber;
         $slipdataup->sum_own_retention=$request->slipsumor;

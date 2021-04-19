@@ -111,11 +111,12 @@
 
     //triggered when modal is about to be shown
     $('#detailmodaldata').on('show.bs.modal', function(e) {
+
         //get data-id attribute of the clicked element
         var codesl = $(e.relatedTarget).data('book-id');
 
         //alert(codesl);
-        
+
         $.ajax({
         url:'{{ url("/") }}/transaction-data/detailslip/'+codesl,
         type:"GET",
@@ -131,6 +132,7 @@
             $('#slipeddetail').val(response.endorsment);
             $('#slipslsdetail').val(response.selisih);
             $('#wpcdetail').val(response.wpc);
+
             $('#slipvbrokerdetail').val(response.v_broker);
 
 
@@ -150,7 +152,7 @@
                         // var curr_minamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.min_claimamount);
                         var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         $('#deductiblePaneldetail tbody').empty();
-                        $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.currencydata+'">'+obj.currencydata+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td></td></tr>');
+                        $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td></td></tr>');
 
                     }
                 }
@@ -370,7 +372,7 @@
             $('#slipdaytotaldetail2').val(days);
             $('#slipdaytotaldetail3').val("365");
             $('#slipdaytotaldetail4').val("365");
-            
+        
             $('#sliptotalsumdatedetail').val(parseFloat(sum));
 
 
@@ -387,12 +389,26 @@
 
                 $('#slipratedetail').val(response.rate);
                 $('#slipsharedetail').val(response.share);
+
                 if(response.sum_share){
                     $('#slipsumsharedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumsharedetail2').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }
                 else{
                     $('#slipsumsharedetail').val("0");
+                    $('#slipsumsharedetail2').val("0");
                 }
+
+                if(response.sum_feebroker){
+                    $('#slipsumfeedetail').val(response.sum_feebroker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumfeedetail2').val(response.sum_feebroker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                }
+                else{
+                    $('#slipsumfeedetail').val("0");
+                    $('#slipsumfeedetail2').val("0");
+                }
+
+
                 if(response.basic_premium){
                     $('#slipbasicpremiumdetail').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }else
@@ -402,10 +418,14 @@
                 
                 if(response.grossprm_to_nr){
                     $('#slipgrossprmtonrdetail').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipgrossprmtonrdetail2').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                
                 }
                 else{
                     $('#slipgrossprmtonrdetail').val("0");
+                    $('#slipgrossprmtonrdetail2').val("0");
                 }
+
                 if(response.commission){
                     $('#slipcommissiondetail').val(response.commission);
                 }
@@ -416,17 +436,22 @@
 
                 if(response.sum_commission){
                     $('#slipsumcommissiondetail').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumcommissiondetail2').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                
                 }
                 else{
                     $('#slipsumcommissiondetail').val("0");
+                    $('#slipsumcommissiondetail2').val("0");
 
                 }
 
                 if(response.netprm_to_nr){
-                    $('#slipnetprmtonrdetail').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
+                    $('#slipnetprmtonrdetail').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipnetprmtonrdetail2').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
                 }
                 else{
                     $('#slipnetprmtonrdetail').val("0"); 
+                    $('#slipnetprmtonrdetail2').val("0"); 
                 }
 
                 if(response.own_retention){
@@ -442,6 +467,9 @@
                 else{
                     $('#slipsumordetail').val("0");
                 }
+
+                $('#countendorsmentdetail').val(response.endorsment);
+                $('#remarksdetail').val(response.remarks);
                 
                 
                 swal("Success!", "Data Show")
@@ -455,7 +483,7 @@
         });
 
 
-    });
+});
 </script>
 
 
@@ -464,6 +492,7 @@
     $('#updatemodaldata').on('show.bs.modal', function(e) {
 
         //get data-id attribute of the clicked element
+        $("#tabretroupdate").attr('hidden','true');
         var codesl = $(e.relatedTarget).data('book-id');
         //alert(codesl);
         $('input .amount').val(function(event) {
@@ -529,7 +558,7 @@
                         var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                         $('#deductiblePanelupdate tbody').empty();
-                        $('#deductiblePanelupdate tbody').prepend('<tr id="iiddeductibleupdate'+obj.id+'" data-name="deductibleupdatevalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.currencydata+'">'+obj.currencydata+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleupdate('+obj.id+')">delete</a></td></tr>');
+                        $('#deductiblePanelupdate tbody').prepend('<tr id="iiddeductibleupdate'+obj.id+'" data-name="deductibleupdatevalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleupdate('+obj.id+')">delete</a></td></tr>');
 
                     }
                 }
@@ -699,6 +728,8 @@
             $('#sliptotalsumpctupdate').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $('#sliptotalsumpctupdate2').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
+            $('#remarksupdate').val(response.remarks);
+            $('#countendorsmentupdate').val(response.endorsment);
 
             $('#slipipfromupdate').val(response.insurance_period_from);
             $('#slipiptoupdate').val(response.insurance_period_to);
@@ -788,6 +819,7 @@
     $('#endorsementmodaldata').on('show.bs.modal', function(e) {
 
          //get data-id attribute of the clicked element
+         $("#tabretroendorsement").attr('hidden','true');
          var codesl = $(e.relatedTarget).data('book-id');
         //alert(codesl);
         $('input .amount').val(function(event) {
@@ -842,7 +874,7 @@
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
                             $('#deductiblePanelendorsement tbody').empty();
-                            $('#deductiblePanelendorsement tbody').prepend('<tr id="iiddeductibleendorsement'+obj.id+'" data-name="deductibleendorsementvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.currencydata+'">'+obj.currencydata+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleendorsement('+obj.id+')">delete</a></td></tr>');
+                            $('#deductiblePanelendorsement tbody').prepend('<tr id="iiddeductibleendorsement'+obj.id+'" data-name="deductibleendorsementvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleendorsement('+obj.id+')">delete</a></td></tr>');
 
                         }
                     }
@@ -1025,6 +1057,11 @@
             $('#slipdaytotalendorsement2').val(days);
             $('#slipdaytotalendorsement3').val("365");
             $('#slipdaytotalendorsement4').val("365");
+
+            
+            $('#countendorsmentdata').val(response.endorsment);
+            $('#remarksendorsement').val(response.remarks);
+           
                 
 
             $('#sliptotalsumdateendorsement').val(parseFloat(sum));
@@ -5102,7 +5139,7 @@ $('#sliprate').change(function(){
             
                console.log(response)
                var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-               $('#deductiblePanelupdate tbody').prepend('<tr id="iiddeductibleupdate'+response.id+'" data-name="deductibleupdatevalue[]"><td data-name="'+response.deductibletype+'">'+response.deductibletype+'</td><td data-name="'+response.currencydata+'">'+response.currencydata+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleupdate('+response.id+')">delete</a></td></tr>');
+               $('#deductiblePanelupdate tbody').prepend('<tr id="iiddeductibleupdate'+response.id+'" data-name="deductibleupdatevalue[]"><td data-name="'+response.deductibletype+'">'+response.deductibletype+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td data-name="'+response.min_claimamount+'">'+response.min_claimamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleupdate('+response.id+')">delete</a></td></tr>');
                $('#slipdppercentageupdate').val('');
                $('#slipdpamountupdate').val('');
                $('#slipdpminamountupdate').val('');
@@ -6480,6 +6517,7 @@ $('#sliprate').change(function(){
        var slipor =  $('#sliporupdate').val();
        var slipsumor =  $('#slipsumorupdate').val();
        var wpc =  $('#wpcupdate').val();
+       var remarks =  $('#remarksupdate').val();
 
        var token2 = $('input[name=_token]').val();
 
@@ -6574,7 +6612,8 @@ $('#sliprate').change(function(){
                sliprb:sliprb,
                slipor:slipor,
                slipsumor:real_slipsumor,
-               wpc:wpc
+               wpc:wpc,
+               remarks:remarks
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },
@@ -6757,6 +6796,7 @@ $('#sliprate').change(function(){
        var slipor =  $('#sliporendorsement').val();
        var slipsumor =  $('#slipsumorendorsement').val();
        var wpc =  $('#wpcendorsement').val();
+       var remarks =  $('#remarksendorsement').val();
 
        var token2 = $('input[name=_token]').val();
        
@@ -6852,7 +6892,8 @@ $('#sliprate').change(function(){
                sliprb:sliprb,
                slipor:slipor,
                slipsumor:real_slipsumor,
-               wpc:wpc
+               wpc:wpcm,
+               remarks:remarks
            },
            beforeSend: function() { $("body").addClass("loading");  },
            complete: function() {  $("body").removeClass("loading"); },

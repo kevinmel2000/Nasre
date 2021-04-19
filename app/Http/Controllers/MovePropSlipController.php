@@ -1124,7 +1124,8 @@ class MovePropSlipController extends Controller
                     'retro_backup'=>$request->sliprb,
                     'own_retention'=>$request->slipor,
                     'sum_own_retention'=>$request->slipsumor,
-                    'wpc'=>$request->wpc
+                    'wpc'=>$request->wpc,
+                    'remarks'=>$request->remarks
 
                 ]);
 
@@ -1358,6 +1359,7 @@ class MovePropSlipController extends Controller
                 $slipdataup->own_retention=$request->slipor;
                 $slipdataup->sum_own_retention=$request->slipsumor;
                 $slipdataup->wpc=$request->wpc;
+                $slipdataup->remarks=$request->remarks;
 
                 
                 $slipdataup->save();
@@ -1750,7 +1752,8 @@ class MovePropSlipController extends Controller
                                         'retro_backup'=>$slt->retro_backup,
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
-                                        'wpc'=>$slt->wpc
+                                        'wpc'=>$slt->wpc,
+                                        'remarks'=>$slt->$remarks
                     
                                     ]);
                             }
@@ -1801,7 +1804,8 @@ class MovePropSlipController extends Controller
                                         'retro_backup'=>$slt->retro_backup,
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
-                                        'wpc'=>$slt->wpc
+                                        'wpc'=>$slt->wpc,
+                                        'remarks'=>$slt->$remarks
                     
                                     ]);
                             }
@@ -1851,7 +1855,8 @@ class MovePropSlipController extends Controller
                                         'retro_backup'=>$slt->retro_backup,
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
-                                        'wpc'=>$slt->wpc
+                                        'wpc'=>$slt->wpc,
+                                        'remarks'=>$slt->$remarks
                     
                                     ]);
                             }
@@ -1901,8 +1906,9 @@ class MovePropSlipController extends Controller
                                         'retro_backup'=>$slt->retro_backup,
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
-                                        'wpc'=>$slt->wpc
-                    
+                                        'wpc'=>$slt->wpc,
+                                        'remarks'=>$slt->$remarks
+
                                     ]);
                             }
                         }
@@ -1954,7 +1960,8 @@ class MovePropSlipController extends Controller
                                         'retro_backup'=>$slt->retro_backup,
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
-                                        'wpc'=>$slt->wpc
+                                        'wpc'=>$slt->wpc,
+                                        'remarks'=>$slt->$remarks
                     
                                     ]);
                             }
