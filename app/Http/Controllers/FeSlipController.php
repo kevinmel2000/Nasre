@@ -2866,8 +2866,10 @@ class FeSlipController extends Controller
                         ]);
                     }
 
-                    if($installmentlist != null){
-                        foreach($installmentlist as $ipt){
+                    if($installmentlist != null)
+                    {
+                        foreach($installmentlist as $ipt)
+                        {
                             $iptlistup = InstallmentTemp::create([
                                 'installment_date'=>$ipt->installment_date,
                                 'percentage'=>$ipt->percentage,
