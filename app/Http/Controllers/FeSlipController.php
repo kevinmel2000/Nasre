@@ -2811,7 +2811,13 @@ class FeSlipController extends Controller
                             ]);
 
                             $jsondtlistup = DeductibleTemp::where('slip_id','=',$dtlistup->slip_id)->where('count_endorsement',$dtlistup->count_endorsement)->orderby('id','desc')->get();
-    
+                            
+                            if(empty($jsondtlistup))
+                            {
+                                $jsondtlistup=[];
+                            }
+                            
+
                             $dtdata =  DeductibleTemp::findOrFail($dt->id);
                             $dtdata->min_claimamount = ($dt->min_claimamount * (-1));
                             $dtdata->amount = ($dt->amount * (-1));
@@ -2836,6 +2842,10 @@ class FeSlipController extends Controller
 
                             $jsonectlistup = ExtendCoverageTemp::where('slip_id','=',$ectlistup->slip_id)->where('count_endorsement',$ectlistup->count_endorsement)->orderby('id','desc')->get();
 
+                            if(empty($jsonectlistup))
+                            {
+                                $jsonectlistup=[];
+                            }
     
                             $ectdata =  ExtendCoverageTemp::findOrFail($ect->id);
                             $ectdata->amount = ($ect->amount * (-1));
@@ -2860,6 +2870,10 @@ class FeSlipController extends Controller
 
                             $jsoniptlistup = InstallmentTemp::where('slip_id','=',$iptlistup->slip_id)->where('count_endorsement',$iptlistup->count_endorsement)->orderby('id','desc')->get();
 
+                            if(empty($jsoniptlistup))
+                            {
+                                $jsoniptlistup=[];
+                            }
     
                             $iptdata =  InstallmentTemp::findOrFail($ipt->id);
                             $iptdata->amount = ($ipt->amount * (-1));
@@ -2893,7 +2907,12 @@ class FeSlipController extends Controller
                             ]);
 
                             $jsonrctlistup = RetrocessionTemp::where('slip_id','=',$rctlistup->slip_id)->where('count_endorsement',$rctlistup->count_endorsement)->orderby('id','desc')->get();
-
+                            
+                            if(empty($jsonrctlistup))
+                            {
+                                $jsonrctlistup=[];
+                            }
+    
     
                             $rctdata =  RetrocessionTemp::findOrFail($rct->id);
                             $rctdata->amount = ($rct->amount * (-1));
