@@ -219,16 +219,17 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="">{{__('Rate Upper Area')}}</label>
-                                                                <input type="text" id="slipbcuaupdate" name="slipbcuaupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
                                                                 <label for="">{{__('Rate Lower Area')}}</label>
                                                                 <input type="text" id="slipbclaupdate" name="slipbclaupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                             </div>
                                                         </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Rate Upper Area')}}</label>
+                                                                <input type="text" id="slipbcuaupdate" name="slipbcuaupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
+                                                            </div>
+                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
