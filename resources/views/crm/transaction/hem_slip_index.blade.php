@@ -28,11 +28,64 @@
             <div class="row">
                 <div class="col-md-12 com-sm-12 mt-3">
                 
-                  {!! link_to('transaction-data/fe-slip','Add Data',['class'=>'btn btn-primary']) !!}
+                  {!! link_to('transaction-data/hem-slip','Add Data',['class'=>'btn btn-primary']) !!}
                   <hr>
-                  {{-- {!! Form::open(array('url'=>'transaction-data/fe-slipindex')) !!}
-                  {!! Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari FIRE & ENGINEERING Number, ketik lalu tekan enter']) !!}
-                  {!! Form::close() !!} --}}
+                  {{ Form::open(array('url'=>'transaction-data/hem-slipindex')) }}
+                  
+                  <table>
+                    <tbody>
+                    
+                    <tr>
+                      <td>
+                      {{ Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari Number']) }}
+                      </td>
+                      <td>
+                      {{ Form::text('searchinsured',null,['class'=>'form-control','placeholder'=>'Cari Insured']) }}
+                      </td>
+                      <td>
+                      {{ Form::text('searchuy',null,['class'=>'form-control','placeholder'=>'Cari UY']) }}
+                      </td>
+                      <td>
+                      {{ Form::text('searchshare',null,['class'=>'form-control','placeholder'=>'Our Share']) }}
+                      </td>
+                      <td>
+                      {{ Form::text('searchnre',null,['class'=>'form-control','placeholder'=>'National Reinsurance']) }}
+                      </td>
+                      <td>
+                      {{ Form::text('searchtsi',null,['class'=>'form-control','placeholder'=>'Total Sum Insurance']) }}
+                      </td>
+                      <td>
+                      {{ Form::text('searchendorse',null,['class'=>'form-control','placeholder'=>'Endorsement Count']) }}
+                      </td>
+                      <td>
+                      {{ Form::text('searchslipnum',null,['class'=>'form-control','placeholder'=>'Slip Number']) }}
+                      </td>
+                      <td>
+                        <select id="searchcob" name="searchcob" class="e1 form-control form-control-sm ">
+                            <option selected readonly  value='0'>{{__('COB list')}}</option>
+                            @foreach($cob as $boc)
+                            <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
+                            @endforeach
+                        </select>
+                      </td>
+                      <td>
+                          <select id="searchceding" name="searchceding" class="e1 form-control form-control-sm ">
+                              <option value=""  selected disabled >Ceding or Broker</option>
+                              @foreach($cedingbroker as $cb)
+                              <option value="{{ $cb->id }}"> {{ $cb->code }} - {{ $cb->name }}</option>
+                              @endforeach
+                          </select>
+                      </td>
+                    </tr>
+                    </tbody>
+
+                    <tr>
+                      <td>
+                      <button type="submit" class="btn btn-md btn-primary">{{__('Search')}}</button>
+                      </td>
+                    </tr>
+                </table>
+                  {{ Form::close() }}
                   <hr>
                   <table id="felookupTable2" class="table table-bordered table-striped">
                     <thead>
@@ -100,6 +153,7 @@
                               </td>
 
                             </tr>
+
                             
                             <tr>
                               <th></th>
