@@ -1107,7 +1107,6 @@ class FeSlipController extends Controller
                 $slipdataup->selisih="false";
                 $slipdataup->source=$request->slipcedingbroker;
                 $slipdataup->source_2=$request->slipceding;
-                // $slipdataup->currency=$request->slipcurrency;
                 $slipdataup->cob=$request->slipcob;
                 $slipdataup->koc=$request->slipkoc;
                 $slipdataup->occupacy=$request->slipoccupacy;
@@ -1118,9 +1117,9 @@ class FeSlipController extends Controller
                 $slipdataup->attacment_file=''; 
                 $slipdataup->interest_insured=$interestlist->toJSon();
                 $slipdataup->total_sum_insured=$request->sliptotalsum; 
-                $slipdataup->share_tsi=$request->slipsharetotalsum; 
-                $slipdataup->type_tsi=$request->sliptypetotalsum; 
-                $slipdataup->type_share_tsi=$request->sliptypetsishare; 
+                $slipdataup->share_tsi=$request->sharetotalsum; 
+                $slipdataup->type_tsi=$request->sliptypetsi; 
+                $slipdataup->type_share_tsi=$request->sharetypetsi; 
                 $slipdataup->total_day=$request->sliptotalday; 
                 $slipdataup->total_year=$request->sliptotalyear; 
                 $slipdataup->sum_total_date=$request->slipdatesum; 
@@ -1136,6 +1135,7 @@ class FeSlipController extends Controller
                 $slipdataup->proportional=$request->slipproportional;
                 $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
                 $slipdataup->rate=$request->sliprate;  
+                $slipdataup->sliptotalrate=$request->slipsumrate;  
                 $slipdataup->v_broker=$request->slipvbroker;
                 $slipdataup->sum_feebroker=$request->slipsumvbroker;
                 $slipdataup->share=$request->slipshare;
@@ -1180,6 +1180,7 @@ class FeSlipController extends Controller
                     [
                         'id' => $slipdataup->id,
                         'slipstatus' => $slipdataup->status,
+                        'new_share_nasre' => $msdata->share_from,
                         'ceding'=>$slipdataup->ceding->name,
                         'cedingbroker'=>$slipdataup->cedingbroker->name,
                         'count_endorsement'=>$slipdataup->endorsment

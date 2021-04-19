@@ -2133,6 +2133,196 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 </script>
 
 <script type="text/javascript">
+    $('#slipoccupacyupdate').change(function(){
+         var bld = $('#slipbld_constupdate').val();
+        var ocp_id = $('#slipoccupacyupdate').val();
+        console.log(bld)
+        console.log(ocp_id)
+        if(bld != ''){
+
+
+            if(ocp_id){
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('get-building-rate')}}",
+                    data: {
+                        building: bld,
+                        occupacy_id:ocp_id
+                    },
+                    beforeSend: function() { $("body").addClass("loading");  },
+                    complete: function() {  $("body").removeClass("loading"); },
+                    success:function(res){  
+                        console.log(res)      
+                        console.log(bld)      
+                        if(res.rate_batas_atas_building_class_1 && res.rate_batas_bawah_building_class_1){
+                            if(res.rate_batas_atas_building_class_1 != null){
+                                $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_1);
+                            }else{
+                                $("#slipbcuaupdate").val(parseInt('0'));
+                            }
+                            
+                            if(res.rate_batas_bawah_building_class_1 != null){
+                                $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_1);
+                            }else{
+                                $("#slipbclaupdate").val(parseInt('0'));
+                            }
+                            
+
+                        }
+                        else if(res.rate_batas_atas_building_class_2 && res.rate_batas_bawah_building_class_2){
+                            if(res.rate_batas_atas_building_class_2 != null){
+                                $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_2);
+                            }else{
+                                $("#slipbcuaupdate").val(parseInt('0'));
+                            }
+                            
+                            if(res.rate_batas_bawah_building_class_2 != null){
+                                $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_2);
+                            }else{
+                                $("#slipbclaupdate").val(parseInt('0'));
+                            }
+                            
+                        }
+                        else if(res.rate_batas_atas_building_class_3 && res.rate_batas_bawah_building_class_3){
+                            if(res.rate_batas_atas_building_class_3 != null){
+                                $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_3); 
+                            }else{
+                                $("#slipbcuaupdate").val( parseInt('0'));
+                            }
+                            
+                            if(res.rate_batas_bawah_building_class_3 != null){
+                                $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_3);
+                            }else{
+                                $("#slipbclaupdate").val( parseInt('0'));
+                            }
+                            
+                            
+                        }else{
+                            if(res.rate_batas_atas_building_class_1){
+                                $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_1); 
+                                $("#slipbclaupdate").val( parseInt('0'));
+                            }else if(res.rate_batas_bawah_building_class_1){
+                                $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_1); 
+                                $("#slipbcuaupdate").val( parseInt('0'));
+                            }else if(res.rate_batas_atas_building_class_2){
+                                $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_2); 
+                                $("#slipbclaupdate").val( parseInt('0'));
+                            }else if(res.rate_batas_bawah_building_class_2){
+                                $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_2); 
+                                $("#slipbcuaupdate").val( parseInt('0'));
+                            }else if(res.rate_batas_atas_building_class_3){
+                                $("#slipbcuaupdate").val(res.rate_batas_atas_building_class_3); 
+                                $("#slipbclaupdate").val( parseInt('0'));
+                            }else if(res.rate_batas_bawah_building_class_3){
+                                $("#slipbclaupdate").val(res.rate_batas_bawah_building_class_3); 
+                                $("#slipbcuaupdate").val( parseInt('0'));
+                            }
+                        }
+                    }
+                });
+            }else{
+                swal("Error!", "Please choose occupacy first", "Get Building Rate Error");
+            }   
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    $('#slipoccupacyendorsement').change(function(){
+         var bld = $('#slipbld_constendorsement').val();
+        var ocp_id = $('#slipoccupacyendorsement').val();
+        console.log(bld)
+        console.log(ocp_id)
+        if(bld != ''){
+
+
+            if(ocp_id){
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('get-building-rate')}}",
+                    data: {
+                        building: bld,
+                        occupacy_id:ocp_id
+                    },
+                    beforeSend: function() { $("body").addClass("loading");  },
+                    complete: function() {  $("body").removeClass("loading"); },
+                    success:function(res){  
+                        console.log(res)      
+                        console.log(bld)      
+                        if(res.rate_batas_atas_building_class_1 && res.rate_batas_bawah_building_class_1){
+                            if(res.rate_batas_atas_building_class_1 != null){
+                                $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_1);
+                            }else{
+                                $("#slipbcuaendorsement").val(parseInt('0'));
+                            }
+                            
+                            if(res.rate_batas_bawah_building_class_1 != null){
+                                $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_1);
+                            }else{
+                                $("#slipbclaendorsement").val(parseInt('0'));
+                            }
+                            
+
+                        }
+                        else if(res.rate_batas_atas_building_class_2 && res.rate_batas_bawah_building_class_2){
+                            if(res.rate_batas_atas_building_class_2 != null){
+                                $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_2);
+                            }else{
+                                $("#slipbcuaendorsement").val(parseInt('0'));
+                            }
+                            
+                            if(res.rate_batas_bawah_building_class_2 != null){
+                                $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_2);
+                            }else{
+                                $("#slipbclaendorsement").val(parseInt('0'));
+                            }
+                            
+                        }
+                        else if(res.rate_batas_atas_building_class_3 && res.rate_batas_bawah_building_class_3){
+                            if(res.rate_batas_atas_building_class_3 != null){
+                                $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_3); 
+                            }else{
+                                $("#slipbcuaendorsement").val( parseInt('0'));
+                            }
+                            
+                            if(res.rate_batas_bawah_building_class_3 != null){
+                                $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_3);
+                            }else{
+                                $("#slipbclaendorsement").val( parseInt('0'));
+                            }
+                            
+                            
+                        }else{
+                            if(res.rate_batas_atas_building_class_1){
+                                $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_1); 
+                                $("#slipbclaendorsement").val( parseInt('0'));
+                            }else if(res.rate_batas_bawah_building_class_1){
+                                $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_1); 
+                                $("#slipbcuaendorsement").val( parseInt('0'));
+                            }else if(res.rate_batas_atas_building_class_2){
+                                $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_2); 
+                                $("#slipbclaendorsement").val( parseInt('0'));
+                            }else if(res.rate_batas_bawah_building_class_2){
+                                $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_2); 
+                                $("#slipbcuaendorsement").val( parseInt('0'));
+                            }else if(res.rate_batas_atas_building_class_3){
+                                $("#slipbcuaendorsement").val(res.rate_batas_atas_building_class_3); 
+                                $("#slipbclaendorsement").val( parseInt('0'));
+                            }else if(res.rate_batas_bawah_building_class_3){
+                                $("#slipbclaendorsement").val(res.rate_batas_bawah_building_class_3); 
+                                $("#slipbcuaendorsement").val( parseInt('0'));
+                            }
+                        }
+                    }
+                });
+            }else{
+                swal("Error!", "Please choose occupacy first", "Get Building Rate Error");
+            }   
+        }
+    });
+</script>
+
+<script type="text/javascript">
     $('#slipbld_const').change(function(){
         var bld = $(this).val();
         var ocp_id = $('#slipoccupacy').val();
@@ -2420,8 +2610,11 @@ $('#slipbld_constendorsement').change(function(){
                 }else{
                     
                     var tsi = $('#feshareto').val();
-                    $('#sliptotalsum').val(tsi);
-                    $('#sliptotalsum2').val(tsi);
+                    var int_tsi = parseInt(tsi.replace(/,/g, ""));
+                    var conv_str_tsi = int_tsi.toFixed(2);
+                    var real_tsi = conv_str_tsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    $('#sliptotalsum').val(real_tsi);
+                    $('#sliptotalsum2').val(real_tsi);
 
                     var pctval = $('#sliptotalsumpct').val();
 
@@ -2433,7 +2626,8 @@ $('#slipbld_constendorsement').change(function(){
 
                         var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
                         console.log(sum)
-                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        var conv_sum = sum.toFixed(2);
+                        var real_sum = conv_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         $('#sliptotalsumpct').val(real_sum);
                         $('#sliptotalsumpct2').val(real_sum);
                         // swal('success','changed to tsi','success')
@@ -2482,8 +2676,11 @@ $('#slipbld_constendorsement').change(function(){
         {
             if(valcedshare != null){
                 var ceding_share = $('#feshare').val();
-                $('#sliptotalsum').val(ceding_share);
-                $('#sliptotalsum2').val(ceding_share);
+                var int_ceding_share = parseInt(ceding_share.replace(/,/g, ""));
+                var conv_ceding_share = int_ceding_share.toFixed(2);
+                var real_ceding_share = conv_ceding_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#sliptotalsum').val(real_ceding_share);
+                $('#sliptotalsum2').val(real_ceding_share);
 
                  var pctval = $('#sliptotalsumpct').val();
 
@@ -2550,8 +2747,11 @@ $('#slipbld_constendorsement').change(function(){
         if(choice == '1'){
 
             var tsi = $('#feshareto').val();
-            $('#sharetotalsum').val(tsi);
-            $('#sharetotalsum2').val(tsi);
+            var int_tsi = parseInt(tsi.replace(/,/g, ""));
+            var conv_str_tsi = int_tsi.toFixed(2);
+            var real_tsi = conv_str_tsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#sharetotalsum').val(real_tsi);
+            $('#sharetotalsum2').val(real_tsi);
 
             var shareslipval = $('#slipshare').val();
             if(shareslipval != null){
@@ -2715,7 +2915,8 @@ $('#slipbld_constendorsement').change(function(){
                         {
                             console.log('sum amount ' + res.sumamount)
                             var sum = res.sumamount;
-                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            var conv_sum = sum.toFixed(2);
+                            var real_sum = conv_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             $("#sharetotalsum").val(real_sum);
                             $("#sharetotalsum2").val(real_sum);
                         }
@@ -2887,6 +3088,984 @@ $('#slipbld_constendorsement').change(function(){
 </script>
 
 <script type="text/javascript">
+    $('#sliptypetsiendorsement').change(function(){
+        var choice = $(this).val();
+        var valtsi = $('#feshareto').val();
+        var valcedshare = $('#feshare').val();
+
+        if(choice == '1'){
+            if(valtsi == null){
+                    swal('warning','please fill tsi insured value first','error')
+                }else{
+                    
+                    var tsi = $('#feshareto').val();
+                    var int_tsi = parseInt(tsi.replace(/,/g, ""));
+                    var conv_str_tsi = int_tsi.toFixed(2);
+                    var real_tsi = conv_str_tsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    $('#sliptotalsumendorsement').val(real_tsi);
+                    $('#sliptotalsumendorsement2').val(real_tsi);
+
+                    var pctval = $('#sliptotalsumpctendorsement').val();
+
+                    if(pctval != null){
+                        var pct =  parseFloat($('#slippctendorsement').val())/100;
+
+                    
+                        var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                        var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
+                        console.log(sum)
+                        var conv_sum = sum.toFixed(2);
+                        var real_sum = conv_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#sliptotalsumpctendorsement').val(real_sum);
+                        $('#sliptotalsumpctendorsement2').val(real_sum);
+                        // swal('success','changed to tsi','success')
+
+
+                        var dpamount = $('#slipdpamountendorsement').val();
+                        var ecamount = $('#slipamountecendorsement').val();
+
+                        if(dpamount != null){
+
+                            var percent =  parseFloat($('#slipdppercentageendorsement').val()) / 100;
+                            
+                            var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            console.log($('#slipdppercentageendorsement').val())
+                            console.log(percent)
+                            console.log(sum)
+                            console.log(real_sum)
+
+                            $('#slipdpamountendorsement').val(real_sum);
+                            $('#slipdpamountendorsement2').val(real_sum);
+
+                        }
+
+                        if(ecamount != null){
+
+                            var persentage =  parseFloat($('#slipnilaiecendorsement').val()) / 1000;
+                            var sum = isNaN(conv_tsi * persentage) ? 0 :(conv_tsi * persentage).toFixed(2) ;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            console.log($('#slipnilaiecendorsement').val())
+                            console.log(persentage)
+                            console.log(sum)
+                            console.log(real_sum)
+
+                            $('#slipamountecendorsement').val(real_sum);
+                            $('#slipamountecendorsement2').val(real_sum);
+
+                        }
+
+                    }
+                }
+
+
+
+        }else if(choice == '2')
+        {
+            if(valcedshare != null){
+                var ceding_share = $('#feshare').val();
+                var int_ceding_share = parseInt(ceding_share.replace(/,/g, ""));
+                var conv_ceding_share = int_ceding_share.toFixed(2);
+                var real_ceding_share = conv_ceding_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#sliptotalsumendorsement').val(real_ceding_share);
+                $('#sliptotalsumendorsement2').val(real_ceding_share);
+
+                 var pctval = $('#sliptotalsumpctendorsement').val();
+
+                if(pctval != null){
+
+                    var pct =  parseFloat($('#slippctendorsement').val())/100;
+
+                    // var tsi = $("#sliptotalsum").val();
+                    var conv_tsi = parseInt(ceding_share.replace(/,/g, ""));
+
+                    var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
+                    console.log(sum)
+                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    $('#sliptotalsumpctendorsement').val(real_sum);
+                    $('#sliptotalsumpctendorsement2').val(real_sum);
+                    // swal('success','changed to ceding share','success')
+
+                    var dpamount = $('#slipdpamountendorsement').val();
+                    var ecamount = $('#slipamountecendorsement').val();
+
+                    if(dpamount != null){
+                        var percent =  parseFloat($('#slipdppercentageendorsement').val()) / 100;
+                        
+                        var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
+                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        console.log($('#slipdppercentageendorsement').val())
+                        console.log(percent)
+                        console.log(sum)
+                        console.log(real_sum)
+
+                        $('#slipdpamountendorsement').val(real_sum);
+                        $('#slipdpamountendorsement2').val(real_sum);
+                    }
+
+                    if(ecamount != null){
+
+                        var persentage =  parseFloat($('#slipnilaiecendorsement').val()) / 1000;
+                        var sum = isNaN(conv_tsi * persentage) ? 0 :(conv_tsi * persentage).toFixed(2) ;
+                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        console.log($('#slipnilaiecendorsement').val())
+                        console.log(persentage)
+                        console.log(sum)
+                        console.log(real_sum)
+
+                        $('#slipamountecendorsement').val(real_sum);
+                        $('#slipamountecendorsement2').val(real_sum);
+                        
+                    }
+
+                }
+            }else{
+                swal('warning','please fill ceding share first','error')
+            }
+
+
+        }
+
+    });
+</script>
+
+<script type="text/javascript">
+    $('#sharetypetsiendorsement').change(function(){
+        var choice = $(this).val();
+        if(choice == '1'){
+
+            var tsi = $('#feshareto').val();
+            var int_tsi = parseInt(tsi.replace(/,/g, ""));
+            var conv_str_tsi = int_tsi.toFixed(2);
+            var real_tsi = conv_str_tsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#sharetotalsumendorsement').val(real_tsi);
+            $('#sharetotalsumendorsement2').val(real_tsi);
+
+            var shareslipval = $('#slipshareendorsement').val();
+            if(shareslipval != null){
+                var shareslip =  parseFloat($('#slipshareendorsement').val()) / 100 ;
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+                var sumshare =isNaN( shareslip * conv_tsi) ? 0 :( shareslip * conv_tsi).toFixed(2) ;
+                var real_sumshare = sumshare.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
+                $('#slipsumshareendorsement').val(real_sumshare);
+                $('#slipsumshareendorsement2').val(real_sumshare);
+
+                var rateslipval = $('#sliprateendorsement').val();
+
+                if(sliprate != null){
+
+                    var insurance_period_from2 = $('#sliprpfromendorsement').val();
+                    var insurance_period_to2 = $('#sliprptoendorsement').val();
+                    var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+                    var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+                    var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
+                    var insurance = (days/365);
+                    
+                    console.log(insurance_period_from2)
+                    console.log(insurance_period_to2)
+                    console.log(newinsurance_period_from2)
+                    console.log(newinsurance_period_to2)
+                    console.log(days)
+                    console.log(insurance)
+
+                    var rateslip =  parseFloat($(this).val()) / 1000;
+                    var sumrate = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
+                    var real_sumrate = sumrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                    $('#slipbasicpremiumendorsement').val(real_sumrate);
+
+                    var grossprm_to_nr = $('#slipgrossprmtonrendorsement').val();
+
+                    if(grossprm_to_nr != null){
+                        var nasionalreinsurance =  $('#fesharefromendorsement').val();
+                        var totalnre =  $('#fesharetoendorsement').val();
+                        var conv_totalnre =  parseInt(totalnre.replace(/,/g, ""));
+
+                        console.log('nre' + nasionalreinsurance)
+                            // console.log(conv_nasionalreinsurance)
+                            console.log('totalnre' + totalnre)
+                            console.log('convtotnre' + conv_totalnre)
+                            
+                            var sumshare2 = $('#slipsumshareendorsement').val() ;
+                            var conv_sumshare = parseInt(sumshare2.replace(/,/g, ""));
+                            var basic_premium = $('#slipbasicpremiumendorsement').val();
+                            var conv_basre = parseInt(basic_premium.replace(/,/g, ""));
+
+                            var orpercent = $('#sliporendorsement').val() / 100;
+
+                            var sumor = isNaN(orpercent * conv_sumshare) ? 0 :(orpercent * conv_sumshare).toFixed(2);
+                            var real_sumor = sumor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            
+                            var sumgrtoprm = isNaN(conv_basre * shareslip) ? 0 :(conv_basre * shareslip ).toFixed(2);
+                            var real_sumgrtoprm = sumgrtoprm.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            
+                            if(nasionalreinsurance){
+                                var conv_nasionalreinsurance =  parseInt(nasionalreinsurance.replace(/,/g, ""));
+                                var sumnre = isNaN(conv_nasionalreinsurance + conv_sumshare ) ? 0 :(conv_nasionalreinsurance + conv_sumshare).toFixed(2) ;
+                                var real_sumnre = sumnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            }else{
+                                var conv_nasionalreinsurance =  parseInt(nasionalreinsurance.replace(/,/g, ""));
+                                var sumnre = isNaN(0 + conv_sumshare ) ? 0 :(0 + conv_sumshare).toFixed(2) ;
+                                var real_sumnre = sumnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            }
+                            
+                            
+                            var sumourshare = isNaN((sumnre / conv_totalnre) * 100 ) ? 0 :((sumnre / conv_totalnre) * 100 ).toFixed(2) ;
+
+                            console.log('sumnre' + sumnre)
+                            console.log('realnre' + real_sumnre)
+                            console.log('sumourshare' + sumourshare)
+
+                            $('#slipgrossprmtonrendorsement').val(real_sumgrtoprm);
+                            $('#slipgrossprmtonrendorsement2').val(real_sumgrtoprm);
+                            $('#slipsumorendorsement').val(real_sumor);
+                            $('#slipsumorendorsement2').val(real_sumor);
+                            // $('#feshare').val(sumourshare.replace(/,/g, "."));
+                            $('#fesharefrom').val(real_sumnre);
+
+
+                            var commision =  parseFloat($(this).val()) / 100;
+                            var feebroker = parseFloat($('#slipvbrokerendorsement').val()) / 100;
+                            var sumgrossprmtonr2 = $("#slipgrossprmtonrendorsement").val();
+                            var conv_sumgrossprmtonr = parseInt(sumgrossprmtonr2.replace(/,/g, ""));
+
+                            var sumcomm = isNaN(commision * conv_sumgrossprmtonr) ? 0 :(commision * conv_sumgrossprmtonr).toFixed(2);
+                            var real_sumcomm = sumcomm.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                            $('#slipsumcommissionendorsement').val(real_sumcomm);
+                            $('#slipsumcommissionendorsement2').val(real_sumcomm);
+
+                            var sumgrossprmtonr3 = $("#slipgrossprmtonrendorsement").val();
+                            var conv_sumgrossprmtonr2 = parseInt(sumgrossprmtonr3.replace(/,/g, ""));
+
+                            var sumnetprmtonr = isNaN( conv_sumgrossprmtonr2 * (100/100 - commision - feebroker)) ? 0 :(conv_sumgrossprmtonr2 * (100/100 - commision - feebroker)).toFixed(2);
+                            var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                            var sumfeebroker = isNaN( conv_sumgrossprmtonr2 * feebroker) ? 0 :(conv_sumgrossprmtonr2 * feebroker).toFixed(2);
+                            var real_sumfeebroker = sumfeebroker.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
+                            $('#slipnetprmtonrendorsement').val(real_sumnetprmtonr);
+                            $('#slipnetprmtonrendorsement2').val(real_sumnetprmtonr);
+                            // $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
+                            $('#slipsumfeeendorsement').val(real_sumfeebroker);
+                            $('#slipsumfeeendorsement2').val(real_sumfeebroker);
+
+                            var sumipamountval = $('#slipipamountendorsement').val();
+
+                            if(sumipamountval != null){
+                                var percent =  parseFloat($(this).val()) / 100;
+
+                                var sumnetprtonr2 = $("#slipnetprmtonrendorsement").val();
+                                var conv_sumnetprtonr = parseInt(sumnetprtonr2.replace(/,/g, ""));
+
+                                var sumipamount = isNaN(percent *  conv_sumnetprtonr) ? 0 :(percent *  conv_sumnetprtonr).toFixed(2);
+                                var real_sumipamount = sumipamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                                $('#slipipamountendorsement').val(real_sumipamount);
+                                $('#slipipamountendorsement2').val(real_sumipamount);
+                            }
+
+                    }
+
+
+
+                }
+
+            }
+
+            // swal('warning!','change to tsi please change installment and retrocession amount manually','success')
+        }else if(choice == '2')
+        {
+
+            var insuredid = $('#insuredIDtxt').val(); 
+            var cedbrok = $('#slipcedingbrokerendorsement').val();
+            var ceding = $('#slipcedingendorsement').val();
+            if(cedbrok != null && ceding != null){
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
+                    beforeSend: function() { $("body").addClass("loading");  },
+                    complete: function() {  $("body").removeClass("loading"); },
+                    success:function(res){  
+                        console.log(res)      
+                        if(res.type == 4){
+                        // $("#slipceding option").remove();
+
+
+                        // $("#slipceding").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+
+                        var ceding_curr = $('#slipcedingendorsement').val();
+                        var totalsum = $("#sliptotalsumendorsement").val();
+                        if(res.amountlist > 0)
+                        {
+                            console.log('sum amount ' + res.sumamount)
+                            var sum = res.sumamount;
+                            var conv_sum = sum.toFixed(2);
+                            var real_sum = conv_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            $("#sharetotalsumendorsement").val(real_sum);
+                            $("#sharetotalsumendorsement2").val(real_sum);
+                        }
+                        else
+                        {
+                            console.log('hasilnya ' + res)
+                        }
+
+
+                    }else{
+                        // $("#slipceding option").remove();
+                        // $("#slipceding").append('<option value="#" selected disabled> select ceding </option>');
+                        // $("#sliptotalsum").val('');
+                        // $("#sliptotalsum2").val('');
+                        // $.each(res,function(key,value){
+                        //     $("#slipceding").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+
+                        // });
+
+                    }
+                }
+            });
+            }else{
+                swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+            }  
+            var tsi = $('#feshare').val();
+            $('#sharetotalsumendorsement').val(tsi);
+            $('#sharetotalsumendorsement2').val(tsi);
+
+            var shareslipval = $('#slipshareendorsement').val();
+            if(shareslipval != null){
+                var shareslip =  parseFloat($('#slipshareendorsement').val()) / 100 ;
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+                var sumshare =isNaN( shareslip * conv_tsi) ? 0 :( shareslip * conv_tsi).toFixed(2) ;
+                var real_sumshare = sumshare.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
+                $('#slipsumshareendorsement').val(real_sumshare);
+                $('#slipsumshareendorsement2').val(real_sumshare);
+
+                var rateslipval = $('#sliprateendorsement').val();
+
+                if(sliprate != null){
+
+                    var insurance_period_from2 = $('#sliprpfromendorsement').val();
+                    var insurance_period_to2 = $('#sliprptoendorsement').val();
+                    var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+                    var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+                    var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
+                    var insurance = (days/365);
+                    
+                    console.log(insurance_period_from2)
+                    console.log(insurance_period_to2)
+                    console.log(newinsurance_period_from2)
+                    console.log(newinsurance_period_to2)
+                    console.log(days)
+                    console.log(insurance)
+
+                    var rateslip =  parseFloat($(this).val()) / 1000;
+                    var sumrate = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
+                    var real_sumrate = sumrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                    $('#slipbasicpremiumendorsement').val(real_sumrate);
+
+                    var grossprm_to_nr = $('#slipgrossprmtonrendorsement').val();
+
+                    if(grossprm_to_nr != null){
+                        var nasionalreinsurance =  $('#fesharefromendorsement').val();
+                        var totalnre =  $('#fesharetoendorsement').val();
+                        var conv_totalnre =  parseInt(totalnre.replace(/,/g, ""));
+
+                        console.log('nre' + nasionalreinsurance)
+                            // console.log(conv_nasionalreinsurance)
+                            console.log('totalnre' + totalnre)
+                            console.log('convtotnre' + conv_totalnre)
+                            
+                            var sumshare2 = $('#slipsumshareendorsement').val() ;
+                            var conv_sumshare = parseInt(sumshare2.replace(/,/g, ""));
+                            var basic_premium = $('#slipbasicpremiumendorsement').val();
+                            var conv_basre = parseInt(basic_premium.replace(/,/g, ""));
+
+                            var orpercent = $('#sliporendorsement').val() / 100;
+
+                            var sumor = isNaN(orpercent * conv_sumshare) ? 0 :(orpercent * conv_sumshare).toFixed(2);
+                            var real_sumor = sumor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            
+                            var sumgrtoprm = isNaN(conv_basre * shareslip) ? 0 :(conv_basre * shareslip ).toFixed(2);
+                            var real_sumgrtoprm = sumgrtoprm.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            
+                            if(nasionalreinsurance){
+                                var conv_nasionalreinsurance =  parseInt(nasionalreinsurance.replace(/,/g, ""));
+                                var sumnre = isNaN(conv_nasionalreinsurance + conv_sumshare ) ? 0 :(conv_nasionalreinsurance + conv_sumshare).toFixed(2) ;
+                                var real_sumnre = sumnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            }else{
+                                var conv_nasionalreinsurance =  parseInt(nasionalreinsurance.replace(/,/g, ""));
+                                var sumnre = isNaN(0 + conv_sumshare ) ? 0 :(0 + conv_sumshare).toFixed(2) ;
+                                var real_sumnre = sumnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            }
+                            
+                            
+                            var sumourshare = isNaN((sumnre / conv_totalnre) * 100 ) ? 0 :((sumnre / conv_totalnre) * 100 ).toFixed(2) ;
+
+                            console.log('sumnre' + sumnre)
+                            console.log('realnre' + real_sumnre)
+                            console.log('sumourshare' + sumourshare)
+
+                            $('#slipgrossprmtonrendorsement').val(real_sumgrtoprm);
+                            $('#slipgrossprmtonrendorsement2').val(real_sumgrtoprm);
+                            $('#slipsumorendorsement').val(real_sumor);
+                            $('#slipsumorendorsement2').val(real_sumor);
+                            // $('#feshare').val(sumourshare.replace(/,/g, "."));
+                            $('#fesharefrom').val(real_sumnre);
+
+
+                            var commision =  parseFloat($(this).val()) / 100;
+                            var feebroker = parseFloat($('#slipvbrokerendorsement').val()) / 100;
+                            var sumgrossprmtonr2 = $("#slipgrossprmtonrendorsement").val();
+                            var conv_sumgrossprmtonr = parseInt(sumgrossprmtonr2.replace(/,/g, ""));
+
+                            var sumcomm = isNaN(commision * conv_sumgrossprmtonr) ? 0 :(commision * conv_sumgrossprmtonr).toFixed(2);
+                            var real_sumcomm = sumcomm.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                            $('#slipsumcommissionendorsement').val(real_sumcomm);
+                            $('#slipsumcommissionendorsement2').val(real_sumcomm);
+
+                            var sumgrossprmtonr3 = $("#slipgrossprmtonrendorsement").val();
+                            var conv_sumgrossprmtonr2 = parseInt(sumgrossprmtonr3.replace(/,/g, ""));
+
+                            var sumnetprmtonr = isNaN( conv_sumgrossprmtonr2 * (100/100 - commision - feebroker)) ? 0 :(conv_sumgrossprmtonr2 * (100/100 - commision - feebroker)).toFixed(2);
+                            var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                            var sumfeebroker = isNaN( conv_sumgrossprmtonr2 * feebroker) ? 0 :(conv_sumgrossprmtonr2 * feebroker).toFixed(2);
+                            var real_sumfeebroker = sumfeebroker.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
+                            $('#slipnetprmtonrendorsement').val(real_sumnetprmtonr);
+                            $('#slipnetprmtonrendorsement2').val(real_sumnetprmtonr);
+                            // $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
+                            $('#slipsumfeeendorsement').val(real_sumfeebroker);
+                            $('#slipsumfeeendorsement2').val(real_sumfeebroker);
+
+                            var sumipamountval = $('#slipipamountendorsement').val();
+
+                            if(sumipamountval != null){
+                                var percent =  parseFloat($(this).val()) / 100;
+
+                                var sumnetprtonr2 = $("#slipnetprmtonrendorsement").val();
+                                var conv_sumnetprtonr = parseInt(sumnetprtonr2.replace(/,/g, ""));
+
+                                var sumipamount = isNaN(percent *  conv_sumnetprtonr) ? 0 :(percent *  conv_sumnetprtonr).toFixed(2);
+                                var real_sumipamount = sumipamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                                $('#slipipamountendorsement').val(real_sumipamount);
+                                $('#slipipamountendorsement2').val(real_sumipamount);
+                            }
+
+                    }
+
+
+
+                }
+
+            }
+
+            // swal('warning!','change to ceding share please change installment and retrocession amount manually','success')
+
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    $('#sliptypetsiupdate').change(function(){
+        var choice = $(this).val();
+        var valtsi = $('#feshareto').val();
+        var valcedshare = $('#feshare').val();
+
+        if(choice == '1'){
+            if(valtsi == null){
+                    swal('warning','please fill tsi insured value first','error')
+                }else{
+                    
+                    var tsi = $('#feshareto').val();
+                    var int_tsi = parseInt(tsi.replace(/,/g, ""));
+                    var conv_str_tsi = int_tsi.toFixed(2);
+                    var real_tsi = conv_str_tsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    $('#sliptotalsumupdate').val(real_tsi);
+                    $('#sliptotalsumupdate2').val(real_tsi);
+
+                    var pctval = $('#sliptotalsumpctupdate').val();
+
+                    if(pctval != null){
+                        var pct =  parseFloat($('#slippctupdate').val())/100;
+
+                    
+                        var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                        var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
+                        console.log(sum)
+                        var conv_sum = sum.toFixed(2);
+                        var real_sum = conv_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#sliptotalsumpctupdate').val(real_sum);
+                        $('#sliptotalsumpctupdate2').val(real_sum);
+                        // swal('success','changed to tsi','success')
+
+
+                        var dpamount = $('#slipdpamountupdate').val();
+                        var ecamount = $('#slipamountecupdate').val();
+
+                        if(dpamount != null){
+
+                            var percent =  parseFloat($('#slipdppercentageupdate').val()) / 100;
+                            
+                            var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            console.log($('#slipdppercentageupdate').val())
+                            console.log(percent)
+                            console.log(sum)
+                            console.log(real_sum)
+
+                            $('#slipdpamountupdate').val(real_sum);
+                            $('#slipdpamountupdate2').val(real_sum);
+
+                        }
+
+                        if(ecamount != null){
+
+                            var persentage =  parseFloat($('#slipnilaiecupdate').val()) / 1000;
+                            var sum = isNaN(conv_tsi * persentage) ? 0 :(conv_tsi * persentage).toFixed(2) ;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            console.log($('#slipnilaiecupdate').val())
+                            console.log(persentage)
+                            console.log(sum)
+                            console.log(real_sum)
+
+                            $('#slipamountecupdate').val(real_sum);
+                            $('#slipamountecupdate2').val(real_sum);
+
+                        }
+
+                    }
+                }
+
+
+
+        }else if(choice == '2')
+        {
+            if(valcedshare != null){
+                var ceding_share = $('#feshare').val();
+                var int_ceding_share = parseInt(ceding_share.replace(/,/g, ""));
+                var conv_ceding_share = int_ceding_share.toFixed(2);
+                var real_ceding_share = conv_ceding_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#sliptotalsumupdate').val(real_ceding_share);
+                $('#sliptotalsumupdate2').val(real_ceding_share);
+
+                 var pctval = $('#sliptotalsumpctupdate').val();
+
+                if(pctval != null){
+
+                    var pct =  parseFloat($('#slippctupdate').val())/100;
+
+                    // var tsi = $("#sliptotalsum").val();
+                    var conv_tsi = parseInt(ceding_share.replace(/,/g, ""));
+
+                    var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
+                    console.log(sum)
+                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    $('#sliptotalsumpctupdate').val(real_sum);
+                    $('#sliptotalsumpctupdate2').val(real_sum);
+                    // swal('success','changed to ceding share','success')
+
+                    var dpamount = $('#slipdpamountupdate').val();
+                    var ecamount = $('#slipamountecupdate').val();
+
+                    if(dpamount != null){
+                        var percent =  parseFloat($('#slipdppercentageupdate').val()) / 100;
+                        
+                        var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
+                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        console.log($('#slipdppercentageupdate').val())
+                        console.log(percent)
+                        console.log(sum)
+                        console.log(real_sum)
+
+                        $('#slipdpamountupdate').val(real_sum);
+                        $('#slipdpamountupdate2').val(real_sum);
+                    }
+
+                    if(ecamount != null){
+
+                        var persentage =  parseFloat($('#slipnilaiecupdate').val()) / 1000;
+                        var sum = isNaN(conv_tsi * persentage) ? 0 :(conv_tsi * persentage).toFixed(2) ;
+                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        console.log($('#slipnilaiecupdate').val())
+                        console.log(persentage)
+                        console.log(sum)
+                        console.log(real_sum)
+
+                        $('#slipamountecupdate').val(real_sum);
+                        $('#slipamountecupdate2').val(real_sum);
+                        
+                    }
+
+                }
+            }else{
+                swal('warning','please fill ceding share first','error')
+            }
+
+
+        }
+
+    });
+</script>
+
+<script type="text/javascript">
+    $('#sharetypetsiupdate').change(function(){
+        var choice = $(this).val();
+        if(choice == '1'){
+
+            var tsi = $('#feshareto').val();
+            var int_tsi = parseInt(tsi.replace(/,/g, ""));
+            var conv_str_tsi = int_tsi.toFixed(2);
+            var real_tsi = conv_str_tsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $('#sharetotalsumupdate').val(real_tsi);
+            $('#sharetotalsumupdate2').val(real_tsi);
+
+            var shareslipval = $('#slipshareupdate').val();
+            if(shareslipval != null){
+                var shareslip =  parseFloat($('#slipshareupdate').val()) / 100 ;
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+                var sumshare =isNaN( shareslip * conv_tsi) ? 0 :( shareslip * conv_tsi).toFixed(2) ;
+                var real_sumshare = sumshare.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
+                $('#slipsumshareupdate').val(real_sumshare);
+                $('#slipsumshareupdate2').val(real_sumshare);
+
+                var rateslipval = $('#sliprateupdate').val();
+
+                if(sliprate != null){
+
+                    var insurance_period_from2 = $('#sliprpfromupdate').val();
+                    var insurance_period_to2 = $('#sliprptoupdate').val();
+                    var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+                    var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+                    var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
+                    var insurance = (days/365);
+                    
+                    console.log(insurance_period_from2)
+                    console.log(insurance_period_to2)
+                    console.log(newinsurance_period_from2)
+                    console.log(newinsurance_period_to2)
+                    console.log(days)
+                    console.log(insurance)
+
+                    var rateslip =  parseFloat($(this).val()) / 1000;
+                    var sumrate = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
+                    var real_sumrate = sumrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                    $('#slipbasicpremiumupdate').val(real_sumrate);
+
+                    var grossprm_to_nr = $('#slipgrossprmtonrupdate').val();
+
+                    if(grossprm_to_nr != null){
+                        var nasionalreinsurance =  $('#fesharefromupdate').val();
+                        var totalnre =  $('#fesharetoupdate').val();
+                        var conv_totalnre =  parseInt(totalnre.replace(/,/g, ""));
+
+                        console.log('nre' + nasionalreinsurance)
+                            // console.log(conv_nasionalreinsurance)
+                            console.log('totalnre' + totalnre)
+                            console.log('convtotnre' + conv_totalnre)
+                            
+                            var sumshare2 = $('#slipsumshareupdate').val() ;
+                            var conv_sumshare = parseInt(sumshare2.replace(/,/g, ""));
+                            var basic_premium = $('#slipbasicpremiumupdate').val();
+                            var conv_basre = parseInt(basic_premium.replace(/,/g, ""));
+
+                            var orpercent = $('#sliporupdate').val() / 100;
+
+                            var sumor = isNaN(orpercent * conv_sumshare) ? 0 :(orpercent * conv_sumshare).toFixed(2);
+                            var real_sumor = sumor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            
+                            var sumgrtoprm = isNaN(conv_basre * shareslip) ? 0 :(conv_basre * shareslip ).toFixed(2);
+                            var real_sumgrtoprm = sumgrtoprm.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            
+                            if(nasionalreinsurance){
+                                var conv_nasionalreinsurance =  parseInt(nasionalreinsurance.replace(/,/g, ""));
+                                var sumnre = isNaN(conv_nasionalreinsurance + conv_sumshare ) ? 0 :(conv_nasionalreinsurance + conv_sumshare).toFixed(2) ;
+                                var real_sumnre = sumnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            }else{
+                                var conv_nasionalreinsurance =  parseInt(nasionalreinsurance.replace(/,/g, ""));
+                                var sumnre = isNaN(0 + conv_sumshare ) ? 0 :(0 + conv_sumshare).toFixed(2) ;
+                                var real_sumnre = sumnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            }
+                            
+                            
+                            var sumourshare = isNaN((sumnre / conv_totalnre) * 100 ) ? 0 :((sumnre / conv_totalnre) * 100 ).toFixed(2) ;
+
+                            console.log('sumnre' + sumnre)
+                            console.log('realnre' + real_sumnre)
+                            console.log('sumourshare' + sumourshare)
+
+                            $('#slipgrossprmtonrupdate').val(real_sumgrtoprm);
+                            $('#slipgrossprmtonrupdate2').val(real_sumgrtoprm);
+                            $('#slipsumorupdate').val(real_sumor);
+                            $('#slipsumorupdate2').val(real_sumor);
+                            // $('#feshare').val(sumourshare.replace(/,/g, "."));
+                            $('#fesharefrom').val(real_sumnre);
+
+
+                            var commision =  parseFloat($(this).val()) / 100;
+                            var feebroker = parseFloat($('#slipvbrokerupdate').val()) / 100;
+                            var sumgrossprmtonr2 = $("#slipgrossprmtonrupdate").val();
+                            var conv_sumgrossprmtonr = parseInt(sumgrossprmtonr2.replace(/,/g, ""));
+
+                            var sumcomm = isNaN(commision * conv_sumgrossprmtonr) ? 0 :(commision * conv_sumgrossprmtonr).toFixed(2);
+                            var real_sumcomm = sumcomm.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                            $('#slipsumcommissionupdate').val(real_sumcomm);
+                            $('#slipsumcommissionupdate2').val(real_sumcomm);
+
+                            var sumgrossprmtonr3 = $("#slipgrossprmtonrupdate").val();
+                            var conv_sumgrossprmtonr2 = parseInt(sumgrossprmtonr3.replace(/,/g, ""));
+
+                            var sumnetprmtonr = isNaN( conv_sumgrossprmtonr2 * (100/100 - commision - feebroker)) ? 0 :(conv_sumgrossprmtonr2 * (100/100 - commision - feebroker)).toFixed(2);
+                            var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                            var sumfeebroker = isNaN( conv_sumgrossprmtonr2 * feebroker) ? 0 :(conv_sumgrossprmtonr2 * feebroker).toFixed(2);
+                            var real_sumfeebroker = sumfeebroker.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
+                            $('#slipnetprmtonrupdate').val(real_sumnetprmtonr);
+                            $('#slipnetprmtonrupdate2').val(real_sumnetprmtonr);
+                            // $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
+                            $('#slipsumfeeupdate').val(real_sumfeebroker);
+                            $('#slipsumfeeupdate2').val(real_sumfeebroker);
+
+                            var sumipamountval = $('#slipipamountupdate').val();
+
+                            if(sumipamountval != null){
+                                var percent =  parseFloat($(this).val()) / 100;
+
+                                var sumnetprtonr2 = $("#slipnetprmtonrupdate").val();
+                                var conv_sumnetprtonr = parseInt(sumnetprtonr2.replace(/,/g, ""));
+
+                                var sumipamount = isNaN(percent *  conv_sumnetprtonr) ? 0 :(percent *  conv_sumnetprtonr).toFixed(2);
+                                var real_sumipamount = sumipamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                                $('#slipipamountupdate').val(real_sumipamount);
+                                $('#slipipamountupdate2').val(real_sumipamount);
+                            }
+
+                    }
+
+
+
+                }
+
+            }
+
+            // swal('warning!','change to tsi please change installment and retrocession amount manually','success')
+        }else if(choice == '2')
+        {
+
+            var insuredid = $('#insuredIDtxt').val(); 
+            var cedbrok = $('#slipcedingbrokerupdate').val();
+            var ceding = $('#slipcedingupdate').val();
+            if(cedbrok != null && ceding != null){
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
+                    beforeSend: function() { $("body").addClass("loading");  },
+                    complete: function() {  $("body").removeClass("loading"); },
+                    success:function(res){  
+                        console.log(res)      
+                        if(res.type == 4){
+                        // $("#slipceding option").remove();
+
+
+                        // $("#slipceding").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
+
+                        var ceding_curr = $('#slipcedingupdate').val();
+                        var totalsum = $("#sliptotalsumupdate").val();
+                        if(res.amountlist > 0)
+                        {
+                            console.log('sum amount ' + res.sumamount)
+                            var sum = res.sumamount;
+                            var conv_sum = sum.toFixed(2);
+                            var real_sum = conv_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            $("#sharetotalsumupdate").val(real_sum);
+                            $("#sharetotalsumupdate2").val(real_sum);
+                        }
+                        else
+                        {
+                            console.log('hasilnya ' + res)
+                        }
+
+
+                    }else{
+                        // $("#slipceding option").remove();
+                        // $("#slipceding").append('<option value="#" selected disabled> select ceding </option>');
+                        // $("#sliptotalsum").val('');
+                        // $("#sliptotalsum2").val('');
+                        // $.each(res,function(key,value){
+                        //     $("#slipceding").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
+
+                        // });
+
+                    }
+                }
+            });
+            }else{
+                swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
+            }  
+            var tsi = $('#feshare').val();
+            $('#sharetotalsumupdate').val(tsi);
+            $('#sharetotalsumupdate2').val(tsi);
+
+            var shareslipval = $('#slipshareupdate').val();
+            if(shareslipval != null){
+                var shareslip =  parseFloat($('#slipshareupdate').val()) / 100 ;
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+                var sumshare =isNaN( shareslip * conv_tsi) ? 0 :( shareslip * conv_tsi).toFixed(2) ;
+                var real_sumshare = sumshare.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
+                $('#slipsumshareupdate').val(real_sumshare);
+                $('#slipsumshareupdate2').val(real_sumshare);
+
+                var rateslipval = $('#sliprateupdate').val();
+
+                if(sliprate != null){
+
+                    var insurance_period_from2 = $('#sliprpfromupdate').val();
+                    var insurance_period_to2 = $('#sliprptoupdate').val();
+                    var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+                    var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+                    var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
+                    var insurance = (days/365);
+                    
+                    console.log(insurance_period_from2)
+                    console.log(insurance_period_to2)
+                    console.log(newinsurance_period_from2)
+                    console.log(newinsurance_period_to2)
+                    console.log(days)
+                    console.log(insurance)
+
+                    var rateslip =  parseFloat($(this).val()) / 1000;
+                    var sumrate = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
+                    var real_sumrate = sumrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                    $('#slipbasicpremiumupdate').val(real_sumrate);
+
+                    var grossprm_to_nr = $('#slipgrossprmtonrupdate').val();
+
+                    if(grossprm_to_nr != null){
+                        var nasionalreinsurance =  $('#fesharefromupdate').val();
+                        var totalnre =  $('#fesharetoupdate').val();
+                        var conv_totalnre =  parseInt(totalnre.replace(/,/g, ""));
+
+                        console.log('nre' + nasionalreinsurance)
+                            // console.log(conv_nasionalreinsurance)
+                            console.log('totalnre' + totalnre)
+                            console.log('convtotnre' + conv_totalnre)
+                            
+                            var sumshare2 = $('#slipsumshareupdate').val() ;
+                            var conv_sumshare = parseInt(sumshare2.replace(/,/g, ""));
+                            var basic_premium = $('#slipbasicpremiumupdate').val();
+                            var conv_basre = parseInt(basic_premium.replace(/,/g, ""));
+
+                            var orpercent = $('#sliporupdate').val() / 100;
+
+                            var sumor = isNaN(orpercent * conv_sumshare) ? 0 :(orpercent * conv_sumshare).toFixed(2);
+                            var real_sumor = sumor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            
+                            var sumgrtoprm = isNaN(conv_basre * shareslip) ? 0 :(conv_basre * shareslip ).toFixed(2);
+                            var real_sumgrtoprm = sumgrtoprm.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            
+                            if(nasionalreinsurance){
+                                var conv_nasionalreinsurance =  parseInt(nasionalreinsurance.replace(/,/g, ""));
+                                var sumnre = isNaN(conv_nasionalreinsurance + conv_sumshare ) ? 0 :(conv_nasionalreinsurance + conv_sumshare).toFixed(2) ;
+                                var real_sumnre = sumnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            }else{
+                                var conv_nasionalreinsurance =  parseInt(nasionalreinsurance.replace(/,/g, ""));
+                                var sumnre = isNaN(0 + conv_sumshare ) ? 0 :(0 + conv_sumshare).toFixed(2) ;
+                                var real_sumnre = sumnre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            }
+                            
+                            
+                            var sumourshare = isNaN((sumnre / conv_totalnre) * 100 ) ? 0 :((sumnre / conv_totalnre) * 100 ).toFixed(2) ;
+
+                            console.log('sumnre' + sumnre)
+                            console.log('realnre' + real_sumnre)
+                            console.log('sumourshare' + sumourshare)
+
+                            $('#slipgrossprmtonrupdate').val(real_sumgrtoprm);
+                            $('#slipgrossprmtonrupdate2').val(real_sumgrtoprm);
+                            $('#slipsumorupdate').val(real_sumor);
+                            $('#slipsumorupdate2').val(real_sumor);
+                            // $('#feshare').val(sumourshare.replace(/,/g, "."));
+                            $('#fesharefrom').val(real_sumnre);
+
+
+                            var commision =  parseFloat($(this).val()) / 100;
+                            var feebroker = parseFloat($('#slipvbrokerupdate').val()) / 100;
+                            var sumgrossprmtonr2 = $("#slipgrossprmtonrupdate").val();
+                            var conv_sumgrossprmtonr = parseInt(sumgrossprmtonr2.replace(/,/g, ""));
+
+                            var sumcomm = isNaN(commision * conv_sumgrossprmtonr) ? 0 :(commision * conv_sumgrossprmtonr).toFixed(2);
+                            var real_sumcomm = sumcomm.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                            $('#slipsumcommissionupdate').val(real_sumcomm);
+                            $('#slipsumcommissionupdate2').val(real_sumcomm);
+
+                            var sumgrossprmtonr3 = $("#slipgrossprmtonrupdate").val();
+                            var conv_sumgrossprmtonr2 = parseInt(sumgrossprmtonr3.replace(/,/g, ""));
+
+                            var sumnetprmtonr = isNaN( conv_sumgrossprmtonr2 * (100/100 - commision - feebroker)) ? 0 :(conv_sumgrossprmtonr2 * (100/100 - commision - feebroker)).toFixed(2);
+                            var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                            var sumfeebroker = isNaN( conv_sumgrossprmtonr2 * feebroker) ? 0 :(conv_sumgrossprmtonr2 * feebroker).toFixed(2);
+                            var real_sumfeebroker = sumfeebroker.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
+                            $('#slipnetprmtonrupdate').val(real_sumnetprmtonr);
+                            $('#slipnetprmtonrupdate2').val(real_sumnetprmtonr);
+                            // $('#slipsumfee').val("100" + "-" + commision.toString() + "-" + feebroker.toString() + "*" + conv_sumgrossprmtonr.toString());
+                            $('#slipsumfeeupdate').val(real_sumfeebroker);
+                            $('#slipsumfeeupdate2').val(real_sumfeebroker);
+
+                            var sumipamountval = $('#slipipamountupdate').val();
+
+                            if(sumipamountval != null){
+                                var percent =  parseFloat($(this).val()) / 100;
+
+                                var sumnetprtonr2 = $("#slipnetprmtonrupdate").val();
+                                var conv_sumnetprtonr = parseInt(sumnetprtonr2.replace(/,/g, ""));
+
+                                var sumipamount = isNaN(percent *  conv_sumnetprtonr) ? 0 :(percent *  conv_sumnetprtonr).toFixed(2);
+                                var real_sumipamount = sumipamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                                $('#slipipamountupdate').val(real_sumipamount);
+                                $('#slipipamountupdate2').val(real_sumipamount);
+                            }
+
+                    }
+
+
+
+                }
+
+            }
+
+            // swal('warning!','change to ceding share please change installment and retrocession amount manually','success')
+
+        }
+    });
+</script>
+
+<script type="text/javascript">
     $('#slipcedingbroker').change(function(){
         var cedbrok = $(this).val();
         var insuredid = $('#insuredIDtxt').val();  
@@ -2986,383 +4165,6 @@ $('#slipbld_constendorsement').change(function(){
     });
 </script>
 
-<!-- <script type="text/javascript">
-    $('#slipcedingbrokerupdate').change(function(){
-        var cedbrok = $(this).val();
-        var insuredid = $('#insuredIDtxtupdate').val();  
-        //alert(countryID);
-        if(cedbrok){
-            $.ajax({
-                type:"GET",
-                url:"{{url('get-ceding-detail')}}?ceding_id="+cedbrok+"&insured_id="+insuredid,
-                beforeSend: function() { $("body").addClass("loading");  },
-                complete: function() {  $("body").removeClass("loading"); },
-                success:function(res){  
-                    console.log(res)      
-                    if(res.type == 4){
-                        $("#slipcedingupdate option").remove();
-
-
-                        $("#slipcedingupdate").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
-
-                        var ceding_curr = $('#slipcedingupdate').val();
-                        var totalsum = $("#sliptotalsumupdate").val();
-                        if(res.amountlist > 0)
-                        {
-                            console.log('sum amount ' + res.sumamount)
-                            var sum = res.sumamount;
-                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $("#sliptotalsumupdate").val(real_sum);
-                            $("#sliptotalsumupdate2").val(real_sum);
-
-                            var tsi = $("#sliptotalsumupdate").val();
-                            var conv_tsi = parseInt(tsi.replace(/,/g, ""));
-
-                            var pct =  parseFloat($('#slippctupdate').val())/100;
-                            var sumpct = isNaN(pct * parseFloat(conv_tsi)) ? 0 :(pct * parseFloat(conv_tsi)).toFixed(2) ;
-                            console.log(sumpct)
-                            var real_sumpct = sumpct.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#sliptotalsumpctupdate').val(real_sumpct);
-                            $('#sliptotalsumpctupdate2').val(real_sumpct);
-
-                            var percent =  parseFloat($('#slipdppercentageupdate').val()) / 100;
-                            var sumdpamount = isNaN(percent * parseFloat(conv_tsi)) ? 0 :(percent * parseFloat(conv_tsi)) ;
-                            var real_sumdpamount = sumdpamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipdpamountupdate').val(real_sumdpamount);
-                            $('#slipdpamountupdate2').val(real_sumdpamount);
-
-                            var shareslip =  parseFloat($('#slipshareupdate').val()) / 100 ;
-                            var sumshare =isNaN( shareslip * parseFloat(conv_tsi)) ? 0 :( shareslip * parseFloat(conv_tsi)).toFixed(2) ;
-                            var real_sumshare = sumshare.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipsumshareupdate').val(real_sumshare);
-                            $('#slipsumshareupdate2').val(real_sumshare);
-
-                            var insurance_period_from = $('#slipipfromupdate').val().split('-');
-                            var insurance_period_to = $('#slipiptoupdate').val().split('-');
-                            var insurance_period_from2 = $('#slipipfromupdate').val();
-                            var insurance_period_to2 = $('#slipiptoupdate').val();
-                            var month_from = parseInt(insurance_period_from[1]);
-                            var month_to = parseInt(insurance_period_to[1]);
-                            var month = (month_to - month_from);
-                            var days=daysBetween(insurance_period_from2, insurance_period_to2);
-                            var insurance = (days/365);
-                            var rateslip =  parseFloat($('#sliprateupdate').val()) / 1000;
-                            var sumbp = isNaN((rateslip * parseFloat(conv_tsi)) * insurance) ? 0 :((rateslip * parseFloat(conv_tsi)) * insurance).toFixed(2) ;
-                            var real_sumbp = sumbp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipbasicpremiumupdate').val(real_sumbp);
-
-                            var sumgrossprmtonr = isNaN(rateslip * shareslip * parseFloat(conv_tsi)) ? 0 :(rateslip * shareslip * parseFloat(conv_tsi)).toFixed(2);
-                            var real_sumgrossprmtonr = sumgrossprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipgrossprmtonrupdate').val(real_sumgrossprmtonr);
-                            $('#slipgrossprmtonrupdate2').val(real_sumgrossprmtonr);
-
-                            var sumshare = $('#slipsumshareupdate').val() ;
-                            var conv_sumshare = parseInt(sumshare.replace(/,/g, ""));
-                            var orpercent = parseFloat($('#sliporupdate').val()) / 100;
-                            var sumor = isNaN(orpercent * parseFloat(conv_sumshare)) ? 0 :(orpercent * parseFloat(conv_sumshare)).toFixed(2);
-                            var real_sumor = sumor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipsumorupdate').val(real_sumor);
-                            $('#slipsumorupdate2').val(real_sumor);
-
-                            var commision =  parseFloat($('#slipcommissionupdate').val()) / 100;
-                            var feebroker = $('#slipvbrokerupdate').val() / 100;
-                            var sumgrossprmtonr2 = $("#slipgrossprmtonrupdate").val();
-                            var conv_sumgrossprmtonr2 = parseInt(sumgrossprmtonr.replace(/,/g, ""));
-                            var sum_commision = isNaN(commision * parseFloat(conv_sumgrossprmtonr2)) ? 0 :(commision * parseFloat(conv_sumgrossprmtonr2)).toFixed(2);
-                            var real_sum_commision = sum_commision.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            var sumnetprmtonr = isNaN( parseFloat(conv_sumgrossprmtonr2) * (100/100 - commision - feebroker)) ? 0 :(parseFloat(conv_sumgrossprmtonr2) * (100/100 - commision - feebroker)).toFixed(2);
-                            var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipsumcommissionupdate').val(real_sum_commision);
-                            $('#slipsumcommissionupdate2').val(real_sum_commision);
-                            $('#slipnetprmtonrupdate').val(real_sumnetprmtonr);
-                            $('#slipnetprmtonrupdate2').val(real_sumnetprmtonr);
-
-                            var ippercent =  parseFloat($('#slipippercentageupdate').val()) / 100;
-                            var sumnetprtonr2 = $("#slipnetprmtonrupdate").val();
-                            var conv_sumnetprtonr = parseInt(sumnetprtonr2.replace(/,/g, ""));
-                            var sumip = isNaN(ippercent *  parseFloat(conv_sumnetprtonr)) ? 0 :(ippercent *  parseFloat(conv_sumnetprtonr)).toFixed(2);
-                            var real_sumip = sumip.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipipamountupdate').val(real_sumip);
-                            $('#slipipamountupdate2').val(real_sumip);
-
-                            var percentval =  parseFloat($('#sliprppercentageupdate').val()) / 100;
-                            var sumor2 = $('#slipsumorupdate').val() ;
-                            var conv_sumor = parseInt(sumor2.replace(/,/g, ""));
-                            var sumrpamount = isNaN(percentval * parseFloat(conv_sumor)) ? 0 :(percentval * parseFloat(conv_sumor)).toFixed(2);
-                            var real_sumrpamount = sumrpamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#sliprpamountupdate').val(real_sumrpamount);
-                            $('#sliprpamountupdate2').val(real_sumrpamount);
-
-                            var percentval2 =  parseFloat($('#sliprppercentageupdate').val());
-                            var orpercent = parseFloat($('#sliporupdate').val());
-                            var sumpercentor = isNaN(orpercent - percentval2) ? 0 :(orpercent - percentval2);
-                            $('#sliporupdate').val(sumpercentor);
-
-                            var persentageec =  parseFloat($('#slipnilaiecupdate').val()) / 1000;
-                            var sliptotalsum =  $('#sliptotalsumupdate').val();
-                            var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
-                            var sumec = isNaN(conv_sliptotalsum * persentageec) ? 0 :(conv_sliptotalsum * persentageec).toFixed(2) ;
-                            var real_sumec = sumec.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#slipamountecupdate').val(real_sumec);
-                            $('#slipamountecupdate2').val(real_sumec);
-                        }
-                        else
-                        {
-                            console.log('hasilnya ' + res)
-                        }
-
-
-                    }else{
-                        $("#slipcedingupdate option").remove();
-                        $("#slipcedingupdate").append('<option value="#" selected disabled> select ceding </option>');
-                        $("#sliptotalsumupdate").val('');
-                        $("#sliptotalsumupdate2").val('');
-                        $.each(res,function(key,value){
-                            $("#slipcedingupdate").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
-
-                        });
-                    }
-                }
-            });
-}else{
-    swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
-}   
-});
-
-$('#slipcedingupdate').change(function(){
-    var ceding = $(this).val();
-    var insuredid = $('#insuredIDtxtupdate').val();  
-    if(ceding){
-        $.ajax({
-            type:"GET",
-            url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
-            beforeSend: function() { $("body").addClass("loading");  },
-            complete: function() {  $("body").removeClass("loading"); },
-            success:function(res){  
-                console.log(res)      
-                if(res.type == 4){
-                    // $("#slipcedingupdate option").remove();
-
-                    $("#slipcedingupdate").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
-                    var ceding_curr = $('#slipcedingupdate').val();
-                    var totalsum = $("#sliptotalsumupdate").val();
-                    if(res.amountlist > 0)
-                    {
-                        console.log('sum amount ' + res.sumamount)
-                        var sum = res.sumamount;
-                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $("#sliptotalsumupdate").val(real_sum);
-                        $("#sliptotalsumupdate2").val(real_sum);
-
-                        var tsi = $("#sliptotalsumupdate").val();
-                        var conv_tsi = parseInt(tsi.replace(/,/g, ""));
-
-                        var pct =  parseFloat($('#slippctupdate').val())/100;
-                        var sumpct = isNaN(pct * parseFloat(conv_tsi)) ? 0 :(pct * parseFloat(conv_tsi)).toFixed(2) ;
-                        console.log(sumpct)
-                        var real_sumpct = sumpct.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#sliptotalsumpctupdate').val(real_sumpct);
-                        $('#sliptotalsumpctupdate2').val(real_sumpct);
-
-                        var percent =  parseFloat($('#slipdppercentageupdate').val()) / 100;
-                        var sumdpamount = isNaN(percent * parseFloat(conv_tsi)) ? 0 :(percent * parseFloat(conv_tsi)) ;
-                        var real_sumdpamount = sumdpamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#slipdpamountupdate').val(real_sumdpamount);
-                        $('#slipdpamountupdate2').val(real_sumdpamount);
-
-                        var shareslip =  parseFloat($('#slipshareupdate').val()) / 100 ;
-                        var sumshare =isNaN( shareslip * parseFloat(conv_tsi)) ? 0 :( shareslip * parseFloat(conv_tsi)).toFixed(2) ;
-                        var real_sumshare = sumshare.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#slipsumshareupdate').val(real_sumshare);
-                        $('#slipsumshareupdate2').val(real_sumshare);
-
-                        var insurance_period_from = $('#slipipfromupdate').val().split('-');
-                        var insurance_period_to = $('#slipiptoupdate').val().split('-');
-                        var insurance_period_from2 = $('#slipipfromupdate').val();
-                        var insurance_period_to2 = $('#slipiptoupdate').val();
-                        var month_from = parseInt(insurance_period_from[1]);
-                        var month_to = parseInt(insurance_period_to[1]);
-                        var month = (month_to - month_from);
-                        var days=daysBetween(insurance_period_from2, insurance_period_to2);
-                        var insurance = (days/365);
-                        var rateslip =  parseFloat($('#sliprateupdate').val()) / 1000;
-                        var sumbp = isNaN((rateslip * parseFloat(conv_tsi)) * insurance) ? 0 :((rateslip * parseFloat(conv_tsi)) * insurance).toFixed(2) ;
-                        var real_sumbp = sumbp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#slipbasicpremiumupdate').val(real_sumbp);
-
-                        var sumgrossprmtonr = isNaN(rateslip * shareslip * parseFloat(conv_tsi)) ? 0 :(rateslip * shareslip * parseFloat(conv_tsi)).toFixed(2);
-                        var real_sumgrossprmtonr = sumgrossprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#slipgrossprmtonrupdate').val(real_sumgrossprmtonr);
-                        $('#slipgrossprmtonrupdate2').val(real_sumgrossprmtonr);
-
-                        var sumshare = $('#slipsumshareupdate').val() ;
-                        var conv_sumshare = parseInt(sumshare.replace(/,/g, ""));
-                        var orpercent = parseFloat($('#sliporupdate').val()) / 100;
-                        var sumor = isNaN(orpercent * parseFloat(conv_sumshare)) ? 0 :(orpercent * parseFloat(conv_sumshare)).toFixed(2);
-                        var real_sumor = sumor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#slipsumorupdate').val(real_sumor);
-                        $('#slipsumorupdate2').val(real_sumor);
-
-                        var commision =  parseFloat($('#slipcommissionupdate').val()) / 100;
-                        var feebroker = $('#slipvbrokerupdate').val() / 100;
-
-                        var sumgrossprmtonr2 = $("#slipgrossprmtonrupdate").val();
-                        var conv_sumgrossprmtonr2 = parseInt(sumgrossprmtonr.replace(/,/g, ""));
-                        var sum_commision = isNaN(commision * parseFloat(conv_sumgrossprmtonr2)) ? 0 :(commision * parseFloat(conv_sumgrossprmtonr2)).toFixed(2);
-                        var real_sum_commision = sum_commision.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        var sumnetprmtonr = isNaN( parseFloat(conv_sumgrossprmtonr2) * (100/100 - commision - feebroker)) ? 0 :(parseFloat(conv_sumgrossprmtonr2) * (100/100 - commision - feebroker)).toFixed(2);
-                        var real_sumnetprmtonr = sumnetprmtonr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#slipsumcommissionupdate').val(real_sum_commision);
-                        $('#slipsumcommissionupdate2').val(real_sum_commision);
-                        $('#slipnetprmtonrupdate').val(real_sumnetprmtonr);
-                        $('#slipnetprmtonrupdate2').val(real_sumnetprmtonr);
-
-                        var ippercent =  parseFloat($('#slipippercentageupdate').val()) / 100;
-                        var sumnetprtonr2 = $("#slipnetprmtonrupdate").val();
-                        var conv_sumnetprtonr = parseInt(sumnetprtonr2.replace(/,/g, ""));
-                        var sumip = isNaN(ippercent *  parseFloat(conv_sumnetprtonr)) ? 0 :(ippercent *  parseFloat(conv_sumnetprtonr)).toFixed(2);
-                        var real_sumip = sumip.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#slipipamountupdate').val(real_sumip);
-                        $('#slipipamountupdate2').val(real_sumip);
-
-                        var percentval =  parseFloat($('#sliprppercentageupdate').val()) / 100;
-                        var sumor2 = $('#slipsumorupdate').val() ;
-                        var conv_sumor = parseInt(sumor2.replace(/,/g, ""));
-                        var sumrpamount = isNaN(percentval * parseFloat(conv_sumor)) ? 0 :(percentval * parseFloat(conv_sumor)).toFixed(2);
-                        var real_sumrpamount = sumrpamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#sliprpamountupdate').val(real_sumrpamount);
-                        $('#sliprpamountupdate2').val(real_sumrpamount);
-
-                        var percentval2 =  parseFloat($('#sliprppercentageupdate').val());
-                        var orpercent = parseFloat($('#sliporupdate').val());
-                        var sumpercentor = isNaN(orpercent - percentval2) ? 0 :(orpercent - percentval2);
-                        $('#sliporupdate').val(sumpercentor);
-
-                        var persentageec =  parseFloat($('#slipnilaiecupdate').val()) / 1000;
-                        var sliptotalsum =  $('#sliptotalsumupdate').val();
-                        var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
-                        var sumec = isNaN(conv_sliptotalsum * persentageec) ? 0 :(conv_sliptotalsum * persentageec).toFixed(2) ;
-                        var real_sumec = sumec.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#slipamountecupdate').val(real_sumec);
-                        $('#slipamountecupdate2').val(real_sumec);
-                    }
-                    else
-                    {
-                        console.log('hasilnya ' + res)
-                    }
-                    
-
-                }else{
-                    // $("#slipceding option").remove();
-                    $("#slipcedingupdate").append('<option value="#" selected disabled> select ceding </option>');
-                    $("#sliptotalsumupdate").val('');
-                    $.each(res,function(key,value){
-                     $("#slipcedingupdate").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
-                 });
-                }
-            }
-        });
-}else{
-    swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
-}   
-});
-</script>
-
-<script type="text/javascript">
-    $('#slipcedingbrokerendorsement').change(function(){
-        var cedbrok = $(this).val();
-        var insuredid = $('#insuredIDtxtendorsement').val();  
-        //alert(countryID);
-        if(cedbrok){
-            $.ajax({
-                type:"GET",
-                url:"{{url('get-ceding-detail')}}?ceding_id="+cedbrok+"&insured_id="+insuredid,
-                beforeSend: function() { $("body").addClass("loading");  },
-                complete: function() {  $("body").removeClass("loading"); },
-                success:function(res){  
-                    console.log(res)      
-                    if(res.type == 4){
-                        $("#slipcedingendorsement option").remove();
-
-
-                        $("#slipcedingendorsement").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
-
-                        var ceding_curr = $('#slipcedingendorsement').val();
-                        var totalsum = $("#sliptotalsumendorsement").val();
-                        if(res.amountlist > 0)
-                        {
-                            console.log('sum amount ' + res.sumamount)
-                            var sum = res.sumamount;
-                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $("#sliptotalsumendorsement").val(real_sum);
-                        }
-                        else
-                        {
-                            console.log('hasilnya ' + res)
-                        }
-
-
-                    }else{
-                    // $("#slipcedingendorsement option").remove();
-                    $("#slipcedingendorsement").append('<option value="#" selected disabled> select ceding </option>');
-                    $("#sliptotalsumendorsement").val('');
-                    $.each(res,function(key,value){
-                        $("#slipcedingendorsement").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
-                    });
-                }
-            }
-        });
-        }else{
-            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
-        }   
-    });
-
-    $('#slipcedingendorsement').change(function(){
-        var ceding = $(this).val();
-        var insuredid = $('#insuredIDtxtendorsement').val();  
-        if(ceding){
-            $.ajax({
-                type:"GET",
-                url:"{{url('get-ceding-detail')}}?ceding_id="+ceding+"&insured_id="+insuredid,
-                beforeSend: function() { $("body").addClass("loading");  },
-                complete: function() {  $("body").removeClass("loading"); },
-                success:function(res){  
-                    console.log(res)      
-                    if(res.type == 4){
-                    // $("#slipcedingendorsement option").remove();
-
-
-                    $("#slipcedingendorsement").append('<option value="'+res.id+'">'+res.type+' - '+res.code+' - '+res.name+'</option>');
-                    var ceding_curr = $('#slipcedingendorsement').val();
-                    var totalsum = $("#sliptotalsumendorsement").val();
-                    if(res.amountlist > 0)
-                    {
-                        console.log('sum amount ' + res.sumamount)
-                        var sum = res.sumamount;
-                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $("#sliptotalsumendorsement").val(real_sum);
-                    }
-                    else
-                    {
-                        console.log('hasilnya ' + res)
-                    }
-                    
-
-                }else{
-                    $("#slipceding option").remove();
-
-                    $.each(res,function(key,value){
-                     $("#slipcedingendorsement").append('<option value="'+value.id+'">'+value.type+' - '+value.code+' - '+value.name+'</option>');
-
-                 });
-                }
-            }
-        });
-        }else{
-            swal("Error!", "Please choose Ceding/Broker first", "Get Ceding Error");
-        }   
-    });
-</script> -->
 
 
 <script>
@@ -8072,7 +8874,10 @@ function deletelocationriskdetail(id){
        var slipno = $('#slipnoupdate').val();
        var slipcndn = $('#slipcndnupdate').val();
        var slippolicy_no = $('#slippolicy_noupdate').val();
+       var sliptypetsi = $('#sliptypetsiupdate').val();
        var sliptotalsum = $('#sliptotalsumupdate').val();
+       var sharetypetsi = $('#sharetypetsiupdate').val();
+       var sharetotalsum = $('#sharetotalsumupdate').val();
        var sliptype =  $('#sliptypeupdate').val();
        var slippct =  $('#slippctupdate').val();
        var sliptotalsumpct =  $('#sliptotalsumpctupdate').val();
@@ -8083,7 +8888,9 @@ function deletelocationriskdetail(id){
        var proportional =  $('#switch-proportionalupdate').val();
        var sliplayerproportional =  $('#sliplayerproportionalupdate').val();
        var sliprate =  $('#sliprateupdate').val();
+       var slipsumrate =  $('#sliptotalrateupdate').val();
        var slipvbroker =  $('#slipvbrokerupdate').val();
+       var slipsumvbroker =  $('#slipsumfeeupdate').val();
        var slipshare =  $('#slipshareupdate').val();
        var slipsumshare =  $('#slipsumshareupdate').val();
        var slipoldsumshare =  $('#slipoldsumshareupdate').val();
@@ -8104,6 +8911,11 @@ function deletelocationriskdetail(id){
        console.log(conv_sliptotalsum)
        var real_sliptotalsum = parseInt(conv_sliptotalsum);
        console.log(real_sliptotalsum)
+
+       var conv_sharetotalsum = sharetotalsum.replace(/,/g, "");
+       console.log(conv_sharetotalsum)
+       var real_sliptotalsum = parseInt(conv_sharetotalsum);
+       console.log(real_sharetotalsum)
        
        var conv_sliptotalsumpct = sliptotalsumpct.replace(/,/g, "");
        console.log(conv_sliptotalsumpct)
@@ -8115,10 +8927,20 @@ function deletelocationriskdetail(id){
        var real_slipsumshare = parseInt(conv_slipsumshare);
        console.log(real_slipsumshare)
 
+       var conv_slipsumrate = slipsumrate.replace(/,/g, "");
+       console.log(conv_slipsumrate)
+       var real_slipsumrate = parseInt(conv_slipsumrate);
+       console.log(real_slipsumrate)
+
        var conv_slipbasicpremium = slipbasicpremium.replace(/,/g, "");
        console.log(conv_slipbasicpremium)
        var real_slipbasicpremium = parseInt(conv_slipbasicpremium);
        console.log(real_slipbasicpremium)
+
+       var conv_slipsumvbroker = slipsumvbroker.replace(/,/g, "");
+       console.log(conv_slipsumvbroker)
+       var real_slipsumvbroker = parseInt(conv_slipsumvbroker);
+       console.log(real_slipsumvbroker)
 
        var conv_slipgrossprmtonr = slipgrossprmtonr.replace(/,/g, "");
        console.log(conv_slipgrossprmtonr)
@@ -8166,10 +8988,10 @@ function deletelocationriskdetail(id){
              slipkoc:slipkoc,
              slipoccupacy:slipoccupacy,
              slipbld_const:slipbld_const,
-             slipno:slipno,
-             slipcndn:slipcndn,
-             slippolicy_no:slippolicy_no,
+             sliptypetsi:sliptypetsi,
              sliptotalsum:real_sliptotalsum,
+             sharetypetsi:sharetypetsi,
+             sharetotalsum:real_sharetotalsum,
              sliptype:sliptype,
              slippct:slippct,
              sliptotalsumpct:real_sliptotalsumpct,
@@ -8180,7 +9002,9 @@ function deletelocationriskdetail(id){
              proportional:proportional,
              sliplayerproportional:sliplayerproportional,
              sliprate:sliprate,
+             slipsumrate:real_slipsumrate,
              slipvbroker:slipvbroker,
+             slipsumvbroker:real_slipsumvbroker,
              slipshare:slipshare,
              slipsumshare:real_slipsumshare,
              slipoldsumshare:slipoldsumshare,
@@ -8199,27 +9023,19 @@ function deletelocationriskdetail(id){
          complete: function() {  $("body").removeClass("loading"); },
          success:function(response)
          {
-            swal("Success!", "Insured Fire & Engineering Slip Insert Success", "success")
+            swal("Success!", "Insured Fire & Engineering Slip Update Success", "success")
             console.log(response)
-
-                /*
-                $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.slipuy+'">'+slipuy+'</td><td data-name="'+response.slipstatus+'">"'+slipstatus+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.number+'" data-target="#detailmodaldata" href="#detailmodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
-                    +'</a>'
-                    +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#updatemodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
-                    +'</a>'
-                    +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.number+'" data-target="#endorsementmodaldata">'
-                    +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
-                    +'</a><td></td></tr>');
-                    */
-                    
-                //$('#slipnumberupdate').val(response.code_sl);
+            if(response.new_share_nasre){
+                var new_nasre = response.new_share_nasre;
+                var conv_nasre = new_nasre.toFixed(2);
+                var real_nasre = conv_nasre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#fesharefrom').val(real_nasre);
+            }
 
             },
             error: function (request, status, error) {
                 //alert(request.responseText);
-                swal("Error!", "Insured Fire & Engineering Slip Insert Error", "Insert Error");
+                swal("Error!", "Insured Fire & Engineering Slip Update Error", "Update Error");
             }
         });
 
@@ -8259,75 +9075,6 @@ function deletelocationriskdetail(id){
                      //console.log(data.responseJSON.errors);
                  }
              });
-
-
-      // insured save
-    //    var fesnumber = $('#insuredIDtxt').val();
-    //    var fesinsured = $('#feinsured').val();
-    //    var fessuggestinsured = $('#autocomplete').val();
-    //    var fessuffix = $('#autocomplete2').val();
-    //    var fesshare = $('#feshare').val();
-    //    var fessharefrom  = $('#fesharefrom').val();
-    //    var fesshareto = $('#feshareto').val();
-    //    var fescoinsurance = $('#fecoinsurance').val();
-
-
-    //    var conv_fessharefrom = fessharefrom.replace(/,/g, "");
-    //    console.log(conv_fessharefrom)
-    //    var real_fessharefrom = parseInt(conv_fessharefrom);
-    //    console.log(real_fessharefrom)
-    //    var conv_fesshareto = fesshareto.replace(/,/g, "");
-    //    console.log(conv_fesshareto)
-    //    var real_fesshareto = parseInt(conv_fesshareto);
-    //    console.log(real_fesshareto)
-
-
-    //    var token2 = $('input[name=_token]').val();
-
-    //    console.log(fesinsured)
-    //    console.log(fessuggestinsured)
-    //    console.log(fesnumber)
-    //    console.log(fessuffix)
-
-
-    //    $.ajaxSetup({
-    //             headers: {
-    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //             }
-    //         });
-
-    //    $.ajax({
-    //        url:"{{ url('transaction-data/fe-insured/store') }}",
-    //        type:"POST",
-    //        data:{
-    //            fesnumber:fesnumber,
-    //            fesinsured:fesinsured,
-    //            fessuggestinsured:fessuggestinsured,
-    //            fessuffix:fessuffix,
-    //            fesshare:fesshare,
-    //            fessharefrom:real_fessharefrom,
-    //            fesshareto:real_fesshareto,
-    //            fescoinsurance:fescoinsurance
-    //        },
-    //        beforeSend: function() { $("body").addClass("loading");  },
-    //        complete: function() {  $("body").removeClass("loading"); },
-    //        success:function(response)
-    //        {
-    //             swal("Success!", "Insured Fire & Engineering Insert Success", "success")
-    //             console.log(response)
-
-    //        },
-    //        error: function (request, status, error) {
-    //             //alert(request.responseText);
-    //             swal("Error!", "Insured Fire & Engineering Insured Insert Error", "Insert Error");
-    //        }
-    //    });
-
-
-    //    $('#installmentPanelupdate tbody').empty();
-    //    $('#ExtendCoveragePanelupdate tbody').empty();
-    //    $('#deductiblePanelupdate tbody').empty();
-    //    $('#retrocessionPanelupdate tbody').empty();
 
 
 });

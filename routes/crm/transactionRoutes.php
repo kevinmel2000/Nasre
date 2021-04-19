@@ -103,6 +103,7 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::post('/fe-insured/store', [FeSlipController::class, 'storefeinsured']);
     Route::post('/fe-insured', [TransactionController::class, 'storefeinsured']);
     Route::post('/fe-slip/store', [FeSlipController::class, 'storefeslip']);
+    Route::post('/fe-slip/updateform', [FeSlipController::class, 'updatefeslipmodal']);
     Route::post('/fe-slip/endorsementstore', [FeSlipController::class, 'storeendorsementfeslip']);
     Route::get('/fe-slip/updatefeslip/{fe}', [FeSlipController::class, 'updatefeslip']);
     Route::get('/updatefeslip/{fe}', [FeSlipController::class, 'updatefeslip']);
