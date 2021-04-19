@@ -796,7 +796,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Remarks')}}</label>
-                                                            <textarea type="text"  id="remarks" name="remarks" class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder="" ></textarea>
+                                                            <textarea type="text"  id="remarks" name="remarks" class="form-control form-control-sm" placeholder="" ></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -818,7 +818,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label for="">{{__('Total Sum Insured/Ceding Shared') }}</label>
+                                                                            <label for="">{{__('Total Sum Insured/Ceding Share') }}</label>
                                                                             <select id="sliptypetsi" name="sliptype" class="form-control form-control-sm ">
                                                                                 <option selected disabled>{{__('Select Share')}}</option>
                                                                                 <option value="1">Total Sum Insured</option>

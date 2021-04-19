@@ -1137,6 +1137,7 @@ class FeSlipController extends Controller
                 $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
                 $slipdataup->rate=$request->sliprate;  
                 $slipdataup->v_broker=$request->slipvbroker;
+                $slipdataup->sum_feebroker=$request->slipsumvbroker;
                 $slipdataup->share=$request->slipshare;
                 $slipdataup->sum_share=$request->slipsumshare;
                 $slipdataup->basic_premium=$request->slipbasicpremium;
@@ -1174,97 +1175,10 @@ class FeSlipController extends Controller
                     $msdata->save();
                 }
 
-                $slipnumberdata = SlipNumber::where('number',$request->slipnumber)->where('slip_type','fe')->orderby('id','desc')->first();
-                $slipnumberdata->status = 'active';
-                $slipnumberdata->save();
-
-                $old_number = $slipdataup->number;
-                $newnumber = substr($old_number, 10,15);
-                $codenumber = substr($old_number, 0,10);
-
-                if(intval($newnumber) < 9)
-                {
-                    $count = substr($newnumber,14);
-                    $new_number = $codenumber . "0000" . strval(intval($count) + 1);
-                }   
-                elseif(intval($newnumber) > 8 && intval($newnumber) < 99)
-                {
-                    $count = substr($newnumber,13);
-                    $new_number = $codenumber . "000" . strval(intval($count) + 1);
-                }
-                elseif(intval($newnumber) > 98 && intval($newnumber) < 999)
-                {
-                    $count = substr($newnumber,12);
-                    $new_number = $codenumber . "00" . strval(intval($count) + 1);
-                }
-                elseif(intval($newnumber) > 998 && intval($newnumber) < 9999)
-                {
-                    $count = substr($newnumber,11);
-                    $new_number = $codenumber . "0" . strval(intval($count) + 1);
-                }
-                elseif(intval($newnumber) > 9998 && intval($newnumber) < 99999)
-                {
-                    $count = substr($newnumber,10);
-                    $new_number = $codenumber  . strval(intval($count) + 1);
-                }
-
-                $reservedslipnumber = SlipNumber::create([
-                            'number'=>$new_number,
-                            'slip_type'=>'fe',
-                            'status'=>'passive'     
-                ]);
-
-                
-                // $kondisi=0;
-                // $im=1;
-                // while($kondisi==0)
-                // {
-                //     $checkdataslip= SlipTable::where('number',$new_number)->first();
-
-                //    if(!empty($checkdataslip))
-                //     {
-                //         $newnumber2 = substr($new_number, 10,15);
-                //         $codenumber = substr($new_number, 0,10);
-
-                //         if(intval($newnumber2) < 9)
-                //         {
-                //             $count = substr($newnumber2,14);
-                //             $new_number = $codenumber . "0000" . strval(intval($count) + $im);
-                //         }   
-                //         elseif(intval($newnumber2) > 8 && intval($newnumber2) < 99)
-                //         {
-                //             $count = substr($newnumber2,13);
-                //             $new_number = $codenumber . "000" . strval(intval($count) + $im);
-                //         }
-                //         elseif(intval($newnumber2) > 98 && intval($newnumber2) < 999)
-                //         {
-                //             $count = substr($newnumber2,12);
-                //             $new_number = $codenumber . "00" . strval(intval($count) + $im);
-                //         }
-                //         elseif(intval($newnumber2) > 998 && intval($newnumber2) < 9999)
-                //         {
-                //             $count = substr($newnumber2,11);
-                //             $new_number = $codenumber . "0" . strval(intval($count) + $im);
-                //         }
-                //         elseif(intval($newnumber2) > 9998 && intval($newnumber2) < 99999)
-                //         {
-                //             $count = substr($newnumber2,10);
-                //             $new_number = $codenumber  . strval(intval($count) + $im);
-                //         }
-                        
-                //         $im++;
-
-                //     }
-                //     else
-                //     {
-                //         $kondisi=1;
-                //     }    
-                // } 
 
                 return response()->json(
                     [
                         'id' => $slipdataup->id,
-                        'number' => $reservedslipnumber->number,
                         'slipstatus' => $slipdataup->status,
                         'ceding'=>$slipdataup->ceding->name,
                         'cedingbroker'=>$slipdataup->cedingbroker->name,
@@ -1658,7 +1572,10 @@ class FeSlipController extends Controller
                 'cn_dn'=> $slipdata->cn_dn,
                 'policy_no'=> $slipdata->policy_no,
                 'attacment_file'=> $attachmentlist,
+                'type_tsi'=> $slipdata->type_tsi,
                 'total_sum_insured'=> $slipdata->total_sum_insured,
+                'type_share_tsi'=> $slipdata->type_share_tsi,
+                'share_tsi'=> $slipdata->share_tsi,
                 'insured_type'=>$slipdata->insured_type,
                 'insured_pct'=>$slipdata->insured_pct,
                 'total_sum_pct'=>$slipdata->total_sum_pct,
@@ -1671,6 +1588,7 @@ class FeSlipController extends Controller
                 'proportional'=>$slipdata->proportional,
                 'layer_non_proportional'=>$slipdata->layer_non_proportional,
                 'rate'=>$slipdata->rate,
+                'sum_rate'=>$slipdata->sliptotalrate,
                 'share'=>$slipdata->share,
                 'sum_share'=>$slipdata->sum_share,
                 'basic_premium'=>$slipdata->basic_premium,
@@ -1689,7 +1607,12 @@ class FeSlipController extends Controller
                 'created_at'=>$slipdata->created_at,
                 'updated_at'=>$slipdata->updated_at,
                 'wpc'=>$slipdata->wpc,
+                'remarks'=>$slipdata->remarks,
                 'v_broker'=>$slipdata->v_broker,
+                'sum_v_broker'=>$slipdata->sum_feebroker,
+                'total_day'=>$slipdata->total_day,
+                'total_year'=>$slipdata->total_year,
+                'sum_total_date'=>$slipdata->sum_total_date,
                 'coinsurance_slip'=>$slipdata->coinsurance_slip,
                 'status_log'=>$statuslist
             ]
@@ -2116,6 +2039,7 @@ class FeSlipController extends Controller
                     'rate'=>$request->sliprate,
                     'sliptotalrate'=>$request->sliptotalrate,
                     'v_broker'=>$request->slipvbroker,
+                    'sum_feebroker'=>$request->slipsumvbroker,
                     'share'=>$request->slipshare,
                     'sum_share'=>$request->slipsumshare,
                     'basic_premium'=>$request->slipbasicpremium,
@@ -2137,6 +2061,14 @@ class FeSlipController extends Controller
                     'message' => 'Fire & Engginering Slip added successfully!',
                     'alert-type' => 'success'
                 );
+
+                StatusLog::create([
+                        'status'=>$request->slipstatus,
+                        'user'=>Auth::user()->name,
+                        'datetime'=>date('Y-m-d H:i:s '),
+                        'insured_id'=>$request->code_ms,
+                        'slip_id'=>$request->slipnumber,
+                    ]);
 
                 
                 //$insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
@@ -2401,6 +2333,7 @@ class FeSlipController extends Controller
                 $slipdataup->rate=$request->sliprate;
                 $slipdataup->sliptotalrate=$request->sliptotalrate;  
                 $slipdataup->v_broker=$request->slipvbroker;
+                $slipdataup->sum_feebroker=$request->slipsumvbroker;
                 $slipdataup->share=$request->slipshare;
                 $slipdataup->sum_share=$request->slipsumshare;
                 $slipdataup->basic_premium=$request->slipbasicpremium;
