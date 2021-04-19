@@ -5715,9 +5715,10 @@ function deletelocationriskdetail(id){
                 var tsi = $("#sliptotalsum").val();
                 var conv_tsi = parseInt(tsi.replace(/,/g, ""));
 
-                var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi).toFixed(2) ;
+                var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi);
                 console.log(sum)
-                var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                var conv_sum = sum.toFixed(2);
+                var real_sum = conv_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 $('#sliptotalsumpct').val(real_sum);
                 $('#sliptotalsumpct2').val(real_sum);
 
