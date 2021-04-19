@@ -71,7 +71,8 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Transfer Date')}}</label>
-                                                                <input type="text" id="sliptddetail" name="sliptddetail" class="form-control form-control-sm datepicker-input" data-validation="length"  data-validation-length="0-50" readonly="readonly"/>
+                                                                <input type="hidden" id="sliptddetail" name="sliptddetail" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" />
+                                                                    <input type="text" id="sliptddetail2" name="sliptddetail2" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" disabled />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -140,7 +141,7 @@
                                             
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <div class="row">
+                                                    <!-- <div class="row">
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Currency')}}</label>
@@ -152,7 +153,7 @@
                                                             </select>
                                                         </div>    
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                             
                                                     <div class="row">
                                                         <div class="col-md-12">
@@ -262,14 +263,14 @@
                                                 </div>
                                             </div>
 
-                                            <!-- <div class="row">
+                                            <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Count Endorsement')}}</label>
-                                                        <input type="text" min="0" value="" readonly="readonly" step=".0001" id="countendorsmentdetail" name="countendorsmentdetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                        <input type="text" min="0" value="" disabled step=".0001" id="countendorsmentdetail" name="countendorsmentdetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
                                                     </div>
                                                 </div>
-                                            </div> -->
+                                            </div>
                                             
                                             
 

@@ -85,7 +85,10 @@
                                                             </div> --}}
                                                             <div class="form-group">
                                                                 <label for="">{{__('Transfer Date')}}</label>
-                                                                <input type="text" id="sliptdendorsement" name="sliptdendorsement" class="form-control form-control-sm datepicker-input" data-validation="length"  data-validation-length="0-50" readonly="readonly"/>
+                                                                <!-- <input type="text" id="sliptdendorsement" name="sliptdendorsement" class="form-control form-control-sm datepicker-input" data-validation="length"  data-validation-length="0-50" readonly="readonly"/>
+                                                                 -->
+                                                                 <input type="hidden" id="sliptdendorsement" name="sliptd" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" />
+                                                                    <input type="text" id="sliptdendorsement2" name="sliptd" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" disabled />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -93,7 +96,7 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Status')}}</label>
-                                                            <select name="slipstatusendorsement" id="slipstatusendorsement" class="form-control form-control-sm " readonly>
+                                                            <select name="slipstatusendorsement" id="slipstatusendorsement" class="form-control form-control-sm ">
                                                                 <option value="slip"  >Slip</option>
                                                                 <option value="endorsement">Endorsement</option>
                                                                 <option value="cancel">Cancel</option>
@@ -156,7 +159,7 @@
                                             
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <div class="row">
+                                                    <!-- <div class="row">
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Currency')}}</label>
@@ -168,7 +171,7 @@
                                                             </select>
                                                         </div>    
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                             
                                                     <div class="row">
                                                         <div class="col-md-12">
@@ -838,6 +841,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
+                                                                                    <input type="text" id="sliptotalpercentinspanendorsement" name="sliptotalpercentinspanendorsement" hidden="false">
                                                                                     <button type="button" id="addinstallmentinsuredendorsement-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>
