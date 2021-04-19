@@ -284,10 +284,24 @@
                                             
                                             <div class="row">
                                                 <div class="col-md-12 d-flex justify-content-end">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Total Sum Insured') }}</label>
-                                                        <input type="hidden" value="" id="sliptotalsumupdate" name="sliptotalsumupdate" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="tsi(*total/sum from interest insured)" />
-                                                        <input type="text" value="" id="sliptotalsumupdate2" name="sliptotalsumupdate2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="tsi(*total/sum from interest insured)" />
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Total Sum Insured/Ceding Shared') }}</label>
+                                                                <select id="sliptypetsiupdate" name="sliptypetsiupdate" class="form-control form-control-sm ">
+                                                                    <option selected disabled>{{__('Select Share')}}</option>
+                                                                    <option value="1">Total Sum Insured</option>
+                                                                    <option value="2">Ceding Share</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for=""  style="opacity: 0;" >{{__('Total Sum Insured') }}</label>
+                                                                <input type="hidden" id="sliptotalsumupdate" value="" name="sliptotalsumupdate" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="tsi(*total/sum from interest insured)" />
+                                                                <input type="text" id="sliptotalsumupdate2" value="" name="sliptotalsumupdate2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="tsi(*total/sum from interest insured)" />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
