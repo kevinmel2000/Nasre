@@ -239,7 +239,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('WPC')}}</label>
-                                                            <input type="number" min="0" value=""  id="wpcupdate" name="wpcupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                            <input type="text" min="0" value=""  id="wpcupdate" name="wpcupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
                                                         </div>
                                                     </div>
                                             </div>

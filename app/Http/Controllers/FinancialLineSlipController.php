@@ -1819,7 +1819,7 @@ class FinancialLineSlipController extends Controller
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
                                         'wpc'=>$slt->wpc,
-                                        'remarks'=>$slt->$remarks
+                                        'remarks'=>$slt->remarks
                     
                                     ]);
                             }
@@ -1871,7 +1871,7 @@ class FinancialLineSlipController extends Controller
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
                                         'wpc'=>$slt->wpc,
-                                        'remarks'=>$slt->$remarks
+                                        'remarks'=>$slt->remarks
                     
                                     ]);
                             }
@@ -1922,7 +1922,7 @@ class FinancialLineSlipController extends Controller
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
                                         'wpc'=>$slt->wpc,
-                                        'remarks'=>$slt->$remarks
+                                        'remarks'=>$slt->remarks
                     
                                     ]);
                             }
@@ -1973,7 +1973,7 @@ class FinancialLineSlipController extends Controller
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
                                         'wpc'=>$slt->wpc,
-                                        'remarks'=>$slt->$remarks
+                                        'remarks'=>$slt->remarks
                     
                                     ]);
                             }
@@ -2027,7 +2027,7 @@ class FinancialLineSlipController extends Controller
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
                                         'wpc'=>$slt->wpc,
-                                        'remarks'=>$slt->$remarks
+                                        'remarks'=>$slt->remarks
                     
                                     ]);
                             }

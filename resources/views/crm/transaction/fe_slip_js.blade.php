@@ -435,7 +435,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                     if(response.layer_non_proportional)
                     {
-                        $("#sliplayerproportionaldetail option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
+                        //$("#sliplayerproportionaldetail option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
                     }
 
                     if(response.type_tsi)
@@ -899,7 +899,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                 if(response.layer_non_proportional)
                 {
-                    $("#sliplayerproportionalupdate option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
+                    //$("#sliplayerproportionalupdate option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
                 }
 
                 if(response.retro_backup)
@@ -1298,7 +1298,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
             if(response.layer_non_proportional)
             {
-                $("#sliplayerproportionalendorsement option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
+                //$("#sliplayerproportionalendorsement option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
             }
 
             if(response.retro_backup)
