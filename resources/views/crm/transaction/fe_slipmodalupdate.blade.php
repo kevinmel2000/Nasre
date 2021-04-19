@@ -1,4 +1,4 @@
-            <div class="modal fade" id="updatemodaldata" tabindex="-1" user="dialog" aria-labelledby="addupdateLabel" aria-hidden="true">
+<div class="modal fade" id="updatemodaldata" tabindex="-1" user="dialog" aria-labelledby="addupdateLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl" user="document">
                 <div class="modal-content bg-light-gray">
                     <div class="modal-header bg-gray">
@@ -219,14 +219,14 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="">{{__('Rate Lower Area')}}</label>
-                                                                <input type="text" id="slipbclaupdate" name="slipbclaupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
+                                                                <label for="">{{__('Rate Upper Area')}}</label>
+                                                                <input type="text" id="slipbcuaupdate" name="slipbcuaupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="">{{__('Rate Upper Area')}}</label>
-                                                                <input type="text" id="slipbcuaupdate" name="slipbcuaupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
+                                                                <label for="">{{__('Rate Lower Area')}}</label>
+                                                                <input type="text" id="slipbclaupdate" name="slipbclaupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -261,22 +261,20 @@
                                             </div>
 
 
-                                            <!-- <div class="row">
+                                            <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Count Endorsement')}}</label>
                                                         <input type="text" min="0" value="" step=".0001" id="countendorsmentupdate" name="countendorsmentupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
                                                     </div>
                                                 </div>
-                                            </div> -->
-
+                                            </div>
+                                            
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Remarks')}}</label>
-
-                                                        <textarea type="text"  id="remarksupdate" name="remarksupdate" class="form-control form-control-sm" placeholder="" ></textarea>
-
+                                                        <textarea type="text"  id="remarksupdate" name="remarksupdate" class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder="" ></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -705,34 +703,6 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="">{{__('RI Com')}}</label>
-                                                                <div class="row d-flex flex-wrap">
-                                                                    <div class="col-md-12">
-                                                                        <div class="input-group">
-                                                                            <input type="text" id="slipcommissionupdate" name="slipcommissionupdate" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="d" />
-                                                                            <div class="input-group-append">
-                                                                                <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <div class="form-group">
-                                                                            <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
-                                                                            <input type="hidden" id="slipsumshareupdate" name="slipsumshareupdate" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  />
-                                                                            <input type="text" id="slipsumshareupdate2" name="slipsumshareupdate2" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled/>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                <div class="row">
-
-                                                <div class="col-md-6">
-                                                    <div class="row">
-
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="">{{__('RI Com')}}</label>
