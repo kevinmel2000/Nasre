@@ -5889,6 +5889,8 @@ function deletelocationriskdetail(id){
                     var conv_totalrateexc = parseFloat(totalrateexc);
                     var sumtotalrate = isNaN(rateslip * conv_totalrateexc) ? 0 :(rateslip * conv_totalrateexc);
                     var real_sumtotalrate = sumtotalrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    console.log('sliptotalrate' + sumtotalrate)
+                    console.log('sliptotalrate' + real_sumtotalrate)
                     $('#sliptotalrate').val(real_sumtotalrate);
                     $('#sliptotalrate2').val(real_sumtotalrate);
 
@@ -5896,19 +5898,24 @@ function deletelocationriskdetail(id){
                     var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
                     var sum = isNaN((conv_sumrate * conv_tsi) * insurance) ? 0 :((conv_sumrate * conv_tsi) * insurance).toFixed(2) ;
                     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
+                    console.log('conv_sumrate' + sum)
+                    console.log('real_sum' + real_sum)
                     $('#slipbasicpremium').val(real_sum);
                 }else{
                      var conv_totalrateexc = parseFloat(totalrateexc);
                      var sumtotalrate = isNaN(parseInt(0) * totalrateexc) ? 0 :(parseInt(0) * totalrateexc);
                      var real_sumtotalrate = sumtotalrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                     console.log('sliptotalrate' + sumtotalrate)
+                    console.log('sliptotalrate' + real_sumtotalrate)
                      $('#sliptotalrate').val(real_sumtotalrate);
                      $('#sliptotalrate2').val(real_sumtotalrate);
 
-                      var sumrate = $("#sliptotalrate").val();
+                    var sumrate = $("#sliptotalrate").val();
                     var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
                     var sum = isNaN((conv_sumrate * conv_tsi) * insurance) ? 0 :((conv_sumrate * conv_tsi) * insurance).toFixed(2) ;
                     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    console.log('conv_sumrate' + sum)
+                    console.log('real_sum' + real_sum)
 
                     $('#slipbasicpremium').val(real_sum);
                 }
@@ -8035,7 +8042,7 @@ function deletelocationriskdetail(id){
                  console.log(response)
                  if(response.code_error){
                     swal("Error!", response.message , "Insert Error");
-                    $('#addinstallmentinsured-btn').attr('hidden','true')
+                    // $('#addinstallmentinsured-btn').attr('hidden','true')
                 }else{
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
                         var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -9572,7 +9579,11 @@ function deletelocationriskdetail(id){
                 if(parseInt(jumlah_tgl) > 0){
                     var type_tsi = $('#sliptypetsi').val();
                     var tsislipval = $('#sliptotalsum').val();
+                    var conv_tsislipval = tsislipval.replace(/,/g, "");
+                    var int_tsislipval = parseInt(conv_tsiinsval).toFixed(2);
                     var tsiinsval = $('#feshareto').val();
+                    var conv_tsiinsval = tsiinsval.replace(/,/g, "");
+                    var int_tsiinsval = parseInt(conv_tsiinsval).toFixed(2);
                     var cedshareins = $('#feshare').val();
                     console.log('type_tsi'+ type_tsi)
                     console.log('tsislipval'+ tsislipval)
@@ -9580,7 +9591,7 @@ function deletelocationriskdetail(id){
                     console.log('cedshareins'+ cedshareins)
 
                     if(type_tsi == 1){
-                        if(tsislipval == tsiinsval){
+                        if(int_tsislipval == int_tsiinsval){
                                 $.ajaxSetup({
                                     headers: {
                                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
