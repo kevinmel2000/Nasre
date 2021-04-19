@@ -1163,7 +1163,7 @@ class FeSlipController extends Controller
                 $slipdataup->insured_id=$request->code_ms;
                 $slipdataup->slip_type= 'fe';
                 $slipdataup->prod_year=$currdate;
-                $slipdataup->date_transfer=date("Y-m-d", strtotime($request->slipdatetransfer));
+                // $slipdataup->date_transfer=date("Y-m-d", strtotime($request->slipdatetransfer));
                 $slipdataup->status=$request->slipstatus;
                 $slipdataup->endorsment=0;
                 $slipdataup->selisih="false";
