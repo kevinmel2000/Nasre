@@ -9642,7 +9642,7 @@ function deletelocationriskdetail(id){
                     var type_tsi = $('#sliptypetsi').val();
                     var tsislipval = $('#sliptotalsum').val();
                     var conv_tsislipval = tsislipval.replace(/,/g, "");
-                    var int_tsislipval = parseFloat(conv_tsiinsval).toFixed(0);
+                    var int_tsislipval = parseInt(conv_tsiinsval);
                     var int_fullslip = parseInt(int_tsislipval);
                     var tsiinsval = $('#feshareto').val();
                     var conv_tsiinsval = tsiinsval.replace(/,/g, "");
@@ -9660,7 +9660,7 @@ function deletelocationriskdetail(id){
                         console.log('int_tsiinsval' + int_tsiinsval)
                         console.log('int_fullslip' + int_fullslip)
                         console.log('int_fullins' + int_fullins)
-                        if(int_fullslip == int_fullins){
+                        if(int_tsislipval == int_fullins){
                                 $.ajaxSetup({
                                     headers: {
                                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
