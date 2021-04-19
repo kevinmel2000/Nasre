@@ -326,10 +326,12 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     }
 
 
-                    if(response.installment_panel && response.installment_panel.length > 0)
+                    if(response.installment_panel && response.installment_panel.length > 3)
                     {
 
-                        var installment_panel = JSON.parse(response.installment_panel); 
+                        //var installment_panel = JSON.parse(response.installment_panel); 
+                        var installment_panel = JSON.parse(JSON.stringify(response.installment_panel)); 
+
 
                         for(var i = 0; i < installment_panel.length; i++) 
                         {
@@ -347,7 +349,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
 
 
-                    if(response.retrocession_panel && response.retrocession_panel.length > 0)
+                    if(response.retrocession_panel && response.retrocession_panel.length > 3)
                     {
 
                         var retrocession_panel = JSON.parse(response.retrocession_panel); 
@@ -786,10 +788,12 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     }
 
 
-                    if(response.installment_panel && response.installment_panel.length > 0)
+                    if(response.installment_panel && response.installment_panel.length > 3)
                     {
 
-                        var installment_panel = JSON.parse(response.installment_panel); 
+                        var installment_panel = JSON.parse(JSON.stringify(response.installment_panel)); 
+
+                        //var installment_panel = JSON.parse(response.installment_panel); 
 
                         for(var i = 0; i < installment_panel.length; i++) 
                         {
@@ -807,7 +811,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
 
 
-                    if(response.retrocession_panel && response.retrocession_panel.length > 0)
+                    if(response.retrocession_panel && response.retrocession_panel.length > 3)
                     {
 
                         var retrocession_panel = JSON.parse(response.retrocession_panel); 
@@ -1197,7 +1201,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     }
 
 
-                    if(response.installment_panel && response.installment_panel.length > 0)
+                    if(response.installment_panel && response.installment_panel.length > 3)
                     {
                         
                         var installment_panel = JSON.parse(JSON.stringify(response.installment_panel)); 
@@ -1218,7 +1222,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
 
 
-                    if(response.retrocession_panel && response.retrocession_panel.length > 0)
+                    if(response.retrocession_panel && response.retrocession_panel.length > 3)
                     {
 
                         var retrocession_panel = JSON.parse(JSON.stringify(response.retrocession_panel)); 
