@@ -10291,7 +10291,7 @@ function deletelocationriskdetail(id){
 
        var conv_sharetotalsum = sharetotalsum.replace(/,/g, "");
        console.log(conv_sharetotalsum)
-       var real_sliptotalsum = parseInt(conv_sharetotalsum);
+       var real_sharetotalsum = parseInt(conv_sharetotalsum);
        console.log(real_sharetotalsum)
        
        var conv_sliptotalsumpct = sliptotalsumpct.replace(/,/g, "");
