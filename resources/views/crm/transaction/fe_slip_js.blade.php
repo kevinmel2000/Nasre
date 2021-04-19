@@ -9662,7 +9662,7 @@ function deletelocationriskdetail(id){
                         console.log('int_tsiinsval' + int_tsiinsval)
                         console.log('int_fullslip' + int_fullslip)
                         console.log('int_fullins' + int_fullins)
-                        if(int_tsislipval == int_fullins){
+                        if(tsislipval == new_instsi){
                                 $.ajaxSetup({
                                     headers: {
                                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
