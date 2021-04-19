@@ -5892,7 +5892,7 @@ function deletelocationriskdetail(id){
             console.log(days)
             console.log(insurance)
 
-            var rateslip =  parseFloat($(this).val()) ;
+            var rateslip =  parseFloat($(this).val()) / 1000;
             var tsi = $("#sharetotalsum").val();
             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
             var totalrateexc = $('#sliptotalnilaiec').val();
@@ -5943,7 +5943,7 @@ function deletelocationriskdetail(id){
             console.log(days)
             console.log(insurance)
 
-            var rateslip =  parseFloat($(this).val()) ;
+            var rateslip =  parseFloat($(this).val()) / 1000 ;
             var tsi = $("#sharetotalsum").val();
             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
             var totalrateexc = $('#sliptotalnilaiec').val();
@@ -6548,7 +6548,7 @@ function deletelocationriskdetail(id){
     });
 
    $('#slipnilaiec').keyup(function () {
-        var persentage =  parseFloat($('#slipnilaiec').val());
+        var persentage =  parseFloat($('#slipnilaiec').val()) / 1000;
         var sliptotalsum =  $('#sliptotalsum').val();
         var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
        //alert(premiumnr);
@@ -6631,7 +6631,7 @@ function deletelocationriskdetail(id){
             console.log(days)
             console.log(insurance)
 
-            var rateslip =  parseFloat($(this).val()) ;
+            var rateslip =  parseFloat($(this).val()) / 1000 ;
             var tsi = $("#sharetotalsumupdate").val();
             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
             var totalrateexc = $('#sliptotalnilaiecupdate').val();
@@ -6682,7 +6682,7 @@ function deletelocationriskdetail(id){
             console.log(days)
             console.log(insurance)
 
-            var rateslip =  parseFloat($(this).val()) ;
+            var rateslip =  parseFloat($(this).val()) / 1000;
             var tsi = $("#sharetotalsumupdate").val();
             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
             var totalrateexc = $('#sliptotalnilaiecupdate').val();
@@ -7280,7 +7280,7 @@ function deletelocationriskdetail(id){
     });
 
    $('#slipnilaiecupdate').keyup(function () {
-        var persentage =  parseFloat($('#slipnilaiecupdate').val());
+        var persentage =  parseFloat($('#slipnilaiecupdate').val()) / 1000;
         var sliptotalsum =  $('#sliptotalsumupdate').val();
         var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
        //alert(premiumnr);
@@ -7364,7 +7364,7 @@ function deletelocationriskdetail(id){
             console.log(days)
             console.log(insurance)
 
-            var rateslip =  parseFloat($(this).val()) ;
+            var rateslip =  parseFloat($(this).val()) / 1000;
             var tsi = $("#sharetotalsumendorsement").val();
             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
             var totalrateexc = $('#sliptotalnilaiecendorsement').val();
@@ -7415,7 +7415,7 @@ function deletelocationriskdetail(id){
             console.log(days)
             console.log(insurance)
 
-            var rateslip =  parseFloat($(this).val()) ;
+            var rateslip =  parseFloat($(this).val())/1000 ;
             var tsi = $("#sharetotalsumendorsement").val();
             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
             var totalrateexc = $('#sliptotalnilaiecendorsement').val();
@@ -8013,7 +8013,7 @@ function deletelocationriskdetail(id){
     });
 
    $('#slipnilaiecendorsement').keyup(function () {
-        var persentage =  parseFloat($('#slipnilaiecendorsement').val());
+        var persentage =  parseFloat($('#slipnilaiecendorsement').val()) / 1000;
         var sliptotalsum =  $('#sliptotalsumendorsement').val();
         var conv_sliptotalsum = parseInt(sliptotalsum.replace(/,/g, ""));
        //alert(premiumnr);
