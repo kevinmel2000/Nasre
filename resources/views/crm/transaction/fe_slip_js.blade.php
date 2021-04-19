@@ -9644,10 +9644,12 @@ function deletelocationriskdetail(id){
                     var conv_tsislipval = tsislipval.replace(/,/g, "");
                     var int_tsislipval = parseInt(conv_tsiinsval);
                     var int_fullslip = parseInt(int_tsislipval);
+
                     var tsiinsval = $('#feshareto').val();
                     var conv_tsiinsval = tsiinsval.replace(/,/g, "");
-                    var int_tsiinsval = parseFloat(conv_tsiinsval).toFixed(0);
-                    var int_fullins = parseInt(int_tsiinsval);
+                    var int_tsiinsval = parseFloat(conv_tsiinsval);
+                    var int_fullins = int_tsiinsval.toFixed(2);
+                    var new_instsi = int_fullins.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     var cedshareins = $('#feshare').val();
                     console.log('type_tsi'+ type_tsi)
