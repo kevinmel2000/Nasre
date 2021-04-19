@@ -126,72 +126,132 @@ class HeMotorSlipController extends Controller
 
          $search = @$request->input('search');
 
-         if(empty($search))
+         if(!empty($search) || !empty($searchinsured) || !empty($searchuy) || !empty($searchshare) || !empty($searchnre) || !empty($searchtsi) || !empty($searchendorse))
          {
-          //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $insured = Insured::where('slip_type', 'LIKE', 'hem%')->orderby('id','desc')->paginate(10);
-          $insured_ids = response()->json($insured->modelKeys());
-
-          $slip = SlipTable::where('slip_type', '=', 'fe')->orderby('id','desc')->paginate(10);
-          $slip_ids = response()->json($insured->modelKeys());
-          
-          $insuredlist=[];
-          foreach (@$insured as $insureddata)
-          {
-                 $slipdata=SlipTable::where('insured_id', '=', $insureddata->number)->get()->toArray();
+ 
+             $query = Insured::query();
+ 
+             if (!empty($search)) {
+                 $query = $query->where('number', $search);
+             }
+ 
+             if (!empty($searchinsured)) {
+                 $query = $query->where('insured_name', $searchinsured);
+             }
+ 
+             if (!empty($searchuy)) {
+                 $query = $query->where('uy', $searchuy);
+             }
+ 
+             if (!empty($searchshare)) {
+                 $query = $query->where('share', $searchshare);
+             }
+ 
+             if (!empty($searchnre)) {
+                 $query = $query->where('share_from', $searchnre);
+             }
+ 
+             if (!empty($searchtsi)) {
+                 $query = $query->where('share_to', $searchtsi);
+             }
+ 
+             if (!empty($searchendorse)) {
+                 $query = $query->where('count_endorsement', $searchendorse);
+             }
+ 
+             // Ordering
+             $query = $query->where('slip_type', '=', 'hem')->orderBy('id', 'DESC');
+             
+             $insured =$query->paginate(50);
+ 
+             $insured_ids = response()->json($insured->modelKeys());
+     
+             $slip = SlipTable::where('slip_type', '=', 'hem')->orWhere('number', 'LIKE', '%' . @$search . '%')->orderby('id','desc')->paginate(10);
+             $slip_ids = response()->json($insured->modelKeys());
+ 
+             $insuredlist=[];
+             foreach (@$insured as $insureddata)
+             {
+                    $queryslip = SlipTable::query();
+                    
+                    if (!empty($searchslipnum)) 
+                    {
+                     $queryslip = $queryslip->where('number', $searchslipnum);
+                    }
+ 
+                    if (!empty($searchcob)) 
+                    {
+                     $queryslip = $queryslip->where('cob', $searchcob);
+                    }
+ 
+                    if (!empty($searchceding)) 
+                    {
+                     $queryslip = $queryslip->where('source', $searchceding);
+                    }
+ 
+                    $slipdata=$queryslip->where('insured_id', '=', $insureddata->number)->get()->toArray();
+                    
+                    $sliplist=[];
+                    foreach($slipdata as $value)
+                    {
+                      $value['cobdata']=COB::where('id','=',$value['cob'])->first();
+                      $value['brokerdata']=CedingBroker::where('id','=',$value['source'])->first();
+                      $value['cedingdata']=CedingBroker::where('id','=',$value['source_2'])->first();
+ 
+                      array_push($sliplist,$value);
+                    }
                  
-                 $sliplist=[];
-                 foreach($slipdata as $value)
+                    $insureddata->slipdata=$sliplist;
+                 
+                 if(!empty($sliplist))
                  {
-                   $value['cobdata']=COB::where('id','=',$value['cob'])->first();
-                   $value['brokerdata']=CedingBroker::where('id','=',$value['source'])->first();
-                   $value['cedingdata']=CedingBroker::where('id','=',$value['source_2'])->first();
-
-                   array_push($sliplist,$value);
+                   array_push($insuredlist,$insureddata);
                  }
-              
-                 $insureddata->slipdata=$sliplist;
-              
-              array_push($insuredlist,$insureddata);
-          }
+             }
 
+             $cob = COB::orderby('id','asc')->get();
+             $cedingbroker = CedingBroker::orderby('id','asc')->get();
+             $ceding = CedingBroker::orderby('id','asc')->where('type',4)->get();
 
-          return view('crm.transaction.hem_slip_index', compact('insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
-        
+             return view('crm.transaction.hem_slip_index', compact('cob','cedingbroker','ceding','insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+            
          }
          else
          {
-          //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
-          
-          $insured = Insured::where('slip_type', 'LIKE', 'hem%')->where('number', 'LIKE', '%' . $search . '%')->orderby('id','desc')->paginate(10);
-          $insured_ids = response()->json($insured->modelKeys());
+         
+            //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
+            $insured = Insured::where('slip_type', 'LIKE', 'hem%')->orderby('id','desc')->paginate(10);
+            $insured_ids = response()->json($insured->modelKeys());
 
-          $slip = SlipTable::where('slip_type', '=', 'fe')->orderby('id','desc')->paginate(10);
-          $slip_ids = response()->json($insured->modelKeys());
-          
-          $insuredlist=[];
-          foreach (@$insured as $insureddata)
-          {
-                 $slipdata=SlipTable::where('insured_id', '=', $insureddata->number)->get()->toArray();
-                 
-                 $sliplist=[];
-                 foreach($slipdata as $value)
-                 {
-                   $value['cobdata']=COB::where('id','=',$value['cob'])->first();
-                   $value['brokerdata']=CedingBroker::where('id','=',$value['source'])->first();
-                   $value['cedingdata']=CedingBroker::where('id','=',$value['source_2'])->first();
+            $slip = SlipTable::where('slip_type', '=', 'hem')->orderby('id','desc')->paginate(10);
+            $slip_ids = response()->json($insured->modelKeys());
+            
+            $insuredlist=[];
+            foreach (@$insured as $insureddata)
+            {
+                    $slipdata=SlipTable::where('insured_id', '=', $insureddata->number)->get()->toArray();
+                    
+                    $sliplist=[];
+                    foreach($slipdata as $value)
+                    {
+                    $value['cobdata']=COB::where('id','=',$value['cob'])->first();
+                    $value['brokerdata']=CedingBroker::where('id','=',$value['source'])->first();
+                    $value['cedingdata']=CedingBroker::where('id','=',$value['source_2'])->first();
 
-                   array_push($sliplist,$value);
-                 }
-              
-                 $insureddata->slipdata=$sliplist;
-              
-              array_push($insuredlist,$insureddata);
-          }
+                    array_push($sliplist,$value);
+                    }
+                
+                    $insureddata->slipdata=$sliplist;
+                
+                array_push($insuredlist,$insureddata);
+            }
 
-        
-          return view('crm.transaction.hem_slip_index', compact('insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
-        
+            $cob = COB::orderby('id','asc')->get();
+            $cedingbroker = CedingBroker::orderby('id','asc')->get();
+            $ceding = CedingBroker::orderby('id','asc')->where('type',4)->get();
+
+            return view('crm.transaction.hem_slip_index', compact('cob','cedingbroker','ceding','insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+    
         }
     }
 
