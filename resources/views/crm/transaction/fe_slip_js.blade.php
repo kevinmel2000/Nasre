@@ -352,7 +352,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     if(response.retrocession_panel && response.retrocession_panel.length > 3)
                     {
 
-                        var retrocession_panel = JSON.parse(response.retrocession_panel); 
+                        var retrocession_panel = JSON.parse(JSON.stringify(response.retrocession_panel)); 
 
                         for(var i = 0; i < retrocession_panel.length; i++) 
                         {
