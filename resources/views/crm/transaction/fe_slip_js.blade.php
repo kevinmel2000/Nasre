@@ -9643,9 +9643,12 @@ function deletelocationriskdetail(id){
                     var tsislipval = $('#sliptotalsum').val();
                     var conv_tsislipval = tsislipval.replace(/,/g, "");
                     var int_tsislipval = parseFloat(conv_tsiinsval).toFixed(0);
+                    var int_fullslip = parseInt(int_tsislipval);
                     var tsiinsval = $('#feshareto').val();
                     var conv_tsiinsval = tsiinsval.replace(/,/g, "");
                     var int_tsiinsval = parseFloat(conv_tsiinsval).toFixed(0);
+                    var int_fullins = parseInt(int_tsiinsval);
+
                     var cedshareins = $('#feshare').val();
                     console.log('type_tsi'+ type_tsi)
                     console.log('tsislipval'+ tsislipval)
@@ -9653,7 +9656,11 @@ function deletelocationriskdetail(id){
                     console.log('cedshareins'+ cedshareins)
 
                     if(type_tsi == 1){
-                        if(int_tsislipval == int_tsiinsval){
+                        console.log('int_tsislipval' + int_tsislipval)
+                        console.log('int_tsiinsval' + int_tsiinsval)
+                        console.log('int_fullslip' + int_fullslip)
+                        console.log('int_fullins' + int_fullins)
+                        if(int_fullslip == int_fullins){
                                 $.ajaxSetup({
                                     headers: {
                                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
