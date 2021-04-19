@@ -879,7 +879,7 @@
 
 
 
-                if(response.deductible_panel)
+                if(response.deductible_panel && response.deductible_panel.length > 0)
                 {
 
                     var deductibledata = JSON.parse(response.deductible_panel); 
@@ -901,7 +901,7 @@
                 }
 
 
-                if(response.extend_coverage)
+                if(response.extend_coverage && response.extend_coverage.length > 0)
                 {
 
                     var extend_coverage = JSON.parse(response.extend_coverage); 
@@ -921,7 +921,7 @@
                 }
 
 
-                if(response.installment_panel)
+                if(response.installment_panel && response.installment_panel.length > 0)
                 {
 
                     var installment_panel = JSON.parse(response.installment_panel); 
@@ -942,7 +942,7 @@
 
 
 
-                if(response.retrocession_panel)
+                if(response.retrocession_panel  && response.retrocession_panel.length > 0)
                 {
 
                     var retrocession_panel = JSON.parse(response.retrocession_panel); 

@@ -284,29 +284,29 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#slipvbrokerdetail').val(response.v_broker);
 
 
-                if(response.deductible_panel)
-                {
-
-                    var deductibledata = JSON.parse(response.deductible_panel); 
-
-                    for(var i = 0; i < deductibledata.length; i++) 
+                    if(response.deductible_panel && response.deductible_panel.length > 0)
                     {
-                        var obj = deductibledata[i];
 
-                            //console.log(obj.id);
-                            //$('#interestInsuredTabledetail tbody').prepend('');
-                            // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                            var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            // var curr_minamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.min_claimamount);
-                            var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#deductiblePaneldetail tbody').empty();
-                            $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td></td></tr>');
+                        var deductibledata = JSON.parse(response.deductible_panel); 
+
+                        for(var i = 0; i < deductibledata.length; i++) 
+                        {
+                            var obj = deductibledata[i];
+
+                                //console.log(obj.id);
+                                //$('#interestInsuredTabledetail tbody').prepend('');
+                                // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
+                                var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                // var curr_minamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.min_claimamount);
+                                var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                $('#deductiblePaneldetail tbody').empty();
+                                $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td></td></tr>');
 
                         }
                     }
 
 
-                    if(response.extend_coverage)
+                    if(response.extend_coverage && response.extend_coverage.length > 0)
                     {
 
                         var extend_coverage = JSON.parse(response.extend_coverage); 
@@ -326,7 +326,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     }
 
 
-                    if(response.installment_panel)
+                    if(response.installment_panel && response.installment_panel.length > 0)
                     {
 
                         var installment_panel = JSON.parse(response.installment_panel); 
@@ -347,7 +347,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
 
 
-                    if(response.retrocession_panel)
+                    if(response.retrocession_panel && response.retrocession_panel.length > 0)
                     {
 
                         var retrocession_panel = JSON.parse(response.retrocession_panel); 
@@ -743,7 +743,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     // }
 
 
-                    if(response.deductible_panel)
+                    if(response.deductible_panel && response.deductible_panel.length > 0)
                     {
 
                         var deductibledata = JSON.parse(response.deductible_panel); 
@@ -766,7 +766,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     }
 
 
-                    if(response.extend_coverage)
+                    if(response.extend_coverage && response.extend_coverage.length > 0) 
                     {
 
                         var extend_coverage = JSON.parse(response.extend_coverage); 
@@ -786,7 +786,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     }
 
 
-                    if(response.installment_panel)
+                    if(response.installment_panel && response.installment_panel.length > 0)
                     {
 
                         var installment_panel = JSON.parse(response.installment_panel); 
@@ -807,7 +807,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
 
 
-                    if(response.retrocession_panel)
+                    if(response.retrocession_panel && response.retrocession_panel.length > 0)
                     {
 
                         var retrocession_panel = JSON.parse(response.retrocession_panel); 
@@ -1155,7 +1155,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
 
 
-                    if(response.deductible_panel)
+                    if(response.deductible_panel && response.deductible_panel.length > 0)
                     {
 
                         var deductibledata = JSON.parse(response.deductible_panel); 
@@ -1177,7 +1177,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     }
 
 
-                    if(response.extend_coverage)
+                    if(response.extend_coverage && response.extend_coverage.length > 0)
                     {
 
                         var extend_coverage = JSON.parse(response.extend_coverage); 
@@ -1197,9 +1197,9 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     }
 
 
-                    if(response.installment_panel)
+                    if(response.installment_panel && response.installment_panel.length > 0)
                     {
-
+                        
                         var installment_panel = JSON.parse(response.installment_panel); 
 
                         for(var i = 0; i < installment_panel.length; i++) 
@@ -1218,7 +1218,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
 
 
-                    if(response.retrocession_panel)
+                    if(response.retrocession_panel && response.retrocession_panel.length > 0)
                     {
 
                         var retrocession_panel = JSON.parse(response.retrocession_panel); 
