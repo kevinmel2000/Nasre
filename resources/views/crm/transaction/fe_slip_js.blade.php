@@ -5764,6 +5764,67 @@ function deletelocationriskdetail(id){
                 // swal('Success!','tsi in slip changed, please change value in risk detail','success')
             }    
      });
+
+     $('#feshareto2').change(function(){
+        var sumpct = $('#sliptotalsumpct').val();
+        var typetsi = $('#sliptypetsi').val();
+
+
+        if(sumpct != '' && typetsi == '1'){
+                var pct =  parseFloat($('#slippct').val())/100;
+
+                var tsi = $("#sliptotalsum").val();
+                var conv_tsi = parseInt(tsi.replace(/,/g, ""));
+
+                var sum = isNaN(pct * conv_tsi) ? 0 :(pct * conv_tsi);
+                console.log(sum)
+                var conv_sum = sum.toFixed(2);
+                var real_sum = conv_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#sliptotalsumpct').val(real_sum);
+                $('#sliptotalsumpct2').val(real_sum);
+
+                var dpamount = $('#slipdpamount').val();
+                var ecamount = $('#slipamountec').val();
+
+                swal('Success!','tsi in slip changed, please change value in risk detail, deductible and extendcoverage manually','success')
+
+                if(dpamount != null){
+                    var percent =  parseFloat($('#slipdppercentage').val()) / 100;
+                    
+                    var sum = isNaN(percent * conv_tsi) ? 0 :(percent * conv_tsi).toFixed(2) ;
+                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    console.log($('#slipdppercentage').val())
+                    console.log(percent)
+                    console.log(sum)
+                    console.log(real_sum)
+
+                    $('#slipdpamount').val(real_sum);
+                    $('#slipdpamount2').val(real_sum);
+                }
+
+                if(ecamount != null){
+
+                    var persentage =  parseFloat($('#slipnilaiec').val()) / 1000;
+                    var sum = isNaN(conv_tsi * persentage) ? 0 :(conv_tsi * persentage).toFixed(2) ;
+                    var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    console.log($('#slipnilaiec').val())
+                    console.log(persentage)
+                    console.log(sum)
+                    console.log(real_sum)
+
+                    $('#slipamountec').val(real_sum);
+                    $('#slipamountec2').val(real_sum);
+                    
+                }
+
+                
+
+
+            }
+            else{
+                // swal('Success!','tsi in slip changed, please change value in risk detail','success')
+            }    
+     });
 </script>
 
 <script  type='text/javascript'>
