@@ -1227,7 +1227,7 @@ class FeSlipController extends Controller
 
                 $old_nasre_share = $insdata->share_from;
                 $current_share = $request->slipshare;
-                $new_nasre_share = parseFloat($old_nasre_share + $current_share);
+                $new_nasre_share = floatval($old_nasre_share + $current_share);
 
     
                 if($new_nasre_share != $old_nasre_share){
