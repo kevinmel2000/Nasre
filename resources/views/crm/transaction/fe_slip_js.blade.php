@@ -10231,7 +10231,7 @@ function deletelocationriskdetail(id){
 
 <script type='text/javascript'>
     $('#multi-file-upload-ajaxupdate').submit(function(e){
-       alert('masuk ' + $('#insuredIDtxt').val() + ' ' + $('#slipnumberupdate').val()) ;
+       // alert('masuk ' + $('#insuredIDtxt').val() + ' ' + $('#slipnumberupdate').val()) ;
        e.preventDefault();
 
 
