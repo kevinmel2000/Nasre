@@ -839,287 +839,346 @@
 
     //triggered when modal is about to be shown
     $('#endorsementmodaldata').on('show.bs.modal', function(e) {
-
-         //get data-id attribute of the clicked element
-         $("#tabretroendorsement").attr('hidden','true');
-         var codesl = $(e.relatedTarget).data('book-id');
+        //get data-id attribute of the clicked element
+        $("#tabretroendorsement").attr('hidden','true');
+        var codesl = $(e.relatedTarget).data('book-id');
         //alert(codesl);
         $('input .amount').val(function(event) {
-            // skip for arrow keys
-            if(event.which >= 37 && event.which <= 40) return;
-            console.log(event.which)
-            console.log($(this).val())
-                // format number
-                $(this).val(function(index, value) {
-                    return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                });
+        // skip for arrow keys
+        if(event.which >= 37 && event.which <= 40) return;
+        console.log(event.which)
+        console.log($(this).val())
+            // format number
+            $(this).val(function(index, value) {
+                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             });
-        
+        });
+
         $.ajax({
-            url:'{{ url("/") }}/transaction-data/detailendorsementslip/'+codesl,
-            type:"GET",
-            beforeSend: function() { $("body").addClass("loading");  },
-            complete: function() {  $("body").removeClass("loading"); },
-            success:function(response)
+        url:'{{ url("/") }}/transaction-data/detailendorsementslip/'+codesl,
+        type:"GET",
+        beforeSend: function() { $("body").addClass("loading");  },
+        complete: function() {  $("body").removeClass("loading"); },
+        success:function(response)
+        {
+                //$('#slipnumberendorsement').val(response.number);
+                $('#insuredIDtxtendorsement').val(response.insured_id);
+                $('#slipidendorsement').val(response.id);
+                $('#slipnumberendorsement').val(response.code_sl);
+                
+                $('#codeslreal').val(response.code_slreal);
+
+                $('#slipusernameendorsement').val(response.username);
+                $('#slipprodyearendorsement').val(response.prod_year);
+                // $('#slipuyendorsement').val(response.uy);
+                $('#slipedendorsement').val(response.endorsment);
+                $('#slipslsendorsement').val(response.selisih);
+                $('#wpcendorsement').val(response.wpc);
+                $('#slipvbrokerendorsement').val(response.v_broker);
+
+
+
+
+                if(response.deductible_panel)
+                {
+
+                    var deductibledata = JSON.parse(response.deductible_panel); 
+
+                    for(var i = 0; i < deductibledata.length; i++) 
+                    {
+                        var obj = deductibledata[i];
+                        // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
+                        var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        // var curr_minamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.min_claimamount);
+                        var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                        //console.log(obj.id);
+                        //$('#interestInsuredTabledetail tbody').prepend('');
+                        $('#deductiblePanelendorsement tbody').empty();
+                        $('#deductiblePanelendorsement tbody').prepend('<tr id="iiddeductibleendorsement'+obj.id+'" data-name="deductibleendorsementvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleendorsement('+obj.id+')">delete</a></td></tr>');
+
+                    }
+                }
+
+
+                if(response.extend_coverage)
+                {
+
+                    var extend_coverage = JSON.parse(response.extend_coverage); 
+
+                    for(var i = 0; i < extend_coverage.length; i++) 
+                    {
+                        var obj = extend_coverage[i];
+                        // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
+                        var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                        //console.log(obj.id);
+                        //$('#interestInsuredTabledetail tbody').prepend('');
+                        $('#ExtendCoveragePanelendorsement tbody').empty();
+                        $('#ExtendCoveragePanelendorsement tbody').prepend('<tr id="iidextendcoverageendorsement'+obj.id+'" data-name="extendcoverageendorsementvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragetype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageendorsement('+obj.id+')">delete</a></td></tr>');
+                        
+                    }
+                }
+
+
+                if(response.installment_panel)
+                {
+
+                    var installment_panel = JSON.parse(response.installment_panel); 
+
+                    for(var i = 0; i < installment_panel.length; i++) 
+                    {
+                        var obj = installment_panel[i];
+                        // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
+                        var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                        //console.log(obj.id);
+                        //$('#interestInsuredTabledetail tbody').prepend('');
+                        $('#installmentPanelendorsement tbody').empty();
+                        $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+obj.id+'" data-name="installmentendorsementvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+obj.id+')">delete</a></td></tr>')
+
+                    }
+                }
+
+
+
+                if(response.retrocession_panel)
+                {
+
+                    var retrocession_panel = JSON.parse(response.retrocession_panel); 
+
+                    for(var i = 0; i < retrocession_panel.length; i++) 
+                    {
+                        var obj = retrocession_panel[i];
+                        // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
+                        var curr_amount =obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                        //console.log(obj.id);
+                        //$('#interestInsuredTabledetail tbody').prepend('');
+                        $('#retrocessionPanelendorsement tbody').empty();
+                        
+                        $('#retrocessionPanelendorsement tbody').prepend('<tr id="iidretrocessionendorsement'+obj.id+'" data-name="retrocessionendorsementvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessionendorsement('+obj.id+')">delete</a></td></tr>');
+
+                    }
+                }
+                
+                
+                if(response.status)
+                {
+                    $("#slipstatusendorsement option[value=" + response.status + "]:first")[0].selected = true;
+                }
+
+                if(response.source)
+                {
+                $("#slipcedingbrokerendorsement option[value=" + response.source + "]:first")[0].selected = true;
+            }
+
+            if(response.source_2)
             {
-                    //$('#slipnumberendorsement').val(response.number);
-                    $('#insuredIDtxtendorsement').val(response.insured_id);
-                    $('#slipidendorsement').val(response.id);
-                    $('#slipnumberendorsement').val(response.code_sl);
-                    
-                    $('#codeslreal').val(response.code_slreal);
-
-                    $('#slipusernameendorsement').val(response.username);
-                    $('#slipprodyearendorsement').val(response.prod_year);
-                    // $('#slipuyendorsement').val(response.uy);
-                    $('#slipedendorsement').val(response.endorsment);
-                    $('#slipslsendorsement').val(response.selisih);
-                    $('#wpcendorsement').val(response.wpc);
-                    $('#slipvbrokerendorsement').val(response.v_broker);
-
-
-
-
-                    if(response.deductible_panel)
-                    {
-
-                        var deductibledata = JSON.parse(response.deductible_panel); 
-
-                        for(var i = 0; i < deductibledata.length; i++) 
-                        {
-                            var obj = deductibledata[i];
-                            // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                            var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            // var curr_minamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.min_claimamount);
-                            var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-                            //console.log(obj.id);
-                            //$('#interestInsuredTabledetail tbody').prepend('');
-                            $('#deductiblePanelendorsement tbody').empty();
-                            $('#deductiblePanelendorsement tbody').prepend('<tr id="iiddeductibleendorsement'+obj.id+'" data-name="deductibleendorsementvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleendorsement('+obj.id+')">delete</a></td></tr>');
-
-                        }
-                    }
-
-
-                    if(response.extend_coverage)
-                    {
-
-                        var extend_coverage = JSON.parse(response.extend_coverage); 
-
-                        for(var i = 0; i < extend_coverage.length; i++) 
-                        {
-                            var obj = extend_coverage[i];
-                            // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                            var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-                            //console.log(obj.id);
-                            //$('#interestInsuredTabledetail tbody').prepend('');
-                            $('#ExtendCoveragePanelendorsement tbody').empty();
-                            $('#ExtendCoveragePanelendorsement tbody').prepend('<tr id="iidextendcoverageendorsement'+obj.id+'" data-name="extendcoverageendorsementvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragetype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageendorsement('+obj.id+')">delete</a></td></tr>');
-                            
-                        }
-                    }
-
-
-                    if(response.installment_panel)
-                    {
-
-                        var installment_panel = JSON.parse(response.installment_panel); 
-
-                        for(var i = 0; i < installment_panel.length; i++) 
-                        {
-                            var obj = installment_panel[i];
-                            // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                            var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-                            //console.log(obj.id);
-                            //$('#interestInsuredTabledetail tbody').prepend('');
-                            $('#installmentPanelendorsement tbody').empty();
-                            $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+obj.id+'" data-name="installmentendorsementvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+obj.id+')">delete</a></td></tr>')
-
-                        }
-                    }
-
-
-
-                    if(response.retrocession_panel)
-                    {
-
-                        var retrocession_panel = JSON.parse(response.retrocession_panel); 
-
-                        for(var i = 0; i < retrocession_panel.length; i++) 
-                        {
-                            var obj = retrocession_panel[i];
-                            // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                            var curr_amount =obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-                            //console.log(obj.id);
-                            //$('#interestInsuredTabledetail tbody').prepend('');
-                            $('#retrocessionPanelendorsement tbody').empty();
-                            
-                            $('#retrocessionPanelendorsement tbody').prepend('<tr id="iidretrocessionendorsement'+obj.id+'" data-name="retrocessionendorsementvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessionendorsement('+obj.id+')">delete</a></td></tr>');
-
-                        }
-                    }
-                    
-                    
-                    if(response.status)
-                    {
-                       $("#slipstatusendorsement option[value=" + response.status + "]:first")[0].selected = true;
-                   }
-
-                   if(response.source)
-                   {
-                    $("#slipcedingbrokerendorsement option[value=" + response.source + "]:first")[0].selected = true;
-                }
-
-                if(response.source_2)
-                {
-                    $("#slipcedingendorsement option[value=" + response.source_2 + "]:first")[0].selected = true;
-                }
-
-                if(response.currency)
-                {
-                    $("#slipcurrencyendorsement option[value=" + response.currency + "]:first")[0].selected = true;
-                }
-
-                if(response.cob)
-                {
-                    $("#slipcobendorsement option[value=" + response.cob + "]:first")[0].selected = true;
-                }
-
-                if(response.koc)
-                {
-                    $("#slipkocendorsement option[value=" + response.koc + "]:first")[0].selected = true;
-                }
-
-                if(response.occupacy)
-                {
-                    $("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
-                }
-
-                if(response.build_const)
-                {
-                 $("#slipbld_constendorsement option[value='" + response.build_const + "']:first")[0].selected = true;
-                 $("#slipbcuaendorsement").val(response.build_rate_up);
-                 $("#slipbclaendorsement").val(response.build_rate_down);
-             }
-
-             if(response.insured_type)
-             {
-                $("#sliptypeendorsement option[value=" + response.insured_type + "]:first")[0].selected = true;
+                $("#slipcedingendorsement option[value=" + response.source_2 + "]:first")[0].selected = true;
             }
 
-            if(response.layer_non_proportional)
+            if(response.currency)
             {
-                $("#sliplayerproportionalendorsement option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
+                $("#slipcurrencyendorsement option[value=" + response.currency + "]:first")[0].selected = true;
             }
 
-            if(response.retro_backup)
+            if(response.cob)
             {
-                $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
-                if(response.retro_backup == "NO")
-                {
-                    $("#tabretroendorsement").attr('hidden');
-                }
-                else if(response.retro_backup == "YES"){
-                    $("#tabretroendorsement").removeAttr('hidden');
-                }
+                $("#slipcobendorsement option[value=" + response.cob + "]:first")[0].selected = true;
             }
 
-            if(response.status_log){
-                var status_log = response.status_log;
-                for (var i = 0; i < 5; i++){
-                    if(status_log[i])
-                    {
-                        var status = status_log[i].status;
-                        var datetime = status_log[i].datetime;
-                        var user = status_log[i].user;
-                        $('#stlid'+status_log[i].id).remove();
-                        $('#slipStatusTableendorsement tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
-                    }
-                };
+            if(response.koc)
+            {
+                $("#slipkocendorsement option[value=" + response.koc + "]:first")[0].selected = true;
             }
 
-            if(response.attacment_file){
-                $('#aidlistendorsement li').remove();
-                var attacment_file = response.attacment_file;
-                for (var i = 0; i < attacment_file.length; i++){
-                    var filename = attacment_file[i].filename;
-
-                    $('#aidlistendorsement').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
-                };
+            if(response.occupacy)
+            {
+                $("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
             }
 
-            $('#slipnoendorsement').val(response.slip_no);
-            $('#slipcndnendorsement').val(response.cn_dn);
-            $('#slippolicy_noendorsement').val(response.policy_no);
-            $('#sliptotalsumendorsement').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            $('#sliptdendorsement').val(response.date_transfer);
-            $('#slippctendorsement').val(response.insured_pct);
-            $('#sliptotalsumpctendorsement').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            $('#slipipfromendorsement').val(response.insurance_period_from);
-            $('#slipiptoendorsement').val(response.insurance_period_to);
+            if(response.build_const)
+            {
+                $("#slipbld_constendorsement option[value='" + response.build_const + "']:first")[0].selected = true;
+                $("#slipbcuaendorsement").val(response.build_rate_up);
+                $("#slipbclaendorsement").val(response.build_rate_down);
+            }
 
-            var insurance_period_from2 = response.insurance_period_from.split("/").reverse().join("-");
-            var insurance_period_to2 = response.insurance_period_to.split("/").reverse().join("-");
-            var days=daysBetween(insurance_period_from2, insurance_period_to2);
-            var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
-            var constday = days.toString() + "/365";
-            console.log(insurance_period_from2)
-            console.log(insurance_period_to2)
-            console.log(days)
-            console.log(constday)
-            console.log(parseFloat(sum))
+        if(response.insured_type)
+        {
+            $("#sliptypeendorsement option[value=" + response.insured_type + "]:first")[0].selected = true;
+        }
 
-            //$('#slipdaytotalendorsement').val(constday);
+        if(response.type_tsi)
+        {
+            $("#sliptypetsiendorsement option[value=" + response.type_tsi + "]:first")[0].selected = true;
+        }
 
-            $('#slipdaytotalendorsement').val(days);
-            $('#slipdaytotalendorsement2').val(days);
-            $('#slipdaytotalendorsement3').val("365");
-            $('#slipdaytotalendorsement4').val("365");
+        if(response.type_share_tsi)
+        {
+            $("#sharetypetsiendorsement option[value=" + response.type_share_tsi + "]:first")[0].selected = true;
+        }
 
+        if(response.layer_non_proportional)
+        {
+            $("#sliplayerproportionalendorsement option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
+        }
+
+        if(response.retro_backup)
+        {
+            $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
             
-            $('#countendorsmentdata').val(response.endorsment);
-            $('#remarksendorsement').val(response.remarks);
-           
+            if(response.retro_backup == "NO")
+            {
+                $("#tabretroendorsement").attr('hidden');
+            }
+            else if(response.retro_backup == "YES"){
+                $("#tabretroendorsement").removeAttr('hidden');
+            }
+        }
+
+        if(response.status_log){
+            var status_log = response.status_log;
+            for (var i = 0; i < 5; i++){
+                if(status_log[i])
+                {
+                    var status = status_log[i].status;
+                    var datetime = status_log[i].datetime;
+                    var user = status_log[i].user;
+                    $('#stlid'+status_log[i].id).remove();
+                    $('#slipStatusTableendorsement tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
+                }
+            };
+        }
+
+        if(response.attacment_file){
+            $('#aidlistendorsement li').remove();
+            var attacment_file = response.attacment_file;
+            for (var i = 0; i < attacment_file.length; i++){
+                var filename = attacment_file[i].filename;
+
+                $('#aidlistendorsement').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
+            };
+        }
+
+        $('#slipnoendorsement').val(response.slip_no);
+        $('#slipcndnendorsement').val(response.cn_dn);
+        $('#slippolicy_noendorsement').val(response.policy_no);
+
+        $('#sliptotalsumendorsement').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        $('#sliptotalsumendorsement2').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+        if(response.share_tsi){
+            $('#sharetotalsumendorsement').val(response.share_tsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $('#sharetotalsumendorsement2').val(response.share_tsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        }
+        else
+        {
+            $('#sharetotalsumendorsement').val("0");
+            $('#sharetotalsumendorsement2').val("0");
+        }
+
+        $('#sliptdendorsement').val(response.date_transfer);
+        $('#slippctendorsement').val(response.insured_pct);
+        $('#sliptotalsumpctendorsement').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        
+        $('#slipipfromendorsement').val(response.insurance_period_from);
+        $('#slipiptoendorsement').val(response.insurance_period_to);
+
+        var insurance_period_from2 = response.insurance_period_from.split("/").reverse().join("-");
+        var insurance_period_to2 = response.insurance_period_to.split("/").reverse().join("-");
+        var days=daysBetween(insurance_period_from2, insurance_period_to2);
+        var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+        var constday = days.toString() + "/365";
+        console.log(insurance_period_from2)
+        console.log(insurance_period_to2)
+        console.log(days)
+        console.log(constday)
+        console.log(parseFloat(sum))
+
+        //$('#slipdaytotalendorsement').val(constday);
+
+        $('#slipdaytotalendorsement').val(days);
+        $('#slipdaytotalendorsement2').val(days);
+        $('#slipdaytotalendorsement3').val("365");
+        $('#slipdaytotalendorsement4').val("365");
+
+        $('#countendorsmentdata').val(response.endorsment);
+        $('#remarksendorsement').val(response.remarks);
+            
+        
+        $('#sliptotalsumdateendorsement').val(parseFloat(sum));
+
+        $('#sliprpfromendorsement').val(response.reinsurance_period_from);
+        $('#sliprptoendorsement').val(response.reinsurance_period_to);
+        $('#switch-proportionalendorsement').val(response.proportional);
+                // if(response.proportional == ''){
+                    $("#btnaddlayerendorsement").attr('hidden','true');
+                    $("#sliplayerproportionalendorsement").attr('hidden','true');
+                    $("#labelnonpropendorsement").attr('hidden','true');
+                    $("#labelnpendorsement").attr('hidden','true');
+                // }
+
+                $('#sliprateendorsement').val(response.rate);
+
+                $('#slipshareendorsement').val(response.share);
+                
+                $('#slipsumshareendorsement').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#slipsumshareendorsement2').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 
 
-            $('#sliptotalsumdateendorsement').val(parseFloat(sum));
+                $('#slipbasicpremiumendorsement').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#slipgrossprmtonrendorsement').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#slipcommissionendorsement').val(response.commission);
+                
+                $('#slipsumcommissionendorsement').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#slipsumcommissionendorsement2').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
-            $('#sliprpfromendorsement').val(response.reinsurance_period_from);
-            $('#sliprptoendorsement').val(response.reinsurance_period_to);
-            $('#switch-proportionalendorsement').val(response.proportional);
-                    // if(response.proportional == ''){
-                        $("#btnaddlayerendorsement").attr('hidden','true');
-                        $("#sliplayerproportionalendorsement").attr('hidden','true');
-                        $("#labelnonpropendorsement").attr('hidden','true');
-                        $("#labelnpendorsement").attr('hidden','true');
-                    // }
 
-                    $('#sliprateendorsement').val(response.rate);
-                    $('#slipshareendorsement').val(response.share);
-                    $('#slipsumshareendorsement').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipbasicpremiumendorsement').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipgrossprmtonrendorsement').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipcommissionendorsement').val(response.commission);
-                    $('#slipsumcommissionendorsement').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipnetprmtonrendorsement').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#sliporendorsement').val(response.own_retention);
-                    $('#slipsumorendorsement').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    
-                    
-                    swal("Success!", "Data Show")
-                    console.log(response)
-                    // addendorsement();
-
-                },
-                error: function (request, status, error) {
-                    //alert(request.responseText);
-                    swal("Error!", "Get Slip Data Error", "Get Data Error");
+                $('#slipnetprmtonrendorsement').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#sliporendorsement').val(response.own_retention);
+                $('#slipsumorendorsement').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                
+                if(response.sum_feebroker){
+                $('#slipsumfeeendorsement').val(response.sum_feebroker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#slipsumfeeendorsement2').val(response.sum_feebroker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }
-            });
+                else{
+                    $('#slipsumfeeendorsement').val("0");
+                    $('#slipsumfeeendorsement2').val("0");
+                }
+
+
+                if(response.grossprm_to_nr){
+                    $('#slipgrossprmtonrendorsement').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipgrossprmtonrendorsement2').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                
+                }
+                else{
+                    $('#slipgrossprmtonrendorsement').val("0");
+                    $('#slipgrossprmtonrendorsement2').val("0");
+                }
+
+                if(response.netprm_to_nr){
+                    $('#slipnetprmtonrendorsement').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipnetprmtonrendorsement2').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
+                }
+                else{
+                    $('#slipnetprmtonrendorsement').val("0"); 
+                    $('#slipnetprmtonrendorsement2').val("0"); 
+                }
+                
+                swal("Success!", "Data Show")
+                console.log(response)
+                // addendorsement();
+
+            },
+            error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", "Get Slip Data Error", "Get Data Error");
+            }
+        });
 
 
 
