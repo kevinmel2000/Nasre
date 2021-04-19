@@ -280,6 +280,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#slipslsdetail').val(response.selisih);
                 $('#wpcdetail').val(response.wpc);
                 $('#remarksdetail').val(response.remarks);
+
                 $('#slipvbrokerdetail').val(response.v_broker);
 
 
@@ -565,8 +566,10 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     $('#slipsharedetail').val(response.share);
 
                     if(response.sum_share){
+
                         $('#slipsumsharedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                         $('#slipsumsharedetail2').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
                     }
                     else{
                         $('#slipsumsharedetail').val("0");
@@ -591,8 +594,10 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     }
                     
                     if(response.grossprm_to_nr){
+
                         $('#slipgrossprmtonrdetail').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                         $('#slipgrossprmtonrdetail2').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
                     }
                     else{
                         $('#slipgrossprmtonrdetail').val("0");
@@ -611,6 +616,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                         $('#slipsumcommissiondetail').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                         $('#slipsumcommissiondetail2').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    
                     }
                     else{
                         $('#slipsumcommissiondetail').val("0");
@@ -635,8 +641,10 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     }
 
                     if(response.netprm_to_nr){
+
                         $('#slipnetprmtonrdetail').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                         $('#slipnetprmtonrdetail2').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
+
                     }
                     else{
                         $('#slipnetprmtonrdetail').val("0"); 
@@ -706,7 +714,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response)
             {
-
+                 $("body").removeClass("loading");
                 $('#insuredIDtxtupdate').val(response.insured_id);
                 $('#slipnumberupdate').val(response.number);
                 $('#slipusernameupdate').val(response.username);
@@ -1035,7 +1043,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                     $('#slipcommissionupdate').val(response.commission);
                     $('#slipcommissionupdate2').val(response.commission);
-
+                    
                     if(response.sum_commission){
                         $('#slipsumcommissionupdate').val(response.sum_commission.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                         $('#slipsumcommissionupdate2').val(response.sum_commission.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -1071,6 +1079,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                         $('#slipsumfeeupdate2').val("0");
 
                     }
+
 
                     $('#sliporupdate').val(response.own_retention);
 

@@ -729,6 +729,7 @@
                                                     </div>
 
                                                     <div class="row">
+
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Fee Broker')}}</label>
@@ -762,6 +763,7 @@
 
                                                 </div>
 
+                                                
                                                 <div class="col-md-6">
                                                     <div class="row"> 
                                                         <div class="col-md-12">
@@ -782,8 +784,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
                                             </div>
-                                
                                         </div>
                                         
                                         <div class="tab-pane fade" id="installment-details-id4" role="tabpanel" aria-labelledby="installment-details">
