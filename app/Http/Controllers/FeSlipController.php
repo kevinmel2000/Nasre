@@ -1632,6 +1632,7 @@ class FeSlipController extends Controller
             $building_rate_down = $building_rate->rate_batas_bawah_building_class_3;
         }
       
+
         return response()->json(
             [
                 'id' => $slipdata->id,
@@ -1692,7 +1693,8 @@ class FeSlipController extends Controller
                 'remarks'=>$slipdata->remarks,
                 'v_broker'=>$slipdata->v_broker,
                 'coinsurance_slip'=>$slipdata->coinsurance_slip,
-                'status_log'=>$statuslist
+                'status_log'=>$statuslist,
+                'sum_feebroker'=>$slipdata->sum_feebroker
             ]
         );
 
@@ -1868,7 +1870,8 @@ class FeSlipController extends Controller
                 'remarks'=>$slipdata->remarks,
                 'v_broker'=>$slipdata->v_broker,
                 'coinsurance_slip'=>$slipdata->coinsurance_slip,
-                'status_log'=>$statuslist
+                'status_log'=>$statuslist,
+                'sum_feebroker'=>$slipdata->sum_feebroker
             ]
         );
 

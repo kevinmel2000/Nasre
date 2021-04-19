@@ -279,6 +279,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#slipeddetail').val(response.endorsment);
                 $('#slipslsdetail').val(response.selisih);
                 $('#wpcdetail').val(response.wpc);
+
                 $('#slipvbrokerdetail').val(response.v_broker);
 
 
@@ -518,7 +519,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#slipdaytotaldetail2').val(days);
                 $('#slipdaytotaldetail3').val("365");
                 $('#slipdaytotaldetail4').val("365");
-                
+            
                 $('#sliptotalsumdatedetail').val(parseFloat(sum));
 
 
@@ -535,12 +536,26 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                     $('#slipratedetail').val(response.rate);
                     $('#slipsharedetail').val(response.share);
+
                     if(response.sum_share){
                         $('#slipsumsharedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipsumsharedetail2').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     }
                     else{
                         $('#slipsumsharedetail').val("0");
+                        $('#slipsumsharedetail2').val("0");
                     }
+
+                    if(response.sum_feebroker){
+                        $('#slipsumfeedetail').val(response.sum_feebroker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipsumfeedetail2').val(response.sum_feebroker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }
+                    else{
+                        $('#slipsumfeedetail').val("0");
+                        $('#slipsumfeedetail2').val("0");
+                    }
+
+
                     if(response.basic_premium){
                         $('#slipbasicpremiumdetail').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     }else
@@ -550,10 +565,14 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     
                     if(response.grossprm_to_nr){
                         $('#slipgrossprmtonrdetail').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipgrossprmtonrdetail2').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                   
                     }
                     else{
                         $('#slipgrossprmtonrdetail').val("0");
+                        $('#slipgrossprmtonrdetail2').val("0");
                     }
+
                     if(response.commission){
                         $('#slipcommissiondetail').val(response.commission);
                     }
@@ -564,17 +583,22 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                     if(response.sum_commission){
                         $('#slipsumcommissiondetail').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipsumcommissiondetail2').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    
                     }
                     else{
                         $('#slipsumcommissiondetail').val("0");
+                        $('#slipsumcommissiondetail2').val("0");
 
                     }
 
                     if(response.netprm_to_nr){
-                        $('#slipnetprmtonrdetail').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
+                        $('#slipnetprmtonrdetail').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipnetprmtonrdetail2').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
                     }
                     else{
                         $('#slipnetprmtonrdetail').val("0"); 
+                        $('#slipnetprmtonrdetail2').val("0"); 
                     }
 
                     if(response.own_retention){
@@ -1164,9 +1188,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             $('#slipcndnendorsement').val(response.cn_dn);
             $('#slippolicy_noendorsement').val(response.policy_no);
             $('#sliptotalsumendorsement').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
             $('#sliptdendorsement').val(response.date_transfer);
             $('#slippctendorsement').val(response.insured_pct);
             $('#sliptotalsumpctendorsement').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            
             $('#slipipfromendorsement').val(response.insurance_period_from);
             $('#slipiptoendorsement').val(response.insurance_period_to);
 
@@ -1206,11 +1232,18 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                     $('#sliprateendorsement').val(response.rate);
                     $('#slipshareendorsement').val(response.share);
+                    
                     $('#slipsumshareendorsement').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumshareendorsement2').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                   
+
                     $('#slipbasicpremiumendorsement').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#slipgrossprmtonrendorsement').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#slipcommissionendorsement').val(response.commission);
+                    
                     $('#slipsumcommissionendorsement').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumcommissionendorsement2').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
                     $('#slipnetprmtonrendorsement').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#sliporendorsement').val(response.own_retention);
                     $('#slipsumorendorsement').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
