@@ -1173,7 +1173,7 @@ class FeSlipController extends Controller
                 $slipdataup->prod_year=$currdate;
                 // $slipdataup->date_transfer=date("Y-m-d", strtotime($request->slipdatetransfer));
                 $slipdataup->status=$request->slipstatus;
-                $slipdataup->endorsment=;
+                $slipdataup->endorsment=$slipdatalatest->endorsment;
                 $slipdataup->selisih="false";
                 $slipdataup->source=$request->slipcedingbroker;
                 $slipdataup->source_2=$request->slipceding;
