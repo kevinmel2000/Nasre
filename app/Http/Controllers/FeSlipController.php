@@ -1703,7 +1703,7 @@ class FeSlipController extends Controller
                 'commission'=>$slipdata->commission,
                 'grossprm_to_nr'=>$slipdata->grossprm_to_nr,
                 'netprm_to_nr'=>$slipdata->netprm_to_nr,
-                'installment_panel'=>$newarrayinspandata,
+                'installment_panel'=>$slipdata->installment_panel,
                 'sum_commission'=>$slipdata->sum_commission,
                 'retro_backup'=>$slipdata->retro_backup,
                 'own_retention'=>$slipdata->own_retention,
