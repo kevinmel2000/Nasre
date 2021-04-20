@@ -1623,12 +1623,12 @@ class FeSlipController extends Controller
         $attachmentlist->values()->all();
         // }
 
-        $sum_permilec = DB::table('extend_coverage_detail')
+        $sum_permilec = DB::table('extended_coverage_detail')
                             ->where('slip_id',$slipdata->number)
                             ->where('insured_id','=',$slipdata->insured_id)
                             ->where('slip_type','fe')
                             ->where('count_endorsement',$slipdata->endorsment)
-                            ->sum('extend_coverage_detail.percentage');
+                            ->sum('extended_coverage_detail.percentage');
 
         $sum_inspanpercent = DB::table('installment_panel_detail')
                             ->where('slip_id',$slipdata->number)
@@ -1850,12 +1850,12 @@ class FeSlipController extends Controller
         $attachmentlist->values()->all();
 
 
-        $sum_permilec = DB::table('extend_coverage_detail')
+        $sum_permilec = DB::table('extended_coverage_detail')
                             ->where('slip_id',$slipdata->number)
                             ->where('insured_id','=',$slipdata->insured_id)
                             ->where('slip_type','fe')
                             ->where('count_endorsement',$slipdata->endorsment)
-                            ->sum('extend_coverage_detail.percentage');
+                            ->sum('extended_coverage_detail.percentage');
 
         $sum_inspanpercent = DB::table('installment_panel_detail')
                             ->where('slip_id',$slipdata->number)
