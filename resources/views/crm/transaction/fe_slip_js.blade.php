@@ -7849,7 +7849,7 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountendorsement').val(real_sum);
-            // $('#slipipamount2').val(real_sum);
+            $('#slipipamountendorsement2').val(real_sum);
         }else{
             var percent =  parseFloat($(this).val()) / 100;
 
@@ -7860,6 +7860,7 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountendorsement').val(real_sum);
+            $('#slipipamountendorsement2').val(real_sum);
         }
     });
 
@@ -7876,7 +7877,7 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountendorsement').val(real_sum);
-            // $('#slipipamount2').val(real_sum);
+            $('#slipipamountendorsement2').val(real_sum);
         }else{
             var percent =  parseFloat($(this).val()) / 100;
 
@@ -7903,7 +7904,7 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountendorsement').val(real_sum);
-            // $('#slipipamount2').val(real_sum);
+            $('#slipipamountendorsement2').val(real_sum);
         }else{
             var percent =  parseFloat($(this).val()) / 100;
 
@@ -7914,6 +7915,7 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountendorsement').val(real_sum);
+            $('#slipipamountendorsement2').val(real_sum);
         }
     });
 
@@ -7930,7 +7932,7 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountendorsement').val(real_sum);
-            // $('#slipipamount2').val(real_sum);
+           $('#slipipamountendorsement2').val(real_sum);
         }else{
             var percent =  parseFloat($(this).val()) / 100;
 
@@ -7941,6 +7943,7 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountendorsement').val(real_sum);
+
         }
     });
 
@@ -8002,6 +8005,7 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountendorsement').val(real_sum);
+            $('#slipipamountendorsement2').val(real_sum);
         }
    });
 
@@ -8028,6 +8032,7 @@ function deletelocationriskdetail(id){
                 var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                 $('#slipipamountendorsement').val(real_sum);
+                $('#slipipamountendorsement2').val(real_sum);
             }
    });
 
@@ -8055,6 +8060,7 @@ function deletelocationriskdetail(id){
                 var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                 $('#slipipamountendorsement').val(real_sum);
+                $('#slipipamountendorsement2').val(real_sum);
             }
    });
 
@@ -10528,116 +10534,132 @@ function deletelocationriskdetail(id){
        console.log('sudah tertekan button update')
        //ajaxfilefunction(e);
 
-       $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       var current_percent = $('#sliptotalpercentinspanupdate').val();
+       console.log('jumlah installment panel ' + current_percent)
+       var current_percent_rp = $('#sliptotalpercentrporupdate').val();
+       console.log('jumlah total or ' + current_percent_rp)
+
+       var count_endorsement_ins = $('#fecountendorsement').val();
+       console.log('count endorsement ' + count_endorsement_ins)
+
+
+        if(current_percent == '100'){
+             $.ajaxSetup({
+                headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+               $.ajax({
+                 url:"{{url('transaction-data/fe-slip/updateform')}}",
+                 type:"POST",
+                 data:{
+                     code_ms:code_ms,
+                     slipnumber:slipnumber,
+                     slipdatetransfer:slipdatetransfer,
+                     slipstatus:slipstatus,
+                     sliped:sliped,
+                     slipsls:slipsls,
+                     slipcedingbroker:slipcedingbroker,
+                     slipceding:slipceding,
+                     // slipcurrency:slipcurrency,
+                     slipcob:slipcob,
+                     slipkoc:slipkoc,
+                     slipoccupacy:slipoccupacy,
+                     slipbld_const:slipbld_const,
+                     sliptypetsi:sliptypetsi,
+                     sliptotalsum:real_sliptotalsum,
+                     sharetypetsi:sharetypetsi,
+                     sharetotalsum:real_sharetotalsum,
+                     sliptype:sliptype,
+                     slippct:slippct,
+                     sliptotalsumpct:real_sliptotalsumpct,
+                     slipipfrom:slipipfrom,
+                     slipipto:slipipto,
+                     sliprpfrom:sliprpfrom,
+                     sliprpto:sliprpto,
+                     proportional:proportional,
+                     sliplayerproportional:sliplayerproportional,
+                     sliprate:sliprate,
+                     slipsumrate:real_slipsumrate,
+                     slipvbroker:slipvbroker,
+                     slipsumvbroker:real_slipsumvbroker,
+                     slipshare:slipshare,
+                     slipsumshare:real_slipsumshare,
+                     slipoldsumshare:slipoldsumshare,
+                     slipbasicpremium:real_slipbasicpremium,
+                     slipgrossprmtonr:real_slipgrossprmtonr,
+                     slipcommission:slipcommission,
+                     slipsumcommission:real_slipsumcommission,
+                     slipnetprmtonr:real_slipnetprmtonr,
+                     sliprb:sliprb,
+                     slipor:slipor,
+                     slipsumor:real_slipsumor,
+                     wpc:wpc,
+                     remarks:remarks
+                 },
+                 beforeSend: function() { $("body").addClass("loading");  },
+                 complete: function() {  $("body").removeClass("loading"); },
+                 success:function(response)
+                 {
+                    swal("Success!", "Insured Fire & Engineering Slip Update Success", "success")
+                    console.log(response)
+                    if(response.new_share_nasre){
+                        var new_nasre = response.new_share_nasre;
+                        var conv_nasre = new_nasre.toFixed(2);
+                        var real_nasre = conv_nasre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#fesharefrom').val(real_nasre);
+                    }
+
+                    },
+                    error: function (request, status, error) {
+                        //alert(request.responseText);
+                        swal("Error!", "Insured Fire & Engineering Slip Update Error", "Update Error");
+                    }
+                });
+
+               console.log('sudah update');
+
+               var formData = new FormData(this);
+               let TotalFiles = $('#attachmentupdate')[0].files.length; //Total files
+               let files = $('#attachmentupdate')[0];
+               var slip_id = $('#slipnumberupdate').val();
+
+               for (let i = 0; i < TotalFiles; i++) 
+               {
+                formData.append('files' + i, files.files[i]);
+            }
+
+            formData.append('TotalFiles', TotalFiles);
+            formData.append('slip_id', slip_id);
+            formData.append('insured_id', code_ms);
+
+
+            $.ajax({
+                type:'POST',
+                url: "{{ url('store-multi-file-ajax')}}",
+                data: formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                success: (data) => {
+                            //this.reset();
+                            //alert('Files has been uploaded using jQuery ajax');
+                            swal("Success!", "Files has been uploaded", "success")
+                        },
+                        error: function(data){
+                             //alert(data.responseJSON.errors.files[0]);
+                             // swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
+                             //console.log(data.responseJSON.errors);
+                         }
+                     });
+
+        }else{
+            swal("Error!", "Please input installment panel until 100%", "Insert Error");
         }
-    });
 
-       $.ajax({
-         url:"{{url('transaction-data/fe-slip/updateform')}}",
-         type:"POST",
-         data:{
-             code_ms:code_ms,
-             slipnumber:slipnumber,
-             slipdatetransfer:slipdatetransfer,
-             slipstatus:slipstatus,
-             sliped:sliped,
-             slipsls:slipsls,
-             slipcedingbroker:slipcedingbroker,
-             slipceding:slipceding,
-             // slipcurrency:slipcurrency,
-             slipcob:slipcob,
-             slipkoc:slipkoc,
-             slipoccupacy:slipoccupacy,
-             slipbld_const:slipbld_const,
-             sliptypetsi:sliptypetsi,
-             sliptotalsum:real_sliptotalsum,
-             sharetypetsi:sharetypetsi,
-             sharetotalsum:real_sharetotalsum,
-             sliptype:sliptype,
-             slippct:slippct,
-             sliptotalsumpct:real_sliptotalsumpct,
-             slipipfrom:slipipfrom,
-             slipipto:slipipto,
-             sliprpfrom:sliprpfrom,
-             sliprpto:sliprpto,
-             proportional:proportional,
-             sliplayerproportional:sliplayerproportional,
-             sliprate:sliprate,
-             slipsumrate:real_slipsumrate,
-             slipvbroker:slipvbroker,
-             slipsumvbroker:real_slipsumvbroker,
-             slipshare:slipshare,
-             slipsumshare:real_slipsumshare,
-             slipoldsumshare:slipoldsumshare,
-             slipbasicpremium:real_slipbasicpremium,
-             slipgrossprmtonr:real_slipgrossprmtonr,
-             slipcommission:slipcommission,
-             slipsumcommission:real_slipsumcommission,
-             slipnetprmtonr:real_slipnetprmtonr,
-             sliprb:sliprb,
-             slipor:slipor,
-             slipsumor:real_slipsumor,
-             wpc:wpc,
-             remarks:remarks
-         },
-         beforeSend: function() { $("body").addClass("loading");  },
-         complete: function() {  $("body").removeClass("loading"); },
-         success:function(response)
-         {
-            swal("Success!", "Insured Fire & Engineering Slip Update Success", "success")
-            console.log(response)
-            if(response.new_share_nasre){
-                var new_nasre = response.new_share_nasre;
-                var conv_nasre = new_nasre.toFixed(2);
-                var real_nasre = conv_nasre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                $('#fesharefrom').val(real_nasre);
-            }
-
-            },
-            error: function (request, status, error) {
-                //alert(request.responseText);
-                swal("Error!", "Insured Fire & Engineering Slip Update Error", "Update Error");
-            }
-        });
-
-       console.log('sudah update');
-
-       var formData = new FormData(this);
-       let TotalFiles = $('#attachmentupdate')[0].files.length; //Total files
-       let files = $('#attachmentupdate')[0];
-       var slip_id = $('#slipnumberupdate').val();
-
-       for (let i = 0; i < TotalFiles; i++) 
-       {
-        formData.append('files' + i, files.files[i]);
-    }
-
-    formData.append('TotalFiles', TotalFiles);
-    formData.append('slip_id', slip_id);
-    formData.append('insured_id', code_ms);
-
-
-    $.ajax({
-        type:'POST',
-        url: "{{ url('store-multi-file-ajax')}}",
-        data: formData,
-        cache:false,
-        contentType: false,
-        processData: false,
-        dataType: 'json',
-        success: (data) => {
-                    //this.reset();
-                    //alert('Files has been uploaded using jQuery ajax');
-                    swal("Success!", "Files has been uploaded", "success")
-                },
-                error: function(data){
-                     //alert(data.responseJSON.errors.files[0]);
-                     // swal("Error!", data.responseJSON.errors.files[0], "Insert Error");
-                     //console.log(data.responseJSON.errors);
-                 }
-             });
+      
 
 
 });
