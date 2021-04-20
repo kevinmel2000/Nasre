@@ -1147,7 +1147,7 @@ class FeSlipController extends Controller
 
                 $slipipfromdate = str_replace('/', '-', $request->slipipfrom);
                 $slipiptodate = str_replace('/', '-', $request->slipipto);
-                $sliprpfromodate = str_replace('/', '-', $request->sliprpfrom);
+                $sliprpfromdate = str_replace('/', '-', $request->sliprpfrom);
                 $sliprptodate = str_replace('/', '-', $request->sliprpto);
 
                 $slipdataid=$slipdata->number;
