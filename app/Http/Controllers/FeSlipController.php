@@ -1145,6 +1145,11 @@ class FeSlipController extends Controller
 
                 $currdate = date("Y-m-d");
 
+                $slipipfromdate = str_replace('/', '-', $request->slipipfrom);
+                $slipiptodate = str_replace('/', '-', $request->slipipto);
+                $sliprpfromodate = str_replace('/', '-', $request->sliprpfrom);
+                $sliprptodate = str_replace('/', '-', $request->sliprpto);
+
                 $slipdataid=$slipdata->number;
                 $slipdataup = SlipTable::where('number',$slipdataid)->orderby('created_at','desc')->first();
 
@@ -1190,10 +1195,10 @@ class FeSlipController extends Controller
                 $slipdataup->total_sum_pct=$request->sliptotalsumpct; 
                 $slipdataup->deductible_panel=$deductiblelist->toJson(); 
                 $slipdataup->extend_coverage=$extendcoveragelist->toJson();  
-                $slipdataup->insurance_period_from=date("Y-m-d", strtotime($request->slipipfrom));  
-                $slipdataup->insurance_period_to=date("Y-m-d", strtotime($request->slipipto));  
-                $slipdataup->reinsurance_period_from=date("Y-m-d", strtotime($request->sliprpfrom));  
-                $slipdataup->reinsurance_period_to=date("Y-m-d", strtotime($request->sliprpto));
+                $slipdataup->insurance_period_from=date("Y-m-d", strtotime($slipipfromdate));  
+                $slipdataup->insurance_period_to=date("Y-m-d", strtotime($slipiptodate));  
+                $slipdataup->reinsurance_period_from=date("Y-m-d", strtotime($sliprpfromdate));  
+                $slipdataup->reinsurance_period_to=date("Y-m-d", strtotime($sliprptodate));
                 $slipdataup->proportional=$request->slipproportional;
                 $slipdataup->layer_non_proportional=$request->sliplayerproportional;  
                 $slipdataup->rate=$request->sliprate;  
@@ -1605,14 +1610,17 @@ class FeSlipController extends Controller
         //     //$attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','DESC')->get();
             
         // $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get();
-        $attachmentlist = DB::table('slip_table_file')
-                    ->where('slip_id','=',$slipdata->number)
-                    ->where('insured_id','=',$slipdata->insured_id)
-                    ->where('slip_type','fe')
-                    ->where('count_endorsement',$slipdata->endorsment)        
-                    ->orderby('id','desc')
-                    ->distinct('slip_table_file.filename')
-                    ->get();
+        // $attachmentlist = DB::table('slip_table_file')
+        //             ->where('slip_id','=',$slipdata->number)
+        //             ->where('insured_id','=',$slipdata->insured_id)
+        //             ->where('slip_type','fe')
+        //             ->where('count_endorsement',$slipdata->endorsment)        
+        //             ->orderby('id','desc')
+        //             ->distinct('slip_table_file.filename')
+        //             ->get();
+        $attachmenttable = collect(SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get());
+        $attachmentlist = $felookuptable->unique('country_id');
+        $attachmentlist->values()->all();
         // }
 
 
@@ -1821,14 +1829,9 @@ class FeSlipController extends Controller
         $statuslist= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->take(5)->get();
         
         
-        $attachmentlist = DB::table('slip_table_file')
-                    ->where('slip_id','=',$slipdata->number)
-                    ->where('insured_id','=',$slipdata->insured_id)
-                    ->where('slip_type','fe')
-                    ->where('count_endorsement',$slipdata->endorsment)        
-                    ->orderby('id','desc')
-                    ->distinct('slip_table_file.filename')
-                    ->get();
+        $attachmenttable = collect(SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get());
+        $attachmentlist = $felookuptable->unique('country_id');
+        $attachmentlist->values()->all();
 
 
         if($slipdata->build_const == "Building 1"){
