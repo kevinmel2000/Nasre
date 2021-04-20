@@ -470,12 +470,13 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                         var status_log = response.status_log;
                         for (var i = 0; i < 5; i++){
 
+                            $('#slipStatusTabledetail tbody').remove();
                           if(status_log[i])
                           {
                             var status = status_log[i].status;
                             var datetime = status_log[i].datetime;
                             var user = status_log[i].user;
-                            $('#stlid'+status_log[i].id).remove();
+                            
                             $('#slipStatusTabledetail tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
                         }
 
@@ -933,6 +934,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                 if(response.status_log){
                     var status_log = response.status_log;
+                    $('#slipStatusTableupdate tbody').remove();
                     for (var i = 0; i < 5; i++){
 
                         if(status_log[i])
@@ -940,7 +942,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                             var status = status_log[i].status;
                             var datetime = status_log[i].datetime;
                             var user = status_log[i].user;
-                            $('#stlid'+status_log[i].id).remove();
+                            
                             $('#slipStatusTableupdate tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
                         }
                     };
@@ -1338,13 +1340,14 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
             if(response.status_log){
                 var status_log = response.status_log;
+                $('#slipStatusTableendorsement tbody').remove();
                 for (var i = 0; i < 5; i++){
                     if(status_log[i])
                     {
                         var status = status_log[i].status;
                         var datetime = status_log[i].datetime;
                         var user = status_log[i].user;
-                        $('#stlid'+status_log[i].id).remove();
+                        
                         $('#slipStatusTableendorsement tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
                     }
                 };

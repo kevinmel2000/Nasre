@@ -343,7 +343,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <div class="input-group">
-                                                                            <input type="number" value="" step=".0001" id="slippctendorsement" name="slippctendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
+                                                                            <input type="text" id="slippctendorsement" name="slippctendorsement" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="pct" />
                                                                             <div class="input-group-append">
                                                                                 <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                             </div>
@@ -402,7 +402,7 @@
                                                                           
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" value="0" step=".0001" id="slipdppercentageendorsement" name="slipdppercentageendorsement" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                                    <input type="text" id="slipdppercentageendorsement" name="slipdppercentageendorsement" placeholder="x" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" />
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -472,7 +472,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" value="0" step=".0001" id="slipnilaiecendorsement" name="slipnilaiecendorsement" placeholder="y" class="form-control form-control-sm "/>
+                                                                                    <input type="text" id="slipnilaiecendorsement" name="slipnilaiecendorsement" placeholder="y" class="form-control form-control-sm floatTextBox2"/>
                                                                                     <input type="hidden" id="sliptotalnilaiecendorsement" name="sliptotalnilaiec" placeholder="sum y &permil;" class="form-control form-control-sm floatTextBox2"/>
                                                                                 </div>
                                                                             </td>
@@ -832,7 +832,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" min="0" max="100" value="" step=".001"  id="slipippercentageendorsement" name="slipippercentageendorsement" placeholder="w" class="form-control form-control-sm " />
+                                                                                    <input type="text"   id="slipippercentageendorsement" name="slipippercentageendorsement" placeholder="w" class="form-control form-control-sm floatTextBox" />
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -876,7 +876,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-6">
                                                                     <div class="input-group">
-                                                                        <input type="text" id="sliporendorsement" value="" name="sliporendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50"/>
+                                                                        <input type="text" id="sliporendorsement" value="" name="sliporendorsement" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50"/>
                                                                         <div class="input-group-append">
                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                         </div>
@@ -943,7 +943,7 @@
                                                                                             <div class="row">
                                                                                                 <div class="col-md-10">
                                                                                                     <div class="input-group">
-                                                                                                        <input type="number" min="0" max="100" value="" step=".01" id="sliprppercentageendorsement" name="sliprppercentageendorsement" class="form-control form-control-sm " />
+                                                                                                        <input type="text" id="sliprppercentageendorsement" name="sliprppercentageendorsement" class="form-control form-control-sm floatTextBox" />
                                                                                                         <div class="input-group-append">
                                                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                                                         </div>
