@@ -1912,7 +1912,6 @@ class FeSlipController extends Controller
                 'cn_dn'=> $slipdata->cn_dn,
                 'policy_no'=> $slipdata->policy_no,
                 'attacment_file'=> $attachmentlist,
-                'interest_insured'=> $newinterestdata,
                 'total_sum_insured'=> $slipdata->total_sum_insured,
                 'insured_type'=>$slipdata->insured_type,
                 'insured_pct'=>$slipdata->insured_pct,

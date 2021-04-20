@@ -515,13 +515,17 @@
                             {{-- <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->id }}" data-target="#endorsementmodaldata"> 
                                 <button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" onclick="addendorsement({{  @$slipdatatadetail->id }})">{{__('Endorsement')}}</button>
                             </a> --}}
-                        @else
+                        @elseif($slipdatatadetail->date_transfer == null || $slipdatatadetail->status == 'decline' || $slipdatatadetail->status == 'cancel')
                             <a class="text-primary mr-3 float-right " data-toggle="modal"  data-book-id="{{  @$slipdatatadetail->id }}" data-target="#detailmodaldata" href="#detailmodaldata">
                                 <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">{{__('Detail')}}</button>
                             </a>
 
                             <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->id }}" data-target="#endorsementmodaldata">
                                 <button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">{{__('Endorsement')}}</button>
+                            </a>
+
+                            <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->id }}" data-target="#endorsementmodaldata">
+                                <button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2" disabled>{{__('Endorsement')}}</button>
                             </a>
 
                             {{-- <button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" onclick="addendorsement({{  @$slipdatatadetail->id }})">{{__('Endorsement')}}</button>
