@@ -821,7 +821,7 @@
                                                                         <tr>
                                                                            <td>
                                                                                 <div class="form-group">
-                                                                                        <input type="text" id="dateinstallmentdataupdate" class="form-control form-control-sm datepicker-input" >
+                                                                                        <input type="text" id="slipipdateupdate" class="form-control form-control-sm datepicker-input" >
                                                                                  </div>
                                                                             </td>
                                                                             <td>

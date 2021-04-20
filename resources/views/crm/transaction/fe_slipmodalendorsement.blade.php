@@ -827,7 +827,7 @@
 
                                                                            <td>
                                                                                 <div class="form-group">
-                                                                                <input type="text" class="form-control form-control-sm datepicker-input" value="" data-target="#date" id="dateinstallmentdataendorsement" name="slipipdateendorsement">
+                                                                                <input type="text" class="form-control form-control-sm datepicker-input" value="" data-target="#date" id="slipipdateendorsement" name="slipipdateendorsement">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
