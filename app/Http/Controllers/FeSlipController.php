@@ -1151,6 +1151,7 @@ class FeSlipController extends Controller
                 $sliprptodate = str_replace('/', '-', $request->sliprpto);
 
                 $slipdataid=$slipdata->number;
+                $slipdatalatest = SlipTable::where('number',$slipdataid)->where('insured_id',$request->code_ms)->orderby('created_at','desc')->first();
                 $slipdataup = SlipTable::where('number',$slipdataid)->orderby('created_at','desc')->first();
 
                 if($slipdataup->status != $request->slipstatus){
@@ -1160,6 +1161,8 @@ class FeSlipController extends Controller
                         'datetime'=>date('Y-m-d H:i:s '),
                         'insured_id'=>$request->code_ms,
                         'slip_id'=>$request->slipnumber,
+                        'slip_type'=>'fe',
+                        'count_endorsement'=> $slipdatalatest->endorsment
                     ]);
                 }
 
@@ -1170,7 +1173,7 @@ class FeSlipController extends Controller
                 $slipdataup->prod_year=$currdate;
                 // $slipdataup->date_transfer=date("Y-m-d", strtotime($request->slipdatetransfer));
                 $slipdataup->status=$request->slipstatus;
-                $slipdataup->endorsment=0;
+                $slipdataup->endorsment=;
                 $slipdataup->selisih="false";
                 $slipdataup->source=$request->slipcedingbroker;
                 $slipdataup->source_2=$request->slipceding;
@@ -1218,6 +1221,7 @@ class FeSlipController extends Controller
                 $slipdataup->own_retention=$request->slipor;
                 $slipdataup->sum_own_retention=$request->slipsumor;
                 $slipdataup->wpc=$request->wpc;
+                $slipdataup->remarks=$request->remarks;
 
                 $slipdataup->save();
 
