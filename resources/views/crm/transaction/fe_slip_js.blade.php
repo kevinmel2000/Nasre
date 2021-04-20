@@ -8152,6 +8152,8 @@ function deletelocationriskdetail(id){
        var amount = $('#slipipamount').val();
        var slip_id = $('#slipnumber').val();
        var token2 = $('input[name=_token2]').val();
+       var code_ms = $('#insuredIDtxt').val();
+       var sliptype = 'fe'
 
        var conv_amount = amount.replace(/,/g, "");
        console.log(conv_amount)
@@ -8204,7 +8206,9 @@ function deletelocationriskdetail(id){
                  installmentdate:newinstallmentdate,
                  percentage:percentage,
                  slipamount:real_amount,
-                 id_slip:slip_id
+                 id_slip:slip_id,
+                 insured_id:code_ms,
+                 sliptype:sliptype
              },
              beforeSend: function() { $("body").addClass("loading");  },
              complete: function() {  $("body").removeClass("loading"); },
@@ -8268,6 +8272,7 @@ function deletelocationriskdetail(id){
        var slip_id = $('#slipnumberupdate').val();
        var token2 = $('input[name=_token2]').val();
        var sliptype = 'fe';
+
 
        var conv_amount = amount.replace(/,/g, "");
        console.log(conv_amount)
@@ -8384,6 +8389,8 @@ function deletelocationriskdetail(id){
        var amount = $('#slipipamountendorsement').val();
        var slip_id = $('#slipnumberendorsement').val();
        var token2 = $('input[name=_token2]').val();
+       var code_ms = $('#insuredIDtxt').val();
+       var sliptype = 'fe';  
 
        var conv_amount = amount.replace(/,/g, "");
        console.log(conv_amount)
@@ -8436,7 +8443,10 @@ function deletelocationriskdetail(id){
                  installmentdate:newinstallmentdate,
                  percentage:percentage,
                  slipamount:real_amount,
-                 id_slip:slip_id
+                 id_slip:slip_id,
+                 insured_id:code_ms,
+                 sliptype:sliptype
+
              },
              beforeSend: function() { $("body").addClass("loading");  },
              complete: function() {  $("body").removeClass("loading"); },
@@ -8590,6 +8600,8 @@ function deletelocationriskdetail(id){
            var percentage = $('#slipdppercentage').val();
            var amount = $('#slipdpamount').val();
            var minamount = $('#slipdpminamount').val();
+           var code_ms = $('#insuredIDtxt').val();
+           var sliptype = 'fe':
            var real_minamount = 0;
            if(minamount == ''){
                real_minamount = 0;
@@ -8629,7 +8641,9 @@ function deletelocationriskdetail(id){
              percentage:percentage,
              amount:real_amount,
              minamount:real_minamount,
-             id_slip:slip_id
+             id_slip:slip_id,
+             insured_id:code_ms,
+             sliptype:sliptype
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
@@ -8665,6 +8679,8 @@ function deletelocationriskdetail(id){
            var percentage = $('#slipdppercentageupdate').val();
            var amount = $('#slipdpamountupdate').val();
            var minamount = $('#slipdpminamountupdate').val();
+           var code_ms = $('#insuredIDtxt').val();
+           var sliptype = 'fe':
            var real_minamount = 0;
            if(minamount == ''){
                real_minamount = 0;
@@ -8704,7 +8720,8 @@ function deletelocationriskdetail(id){
              percentage:percentage,
              amount:real_amount,
              minamount:real_minamount,
-             id_slip:slip_id
+             id_slip:slip_id,
+             insured_id:code_ms
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
@@ -8740,6 +8757,8 @@ function deletelocationriskdetail(id){
            var percentage = $('#slipdppercentageendorsement').val();
            var amount = $('#slipdpamountendorsement').val();
            var minamount = $('#slipdpminamountendorsement').val();
+           var code_ms = $('#insuredIDtxt').val();
+           var sliptype = 'fe':
            var real_minamount = 0;
            if(minamount == ''){
                real_minamount = 0;
@@ -8779,7 +8798,9 @@ function deletelocationriskdetail(id){
              percentage:percentage,
              amount:real_amount,
              minamount:real_minamount,
-             id_slip:slip_id
+             id_slip:slip_id,
+             insured_id:code_ms,
+             sliptype:sliptype
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
@@ -8882,6 +8903,8 @@ function deletelocationriskdetail(id){
        var slipcncode = $('#slipcncode').val();
        var percentage = $('#slipnilaiec').val();
        var amount = $('#slipamountec').val();
+       var code_ms = $('#insuredIDtxt').val();
+       var sliptype = 'fe';      
        
        var slip_id = $('#slipnumber').val();
        var token2 = $('input[name=_token2]').val();
@@ -8905,7 +8928,9 @@ function deletelocationriskdetail(id){
              slipcncode:slipcncode,
              percentage:percentage,
              amount:real_amount,
-             id_slip:slip_id
+             id_slip:slip_id,
+             insured_id:code_ms,
+             sliptype:sliptype
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
@@ -8955,6 +8980,8 @@ function deletelocationriskdetail(id){
        var slipcncode = $('#slipcncodeupdate').val();
        var percentage = $('#slipnilaiecupdate').val();
        var amount = $('#slipamountecupdate').val();
+       var code_ms = $('#insuredIDtxt').val();
+       var sliptype = 'fe';  
        
        var slip_id = $('#slipnumberupdate').val();
        var token2 = $('input[name=_token2]').val();
@@ -8978,7 +9005,9 @@ function deletelocationriskdetail(id){
              slipcncode:slipcncode,
              percentage:percentage,
              amount:real_amount,
-             id_slip:slip_id
+             id_slip:slip_id,
+             insured_id:code_ms,
+             sliptype:sliptype
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
@@ -9027,6 +9056,9 @@ function deletelocationriskdetail(id){
        var slipcncode = $('#slipcncodeendorsement').val();
        var percentage = $('#slipnilaiecendorsement').val();
        var amount = $('#slipamountecendorsement').val();
+       var code_ms = $('#insuredIDtxt').val();
+       var sliptype = 'fe';  
+
        
        var slip_id = $('#slipnumberendorsement').val();
        var token2 = $('input[name=_token2]').val();
@@ -9050,7 +9082,9 @@ function deletelocationriskdetail(id){
              slipcncode:slipcncode,
              percentage:percentage,
              amount:real_amount,
-             id_slip:slip_id
+             id_slip:slip_id,
+             insured_id:code_ms,
+             sliptype:sliptype
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
@@ -9199,6 +9233,8 @@ function deletelocationriskdetail(id){
        var percentage = $('#sliprppercentage').val();
        var amount = $('#sliprpamount').val();
        var or_percent = $('#slipor').val();
+       var code_ms = $('#insuredIDtxt').val();
+       var sliptype = 'fe'
        
        var slip_id = $('#slipnumber').val();
        var token2 = $('input[name=_token2]').val();
@@ -9223,7 +9259,9 @@ function deletelocationriskdetail(id){
              percentage:percentage,
              amount:real_amount,
              or_percent:or_percent,
-             id_slip:slip_id
+             id_slip:slip_id,
+             insured_id:code_ms,
+             sliptype:sliptype
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
@@ -9273,6 +9311,8 @@ function deletelocationriskdetail(id){
        var contract = $('#sliprpcontractupdate').val();
        var percentage = $('#sliprppercentageupdate').val();
        var amount = $('#sliprpamountupdate').val();
+       var code_ms = $('#insuredIDtxt').val();
+       var sliptype = 'fe';  
        
        var slip_id = $('#slipnumberupdate').val();
        var token2 = $('input[name=_token2]').val();
@@ -9296,7 +9336,9 @@ function deletelocationriskdetail(id){
              contract:contract,
              percentage:percentage,
              amount:real_amount,
-             id_slip:slip_id
+             id_slip:slip_id,
+             insured_id:code_ms,
+             sliptype:sliptype
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
@@ -9327,7 +9369,9 @@ function deletelocationriskdetail(id){
        var contract = $('#sliprpcontractendorsement').val();
        var percentage = $('#sliprppercentageendorsement').val();
        var amount = $('#sliprpamountendorsement').val();
-       
+       var code_ms = $('#insuredIDtxt').val();
+       var sliptype = 'fe';  
+
        var slip_id = $('#slipnumberendorsement').val();
        var token2 = $('input[name=_token2]').val();
 
@@ -9350,7 +9394,9 @@ function deletelocationriskdetail(id){
              contract:contract,
              percentage:percentage,
              amount:real_amount,
-             id_slip:slip_id
+             id_slip:slip_id,
+             insured_id:code_ms,
+             sliptype:sliptype
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
@@ -9883,6 +9929,7 @@ function deletelocationriskdetail(id){
                                         formData.append('TotalFiles', TotalFiles);
                                         formData.append('slip_id', slip_id);
                                         formData.append('insured_id', code_ms);
+                                        formData.append('slip_type', 'fe');
 
                                         $.ajax({
                                             type:'POST',
@@ -10021,6 +10068,7 @@ function deletelocationriskdetail(id){
                                         formData.append('TotalFiles', TotalFiles);
                                         formData.append('slip_id', slip_id);
                                         formData.append('insured_id', code_ms);
+                                        formData.append('slip_type', 'fe');
 
                                         $.ajax({
                                             type:'POST',
@@ -10329,6 +10377,7 @@ function deletelocationriskdetail(id){
     formData.append('TotalFiles', TotalFiles);
     formData.append('slip_id', slip_id);
     formData.append('insured_id', code_ms);
+    formData.append('slip_type', 'fe');
 
 
     $.ajax({
@@ -10637,6 +10686,7 @@ function deletelocationriskdetail(id){
             formData.append('TotalFiles', TotalFiles);
             formData.append('slip_id', slip_id);
             formData.append('insured_id', code_ms);
+            formData.append('slip_type', 'fe');
 
 
             $.ajax({
@@ -10874,6 +10924,7 @@ function deletelocationriskdetail(id){
     formData.append('TotalFiles', TotalFiles);
     formData.append('slip_id', slip_id);
     formData.append('insured_id', code_ms);
+    formData.append('slip_type', 'fe');
 
 
     $.ajax({

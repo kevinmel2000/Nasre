@@ -1259,6 +1259,38 @@ class FeSlipController extends Controller
                     $msdata->save();
                 }
 
+                    $deductibleup = DeductibleTemp::where('slip_id',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
+                    foreach($deductibleup as $ddup)
+                    {
+                        $deductibleprocessup = DeductibleTemp::findOrFail($ddup->id);
+                        $deductibleprocessup->status = 'active';
+                        $deductibleprocessup->save();
+                    }
+
+                    $extendcoverageup = ExtendCoverageTemp::where('slip_id',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
+                    foreach($extendcoverageup as $ecup)
+                    {
+                        $extendcoverageprocessup = ExtendCoverageTemp::findOrFail($ecup->id);
+                        $extendcoverageprocessup->status = 'active';
+                        $extendcoverageprocessup->save();
+                    }
+
+                    $installmentpansup = InstallmentTemp::where('slip_id',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
+                    foreach($installmentpansup as $ipup)
+                    {
+                        $inspanprocessup = InstallmentTemp::findOrFail($ipup->id);
+                        $inspanprocessup->status = 'active';
+                        $inspanprocessup->save();
+                    }
+
+                    $retrocessionpanup = RetrocessionTemp::where('slip_id',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
+                    foreach($retrocessionpanup as $rpup)
+                    {
+                        $retropanprocessup = RetrocessionTemp::findOrFail($rpup->id);
+                        $retropanprocessup->status = 'active';
+                        $retropanprocessup->save();
+                    }
+
 
                 return response()->json(
                     [
@@ -2128,6 +2160,7 @@ class FeSlipController extends Controller
                                 $insert[$x]['user_id'] = Auth::user()->name;
                                 $insert[$x]['slip_id'] = $request->slip_id;
                                 $insert[$x]['insured_id'] = $request->code_ms;
+                                $insert[$x]['slip_type'] = $request->slip_type;
                                 SlipTableFile::insert($insert);
                             }
                             else{
@@ -2314,6 +2347,38 @@ class FeSlipController extends Controller
                             'status'=>'passive',
                             'insured_number'=>$request->code_ms     
                     ]);
+
+                    $deductibleup = DeductibleTemp::where('slip_id',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
+                    foreach($deductibleup as $ddup)
+                    {
+                        $deductibleprocessup = DeductibleTemp::findOrFail($ddup->id);
+                        $deductibleprocessup->status = 'active';
+                        $deductibleprocessup->save();
+                    }
+
+                    $extendcoverageup = ExtendCoverageTemp::where('slip_id',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
+                    foreach($extendcoverageup as $ecup)
+                    {
+                        $extendcoverageprocessup = ExtendCoverageTemp::findOrFail($ecup->id);
+                        $extendcoverageprocessup->status = 'active';
+                        $extendcoverageprocessup->save();
+                    }
+
+                    $installmentpansup = InstallmentTemp::where('slip_id',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
+                    foreach($installmentpansup as $ipup)
+                    {
+                        $inspanprocessup = InstallmentTemp::findOrFail($ipup->id);
+                        $inspanprocessup->status = 'active';
+                        $inspanprocessup->save();
+                    }
+
+                    $retrocessionpanup = RetrocessionTemp::where('slip_id',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
+                    foreach($retrocessionpanup as $rpup)
+                    {
+                        $retropanprocessup = RetrocessionTemp::findOrFail($rpup->id);
+                        $retropanprocessup->status = 'active';
+                        $retropanprocessup->save();
+                    }
 
                 return response()->json(
                     [
@@ -2600,6 +2665,38 @@ class FeSlipController extends Controller
                             'status'=>'passive',
                             'insured_number' => $request->code_ms     
                     ]);
+
+                $deductibleup = DeductibleTemp::where('slip_id',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
+                    foreach($deductibleup as $ddup)
+                    {
+                        $deductibleprocessup = DeductibleTemp::findOrFail($ddup->id);
+                        $deductibleprocessup->status = 'active';
+                        $deductibleprocessup->save();
+                    }
+
+                    $extendcoverageup = ExtendCoverageTemp::where('slip_id',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
+                    foreach($extendcoverageup as $ecup)
+                    {
+                        $extendcoverageprocessup = ExtendCoverageTemp::findOrFail($ecup->id);
+                        $extendcoverageprocessup->status = 'active';
+                        $extendcoverageprocessup->save();
+                    }
+
+                    $installmentpansup = InstallmentTemp::where('slip_id',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
+                    foreach($installmentpansup as $ipup)
+                    {
+                        $inspanprocessup = InstallmentTemp::findOrFail($ipup->id);
+                        $inspanprocessup->status = 'active';
+                        $inspanprocessup->save();
+                    }
+
+                    $retrocessionpanup = RetrocessionTemp::where('slip_id',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
+                    foreach($retrocessionpanup as $rpup)
+                    {
+                        $retropanprocessup = RetrocessionTemp::findOrFail($rpup->id);
+                        $retropanprocessup->status = 'active';
+                        $retropanprocessup->save();
+                    }
 
                 return response()->json(
                     [

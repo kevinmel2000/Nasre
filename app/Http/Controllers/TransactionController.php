@@ -2028,6 +2028,8 @@ class TransactionController extends Controller
             $amount = $request->slipamount;
             $slip_id = $request->id_slip;
             $insured_id = $request->insured_id;
+            $slip_type = $request->sliptype;
+            $status = 'passive';
 
             $checkit = DB::table('installment_panel_detail')->where('installment_panel_detail.slip_id',$slip_id)->where('installment_panel_detail.insured_id',$insured_id)->where('installment_panel_detail.slip_type',$request->sliptype)->sum('installment_panel_detail.percentage');
             $totalpercent = $checkit + $percentage;
@@ -2070,6 +2072,9 @@ class TransactionController extends Controller
                             $installmentlist->percentage  = $percentage;
                             $installmentlist->amount = $amount;
                             $installmentlist->slip_id = $slip_id; 
+                            $installmentlist->insured_id = $insured_id; 
+                            $installmentlist->slip_type = $slip_type; 
+                            $installmentlist->status = $status; 
                             $installmentlist->save();
 
                             $checkit2 = DB::table('installment_panel_detail')->where('installment_panel_detail.slip_id',$installmentlist->slip_id)->sum('installment_panel_detail.percentage');
@@ -2137,6 +2142,9 @@ class TransactionController extends Controller
             $amount = $request->amount;
             $percentage = $request->percentage;
             $slip_id = $request->id_slip;
+            $insured_id = $request->insured_id;
+            $slip_type = $request->sliptype;
+            $status = 'passive';
         
             if($percentage !='' && $amount !='' && $slip_id != '')
             {
@@ -2148,6 +2156,9 @@ class TransactionController extends Controller
                 $deductiblelist->amount = $amount;
                 $deductiblelist->min_claimamount = $minamount;
                 $deductiblelist->slip_id = $slip_id; 
+                $deductiblelist->insured_id = $insured_id;
+                $deductiblelist->slip_type = $slip_type;
+                $deductiblelist->status = $status;
                 $deductiblelist->save();
 
                 return response()->json(
@@ -2162,7 +2173,7 @@ class TransactionController extends Controller
                         // 'currencydata' => $deductiblelist->currency->code.'-'.$deductiblelist->currency->symbol_name,
                         'amount' => $deductiblelist->amount,
                         'min_claimamount' => $deductiblelist->min_claimamount,
-                        'slip_id' => $deductiblelist->slip_id
+                        'slip_id' => $deductiblelist->slip_id                        
                     ]
                 );
         
@@ -2189,6 +2200,9 @@ class TransactionController extends Controller
             $slipcncode = $request->slipcncode;
             $amount = $request->amount;
             $slip_id = $request->id_slip;
+            $insured_id = $request->insured_id;
+            $slip_type = $request->sliptype;
+            $status = 'passive';
         
             if($percentage !='' && $amount !='' && $slip_id != '')
             {
@@ -2198,6 +2212,9 @@ class TransactionController extends Controller
                 $extendcoveragelist->percentage  = $percentage;
                 $extendcoveragelist->amount = $amount;
                 $extendcoveragelist->slip_id = $slip_id; 
+                $extendcoveragelist->insured_id = $insured_id; 
+                $extendcoveragelist->slip_type = $slip_type; 
+                $extendcoveragelist->status = $status; 
                 $extendcoveragelist->save();
 
                 return response()->json(
@@ -2279,6 +2296,10 @@ class TransactionController extends Controller
             $amount = $request->amount;
             $slip_id = $request->id_slip;
             $percentage_or = $request->or_percent;
+            $insured_id = $request->insured_id;
+            $slip_type = $request->sliptype;
+            $status = 'passive';
+
 
             $checkit = DB::table('retrocession_panel_detail')->where('retrocession_panel_detail.slip_id',$slip_id)->sum('retrocession_panel_detail.percentage');
             $totalpercent = $checkit + $percentage + $percentage_or;
@@ -2293,6 +2314,9 @@ class TransactionController extends Controller
                     $retrocessionlist->percentage  = $percentage;
                     $retrocessionlist->amount = $amount;
                     $retrocessionlist->slip_id = $slip_id; 
+                    $retrocessionlist->insured_id = $insured_id; 
+                    $retrocessionlist->slip_type = $slip_type; 
+                    $retrocessionlist->status = $status; 
                     $retrocessionlist->save();
 
                     $checkit2 = DB::table('retrocession_panel_detail')->where('retrocession_panel_detail.slip_id',$retrocessionlist->slip_id)->sum('retrocession_panel_detail.percentage');
