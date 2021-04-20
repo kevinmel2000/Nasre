@@ -1515,11 +1515,8 @@ class FeSlipController extends Controller
         {
             $deductibledata=null;
         }
-
         $newarraydeduct=[];
-
         // dd($deductibledata);
-
         if(!empty($deductibledata))
         {
             foreach($deductibledata as $mydata)
@@ -1534,18 +1531,22 @@ class FeSlipController extends Controller
                 if($currencydesc){
                     $mydata->currencydata=$currencydesc->symbol_name;
                 }
-                
-                
                 array_push($newarraydeduct,$mydata);
             }     
         }  
-
         $newdeductdata=json_encode($newarraydeduct);
 
 
 
-        $extendcoverdata=json_decode($slipdata->extend_coverage);   
-
+        if(!empty($slipdata->extend_coverage))
+        {
+            $extendcoverdata=json_decode($slipdata->extend_coverage);   
+        }
+        else
+        {
+            $extendcoverdata=null;
+        }
+        // $extendcoverdata=json_decode($slipdata->extend_coverage);   
         $newarrayextend=[];
 
         if(!empty($extendcoverdata))
@@ -1562,23 +1563,50 @@ class FeSlipController extends Controller
         }
         $newextenddata=json_encode($newarrayextend);
 
-        
 
-        $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
-
-        $statuslist= StatusLog::where('slip_id','=',$slipdata->number)->orderby('created_at','DESC')->take(5)->get();
-        
-        if(empty($slipdata->insured_id) || $slipdata->insured_id==NULL)
+        if(!empty($slipdata->installment_panel))
         {
-            $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','DESC')->get();
-            
+            $installmentpdata=json_decode($slipdata->installment_panel);   
         }
         else
         {
-            //$attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','DESC')->get();
-            
-            $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orWhere('insured_id','=',$slipdata->insured_id)->orderby('id','DESC')->get();
+            $installmentpdata=null;
         }
+        // $extendcoverdata=json_decode($slipdata->extend_coverage);   
+        $newarrayinspan=[];
+
+        if(!empty($installmentpdata))
+        {
+            foreach($installmentpdata as $ipdata)
+            {
+                // $ipddesc= ExtendedCoverage::where('id','=',$ipdata->extendcoverage_id)->first();
+                // if($ipddesc){
+                //     $ipdata->coveragetype=$ipddesc->description;
+                // }
+                
+                array_push($newarrayinspan,$ipdata);
+            }       
+        }
+        $newarrayinspandata=json_encode($newarrayinspan);
+
+
+        $dateyeardata= date("d/m/Y", strtotime($slipdata->prod_year));
+
+
+        $statuslist= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('sliptype','fe')->orderby('created_at','DESC')->take(5)->get();
+        
+        // if(empty($slipdata->insured_id) || $slipdata->insured_id == NULL)
+        // {
+        //     $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','DESC')->get();
+            
+        // }
+        // else
+        // {
+        //     //$attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','DESC')->get();
+            
+            $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get();
+        // }
+
 
         if($slipdata->build_const == "Building 1"){
             $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
@@ -1645,7 +1673,7 @@ class FeSlipController extends Controller
                 'commission'=>$slipdata->commission,
                 'grossprm_to_nr'=>$slipdata->grossprm_to_nr,
                 'netprm_to_nr'=>$slipdata->netprm_to_nr,
-                'installment_panel'=>$slipdata->installment_panel,
+                'installment_panel'=>$newarrayinspandata,
                 'sum_commission'=>$slipdata->sum_commission,
                 'retro_backup'=>$slipdata->retro_backup,
                 'own_retention'=>$slipdata->own_retention,
