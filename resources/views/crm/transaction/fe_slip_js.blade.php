@@ -1205,7 +1205,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     {
                         
                         var installment_panel = JSON.parse(response.installment_panel); 
-                        
+
                         for(var i = 0; i < installment_panel.length; i++) 
                         {
                             var obj = installment_panel[i];
@@ -2838,8 +2838,8 @@ $('#slipbld_constendorsement').change(function(){
                     console.log(days)
                     console.log(insurance)
 
-                    var rateslip =  parseFloat($(this).val()) / 1000;
-                    var sumrate = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
+                    var rateslip =  parseFloat($(this).val()) ;
+                    var sumrate = isNaN(((rateslip / 1000) * conv_tsi) * insurance) ? 0 :(((rateslip / 1000) * conv_tsi) * insurance).toFixed(2) ;
                     var real_sumrate = sumrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     $('#slipbasicpremium').val(real_sumrate);
@@ -3031,8 +3031,8 @@ $('#slipbld_constendorsement').change(function(){
                     console.log(days)
                     console.log(insurance)
 
-                    var rateslip =  parseFloat($(this).val()) / 1000;
-                    var sumrate = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
+                    var rateslip =  parseFloat($(this).val());
+                    var sumrate = isNaN(((rateslip / 1000) * conv_tsi) * insurance) ? 0 :(((rateslip / 1000) * conv_tsi) * insurance).toFixed(2) ;
                     var real_sumrate = sumrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     $('#slipbasicpremium').val(real_sumrate);
@@ -3327,8 +3327,8 @@ $('#slipbld_constendorsement').change(function(){
                     console.log(days)
                     console.log(insurance)
 
-                    var rateslip =  parseFloat($(this).val()) / 1000;
-                    var sumrate = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
+                    var rateslip =  parseFloat($(this).val());
+                    var sumrate = isNaN(((rateslip / 1000) * conv_tsi) * insurance) ? 0 :(((rateslip / 1000) * conv_tsi) * insurance).toFixed(2) ;
                     var real_sumrate = sumrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     $('#slipbasicpremiumendorsement').val(real_sumrate);
@@ -3520,8 +3520,8 @@ $('#slipbld_constendorsement').change(function(){
                     console.log(days)
                     console.log(insurance)
 
-                    var rateslip =  parseFloat($(this).val()) / 1000;
-                    var sumrate = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
+                    var rateslip =  parseFloat($(this).val());
+                    var sumrate = isNaN(((rateslip  / 1000) * conv_tsi) * insurance) ? 0 :(((rateslip  / 1000) * conv_tsi) * insurance).toFixed(2) ;
                     var real_sumrate = sumrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     $('#slipbasicpremiumendorsement').val(real_sumrate);
@@ -3816,8 +3816,8 @@ $('#slipbld_constendorsement').change(function(){
                     console.log(days)
                     console.log(insurance)
 
-                    var rateslip =  parseFloat($(this).val()) / 1000;
-                    var sumrate = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
+                    var rateslip =  parseFloat($(this).val()) ;
+                    var sumrate = isNaN(((rateslip  / 1000) * conv_tsi) * insurance) ? 0 :(((rateslip  / 1000) * conv_tsi) * insurance).toFixed(2) ;
                     var real_sumrate = sumrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     $('#slipbasicpremiumupdate').val(real_sumrate);
@@ -4009,8 +4009,8 @@ $('#slipbld_constendorsement').change(function(){
                     console.log(days)
                     console.log(insurance)
 
-                    var rateslip =  parseFloat($(this).val()) / 1000;
-                    var sumrate = isNaN((rateslip * conv_tsi) * insurance) ? 0 :((rateslip * conv_tsi) * insurance).toFixed(2) ;
+                    var rateslip =  parseFloat($(this).val()) ;
+                    var sumrate = isNaN(((rateslip  / 1000) * conv_tsi) * insurance) ? 0 :(((rateslip  / 1000) * conv_tsi) * insurance).toFixed(2) ;
                     var real_sumrate = sumrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     $('#slipbasicpremiumupdate').val(real_sumrate);
@@ -5896,13 +5896,13 @@ function deletelocationriskdetail(id){
             console.log(days)
             console.log(insurance)
 
-            var rateslip =  parseFloat($(this).val()) / 1000;
+            var rateslip =  parseFloat($(this).val());
             var tsi = $("#sharetotalsum").val();
             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
             var totalrateexc = $('#sliptotalnilaiec').val();
             if(totalrateexc){
                     var conv_totalrateexc = parseFloat(totalrateexc);
-                    var sumtotalrate = isNaN(rateslip * conv_totalrateexc) ? 0 :(rateslip * conv_totalrateexc);
+                    var sumtotalrate = isNaN((rateslip  / 1000) * conv_totalrateexc) ? 0 :((rateslip  / 1000) * conv_totalrateexc);
                     var real_sumtotalrate = sumtotalrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     $('#sliptotalrate').val(real_sumtotalrate);
                     $('#sliptotalrate2').val(real_sumtotalrate);
@@ -5947,13 +5947,13 @@ function deletelocationriskdetail(id){
             console.log(days)
             console.log(insurance)
 
-            var rateslip =  parseFloat($(this).val()) / 1000 ;
+            var rateslip =  parseFloat($(this).val());
             var tsi = $("#sharetotalsum").val();
             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
             var totalrateexc = $('#sliptotalnilaiec').val();
             if(totalrateexc){
                     var conv_totalrateexc = parseFloat(totalrateexc);
-                    var sumtotalrate = isNaN(rateslip * conv_totalrateexc) ? 0 :(rateslip * conv_totalrateexc);
+                    var sumtotalrate = isNaN((rateslip  / 1000) * conv_totalrateexc) ? 0 :((rateslip  / 1000) * conv_totalrateexc);
                     var real_sumtotalrate = sumtotalrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     console.log('sliptotalrate' + sumtotalrate)
                     console.log('sliptotalrate' + real_sumtotalrate)
@@ -6032,7 +6032,7 @@ function deletelocationriskdetail(id){
         console.log(days)
         console.log(insurance)
 
-        var rateslip =  parseFloat($('#sliprate').val()) / 1000;
+        var rateslip =  parseFloat($('#sliprate').val());
         var sumrate = $("#sliptotalrate").val();
         var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
         var tsi = $("#sharetotalsum").val();
@@ -6065,7 +6065,7 @@ function deletelocationriskdetail(id){
         console.log(days)
         console.log(insurance)
 
-        var rateslip =  parseFloat($('#sliprate').val()) / 1000;
+        var rateslip =  parseFloat($('#sliprate').val());
         var sumrate = $("#sliptotalrate").val();
         var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
         var tsi = $("#sharetotalsum").val();
@@ -6097,7 +6097,7 @@ function deletelocationriskdetail(id){
         console.log(days)
         console.log(insurance)
 
-        var rateslip =  parseFloat($('#sliprate').val()) / 1000;
+        var rateslip =  parseFloat($('#sliprate').val());
         var sumrate = $("#sliptotalrate").val();
         var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
         var tsi = $("#sharetotalsum").val();
@@ -6111,7 +6111,7 @@ function deletelocationriskdetail(id){
 
    $('#slipshare').change(function (e) {
     if(e.keyCode != 9){
-        var rateslip =  parseFloat($('#sliprate').val()) / 1000 ;
+        var rateslip =  parseFloat($('#sliprate').val()) ;
 
         var shareslip =  parseFloat($('#slipshare').val()) / 100 ;
         var nasionalreinsurance =  $('#fesharefrom').val();
@@ -6635,13 +6635,13 @@ function deletelocationriskdetail(id){
             console.log(days)
             console.log(insurance)
 
-            var rateslip =  parseFloat($(this).val()) / 1000 ;
+            var rateslip =  parseFloat($(this).val()) ;
             var tsi = $("#sharetotalsumupdate").val();
             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
             var totalrateexc = $('#sliptotalnilaiecupdate').val();
             if(totalrateexc){
                     var conv_totalrateexc = parseFloat(totalrateexc);
-                    var sumtotalrate = isNaN(rateslip * conv_totalrateexc) ? 0 :(rateslip * conv_totalrateexc);
+                    var sumtotalrate = isNaN((rateslip  / 1000) * conv_totalrateexc) ? 0 :((rateslip  / 1000) * conv_totalrateexc);
                     var real_sumtotalrate = sumtotalrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     $('#sliptotalrateupdate').val(real_sumtotalrate);
                     $('#sliptotalrateupdate2').val(real_sumtotalrate);
@@ -6686,13 +6686,13 @@ function deletelocationriskdetail(id){
             console.log(days)
             console.log(insurance)
 
-            var rateslip =  parseFloat($(this).val()) / 1000;
+            var rateslip =  parseFloat($(this).val());
             var tsi = $("#sharetotalsumupdate").val();
             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
             var totalrateexc = $('#sliptotalnilaiecupdate').val();
             if(totalrateexc){
                     var conv_totalrateexc = parseFloat(totalrateexc);
-                    var sumtotalrate = isNaN(rateslip * conv_totalrateexc) ? 0 :(rateslip * conv_totalrateexc);
+                    var sumtotalrate = isNaN((rateslip  / 1000) * conv_totalrateexc) ? 0 :((rateslip  / 1000) * conv_totalrateexc);
                     var real_sumtotalrate = sumtotalrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     $('#sliptotalrateupdate').val(real_sumtotalrate);
                     $('#sliptotalrateupdate2').val(real_sumtotalrate);
@@ -6764,7 +6764,7 @@ function deletelocationriskdetail(id){
         console.log(days)
         console.log(insurance)
 
-        var rateslip =  parseFloat($('#sliprateupdate').val()) / 1000;
+        var rateslip =  parseFloat($('#sliprateupdate').val());
         var sumrate = $("#sliptotalrateupdate").val();
         var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
         var tsi = $("#sharetotalsumupdate").val();
@@ -6797,7 +6797,7 @@ function deletelocationriskdetail(id){
         console.log(days)
         console.log(insurance)
 
-        var rateslip =  parseFloat($('#sliprateupdate').val()) / 1000;
+        var rateslip =  parseFloat($('#sliprateupdate').val());
         var sumrate = $("#sliptotalrateupdate").val();
         var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
         var tsi = $("#sharetotalsumupdate").val();
@@ -6829,7 +6829,7 @@ function deletelocationriskdetail(id){
         console.log(days)
         console.log(insurance)
 
-        var rateslip =  parseFloat($('#sliprateupdate').val()) / 1000;
+        var rateslip =  parseFloat($('#sliprateupdate').val());
         var sumrate = $("#sliptotalrateupdate").val();
         var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
         var tsi = $("#sharetotalsumupdate").val();
@@ -6843,7 +6843,7 @@ function deletelocationriskdetail(id){
 
    $('#slipshareupdate').change(function (e) {
     if(e.keyCode != 9){
-        var rateslip =  parseFloat($('#sliprateupdate').val()) / 1000 ;
+        var rateslip =  parseFloat($('#sliprateupdate').val());
 
         var shareslip =  parseFloat($('#slipshareupdate').val()) / 100 ;
         var nasionalreinsurance =  $('#fesharefromupdate').val();
@@ -7368,13 +7368,13 @@ function deletelocationriskdetail(id){
             console.log(days)
             console.log(insurance)
 
-            var rateslip =  parseFloat($(this).val()) / 1000;
+            var rateslip =  parseFloat($(this).val());
             var tsi = $("#sharetotalsumendorsement").val();
             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
             var totalrateexc = $('#sliptotalnilaiecendorsement').val();
             if(totalrateexc){
                     var conv_totalrateexc = parseFloat(totalrateexc);
-                    var sumtotalrate = isNaN(rateslip * conv_totalrateexc) ? 0 :(rateslip * conv_totalrateexc);
+                    var sumtotalrate = isNaN((rateslip  / 1000) * conv_totalrateexc) ? 0 :((rateslip  / 1000) * conv_totalrateexc);
                     var real_sumtotalrate = sumtotalrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     $('#sliptotalrateendorsement').val(real_sumtotalrate);
                     $('#sliptotalrateendorsement2').val(real_sumtotalrate);
@@ -7419,13 +7419,13 @@ function deletelocationriskdetail(id){
             console.log(days)
             console.log(insurance)
 
-            var rateslip =  parseFloat($(this).val())/1000 ;
+            var rateslip =  parseFloat($(this).val()) ;
             var tsi = $("#sharetotalsumendorsement").val();
             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
             var totalrateexc = $('#sliptotalnilaiecendorsement').val();
             if(totalrateexc){
                     var conv_totalrateexc = parseFloat(totalrateexc);
-                    var sumtotalrate = isNaN(rateslip * conv_totalrateexc) ? 0 :(rateslip * conv_totalrateexc);
+                    var sumtotalrate = isNaN((rateslip  / 1000) * conv_totalrateexc) ? 0 :((rateslip  / 1000) * conv_totalrateexc);
                     var real_sumtotalrate = sumtotalrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     $('#sliptotalrateendorsement').val(real_sumtotalrate);
                     $('#sliptotalrateendorsement2').val(real_sumtotalrate);
@@ -7497,7 +7497,7 @@ function deletelocationriskdetail(id){
         console.log(days)
         console.log(insurance)
 
-        var rateslip =  parseFloat($('#sliprateendorsement').val()) / 1000;
+        var rateslip =  parseFloat($('#sliprateendorsement').val());
         var sumrate = $("#sliptotalrateendorsement").val();
         var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
         var tsi = $("#sharetotalsumendorsement").val();
@@ -7530,7 +7530,7 @@ function deletelocationriskdetail(id){
         console.log(days)
         console.log(insurance)
 
-        var rateslip =  parseFloat($('#sliprateendorsement').val()) / 1000;
+        var rateslip =  parseFloat($('#sliprateendorsement').val());
         var sumrate = $("#sliptotalrateendorsement").val();
         var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
         var tsi = $("#sharetotalsumendorsement").val();
@@ -7562,7 +7562,7 @@ function deletelocationriskdetail(id){
         console.log(days)
         console.log(insurance)
 
-        var rateslip =  parseFloat($('#sliprateendorsement').val()) / 1000;
+        var rateslip =  parseFloat($('#sliprateendorsement').val());
         var sumrate = $("#sliptotalrateendorsement").val();
         var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
         var tsi = $("#sharetotalsumendorsement").val();
@@ -7576,7 +7576,7 @@ function deletelocationriskdetail(id){
 
    $('#slipshareendorsement').change(function (e) {
     if(e.keyCode != 9){
-        var rateslip =  parseFloat($('#sliprateendorsement').val()) / 1000 ;
+        var rateslip =  parseFloat($('#sliprateendorsement').val()) ;
 
         var shareslip =  parseFloat($('#slipshareendorsement').val()) / 100 ;
         var nasionalreinsurance =  $('#fesharefromendorsement').val();
