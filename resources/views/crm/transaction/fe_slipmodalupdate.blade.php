@@ -462,7 +462,7 @@
                                                                                 <td>
                                                                                     <div class="form-group">
                                                                                         <input type="text"  id="slipnilaiecupdate" name="slipnilaiecupdate" placeholder="y" class="form-control form-control-sm floatTextBox2"/>
-                                                                                        <input type="hidden" id="sliptotalnilaiecupdate" name="sliptotalnilaiecupdate" placeholder="sum y &permil;" class="form-control form-control-sm floatTextBox2"/>
+                                                                                        <input type="text" id="sliptotalnilaiecupdate" name="sliptotalnilaiecupdate" placeholder="sum y &permil;" class="form-control form-control-sm floatTextBox2"/>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td>
@@ -837,7 +837,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" id="sliptotalpercentinspanupdate" name="sliptotalpercentinspanupdate" hidden="false">
+                                                                                    <input type="text" id="sliptotalpercentinspanupdate" name="sliptotalpercentinspanupdate" >
                                                                                     <button type="button" id="addinstallmentinsuredupdate-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>
