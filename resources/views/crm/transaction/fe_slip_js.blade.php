@@ -4830,6 +4830,7 @@ $('#slipbld_constendorsement').change(function(){
     var state = $('#state_location').val();
     var city = $('#city_location').val();        
     var adrress = $('#address_location').val();
+    var sliptype = 'fe';
 
 
         //var slipinterestid = $('#slipinterestlistlocation').val();
@@ -4853,6 +4854,7 @@ $('#slipbld_constendorsement').change(function(){
                 city:city,
                 adrress:adrress,
                 insuredID:insured_id,
+                sliptype:sliptype,
                 _token:token
             },
             beforeSend: function() { $("body").addClass("loading");  },

@@ -3522,6 +3522,7 @@ class FeSlipController extends Controller
                 $locationlist->city_id=$request->city;
                 $locationlist->address_location_id=$adrress;
                 $locationlist->interest_id=$request->slipinterestid;
+                $locationlist->slip_type=$request->sliptype;
                 $locationlist->save();
 
                 $felookuplocations = FeLookupLocation::find($adrress);
