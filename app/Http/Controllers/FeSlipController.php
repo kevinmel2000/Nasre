@@ -1593,7 +1593,7 @@ class FeSlipController extends Controller
         $dateyeardata= date("d/m/Y", strtotime($slipdata->prod_year));
 
 
-        $statuslist= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('sliptype','fe')->orderby('created_at','DESC')->take(5)->get();
+        $statuslist= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->take(5)->get();
         
         // if(empty($slipdata->insured_id) || $slipdata->insured_id == NULL)
         // {
