@@ -1680,6 +1680,18 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
            yearRange: '-50:+100',
        });
 
+       $('#slipipdateupdate').datepicker({
+           dateFormat: 'dd/mm/yy',
+           changeYear: true,
+           yearRange: '-50:+100',
+       });
+
+       $('#slipipdateendorsement').datepicker({
+           dateFormat: 'dd/mm/yy',
+           changeYear: true,
+           yearRange: '-50:+100',
+       });
+
      
        $('#dateinfrom').datepicker({
            dateFormat: 'dd/mm/yy',
@@ -1724,6 +1736,54 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
        });
 
        $('#sliprpto').datepicker({
+           dateFormat: 'dd/mm/yy',
+           changeYear: true,
+           yearRange: '-50:+100',
+       });
+
+       $('#slipipfromupdate').datepicker({
+           dateFormat: 'dd/mm/yy',
+           changeYear: true,
+           yearRange: '-50:+100',
+       });
+
+       $('#slipiptoupdate').datepicker({
+           dateFormat: 'dd/mm/yy',
+           changeYear: true,
+           yearRange: '-50:+100',
+       });
+
+       $('#sliprpfromupdate').datepicker({
+           dateFormat: 'dd/mm/yy',
+           changeYear: true,
+           yearRange: '-50:+100',
+       });
+
+       $('#sliprptoupdate').datepicker({
+           dateFormat: 'dd/mm/yy',
+           changeYear: true,
+           yearRange: '-50:+100',
+       });
+
+       $('#slipipfromendorsement').datepicker({
+           dateFormat: 'dd/mm/yy',
+           changeYear: true,
+           yearRange: '-50:+100',
+       });
+
+       $('#slipiptoendorsement').datepicker({
+           dateFormat: 'dd/mm/yy',
+           changeYear: true,
+           yearRange: '-50:+100',
+       });
+
+       $('#sliprpfromendorsement').datepicker({
+           dateFormat: 'dd/mm/yy',
+           changeYear: true,
+           yearRange: '-50:+100',
+       });
+
+       $('#sliprptoendorsement').datepicker({
            dateFormat: 'dd/mm/yy',
            changeYear: true,
            yearRange: '-50:+100',
@@ -7261,7 +7321,7 @@ function deletelocationriskdetail(id){
 
                 $('#slipipamountupdate').val(real_sum);
                 $('#slipipamountupdate2').val(real_sum);
-                
+
             }
    });
 
