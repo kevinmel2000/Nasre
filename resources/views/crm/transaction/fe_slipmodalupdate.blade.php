@@ -329,7 +329,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <div class="input-group">
-                                                                            <input type="number" value="" step=".0001" id="slippctupdate" name="slippctupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="pct" />
+                                                                            <input type="text" id="slippctupdate" name="slippctupdate" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="pct" />
                                                                             <div class="input-group-append">
                                                                                 <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                             </div>
@@ -390,7 +390,7 @@
                                                                            
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" value="" step=".0001" id="slipdppercentageupdate" name="slipdppercentageupdate" placeholder="x" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                                    <input type="text"  id="slipdppercentageupdate" name="slipdppercentageupdate" placeholder="x" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" />
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -461,7 +461,7 @@
                                                                                 </td>
                                                                                 <td>
                                                                                     <div class="form-group">
-                                                                                        <input type="number" value="" step=".0001" id="slipnilaiecupdate" name="slipnilaiecupdate" placeholder="y" class="form-control form-control-sm "/>
+                                                                                        <input type="text"  id="slipnilaiecupdate" name="slipnilaiecupdate" placeholder="y" class="form-control form-control-sm floatTextBox2"/>
                                                                                         <input type="hidden" id="sliptotalnilaiecupdate" name="sliptotalnilaiecupdate" placeholder="sum y &permil;" class="form-control form-control-sm floatTextBox2"/>
                                                                                     </div>
                                                                                 </td>
@@ -826,7 +826,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="number" min="0" max="100" value="" step=".01"  id="slipippercentageupdate" name="slipippercentageupdate" placeholder="w" class="form-control form-control-sm " />
+                                                                                    <input type="text"  id="slipippercentageupdate" name="slipippercentageupdate" placeholder="w" class="form-control form-control-sm floatTextBox" />
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -869,7 +869,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-6">
                                                                     <div class="input-group">
-                                                                        <input type="text" id="sliporupdate" value="" name="sliporupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" />
+                                                                        <input type="text" id="sliporupdate" value="" name="sliporupdate" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" />
                                                                         <div class="input-group-append">
                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                         </div>
@@ -938,7 +938,7 @@
                                                                                             <div class="row">
                                                                                                 <div class="col-md-10">
                                                                                                     <div class="input-group">
-                                                                                                        <input type="number" min="0" max="100" value="" step=".01" id="sliprppercentageupdate" name="sliprppercentageupdate" class="form-control form-control-sm " />
+                                                                                                        <input type="text" id="sliprppercentageupdate" name="sliprppercentageupdate" class="form-control form-control-sm floatTextBox" />
                                                                                                         <div class="input-group-append">
                                                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                                                         </div>
