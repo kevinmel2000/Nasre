@@ -290,6 +290,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                         var deductibledata = JSON.parse(response.deductible_panel); 
 
+                        $('#deductiblePaneldetail tbody').empty();        
                         for(var i = 0; i < deductibledata.length; i++) 
                         {
                             var obj = deductibledata[i];
@@ -300,7 +301,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                                 var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                                 // var curr_minamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.min_claimamount);
                                 var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                $('#deductiblePaneldetail tbody').empty();
+                                // $('#deductiblePaneldetail tbody').empty();
                                 $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td></td></tr>');
 
                         }
@@ -312,6 +313,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                         var extend_coverage = JSON.parse(response.extend_coverage); 
 
+                        $('#ExtendCoveragePaneldetail tbody').empty();
                         for(var i = 0; i < extend_coverage.length; i++) 
                         {
                             var obj = extend_coverage[i];
@@ -320,7 +322,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                             //$('#interestInsuredTabledetail tbody').prepend('');
                             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
                             var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            $('#ExtendCoveragePaneldetail tbody').empty();
+                            // $('#ExtendCoveragePaneldetail tbody').empty();
                             $('#ExtendCoveragePaneldetail tbody').prepend('<tr id="iidextendcoveragedetail'+obj.id+'" data-name="extendcoveragedetailvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragetype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
                             
                         }
@@ -333,7 +335,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                         //var installment_panel = JSON.parse(response.installment_panel); 
                         var installment_panel = JSON.parse(response.installment_panel); 
 
-
+                        $('#installmentPaneldetail tbody').empty();
                         for(var i = 0; i < installment_panel.length; i++) 
                         {
                             var obj = installment_panel[i];
@@ -342,7 +344,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
-                            $('#installmentPaneldetail tbody').empty();
+                            // $('#installmentPaneldetail tbody').empty();
                             $('#installmentPaneldetail tbody').prepend('<tr id="iidinstallmentdetail'+obj.id+'" data-name="installmentdetailvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>')
 
                         }
@@ -355,6 +357,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                         var retrocession_panel = JSON.parse(response.retrocession_panel); 
 
+                        $('#retrocessionPaneldetail tbody').empty();
                         for(var i = 0; i < retrocession_panel.length; i++) 
                         {
                             var obj = retrocession_panel[i];
@@ -363,7 +366,6 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
-                            $('#retrocessionPaneldetail tbody').empty();
                             
                             $('#retrocessionPaneldetail tbody').prepend('<tr id="iidretrocessiondetail'+obj.id+'" data-name="retrocessiondetailvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
 
@@ -755,6 +757,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                         var deductibledata = JSON.parse(response.deductible_panel); 
 
+                        $('#deductiblePanelupdate tbody').empty();
                         for(var i = 0; i < deductibledata.length; i++) 
                         {
                             var obj = deductibledata[i];
@@ -766,7 +769,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                             // var curr_minamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.min_claimamount);
                             var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-                            $('#deductiblePanelupdate tbody').empty();
+                            
                             $('#deductiblePanelupdate tbody').prepend('<tr id="iiddeductibleupdate'+obj.id+'" data-name="deductibleupdatevalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleupdate('+obj.id+')">delete</a></td></tr>');
 
                         }
@@ -778,6 +781,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                         var extend_coverage = JSON.parse(response.extend_coverage); 
 
+                        $('#ExtendCoveragePanelupdate tbody').empty();
                         for(var i = 0; i < extend_coverage.length; i++) 
                         {
                             var obj = extend_coverage[i];
@@ -786,7 +790,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
-                            $('#ExtendCoveragePanelupdate tbody').empty();
+                            
                             $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+obj.id+'" data-name="extendcoverageupdatevalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragetype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageupdate('+obj.id+')">delete</a></td></tr>');
                             
                         }
@@ -800,6 +804,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                         //var installment_panel = JSON.parse(response.installment_panel); 
 
+                        $('#installmentPanelupdate tbody').empty();
                         for(var i = 0; i < installment_panel.length; i++) 
                         {
                             var obj = installment_panel[i];
@@ -808,7 +813,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
-                            $('#installmentPanelupdate tbody').empty();
+                            
                             $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+obj.id+'" data-name="installmentupdatevalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+obj.id+')">delete</a></td></tr>')
 
                         }
@@ -821,6 +826,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                         var retrocession_panel = JSON.parse(response.retrocession_panel); 
 
+                        $('#retrocessionPanelupdate tbody').empty();
                         for(var i = 0; i < retrocession_panel.length; i++) 
                         {
                             var obj = retrocession_panel[i];
@@ -829,7 +835,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
-                            $('#retrocessionPanelupdate tbody').empty();
+                            
                             
                             $('#retrocessionPanelupdate tbody').prepend('<tr id="iidretrocessionupdate'+obj.id+'" data-name="retrocessionupdatevalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessionupdate('+obj.id+')">delete</a></td></tr>');
 
@@ -1172,6 +1178,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                         var deductibledata = JSON.parse(response.deductible_panel); 
 
+                        $('#deductiblePanelendorsement tbody').empty();
                         for(var i = 0; i < deductibledata.length; i++) 
                         {
                             var obj = deductibledata[i];
@@ -1182,7 +1189,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
-                            $('#deductiblePanelendorsement tbody').empty();
+                            
                             $('#deductiblePanelendorsement tbody').prepend('<tr id="iiddeductibleendorsement'+obj.id+'" data-name="deductibleendorsementvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleendorsement('+obj.id+')">delete</a></td></tr>');
 
                         }
@@ -1194,6 +1201,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                         var extend_coverage = JSON.parse(response.extend_coverage); 
 
+                        $('#ExtendCoveragePanelendorsement tbody').empty();
                         for(var i = 0; i < extend_coverage.length; i++) 
                         {
                             var obj = extend_coverage[i];
@@ -1202,7 +1210,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
-                            $('#ExtendCoveragePanelendorsement tbody').empty();
+                            
                             $('#ExtendCoveragePanelendorsement tbody').prepend('<tr id="iidextendcoverageendorsement'+obj.id+'" data-name="extendcoverageendorsementvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragetype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageendorsement('+obj.id+')">delete</a></td></tr>');
                             
                         }
@@ -1214,6 +1222,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                         
                         var installment_panel = JSON.parse(response.installment_panel); 
 
+                        $('#installmentPanelendorsement tbody').empty();
                         for(var i = 0; i < installment_panel.length; i++) 
                         {
                             var obj = installment_panel[i];
@@ -1222,7 +1231,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
-                            $('#installmentPanelendorsement tbody').empty();
+                            
                             $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+obj.id+'" data-name="installmentendorsementvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+obj.id+')">delete</a></td></tr>')
 
                         }
@@ -1235,6 +1244,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                         var retrocession_panel = JSON.parse(response.retrocession_panel); 
 
+                        $('#retrocessionPanelendorsement tbody').empty();
                         for(var i = 0; i < retrocession_panel.length; i++) 
                         {
                             var obj = retrocession_panel[i];
@@ -1243,7 +1253,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
-                            $('#retrocessionPanelendorsement tbody').empty();
+                            
                             
                             $('#retrocessionPanelendorsement tbody').prepend('<tr id="iidretrocessionendorsement'+obj.id+'" data-name="retrocessionendorsementvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessionendorsement('+obj.id+')">delete</a></td></tr>');
 
