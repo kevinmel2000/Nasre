@@ -1619,7 +1619,7 @@ class FeSlipController extends Controller
         //             ->distinct('slip_table_file.filename')
         //             ->get();
         $attachmenttable = collect(SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get());
-        $attachmentlist = $attachmenttable->unique('country_id');
+        $attachmentlist = $attachmenttable->unique('filename');
         $attachmentlist->values()->all();
         // }
 
@@ -1830,7 +1830,7 @@ class FeSlipController extends Controller
         
         
         $attachmenttable = collect(SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get());
-        $attachmentlist = $attachmenttable->unique('country_id');
+        $attachmentlist = $attachmenttable->unique('filename');
         $attachmentlist->values()->all();
 
 
