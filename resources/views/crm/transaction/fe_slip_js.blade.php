@@ -7038,7 +7038,7 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountupdate').val(real_sum);
-            // $('#slipipamount2').val(real_sum);
+            $('#slipipamountupdate2').val(real_sum);
         }else{
             var percent =  parseFloat($(this).val()) / 100;
 
@@ -7049,6 +7049,8 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountupdate').val(real_sum);
+            $('#slipipamountupdate2').val(real_sum);
+
         }
     });
 
@@ -7065,7 +7067,7 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountupdate').val(real_sum);
-            // $('#slipipamount2').val(real_sum);
+            $('#slipipamountupdate2').val(real_sum);
         }else{
             var percent =  parseFloat($(this).val()) / 100;
 
@@ -7076,6 +7078,8 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountupdate').val(real_sum);
+            $('#slipipamountupdate2').val(real_sum);
+
         }
     });
 
@@ -7092,7 +7096,7 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountupdate').val(real_sum);
-            // $('#slipipamount2').val(real_sum);
+            $('#slipipamountupdate2').val(real_sum);
         }else{
             var percent =  parseFloat($(this).val()) / 100;
 
@@ -7103,6 +7107,8 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountupdate').val(real_sum);
+            $('#slipipamountupdate2').val(real_sum);
+
         }
     });
 
@@ -7119,7 +7125,8 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountupdate').val(real_sum);
-            // $('#slipipamount2').val(real_sum);
+            $('#slipipamountupdate2').val(real_sum);
+            
         }else{
             var percent =  parseFloat($(this).val()) / 100;
 
@@ -7130,6 +7137,8 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountupdate').val(real_sum);
+            $('#slipipamountupdate2').val(real_sum);
+
         }
     });
 
@@ -7150,7 +7159,8 @@ function deletelocationriskdetail(id){
                 console.log(real_sum)
 
                 $('#slipippercentageupdate').val(real_sum);
-                // $('#slipipamount2').val(real_sum);
+                $('#slipipamountupdate2').val(real_sum);
+                
             }else{
                  var amount =  $(this).val();
                 var conv_amount = parseFloat(amount.replace(/,/g, ""));
@@ -7164,6 +7174,8 @@ function deletelocationriskdetail(id){
                 console.log(sum)
                 console.log(real_sum)
                 $('#slipippercentageupdate').val(real_sum);
+                $('#slipipamountupdate2').val(real_sum);
+
             }
    });
 
@@ -7191,6 +7203,8 @@ function deletelocationriskdetail(id){
             var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             $('#slipipamountupdate').val(real_sum);
+                $('#slipipamountupdate2').val(real_sum);
+
         }
    });
 
@@ -7217,6 +7231,8 @@ function deletelocationriskdetail(id){
                 var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                 $('#slipipamountupdate').val(real_sum);
+                $('#slipipamountupdate2').val(real_sum);
+
             }
    });
 
@@ -7244,6 +7260,8 @@ function deletelocationriskdetail(id){
                 var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                 $('#slipipamountupdate').val(real_sum);
+                $('#slipipamountupdate2').val(real_sum);
+                
             }
    });
 
