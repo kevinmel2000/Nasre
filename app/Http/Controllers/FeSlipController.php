@@ -635,25 +635,25 @@ class FeSlipController extends Controller
                     RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
                 }
                 
-                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
 
                 // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
 
 
-                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
 
                 
-                $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+                $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->where('slip_type','fe')->orderby('id','desc')->get();
 
                 
                 $locationlist=array();
@@ -669,7 +669,7 @@ class FeSlipController extends Controller
                 }
 
 
-                $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+                $statuslist= StatusLog::where('insured_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
                 
                 // if(count($interestlist) != null){
                 //     InterestInsuredTemp::where('slip_id', $code_sl)->delete();
@@ -713,25 +713,25 @@ class FeSlipController extends Controller
                         RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
                     }
                     
-                    $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                    $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                    $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                    $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                    $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                    $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                    $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                    $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                    $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                    $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                    $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                    $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                    $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                    $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
 
                     // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
 
 
-                    $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                    $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                    $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                    $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                    $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                    $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                    $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                    $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                    $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                    $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
 
-                    
-                    $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+                
+                    $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->where('slip_type','fe')->orderby('id','desc')->get();
 
                     
                     $locationlist=array();
@@ -817,25 +817,25 @@ class FeSlipController extends Controller
                         RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
                     }
                     
-                    $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                    $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                    $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                    $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                    $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                    $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                    $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                   $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                    $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                    $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                    $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                    $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                    $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                    $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
 
                     // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
 
 
-                    $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                    $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                    $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                    $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                    $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                    $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                    $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                    $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                    $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                    $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
 
                     
-                    $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+                    $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->where('slip_type','fe')->orderby('id','desc')->get();
 
                     
                     $locationlist=array();
@@ -899,25 +899,25 @@ class FeSlipController extends Controller
                     RiskLocationDetail::where('translocation_id','=',$dataid->id)->delete();
                 }
                 
-                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
-                $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->delete();
-                $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
 
                 // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
 
 
-                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+                $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
 
                 
-                $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+                $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->where('slip_type','fe')->orderby('id','desc')->get();
 
                 
                 $locationlist=array();
@@ -1072,18 +1072,30 @@ class FeSlipController extends Controller
         }
 
         $interestinsured= InterestInsured::orderby('id','asc')->get();
-        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        // $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+
+
         
         
-        $filelist=SlipTableFile::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
-        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->where('count_endorsement',$insureddata->count_endorsement)->orderby('id','desc')->get();
-        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('count_endorsement',$insureddata->count_endorsement)->orderby('id','desc')->get();
-        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->where('count_endorsement',$insureddata->count_endorsement)->orderby('id','desc')->get();
-        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('count_endorsement',$insureddata->count_endorsement)->orderby('id','desc')->get();       
+        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+        $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+        $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+
+        // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
+
+
+        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+        $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+        $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+        $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+        $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+
         
-        
-        //$locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->where('count_endorsement',$insureddata->count_endorsement)->orderby('id','desc')->get();
-        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
+        $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->where('slip_type','fe')->orderby('id','desc')->get();
          
         //dd($locationlist2);
         
@@ -1137,11 +1149,12 @@ class FeSlipController extends Controller
                 
                 $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
                 
-                $interestlist= InterestInsuredTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
-                $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
-                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
-                $deductiblelist= DeductibleTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
-                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
+                 $interestlist= InterestInsuredTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                $deductiblelist= DeductibleTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+
 
                 $currdate = date("Y-m-d");
 
@@ -1987,7 +2000,7 @@ class FeSlipController extends Controller
             $user = Auth::user();
             
             $insureddata= Insured::where('number','=',$request->fesnumber)->first();
-            $locationlist= TransLocationTemp::where('insured_id','=',$request->fesnumber)->orderby('id','desc')->get();
+            $locationlist= TransLocationTemp::where('insured_id','=',$request->fesnumber)->where('slip_type','fe')->orderby('id','desc')->get();
 
             $sum_amount = DB::table('risk_location_detail')
                             ->join('trans_location_detail','trans_location_detail.id','=','risk_location_detail.translocation_id')
@@ -2149,12 +2162,12 @@ class FeSlipController extends Controller
             
             $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
             
-            $interestlist= InterestInsuredTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
-            $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
-            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
-            $deductiblelist= DeductibleTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
-            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();             
-
+            $interestlist= InterestInsuredTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+            $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+            $deductiblelist= DeductibleTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+        
             if($slipdata==null)
             {
                 $currdate = date("Y-m-d");
@@ -2232,7 +2245,11 @@ class FeSlipController extends Controller
                         'datetime'=>date('Y-m-d H:i:s '),
                         'insured_id'=>$request->code_ms,
                         'slip_id'=>$request->slipnumber,
+                        'slip_type'=>'fe',
+                        'count_endorsement'=> $slipdataup->endorsment
                     ]);
+
+                
 
                 
                 //$insdata = Insured::where('number',$request->code_ms)->where('slip_type','fe')->first();
@@ -2452,6 +2469,8 @@ class FeSlipController extends Controller
                         'datetime'=>date('Y-m-d H:i:s '),
                         'insured_id'=>$request->code_ms,
                         'slip_id'=>$request->slipnumber,
+                        'slip_type'=>'fe',
+                        'count_endorsement'=> $slipdataup->endorsment
                     ]);
                 }
 
@@ -2809,14 +2828,13 @@ class FeSlipController extends Controller
             $slipdatalast= SlipTable::where('endorsment',$id_ed)->where('id','=',$request->slipid)->first();
             // dd($slipdatalast);
             // $interestlist= InterestInsuredTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
-            $installmentlist= InstallmentTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
-            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
-            $deductiblelist= DeductibleTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
-            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
-            $locationlist= TransLocationTemp::where('insured_id','=',$slipdata->insured_id)->orderby('id','desc')->get();
-            $attachmentlist=SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
+            $installmentlist= InstallmentTemp::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->orderby('id','desc')->get();
+            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->orderby('id','desc')->get();
+            $deductiblelist= DeductibleTemp::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->orderby('id','desc')->get();
+            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->orderby('id','desc')->get();
+            $locationlist= TransLocationTemp::where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->orderby('id','desc')->get();
+            $attachmentlist=SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->orderby('id','desc')->get();
 
-            
 
             if($slipdata==null)
             {

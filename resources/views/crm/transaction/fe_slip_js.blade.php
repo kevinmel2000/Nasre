@@ -8263,9 +8263,11 @@ function deletelocationriskdetail(id){
 
        var installmentdate = $('#slipipdateupdate').val();
        var percentage = $('#slipippercentageupdate').val();
+       var insured_id = $('#insuredIDtxt').val()
        var amount = $('#slipipamountupdate').val();
        var slip_id = $('#slipnumberupdate').val();
        var token2 = $('input[name=_token2]').val();
+       var sliptype = 'fe';
 
        var conv_amount = amount.replace(/,/g, "");
        console.log(conv_amount)
@@ -8318,7 +8320,9 @@ function deletelocationriskdetail(id){
                  installmentdate:newinstallmentdate,
                  percentage:percentage,
                  slipamount:real_amount,
-                 id_slip:slip_id
+                 id_slip:slip_id,
+                 insured_id:insured_id,
+                 sliptype:sliptype
              },
              beforeSend: function() { $("body").addClass("loading");  },
              complete: function() {  $("body").removeClass("loading"); },

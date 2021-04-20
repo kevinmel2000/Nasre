@@ -2027,8 +2027,9 @@ class TransactionController extends Controller
             $installmentdate = $request->installmentdate;
             $amount = $request->slipamount;
             $slip_id = $request->id_slip;
+            $insured_id = $request->insured_id;
 
-            $checkit = DB::table('installment_panel_detail')->where('installment_panel_detail.slip_id',$slip_id)->sum('installment_panel_detail.percentage');
+            $checkit = DB::table('installment_panel_detail')->where('installment_panel_detail.slip_id',$slip_id)->where('installment_panel_detail.insured_id',$insured_id)->where('installment_panel_detail.slip_type',$request->sliptype)->sum('installment_panel_detail.percentage');
             $totalpercent = $checkit + $percentage;
         
             if($percentage !='' && $amount !='' && $slip_id != '')
