@@ -462,6 +462,7 @@
                                                                                 <td>
                                                                                     <div class="form-group">
                                                                                         <input type="number" value="" step=".0001" id="slipnilaiecupdate" name="slipnilaiecupdate" placeholder="y" class="form-control form-control-sm "/>
+                                                                                        <input type="hidden" id="sliptotalnilaiecupdate" name="sliptotalnilaiecupdate" placeholder="sum y &permil;" class="form-control form-control-sm floatTextBox2"/>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td>

@@ -1623,6 +1623,20 @@ class FeSlipController extends Controller
         $attachmentlist->values()->all();
         // }
 
+        $sum_permilec = DB::table('extend_coverage_detail')
+                            ->where('slip_id',$slipdata->number)
+                            ->where('insured_id','=',$slipdata->insured_id)
+                            ->where('slip_type','fe')
+                            ->where('count_endorsement',$slipdata->endorsment)
+                            ->sum('extend_coverage_detail.percentage');
+
+        $sum_inspanpercent = DB::table('installment_panel_detail')
+                            ->where('slip_id',$slipdata->number)
+                            ->where('insured_id','=',$slipdata->insured_id)
+                            ->where('slip_type','fe')
+                            ->where('count_endorsement',$slipdata->endorsment)
+                            ->sum('installment_panel_detail.percentage');
+
 
         if($slipdata->build_const == "Building 1"){
             $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
@@ -1709,7 +1723,9 @@ class FeSlipController extends Controller
                 'sum_total_date'=>$slipdata->sum_total_date,
                 'coinsurance_slip'=>$slipdata->coinsurance_slip,
                 'status_log'=>$statuslist,
-                'sum_feebroker'=>$slipdata->sum_feebroker
+                'sum_feebroker'=>$slipdata->sum_feebroker,
+                'sum_ec'=>$sum_permilec,
+                'sum_ippercent' =>$sum_inspanpercent
             ]
         );
 
@@ -1834,6 +1850,22 @@ class FeSlipController extends Controller
         $attachmentlist->values()->all();
 
 
+        $sum_permilec = DB::table('extend_coverage_detail')
+                            ->where('slip_id',$slipdata->number)
+                            ->where('insured_id','=',$slipdata->insured_id)
+                            ->where('slip_type','fe')
+                            ->where('count_endorsement',$slipdata->endorsment)
+                            ->sum('extend_coverage_detail.percentage');
+
+        $sum_inspanpercent = DB::table('installment_panel_detail')
+                            ->where('slip_id',$slipdata->number)
+                            ->where('insured_id','=',$slipdata->insured_id)
+                            ->where('slip_type','fe')
+                            ->where('count_endorsement',$slipdata->endorsment)
+                            ->sum('installment_panel_detail.percentage');
+
+
+
         if($slipdata->build_const == "Building 1"){
             $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
             $building_rate_up = $building_rate->rate_batas_atas_building_class_1;
@@ -1916,7 +1948,9 @@ class FeSlipController extends Controller
                 'v_broker'=>$slipdata->v_broker,
                 'coinsurance_slip'=>$slipdata->coinsurance_slip,
                 'status_log'=>$statuslist,
-                'sum_feebroker'=>$slipdata->sum_feebroker
+                'sum_feebroker'=>$slipdata->sum_feebroker,
+                'sum_ec'=>$sum_permilec,
+                'sum_ippercent' =>$sum_inspanpercent
             ]
         );
 

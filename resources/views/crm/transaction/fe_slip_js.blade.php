@@ -280,6 +280,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#slipslsdetail').val(response.selisih);
                 $('#wpcdetail').val(response.wpc);
                 $('#remarksdetail').val(response.remarks);
+                $('#sliptotalnilaiecdetail').val(response.sum_ec);
 
                 $('#slipvbrokerdetail').val(response.v_broker);
 
@@ -727,6 +728,10 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#wpcupdate').val(response.wpc);
                 $('#remarksupdate').val(response.remarks);
                 $('#slipvbrokerupdate').val(response.v_broker);
+                $('#sliptotalnilaiecupdate').val(response.sum_ec);
+                $('#sliptotalpercentinspanupdate').val(response.sum_ippercent);
+
+
 
                     // if(response.interest_insured)
                     // {
@@ -1155,6 +1160,9 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     $('#slipslsendorsement').val(response.selisih);
                     $('#wpcendorsement').val(response.wpc);
                     $('#slipvbrokerendorsement').val(response.v_broker);
+                    $('#sliptotalnilaiecendorsement').val(response.sum_ec);
+                    $('#sliptotalpercentinspanendorsement').val(response.sum_ippercent);
+
 
 
 
@@ -5900,6 +5908,7 @@ function deletelocationriskdetail(id){
             var tsi = $("#sharetotalsum").val();
             var conv_tsi = parseInt(tsi.replace(/,/g, ""));
             var totalrateexc = $('#sliptotalnilaiec').val();
+
             if(totalrateexc){
                     var conv_totalrateexc = parseFloat(totalrateexc);
                     var sumtotalrate = isNaN((rateslip  / 1000) * conv_totalrateexc) ? 0 :((rateslip  / 1000) * conv_totalrateexc);
