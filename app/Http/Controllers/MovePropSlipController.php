@@ -111,8 +111,17 @@ class MovePropSlipController extends Controller
          $route_active = 'Moveable Property - Index';   
          $mydate = date("Y").date("m").date("d");
          $fe_ids = response()->json($country->modelKeys());
+         $search = @$request->input('search');
+         $searchinsured = @$request->input('searchinsured');
+         $searchuy = @$request->input('searchuy');
+         $searchshare = @$request->input('searchshare');
+         $searchnre = @$request->input('searchnre');
+         $searchtsi = @$request->input('searchtsi');
+         $searchendorse = @$request->input('searchendorse');
+         $searchslipnum = @$request->input('searchslipnum');
+         $searchcob = @$request->input('searchcob');
+         $searchceding = @$request->input('searchceding');
 
-        
          $checkdatainsured= Insured::where('statmodified','=',1)->whereNull('share_to')->Where('share_to','=',0)->get();
 
 
@@ -122,9 +131,7 @@ class MovePropSlipController extends Controller
             $deleteinsured= Insured::where('number','=',$insureddata->number)->delete();  
         }
 
-
-         $search = @$request->input('search');
-
+        
         if(!empty($search) || !empty($searchinsured) || !empty($searchuy) || !empty($searchshare) || !empty($searchnre) || !empty($searchtsi) || !empty($searchendorse))
         {
 
@@ -213,7 +220,7 @@ class MovePropSlipController extends Controller
             $ceding = CedingBroker::orderby('id','asc')->where('type',4)->get();
 
             
-            return view('crm.transaction.mp_slip_index', compact('cob','cedingbroker','ceding','insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+            return view('crm.transaction.mp_slip_index', compact('searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
             
 
          }
@@ -251,7 +258,7 @@ class MovePropSlipController extends Controller
             $cedingbroker = CedingBroker::orderby('id','asc')->get();
             $ceding = CedingBroker::orderby('id','asc')->where('type',4)->get();
 
-            return view('crm.transaction.mp_slip_index', compact('cob','cedingbroker','ceding','insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+            return view('crm.transaction.mp_slip_index', compact('searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
             
         }
     }

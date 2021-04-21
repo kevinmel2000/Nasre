@@ -260,6 +260,15 @@ class FeSlipController extends Controller
          $mydate = date("Y").date("m").date("d");
          $fe_ids = response()->json($country->modelKeys());
          $search = @$request->input('search');
+         $searchinsured = @$request->input('searchinsured');
+         $searchuy = @$request->input('searchuy');
+         $searchshare = @$request->input('searchshare');
+         $searchnre = @$request->input('searchnre');
+         $searchtsi = @$request->input('searchtsi');
+         $searchendorse = @$request->input('searchendorse');
+         $searchslipnum = @$request->input('searchslipnum');
+         $searchcob = @$request->input('searchcob');
+         $searchceding = @$request->input('searchceding');
          
         $checkdatainsured= Insured::where('statmodified','=',1)->whereNull('share_to')->Where('share_to','=',0)->get();
 
@@ -356,7 +365,7 @@ class FeSlipController extends Controller
             $cedingbroker = CedingBroker::orderby('id','asc')->get();
             $ceding = CedingBroker::orderby('id','asc')->where('type',4)->get();
 
-            return view('crm.transaction.fe_slip_index', compact('cob','cedingbroker','ceding','insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+            return view('crm.transaction.fe_slip_index', compact('searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
             
          }
          else
@@ -397,7 +406,7 @@ class FeSlipController extends Controller
             $cedingbroker = CedingBroker::orderby('id','asc')->get();
             $ceding = CedingBroker::orderby('id','asc')->where('type',4)->get();
 
-            return view('crm.transaction.fe_slip_index', compact('cob','cedingbroker','ceding','insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+            return view('crm.transaction.fe_slip_index', compact('searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
             
         }
     }
@@ -1077,23 +1086,23 @@ class FeSlipController extends Controller
 
         
         
-        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
+        // $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
         $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
         $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
-        $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->delete();
+        $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
 
         // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
 
 
-        $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
+        // $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
         $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
-        $filelist=SlipTableFile::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','fe')->where('count_endorsement',$insureddata->count_endorsement)->orderby('id','desc')->get();
+
         
         $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->where('slip_type','fe')->orderby('id','desc')->get();
          

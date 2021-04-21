@@ -31,61 +31,118 @@
                   {!! link_to('transaction-data/hem-slip','Add Data',['class'=>'btn btn-primary']) !!}
                   <hr>
                   {{ Form::open(array('url'=>'transaction-data/hem-slipindex')) }}
-                  
-                  <table>
-                    <tbody>
-                    
-                    <tr>
-                      <td>
-                      {{ Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari Number']) }}
-                      </td>
-                      <td>
-                      {{ Form::text('searchinsured',null,['class'=>'form-control','placeholder'=>'Cari Insured']) }}
-                      </td>
-                      <td>
-                      {{ Form::text('searchuy',null,['class'=>'form-control','placeholder'=>'Cari UY']) }}
-                      </td>
-                      <td>
-                      {{ Form::text('searchshare',null,['class'=>'form-control','placeholder'=>'Our Share']) }}
-                      </td>
-                      <td>
-                      {{ Form::text('searchnre',null,['class'=>'form-control','placeholder'=>'National Reinsurance']) }}
-                      </td>
-                      <td>
-                      {{ Form::text('searchtsi',null,['class'=>'form-control','placeholder'=>'Total Sum Insurance']) }}
-                      </td>
-                      <td>
-                      {{ Form::text('searchendorse',null,['class'=>'form-control','placeholder'=>'Endorsement Count']) }}
-                      </td>
-                      <td>
-                      {{ Form::text('searchslipnum',null,['class'=>'form-control','placeholder'=>'Slip Number']) }}
-                      </td>
-                      <td>
-                        <select id="searchcob" name="searchcob" class="e1 form-control form-control-sm ">
-                            <option selected readonly  value='0'>{{__('COB list')}}</option>
-                            @foreach($cob as $boc)
-                            <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
-                            @endforeach
-                        </select>
-                      </td>
-                      <td>
-                          <select id="searchceding" name="searchceding" class="e1 form-control form-control-sm ">
-                              <option value=""  selected disabled >Ceding or Broker</option>
-                              @foreach($cedingbroker as $cb)
-                              <option value="{{ $cb->id }}"> {{ $cb->code }} - {{ $cb->name }}</option>
-                              @endforeach
-                          </select>
-                      </td>
-                    </tr>
-                    </tbody>
-
-                    <tr>
-                      <td>
-                      <button type="submit" class="btn btn-md btn-primary">{{__('Search')}}</button>
-                      </td>
-                    </tr>
-                </table>
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Insured Number')}}</label>
+                                        {{ Form::text('search',@$search,['class'=>'form-control form-control-sm','placeholder'=>'Cari Number']) }}
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Insured Name')}}</label>
+                                        {{ Form::text('searchinsured',@$searchinsured,['class'=>'form-control form-control-sm','placeholder'=>'Cari Insured']) }}
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('UY')}}</label>
+                                        {{ Form::text('searchuy',@$searchuy,['class'=>'form-control form-control-sm','placeholder'=>'Cari UY']) }}
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Our Share')}}</label>
+                                        {{ Form::text('searchshare',@$searchshare,['class'=>'form-control form-control-sm','placeholder'=>'Our Share']) }}
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label for="">{{__('Nasional RE Share')}}</label>
+                                       {{ Form::text('searchnre',@$searchnre,['class'=>'form-control form-control-sm','placeholder'=>'National Reinsurance']) }}
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label for="">{{__('COB')}}</label><br>
+                                      <select id="searchcob" name="searchcob" class="e1 form-control form-control-sm ">
+                                          <option selected readonly  value='0'>{{__('COB list')}}</option>
+                                          @foreach($cob as $boc)
+                                            @if($boc->id  == @$searchcob)
+                                                <option value="{{ $boc->id }}" selected>{{ $boc->code }} - {{ $boc->description }}</option>
+                                            @else
+                                                <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
+                                            @endif
+                                          @endforeach
+                                      </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Ceding / Broker')}}</label><br>
+                                        <select id="searchceding" name="searchceding" class="e1 form-control form-control-sm ">
+                                            <option value=""  selected disabled >Ceding or Broker</option>
+                                            @foreach($cedingbroker as $cb)
+                                                @if($cb->id  == @$searchceding)
+                                                <option value="{{ $cb->id }}" selected> {{ $cb->code }} - {{ $cb->name }}</option>
+                                                @else
+                                                <option value="{{ $cb->id }}"> {{ $cb->code }} - {{ $cb->name }}</option>
+                                                 @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Total Sum Insurance')}}</label>
+                                          {{ Form::text('searchtsi',@$searchtsi,['class'=>'form-control form-control-sm','placeholder'=>'Total Sum Insurance']) }}
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label for="">{{__('Endorsement')}}</label>
+                                        {{ Form::text('searchendorse',@$searchendorse,['class'=>'form-control form-control-sm','placeholder'=>'Endorsement Count']) }}
+                                  </div>
+                                </div>
+                                
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Slip Number')}}</label>
+                                          {{ Form::text('searchslipnum',@$searchslipnum,['class'=>'form-control form-control-sm','placeholder'=>'Slip Number']) }}
+                                    </div>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <button type="submit" class="btn btn-md btn-primary">{{__('Search')}}</button>
+                        </div>
+                      </div>
                   {{ Form::close() }}
+
                   <hr>
                   <table id="felookupTable2" class="table table-bordered table-striped">
                     <thead>
