@@ -2936,7 +2936,7 @@ class FeSlipController extends Controller
             $user = Auth::user();
             
             $slipdata= SlipTable::where('id','=',$request->slipid)->first();
-            $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->where('selisih','=','false')->get();
+            $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('selisih','=','false')->get();
             $insureddata = Insured::where('number','=',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->first();
 
             // $id_ed = ($slipdata->id + 1);
@@ -3184,7 +3184,7 @@ class FeSlipController extends Controller
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
                                         'wpc'=>$slt->wpc,
-                                        'remarks'=>$slt->$remarks
+                                        'remarks'=>$slt->slipremarks
                     
                                     ]);
                             }
@@ -3236,7 +3236,7 @@ class FeSlipController extends Controller
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
                                         'wpc'=>$slt->wpc,
-                                        'remarks'=>$slt->$remarks
+                                        'remarks'=>$slt->slipremarks
                     
                                     ]);
                             }
@@ -3289,7 +3289,7 @@ class FeSlipController extends Controller
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
                                         'wpc'=>$slt->wpc,
-                                        'remarks'=>$slt->$remarks
+                                        'remarks'=>$slt->slipremarks
                     
                                     ]);
                             }
@@ -3343,7 +3343,7 @@ class FeSlipController extends Controller
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
                                         'wpc'=>$slt->wpc,
-                                        'remarks'=>$slt->$remarks
+                                        'remarks'=>$slt->slipremarks
                     
                                     ]);
                             }
@@ -3399,7 +3399,7 @@ class FeSlipController extends Controller
                                         'own_retention'=>$slt->own_retention,
                                         'sum_own_retention'=>$slt->sum_own_retention,
                                         'wpc'=>$slt->wpc,
-                                        'remarks'=>$slt->$remarks
+                                        'remarks'=>$slt->slipremarks
                     
                                     ]);
                             }

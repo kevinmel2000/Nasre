@@ -8339,7 +8339,7 @@ function deletelocationriskdetail(id){
                  console.log(response)
                  if(response.code_error){
                     swal("Error!", response.message , "Insert Error");
-                    $('#addinstallmentinsuredupdate-btn').attr('hidden','true')
+                    // $('#addinstallmentinsuredupdate-btn').attr('hidden','true')
                 }else{
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
                         var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -8458,7 +8458,7 @@ function deletelocationriskdetail(id){
                  console.log(response)
                  if(response.code_error){
                     swal("Error!", response.message , "Insert Error");
-                    $('#addinstallmentinsuredendorsement-btn').attr('hidden','true')
+                    // $('#addinstallmentinsuredendorsement-btn').attr('hidden','true')
                 }else{
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
                         var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -8723,7 +8723,8 @@ function deletelocationriskdetail(id){
              amount:real_amount,
              minamount:real_minamount,
              id_slip:slip_id,
-             insured_id:code_ms
+             insured_id:code_ms,
+             sliptype:sliptype
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
@@ -10872,7 +10873,7 @@ function deletelocationriskdetail(id){
              slipor:slipor,
              slipsumor:real_slipsumor,
              wpc:wpc,
-             remarks:remarks
+             slipremarks:remarks
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
