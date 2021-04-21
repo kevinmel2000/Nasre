@@ -3100,7 +3100,7 @@ class FeSlipController extends Controller
                                 'percentage'=>$ipt->percentage,
                                 'amount'=>$ipt->amount,
                                 'slip_id'=>$ipt->slip_id,
-                                'count_endorsement' => ($ect->count_endorsement + 1)
+                                'count_endorsement' => ($ipt->count_endorsement + 1)
                             ]);
 
                             $jsoniptlistup = InstallmentTemp::where('slip_id','=',$iptlistup->slip_id)->where('count_endorsement',$iptlistup->count_endorsement)->orderby('id','desc')->get();
