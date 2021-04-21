@@ -1149,7 +1149,7 @@ class FeSlipController extends Controller
                 
                 $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
                 
-                 $interestlist= InterestInsuredTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                $interestlist= InterestInsuredTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
                 $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
                 $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
                 $deductiblelist= DeductibleTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();

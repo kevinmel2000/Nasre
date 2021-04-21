@@ -9908,11 +9908,15 @@ function deletelocationriskdetail(id){
                                         $('#slipnumber').val(response.slipnumber);
                                         // $('#feshare').val(response.ourshare);
                                         // $('#fesharefrom').val(response.sumshare);
+                                        $('#installmentPanel tbody').empty();
+                                        $('#ExtendCoveragePanel tbody').empty();
+                                        $('#deductiblePanel tbody').empty();
+                                        $('#retrocessionPanel tbody').empty();
 
                                     },
                                     error: function (request, status, error) {
                                             //alert(request.responseText);
-                                            swal("Error!", "Insured Fire & Engineering Slip Insert Error", "Insert Error");
+                                            swal("Error!", "Insured Fire & Engineering Slip Insert Error : " + request.responseText, "Insert Error");
                                         }
                                     });
 
@@ -9922,6 +9926,7 @@ function deletelocationriskdetail(id){
                                     let TotalFiles = $('#attachment')[0].files.length; //Total files
                                     let files = $('#attachment')[0];
                                     var slip_id = $('#slipnumber').val();
+                                    var insured_id = $('#insuredIDtxt').val();
 
                                     if(TotalFiles > 0){
                                         for (let i = 0; i < TotalFiles; i++){
@@ -9930,7 +9935,7 @@ function deletelocationriskdetail(id){
 
                                         formData.append('TotalFiles', TotalFiles);
                                         formData.append('slip_id', slip_id);
-                                        formData.append('insured_id', code_ms);
+                                        formData.append('insured_id', insured_id);
                                         formData.append('slip_type', 'fe');
 
                                         $.ajax({
@@ -9956,10 +9961,7 @@ function deletelocationriskdetail(id){
                                     }
 
                                    
-                                    $('#installmentPanel tbody').empty();
-                                    $('#ExtendCoveragePanel tbody').empty();
-                                    $('#deductiblePanel tbody').empty();
-                                    $('#retrocessionPanel tbody').empty();
+                                    
                         }else{
                             swal('Warning!','please check tsi value again','insert error');
                         }
@@ -10047,11 +10049,15 @@ function deletelocationriskdetail(id){
                                         $('#slipnumber').val(response.number);
                                         // $('#feshare').val(response.ourshare);
                                         // $('#fesharefrom').val(response.sumshare);
+                                         $('#installmentPanel tbody').empty();
+                                        $('#ExtendCoveragePanel tbody').empty();
+                                        $('#deductiblePanel tbody').empty();
+                                        $('#retrocessionPanel tbody').empty();
 
                                     },
                                     error: function (request, status, error) {
                                             //alert(request.responseText);
-                                            swal("Error!", "Insured Fire & Engineering Slip Insert Error", "Insert Error");
+                                            swal("Error!", "Insured Fire & Engineering Slip Insert Error : " + request.responseText, "Insert Error");
                                         }
                                     });
 
@@ -10061,6 +10067,7 @@ function deletelocationriskdetail(id){
                                     let TotalFiles = $('#attachment')[0].files.length; //Total files
                                     let files = $('#attachment')[0];
                                     var slip_id = $('#slipnumber').val();
+                                    var insured_id = $('#insuredIDtxt').val();
 
                                     if(TotalFiles > 0){
                                         for (let i = 0; i < TotalFiles; i++){
@@ -10069,8 +10076,9 @@ function deletelocationriskdetail(id){
 
                                         formData.append('TotalFiles', TotalFiles);
                                         formData.append('slip_id', slip_id);
-                                        formData.append('insured_id', code_ms);
+                                        formData.append('insured_id', insured_id);
                                         formData.append('slip_type', 'fe');
+
 
                                         $.ajax({
                                             type:'POST',
@@ -10095,10 +10103,7 @@ function deletelocationriskdetail(id){
                                     }
 
                                    
-                                    $('#installmentPanel tbody').empty();
-                                    $('#ExtendCoveragePanel tbody').empty();
-                                    $('#deductiblePanel tbody').empty();
-                                    $('#retrocessionPanel tbody').empty();
+                                   
                         }else{
                             swal('Warning!','please check ceding share value again','insert error');
                         }
@@ -10370,6 +10375,7 @@ function deletelocationriskdetail(id){
        let TotalFiles = $('#attachment')[0].files.length; //Total files
        let files = $('#attachment')[0];
        var slip_id = $('#slipnumber').val();
+       var insured_id = $('#insuredIDtxt').val();
 
        for (let i = 0; i < TotalFiles; i++) 
        {
@@ -10378,7 +10384,7 @@ function deletelocationriskdetail(id){
 
     formData.append('TotalFiles', TotalFiles);
     formData.append('slip_id', slip_id);
-    formData.append('insured_id', code_ms);
+    formData.append('insured_id', insured_ids);
     formData.append('slip_type', 'fe');
 
 
@@ -10679,6 +10685,7 @@ function deletelocationriskdetail(id){
                let TotalFiles = $('#attachmentupdate')[0].files.length; //Total files
                let files = $('#attachmentupdate')[0];
                var slip_id = $('#slipnumberupdate').val();
+               var insured_id = $('#insuredIDtxt').val();
 
                for (let i = 0; i < TotalFiles; i++) 
                {
@@ -10687,7 +10694,7 @@ function deletelocationriskdetail(id){
 
             formData.append('TotalFiles', TotalFiles);
             formData.append('slip_id', slip_id);
-            formData.append('insured_id', code_ms);
+            formData.append('insured_id', insured_id);
             formData.append('slip_type', 'fe');
 
 
