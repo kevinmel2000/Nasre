@@ -67,7 +67,7 @@
                           <div class="col-md-6">
                               <div class="row">
                                 <div class="form-group">
-                                    <label for="">{{__('COB')}}</label>
+                                    <label for="">{{__('COB')}}</label><br>
                                     <select id="searchcob" name="searchcob" class="e1 form-control form-control-sm ">
                                         <option selected readonly  value='0'>{{__('COB list')}}</option>
                                         @foreach($cob as $boc)
@@ -78,7 +78,7 @@
                               </div>
                               <div class="row">
                                 <div class="form-group">
-                                    <label for="">{{__('Ceding / Broker')}}</label>
+                                    <label for="">{{__('Ceding / Broker')}}</label><br>
                                     <select id="searchceding" name="searchceding" class="e1 form-control form-control-sm ">
                                         <option value=""  selected disabled >Ceding or Broker</option>
                                         @foreach($cedingbroker as $cb)
