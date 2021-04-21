@@ -8223,7 +8223,8 @@ function deletelocationriskdetail(id){
                     // $('#addinstallmentinsured-btn').attr('hidden','true')
                 }else{
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-                        var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        var str_amount = response.amount.toString() ;
+                        var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
                         $('#dateinstallment').val('');
                         $('#slipippercentage').val('');
@@ -8342,7 +8343,8 @@ function deletelocationriskdetail(id){
                     // $('#addinstallmentinsuredupdate-btn').attr('hidden','true')
                 }else{
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-                        var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        var str_amount = response.amount.toString();
+                        var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+response.id+')">delete</a></td></tr>')
                         $('#dateinstallmentupdate').val('');
                         $('#slipippercentageupdate').val('');
@@ -8461,7 +8463,8 @@ function deletelocationriskdetail(id){
                     // $('#addinstallmentinsuredendorsement-btn').attr('hidden','true')
                 }else{
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-                        var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                         var str_amount = response.amount.toString();
+                        var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+response.id+')">delete</a></td></tr>')
                         $('#dateinstallmentendorsement').val('');
                         $('#slipippercentageendorsement').val('');
