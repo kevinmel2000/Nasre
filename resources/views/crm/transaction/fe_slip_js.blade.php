@@ -8603,7 +8603,7 @@ function deletelocationriskdetail(id){
            var amount = $('#slipdpamount').val();
            var minamount = $('#slipdpminamount').val();
            var code_ms = $('#insuredIDtxt').val();
-           var sliptype = 'fe':
+           var sliptype = 'fe';
            var real_minamount = 0;
            if(minamount == ''){
                real_minamount = 0;
@@ -8682,7 +8682,7 @@ function deletelocationriskdetail(id){
            var amount = $('#slipdpamountupdate').val();
            var minamount = $('#slipdpminamountupdate').val();
            var code_ms = $('#insuredIDtxt').val();
-           var sliptype = 'fe':
+           var sliptype = 'fe';
            var real_minamount = 0;
            if(minamount == ''){
                real_minamount = 0;
@@ -8760,7 +8760,7 @@ function deletelocationriskdetail(id){
            var amount = $('#slipdpamountendorsement').val();
            var minamount = $('#slipdpminamountendorsement').val();
            var code_ms = $('#insuredIDtxt').val();
-           var sliptype = 'fe':
+           var sliptype = 'fe';
            var real_minamount = 0;
            if(minamount == ''){
                real_minamount = 0;
