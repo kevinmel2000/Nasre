@@ -12,3 +12,4 @@ class MasterCauseOfLoss extends Model
     protected $table = 'master_cause_ofloss';
 
 }
+

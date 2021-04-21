@@ -12,3 +12,4 @@ class NatureOfLoss extends Model
     protected $table = 'nature_ofloss';
 
 }
+
