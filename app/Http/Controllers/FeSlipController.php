@@ -2065,6 +2065,24 @@ class FeSlipController extends Controller
                 $insurednumberdata->status='active';
                 $insurednumberdata->save();
 
+                $TransLocationup = TransLocationTemp::where('insured_id','=',$request->fesnumber)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
+                foreach($TransLocationup as $tstup)
+                {
+                    $translocationprocessup = TransLocationTemp::findOrFail($tstup->id);
+                    $translocationprocessup->status = 'active';
+                    $translocationprocessup->save();
+                }
+
+                $risklocationup = RiskLocationDetail::where('insured_id','=',$request->fesnumber)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
+                foreach($risklocationup as $rlsup)
+                {
+                    $risklocationprocessup = RiskLocationDetail::findOrFail($rlsup->id);
+                    $risklocationprocessup->status = 'active';
+                    $risklocationprocessup->save();
+                }
+
+
+
 
                 $notification = array(
                     'message' => 'Fire & Engginering Insured added successfully!',
@@ -3523,6 +3541,7 @@ class FeSlipController extends Controller
                 $locationlist->address_location_id=$adrress;
                 $locationlist->interest_id=$request->slipinterestid;
                 $locationlist->slip_type=$request->sliptype;
+                $locationlist->status="passive";
                 $locationlist->save();
 
                 $felookuplocations = FeLookupLocation::find($adrress);
@@ -3576,6 +3595,7 @@ class FeSlipController extends Controller
                 $locationlist->policyno=$request->policyno;
                 $locationlist->percentage=$request->percent_ceding;
                 $locationlist->amountlocation=$request->amountlocation;
+                $locationlist->status="passive";
                 $locationlist->save();
 
                 //$felookuplocations = FeLookupLocation::find($adrress);
