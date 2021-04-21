@@ -466,11 +466,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     }
 
 
-                    if(response.status_log){
+                    if(response.status_log && response.status_log.length > 0){
                         var status_log = response.status_log;
-                        for (var i = 0; i < 5; i++){
+                        for (var i = 0; i < status_log.length; i++){
 
-                            $('#slipStatusTabledetail tbody').remove();
+                        $('#slipStatusTabledetail tbody').remove();
                           if(status_log[i])
                           {
                             var status = status_log[i].status;
@@ -478,17 +478,17 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                             var user = status_log[i].user;
                             
                             $('#slipStatusTabledetail tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
-                        }
+                         }
 
                     };
                 }
 
-                if(response.attacment_file){
-                    $('#aidlistdetail li').remove();
+                if(response.attacment_file && response.attacment_file.length > 0){
+                    $('#aidlistdetail ul').remove();
                     var attacment_file = response.attacment_file;
                     for (var i = 0; i < attacment_file.length; i++){
                         var filename = attacment_file[i].filename;
-                        $('#aidlistdetail').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
+                        $('#aidlistdetail ul').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
                     };
                 }
 
