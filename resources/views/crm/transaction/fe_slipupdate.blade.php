@@ -710,7 +710,6 @@
                                                             <option selected  disabled>{{__('COB list')}}</option>
                                                             @foreach($cob as $boc)
                                                                  <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
-                                                                 
                                                             @endforeach
                                                         </select>
                                                     </div>    

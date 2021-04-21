@@ -112,7 +112,16 @@ class HeMotorSlipController extends Controller
          $route_active = 'HE & Motor - Index';   
          $mydate = date("Y").date("m").date("d");
          $fe_ids = response()->json($country->modelKeys());
-
+         $search = @$request->input('search');
+         $searchinsured = @$request->input('searchinsured');
+         $searchuy = @$request->input('searchuy');
+         $searchshare = @$request->input('searchshare');
+         $searchnre = @$request->input('searchnre');
+         $searchtsi = @$request->input('searchtsi');
+         $searchendorse = @$request->input('searchendorse');
+         $searchslipnum = @$request->input('searchslipnum');
+         $searchcob = @$request->input('searchcob');
+         $searchceding = @$request->input('searchceding');
         
          $checkdatainsured= Insured::where('statmodified','=',1)->whereNull('share_to')->Where('share_to','=',0)->get();
 
@@ -124,8 +133,7 @@ class HeMotorSlipController extends Controller
         }
 
 
-         $search = @$request->input('search');
-
+        
          if(!empty($search) || !empty($searchinsured) || !empty($searchuy) || !empty($searchshare) || !empty($searchnre) || !empty($searchtsi) || !empty($searchendorse))
          {
  
@@ -213,7 +221,7 @@ class HeMotorSlipController extends Controller
              $cedingbroker = CedingBroker::orderby('id','asc')->get();
              $ceding = CedingBroker::orderby('id','asc')->where('type',4)->get();
 
-             return view('crm.transaction.hem_slip_index', compact('cob','cedingbroker','ceding','insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+             return view('crm.transaction.hem_slip_index', compact('searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
             
          }
          else
@@ -250,7 +258,7 @@ class HeMotorSlipController extends Controller
             $cedingbroker = CedingBroker::orderby('id','asc')->get();
             $ceding = CedingBroker::orderby('id','asc')->where('type',4)->get();
 
-            return view('crm.transaction.hem_slip_index', compact('cob','cedingbroker','ceding','insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+            return view('crm.transaction.hem_slip_index', compact('searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','insuredlist','user','slip','slip_ids','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
     
         }
     }
