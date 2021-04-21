@@ -1610,6 +1610,8 @@ class FeSlipController extends Controller
                 $extenddesc= ExtendedCoverage::where('id','=',$mydata->extendcoverage_id)->first();
                 if($extenddesc){
                     $mydata->coveragetype=$extenddesc->description;
+                    $mydata->coveragename=$extenddesc->name;
+                    $mydata->coveragecode=$extenddesc->code;
                 }
                 
                 array_push($newarrayextend,$mydata);
@@ -1855,6 +1857,8 @@ class FeSlipController extends Controller
             {
                 $extenddesc= ExtendedCoverage::where('id','=',$mydata->extendcoverage_id)->first();
                 $mydata->coveragetype=$extenddesc->description;
+                $mydata->coveragename=$extenddesc->name;
+                $mydata->coveragecode=$extenddesc->code;    
                 
                 array_push($newarrayextend,$mydata);
             }       
