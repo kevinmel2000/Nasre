@@ -3159,7 +3159,7 @@ class FeSlipController extends Controller
                                         'prod_year' => $slt->prod_year,
                                         'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
-                                        'status'=>$slt->status,
+                                        'status'=>'endorsement',
                                         'endorsment'=>($slt->endorsement + 1),
                                         'selisih'=>'true',
                                         'source'=>$slt->source,
@@ -3211,7 +3211,7 @@ class FeSlipController extends Controller
                                         'prod_year' => $slt->prod_year,
                                         'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
-                                        'status'=>$slt->status,
+                                        'status'=>'endorsement',
                                         'endorsment'=>($slt->endorsement + 1),
                                         'selisih'=>'true',
                                         'source'=>$slt->source,
@@ -3265,7 +3265,7 @@ class FeSlipController extends Controller
                                         'prod_year' => $slt->prod_year,
                                         'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
-                                        'status'=>$slt->status,
+                                        'status'=>'endorsement',
                                         'endorsment'=>($slt->endorsement + 1),
                                         'selisih'=>'true',
                                         'source'=>$slt->source,
@@ -3319,7 +3319,7 @@ class FeSlipController extends Controller
                                         'prod_year' => $slt->prod_year,
                                         'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
-                                        'status'=>$slt->status,
+                                        'status'=>'endorsement',
                                         'endorsment'=>($slt->endorsement + 1),
                                         'selisih'=>'true',
                                         'source'=>$slt->source,
@@ -3374,7 +3374,7 @@ class FeSlipController extends Controller
                                         'prod_year' => $slt->prod_year,
                                         'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
-                                        'status'=>$slt->status,
+                                        'status'=>'endorsement',
                                         'endorsment'=>($slt->endorsement + 1),
                                         'selisih'=>'true',
                                         'source'=>$slt->source,
@@ -3454,6 +3454,7 @@ class FeSlipController extends Controller
                     $msdata->netprm_to_nr=($slipdata->netprm_to_nr * (-1));
                     $msdata->sum_commission=($slipdata->sum_commission * (-1));
                     $msdata->wpc=($slipdata->wpc * (-1)); 
+                    $msdata->status='endorsement'; 
                     $msdata->sum_own_retention=($slipdata->sum_own_retention * (-1));
                     $msdata->selisih="false"; 
                     $msdata->save();
@@ -3461,8 +3462,8 @@ class FeSlipController extends Controller
 
 
                     $insdata =  Insured::findOrFail($insureddata->id);
-                    $insdata->share_from = ($insureddata->share_from * (-1));
-                    $insdata->share_to = ($insureddata->share_to * (-1));
+                    $insdata->share_from = ($insureddata->share_from * (1));
+                    $insdata->share_to = ($insureddata->share_to * (1));
                     $insdata->save();
 
                     $cedingbroker = CedingBroker::where('id',$slipdataup->source)->first();
@@ -3701,7 +3702,8 @@ class FeSlipController extends Controller
     }
 
     
-    public function updateendorsement(Request $request){
+    public function updateendorsement(Request $request)
+    {
 
         $slipdata= SlipTable::where('id','=',$request->slipid)->first();
 

@@ -2082,7 +2082,8 @@ class TransactionController extends Controller
 
 
 
-                            if($checkit2 < 100){
+                            if($checkit2 < 100)
+                            {
                                     return response()->json(
                                         [
                                             'id' => $installmentlist->id,
@@ -2093,8 +2094,9 @@ class TransactionController extends Controller
                                             'message' => 'sorry percent must 100%, your percent minus '. $minpercent2.'percent'
                                         ]
                                     );
-                                }
-                            elseif ($checkit2 == 100) {
+                            }
+                            elseif ($checkit2 == 100) 
+                            {
                                 return response()->json(
                                         [
                                             'id' => $installmentlist->id,
@@ -2104,6 +2106,18 @@ class TransactionController extends Controller
                                             'slip_id' => $installmentlist->slip_id
                                         ]
                                     );
+                            }
+                            else
+                            {
+                                return response()->json(
+                                    [
+                                        'id' => $installmentlist->id,
+                                        'percentage' => $installmentlist->percentage,
+                                        'installment_date' => date("d/m/Y", strtotime($new_date)),
+                                        'amount' => $installmentlist->amount,
+                                        'slip_id' => $installmentlist->slip_id
+                                    ]
+                                );
                             }
 
                         }
