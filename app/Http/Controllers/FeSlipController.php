@@ -2071,15 +2071,17 @@ class FeSlipController extends Controller
                     $translocationprocessup = TransLocationTemp::findOrFail($tstup->id);
                     $translocationprocessup->status = 'active';
                     $translocationprocessup->save();
+
+                    $risklocationup = RiskLocationDetail::where('translocation_id','=',$tstup->id)->where('status','passive')->orderby('id','desc')->get();
+                    foreach($risklocationup as $rlsup)
+                    {
+                        $risklocationprocessup = RiskLocationDetail::findOrFail($rlsup->id);
+                        $risklocationprocessup->status = 'active';
+                        $risklocationprocessup->save();
+                    }
                 }
 
-                $risklocationup = RiskLocationDetail::where('insured_id','=',$request->fesnumber)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
-                foreach($risklocationup as $rlsup)
-                {
-                    $risklocationprocessup = RiskLocationDetail::findOrFail($rlsup->id);
-                    $risklocationprocessup->status = 'active';
-                    $risklocationprocessup->save();
-                }
+                
 
 
 
