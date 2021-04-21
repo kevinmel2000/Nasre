@@ -34,76 +34,96 @@
                       <div class="row">
                           <div class="col-md-6">
                               <div class="row">
-                                <div class="form-group">
-                                    <label for="">{{__('Insured Number')}}</label>
-                                    {{ Form::text('search',null,['class'=>'form-control','placeholder'=>'Cari Number']) }}
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Insured Number')}}</label>
+                                        {{ Form::text('search',null,['class'=>'form-control form-control-sm','placeholder'=>'Cari Number']) }}
+                                    </div>
                                 </div>
                               </div>
                               <div class="row">
-                                <div class="form-group">
-                                    <label for="">{{__('Insured Name')}}</label>
-                                    {{ Form::text('searchinsured',null,['class'=>'form-control','placeholder'=>'Cari Insured']) }}
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Insured Name')}}</label>
+                                        {{ Form::text('searchinsured',null,['class'=>'form-control form-control-sm','placeholder'=>'Cari Insured']) }}
+                                    </div>
                                 </div>
                               </div>
                               <div class="row">
-                                <div class="form-group">
-                                    <label for="">{{__('UY')}}</label>
-                                    {{ Form::text('searchuy',null,['class'=>'form-control','placeholder'=>'Cari UY']) }}
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('UY')}}</label>
+                                        {{ Form::text('searchuy',null,['class'=>'form-control form-control-sm','placeholder'=>'Cari UY']) }}
+                                    </div>
                                 </div>
                               </div>
                               <div class="row">
-                                <div class="form-group">
-                                    <label for="">{{__('Our Share')}}</label>
-                                    {{ Form::text('searchshare',null,['class'=>'form-control','placeholder'=>'Our Share']) }}
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Our Share')}}</label>
+                                        {{ Form::text('searchshare',null,['class'=>'form-control form-control-sm','placeholder'=>'Our Share']) }}
+                                    </div>
                                 </div>
                               </div>
                               <div class="row">
-                                <div class="form-group">
-                                    <label for="">{{__('Nasional RE Share')}}</label>
-                                     {{ Form::text('searchnre',null,['class'=>'form-control','placeholder'=>'National Reinsurance']) }}
+                                <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label for="">{{__('Nasional RE Share')}}</label>
+                                       {{ Form::text('searchnre',null,['class'=>'form-control form-control-sm','placeholder'=>'National Reinsurance']) }}
+                                  </div>
                                 </div>
                               </div>
                           </div>
                           <div class="col-md-6">
                               <div class="row">
-                                <div class="form-group">
-                                    <label for="">{{__('COB')}}</label><br>
-                                    <select id="searchcob" name="searchcob" class="e1 form-control form-control-sm ">
-                                        <option selected readonly  value='0'>{{__('COB list')}}</option>
-                                        @foreach($cob as $boc)
-                                        <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label for="">{{__('COB')}}</label><br>
+                                      <select id="searchcob" name="searchcob" class="e1 form-control form-control-sm ">
+                                          <option selected readonly  value='0'>{{__('COB list')}}</option>
+                                          @foreach($cob as $boc)
+                                          <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
+                                          @endforeach
+                                      </select>
+                                  </div>
                                 </div>
                               </div>
                               <div class="row">
-                                <div class="form-group">
-                                    <label for="">{{__('Ceding / Broker')}}</label><br>
-                                    <select id="searchceding" name="searchceding" class="e1 form-control form-control-sm ">
-                                        <option value=""  selected disabled >Ceding or Broker</option>
-                                        @foreach($cedingbroker as $cb)
-                                        <option value="{{ $cb->id }}"> {{ $cb->code }} - {{ $cb->name }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Ceding / Broker')}}</label><br>
+                                        <select id="searchceding" name="searchceding" class="e1 form-control form-control-sm ">
+                                            <option value=""  selected disabled >Ceding or Broker</option>
+                                            @foreach($cedingbroker as $cb)
+                                            <option value="{{ $cb->id }}"> {{ $cb->code }} - {{ $cb->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                               </div>
                               <div class="row">
-                                <div class="form-group">
-                                    <label for="">{{__('Total Sum Insurance')}}</label>
-                                      {{ Form::text('searchtsi',null,['class'=>'form-control','placeholder'=>'Total Sum Insurance']) }}
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Total Sum Insurance')}}</label>
+                                          {{ Form::text('searchtsi',null,['class'=>'form-control form-control-sm','placeholder'=>'Total Sum Insurance']) }}
+                                    </div>
                                 </div>
                               </div>
                               <div class="row">
-                                <div class="form-group">
-                                    <label for="">{{__('Endorsement')}}</label>
-                                      {{ Form::text('searchendorse',null,['class'=>'form-control','placeholder'=>'Endorsement Count']) }}
+                                <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label for="">{{__('Endorsement')}}</label>
+                                        {{ Form::text('searchendorse',null,['class'=>'form-control form-control-sm','placeholder'=>'Endorsement Count']) }}
+                                  </div>
                                 </div>
                                 
                               </div>
                               <div class="row">
-                                <div class="form-group">
-                                    <label for="">{{__('Slip Number')}}</label>
-                                      {{ Form::text('searchslipnum',null,['class'=>'form-control','placeholder'=>'Slip Number']) }}
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Slip Number')}}</label>
+                                          {{ Form::text('searchslipnum',null,['class'=>'form-control form-control-sm','placeholder'=>'Slip Number']) }}
+                                    </div>
                                 </div>
                               </div>
                           </div>
