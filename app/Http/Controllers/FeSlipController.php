@@ -3856,5 +3856,36 @@ class FeSlipController extends Controller
         return response()->json(['success'=>'Data has been deleted','amountlocation'=>$amountlocation,'cedinglocation'=>$cedinglocation]);
     }
 
+
+    public function changeDecline($id)
+    {
+        
+            $slip = SlipTable::where('id', '=', $id);
+            $slip->status = "decline";
+            $slip->save();
+
+            $notification = array(
+                'message' => 'Fire & Engginering Insured & Slip Status Decline successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);    
+    }
+
+
+    public function changeCancel($id)
+    {
+        
+            $slip = SlipTable::where('id', '=', $id);
+            $slip->status = "cancel";
+            $slip->save();
+
+            $notification = array(
+                'message' => 'Fire & Engginering Insured & Slip Status Cancel successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);    
+    }
+
+
     
 }
