@@ -138,7 +138,9 @@
                       </div>
                       <div class="row">
                         <div class="col-md-12">
-                          <button type="submit" class="btn btn-md btn-primary">{{__('Search')}}</button>
+                          <div class="form-group">
+                            <button type="submit" class="btn btn-md btn-primary">{{__('Search')}}</button>
+                          </div>
                         </div>
                       </div>
                   {{ Form::close() }}

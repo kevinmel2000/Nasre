@@ -253,7 +253,10 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('WPC')}}</label>
-                                                        <input type="text" min="0" value="" step=".0001" id="wpcendorsement" name="wpcendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                        <input type="text"  id="wpcendorsement" name="wpcendorsement" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                        <div class="input-group-append">
+                                                            <div class="input-group-text"><span>Days</span></div> 
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

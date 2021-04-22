@@ -217,7 +217,10 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="">{{__('UY')}}</label>
-                                        <input type="text" id="feuy" name="feuy" class="form-control form-control-sm intTextBox" data-validation="length"  data-validation-length="0-12" />
+                                        <select id="feuy" name="feuy" class="form-control form-control-sm ">
+                                            <option value="{{ date('Y') }}" selected>{{ date('Y') }}</option>
+                                            <option value="{{ (intval(date('Y')) - 1) }}">{{ (intval(date('Y')) - 1) }}</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -233,8 +236,8 @@
 
                             <div class="row">
                                 <div class="col-md-12 com-sm-12 mt-3">
-                                    <button type="button" id="addinsuredsave-btn" class="btn btn-primary btn-block ">
-                                        {{__('Save')}}
+                                    <button type="button" id="addinsuredsave-btn" class="btn btn-primary btn-block " value="Save">
+                                        <!-- {{__('Save')}} -->
                                     </button>
                                 </div>
                             </div>
@@ -775,6 +778,9 @@
                                                         <div class="form-group">
                                                             <label for="">{{__('WPC')}}</label>
                                                             <input type="text"  id="wpc" name="wpc" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                            <div class="input-group-append">
+                                                                <div class="input-group-text"><span>Days</span></div> 
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

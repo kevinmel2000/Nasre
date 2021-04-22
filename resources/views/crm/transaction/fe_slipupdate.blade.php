@@ -789,6 +789,9 @@
                                                     <div class="form-group">
                                                         <label for="">{{__('WPC')}}</label>
                                                         <input type="text" id="wpc" name="wpc" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                        <div class="input-group-append">
+                                                            <div class="input-group-text"><span>Days</span></div> 
+                                                        </div>
                                                     </div>
                                                 </div>
                                         </div>
@@ -1443,14 +1446,12 @@
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                     <div class="row">
-                                                                                        <div class="col-md-8">
+                                                                                        <div class="col-md-12">
                                                                                             <div class="input-group">
                                                                                                 <input type="text" id="sliprppercentage" name="sliprppercentage" class="form-control form-control-sm floatTextBox" />
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col-md-2">
-                                                                                            <div class="input-group-append">
-                                                                                                <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                                                <div class="input-group-append">
+                                                                                                    <div class="input-group-text"><span><i class="fa fa-percent" aria-hidden="true"></i></span></div> 
+                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>

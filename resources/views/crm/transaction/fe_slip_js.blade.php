@@ -9595,7 +9595,9 @@ function deletelocationriskdetail(id){
             var real_ceding_share = response.ceding_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             $('#feshare').val(real_ceding_share);
 
-            $('#addinsuredsave-btn').attr('hidden','true');
+            // $('#addinsuredsave-btn').attr('hidden','true');
+
+            $('#addinsuredsave-btn').val('Update');
 
         },
         error: function (request, status, error) {
