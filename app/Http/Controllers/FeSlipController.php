@@ -1093,6 +1093,7 @@ class FeSlipController extends Controller
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
         $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
         $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+        // $filelist = SlipTableFile::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
 
         // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
 
@@ -1102,7 +1103,7 @@ class FeSlipController extends Controller
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
         $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
         $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
-
+        $filelist = SlipTableFile::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->get();
         
         $locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->where('slip_type','fe')->orderby('id','desc')->get();
          
@@ -2950,7 +2951,7 @@ class FeSlipController extends Controller
             
             $slipdata= SlipTable::where('id','=',$request->slipid)->first();
             $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('selisih','=','false')->get();
-            $insureddata = Insured::where('number','=',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->first();
+            $insureddata = Insured::where('number','=',$slipdata->insured_id)->where('slip_type','=','fe')->where('count_endorsement',$slipdata->endorsment)->first();
 
             // $id_ed = ($slipdata->id + 1);
             $id_ed = ($slipdata->endorsment + 1);
@@ -3419,22 +3420,9 @@ class FeSlipController extends Controller
                         }
                     }
 
-                    
-
-                    $insureddataup = Insured::create([
-                        'number'=>$insureddata->number,
-                        'slip_type'=>'fe',
-                        'insured_prefix' => $insureddata->insured_prefix,
-                        'insured_name'=>$insureddata->insured_name,
-                        'insured_suffix'=>$insureddata->insured_suffix,
-                        'share'=>$insureddata->share,
-                        'share_from'=>$insureddata->share_from,
-                        'share_to'=>$insureddata->share_to,
-                        'coincurance'=>$insureddata->coincurance,
-                        'location'=>$lookuplocationlist->toJson(),
-                        'uy'=>$insureddata->uy,
-                        'count_endorsement' => ($insureddata->count_endorsement + 1)
-                    ]);
+                    $insureddataup = Insured::findOrFail($insureddata->id);
+                    $insureddataup->count_endorsement = ($insureddata->count_endorsement + 1);
+                    $insureddataup->save();
     
                     $notification = array(
                         'message' => 'Fire & Enginering Slip added Endorsement successfully!',
@@ -3461,10 +3449,10 @@ class FeSlipController extends Controller
 
 
 
-                    $insdata =  Insured::findOrFail($insureddata->id);
-                    $insdata->share_from = ($insureddata->share_from * (1));
-                    $insdata->share_to = ($insureddata->share_to * (1));
-                    $insdata->save();
+                    // $insdata =  Insured::findOrFail($insureddata->id);
+                    // $insdata->share_from = ($insureddata->share_from * (1));
+                    // $insdata->share_to = ($insureddata->share_to * (1));
+                    // $insdata->save();
 
                     $cedingbroker = CedingBroker::where('id',$slipdataup->source)->first();
                     $ceding = CedingBroker::where('id',$slipdataup->source_2)->first();
