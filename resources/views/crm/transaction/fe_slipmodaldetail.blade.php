@@ -1,4 +1,4 @@
-        <div class="modal fade" id="detailmodaldata" tabindex="-1" user="dialog" aria-labelledby="addDetailLabel" aria-hidden="true">
+<div class="modal fade" id="detailmodaldata" tabindex="-1" user="dialog" aria-labelledby="addDetailLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl" user="document">
                 <div class="modal-content bg-light-gray">
                     <div class="modal-header bg-gray">
@@ -16,20 +16,20 @@
                                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                                         <li class="pt-1 px-3"><h3 class="card-title">{{__('Slip Form')}}</h3></li>
                                         <li class="nav-item">
-                                        <a class="nav-link active" id="general-details2" data-toggle="pill" href="#general-details-id2" role="tab" aria-controls="general-details-id2" aria-selected="true">{{__('General Data')}}</a>
+                                        <a class="nav-link active" id="general-details2" data-toggle="pill" href="#general-details-id2" role="tab" aria-controls="general-details-id" aria-selected="true">{{__('General Data')}}</a>
                                         </li>
                                         <li class="nav-item">
-                                        <a class="nav-link" id="insured-details2" data-toggle="pill" href="#insured-details-id2" role="tab" aria-controls="address-details-id2" aria-selected="false">{{__('Insured Data & Insurance Measurement')}}</a>
+                                        <a class="nav-link" id="insured-details2" data-toggle="pill" href="#insured-details-id2" role="tab" aria-controls="address-details-id" aria-selected="false">{{__('Insured Data & Insurance Measurement')}}</a>
                                         </li>
                                     
                                         <li class="nav-item">
-                                            <a class="nav-link" id="installment-details2" data-toggle="pill" href="#installment-details-id2" role="tab" aria-controls="installment-details-id2" aria-selected="false">{{__('Installment & Retrocession')}}</a>
+                                            <a class="nav-link" id="installment-details2" data-toggle="pill" href="#installment-details-id2" role="tab" aria-controls="installment-details-id" aria-selected="false">{{__('Installment & Retrocession')}}</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="card-body bg-light-gray">
                                     <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
-                                        <div class="tab-pane fade show active" id="general-details-id2" role="tabpanel" aria-labelledby="general-details2">
+                                        <div class="tab-pane fade show active" id="general-details-id2" role="tabpanel" aria-labelledby="general-details">
                                             <div class="row">
                                                 
                                              
@@ -69,10 +69,13 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-12">
+                                                            {{-- <div class="form-group">
+                                                                <label for="">{{__('UY')}}</label>
+                                                                <input type="number" id="slipuydetail" name="slipuydetail" value="" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-4" required/>
+                                                            </div> --}}
                                                             <div class="form-group">
                                                                 <label for="">{{__('Transfer Date')}}</label>
-                                                                <input type="hidden" id="sliptddetail" name="sliptddetail" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" />
-                                                                    <input type="text" id="sliptddetail2" name="sliptddetail2" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" disabled />
+                                                                <input type="text" id="sliptddetail" name="sliptddetail" class="form-control form-control-sm datepicker-input" data-validation="length"  data-validation-length="0-50" readonly="readonly"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -80,11 +83,8 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Status')}}</label>
-                                                            <select name="slipstatusdetail" id="slipstatusdetail" class="form-control form-control-sm " disabled="true">
-                                                                <option value="slip">Slip</option>
-                                                                <option value="endorsement" >Endorsement</option>
-                                                                <option value="cancel">Cancel</option>
-                                                            </select>
+                                                            <input type="text" id="slipstatusdetail" name="slipstatusdetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="slip" readonly="readonly"/>
+                                                         
                                                         </div>    
                                                         </div>
                                                     </div>
@@ -141,7 +141,7 @@
                                             
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <!-- <div class="row">
+                                                    <div class="row">
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Currency')}}</label>
@@ -153,7 +153,7 @@
                                                             </select>
                                                         </div>    
                                                         </div>
-                                                    </div> -->
+                                                    </div>
                             
                                                     <div class="row">
                                                         <div class="col-md-12">
@@ -217,14 +217,14 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="">{{__('Rate Lower Area')}}</label>
-                                                                <input type="text" id="slipbcladetail" name="slipbcladetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
+                                                                <label for="">{{__('Rate Upper Area')}}</label>
+                                                                <input type="text" id="slipbcuadetail" name="slipbcuadetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="">{{__('Rate Upper Area')}}</label>
-                                                                <input type="text" id="slipbcuadetail" name="slipbcuadetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
+                                                                <label for="">{{__('Rate Lower Area')}}</label>
+                                                                <input type="text" id="slipbcladetail" name="slipbcladetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" readonly="readonly" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -235,10 +235,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('WPC')}}</label>
-                                                        <input type="text" readonly="readonly" id="wpcdetail" name="wpcdetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
-                                                        <div class="input-group-append">
-                                                            <div class="input-group-text"><span>Days</span></div> 
-                                                        </div>
+                                                        <input type="number" min="0" value="" readonly="readonly" step=".0001" id="wpcdetail" name="wpcdetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -260,45 +257,29 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="">{{__('Remarks')}}</label>
-                                                        <textarea type="text"  id="remarksdetail" name="remarksdetail" class="form-control form-control-sm" placeholder="" disabled ></textarea>
+                                                        <label for="">{{__('Count Endorsement')}}</label>
+                                                        <input type="text" min="0" value="" readonly="readonly" step=".0001" id="countendorsmentdetail" name="countendorsmentdetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="">{{__('Count Endorsement')}}</label>
-                                                        <input type="text" min="0" value="" disabled step=".0001" id="countendorsmentdetail" name="countendorsmentdetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                        <label for="">{{__('Remarks')}}</label>
+                                                        <textarea type="text"  id="remarksdetail" name="remarksdetail" class="form-control form-control-sm" data-validation="length" data-validation-length="0-50" placeholder="" readonly></textarea>
                                                     </div>
                                                 </div>
                                             </div>
-                                            
-                                            
 
                                         </div>
-                                        <div class="tab-pane fade" id="insured-details-id2" role="tabpanel" aria-labelledby="insured-details2">
+                                        <div class="tab-pane fade" id="insured-details-id2" role="tabpanel" aria-labelledby="insured-details">
                                            
                                             <div class="row">
                                                 <div class="col-md-12 d-flex justify-content-end">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="">{{__('TSI/Ceding Share') }}</label>
-                                                                <select id="sliptypetsidetail" name="sliptypetsidetail" class="form-control form-control-sm " disabled>
-                                                                    <option selected disabled>{{__('Select Share')}}</option>
-                                                                    <option value="1">Total Sum Insured</option>
-                                                                    <option value="2">Ceding Share</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="">{{__('TSI/Ceding Share Value') }}</label>
-                                                                <input type="text" value="" id="sliptotalsumdetail"  name="sliptotalsumdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
-                                                            </div>
-                                                        </div>
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Total Sum Insured') }}</label>
+                                                        <input type="text" value="" id="sliptotalsumdetail"  name="sliptotalsumdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -359,6 +340,7 @@
                                                                             <th>{{__('Percentage')}}</th>
                                                                             <th>{{__('Amount')}}</th>
                                                                             <th>{{__('Min Claim Amount')}}</th>
+                                                                            <th width="20%">{{__('Actions')}}</th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -388,6 +370,7 @@
                                                                             <th>{{__('Peril Code - Name')}}</th>
                                                                             <th>{{__('Nilai (permil %.)')}}</th>
                                                                             <th>{{__('Amount')}}</th>
+                                                                            <th width="20%">{{__('Actions')}}</th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -504,7 +487,6 @@
                                             <div class="row d-flex justify-content-start">
                                                 <i class="fa fa-info-circle" id="labelnpdetail" style="color: grey;" aria-hidden="true"> non proportional panel</i>
                                             </div>
-                                            
                                             <div class="row d-flex justify-content-end">
                                                 <div class="col-md-4">
                                                     <label class="cl-switch cl-switch-green">
@@ -543,166 +525,172 @@
 
                                             
                                             <div class="row">
-                                                <div class="col-md-6 ">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="">{{__('TSI/Ceding Share') }}</label>
-                                                                <select id="sharetypetsidetail" name="sharetypetsidetail" class="form-control form-control-sm " disabled>
-                                                                    <option selected disabled>{{__('Select Share')}}</option>
-                                                                    <option value="1">Total Sum Insured</option>
-                                                                    <option value="2">Ceding Share</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for=""  style="opacity: 0;" >{{__('Total Sum Insured') }}</label>
-                                                                <input type="text" id="sharetotalsumdetail" value="" name="sharetotalsumdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="tsi(*total/sum from interest insured)" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="">{{__('Rate (permil.. ')}} &permil;)</label>
-                                                                <input type="text"  id="slipratedetail" name="slipratedetail" disabled class="form-control form-control-sm floatTextBox2" data-validation="length" data-validation-length="0-50" placeholder="a &permil;" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for=""  >{{__('Total Rate') }}</label>
-                                                                <input type="text" id="sliptotalratedetail" value="" name="sliptotalratedetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="= a &permil; * sum y &permil; " />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="col-md-12">
+                                            <div class="col-md-6 ">
+                                                <div class="row">
+                                                    <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="">{{__('Basic Premium')}}</label>
-                                                            <input type="text" id="slipbasicpremiumdetail" name="slipbasicpremiumdetail" disabled class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a &permil; * tsi" />
+                                                            <label for="">{{__('TSI/Ceding Share') }}</label>
+                                                            <select id="sharetypetsidetail" name="sharetypetsidetail" class="form-control form-control-sm ">
+                                                                <option selected disabled>{{__('Select Share')}}</option>
+                                                                <option value="1">Total Sum Insured</option>
+                                                                <option value="2">Ceding Share</option>
+                                                            </select>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="">{{__('Share to NR')}}</label>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="input-group">
-                                                                            <input type="text"  id="slipsharedetail" name="slipsharedetail" class="form-control form-control-sm floatTextBox" disabled data-validation="length" data-validation-length="0-50" placeholder="b%" />
-                                                                            <div class="input-group-append">
-                                                                                <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="" >{{__('Nasional RE Share')}}</label>
-                                                                <input type="text" id="slipsumsharedetail" name="slipsumsharedetail" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled/>
-                                                            </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for=""  style="opacity: 0;" >{{__('Total Sum Insured') }}</label>
+                                                            <input type="hidden" id="sharetotalsumdetail" value="" name="sharetotalsumdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="tsi(*total/sum from interest insured)" />
+                                                            <input type="text" id="sharetotalsumdetail2" value="" name="sharetotalsumdetail2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="tsi(*total/sum from interest insured)" />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-
-                                                <div class="col-md-6">
-                                                    <div class="row">
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="">{{__('RI Com')}}</label>
-                                                                <div class="row d-flex flex-wrap">
-                                                                    <div class="col-md-12">
-                                                                        <div class="input-group">
-                                                                            <input type="text" id="slipcommissiondetail" name="slipcommissiondetail" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="d" disabled />
-                                                                            <div class="input-group-append">
-                                                                                <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="">{{__('RI Com Amount')}}</label>
-                                                                <input type="text" id="slipsumcommissiondetail" name="slipsumcommissiondetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a &permil; * b% * tsi * (100% - d%)" disabled />
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="row">
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="">{{__('Fee Broker')}}</label>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="input-group">
-                                                                            <input type="text" id="slipvbrokerdetail" name="slipvbrokerdetail" value="0" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" disabled placeholder="a" />
-                                                                            <div class="input-group-append">
-                                                                                <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="">{{__('Fee Broker Amount')}}</label>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="input-group">
-                                                                            <input type="text"  id="slipsumfeedetail" name="slipsumfeedetail"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" disabled placeholder="= a &permil; * b% * tsi * (100% - e%)" />
-                                                                            
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Rate (permil.. ')}} &permil;)</label>
+                                                            <input type="text"  id="slipratedetail" name="slipratedetail" class="form-control form-control-sm floatTextBox2" data-validation="length" data-validation-length="0-50" placeholder="a &permil;" />
                                                         </div>
                                                     </div>
-
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="row"> 
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="">{{__('Gross Prm to NR')}}</label>
-                                                                <input type="text" id="slipgrossprmtonrdetail" name="slipgrossprmtonrdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a &permil; * tsi * b% " disabled />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="">{{__('Net Prm to NR')}}</label>
-                                                                <input type="text" id="slipnetprmtonrdetail" name="slipnetprmtonrdetail" class="form-control form-control-sm amount" data-validation="length" placeholder="= a &permil; * b% * tsi * (100% - d% - e%)" data-validation-length="0-50" disabled/>
-                                                            </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for=""  style="opacity: 0;" >{{__('Total Rate') }}</label>
+                                                            <input type="hidden" id="sliptotalratedetail" value="" name="sliptotalratedetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="= a &permil; * sum y &permil; " />
+                                                            <input type="text" id="sliptotalratedetail2" value="" name="sliptotalratedetail2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="= a &permil; * sum y &permil; " />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">{{__('Basic Premium')}}</label>
+                                                        <input type="text" id="slipbasicpremiumdetail" name="slipbasicpremiumdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a &permil; * tsi" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Share')}}</label>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <input type="text"  id="slipsharedetail" name="slipsharedetail" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="b%" />
+                                                                        <div class="input-group-append">
+                                                                            <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
+                                                            <input type="hidden" id="slipsumsharedetail" name="slipsumsharedetail" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  />
+                                                            <input type="text" id="slipsumsharedetail2" name="slipsumsharedetail2" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('RI Com')}}</label>
+                                                            <div class="row d-flex flex-wrap">
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <input type="text" id="slipcommissiondetail" name="slipcommissiondetail" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="d" />
+                                                                        <div class="input-group-append">
+                                                                            <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('RI Com Amount')}}</label>
+                                                            <input type="hidden" id="slipsumcommissiondetail" name="slipsumcommissiondetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a &permil; * b% * tsi * (100% - d%)"  />
+                                                            <input type="text" id="slipsumcommissiondetail2" name="slipsumcommissiondetail2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="= a &permil; * b% * tsi * (100% - d%)" disabled />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Fee Broker')}}</label>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <input type="text" id="slipvbrokerdetail" name="slipvbrokerdetail" value="0" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                        <div class="input-group-append">
+                                                                            <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Fee Broker Amount')}}</label>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <input type="hidden"  id="slipsumfeedetail" name="slipsumfeedetail"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="= a &permil; * b% * tsi * (100% - e%)" />
+                                                                        <input type="text"  id="slipsumfeedetail2" name="slipsumfeedetail"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" disabled placeholder="= a &permil; * b% * tsi * (100% - e%)" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="row"> 
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Gross Prm to NR')}}</label>
+                                                            <input type="hidden" id="slipgrossprmtonrdetail" name="slipgrossprmtonrdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a &permil;  * tsi * b%"  />
+                                                            <input type="text" id="slipgrossprmtonrdetail2" name="slipgrossprmtonrdetail2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a &permil; * tsi * b% " disabled />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">{{__('Net Prm to NR')}}</label>
+                                                            <input type="hidden" id="slipnetprmtonrdetail" name="slipnetprmtonrdetail" class="form-control form-control-sm amount" data-validation="length" placeholder="=a &permil;. * b% * tsi * (100% - d%)" data-validation-length="0-50" />
+                                                            <input type="text" id="slipnetprmtonrdetail2" name="slipnetprmtonrdetail2" class="form-control form-control-sm amount" data-validation="length" placeholder="= a &permil; * b% * tsi * (100% - d% - e%)" data-validation-length="0-50" disabled/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            
+
+                                        </div>
                                         
-                                        <div class="tab-pane fade" id="installment-details-id2" role="tabpanel" aria-labelledby="installment-details2">
+                                        <div class="tab-pane fade" id="installment-details-id2" role="tabpanel" aria-labelledby="installment-details">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="card">
@@ -719,6 +707,7 @@
                                                                             <th>{{__('Installment Date')}}</th>
                                                                             <th>{{__('Percentage')}}</th>
                                                                             <th>{{__('Amount')}}</th>
+                                                                            <th width="20%">{{__('Actions')}}</th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -783,6 +772,7 @@
                                                                             <th>{{__('Retrocession Contract')}}</th>
                                                                             <th>{{__('Percentage')}}</th>
                                                                             <th>{{__('Amount')}}</th>
+                                                                            <th width="20%">{{__('Actions')}}</th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>

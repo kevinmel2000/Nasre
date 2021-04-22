@@ -96,11 +96,9 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Status')}}</label>
-                                                            <select name="slipstatusendorsement" id="slipstatusendorsement" class="form-control form-control-sm ">
-                                                                <option value="slip"  >Slip</option>
-                                                                <option value="endorsement">Endorsement</option>
-                                                                <option value="cancel">Cancel</option>
-                                                            </select>
+                                                           
+                                                            <input type="text" id="slipstatusendorsement" name="slipstatusendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="slip" readonly="readonly"/>
+                                                            
                                                         </div>    
                                                         </div>
                                                     </div>

@@ -83,6 +83,7 @@
                                                             <label for="">{{__('Status')}}</label>
                                                             <input type="text" id="slipstatusupdate" name="slipstatusupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="slip" readonly="readonly"/>
                                                             
+                                                            
                                                             <!-- <select name="slipstatusupdate" id="slipstatusupdate" class="form-control form-control-sm ">
                                                                 <option value="slip" >Slip</option>
                                                                 <option value="endorsement" >Endorsement</option>

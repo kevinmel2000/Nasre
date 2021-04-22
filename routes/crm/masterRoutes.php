@@ -11,6 +11,9 @@ use App\Http\Controllers\FeLookupLocationController;
 use App\Http\Controllers\ProductGroupController;
 use App\Http\Controllers\EarthQuakeZoneController;
 use App\Http\Controllers\FloodZoneController;
+use App\Http\Controllers\CauseOfLossController;
+use App\Http\Controllers\NatureOfLossController;
+use App\Http\Controllers\SurveyorController;
 
 Route::get('get-state-list','FeLookupLocationController@getStateList');
 Route::get('get-city-list','FeLookupLocationController@getCityList');
@@ -97,6 +100,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::post('/koc/store', [KocController::class, 'store'])->middleware(['can:create-koc']);
     // Route::put('/koc/update/{koc}', [KocController::class, 'update'])->middleware(['can:update-koc']);
     // Route::delete('/koc/destroy/{koc}', [KocController::class, 'destroy'])->middleware(['can:delete-koc']);
+    
     Route::get('/koc', [KocController::class, 'index']);
     Route::post('/koc/store', [KocController::class, 'store']);
     Route::put('/koc/update/{koc}', [KocController::class, 'update']);
@@ -254,6 +258,22 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::get('/import', [ ProductController::class, 'import'])->middleware(['can:create-product']);
     // Route::post('/import', [ ProductController::class, 'importStore'])->middleware(['can:create-product']);
     
+    Route::get('/causeofloss', [CauseOfLossController::class, 'index']);
+    Route::post('/causeofloss/store', [CauseOfLossController::class, 'store']);
+    Route::put('/causeofloss/update/{causeofloss}', [CauseOfLossController::class, 'update']);
+    Route::delete('/causeofloss/destroy/{causeofloss}', [CauseOfLossController::class, 'destroy']);
+
+    
+    Route::get('/natureofloss', [NatureOfLossController::class, 'index']);
+    Route::post('/natureofloss/store', [NatureOfLossController::class, 'store']);
+    Route::put('/natureofloss/update/{natureofloss}', [NatureOfLossController::class, 'update']);
+    Route::delete('/natureofloss/destroy/{natureofloss}', [NatureOfLossController::class, 'destroy']);
+
+
+    Route::get('/surveyor', [SurveyorController::class, 'index']);
+    Route::post('/surveyor/store', [SurveyorController::class, 'store']);
+    Route::put('/surveyor/update/{surveyor}', [SurveyorController::class, 'update']);
+    Route::delete('/surveyor/destroy/{surveyor}', [SurveyorController::class, 'destroy']);
 
 
 });

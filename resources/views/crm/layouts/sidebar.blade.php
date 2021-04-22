@@ -531,6 +531,22 @@
                                         </li>
                                     {{-- @endcan --}}
     
+
+                                    {{-- @can('viewany-causeofloss', User::class) --}}
+                                        @if($route_active == 'Cause Of Loss')
+                                            @php
+                                                $causeofloss = 'active';
+                                            @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/master-data/causeofloss')}}" class="nav-link {{@$causeofloss}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                                <p style="font-size: 90%;margin-left:2%;">{{__('CAUSE OF LOSS FORM')}}</p>
+                                            </a>
+                                        </li>
+                                    {{-- @endcan --}}
+    
+
                                     {{-- @can('viewany-cob', User::class) --}}
                                         @if($route_active == 'COB Master')
                                             @php
@@ -887,6 +903,20 @@
                                             <a href="{{url('/master-data/propertytype')}}" class="nav-link {{@$property_form}}">
                                                     <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('PROPERTY TYPE FORM')}}</p>
+                                            </a>
+                                        </li>
+                                    {{-- @endcan --}}
+
+                                    {{-- @can('viewany-natureofloss', User::class) --}}
+                                        @if($route_active == 'Cause Of Loss')
+                                            @php
+                                                $natureofloss = 'active';
+                                            @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/master-data/natureofloss')}}" class="nav-link {{@$natureofloss}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                                <p style="font-size: 90%;margin-left:2%;">{{__('NATURE OF LOSS FORM')}}</p>
                                             </a>
                                         </li>
                                     {{-- @endcan --}}

@@ -1570,8 +1570,7 @@ class FeSlipController extends Controller
         $slipdata=SlipTable::where('id',$idm)->first();
     
 
-        
-        if(!empty($slipdata->deductible_panel))
+        if(!empty($slipdata->deductible_panel) && strlen($slipdata->deductible_panel)>10)
         {
             $deductibledata=json_decode($slipdata->deductible_panel);   
         }
@@ -1579,6 +1578,7 @@ class FeSlipController extends Controller
         {
             $deductibledata=null;
         }
+
         $newarraydeduct=[];
         // dd($deductibledata);
         if(!empty($deductibledata))
@@ -1602,7 +1602,7 @@ class FeSlipController extends Controller
 
 
 
-        if(!empty($slipdata->extend_coverage))
+        if(!empty($slipdata->extend_coverage) && strlen($slipdata->extend_coverage)>=10)
         {
             $extendcoverdata=json_decode($slipdata->extend_coverage);   
         }
@@ -1630,7 +1630,7 @@ class FeSlipController extends Controller
         $newextenddata=json_encode($newarrayextend);
 
 
-        if(!empty($slipdata->installment_panel))
+        if(!empty($slipdata->installment_panel) && strlen($slipdata->installment_panel)>=10)
         {
             $installmentpdata=json_decode($slipdata->installment_panel);   
         }
@@ -1840,8 +1840,15 @@ class FeSlipController extends Controller
 
         // $newinterestdata=json_encode($newarray);
 
+        if(!empty($slipdata->deductible_panel) && strlen($slipdata->deductible_panel)>=10)
+        {
+            $deductibledata=json_decode($slipdata->deductible_panel);   
+        }
+        else
+        {
+            $deductibledata=null;
+        }
 
-        $deductibledata=json_decode($slipdata->deductible_panel);  
         $newarraydeduct=[];
         if(!empty($deductibledata))
         {
@@ -1855,11 +1862,19 @@ class FeSlipController extends Controller
                 
                 array_push($newarraydeduct,$mydata);
             }     
-        }  
+        } 
+
         $newdeductdata=json_encode($newarraydeduct);
 
-
-        $extendcoverdata=json_decode($slipdata->extend_coverage);
+        if(!empty($slipdata->extend_coverage) && strlen($slipdata->extend_coverage)>=10)
+        {
+            $extendcoverdata=json_decode($slipdata->extend_coverage);   
+        }
+        else
+        {
+            $extendcoverdata=null;
+        }
+        
         $newarrayextend=[];
         if(!empty($extendcoverdata))
         {
@@ -1877,9 +1892,8 @@ class FeSlipController extends Controller
 
 
         $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
-
-
-        if(!empty($slipdata->installment_panel))
+        
+        if(!empty($slipdata->installment_panel) && strlen($slipdata->installment_panel)>=10)
         {
             $installmentpdata=json_decode($slipdata->installment_panel);   
         }
