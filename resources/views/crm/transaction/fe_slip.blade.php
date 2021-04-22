@@ -600,10 +600,6 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                {{-- <div class="form-group">
-                                                                    <label for="">{{__('UY')}}</label>
-                                                                    <input type="number" id="slipuy" name="slipuy" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-12" required/>
-                                                                </div> --}}
                                                                 <div class="form-group">
                                                                     <label for="">{{__('Transfer Date')}}</label>
                                                                     <input type="hidden" id="sliptd" name="sliptd" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" />
@@ -615,13 +611,15 @@
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <label for="">{{__('Status')}}</label>
-                                                                    <select name="slipstatus" id="slipstatus" class="form-control form-control-sm ">
+                                                                    <input type="text" id="slipstatus" name="slipstatus" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="slip" readonly="readonly"/>
+
+                                                                    <!-- <select name="slipstatus" id="slipstatus" class="form-control form-control-sm ">
                                                                         {{-- <option selected readonly>{{__('Select Status')}}</option> --}}
                                                                         <option value="slip" selected>Slip</option>
                                                                         <option value="endorsement">Endorsement</option>
                                                                         <option value="cancel">Cancel</option>
                                                                         <option value="decline">Decline</option>
-                                                                    </select>
+                                                                    </select> -->
                                                                 </div>    
                                                             </div>
                                                         </div>

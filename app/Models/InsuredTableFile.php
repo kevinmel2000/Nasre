@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class InsuredTableFile extends Model
 {
     //
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
     protected $guarded = [];
 
     protected $table = 'insured_table_file';

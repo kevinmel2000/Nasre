@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class DeductibleTemp extends Model
 {
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
     protected $table = "deductible_type_detail";
 
     protected $guarded = [];

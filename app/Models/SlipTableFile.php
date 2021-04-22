@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class SlipTableFile extends Model
 {
     //
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
     protected $guarded = [];
 
     protected $table = 'slip_table_file';

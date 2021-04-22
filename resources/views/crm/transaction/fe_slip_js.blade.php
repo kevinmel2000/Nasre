@@ -4988,7 +4988,7 @@ $('#slipbld_constendorsement').change(function(){
     var real_tsi = parseInt(conv_tsi);
     console.log(real_tsi)
 
-    var cedshare = $('feshare').val();
+    var cedshare = $('#feshare').val();
     if(cedshare == null){
         cedshare = parseInt(0);
     }else{
