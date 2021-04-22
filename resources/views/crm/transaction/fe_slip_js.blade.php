@@ -8221,10 +8221,14 @@ function deletelocationriskdetail(id){
                  if(response.code_error){
                     swal("Error!", response.message , "Insert Error");
                     // $('#addinstallmentinsured-btn').attr('hidden','true')
-                }else{
+                }
+                else
+                {
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-                        var str_amount = response.amount.toString() ;
+                        
+                        var str_amount = response.amount.toString();
                         var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        
                         $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
                         $('#dateinstallment').val('');
                         $('#slipippercentage').val('');

@@ -3100,7 +3100,7 @@ class FeSlipController extends Controller
                                 'percentage'=>$ipt->percentage,
                                 'amount'=>$ipt->amount,
                                 'slip_id'=>$ipt->slip_id,
-                                'count_endorsement' => ($ect->count_endorsement + 1)
+                                'count_endorsement' => ($ipt->count_endorsement + 1)
                             ]);
 
                             $jsoniptlistup = InstallmentTemp::where('slip_id','=',$iptlistup->slip_id)->where('count_endorsement',$iptlistup->count_endorsement)->orderby('id','desc')->get();
@@ -3159,7 +3159,7 @@ class FeSlipController extends Controller
                                         'prod_year' => $slt->prod_year,
                                         'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
-                                        'status'=>$slt->status,
+                                        'status'=>'endorsement',
                                         'endorsment'=>($slt->endorsement + 1),
                                         'selisih'=>'true',
                                         'source'=>$slt->source,
@@ -3211,7 +3211,7 @@ class FeSlipController extends Controller
                                         'prod_year' => $slt->prod_year,
                                         'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
-                                        'status'=>$slt->status,
+                                        'status'=>'endorsement',
                                         'endorsment'=>($slt->endorsement + 1),
                                         'selisih'=>'true',
                                         'source'=>$slt->source,
@@ -3265,7 +3265,7 @@ class FeSlipController extends Controller
                                         'prod_year' => $slt->prod_year,
                                         'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
-                                        'status'=>$slt->status,
+                                        'status'=>'endorsement',
                                         'endorsment'=>($slt->endorsement + 1),
                                         'selisih'=>'true',
                                         'source'=>$slt->source,
@@ -3319,7 +3319,7 @@ class FeSlipController extends Controller
                                         'prod_year' => $slt->prod_year,
                                         'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
-                                        'status'=>$slt->status,
+                                        'status'=>'endorsement',
                                         'endorsment'=>($slt->endorsement + 1),
                                         'selisih'=>'true',
                                         'source'=>$slt->source,
@@ -3374,7 +3374,7 @@ class FeSlipController extends Controller
                                         'prod_year' => $slt->prod_year,
                                         'selisih' => 'true',
                                         'date_transfer'=>$slt->slipdatetransfer,
-                                        'status'=>$slt->status,
+                                        'status'=>'endorsement',
                                         'endorsment'=>($slt->endorsement + 1),
                                         'selisih'=>'true',
                                         'source'=>$slt->source,
@@ -3454,6 +3454,7 @@ class FeSlipController extends Controller
                     $msdata->netprm_to_nr=($slipdata->netprm_to_nr * (-1));
                     $msdata->sum_commission=($slipdata->sum_commission * (-1));
                     $msdata->wpc=($slipdata->wpc * (-1)); 
+                    $msdata->status='endorsement'; 
                     $msdata->sum_own_retention=($slipdata->sum_own_retention * (-1));
                     $msdata->selisih="false"; 
                     $msdata->save();
@@ -3461,8 +3462,8 @@ class FeSlipController extends Controller
 
 
                     $insdata =  Insured::findOrFail($insureddata->id);
-                    $insdata->share_from = ($insureddata->share_from * (-1));
-                    $insdata->share_to = ($insureddata->share_to * (-1));
+                    $insdata->share_from = ($insureddata->share_from * (1));
+                    $insdata->share_to = ($insureddata->share_to * (1));
                     $insdata->save();
 
                     $cedingbroker = CedingBroker::where('id',$slipdataup->source)->first();
@@ -3701,7 +3702,8 @@ class FeSlipController extends Controller
     }
 
     
-    public function updateendorsement(Request $request){
+    public function updateendorsement(Request $request)
+    {
 
         $slipdata= SlipTable::where('id','=',$request->slipid)->first();
 
@@ -3853,6 +3855,37 @@ class FeSlipController extends Controller
         
         return response()->json(['success'=>'Data has been deleted','amountlocation'=>$amountlocation,'cedinglocation'=>$cedinglocation]);
     }
+
+
+    public function changeDecline($id)
+    {
+        
+            $slip = SlipTable::where('id', '=', $id);
+            $slip->status = "decline";
+            $slip->save();
+
+            $notification = array(
+                'message' => 'Fire & Engginering Insured & Slip Status Decline successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);    
+    }
+
+
+    public function changeCancel($id)
+    {
+        
+            $slip = SlipTable::where('id', '=', $id);
+            $slip->status = "cancel";
+            $slip->save();
+
+            $notification = array(
+                'message' => 'Fire & Engginering Insured & Slip Status Cancel successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);    
+    }
+
 
     
 }
