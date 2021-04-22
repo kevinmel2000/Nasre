@@ -236,8 +236,8 @@
 
                             <div class="row">
                                 <div class="col-md-12 com-sm-12 mt-3">
-                                    <button type="button" id="addinsuredsave-btn" class="btn btn-primary btn-block " value="Save">
-                                        <!-- {{__('Save')}} -->
+                                    <button type="button" id="addinsuredsave-btn" class="btn btn-primary btn-block ">
+                                        {{__('Save')}}
                                     </button>
                                 </div>
                             </div>

@@ -9537,7 +9537,8 @@ function deletelocationriskdetail(id){
 
             // $('#addinsuredsave-btn').attr('hidden','true');
 
-            $('#addinsuredsave-btn').val('Update');
+            // $('#addinsuredsave-btn').val('Update');
+            $("#addinsuredsave-btn").html('Update');
 
         },
         error: function (request, status, error) {

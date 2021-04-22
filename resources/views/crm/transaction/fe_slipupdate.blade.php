@@ -225,7 +225,10 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">{{__('UY')}}</label>
-                                            <input type="text" id="feuy" name="feuy" value="{{$insureddata->uy}}" class="form-control form-control-sm intTextBox" data-validation="length"  data-validation-length="0-12" />
+                                           <select id="feuy" name="feuy" class="form-control form-control-sm ">
+                                                <option value="{{ date('Y') }}" selected>{{ date('Y') }}</option>
+                                                <option value="{{ (intval(date('Y')) - 1) }}">{{ (intval(date('Y')) - 1) }}</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
