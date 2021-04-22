@@ -258,11 +258,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
     //triggered when modal is about to be shown
     $('#detailmodaldata').on('show.bs.modal', function(e) {
-        
+
          //get data-id attribute of the clicked element
          var codesl = $(e.relatedTarget).data('book-id');
 
-        alert(codesl);
+        alert('hello id slip ' + codesl);
         
         $.ajax({
             url:'{{ url("/") }}/transaction-data/detailslip/'+codesl,
@@ -685,11 +685,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 }
             });
 
-
-
-
-
-});
+    });
 </script>
 
 
