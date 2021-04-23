@@ -287,7 +287,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             {
 
                 var deductibledata = JSON.parse(response.deductible_panel); 
-                // $('#deductiblePaneldetail tbody').empty();
+                $('#deductiblePaneldetail tbody').empty();
                 for(var i = 0; i < deductibledata.length; i++) 
                 {
                     var obj = deductibledata[i];
@@ -309,7 +309,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 {
 
                     var extend_coverage = JSON.parse(response.extend_coverage); 
-                    // $('#ExtendCoveragePaneldetail tbody').empty();
+                    $('#ExtendCoveragePaneldetail tbody').empty();
                     for(var i = 0; i < extend_coverage.length; i++) 
                     {
                         var obj = extend_coverage[i];
@@ -329,7 +329,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 {
 
                     var installment_panel = JSON.parse(response.installment_panel); 
-                    // $('#installmentPaneldetail tbody').empty();
+                    $('#installmentPaneldetail tbody').empty();
                     for(var i = 0; i < installment_panel.length; i++) 
                     {
                         var obj = installment_panel[i];
@@ -350,7 +350,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 {
 
                     var retrocession_panel = JSON.parse(response.retrocession_panel); 
-                    // $('#retrocessionPaneldetail tbody').empty();
+                    $('#retrocessionPaneldetail tbody').empty();
                     for(var i = 0; i < retrocession_panel.length; i++) 
                     {
                         var obj = retrocession_panel[i];
@@ -455,7 +455,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                 if(response.status_log){
                     var status_log = response.status_log;
-                    // $('#stlid'+status_log[i].id).remove();
+                    $('#stlid'+status_log[i].id).remove();
                     for (var i = 0; i < 5; i++){
 
                         if(status_log[i])
@@ -471,7 +471,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             }
 
             if(response.attacment_file){
-                // $('#aidlistdetail li').remove();
+                $('#aidlistdetail').remove();
                 var attacment_file = response.attacment_file;
                 for (var i = 0; i < attacment_file.length; i++){
                     var filename = attacment_file[i].filename;
