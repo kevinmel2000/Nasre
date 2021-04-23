@@ -277,12 +277,27 @@
                                            
                                             <div class="row">
                                                 <div class="col-md-12 d-flex justify-content-end">
-                                                    <div class="form-group">
-                                                        <label for="">{{__('Total Sum Insured') }}</label>
-                                                        <input type="text" value="" id="sliptotalsumdetail"  name="sliptotalsumdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">{{__('TSI/Ceding Share') }}</label>
+                                                                <select id="sliptypetsidetail" name="sliptypetsiupdate" class="form-control form-control-sm ">
+                                                                    <option selected disabled>{{__('Select Share')}}</option>
+                                                                    <option value="1">Total Sum Insured</option>
+                                                                    <option value="2">Ceding Share</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6"> 
+                                                            <div class="form-group">
+                                                                <label for="">{{__('Total Sum Insured') }}</label>
+                                                                <input type="text" value="" id="sliptotalsumdetail"  name="sliptotalsumdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="row">
                                                 <div class="col-md-12 d-flex justify-content-end">
                                                     <div class="row">
@@ -540,8 +555,8 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for=""  style="opacity: 0;" >{{__('Total Sum Insured') }}</label>
-                                                            <input type="hidden" id="sharetotalsumdetail" value="" name="sharetotalsumdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="tsi(*total/sum from interest insured)" />
-                                                            <input type="text" id="sharetotalsumdetail2" value="" name="sharetotalsumdetail2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="tsi(*total/sum from interest insured)" />
+                                                            <!-- /<input type="hidden" id="sharetotalsumdetail" value="" name="sharetotalsumdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="tsi(*total/sum from interest insured)" /> -->
+                                                            <input type="text" id="sharetotalsumdetail" value="" name="sharetotalsumdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="tsi(*total/sum from interest insured)" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -558,8 +573,8 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for=""  style="opacity: 0;" >{{__('Total Rate') }}</label>
-                                                            <input type="hidden" id="sliptotalratedetail" value="" name="sliptotalratedetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="= a &permil; * sum y &permil; " />
-                                                            <input type="text" id="sliptotalratedetail2" value="" name="sliptotalratedetail2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="= a &permil; * sum y &permil; " />
+                                                            <!-- <input type="hidden" id="sliptotalratedetail" value="" name="sliptotalratedetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="= a &permil; * sum y &permil; " /> -->
+                                                            <input type="text" id="sliptotalratedetail" value="" name="sliptotalratedetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="= a &permil; * sum y &permil; " />
                                                         </div>
                                                     </div>
                                                 </div>

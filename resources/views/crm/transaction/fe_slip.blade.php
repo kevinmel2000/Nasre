@@ -1188,7 +1188,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label for=""  style="opacity: 0;" >{{__('Total Sum Insured') }}</label>
+                                                                            <label for="" >{{__('TSI/Ceding Share Value') }}</label>
                                                                             <input type="hidden" id="sharetotalsum" value="" name="sharetotalsum" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="tsi(*total/sum from interest insured)" />
                                                                             <input type="text" id="sharetotalsum2" value="" name="sharetotalsum2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="tsi(*total/sum from interest insured)" />
                                                                         </div>
@@ -1201,14 +1201,14 @@
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label for="">{{__('Rate (permil.. ')}} &permil;)</label>
-                                                                            <input type="text"  id="sliprate" name="sliprate" class="form-control form-control-sm floatTextBox2" data-validation="length" data-validation-length="0-50" placeholder="a &permil;" />
+                                                                            <input type="text"  id="sliprate" name="sliprate" class="form-control form-control-sm floatTextBox2" data-validation="length" data-validation-length="0-50" placeholder="" />
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label for=""  >{{__('Total Rate') }}</label>
                                                                             <input type="hidden" id="sliptotalrate" value="" name="sliptotalrate" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="= a &permil; * sum y &permil; " />
-                                                                            <input type="text" id="sliptotalrate2" value="" name="sliptotalrate2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="= a &permil; * sum y &permil; " />
+                                                                            <input type="text" id="sliptotalrate2" value="" name="sliptotalrate2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="= a &permil;(rate + sum(permil&permil; extend coverage ))" />
                                                                         </div>
                                                                     </div>
                                                                 </div>

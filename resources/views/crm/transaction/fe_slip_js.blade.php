@@ -282,11 +282,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             $('#slipvbrokerdetail').val(response.v_broker);
 
 
-            if(response.deductible_panel && response.deductible_panel.length > 10)
+            if(response.deductible_panel && response.deductible_panel.length > 0)
             {
 
                 var deductibledata = JSON.parse(response.deductible_panel); 
-
+                $('#deductiblePaneldetail tbody').empty();
                 for(var i = 0; i < deductibledata.length; i++) 
                 {
                     var obj = deductibledata[i];
@@ -297,18 +297,18 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                         var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         // var curr_minamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.min_claimamount);
                         var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#deductiblePaneldetail tbody').empty();
+                        
                         $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td></td></tr>');
 
                     }
                 }
 
 
-                if(response.extend_coverage && response.extend_coverage.length > 10)
+                if(response.extend_coverage && response.extend_coverage.length > 0)
                 {
 
                     var extend_coverage = JSON.parse(response.extend_coverage); 
-
+                    $('#ExtendCoveragePaneldetail tbody').empty();
                     for(var i = 0; i < extend_coverage.length; i++) 
                     {
                         var obj = extend_coverage[i];
@@ -317,18 +317,18 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                         //$('#interestInsuredTabledetail tbody').prepend('');
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
                         var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#ExtendCoveragePaneldetail tbody').empty();
+                        
                         $('#ExtendCoveragePaneldetail tbody').prepend('<tr id="iidextendcoveragedetail'+obj.id+'" data-name="extendcoveragedetailvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragetype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
                         
                     }
                 }
 
 
-                if(response.installment_panel && response.installment_panel.length > 10)
+                if(response.installment_panel && response.installment_panel.length > 0)
                 {
 
                     var installment_panel = JSON.parse(response.installment_panel); 
-
+                    $('#installmentPaneldetail tbody').empty();
                     for(var i = 0; i < installment_panel.length; i++) 
                     {
                         var obj = installment_panel[i];
@@ -337,7 +337,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                         //console.log(obj.id);
                         //$('#interestInsuredTabledetail tbody').prepend('');
-                        $('#installmentPaneldetail tbody').empty();
+                        
                         $('#installmentPaneldetail tbody').prepend('<tr id="iidinstallmentdetail'+obj.id+'" data-name="installmentdetailvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>')
 
                     }
@@ -345,11 +345,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
 
 
-                if(response.retrocession_panel && response.retrocession_panel.length > 10)
+                if(response.retrocession_panel && response.retrocession_panel.length > 0)
                 {
 
                     var retrocession_panel = JSON.parse(response.retrocession_panel); 
-
+                    $('#retrocessionPaneldetail tbody').empty();
                     for(var i = 0; i < retrocession_panel.length; i++) 
                     {
                         var obj = retrocession_panel[i];
@@ -358,7 +358,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                         //console.log(obj.id);
                         //$('#interestInsuredTabledetail tbody').prepend('');
-                        $('#retrocessionPaneldetail tbody').empty();
+                        
                         
                         $('#retrocessionPaneldetail tbody').prepend('<tr id="iidretrocessiondetail'+obj.id+'" data-name="retrocessiondetailvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
 
@@ -441,9 +441,20 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     }
                 }
 
+                if(response.type_tsi)
+                {
+                    $("#sliptypetsidetail option[value=" + response.occupacy + "]:first")[0].selected = true;
+                }
 
-                if(response.status_log){
+                if(response.type_share_tsi)
+                {
+                    $("#sharetypetsidetail option[value=" + response.occupacy + "]:first")[0].selected = true;
+                }
+
+
+                if(response.status_log && response.status_log.length > 0 ){
                     var status_log = response.status_log;
+                    $('#stlid'+status_log[i].id).remove();
                     for (var i = 0; i < 5; i++){
 
                         if(status_log[i])
@@ -451,7 +462,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                         var status = status_log[i].status;
                         var datetime = status_log[i].datetime;
                         var user = status_log[i].user;
-                        $('#stlid'+status_log[i].id).remove();
+                        
                         $('#slipStatusTabledetail tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
                     }
 
@@ -459,11 +470,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             }
 
             if(response.attacment_file){
-                $('#aidlistdetail li').remove();
+                $('#aidlistdetail ul').remove();
                 var attacment_file = response.attacment_file;
                 for (var i = 0; i < attacment_file.length; i++){
                     var filename = attacment_file[i].filename;
-                    $('#aidlistdetail').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
+                    $('#aidlistdetail ul').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
                 };
             }
 
@@ -477,6 +488,14 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             else
             {
                 $('#sliptotalsumdetail').val("0");
+            }
+
+            if(response.share_tsi){
+                $('#sharetotalsumdetail').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }
+            else
+            {
+                $('#sharetotalsumdetail').val("0");
             }
 
             
@@ -541,6 +560,15 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 if(response.sum_share){
                     $('#slipsumsharedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#slipsumsharedetail2').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                }
+                else{
+                    $('#slipsumsharedetail').val("0");
+                    $('#slipsumsharedetail2').val("0");
+                }
+
+                if(response.sum_rate){
+                    $('#sliptotalratedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#sliptotalratedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }
                 else{
                     $('#slipsumsharedetail').val("0");
@@ -10429,6 +10457,9 @@ function deletelocationriskdetail(id){
        var slipsumor =  $('#slipsumorupdate').val();
        var wpc =  $('#wpcupdate').val();
        var remarks =  $('#remarksupdate').val();
+       var sliptotalday = $('#slipdaytotalupdate').val();
+       var sliptotalyear = $('#slipdaytotalupdate3').val();
+       var sliptotaldatesum = $('#sliptotalsumdateupdate').val();
 
        var token2 = $('input[name=_token]').val();
 
@@ -10534,6 +10565,9 @@ function deletelocationriskdetail(id){
                      slipipto:slipipto,
                      sliprpfrom:sliprpfrom,
                      sliprpto:sliprpto,
+                     sliptotalday:sliptotalday,
+                     sliptotalyear:sliptotalyear,
+                     slipdatesum:sliptotaldatesum,
                      proportional:proportional,
                      sliplayerproportional:sliplayerproportional,
                      sliprate:sliprate,
