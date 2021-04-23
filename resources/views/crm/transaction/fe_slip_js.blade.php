@@ -270,6 +270,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
         complete: function() {  $("body").removeClass("loading"); },
         success:function(response)
         {
+            console.log('bisa tampil')
             console.log(response);
             $('#slipnumberdetail').val(response.number);
             $('#slipusernamedetail').val(response.username);
@@ -282,11 +283,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             $('#slipvbrokerdetail').val(response.v_broker);
 
 
-            if(response.deductible_panel && response.deductible_panel.length > 0)
+            if(response.deductible_panel && response.deductible_panel.length > 10)
             {
 
                 var deductibledata = JSON.parse(response.deductible_panel); 
-                $('#deductiblePaneldetail tbody').empty();
+                // $('#deductiblePaneldetail tbody').empty();
                 for(var i = 0; i < deductibledata.length; i++) 
                 {
                     var obj = deductibledata[i];
@@ -304,11 +305,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 }
 
 
-                if(response.extend_coverage && response.extend_coverage.length > 0)
+                if(response.extend_coverage && response.extend_coverage.length > 10)
                 {
 
                     var extend_coverage = JSON.parse(response.extend_coverage); 
-                    $('#ExtendCoveragePaneldetail tbody').empty();
+                    // $('#ExtendCoveragePaneldetail tbody').empty();
                     for(var i = 0; i < extend_coverage.length; i++) 
                     {
                         var obj = extend_coverage[i];
@@ -324,11 +325,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 }
 
 
-                if(response.installment_panel && response.installment_panel.length > 0)
+                if(response.installment_panel && response.installment_panel.length > 10)
                 {
 
                     var installment_panel = JSON.parse(response.installment_panel); 
-                    $('#installmentPaneldetail tbody').empty();
+                    // $('#installmentPaneldetail tbody').empty();
                     for(var i = 0; i < installment_panel.length; i++) 
                     {
                         var obj = installment_panel[i];
@@ -345,11 +346,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
 
 
-                if(response.retrocession_panel && response.retrocession_panel.length > 0)
+                if(response.retrocession_panel && response.retrocession_panel.length > 10)
                 {
 
                     var retrocession_panel = JSON.parse(response.retrocession_panel); 
-                    $('#retrocessionPaneldetail tbody').empty();
+                    // $('#retrocessionPaneldetail tbody').empty();
                     for(var i = 0; i < retrocession_panel.length; i++) 
                     {
                         var obj = retrocession_panel[i];
@@ -452,9 +453,9 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 }
 
 
-                if(response.status_log && response.status_log.length > 0 ){
+                if(response.status_log){
                     var status_log = response.status_log;
-                    $('#stlid'+status_log[i].id).remove();
+                    // $('#stlid'+status_log[i].id).remove();
                     for (var i = 0; i < 5; i++){
 
                         if(status_log[i])
@@ -470,11 +471,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             }
 
             if(response.attacment_file){
-                $('#aidlistdetail ul').remove();
+                // $('#aidlistdetail li').remove();
                 var attacment_file = response.attacment_file;
                 for (var i = 0; i < attacment_file.length; i++){
                     var filename = attacment_file[i].filename;
-                    $('#aidlistdetail ul').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
+                    $('#aidlistdetail li').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
                 };
             }
 
