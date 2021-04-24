@@ -948,6 +948,20 @@
                                             </a>
                                         </li>
                                     {{-- @endcan --}}
+
+                                    {{-- @can('viewany-surveyor', User::class) --}}
+                                        @if($route_active == 'Surveyor')
+                                            @php
+                                                $surveyor = 'active';
+                                            @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/master-data/surveyor')}}" class="nav-link {{@$surveyor}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                                <p style="font-size: 90%;margin-left:2%;">{{__('SURVEYOR')}}</p>
+                                            </a>
+                                        </li>
+                                    {{-- @endcan --}}
                                 </ul>
                             </li>
                         {{-- @endcan --}}
