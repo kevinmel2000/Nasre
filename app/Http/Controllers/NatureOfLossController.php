@@ -88,7 +88,7 @@ class NatureOfLossController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'number'=>'required|unique',
+            'number'=>'required',
             'accident'=>'required',
             'keterangan'=>'required'
         ]);
@@ -100,7 +100,7 @@ class NatureOfLossController extends Controller
             $user = Auth::user();
             NatureOfLoss::create([
                 'number'=>$request->number,
-                'keterangan'=> $request->nama,
+                'keterangan'=> $request->keterangan,
                 'accident'=> $request->accident
             ]);
             $notification = array(
@@ -119,7 +119,7 @@ class NatureOfLossController extends Controller
     public function update(Request $request, $natureoflossdata)
     {
         $validator = $request->validate([
-            'number'=>'required|unique',
+            'number'=>'required',
             'accident'=>'required',
             'keterangan'=>'required'
         ]);
@@ -133,7 +133,7 @@ class NatureOfLossController extends Controller
             $natureofloss->update($data);
 
             $notification = array(
-                'message' => 'NatureOfLoss updated successfully!',
+                'message' => 'Nature Of Loss updated successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);
@@ -146,8 +146,9 @@ class NatureOfLossController extends Controller
     }
 
 
-    public function destroy(NatureOfLoss $natureoflossdata)
+    public function destroy($id)
     {
+        $natureoflossdata = NatureOfLoss::find($id);
         if($natureoflossdata->delete())
         {
             $notification = array(

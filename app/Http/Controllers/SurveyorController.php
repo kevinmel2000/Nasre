@@ -146,8 +146,9 @@ class SurveyorController extends Controller
     }
 
 
-    public function destroy(Surveyor $surveyor)
+    public function destroy($id)
     {
+        $surveyor = Surveyor::find($id);
         if($surveyor->delete())
         {
             $notification = array(

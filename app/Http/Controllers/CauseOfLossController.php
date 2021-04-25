@@ -86,7 +86,7 @@ class CauseOfLossController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'number'=>'required|unique',
+            'number'=>'required',
             'nama'=>'required',
             'keterangan'=>'required'
         ]);
@@ -117,7 +117,7 @@ class CauseOfLossController extends Controller
     public function update(Request $request, $masteroflossdata)
     {
         $validator = $request->validate([
-            'number'=>'required|unique',
+            'number'=>'required',
             'nama'=>'required',
             'keterangan'=>'required'
         ]);
@@ -145,9 +145,9 @@ class CauseOfLossController extends Controller
     }
 
 
-    public function destroy(MasterCauseOfLoss  $masterofloss)
+    public function destroy($id)
     {
-        
+        $masterofloss = MasterCauseOfLoss::find($id);
         if($masterofloss->delete())
         {
             $notification = array(

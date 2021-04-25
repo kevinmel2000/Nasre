@@ -7,38 +7,12 @@
 
         });
 </script>
-<script>
-    $('#kocparentdd').change(function(){
-        var parentkoc = $(this).val();
-        console.log(parentkoc)
-        if(parentkoc){
-            $.ajax({
-                type:"GET",
-                dataType: 'json',
-                url:"{{url('get-koc-autocode')}}?koc_code="+parentkoc,
-                success:function(response){        
-                    if(response){
-                        console.log(response);
-                        $("#koccode").val(response.autocode);
-                        $("#koccode").attr('readonly',false);
-                    }else{
-                        console.log("data gak ada");
-                    }
-                }
-            });
-        }else{
-            $("#koccode").val(" ");
-            $("#koccode").attr('readonly',false);
-        }
-    });
-
-</script>
 
 <script>
     $(function () {
       "use strict";
   
-      var kocs = <?php echo(($koc_ids->content())) ?>;
+      var kocs = <?php echo(($surveyor_ids->content())) ?>;
       for(const id of kocs) {
           var btn = `
               <a href="#" onclick="confirmDelete('${id}')">
@@ -49,7 +23,7 @@
       }
   
   
-      $("#kocTable").DataTable({
+      $("#surveyorTable").DataTable({
         "order": [[ 0, "asc" ]],
         dom: '<"top"fB>rt<"bottom"lip><"clear">',
         lengthMenu: [
@@ -61,9 +35,9 @@
     });
   
     function confirmDelete(id){
-        let choice = confirm("{{__('Are you sure, you want to delete this Koc data and related data?')}}")
+        let choice = confirm("{{__('Are you sure, you want to delete this Surveyor data and related data?')}}")
         if(choice){
-            document.getElementById('delete-koc-'+id).submit();
+            document.getElementById('delete-surveyor-'+id).submit();
         }
     }
   
