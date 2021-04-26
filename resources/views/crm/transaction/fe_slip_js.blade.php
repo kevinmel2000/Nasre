@@ -4973,22 +4973,26 @@ $('#slipbld_constendorsement').change(function(){
 
     var cedshare = $('#feshare').val();
     if(cedshare == null){
-        cedshare = parseInt(0);
+        var real_cedshare = parseInt(0);
     }else{
         var conv_cedshare = cedshare.replace(/,/g, "");
         console.log(conv_cedshare)
         var real_cedshare = parseInt(conv_cedshare);
         console.log(real_cedshare)
+
     }
+
+    var sum_cedshare = real_amount + real_cedshare;
     
 
     if(slipinterestid == null || ceding_id == null){
         swal('warning','please choose interest or ceding first','insert error')
     }else{
-        console.log('ceding share' + real_cedshare)
-        console.log('tsi' + new_instsi)
+        console.log('sum ceding share ' + sum_cedshare)
+        console.log('ceding share ' + real_cedshare)
+        console.log('tsi' + int_tsiinsval)
 
-        if(real_cedshare > new_instsi){
+        if(sum_cedshare > int_tsiinsval){
             swal('warning','ceding share cannot greater than Total Sum Insured','insert error')
         }else{
             $.ajax({
