@@ -346,25 +346,25 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
 
 
-            //     if(response.retrocession_panel && response.retrocession_panel.length > 10)
-            //     {
+                if(response.retrocession_panel && response.retrocession_panel.length > 10)
+                {
 
-            //         var retrocession_panel = JSON.parse(response.retrocession_panel); 
-            //         $('#retrocessionPaneldetail tbody').empty();
-            //         for(var i = 0; i < retrocession_panel.length; i++) 
-            //         {
-            //             var obj = retrocession_panel[i];
-            //             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-            //             var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    var retrocession_panel = JSON.parse(response.retrocession_panel); 
+                    $('#retrocessionPaneldetail tbody').empty();
+                    for(var i = 0; i < retrocession_panel.length; i++) 
+                    {
+                        var obj = retrocession_panel[i];
+                        // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
+                        var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            //             //console.log(obj.id);
-            //             //$('#interestInsuredTabledetail tbody').prepend('');
+                        //console.log(obj.id);
+                        //$('#interestInsuredTabledetail tbody').prepend('');
                         
                         
-            //             $('#retrocessionPaneldetail tbody').prepend('<tr id="iidretrocessiondetail'+obj.id+'" data-name="retrocessiondetailvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
+                        $('#retrocessionPaneldetail tbody').prepend('<tr id="iidretrocessiondetail'+obj.id+'" data-name="retrocessiondetailvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
 
-            //         }
-            //     }
+                    }
+                }
                 
                 
                 if(response.status)
@@ -471,8 +471,10 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             //     };
             // }
 
-            if(response.attacment_file){
-                $('#aidlistdetail').remove();
+
+            if(response.attacment_file)
+            {
+                $('#aidlistdetail li').remove();
                 var attacment_file = response.attacment_file;
                 for (var i = 0; i < attacment_file.length; i++){
                     var filename = attacment_file[i].filename;
