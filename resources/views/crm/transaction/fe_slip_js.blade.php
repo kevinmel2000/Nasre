@@ -481,163 +481,163 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             // }
 
 
-            // $('#slipnodetail').val(response.slip_no);
-            // $('#slipcndndetail').val(response.cn_dn);
-            // $('#slippolicy_nodetail').val(response.policy_no);
-            // if(response.total_sum_insured){
-            //     $('#sliptotalsumdetail').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            // }
-            // else
-            // {
-            //     $('#sliptotalsumdetail').val("0");
-            // }
+            $('#slipnodetail').val(response.slip_no);
+            $('#slipcndndetail').val(response.cn_dn);
+            $('#slippolicy_nodetail').val(response.policy_no);
+            if(response.total_sum_insured){
+                $('#sliptotalsumdetail').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }
+            else
+            {
+                $('#sliptotalsumdetail').val("0");
+            }
 
-            // if(response.share_tsi){
-            //     $('#sharetotalsumdetail').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            // }
-            // else
-            // {
-            //     $('#sharetotalsumdetail').val("0");
-            // }
-
-            
-            // $('#slippctdetail').val(response.insured_pct);
-            // if(response.total_sum_pct){
-            //     $('#sliptotalsumpctdetail').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            // }
-            // else{
-            //     $('#sliptotalsumpctdetail').val("0");
-            // }
-
-
-            // $('#sliptddetail').val(response.date_transfer);
-            // $('#slipipfromdetail').val(response.insurance_period_from);
-            // $('#slipiptodetail').val(response.insurance_period_to);
-
-            // var insurance_period_from2 = response.insurance_period_from.split("/").reverse().join("-");
-            // var insurance_period_to2 = response.insurance_period_to.split("/").reverse().join("-");
-            // var days=daysBetween(insurance_period_from2, insurance_period_to2);
-            
-            // var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
-            // var constday = days.toString() + "/365";
-
-            // console.log(insurance_period_from2)
-            // console.log(insurance_period_to2)
-            // console.log(days)
-            // console.log(constday)
-            // console.log(parseFloat(sum))
+            if(response.share_tsi){
+                $('#sharetotalsumdetail').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }
+            else
+            {
+                $('#sharetotalsumdetail').val("0");
+            }
 
             
+            $('#slippctdetail').val(response.insured_pct);
+            if(response.total_sum_pct){
+                $('#sliptotalsumpctdetail').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }
+            else{
+                $('#sliptotalsumpctdetail').val("0");
+            }
+
+
+            $('#sliptddetail').val(response.date_transfer);
+            $('#slipipfromdetail').val(response.insurance_period_from);
+            $('#slipiptodetail').val(response.insurance_period_to);
+
+            var insurance_period_from2 = response.insurance_period_from.split("/").reverse().join("-");
+            var insurance_period_to2 = response.insurance_period_to.split("/").reverse().join("-");
+            var days=daysBetween(insurance_period_from2, insurance_period_to2);
+            
+            var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+            var constday = days.toString() + "/365";
+
+            console.log(insurance_period_from2)
+            console.log(insurance_period_to2)
+            console.log(days)
+            console.log(constday)
+            console.log(parseFloat(sum))
+
+            
             
 
-            // $('#slipdaytotaldetail').val(days);
-            // $('#slipdaytotaldetail2').val(days);
-            // $('#slipdaytotaldetail3').val("365");
-            // $('#slipdaytotaldetail4').val("365");
+            $('#slipdaytotaldetail').val(days);
+            $('#slipdaytotaldetail2').val(days);
+            $('#slipdaytotaldetail3').val("365");
+            $('#slipdaytotaldetail4').val("365");
         
-            // $('#sliptotalsumdatedetail').val(parseFloat(sum));
+            $('#sliptotalsumdatedetail').val(parseFloat(sum));
 
 
-            // $('#sliprpfromdetail').val(response.reinsurance_period_from);
-            // $('#sliprptodetail').val(response.reinsurance_period_to);
+            $('#sliprpfromdetail').val(response.reinsurance_period_from);
+            $('#sliprptodetail').val(response.reinsurance_period_to);
 
-            // $('#switch-proportionaldetail').val(response.proportional);
-            //     // if(response.proportional == ''){
-            //         $("#btnaddlayerdetail").attr('hidden','true');
-            //         $("#sliplayerproportionaldetail").attr('hidden','true');
-            //         $("#labelnonpropdetail").attr('hidden','true');
-            //         $("#labelnpdetail").attr('hidden','true');
-            //     // }
+            $('#switch-proportionaldetail').val(response.proportional);
+                // if(response.proportional == ''){
+                    $("#btnaddlayerdetail").attr('hidden','true');
+                    $("#sliplayerproportionaldetail").attr('hidden','true');
+                    $("#labelnonpropdetail").attr('hidden','true');
+                    $("#labelnpdetail").attr('hidden','true');
+                // }
 
-            //     $('#slipratedetail').val(response.rate);
-            //     $('#slipsharedetail').val(response.share);
+                $('#slipratedetail').val(response.rate);
+                $('#slipsharedetail').val(response.share);
 
-            //     if(response.sum_share){
-            //         $('#slipsumsharedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //         $('#slipsumsharedetail2').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //     }
-            //     else{
-            //         $('#slipsumsharedetail').val("0");
-            //         $('#slipsumsharedetail2').val("0");
-            //     }
+                if(response.sum_share){
+                    $('#slipsumsharedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumsharedetail2').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                }
+                else{
+                    $('#slipsumsharedetail').val("0");
+                    $('#slipsumsharedetail2').val("0");
+                }
 
-            //     if(response.sum_rate){
-            //         $('#sliptotalratedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //         $('#sliptotalratedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //     }
-            //     else{
-            //         $('#slipsumsharedetail').val("0");
-            //         $('#slipsumsharedetail2').val("0");
-            //     }
+                if(response.sum_rate){
+                    $('#sliptotalratedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#sliptotalratedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                }
+                else{
+                    $('#slipsumsharedetail').val("0");
+                    $('#slipsumsharedetail2').val("0");
+                }
 
-            //     if(response.sum_feebroker){
-            //         $('#slipsumfeedetail').val(response.sum_feebroker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //         $('#slipsumfeedetail2').val(response.sum_feebroker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //     }
-            //     else{
-            //         $('#slipsumfeedetail').val("0");
-            //         $('#slipsumfeedetail2').val("0");
-            //     }
+                if(response.sum_feebroker){
+                    $('#slipsumfeedetail').val(response.sum_feebroker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumfeedetail2').val(response.sum_feebroker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                }
+                else{
+                    $('#slipsumfeedetail').val("0");
+                    $('#slipsumfeedetail2').val("0");
+                }
 
 
-            //     if(response.basic_premium){
-            //         $('#slipbasicpremiumdetail').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //     }else
-            //     {
-            //         $('#slipbasicpremiumdetail').val("0");
-            //     }
+                if(response.basic_premium){
+                    $('#slipbasicpremiumdetail').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                }else
+                {
+                    $('#slipbasicpremiumdetail').val("0");
+                }
                 
-            //     if(response.grossprm_to_nr){
-            //         $('#slipgrossprmtonrdetail').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //         $('#slipgrossprmtonrdetail2').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                if(response.grossprm_to_nr){
+                    $('#slipgrossprmtonrdetail').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipgrossprmtonrdetail2').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 
-            //     }
-            //     else{
-            //         $('#slipgrossprmtonrdetail').val("0");
-            //         $('#slipgrossprmtonrdetail2').val("0");
-            //     }
+                }
+                else{
+                    $('#slipgrossprmtonrdetail').val("0");
+                    $('#slipgrossprmtonrdetail2').val("0");
+                }
 
-            //     if(response.commission){
-            //         $('#slipcommissiondetail').val(response.commission);
-            //     }
-            //     else{
-            //         $('#slipcommissiondetail').val(0);
-            //     }
+                if(response.commission){
+                    $('#slipcommissiondetail').val(response.commission);
+                }
+                else{
+                    $('#slipcommissiondetail').val(0);
+                }
                 
 
-            //     if(response.sum_commission){
-            //         $('#slipsumcommissiondetail').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //         $('#slipsumcommissiondetail2').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                if(response.sum_commission){
+                    $('#slipsumcommissiondetail').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumcommissiondetail2').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 
-            //     }
-            //     else{
-            //         $('#slipsumcommissiondetail').val("0");
-            //         $('#slipsumcommissiondetail2').val("0");
+                }
+                else{
+                    $('#slipsumcommissiondetail').val("0");
+                    $('#slipsumcommissiondetail2').val("0");
 
-            //     }
+                }
 
-            //     if(response.netprm_to_nr){
-            //         $('#slipnetprmtonrdetail').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //         $('#slipnetprmtonrdetail2').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
-            //     }
-            //     else{
-            //         $('#slipnetprmtonrdetail').val("0"); 
-            //         $('#slipnetprmtonrdetail2').val("0"); 
-            //     }
+                if(response.netprm_to_nr){
+                    $('#slipnetprmtonrdetail').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipnetprmtonrdetail2').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
+                }
+                else{
+                    $('#slipnetprmtonrdetail').val("0"); 
+                    $('#slipnetprmtonrdetail2').val("0"); 
+                }
 
-            //     if(response.own_retention){
-            //         $('#slipordetail').val(response.own_retention);
-            //     }
-            //     else{
-            //         $('#slipordetail').val(0);
-            //     }
+                if(response.own_retention){
+                    $('#slipordetail').val(response.own_retention);
+                }
+                else{
+                    $('#slipordetail').val(0);
+                }
 
-            //     if(response.sum_own_retention){
-            //         $('#slipsumordetail').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //     }
-            //     else{
-            //         $('#slipsumordetail').val("0");
-            //     }
+                if(response.sum_own_retention){
+                    $('#slipsumordetail').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                }
+                else{
+                    $('#slipsumordetail').val("0");
+                }
 
                 $('#countendorsmentdetail').val(response.endorsment);
                 $('#remarksdetail').val(response.remarks);
@@ -700,23 +700,6 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#sliptotalnilaiecupdate').val(response.sum_ec);
                 $('#sliptotalpercentinspanupdate').val(response.sum_ippercent);
 
-
-
-                    // if(response.interest_insured)
-                    // {
-                    //     var interestdata = JSON.parse(response.interest_insured); 
-
-                    //     for(var i = 0; i < interestdata.length; i++) 
-                    //     {
-                    //         var obj = interestdata[i];
-
-                    //         //console.log(obj.id);
-                    //         //$('#interestInsuredTabledetail tbody').prepend('');
-                    //         $('#interestInsuredTableupdate tbody').empty();
-                    //         $('#interestInsuredTableupdate tbody').prepend('<tr id="iidupdate'+obj.id+'" data-name="interestupdatevalue[]"><td data-name="'+obj.description+'">'+obj.description+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestupdate('+obj.id+')">delete</a></td></tr>')
-
-                    //     }
-                    // }
 
 
                     if(response.deductible_panel && response.deductible_panel.length > 10)
