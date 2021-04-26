@@ -13,116 +13,101 @@ use Illuminate\Support\Facades\Auth;
 
 class SurveyorController extends Controller
 {   
+    
 
     public function index(Request $request)
     {
          $user = Auth::user();
-         $route_active = 'Nature Of Loss Master';   
+         $route_active = 'Surveyor Master';   
          $mydate = date("Y").date("m").date("d");
          $search = @$request->input('search');
 
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $koc = Surveyor::orderby('code')->get();
-          $kocparent = Surveyor::whereRaw('LENGTH(code) < 9')->orderby('code','desc')->get();
-        //   $kocparent = Surveyor::orderby('code')->get();
-          $countparent= Surveyor::where('parent_id',null)->where('code','<',100)->orderby('code','desc')->get();
-          // dd($countparent);
-          $lastid = count($countparent);
-          $koc_ids = response()->json($koc->modelKeys());
+          $surveyor = Surveyor::orderby('number')->get();
+         
+          $lastid = count($surveyor);
+          $surveyor_ids = response()->json($surveyor->modelKeys());
 
-          if($lastid != null){
+            if($lastid != null)
+            {
 
-            if($lastid < 9){
-                $code_koc = '0' . strval($lastid + 1);
-            }   
-            elseif($lastid > 8 && $lastid < 99){
-                $code_koc = strval($lastid + 1);
-            } 
+                if($lastid < 9){
+                    $number_surveyor = '0' . strval($lastid + 1);
+                }   
+                elseif($lastid > 8 && $lastid < 99){
+                    $number_surveyor = strval($lastid + 1);
+                } 
+            }
+            else{
+                $number_surveyor = '0' . strval(1);
+                
+            }
             
-        }
-        else{
-            $code_koc = '0' . strval(1);
-            
-        }
-          
-          return view('crm.master.koc', compact('user','koc','kocparent','route_active','code_koc','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+            return view('crm.master.surveyor', compact('user','surveyor','route_active','number_surveyor','surveyor_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
-          //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
-          $koc=Surveyor::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
-          $kocparent = Surveyor::where('parent_id','')->orderby('code','desc')->get();
-          $koc_ids = response()->json($koc->modelKeys());
-          return view('crm.master.koc', compact('user','koc','kocparent','route_active','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+            //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
+            $surveyor=Surveyor::where('number', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+            $surveyor_ids = response()->json($surveyor->modelKeys());
+            return view('crm.master.surveyor', compact('user','surveyor','route_active','surveyor_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }
 
     public function generatecode(request $request)
     {
-        $koc_parent = Surveyor::where('id',$request->koc_code)->first();
-        $koc = Surveyor::where('parent_id',$request->koc_code)->orderby('id','desc')->get();
-        $koclastparent = Surveyor::where('parent_id',$request->koc_code)->orderby('id','desc')->first();
-        $lastid = count($koc);
-        
-        if(!$koclastparent){
-            $code_koc =  $koc_parent->code . '0' . strval(0);
-            return response()->json(
-                [
-                    'autocode' => $code_koc
-                ]
-            );
-        }
-        else{
-            
-            $parentlastcode = substr($koclastparent->code,2) ;
-            $sumlastcode = strval($parentlastcode + 1);
+        $surveyor = Surveyor::where('number',$request->koc_code)->orderby('id','desc')->get();
+        $lastid = count($surveyor);
+         
+        $parentlastcode = substr($surveyor->number,2) ;
+        $sumlastcode = strval($parentlastcode + 1);
 
-                if($parentlastcode < 9){
-                    $code_koc = $koc_parent->code . '0' . strval($parentlastcode + 1);
-                    return response()->json(
-                        [
-                            'autocode' => $code_koc
-                        ]
-                    );
-                }elseif($parentlastcode > 8 && $parentlastcode < 100){
-                    $code_koc = $koc_parent->code . strval($parentlastcode + 1);
-                    return response()->json(
-                        [
-                            'autocode' => $code_koc
-                        ]
-                    );
-                }
-        }
+            if($parentlastcode < 9)
+            {
+                $number_surveyor = $surveyor->number . '0' . strval($parentlastcode + 1);
+                return response()->json(
+                    [
+                        'autocode' => $number_surveyor
+                    ]
+                );
+            }
+            elseif($parentlastcode > 8 && $parentlastcode < 100)
+            {
+                $number_surveyor = $surveyor->number . strval($parentlastcode + 1);
+                return response()->json(
+                    [
+                        'autocode' => $number_surveyor
+                    ]
+                );
+            }
        
-
-          
     }
 
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'code'=>'required|unique:currencies,code',
-            'description'=>'required',
-            'abbreviation'=>'required'
+            'number'=>'required',
+            'keterangan'=>'required'
         ]);
         
         if($validator)
         {
-            // dd($request);
+            //dd($request);
             //exit();
+            
             $user = Auth::user();
             Surveyor::create([
-                'code'=>$request->code,
-                'description'=> $request->description,
-                'parent_id'=> $request->parent_id,
-                'abbreviation'=>$request->abbreviation
+                'number'=>$request->number,
+                'keterangan'=> $request->keterangan
             ]);
+
             $notification = array(
                 'message' => 'Surveyor added successfully!',
                 'alert-type' => 'success'
             );
+
             return back()->with($notification);
         }
         else
@@ -132,12 +117,11 @@ class SurveyorController extends Controller
     }
     
 
-    public function update(Request $request, $koc)
+    public function update(Request $request, $surveyor)
     {
         $validator = $request->validate([
-            'code'=>'required|unique:currencies,code',
-            'description'=>'required',
-            'abbreviation'=>'required'
+            'number'=>'required',
+            'keterangan'=>'required'
         ]);
 
         if($validator){
@@ -145,8 +129,8 @@ class SurveyorController extends Controller
             $data=$request->all();
 
             // dd($data);
-            $kocs = Surveyor::find($koc);
-            $kocs->update($data);
+            $surveyors = Surveyor::find($surveyor);
+            $surveyors->update($data);
 
             $notification = array(
                 'message' => 'Surveyor updated successfully!',
@@ -162,9 +146,10 @@ class SurveyorController extends Controller
     }
 
 
-    public function destroy(Surveyor $koc)
+    public function destroy($id)
     {
-        if($koc->delete())
+        $surveyor = Surveyor::find($id);
+        if($surveyor->delete())
         {
             $notification = array(
                 'message' => 'Surveyor deleted successfully!',

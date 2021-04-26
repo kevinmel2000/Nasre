@@ -23,87 +23,72 @@ class CauseOfLossController extends Controller
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $koc = MasterCauseOfLoss::orderby('code')->get();
-          $kocparent = MasterCauseOfLoss::whereRaw('LENGTH(code) < 9')->orderby('code','desc')->get();
-        //   $kocparent = MasterCauseOfLoss::orderby('code')->get();
-          $countparent= MasterCauseOfLoss::where('parent_id',null)->where('code','<',100)->orderby('code','desc')->get();
-          // dd($countparent);
-          $lastid = count($countparent);
-          $koc_ids = response()->json($koc->modelKeys());
+          $causeofloss = MasterCauseOfLoss::orderby('number')->get();
+          $lastid = count($causeofloss);
+          $causeofloss_ids = response()->json($causeofloss->modelKeys());
 
           if($lastid != null){
 
             if($lastid < 9){
-                $code_koc = '0' . strval($lastid + 1);
+                $number_causeofloss = '0' . strval($lastid + 1);
             }   
             elseif($lastid > 8 && $lastid < 99){
-                $code_koc = strval($lastid + 1);
+                $number_causeofloss = strval($lastid + 1);
             } 
            
         }
-        else{
-            $code_koc = '0' . strval(1);
+        else
+        {
+            $number_causeofloss = '0' . strval(1);
             
         }
           
-          return view('crm.master.koc', compact('user','koc','kocparent','route_active','code_koc','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.master.causeofloss', compact('user','causeofloss','route_active','number_causeofloss','causeofloss_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
-          $koc=MasterCauseOfLoss::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
-          $kocparent = MasterCauseOfLoss::where('parent_id','')->orderby('code','desc')->get();
-          $koc_ids = response()->json($koc->modelKeys());
-          return view('crm.master.koc', compact('user','koc','kocparent','route_active','koc_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
-         }
+          $causeofloss=MasterCauseOfLoss::where('number', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $causeoflossparent = MasterCauseOfLoss::where('id','')->orderby('number','desc')->get();
+          $causeofloss_ids = response()->json($causeofloss->modelKeys());
+          return view('crm.master.causeofloss', compact('user','causeofloss','route_active','number_causeofloss','causeofloss_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
     }
 
+    
     public function generatecode(request $request)
     {
-        $koc_parent = MasterCauseOfLoss::where('id',$request->koc_code)->first();
-        $koc = MasterCauseOfLoss::where('parent_id',$request->koc_code)->orderby('id','desc')->get();
-        $koclastparent = MasterCauseOfLoss::where('parent_id',$request->koc_code)->orderby('id','desc')->first();
-        $lastid = count($koc);
+        $causeofloss = MasterCauseOfLoss::where('number',$request->number_causeofloss)->orderby('id','desc')->get();
+        $lastid = count($causeofloss);
         
-        if(!$koclastparent){
-            $code_koc =  $koc_parent->code . '0' . strval(0);
-            return response()->json(
-                [
-                    'autocode' => $code_koc
-                ]
-            );
-        }
-        else{
-            
-            $parentlastcode = substr($koclastparent->code,2) ;
+            $parentlastcode = substr($causeofloss->number,2) ;
             $sumlastcode = strval($parentlastcode + 1);
 
-                if($parentlastcode < 9){
-                    $code_koc = $koc_parent->code . '0' . strval($parentlastcode + 1);
+                if($parentlastcode < 9)
+                {
+                    $number_causeofloss = $causeofloss->number . '0' . strval($parentlastcode + 1);
                     return response()->json(
                         [
-                            'autocode' => $code_koc
-                        ]
-                    );
-                }elseif($parentlastcode > 8 && $parentlastcode < 100){
-                    $code_koc = $koc_parent->code . strval($parentlastcode + 1);
-                    return response()->json(
-                        [
-                            'autocode' => $code_koc
+                            'autocode' => $number_causeofloss
                         ]
                     );
                 }
-        }
-       
-
-          
+                elseif($parentlastcode > 8 && $parentlastcode < 100)
+                {
+                    $number_causeofloss = $causeofloss->number . strval($parentlastcode + 1);
+                    return response()->json(
+                        [
+                            'autocode' => $number_causeofloss
+                        ]
+                    );
+                }
     }
 
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'code'=>'required|unique:currencies,code',
-            'description'=>'required',
-            'abbreviation'=>'required'
+            'number'=>'required',
+            'nama'=>'required',
+            'keterangan'=>'required'
         ]);
         
         if($validator)
@@ -112,10 +97,9 @@ class CauseOfLossController extends Controller
             //exit();
             $user = Auth::user();
             MasterCauseOfLoss::create([
-                'code'=>$request->code,
-                'description'=> $request->description,
-                'parent_id'=> $request->parent_id,
-                'abbreviation'=>$request->abbreviation
+                'number'=>$request->number,
+                'keterangan'=> $request->keterangan,
+                'nama'=> $request->nama
             ]);
             $notification = array(
                 'message' => 'MasterCauseOfLoss  added successfully!',
@@ -130,12 +114,12 @@ class CauseOfLossController extends Controller
     }
     
 
-    public function update(Request $request, $koc)
+    public function update(Request $request, $masteroflossdata)
     {
         $validator = $request->validate([
-            'code'=>'required|unique:currencies,code',
-            'description'=>'required',
-            'abbreviation'=>'required'
+            'number'=>'required',
+            'nama'=>'required',
+            'keterangan'=>'required'
         ]);
 
         if($validator){
@@ -143,8 +127,8 @@ class CauseOfLossController extends Controller
             $data=$request->all();
 
             // dd($data);
-            $kocs = MasterCauseOfLoss::find($koc);
-            $kocs->update($data);
+            $masterofloss = MasterCauseOfLoss::find($masteroflossdata);
+            $masterofloss->update($data);
 
             $notification = array(
                 'message' => 'MasterCauseOfLoss  updated successfully!',
@@ -157,12 +141,14 @@ class CauseOfLossController extends Controller
         {
             return back()->with($validator)->withInput();
         }
+
     }
 
 
-    public function destroy(MasterCauseOfLoss  $koc)
+    public function destroy($id)
     {
-        if($koc->delete())
+        $masterofloss = MasterCauseOfLoss::find($id);
+        if($masterofloss->delete())
         {
             $notification = array(
                 'message' => 'MasterCauseOfLoss  deleted successfully!',
@@ -178,6 +164,7 @@ class CauseOfLossController extends Controller
             );
             return back()->with($notification);
         }
+
     }
 
 }

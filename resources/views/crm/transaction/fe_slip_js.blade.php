@@ -287,7 +287,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             {
 
                 var deductibledata = JSON.parse(response.deductible_panel); 
-                // $('#deductiblePaneldetail tbody').empty();
+                $('#deductiblePaneldetail tbody').empty();
                 for(var i = 0; i < deductibledata.length; i++) 
                 {
                     var obj = deductibledata[i];
@@ -309,7 +309,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 {
 
                     var extend_coverage = JSON.parse(response.extend_coverage); 
-                    // $('#ExtendCoveragePaneldetail tbody').empty();
+                    $('#ExtendCoveragePaneldetail tbody').empty();
                     for(var i = 0; i < extend_coverage.length; i++) 
                     {
                         var obj = extend_coverage[i];
@@ -329,7 +329,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 {
 
                     var installment_panel = JSON.parse(response.installment_panel); 
-                    // $('#installmentPaneldetail tbody').empty();
+                    $('#installmentPaneldetail tbody').empty();
                     for(var i = 0; i < installment_panel.length; i++) 
                     {
                         var obj = installment_panel[i];
@@ -350,7 +350,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 {
 
                     var retrocession_panel = JSON.parse(response.retrocession_panel); 
-                    // $('#retrocessionPaneldetail tbody').empty();
+                    $('#retrocessionPaneldetail tbody').empty();
                     for(var i = 0; i < retrocession_panel.length; i++) 
                     {
                         var obj = retrocession_panel[i];
@@ -455,7 +455,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                 if(response.status_log){
                     var status_log = response.status_log;
-                    // $('#stlid'+status_log[i].id).remove();
+                    $('#stlid'+status_log[i].id).remove();
                     for (var i = 0; i < 5; i++){
 
                         if(status_log[i])
@@ -471,11 +471,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             }
 
             if(response.attacment_file){
-                // $('#aidlistdetail li').remove();
+                $('#aidlistdetail').remove();
                 var attacment_file = response.attacment_file;
                 for (var i = 0; i < attacment_file.length; i++){
                     var filename = attacment_file[i].filename;
-                    $('#aidlistdetail li').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
+                    $('#aidlistdetail').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
                 };
             }
 
@@ -4959,11 +4959,17 @@ $('#slipbld_constendorsement').change(function(){
     var real_amount = parseInt(conv_amount);
     console.log(real_amount)
 
-    var tsi = $('#feshareto').val();
-    var conv_tsi = tsi.replace(/,/g, "");
-    console.log(conv_tsi)
-    var real_tsi = parseInt(conv_tsi);
-    console.log(real_tsi)
+    // var tsi = $('#feshareto').val();
+    // var conv_tsi = tsi.replace(/,/g, "");
+    // console.log(conv_tsi)
+    // var real_tsi = parseInt(conv_tsi);
+    // console.log(real_tsi)
+
+    var tsiinsval = $('#feshareto').val();
+    var conv_tsiinsval = tsiinsval.replace(/,/g, "");
+    var int_tsiinsval = parseFloat(conv_tsiinsval);
+    var int_fullins = int_tsiinsval.toFixed(2);
+    var new_instsi = int_fullins.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
     var cedshare = $('#feshare').val();
     if(cedshare == null){
@@ -4979,7 +4985,10 @@ $('#slipbld_constendorsement').change(function(){
     if(slipinterestid == null || ceding_id == null){
         swal('warning','please choose interest or ceding first','insert error')
     }else{
-        if(real_cedshare > real_tsi){
+        console.log('ceding share' + real_cedshare)
+        console.log('tsi' + new_instsi)
+
+        if(real_cedshare > new_instsi){
             swal('warning','ceding share cannot greater than Total Sum Insured','insert error')
         }else{
             $.ajax({

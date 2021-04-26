@@ -955,7 +955,8 @@ class FeSlipController extends Controller
                 return view('crm.transaction.fe_slip', compact(['insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
 
                 
-        }        
+        }    
+            
     }
 
 

@@ -262,18 +262,22 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::post('/causeofloss/store', [CauseOfLossController::class, 'store']);
     Route::put('/causeofloss/update/{causeofloss}', [CauseOfLossController::class, 'update']);
     Route::delete('/causeofloss/destroy/{causeofloss}', [CauseOfLossController::class, 'destroy']);
+    Route::post('/causeofloss/destroy/{causeofloss}', [CauseOfLossController::class, 'destroy']);
 
     
     Route::get('/natureofloss', [NatureOfLossController::class, 'index']);
     Route::post('/natureofloss/store', [NatureOfLossController::class, 'store']);
+    Route::post('/natureofloss/update/{natureofloss}', [NatureOfLossController::class, 'update']);
     Route::put('/natureofloss/update/{natureofloss}', [NatureOfLossController::class, 'update']);
     Route::delete('/natureofloss/destroy/{natureofloss}', [NatureOfLossController::class, 'destroy']);
+    Route::post('/natureofloss/destroy/{natureofloss}', [NatureOfLossController::class, 'destroy']);
 
 
     Route::get('/surveyor', [SurveyorController::class, 'index']);
     Route::post('/surveyor/store', [SurveyorController::class, 'store']);
     Route::put('/surveyor/update/{surveyor}', [SurveyorController::class, 'update']);
     Route::delete('/surveyor/destroy/{surveyor}', [SurveyorController::class, 'destroy']);
+    Route::post('/surveyor/destroy/{surveyor}', [SurveyorController::class, 'destroy']);
 
 
 });
