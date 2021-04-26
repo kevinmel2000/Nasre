@@ -909,7 +909,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 {
                     var status_log = response.status_log;
                     $('#slipStatusTableupdate tbody').remove();
-                    for (var i = 0; i < 5; i++){
+                    for (var i = 0; i < status_log.length; i++){
 
                         if(status_log[i])
                         {

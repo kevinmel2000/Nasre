@@ -1660,30 +1660,14 @@ class FeSlipController extends Controller
         $dateyeardata= date("d/m/Y", strtotime($slipdata->prod_year));
 
 
-        $statuslist= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->take(5)->get();
+        // $statuslist= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->take(5)->get();
+        $statuslist= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->get();
         
-        // if(empty($slipdata->insured_id) || $slipdata->insured_id == NULL)
-        // {
-        //     $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','DESC')->get();
-            
-        // }
-        // else
-        // {
-        //     //$attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','DESC')->get();
-            
-        // $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get();
-        // $attachmentlist = DB::table('slip_table_file')
-        //             ->where('slip_id','=',$slipdata->number)
-        //             ->where('insured_id','=',$slipdata->insured_id)
-        //             ->where('slip_type','fe')
-        //             ->where('count_endorsement',$slipdata->endorsment)        
-        //             ->orderby('id','desc')
-        //             ->distinct('slip_table_file.filename')
-        //             ->get();
+       
         $attachmenttable = collect(SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get());
         $attachmentlist = $attachmenttable->unique('filename');
         $attachmentlist->values()->all();
-        // }
+        
 
         $sum_permilec = DB::table('extended_coverage_detail')
                             ->where('slip_id',$slipdata->number)
@@ -2208,7 +2192,7 @@ class FeSlipController extends Controller
                                 $insert[$x]['path'] = $path;
                                 $insert[$x]['user_id'] = Auth::user()->name;
                                 $insert[$x]['slip_id'] = $request->slip_id;
-                                $insert[$x]['insured_id'] = $request->code_ms;
+                                $insert[$x]['insured_id'] = $request->insured_id;
                                 $insert[$x]['slip_type'] = $request->slip_type;
                                 SlipTableFile::insert($insert);
                             }
