@@ -513,8 +513,12 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#sliptotalsumpctdetail').val("0");
             }
 
-
-            $('#sliptddetail').val(response.date_transfer);
+            if(response.date_transfer == null){
+               $('#sliptddetail').val(''); 
+           }else{
+                $('#sliptddetail').val(response.date_transfer); 
+           }
+            
             $('#slipipfromdetail').val(response.insurance_period_from);
             $('#slipiptodetail').val(response.insurance_period_to);
 
