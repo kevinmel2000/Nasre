@@ -814,6 +814,33 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                         }
                     }
+
+                    if(response.status_log)
+                    {
+                        $('#slipStatusTableupdate tbody').remove();
+                        var obj_status = JSON.parse(response.status_log);
+                        
+                        for (var i = 0; i < obj_status.length; i++){
+
+                            
+                                var status = obj_status[i].status;
+                                var datetime = obj_status[i].datetime;
+                                var user = obj_status[i].user;
+                                
+                                $('#slipStatusTableupdate tbody').append('<tr id="stlid'+obj_status[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
+                            
+                        };
+                    }
+
+                    if(response.attacment_file)
+                    {
+                        $('#aidlistupdate li').remove();
+                        var attacment_file = response.attacment_file;
+                        for (var i = 0; i < attacment_file.length; i++){
+                            var filename = attacment_file[i].filename;
+                            $('#aidlistupdate').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
+                        };
+                    }
                     
 
 
@@ -905,32 +932,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
 
 
-                if(response.status_log)
-                {
-                    $('#slipStatusTableupdate tbody').remove();
-                    var status_log = response.status_log;
-                    
-                    for (var i = 0; i < status_log.length; i++){
-
-                        
-                            var status = status_log[i].status;
-                            var datetime = status_log[i].datetime;
-                            var user = status_log[i].user;
-                            
-                            $('#slipStatusTableupdate tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
-                        
-                    };
-                }
-
-                if(response.attacment_file)
-                {
-                    $('#aidlistupdate li').remove();
-                    var attacment_file = response.attacment_file;
-                    for (var i = 0; i < attacment_file.length; i++){
-                        var filename = attacment_file[i].filename;
-                        $('#aidlistupdate').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
-                    };
-                }
+               
 
 
                 if(response.total_sum_insured)
