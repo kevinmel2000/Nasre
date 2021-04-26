@@ -514,6 +514,10 @@
                                 <button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">{{__('Endorsement')}}</button>
                             </a>
 
+                            <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->id }}" data-target="#cancelmodaldata">
+                                <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#cancelmodaldata2">{{__('Cancel')}}</button>
+                            </a>
+
                             <button type="button" id="claim-endorse" class="btn btn-sm btn-warning float-right">Claim</button>
                             @include('crm.transaction.fe_slipupdate_claim_modal')
 

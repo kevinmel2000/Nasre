@@ -504,6 +504,9 @@
                                         </a> 
 
 
+                                         @include('crm.transaction.fe_slipupdate_claim_modal')
+
+
                                         {{--<button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" onclick="addendorsement({{  @$slipdatatadetail->id }})">{{__('Endorsement')}}</button>
                                         --}}
 

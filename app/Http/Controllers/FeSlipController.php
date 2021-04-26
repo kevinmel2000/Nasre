@@ -991,7 +991,7 @@ class FeSlipController extends Controller
         // dd($insureddata->number);
         $code_ms=$insureddata->number;
         $slipdata=SlipTable::where('insured_id',$insureddata->number)->where('endorsment',$insureddata->count_endorsement)->first();
-        $slipdata2=SlipTable::where('insured_id',$insureddata->number)->where('endorsment',$insureddata->count_endorsement)->get();
+        $slipdata2=SlipTable::where('insured_id',$insureddata->number)->where('slipshow','yes')->where('slip_type','fe')->get();
         // dd($slipdata2);
 
         if(!empty($slipdata))

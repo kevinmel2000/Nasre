@@ -9824,6 +9824,10 @@ function deletelocationriskdetail(id){
                                             +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.id+'" data-target="#endorsementmodaldata">'
                                             +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata">Endorsment</button>'
                                             +'</a>'
+                                            +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.id+'" data-target="#cancelmodaldata">'
+                                            +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#cancelmodaldata2">Cancel</button>'
+                                            +'</a>'
+                                            +'<button type="button" id="claim-endorse" class="btn btn-sm btn-warning float-right">Claim</button>'
                                             +'<td></td></tr>');
 
                                         $('#slipnumber').val(response.slipnumber);
@@ -9965,6 +9969,10 @@ function deletelocationriskdetail(id){
                                             +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.id+'" data-target="#endorsementmodaldata">'
                                             +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsment</button>'
                                             +'</a>'
+                                            +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.id+'" data-target="#cancelmodaldata">'
+                                            +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#cancelmodaldata2">Cancel</button>'
+                                            +'</a>'
+                                            +'<button type="button" id="claim-endorse" class="btn btn-sm btn-warning float-right">Claim</button>'
                                             +'<td></td></tr>');
 
                                         $('#slipnumber').val(response.number);
@@ -10815,7 +10823,7 @@ function deletelocationriskdetail(id){
             var slip_data2array=JSON.parse(response.slip_dataarray);
             var slip_dataarray=JSON.parse(response.slip_data);
             
-            $('#SlipInsuredTableData tbody tr[id='+response.oldid+']').empty();
+            $('#SlipInsuredTableData tbody tr[id=slipiid'+response.oldid+']').empty();
             
             // slip_data2array.forEach(function (arrayItem) 
             // {
