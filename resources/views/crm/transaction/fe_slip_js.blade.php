@@ -325,24 +325,24 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             //     }
 
 
-            //     if(response.installment_panel && response.installment_panel.length > 10)
-            //     {
+                if(response.installment_panel && response.installment_panel.length > 10)
+                {
 
-            //         var installment_panel = JSON.parse(response.installment_panel); 
-            //         $('#installmentPaneldetail tbody').empty();
-            //         for(var i = 0; i < installment_panel.length; i++) 
-            //         {
-            //             var obj = installment_panel[i];
-            //             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-            //             var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    var installment_panel = JSON.parse(response.installment_panel); 
+                    $('#installmentPaneldetail tbody').empty();
+                    for(var i = 0; i < installment_panel.length; i++) 
+                    {
+                        var obj = installment_panel[i];
+                        // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
+                        var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            //             //console.log(obj.id);
-            //             //$('#interestInsuredTabledetail tbody').prepend('');
+                        //console.log(obj.id);
+                        //$('#interestInsuredTabledetail tbody').prepend('');
                         
-            //             $('#installmentPaneldetail tbody').prepend('<tr id="iidinstallmentdetail'+obj.id+'" data-name="installmentdetailvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>')
+                        $('#installmentPaneldetail tbody').prepend('<tr id="iidinstallmentdetail'+obj.id+'" data-name="installmentdetailvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>')
 
-            //         }
-            //     }
+                    }
+                }
 
 
 
@@ -430,15 +430,17 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     $("#sliplayerproportionaldetail option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
                 }
 
+                
+
                 if(response.retro_backup)
                 {
                     $("#sliprbdetail option[value=" + response.retro_backup + "]:first")[0].selected = true;
                     if(response.retro_backup == "NO")
                     {
-                        $("#tabretrodetail").attr('hidden');
+                        $("#sliprbdetail").attr('hidden','true');
                     }
                     else if(response.retro_backup == "YES"){
-                        $("#tabretrodetail").removeAttr('hidden');
+                        $("#sliprbdetail").removeAttr('hidden');
                     }
                 }
 
