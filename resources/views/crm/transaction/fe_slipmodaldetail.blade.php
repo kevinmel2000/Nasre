@@ -58,11 +58,8 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label>{{__('Prod Year')}}:</label>
-                                                                    <div class="input-group date" id="date" data-target-input="nearest">
-                                                                            <input type="text" id="slipprodyeardetail" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipprodyeardetail" value="" readonly="readonly">
-                                                                            <div class="input-group-append" >
-                                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                            </div>
+                                                                    <div class="input-group " >
+                                                                            <input type="text" id="slipprodyeardetail" class="form-control form-control-sm "  name="slipprodyeardetail" value="" disabled>
                                                                     </div>
                                                             </div>
                                                         </div>

@@ -696,6 +696,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#slipnumberupdate').val(response.number);
                 $('#slipusernameupdate').val(response.username);
                 $('#slipprodyearupdate').val(response.prod_year);
+                $('#slipprodyearupdate2').val(response.prod_year);
                 $('#slipuyupdate').val(response.uy);
                 $('#slipedupdate').val(response.endorsment);
                 $('#slipslsupdate').val(response.selisih);
@@ -1139,6 +1140,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                     $('#slipusernameendorsement').val(response.username);
                     $('#slipprodyearendorsement').val(response.prod_year);
+                    $('#slipprodyearendorsement2').val(response.prod_year);
                     // $('#slipuyendorsement').val(response.uy);
                     $('#slipedendorsement').val(response.endorsment);
                     $('#slipslsendorsement').val(response.selisih);
@@ -5919,7 +5921,7 @@ function deletelocationriskdetail(id){
 
                     var sumrate = $("#sliptotalrate").val();
                     var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
-                    var sum = isNaN((conv_sumrate * conv_tsi) * insurance) ? 0 :((conv_sumrate * conv_tsi) * insurance).toFixed(2) ;
+                    var sum = isNaN(((conv_sumrate / 1000) * conv_tsi) * insurance) ? 0 :(((conv_sumrate / 1000) * conv_tsi) * insurance).toFixed(2) ;
                     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     $('#slipbasicpremium').val(real_sum);
@@ -6047,7 +6049,7 @@ function deletelocationriskdetail(id){
         var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
         var tsi = $("#sharetotalsum").val();
         var conv_tsi = parseInt(tsi.replace(/,/g, ""));
-        var sum = isNaN((conv_sumrate * conv_tsi) * insurance) ? 0 :((conv_sumrate * conv_tsi) * insurance).toFixed(2) ;
+        var sum = isNaN(((conv_sumrate / 1000) * conv_tsi) * insurance) ? 0 :(((conv_sumrate / 1000) * conv_tsi) * insurance).toFixed(2) ;
         var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
         $('#slipbasicpremium').val(real_sum);
