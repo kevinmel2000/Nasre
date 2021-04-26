@@ -1763,11 +1763,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
            yearRange: '-50:+100',
        });
 
-       $('#sliptddetail').datepicker({
-           dateFormat: 'dd/mm/yy',
-           changeYear: true,
-           yearRange: '-50:+100',
-       });  
+       // $('#sliptddetail').datepicker({
+       //     dateFormat: 'dd/mm/yy',
+       //     changeYear: true,
+       //     yearRange: '-50:+100',
+       // });  
 
 
        $('#slipprodyearendorsement').datepicker({
@@ -9505,7 +9505,7 @@ function deletelocationriskdetail(id){
          {
             swal("Success!", "Insured Fire & Engineering Insert Success", "success")
             console.log(response)
-            $('#fecountendorsement').val(response.count_endorsement);
+            // $('#fecountendorsement').val(response.count_endorsement);
             var real_ceding_share = response.ceding_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             $('#feshare').val(real_ceding_share);
 
@@ -10808,19 +10808,19 @@ function deletelocationriskdetail(id){
             swal("Success!", "Insured Fire & Engineering Slip Endorsement Success", "success")
             console.log(response)
 
-            var insured_data2=JSON.parse(response.insured_data);
-            $('#fecountendorsement').val(insured_data2.count_endorsement);
+            // var insured_data2=JSON.parse(response.insured_data);
+            // $('#fecountendorsement').val(insured_data2.count_endorsement);
             //alert(insured_data2.count_endorsement);
 
             var slip_data2array=JSON.parse(response.slip_dataarray);
             
-            $('#SlipInsuredTableData tbody').empty();
+            $('#SlipInsuredTableData tbody tr[id='+response.oldid+']').empty();
             
             slip_data2array.forEach(function (arrayItem) 
             {
                 //var x = arrayItem.prop1 + 2;
                 
-                $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+arrayItem.id+'" data-name="slipvalue[]"><td data-name="'+arrayItem.number+'">'+arrayItem.number+'</td><td data-name="'+arrayItem.cedingbroker.name+'">"'+arrayItem.cedingbroker.name+'"</td><td data-name="'+arrayItem.ceding+'">'+arrayItem.ceding+'</td><td data-name="'+arrayItem.status+'">"'+arrayItem.status+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+arrayItem.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
+                $('#SlipInsuredTableData tbody ').prepend('<tr id="slipiid'+arrayItem.id+'" data-name="slipvalue[]"><td data-name="'+arrayItem.number+'">'+arrayItem.number+'</td><td data-name="'+arrayItem.cedingbroker.name+'">"'+arrayItem.cedingbroker.name+'"</td><td data-name="'+arrayItem.ceding+'">'+arrayItem.ceding+'</td><td data-name="'+arrayItem.status+'">"'+arrayItem.status+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+arrayItem.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
                      +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
                      +'</a>'
                      +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+arrayItem.id+'" data-target="#updatemodaldata">'
