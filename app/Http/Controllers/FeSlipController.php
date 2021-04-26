@@ -3205,7 +3205,15 @@ class FeSlipController extends Controller
                                         'own_retention'=>$slipdatalist->own_retention,
                                         'sum_own_retention'=>$slipdatalist->sum_own_retention,
                                         'wpc'=>$slipdatalist->wpc,
-                                        'remarks'=>$slipdatalist->slipremarks,
+                                        'remarks'=>$slipdatalist->remarks,
+                                        'total_day'=>$slipdatalist->total_day,
+                                        'total_year'=>$slipdatalist->total_year,
+                                        'sum_total_date'=>$slipdatalist->sum_total_date,
+                                        'type_tsi' =>$slipdatalist->type_tsi,
+                                        'share_tsi' =>$slipdatalist->share_tsi,
+                                        'type_share_tsi' =>$slipdatalist->type_share_tsi,
+                                        'sliptotalrate' =>$slipdatalist->sliptotalrate,
+                                        'sum_feebroker' =>$slipdatalist->sum_feebroker,
                                         'slipshow'=>'yes'
                     
                                     ]);
@@ -3258,7 +3266,15 @@ class FeSlipController extends Controller
                                         'own_retention'=>$slipdatalist->own_retention,
                                         'sum_own_retention'=>$slipdatalist->sum_own_retention,
                                         'wpc'=>$slipdatalist->wpc,
-                                        'remarks'=>$slipdatalist->slipremarks,
+                                        'remarks'=>$slipdatalist->remarks,
+                                        'total_day'=>$slipdatalist->total_day,
+                                        'total_year'=>$slipdatalist->total_year,
+                                        'sum_total_date'=>$slipdatalist->sum_total_date,
+                                        'type_tsi' =>$slipdatalist->type_tsi,
+                                        'share_tsi' =>$slipdatalist->share_tsi,
+                                        'type_share_tsi' =>$slipdatalist->type_share_tsi,
+                                        'sliptotalrate' =>$slipdatalist->sliptotalrate,
+                                        'sum_feebroker' =>$slipdatalist->sum_feebroker,
                                         'slipshow'=>'yes'
                     
                                     ]);
@@ -3312,7 +3328,15 @@ class FeSlipController extends Controller
                                         'own_retention'=>$slipdatalist->own_retention,
                                         'sum_own_retention'=>$slipdatalist->sum_own_retention,
                                         'wpc'=>$slipdatalist->wpc,
-                                        'remarks'=>$slipdatalist->slipremarks,
+                                        'remarks'=>$slipdatalist->remarks,
+                                        'total_day'=>$slipdatalist->total_day,
+                                        'total_year'=>$slipdatalist->total_year,
+                                        'sum_total_date'=>$slipdatalist->sum_total_date,
+                                        'type_tsi' =>$slipdatalist->type_tsi,
+                                        'share_tsi' =>$slipdatalist->share_tsi,
+                                        'type_share_tsi' =>$slipdatalist->type_share_tsi,
+                                        'sliptotalrate' =>$slipdatalist->sliptotalrate,
+                                        'sum_feebroker' =>$slipdatalist->sum_feebroker,
                                         'slipshow'=>'yes'
                     
                                     ]);
@@ -3366,7 +3390,15 @@ class FeSlipController extends Controller
                                         'own_retention'=>$slipdatalist->own_retention,
                                         'sum_own_retention'=>$slipdatalist->sum_own_retention,
                                         'wpc'=>$slipdatalist->wpc,
-                                        'remarks'=>$slipdatalist->slipremarks,
+                                        'remarks'=>$slipdatalist->remarks,
+                                        'total_day'=>$slipdatalist->total_day,
+                                        'total_year'=>$slipdatalist->total_year,
+                                        'sum_total_date'=>$slipdatalist->sum_total_date,
+                                        'type_tsi' =>$slipdatalist->type_tsi,
+                                        'share_tsi' =>$slipdatalist->share_tsi,
+                                        'type_share_tsi' =>$slipdatalist->type_share_tsi,
+                                        'sliptotalrate' =>$slipdatalist->sliptotalrate,
+                                        'sum_feebroker' =>$slipdatalist->sum_feebroker,
                                         'slipshow'=>'yes'
                     
                                     ]);
@@ -3422,7 +3454,15 @@ class FeSlipController extends Controller
                                         'own_retention'=>$slipdatalist->own_retention,
                                         'sum_own_retention'=>$slipdatalist->sum_own_retention,
                                         'wpc'=>$slipdatalist->wpc,
-                                        'remarks'=>$slipdatalist->slipremarks,
+                                        'remarks'=>$slipdatalist->remarks,
+                                        'total_day'=>$slipdatalist->total_day,
+                                        'total_year'=>$slipdatalist->total_year,
+                                        'sum_total_date'=>$slipdatalist->sum_total_date,
+                                        'type_tsi' =>$slipdatalist->type_tsi,
+                                        'share_tsi' =>$slipdatalist->share_tsi,
+                                        'type_share_tsi' =>$slipdatalist->type_share_tsi,
+                                        'sliptotalrate' =>$slipdatalist->sliptotalrate,
+                                        'sum_feebroker' =>$slipdatalist->sum_feebroker,
                                         'slipshow'=>'yes'
                     
                                     ]);
