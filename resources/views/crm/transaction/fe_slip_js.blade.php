@@ -4959,11 +4959,17 @@ $('#slipbld_constendorsement').change(function(){
     var real_amount = parseInt(conv_amount);
     console.log(real_amount)
 
-    var tsi = $('#feshareto').val();
-    var conv_tsi = tsi.replace(/,/g, "");
-    console.log(conv_tsi)
-    var real_tsi = parseInt(conv_tsi);
-    console.log(real_tsi)
+    // var tsi = $('#feshareto').val();
+    // var conv_tsi = tsi.replace(/,/g, "");
+    // console.log(conv_tsi)
+    // var real_tsi = parseInt(conv_tsi);
+    // console.log(real_tsi)
+
+    var tsiinsval = $('#feshareto').val();
+    var conv_tsiinsval = tsiinsval.replace(/,/g, "");
+    var int_tsiinsval = parseFloat(conv_tsiinsval);
+    var int_fullins = int_tsiinsval.toFixed(2);
+    var new_instsi = int_fullins.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
     var cedshare = $('#feshare').val();
     if(cedshare == null){
@@ -4979,7 +4985,10 @@ $('#slipbld_constendorsement').change(function(){
     if(slipinterestid == null || ceding_id == null){
         swal('warning','please choose interest or ceding first','insert error')
     }else{
-        if(real_cedshare > real_tsi){
+        console.log('ceding share' + real_cedshare)
+        console.log('tsi' + new_instsi)
+
+        if(real_cedshare > new_instsi){
             swal('warning','ceding share cannot greater than Total Sum Insured','insert error')
         }else{
             $.ajax({
