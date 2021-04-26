@@ -283,46 +283,46 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             $('#slipvbrokerdetail').val(response.v_broker);
 
 
-            // if(response.deductible_panel && response.deductible_panel.length > 10)
-            // {
+            if(response.deductible_panel && response.deductible_panel.length > 10)
+            {
 
-            //     var deductibledata = JSON.parse(response.deductible_panel); 
-            //     $('#deductiblePaneldetail tbody').empty();
-            //     for(var i = 0; i < deductibledata.length; i++) 
-            //     {
-            //         var obj = deductibledata[i];
+                var deductibledata = JSON.parse(response.deductible_panel); 
+                $('#deductiblePaneldetail tbody').empty();
+                for(var i = 0; i < deductibledata.length; i++) 
+                {
+                    var obj = deductibledata[i];
 
-            //             //console.log(obj.id);
-            //             //$('#interestInsuredTabledetail tbody').prepend('');
-            //             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-            //             var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            //             // var curr_minamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.min_claimamount);
-            //             var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        //console.log(obj.id);
+                        //$('#interestInsuredTabledetail tbody').prepend('');
+                        // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
+                        var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        // var curr_minamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.min_claimamount);
+                        var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         
-            //             $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td></td></tr>');
+                        $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td></td></tr>');
 
-            //         }
-            //     }
+                    }
+                }
 
 
-            //     if(response.extend_coverage && response.extend_coverage.length > 10)
-            //     {
+                if(response.extend_coverage && response.extend_coverage.length > 10)
+                {
 
-            //         var extend_coverage = JSON.parse(response.extend_coverage); 
-            //         $('#ExtendCoveragePaneldetail tbody').empty();
-            //         for(var i = 0; i < extend_coverage.length; i++) 
-            //         {
-            //             var obj = extend_coverage[i];
+                    var extend_coverage = JSON.parse(response.extend_coverage); 
+                    $('#ExtendCoveragePaneldetail tbody').empty();
+                    for(var i = 0; i < extend_coverage.length; i++) 
+                    {
+                        var obj = extend_coverage[i];
 
-            //             //console.log(obj.id);
-            //             //$('#interestInsuredTabledetail tbody').prepend('');
-            //             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-            //             var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        //console.log(obj.id);
+                        //$('#interestInsuredTabledetail tbody').prepend('');
+                        // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
+                        var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         
-            //             $('#ExtendCoveragePaneldetail tbody').prepend('<tr id="iidextendcoveragedetail'+obj.id+'" data-name="extendcoveragedetailvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragetype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
+                        $('#ExtendCoveragePaneldetail tbody').prepend('<tr id="iidextendcoveragedetail'+obj.id+'" data-name="extendcoveragedetailvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragetype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
                         
-            //         }
-            //     }
+                    }
+                }
 
 
                 if(response.installment_panel && response.installment_panel.length > 10)
@@ -437,10 +437,10 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     $("#sliprbdetail option[value=" + response.retro_backup + "]:first")[0].selected = true;
                     if(response.retro_backup == "NO")
                     {
-                        $("#sliprbdetail").attr('hidden','true');
+                        $("#tabretrodetail").attr('hidden','true');
                     }
                     else if(response.retro_backup == "YES"){
-                        $("#sliprbdetail").removeAttr('hidden');
+                        $("#tabretrodetail").removeAttr('hidden');
                     }
                 }
 
