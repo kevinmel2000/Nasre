@@ -818,7 +818,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     if(response.status_log)
                     {
                         $('#slipStatusTableupdate tbody').remove();
-                        var obj_status = JSON.parse(response.status_log);
+                        var obj_status =response.status_log;
                         
                         for (var i = 0; i < obj_status.length; i++){
 
