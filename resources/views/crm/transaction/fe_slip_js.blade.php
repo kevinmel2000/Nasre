@@ -6635,14 +6635,14 @@ function deletelocationriskdetail(id){
             var totalrateexc = $('#sliptotalnilaiecupdate').val();
             if(totalrateexc){
                     var conv_totalrateexc = parseFloat(totalrateexc);
-                    var sumtotalrate = isNaN((rateslip  / 1000) * conv_totalrateexc) ? 0 :((rateslip  / 1000) * conv_totalrateexc);
+                    var sumtotalrate = isNaN(rateslip + conv_totalrateexc) ? 0 :(rateslip + conv_totalrateexc);
                     var real_sumtotalrate = sumtotalrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     $('#sliptotalrateupdate').val(real_sumtotalrate);
                     $('#sliptotalrateupdate2').val(real_sumtotalrate);
 
                     var sumrate = $("#sliptotalrateupdate").val();
                     var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
-                    var sum = isNaN((conv_sumrate * conv_tsi) * insurance) ? 0 :((conv_sumrate * conv_tsi) * insurance).toFixed(2) ;
+                    var sum = isNaN(((conv_sumrate / 1000) * conv_tsi) * insurance) ? 0 :(((conv_sumrate / 1000) * conv_tsi) * insurance).toFixed(2) ;
                     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     $('#slipbasicpremiumupdate').val(real_sum);
@@ -6650,14 +6650,14 @@ function deletelocationriskdetail(id){
 
                 }else{
                      var conv_totalrateexc = parseFloat(totalrateexc);
-                     var sumtotalrate = isNaN(parseInt(0) * totalrateexc) ? 0 :(parseInt(0) * totalrateexc);
+                     var sumtotalrate = isNaN(parseInt(0) + totalrateexc) ? 0 :(parseInt(0) + totalrateexc);
                      var real_sumtotalrate = sumtotalrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                      $('#sliptotalrateupdate').val(real_sumtotalrate);
                      $('#sliptotalrateupdate2').val(real_sumtotalrate);
 
                       var sumrate = $("#sliptotalrateupdate").val();
                     var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
-                    var sum = isNaN((conv_sumrate * conv_tsi) * insurance) ? 0 :((conv_sumrate * conv_tsi) * insurance).toFixed(2) ;
+                    var sum = isNaN(((conv_sumrate / 1000) * conv_tsi) * insurance) ? 0 :(((conv_sumrate / 1000) * conv_tsi) * insurance).toFixed(2) ;
                     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     $('#slipbasicpremiumupdate').val(real_sum);
@@ -6763,7 +6763,7 @@ function deletelocationriskdetail(id){
         var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
         var tsi = $("#sharetotalsumupdate").val();
         var conv_tsi = parseInt(tsi.replace(/,/g, ""));
-        var sum = isNaN((conv_sumrate * conv_tsi) * insurance) ? 0 :((conv_sumrate * conv_tsi) * insurance).toFixed(2) ;
+        var sum = isNaN(((conv_sumrate / 1000) * conv_tsi) * insurance) ? 0 :(((conv_sumrate / 1000) * conv_tsi) * insurance).toFixed(2) ;
         var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
         $('#slipbasicpremiumupdate').val(real_sum);
