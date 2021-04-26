@@ -912,14 +912,13 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     
                     for (var i = 0; i < status_log.length; i++){
 
-                        if(status_log[i])
-                        {
+                        
                             var status = status_log[i].status;
                             var datetime = status_log[i].datetime;
                             var user = status_log[i].user;
                             
                             $('#slipStatusTableupdate tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
-                        }
+                        
                     };
                 }
 
