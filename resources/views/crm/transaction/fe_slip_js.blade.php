@@ -10813,24 +10813,25 @@ function deletelocationriskdetail(id){
             //alert(insured_data2.count_endorsement);
 
             var slip_data2array=JSON.parse(response.slip_dataarray);
+            var slip_dataarray=JSON.parse(response.slip_data);
             
             $('#SlipInsuredTableData tbody tr[id='+response.oldid+']').empty();
             
-            slip_data2array.forEach(function (arrayItem) 
-            {
+            // slip_data2array.forEach(function (arrayItem) 
+            // {
                 //var x = arrayItem.prop1 + 2;
                 
-                $('#SlipInsuredTableData tbody ').prepend('<tr id="slipiid'+arrayItem.id+'" data-name="slipvalue[]"><td data-name="'+arrayItem.number+'">'+arrayItem.number+'</td><td data-name="'+arrayItem.cedingbroker.name+'">"'+arrayItem.cedingbroker.name+'"</td><td data-name="'+arrayItem.ceding+'">'+arrayItem.ceding+'</td><td data-name="'+arrayItem.status+'">"'+arrayItem.status+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+arrayItem.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
+                $('#SlipInsuredTableData tbody ').prepend('<tr id="slipiid'+slip_dataarray.id+'" data-name="slipvalue[]"><td data-name="'+slip_dataarray.number+'">'+slip_dataarray.number+'</td><td data-name="'+slip_dataarray.cedingbroker.name+'">"'+slip_dataarray.cedingbroker.name+'"</td><td data-name="'+slip_dataarray.ceding+'">'+slip_dataarray.ceding+'</td><td data-name="'+slip_dataarray.status+'">"'+slip_dataarray.status+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+slip_dataarray.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
                      +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
                      +'</a>'
-                     +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+arrayItem.id+'" data-target="#updatemodaldata">'
+                     +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+slip_dataarray.id+'" data-target="#updatemodaldata">'
                      +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
                      +'</a>'
-                     +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+arrayItem.id+'" data-target="#endorsementmodaldata">'
+                     +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+slip_dataarray.id+'" data-target="#endorsementmodaldata">'
                      +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
                      +'</a><td></td></tr>');
 
-            });
+            // });
 
             
 

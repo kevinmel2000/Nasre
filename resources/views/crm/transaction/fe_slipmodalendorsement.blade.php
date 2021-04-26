@@ -279,7 +279,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Count Endorsement')}}</label>
-                                                        <input type="text" min="0" value="" step=".0001" id="countendorsmentdata" name="countendorsmentdata" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                        <input type="text" id="countendorsmentdata" name="countendorsmentdata" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="" />
                                                     </div>
                                                 </div>
                                             </div>
