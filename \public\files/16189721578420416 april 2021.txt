@@ -1,0 +1,25 @@
+16 April 2021
+bug 
+1. format detail modal
+2. format edit modal
+3. format endorsement modal
+	1. Slip number masih format yang lama
+	2.	kurang field remarks, dan count_endorsement / endorsement 
+	3. deductible panel di hilangkan currency fieldnya
+	4. saat retro backup memilik value "NO" maka retrocession panel di hidden
+	5. sesuaikan field perhitungan
+
+adjustment
+1. Tolong dimunculkan notifikasi saat tombol save slip detail di click, muncul modal konfirmasi apakah 
+	data sudah benar.
+	 Lalu dimunculkan Nilai Total Sum Insured, NASIONAL RE Share, Net Premium to NR pada slip tersebut dengan currency dan kurs nya lalu di kali dalam IDR.
+	 Contoh :
+	 NASIONAL RE Share : USD 100.000    x 14.000 = IDR 1.400.000.000
+	 Net Premium to NR : USD 200        x 14.000 = IDR 2.800.000
+	 [Save] / [Cancel]
+	 
+	 Kurs contoh 14.000 didapatkan dari data master Currency Exchange dan ambil nilai Kurs dengan kriteria Currency nya sama dengan Currency slip, bulan dan tahun pada prod date slip sama dengan bulan tahun pada data master Currency Exchange, jika tidak muncul, default value nya 0
+	
+	 
+	 
+2. tambah validasi installment date tidak boleh sama tanggalnya

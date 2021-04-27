@@ -1,0 +1,12 @@
+15 april 2021
+bug
+#1. perhitungan gross to prm diganti perhitungannya jadi hasil perkalian basic premium dengan share
+#2. placeholder untuk permill diganti dengan simbol permill atau /1000
+#3. tambahkan perhitungan on.change pada perhitungan rate dan setelahnya
+
+adjusment
+#1. tambah field remarks di slip dibawah attachment untuk keterangan/catatan
+#2. perhitungan menggunakan rate diubah menjadi menggunakan total rate. total rate didapat dari perjumlahan rate dengan jumlah rate pada extend coverage
+#3. hilangkan fungsi yang belum dipakai diluar dari transaksi dan master slip menu/form
+#4. rate di slip ditambah angka dibelakang koma seperti rate pada extend coverage
+#5. get data koc dengan code yang ada 02 / parent 02 (facultative)

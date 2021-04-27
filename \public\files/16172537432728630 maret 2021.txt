@@ -1,0 +1,29 @@
+Farhan
+1. no slip dan insured harus increment saat input bersamaan 
+
+2. otomatisasi pergantian value saat penambahan ceding risk location dan penambahan tsi dan semua perhitungan
+
+3. field number masih dapat diinput text
+
+4. penambahan warning jika total or + contract retro kurang atau lebih 100%
+
+belum selesai kemarin:
+5. field basic premium form msh berubah saat di ketik tab
+
+6. file pada slip lama dalam satu insured msh terbawa
+
+7. reinsurance period tidak bisa menghitung total days/ sum total date
+
+8. deductible panel min claim amount field tidak wajib
+
+9. tambahkan notif installment panel saat kurang dari 100% saat ingin save
+
+selesai:
+10. jpg,jpeg,pdf,docx,ppt tambahkan extensi untuk upload file (done)
+
+Mas Teddy 
+1. endorsement -> slip saat ini dan insured saat ini di duplicate dengan menambahkan nilai pada field count endorsement + 1 pada slip dan insured dan perubahan value field selisih menjadi true pada table slip  -> slip dan insured terakhir amount value (money format) dikali (-1) -> menampilkan modal endorsement dengan data terbaru hasil duplicate dengan nilai count endorsement
+
+2. format tanggal di semua slip diubah menjadi DD/MM/YYYY
+
+3. slip ada kemungkinan untuk ditambah baru saat insured dan data slip sebelumnya sudah di endorsement dengan penambahan count endorsement pada slip yang baru sama dengan slip yang sudah di endorsement pada insured yang sama

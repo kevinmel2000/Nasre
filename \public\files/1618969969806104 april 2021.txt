@@ -1,0 +1,15 @@
+#1. untuk posisi rate upper dan lower dibalik, dan ceding share dan nasional re dibalik posisinya
+#2. insured prefix dan suffix auto generate huruf kapital
+3. jika nilai rate slip diluar dari range upper rate dan lower maka muncul notif 
+#4. tambahkan ceding/broker label dan source label dipindah ke ceding dropdown
+#5. auto generate percent saat diketik amount risk location dan installment panel
+#6. menampilkan percent pada list risk location
+#7. jika occupacy diubah saat building sudah dipilih maka datanya juga berubah
+8. datetime picker input tambahkan default format pengisian dd/mm/yyyy
+#9. loc_code pada master location data diubah menjadi initial+counter
+10. rapihkan data master untuk yang code counter 9 ke 10
+11. save data error
+
+bug :
+save button balik kebawah
+or defaultnya hilang

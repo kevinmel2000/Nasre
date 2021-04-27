@@ -1,0 +1,22 @@
+28 january 2021 :
+
+1. entry code cob,koc,occ 2 digit ada parent data
+2. ceding broker type dropdown pindahin paling atas di form master ceding/broker
+3. tambah master data pada type (company type master form) ceding broker untuk form master ceding/broker isi field code,nama
+4. address field dapat search map location di form master lookup location
+5. semua code master data auto generate 4 digit (000n)
+6. insured customer(field tengah) dan suffix pake auto correct tp bisa input text di form insured
+7. dropdown route pake master = type route nya. field from n to itu pake free text pada insured form
+8. coinsurance free text pada insured form
+9. code pada form insured(IN+tgl+5digit) dan slip(inisial kategori+tgl+5digit) ditambah huruf inisial di awal dan 5 digit angka setelah tanggal
+10. field UY limit 4 digit only number. di form slip
+11. offer default pada dropdown status di form slip
+12. pada dropdown status kurang decline dan cancel di form slip
+13. ganti status, input record baru tidak hanya update
+14. setiap endorsment di insert di posisi akhir
+15. field endorsment/selisih bukan inputan di form slip
+16. field selisih itu false atau true dari selisih sebelumnya
+17. endorsement/selisih dari aplikasi eksternal untuk menentukan perubahan slip
+18. input decimal limit 4 digit
+19. code ceding/broker master data formatnya Inisial huruf depan field name + 5digit di form master ceding/broker
+20.

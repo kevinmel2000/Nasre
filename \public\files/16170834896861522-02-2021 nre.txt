@@ -1,0 +1,16 @@
+22-02-2021 nre:
+1. lookup location state gk muncul
+2. field code dan yang nilainya sedikit disesuaikan panjang fieldnya
+3. retro backup default no. saat retro backup no retrocession panel hide
+4. own retention default value 100%, saat di input retrocession panel, persentase own retention berkurang sesuai value retrocession panel
+5. tab insured data dan insurance measurement digabung
+6. penambahan code ditambah 0 dibelakang angka(2 digit) pada cob,koc,ocp.
+7. lookup location code jadi 6 digit 
+8. lookup location pada slip ditampil berdasarkan province dan city seperti di master data lookup location.
+9. format tanggal diganti dd/mm/yyyy pada field date picker ganti default format ../../.. atau setiap input nanti akan berubah menjadi ../../..
+10. baris our share perhitungannya from / to, from nya tsi*share di slip , to dari tsi yang paling besar diantara slip
+(hold)11. satu insured bisa memiliki banyak slip. form slip dapat menambah data multiple(berkali kali) tambah tab kesamping dengan limit 10.
+12. field from our share ganti jadi nasional reinsurance dan field to our share ganti jadi field total.
+13. data slip yang ditampilkan adalah data terbaru/ endorsement terakhir setelah di endorse (klo bisa tambahin slip_status biar munculin yg terakhir jadi aktif)
+14. endorsement / selisih awal input entry nya di available setelah endorse di readonly dengan perhitungan slip/endorsement sebelumnya di minusin trus di jumlah dengan endorsement selanjutnya
+15. Semua angka yang di update pada slip form di endorsement itu di jadikan minus lalu yg minus disimpan dalam data sebelum diendorse pada database selisih nya disimpan untuk report
