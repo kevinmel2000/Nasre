@@ -3071,7 +3071,7 @@ class FeSlipController extends Controller
                                 'slip_id'=>$dt->slip_id,
                                 'insured_id'=>$dt->insured_id,
                                 'slip_type'=>'fe',
-                                'status'=>'active'
+                                'status'=>'active',
                                 'count_endorsement' => ($dt->count_endorsement + 1)
                             ]);
 
