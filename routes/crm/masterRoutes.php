@@ -89,6 +89,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::delete('/felookuplocation/destroy/{fl}', [FeLookupLocationController::class, 'destroy'])->middleware(['can:delete-felookup']);
     Route::get('/felookuplocation', [FeLookupLocationController::class, 'index']);
     Route::get('/felookuplocationgetcountcode', [FeLookupLocationController::class, 'getCountCode']);
+    Route::get('/felookuplocationgetloccountcode/{fl}', [FeLookupLocationController::class, 'getLocCountCode']);
     Route::post('/felookuplocation', [FeLookupLocationController::class, 'index']);
     Route::post('/felookuplocation/store', [FeLookupLocationController::class, 'store']);
     Route::put('/felookuplocation/update/{fl}', [FeLookupLocationController::class, 'update']);
