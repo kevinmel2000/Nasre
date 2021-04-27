@@ -1657,8 +1657,9 @@ class FeSlipController extends Controller
         }
         $newarrayinspandata=json_encode($newarrayinspan);
 
+        $prodyeardata = strtotime($slipdata->prod_year);
 
-        $dateyeardata= date("d/m/Y", strtotime($slipdata->prod_year));
+        $dateyeardata= date("d/m/Y", $prodyeardata);
 
 
         $statuslist= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->take(5)->get();
