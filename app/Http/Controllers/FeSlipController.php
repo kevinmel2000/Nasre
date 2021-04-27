@@ -1703,6 +1703,13 @@ class FeSlipController extends Controller
             $building_rate_down = $building_rate->rate_batas_bawah_building_class_3;
         }
       
+        if($slipdata->date_transfer == null){
+            $datetransfer = "";
+        }else{
+            $datetransfer = date("d/m/Y", strtotime($slipdata->date_transfer));
+        }
+        
+
 
         return response()->json(
             [
@@ -1713,7 +1720,7 @@ class FeSlipController extends Controller
                 'prod_year' => $dateyeardata,
                 'number' => $slipdata->number,
                 'slipuy' => $slipdata->uy,
-                'date_transfer' => date("d/m/Y", strtotime($slipdata->date_transfer)),
+                'date_transfer' => $datetransfer,
                 'status' => $slipdata->status,
                 'endorsment' => $slipdata->endorsment,
                 'selisih' => $slipdata->selisih,
