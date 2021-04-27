@@ -980,7 +980,10 @@ class FeSlipController extends Controller
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
         $ceding = CedingBroker::orderby('id','asc')->where('type',4)->get();
-        $felookup = FelookupLocation::orderby('id','asc')->get();
+        // $felookup = FelookupLocation::orderby('id','asc')->get();
+        $felookuptable = collect(FelookupLocation::orderby('id','asc')->get());
+        $felookup = $felookuptable->unique('country_id');
+        $felookup->values()->all();
         $cnd = ConditionNeeded::orderby('id','asc')->get();
         $deductibletype= DeductibleType::orderby('id','asc')->get();
         $extendedcoverage= ExtendedCoverage::orderby('id','asc')->get();
