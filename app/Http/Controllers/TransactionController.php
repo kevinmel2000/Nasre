@@ -2031,7 +2031,11 @@ class TransactionController extends Controller
             $slip_type = $request->sliptype;
             $status = 'passive';
 
-            $checkit = DB::table('installment_panel_detail')->where('installment_panel_detail.slip_id',$slip_id)->where('installment_panel_detail.insured_id',$insured_id)->where('installment_panel_detail.slip_type',$request->sliptype)->sum('installment_panel_detail.percentage');
+            $checkit = DB::table('installment_panel_detail')
+            ->where('installment_panel_detail.slip_id',$slip_id)
+            ->where('installment_panel_detail.insured_id',$insured_id)
+            ->where('installment_panel_detail.slip_type',$request->sliptype)
+            ->sum('installment_panel_detail.percentage');
             $totalpercent = $checkit + $percentage;
         
             if($percentage !='' && $amount !='' && $slip_id != '')

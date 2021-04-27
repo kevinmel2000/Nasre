@@ -980,7 +980,10 @@ class FeSlipController extends Controller
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
         $ceding = CedingBroker::orderby('id','asc')->where('type',4)->get();
-        $felookup = FelookupLocation::orderby('id','asc')->get();
+        // $felookup = FelookupLocation::orderby('id','asc')->get();
+        $felookuptable = collect(FelookupLocation::orderby('id','asc')->get());
+        $felookup = $felookuptable->unique('country_id');
+        $felookup->values()->all();
         $cnd = ConditionNeeded::orderby('id','asc')->get();
         $deductibletype= DeductibleType::orderby('id','asc')->get();
         $extendedcoverage= ExtendedCoverage::orderby('id','asc')->get();
@@ -1657,9 +1660,16 @@ class FeSlipController extends Controller
         }
         $newarrayinspandata=json_encode($newarrayinspan);
 
-        $prodyeardata = strtotime($slipdata->prod_year);
+        if($slipdata->prod_year == null){
+            $prodyeardata = strtotime(date("Y-m-d"));
+            $dateyeardata= date("d/m/Y", $prodyeardata);
+        }else{
+            $prodyeardata = strtotime($slipdata->prod_year);
+            $dateyeardata= date("d/m/Y", $prodyeardata);
+        }
+        
 
-        $dateyeardata= date("d/m/Y", $prodyeardata);
+        
 
 
         $statuslist= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->take(5)->get();

@@ -315,12 +315,28 @@ $('input[name=address]').on('input',function(e){
           }
 
           var firstWordsdata2 = firstWordsdata.join('');
-
           var codenew=document.getElementById('code').value;
-          var codenew2=firstWordsdata2+""+codenew.slice(codenew.length - 6);
-     
+          
+          
+               $.ajax({
+                  type:"GET",
+                  url:'{{ url("/") }}/master-data/felookuplocationgetloccountcode/'+firstWordsdata2,
+                  beforeSend: function() { $("body").addClass("loading");  },
+                  complete: function() {  $("body").removeClass("loading"); },
+                  success:function(res){  
+                      console.log(res)      
+                      if(res){
+                           document.getElementById('code').value=res[0].codecount;
 
-          document.getElementById('code').value=codenew2;
+                      }else{
+                          
+                          var codenew2=firstWordsdata2+""+codenew.slice(codenew.length - 6);
+                          document.getElementById('code').value=codenew2;
+
+                      }
+                  }
+              });
+          
 
           
             var arraystring=results[0].formatted_address.split(","); 
@@ -546,13 +562,32 @@ function updateMarkerPosition(latLng)
       var firstWordsdata2 = firstWordsdata.join('');
      
       var codenew=document.getElementById('code').value;
-      var codenew2=firstWordsdata2+""+codenew.slice(codenew.length - 6);
-     
+      
+      //var codenew2=firstWordsdata2+""+codenew.slice(codenew.length - 6);
+      //document.getElementById('code').value=codenew2;
+
+      $.ajax({
+            type:"GET",
+            url:'{{ url("/") }}/master-data/felookuplocationgetloccountcode/'+firstWordsdata2,
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(res){  
+                console.log(res)      
+                if(res){
+                    document.getElementById('code').value=res[0].codecount;
+
+                }else{
+                    
+                    var codenew2=firstWordsdata2+""+codenew.slice(codenew.length - 6);
+                    document.getElementById('code').value=codenew2;
+
+                }
+            }
+        });
+          
+
 
       document.getElementById('address').value=results[0].formatted_address;
-      
-      document.getElementById('code').value=codenew2;
-
       var arraystring=results[0].formatted_address.split(","); 
 
       //alert(arraystring);
@@ -770,14 +805,30 @@ function updateMarkerPosition2(latLng)
 
       var firstWordsdata2 = firstWordsdata.join('');
      
-      var codenew=document.getElementById('code').value;
-      var codenew2=firstWordsdata2+""+codenew.slice(codenew.length - 6);
-     
-
-      //document.getElementById('address').value=results[0].formatted_address;
       
-       document.getElementById('code').value=codenew2;
+      var codenew=document.getElementById('code').value;
 
+      $.ajax({
+          type:"GET",
+          url:'{{ url("/") }}/master-data/felookuplocationgetloccountcode/'+firstWordsdata2,
+          beforeSend: function() { $("body").addClass("loading");  },
+          complete: function() {  $("body").removeClass("loading"); },
+          success:function(res){  
+              console.log(res)      
+              if(res){
+                   document.getElementById('code').value=res[0].codecount;
+
+              }else{
+                  
+                  var codenew2=firstWordsdata2+""+codenew.slice(codenew.length - 6);
+                  document.getElementById('code').value=codenew2;
+
+              }
+          }
+      });
+        
+      //document.getElementById('address').value=results[0].formatted_address;
+    
         var arraystring=results[0].formatted_address.split(","); 
 
         //alert(arraystring);

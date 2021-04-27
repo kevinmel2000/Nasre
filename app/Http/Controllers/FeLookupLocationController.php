@@ -84,6 +84,7 @@ class FeLookupLocationController extends Controller
                 $code_felookuplocation =  strval($lastid + 1);
               }
 
+
         }
         else{
               $code_felookuplocation = '00000' . strval(1);
@@ -101,6 +102,47 @@ class FeLookupLocationController extends Controller
     }
   
 
+    public function getLocCountCode($code)
+    {
+        
+        $lastid = FeLookupLocation::where('loc_code','like',$code.'%')->count();
+    
+        if($lastid != null)
+        {
+              // $code_st = $mydate . strval($lastid + 1);
+              if($lastid < 9){
+                  $code_felookuplocation = '00000' . strval($lastid + 1);
+              }elseif($lastid > 8 && $lastid < 99){
+                  $code_felookuplocation = '0000' . strval($lastid + 1);
+              }elseif($lastid > 98 && $lastid < 999){
+                  $code_felookuplocation = '000' . strval($lastid + 1);
+              }elseif($lastid > 998 && $lastid < 9999){
+                  $code_felookuplocation = '00' . strval($lastid + 1);
+              }
+              elseif($lastid > 9998 && $lastid < 99999){
+                $code_felookuplocation = '0' . strval($lastid + 1);
+              }
+              elseif($lastid > 99998 && $lastid < 999999){
+                $code_felookuplocation =  strval($lastid + 1);
+              }
+
+        }
+        else
+        {
+              $code_felookuplocation = '00000' . strval(1);
+        }
+
+
+        $data2 = [];
+
+        $data2[] = [
+            'codecount' => $code.''.$code_felookuplocation
+        ];
+
+        
+        return response()->json($data2);
+    }
+  
 
     
     public function index(Request $request)
