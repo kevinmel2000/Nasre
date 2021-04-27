@@ -197,7 +197,7 @@
                                     <td>{{ $detaillocrisk->slipno }}</td>
                                     <td>{{ $detaillocrisk->policyno }}</td>
                                     <td>{{ number_format($detaillocrisk->percentage, 2, '.', ',') }}</td>
-                                    <td>@currency($detaillocrisk->amountlocation)</td>
+                                    <td>@currency(number_format($detaillocrisk->amountlocation, 2, '.', ','))</td>
                                     <td>
                                     <a href="javascript:void(0)" onclick="deletelocationriskdetail({{ $detaillocrisk->id }})"><i class="fas fa-trash text-danger"></i></a>
                                     </td>
