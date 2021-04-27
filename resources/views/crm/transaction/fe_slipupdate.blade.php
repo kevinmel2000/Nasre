@@ -68,7 +68,8 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="">{{__('NASIONAL RE Share')}}</label>
-                                                    <input id="fesharefrom" type="text"  name="fesharefrom" value="{{strval(number_format($insureddata->share_from, 3, '.', ','))}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                    <input id="fesharefrom" type="hidden"  name="fesharefrom" value="{{strval(number_format($insureddata->share_from, 3, '.', ','))}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-150" />
+                                                    <input id="fesharefrom2" type="text"  name="fesharefrom2" value="{{strval(number_format($insureddata->share_from, 2, '.', ','))}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-150" disabled />
                                                 </div>
                                             </div>
 
@@ -78,7 +79,8 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="input-group" lang="en-US">
-                                                             <input type="text" id="feshare" name="feshare" value="{{strval(number_format($insureddata->share, 3, '.', ','))}}" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly/>
+                                                             <input type="hidden" id="feshare" name="feshare" value="{{strval(number_format($insureddata->share, 3, '.', ','))}}" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-150" />
+                                                             <input type="text" id="feshare2" name="feshare2" value="{{strval(number_format($insureddata->share, 2, '.', ','))}}" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-150" disabled />
                                                              <!-- <div class="input-group-append">
                                                                 <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                             </div> -->
@@ -94,7 +96,7 @@
                                                     <label for="">{{__('Currency')}}</label>
                                                     <select id="fecurrency" name="fecurrency" class="e1 form-control form-control-sm ">
                                                         @foreach($currency as $crc)
-                                                            @if($insureddata->insured_prefix  == $crc->id)
+                                                            @if($insureddata->currency_id  == $crc->id)
                                                                  <option value="{{ $crc->id }}" selected>{{ $crc->code }} - {{ $crc->symbol_name }}</option>
                                                             @else
                                                                  <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
@@ -107,8 +109,8 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured')}}</label>
-                                                    <input id="feshareto2" type="text"  name="feshareto" value="{{strval(number_format($insureddata->share_to, 3, '.', ','))}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="1-50" />
-                                                    <input id="feshareto" type="hidden"  name="feshareto" value="{{strval(number_format($insureddata->share_to, 3, '.', ','))}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" />
+                                                    <input id="feshareto2" type="text"  name="feshareto" value="{{strval(number_format($insureddata->share_to, 2, '.', ','))}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="1-150" />
+                                                    <input id="feshareto" type="hidden"  name="feshareto" value="{{strval(number_format($insureddata->share_to, 3, '.', ','))}}"  class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-150" />
                                                 </div>
                                             </div>
 
