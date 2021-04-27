@@ -70,8 +70,8 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Transfer Date')}}</label>
-                                                                <input type="hidden" id="sliptdupdate" name="sliptdupdate" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" />
-                                                                    <input type="text" id="sliptdupdate2" name="sliptdupdate2" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" disabled />
+                                                                <input type="hidden" id="sliptdupdate" name="sliptdupdate" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-50" />
+                                                                    <input type="text" id="sliptdupdate2" name="sliptdupdate2" class="form-control form-control-sm" data-validation="length"  data-validation-length="0-50" disabled />
                                                             </div>
                                                         </div>
                                                     </div>
