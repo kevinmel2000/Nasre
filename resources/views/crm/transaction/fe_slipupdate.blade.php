@@ -49,11 +49,11 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 1')}}</label>
-                                                    <input type="text" name="fesuggestinsured" id='autocomplete' style="text-transform:uppercase;"  value="{{$insureddata->insured_name}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="1-50" placeholder="search for insured suggestion" required/>
+                                                    <input type="text" name="fesuggestinsured" id='autocomplete' style="text-transform:uppercase;"  value="{{$insureddata->insured_name}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="1-350" placeholder="search for insured suggestion" required/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 2')}}</label>
-                                                    <input type="text" name="fesuffix" id='autocomplete2' style="text-transform:uppercase;"  value="{{$insureddata->insured_suffix}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="suffix: QQ or TBk" required/>
+                                                    <input type="text" name="fesuffix" id='autocomplete2' style="text-transform:uppercase;"  value="{{$insureddata->insured_suffix}}"  class="form-control form-control-sm " data-validation="length" data-validation-length="0-350" placeholder="suffix: QQ or TBk" required/>
                                                
                                                 </div>
                                             </div>
@@ -438,7 +438,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="input-group">
-                                                            <input type="text" id="percentceding" name="percentceding" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50"  />
+                                                            <input type="text" id="percentceding" name="percentceding" class="form-control form-control-sm floatTextBox2" data-validation="length" data-validation-length="0-50"  />
                                                             <div class="input-group-append">
                                                                 <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                             </div>
@@ -797,7 +797,7 @@
 
 <div class="row">
         <div class="col-md-12">
-            <div class="form-group">
+            <div class="input-group">
                 <label for="">{{__('WPC')}}</label>
                 <input type="text" id="wpc" name="wpc" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="" />
                 <div class="input-group-append">
