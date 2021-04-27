@@ -513,7 +513,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#sliptotalsumpctdetail').val("0");
             }
 
-            if(response.date_transfer == null){
+            if(response.date_transfer == null || response.date_transfer == "" ){
                $('#sliptddetail').val(''); 
            }else{
                 $('#sliptddetail').val(response.date_transfer); 
@@ -935,6 +935,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 }
                 
                 $('#sliptdupdate').val(response.date_transfer);
+                $('#sliptdupdate2').val(response.date_transfer);
                 $('#slippctupdate').val(response.insured_pct);
 
                 if(response.total_sum_pct)
