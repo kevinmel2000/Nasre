@@ -3010,7 +3010,9 @@ class FeSlipController extends Controller
                                 'state_id'=>$ll->state_id,
                                 'city_id'=>$ll->city_id,
                                 'address_location_id'=>$ll->address_location_id,
-                                'count_endorsement' => ($ll->count_endorsement + 1)
+                                'slip_type' => 'fe',
+                                'count_endorsement' => ($ll->count_endorsement + 1),
+                                'status' => 'active'
                             ]);
     
                             $lookuplocationlist = DB::table('trans_location_detail')
@@ -3019,6 +3021,9 @@ class FeSlipController extends Controller
                                                     ->where('trans_location_detail.id',$locationlistup->id)
                                                     ->get();
 
+                            $lldata =  TransLocationTemp::findOrFail($locationlistup->id);
+                                    $lldata->status = "passive";
+                                    $rldata->save();
                             
                             
                             $risklocationlist= RiskLocationDetail::where('translocation_id','=',$ll->id)->orderby('id','desc')->get();
@@ -3031,12 +3036,16 @@ class FeSlipController extends Controller
                                         'cndn'=>$rl->cndn,
                                         'certno'=>$rl->certno,
                                         'slipno'=>$rl->slipno,
+                                        'percentage'=>$rl->percentage,
                                         'amountlocation'=>$rl->amountlocation,
-                                        'count_endorsement' => ($rl->count_endorsement + 1)
+                                        'count_endorsement' => ($rl->count_endorsement + 1),
+                                        'status' => 'active'
+
                                     ]);
         
                                     $rldata =  RiskLocationDetail::findOrFail($rl->id);
                                     $rldata->amountlocation = ($rl->amountlocation * (-1));
+                                    $rldata->status = "passive";
                                     $rldata->save();
         
                                     $risklocationlistdetail = DB::table('risk_location_detail')
@@ -3060,6 +3069,9 @@ class FeSlipController extends Controller
                                 'min_claimamount'=>$dt->min_claimamount,
                                 'amount'=>$dt->amount,
                                 'slip_id'=>$dt->slip_id,
+                                'insured_id'=>$dt->insured_id,
+                                'slip_type'=>'fe',
+                                'status'=>'active'
                                 'count_endorsement' => ($dt->count_endorsement + 1)
                             ]);
 
@@ -3068,6 +3080,7 @@ class FeSlipController extends Controller
                             $dtdata =  DeductibleTemp::findOrFail($dt->id);
                             $dtdata->min_claimamount = ($dt->min_claimamount * (-1));
                             $dtdata->amount = ($dt->amount * (-1));
+                            $dtdata->status = "passive";
                             $dtdata->save();
                         }
                     }else{
@@ -3084,7 +3097,10 @@ class FeSlipController extends Controller
                                 'percentage'=>$ect->percentage,
                                 'amount'=>$ect->amount,
                                 'slip_id'=>$ect->slip_id,
-                                'count_endorsement' => ($ect->count_endorsement + 1)
+                                'count_endorsement' => ($ect->count_endorsement + 1),
+                                'insured_id' => $ect->insured_id,
+                                'slip_type' => 'fe',
+                                'status' => 'active'
                             ]);
 
                             $jsonectlistup = ExtendCoverageTemp::where('slip_id','=',$ectlistup->slip_id)->where('count_endorsement',$ectlistup->count_endorsement)->orderby('id','desc')->get();
@@ -3092,6 +3108,7 @@ class FeSlipController extends Controller
     
                             $ectdata =  ExtendCoverageTemp::findOrFail($ect->id);
                             $ectdata->amount = ($ect->amount * (-1));
+                            $ectdata->status = "passive";
                             $ectdata->save();
                         }
                     }else{
@@ -3108,7 +3125,10 @@ class FeSlipController extends Controller
                                 'percentage'=>$ipt->percentage,
                                 'amount'=>$ipt->amount,
                                 'slip_id'=>$ipt->slip_id,
-                                'count_endorsement' => ($ipt->count_endorsement + 1)
+                                'count_endorsement' => ($ipt->count_endorsement + 1),
+                                'insured_id' => $ipt->insured_id,
+                                'slip_type' => "fe",
+                                'status' => 'active'
                             ]);
 
                             $jsoniptlistup = InstallmentTemp::where('slip_id','=',$iptlistup->slip_id)->where('count_endorsement',$iptlistup->count_endorsement)->orderby('id','desc')->get();
@@ -3116,6 +3136,7 @@ class FeSlipController extends Controller
     
                             $iptdata =  InstallmentTemp::findOrFail($ipt->id);
                             $iptdata->amount = ($ipt->amount * (-1));
+                            $iptdata->status = "passive";
                             $iptdata->save();
                         }
                     }
@@ -3142,7 +3163,10 @@ class FeSlipController extends Controller
                                 'percentage'=>$rct->percentage,
                                 'amount'=>$rct->amount,
                                 'slip_id'=>$rct->slip_id,
-                                'count_endorsement' => ($ect->count_endorsement + 1)
+                                'count_endorsement' => ($ect->count_endorsement + 1),
+                                'insured_id' => $rct->insured_id,
+                                'slip_type' => 'fe',
+                                'status' => 'active'
                             ]);
 
                             $jsonrctlistup = RetrocessionTemp::where('slip_id','=',$rctlistup->slip_id)->where('count_endorsement',$rctlistup->count_endorsement)->orderby('id','desc')->get();
@@ -3150,6 +3174,7 @@ class FeSlipController extends Controller
     
                             $rctdata =  RetrocessionTemp::findOrFail($rct->id);
                             $rctdata->amount = ($rct->amount * (-1));
+                            $rctdata->status = "passive";
                             $rctdata->save();
                         }
                     }
@@ -3486,13 +3511,16 @@ class FeSlipController extends Controller
                     $msdata->total_sum_insured=($slipdata->total_sum_insured * (-1));
                     $msdata->total_sum_pct=($slipdata->total_sum_pct * (-1));
                     $msdata->sum_share=($slipdata->sum_share * (-1));
+                    $msdata->sliptotalrate=($slipdata->sliptotalrate * (-1));
+                    $msdata->sum_total_date=($slipdata->sum_total_date * (-1));
+                    $msdata->sum_feebroker=($slipdata->sum_feebroker * (-1));
                     $msdata->basic_premium=($slipdata->basic_premium * (-1));
                     $msdata->commission=($slipdata->commission * (-1));
                     $msdata->grossprm_to_nr=($slipdata->grossprm_to_nr * (-1));
                     $msdata->netprm_to_nr=($slipdata->netprm_to_nr * (-1));
                     $msdata->sum_commission=($slipdata->sum_commission * (-1));
                     $msdata->wpc=($slipdata->wpc * (-1)); 
-                    $msdata->status='endorsement'; 
+                    // $msdata->status='endorsement'; 
                     $msdata->sum_own_retention=($slipdata->sum_own_retention * (-1));
                     $msdata->selisih="false"; 
                     $msdata->slipshow="no"; 
