@@ -10,6 +10,7 @@ use App\Http\Controllers\FinancialLineSlipController;
 use App\Http\Controllers\HeMotorSlipController;
 use App\Http\Controllers\MovePropSlipController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\Claim_controller;
 
 Route::get('get-state-lookup','FeSlipController@getStateLookup');
 Route::get('get-city-lookup','FeSlipController@getCityLookup');
@@ -75,7 +76,9 @@ Route::get('/detailendorsementslip/{idm}', [FeSlipController::class, 'getdetailE
 
 
 Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
-    
+
+    // claim cuy
+    Route::get('claim',[Claim_controller::class,'index']);    
 
     // SECTION Marine Slip Group Routes
     Route::get('/marine-slip', [TransactionController::class, 'indexmarineslip']);

@@ -58,11 +58,8 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label>{{__('Prod Year')}}:</label>
-                                                                    <div class="input-group date" id="date" data-target-input="nearest">
-                                                                            <input type="text" id="slipprodyeardetail" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipprodyeardetail" value="" readonly="readonly">
-                                                                            <div class="input-group-append" >
-                                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                            </div>
+                                                                    <div class="input-group " >
+                                                                            <input type="text" id="slipprodyeardetail" class="form-control form-control-sm "  name="slipprodyeardetail" value="" disabled>
                                                                     </div>
                                                             </div>
                                                         </div>
@@ -75,7 +72,7 @@
                                                             </div> --}}
                                                             <div class="form-group">
                                                                 <label for="">{{__('Transfer Date')}}</label>
-                                                                <input type="text" id="sliptddetail" name="sliptddetail" class="form-control form-control-sm datepicker-input" data-validation="length"  data-validation-length="0-50" readonly="readonly"/>
+                                                                 <input type="text" id="sliptddetail" name="sliptddetail" class="form-control form-control-sm datetimepicker-input" value="" disabled />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -281,7 +278,7 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="">{{__('TSI/Ceding Share') }}</label>
-                                                                <select id="sliptypetsidetail" name="sliptypetsiupdate" class="form-control form-control-sm ">
+                                                                <select id="sliptypetsidetail" disabled="true" name="sliptypetsiupdate" class="form-control form-control-sm ">
                                                                     <option selected disabled>{{__('Select Share')}}</option>
                                                                     <option value="1">Total Sum Insured</option>
                                                                     <option value="2">Ceding Share</option>
@@ -476,14 +473,14 @@
                                                                 <div class="row">
                                                                     <div class="col-md-5">
                                                                         <input type="hidden"  id="slipdaytotaldetail" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
-                                                                        <input type="text"  id="slipdaytotaldetail2" name="slipdaytotal2" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="a"  />
+                                                                        <input type="text" disabled="true"  id="slipdaytotaldetail2" name="slipdaytotal2" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="a"  />
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                         <h2>/</h2>
                                                                     </div>
                                                                     <div class="col-md-5">
                                                                         <input type="hidden"  id="slipdaytotaldetail3" name="slipdaytotal" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="a"  />
-                                                                        <input type="text"  id="slipdaytotaldetail4" name="slipdaytotal2" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="a"  />
+                                                                        <input type="text" disabled="true"  id="slipdaytotaldetail4" name="slipdaytotal2" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="a"  />
                                                                     </div>
                                                                 </div>                                                                       
                                                             </div>
@@ -545,7 +542,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="">{{__('TSI/Ceding Share') }}</label>
-                                                            <select id="sharetypetsidetail" name="sharetypetsidetail" class="form-control form-control-sm ">
+                                                            <select id="sharetypetsidetail" disabled="true" name="sharetypetsidetail" class="form-control form-control-sm ">
                                                                 <option selected disabled>{{__('Select Share')}}</option>
                                                                 <option value="1">Total Sum Insured</option>
                                                                 <option value="2">Ceding Share</option>
@@ -567,7 +564,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="">{{__('Rate (permil.. ')}} &permil;)</label>
-                                                            <input type="text"  id="slipratedetail" name="slipratedetail" class="form-control form-control-sm floatTextBox2" data-validation="length" data-validation-length="0-50" placeholder="a &permil;" />
+                                                            <input type="text" disabled="true" id="slipratedetail" name="slipratedetail" class="form-control form-control-sm floatTextBox2" data-validation="length" data-validation-length="0-50" placeholder="a &permil;" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -586,7 +583,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Basic Premium')}}</label>
-                                                        <input type="text" id="slipbasicpremiumdetail" name="slipbasicpremiumdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a &permil; * tsi" />
+                                                        <input type="text" disabled="true"  id="slipbasicpremiumdetail" name="slipbasicpremiumdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a &permil; * tsi" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -598,7 +595,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="input-group">
-                                                                        <input type="text"  id="slipsharedetail" name="slipsharedetail" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="b%" />
+                                                                        <input type="text"  id="slipsharedetail" disabled="true" name="slipsharedetail" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="b%" />
                                                                         <div class="input-group-append">
                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                         </div>
@@ -627,7 +624,7 @@
                                                             <div class="row d-flex flex-wrap">
                                                                 <div class="col-md-12">
                                                                     <div class="input-group">
-                                                                        <input type="text" id="slipcommissiondetail" name="slipcommissiondetail" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="d" />
+                                                                        <input type="text" disabled="true" id="slipcommissiondetail" name="slipcommissiondetail" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="d" />
                                                                         <div class="input-group-append">
                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                         </div>
@@ -653,7 +650,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="input-group">
-                                                                        <input type="text" id="slipvbrokerdetail" name="slipvbrokerdetail" value="0" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="a" />
+                                                                        <input type="text" disabled="true" id="slipvbrokerdetail" name="slipvbrokerdetail" value="0" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-50" placeholder="a" />
                                                                         <div class="input-group-append">
                                                                             <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
                                                                         </div>

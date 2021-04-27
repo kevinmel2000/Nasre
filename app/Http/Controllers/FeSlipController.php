@@ -531,7 +531,7 @@ class FeSlipController extends Controller
         // }
 
         $slipdata=SlipTable::where('insured_id',$code_ms)->first();
-        $slipdata2=SlipTable::where('insured_id',$code_ms)->get();
+        $slipdata2=SlipTable::where('insured_id',$code_ms)->where('slipshow','yes')->where('slip_type','fe')->get();
         // $slip_now = SlipTable::whereDate('created_at',$currdate2)->where('slip_type','fe')->where('insured_id',$code_ms)->orderby('id','asc')->get();
         $slip_now = SlipNumber::whereDate('created_at',$currdate2)->where('slip_type','fe')->where('insured_number',$code_ms)->orderby('id','asc')->get();
         $sliplastid = count($slip_now);
@@ -955,7 +955,8 @@ class FeSlipController extends Controller
                 return view('crm.transaction.fe_slip', compact(['insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
 
                 
-        }        
+        }    
+            
     }
 
 
@@ -990,7 +991,7 @@ class FeSlipController extends Controller
         // dd($insureddata->number);
         $code_ms=$insureddata->number;
         $slipdata=SlipTable::where('insured_id',$insureddata->number)->where('endorsment',$insureddata->count_endorsement)->first();
-        $slipdata2=SlipTable::where('insured_id',$insureddata->number)->where('endorsment',$insureddata->count_endorsement)->get();
+        $slipdata2=SlipTable::where('insured_id',$insureddata->number)->where('slipshow','yes')->where('slip_type','fe')->get();
         // dd($slipdata2);
 
         if(!empty($slipdata))
@@ -1245,6 +1246,7 @@ class FeSlipController extends Controller
                 $slipdataup->sum_own_retention=$request->slipsumor;
                 $slipdataup->wpc=$request->wpc;
                 $slipdataup->remarks=$request->remarks;
+                $slipdataup->slipshow="no";
 
                 $slipdataup->save();
 
@@ -1660,29 +1662,15 @@ class FeSlipController extends Controller
 
 
         $statuslist= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->take(5)->get();
+        // $statustable= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->get();
+        // $statuslist= collect(StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->get());
+        // $statuslist->values()->all();
         
-        // if(empty($slipdata->insured_id) || $slipdata->insured_id == NULL)
-        // {
-        //     $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','DESC')->get();
-            
-        // }
-        // else
-        // {
-        //     //$attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->orderby('id','DESC')->get();
-            
-        // $attachmentlist= SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get();
-        // $attachmentlist = DB::table('slip_table_file')
-        //             ->where('slip_id','=',$slipdata->number)
-        //             ->where('insured_id','=',$slipdata->insured_id)
-        //             ->where('slip_type','fe')
-        //             ->where('count_endorsement',$slipdata->endorsment)        
-        //             ->orderby('id','desc')
-        //             ->distinct('slip_table_file.filename')
-        //             ->get();
+       
         $attachmenttable = collect(SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get());
         $attachmentlist = $attachmenttable->unique('filename');
         $attachmentlist->values()->all();
-        // }
+        
 
         $sum_permilec = DB::table('extended_coverage_detail')
                             ->where('slip_id',$slipdata->number)
@@ -2207,7 +2195,7 @@ class FeSlipController extends Controller
                                 $insert[$x]['path'] = $path;
                                 $insert[$x]['user_id'] = Auth::user()->name;
                                 $insert[$x]['slip_id'] = $request->slip_id;
-                                $insert[$x]['insured_id'] = $request->code_ms;
+                                $insert[$x]['insured_id'] = $request->insured_id;
                                 $insert[$x]['slip_type'] = $request->slip_type;
                                 SlipTableFile::insert($insert);
                             }
@@ -2311,7 +2299,8 @@ class FeSlipController extends Controller
                     'own_retention'=>$request->slipor,
                     'sum_own_retention'=>$request->slipsumor,
                     'wpc'=>$request->wpc,
-                    'remarks'=>$request->remarks
+                    'remarks'=>$request->remarks,
+                    'slipshow'=>"no"
 
                 ]);
 
@@ -2644,6 +2633,7 @@ class FeSlipController extends Controller
                 $slipdataup->sum_own_retention=$request->slipsumor;
                 $slipdataup->wpc=$request->wpc;
                 $slipdataup->remarks=$request->remarks;
+                $slipdataup->slipshow="no";
 
                 $slipdataup->save();
 
@@ -2964,9 +2954,12 @@ class FeSlipController extends Controller
             $user = Auth::user();
             
             $slipdata= SlipTable::where('id','=',$request->slipid)->first();
-            $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('selisih','=','false')->get();
+            // $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('selisih','=','false')->get();
+            $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->orderby('id','desc')->first();
             $insureddata = Insured::where('number','=',$slipdata->insured_id)->where('slip_type','=','fe')->where('count_endorsement',$slipdata->endorsment)->first();
 
+
+            
             // $id_ed = ($slipdata->id + 1);
             $id_ed = ($slipdata->endorsment + 1);
             
@@ -3165,278 +3158,321 @@ class FeSlipController extends Controller
                     if($slipdatalist != null)
                     {
                         if($jsondtlistup == ' '){
-                            foreach($slipdatalist as $slt){
+                            
                                 $slipdataup = SlipTable::create([
-                                        'number'=>$slt->number,
-                                        'username'=>$slt->username,
-                                        'insured_id'=>$slt->insured_id,
+                                        'number'=>$slipdatalist->number,
+                                        'username'=>$slipdatalist->username,
+                                        'insured_id'=>$slipdatalist->insured_id,
                                         'slip_type'=>'fe',
-                                        'prod_year' => $slt->prod_year,
+                                        'prod_year' => $slipdatalist->prod_year,
                                         'selisih' => 'true',
-                                        'date_transfer'=>$slt->slipdatetransfer,
+                                        'date_transfer'=>$slipdatalist->slipdatetransfer,
                                         'status'=>'endorsement',
-                                        'endorsment'=>($slt->endorsement + 1),
+                                        'endorsment'=>($slipdatalist->endorsement + 1),
                                         'selisih'=>'true',
-                                        'source'=>$slt->source,
-                                        'source_2'=>$slt->source_2,
+                                        'source'=>$slipdatalist->source,
+                                        'source_2'=>$slipdatalist->source_2,
                                         // 'currency'=>$slt->currency,
-                                        'cob'=>$slt->cob,
-                                        'koc'=>$slt->koc,
-                                        'occupacy'=>$slt->occupacy,
-                                        'build_const'=>$slt->build_const,
+                                        'cob'=>$slipdatalist->cob,
+                                        'koc'=>$slipdatalist->koc,
+                                        'occupacy'=>$slipdatalist->occupacy,
+                                        'build_const'=>$slipdatalist->build_const,
                                         'attacment_file'=>json_encode($attachmentlist),
-                                        'total_sum_insured'=>$slt->total_sum_insured,
-                                        'insured_type'=>$slt->insured_type,
-                                        'insured_pct'=>$slt->insured_pct,
-                                        'total_sum_pct'=>$slt->total_sum_pct,
+                                        'total_sum_insured'=>$slipdatalist->total_sum_insured,
+                                        'insured_type'=>$slipdatalist->insured_type,
+                                        'insured_pct'=>$slipdatalist->insured_pct,
+                                        'total_sum_pct'=>$slipdatalist->total_sum_pct,
                                         'deductible_panel'=>json_encode($jsondtlistup),
                                         'extend_coverage'=>json_encode($jsonectlistup),
-                                        'insurance_period_from'=>$slt->insurance_period_from,
-                                        'insurance_period_to'=>$slt->insurance_period_to,
-                                        'reinsurance_period_from'=>$slt->reinsurance_period_from,
-                                        'reinsurance_period_to'=>$slt->reinsurance_period_to,
-                                        'proportional'=>$slt->proportional,
-                                        'layer_non_proportional'=>$slt->layer_non_proportional,
-                                        'rate'=>$slt->rate,
-                                        'v_broker'=>$slt->v_broker,
-                                        'share'=>$slt->share,
-                                        'sum_share'=>$slt->sum_share,
-                                        'basic_premium'=>$slt->basic_premium,
-                                        'commission'=>$slt->commission,
-                                        'grossprm_to_nr'=>$slt->grossprm_to_nr,
-                                        'netprm_to_nr'=>$slt->netprm_to_nr,
-                                        'sum_commission'=>$slt->sum_commission,
+                                        'insurance_period_from'=>$slipdatalist->insurance_period_from,
+                                        'insurance_period_to'=>$slipdatalist->insurance_period_to,
+                                        'reinsurance_period_from'=>$slipdatalist->reinsurance_period_from,
+                                        'reinsurance_period_to'=>$slipdatalist->reinsurance_period_to,
+                                        'proportional'=>$slipdatalist->proportional,
+                                        'layer_non_proportional'=>$slipdatalist->layer_non_proportional,
+                                        'rate'=>$slipdatalist->rate,
+                                        'v_broker'=>$slipdatalist->v_broker,
+                                        'share'=>$slipdatalist->share,
+                                        'sum_share'=>$slipdatalist->sum_share,
+                                        'basic_premium'=>$slipdatalist->basic_premium,
+                                        'commission'=>$slipdatalist->commission,
+                                        'grossprm_to_nr'=>$slipdatalist->grossprm_to_nr,
+                                        'netprm_to_nr'=>$slipdatalist->netprm_to_nr,
+                                        'sum_commission'=>$slipdatalist->sum_commission,
                                         'installment_panel'=>json_encode($jsoniptlistup),
                                         'retrocession_panel'=>json_encode($jsonrctlistup),
-                                        'retro_backup'=>$slt->retro_backup,
-                                        'own_retention'=>$slt->own_retention,
-                                        'sum_own_retention'=>$slt->sum_own_retention,
-                                        'wpc'=>$slt->wpc,
-                                        'remarks'=>$slt->slipremarks
+                                        'retro_backup'=>$slipdatalist->retro_backup,
+                                        'own_retention'=>$slipdatalist->own_retention,
+                                        'sum_own_retention'=>$slipdatalist->sum_own_retention,
+                                        'wpc'=>$slipdatalist->wpc,
+                                        'remarks'=>$slipdatalist->remarks,
+                                        'total_day'=>$slipdatalist->total_day,
+                                        'total_year'=>$slipdatalist->total_year,
+                                        'sum_total_date'=>$slipdatalist->sum_total_date,
+                                        'type_tsi' =>$slipdatalist->type_tsi,
+                                        'share_tsi' =>$slipdatalist->share_tsi,
+                                        'type_share_tsi' =>$slipdatalist->type_share_tsi,
+                                        'sliptotalrate' =>$slipdatalist->sliptotalrate,
+                                        'sum_feebroker' =>$slipdatalist->sum_feebroker,
+                                        'slipshow'=>'yes'
                     
                                     ]);
-                            }
+                            
                         }elseif($jsonectlistup == ' ' ){
-                            foreach($slipdatalist as $slt){
+                            
                                 $slipdataup = SlipTable::create([
-                                        'number'=>$slt->number,
-                                        'username'=>$slt->username,
-                                        'insured_id'=>$slt->insured_id,
+                                        'number'=>$slipdatalist->number,
+                                        'username'=>$slipdatalist->username,
+                                        'insured_id'=>$slipdatalist->insured_id,
                                         'slip_type'=>'fe',
-                                        'prod_year' => $slt->prod_year,
+                                        'prod_year' => $slipdatalist->prod_year,
                                         'selisih' => 'true',
-                                        'date_transfer'=>$slt->slipdatetransfer,
+                                        'date_transfer'=>$slipdatalist->slipdatetransfer,
                                         'status'=>'endorsement',
-                                        'endorsment'=>($slt->endorsement + 1),
+                                        'endorsment'=>($slipdatalist->endorsement + 1),
                                         'selisih'=>'true',
-                                        'source'=>$slt->source,
-                                        'source_2'=>$slt->source_2,
+                                        'source'=>$slipdatalist->source,
+                                        'source_2'=>$slipdatalist->source_2,
                                         // 'currency'=>$slt->currency,
-                                        'cob'=>$slt->cob,
-                                        'koc'=>$slt->koc,
-                                        'occupacy'=>$slt->occupacy,
-                                        'build_const'=>$slt->build_const,
+                                        'cob'=>$slipdatalist->cob,
+                                        'koc'=>$slipdatalist->koc,
+                                        'occupacy'=>$slipdatalist->occupacy,
+                                        'build_const'=>$slipdatalist->build_const,
                                         'attacment_file'=>json_encode($attachmentlist),
-                                        'total_sum_insured'=>$slt->total_sum_insured,
-                                        'insured_type'=>$slt->insured_type,
-                                        'insured_pct'=>$slt->insured_pct,
-                                        'total_sum_pct'=>$slt->total_sum_pct,
+                                        'total_sum_insured'=>$slipdatalist->total_sum_insured,
+                                        'insured_type'=>$slipdatalist->insured_type,
+                                        'insured_pct'=>$slipdatalist->insured_pct,
+                                        'total_sum_pct'=>$slipdatalist->total_sum_pct,
                                         'deductible_panel'=>json_encode($jsondtlistup),
                                         'extend_coverage'=>json_encode($jsonectlistup),
-                                        'insurance_period_from'=>$slt->insurance_period_from,
-                                        'insurance_period_to'=>$slt->insurance_period_to,
-                                        'reinsurance_period_from'=>$slt->reinsurance_period_from,
-                                        'reinsurance_period_to'=>$slt->reinsurance_period_to,
-                                        'proportional'=>$slt->proportional,
-                                        'layer_non_proportional'=>$slt->layer_non_proportional,
-                                        'rate'=>$slt->rate,
-                                        'v_broker'=>$slt->v_broker,
-                                        'share'=>$slt->share,
-                                        'sum_share'=>$slt->sum_share,
-                                        'basic_premium'=>$slt->basic_premium,
-                                        'commission'=>$slt->commission,
-                                        'grossprm_to_nr'=>$slt->grossprm_to_nr,
-                                        'netprm_to_nr'=>$slt->netprm_to_nr,
-                                        'sum_commission'=>$slt->sum_commission,
+                                        'insurance_period_from'=>$slipdatalist->insurance_period_from,
+                                        'insurance_period_to'=>$slipdatalist->insurance_period_to,
+                                        'reinsurance_period_from'=>$slipdatalist->reinsurance_period_from,
+                                        'reinsurance_period_to'=>$slipdatalist->reinsurance_period_to,
+                                        'proportional'=>$slipdatalist->proportional,
+                                        'layer_non_proportional'=>$slipdatalist->layer_non_proportional,
+                                        'rate'=>$slipdatalist->rate,
+                                        'v_broker'=>$slipdatalist->v_broker,
+                                        'share'=>$slipdatalist->share,
+                                        'sum_share'=>$slipdatalist->sum_share,
+                                        'basic_premium'=>$slipdatalist->basic_premium,
+                                        'commission'=>$slipdatalist->commission,
+                                        'grossprm_to_nr'=>$slipdatalist->grossprm_to_nr,
+                                        'netprm_to_nr'=>$slipdatalist->netprm_to_nr,
+                                        'sum_commission'=>$slipdatalist->sum_commission,
                                         'installment_panel'=>json_encode($jsoniptlistup),
                                         'retrocession_panel'=>json_encode($jsonrctlistup),
-                                        'retro_backup'=>$slt->retro_backup,
-                                        'own_retention'=>$slt->own_retention,
-                                        'sum_own_retention'=>$slt->sum_own_retention,
-                                        'wpc'=>$slt->wpc,
-                                        'remarks'=>$slt->slipremarks
+                                        'retro_backup'=>$slipdatalist->retro_backup,
+                                        'own_retention'=>$slipdatalist->own_retention,
+                                        'sum_own_retention'=>$slipdatalist->sum_own_retention,
+                                        'wpc'=>$slipdatalist->wpc,
+                                        'remarks'=>$slipdatalist->remarks,
+                                        'total_day'=>$slipdatalist->total_day,
+                                        'total_year'=>$slipdatalist->total_year,
+                                        'sum_total_date'=>$slipdatalist->sum_total_date,
+                                        'type_tsi' =>$slipdatalist->type_tsi,
+                                        'share_tsi' =>$slipdatalist->share_tsi,
+                                        'type_share_tsi' =>$slipdatalist->type_share_tsi,
+                                        'sliptotalrate' =>$slipdatalist->sliptotalrate,
+                                        'sum_feebroker' =>$slipdatalist->sum_feebroker,
+                                        'slipshow'=>'yes'
                     
                                     ]);
-                            }
+                            
                         }
                         elseif($jsoniptlistup == ' ')
                         {
-                            foreach($slipdatalist as $slt){
+                            
                                 $slipdataup = SlipTable::create([
-                                        'number'=>$slt->number,
-                                        'username'=>$slt->username,
-                                        'insured_id'=>$slt->insured_id,
+                                        'number'=>$slipdatalist->number,
+                                        'username'=>$slipdatalist->username,
+                                        'insured_id'=>$slipdatalist->insured_id,
                                         'slip_type'=>'fe',
-                                        'prod_year' => $slt->prod_year,
+                                        'prod_year' => $slipdatalist->prod_year,
                                         'selisih' => 'true',
-                                        'date_transfer'=>$slt->slipdatetransfer,
+                                        'date_transfer'=>$slipdatalist->slipdatetransfer,
                                         'status'=>'endorsement',
-                                        'endorsment'=>($slt->endorsement + 1),
+                                        'endorsment'=>($slipdatalist->endorsement + 1),
                                         'selisih'=>'true',
-                                        'source'=>$slt->source,
-                                        'source_2'=>$slt->source_2,
+                                        'source'=>$slipdatalist->source,
+                                        'source_2'=>$slipdatalist->source_2,
                                         // 'currency'=>$slt->currency,
-                                        'cob'=>$slt->cob,
-                                        'koc'=>$slt->koc,
-                                        'occupacy'=>$slt->occupacy,
-                                        'build_const'=>$slt->build_const,
+                                        'cob'=>$slipdatalist->cob,
+                                        'koc'=>$slipdatalist->koc,
+                                        'occupacy'=>$slipdatalist->occupacy,
+                                        'build_const'=>$slipdatalist->build_const,
                                         'attacment_file'=>json_encode($attachmentlist),
-                                        'total_sum_insured'=>$slt->total_sum_insured,
-                                        'insured_type'=>$slt->insured_type,
-                                        'insured_pct'=>$slt->insured_pct,
-                                        'total_sum_pct'=>$slt->total_sum_pct,
+                                        'total_sum_insured'=>$slipdatalist->total_sum_insured,
+                                        'insured_type'=>$slipdatalist->insured_type,
+                                        'insured_pct'=>$slipdatalist->insured_pct,
+                                        'total_sum_pct'=>$slipdatalist->total_sum_pct,
                                         'deductible_panel'=>json_encode($jsondtlistup),
                                         'extend_coverage'=>json_encode($jsonectlistup),
-                                        'insurance_period_from'=>$slt->insurance_period_from,
-                                        'insurance_period_to'=>$slt->insurance_period_to,
-                                        'reinsurance_period_from'=>$slt->reinsurance_period_from,
-                                        'reinsurance_period_to'=>$slt->reinsurance_period_to,
-                                        'proportional'=>$slt->proportional,
-                                        'layer_non_proportional'=>$slt->layer_non_proportional,
-                                        'rate'=>$slt->rate,
-                                        'v_broker'=>$slt->v_broker,
-                                        'share'=>$slt->share,
-                                        'sum_share'=>$slt->sum_share,
-                                        'basic_premium'=>$slt->basic_premium,
-                                        'commission'=>$slt->commission,
-                                        'grossprm_to_nr'=>$slt->grossprm_to_nr,
-                                        'netprm_to_nr'=>$slt->netprm_to_nr,
-                                        'sum_commission'=>$slt->sum_commission,
+                                        'insurance_period_from'=>$slipdatalist->insurance_period_from,
+                                        'insurance_period_to'=>$slipdatalist->insurance_period_to,
+                                        'reinsurance_period_from'=>$slipdatalist->reinsurance_period_from,
+                                        'reinsurance_period_to'=>$slipdatalist->reinsurance_period_to,
+                                        'proportional'=>$slipdatalist->proportional,
+                                        'layer_non_proportional'=>$slipdatalist->layer_non_proportional,
+                                        'rate'=>$slipdatalist->rate,
+                                        'v_broker'=>$slipdatalist->v_broker,
+                                        'share'=>$slipdatalist->share,
+                                        'sum_share'=>$slipdatalist->sum_share,
+                                        'basic_premium'=>$slipdatalist->basic_premium,
+                                        'commission'=>$slipdatalist->commission,
+                                        'grossprm_to_nr'=>$slipdatalist->grossprm_to_nr,
+                                        'netprm_to_nr'=>$slipdatalist->netprm_to_nr,
+                                        'sum_commission'=>$slipdatalist->sum_commission,
                                         'retrocession_panel'=>json_encode($jsonrctlistup),
-                                        'retro_backup'=>$slt->retro_backup,
-                                        'own_retention'=>$slt->own_retention,
-                                        'sum_own_retention'=>$slt->sum_own_retention,
-                                        'wpc'=>$slt->wpc,
-                                        'remarks'=>$slt->slipremarks
+                                        'retro_backup'=>$slipdatalist->retro_backup,
+                                        'own_retention'=>$slipdatalist->own_retention,
+                                        'sum_own_retention'=>$slipdatalist->sum_own_retention,
+                                        'wpc'=>$slipdatalist->wpc,
+                                        'remarks'=>$slipdatalist->remarks,
+                                        'total_day'=>$slipdatalist->total_day,
+                                        'total_year'=>$slipdatalist->total_year,
+                                        'sum_total_date'=>$slipdatalist->sum_total_date,
+                                        'type_tsi' =>$slipdatalist->type_tsi,
+                                        'share_tsi' =>$slipdatalist->share_tsi,
+                                        'type_share_tsi' =>$slipdatalist->type_share_tsi,
+                                        'sliptotalrate' =>$slipdatalist->sliptotalrate,
+                                        'sum_feebroker' =>$slipdatalist->sum_feebroker,
+                                        'slipshow'=>'yes'
                     
                                     ]);
-                            }
+                            
                         }
                         elseif($jsonrctlistup == ' ')
                         {
-                            foreach($slipdatalist as $slt)
-                            {
+                            
                                 $slipdataup = SlipTable::create([
-                                        'number'=>$slt->number,
-                                        'username'=>$slt->username,
-                                        'insured_id'=>$slt->insured_id,
+                                        'number'=>$slipdatalist->number,
+                                        'username'=>$slipdatalist->username,
+                                        'insured_id'=>$slipdatalist->insured_id,
                                         'slip_type'=>'fe',
-                                        'prod_year' => $slt->prod_year,
+                                        'prod_year' => $slipdatalist->prod_year,
                                         'selisih' => 'true',
-                                        'date_transfer'=>$slt->slipdatetransfer,
+                                        'date_transfer'=>$slipdatalist->slipdatetransfer,
                                         'status'=>'endorsement',
-                                        'endorsment'=>($slt->endorsement + 1),
+                                        'endorsment'=>($slipdatalist->endorsement + 1),
                                         'selisih'=>'true',
-                                        'source'=>$slt->source,
-                                        'source_2'=>$slt->source_2,
+                                        'source'=>$slipdatalist->source,
+                                        'source_2'=>$slipdatalist->source_2,
                                         // 'currency'=>$slt->currency,
-                                        'cob'=>$slt->cob,
-                                        'koc'=>$slt->koc,
-                                        'occupacy'=>$slt->occupacy,
-                                        'build_const'=>$slt->build_const,
+                                        'cob'=>$slipdatalist->cob,
+                                        'koc'=>$slipdatalist->koc,
+                                        'occupacy'=>$slipdatalist->occupacy,
+                                        'build_const'=>$slipdatalist->build_const,
                                         'attacment_file'=>json_encode($attachmentlist),
-                                        'total_sum_insured'=>$slt->total_sum_insured,
-                                        'insured_type'=>$slt->insured_type,
-                                        'insured_pct'=>$slt->insured_pct,
-                                        'total_sum_pct'=>$slt->total_sum_pct,
+                                        'total_sum_insured'=>$slipdatalist->total_sum_insured,
+                                        'insured_type'=>$slipdatalist->insured_type,
+                                        'insured_pct'=>$slipdatalist->insured_pct,
+                                        'total_sum_pct'=>$slipdatalist->total_sum_pct,
                                         'deductible_panel'=>json_encode($jsondtlistup),
                                         'extend_coverage'=>json_encode($jsonectlistup),
-                                        'insurance_period_from'=>$slt->insurance_period_from,
-                                        'insurance_period_to'=>$slt->insurance_period_to,
-                                        'reinsurance_period_from'=>$slt->reinsurance_period_from,
-                                        'reinsurance_period_to'=>$slt->reinsurance_period_to,
-                                        'proportional'=>$slt->proportional,
-                                        'layer_non_proportional'=>$slt->layer_non_proportional,
-                                        'rate'=>$slt->rate,
-                                        'v_broker'=>$slt->v_broker,
-                                        'share'=>$slt->share,
-                                        'sum_share'=>$slt->sum_share,
-                                        'basic_premium'=>$slt->basic_premium,
-                                        'commission'=>$slt->commission,
-                                        'grossprm_to_nr'=>$slt->grossprm_to_nr,
-                                        'netprm_to_nr'=>$slt->netprm_to_nr,
-                                        'sum_commission'=>$slt->sum_commission,
+                                        'insurance_period_from'=>$slipdatalist->insurance_period_from,
+                                        'insurance_period_to'=>$slipdatalist->insurance_period_to,
+                                        'reinsurance_period_from'=>$slipdatalist->reinsurance_period_from,
+                                        'reinsurance_period_to'=>$slipdatalist->reinsurance_period_to,
+                                        'proportional'=>$slipdatalist->proportional,
+                                        'layer_non_proportional'=>$slipdatalist->layer_non_proportional,
+                                        'rate'=>$slipdatalist->rate,
+                                        'v_broker'=>$slipdatalist->v_broker,
+                                        'share'=>$slipdatalist->share,
+                                        'sum_share'=>$slipdatalist->sum_share,
+                                        'basic_premium'=>$slipdatalist->basic_premium,
+                                        'commission'=>$slipdatalist->commission,
+                                        'grossprm_to_nr'=>$slipdatalist->grossprm_to_nr,
+                                        'netprm_to_nr'=>$slipdatalist->netprm_to_nr,
+                                        'sum_commission'=>$slipdatalist->sum_commission,
                                         'installment_panel'=>$jsoniptlistup->toJson(),
-                                        'retro_backup'=>$slt->retro_backup,
-                                        'own_retention'=>$slt->own_retention,
-                                        'sum_own_retention'=>$slt->sum_own_retention,
-                                        'wpc'=>$slt->wpc,
-                                        'remarks'=>$slt->slipremarks
+                                        'retro_backup'=>$slipdatalist->retro_backup,
+                                        'own_retention'=>$slipdatalist->own_retention,
+                                        'sum_own_retention'=>$slipdatalist->sum_own_retention,
+                                        'wpc'=>$slipdatalist->wpc,
+                                        'remarks'=>$slipdatalist->remarks,
+                                        'total_day'=>$slipdatalist->total_day,
+                                        'total_year'=>$slipdatalist->total_year,
+                                        'sum_total_date'=>$slipdatalist->sum_total_date,
+                                        'type_tsi' =>$slipdatalist->type_tsi,
+                                        'share_tsi' =>$slipdatalist->share_tsi,
+                                        'type_share_tsi' =>$slipdatalist->type_share_tsi,
+                                        'sliptotalrate' =>$slipdatalist->sliptotalrate,
+                                        'sum_feebroker' =>$slipdatalist->sum_feebroker,
+                                        'slipshow'=>'yes'
                     
                                     ]);
-                            }
+                            
                         
                         }
                         else
                         {
-                            foreach($slipdatalist as $slt)
-                            {
+                            
                                 $slipdataup = SlipTable::create([
-                                        'number'=>$slt->number,
-                                        'username'=>$slt->username,
-                                        'insured_id'=>$slt->insured_id,
+                                        'number'=>$slipdatalist->number,
+                                        'username'=>$slipdatalist->username,
+                                        'insured_id'=>$slipdatalist->insured_id,
                                         'slip_type'=>'fe',
-                                        'prod_year' => $slt->prod_year,
+                                        'prod_year' => $slipdatalist->prod_year,
                                         'selisih' => 'true',
-                                        'date_transfer'=>$slt->slipdatetransfer,
+                                        'date_transfer'=>$slipdatalist->slipdatetransfer,
                                         'status'=>'endorsement',
-                                        'endorsment'=>($slt->endorsement + 1),
+                                        'endorsment'=>($slipdatalist->endorsement + 1),
                                         'selisih'=>'true',
-                                        'source'=>$slt->source,
-                                        'source_2'=>$slt->source_2,
+                                        'source'=>$slipdatalist->source,
+                                        'source_2'=>$slipdatalist->source_2,
                                         // 'currency'=>$slt->currency,
-                                        'cob'=>$slt->cob,
-                                        'koc'=>$slt->koc,
-                                        'occupacy'=>$slt->occupacy,
-                                        'build_const'=>$slt->build_const,
+                                        'cob'=>$slipdatalist->cob,
+                                        'koc'=>$slipdatalist->koc,
+                                        'occupacy'=>$slipdatalist->occupacy,
+                                        'build_const'=>$slipdatalist->build_const,
                                         'attacment_file'=>json_encode($attachmentlist),
-                                        'total_sum_insured'=>$slt->total_sum_insured,
-                                        'insured_type'=>$slt->insured_type,
-                                        'insured_pct'=>$slt->insured_pct,
-                                        'total_sum_pct'=>$slt->total_sum_pct,
+                                        'total_sum_insured'=>$slipdatalist->total_sum_insured,
+                                        'insured_type'=>$slipdatalist->insured_type,
+                                        'insured_pct'=>$slipdatalist->insured_pct,
+                                        'total_sum_pct'=>$slipdatalist->total_sum_pct,
                                         'deductible_panel'=>json_encode($jsondtlistup),
                                         'extend_coverage'=>json_encode($jsonectlistup),
-                                        'insurance_period_from'=>$slt->insurance_period_from,
-                                        'insurance_period_to'=>$slt->insurance_period_to,
-                                        'reinsurance_period_from'=>$slt->reinsurance_period_from,
-                                        'reinsurance_period_to'=>$slt->reinsurance_period_to,
-                                        'proportional'=>$slt->proportional,
-                                        'layer_non_proportional'=>$slt->layer_non_proportional,
-                                        'rate'=>$slt->rate,
-                                        'v_broker'=>$slt->v_broker,
-                                        'share'=>$slt->share,
-                                        'sum_share'=>$slt->sum_share,
-                                        'basic_premium'=>$slt->basic_premium,
-                                        'commission'=>$slt->commission,
-                                        'grossprm_to_nr'=>$slt->grossprm_to_nr,
-                                        'netprm_to_nr'=>$slt->netprm_to_nr,
-                                        'sum_commission'=>$slt->sum_commission,
+                                        'insurance_period_from'=>$slipdatalist->insurance_period_from,
+                                        'insurance_period_to'=>$slipdatalist->insurance_period_to,
+                                        'reinsurance_period_from'=>$slipdatalist->reinsurance_period_from,
+                                        'reinsurance_period_to'=>$slipdatalist->reinsurance_period_to,
+                                        'proportional'=>$slipdatalist->proportional,
+                                        'layer_non_proportional'=>$slipdatalist->layer_non_proportional,
+                                        'rate'=>$slipdatalist->rate,
+                                        'v_broker'=>$slipdatalist->v_broker,
+                                        'share'=>$slipdatalist->share,
+                                        'sum_share'=>$slipdatalist->sum_share,
+                                        'basic_premium'=>$slipdatalist->basic_premium,
+                                        'commission'=>$slipdatalist->commission,
+                                        'grossprm_to_nr'=>$slipdatalist->grossprm_to_nr,
+                                        'netprm_to_nr'=>$slipdatalist->netprm_to_nr,
+                                        'sum_commission'=>$slipdatalist->sum_commission,
                                         'installment_panel'=>$jsoniptlistup->toJson(),
                                         'retrocession_panel'=>$jsonrctlistup->toJson(),
-                                        'retro_backup'=>$slt->retro_backup,
-                                        'own_retention'=>$slt->own_retention,
-                                        'sum_own_retention'=>$slt->sum_own_retention,
-                                        'wpc'=>$slt->wpc,
-                                        'remarks'=>$slt->slipremarks
+                                        'retro_backup'=>$slipdatalist->retro_backup,
+                                        'own_retention'=>$slipdatalist->own_retention,
+                                        'sum_own_retention'=>$slipdatalist->sum_own_retention,
+                                        'wpc'=>$slipdatalist->wpc,
+                                        'remarks'=>$slipdatalist->remarks,
+                                        'total_day'=>$slipdatalist->total_day,
+                                        'total_year'=>$slipdatalist->total_year,
+                                        'sum_total_date'=>$slipdatalist->sum_total_date,
+                                        'type_tsi' =>$slipdatalist->type_tsi,
+                                        'share_tsi' =>$slipdatalist->share_tsi,
+                                        'type_share_tsi' =>$slipdatalist->type_share_tsi,
+                                        'sliptotalrate' =>$slipdatalist->sliptotalrate,
+                                        'sum_feebroker' =>$slipdatalist->sum_feebroker,
+                                        'slipshow'=>'yes'
                     
                                     ]);
-                            }
+                            
                         }
                     }
 
-                    $insureddataup = Insured::findOrFail($insureddata->id);
-                    $insureddataup->count_endorsement = ($insureddata->count_endorsement + 1);
-                    $insureddataup->save();
+                    // $insureddataup = Insured::findOrFail($insureddata->id);
+                    // $insureddataup->count_endorsement = ($insureddata->count_endorsement + 1);
+                    // $insureddataup->save();
     
                     $notification = array(
                         'message' => 'Fire & Enginering Slip added Endorsement successfully!',
@@ -3459,6 +3495,7 @@ class FeSlipController extends Controller
                     $msdata->status='endorsement'; 
                     $msdata->sum_own_retention=($slipdata->sum_own_retention * (-1));
                     $msdata->selisih="false"; 
+                    $msdata->slipshow="no"; 
                     $msdata->save();
 
 
@@ -3504,7 +3541,8 @@ class FeSlipController extends Controller
                         [
                             'slip_data' => $slipdataup->toJson(),
                             'slip_dataarray' => json_encode($slipdatalist),
-                            'insured_data' => $insureddataup->toJson(),
+                            'oldid' => $request->slipid,
+                            // 'insured_data' => $insureddataup->toJson(),
                             'location_data' => $lookuplocationlist->toJson(),
                             'risklocation_data' => $risklocationlistdetail->toJson(),
                         ]

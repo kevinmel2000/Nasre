@@ -430,12 +430,14 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     $("#sliplayerproportionaldetail option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
                 }
 
+                
+
                 if(response.retro_backup)
                 {
                     $("#sliprbdetail option[value=" + response.retro_backup + "]:first")[0].selected = true;
                     if(response.retro_backup == "NO")
                     {
-                        $("#tabretrodetail").attr('hidden');
+                        $("#tabretrodetail").attr('hidden','true');
                     }
                     else if(response.retro_backup == "YES"){
                         $("#tabretrodetail").removeAttr('hidden');
@@ -453,25 +455,28 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 }
 
 
-                if(response.status_log){
-                    var status_log = response.status_log;
-                    $('#stlid'+status_log[i].id).remove();
-                    for (var i = 0; i < 5; i++){
+            //     if(response.status_log){
+            //         $('#stlid'+status_log[i].id).remove();
+            //         var status_log = response.status_log;
+                    
+            //         for (var i = 0; i < 5; i++){
 
-                        if(status_log[i])
-                        {
-                        var status = status_log[i].status;
-                        var datetime = status_log[i].datetime;
-                        var user = status_log[i].user;
+            //             if(status_log[i])
+            //             {
+            //             var status = status_log[i].status;
+            //             var datetime = status_log[i].datetime;
+            //             var user = status_log[i].user;
                         
-                        $('#slipStatusTabledetail tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
-                    }
+            //             $('#slipStatusTabledetail tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
+            //         }
 
-                };
-            }
+            //     };
+            // }
 
-            if(response.attacment_file){
-                $('#aidlistdetail').remove();
+
+            if(response.attacment_file)
+            {
+                $('#aidlistdetail li').remove();
                 var attacment_file = response.attacment_file;
                 for (var i = 0; i < attacment_file.length; i++){
                     var filename = attacment_file[i].filename;
@@ -508,8 +513,12 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#sliptotalsumpctdetail').val("0");
             }
 
-
-            $('#sliptddetail').val(response.date_transfer);
+            if(response.date_transfer == null){
+               $('#sliptddetail').val(''); 
+           }else{
+                $('#sliptddetail').val(response.date_transfer); 
+           }
+            
             $('#slipipfromdetail').val(response.insurance_period_from);
             $('#slipiptodetail').val(response.insurance_period_to);
 
@@ -526,14 +535,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             console.log(constday)
             console.log(parseFloat(sum))
 
-            /*
-            var fulltgl = $(this).val();
-
-            var tgl = parseInt(fulltgl.substring(0,2));
-            console.log(tgl)
-            var month = parseInt(fulltgl.substring(3,5));
-            console.log(month)
-            */
+            
             
 
             $('#slipdaytotaldetail').val(days);
@@ -696,6 +698,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#slipnumberupdate').val(response.number);
                 $('#slipusernameupdate').val(response.username);
                 $('#slipprodyearupdate').val(response.prod_year);
+                $('#slipprodyearupdate2').val(response.prod_year);
                 $('#slipuyupdate').val(response.uy);
                 $('#slipedupdate').val(response.endorsment);
                 $('#slipslsupdate').val(response.selisih);
@@ -705,23 +708,6 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $('#sliptotalnilaiecupdate').val(response.sum_ec);
                 $('#sliptotalpercentinspanupdate').val(response.sum_ippercent);
 
-
-
-                    // if(response.interest_insured)
-                    // {
-                    //     var interestdata = JSON.parse(response.interest_insured); 
-
-                    //     for(var i = 0; i < interestdata.length; i++) 
-                    //     {
-                    //         var obj = interestdata[i];
-
-                    //         //console.log(obj.id);
-                    //         //$('#interestInsuredTabledetail tbody').prepend('');
-                    //         $('#interestInsuredTableupdate tbody').empty();
-                    //         $('#interestInsuredTableupdate tbody').prepend('<tr id="iidupdate'+obj.id+'" data-name="interestupdatevalue[]"><td data-name="'+obj.description+'">'+obj.description+'</td><td data-name="'+obj.amount+'">'+obj.amount+'</td><td><a href="javascript:void(0)" onclick="deleteinterestupdate('+obj.id+')">delete</a></td></tr>')
-
-                    //     }
-                    // }
 
 
                     if(response.deductible_panel && response.deductible_panel.length > 10)
@@ -813,6 +799,33 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                         }
                     }
+
+                    if(response.status_log)
+                    {
+                        $('#slipStatusTableupdate tbody').remove();
+                        var obj_status =response.status_log;
+                        
+                        for (var i = 0; i < obj_status.length; i++){
+
+                            
+                                var status = obj_status[i].status;
+                                var datetime = obj_status[i].datetime;
+                                var user = obj_status[i].user;
+                                
+                                $('#slipStatusTableupdate tbody').append('<tr id="stlid'+obj_status[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
+                            
+                        };
+                    }
+
+                    if(response.attacment_file)
+                    {
+                        $('#aidlistupdate li').remove();
+                        var attacment_file = response.attacment_file;
+                        for (var i = 0; i < attacment_file.length; i++){
+                            var filename = attacment_file[i].filename;
+                            $('#aidlistupdate').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
+                        };
+                    }
                     
 
 
@@ -901,36 +914,6 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                         $("#tabretroupdate").removeAttr('hidden');
                     }
                 }
-
-
-
-                if(response.status_log)
-                {
-                    var status_log = response.status_log;
-                    $('#slipStatusTableupdate tbody').remove();
-                    for (var i = 0; i < 5; i++){
-
-                        if(status_log[i])
-                        {
-                            var status = status_log[i].status;
-                            var datetime = status_log[i].datetime;
-                            var user = status_log[i].user;
-                            
-                            $('#slipStatusTableupdate tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
-                        }
-                    };
-                }
-
-                if(response.attacment_file)
-                {
-                    $('#aidlistupdate li').remove();
-                    var attacment_file = response.attacment_file;
-                    for (var i = 0; i < attacment_file.length; i++){
-                        var filename = attacment_file[i].filename;
-                        $('#aidlistupdate').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
-                    };
-                }
-
 
                 if(response.total_sum_insured)
                 {
@@ -1139,6 +1122,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                     $('#slipusernameendorsement').val(response.username);
                     $('#slipprodyearendorsement').val(response.prod_year);
+                    $('#slipprodyearendorsement2').val(response.prod_year);
                     // $('#slipuyendorsement').val(response.uy);
                     $('#slipedendorsement').val(response.endorsment);
                     $('#slipslsendorsement').val(response.selisih);
@@ -1779,11 +1763,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
            yearRange: '-50:+100',
        });
 
-       $('#sliptddetail').datepicker({
-           dateFormat: 'dd/mm/yy',
-           changeYear: true,
-           yearRange: '-50:+100',
-       });  
+       // $('#sliptddetail').datepicker({
+       //     dateFormat: 'dd/mm/yy',
+       //     changeYear: true,
+       //     yearRange: '-50:+100',
+       // });  
 
 
        $('#slipprodyearendorsement').datepicker({
@@ -4959,27 +4943,40 @@ $('#slipbld_constendorsement').change(function(){
     var real_amount = parseInt(conv_amount);
     console.log(real_amount)
 
-    var tsi = $('#feshareto').val();
-    var conv_tsi = tsi.replace(/,/g, "");
-    console.log(conv_tsi)
-    var real_tsi = parseInt(conv_tsi);
-    console.log(real_tsi)
+    // var tsi = $('#feshareto').val();
+    // var conv_tsi = tsi.replace(/,/g, "");
+    // console.log(conv_tsi)
+    // var real_tsi = parseInt(conv_tsi);
+    // console.log(real_tsi)
+
+    var tsiinsval = $('#feshareto').val();
+    var conv_tsiinsval = tsiinsval.replace(/,/g, "");
+    var int_tsiinsval = parseFloat(conv_tsiinsval);
+    var int_fullins = int_tsiinsval.toFixed(2);
+    var new_instsi = int_fullins.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
     var cedshare = $('#feshare').val();
     if(cedshare == null){
-        cedshare = parseInt(0);
+        var real_cedshare = parseInt(0);
     }else{
         var conv_cedshare = cedshare.replace(/,/g, "");
         console.log(conv_cedshare)
         var real_cedshare = parseInt(conv_cedshare);
         console.log(real_cedshare)
+
     }
+
+    var sum_cedshare = real_amount + real_cedshare;
     
 
     if(slipinterestid == null || ceding_id == null){
         swal('warning','please choose interest or ceding first','insert error')
     }else{
-        if(real_cedshare > real_tsi){
+        console.log('sum ceding share ' + sum_cedshare)
+        console.log('ceding share ' + real_cedshare)
+        console.log('tsi' + int_tsiinsval)
+
+        if(sum_cedshare > int_tsiinsval){
             swal('warning','ceding share cannot greater than Total Sum Insured','insert error')
         }else{
             $.ajax({
@@ -5906,7 +5903,7 @@ function deletelocationriskdetail(id){
 
                     var sumrate = $("#sliptotalrate").val();
                     var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
-                    var sum = isNaN((conv_sumrate * conv_tsi) * insurance) ? 0 :((conv_sumrate * conv_tsi) * insurance).toFixed(2) ;
+                    var sum = isNaN(((conv_sumrate / 1000) * conv_tsi) * insurance) ? 0 :(((conv_sumrate / 1000) * conv_tsi) * insurance).toFixed(2) ;
                     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     $('#slipbasicpremium').val(real_sum);
@@ -6034,7 +6031,7 @@ function deletelocationriskdetail(id){
         var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
         var tsi = $("#sharetotalsum").val();
         var conv_tsi = parseInt(tsi.replace(/,/g, ""));
-        var sum = isNaN((conv_sumrate * conv_tsi) * insurance) ? 0 :((conv_sumrate * conv_tsi) * insurance).toFixed(2) ;
+        var sum = isNaN(((conv_sumrate / 1000) * conv_tsi) * insurance) ? 0 :(((conv_sumrate / 1000) * conv_tsi) * insurance).toFixed(2) ;
         var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
         $('#slipbasicpremium').val(real_sum);
@@ -6638,14 +6635,14 @@ function deletelocationriskdetail(id){
             var totalrateexc = $('#sliptotalnilaiecupdate').val();
             if(totalrateexc){
                     var conv_totalrateexc = parseFloat(totalrateexc);
-                    var sumtotalrate = isNaN((rateslip  / 1000) * conv_totalrateexc) ? 0 :((rateslip  / 1000) * conv_totalrateexc);
+                    var sumtotalrate = isNaN(rateslip + conv_totalrateexc) ? 0 :(rateslip + conv_totalrateexc);
                     var real_sumtotalrate = sumtotalrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     $('#sliptotalrateupdate').val(real_sumtotalrate);
                     $('#sliptotalrateupdate2').val(real_sumtotalrate);
 
                     var sumrate = $("#sliptotalrateupdate").val();
                     var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
-                    var sum = isNaN((conv_sumrate * conv_tsi) * insurance) ? 0 :((conv_sumrate * conv_tsi) * insurance).toFixed(2) ;
+                    var sum = isNaN(((conv_sumrate / 1000) * conv_tsi) * insurance) ? 0 :(((conv_sumrate / 1000) * conv_tsi) * insurance).toFixed(2) ;
                     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     $('#slipbasicpremiumupdate').val(real_sum);
@@ -6653,14 +6650,14 @@ function deletelocationriskdetail(id){
 
                 }else{
                      var conv_totalrateexc = parseFloat(totalrateexc);
-                     var sumtotalrate = isNaN(parseInt(0) * totalrateexc) ? 0 :(parseInt(0) * totalrateexc);
+                     var sumtotalrate = isNaN(parseInt(0) + totalrateexc) ? 0 :(parseInt(0) + totalrateexc);
                      var real_sumtotalrate = sumtotalrate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                      $('#sliptotalrateupdate').val(real_sumtotalrate);
                      $('#sliptotalrateupdate2').val(real_sumtotalrate);
 
                       var sumrate = $("#sliptotalrateupdate").val();
                     var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
-                    var sum = isNaN((conv_sumrate * conv_tsi) * insurance) ? 0 :((conv_sumrate * conv_tsi) * insurance).toFixed(2) ;
+                    var sum = isNaN(((conv_sumrate / 1000) * conv_tsi) * insurance) ? 0 :(((conv_sumrate / 1000) * conv_tsi) * insurance).toFixed(2) ;
                     var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     $('#slipbasicpremiumupdate').val(real_sum);
@@ -6766,7 +6763,7 @@ function deletelocationriskdetail(id){
         var conv_sumrate = parseInt(sumrate.replace(/,/g, ""));
         var tsi = $("#sharetotalsumupdate").val();
         var conv_tsi = parseInt(tsi.replace(/,/g, ""));
-        var sum = isNaN((conv_sumrate * conv_tsi) * insurance) ? 0 :((conv_sumrate * conv_tsi) * insurance).toFixed(2) ;
+        var sum = isNaN(((conv_sumrate / 1000) * conv_tsi) * insurance) ? 0 :(((conv_sumrate / 1000) * conv_tsi) * insurance).toFixed(2) ;
         var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
         $('#slipbasicpremiumupdate').val(real_sum);
@@ -9508,7 +9505,7 @@ function deletelocationriskdetail(id){
          {
             swal("Success!", "Insured Fire & Engineering Insert Success", "success")
             console.log(response)
-            $('#fecountendorsement').val(response.count_endorsement);
+            // $('#fecountendorsement').val(response.count_endorsement);
             var real_ceding_share = response.ceding_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             $('#feshare').val(real_ceding_share);
 
@@ -9827,6 +9824,10 @@ function deletelocationriskdetail(id){
                                             +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.id+'" data-target="#endorsementmodaldata">'
                                             +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata">Endorsment</button>'
                                             +'</a>'
+                                            +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.id+'" data-target="#cancelmodaldata">'
+                                            +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#cancelmodaldata2">Cancel</button>'
+                                            +'</a>'
+                                            +'<button type="button" id="claim-endorse" class="btn btn-sm btn-warning float-right">Claim</button>'
                                             +'<td></td></tr>');
 
                                         $('#slipnumber').val(response.slipnumber);
@@ -9968,6 +9969,10 @@ function deletelocationriskdetail(id){
                                             +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.id+'" data-target="#endorsementmodaldata">'
                                             +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsment</button>'
                                             +'</a>'
+                                            +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.id+'" data-target="#cancelmodaldata">'
+                                            +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#cancelmodaldata2">Cancel</button>'
+                                            +'</a>'
+                                            +'<button type="button" id="claim-endorse" class="btn btn-sm btn-warning float-right">Claim</button>'
                                             +'<td></td></tr>');
 
                                         $('#slipnumber').val(response.number);
@@ -10811,29 +10816,30 @@ function deletelocationriskdetail(id){
             swal("Success!", "Insured Fire & Engineering Slip Endorsement Success", "success")
             console.log(response)
 
-            var insured_data2=JSON.parse(response.insured_data);
-            $('#fecountendorsement').val(insured_data2.count_endorsement);
+            // var insured_data2=JSON.parse(response.insured_data);
+            // $('#fecountendorsement').val(insured_data2.count_endorsement);
             //alert(insured_data2.count_endorsement);
 
             var slip_data2array=JSON.parse(response.slip_dataarray);
+            var slip_dataarray=JSON.parse(response.slip_data);
             
-            $('#SlipInsuredTableData tbody').empty();
+            $('#SlipInsuredTableData tbody tr[id=slipiid'+response.oldid+']').empty();
             
-            slip_data2array.forEach(function (arrayItem) 
-            {
+            // slip_data2array.forEach(function (arrayItem) 
+            // {
                 //var x = arrayItem.prop1 + 2;
                 
-                $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+arrayItem.id+'" data-name="slipvalue[]"><td data-name="'+arrayItem.number+'">'+arrayItem.number+'</td><td data-name="'+arrayItem.cedingbroker.name+'">"'+arrayItem.cedingbroker.name+'"</td><td data-name="'+arrayItem.ceding+'">'+arrayItem.ceding+'</td><td data-name="'+arrayItem.status+'">"'+arrayItem.status+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+arrayItem.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
+                $('#SlipInsuredTableData tbody ').prepend('<tr id="slipiid'+slip_dataarray.id+'" data-name="slipvalue[]"><td data-name="'+slip_dataarray.number+'">'+slip_dataarray.number+'</td><td data-name="'+slip_dataarray.cedingbroker.name+'">"'+slip_dataarray.cedingbroker.name+'"</td><td data-name="'+slip_dataarray.ceding+'">'+slip_dataarray.ceding+'</td><td data-name="'+slip_dataarray.status+'">"'+slip_dataarray.status+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+slip_dataarray.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
                      +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
                      +'</a>'
-                     +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+arrayItem.id+'" data-target="#updatemodaldata">'
+                     +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+slip_dataarray.id+'" data-target="#updatemodaldata">'
                      +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
                      +'</a>'
-                     +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+arrayItem.id+'" data-target="#endorsementmodaldata">'
+                     +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+slip_dataarray.id+'" data-target="#endorsementmodaldata">'
                      +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
                      +'</a><td></td></tr>');
 
-            });
+            // });
 
             
 
