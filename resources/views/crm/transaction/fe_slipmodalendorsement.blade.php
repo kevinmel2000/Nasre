@@ -248,10 +248,16 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="">{{__('WPC')}}</label>
-                                                        <input type="text"  id="wpcendorsement" name="wpcendorsement" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="" />
-                                                        <div class="input-group-append">
-                                                            <div class="input-group-text"><span>Days</span></div> 
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group">
+                                                                    <label for="">{{__('WPC')}}</label>
+                                                                    <input type="text"  id="wpcendorsement" name="wpcendorsement" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                                    <div class="input-group-append">
+                                                                        <div class="input-group-text"><span style="font-size: 12px;">Days</span></div> 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
