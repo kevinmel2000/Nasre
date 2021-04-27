@@ -797,11 +797,17 @@
 
 <div class="row">
         <div class="col-md-12">
-            <div class="input-group">
+            <div class="form-group">
                 <label for="">{{__('WPC')}}</label>
-                <input type="text" id="wpc" name="wpc" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="" />
-                <div class="input-group-append">
-                    <div class="input-group-text"><span>Days</span></div> 
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            <input type="text" id="wpc" name="wpc" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="" />
+                            <div class="input-group-append">
+                                <div class="input-group-text"><span>Days</span></div> 
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
