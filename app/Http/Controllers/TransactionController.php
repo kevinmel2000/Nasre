@@ -2042,24 +2042,12 @@ class TransactionController extends Controller
             {
                 $checkdateins = InstallmentTemp::where('slip_id',$slip_id)->orderby('id','desc')->get();
 
-                // $dateins = $checkdateins[0]->installment_date;
-
-                // if($dateins == $installmentdate){
-                //     return response()->json(
-                //             [
-                //                 'code_error' => '404',
-                //                 'message' => 'sorry date cannot duplicate'
-                //             ]
-                //         );
-                // }else{
-                    
-                // }
 
                 if($totalpercent <= 100)
                     {
                         $old_date_timestamp = strtotime($installmentdate);
                         $new_date = date('Y-m-d', $old_date_timestamp); 
-                        $checkdatesame = InstallmentTemp::where('installment_date',$new_date)->orderby('id','desc')->get();
+                        $checkdatesame = InstallmentTemp::where('insured_id',$insured_id)->where('slip_id',$slip_id)->where('slip_type',$slip_type)->where('installment_date',$new_date)->orderby('id','desc')->get();
                         $count_datesame = count($checkdatesame);
 
                         if($count_datesame > 0 ){
