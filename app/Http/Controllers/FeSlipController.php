@@ -575,6 +575,15 @@ class FeSlipController extends Controller
         if($checkinsurednumber != null){
             
             if($checkslipnumber != null){
+                InsuredNumber::where('number',$code_ms)->where('slip_type','fe')->where('status','passive')->delete();
+
+                    $reservedinsurednumber = InsuredNumber::create([
+                                    'number'=>$code_ms,
+                                    'status'=>'passive',
+                                    'slip_type'=>'fe'     
+                        ]);
+
+                
                 $insurednumform = $code_ms;
                 $slipnumform = $code_sl;
 
@@ -624,6 +633,14 @@ class FeSlipController extends Controller
 
                 return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
             }else{
+                InsuredNumber::where('number',$code_ms)->where('slip_type','fe')->where('status','passive')->delete();
+
+                    $reservedinsurednumber = InsuredNumber::create([
+                                    'number'=>$code_ms,
+                                    'status'=>'passive',
+                                    'slip_type'=>'fe'     
+                        ]);
+
                 $insurednumform = $code_ms;
 
                 $reservedslipnumber = SlipNumber::create([
@@ -685,6 +702,7 @@ class FeSlipController extends Controller
              
 
              if($checkslipnumber != null){
+                    InsuredNumber::where('number',$code_ms)->where('slip_type','fe')->where('status','passive')->delete();
 
                     $reservedinsurednumber = InsuredNumber::create([
                                     'number'=>$code_ms,
@@ -742,6 +760,8 @@ class FeSlipController extends Controller
 
                     return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
             }else{
+                InsuredNumber::where('number',$code_ms)->where('slip_type','fe')->where('status','passive')->delete();
+
                 $reservedinsurednumber = InsuredNumber::create([
                             'number'=>$code_ms,
                             'status'=>'passive',
