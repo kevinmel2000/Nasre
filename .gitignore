@@ -6,5 +6,5 @@
 /storage/framework/views/*
 /storage/framework/cache/*
 /storage/logs/*
-\public\files/*
+/\public\files/*
 /public/files/*
