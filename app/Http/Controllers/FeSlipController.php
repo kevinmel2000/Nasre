@@ -569,13 +569,13 @@ class FeSlipController extends Controller
 
 
         $checkinsurednumber = InsuredNumber::where('number',$code_ms)->where('status','passive')->first();
-        // $insurednumform = '';
+        $insurednumform = '';
         $checkslipnumber= SlipNumber::where('number',$code_sl)->where('insured_number',$code_ms)->where('slip_type','fe')->where('status','passive')->first();
-        // $slipnumform = '';
+        $slipnumform = '';
         if($checkinsurednumber != null){
-            
+            $insurednumform = $code_ms;
             if($checkslipnumber != null){
-                $insurednumform = $code_ms;
+                
                 $slipnumform = $code_sl;
 
                 $interestinsured= InterestInsured::orderby('id','asc')->get();
@@ -624,7 +624,6 @@ class FeSlipController extends Controller
 
                 return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
             }else{
-                $insurednumform = $code_ms;
 
                 $reservedslipnumber = SlipNumber::create([
                             'number'=>$code_sl,
@@ -681,18 +680,17 @@ class FeSlipController extends Controller
 
                 return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
             }
-
         }else{
+             $reservedinsurednumber = InsuredNumber::create([
+                            'number'=>$code_ms,
+                            'status'=>'passive',
+                            'slip_type'=>'fe'     
+                ]);
 
-            if($checkslipnumber != null){
-                    $reservedinsurednumber = InsuredNumber::create([
-                                    'number'=>$code_ms,
-                                    'status'=>'passive',
-                                    'slip_type'=>'fe'     
-                        ]);
+             $insurednumform = $reservedinsurednumber->number;
 
-                    $insurednumform = $reservedinsurednumber->number;
-
+             if($checkslipnumber != null){
+                
                     $slipnumform = $code_sl;
 
                     $interestinsured= InterestInsured::orderby('id','asc')->get();
@@ -741,14 +739,6 @@ class FeSlipController extends Controller
 
                     return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
             }else{
-
-                $reservedinsurednumber = InsuredNumber::create([
-                                'number'=>$code_ms,
-                                'status'=>'passive',
-                                'slip_type'=>'fe'     
-                    ]);
-
-                 $insurednumform = $reservedinsurednumber->number;
 
                 $reservedslipnumber = SlipNumber::create([
                             'number'=>$code_sl,
@@ -1181,10 +1171,9 @@ class FeSlipController extends Controller
 
         $fe_ids = response()->json($insured->modelKeys());
         
-        $insureddata=Insured::find($idm)->where('slip_type','fe');
+        $insureddata=Insured::find($idm);
         // dd($insureddata->number);
         $code_ms=$insureddata->number;
-
         $slipdata=SlipTable::where('insured_id',$insureddata->number)->where('endorsment',$insureddata->count_endorsement)->first();
         $slipdata2=SlipTable::where('insured_id',$insureddata->number)->where('slipshow','yes')->where('slip_type','fe')->get();
         // dd($slipdata2);
@@ -1276,30 +1265,12 @@ class FeSlipController extends Controller
             $slipdata=SlipTable::orderBy('id', 'desc')->first();
         }
 
-        $checkslipnumber= SlipNumber::where('number',$code_sl)->where('insured_number',$insureddata->number)->where('slip_type','fe')->where('status','passive')->first();
-
-        if($checkslipnumber != null){
-
-            $slipnumform = $code_sl;
-
-
-        }else{
-
-            $reservedslipnumber = SlipNumber::create([
-                            'number'=>$code_sl,
-                            'slip_type'=>'fe',
-                            'status'=>'passive',
-                            'insured_number'=>$code_ms     
-                    ]);
-
-                $slipnumform = $reservedslipnumber->number;
-
-
-        }
-
         $interestinsured= InterestInsured::orderby('id','asc')->get();
         // $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->get();
 
+
+        
+        
         $interestlist= InterestInsuredTemp::where('slip_id','=',$code_sl)->orderby('id','desc')->delete();
         $installmentlist= InstallmentTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
         $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
@@ -1357,7 +1328,7 @@ class FeSlipController extends Controller
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
             
 
-        return view('crm.transaction.fe_slipupdate', compact(['slipnumform','user','userid','cnd','slipdata2','filelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.fe_slipupdate', compact(['user','userid','cnd','slipdata2','filelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
     }
 

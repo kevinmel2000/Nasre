@@ -25,7 +25,7 @@
                                         <div class="form-group">
                                             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                                             <label for="">{{__('Number')}} </label>
-                                            <input type="text" name="fenumber"  id="insuredIDtxt"  value="{{$insureddata->number}}" class="form-control form-control-sm" readonly required/>
+                                            <input type="text" name="fenumber"  id="insuredIDtxt"  value="{{$code_ms}}" class="form-control form-control-sm" readonly required/>
                                         </div>
                                     </div>
                                 </div>
