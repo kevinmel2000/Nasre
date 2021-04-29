@@ -643,6 +643,8 @@ class FeSlipController extends Controller
                 //                     'slip_type'=>'fe'     
                 //         ]);
 
+                dd($code_ms);
+
                 $insurednumform = $code_ms;
 
                 $reservedslipnumber = SlipNumber::create([
