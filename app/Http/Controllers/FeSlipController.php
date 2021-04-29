@@ -583,6 +583,8 @@ class FeSlipController extends Controller
                 //                     'slip_type'=>'fe'     
                 //         ]);
 
+                dd($code_ms);
+
 
                 $insurednumform = $code_ms;
                 $slipnumform = $code_sl;
