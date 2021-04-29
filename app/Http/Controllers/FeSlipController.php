@@ -1842,7 +1842,7 @@ class FeSlipController extends Controller
             $dateyeardata= date("d/m/Y", $prodyeardata);
         }
         
-
+        $currdate = date("d/m/Y");
         
 
 
@@ -1901,7 +1901,7 @@ class FeSlipController extends Controller
                 'insured_id' => $slipdata->insured_id,
                 'slip_type' => $slipdata->slip_type,
                 'username' => $slipdata->username,
-                'prod_year' => $dateyeardata,
+                'prod_year' => $currdate,
                 'number' => $slipdata->number,
                 'slipuy' => $slipdata->uy,
                 'date_transfer' => $datetransfer,
@@ -2072,6 +2072,9 @@ class FeSlipController extends Controller
 
 
         $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
+
+        $currdate = date("d/m/Y");
+
         
         if(!empty($slipdata->installment_panel) && strlen($slipdata->installment_panel)>=10)
         {
@@ -2149,7 +2152,7 @@ class FeSlipController extends Controller
                 'insured_id' => $slipdata->insured_id,
                 'slip_type' => $slipdata->slip_type,
                 'username' => $slipdata->username,
-                'prod_year' => $dateyeardata,
+                'prod_year' => $currdate,
                 'number' => $slipdata->number,
                 'slipuy' => $slipdata->uy,
                 'date_transfer' => date("d/m/Y", strtotime($slipdata->date_transfer)),
