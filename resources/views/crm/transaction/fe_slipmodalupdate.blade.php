@@ -649,7 +649,7 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for=""  style="opacity: 0;" >{{__('Total Sum Insured') }}</label>
+                                                                <label for=""  >{{__('TSI/Ceding Share value') }}</label>
                                                                 <input type="hidden" id="sharetotalsumupdate" value="" name="sharetotalsumupdate" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="tsi(*total/sum from interest insured)" />
                                                                 <input type="text" id="sharetotalsumupdate2" value="" name="sharetotalsumupdate2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="tsi(*total/sum from interest insured)" />
                                                             </div>

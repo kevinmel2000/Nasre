@@ -1834,13 +1834,13 @@ class FeSlipController extends Controller
         }
         $newarrayinspandata=json_encode($newarrayinspan);
 
-        if($slipdata->prod_year == null){
-            $prodyeardata = strtotime(date("Y-m-d"));
-            $dateyeardata= date("d/m/Y", $prodyeardata);
-        }else{
-            $prodyeardata = strtotime($slipdata->prod_year);
-            $dateyeardata= date("d/m/Y", $prodyeardata);
-        }
+        // if($slipdata->prod_year == null){
+        //     $prodyeardata = strtotime(date("Y-m-d"));
+        //     $dateyeardata= date("d/m/Y", $prodyeardata);
+        // }else{
+        //     $prodyeardata = strtotime($slipdata->prod_year);
+        //     $dateyeardata= date("d/m/Y", $prodyeardata);
+        // }
         
         $currdate = date("d/m/Y");
         
@@ -2071,7 +2071,7 @@ class FeSlipController extends Controller
         $newextenddata=json_encode($newarrayextend);
 
 
-        $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
+        // $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
 
         $currdate = date("d/m/Y");
 
