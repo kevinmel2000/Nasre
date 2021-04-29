@@ -706,6 +706,7 @@ class FeSlipController extends Controller
              
 
              if($checkslipnumber != null){
+                dd($code_ms);
                     InsuredNumber::where('number',$code_ms)->where('slip_type','fe')->where('status','passive')->delete();
 
                     $reservedinsurednumber = InsuredNumber::create([
