@@ -547,7 +547,7 @@ class FeSlipController extends Controller
                 $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
                 $deductiblelist= DeductibleTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
                 $retrocessionlist=RetrocessionTemp::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
-                $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
+                $locationlist = TransLocationTemp::where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
                 $attachmentlist = SlipTableFile::where('slip_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->where('status','=','passive')->orderby('id','desc')->delete();
 
                 // $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
@@ -567,7 +567,7 @@ class FeSlipController extends Controller
                 foreach($locationlist2 as $datadetail)
                 {
                     if($datadetail->risklocationdetail){
-                        $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->delete();
+                        $datadetail->risklocationdetail = RiskLocationDetail::where('translocation_id','=',$datadetail->id)->where('status','passive')->delete();
                         
                     }else{
                         $datadetail->risklocationdetail= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->orderby('id','desc')->get();
