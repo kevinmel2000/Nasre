@@ -1,0 +1,9 @@
+/vendor
+/bootstrap/cache/*w 
+.env
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+/storage/framework/cache/*
+/storage/logs/*
+/public/files/*

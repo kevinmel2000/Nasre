@@ -1,0 +1,136 @@
+/* this class is for plus as well as minus button
+ */
+
+.plus-button{
+    padding-top:0px;
+    padding-bottom:0px;
+    line-height:1;
+    margin-left:5px;
+    font-size: 22px;
+    font-weight:bold;
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+    box-shadow: none;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #343a40;
+}
+
+.minus-button{
+    padding-top:0px;
+    padding-bottom:0px;
+    line-height:1;
+    margin-left:5px;
+    font-size: 22px;
+    font-weight:bold;
+    color: #fff;
+    background-color: #ff4800;
+    border-color: #ff0000;
+    box-shadow: none;
+}
+
+.h3, h3 {
+    font-size: 1.25rem;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0rem;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+    color: inherit;
+}
+
+.card-header {
+    padding: 0.30rem 1.25rem;
+}
+
+table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_desc, table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>td.sorting_asc, table.dataTable thead>tr>td.sorting_desc, table.dataTable thead>tr>td.sorting {
+    padding-right: 10px;
+}
+
+.table td, .table th {
+    padding: .35rem;
+}
+
+.content-header {
+    padding: 5px .5rem;
+}
+
+.btn-group-sm>.btn, .btn-sm {
+    padding: 0rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
+
+
+.select2-container .select2-selection--single {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    height: 38px;
+    user-select: none;
+}
+
+[class*=sidebar-dark-] {
+     background-color: #083561;
+} 
+
+.navbar-gray {
+    background-color: #093969;
+    color: #fff;
+}
+
+.bg-light-gray{
+    background-color: rgb(230, 230, 230);
+}
+
+.bg-light-blue{
+    background-color: #f4f6f9;;
+}
+
+.nav-sidebar>.nav-item {
+    margin-bottom: 5px;
+}
+
+main-header navbar navbar-expand navbar-white navbar-dark navbar-gray-dark
+
+[class*=sidebar-dark-] .sidebar a {
+    color: #dee2e6;
+}
+
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    font-weight: 500;
+}
+
+.nav-flat.nav-sidebar>.nav-item .nav-treeview .nav-item>.nav-link, .nav-flat.nav-sidebar>.nav-item>.nav-treeview .nav-item>.nav-link {
+    border-left: 0rem solid;
+}
+
+/* Updated Modal Radius for all modals */
+.modal-content  {
+    -webkit-border-radius: 25px !important;
+    -moz-border-radius: 25px !important;
+    border-radius: 25px !important; 
+}
+
+label{
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.nav-sidebar .nav-item>.nav-link {
+    position: relative;
+    color: #ffffff;
+}
+
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link {
+    color: #ffffff;
+}
+
