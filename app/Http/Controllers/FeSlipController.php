@@ -426,7 +426,7 @@ class FeSlipController extends Controller
         // $currdate = date("d/m/Y");
         $insured = Insured::orderby('id','asc')->get();
         // $insured_now = Insured::whereDate('created_at',$currdate2)->orderby('id','asc')->get();
-        $insured_now = InsuredNumber::whereDate('created_at',$currdate2)->orderby('id','asc')->get();
+        $insured_now = InsuredNumber::whereDate('created_at',$currdate2)->where('slip_type','fe')->orderby('id','asc')->get();
         $slip = SlipTable::orderby('id','asc')->get();
         
         $currency = Currency::orderby('id','asc')->get();
