@@ -1040,7 +1040,7 @@
                                     <td>
                                         <div class="form-group">
                                             <input type="text" id="slipnilaiec" name="slipnilaiec" placeholder="y &permil;" class="form-control form-control-sm floatTextBox2"/>
-                                            <input type="hidden" id="sliptotalnilaiec" name="sliptotalnilaiec" placeholder="sum y &permil;" class="form-control form-control-sm floatTextBox2"/>
+                                            <input type="text" id="sliptotalnilaiec" name="sliptotalnilaiec" placeholder="sum y &permil;" class="form-control form-control-sm floatTextBox2"/>
                                         </div>
                                     </td>
                                     <td>
