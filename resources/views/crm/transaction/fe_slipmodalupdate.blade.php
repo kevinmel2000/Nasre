@@ -841,8 +841,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="hidden"  value=""  id="slipipamountupdate" name="slipipamountupdate" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" />
-                                                                                    <input type="text"  value=""  id="slipipamountupdate2" name="slipipamountupdate2" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" disabled/>
+                                                                                    <input type="text" id="slipipamountupdate" name="slipipamountupdate" placeholder="= w% * net premium to NR" class="form-control form-control-sm amount" />
                                                                                 </div>
                                                                             </td>
                                                                             <td>

@@ -674,7 +674,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
         $("#tabretroupdate").attr('hidden','true');
          //get data-id attribute of the clicked element
          var codesl = $(e.relatedTarget).data('book-id');
-        alert(codesl);
+        // alert(codesl);
         // $('input .amount').val(function(event) {
         //     // skip for arrow keys
         //     if(event.which >= 37 && event.which <= 40) return;
