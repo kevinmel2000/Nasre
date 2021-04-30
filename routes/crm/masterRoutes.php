@@ -280,6 +280,11 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::delete('/surveyor/destroy/{surveyor}', [SurveyorController::class, 'destroy']);
     Route::post('/surveyor/destroy/{surveyor}', [SurveyorController::class, 'destroy']);
 
+    Route::get('/prefixinsured', [MasterController::class, 'indexprefixinsured']);
+    Route::post('/prefixinsured/store', [MasterController::class, 'storeprefixinsured']);
+    Route::put('prefixinsured/{pi}', [MasterController::class, 'updateprefixinsured']);
+    Route::delete('/prefixinsured/destroy/{pi}', [MasterController::class, 'destroyprefixinsured']);
+
 
 });
 ?>

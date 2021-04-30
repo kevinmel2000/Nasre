@@ -101,10 +101,10 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             if(tbl_long < 2){
                 var attr = $('#feshareto2').prop("disabled", true);
                 if(typeof attr !== typeof undefined && attr !== false){
-                    $('#feshareto2').prop("disabled", false);
+                    $('#feshareto2 .insertins').prop("disabled", false);
                 }
             }else if(tbl_long > 1){
-                $('#feshareto2').prop("disabled", true);
+                $('#feshareto2 .insertins').prop("disabled", true);
             }
 
             var countryID = 102; 

@@ -40,6 +40,7 @@ use App\Models\RiskLocationDetail;
 use App\Models\CurrencyExchange;
 use App\Models\InsuredNumber;
 use App\Models\SlipNumber;
+use App\Models\PrefixInsured;
 
 
 class FeSlipController extends Controller
@@ -435,6 +436,7 @@ class FeSlipController extends Controller
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
         $ceding = CedingBroker::orderby('id','asc')->where('type','4')->get();
+        $prefixinsured = PrefixInsured::orderby('id','asc')->get();
         // $felookup = FelookupLocation::distinct()->orderby('id','asc')->get();
         $felookuptable = collect(FelookupLocation::orderby('id','asc')->get());
         $felookup = $felookuptable->unique('country_id');
@@ -578,7 +580,7 @@ class FeSlipController extends Controller
 
                 $statuslist= StatusLog::where('insured_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
 
-                return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+                return view('crm.transaction.fe_slip', compact(['prefixinsured','slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
             }elseif($checkslipnumber == null){
                 
 
@@ -637,7 +639,7 @@ class FeSlipController extends Controller
 
                 $statuslist= StatusLog::where('insured_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
 
-                return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+                return view('crm.transaction.fe_slip', compact(['prefixinsured','slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
             }
         }elseif($checkinsurednumber == null){
              
@@ -700,7 +702,7 @@ class FeSlipController extends Controller
 
                     $statuslist= StatusLog::where('insured_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
 
-                    return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+                    return view('crm.transaction.fe_slip', compact(['prefixinsured','slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
             }elseif($checkslipnumber == null){
                 InsuredNumber::where('number',$code_ms)->where('slip_type','fe')->where('status','passive')->delete();
                 // dd($code_ms);
@@ -765,7 +767,7 @@ class FeSlipController extends Controller
 
                 $statuslist= StatusLog::where('insured_id','=',$code_sl)->where('insured_id','=',$code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
 
-                return view('crm.transaction.fe_slip', compact(['slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+                return view('crm.transaction.fe_slip', compact(['prefixinsured','slipnumform','insurednumform','user','cnd','slipdata','slipdata2','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
             }
 
         }
@@ -1135,6 +1137,7 @@ class FeSlipController extends Controller
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
         $ceding = CedingBroker::orderby('id','asc')->where('type',4)->get();
+        $prefixinsured =  PrefixInsured::orderby('id','asc')->get();
         // $felookup = FelookupLocation::orderby('id','asc')->get();
         $felookuptable = collect(FelookupLocation::orderby('id','asc')->get());
         $felookup = $felookuptable->unique('country_id');
@@ -1321,7 +1324,7 @@ class FeSlipController extends Controller
         $statuslist= StatusLog::where('insured_id','=',$code_sl)->orderby('id','desc')->get();
             
 
-        return view('crm.transaction.fe_slipupdate', compact(['slipnumform','user','userid','cnd','slipdata2','filelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
+        return view('crm.transaction.fe_slipupdate', compact(['prefixinsured','slipnumform','user','userid','cnd','slipdata2','filelist','slipdata','insureddata','statuslist','retrocessionlist','installmentlist','extendcoveragelist','deductiblelist','extendedcoverage','extendedcoverage','deductibletype','interestinsured','locationlist','interestlist','felookup','currency','cob','koc','ocp','ceding','cedingbroker','route_active','currdate','slip','insured','fe_ids','code_ms','code_sl','costumer']));
     
     }
 
@@ -2261,7 +2264,7 @@ class FeSlipController extends Controller
                             'number'=>$request->fesnumber,
                             'slip_type'=>'fe',
 
-                            'insured_prefix' => strtoupper($request->fesinsured),
+                            'prefix_id' => $request->fesinsured,
                             'insured_name'=> strtoupper($request->fessuggestinsured),
                             'insured_suffix'=> strtoupper($request->fessuffix),
 
@@ -2297,11 +2300,6 @@ class FeSlipController extends Controller
                             }
                         }
 
-                        
-
-
-
-
                         $notification = array(
                             'message' => 'Fire & Engginering Insured added successfully!',
                             'alert-type' => 'success',
@@ -2314,7 +2312,7 @@ class FeSlipController extends Controller
                     $insureddataid=$insureddata->id;
                     $insureddataup = Insured::findOrFail($insureddataid);
 
-                    $insureddataup->insured_prefix= strtoupper($request->fesinsured);
+                    $insureddataup->prefix_id= $request->fesinsured;
                     $insureddataup->insured_name= strtoupper($request->fessuggestinsured);
                     $insureddataup->insured_suffix= strtoupper($request->fessuffix);
 
@@ -2331,6 +2329,21 @@ class FeSlipController extends Controller
                     $insurednumberdata = InsuredNumber::where('number',$request->fesnumber)->orderby('id','desc')->first();
                     $insurednumberdata->status = 'active';
 
+                    $TransLocationup = TransLocationTemp::where('insured_id','=',$request->fesnumber)->where('slip_type','fe')->where('status','passive')->orderby('id','desc')->get();
+                        foreach($TransLocationup as $tstup)
+                        {
+                            $translocationprocessup = TransLocationTemp::findOrFail($tstup->id);
+                            $translocationprocessup->status = 'active';
+                            $translocationprocessup->save();
+
+                            $risklocationup = RiskLocationDetail::where('translocation_id','=',$tstup->id)->where('status','passive')->orderby('id','desc')->get();
+                            foreach($risklocationup as $rlsup)
+                            {
+                                $risklocationprocessup = RiskLocationDetail::findOrFail($rlsup->id);
+                                $risklocationprocessup->status = 'active';
+                                $risklocationprocessup->save();
+                            }
+                        }
 
                     $notification = array(
                         'message' => 'Fire & Engginering Insured Update successfully!',
@@ -2399,7 +2412,7 @@ class FeSlipController extends Controller
                             'number'=>$code_ms2,
                             'slip_type'=>'fe',
 
-                            'insured_prefix' => strtoupper($request->fesinsured),
+                            'prefix_id' => $request->fesinsured,
                             'insured_name'=> strtoupper($request->fessuggestinsured),
                             'insured_suffix'=> strtoupper($request->fessuffix),
 
@@ -2452,7 +2465,7 @@ class FeSlipController extends Controller
                     $insureddataid=$insureddata->id;
                     $insureddataup = Insured::findOrFail($insureddataid);
 
-                    $insureddataup->insured_prefix= strtoupper($request->fesinsured);
+                    $insureddataup->prefix_id= $request->fesinsured;
                     $insureddataup->insured_name= strtoupper($request->fessuggestinsured);
                     $insureddataup->insured_suffix= strtoupper($request->fessuffix);
 

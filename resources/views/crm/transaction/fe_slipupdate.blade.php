@@ -37,14 +37,15 @@
                                                 <div class="col-md-4">
                                                     <label for="">{{__('Insured')}}</label>
                                                     <select id="feinsured" name="feinsured" class="form-control form-control-sm ">
-                                                        <option selected readonly>{{__('Select Prefix')}}</option>
-                                                        @if($insureddata->insured_prefix  == "PT")
-                                                        <option value="PT"  selected="selected">PT</option>
-                                                        <option value="CV">CV</option>
-                                                        @else
-                                                        <option value="PT">PT</option>
-                                                        <option value="CV"  selected="selected">CV</option>
-                                                        @endif
+                                                        
+                                                        @foreach($prefixinsured as $pi)
+                                                            @if($insureddata->prefix_id  == $pi->id)
+                                                                 <option value="{{ $pi->id }}" selected>{{ $pi->code }} - {{ $pi->name }}</option>
+                                                            @else
+                                                                <option selected readonly>{{__('Select Prefix')}}</option>
+                                                                 <option value="{{ $pi->code }}">{{ $pi->code }} - {{ $pi->name}}</option>
+                                                            @endif
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4">

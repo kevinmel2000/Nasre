@@ -14,6 +14,11 @@ class Insured extends Model
         return $this->belongsTo('App\Models\RouteShip', 'route');
     }
 
+    public function prefixinsured()
+    {
+        return $this->belongsTo('App\Models\prefixinsured', 'prefix_id');
+    }
+
     public function ship_list()
     {
         return $this->belongsTo('App\Models\ShipPort', 'ship_detail');

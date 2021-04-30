@@ -98,8 +98,8 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="">{{__('Total Sum Insured')}}</label>
-                                                <input id="feshareto2" type="text"  name="feshareto" class="form-control form-control-sm amount" value="" data-validation="length" data-validation-length="1-50" />
-                                                <input id="feshareto" type="hidden"  name="feshareto" class="form-control form-control-sm amount" value="" data-validation="length" data-validation-length="0-50" />
+                                                <input id="feshareto2" type="text"  name="feshareto" class="form-control form-control-sm amount insertins" value="" data-validation="length" data-validation-length="1-50" />
+                                                <input id="feshareto" type="hidden"  name="feshareto" class="form-control form-control-sm amount insertins" value="" data-validation="length" data-validation-length="0-50" />
                                             </div>
                                         </div>
                                     </div>

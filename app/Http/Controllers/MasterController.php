@@ -22,6 +22,7 @@ use App\Models\Collection;
 use App\Models\Construction;
 use App\Models\CompanyType;
 use App\Models\MarineLookup;
+use App\Models\PrefixInsured;
 use PHPUnit\Framework\Constraint\Count;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -819,6 +820,54 @@ class MasterController extends Controller
     }
 
 
+    public function indexprefiixinsured(Request $request)
+    {
+        $user = Auth::user();
+        $route_active = 'Prefix Insured Master';
+        $search = @$request->input('search');
+        // $mydate = date("Y").date("m").date("d");
+
+        // dd($country);
+        if(empty($search))
+         {
+            $prefixinsured = PrefixInsured::orderby('id','asc')->get();
+            // $cob = COB::orderby('id','asc')->get();
+            $prefixinsured_ids = response()->json($prefixinsured->modelKeys());
+            $lastid = count($prefixinsured);
+
+            if($lastid != null){
+                // $code_cr = $mydate . strval($lastid + 1);
+
+                if($lastid < 9){
+                    $code_ii = '00000' . strval($lastid + 1);
+                }elseif($lastid > 8 && $lastid < 99){
+                    $code_ii = '0000' . strval($lastid- + 1);
+                }elseif($lastid > 98 && $lastid < 999){
+                    $code_ii = '000' . strval($lastid + 1);
+                }elseif($lastid > 998 && $lastid < 9999){
+                    $code_ii = '00' . strval($lastid + 1);
+                }elseif($lastid > 9998 && $lastid < 99999){
+                    $code_ii = '0' . strval($lastid + 1);
+                }elseif($lastid > 99998 ){
+                    $code_ii =  strval($lastid + 1);
+                }
+
+                
+            }
+            else{
+                $code_ii = '00000' . strval(1);
+            }
+            return view('crm.master.prefix_insured', compact(['route_active','code_ii','prefixinsured','prefixinsured_ids']));   
+         }
+        else
+        {
+          $prefixinsured = PrefixInsured::where('code', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $prefixinsured_ids = response()->json($interestinsured->modelKeys());
+          return view('crm.master.prefix_insured', compact('user','prefixinsured','route_active','prefixinsured_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+        }
+    }
+
+
     public function generatecodecob(request $request)
     {
         $cob_parent = COB::where('id',$request->cob_code)->first();
@@ -1354,6 +1403,28 @@ class MasterController extends Controller
         }
     }
 
+    public function storeprefixinsured(Request $request)
+    {
+        $validator = $request->validate([
+            'picode'=>'required|max:15|unique:prefix_insured,code',
+            'piname'=>'required',
+        ]);
+        if($validator){
+            $user = Auth::user();
+            PrefixInsured::create([
+                'code'=>$request->picode,
+                'name' => $request->piname
+            ]);
+            $notification = array(
+                'message' => 'Prefix Insured Data added successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    }
+
     public function getCityList()
     {
         $cities = DB::table("cities")
@@ -1825,6 +1896,30 @@ class MasterController extends Controller
     
    }
 
+   public function updateprefixinsured(Request $request, PrefixInsured $pi)
+   {
+    
+        $validator = $request->validate([
+            'codepi'=>'required|max:15',
+            'namepi'=>'required'
+
+        ]);
+        
+        if($validator){
+            $pi->code = $request->codepi;
+            $pi->description = $request->namepi;
+            $pi->save();
+            $notification = array(
+                'message' => 'Prefix Insured updated successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            return back()->with($validator)->withInput();
+        }
+    
+   }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -2115,6 +2210,23 @@ class MasterController extends Controller
         }else{
             $notification = array(
                 'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
+    public function destroyprefixinsured(PrefixInsured $pi)
+    {
+        if($pi->delete()){
+            $notification = array(
+                'message' => 'Prefix Insured  Data deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Contact admin! Delete error',
                 'alert-type' => 'error'
             );
             return back()->with($notification);
