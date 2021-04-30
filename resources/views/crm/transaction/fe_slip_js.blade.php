@@ -5019,6 +5019,7 @@ $('#slipbld_constendorsement').change(function(){
                             var sum_ceding = isNaN(parseFloat(0) + parseFloat(amount)) ? 0 :(parseFloat(0) + parseFloat(amount)).toFixed(2);
                             var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             $('#feshare').val(conv_sum_ceding);
+                            $('#feshare2').val(conv_sum_ceding);
                             console.log('ceding awal' + conv_sum_ceding)
                         }else{
                             var conv_ceding_share = ceding_share.replace(/,/g, "");
@@ -5026,6 +5027,7 @@ $('#slipbld_constendorsement').change(function(){
                             var sum_ceding = isNaN(parseFloat(real_ceding_share) + parseFloat(amount)) ? 0 :(parseFloat(real_ceding_share) + parseFloat(amount)).toFixed(2);
                             var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             $('#feshare').val(conv_sum_ceding);
+                            $('#feshare2').val(conv_sum_ceding);
                             console.log('ceding bertambah' + conv_sum_ceding)
 
 
@@ -5136,6 +5138,7 @@ function deletelocationriskdetail(id){
                 var sum_ceding = isNaN(parseFloat(real_ceding_share) - parseFloat(amount)) ? 0 :(parseFloat(real_ceding_share) - parseFloat(amount));
                 var conv_sum_ceding = sum_ceding.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 $('#feshare').val(conv_sum_ceding);
+                $('#feshare2').val(conv_sum_ceding);
                 console.log('ceding bertambah' + conv_sum_ceding)
                 
                     // $("#feshareto").val(real_sum);
@@ -5991,6 +5994,9 @@ function deletelocationriskdetail(id){
                     console.log('conv_sumrate' + sum)
                     console.log('real_sum' + real_sum)
                     $('#slipbasicpremium').val(real_sum);
+
+
+
                 }else{
                      var conv_totalrateexc = parseFloat(totalrateexc);
                      var sumtotalrate = isNaN(parseFloat(0) + rateslip) ? 0 :(parseFloat(0) + rateslip);
@@ -9863,20 +9869,24 @@ function deletelocationriskdetail(id){
                                         console.log(response)
 
 
-                                        $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">'+response.cedingbroker+'</td><td data-name="'+response.ceding+'">'+response.ceding+'</td><td data-name="'+response.slipstatus+'">'+response.slipstatus+'</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+response.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
-                                            +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata">Detail</button>'
+                                        $('#SlipInsuredTableData tbody').prepend('<tr id="slipiid'+response.id+'" data-name="slipvalue[]"><td data-name="'+response.number+'">'+response.number+'</td><td data-name="'+response.cedingbroker+'">'+response.cedingbroker+'</td><td data-name="'+response.ceding+'">'+response.ceding+'</td>'
+                                            +'<td data-name="'+response.slipstatus+'">'+response.slipstatus+'</td><td>'
+                                            +'<a class="text-primary mr-3 float-right " data-toggle="modal"  data-book-id="'+response.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
+                                            +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
                                             +'</a>'
                                             +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.id+'" data-target="#updatemodaldata">'
-                                            +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata">Edit</button>'
+                                            +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#updatemodaldata2">Edit</button>'
                                             +'</a>'
                                             +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.id+'" data-target="#endorsementmodaldata">'
-                                            +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata">Endorsment</button>'
+                                            +'<button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
                                             +'</a>'
                                             +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+response.id+'" data-target="#cancelmodaldata">'
                                             +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#cancelmodaldata2">Cancel</button>'
                                             +'</a>'
                                             +'<button type="button" id="claim-endorse" class="btn btn-sm btn-warning float-right">Claim</button>'
-                                            +'<td></td></tr>');
+                                            +'</td></tr>');
+
+                                            
 
                                         $('#slipnumber').val(response.slipnumber);
                                         // $('#feshare').val(response.ourshare);
