@@ -8888,15 +8888,24 @@ function deletelocationriskdetail(id){
             
 
             var total_percent =  $('#sliptotalnilaiec').val();
+            var total_rate = $('#sliptotalrate').val();
 
             if(total_percent == ''){
                 var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
                 $('#sliptotalnilaiec').val(sum_percent.toString());
                 console.log('total rate extend_coverage ' + $('#sliptotalnilaiec').val())
+                if(total_rate != null){
+                    var sum_totalrate = isNaN(parseFloat(total_percent) + parseFloat(total_rate)) ? 0 :(parseFloat(total_percent) + parseFloat(total_rate)) ;
+                    $('#sliptotalrate').val(sum_totalrate.toString());
+                }
             }else{
                 var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
                 $('#sliptotalnilaiec').val(sum_percent.toString());
                 console.log('total rate extend_coverage ' + $('#sliptotalnilaiec').val())
+                if(total_rate != null){
+                    var sum_totalrate = isNaN(parseFloat(total_percent) + parseFloat(total_rate)) ? 0 :(parseFloat(total_percent) + parseFloat(total_rate)) ;
+                    $('#sliptotalrate').val(sum_totalrate.toString());
+                }
                 
             }
 
@@ -8964,17 +8973,25 @@ function deletelocationriskdetail(id){
             $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">' +response.coveragecode+ ' - ' +response.coveragename+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageupdate('+response.id+')">delete</a></td></tr>');
             
 
-            var total_percent =  $('#sliptotalnilaiec').val();
+            var total_percent =  $('#sliptotalnilaiecupdate').val();
+            var total_rate = $('#sliptotalrateupdate').val();
 
             if(total_percent == ''){
                 var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
                 $('#sliptotalnilaiecupdate').val(sum_percent.toString());
                 console.log('total rate extend_coverage ' + $('#sliptotalnilaiecupdate').val())
+                if(total_rate != null){
+                    var sum_totalrate = isNaN(parseFloat(total_percent) + parseFloat(total_rate)) ? 0 :(parseFloat(total_percent) + parseFloat(total_rate)) ;
+                    $('#sliptotalrateupdate').val(sum_totalrate.toString());
+                }
             }else{
                 var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
                 $('#sliptotalnilaiecupdate').val(sum_percent.toString());
                 console.log('total rate extend_coverage ' + $('#sliptotalnilaiecupdate').val())
-                
+                if(total_rate != null){
+                    var sum_totalrate = isNaN(parseFloat(total_percent) + parseFloat(total_rate)) ? 0 :(parseFloat(total_percent) + parseFloat(total_rate)) ;
+                    $('#sliptotalrateupdate').val(sum_totalrate.toString());
+                }
             }
 
 
@@ -9042,16 +9059,24 @@ function deletelocationriskdetail(id){
             
 
             var total_percent =  $('#sliptotalnilaiecendorsement').val();
+            var total_rate = $('#sliptotalrateendorsement').val();
 
             if(total_percent == ''){
                 var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
                 $('#sliptotalnilaiecendorsement').val(sum_percent.toString());
                 console.log('total rate extend_coverage ' + $('#sliptotalnilaiecendorsement').val())
+                if(total_rate != null){
+                    var sum_totalrate = isNaN(parseFloat(total_percent) + parseFloat(total_rate)) ? 0 :(parseFloat(total_percent) + parseFloat(total_rate)) ;
+                    $('#sliptotalrateendorsement').val(sum_totalrate.toString());
+                }
             }else{
                 var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
                 $('#sliptotalnilaiecendorsement').val(sum_percent.toString());
                 console.log('total rate extend_coverage ' + $('#sliptotalnilaiecendorsement').val())
-                
+                if(total_rate != null){
+                    var sum_totalrate = isNaN(parseFloat(total_percent) + parseFloat(total_rate)) ? 0 :(parseFloat(total_percent) + parseFloat(total_rate)) ;
+                    $('#sliptotalrateendorsement').val(sum_totalrate.toString());
+                }
             }
 
 

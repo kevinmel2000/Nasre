@@ -497,6 +497,7 @@
                                 || @$route_active == 'Deductible Type Master' 
                                 || @$route_active == 'Ship Port Master' 
                                 || @$route_active == 'Route Form Master' 
+                                || @$route_active == 'Prefix Insured Master' 
                             )
                                 @php
                                 $master_dd = 'active';
@@ -880,15 +881,15 @@
                                     </li>
 
                                     {{-- @can('viewany-masterprefix', User::class) --}}
-                                        @if($route_active == 'Master Prefix')
+                                        @if($route_active == 'Prefix Insured Master')
                                             @php
                                                 $masterprefix = 'active';
                                             @endphp
                                         @endif
                                         <li class="nav-item">
-                                            <a href="{{url('/master-data/prefix')}}" class="nav-link {{@$masterprefix}}">
+                                            <a href="{{url('/master-data/prefixinsured')}}" class="nav-link {{@$masterprefix}}">
                                                     <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                                <p style="font-size: 90%;margin-left:2%;">{{__('MASTER PREFIX')}}</p>
+                                                <p style="font-size: 90%;margin-left:2%;">{{__('PREFIX INSURED MASTER DATA')}}</p>
                                             </a>
                                         </li>
                                     {{-- @endcan --}}
