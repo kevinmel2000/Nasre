@@ -4372,11 +4372,12 @@ class TransactionController extends Controller
     {
         $installmentlist = InstallmentTemp::find($id);
         
+        $installmentpercentage = $installmentlist->percentage;
         $installmentamount = $installmentlist->amount;
         
         $installmentlist->delete();
         
-        return response()->json(['success'=>'Data has been deleted','amount'=>$installmentamount]);
+        return response()->json(['success'=>'Data has been deleted','amount'=>$installmentamount,'percentage'=>$installmentpercentage]);
     }
 
 
@@ -4384,9 +4385,11 @@ class TransactionController extends Controller
     {
         $extendcoveragelist = ExtendCoverageTemp::find($id);
         
+        $extendcoveragepercentage = $extendcoveragelist->percentage;
+
         $extendcoveragelist->delete();
         
-        return response()->json(['success'=>'Data has been deleted']);
+        return response()->json(['success'=>'Data has been deleted','percentage'=>$extendcoveragepercentage]);
     }
 
     public function destroyconditionneededlist($id)
