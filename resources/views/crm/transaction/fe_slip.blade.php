@@ -37,8 +37,9 @@
                                                 <label for="">{{__('Insured')}}</label>
                                                 <select id="feinsured" name="feinsured" class="form-control form-control-sm ">
                                                     <option selected disabled>{{__('Select Prefix')}}</option>
-                                                    <option value="PT">PT</option>
-                                                    <option value="CV">CV</option>
+                                                    @foreach($prefixinsured as $pi)
+                                                    <option value="{{ $pi->id }}">{{ $pi->code }} - {{ $pi->name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="col-md-4">
