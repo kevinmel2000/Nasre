@@ -820,7 +820,7 @@ class MasterController extends Controller
     }
 
 
-    public function indexprefiixinsured(Request $request)
+    public function indexprefixinsured(Request $request)
     {
         $user = Auth::user();
         $route_active = 'Prefix Insured Master';
