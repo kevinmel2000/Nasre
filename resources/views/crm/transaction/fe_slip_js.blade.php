@@ -734,25 +734,25 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     }
 
 
-                    // if(response.extend_coverage && response.extend_coverage.length > 10) 
-                    // {
+                    if(response.extend_coverage && response.extend_coverage.length > 10) 
+                    {
 
-                    //     var extend_coverage = JSON.parse(response.extend_coverage); 
+                        var extend_coverage = JSON.parse(response.extend_coverage); 
 
-                    //     $('#ExtendCoveragePanelupdate tbody').empty();
-                    //     for(var i = 0; i < extend_coverage.length; i++) 
-                    //     {
-                    //         var obj = extend_coverage[i];
-                    //         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                    //         var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#ExtendCoveragePanelupdate tbody').empty();
+                        for(var i = 0; i < extend_coverage.length; i++) 
+                        {
+                            var obj = extend_coverage[i];
+                            // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
+                            var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-                    //         //console.log(obj.id);
-                    //         //$('#interestInsuredTabledetail tbody').prepend('');
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
                             
-                    //         $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+obj.id+'" data-name="extendcoverageupdatevalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragecode + ' - ' + obj.coveragename+</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageupdate('+obj.id+')">delete</a></td></tr>');
+                            $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+obj.id+'" data-name="extendcoverageupdatevalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragecode + ' - ' + obj.coveragename+</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageupdate('+obj.id+')">delete</a></td></tr>');
                             
-                    //     }
-                    // }
+                        }
+                    }
 
 
                     // if(response.installment_panel && response.installment_panel.length > 10)
