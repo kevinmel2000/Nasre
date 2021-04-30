@@ -9060,23 +9060,27 @@ function deletelocationriskdetail(id){
             
 
             var total_percent =  $('#sliptotalnilaiec').val();
-            var total_rate = $('#sliptotalrate').val();
+            
 
             if(total_percent == ''){
-                var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
+                var sum_percent = isNaN(parseFloat(0) + parseFloat(response.percentage)) ? 0 :(parseFloat(0) + parseFloat(response.percentage)) ;
                 $('#sliptotalnilaiec').val(sum_percent.toString());
                 console.log('total rate extend_coverage ' + $('#sliptotalnilaiec').val())
+                var total_rate = $('#sliptotalrate').val();
                 if(total_rate){
-                    var sum_totalrate = isNaN(parseFloat(total_percent) + parseFloat(total_rate)) ? 0 :(parseFloat(total_percent) + parseFloat(total_rate)) ;
+                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
                     $('#sliptotalrate').val(sum_totalrate.toString());
+                    $('#sliptotalrate2').val(sum_totalrate.toString());
                 }
             }else{
-                var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
+                var sum_percent = isNaN(parseFloat(total_percent) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) + parseFloat(response.percentage))
                 $('#sliptotalnilaiec').val(sum_percent.toString());
                 console.log('total rate extend_coverage ' + $('#sliptotalnilaiec').val())
+                var total_rate = $('#sliptotalrate').val();
                 if(total_rate){
-                    var sum_totalrate = isNaN(parseFloat(total_percent) + parseFloat(total_rate)) ? 0 :(parseFloat(total_percent) + parseFloat(total_rate)) ;
+                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
                     $('#sliptotalrate').val(sum_totalrate.toString());
+                    $('#sliptotalrate2').val(sum_totalrate.toString());
                 }
                 
             }
@@ -9152,17 +9156,21 @@ function deletelocationriskdetail(id){
                 var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
                 $('#sliptotalnilaiecupdate').val(sum_percent.toString());
                 console.log('total rate extend_coverage ' + $('#sliptotalnilaiecupdate').val())
-                if(total_rate != null){
-                    var sum_totalrate = isNaN(parseFloat(total_percent) + parseFloat(total_rate)) ? 0 :(parseFloat(total_percent) + parseFloat(total_rate)) ;
+                var total_rate = $('#sliptotalrateupdate').val();
+                if(total_rate){
+                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
                     $('#sliptotalrateupdate').val(sum_totalrate.toString());
+                    $('#sliptotalrateupdate2').val(sum_totalrate.toString());
                 }
             }else{
                 var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
                 $('#sliptotalnilaiecupdate').val(sum_percent.toString());
                 console.log('total rate extend_coverage ' + $('#sliptotalnilaiecupdate').val())
-                if(total_rate != null){
-                    var sum_totalrate = isNaN(parseFloat(total_percent) + parseFloat(total_rate)) ? 0 :(parseFloat(total_percent) + parseFloat(total_rate)) ;
+                var total_rate = $('#sliptotalrateupdate').val();
+                if(total_rate){
+                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
                     $('#sliptotalrateupdate').val(sum_totalrate.toString());
+                    $('#sliptotalrateupdate2').val(sum_totalrate.toString());
                 }
             }
 
@@ -9237,17 +9245,21 @@ function deletelocationriskdetail(id){
                 var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
                 $('#sliptotalnilaiecendorsement').val(sum_percent.toString());
                 console.log('total rate extend_coverage ' + $('#sliptotalnilaiecendorsement').val())
-                if(total_rate != null){
-                    var sum_totalrate = isNaN(parseFloat(total_percent) + parseFloat(total_rate)) ? 0 :(parseFloat(total_percent) + parseFloat(total_rate)) ;
+                var total_rate = $('#sliptotalrateendorsement').val();
+                if(total_rate){
+                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
                     $('#sliptotalrateendorsement').val(sum_totalrate.toString());
+                    $('#sliptotalrateendorsement2').val(sum_totalrate.toString());
                 }
             }else{
                 var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
                 $('#sliptotalnilaiecendorsement').val(sum_percent.toString());
                 console.log('total rate extend_coverage ' + $('#sliptotalnilaiecendorsement').val())
-                if(total_rate != null){
-                    var sum_totalrate = isNaN(parseFloat(total_percent) + parseFloat(total_rate)) ? 0 :(parseFloat(total_percent) + parseFloat(total_rate)) ;
+                var total_rate = $('#sliptotalrateendorsement').val();
+                if(total_rate){
+                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
                     $('#sliptotalrateendorsement').val(sum_totalrate.toString());
+                    $('#sliptotalrateendorsement2').val(sum_totalrate.toString());
                 }
             }
 
@@ -9288,6 +9300,13 @@ function deletelocationriskdetail(id){
                 console.log('percentexc = ' + parseFloat(response.percentage))
                 $('#sliptotalnilaiec').val(sum_percent.toString());
                 console.log($('#sliptotalnilaiec').val())
+
+                var total_rate = $('#sliptotalrate').val();
+                if(total_rate){
+                    var sum_totalrate = isNaN(parseFloat(total_rate) - parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) - parseFloat(response.percentage)) ;
+                    $('#sliptotalrate').val(sum_totalrate.toString());
+                    $('#sliptotalrate2').val(sum_totalrate.toString());
+                }
                     
                 
 
@@ -9322,6 +9341,12 @@ function deletelocationriskdetail(id){
                 $('#sliptotalnilaiecupdate').val(sum_percent.toString());
                 console.log($('#sliptotalnilaiecupdate').val())
                     
+                var total_rate = $('#sliptotalrateupdate').val();
+                if(total_rate){
+                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
+                    $('#sliptotalrateupdate').val(sum_totalrate.toString());
+                    $('#sliptotalrateupdate2').val(sum_totalrate.toString());
+                }
                 
 
                 $('#iidextendcoverageupdate'+id).remove();
@@ -9355,7 +9380,12 @@ function deletelocationriskdetail(id){
                 $('#sliptotalnilaiecendorsement').val(sum_percent.toString());
                 console.log($('#sliptotalnilaiecendorsement').val())
                     
-                
+                var total_rate = $('#sliptotalrateendorsement').val();
+                if(total_rate){
+                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
+                    $('#sliptotalrateendorsement').val(sum_totalrate.toString());
+                    $('#sliptotalrateendorsement2').val(sum_totalrate.toString());
+                }
 
                 $('#iidextendcoverageendorsement'+id).remove();
                 console.log(response);
