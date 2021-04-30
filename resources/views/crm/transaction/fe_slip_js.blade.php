@@ -9066,7 +9066,7 @@ function deletelocationriskdetail(id){
                 var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
                 $('#sliptotalnilaiec').val(sum_percent.toString());
                 console.log('total rate extend_coverage ' + $('#sliptotalnilaiec').val())
-                if(total_rate != null){
+                if(total_rate){
                     var sum_totalrate = isNaN(parseFloat(total_percent) + parseFloat(total_rate)) ? 0 :(parseFloat(total_percent) + parseFloat(total_rate)) ;
                     $('#sliptotalrate').val(sum_totalrate.toString());
                 }
@@ -9074,7 +9074,7 @@ function deletelocationriskdetail(id){
                 var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
                 $('#sliptotalnilaiec').val(sum_percent.toString());
                 console.log('total rate extend_coverage ' + $('#sliptotalnilaiec').val())
-                if(total_rate != null){
+                if(total_rate){
                     var sum_totalrate = isNaN(parseFloat(total_percent) + parseFloat(total_rate)) ? 0 :(parseFloat(total_percent) + parseFloat(total_rate)) ;
                     $('#sliptotalrate').val(sum_totalrate.toString());
                 }
@@ -9283,7 +9283,9 @@ function deletelocationriskdetail(id){
                 var total_percent =  $('#sliptotalnilaiec').val();
 
                 
-                var sum_percent = isNaN(parseInt(total_percent) - parseInt(response.percentage)) ? 0 :(parseInt(total_percent) - parseInt(response.percentage))
+                var sum_percent = isNaN(parseFloat(total_percent) - parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) - parseFloat(response.percentage))
+                console.log('total = ' + parseFloat(total_percent))
+                console.log('percentexc = ' + parseFloat(response.percentage))
                 $('#sliptotalnilaiec').val(sum_percent.toString());
                 console.log($('#sliptotalnilaiec').val())
                     
