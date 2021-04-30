@@ -36,16 +36,26 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="">{{__('Insured')}}</label>
-                                                    <select id="feinsured" name="feinsured" class="form-control form-control-sm ">
+                                                    <select id="feinsured" name="feinsured" class="e1 form-control form-control-sm ">
                                                         
                                                         @foreach($prefixinsured as $pi)
                                                             @if($insureddata->prefix_id  == $pi->id)
                                                                  <option value="{{ $pi->id }}" selected>{{ $pi->code }} - {{ $pi->name }}</option>
                                                             @else
-                                                                <option selected readonly>{{__('Select Prefix')}}</option>
+                                                                <!-- <option selected readonly>{{__('Select Prefix')}}</option> -->
                                                                  <option value="{{ $pi->code }}">{{ $pi->code }} - {{ $pi->name}}</option>
                                                             @endif
                                                         @endforeach
+
+                                                        @foreach($prefixinsured as $pi)
+                                                              @if($insureddata->prefix_id  == $pi->id)
+                                                                <option value="{{ $pi->id }}" selected>{{ $pi->code }} - {{ $pi->name }}</option>
+                                                              @else
+                                                                <option value="{{  $pi->id }}">{{  $pi->code  }} - {{ $pi->name }}</option>
+                                                              @endif
+                                                        @endforeach
+
+
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4">
@@ -96,12 +106,12 @@
                                                 <div class="form-group">
                                                     <label for="">{{__('Currency')}}</label>
                                                     <select id="fecurrency" name="fecurrency" class="e1 form-control form-control-sm ">
-                                                        @foreach($currency as $crc)
-                                                            @if($insureddata->currency_id  == $crc->id)
-                                                                 <option value="{{ $crc->id }}" selected>{{ $crc->code }} - {{ $crc->symbol_name }}</option>
-                                                            @else
-                                                                 <option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
-                                                            @endif
+                                                         @foreach($currency as $crc)
+                                                                  @if($insureddata->currency_id  == $crc->id)
+                                                                    <option value="{{ $crc->id }}" selected>{{ $crc->code }} - {{ $crc->symbol_name }}</option>
+                                                                  @else
+                                                                    <option value="{{  $crc->id }}">{{  $crc->code  }} - {{ $crc->symbol_name }}</option>
+                                                                  @endif
                                                         @endforeach
                                                     </select>
                                                 </div> 
