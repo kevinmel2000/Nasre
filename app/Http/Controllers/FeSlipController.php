@@ -1426,7 +1426,7 @@ class FeSlipController extends Controller
                 $slipdataup->sum_own_retention=$request->slipsumor;
                 $slipdataup->wpc=$request->wpc;
                 $slipdataup->remarks=$request->remarks;
-                $slipdataup->slipshow="no";
+                $slipdataup->slipshow="yes";
 
                 $slipdataup->save();
 

@@ -6699,7 +6699,7 @@ function deletelocationriskdetail(id){
 
 
             $('#slipsumshareupdate').val(real_sumshare);
-            $('#slipsumshare2update').val(real_sumshare);
+            $('#slipsumshareupdate2').val(real_sumshare);
         }
     });
 
@@ -7498,7 +7498,7 @@ function deletelocationriskdetail(id){
 
 
             $('#slipsumshareendorsement').val(real_sumshare);
-            $('#slipsumshare2endorsement').val(real_sumshare);
+            $('#slipsumshareendorsement2').val(real_sumshare);
         }
     });
 
@@ -10833,6 +10833,9 @@ function deletelocationriskdetail(id){
                         $('#fesharefrom').val(real_nasre);
                     }
 
+                    $('#updatemodaldata').modal('toggle');
+                    $('#updatemodaldata2').modal('toggle');
+
                     },
                     error: function (request, status, error) {
                         //alert(request.responseText);
@@ -11068,7 +11071,8 @@ function deletelocationriskdetail(id){
             // });
 
             
-
+            $('#endorsementmodaldata').modal('toggle');
+            $('#endorsementmodaldata2').modal('toggle');
 
             // $('#slipnumberendorsement').val(response.number);
 
