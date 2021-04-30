@@ -195,10 +195,10 @@
                                     <tr id="riskdetailsid{{ $detaillocrisk->id }}">
                                     <td>{{ @$detaillocrisk->interestdetail->code }} - {{ @$detaillocrisk->interestdetail->description }}</td>
                                     <td>{{ $detaillocrisk->cedingdetail->name }}</td>
-                                    <td>{{ $detaillocrisk->cndn }}</td>
-                                    <td>{{ $detaillocrisk->certno }}</td>
-                                    <td>{{ $detaillocrisk->slipno }}</td>
-                                    <td>{{ $detaillocrisk->policyno }}</td>
+                                    <td>@if($detaillocrisk->cndn) {{$detaillocrisk->cndn}} @else - @endif</td>
+                                    <td>@if($detaillocrisk->certno) {{ $detaillocrisk->certno }} @else - @endif</td>
+                                    <td>@if($detaillocrisk->slipno) {{ $detaillocrisk->slipno }} @else - @endif</td>
+                                    <td>@if($detaillocrisk->policyno) {{ $detaillocrisk->policyno }} @else - @endif</td>
                                     <td>{{ number_format($detaillocrisk->percentage, 2, '.', ',') }}</td>
                                     <td class="amount">{{strval(number_format($detaillocrisk->amountlocation, 2, '.', ','))}}</td>
                                     <td>
