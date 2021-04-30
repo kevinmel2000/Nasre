@@ -455,11 +455,11 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 }
 
 
-                if(response.status_log){
+                if(response.status_log  && response.status_log.length > 10){
                     $('#stlid'+status_log[i].id).remove();
                     var status_log = response.status_log;
                     
-                    for (var i = 0; i < 5; i++){
+                    for (var i = 0; i < status_log.length; i++){
 
                         if(status_log[i])
                         {
