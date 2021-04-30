@@ -839,25 +839,25 @@ class MasterController extends Controller
                 // $code_cr = $mydate . strval($lastid + 1);
 
                 if($lastid < 9){
-                    $code_ii = '00000' . strval($lastid + 1);
+                    $code_pi = '00000' . strval($lastid + 1);
                 }elseif($lastid > 8 && $lastid < 99){
-                    $code_ii = '0000' . strval($lastid- + 1);
+                    $code_pi = '0000' . strval($lastid- + 1);
                 }elseif($lastid > 98 && $lastid < 999){
-                    $code_ii = '000' . strval($lastid + 1);
+                    $code_pi = '000' . strval($lastid + 1);
                 }elseif($lastid > 998 && $lastid < 9999){
-                    $code_ii = '00' . strval($lastid + 1);
+                    $code_pi = '00' . strval($lastid + 1);
                 }elseif($lastid > 9998 && $lastid < 99999){
-                    $code_ii = '0' . strval($lastid + 1);
+                    $code_pi = '0' . strval($lastid + 1);
                 }elseif($lastid > 99998 ){
-                    $code_ii =  strval($lastid + 1);
+                    $code_pi =  strval($lastid + 1);
                 }
 
                 
             }
             else{
-                $code_ii = '00000' . strval(1);
+                $code_pi = '00000' . strval(1);
             }
-            return view('crm.master.prefix_insured', compact(['route_active','code_ii','prefixinsured','prefixinsured_ids']));   
+            return view('crm.master.prefix_insured', compact(['route_active','code_pi','prefixinsured','prefixinsured_ids']));   
          }
         else
         {
