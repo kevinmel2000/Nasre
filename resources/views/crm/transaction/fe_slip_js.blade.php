@@ -455,23 +455,23 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 }
 
 
-            //     if(response.status_log){
-            //         $('#stlid'+status_log[i].id).remove();
-            //         var status_log = response.status_log;
+                if(response.status_log){
+                    $('#stlid'+status_log[i].id).remove();
+                    var status_log = response.status_log;
                     
-            //         for (var i = 0; i < 5; i++){
+                    for (var i = 0; i < 5; i++){
 
-            //             if(status_log[i])
-            //             {
-            //             var status = status_log[i].status;
-            //             var datetime = status_log[i].datetime;
-            //             var user = status_log[i].user;
+                        if(status_log[i])
+                        {
+                        var status = status_log[i].status;
+                        var datetime = status_log[i].datetime;
+                        var user = status_log[i].user;
                         
-            //             $('#slipStatusTabledetail tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
-            //         }
+                        $('#slipStatusTabledetail tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
+                    }
 
-            //     };
-            // }
+                };
+            }
 
 
             if(response.attacment_file)
