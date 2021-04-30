@@ -878,6 +878,21 @@
                                             {{-- @endcan --}}
                                         </ul>
                                     </li>
+
+                                    {{-- @can('viewany-masterprefix', User::class) --}}
+                                        @if($route_active == 'Master Prefix')
+                                            @php
+                                                $masterprefix = 'active';
+                                            @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('/master-data/prefix')}}" class="nav-link {{@$masterprefix}}">
+                                                    <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                                <p style="font-size: 90%;margin-left:2%;">{{__('MASTER PREFIX')}}</p>
+                                            </a>
+                                        </li>
+                                    {{-- @endcan --}}
+    
     
                                     {{-- @can('viewany-occupation', User::class) --}}
                                         @if($route_active == 'Occupation Master')
@@ -908,7 +923,7 @@
                                     {{-- @endcan --}}
 
                                     {{-- @can('viewany-natureofloss', User::class) --}}
-                                        @if($route_active == 'Cause Of Loss')
+                                        @if($route_active == 'Nature Of Loss')
                                             @php
                                                 $natureofloss = 'active';
                                             @endphp

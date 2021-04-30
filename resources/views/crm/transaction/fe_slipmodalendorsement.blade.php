@@ -68,11 +68,9 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label>{{__('Prod Year')}}:</label>
-                                                                    <div class="input-group date" id="date" data-target-input="nearest">
-                                                                            <input type="text" id="slipprodyearendorsement" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipprodyearendorsement" value="" readonly="readonly">
-                                                                            <div class="input-group-append" >
-                                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                            </div>
+                                                                    <div class="input-group" >
+                                                                            <input type="hidden" id="slipprodyearendorsement" class="form-control form-control-sm "  name="slipprodyearendorsement" value="" >
+                                                                            <input type="text" id="slipprodyearendorsement2" class="form-control form-control-sm "  name="slipprodyearendorsement2" value="" disabled>
                                                                     </div>
                                                             </div>
                                                         </div>
@@ -250,10 +248,16 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="">{{__('WPC')}}</label>
-                                                        <input type="text"  id="wpcendorsement" name="wpcendorsement" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="" />
-                                                        <div class="input-group-append">
-                                                            <div class="input-group-text"><span>Days</span></div> 
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group">
+                                                                    <label for="">{{__('WPC')}}</label>
+                                                                    <input type="text"  id="wpcendorsement" name="wpcendorsement" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                                    <div class="input-group-append">
+                                                                        <div class="input-group-text"><span style="font-size: 12px;">Days</span></div> 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -281,7 +285,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Count Endorsement')}}</label>
-                                                        <input type="text" min="0" value="" step=".0001" id="countendorsmentdata" name="countendorsmentdata" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                        <input type="text" id="countendorsmentdata" name="countendorsmentdata" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="" />
                                                     </div>
                                                 </div>
                                             </div>

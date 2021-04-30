@@ -7,79 +7,79 @@ use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
 use App\Models\Koc;
-use App\Models\NatureOfLoss;
+use App\Models\MasterPrefix;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class NatureOfLossController extends Controller
+class MasterPrefixController extends Controller
 {   
 
     public function index(Request $request)
     {
          $user = Auth::user();
-         $route_active = 'Nature Of Loss Master';   
+         $route_active = 'Master Prefix';   
          $mydate = date("Y").date("m").date("d");
          $search = @$request->input('search');
 
          if(empty($search))
          {
           //$felookuplocation=FeLookupLocation::orderBy('created_at','desc')->paginate(10);
-          $natureofloss = NatureOfLoss::orderby('number')->get();
-          $lastid = count($natureofloss);
-          $natureofloss_ids = response()->json($natureofloss->modelKeys());
+          $prefixdata = MasterPrefix::orderby('code')->get();
+          $lastid = count($prefixdata);
+          $prefixdata_ids = response()->json($prefixdata->modelKeys());
 
             if($lastid != null)
             {
 
                 if($lastid < 9){
-                    $number_natureofloss = '0' . strval($lastid + 1);
+                    $number_prefixdata = '0' . strval($lastid + 1);
                 }   
                 elseif($lastid > 8 && $lastid < 99){
-                    $number_natureofloss = strval($lastid + 1);
+                    $number_prefixdata = strval($lastid + 1);
                 } 
                 
             }
             else
             {
-                $number_natureofloss = '0' . strval(1);
+                $number_prefixdata = '0' . strval(1);
                 
             }
           
-          return view('crm.master.natureofloss', compact('user','natureofloss','route_active','number_natureofloss','natureofloss_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.master.masterprefix', compact('user','prefixdata','route_active','number_prefixdata','prefixdata_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
          else
          {
           //$felookuplocation=FeLookupLocation::where('loc_code', 'LIKE', '%' . $search . '%')->orWhere('address', 'LIKE', '%' . $search . '%')->orderBy('created_at','desc')->paginate(10);
-          $natureofloss=NatureOfLoss::where('number', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
-          $natureofloss_ids = response()->json($natureofloss->modelKeys());
-          return view('crm.master.natureofloss', compact('user','natureofloss','route_active','natureofloss_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
+          $prefixdata=MasterPrefix::where('number', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
+          $prefixdata_ids = response()->json($prefixdata->modelKeys());
+          return view('crm.master.masterprefix', compact('user','prefixdata','route_active','prefixdata_ids'))->with('i', ($request->input('page', 1) - 1) * 10);
          }
     }
 
 
     public function generatecode(request $request)
     {
-            $natureofloss = NatureOfLoss::where('number',$request->number_natureofloss)->orderby('id','desc')->get();
-            $lastid = count($natureofloss);
+            $prefixdata = MasterPrefix::where('code',$request->number_prefix)->orderby('id','desc')->get();
+            $lastid = count($prefixdata);
          
-            $parentlastcode = substr($natureofloss->number,2) ;
+            $parentlastcode = substr($prefixdata->code,2) ;
             $sumlastcode = strval($parentlastcode + 1);
 
                 if($parentlastcode < 9)
                 {
-                    $number_natureofloss = $natureofloss->number . '0' . strval($parentlastcode + 1);
+                    $number_prefixdata = $prefixdata->code . '0' . strval($parentlastcode + 1);
                     return response()->json(
                         [
-                            'autocode' => $number_natureofloss
+                            'autocode' => $number_prefixdata
                         ]
                     );
                 }
                 elseif($parentlastcode > 8 && $parentlastcode < 100)
                 {
-                    $number_natureofloss = $natureofloss->number . strval($parentlastcode + 1);
+                    $number_prefixdata = $prefixdata->code . strval($parentlastcode + 1);
                     return response()->json(
                         [
-                            'autocode' => $number_natureofloss
+                            'autocode' => $number_prefixdata
                         ]
                     );
                 }
@@ -88,9 +88,8 @@ class NatureOfLossController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'number'=>'required',
-            'accident'=>'required',
-            'keterangan'=>'required'
+            'code'=>'required',
+            'prefix'=>'required'
         ]);
         
         if($validator)
@@ -98,13 +97,12 @@ class NatureOfLossController extends Controller
             // dd($request);
             //exit();
             $user = Auth::user();
-            NatureOfLoss::create([
-                'number'=>$request->number,
-                'keterangan'=> $request->keterangan,
-                'accident'=> $request->accident
+            MasterPrefix::create([
+                'code'=>$request->code,
+                'prefix'=> $request->prefix
             ]);
             $notification = array(
-                'message' => 'NatureOfLoss added successfully!',
+                'message' => 'Master prefix added successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);
@@ -116,12 +114,11 @@ class NatureOfLossController extends Controller
     }
     
 
-    public function update(Request $request, $natureoflossdata)
+    public function update(Request $request, $masterprefixdata)
     {
         $validator = $request->validate([
-            'number'=>'required',
-            'accident'=>'required',
-            'keterangan'=>'required'
+            'code'=>'required',
+            'prefix'=>'required'
         ]);
 
         if($validator){
@@ -129,11 +126,11 @@ class NatureOfLossController extends Controller
             $data=$request->all();
 
             // dd($data);
-            $natureofloss = NatureOfLoss::find($natureoflossdata);
-            $natureofloss->update($data);
+            $masterprefix = MasterPrefix::find($masterprefixdata);
+            $masterprefix->update($data);
 
             $notification = array(
-                'message' => 'Nature Of Loss updated successfully!',
+                'message' => 'Master Prefix updated successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);
@@ -148,11 +145,11 @@ class NatureOfLossController extends Controller
 
     public function destroy($id)
     {
-        $natureoflossdata = NatureOfLoss::find($id);
-        if($natureoflossdata->delete())
+        $masterprefixdata = MasterPrefix::find($id);
+        if($masterprefixdata->delete())
         {
             $notification = array(
-                'message' => 'NatureOfLoss deleted successfully!',
+                'message' => 'Master Prefix Data deleted successfully!',
                 'alert-type' => 'success'
             );
             return back()->with($notification);

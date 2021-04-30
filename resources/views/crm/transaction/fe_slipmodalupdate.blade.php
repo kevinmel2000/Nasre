@@ -59,11 +59,9 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label>{{__('Prod Year')}}:</label>
-                                                                    <div class="input-group date" id="date" data-target-input="nearest">
-                                                                            <input type="text" id="slipprodyearupdate" class="form-control form-control-sm datepicker-input" data-target="#date" name="slipprodyearupdate" value="" readonly="readonly">
-                                                                            <div class="input-group-append" >
-                                                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                            </div>
+                                                                    <div class="input-group ">
+                                                                            <input type="hidden" id="slipprodyearupdate" class="form-control form-control-sm "  name="slipprodyearupdate" value="" >
+                                                                            <input type="text" id="slipprodyearupdate2" class="form-control form-control-sm "  name="slipprodyearupdate2" value="" disabled>
                                                                     </div>
                                                             </div>
                                                         </div>
@@ -72,8 +70,8 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">{{__('Transfer Date')}}</label>
-                                                                <input type="hidden" id="sliptdupdate" name="sliptdupdate" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" />
-                                                                    <input type="text" id="sliptdupdate2" name="sliptdupdate2" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" disabled />
+                                                                <input type="hidden" id="sliptdupdate" name="sliptdupdate" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-50" />
+                                                                    <input type="text" id="sliptdupdate2" name="sliptdupdate2" class="form-control form-control-sm" data-validation="length"  data-validation-length="0-50" disabled />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -241,10 +239,16 @@
                                             <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label for="">{{__('WPC')}}</label>
-                                                            <input type="text"  id="wpcupdate" name="wpcupdate" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="" />
-                                                            <div class="input-group-append">
-                                                                <div class="input-group-text"><span>Days</span></div> 
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <label for="">{{__('WPC')}}</label>
+                                                                        <input type="text"  id="wpcupdate" name="wpcupdate" class="form-control form-control-sm intTextBox" data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                                        <div class="input-group-append">
+                                                                            <div class="input-group-text"><span style="font-size: 12px;">Days</span></div> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -645,7 +649,7 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for=""  style="opacity: 0;" >{{__('Total Sum Insured') }}</label>
+                                                                <label for=""  >{{__('TSI/Ceding Share value') }}</label>
                                                                 <input type="hidden" id="sharetotalsumupdate" value="" name="sharetotalsumupdate" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="tsi(*total/sum from interest insured)" />
                                                                 <input type="text" id="sharetotalsumupdate2" value="" name="sharetotalsumupdate2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="tsi(*total/sum from interest insured)" />
                                                             </div>
