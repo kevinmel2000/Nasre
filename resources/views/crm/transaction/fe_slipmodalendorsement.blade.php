@@ -849,7 +849,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" id="sliptotalpercentinspanendorsement" name="sliptotalpercentinspanendorsement" hidden="false">
+                                                                                    <input type="text" id="sliptotalpercentinspanendorsement" name="sliptotalpercentinspanendorsement" hidden="true">
                                                                                     <button type="button" id="addinstallmentinsuredendorsement-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>
