@@ -8631,7 +8631,7 @@ function deletelocationriskdetail(id){
                 console.log(response);
                 var total_percent =  $('#sliptotalpercentinspan').val();
                         
-                var sum_percent = isNaN(parseInt(total_percent) - parseInt(response.percentage)) ? 0 :(parseInt(0) - parseInt(response.percentage)) ;
+                var sum_percent = isNaN(parseFloat(total_percent) - parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) - parseFloat(response.percentage)) ;
                 $('#sliptotalpercentinspan').val(sum_percent.toString());
                 console.log('total percent' + $('#sliptotalpercentinspan').val())
                         
@@ -8662,7 +8662,7 @@ function deletelocationriskdetail(id){
                 console.log(response);
                 var total_percent =  $('#sliptotalpercentinspanupdate').val();
                         
-                var sum_percent = isNaN(parseInt(total_percent) - parseInt(response.percentage)) ? 0 :(parseInt(0) - parseInt(response.percentage)) ;
+                var sum_percent = isNaN(parseFloat(total_percent) - parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) - parseFloat(response.percentage)) ;
                 $('#sliptotalpercentinspanupdate').val(sum_percent.toString());
                 console.log('total percent' + $('#sliptotalpercentinspanupdate').val())
                         
@@ -8692,7 +8692,7 @@ function deletelocationriskdetail(id){
                 console.log(response);
                 var total_percent =  $('#sliptotalpercentinspanendorsement').val();
                         
-                var sum_percent = isNaN(parseInt(total_percent) - parseInt(response.percentage)) ? 0 :(parseInt(0) - parseInt(response.percentage)) ;
+                var sum_percent = isNaN(parseFloat(total_percent) - parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) - parseFloat(response.percentage)) ;
                 $('#sliptotalpercentinspanendorsement').val(sum_percent.toString());
                 console.log('total percent' + $('#sliptotalpercentinspanendorsement').val())
                         
