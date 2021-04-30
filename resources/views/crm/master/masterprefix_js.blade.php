@@ -38,7 +38,7 @@
     $(function () {
       "use strict";
   
-      var kocs = <?php echo(($causeofloss_ids->content())) ?>;
+      var kocs = <?php echo(($prefixdata_ids->content())) ?>;
       for(const id of kocs) {
           var btn = `
               <a href="#" onclick="confirmDelete('${id}')">
@@ -49,7 +49,7 @@
       }
   
   
-      $("#causeoflossTable").DataTable({
+      $("#prefixTable").DataTable({
         "order": [[ 0, "asc" ]],
         dom: '<"top"fB>rt<"bottom"lip><"clear">',
         lengthMenu: [
@@ -61,9 +61,9 @@
     });
   
     function confirmDelete(id){
-        let choice = confirm("{{__('Are you sure, you want to delete this Cause Of Loss data and related data?')}}")
+        let choice = confirm("{{__('Are you sure, you want to delete this Master Prefix data and related data?')}}")
         if(choice){
-            document.getElementById('delete-causeofloss-'+id).submit();
+            document.getElementById('delete-prefix-'+id).submit();
         }
     }
   

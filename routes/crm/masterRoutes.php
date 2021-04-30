@@ -14,6 +14,7 @@ use App\Http\Controllers\FloodZoneController;
 use App\Http\Controllers\CauseOfLossController;
 use App\Http\Controllers\NatureOfLossController;
 use App\Http\Controllers\SurveyorController;
+use App\Http\Controllers\MasterPrefixController;
 
 Route::get('get-state-list','FeLookupLocationController@getStateList');
 Route::get('get-city-list','FeLookupLocationController@getCityList');
@@ -284,6 +285,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::post('/prefixinsured/store', [MasterController::class, 'storeprefixinsured']);
     Route::put('prefixinsured/{pi}', [MasterController::class, 'updateprefixinsured']);
     Route::delete('/prefixinsured/destroy/{pi}', [MasterController::class, 'destroyprefixinsured']);
+
 
 
 });
