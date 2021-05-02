@@ -9970,7 +9970,8 @@ function deletelocationriskdetail(id){
 
         if(count_endorsement_ins != '' || count_endorsement_ins != null){
 
-            if(current_percent == '100'){
+            if(current_percent >= '100')
+            {
                 var jumlah_tgl = $('#slipdaytotal').val();
                 console.log('jumlah_tgl '+jumlah_tgl)
                 if(parseInt(jumlah_tgl) > 0){
@@ -10792,7 +10793,7 @@ function deletelocationriskdetail(id){
        console.log('count endorsement ' + count_endorsement_ins)
 
 
-        if(current_percent == '100'){
+        if(current_percent >= '100'){
              $.ajaxSetup({
                 headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
