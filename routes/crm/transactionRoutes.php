@@ -77,9 +77,6 @@ Route::get('/detailendorsementslip/{idm}', [FeSlipController::class, 'getdetailE
 
 Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
 
-    // claim cuy
-    Route::get('claim',[Claim_controller::class,'index']);    
-
     // SECTION Marine Slip Group Routes
     Route::get('/marine-slip', [TransactionController::class, 'indexmarineslip']);
     Route::get('/marine-index', [TransactionController::class, 'indexmarine']);
@@ -191,6 +188,13 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::delete('/pa-insured/destroyinsured/{id}', [TransactionController::class, 'destroypainsured']);
     Route::delete('/pa-slip/destroyslip/{id}', [TransactionController::class, 'destroypaslip']);
  
+    
+    // Claim Route
+    Route::get('claim',[Claim_controller::class,'index']);    
+    Route::get('/claim-index', [TransactionController::class, 'indexclaim']);
+    Route::post('/claim/store', [TransactionController::class, 'storeclaim']);
+    
+
 
 
     // Route::get('/country', [MasterController::class, 'indexcountry'])->middleware(['can:view-country']);
