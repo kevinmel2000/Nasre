@@ -283,6 +283,7 @@
                                         </div>
                                         <div class="tab-pane fade" id="insured-details-id2" role="tabpanel" aria-labelledby="insured-details">
                                            
+                                           
                                             <div class="row">
                                                 <div class="col-md-12 d-flex justify-content-end">
                                                     <div class="row">

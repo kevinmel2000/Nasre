@@ -446,12 +446,12 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
 
                 if(response.type_tsi)
                 {
-                    $("#sliptypetsidetail option[value=" + response.occupacy + "]:first")[0].selected = true;
+                    $("#sliptypetsidetail option[value=" + response.type_tsi + "]:first")[0].selected = true;
                 }
 
                 if(response.type_share_tsi)
                 {
-                    $("#sharetypetsidetail option[value=" + response.occupacy + "]:first")[0].selected = true;
+                    $("#sharetypetsidetail option[value=" + response.type_share_tsi + "]:first")[0].selected = true;
                 }
 
 
