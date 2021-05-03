@@ -55,7 +55,7 @@
         <!-- Script -->
         
         <script src="{{asset('js/jquery.js')}}" type="text/javascript"></script>
-
+        
         <script src="{{asset('js/app.js')}}"></script>
         <script src="{{asset('theme/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('js/datatable.js')}}"></script> 
