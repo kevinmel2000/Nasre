@@ -336,10 +336,19 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
                         var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+                        var currdate = obj.installment_date;
+                        var d=new Date(currdate.split("-").reverse().join("/"));
+                        var dd=d.getDate();
+                        var mm=d.getMonth()+1;
+                        var yy=d.getFullYear();
+                        var newdate=dd+"/"+mm+"/"+yy;
+
+                        var strdate = newdate.toString();
+
                         //console.log(obj.id);
                         //$('#interestInsuredTabledetail tbody').prepend('');
                         
-                        $('#installmentPaneldetail tbody').prepend('<tr id="iidinstallmentdetail'+obj.id+'" data-name="installmentdetailvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>')
+                        $('#installmentPaneldetail tbody').prepend('<tr id="iidinstallmentdetail'+obj.id+'" data-name="installmentdetailvalue[]"><td data-name="'+obj.installment_date+'">'+strdate+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>')
 
                     }
                 }
@@ -769,10 +778,19 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
                             var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+                            var currdate = obj.installment_date;
+                            var d=new Date(currdate.split("-").reverse().join("/"));
+                            var dd=d.getDate();
+                            var mm=d.getMonth()+1;
+                            var yy=d.getFullYear();
+                            var newdate=dd+"/"+mm+"/"+yy;
+
+                            var strdate = newdate.toString();
+
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
                             
-                            $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+obj.id+'" data-name="installmentupdatevalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+obj.id+')">delete</a></td></tr>')
+                            $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+obj.id+'" data-name="installmentupdatevalue[]"><td data-name="'+obj.installment_date+'">'+strdate+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+obj.id+')">delete</a></td></tr>')
 
                         }
                     }
@@ -1192,10 +1210,19 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
                             var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+                            var currdate = obj.installment_date;
+                            var d=new Date(currdate.split("-").reverse().join("/"));
+                            var dd=d.getDate();
+                            var mm=d.getMonth()+1;
+                            var yy=d.getFullYear();
+                            var newdate=dd+"/"+mm+"/"+yy;
+
+                            var strdate = newdate.toString();
+
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
                             
-                            $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+obj.id+'" data-name="installmentendorsementvalue[]"><td data-name="'+obj.installment_date+'">'+obj.installment_date+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+obj.id+')">delete</a></td></tr>')
+                            $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+obj.id+'" data-name="installmentendorsementvalue[]"><td data-name="'+obj.installment_date+'">'+strdate+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+obj.id+')">delete</a></td></tr>')
 
                         }
                     }
@@ -8333,8 +8360,17 @@ function deletelocationriskdetail(id){
                         
                         var str_amount = response.amount.toString();
                         var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                        var currdate = response.installment_date;
+                        var d=new Date(currdate.split("-").reverse().join("/"));
+                        var dd=d.getDate();
+                        var mm=d.getMonth()+1;
+                        var yy=d.getFullYear();
+                        var newdate=dd+"/"+mm+"/"+yy;
+
+                        var strdate = newdate.toString();
                         
-                        $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
+                        $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+strdate+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
                         $('#dateinstallment').val('');
                         $('#slipippercentage').val('');
                         $('#slipipamount').val('');
@@ -8344,6 +8380,7 @@ function deletelocationriskdetail(id){
                             // swal("Success!", response.message, "success")
                         }       
                         
+
 
                         var total_percent =  $('#sliptotalpercentinspan').val();
 
@@ -8454,7 +8491,18 @@ function deletelocationriskdetail(id){
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
                         var str_amount = response.amount.toString();
                         var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+response.id+')">delete</a></td></tr>')
+
+
+                        var currdate = response.installment_date;
+                        var d=new Date(currdate.split("-").reverse().join("/"));
+                        var dd=d.getDate();
+                        var mm=d.getMonth()+1;
+                        var yy=d.getFullYear();
+                        var newdate=dd+"/"+mm+"/"+yy;
+
+                        var strdate = newdate.toString();
+
+                        $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+strdate+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+response.id+')">delete</a></td></tr>')
                         $('#dateinstallmentupdate').val('');
                         $('#slipippercentageupdate').val('');
                         $('#slipipamountupdate').val('');
@@ -8574,7 +8622,17 @@ function deletelocationriskdetail(id){
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
                          var str_amount = response.amount.toString();
                         var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+response.installment_date+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+response.id+')">delete</a></td></tr>')
+
+                        var currdate = response.installment_date;
+                        var d=new Date(currdate.split("-").reverse().join("/"));
+                        var dd=d.getDate();
+                        var mm=d.getMonth()+1;
+                        var yy=d.getFullYear();
+                        var newdate=dd+"/"+mm+"/"+yy;
+
+                        var strdate = newdate.toString();
+                        
+                        $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+strdate+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+response.id+')">delete</a></td></tr>')
                         $('#dateinstallmentendorsement').val('');
                         $('#slipippercentageendorsement').val('');
                         $('#slipipamountendorsement').val('');
