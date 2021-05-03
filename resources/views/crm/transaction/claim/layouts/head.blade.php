@@ -6,8 +6,12 @@
 					<tr>
 						<th>KOC</th>
 						<th>
-							<select class="form-control">
-								
+							
+							<select id="slipkoc" name="slipkoc" class="e1 form-control form-control-sm ">
+								<option selected readonly  value='0'>{{__('KOC list')}}</option>
+								@foreach($koc as $cok)
+								<option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
+								@endforeach
 							</select>
 						</th>
 						<th>
@@ -26,8 +30,11 @@
 					<tr>
 						<th>COB</th>
 						<th>
-							<select class="form-control">
-								
+							<select id="slipcob" name="slipcob" class="e1 form-control form-control-sm ">
+								<option selected readonly  value='0'>{{__('COB list')}}</option>
+								@foreach($cob as $boc)
+								<option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
+								@endforeach
 							</select>
 						</th>
 						<th>
