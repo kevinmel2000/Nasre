@@ -191,8 +191,8 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     
     // Claim Route
     Route::get('claim',[Claim_controller::class,'index']);    
-    Route::get('/claim-index', [TransactionController::class, 'indexclaim']);
-    Route::post('/claim/store', [TransactionController::class, 'storeclaim']);
+    Route::get('/claim-index', [Claim_controller::class, 'indexclaim']);
+    Route::post('/claim/store', [Claim_controller::class, 'storeclaim']);
     
 
 

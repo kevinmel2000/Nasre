@@ -11,6 +11,8 @@ use App\Models\Currency;
 use App\Models\COB;
 use App\Models\Occupation;
 use App\Models\Koc;
+use App\Models\User;
+use App\Models\Insured;
 use App\Models\CedingBroker;
 use App\Models\TransLocationTemp;
 use App\Models\EarthQuakeZone;
@@ -48,7 +50,7 @@ class Claim_controller extends Controller
         $user = Auth::user();
         $country = User::orderby('id','asc')->get();
         $route_active = 'CLAIM INSURED - Index';   
-        
+
         $mydate = date("Y").date("m").date("d");
         $fe_ids = response()->json($country->modelKeys());
         $search = @$request->input('search');
@@ -61,14 +63,10 @@ class Claim_controller extends Controller
         $searchslipnum = @$request->input('searchslipnum');
         $searchcob = @$request->input('searchcob');
         $searchceding = @$request->input('searchceding');
+
+        $costumer=Customer::orderby('id','asc')->get();
         
-       $checkdatainsured= Insured::where('statmodified','=',1)->whereNull('share_to')->Where('share_to','=',0)->get();
-
-       foreach ($checkdatainsured as $insureddata)
-       {   
-           $deleteinsured= Insured::where('number','=',$insureddata->number)->delete();  
-       }
-
+    
        if(!empty($search) || !empty($searchinsured) || !empty($searchuy) || !empty($searchshare) || !empty($searchnre) || !empty($searchtsi) || !empty($searchendorse))
        {
 
@@ -120,7 +118,9 @@ class Claim_controller extends Controller
            $natureofloss = NatureOfLoss::orderby('id','asc')->get();
            $causeofloss = MasterCauseOfLoss::orderby('id','asc')->get();
 
-           return view('crm.transaction.claim.fe_slip_index', compact('causeofloss','natureofloss','surveyor','ocp','koc','currency','searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','insuredlist','user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+           $claimlist= Insured::where('statmodified','=',1)->whereNull('share_to')->Where('share_to','=',0)->get();
+
+           return view('crm.transaction.claim.claim_index', compact('claimlist','costumer','causeofloss','natureofloss','surveyor','ocp','koc','currency','searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
            
         }
         else
@@ -143,7 +143,9 @@ class Claim_controller extends Controller
            $natureofloss = NatureOfLoss::orderby('id','asc')->get();
            $causeofloss = MasterCauseOfLoss::orderby('id','asc')->get();
 
-           return view('crm.transaction.claim.fe_slip_index', compact('causeofloss','natureofloss','surveyor','ocp','koc','currency','searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','insuredlist','user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+           $claimlist= Insured::where('statmodified','=',1)->whereNull('share_to')->Where('share_to','=',0)->get();
+
+           return view('crm.transaction.claim.claim_index', compact('claimlist','costumer','causeofloss','natureofloss','surveyor','ocp','koc','currency','searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
            
        }
 
