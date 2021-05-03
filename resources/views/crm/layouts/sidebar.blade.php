@@ -1028,16 +1028,16 @@
                                     || @$route_active == 'CLAIM INSURED - Index'  
                                     )
                                         @php
-                                            $fed_dd = 'active';
-                                            $fed_menu_open = 'menu-open';
+                                            $claim_dd = 'active';
+                                            $claim_menu_open = 'menu-open';
                                         @endphp
                                 @else
                                     @php
-                                        $fed_menu_open = 'menu-close';
+                                        $claim_menu_open = 'menu-close';
                                     @endphp
                                 @endif
-                                <li class="nav-item has-treeview {{ @$fed_menu_open }}">
-                                    <a href="#" class="nav-link {{@$fed_dd}}">
+                                <li class="nav-item has-treeview {{ @$claim_menu_open }}">
+                                    <a href="#" class="nav-link {{@$claim_dd}}">
                                         <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                         <p style="font-size: 90%;margin-left:2%;">
                                             {{__('CLAIM INSURED')}}
@@ -1048,11 +1048,11 @@
                                     <ul class="nav nav-treeview">
                                             @if($route_active == 'CLAIM INSURED - Index')
                                                 @php
-                                                    $fes_formindex = 'active';
+                                                    $claim_formindex = 'active';
                                                 @endphp
                                             @endif
                                             <li class="nav-item">
-                                                <a href="{{url('/transaction-data/claim-index')}}" class="nav-link {{@$fes_formindex}}">
+                                                <a href="{{url('/transaction-data/claim-index')}}" class="nav-link {{@$claim_formindex}}">
                                                         <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
                                                     <p style="font-size: 80%;margin-left:2%;">{{__('CLAIM INSURED')}} <br> {{__('INDEX')}}</p>
                                                 </a>
@@ -1060,11 +1060,11 @@
     
                                             @if($route_active == 'CLAIM INSURED - Entry')
                                                 @php
-                                                    $fes_form = 'active';
+                                                    $claim_form = 'active';
                                                 @endphp
                                             @endif
                                             <li class="nav-item">
-                                                <a href="{{url('/transaction-data/claim')}}" class="nav-link {{@$fes_form}}">
+                                                <a href="{{url('/transaction-data/claim')}}" class="nav-link {{@$claim_form}}">
                                                         <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
                                                     <p style="font-size: 80%;margin-left:2%;">{{__('CLAIM INSURED')}} <br> {{__('ENTRY')}}</p>
                                                 </a>
