@@ -120,15 +120,19 @@
 
 			<div class="col-md-10">
 				<div>
-					<select class="form-control">
-						<option>Ceding</option>
-						<option>Broker</option>
+					<select id="claimcedingbroker" name="claimcedingbroker" class="e1 form-control form-control-sm ">
+						<option value=""  selected disabled >Ceding or Broker</option>
+						@foreach($cedingbroker as $cb)
+						<option value="{{ $cb->id }}"> {{ $cb->code }} - {{ $cb->name }}</option>
+						@endforeach
 					</select>
 				</div>
 				<div>
-					<select class="form-control">
-						<option>Ceding</option>
-						<option>Broker</option>
+						<select id="claimceding" name="claimceding" class="e1 form-control form-control-sm ">
+						<option value="placehoder" selected disabled>Ceding </option>
+						{{-- @foreach($ceding as $cd)
+							<option value="{{ $cd->id }}">{{ $cd->code }} - {{ $cd->name }}</option>
+							@endforeach --}}
 					</select>
 				</div>
 			</div>
@@ -142,49 +146,56 @@
 							<tr>
 								<td>Currency</td>
 								<td>
-									<select class="form-control">
-										<option>IDR</option>
-										<option>USD</option>
+									<select id="claimcurrency" name="claimcurrency" class="e1 form-control form-control-sm ">
+										<option selected readonly value='0'>{{__('Select Currency')}}</option>
+										@foreach($currency as $crc)
+										<option value="{{ $crc->id }}">{{ $crc->code }} - {{ $crc->symbol_name }}</option>
+										@endforeach
 									</select>
 								</td>
 							</tr>
 							<tr>
 								<td>COB</td>
 								<td>
-									<select class="form-control">
-										<option selected="" disabled="">COB List</option>
-										<option>IDR</option>
-										<option>USD</option>
+									<select id="claimcob" name="claimcob" class="e1 form-control form-control-sm ">
+										<option selected readonly  value='0'>{{__('COB list')}}</option>
+										@foreach($cob as $boc)
+										<option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
+										@endforeach
 									</select>
 								</td>
 							</tr>
 							<tr>
 								<td>KOC</td>
 								<td>
-									<select class="form-control">
-										<option selected="" disabled="">KOC List</option>
-										<option>IDR</option>
-										<option>USD</option>
+									<select id="claimkoc" name="claimkoc" class="e1 form-control form-control-sm ">
+										<option selected readonly  value='0'>{{__('KOC list')}}</option>
+										@foreach($koc as $cok)
+										<option value="{{ $cok->id }}">{{ $cok->code }} - {{ $cok->description }}</option>
+										@endforeach
 									</select>
 								</td>
 							</tr>
 							<tr>
 								<td>Occupacy</td>
 								<td>
-									<select class="form-control">
-										<option selected="" disabled="">OCC List</option>
-										<option>IDR</option>
-										<option>USD</option>
+									<select id="claimoccupacy" name="claimoccupacy" class="e1 form-control form-control-sm ">
+									<option selected disabled>{{__('Occupation list')}}</option>
+									@foreach($ocp as $ocpy)
+									<option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
+									@endforeach
 									</select>
 								</td>
 							</tr>
 							<tr>
 								<td>Building Const</td>
 								<td>
-									<select class="form-control">
-										<option selected="" disabled="">Bid Const List</option>
-										<option>IDR</option>
-										<option>USD</option>
+									<select id="claimbld_const" name="claimbld_const" class="e1 form-control form-control-sm ">
+										<option selected disabled>{{__('Building Const list')}}</option>
+										<option value="Building 1">Building 1</option>
+										<option value="Building 2">Building 2</option>
+										<option value="Building 3">Building 3</option>
+										
 									</select>
 								</td>
 							</tr>

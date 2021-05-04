@@ -23,9 +23,11 @@
 					<tr>
 						<td>Insured</td>
 						<td colspan="2">
-							<select class="form-control">
-								<option>PT</option>
-								<option>CV</option>
+							<select id="claiminsured" name="claiminsured" class="e1 form-control form-control-sm ">
+								<option selected disabled>{{__('Select Prefix')}}</option>
+								@foreach($prefixinsured as $pi)
+								<option value="{{ $pi->id }}">{{ $pi->code }} - {{ $pi->name }}</option>
+								@endforeach
 							</select>
 						</td>
 						<td colspan="2">

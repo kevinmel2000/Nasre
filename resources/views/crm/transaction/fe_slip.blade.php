@@ -34,6 +34,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="row">
+                                            
                                             <div class="col-md-4">
                                                 <label for="">{{__('Insured')}}</label>
                                                 <select id="feinsured" name="feinsured" class="form-control form-control-sm ">
@@ -43,6 +44,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+
                                             <div class="col-md-4">
                                                 <label for="" style="opacity: 0">{{__('insured 1')}}</label>
                                                 <input type="text"name="fesuggestinsured" id='autocomplete' style="text-transform:uppercase;"  class="form-control form-control-sm " data-validation="length" data-validation-length="1-350" placeholder="search for insured suggestion" required/>
@@ -770,12 +772,12 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Occupacy')}}</label>
-                                                            <select id="slipoccupacy" name="slipoccupacy" class="e1 form-control form-control-sm ">
+                                                                <select id="slipoccupacy" name="slipoccupacy" class="e1 form-control form-control-sm ">
                                                                 <option selected disabled>{{__('Occupation list')}}</option>
                                                                 @foreach($ocp as $ocpy)
                                                                 <option value="{{ $ocpy->id }}">{{ $ocpy->code }} - {{ $ocpy->description }}</option>
                                                                 @endforeach
-                                                            </select>
+                                                                </select>
                                                         </div>    
                                                     </div>
                                                 </div>

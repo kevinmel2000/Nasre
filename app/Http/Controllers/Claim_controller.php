@@ -22,6 +22,7 @@ use App\Models\MasterCauseOfLoss;
 use App\Models\Surveyor;
 use App\Models\InterestInsured;
 use App\Models\InstallmentTemp;
+use App\Models\PrefixInsured;
 use App\Models\InterestInsuredTemp;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,8 +42,9 @@ class Claim_controller extends Controller
         $surveyor = Surveyor::orderby('id','asc')->get();
         $natureofloss = NatureOfLoss::orderby('id','asc')->get();
         $causeofloss = MasterCauseOfLoss::orderby('id','asc')->get();
+        $prefixinsured = PrefixInsured::orderby('id','asc')->get();
        
-    	return view('crm.transaction.claim.index',compact('causeofloss','natureofloss','surveyor','ceding','cedingbroker','currency','cob','koc','ocp','route_active'));
+    	return view('crm.transaction.claim.index',compact('prefixinsured','causeofloss','natureofloss','surveyor','ceding','cedingbroker','currency','cob','koc','ocp','route_active'));
     }
 
     public function indexclaim(Request $request)
