@@ -427,7 +427,7 @@
                 }
 
 
-                if(response.status_log  && response.status_log.length > 10){
+                if(response.status_log){
                         $('#slipStatusTabledetail tbody').remove();
                         var status_log = response.status_log;
                         
@@ -444,6 +444,7 @@
 
                     };
                 }
+
                 console.log('status log')
                 console.log(response.status_log)
 
