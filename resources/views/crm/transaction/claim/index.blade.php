@@ -88,6 +88,7 @@
 								</div>
 							</div>
 
+
 						</div>
 
 					</div>
@@ -97,6 +98,120 @@
 			</div>
 
 		</form>
+
+			<form autocomplete="off">
+
+				<div class="card">
+
+					<div class="card-header bg-gray">
+						Claim Section (Facultative)
+					</div>
+
+					<div class="card-body bg-light-gray ">
+
+						<div class="card">
+
+							<div class="card-header bg-gray">
+								Show Incoming Claim Information
+							</div>
+
+							<div class="card-body bg-light-gray ">
+
+								<div class="card">
+
+									<div class="card-header bg-gray">
+										
+									</div>
+
+									<div class="card-body bg-light-gray ">
+
+										@include('crm.transaction.claim.layouts.claimsection')
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					 </div>
+
+				</div>
+
+				<div class="card">
+
+					<div class="card-header bg-gray">
+						Retro Section (Facultative)
+					</div>
+
+					<div class="card-body bg-light-gray ">
+
+						<div class="card">
+
+							<div class="card-header bg-gray">
+								Recovery Claim 
+							</div>
+
+							<div class="card-body bg-light-gray ">
+
+								<div class="card">
+
+									<div class="card-header bg-gray">
+										
+									</div>
+
+									<div class="card-body bg-light-gray ">
+
+										@include('crm.transaction.claim.layouts.retrosection')
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="card">
+
+					<div class="card-header bg-gray">
+						Other
+					</div>
+
+					<div class="card-body bg-light-gray ">
+
+						<div class="card">
+
+							<div class="card-body bg-light-gray ">
+
+								<div class="card">
+
+									<div class="card-header bg-gray">
+										
+									</div>
+
+									<div class="card-body bg-light-gray ">
+
+										@include('crm.transaction.claim.layouts.othersection')
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</form>
 
 	</div>
 
