@@ -188,14 +188,6 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::delete('/pa-insured/destroyinsured/{id}', [TransactionController::class, 'destroypainsured']);
     Route::delete('/pa-slip/destroyslip/{id}', [TransactionController::class, 'destroypaslip']);
  
-    
-    // Claim Route
-    Route::get('claim',[Claim_controller::class,'index']);    
-    Route::get('/claim-index', [Claim_controller::class, 'indexclaim']);
-    Route::post('/claim/store', [Claim_controller::class, 'storeclaim']);
-    
-
-
 
     // Route::get('/country', [MasterController::class, 'indexcountry'])->middleware(['can:view-country']);
     // Route::post('/country/store', [MasterController::class, 'storecountry'])->middleware(['can:create-country']);

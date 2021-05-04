@@ -57,6 +57,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapUserRoutes();
         $this->mapMasterRoutes();
         $this->mapTransactionRoutes();
+        $this->mapClaimTransactionRoutes();
 
 
         // Client Route Files Mapping
@@ -196,6 +197,14 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/crm/transactionRoutes.php'));
+    }
+
+    
+    protected function mapClaimTransactionRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/crm/claimtransactionRoutes.php'));
     }
 
     protected function mapApiRoutes()

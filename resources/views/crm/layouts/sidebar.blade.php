@@ -1022,55 +1022,6 @@
 
     
                             <ul class="nav nav-treeview">
-
-                                @if(
-                                    @$route_active == 'CLAIM INSURED - Entry' 
-                                    || @$route_active == 'CLAIM INSURED - Index'  
-                                    )
-                                        @php
-                                            $claim_dd = 'active';
-                                            $claim_menu_open = 'menu-open';
-                                        @endphp
-                                @else
-                                    @php
-                                        $claim_menu_open = 'menu-close';
-                                    @endphp
-                                @endif
-                                <li class="nav-item has-treeview {{ @$claim_menu_open }}">
-                                    <a href="#" class="nav-link {{@$claim_dd}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">
-                                            {{__('CLAIM INSURED')}}
-                                            <i class="right fas fa-angle-left" ></i>
-                                        </p>
-                                    </a>
-    
-                                    <ul class="nav nav-treeview">
-                                            @if($route_active == 'CLAIM INSURED - Index')
-                                                @php
-                                                    $claim_formindex = 'active';
-                                                @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/claim-index')}}" class="nav-link {{@$claim_formindex}}">
-                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('CLAIM INSURED')}} <br> {{__('INDEX')}}</p>
-                                                </a>
-                                            </li>
-    
-                                            @if($route_active == 'CLAIM INSURED - Entry')
-                                                @php
-                                                    $claim_form = 'active';
-                                                @endphp
-                                            @endif
-                                            <li class="nav-item">
-                                                <a href="{{url('/transaction-data/claim')}}" class="nav-link {{@$claim_form}}">
-                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('CLAIM INSURED')}} <br> {{__('ENTRY')}}</p>
-                                                </a>
-                                            </li>
-                                    </ul>
-                                </li>
     
                                 @if(
                                     @$route_active == 'Fire Engineering - Slip Entry' 
@@ -1414,6 +1365,84 @@
     
                             </ul>
                         </li>
+                        
+                        @if(
+                            @$route_active == 'CLAIM INSURED - Entry'
+                            || @$route_active == 'CLAIM INSURED - Index'
+                            )
+                            @php
+                            $trF_ddclaim = 'active';
+                            $transactionclaim_menu_open = 'menu-open';
+                            @endphp
+                        @else
+                            @php
+                            $transactionclaim_menu_open = 'menu-close';
+                            @endphp
+                        @endif
+                        <li class="nav-item has-treeview {{ @$transactionclaim_menu_open }}">
+                            
+                            <a href="#" class="nav-link {{@$trF_ddclaim}}">
+                                <i class="nav-icon fas fa-industry"></i>
+                                <p>
+                                    {{__('CLAIM TRANSACTION')}}
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+
+    
+                            <ul class="nav nav-treeview">
+
+                                @if(
+                                    @$route_active == 'CLAIM INSURED - Entry' 
+                                    || @$route_active == 'CLAIM INSURED - Index'  
+                                    )
+                                        @php
+                                            $claim_dd = 'active';
+                                            $claim_menu_open = 'menu-open';
+                                        @endphp
+                                @else
+                                    @php
+                                        $claim_menu_open = 'menu-close';
+                                    @endphp
+                                @endif
+                                <li class="nav-item has-treeview {{ @$claim_menu_open }}">
+                                    <a href="#" class="nav-link {{@$claim_dd}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">
+                                            {{__('CLAIM INSURED')}}
+                                            <i class="right fas fa-angle-left" ></i>
+                                        </p>
+                                    </a>
+    
+                                    <ul class="nav nav-treeview">
+                                            @if($route_active == 'CLAIM INSURED - Index')
+                                                @php
+                                                    $claim_formindex = 'active';
+                                                @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/claimtransaction-data/claim-index')}}" class="nav-link {{@$claim_formindex}}">
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('CLAIM INSURED')}} <br> {{__('INDEX')}}</p>
+                                                </a>
+                                            </li>
+    
+                                            @if($route_active == 'CLAIM INSURED - Entry')
+                                                @php
+                                                    $claim_form = 'active';
+                                                @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/claimtransaction-data/claim')}}" class="nav-link {{@$claim_form}}">
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('CLAIM INSURED')}} <br> {{__('ENTRY')}}</p>
+                                                </a>
+                                            </li>
+                                    </ul>
+                                </li>
+                                </ul>
+                        </li>
+
                             
                     @endif
     
