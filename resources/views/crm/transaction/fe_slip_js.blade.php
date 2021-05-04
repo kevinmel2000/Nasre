@@ -506,7 +506,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             }
 
             if(response.share_tsi){
-                $('#sharetotalsumdetail').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#sharetotalsumdetail').val(response.share_tsi.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
             else
             {
