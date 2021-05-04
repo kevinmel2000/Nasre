@@ -1298,7 +1298,7 @@
                         var datetime = status_log[i].datetime;
                         var user = status_log[i].user;
                         
-                        $('#slipStatusTableendorsement tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
+                        $('#slipStatusTableendorsement tbody').prepend('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
                     }
                 };
             }
@@ -11171,13 +11171,14 @@ function deletelocationriskdetail(id){
             var slip_data2array=JSON.parse(response.slip_dataarray);
             var slip_dataarray=JSON.parse(response.slip_data);
             
-            $('#SlipInsuredTableData tbody tr[id=slipiid'+response.oldid+']').empty();
+            $('#SlipInsuredTableData tbody tr[id=slipiid'+response.oldid+']').remove();
             
             // slip_data2array.forEach(function (arrayItem) 
             // {
                 //var x = arrayItem.prop1 + 2;
                 
-                $('#SlipInsuredTableData tbody ').prepend('<tr id="slipiid'+slip_dataarray.id+'" data-name="slipvalue[]"><td data-name="'+slip_dataarray.number+'">'+slip_dataarray.number+'</td><td data-name="'+slip_dataarray.cedingbroker+'">"'+slip_dataarray.cedingbroker+'"</td><td data-name="'+slip_dataarray.ceding+'">'+slip_dataarray.ceding+'</td><td data-name="'+slip_dataarray.status+'">"'+slip_dataarray.status+'"</td><td><a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+slip_dataarray.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
+                $('#SlipInsuredTableData tbody ').prepend('<tr id="slipiid'+slip_dataarray.id+'" data-name="slipvalue[]"><td data-name="'+slip_dataarray.number+'">'+slip_dataarray.number+'</td><td data-name="'+slip_dataarray.cedingbroker+'">'+slip_dataarray.cedingbroker+'</td><td data-name="'+slip_dataarray.ceding+'">'+slip_dataarray.ceding+'</td><td data-name="'+slip_dataarray.status+'">'+slip_dataarray.status+'</td><td>'
+                     +'<a class="text-primary mr-3 float-right" data-toggle="modal"  data-book-id="'+slip_dataarray.id+'" data-target="#detailmodaldata" href="#detailmodaldata">'
                      +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">Detail</button>'
                      +'</a>'
                      +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+slip_dataarray.id+'" data-target="#updatemodaldata">'
@@ -11185,10 +11186,12 @@ function deletelocationriskdetail(id){
                      +'</a>'
                      +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+slip_dataarray.id+'" data-target="#endorsementmodaldata">'
                      +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">Endorsement</button>'
+                     +'</a>'
                      +'<a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="'+slip_dataarray.id+'" data-target="#cancelmodaldata">'
                      +'<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#cancelmodaldata2">Cancel</button>'
                      +'</a>'
-                     +'</a><td></td></tr>');
+                     +'<button type="button" id="claim-endorse" class="btn btn-sm btn-warning float-right">Claim</button>'
+                     +'</td></tr>');
 
 
             // });
