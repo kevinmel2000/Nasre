@@ -15,46 +15,6 @@
 </style>
 
 
-
-<!-- <script>
-
-//var $tabsTop = $(".nav-tabs");
-//var $tabsBottom = $tabsTop.clone().addClass("nav-tabs-bottom").insertAfter(".tab-contentbottom");
-//$tabsTop.addClass("nav-tabs-top");
-
-$('.nav-tabs-top a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-    console.log("click top");
-    var target = $(e.target).attr("href") // activated tab
-     alert(target);
-    $('.nav-tabs-bottom a.active').removeClass('active');
-    $('.nav-tabs-bottom a[href="'+$(this).attr('href')+'"]').addClass('active');
-})
-
-
-$('#custom-tabs-three-tab a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-    console.log("click top");
-    var target = $(e.target).attr("href") // activated tab
-     alert(target);
-    $('.nav-tabs-bottom a.active').removeClass('active');
-    $('.nav-tabs-bottom a[href="'+$(this).attr('href')+'"]').addClass('active');
-})
-
-$('.nav-tabs-bottom a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-    var target = $(e.target).attr("href") // activated tab
-     alert(target);
-    $('.nav-tabs-top a.active').removeClass('active');
-    $('.nav-tabs-top a[href="'+$(this).attr('href')+'"]').addClass('active');
-});
-
-$('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-    var target = $(e.target).attr("href") // activated tab
-     alert(target);
-    $('.nav-tabs-top a.active').removeClass('active');
-    $('.nav-tabs-top a[href="'+$(this).attr('href')+'"]').addClass('active');
-});
-
-</script> -->
-
 <script type="text/javascript">
     $('.nav-tabs li a').click(function (e) {     
     //get selected href
@@ -133,6 +93,9 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $("#state_location").append('<option value="" selected disabled>countryID null</option>');
                 $("#city_location").empty();
             }  
+
+            $('#slipnilaiec').empty();
+            $('#sliptotalpercentinspan').empty();
 
 
         });
@@ -8422,7 +8385,8 @@ function deletelocationriskdetail(id){
                         var newdate=dd+"/"+mm+"/"+yy;
                         console.log('new date '+newdate)
 
-                        var strdate = newdate.toString();
+                        // var strdate = newdate.toString();
+                        var strdate = convdate.toString();
                         
                         $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+strdate+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
                         $('#dateinstallment').val('');
