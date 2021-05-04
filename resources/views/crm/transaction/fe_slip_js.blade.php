@@ -8410,6 +8410,7 @@ function deletelocationriskdetail(id){
 
                         var currdate = response.installment_date;
                         var d=new Date(currdate.split("-").reverse().join("/"));
+                        console.log(d)
                         var dd=d.getDate();
                         console.log('dd '+dd)
                         var mm=d.getMonth()+1;
