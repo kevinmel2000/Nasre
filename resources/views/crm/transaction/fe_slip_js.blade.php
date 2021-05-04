@@ -8411,9 +8411,13 @@ function deletelocationriskdetail(id){
                         var currdate = response.installment_date;
                         var d=new Date(currdate.split("-").reverse().join("/"));
                         var dd=d.getDate();
+                        console.log('dd '+dd)
                         var mm=d.getMonth()+1;
+                        console.log('mm '+mm)
                         var yy=d.getFullYear();
+                        console.log('yy '+ yy)
                         var newdate=dd+"/"+mm+"/"+yy;
+                        console.log('new date '+newdate)
 
                         var strdate = newdate.toString();
                         
@@ -10093,6 +10097,11 @@ function deletelocationriskdetail(id){
                     var new_instsi = int_fullins.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     var cedshareins = $('#feshare').val();
+                    var conv_cedshareins = cedshareins.replace(/,/g, "");
+                    var int_cedshareins = parseFloat(conv_cedshareins);
+                    var int_fullcedshare = int_cedshareins.toFixed(2);
+                    var new_cedshareins = int_fullcedshare.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
                     console.log('type_tsi'+ type_tsi)
                     console.log('tsislipval'+ tsislipval)
                     console.log('tsiinsval'+ tsiinsval)
@@ -10200,6 +10209,9 @@ function deletelocationriskdetail(id){
                                         $('#deductiblePanel tbody').empty();
                                         $('#retrocessionPanel tbody').empty();
 
+                                        $('#sliptotalnilaiec').empty();
+                                        $('sliptotalpercentinspan').empty();
+
                                     },
                                     error: function (request, status, error) {
                                             //alert(request.responseText);
@@ -10253,7 +10265,7 @@ function deletelocationriskdetail(id){
                             swal('Warning!','please check tsi value again','insert error');
                         }
                     }else if(type_tsi == 2){
-                        if(tsislipval == cedshareins){
+                        if(tsislipval == new_cedshareins){
                                 $.ajaxSetup({
                                     headers: {
                                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -10344,6 +10356,9 @@ function deletelocationriskdetail(id){
                                         $('#ExtendCoveragePanel tbody').empty();
                                         $('#deductiblePanel tbody').empty();
                                         $('#retrocessionPanel tbody').empty();
+
+                                        $('#sliptotalnilaiec').empty();
+                                        $('sliptotalpercentinspan').empty();
 
                                     },
                                     error: function (request, status, error) {
