@@ -508,8 +508,8 @@
                                             <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#cancelmodaldata2">{{__('Cancel')}}</button>
                                         </a> 
 
-                                        <button type="button" id="claim-endorse" class="btn btn-sm btn-warning float-right">Claim</button>
-                                        @include('crm.transaction.fe_slipupdate_claim_modal')
+                                         <button type="button" id="claim-endorse" class="btn btn-sm btn-warning float-right">Claim</button>
+                                         @include('crm.transaction.fe_slipupdate_claim_modal')
 
 
                                          @include('crm.transaction.fe_slipupdate_claim_modal')

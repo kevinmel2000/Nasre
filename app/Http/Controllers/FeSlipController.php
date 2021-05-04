@@ -4113,6 +4113,9 @@ class FeSlipController extends Controller
                     $cedingbroker = CedingBroker::where('id',$slipdataup->source)->first();
                     $ceding = CedingBroker::where('id',$slipdataup->source_2)->first();
                     
+                    $slipdataup->cedingbroker=$cedingbroker->name;
+                    $slipdataup->ceding=$ceding->name;
+
                     $slipdatalist2= SlipTable::where('insured_id','=',$slipdata->insured_id)->get();
 
                     //$locationlist2= TransLocationTemp::where('insured_id','=',$code_ms)->orderby('id','desc')->get();
@@ -4121,6 +4124,9 @@ class FeSlipController extends Controller
                     $slipdatalist=array();
                     foreach($slipdatalist2 as $datadetail)
                     {
+                        $datadetail->cedingbroker = "";
+                        $datadetail->ceding = "";
+                            
                         if($datadetail->cedingbroker)
                         {
                             $dataceding=CedingBroker::where('id','=',$datadetail->source)->first();
@@ -4133,10 +4139,10 @@ class FeSlipController extends Controller
                             $dataceding=CedingBroker::where('id','=',$datadetail->source)->first();
                             $datadetail->cedingbroker = $dataceding->name;
                             $datadetail->ceding = $dataceding->name;
+                            
                         }
 
 
-                       
 
                         $slipdatalist[]= $datadetail;
                     }

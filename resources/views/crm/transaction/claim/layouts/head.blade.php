@@ -7,7 +7,6 @@
 					<tr>
 						<th>KOC</th>
 						<th>
-							
 							<select id="claimkoc" name="claimkoc" class="e1 form-control form-control-sm ">
 								<option selected readonly  value='0'>{{__('KOC list')}}</option>
 								@foreach($koc as $cok)
