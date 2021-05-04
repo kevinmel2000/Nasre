@@ -426,9 +426,9 @@
                     $("#sharetypetsidetail option[value=" + response.type_share_tsi + "]:first")[0].selected = true;
                 }
 
-                $('#statuslogdetailform tbody').remove();
+
                 if(response.status_log){
-                        
+                        // $('#statuslogdetailform tbody').remove();
                         var status_log = response.status_log;
                         
                         for(var i = 0; i < status_log.length; i++){
