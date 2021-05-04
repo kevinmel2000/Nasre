@@ -1358,17 +1358,17 @@ class FeSlipController extends Controller
                 $slipdatalatest = SlipTable::where('number',$slipdataid)->where('insured_id',$request->code_ms)->orderby('created_at','desc')->first();
                 $slipdataup = SlipTable::where('number',$slipdataid)->orderby('created_at','desc')->first();
 
-                if($slipdataup->status != $request->slipstatus){
-                    StatusLog::create([
-                        'status'=>$request->slipstatus,
-                        'user'=>Auth::user()->name,
-                        'datetime'=>date('Y-m-d H:i:s '),
-                        'insured_id'=>$request->code_ms,
-                        'slip_id'=>$request->slipnumber,
-                        'slip_type'=>'fe',
-                        'count_endorsement'=> $slipdatalatest->endorsment
-                    ]);
-                }
+                // if($slipdataup->status != $request->slipstatus){
+                //     StatusLog::create([
+                //         'status'=>$request->slipstatus,
+                //         'user'=>Auth::user()->name,
+                //         'datetime'=>date('Y-m-d H:i:s '),
+                //         'insured_id'=>$request->code_ms,
+                //         'slip_id'=>$request->slipnumber,
+                //         'slip_type'=>'fe',
+                //         'count_endorsement'=> $slipdatalatest->endorsment
+                //     ]);
+                // }
 
                 $slipdataup->number=$request->slipnumber;
                 $slipdataup->username=Auth::user()->name;
@@ -2107,7 +2107,7 @@ class FeSlipController extends Controller
         $newarrayinspandata=json_encode($newarrayinspan);
 
 
-        $statuslist= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->take(5)->get();
+        $statuslist= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->get();
         
         
         $attachmenttable = collect(SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get());
@@ -4085,6 +4085,26 @@ class FeSlipController extends Controller
                         }
                     }
 
+                    $statuslogcheck = StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->get();
+
+                    if($statuslogcheck){
+                        foreach($statuslogcheck as $slc){
+                            $statuslogupdate = StatusLog::findOrFail($slc->id);
+                            $statuslogupdate->slip_id = $slipdataup->number;
+                            $statuslogupdate->count_endorsement = ($slc->count_endorsement + 1);
+                            $statuslogupdate->save();
+                        }
+
+                        StatusLog::create([
+                            'insured_id' => $slipdataup->insured_id,
+                            'status' => $slipdataup->status,
+                            'datetime'=>date('Y-m-d H:i:s '),
+                            'slip_id'=> $slipdataup->number,
+                            'user'=> $slipdataup->username,
+                            'count_endorsement'=>$slipdataup->endorsment,
+                            'slip_type'=>'fe'
+                        ]);
+                    }
                     // $insdata =  Insured::findOrFail($insureddata->id);
                     // $insdata->share_from = ($insureddata->share_from * (1));
                     // $insdata->share_to = ($insureddata->share_to * (1));
