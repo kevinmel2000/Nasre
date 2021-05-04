@@ -8409,6 +8409,8 @@ function deletelocationriskdetail(id){
                         var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                         var currdate = response.installment_date;
+                        var convdate = currdate.split("-").reverse().join("/");
+                        console.log('conv date ' + convdate)
                         var d=new Date(currdate.split("-").reverse().join("/"));
                         console.log(d)
                         var dd=d.getDate();
