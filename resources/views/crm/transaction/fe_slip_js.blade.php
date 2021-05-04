@@ -428,7 +428,7 @@
 
 
                 if(response.status_log){
-                        $('#slipStatusTabledetail tbody').remove();
+                        $('#statuslogdetailform tbody').remove();
                         var status_log = response.status_log;
                         
                         for(var i = 0; i < status_log.length; i++){
@@ -437,7 +437,7 @@
                             var datetime = status_log[i].datetime;
                             var user = status_log[i].user;
 
-                            $('#slipStatusTabledetail tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
+                            $('#statuslogdetailform tbody').append('<tr id="stlid'+status_log[i].id+'"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
                             $('#statlistdetail').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px">'+datetime+' - '+ status + ' - ' + user +'</div></li>')
                     
                     };
