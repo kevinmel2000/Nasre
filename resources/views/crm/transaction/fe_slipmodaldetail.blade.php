@@ -112,10 +112,10 @@
                                                             </tbody>
                                                             </table>
                                                             <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> Data is Transferred!</i>
-                                                             <ul id="statlistdetail">
+                                                             <!-- <ul id="statlistdetail">
 
 
-                                                            </ul>
+                                                            </ul> -->
                                                         </div>
                                                     </div>
                                                 </div>

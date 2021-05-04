@@ -428,7 +428,7 @@
 
 
                 if(response.status_log){
-                        // $('#statuslogdetailform tbody').remove();
+                        $('#statuslogdetailform tbody').empty();
                         var status_log = response.status_log;
                         
                         for(var i = 0; i < status_log.length; i++){
@@ -438,7 +438,7 @@
                             var user = status_log[i].user;
 
                             $('#statuslogdetailform tbody').append('<tr id="stlid'+status_log[i].id+'"> <td>'+status+'</td> <td >'+ datetime +'</td> <td>'+user+'</td> </tr>')
-                            $('#statlistdetail').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px">'+datetime+' - '+ status + ' - ' + user +'</div></li>')
+                            // $('#statlistdetail').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px">'+datetime+' - '+ status + ' - ' + user +'</div></li>')
                     
                     };
                 }
@@ -784,7 +784,7 @@
 
                     if(response.status_log)
                     {
-                        $('#slipStatusTableupdate tbody').remove();
+                        $('#slipStatusTableupdate tbody').empty();
                         var obj_status =response.status_log;
                         
                         for (var i = 0; i < obj_status.length; i++){
@@ -1290,7 +1290,7 @@
 
             if(response.status_log){
                 var status_log = response.status_log;
-                $('#slipStatusTableendorsement tbody').remove();
+                $('#slipStatusTableendorsement tbody').empty();
                 for (var i = 0; i < 5; i++){
                     if(status_log[i])
                     {
