@@ -702,7 +702,7 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
             complete: function() {  $("body").removeClass("loading"); },
             success:function(response)
             {
-                 $("body").removeClass("loading");
+                $("body").removeClass("loading");
                 $('#insuredIDtxtupdate').val(response.insured_id);
                 $('#slipnumberupdate').val(response.number);
                 $('#slipusernameupdate').val(response.username);
@@ -1151,9 +1151,6 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                     $('#sliptotalpercentinspanendorsement').val(response.sum_ippercent);
 
 
-
-
-
                     if(response.deductible_panel && response.deductible_panel.length > 10)
                     {
 
@@ -1410,25 +1407,66 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                         $("#labelnpendorsement").attr('hidden','true');
                     // }
 
-                    $('#sliprateendorsement').val(response.rate);
+                    if(response.rate){
+                        $('#sliprateendorsement').val(response.rate);
+                    }else{
+                        $('#sliprateendorsement').val("0");
+                    }
 
-                    $('#slipshareendorsement').val(response.share);
+                    if(response.share){
+                        $('#slipshareendorsement').val(response.share);
+                    }else{
+                       $('#slipshareendorsement').val("0");
+                    }
+
+                    if(response.own_retention){
+                       $('#sliporendorsement').val(response.own_retention);
+                    }else{
+                       $('#sliporendorsement').val("0");
+                    }
+
+                    if(response.commission){
+                        $('#slipcommissionendorsement').val(response.commission);
+                    }else{
+                       $('#slipcommissionendorsement').val("0");
+                    }
+
+                    if(response.basic_premium){
+                        $('#slipbasicpremiumendorsement').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }else{
+                        $('#slipbasicpremiumendorsement').val("0");
+                    }
+
+                    if(response.sum_share){
+                        $('#slipsumshareendorsement').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipsumshareendorsement2').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }else{
+                        $('#slipsumshareendorsement').val("0");
+                        $('#slipsumshareendorsement2').val("0");
+                    }
+
+                    if(response.sum_rate){
+                        $('#sliptotalrateendorsement').val(response.sum_rate.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#sliptotalrateendorsement2').val(response.sum_rate.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }else{
+                        $('#sliptotalrateendorsement').val("0");
+                        $('#sliptotalrateendorsement2').val("0");
+                    }
                     
-                    $('#slipsumshareendorsement').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipsumshareendorsement2').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                   
+                    if(response.sum_commission){
+                        $('#slipsumcommissionendorsement').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipsumcommissionendorsement2').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }else{
+                        $('#slipsumcommissionendorsement').val("0");
+                        $('#slipsumcommissionendorsement2').val("0");
+                    }
 
-                    $('#slipbasicpremiumendorsement').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipgrossprmtonrendorsement').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipcommissionendorsement').val(response.commission);
-                    
-                    $('#slipsumcommissionendorsement').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipsumcommissionendorsement2').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    if(response.sum_own_retention){
+                        $('#slipsumorendorsement').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }else{
+                        $('#slipsumorendorsement').val("0");
 
-
-                    $('#slipnetprmtonrendorsement').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#sliporendorsement').val(response.own_retention);
-                    $('#slipsumorendorsement').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }
                     
                     if(response.sum_feebroker){
                     $('#slipsumfeeendorsement').val(response.sum_feebroker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));

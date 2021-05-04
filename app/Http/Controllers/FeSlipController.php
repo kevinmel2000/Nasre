@@ -1844,8 +1844,10 @@ class FeSlipController extends Controller
         //     $prodyeardata = strtotime($slipdata->prod_year);
         //     $dateyeardata= date("d/m/Y", $prodyeardata);
         // }
+
+        $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
         
-        $currdate = date("d/m/Y");
+        // $currdate = date("d/m/Y");
         
 
 
@@ -1904,7 +1906,7 @@ class FeSlipController extends Controller
                 'insured_id' => $slipdata->insured_id,
                 'slip_type' => $slipdata->slip_type,
                 'username' => $slipdata->username,
-                'prod_year' => $currdate,
+                'prod_year' => $dateyeardata,
                 'number' => $slipdata->number,
                 'slipuy' => $slipdata->uy,
                 'date_transfer' => $datetransfer,
@@ -2074,9 +2076,9 @@ class FeSlipController extends Controller
         $newextenddata=json_encode($newarrayextend);
 
 
-        // $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
+        $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
 
-        $currdate = date("d/m/Y");
+        // $currdate = date("d/m/Y");
 
         
         if(!empty($slipdata->installment_panel) && strlen($slipdata->installment_panel)>=10)
@@ -2155,7 +2157,7 @@ class FeSlipController extends Controller
                 'insured_id' => $slipdata->insured_id,
                 'slip_type' => $slipdata->slip_type,
                 'username' => $slipdata->username,
-                'prod_year' => $currdate,
+                'prod_year' => $dateyeardata,
                 'number' => $slipdata->number,
                 'slipuy' => $slipdata->uy,
                 'date_transfer' => date("d/m/Y", strtotime($slipdata->date_transfer)),
@@ -2175,7 +2177,9 @@ class FeSlipController extends Controller
                 'cn_dn'=> $slipdata->cn_dn,
                 'policy_no'=> $slipdata->policy_no,
                 'attacment_file'=> $attachmentlist,
+                'type_tsi'=> $slipdata->type_tsi,
                 'total_sum_insured'=> $slipdata->total_sum_insured,
+                'type_share_tsi'=> $slipdata->type_share_tsi,
                 'insured_type'=>$slipdata->insured_type,
                 'insured_pct'=>$slipdata->insured_pct,
                 'total_sum_pct'=>$slipdata->total_sum_pct,
@@ -2188,6 +2192,7 @@ class FeSlipController extends Controller
                 'proportional'=>$slipdata->proportional,
                 'layer_non_proportional'=>$slipdata->layer_non_proportional,
                 'rate'=>$slipdata->rate,
+                'sum_rate'=>$slipdata->sliptotalrate,
                 'share'=>$slipdata->share,
                 'sum_share'=>$slipdata->sum_share,
                 'basic_premium'=>$slipdata->basic_premium,
@@ -3562,8 +3567,8 @@ class FeSlipController extends Controller
                                                     ->get();
 
                             $lldata =  TransLocationTemp::findOrFail($locationlistup->id);
-                                    $lldata->status = "passive";
-                                    $lldata->save();
+                            $lldata->status = "passive";
+                            $lldata->save();
                             
                             
                             $risklocationlist= RiskLocationDetail::where('translocation_id','=',$ll->id)->orderby('id','desc')->get();
@@ -3718,6 +3723,8 @@ class FeSlipController extends Controller
                             $rctdata->save();
                         }
                     }
+
+
                     
 
                     if($slipdatalist != null)
@@ -4066,7 +4073,16 @@ class FeSlipController extends Controller
                     $msdata->slipshow="no"; 
                     $msdata->save();
 
+                    $attachmentcheck = SlipTableFile::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->get();
 
+                    if($attachmentcheck){
+                        foreach($attachmentcheck as $atc){
+                            $attachmentupdate = SlipTableFile::findOrFail($atc->id);
+                            $attachmentupdate->slip_id = $slipdataup->number;
+                            $attachmentupdate->count_endorsement = ($atc->count_endorsement + 1);
+                            $attachmentupdate->save();
+                        }
+                    }
 
                     // $insdata =  Insured::findOrFail($insureddata->id);
                     // $insdata->share_from = ($insureddata->share_from * (1));
