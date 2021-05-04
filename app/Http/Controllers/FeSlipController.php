@@ -2180,6 +2180,7 @@ class FeSlipController extends Controller
                 'type_tsi'=> $slipdata->type_tsi,
                 'total_sum_insured'=> $slipdata->total_sum_insured,
                 'type_share_tsi'=> $slipdata->type_share_tsi,
+                'share_tsi'=> $slipdata->share_tsi,
                 'insured_type'=>$slipdata->insured_type,
                 'insured_pct'=>$slipdata->insured_pct,
                 'total_sum_pct'=>$slipdata->total_sum_pct,
