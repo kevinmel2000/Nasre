@@ -15,46 +15,6 @@
 </style>
 
 
-
-<!-- <script>
-
-//var $tabsTop = $(".nav-tabs");
-//var $tabsBottom = $tabsTop.clone().addClass("nav-tabs-bottom").insertAfter(".tab-contentbottom");
-//$tabsTop.addClass("nav-tabs-top");
-
-$('.nav-tabs-top a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-    console.log("click top");
-    var target = $(e.target).attr("href") // activated tab
-     alert(target);
-    $('.nav-tabs-bottom a.active').removeClass('active');
-    $('.nav-tabs-bottom a[href="'+$(this).attr('href')+'"]').addClass('active');
-})
-
-
-$('#custom-tabs-three-tab a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-    console.log("click top");
-    var target = $(e.target).attr("href") // activated tab
-     alert(target);
-    $('.nav-tabs-bottom a.active').removeClass('active');
-    $('.nav-tabs-bottom a[href="'+$(this).attr('href')+'"]').addClass('active');
-})
-
-$('.nav-tabs-bottom a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-    var target = $(e.target).attr("href") // activated tab
-     alert(target);
-    $('.nav-tabs-top a.active').removeClass('active');
-    $('.nav-tabs-top a[href="'+$(this).attr('href')+'"]').addClass('active');
-});
-
-$('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-    var target = $(e.target).attr("href") // activated tab
-     alert(target);
-    $('.nav-tabs-top a.active').removeClass('active');
-    $('.nav-tabs-top a[href="'+$(this).attr('href')+'"]').addClass('active');
-});
-
-</script> -->
-
 <script type="text/javascript">
     $('.nav-tabs li a').click(function (e) {     
     //get selected href
@@ -133,6 +93,9 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 $("#state_location").append('<option value="" selected disabled>countryID null</option>');
                 $("#city_location").empty();
             }  
+
+            $('#sliptotalnilaiec').empty();
+            $('#sliptotalpercentinspan').empty();
 
 
         });
@@ -464,30 +427,31 @@ $('#custom-tabs-three-tabbottom a[data-toggle="tab"]').on('shown.bs.tab', functi
                 }
 
 
-                if(response.status_log  && response.status_log.length > 10){
-                    $('#stlid'+status_log[i].id).remove();
-                    var status_log = response.status_log;
-                    
-                    for (var i = 0; i < status_log.length; i++){
-
-                        if(status_log[i])
-                        {
-                        var status = status_log[i].status;
-                        var datetime = status_log[i].datetime;
-                        var user = status_log[i].user;
+                if(response.status_log){
+                        // $('#statuslogdetailform tbody').remove();
+                        var status_log = response.status_log;
                         
-                        $('#slipStatusTabledetail tbody').append('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
-                    }
+                        for(var i = 0; i < status_log.length; i++){
 
-                };
-            }
+                            var status = status_log[i].status;
+                            var datetime = status_log[i].datetime;
+                            var user = status_log[i].user;
+
+                            $('#statuslogdetailform tbody').append('<tr id="stlid'+status_log[i].id+'"> <td>'+status+'</td> <td >'+ datetime +'</td> <td>'+user+'</td> </tr>')
+                            $('#statlistdetail').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px">'+datetime+' - '+ status + ' - ' + user +'</div></li>')
+                    
+                    };
+                }
+
+                console.log('status log')
+                console.log(response.status_log)
 
 
             if(response.attacment_file)
             {
                 $('#aidlistdetail li').remove();
                 var attacment_file = response.attacment_file;
-                for (var i = 0; i < attacment_file.length; i++){
+                for(var i = 0; i < attacment_file.length; i++){
                     var filename = attacment_file[i].filename;
                     $('#aidlistdetail').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
                 };
@@ -8409,7 +8373,10 @@ function deletelocationriskdetail(id){
                         var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                         var currdate = response.installment_date;
+                        var convdate = currdate.split("-").reverse().join("/");
+                        console.log('conv date ' + convdate)
                         var d=new Date(currdate.split("-").reverse().join("/"));
+                        console.log(d)
                         var dd=d.getDate();
                         console.log('dd '+dd)
                         var mm=d.getMonth()+1;
@@ -8419,7 +8386,8 @@ function deletelocationriskdetail(id){
                         var newdate=dd+"/"+mm+"/"+yy;
                         console.log('new date '+newdate)
 
-                        var strdate = newdate.toString();
+                        // var strdate = newdate.toString();
+                        var strdate = convdate.toString();
                         
                         $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+strdate+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
                         $('#dateinstallment').val('');

@@ -99,7 +99,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-12 com-sm-12 mt-3">
-                                                            <table id="slipStatusTabledetail" class="table table-bordered table-striped">
+                                                            <table id="statuslogdetailform" class="table table-bordered table-striped">
                                                             <thead>
                                                                 <tr>
                                                                     <th>{{__('Status')}}</th>
@@ -110,9 +110,12 @@
                                                             <tbody>
                                                                    
                                                             </tbody>
-                                                            
                                                             </table>
                                                             <i class="fa fa-info-circle" style="color: grey;" aria-hidden="true"> Data is Transferred!</i>
+                                                             <ul id="statlistdetail">
+
+
+                                                            </ul>
                                                         </div>
                                                     </div>
                                                 </div>
