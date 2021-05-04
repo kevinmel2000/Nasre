@@ -3563,7 +3563,7 @@ class FeSlipController extends Controller
 
                             $lldata =  TransLocationTemp::findOrFail($locationlistup->id);
                                     $lldata->status = "passive";
-                                    $rldata->save();
+                                    $lldata->save();
                             
                             
                             $risklocationlist= RiskLocationDetail::where('translocation_id','=',$ll->id)->orderby('id','desc')->get();
