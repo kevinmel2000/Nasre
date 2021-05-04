@@ -321,20 +321,17 @@
                                 </div>
                             </div>
 
-
-                                    
-
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                                    <button type="submit" class="btn btn-info" id="addship-btn">Add Risk Location</button>
-                                </div>
-                            </form>
                         </div>
-                    </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                            <button type="submit" class="btn btn-info" id="addship-btn">Add Risk Location</button>
+                        </div>
+                    </form>
                 </div>
-                {{-- Edit Modal Ends --}}
+            </div>
+        </div>
+                {{-- Location Modal Ends --}}
 
                 <div class="modal fade" id="addlocdetailmodaldata" tabindex="-1" user="dialog" aria-labelledby="addLocationLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl" user="document">
@@ -462,7 +459,7 @@
                     </div>
                 </div>
 
-                {{-- Edit Modal Ends --}}
+                {{-- Risk Location Modal Ends --}}
 
                 
                 <div class="card ">
@@ -503,7 +500,14 @@
 
                                         <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->id }}" data-target="#endorsementmodaldata">
                                             <button type="button" id="btnendorsementslip" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#endorsementmodaldata2">{{__('Endorsement')}}</button>
+                                        </a>
+
+                                        <a class="text-primary mr-3 float-right " data-toggle="modal" data-book-id="{{  @$slipdatatadetail->id }}" data-target="#cancelmodaldata">
+                                            <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#cancelmodaldata2">{{__('Cancel')}}</button>
                                         </a> 
+
+                                        <button type="button" id="claim-endorse" class="btn btn-sm btn-warning float-right">Claim</button>
+                                        @include('crm.transaction.fe_slipupdate_claim_modal')
 
 
                                          @include('crm.transaction.fe_slipupdate_claim_modal')
@@ -536,6 +540,37 @@
                             </tbody>
                             
                         </table>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="cancelmodaldata" tabindex="-1" user="dialog" aria-labelledby="cancelmodalLabel" aria-hidden="true">
+                    <div class="modal-dialog" user="document">
+                        <div class="modal-content bg-light-gray">
+                            <div class="modal-header bg-gray">
+                                <h5 class="modal-title" id="cancelmodalLabel">{{__('Cancel')}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form id="form-addlocation">
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-12">
+                                            <div class="form-group">
+                                                <label for="">{{__('Remarks')}}</label>
+                                                <textarea type="text"  id="remarkscancel" name="remarkscancel" class="form-control form-control-sm" placeholder="" ></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                                    <button type="submit" class="btn btn-info" id="cancelmodal-btn">Confirm</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 
