@@ -2043,7 +2043,7 @@ class TransactionController extends Controller
                 $checkdateins = InstallmentTemp::where('slip_id',$slip_id)->orderby('id','desc')->get();
 
 
-                if($totalpercent <= 100)
+                if(floatval($totalpercent) <= 100.00)
                     {
                         $old_date_timestamp = strtotime($installmentdate);
                         $new_date = date('Y-m-d', $old_date_timestamp); 
@@ -2074,7 +2074,7 @@ class TransactionController extends Controller
 
 
 
-                            if($checkit2 < 100)
+                            if(floatval($checkit2) < 100.00)
                             {
                                     return response()->json(
                                         [
@@ -2087,7 +2087,7 @@ class TransactionController extends Controller
                                         ]
                                     );
                             }
-                            elseif ($checkit2 == 100) 
+                            elseif (floatval($checkit2) == 100.00) 
                             {
                                 return response()->json(
                                         [
