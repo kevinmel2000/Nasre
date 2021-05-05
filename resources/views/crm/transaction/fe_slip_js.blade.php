@@ -756,9 +756,11 @@
                         {
                             var obj = installment_panel[i];
                             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                            var conv_amount = obj.amount.toFixed(2);
-                            var str_amount = conv_amount.toString();
-                            var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // var conv_amount = obj.amount.toFixed(2);
+                            // var str_amount = conv_amount.toString();
+                          // var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
 
                             var currdate = obj.installment_date;
                             var d=new Date(currdate.split("-").reverse().join("/"));
@@ -1195,9 +1197,10 @@
                         {
                             var obj = installment_panel[i];
                             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                            var conv_amount = obj.amount.toFixed(2);
-                            var str_amount = conv_amount.toString();
-                            var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // var conv_amount = obj.amount.toFixed(2);
+                            // var str_amount = conv_amount.toString();
+                            // var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            var curr_amount =  obj.amount.toString(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                             var currdate = obj.installment_date;
                             var d=new Date(currdate.split("-").reverse().join("/"));
