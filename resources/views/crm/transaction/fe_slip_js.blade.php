@@ -8418,11 +8418,11 @@ function deletelocationriskdetail(id){
                         var total_percent =  $('#sliptotalpercentinspan').val();
 
                         if(total_percent == ''){
-                            var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
+                            var sum_percent = isNaN(parseFloat(0) + parseFloat(response.percentage)) ? 0 :(parseFloat(0) + parseFloat(response.percentage)) ;
                             $('#sliptotalpercentinspan').val(sum_percent.toString());
                             console.log($('#sliptotalpercentinspan').val())
                         }else{
-                            var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
+                            var sum_percent = isNaN(parseFloat(total_percent) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) + parseFloat(response.percentage))
                             $('#sliptotalpercentinspan').val(sum_percent.toString());
                             console.log($('#sliptotalpercentinspan').val())
                             
@@ -10061,7 +10061,7 @@ function deletelocationriskdetail(id){
 
         if(count_endorsement_ins != '' || count_endorsement_ins != null){
 
-            if(current_percent >= '100')
+            if(parseFloat(current_percent) >= 100.00)
             {
                 var jumlah_tgl = $('#slipdaytotal').val();
                 console.log('jumlah_tgl '+jumlah_tgl)
