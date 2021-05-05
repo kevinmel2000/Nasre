@@ -2114,7 +2114,7 @@ class TransactionController extends Controller
 
                         }
                     }
-                    else
+                    elseif(floatval($totalpercent) > 100.10)
                     {
                         return response()->json(
                             [

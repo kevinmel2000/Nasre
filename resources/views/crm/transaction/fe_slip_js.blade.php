@@ -258,11 +258,11 @@
                         //console.log(obj.id);
                         //$('#interestInsuredTabledetail tbody').prepend('');
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                        var conv_amount = obj.amount.toFixed(2);
-                        var curr_amount = conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        // var conv_amount = obj.amount.toFixed(2);
+                        var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         // var curr_minamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.min_claimamount);
-                        var conv_minamount = obj.min_claimamount.toFixed(2);
-                        var curr_minamount = conv_minamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        // var conv_minamount = obj.min_claimamount.toFixed(2);
+                        var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         
                         $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td></td></tr>');
 
@@ -282,8 +282,8 @@
                         //console.log(obj.id);
                         //$('#interestInsuredTabledetail tbody').prepend('');
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                        var conv_amount = obj.amount.toFixed(2);
-                        var curr_amount = conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        // var conv_amount = obj.amount.toFixed(2);
+                        var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         
                         $('#ExtendCoveragePaneldetail tbody').prepend('<tr id="iidextendcoveragedetail'+obj.id+'" data-name="extendcoveragedetailvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragecode + ' - ' + obj.coveragename+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
                         
@@ -300,8 +300,8 @@
                     {
                         var obj = installment_panel[i];
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                        var conv_amount = obj.amount.toFixed(2);
-                        var curr_amount = conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        // var conv_amount = obj.amount.toFixed(2);
+                        var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                         var currdate = obj.installment_date;
                         var d=new Date(currdate.split("-").reverse().join("/"));
@@ -331,8 +331,8 @@
                     {
                         var obj = retrocession_panel[i];
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                        var conv_amount = obj.amount.toFixed(2);
-                        var curr_amount = conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        // var conv_amount = obj.amount.toFixed(2);
+                        var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                         //console.log(obj.id);
                         //$('#interestInsuredTabledetail tbody').prepend('');
@@ -701,8 +701,8 @@
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
                             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                            var conv_amount = obj.amount.toFixed(2);
-                            var curr_amount = conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // var conv_amount = obj.amount.toFixed(2);
+                            var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             // var curr_minamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.min_claimamount);
                             var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
@@ -723,8 +723,8 @@
                         {
                             var obj = extend_coverage[i];
                             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                            var conv_amount = obj.amount.toFixed(2);
-                            var curr_amount = conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // var conv_amount = obj.amount.toFixed(2);
+                            var curr_amount =  obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
@@ -747,8 +747,8 @@
                         {
                             var obj = installment_panel[i];
                             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                            var conv_amount = obj.amount.toFixed(2);
-                            var curr_amount = conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // var conv_amount = obj.amount.toFixed(2);
+                            var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                             var currdate = obj.installment_date;
                             var d=new Date(currdate.split("-").reverse().join("/"));
@@ -779,8 +779,8 @@
                         {
                             var obj = retrocession_panel[i];
                             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                            var conv_amount = obj.amount.toFixed(2);
-                            var curr_amount = conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // var conv_amount = obj.amount.toFixed(2);
+                            var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
@@ -1134,8 +1134,8 @@
                         {
                             var obj = deductibledata[i];
                             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                            var conv_amount = obj.amount.toFixed(2);
-                            var curr_amount = conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // var conv_amount = obj.amount.toFixed(2);
+                            var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             // var curr_minamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.min_claimamount);
                             var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
@@ -1158,8 +1158,8 @@
                         {
                             var obj = extend_coverage[i];
                             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                            var conv_amount = obj.amount.toFixed(2);
-                            var curr_amount = conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // var conv_amount = obj.amount.toFixed(2);
+                            var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
@@ -1180,8 +1180,8 @@
                         {
                             var obj = installment_panel[i];
                             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                            var conv_amount = obj.amount.toFixed(2);
-                            var curr_amount = conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // var conv_amount = obj.amount.toFixed(2);
+                            var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                             var currdate = obj.installment_date;
                             var d=new Date(currdate.split("-").reverse().join("/"));
@@ -1212,9 +1212,9 @@
                         {
                             var obj = retrocession_panel[i];
                             // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                            var conv_amount = obj.amount.toFixed(2);
+                            // var conv_amount = obj.amount.toFixed(2);
 
-                            var curr_amount = conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
