@@ -99,7 +99,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                               <label for="">{{__('Longitude')}}</label>
-                                  <input type="text" name="longtitude" id='longitude' class="form-control form-control-sm " data-validation="length" data-validation-length="0-150"/>
+                                  <input type="text" name="longtitude" id='longitude' class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" readonly="readonly" />
                           
                               </div>    
                             </div>
@@ -107,7 +107,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                               <label for="">{{__('Latitude')}}</label>
-                                  <input type="text" name="latitude" id="latitude" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150"/>
+                                  <input type="text" name="latitude" id="latitude" class="form-control form-control-sm " data-validation="length" data-validation-length="0-150" readonly="readonly" />
                               </div>    
                             </div>
                         </div>
