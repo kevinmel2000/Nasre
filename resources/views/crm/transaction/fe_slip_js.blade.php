@@ -763,13 +763,9 @@
 
 
                             var currdate = obj.installment_date;
-                            var d=new Date(currdate.split("-").reverse().join("/"));
-                            var dd=d.getDate();
-                            var mm=d.getMonth()+1;
-                            var yy=d.getFullYear();
-                            var newdate=dd+"/"+mm+"/"+yy;
-
-                            var strdate = newdate.toString();
+                            var convdate = currdate.split("-").reverse().join("/");
+                            console.log('conv date ' + convdate)
+                            var strdate = convdate.toString();
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
@@ -1200,16 +1196,12 @@
                             // var conv_amount = obj.amount.toFixed(2);
                             // var str_amount = conv_amount.toString();
                             // var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            var curr_amount =  obj.amount.toString(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            var curr_amount =  obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-                            var currdate = obj.installment_date;
-                            var d=new Date(currdate.split("-").reverse().join("/"));
-                            var dd=d.getDate();
-                            var mm=d.getMonth()+1;
-                            var yy=d.getFullYear();
-                            var newdate=dd+"/"+mm+"/"+yy;
-
-                            var strdate = newdate.toString();
+                           var currdate = obj.installment_date;
+                            var convdate = currdate.split("-").reverse().join("/");
+                            console.log('conv date ' + convdate)
+                            var strdate = convdate.toString();
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
