@@ -262,9 +262,9 @@
                         var str_amount = conv_amount.toString();
                         var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         // var curr_minamount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.min_claimamount);
-                        var conv_minamount = obj.min_claimamount.toFixed(2);
-                        var str_minamount = conv_minamount.toString();
-                        var curr_minamount = str_minamount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        // var conv_minamount = obj.min_claimamount.toFixed(2);
+                        // var str_minamount = conv_minamount.toString();
+                        var curr_minamount = obj.min_claimamount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         
                         $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage.toFixed(2)+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td></td></tr>');
 
