@@ -284,11 +284,12 @@
                         //console.log(obj.id);
                         //$('#interestInsuredTabledetail tbody').prepend('');
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-                        // var conv_amount = obj.amount.toFixed(2);
-                        // var str_amount = conv_amount.toString();
-                        var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        var conv_amount = obj.amount.toFixed(2);
+                        var str_amount = conv_amount.toString();
+                        var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        // var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         
-                        $('#ExtendCoveragePaneldetail tbody').prepend('<tr id="iidextendcoveragedetail'+obj.id+'" data-name="extendcoveragedetailvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragecode + ' - ' + obj.coveragename+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
+                        $('#ExtendCoveragePaneldetail tbody').prepend('<tr id="iidextendcoveragedetail'+obj.id+'" data-name="extendcoveragedetailvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragecode + ' - ' + obj.coveragename+'</td><td data-name="'+obj.percentage+'">'+obj.percentage.toFixed(2)+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
                         
                     }
                 }
@@ -308,13 +309,9 @@
                         var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                         var currdate = obj.installment_date;
-                        var d=new Date(currdate.split("-").reverse().join("/"));
-                        var dd=d.getDate();
-                        var mm=d.getMonth()+1;
-                        var yy=d.getFullYear();
-                        var newdate=dd+"/"+mm+"/"+yy;
-
-                        var strdate = newdate.toString();
+                        var convdate = currdate.split("-").reverse().join("/");
+                        console.log('conv date ' + convdate)
+                        var strdate = convdate.toString();
 
                         //console.log(obj.id);
                         //$('#interestInsuredTabledetail tbody').prepend('');
@@ -8405,18 +8402,6 @@ function deletelocationriskdetail(id){
                         var currdate = response.installment_date;
                         var convdate = currdate.split("-").reverse().join("/");
                         console.log('conv date ' + convdate)
-                        var d=new Date(currdate.split("-").reverse().join("/"));
-                        console.log(d)
-                        var dd=d.getDate();
-                        console.log('dd '+dd)
-                        var mm=d.getMonth()+1;
-                        console.log('mm '+mm)
-                        var yy=d.getFullYear();
-                        console.log('yy '+ yy)
-                        var newdate=dd+"/"+mm+"/"+yy;
-                        console.log('new date '+newdate)
-
-                        // var strdate = newdate.toString();
                         var strdate = convdate.toString();
                         
                         $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+strdate+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
