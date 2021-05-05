@@ -264,7 +264,7 @@
                         // var conv_minamount = obj.min_claimamount.toFixed(2);
                         var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         
-                        $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">{{ number_format('+parseFloat(obj.percentage)+', 2, '.', ',') }}</td><td data-name="'+curr_amount+'">{{ number_format('+parseFloat(obj.amount)+', 2, '.', ',') }}</td><td data-name="'+curr_minamount+'">{{ number_format('+parseFloat(obj.min_claimamount)+', 2, '.', ',') }}</td><td></td></tr>');
+                        $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">{{ number_format('+obj.percentage+', 2, '.', ',') }}</td><td data-name="'+curr_amount+'">{{ number_format('+obj.amount+', 2, '.', ',') }}</td><td data-name="'+curr_minamount+'">{{ number_format('+obj.min_claimamount+', 2, '.', ',') }}</td><td></td></tr>');
 
                     }
                 }
