@@ -7586,7 +7586,7 @@ function deletelocationriskdetail(id){
         if(keyCode != 9){
             var percent =  parseFloat($(this).val()) / 100;
 
-            var sumnetprtonr = $("#slipnetprmtonupdate").val();
+            var sumnetprtonr = $("#slipnetprmtonrupdate").val();
             var conv_sumnetprtonr = parseFloat(sumnetprtonr.replace(/,/g, ""));
 
             var sum = isNaN(percent *  conv_sumnetprtonr) ? 0 :(percent *  conv_sumnetprtonr).toFixed(2);
@@ -7801,7 +7801,7 @@ function deletelocationriskdetail(id){
                 $('#slipipamountupdate').val(real_sum);
             }
    });
-
+   
    $('#sliporupdate').keyup(function(e) {
         if(e.keyCode != 9){
             var percent =  parseFloat($(this).val()) / 100;
@@ -8385,7 +8385,7 @@ function deletelocationriskdetail(id){
         if(keyCode != 9){
             var percent =  parseFloat($(this).val()) / 100;
 
-            var sumnetprtonr = $("#slipnetprmtonendorsement").val();
+            var sumnetprtonr = $("#slipnetprmtonrendorsement").val();
             var conv_sumnetprtonr = parseFloat(sumnetprtonr.replace(/,/g, ""));
 
             var sum = isNaN(percent *  conv_sumnetprtonr) ? 0 :(percent *  conv_sumnetprtonr).toFixed(2);
