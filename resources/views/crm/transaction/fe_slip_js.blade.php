@@ -643,9 +643,8 @@
                 swal("Error!", "Get Slip Data Error", "Get Data Error");
             }
         });
+    });
 
-
-});
 </script>
 
 
@@ -1078,11 +1077,8 @@
                     swal("Error!", "Get Slip Data Error", "Get Data Error");
                 }
             });
+    });
 
-
-
-
-});
 </script>
 
 
@@ -1505,10 +1501,42 @@
                     swal("Error!", "Get Slip Data Error", "Get Data Error");
                 }
             });
+    });
+</script>
 
+<script type="text/javascript">
+  
+    //triggered when modal is about to be shown
+    $('#cancelmodaldata').on('show.bs.modal', function(e) {
 
+        //get data-id attribute of the clicked element
+        var codesl = $(e.relatedTarget).data('book-id');
 
-});
+        //alert(codesl);
+
+        $.ajax({
+            url:'{{ url("/") }}/transaction-data/detailslip/'+codesl,
+            type:"GET",
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response)
+            {
+                console.log('bisa tampil')
+                console.log(response);
+                $('#slipnumberdetail').val(response.number);
+                $('#remarkscancel').val(response.remarks);
+     
+                swal("Success!", "Data Show")
+                console.log(response)
+
+            },
+            error: function (request, status, error) {
+                //alert(request.responseText);
+                swal("Error!", "Get Slip Data Error", "Get Data Error");
+            }
+        });
+    });
+
 </script>
 
 <!-- <script type="text/javascript">
@@ -11017,11 +11045,7 @@ function deletelocationriskdetail(id){
         }else{
             swal("Error!", "Please input installment panel until 100%", "Insert Error");
         }
-
-      
-
-
-});
+    });
 </script>
 
 

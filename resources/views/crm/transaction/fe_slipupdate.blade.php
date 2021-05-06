@@ -572,6 +572,38 @@
             </div>
         </div>
 
+
+        <div class="modal fade" id="cancelmodaldata" tabindex="-1" user="dialog" aria-labelledby="cancelmodalLabel" aria-hidden="true">
+            <div class="modal-dialog" user="document">
+                <div class="modal-content bg-light-gray">
+                    <div class="modal-header bg-gray">
+                        <h5 class="modal-title" id="cancelmodalLabel">{{__('Cancel')}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="form-addlocation">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6 col-md-12">
+                                    <div class="form-group">
+                                        <label for="">{{__('Remarks')}}</label>
+                                        <textarea type="text"  id="remarkscancel" name="remarkscancel" class="form-control form-control-sm" placeholder="" ></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                            <button type="submit" class="btn btn-info" id="cancelmodal-btn">Confirm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="card ">
             <div class="card-header bg-gray">
             {{__('Slip Detail')}}
@@ -598,121 +630,121 @@
     <div class="card-body bg-light-gray">
         <div class="tab-content p-0 pt-1" id="custom-tabs-three-tabContent">
             <div class="tab-pane fade show active" id="general-details-id" role="tabpanel" aria-labelledby="general-details">
-<div class="row">
- 
-</div>
-<div class="row">
-    <div class="col-md-6">
-    <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
-                    <label for="">{{__('Number')}} </label>
-                    <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" value="{{ $slipnumform }}" readonly="readonly" required/>
-                    
-                </div>
-            </div>
+        <div class="row">
+         
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="">{{__('Username')}}</label>
-                    <input type="text" id="slipusername" name="slipusername" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="{{$user->name}}" readonly="readonly" required/>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label>{{__('Prod Year')}}:</label>
-                        <div class="input-group ">
-                            <input type="hidden" id="slipprodyear" class="form-control form-control-sm"  name="slipprodyear" value="{{$currdate}}" >
-                            <input type="text" id="slipprodyear2" class="form-control form-control-sm"  name="slipprodyear2" value="{{$currdate}}" disabled>  
+            <div class="col-md-6">
+            <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">
+                            <label for="">{{__('Number')}} </label>
+                            <input type="text" id="slipnumber" name="slipnumber" class="form-control form-control-sm" value="{{ $slipnumform }}" readonly="readonly" required/>
+                            
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="">{{__('Username')}}</label>
+                            <input type="text" id="slipusername" name="slipusername" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="{{$user->name}}" readonly="readonly" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>{{__('Prod Year')}}:</label>
+                                <div class="input-group ">
+                                    <input type="hidden" id="slipprodyear" class="form-control form-control-sm"  name="slipprodyear" value="{{$currdate}}" >
+                                    <input type="text" id="slipprodyear2" class="form-control form-control-sm"  name="slipprodyear2" value="{{$currdate}}" disabled>  
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {{-- <div class="form-group">
+                            <label for="">{{__('UY')}}</label>
+                            <input type="number" id="slipuy" name="slipuy" value="" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-10" required/>
+                        </div> --}}
+                        <div class="form-group">
+                            <label for="">{{__('Transfer Date')}}</label>
+                            <input type="hidden" id="sliptd" name="sliptd" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50"  />
+                            <input type="text" id="sliptd2" name="sliptd" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">{{__('Status')}}</label>
+                        <input type="text" id="slipstatus" name="slipstatus" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="slip" readonly="readonly"/>
+                        
+                        <!-- <select name="slipstatus" id="slipstatus" class="form-control form-control-sm ">
+                            <option value="slip" >Slip</option>
+                            <option value="endorsement">Endorsement</option>
+                            <option value="cancel" >Cancel</option>
+                            <option value="decline" >Decline</option>
+                        </select> -->
+                    </div>    
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                {{-- <div class="form-group">
-                    <label for="">{{__('UY')}}</label>
-                    <input type="number" id="slipuy" name="slipuy" value="" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-10" required/>
-                </div> --}}
-                <div class="form-group">
-                    <label for="">{{__('Transfer Date')}}</label>
-                    <input type="hidden" id="sliptd" name="sliptd" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50"  />
-                    <input type="text" id="sliptd2" name="sliptd" class="form-control form-control-sm datetimepicker-input" data-validation="length"  data-validation-length="0-50" disabled />
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-            <div class="form-group">
-                <label for="">{{__('Status')}}</label>
-                <input type="text" id="slipstatus" name="slipstatus" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" value="slip" readonly="readonly"/>
+            <div class="col-md-6">
                 
-                <!-- <select name="slipstatus" id="slipstatus" class="form-control form-control-sm ">
-                    <option value="slip" >Slip</option>
-                    <option value="endorsement">Endorsement</option>
-                    <option value="cancel" >Cancel</option>
-                    <option value="decline" >Decline</option>
-                </select> -->
-            </div>    
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        
-        <div class="row">
-            <div class="col-md-12 com-sm-12 mt-3">
-                <table id="slipStatusTable" class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>{{__('Status')}}</th>
-                        <th>{{__('Datetime')}}</th>
-                        <th>{{__('User')}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                        {{-- @foreach($statuslist as $statlist)
+                <div class="row">
+                    <div class="col-md-12 com-sm-12 mt-3">
+                        <table id="slipStatusTable" class="table table-bordered table-striped">
+                        <thead>
                             <tr>
-                                     <td>{{ $statlist->status }}</td>
-                                     <td>{{ $statlist->updated_at }}</td>
-                                     <td>{{ $statlist->user }}</td>
-                            </tr>   
-                        @endforeach --}}
-                </tbody>
-                
-                </table>
-                <i class="fa fa-info-circle" style="color: grey;"  aria-hidden="true"> Data is Transferred!</i>
+                                <th>{{__('Status')}}</th>
+                                <th>{{__('Datetime')}}</th>
+                                <th>{{__('User')}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                {{-- @foreach($statuslist as $statlist)
+                                    <tr>
+                                             <td>{{ $statlist->status }}</td>
+                                             <td>{{ $statlist->updated_at }}</td>
+                                             <td>{{ $statlist->user }}</td>
+                                    </tr>   
+                                @endforeach --}}
+                        </tbody>
+                        
+                        </table>
+                        <i class="fa fa-info-circle" style="color: grey;"  aria-hidden="true"> Data is Transferred!</i>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">{{__('Ceding/Broker')}}</label>
-            <select id="slipcedingbroker" name="slipcedingbroker" class="e1 form-control form-control-sm ">
-                <option value=""  selected disabled >Ceding or Broker</option>
-                @foreach($cedingbroker as $cb)
-                     <option value="{{ $cb->id }}" >{{ $cb->code }} - {{ $cb->name }}</option>
-                     
-                 @endforeach
-            </select>
-        </div>    
-        <div class="form-group">
-            <label for="">{{__('Source')}}</label>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="">{{__('Ceding/Broker')}}</label>
+                    <select id="slipcedingbroker" name="slipcedingbroker" class="e1 form-control form-control-sm ">
+                        <option value=""  selected disabled >Ceding or Broker</option>
+                        @foreach($cedingbroker as $cb)
+                             <option value="{{ $cb->id }}" >{{ $cb->code }} - {{ $cb->name }}</option>
+                             
+                         @endforeach
+                    </select>
+                </div>    
+                <div class="form-group">
+                    <label for="">{{__('Source')}}</label>
 
-            <select id="slipceding" name="slipceding" class="e1 form-control form-control-sm ">
-                <option value="" selected  disabled>Ceding </option>
-                @foreach($ceding as $cd)
-                    <option value="{{ $cd->id }}">{{ $cd->code }} - {{ $cd->name }}</option>
-                @endforeach
-            </select>
-        </div>  
-    </div>
-</div>
+                    <select id="slipceding" name="slipceding" class="e1 form-control form-control-sm ">
+                        <option value="" selected  disabled>Ceding </option>
+                        @foreach($ceding as $cd)
+                            <option value="{{ $cd->id }}">{{ $cd->code }} - {{ $cd->name }}</option>
+                        @endforeach
+                    </select>
+                </div>  
+            </div>
+        </div>
 
 <div class="row">
     <div class="col-md-6">
