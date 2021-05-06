@@ -41,18 +41,18 @@ class PermissionsController extends Controller
         $currency_module =  Module::where(['module_name'=>'currency_module','role_id'=>$selected_role_id])->first();
         $exchange_module =  Module::where(['module_name'=>'exchange_module','role_id'=>$selected_role_id])->first();
         $koc_module =  Module::where(['module_name'=>'koc_module','role_id'=>$selected_role_id])->first();
-        $felookup_module =  Module::where(['module_name'=>'felookup_module','role_id'=>$selected_role_id])->first();
-        $cedingbroker_module =  Module::where(['module_name'=>'cedingbroker_module','role_id'=>$selected_role_id])->first();
-        $gfh_module =  Module::where(['module_name'=>'gfh_module','role_id'=>$selected_role_id])->first();
+        $fe_lookup_module =  Module::where(['module_name'=>'fe_lookup_module','role_id'=>$selected_role_id])->first();
+        $ceding_broker_module =  Module::where(['module_name'=>'ceding_broker_module','role_id'=>$selected_role_id])->first();
+        $golf_field_hole_module =  Module::where(['module_name'=>'golf_field_hole_module','role_id'=>$selected_role_id])->first();
         $city_module =  Module::where(['module_name'=>'city_module','role_id'=>$selected_role_id])->first();
         $state_module =  Module::where(['module_name'=>'state_module','role_id'=>$selected_role_id])->first();
-        $eqz_module =  Module::where(['module_name'=>'eqz_module','role_id'=>$selected_role_id])->first();
-        $fz_module =  Module::where(['module_name'=>'fz_module','role_id'=>$selected_role_id])->first();
-        $shiptype_module =  Module::where(['module_name'=>'shiptype_module','role_id'=>$selected_role_id])->first();
+        $earthquake_zone_module =  Module::where(['module_name'=>'earthquake_zone_module','role_id'=>$selected_role_id])->first();
+        $flood_zone_module =  Module::where(['module_name'=>'flood_zone_module','role_id'=>$selected_role_id])->first();
+        $ship_type_module =  Module::where(['module_name'=>'ship_type_module','role_id'=>$selected_role_id])->first();
         $classification_module =  Module::where(['module_name'=>'classification_module','role_id'=>$selected_role_id])->first();
         $construction_module =  Module::where(['module_name'=>'construction_module','role_id'=>$selected_role_id])->first();
-        $marinelookup_module =  Module::where(['module_name'=>'marinelookup_module','role_id'=>$selected_role_id])->first();
-        $propertytype_module =  Module::where(['module_name'=>'propertytype_module','role_id'=>$selected_role_id])->first();
+        $marine_lookup_module =  Module::where(['module_name'=>'marine_lookup_module','role_id'=>$selected_role_id])->first();
+        $property_type_module =  Module::where(['module_name'=>'property_type_module','role_id'=>$selected_role_id])->first();
         $condition_needed_module =  Module::where(['module_name'=>'condition_needed_module','role_id'=>$selected_role_id])->first();
 
         
@@ -82,18 +82,18 @@ class PermissionsController extends Controller
                     'currency_module',
                     'exchange_module',
                     'koc_module',
-                    'gfh_module',
-                    'cedingbroker_module',
-                    'felookup_module',
+                    'golf_field_hole_module',
+                    'ceding_broker_module',
+                    'fe_lookup_module',
                     'city_module',
                     'state_module',
-                    'eqz_module',
-                    'fz_module',
-                    'shiptype_module',
+                    'earthquake_zone_module',
+                    'flood_zone_module',
+                    'ship_type_module',
                     'classification_module',
                     'construction_module',
-                    'marinelookup_module',
-                    'propertytype_module',
+                    'marine_lookup_module',
+                    'property_type_module',
                     'condition_needed_module',
                     
                 ]));
@@ -133,18 +133,18 @@ class PermissionsController extends Controller
         $currency_module =  Module::where(['module_name'=>'currency_module','role_id'=>$selected_role_id])->first();
         $exchange_module =  Module::where(['module_name'=>'exchange_module','role_id'=>$selected_role_id])->first();
         $koc_module =  Module::where(['module_name'=>'koc_module','role_id'=>$selected_role_id])->first();
-        $felookup_module =  Module::where(['module_name'=>'felookup_module','role_id'=>$selected_role_id])->first();
-        $cedingbroker_module =  Module::where(['module_name'=>'cedingbroker_module','role_id'=>$selected_role_id])->first();
-        $gfh_module =  Module::where(['module_name'=>'gfh_module','role_id'=>$selected_role_id])->first();
+        $fe_lookup_module =  Module::where(['module_name'=>'fe_lookup_module','role_id'=>$selected_role_id])->first();
+        $ceding_broker_module =  Module::where(['module_name'=>'ceding_broker_module','role_id'=>$selected_role_id])->first();
+        $golf_field_hole_module =  Module::where(['module_name'=>'golf_field_hole_module','role_id'=>$selected_role_id])->first();
         $city_module =  Module::where(['module_name'=>'city_module','role_id'=>$selected_role_id])->first();
         $state_module =  Module::where(['module_name'=>'state_module','role_id'=>$selected_role_id])->first();
-        $eqz_module =  Module::where(['module_name'=>'eqz_module','role_id'=>$selected_role_id])->first();
-        $fz_module =  Module::where(['module_name'=>'fz_module','role_id'=>$selected_role_id])->first();
-        $shiptype_module =  Module::where(['module_name'=>'shiptype_module','role_id'=>$selected_role_id])->first();
+        $earthquake_zone_module =  Module::where(['module_name'=>'earthquake_zone_module','role_id'=>$selected_role_id])->first();
+        $flood_zone_module =  Module::where(['module_name'=>'flood_zone_module','role_id'=>$selected_role_id])->first();
+        $ship_type_module =  Module::where(['module_name'=>'ship_type_module','role_id'=>$selected_role_id])->first();
         $classification_module =  Module::where(['module_name'=>'classification_module','role_id'=>$selected_role_id])->first();
         $construction_module =  Module::where(['module_name'=>'construction_module','role_id'=>$selected_role_id])->first();
-        $marinelookup_module =  Module::where(['module_name'=>'marinelookup_module','role_id'=>$selected_role_id])->first();
-        $propertytype_module =  Module::where(['module_name'=>'propertytype_module','role_id'=>$selected_role_id])->first();
+        $marine_lookup_module =  Module::where(['module_name'=>'marine_lookup_module','role_id'=>$selected_role_id])->first();
+        $property_type_module =  Module::where(['module_name'=>'property_type_module','role_id'=>$selected_role_id])->first();
         $condition_needed_module =  Module::where(['module_name'=>'condition_needed_module','role_id'=>$selected_role_id])->first();
         
 
@@ -174,18 +174,18 @@ class PermissionsController extends Controller
                     'currency_module',
                     'exchange_module',
                     'koc_module',
-                    'gfh_module',
-                    'cedingbroker_module',
-                    'felookup_module',
+                    'golf_field_hole_module',
+                    'ceding_broker_module',
+                    'fe_lookup_module',
                     'city_module',
                     'state_module',
-                    'eqz_module',
-                    'fz_module',
-                    'shiptype_module',
+                    'earthquake_zone_module',
+                    'flood_zone_module',
+                    'ship_type_module',
                     'classification_module',
                     'construction_module',
-                    'marinelookup_module',
-                    'propertytype_module',
+                    'marine_lookup_module',
+                    'property_type_module',
                     'condition_needed_module',
                 ]));
 
@@ -225,18 +225,18 @@ class PermissionsController extends Controller
         $currency_module =  Module::where(['module_name'=>'currency_module','role_id'=>$selected_role_id])->first();
         $exchange_module =  Module::where(['module_name'=>'exchange_module','role_id'=>$selected_role_id])->first();
         $koc_module =  Module::where(['module_name'=>'koc_module','role_id'=>$selected_role_id])->first();
-        $felookup_module =  Module::where(['module_name'=>'felookup_module','role_id'=>$selected_role_id])->first();
-        $cedingbroker_module =  Module::where(['module_name'=>'cedingbroker_module','role_id'=>$selected_role_id])->first();
-        $gfh_module =  Module::where(['module_name'=>'gfh_module','role_id'=>$selected_role_id])->first();
+        $fe_lookup_module =  Module::where(['module_name'=>'fe_lookup_module','role_id'=>$selected_role_id])->first();
+        $ceding_broker_module =  Module::where(['module_name'=>'ceding_broker_module','role_id'=>$selected_role_id])->first();
+        $golf_field_hole_module =  Module::where(['module_name'=>'golf_field_hole_module','role_id'=>$selected_role_id])->first();
         $city_module =  Module::where(['module_name'=>'city_module','role_id'=>$selected_role_id])->first();
         $state_module =  Module::where(['module_name'=>'state_module','role_id'=>$selected_role_id])->first();
-        $eqz_module =  Module::where(['module_name'=>'eqz_module','role_id'=>$selected_role_id])->first();
-        $fz_module =  Module::where(['module_name'=>'fz_module','role_id'=>$selected_role_id])->first();
-        $shiptype_module =  Module::where(['module_name'=>'shiptype_module','role_id'=>$selected_role_id])->first();
+        $earthquake_zone_module =  Module::where(['module_name'=>'earthquake_zone_module','role_id'=>$selected_role_id])->first();
+        $flood_zone_module =  Module::where(['module_name'=>'flood_zone_module','role_id'=>$selected_role_id])->first();
+        $ship_type_module =  Module::where(['module_name'=>'ship_type_module','role_id'=>$selected_role_id])->first();
         $classification_module =  Module::where(['module_name'=>'classification_module','role_id'=>$selected_role_id])->first();
         $construction_module =  Module::where(['module_name'=>'construction_module','role_id'=>$selected_role_id])->first();
-        $marinelookup_module =  Module::where(['module_name'=>'marinelookup_module','role_id'=>$selected_role_id])->first();
-        $propertytype_module =  Module::where(['module_name'=>'propertytype_module','role_id'=>$selected_role_id])->first();
+        $marine_lookup_module =  Module::where(['module_name'=>'marine_lookup_module','role_id'=>$selected_role_id])->first();
+        $property_type_module =  Module::where(['module_name'=>'property_type_module','role_id'=>$selected_role_id])->first();
         $condition_needed_module =  Module::where(['module_name'=>'condition_needed_module','role_id'=>$selected_role_id])->first();
 
 
@@ -266,18 +266,18 @@ class PermissionsController extends Controller
                     'currency_module',
                     'exchange_module',
                     'koc_module',
-                    'gfh_module',
-                    'cedingbroker_module',
-                    'felookup_module',
+                    'golf_field_hole_module',
+                    'ceding_broker_module',
+                    'fe_lookup_module',
                     'city_module',
                     'state_module',
-                    'eqz_module',
-                    'fz_module',
-                    'shiptype_module',
+                    'earthquake_zone_module',
+                    'flood_zone_module',
+                    'ship_type_module',
                     'classification_module',
                     'construction_module',
-                    'marinelookup_module',
-                    'propertytype_module',
+                    'marine_lookup_module',
+                    'property_type_module',
                     'condition_needed_module',
                 ]));
     }
