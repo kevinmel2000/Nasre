@@ -713,8 +713,6 @@
                             var str_minamount = conv_minamount.toString();
                             var curr_minamount = str_minamount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-                            var float_percent = obj.percentage.toFixed(2);
-
                             
                             $('#deductiblePanelupdate tbody').prepend('<tr id="iiddeductibleupdate'+obj.id+'" data-name="deductibleupdatevalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleupdate('+obj.id+')">delete</a></td></tr>');
 
@@ -735,8 +733,6 @@
                             var conv_amount = obj.amount.toFixed(2);
                             var str_amount = conv_amount.toString();
                             var curr_amount =  str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-                            var float_percent = obj.percentage.toFixed(2);
 
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
@@ -763,7 +759,6 @@
                             // var str_amount = conv_amount.toString();
                           // var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            // var curr_amount = obj.amount.toFixed(2);
 
 
                             var currdate = obj.installment_date;
@@ -771,12 +766,10 @@
                             console.log('conv date ' + convdate)
                             var strdate = convdate.toString();
 
-                            var float_percent = obj.percentage.toFixed(2);
-
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
                             
-                            $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+obj.id+'" data-name="installmentupdatevalue[]"><td data-name="'+obj.installment_date+'">'+strdate+'</td><td data-name="'+obj.percentage+'">'+obj.percentage +'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+obj.id+')">delete</a></td></tr>')
+                            $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+obj.id+'" data-name="installmentupdatevalue[]"><td data-name="'+obj.installment_date+'">'+strdate+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+obj.id+')">delete</a></td></tr>')
 
                         }
                     }
@@ -797,13 +790,11 @@
                             var str_amount = conv_amount.toString();
                             var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-                            var float_percent = obj.percentage.toFixed(2);
-
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
                             
                             
-                            $('#retrocessionPanelupdate tbody').prepend('<tr id="iidretrocessionupdate'+obj.id+'" data-name="retrocessionupdatevalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage +'</td><td class="amount" data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessionupdate('+obj.id+')">delete</a></td></tr>');
+                            $('#retrocessionPanelupdate tbody').prepend('<tr id="iidretrocessionupdate'+obj.id+'" data-name="retrocessionupdatevalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessionupdate('+obj.id+')">delete</a></td></tr>');
 
                         }
                     }
