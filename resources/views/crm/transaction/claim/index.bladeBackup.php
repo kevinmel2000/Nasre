@@ -18,7 +18,7 @@
 
 	<div class="container-fluid">
 
-		    <form autocomplete="off">
+		<form autocomplete="off">
 
 			<div class="card">
 
@@ -30,13 +30,74 @@
 
 					@include('crm.transaction.claim.layouts.head')
 
-					
+					<div class="card">
+
+						<div class="card-header bg-gray">
+							Incoming
+						</div>
+
+						<div class="card-body bg-light-gray ">
+
+							<div class="card">
+
+								<div class="card-header bg-gray">
+									Insured
+								</div>
+
+								<div class="card-body bg-light-gray ">
+
+									@include('crm.transaction.claim.layouts.insured')
+
+								</div>
+
+							</div>
+
+							<div class="card">
+
+								<div class="card-header bg-gray">
+									
+								</div>
+
+								<div class="card-body bg-light-gray ">
+
+									@include('crm.transaction.claim.layouts.insured2')
+
+								</div>
+
+							</div>
+
+							<div class="row">
+								<div class="col-md-6">
+									<div class="card">
+
+										<div class="card-header bg-gray">
+											Interest Insured
+										</div>
+
+										<div class="card-body bg-light-gray ">
+
+											@include('crm.transaction.claim.layouts.interest_insured')
+
+										</div>
+
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									
+								</div>
+							</div>
+
+
+						</div>
+
+					</div>
 
 				</div>
 
 			</div>
 
-		   </form>
+		</form>
 
 			<form autocomplete="off">
 
