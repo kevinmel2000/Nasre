@@ -275,14 +275,15 @@
                                             </div>
 
 
-                                            <!-- <div class="row">
+                                            <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Count Endorsement')}}</label>
-                                                        <input type="text" min="0" value="" step=".0001" id="countendorsmentupdate" name="countendorsmentupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                        <input type="hidden" min="0" value="" step=".0001" id="countendorsmentupdate" name="countendorsmentupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                        <input type="text" min="0" value="" step=".0001" id="countendorsmentupdate2" name="countendorsmentupdate" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" disabled="" />
                                                     </div>
                                                 </div>
-                                            </div> -->
+                                            </div>
                                             
                                             <div class="row">
                                                 <div class="col-md-12">

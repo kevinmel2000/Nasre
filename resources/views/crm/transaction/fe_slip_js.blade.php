@@ -631,6 +631,7 @@
                 }
 
                 $('#countendorsmentdetail').val(response.endorsment);
+                $('#countendorsmentdetail2').val(response.endorsment);
                 $('#remarksdetail').val(response.remarks);
                 
                 
@@ -980,6 +981,7 @@
 
                 $('#remarksupdate').val(response.remarks);
                 $('#countendorsmentupdate').val(response.endorsment);
+                $('#countendorsmentupdate2').val(response.endorsment);
 
 
 
@@ -1386,6 +1388,7 @@
             $('#slipdaytotalendorsement4').val("365");
 
             $('#countendorsmentdata').val(response.endorsment);
+            $('#countendorsmentdata2').val(response.endorsment);
             $('#remarksendorsement').val(response.remarks);
                 
             

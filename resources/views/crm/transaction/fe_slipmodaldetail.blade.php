@@ -269,7 +269,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">{{__('Count Endorsement')}}</label>
-                                                        <input type="text" min="0" value="" readonly="readonly" step=".0001" id="countendorsmentdetail" name="countendorsmentdetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" />
+                                                        <input type="text" min="0" value=""  step=".0001" id="countendorsmentdetail" name="countendorsmentdetail" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="" disabled />
                                                     </div>
                                                 </div>
                                             </div>
