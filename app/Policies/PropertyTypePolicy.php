@@ -19,7 +19,7 @@ class PropertyTypePolicy
      */
     public function viewAny(User $user)
     {
-        $module = Module::select(['read', 'create', 'update', 'delete'])->where(['module_name'=>'propertytype_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['read', 'create', 'update', 'delete'])->where(['module_name'=>'property_type_module', 'role_id'=>$user->role->id])->first();
         if ($module->create == 'on' || $module->read == 'on' || $module->update == 'on' || $module->delete == 'on') {
             return true;
         }else{
@@ -36,7 +36,7 @@ class PropertyTypePolicy
      */
     public function view(User $user)
     {
-        $module = Module::select(['read'])->where(['module_name'=>'propertytype_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['read'])->where(['module_name'=>'property_type_module', 'role_id'=>$user->role->id])->first();
         return $module->read == 'on';
     }
 
@@ -48,7 +48,7 @@ class PropertyTypePolicy
      */
     public function create(User $user)
     {
-        $module = Module::select(['create'])->where(['module_name'=>'propertytype_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['create'])->where(['module_name'=>'property_type_module', 'role_id'=>$user->role->id])->first();
         return $module->create == 'on';
     }
 
@@ -61,7 +61,7 @@ class PropertyTypePolicy
      */
     public function update(User $user)
     {
-        $module = Module::select(['update'])->where(['module_name'=>'propertytype_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['update'])->where(['module_name'=>'property_type_module', 'role_id'=>$user->role->id])->first();
         return $module->update == 'on';
     }
 
@@ -74,7 +74,7 @@ class PropertyTypePolicy
      */
     public function delete(User $user)
     {
-        $module = Module::select(['delete'])->where(['module_name'=>'propertytype_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['delete'])->where(['module_name'=>'property_type_module', 'role_id'=>$user->role->id])->first();
         return $module->delete == 'on';
     }
 
