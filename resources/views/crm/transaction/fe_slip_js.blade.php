@@ -6797,8 +6797,8 @@ function deletelocationriskdetail(id){
 
    $('#sliprateupdate').keyup(function (e) {
         if(e.keyCode != 9){
-            var insurance_period_from2 = $('#sliprpfromupdate').val();
-            var insurance_period_to2 = $('#sliprptoupdate').val();
+            var insurance_period_from2 = $('#sliprpfrom').val();
+            var insurance_period_to2 = $('#sliprpto').val();
             var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
             var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
             var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
@@ -6847,39 +6847,37 @@ function deletelocationriskdetail(id){
                     $('#slipbasicpremiumupdate').val(real_sum);
 
 
-
                 }
 
+            if(basic_premi){
+                var bpinsurance_period_from2 = $('#sliprpfrom').val();
+                var bpinsurance_period_to2 = $('#sliprpto').val();
+                var bpnewinsurance_period_from2 = bpinsurance_period_from2.split("/").reverse().join("-");
+                var bpnewinsurance_period_to2 = bpinsurance_period_to2.split("/").reverse().join("-");
+                var bpdays=daysBetween(bpnewinsurance_period_from2, bpnewinsurance_period_to2);
+                var bpinsurance = (bpdays/365);
+                
+                console.log(bpinsurance_period_from2)
+                console.log(bpinsurance_period_to2)
+                console.log(bpnewinsurance_period_from2)
+                console.log(bpnewinsurance_period_to2)
+                console.log(bpdays)
+                console.log(bpinsurance)
 
-                if(basic_premi){
-                    var bpinsurance_period_from2 = $('#sliprpfrom').val();
-                    var bpinsurance_period_to2 = $('#sliprpto').val();
-                    var bpnewinsurance_period_from2 = bpinsurance_period_from2.split("/").reverse().join("-");
-                    var bpnewinsurance_period_to2 = bpinsurance_period_to2.split("/").reverse().join("-");
-                    var bpdays=daysBetween(bpnewinsurance_period_from2, bpnewinsurance_period_to2);
-                    var bpinsurance = (bpdays/365);
-                    
-                    console.log(bpinsurance_period_from2)
-                    console.log(bpinsurance_period_to2)
-                    console.log(bpnewinsurance_period_from2)
-                    console.log(bpnewinsurance_period_to2)
-                    console.log(bpdays)
-                    console.log(bpinsurance)
+                var bprateslip =  parseFloat($('#sliprateupdate').val());
+                var bpsumrate = $("#sliptotalrateupdate").val();
+                var bpconv_sumrate = parseFloat(bpsumrate.replace(/,/g, ""));
+                var bptsi = $("#sharetotalsumupdate").val();
+                var bpconv_tsi = parseFloat(bptsi.replace(/,/g, ""));
+                var bpsum = isNaN(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance) ? 0 :(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance).toFixed(2) ;
+                var bpreal_sum = bpsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-                    var bprateslip =  parseFloat($('#sliprateupdate').val());
-                    var bpsumrate = $("#sliptotalrateupdate").val();
-                    var bpconv_sumrate = parseFloat(bpsumrate.replace(/,/g, ""));
-                    var bptsi = $("#sharetotalsumupdate").val();
-                    var bpconv_tsi = parseFloat(bptsi.replace(/,/g, ""));
-                    var bpsum = isNaN(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance) ? 0 :(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance).toFixed(2) ;
-                    var bpreal_sum = bpsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-                    $('#slipbasicpremiumupdate').val(bpreal_sum);
-                }
+                $('#slipbasicpremiumupdate').val(bpreal_sum);
+            }
             
         }else{
-            var insurance_period_from2 = $('#sliprpfromupdate').val();
-            var insurance_period_to2 = $('#sliprptoupdate').val();
+            var insurance_period_from2 = $('#sliprpfrom').val();
+            var insurance_period_to2 = $('#sliprpto').val();
             var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
             var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
             var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
@@ -6896,6 +6894,8 @@ function deletelocationriskdetail(id){
             var tsi = $("#sharetotalsumupdate").val();
             var conv_tsi = parseFloat(tsi.replace(/,/g, ""));
             var totalrateexc = $('#sliptotalnilaiecupdate').val();
+            var basic_premi = $('#slipbasicpremiumupdate').val();
+
             if(totalrateexc){
                     var conv_totalrateexc = parseFloat(totalrateexc);
                     var sumtotalrate = isNaN(rateslip + parseFloat(conv_totalrateexc)) ? 0 :(rateslip  + parseFloat(conv_totalrateexc));
@@ -6912,6 +6912,9 @@ function deletelocationriskdetail(id){
                     console.log('conv_sumrate' + sum)
                     console.log('real_sum' + real_sum)
                     $('#slipbasicpremiumupdate').val(real_sum);
+
+
+
                 }else{
                      var conv_totalrateexc = parseFloat(totalrateexc);
                      var sumtotalrate = isNaN(parseFloat(0) + rateslip) ? 0 :(parseFloat(0) + rateslip);
@@ -6931,34 +6934,34 @@ function deletelocationriskdetail(id){
                     $('#slipbasicpremiumupdate').val(real_sum);
                 }
 
+            if(basic_premi){
+                var bpinsurance_period_from2 = $('#sliprpfrom').val();
+                var bpinsurance_period_to2 = $('#sliprpto').val();
+                var bpnewinsurance_period_from2 = bpinsurance_period_from2.split("/").reverse().join("-");
+                var bpnewinsurance_period_to2 = bpinsurance_period_to2.split("/").reverse().join("-");
+                var bpdays=daysBetween(bpnewinsurance_period_from2, bpnewinsurance_period_to2);
+                var bpinsurance = (bpdays/365);
+                
+                console.log(bpinsurance_period_from2)
+                console.log(bpinsurance_period_to2)
+                console.log(bpnewinsurance_period_from2)
+                console.log(bpnewinsurance_period_to2)
+                console.log(bpdays)
+                console.log(bpinsurance)
 
-                if(basic_premi){
-                    var bpinsurance_period_from2 = $('#sliprpfrom').val();
-                    var bpinsurance_period_to2 = $('#sliprpto').val();
-                    var bpnewinsurance_period_from2 = bpinsurance_period_from2.split("/").reverse().join("-");
-                    var bpnewinsurance_period_to2 = bpinsurance_period_to2.split("/").reverse().join("-");
-                    var bpdays=daysBetween(bpnewinsurance_period_from2, bpnewinsurance_period_to2);
-                    var bpinsurance = (bpdays/365);
-                    
-                    console.log(bpinsurance_period_from2)
-                    console.log(bpinsurance_period_to2)
-                    console.log(bpnewinsurance_period_from2)
-                    console.log(bpnewinsurance_period_to2)
-                    console.log(bpdays)
-                    console.log(bpinsurance)
+                var bprateslip =  parseFloat($('#sliprateupdate').val());
+                var bpsumrate = $("#sliptotalrateupdate").val();
+                var bpconv_sumrate = parseFloat(bpsumrate.replace(/,/g, ""));
+                var bptsi = $("#sharetotalsumupdate").val();
+                var bpconv_tsi = parseFloat(bptsi.replace(/,/g, ""));
+                var bpsum = isNaN(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance) ? 0 :(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance).toFixed(2) ;
+                var bpreal_sum = bpsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-                    var bprateslip =  parseFloat($('#sliprateupdate').val());
-                    var bpsumrate = $("#sliptotalrateupdate").val();
-                    var bpconv_sumrate = parseFloat(bpsumrate.replace(/,/g, ""));
-                    var bptsi = $("#sharetotalsumupdate").val();
-                    var bpconv_tsi = parseFloat(bptsi.replace(/,/g, ""));
-                    var bpsum = isNaN(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance) ? 0 :(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance).toFixed(2) ;
-                    var bpreal_sum = bpsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-                    $('#slipbasicpremiumupdate').val(bpreal_sum);
-                }
+                $('#slipbasicpremiumupdate').val(bpreal_sum);
+            }
         }
     });
+
 
 
    $('#sliprateupdate').change(function(){
@@ -7596,8 +7599,8 @@ function deletelocationriskdetail(id){
 
    $('#sliprateendorsement').keyup(function (e) {
         if(e.keyCode != 9){
-            var insurance_period_from2 = $('#sliprpfromendorsement').val();
-            var insurance_period_to2 = $('#sliprptoendorsement').val();
+            var insurance_period_from2 = $('#sliprpfrom').val();
+            var insurance_period_to2 = $('#sliprpto').val();
             var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
             var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
             var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
@@ -7648,36 +7651,35 @@ function deletelocationriskdetail(id){
 
                 }
 
+            if(basic_premi){
+                var bpinsurance_period_from2 = $('#sliprpfrom').val();
+                var bpinsurance_period_to2 = $('#sliprpto').val();
+                var bpnewinsurance_period_from2 = bpinsurance_period_from2.split("/").reverse().join("-");
+                var bpnewinsurance_period_to2 = bpinsurance_period_to2.split("/").reverse().join("-");
+                var bpdays=daysBetween(bpnewinsurance_period_from2, bpnewinsurance_period_to2);
+                var bpinsurance = (bpdays/365);
+                
+                console.log(bpinsurance_period_from2)
+                console.log(bpinsurance_period_to2)
+                console.log(bpnewinsurance_period_from2)
+                console.log(bpnewinsurance_period_to2)
+                console.log(bpdays)
+                console.log(bpinsurance)
 
-                if(basic_premi){
-                    var bpinsurance_period_from2 = $('#sliprpfrom').val();
-                    var bpinsurance_period_to2 = $('#sliprpto').val();
-                    var bpnewinsurance_period_from2 = bpinsurance_period_from2.split("/").reverse().join("-");
-                    var bpnewinsurance_period_to2 = bpinsurance_period_to2.split("/").reverse().join("-");
-                    var bpdays=daysBetween(bpnewinsurance_period_from2, bpnewinsurance_period_to2);
-                    var bpinsurance = (bpdays/365);
-                    
-                    console.log(bpinsurance_period_from2)
-                    console.log(bpinsurance_period_to2)
-                    console.log(bpnewinsurance_period_from2)
-                    console.log(bpnewinsurance_period_to2)
-                    console.log(bpdays)
-                    console.log(bpinsurance)
+                var bprateslip =  parseFloat($('#sliprateendorsement').val());
+                var bpsumrate = $("#sliptotalrateendorsement").val();
+                var bpconv_sumrate = parseFloat(bpsumrate.replace(/,/g, ""));
+                var bptsi = $("#sharetotalsumendorsement").val();
+                var bpconv_tsi = parseFloat(bptsi.replace(/,/g, ""));
+                var bpsum = isNaN(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance) ? 0 :(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance).toFixed(2) ;
+                var bpreal_sum = bpsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-                    var bprateslip =  parseFloat($('#sliprateendorsement').val());
-                    var bpsumrate = $("#sliptotalrateendorsement").val();
-                    var bpconv_sumrate = parseFloat(bpsumrate.replace(/,/g, ""));
-                    var bptsi = $("#sharetotalsumendorsement").val();
-                    var bpconv_tsi = parseFloat(bptsi.replace(/,/g, ""));
-                    var bpsum = isNaN(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance) ? 0 :(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance).toFixed(2) ;
-                    var bpreal_sum = bpsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-                    $('#slipbasicpremiumendorsement').val(bpreal_sum);
-                }
+                $('#slipbasicpremiumendorsement').val(bpreal_sum);
+            }
             
         }else{
-            var insurance_period_from2 = $('#sliprpfromendorsement').val();
-            var insurance_period_to2 = $('#sliprptoendorsement').val();
+            var insurance_period_from2 = $('#sliprpfrom').val();
+            var insurance_period_to2 = $('#sliprpto').val();
             var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
             var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
             var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
@@ -7694,6 +7696,8 @@ function deletelocationriskdetail(id){
             var tsi = $("#sharetotalsumendorsement").val();
             var conv_tsi = parseFloat(tsi.replace(/,/g, ""));
             var totalrateexc = $('#sliptotalnilaiecendorsement').val();
+            var basic_premi = $('#slipbasicpremiumendorsement').val();
+
             if(totalrateexc){
                     var conv_totalrateexc = parseFloat(totalrateexc);
                     var sumtotalrate = isNaN(rateslip + parseFloat(conv_totalrateexc)) ? 0 :(rateslip  + parseFloat(conv_totalrateexc));
@@ -7710,6 +7714,9 @@ function deletelocationriskdetail(id){
                     console.log('conv_sumrate' + sum)
                     console.log('real_sum' + real_sum)
                     $('#slipbasicpremiumendorsement').val(real_sum);
+
+
+
                 }else{
                      var conv_totalrateexc = parseFloat(totalrateexc);
                      var sumtotalrate = isNaN(parseFloat(0) + rateslip) ? 0 :(parseFloat(0) + rateslip);
@@ -7729,34 +7736,33 @@ function deletelocationriskdetail(id){
                     $('#slipbasicpremiumendorsement').val(real_sum);
                 }
 
-                if(basic_premi){
-                    var bpinsurance_period_from2 = $('#sliprpfrom').val();
-                    var bpinsurance_period_to2 = $('#sliprpto').val();
-                    var bpnewinsurance_period_from2 = bpinsurance_period_from2.split("/").reverse().join("-");
-                    var bpnewinsurance_period_to2 = bpinsurance_period_to2.split("/").reverse().join("-");
-                    var bpdays=daysBetween(bpnewinsurance_period_from2, bpnewinsurance_period_to2);
-                    var bpinsurance = (bpdays/365);
-                    
-                    console.log(bpinsurance_period_from2)
-                    console.log(bpinsurance_period_to2)
-                    console.log(bpnewinsurance_period_from2)
-                    console.log(bpnewinsurance_period_to2)
-                    console.log(bpdays)
-                    console.log(bpinsurance)
+            if(basic_premi){
+                var bpinsurance_period_from2 = $('#sliprpfrom').val();
+                var bpinsurance_period_to2 = $('#sliprpto').val();
+                var bpnewinsurance_period_from2 = bpinsurance_period_from2.split("/").reverse().join("-");
+                var bpnewinsurance_period_to2 = bpinsurance_period_to2.split("/").reverse().join("-");
+                var bpdays=daysBetween(bpnewinsurance_period_from2, bpnewinsurance_period_to2);
+                var bpinsurance = (bpdays/365);
+                
+                console.log(bpinsurance_period_from2)
+                console.log(bpinsurance_period_to2)
+                console.log(bpnewinsurance_period_from2)
+                console.log(bpnewinsurance_period_to2)
+                console.log(bpdays)
+                console.log(bpinsurance)
 
-                    var bprateslip =  parseFloat($('#sliprateendorsement').val());
-                    var bpsumrate = $("#sliptotalrateendorsement").val();
-                    var bpconv_sumrate = parseFloat(bpsumrate.replace(/,/g, ""));
-                    var bptsi = $("#sharetotalsumendorsement").val();
-                    var bpconv_tsi = parseFloat(bptsi.replace(/,/g, ""));
-                    var bpsum = isNaN(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance) ? 0 :(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance).toFixed(2) ;
-                    var bpreal_sum = bpsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                var bprateslip =  parseFloat($('#sliprateendorsement').val());
+                var bpsumrate = $("#sliptotalrateendorsement").val();
+                var bpconv_sumrate = parseFloat(bpsumrate.replace(/,/g, ""));
+                var bptsi = $("#sharetotalsumendorsement").val();
+                var bpconv_tsi = parseFloat(bptsi.replace(/,/g, ""));
+                var bpsum = isNaN(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance) ? 0 :(((bpconv_sumrate / 1000) * bpconv_tsi) * bpinsurance).toFixed(2) ;
+                var bpreal_sum = bpsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-                    $('#slipbasicpremiumendorsement').val(bpreal_sum);
-                }
+                $('#slipbasicpremiumendorsement').val(bpreal_sum);
+            }
         }
     });
-
 
    $('#sliprateendorsement').change(function(){
         var rate_lower = $('#slipbclaendorsement').val();
