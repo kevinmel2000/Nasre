@@ -56,6 +56,8 @@
                   @endif
                   <hr>
                   <h3> Master Form Module </h3>
+                  <br>
+                  <br>
                   @foreach ($modules as $module)
                    
                     @if ($module == NULL)
