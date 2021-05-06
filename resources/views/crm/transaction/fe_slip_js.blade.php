@@ -2010,7 +2010,6 @@
             swal("Warning","Date Format not valid, Please check again","format error")
             
           }
-
     });
 
     $('#slipipto').change(function(){
@@ -2091,6 +2090,7 @@
             
           } 
         
+        // $('#slipipto').val($(this).val());
         $('#slipdaytotal').val(constday1);
         $('#slipdaytotal2').val(constday1);
         $('#slipdaytotal3').val(constday2);
@@ -2133,6 +2133,7 @@
                 
               } 
             
+            // $('#slipipfrom').val($(this).val());
             $('#slipdaytotal').val(constday1);
             $('#slipdaytotal2').val(constday1);
             $('#slipdaytotal3').val(constday2);
@@ -2176,52 +2177,384 @@
 
     $('#slipipfromupdate').change(function(){
         $('#sliprpfromupdate').val($(this).val());
+
+        var date_to = $('#slipiptoupdate').val();
+        if(date_to){
+            var insurance_period_from2 = $('#sliprpfromupdate').val();
+            var insurance_period_to2 = $('#sliprptoupdate').val();
+            var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+            var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+            var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
+            var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(2);
+            // var constday = days.toString() + "/365";
+            var constday1 = days.toString();
+            var constday2 = "365";
+            console.log(insurance_period_from2)
+            console.log(insurance_period_to2)
+            console.log(days)
+            console.log(constday1)
+            console.log(constday2)
+            console.log(parseFloat(sum))
+
+            var fulltgl = $(this).val();
+
+            var tgl = parseInt(fulltgl.substring(0,2));
+            console.log(tgl)
+            var month = parseInt(fulltgl.substring(3,5));
+            console.log(month)
+            // var year = full.substring(6,12);
+
+            if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
+                swal("Warning","Date Format not valid, Please check again","format error")
+              }else if(month == 2 && tgl > 28){
+                swal("Warning","Date Format not valid, Please check again","format error")
+
+              } 
+            
+            $('#slipdaytotalupdate').val(constday1);
+            $('#slipdaytotalupdate2').val(constday1);
+            $('#slipdaytotalupdate3').val(constday2);
+            $('#slipdaytotalupdate4').val(constday2);
+            $('#sliptotalsumdateupdate').val(parseFloat(sum));
+            $('#sliptotalsumdateupdate2').val(parseFloat(sum));
+        }
+
+        var fulltgl = $(this).val();
+
+        var tgl = parseInt(fulltgl.substring(0,2));
+        console.log('ini tgl' + tgl)
+        var month = parseInt(fulltgl.substring(3,5));
+        console.log('ini bln' + month)
+        // var year = full.substring(6,12);
+
+        if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
+            swal("Warning","Date Format not valid, Please check again","format error")
+          }else if(month == 2 && tgl > 28){
+            swal("Warning","Date Format not valid, Please check again","format error")
+            
+          }
     });
 
     $('#slipiptoupdate').change(function(){
         $('#sliprptoupdate').val($(this).val());
-
-        var insurance_period_from2 = $('#slipipfrom').val().split("/").reverse().join("-");
-        var insurance_period_to2 = $('#slipipto').val().split("/").reverse().join("-");
-        var days=daysBetween(insurance_period_from2, insurance_period_to2);
+        
+        var insurance_period_from2 = $('#sliprpfromupdate').val();
+        var insurance_period_to2 = $('#sliprptoupdate').val();
+        var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+        var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+        var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
         var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
-        var constday = days.toString() + "/365";
-       
+        // var constday = days.toString() + "/365";
+        var constday1 = days.toString();
+        var constday2 = "365";
+        console.log(insurance_period_from2)
+        console.log(insurance_period_to2)
+        console.log(days)
+        console.log(constday1)
+        console.log(constday2)
+        console.log(parseFloat(sum))
 
-        $('slipdaytotalupdate').val(days);
-        $('slipdaytotalupdate2').val(days);
+        var fulltgl = $(this).val();
 
-        $('slipdaytotalupdate3').val("365");
-        $('slipdaytotalupdate4').val("365");
+        var tgl = parseInt(fulltgl.substring(0,2));
+        console.log('ini tgl' + tgl)
+        
+        var month = parseInt(fulltgl.substring(3,5));
+        console.log('ini bln' + month)
+        
+        // var year = full.substring(6,12);
 
-        $('sliptotalsumdateupdate').val(sum);
-        $('sliptotalsumdateupdate2').val(sum);
-        // document.getElementById("daytotalupdate").innerHTML = "Total Days :"+days;
+        if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
+            swal("Warning","Date Format not valid, Please check again","format error")
+          }else if(month == 2 && tgl > 28){
+            swal("Warning","Date Format not valid, Please check again","format error")
+            
+          } 
+        
+        $('#slipdaytotalupdate').val(constday1);
+        $('#slipdaytotalupdate2').val(constday1);
+        $('#slipdaytotalupdate3').val(constday2);
+        $('#slipdaytotalupdate4').val(constday2);
+        $('#sliptotalsumdateupdate').val(parseFloat(sum));
+        $('#sliptotalsumdateupdate2').val(parseFloat(sum));
+
+        // document.getElementById("daytotal").innerHTML = "Total Days :"+days;
+    });
+
+    $('#sliprptoupdate').change(function(){
+        var insurance_period_from2 = $('#sliprpfromupdate').val();
+        var insurance_period_to2 = $('#sliprptoupdate').val();
+        var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+        var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+        var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
+        var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+        // var constday = days.toString() + "/365";
+        var constday1 = days.toString();
+        var constday2 = "365";
+        console.log(insurance_period_from2)
+        console.log(insurance_period_to2)
+        console.log(days)
+        console.log(constday1)
+        console.log(constday2)  
+        console.log(parseFloat(sum))
+
+        var fulltgl = $(this).val();
+
+        var tgl = parseInt(fulltgl.substring(0,2));
+        console.log('ini tgl' + tgl)
+        var month = parseInt(fulltgl.substring(3,5));
+        console.log('ini bln' + month)
+        // var year = full.substring(6,12);
+
+        if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
+            swal("Warning","Date Format not valid, Please check again","format error")
+          }else if(month == 2 && tgl > 28){
+            swal("Warning","Date Format not valid, Please check again","format error")
+            
+          } 
+        
+        // $('#slipipto').val($(this).val());
+        $('#slipdaytotalupdate').val(constday1);
+        $('#slipdaytotalupdate2').val(constday1);
+        $('#slipdaytotalupdate3').val(constday2);
+        $('#slipdaytotalupdate4').val(constday2);
+        $('#sliptotalsumdateupdate').val(parseFloat(sum));
+        $('#sliptotalsumdateupdate2').val(parseFloat(sum));
+    });
+
+    $('#sliprpfromupdate').change(function(){
+        var date_to = $('#sliprptoupdate').val();
+        if(date_to){
+            var insurance_period_from2 = $('#sliprpfrom').val();
+            var insurance_period_to2 = $('#sliprpto').val();
+            var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+            var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+            var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
+            var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+            // var constday = days.toString() + "/365";
+            var constday1 = days.toString();
+            var constday2 = "365";
+            console.log(insurance_period_from2)
+            console.log(insurance_period_to2)
+            console.log(days)
+            console.log(constday1)
+            console.log(constday2)
+            console.log(parseFloat(sum))
+
+            var fulltgl = $(this).val();
+
+            var tgl = parseInt(fulltgl.substring(0,2));
+            console.log('ini tgl' + tgl)
+            var month = parseInt(fulltgl.substring(3,5));
+            console.log('ini bln' + month)
+            // var year = full.substring(6,12);
+
+            if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
+                swal("Warning","Date Format not valid, Please check again","format error")
+              }else if(month == 2 && tgl > 28){
+                swal("Warning","Date Format not valid, Please check again","format error")
+                
+              } 
+            
+            // $('#slipipfrom').val($(this).val());
+            $('#slipdaytotalupdate').val(constday1);
+            $('#slipdaytotalupdate2').val(constday1);
+            $('#slipdaytotalupdate3').val(constday2);
+            $('#slipdaytotalupdate4').val(constday2);
+            $('#sliptotalsumdateupdate').val(parseFloat(sum));
+            $('#sliptotalsumdateupdate2').val(parseFloat(sum));
+        }
     });
 
     $('#slipipfromendorsement').change(function(){
         $('#sliprpfromendorsement').val($(this).val());
+
+        var date_to = $('#slipiptoendorsement').val();
+        if(date_to){
+            var insurance_period_from2 = $('#sliprpfromendorsement').val();
+            var insurance_period_to2 = $('#sliprptoendorsement').val();
+            var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+            var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+            var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
+            var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(2);
+            // var constday = days.toString() + "/365";
+            var constday1 = days.toString();
+            var constday2 = "365";
+            console.log(insurance_period_from2)
+            console.log(insurance_period_to2)
+            console.log(days)
+            console.log(constday1)
+            console.log(constday2)
+            console.log(parseFloat(sum))
+
+            var fulltgl = $(this).val();
+
+            var tgl = parseInt(fulltgl.substring(0,2));
+            console.log(tgl)
+            var month = parseInt(fulltgl.substring(3,5));
+            console.log(month)
+            // var year = full.substring(6,12);
+
+            if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
+                swal("Warning","Date Format not valid, Please check again","format error")
+              }else if(month == 2 && tgl > 28){
+                swal("Warning","Date Format not valid, Please check again","format error")
+
+              } 
+            
+            $('#slipdaytotalendorsement').val(constday1);
+            $('#slipdaytotalendorsement2').val(constday1);
+            $('#slipdaytotalendorsement3').val(constday2);
+            $('#slipdaytotalendorsement4').val(constday2);
+            $('#sliptotalsumdateendorsement').val(parseFloat(sum));
+            $('#sliptotalsumdateendorsement2').val(parseFloat(sum));
+        }
+
+        var fulltgl = $(this).val();
+
+        var tgl = parseInt(fulltgl.substring(0,2));
+        console.log('ini tgl' + tgl)
+        var month = parseInt(fulltgl.substring(3,5));
+        console.log('ini bln' + month)
+        // var year = full.substring(6,12);
+
+        if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
+            swal("Warning","Date Format not valid, Please check again","format error")
+          }else if(month == 2 && tgl > 28){
+            swal("Warning","Date Format not valid, Please check again","format error")
+            
+          }
     });
 
     $('#slipiptoendorsement').change(function(){
         $('#sliprptoendorsement').val($(this).val());
-
-        var insurance_period_from2 = $('#slipipfrom').val().split("/").reverse().join("-");
-        var insurance_period_to2 = $('#slipipto').val().split("/").reverse().join("-");
-        var days=daysBetween(insurance_period_from2, insurance_period_to2);
-        var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
-        var constday = days.toString() + "/365";
-
-        $('sliptotalsumdateendorsement').val(sum);
         
-       // $('slipdaytotalendorsement').val(constday);
-        $('slipdaytotalendorsement').val(days);
-        $('slipdaytotalendorsement2').val(days);
+        var insurance_period_from2 = $('#sliprpfromendorsement').val();
+        var insurance_period_to2 = $('#sliprptoendorsement').val();
+        var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+        var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+        var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
+        var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+        // var constday = days.toString() + "/365";
+        var constday1 = days.toString();
+        var constday2 = "365";
+        console.log(insurance_period_from2)
+        console.log(insurance_period_to2)
+        console.log(days)
+        console.log(constday1)
+        console.log(constday2)
+        console.log(parseFloat(sum))
 
-        $('slipdaytotalendorsement3').val("365");
-        $('slipdaytotalendorsement4').val("365");
+        var fulltgl = $(this).val();
 
-        // document.getElementById("daytotalendorsement").innerHTML = "Total Days :"+days;
+        var tgl = parseInt(fulltgl.substring(0,2));
+        console.log('ini tgl' + tgl)
+        
+        var month = parseInt(fulltgl.substring(3,5));
+        console.log('ini bln' + month)
+        
+        // var year = full.substring(6,12);
+
+        if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
+            swal("Warning","Date Format not valid, Please check again","format error")
+          }else if(month == 2 && tgl > 28){
+            swal("Warning","Date Format not valid, Please check again","format error")
+            
+          } 
+        
+        $('#slipdaytotalendorsement').val(constday1);
+        $('#slipdaytotalendorsement2').val(constday1);
+        $('#slipdaytotalendorsement3').val(constday2);
+        $('#slipdaytotalendorsement4').val(constday2);
+        $('#sliptotalsumdateendorsement').val(parseFloat(sum));
+        $('#sliptotalsumdateendorsement2').val(parseFloat(sum));
+
+        // document.getElementById("daytotal").innerHTML = "Total Days :"+days;
+    });
+
+    $('#sliprptoendorsement').change(function(){
+        var insurance_period_from2 = $('#sliprpfromendorsement').val();
+        var insurance_period_to2 = $('#sliprptoendorsement').val();
+        var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+        var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+        var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
+        var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+        // var constday = days.toString() + "/365";
+        var constday1 = days.toString();
+        var constday2 = "365";
+        console.log(insurance_period_from2)
+        console.log(insurance_period_to2)
+        console.log(days)
+        console.log(constday1)
+        console.log(constday2)  
+        console.log(parseFloat(sum))
+
+        var fulltgl = $(this).val();
+
+        var tgl = parseInt(fulltgl.substring(0,2));
+        console.log('ini tgl' + tgl)
+        var month = parseInt(fulltgl.substring(3,5));
+        console.log('ini bln' + month)
+        // var year = full.substring(6,12);
+
+        if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
+            swal("Warning","Date Format not valid, Please check again","format error")
+          }else if(month == 2 && tgl > 28){
+            swal("Warning","Date Format not valid, Please check again","format error")
+            
+          } 
+        
+        // $('#slipipto').val($(this).val());
+        $('#slipdaytotalendorsement').val(constday1);
+        $('#slipdaytotalendorsement2').val(constday1);
+        $('#slipdaytotalendorsement3').val(constday2);
+        $('#slipdaytotalendorsement4').val(constday2);
+        $('#sliptotalsumdateendorsement').val(parseFloat(sum));
+        $('#sliptotalsumdateendorsement2').val(parseFloat(sum));
+    });
+
+    $('#sliprpfromendorsement').change(function(){
+        var date_to = $('#sliprptoendorsement').val();
+        if(date_to){
+            var insurance_period_from2 = $('#sliprpfrom').val();
+            var insurance_period_to2 = $('#sliprpto').val();
+            var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
+            var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
+            var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
+            var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+            // var constday = days.toString() + "/365";
+            var constday1 = days.toString();
+            var constday2 = "365";
+            console.log(insurance_period_from2)
+            console.log(insurance_period_to2)
+            console.log(days)
+            console.log(constday1)
+            console.log(constday2)
+            console.log(parseFloat(sum))
+
+            var fulltgl = $(this).val();
+
+            var tgl = parseInt(fulltgl.substring(0,2));
+            console.log('ini tgl' + tgl)
+            var month = parseInt(fulltgl.substring(3,5));
+            console.log('ini bln' + month)
+            // var year = full.substring(6,12);
+
+            if (tgl < 1 || tgl > 31 || month < 1 || month > 12) {
+                swal("Warning","Date Format not valid, Please check again","format error")
+              }else if(month == 2 && tgl > 28){
+                swal("Warning","Date Format not valid, Please check again","format error")
+                
+              } 
+            
+            // $('#slipipfrom').val($(this).val());
+            $('#slipdaytotalendorsement').val(constday1);
+            $('#slipdaytotalendorsement2').val(constday1);
+            $('#slipdaytotalendorsement3').val(constday2);
+            $('#slipdaytotalendorsement4').val(constday2);
+            $('#sliptotalsumdateendorsement').val(parseFloat(sum));
+            $('#sliptotalsumdateendorsement2').val(parseFloat(sum));
+        }
     });
 
 
@@ -9155,69 +9488,69 @@ function deletelocationriskdetail(id){
 
        
        $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
        $.ajax({
-         url:"{{ route('extendcoverage.store') }}",
-         type:"POST",
-         data:{
-             slipcncode:slipcncode,
-             percentage:percentage,
-             amount:real_amount,
-             id_slip:slip_id,
-             insured_id:code_ms,
-             sliptype:sliptype
-         },
-         beforeSend: function() { $("body").addClass("loading");  },
-         complete: function() {  $("body").removeClass("loading"); },
-         success:function(response)
-         {
+             url:"{{ route('extendcoverage.store') }}",
+             type:"POST",
+             data:{
+                 slipcncode:slipcncode,
+                 percentage:percentage,
+                 amount:real_amount,
+                 id_slip:slip_id,
+                 insured_id:code_ms,
+                 sliptype:sliptype
+             },
+             beforeSend: function() { $("body").addClass("loading");  },
+             complete: function() {  $("body").removeClass("loading"); },
+             success:function(response)
+             {
 
 
-             console.log(response)
-            //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            $('#ExtendCoveragePanel tbody').prepend('<tr id="iidextendcoverage'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">' +response.coveragecode+ ' - ' +response.coveragename+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoveragedetail('+response.id+')">delete</a></td></tr>');
-            
-
-            var total_percent =  $('#sliptotalnilaiec').val();
-            
-
-            if(total_percent == ''){
-                var sum_percent = isNaN(parseFloat(0) + parseFloat(response.percentage)) ? 0 :(parseFloat(0) + parseFloat(response.percentage)) ;
-                $('#sliptotalnilaiec').val(sum_percent.toString());
-                console.log('total rate extend_coverage ' + $('#sliptotalnilaiec').val())
-                var total_rate = $('#sliptotalrate').val();
-                if(total_rate){
-                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
-                    $('#sliptotalrate').val(sum_totalrate.toString());
-                    $('#sliptotalrate2').val(sum_totalrate.toString());
-                }
-            }else{
-                var sum_percent = isNaN(parseFloat(total_percent) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) + parseFloat(response.percentage))
-                $('#sliptotalnilaiec').val(sum_percent.toString());
-                console.log('total rate extend_coverage ' + $('#sliptotalnilaiec').val())
-                var total_rate = $('#sliptotalrate').val();
-                if(total_rate){
-                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
-                    $('#sliptotalrate').val(sum_totalrate.toString());
-                    $('#sliptotalrate2').val(sum_totalrate.toString());
-                }
+                 console.log(response)
+                //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+                var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#ExtendCoveragePanel tbody').prepend('<tr id="iidextendcoverage'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">' +response.coveragecode+ ' - ' +response.coveragename+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoveragedetail('+response.id+')">delete</a></td></tr>');
                 
+
+                var total_percent =  $('#sliptotalnilaiec').val();
+                
+
+                if(total_percent == ''){
+                    var sum_percent = isNaN(parseFloat(0) + parseFloat(response.percentage)) ? 0 :(parseFloat(0) + parseFloat(response.percentage)) ;
+                    $('#sliptotalnilaiec').val(sum_percent.toString());
+                    console.log('total rate extend_coverage ' + $('#sliptotalnilaiec').val())
+                    var total_rate = $('#sliptotalrate').val();
+                    if(total_rate){
+                        var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
+                        $('#sliptotalrate').val(sum_totalrate.toString());
+                        $('#sliptotalrate2').val(sum_totalrate.toString());
+                    }
+                }else{
+                    var sum_percent = isNaN(parseFloat(total_percent) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) + parseFloat(response.percentage))
+                    $('#sliptotalnilaiec').val(sum_percent.toString());
+                    console.log('total rate extend_coverage ' + $('#sliptotalnilaiec').val())
+                    var total_rate = $('#sliptotalrate').val();
+                    if(total_rate){
+                        var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
+                        $('#sliptotalrate').val(sum_totalrate.toString());
+                        $('#sliptotalrate2').val(sum_totalrate.toString());
+                    }
+                    
+                }
+
+
+                $('#slipnilaiec').val('');
+                $('#slipamountec').val('');
+                $('#slipamountec2').val('');
+
+
+
             }
-
-
-            $('#slipnilaiec').val('');
-            $('#slipamountec').val('');
-            $('#slipamountec2').val('');
-
-
-
-        }
-    });
+        });
 
    });
 </script>
@@ -9233,7 +9566,7 @@ function deletelocationriskdetail(id){
        var percentage = $('#slipnilaiecupdate').val();
        var amount = $('#slipamountecupdate').val();
        var code_ms = $('#insuredIDtxt').val();
-       var sliptype = 'fe';  
+       var sliptype = 'fe';      
        
        var slip_id = $('#slipnumberupdate').val();
        var token2 = $('input[name=_token2]').val();
@@ -9245,68 +9578,69 @@ function deletelocationriskdetail(id){
 
        
        $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
        $.ajax({
-         url:"{{ route('extendcoverage.store') }}",
-         type:"POST",
-         data:{
-             slipcncode:slipcncode,
-             percentage:percentage,
-             amount:real_amount,
-             id_slip:slip_id,
-             insured_id:code_ms,
-             sliptype:sliptype
-         },
-         beforeSend: function() { $("body").addClass("loading");  },
-         complete: function() {  $("body").removeClass("loading"); },
-         success:function(response)
-         {
+             url:"{{ route('extendcoverage.store') }}",
+             type:"POST",
+             data:{
+                 slipcncode:slipcncode,
+                 percentage:percentage,
+                 amount:real_amount,
+                 id_slip:slip_id,
+                 insured_id:code_ms,
+                 sliptype:sliptype
+             },
+             beforeSend: function() { $("body").addClass("loading");  },
+             complete: function() {  $("body").removeClass("loading"); },
+             success:function(response)
+             {
 
 
-             console.log(response)
-            //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">' +response.coveragecode+ ' - ' +response.coveragename+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageupdate('+response.id+')">delete</a></td></tr>');
-            
+                 console.log(response)
+                //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+                var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">' +response.coveragecode+ ' - ' +response.coveragename+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoveragedetail('+response.id+')">delete</a></td></tr>');
+                
 
-            var total_percent =  $('#sliptotalnilaiecupdate').val();
-            var total_rate = $('#sliptotalrateupdate').val();
+                var total_percent =  $('#sliptotalnilaiecupdate').val();
+                
 
-            if(total_percent == ''){
-                var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
-                $('#sliptotalnilaiecupdate').val(sum_percent.toString());
-                console.log('total rate extend_coverage ' + $('#sliptotalnilaiecupdate').val())
-                var total_rate = $('#sliptotalrateupdate').val();
-                if(total_rate){
-                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
-                    $('#sliptotalrateupdate').val(sum_totalrate.toString());
-                    $('#sliptotalrateupdate2').val(sum_totalrate.toString());
+                if(total_percent == ''){
+                    var sum_percent = isNaN(parseFloat(0) + parseFloat(response.percentage)) ? 0 :(parseFloat(0) + parseFloat(response.percentage)) ;
+                    $('#sliptotalnilaiecupdate').val(sum_percent.toString());
+                    console.log('total rate extend_coverage ' + $('#sliptotalnilaiecupdate').val())
+                    var total_rate = $('#sliptotalrateupdate').val();
+                    if(total_rate){
+                        var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
+                        $('#sliptotalrateupdate').val(sum_totalrate.toString());
+                        $('#sliptotalrateupdate2').val(sum_totalrate.toString());
+                    }
+                }else{
+                    var sum_percent = isNaN(parseFloat(total_percent) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) + parseFloat(response.percentage))
+                    $('#sliptotalnilaiec').val(sum_percent.toString());
+                    console.log('total rate extend_coverage ' + $('#sliptotalnilaiecupdate').val())
+                    var total_rate = $('#sliptotalrateupdate').val();
+                    if(total_rate){
+                        var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
+                        $('#sliptotalrateupdate').val(sum_totalrate.toString());
+                        $('#sliptotalrateupdate2').val(sum_totalrate.toString());
+                    }
+                    
                 }
-            }else{
-                var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
-                $('#sliptotalnilaiecupdate').val(sum_percent.toString());
-                console.log('total rate extend_coverage ' + $('#sliptotalnilaiecupdate').val())
-                var total_rate = $('#sliptotalrateupdate').val();
-                if(total_rate){
-                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
-                    $('#sliptotalrateupdate').val(sum_totalrate.toString());
-                    $('#sliptotalrateupdate2').val(sum_totalrate.toString());
-                }
+
+
+                $('#slipnilaiecupdate').val('');
+                $('#slipamountecupdate').val('');
+                $('#slipamountecupdate2').val('');
+
+
+
             }
-
-
-            $('#slipnilaiecupdate').val('');
-            $('#slipamountecupdate').val('');
-            $('#slipamountecupdate2').val('');
-
-
-
-        }
-    });
+        });
 
    });
 </script>
@@ -9321,8 +9655,7 @@ function deletelocationriskdetail(id){
        var percentage = $('#slipnilaiecendorsement').val();
        var amount = $('#slipamountecendorsement').val();
        var code_ms = $('#insuredIDtxt').val();
-       var sliptype = 'fe';  
-
+       var sliptype = 'fe';      
        
        var slip_id = $('#slipnumberendorsement').val();
        var token2 = $('input[name=_token2]').val();
@@ -9334,68 +9667,69 @@ function deletelocationriskdetail(id){
 
        
        $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
        $.ajax({
-         url:"{{ route('extendcoverage.store') }}",
-         type:"POST",
-         data:{
-             slipcncode:slipcncode,
-             percentage:percentage,
-             amount:real_amount,
-             id_slip:slip_id,
-             insured_id:code_ms,
-             sliptype:sliptype
-         },
-         beforeSend: function() { $("body").addClass("loading");  },
-         complete: function() {  $("body").removeClass("loading"); },
-         success:function(response)
-         {
+             url:"{{ route('extendcoverage.store') }}",
+             type:"POST",
+             data:{
+                 slipcncode:slipcncode,
+                 percentage:percentage,
+                 amount:real_amount,
+                 id_slip:slip_id,
+                 insured_id:code_ms,
+                 sliptype:sliptype
+             },
+             beforeSend: function() { $("body").addClass("loading");  },
+             complete: function() {  $("body").removeClass("loading"); },
+             success:function(response)
+             {
 
 
-             console.log(response)
-            //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-            var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            $('#ExtendCoveragePanelendorsement tbody').prepend('<tr id="iidextendcoverageendorsement'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">' +response.coveragecode+ ' - ' +response.coveragename+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageendorsement('+response.id+')">delete</a></td></tr>');
-            
+                 console.log(response)
+                //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+                var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#ExtendCoveragePanelendorsement tbody').prepend('<tr id="iidextendcoverageendorsement'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">' +response.coveragecode+ ' - ' +response.coveragename+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoveragedetail('+response.id+')">delete</a></td></tr>');
+                
 
-            var total_percent =  $('#sliptotalnilaiecendorsement').val();
-            var total_rate = $('#sliptotalrateendorsement').val();
+                var total_percent =  $('#sliptotalnilaiecendorsement').val();
+                
 
-            if(total_percent == ''){
-                var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
-                $('#sliptotalnilaiecendorsement').val(sum_percent.toString());
-                console.log('total rate extend_coverage ' + $('#sliptotalnilaiecendorsement').val())
-                var total_rate = $('#sliptotalrateendorsement').val();
-                if(total_rate){
-                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
-                    $('#sliptotalrateendorsement').val(sum_totalrate.toString());
-                    $('#sliptotalrateendorsement2').val(sum_totalrate.toString());
+                if(total_percent == ''){
+                    var sum_percent = isNaN(parseFloat(0) + parseFloat(response.percentage)) ? 0 :(parseFloat(0) + parseFloat(response.percentage)) ;
+                    $('#sliptotalnilaiecendorsement').val(sum_percent.toString());
+                    console.log('total rate extend_coverage ' + $('#sliptotalnilaiecendorsement').val())
+                    var total_rate = $('#sliptotalrateendorsement').val();
+                    if(total_rate){
+                        var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
+                        $('#sliptotalrateendorsement').val(sum_totalrate.toString());
+                        $('#sliptotalrateendorsement2').val(sum_totalrate.toString());
+                    }
+                }else{
+                    var sum_percent = isNaN(parseFloat(total_percent) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) + parseFloat(response.percentage))
+                    $('#sliptotalnilaiec').val(sum_percent.toString());
+                    console.log('total rate extend_coverage ' + $('#sliptotalnilaiecendorsement').val())
+                    var total_rate = $('#sliptotalrateendorsement').val();
+                    if(total_rate){
+                        var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
+                        $('#sliptotalrateendorsement').val(sum_totalrate.toString());
+                        $('#sliptotalrateendorsement2').val(sum_totalrate.toString());
+                    }
+                    
                 }
-            }else{
-                var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
-                $('#sliptotalnilaiecendorsement').val(sum_percent.toString());
-                console.log('total rate extend_coverage ' + $('#sliptotalnilaiecendorsement').val())
-                var total_rate = $('#sliptotalrateendorsement').val();
-                if(total_rate){
-                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
-                    $('#sliptotalrateendorsement').val(sum_totalrate.toString());
-                    $('#sliptotalrateendorsement2').val(sum_totalrate.toString());
-                }
+
+
+                $('#slipnilaiecendorsement').val('');
+                $('#slipamountecendorsement').val('');
+                $('#slipamountecendorsement2').val('');
+
+
+
             }
-
-
-            $('#slipnilaiec').val('');
-            $('#slipamountec').val('');
-            $('#slipamountec2').val('');
-
-
-
-        }
-    });
+        });
 
    });
 </script>
@@ -9461,16 +9795,19 @@ function deletelocationriskdetail(id){
                 var total_percent =  $('#sliptotalnilaiecupdate').val();
 
                 
-                var sum_percent = isNaN(parseInt(total_percent) - parseInt(response.percentage)) ? 0 :(parseInt(total_percent) - parseInt(response.percentage))
+                var sum_percent = isNaN(parseFloat(total_percent) - parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) - parseFloat(response.percentage))
+                console.log('total = ' + parseFloat(total_percent))
+                console.log('percentexc = ' + parseFloat(response.percentage))
                 $('#sliptotalnilaiecupdate').val(sum_percent.toString());
                 console.log($('#sliptotalnilaiecupdate').val())
-                    
+
                 var total_rate = $('#sliptotalrateupdate').val();
                 if(total_rate){
-                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
+                    var sum_totalrate = isNaN(parseFloat(total_rate) - parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) - parseFloat(response.percentage)) ;
                     $('#sliptotalrateupdate').val(sum_totalrate.toString());
                     $('#sliptotalrateupdate2').val(sum_totalrate.toString());
                 }
+                    
                 
 
                 $('#iidextendcoverageupdate'+id).remove();
@@ -9500,16 +9837,20 @@ function deletelocationriskdetail(id){
                 var total_percent =  $('#sliptotalnilaiecendorsement').val();
 
                 
-                var sum_percent = isNaN(parseInt(total_percent) - parseInt(response.percentage)) ? 0 :(parseInt(total_percent) - parseInt(response.percentage))
+                var sum_percent = isNaN(parseFloat(total_percent) - parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) - parseFloat(response.percentage))
+                console.log('total = ' + parseFloat(total_percent))
+                console.log('percentexc = ' + parseFloat(response.percentage))
                 $('#sliptotalnilaiecendorsement').val(sum_percent.toString());
                 console.log($('#sliptotalnilaiecendorsement').val())
-                    
+
                 var total_rate = $('#sliptotalrateendorsement').val();
                 if(total_rate){
-                    var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
+                    var sum_totalrate = isNaN(parseFloat(total_rate) - parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) - parseFloat(response.percentage)) ;
                     $('#sliptotalrateendorsement').val(sum_totalrate.toString());
                     $('#sliptotalrateendorsement2').val(sum_totalrate.toString());
                 }
+                    
+                
 
                 $('#iidextendcoverageendorsement'+id).remove();
                 console.log(response);
