@@ -44,7 +44,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::post('/cob/store', [MasterController::class, 'storecob'])->middleware(['can:create-cob']);
     // Route::put('cob/{cob}', [MasterController::class, 'updatecob'])->middleware(['can:update-cob']);
     // Route::delete('/cob/destroy/{cob}', [MasterController::class, 'destroycob'])->middleware(['can:delete-cob']);
-    Route::get('/cob', [MasterController::class, 'indexcob']);
+    Route::get('/cob', [MasterController::class, 'indexcob'])->middleware(['can:create-cob']);
     Route::post('/cob/store', [MasterController::class, 'storecob']);
     Route::put('cob/{cob}', [MasterController::class, 'updatecob']);
     Route::delete('/cob/destroy/{cob}', [MasterController::class, 'destroycob']);
@@ -149,7 +149,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::post('/cedingbroker/store', [CedingBrokerController::class, 'store'])->middleware(['can:create-cedingbroker']);
     // Route::put('/cedingbroker/update/{cb}', [CedingBrokerController::class, 'update'])->middleware(['can:update-cedingbroker']);
     // Route::delete('/cedingbroker/destroy/{cb}', [CedingBrokerController::class, 'destroy'])->middleware(['can:delete-cedingbroker']);
-    Route::get('/cedingbroker', [CedingBrokerController::class, 'index']);
+    Route::get('/cedingbroker', [CedingBrokerController::class, 'index'])->middleware(['can:create-cedingbroker']);
     Route::post('/cedingbroker', [CedingBrokerController::class, 'index']);
     Route::post('/cedingbroker/store', [CedingBrokerController::class, 'store']);
     Route::put('/cedingbroker/update/{cb}', [CedingBrokerController::class, 'update']);

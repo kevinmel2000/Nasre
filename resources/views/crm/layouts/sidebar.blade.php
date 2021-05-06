@@ -518,7 +518,7 @@
                                 </a>
     
                                 <ul class="nav nav-treeview">
-                                    {{-- @can('viewany-cedingbroker', User::class) --}}
+                                    @can('create-cedingbroker', User::class) 
                                         @if($route_active == 'Ceding / Broker')
                                             @php
                                                 $cedingform = 'active';
@@ -530,7 +530,7 @@
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('CEDING/BROKER FORM')}}</p>
                                             </a>
                                         </li>
-                                    {{-- @endcan --}}
+                                     @endcan 
     
 
                                     {{-- @can('viewany-causeofloss', User::class) --}}
@@ -548,7 +548,7 @@
                                     {{-- @endcan --}}
     
 
-                                    {{-- @can('viewany-cob', User::class) --}}
+                                    @can('create-cob', User::class)
                                         @if($route_active == 'COB Master')
                                             @php
                                                 $cob_form = 'active';
@@ -560,7 +560,7 @@
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('COB FORM')}}</p>
                                             </a>
                                         </li>
-                                    {{-- @endcan --}}
+                                    @endcan
     
                                     {{-- @can('viewany-cedingbroker', User::class) --}}
                                         @if($route_active == 'Company Type Master')
