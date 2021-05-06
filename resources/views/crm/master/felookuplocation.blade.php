@@ -1,5 +1,6 @@
 @extends('crm.layouts.app')
 
+
 <style type="text/css">    
       #map {
         margin: 10px;

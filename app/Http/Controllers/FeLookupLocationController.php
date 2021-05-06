@@ -67,6 +67,7 @@ class FeLookupLocationController extends Controller
     
         if($lastid != null)
         {
+
               // $code_st = $mydate . strval($lastid + 1);
               if($lastid < 9){
                   $code_felookuplocation = '00000000' . strval($lastid + 1);
@@ -96,7 +97,7 @@ class FeLookupLocationController extends Controller
 
         }
         else{
-              $code_felookuplocation = '00000' . strval(1);
+              $code_felookuplocation = '00000000' . strval(1);
         }
 
 
@@ -148,7 +149,7 @@ class FeLookupLocationController extends Controller
         }
         else
         {
-              $code_felookuplocation = '00000' . strval(1);
+              $code_felookuplocation = '00000000' . strval(1);
         }
 
 

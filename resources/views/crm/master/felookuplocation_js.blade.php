@@ -330,7 +330,7 @@ $('input[name=address]').on('input',function(e){
 
                       }else{
                           
-                          var codenew2=firstWordsdata2+""+codenew.slice(codenew.length - 6);
+                          var codenew2=firstWordsdata2+""+codenew.slice(codenew.length - 4);
                           document.getElementById('code').value=codenew2;
 
                       }
@@ -578,7 +578,7 @@ function updateMarkerPosition(latLng)
 
                 }else{
                     
-                    var codenew2=firstWordsdata2+""+codenew.slice(codenew.length - 6);
+                    var codenew2=firstWordsdata2+""+codenew.slice(codenew.length - 4);
                     document.getElementById('code').value=codenew2;
 
                 }
@@ -820,7 +820,7 @@ function updateMarkerPosition2(latLng)
 
               }else{
                   
-                  var codenew2=firstWordsdata2+""+codenew.slice(codenew.length - 6);
+                  var codenew2=firstWordsdata2+""+codenew.slice(codenew.length - 4);
                   document.getElementById('code').value=codenew2;
 
               }
