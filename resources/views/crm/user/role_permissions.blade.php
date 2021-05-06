@@ -200,6 +200,9 @@
 
                   @endforeach
                   <hr>
+                  <h3> Facultative Transaction Module </h3>
+                  <br>
+                  <br>
                 </div>
                 <!-- /.card-body -->
               </div>
