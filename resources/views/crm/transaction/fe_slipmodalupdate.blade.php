@@ -683,7 +683,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">{{__('Basic Premium')}}</label>
-                                                            <input type="text" id="slipbasicpremiumupdate" name="slipbasicpremiumupdate" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" placeholder="a &permil; * tsi" />
+                                                            <input type="text" id="slipbasicpremiumupdate" name="slipbasicpremiumupdate" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-150" placeholder="a &permil; * tsi" />
                                                         </div>
                                                     </div>
                                                 </div>
