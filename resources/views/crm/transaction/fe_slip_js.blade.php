@@ -762,8 +762,8 @@
                             // var conv_amount = obj.amount.toFixed(2);
                             // var str_amount = conv_amount.toString();
                           // var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            // var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            var curr_amount = obj.amount.toFixed(2);
+                            var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            // var curr_amount = obj.amount.toFixed(2);
 
 
                             var currdate = obj.installment_date;
