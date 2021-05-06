@@ -469,7 +469,7 @@
                                                                         <tr>
                                                                             <td >
                                                                                 <div class="form-group">
-                                                                                    <select id="slipcncodeendorsement" name="slipcncodeendorsement" class="form-control form-control-sm ">
+                                                                                    <select id="slipcncodeendorsement" name="slipcncodeendorsement" class="e1 form-control form-control-sm ">
                                                                                         <option selected readonly>{{__('Peril List')}}</option>
                                                                                         @foreach($extendedcoverage as $ncd)
                                                                                         <option value="{{ $ncd->id }}">{{ $ncd->code }} - {{ $ncd->name }} - {{ $ncd->description }}</option>
