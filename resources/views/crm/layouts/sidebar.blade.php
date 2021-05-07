@@ -1025,7 +1025,7 @@
 
     
                             <ul class="nav nav-treeview">
-    
+                                @can('create-fe_slip', User::class)
                                 @if(
                                     @$route_active == 'Fire Engineering - Slip Entry' 
                                     || @$route_active == 'Fire Engineering - Index'  
@@ -1074,7 +1074,8 @@
                                             </li>
                                     </ul>
                                 </li>
-    
+                                @endcan
+                                
                                 @if(
                                     @$route_active == 'Financial Lines - Slip Entry' 
                                     || @$route_active == 'Financial Lines - Index'  
