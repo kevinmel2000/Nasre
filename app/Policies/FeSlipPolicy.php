@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
+use App\Models\Module;
 use App\SlipTable;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
