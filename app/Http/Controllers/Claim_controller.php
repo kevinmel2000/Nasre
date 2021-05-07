@@ -23,6 +23,7 @@ use App\Models\Surveyor;
 use App\Models\InterestInsured;
 use App\Models\InstallmentTemp;
 use App\Models\PrefixInsured;
+use App\Models\MainClaimEntryFAC;
 use App\Models\InterestInsuredTemp;
 use Illuminate\Support\Facades\Auth;
 
@@ -155,7 +156,34 @@ class Claim_controller extends Controller
 
     public function storeclaiminsured(Request $request)
     {
+        
+        $validator = $request->validate([
+            'number'=>'required',
+            'regcomp'=>'required'
+        ]);
+        
+        if($validator)
+        {
+            //dd($request);
+            //exit();
+            
+            $user = Auth::user();
+            MainClaimEntryFAC::create([
+                'number'=>$request->number,
+                'reg_comp'=> $request->regcomp
+            ]);
 
+            $notification = array(
+                'message' => 'Main Claim added successfully!',
+                'alert-type' => 'success'
+            );
+
+            return back()->with($notification);
+        }
+        else
+        {
+            return back()->with($validator)->withInput();
+        }
     }
 
 }
