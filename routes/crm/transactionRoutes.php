@@ -97,8 +97,8 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
 
 
     // SECTION Fire Engineering Slip Group Routes
-    Route::get('/fe-slip', [FeSlipController::class, 'indexfeslip']);
-    Route::get('/fe-slipindex', [FeSlipController::class, 'index']);
+    Route::get('/fe-slip', [FeSlipController::class, 'indexfeslip'])->middleware(['can:create-fe_slip']);
+    Route::get('/fe-slipindex', [FeSlipController::class, 'index'])->middleware(['can:create-fe_slip']);
     Route::post('/fe-slipindex', [FeSlipController::class, 'index']);
     Route::post('/fe-insured/store', [FeSlipController::class, 'storefeinsured']);
     Route::post('/fe-insured', [TransactionController::class, 'storefeinsured']);

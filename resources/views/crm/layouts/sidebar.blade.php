@@ -427,6 +427,8 @@
                                         $fed_menu_open = 'menu-close';
                                     @endphp
                                 @endif
+
+                                @can('create-fe_slip', User::class)
                                 <li class="nav-item has-treeview {{ @$fed_menu_open }}">
                                     <a href="#" class="nav-link {{@$fed_dd}}">
                                         <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
@@ -462,6 +464,7 @@
                                         </li>
                                     </ul>
                                 </li>
+                                @endcan
                             </ul>
                         </li>
     
