@@ -207,7 +207,7 @@
                    
                     @if ($module2 == NULL)
                       <div class="input-group">
-                        <span class="minWidth">{{underscoreToCamelCase($module)}}</span>
+                        <span class="minWidth">{{underscoreToCamelCase($module2)}}</span>
                         <form method="post" action="{{route('post_role_permissions')}}" >
                           @csrf
                           <input type="hidden" name="module_name" value="{{$module2}}">
@@ -252,10 +252,10 @@
                       @else 
                       {{-- NOTE: if module already have a row in the modules table for permissions --}}
                       <div class="input-group">
-                        <span class="minWidth">{{underscoreToCamelCase($module)}}</span>
+                        <span class="minWidth">{{underscoreToCamelCase($module2)}}</span>
                         <div class="mr-4">
                           <form 
-                          action="{{url('user/role/permissions', $$module)}}" 
+                          action="{{url('user/role/permissions', $$module2)}}" 
                           method="post">
                           @csrf
                           @if ($$module2 != NULL)
