@@ -114,6 +114,8 @@ class PermissionsController extends Controller
         $selected_role_id = $request->role_id;
         // NOTE: all modules from the constant file
         $modules = config('constants.MODULES');
+        $modules2 = config('constants.MODULES2');
+
        
         $contact_module =  Module::where(['module_name'=>'contact_module','role_id'=>$selected_role_id])->first();
         $role_module =  Module::where(['module_name'=>'role_module','role_id'=>$selected_role_id])->first();
@@ -157,6 +159,7 @@ class PermissionsController extends Controller
                     'roles',
                     'selected_role_id', 
                     'modules',
+                    'modules2',
                     'contact_module',
                     'role_module',
                     'user_module',
@@ -208,6 +211,8 @@ class PermissionsController extends Controller
         $selected_role_id = $role->id;
         // NOTE: all modules from the constant file
         $modules = config('constants.MODULES');
+        $modules2 = config('constants.MODULES2');
+
         
         $contact_module =  Module::where(['module_name'=>'contact_module','role_id'=>$selected_role_id])->first();
         $role_module =  Module::where(['module_name'=>'role_module','role_id'=>$selected_role_id])->first();
@@ -250,6 +255,7 @@ class PermissionsController extends Controller
                     'roles',
                     'selected_role_id', 
                     'modules',
+                    'modules2',
                     'contact_module',
                     'role_module',
                     'user_module',
