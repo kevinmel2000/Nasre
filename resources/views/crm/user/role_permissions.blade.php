@@ -203,6 +203,147 @@
                   <h3> Facultative Transaction Module </h3>
                   <br>
                   <br>
+                  @foreach ($modules2 as $module2)
+                   
+                    @if ($module2 == NULL)
+                      <div class="input-group">
+                        <span class="minWidth">{{underscoreToCamelCase($module)}}</span>
+                        <form method="post" action="{{route('post_role_permissions')}}" >
+                          @csrf
+                          <input type="hidden" name="module_name" value="{{$module2}}">
+                          <input type="hidden" name="role_id" value="{{$selected_role_id}}">
+                          <label class="cl-switch cl-switch-green">
+                            <label for="create-{{$module2}}" class="label pl-1 pr-3"> {{__('Create')}} </label>
+                            <input type="checkbox" name="create" id="create-{{$module2}}" 
+                            class="submit">
+                            <span class="switcher"></span>
+                          </label>
+                        
+                          
+                        </form>
+                        <form method="post" action="{{route('post_role_permissions')}}" >
+                          @csrf
+                          <input type="hidden" name="module_name" value="{{$module2}}">
+                          <input type="hidden" name="role_id" value="{{$selected_role_id}}">
+                          <input type="checkbox" name="read" id="read-{{$module2}}"
+                          class="submit"
+                          >
+                          <label for="read-{{$module2}}" class="pl-1 pr-3"> {{__('Read')}} </label>
+                        </form>
+                        <form method="post" action="{{route('post_role_permissions')}}" >
+                          @csrf
+                          <input type="hidden" name="module_name" value="{{$module2}}">
+                          <input type="hidden" name="role_id" value="{{$selected_role_id}}">
+                          <input type="checkbox" name="update" id="update-{{$module2}}"
+                          class="submit"
+                          >
+                          <label for="update-{{$module2}}" class="pl-1 pr-3"> {{__('Update')}} </label>
+                        </form>
+                        <form method="post" action="{{route('post_role_permissions')}}" >
+                          @csrf
+                          <input type="hidden" name="module_name" value="{{$module2}}">
+                          <input type="hidden" name="role_id" value="{{$selected_role_id}}">
+                          <input type="checkbox" name="delete" id="delete-{{$module2}}"
+                          class="submit"
+                          >
+                          <label for="delete-{{$module2}}" class="pl-1 pr-3"> {{__('Delete')}} </label>
+                        </form>
+                      </div>
+                      @else 
+                      {{-- NOTE: if module already have a row in the modules table for permissions --}}
+                      <div class="input-group">
+                        <span class="minWidth">{{underscoreToCamelCase($module)}}</span>
+                        <div class="mr-4">
+                          <form 
+                          action="{{url('user/role/permissions', $$module)}}" 
+                          method="post">
+                          @csrf
+                          @if ($$module2 != NULL)
+                            @method('PUT')
+                          @endif
+                          <input type="hidden" name="module_name" value="{{$module2}}">
+                          <input type="hidden" name="role_id" value="{{$selected_role_id}}">
+                          <input type="hidden" name="create[]" value="off" />
+                          <label class="cl-switch cl-switch-green">
+                            <span for="create-{{$module2}}" class="label"> Create </span>
+                            <input type="checkbox" name="create[]" id="create-{{$module2}}" 
+                            class="submit"
+                            @if (@$$module->create == 'on')
+                                checked
+                            @endif>
+                            <span class="switcher"></span>
+                          </label>
+                         </form>
+                        </div>  
+                        <div class="mr-4">
+                          <form 
+                          action="{{url('user/role/permissions', $$module2)}}" 
+                          method="post">
+                          @csrf
+                          @if ($$module2 != NULL)
+                            @method('PUT')
+                          @endif
+                          <input type="hidden" name="module_name" value="{{$module2}}">
+                          <input type="hidden" name="role_id" value="{{$selected_role_id}}">
+                          <input type="hidden" name="read[]" value="off" />
+                          <label class="cl-switch cl-switch-green">
+                            <span for="read-{{$module2}}" class="label "> {{__('Read')}} </span>
+                            <input type="checkbox" class="submit"  name="read[]" id="read-{{$module2}}"
+                            @if (@$$module->read == 'on')
+                                checked
+                            @endif>
+                            <span class="switcher"></span>
+                          </label>
+                          </form>                        
+                        </div>  
+                        <div class="mr-4">
+                          <form 
+                          action="{{url('user/role/permissions', $$module2)}}" 
+                          method="post">
+                          @csrf
+                          @if ($$module2 != NULL)
+                            @method('PUT')
+                          @endif
+                          <input type="hidden" name="module_name" value="{{$module2}}">
+                          <input type="hidden" name="role_id" value="{{$selected_role_id}}">
+                          <input type="hidden" name="update[]" value="off" />
+                          <label class="cl-switch cl-switch-green">
+                            <span for="update-{{$module2}}" class="label"> {{__('Update')}} </span>
+                            <input type="checkbox" name="update[]" id="update-{{$module2}}"
+                            class="submit"
+                            @if (@$$module->update == 'on')
+                                checked
+                            @endif>
+                            <span class="switcher"></span>
+                          </label>
+                        </form>
+                        </div>
+                        <div class="mr-4">
+                          <form 
+                          action="{{url('user/role/permissions', $$module2)}}" 
+                          method="post">
+                          @csrf
+                          @if ($$module2 != NULL)
+                            @method('PUT')
+                          @endif
+                          <input type="hidden" name="module_name" value="{{$module2}}">
+                          <input type="hidden" name="role_id" value="{{$selected_role_id}}">
+                          <input type="hidden" name="delete[]" value="off" />
+                          <label class="cl-switch cl-switch-green">
+                            <span for="delete-{{$module2}}" class="label"> {{__('Delete')}} </span>
+                            <input type="checkbox" name="delete[]" id="delete-{{$module2}}"
+                            class="submit"
+                            @if (@$$module->delete == 'on')
+                                checked
+                            @endif>
+                            <span class="switcher"></span>
+                          </label>
+                        </form>
+                        </div>
+                      </div>
+                    @endif
+
+                  @endforeach
                 </div>
                 <!-- /.card-body -->
               </div>

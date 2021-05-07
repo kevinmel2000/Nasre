@@ -20,6 +20,7 @@ class PermissionsController extends Controller
 
         // NOTE: all modules from the constant file
         $modules = config('constants.MODULES');
+        $modules2 = config('constants.MODULES2');
         
         $contact_module =  Module::where(['module_name'=>'contact_module','role_id'=>$selected_role_id])->first();
         $role_module =  Module::where(['module_name'=>'role_module','role_id'=>$selected_role_id])->first();
@@ -54,7 +55,7 @@ class PermissionsController extends Controller
         $marine_lookup_module =  Module::where(['module_name'=>'marine_lookup_module','role_id'=>$selected_role_id])->first();
         $property_type_module =  Module::where(['module_name'=>'property_type_module','role_id'=>$selected_role_id])->first();
         $condition_needed_module =  Module::where(['module_name'=>'condition_needed_module','role_id'=>$selected_role_id])->first();
-
+        $fire_engineering_slip_module =  Module::where(['module_name'=>'fire_engineering_slip_module','role_id'=>$selected_role_id])->first();
         
         $route_active = 'permissions';
         return view('crm.user.role_permissions', 
@@ -62,6 +63,7 @@ class PermissionsController extends Controller
                     'roles',
                     'selected_role_id', 
                     'modules',
+                    'modules2',
                     'contact_module',
                     'role_module',
                     'user_module',
@@ -95,7 +97,7 @@ class PermissionsController extends Controller
                     'marine_lookup_module',
                     'property_type_module',
                     'condition_needed_module',
-                    
+                    'fire_engineering_slip_module',
                 ]));
     }
 
@@ -146,6 +148,7 @@ class PermissionsController extends Controller
         $marine_lookup_module =  Module::where(['module_name'=>'marine_lookup_module','role_id'=>$selected_role_id])->first();
         $property_type_module =  Module::where(['module_name'=>'property_type_module','role_id'=>$selected_role_id])->first();
         $condition_needed_module =  Module::where(['module_name'=>'condition_needed_module','role_id'=>$selected_role_id])->first();
+        $fire_engineering_slip_module =  Module::where(['module_name'=>'fire_engineering_slip_module','role_id'=>$selected_role_id])->first();
         
 
         $route_active = 'permissions';
@@ -187,6 +190,7 @@ class PermissionsController extends Controller
                     'marine_lookup_module',
                     'property_type_module',
                     'condition_needed_module',
+                    'fire_engineering_slip_module',
                 ]));
 
     }
@@ -238,7 +242,7 @@ class PermissionsController extends Controller
         $marine_lookup_module =  Module::where(['module_name'=>'marine_lookup_module','role_id'=>$selected_role_id])->first();
         $property_type_module =  Module::where(['module_name'=>'property_type_module','role_id'=>$selected_role_id])->first();
         $condition_needed_module =  Module::where(['module_name'=>'condition_needed_module','role_id'=>$selected_role_id])->first();
-
+        $fire_engineering_slip_module =  Module::where(['module_name'=>'fire_engineering_slip_module','role_id'=>$selected_role_id])->first();
 
         $route_active = 'permissions';
         return view('crm.user.role_permissions', 
@@ -279,6 +283,7 @@ class PermissionsController extends Controller
                     'marine_lookup_module',
                     'property_type_module',
                     'condition_needed_module',
+                    'fire_engineering_slip_module',
                 ]));
     }
 

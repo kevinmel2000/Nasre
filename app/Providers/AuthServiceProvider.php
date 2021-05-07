@@ -213,5 +213,12 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-condition_needed', 'App\Policies\ConditionNeededPolicy@create');
         Gate::define('update-condition_needed', 'App\Policies\ConditionNeededPolicy@update');
         Gate::define('delete-condition_needed', 'App\Policies\ConditionNeededPolicy@delete');
+
+        // ANCHOR FE Slip Gates
+        Gate::define('viewany-fe_slip', 'App\Policies\FeSlipPolicy@viewany');
+        Gate::define('view-fe_slip', 'App\Policies\FeSlipPolicy@view');
+        Gate::define('create-fe_slip', 'App\Policies\FeSlipPolicy@create');
+        Gate::define('update-fe_slip', 'App\Policies\FeSlipPolicy@update');
+        Gate::define('delete-fe_slip', 'App\Policies\FeSlipPolicy@delete');
     }
 }
