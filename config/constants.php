@@ -30,7 +30,7 @@ return [
 					'property_type_module',
 					'condition_needed_module',
 				],
-	'MODULES2'=>['fire_engineering_slip_module'],
+	'MODULES2'=>['fire_engineering_slip_module',],
 	'CONTACT_TYPES' => ['Customer','Past-Customer','Non-Customer'],
 	'PROSPECTS' => ['Prospect','Lost-Prospect','Non-Prospect'],
 ];
