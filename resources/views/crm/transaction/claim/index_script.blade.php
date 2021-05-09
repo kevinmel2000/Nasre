@@ -46,7 +46,13 @@
 	
 	var natureofloss = $('#natureofloss').val();
 	var descnatureofloss = $('#descnatureofloss').val();
-	
+	var dateofloss = $('#dateofloss').val();
+    
+    var currofloss = $('#currofloss').val();
+    var desccurrofloss = $('#desccurrofloss').val();
+
+    var surveyoradjuster = $('#surveyoradjuster').val();
+    var descsurveyoradjuster = $('#descsurveyoradjuster').val();
 
     var token2 = $('input[name=_token]').val();
 
@@ -72,7 +78,12 @@
 			 causeofloss:causeofloss,
 			 desccauseofloss:desccauseofloss,
 			 natureofloss:natureofloss,
-			 descnatureofloss:descnatureofloss,	 
+			 descnatureofloss:descnatureofloss,
+             dateofloss:dateofloss,	 
+             currofloss:currofloss,	
+             desccurrofloss:desccurrofloss,
+             surveyoradjuster:surveyoradjuster,	
+             descsurveyoradjuster:descsurveyoradjuster
 
          },
          beforeSend: function() { $("body").addClass("loading");  },
@@ -113,7 +124,13 @@
 	
 	var natureofloss = $('#natureofloss').val();
 	var descnatureofloss = $('#descnatureofloss').val();
-	
+    var dateofloss = $('#dateofloss').val();
+
+    var currofloss = $('#currofloss').val();
+    var desccurrofloss = $('#desccurrofloss').val();
+
+    var surveyoradjuster = $('#surveyoradjuster').val();
+    var descsurveyoradjuster = $('#descsurveyoradjuster').val();
 
 
     var token2 = $('input[name=_token]').val();
@@ -140,7 +157,12 @@
 			 causeofloss:causeofloss,
 			 desccauseofloss:desccauseofloss,
 			 natureofloss:natureofloss,
-			 descnatureofloss:descnatureofloss,	 
+			 descnatureofloss:descnatureofloss,
+             dateofloss:dateofloss,
+             currofloss:currofloss,	
+             desccurrofloss:desccurrofloss,
+             surveyoradjuster:surveyoradjuster,	
+             descsurveyoradjuster:descsurveyoradjuster
 
          },
          beforeSend: function() { $("body").addClass("loading");  },

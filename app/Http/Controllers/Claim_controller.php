@@ -183,6 +183,11 @@ class Claim_controller extends Controller
                 'desc_causeofloss'=> $request->desccauseofloss,
                 'natureofloss_id'=> $request->natureofloss,
                 'descnatureofloss'=> $request->descnatureofloss,
+                'date_of_loss'=> $request->dateofloss,
+                'curr_id_loss'=>$request->currofloss,
+                'curr_lossdesc'=>$request->desccurrofloss,
+                'surveyor_id'=>$request->surveyoradjuster,
+                'desc_surveyor'=>$request->descsurveyoradjuster,
             ]);
 
             $notification = array(

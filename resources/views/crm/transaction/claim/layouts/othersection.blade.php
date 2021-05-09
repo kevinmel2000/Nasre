@@ -235,7 +235,7 @@
 			<tbody>
 				<tr>
 					<td>
-					<input type="text" name="dateentry" id="dateentry" class="form-control" autocomplete="off">				
+					<input type="text" name="dateentry" id="dateentry" class="form-control datepicker" autocomplete="off">				
 					</td>
 				</tr>
 			</tbody>
@@ -262,7 +262,7 @@
 			<tbody>
 				<tr>
 					<td>
-					<input type="text" name="datetrans" id="datetrans" class="form-control" autocomplete="off">
+					<input type="text" name="datetrans" id="datetrans" class="form-control datepicker" autocomplete="off">
 					</td>
 				</tr>
 			</tbody>
@@ -288,7 +288,7 @@
 			<tbody>
 				<tr>
 					<td>
-					<input type="text" name="datesupporting" id="datesupporting" class="form-control" autocomplete="off">
+					<input type="text" name="datesupporting" id="datesupporting" class="form-control datepicker" autocomplete="off">
 					</td>
 				</tr>
 			</tbody>
