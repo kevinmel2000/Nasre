@@ -96,7 +96,7 @@
 
 							<tr>
 								<td>
-									Extra
+									Facultative
 								</td>
 								<td>
 									<input type="text" name="facultativeliability" id="facultativeliability" class="form-control" autocomplete="off">

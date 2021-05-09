@@ -199,6 +199,23 @@ class Claim_controller extends Controller
                 'kronologi'=>$request->kronologi,
                 'staff_recomendation'=>$request->staffrecomend,
                 'ass_man_recomen'=>$request->assistantmanagerrecomend,
+                'pureor_liability'=>$request->pureorliability,
+                'pureor_loss'=>$request->pureorloss,
+                'pureor_retro'=>$request->pureorcontract,
+                'pureor_recovery'=>$request->pureorrecovery,
+                'qs_liability'=>$request->qsliability,
+                'qs_loss'=>$request->qsloss,
+                'qs_retro'=>$request->qscontract,
+                'qs_recovery'=>$request->qsrecovery,
+                'arr1_liability'=>$request->arr1liability,
+                'arr1_loss'=>$request->arr1loss,
+                'arr1_retro'=>$request->arr1contract,
+                'arr1_recovery'=>$request->arr1recovery,
+                'extra_liability'=>$request->extraliability,
+                'extra_loss'=>$request->extraloss,
+                'extra_retro'=>$request->extracontract,
+                'extra_recovery'=>$request->extrarecovery,
+
             ]);
 
             $notification = array(

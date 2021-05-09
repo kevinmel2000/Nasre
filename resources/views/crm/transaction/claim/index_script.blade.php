@@ -67,6 +67,26 @@
     var staffrecomend = $('#staffrecomend').val();
     var assistantmanagerrecomend = $('#assistantmanagerrecomend').val();
 
+    var pureorliability = $('#pureorliability').val();
+    var pureorloss = $('#pureorloss').val();
+    var pureorcontract = $('#pureorcontract').val();
+    var pureorrecovery = $('#pureorrecovery').val();
+
+    var qsliability = $('#qsliability').val();
+    var qsloss = $('#qsloss').val();
+    var qscontract = $('#qscontract').val();
+    var qsrecovery = $('#qsrecovery').val();
+
+    var arr1liability = $('#arr1liability').val();
+    var arr1loss = $('#arr1loss').val();
+    var arr1contract = $('#arr1contract').val();
+    var arr1recovery = $('#arr1recovery').val();
+
+    var extraliability = $('#extraliability').val();
+    var extraloss = $('#extraloss').val();
+    var extracontract = $('#extracontract').val();
+    var extrarecovery = $('#extrarecovery').val();
+
     var token2 = $('input[name=_token]').val();
 
     if(regcomp == ''){
@@ -108,6 +128,23 @@
              kronologi:kronologi,
              staffrecomend:staffrecomend,
              assistantmanagerrecomend:assistantmanagerrecomend,
+             pureorliability:pureorliability,
+             pureorloss:pureorloss,
+             pureorcontract:pureorcontract,
+             pureorrecovery:pureorrecovery,
+             qsliability:qsliability,
+             qsloss:qsloss,
+             qscontract:qscontract,
+             qsrecovery:qsrecovery,
+             arr1liability:arr1liability,
+             arr1loss:arr1loss,
+             arr1contract:arr1contract,
+             arr1recovery:arr1recovery,
+             extraliability:extraliability,
+             extraloss:extraloss,
+             extracontract:extracontract,
+             extrarecovery:extrarecovery
+             
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
@@ -168,6 +205,25 @@
     var staffrecomend = $('#staffrecomend').val();
     var assistantmanagerrecomend = $('#assistantmanagerrecomend').val();
 
+    var pureorliability = $('#pureorliability').val();
+    var pureorloss = $('#pureorloss').val();
+    var pureorcontract = $('#pureorcontract').val();
+    var pureorrecovery = $('#pureorrecovery').val();
+
+    var qsliability = $('#qsliability').val();
+    var qsloss = $('#qsloss').val();
+    var qscontract = $('#qscontract').val();
+    var qsrecovery = $('#qsrecovery').val();
+
+    var arr1liability = $('#arr1liability').val();
+    var arr1loss = $('#arr1loss').val();
+    var arr1contract = $('#arr1contract').val();
+    var arr1recovery = $('#arr1recovery').val();
+
+    var extraliability = $('#extraliability').val();
+    var extraloss = $('#extraloss').val();
+    var extracontract = $('#extracontract').val();
+    var extrarecovery = $('#extrarecovery').val();
 
     var token2 = $('input[name=_token]').val();
  
@@ -210,6 +266,23 @@
              kronologi:kronologi,
              staffrecomend:staffrecomend,
              assistantmanagerrecomend:assistantmanagerrecomend,
+             pureorliability:pureorliability,
+             pureorloss:pureorloss,
+             pureorcontract:pureorcontract,
+             pureorrecovery:pureorrecovery,
+             qsliability:qsliability,
+             qsloss:qsloss,
+             qscontract:qscontract,
+             qsrecovery:qsrecovery,
+             arr1liability:arr1liability,
+             arr1loss:arr1loss,
+             arr1contract:arr1contract,
+             arr1recovery:arr1recovery,
+             extraliability:extraliability,
+             extraloss:extraloss,
+             extracontract:extracontract,
+             extrarecovery:extrarecovery
+
 
          },
          beforeSend: function() { $("body").addClass("loading");  },
