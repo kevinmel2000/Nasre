@@ -54,6 +54,12 @@
     var surveyoradjuster = $('#surveyoradjuster').val();
     var descsurveyoradjuster = $('#descsurveyoradjuster').val();
 
+    var nationalresliab = $('#nationalresliab').val();
+    var descnationalresliab = $('#descnationalresliab').val();
+    var shareonloss = $('#shareonloss').val();
+    var cedantshare = $('#cedantshare').val();
+    var totallossamount = $('#totallossamount').val();
+
     var token2 = $('input[name=_token]').val();
 
     if(regcomp == ''){
@@ -83,8 +89,12 @@
              currofloss:currofloss,	
              desccurrofloss:desccurrofloss,
              surveyoradjuster:surveyoradjuster,	
-             descsurveyoradjuster:descsurveyoradjuster
-
+             descsurveyoradjuster:descsurveyoradjuster,
+             nationalresliab:nationalresliab,
+             descnationalresliab:descnationalresliab,
+             shareonloss:shareonloss,
+             cedantshare:cedantshare,
+             totallossamount:totallossamount,
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
@@ -132,6 +142,13 @@
     var surveyoradjuster = $('#surveyoradjuster').val();
     var descsurveyoradjuster = $('#descsurveyoradjuster').val();
 
+    var nationalresliab = $('#nationalresliab').val();
+    var descnationalresliab = $('#descnationalresliab').val();
+    var shareonloss = $('#shareonloss').val();
+    var cedantshare = $('#cedantshare').val();
+    var totallossamount = $('#totallossamount').val();
+
+
 
     var token2 = $('input[name=_token]').val();
  
@@ -162,7 +179,12 @@
              currofloss:currofloss,	
              desccurrofloss:desccurrofloss,
              surveyoradjuster:surveyoradjuster,	
-             descsurveyoradjuster:descsurveyoradjuster
+             descsurveyoradjuster:descsurveyoradjuster,
+             nationalresliab:nationalresliab,
+             descnationalresliab:descnationalresliab,
+             shareonloss:shareonloss,
+             cedantshare:cedantshare,
+             totallossamount:totallossamount,
 
          },
          beforeSend: function() { $("body").addClass("loading");  },

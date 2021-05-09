@@ -188,6 +188,11 @@ class Claim_controller extends Controller
                 'curr_lossdesc'=>$request->desccurrofloss,
                 'surveyor_id'=>$request->surveyoradjuster,
                 'desc_surveyor'=>$request->descsurveyoradjuster,
+                'nasre_liab'=>$request->nationalresliab,
+                'nasre_liabdesc'=>$request->descnationalresliab,
+                'nasre_share_loss'=>$request->shareonloss,
+                'ced_share'=>$request->cedantshare,
+                'total_loss_amount'=>$request->totallossamount,
             ]);
 
             $notification = array(
