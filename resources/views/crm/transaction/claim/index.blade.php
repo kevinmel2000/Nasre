@@ -173,17 +173,9 @@
 
 @section('scripts')
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
-<link href="{{asset('css/select2.css')}}" rel="stylesheet"/>    
-<script src="{{asset('/js/select2.js')}}"></script>
 
-<script type="text/javascript">
-	$(document).ready(function(){
 
-		$('.datepicker').datepicker();
-		$(".e1").select2({ width: '100%' }); 
+@include('crm.transaction.claim.index_script')
 
-	})
-</script>
 
 @endsection

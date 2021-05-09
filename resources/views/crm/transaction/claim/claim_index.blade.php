@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-md-12 com-sm-12 mt-3">
                 
-                  {!! link_to('claimtransaction-data','Add Data',['class'=>'btn btn-primary']) !!}
+                  {!! link_to('claimtransaction-data/claim','Add Data',['class'=>'btn btn-primary']) !!}
                   <hr>
                   {{ Form::open(array('url'=>'claimtransaction-data/claim-index')) }}
                       <div class="row">
