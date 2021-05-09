@@ -220,7 +220,7 @@
 					<tbody>
 						<tr>
 							<td>
-							<input type="text" name="descsurveyoradjuster" id="descsurveyoradjuster" class="form-control datepicker" autocomplete="off">					
+							<input type="text" name="descsurveyoradjuster" id="descsurveyoradjuster" class="form-control" autocomplete="off">					
 							</td>
 						</tr>
 					</tbody>
@@ -247,10 +247,10 @@
 					<tbody>
 						<tr>
 							<td>
-							<input type="text" name="nationalresliab" id="nationalresliab" class="form-control datepicker" autocomplete="off">					
+							<input type="text" name="nationalresliab" id="nationalresliab" class="form-control" autocomplete="off">					
 							</td>
 							<td>
-							<input type="text" name="descnationalresliab" id="descnationalresliab" class="form-control datepicker" autocomplete="off">					
+							<input type="text" name="descnationalresliab" id="descnationalresliab" class="form-control" autocomplete="off">					
 							</td>
 						</tr>
 					</tbody>
@@ -277,7 +277,7 @@
 					<tbody>
 						<tr>
 							<td>
-							<input type="text" name="cedantshare" id="cedantshare" class="form-control datepicker" autocomplete="off">					
+							<input type="text" name="cedantshare" id="cedantshare" class="form-control" autocomplete="off">					
 							</td>
 						</tr>
 					</tbody>
@@ -336,7 +336,7 @@
 						<tbody>
 							<tr>
 								<td>
-								<input type="text" name="shareonloss" id="shareonloss" class="form-control datepicker" autocomplete="off">					
+								<input type="text" name="shareonloss" id="shareonloss" class="form-control" autocomplete="off">					
 								</td>
 							</tr>
 						</tbody>
@@ -360,7 +360,7 @@
 						<tbody>
 							<tr>
 								<td>
-								<input type="text" name="totallossamount" id="totallossamount" class="form-control datepicker" autocomplete="off">					
+								<input type="text" name="totallossamount" id="totallossamount" class="form-control" autocomplete="off">					
 								</td>
 							</tr>
 						</tbody>
@@ -408,7 +408,7 @@
 					Estimasi Amount Subrogasi
 					</td>
 					<td>
-					<input type="text" name="subrogasi" id="subrogasi" class="form-control datepicker" autocomplete="off">
+					<input type="text" name="subrogasi" id="subrogasi" class="form-control" autocomplete="off">
 							
 					</td>
 				</tr>
