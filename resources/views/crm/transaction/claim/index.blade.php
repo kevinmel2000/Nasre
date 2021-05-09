@@ -18,27 +18,25 @@
 
 	<div class="container-fluid">
 
-		    <form autocomplete="off">
+		    <form id="multi-file-upload-ajaxsearch" method="POST" autocomplete="off"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
 
-			<div class="card">
+				<div class="card">
 
-				<div class="card-header bg-gray">
-					Claim Incoming (Facultative)
+					<div class="card-header bg-gray">
+						Claim Incoming (Facultative)
+					</div>
+
+					<div class="card-body bg-light-gray ">
+
+						@include('crm.transaction.claim.layouts.head')					
+
+					</div>
+
 				</div>
-
-				<div class="card-body bg-light-gray ">
-
-					@include('crm.transaction.claim.layouts.head')
-
-					
-
-				</div>
-
-			</div>
 
 		   </form>
 
-			<form autocomplete="off">
+			<form id="multi-file-upload-ajax" method="POST" autocomplete="off"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
 
 				<div class="card">
 
@@ -148,7 +146,22 @@
 
 					</div>
 
+					<div class="card card-primary">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-12 com-sm-12 mt-3">
+									<button type="submit" id="addallclaiminsured-btn" class="btn btn-primary btn-block ">
+										{{__('Save')}}
+									</button>
+								</div>
+								
+							</div>
+						</div>
+					</div> 
+
 				</div>
+
+				
 
 			</form>
 

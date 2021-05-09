@@ -13,12 +13,13 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\Claim_controller;
 
 
+
 Route::group(['prefix'=>'/claimtransaction-data','middleware'=>['auth']], function(){
  
     // Claim Route
     Route::get('claim',[Claim_controller::class,'index']);    
     Route::get('/claim-index', [Claim_controller::class, 'indexclaim']);
-    Route::post('/claim/store', [Claim_controller::class, 'storeclaim']);
+    Route::post('/claim/store', [Claim_controller::class, 'storeclaiminsured']);
     
 
 });

@@ -1,5 +1,6 @@
 <div class="row">
 	<div class="col-md-3">
+	    <input type="hidden" name="_token2" id="token" value="{{ csrf_token() }}">                                 
 		<div class="table-responsive">
 			<table class="table">
 				<tbody>
@@ -489,11 +490,15 @@
 </div>
 
 
-<div class="row">
-	<div class="col-md-2">
-		<button> POST </button>
+<div class="card card-primary">
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-12 com-sm-12 mt-3">
+				<button type="submit" id="addclaiminsured-btn" class="btn btn-primary btn-block ">
+					{{__('POST')}}
+				</button>
+			</div>
+			
+		</div>
 	</div>
-	<div class="col-md-6">
-
-	</div>
-</div>
+</div> 

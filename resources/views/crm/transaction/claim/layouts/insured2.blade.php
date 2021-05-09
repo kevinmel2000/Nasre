@@ -117,7 +117,7 @@
 					</tbody>
 				</table>
 			</div>
-
+			
 			<div class="col-md-10">
 				<div>
 					<select id="claimcedingbroker" name="claimcedingbroker" class="e1 form-control form-control-sm ">
@@ -128,7 +128,7 @@
 					</select>
 				</div>
 				<div>
-						<select id="claimceding" name="claimceding" class="e1 form-control form-control-sm ">
+					<select id="claimceding" name="claimceding" class="e1 form-control form-control-sm ">
 						<option value="placehoder" selected disabled>Ceding </option>
 						{{-- @foreach($ceding as $cd)
 							<option value="{{ $cd->id }}">{{ $cd->code }} - {{ $cd->name }}</option>
