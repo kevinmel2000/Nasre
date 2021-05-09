@@ -101,7 +101,7 @@
 					<tbody>
 						<tr>
 							<td>
-							<input type="text" name="desccauseofloss" id="desccauseofloss" class="form-control datepicker" autocomplete="off">					
+							<input type="text" name="desccauseofloss" id="desccauseofloss" class="form-control" autocomplete="off">					
 							</td>
 						</tr>
 					</tbody>
@@ -140,7 +140,7 @@
 					<tbody>
 						<tr>
 							<td>
-							<input type="text" name="descnatureofloss" id="descnatureofloss" class="form-control datepicker" autocomplete="off">					
+							<input type="text" name="descnatureofloss" id="descnatureofloss" class="form-control" autocomplete="off">					
 							</td>
 						</tr>
 					</tbody>

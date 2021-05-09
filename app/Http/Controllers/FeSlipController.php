@@ -1328,8 +1328,8 @@ class FeSlipController extends Controller
     
     }
 
-    public function updatefeslipmodal(Request $request){
-
+    public function updatefeslipmodal(Request $request)
+    {
         $validator = $request->validate([
             'slipnumber'=>'required'
         ]);

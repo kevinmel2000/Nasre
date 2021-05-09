@@ -159,7 +159,13 @@ class Claim_controller extends Controller
         
         $validator = $request->validate([
             'number'=>'required',
-            'regcomp'=>'required'
+            'regcomp'=>'required',
+            'dateofreceipt'=>'required',
+            'dateofdocument'=>'required',
+            'causeofloss'=>'required',
+            'desccauseofloss'=>'required',
+            'natureofloss'=>'required',
+            'descnatureofloss'=>'required',
         ]);
         
         if($validator)
@@ -170,7 +176,13 @@ class Claim_controller extends Controller
             $user = Auth::user();
             MainClaimEntryFAC::create([
                 'number'=>$request->number,
-                'reg_comp'=> $request->regcomp
+                'reg_comp'=> $request->regcomp,
+                'date_receipt'=> date("Y-m-d", strtotime($request->dateofreceipt)),
+                'date_document'=> date("Y-m-d", strtotime($request->dateofdocument)),
+                'causeofloss_id'=> $request->causeofloss,
+                'desc_causeofloss'=> $request->desccauseofloss,
+                'natureofloss_id'=> $request->natureofloss,
+                'descnatureofloss'=> $request->descnatureofloss,
             ]);
 
             $notification = array(

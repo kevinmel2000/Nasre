@@ -37,6 +37,17 @@
        
 
     var regcomp = $('#regcomp').val();
+	var number = $('#docnumber').val();
+	var dateofreceipt = $('#dateofreceipt').val();
+	var dateofdocument = $('#dateofdocument').val();
+
+	var causeofloss = $('#causeofloss').val();
+	var desccauseofloss = $('#desccauseofloss').val();
+	
+	var natureofloss = $('#natureofloss').val();
+	var descnatureofloss = $('#descnatureofloss').val();
+	
+
     var token2 = $('input[name=_token]').val();
 
     if(regcomp == ''){
@@ -54,7 +65,15 @@
          url:"{{ url('claimtransaction-data/claim/store') }}",
          type:"POST",
          data:{
-			 regcomp:regcomp
+			 regcomp:regcomp,
+			 number:number,
+			 dateofreceipt:dateofreceipt,
+			 dateofdocument:dateofdocument,
+			 causeofloss:causeofloss,
+			 desccauseofloss:desccauseofloss,
+			 natureofloss:natureofloss,
+			 descnatureofloss:descnatureofloss,	 
+
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
@@ -85,6 +104,18 @@
        
 
     var regcomp = $('#regcomp').val();
+	var number = $('#docnumber').val();
+	var dateofreceipt = $('#dateofreceipt').val();
+	var dateofdocument = $('#dateofdocument').val();
+
+	var causeofloss = $('#causeofloss').val();
+	var desccauseofloss = $('#desccauseofloss').val();
+	
+	var natureofloss = $('#natureofloss').val();
+	var descnatureofloss = $('#descnatureofloss').val();
+	
+
+
     var token2 = $('input[name=_token]').val();
  
     if(regcomp == ''){
@@ -102,7 +133,15 @@
          url:"{{ url('claimtransaction-data/claim/store') }}",
          type:"POST",
          data:{
-			 regcomp:regcomp
+			 regcomp:regcomp,
+			 number:number,
+			 dateofreceipt:dateofreceipt,
+			 dateofdocument:dateofdocument,
+			 causeofloss:causeofloss,
+			 desccauseofloss:desccauseofloss,
+			 natureofloss:natureofloss,
+			 descnatureofloss:descnatureofloss,	 
+
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
