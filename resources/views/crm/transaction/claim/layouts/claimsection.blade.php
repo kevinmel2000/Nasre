@@ -381,8 +381,8 @@
 					<td>Potential Recovery</td>
 					<td>	
 						<select name="potentialrecoverydecision" id="potentialrecoverydecision" class="form-control">
-							<option value="Y">Yes</option>
-							<option value="N">No</option>
+							<option value="1">Yes</option>
+							<option value="0">No</option>
 						</select>
 					</td>
 				</tr>

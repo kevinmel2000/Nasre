@@ -193,6 +193,12 @@ class Claim_controller extends Controller
                 'nasre_share_loss'=>$request->shareonloss,
                 'ced_share'=>$request->cedantshare,
                 'total_loss_amount'=>$request->totallossamount,
+                'potential_recovery'=>$request->potentialrecoverydecision,
+                'estimate_amount_subro'=>$request->potentialrecovery,
+                'desc_poten_rec'=>$request->subrogasi,
+                'kronologi'=>$request->kronologi,
+                'staff_recomendation'=>$request->staffrecomend,
+                'ass_man_recomen'=>$request->assistantmanagerrecomend,
             ]);
 
             $notification = array(

@@ -60,6 +60,13 @@
     var cedantshare = $('#cedantshare').val();
     var totallossamount = $('#totallossamount').val();
 
+    var potentialrecoverydecision = $('#potentialrecoverydecision').val();
+    var potentialrecovery = $('#potentialrecovery').val();
+    var subrogasi = $('#subrogasi').val();
+    var kronologi = $('#kronologi').val();
+    var staffrecomend = $('#staffrecomend').val();
+    var assistantmanagerrecomend = $('#assistantmanagerrecomend').val();
+
     var token2 = $('input[name=_token]').val();
 
     if(regcomp == ''){
@@ -95,6 +102,12 @@
              shareonloss:shareonloss,
              cedantshare:cedantshare,
              totallossamount:totallossamount,
+             potentialrecoverydecision:potentialrecoverydecision,
+             potentialrecovery:potentialrecovery,
+             subrogasi:subrogasi,
+             kronologi:kronologi,
+             staffrecomend:staffrecomend,
+             assistantmanagerrecomend:assistantmanagerrecomend,
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
@@ -148,6 +161,12 @@
     var cedantshare = $('#cedantshare').val();
     var totallossamount = $('#totallossamount').val();
 
+    var potentialrecoverydecision = $('#potentialrecoverydecision').val();
+    var potentialrecovery = $('#potentialrecovery').val();
+    var subrogasi = $('#subrogasi').val();
+    var kronologi = $('#kronologi').val();
+    var staffrecomend = $('#staffrecomend').val();
+    var assistantmanagerrecomend = $('#assistantmanagerrecomend').val();
 
 
     var token2 = $('input[name=_token]').val();
@@ -185,6 +204,12 @@
              shareonloss:shareonloss,
              cedantshare:cedantshare,
              totallossamount:totallossamount,
+             potentialrecoverydecision:potentialrecoverydecision,
+             potentialrecovery:potentialrecovery,
+             subrogasi:subrogasi,
+             kronologi:kronologi,
+             staffrecomend:staffrecomend,
+             assistantmanagerrecomend:assistantmanagerrecomend,
 
          },
          beforeSend: function() { $("body").addClass("loading");  },
