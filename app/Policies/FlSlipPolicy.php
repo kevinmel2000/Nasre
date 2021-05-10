@@ -6,7 +6,7 @@ use App\Models\Module;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class FlSlipPolicy
+class FLSlipPolicy
 {
     use HandlesAuthorization;
 
