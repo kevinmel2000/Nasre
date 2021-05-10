@@ -18,7 +18,7 @@ return [
                     'koc_module',
                     'golf_field_hole_module',
                     'ceding_broker_module',
-                    'fe_lookup_module',
+                    'lookup_location_module',
                     'city_module',
                     'state_module',
                     'earthquake_zone_module',
