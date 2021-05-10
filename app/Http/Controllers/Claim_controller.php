@@ -235,9 +235,9 @@ class Claim_controller extends Controller
                 'ceno'=>$request->ceno,
                 'ceuser'=>$request->ceuser,
                 'description'=>$request->description,
-                'dateentry'=>date("Y-m-d", strtotime($request->dateentry)),
-                'datetrans'=>date("Y-m-d", strtotime($request->datetrans)),
-                'datesupporting'=>date("Y-m-d", strtotime($request->datesupporting))
+                'dateofentry'=>date("Y-m-d", strtotime($request->dateentry)),
+                'dateoftrans'=>date("Y-m-d", strtotime($request->datetrans)),
+                'dateofsupporting'=>date("Y-m-d", strtotime($request->datesupporting))
 
             ]);
 
