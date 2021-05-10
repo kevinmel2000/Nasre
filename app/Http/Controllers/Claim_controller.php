@@ -121,10 +121,11 @@ class Claim_controller extends Controller
            $surveyor = Surveyor::orderby('id','asc')->get();
            $natureofloss = NatureOfLoss::orderby('id','asc')->get();
            $causeofloss = MasterCauseOfLoss::orderby('id','asc')->get();
-           
-           $claimlist= Insured::where('statmodified','=',1)->whereNull('share_to')->Where('share_to','=',0)->get();
 
-           return view('crm.transaction.claim.claim_index', compact('claimlist','costumer','causeofloss','natureofloss','surveyor','ocp','koc','currency','searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+           $claimlist= MainClaimEntryFAC::orderby('id','desc')->get();
+           $claimlist_ids = response()->json($claimlist->modelKeys());
+
+           return view('crm.transaction.claim.claim_index', compact('claimlist_ids','claimlist','costumer','causeofloss','natureofloss','surveyor','ocp','koc','currency','searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
            
         }
         else
@@ -147,9 +148,10 @@ class Claim_controller extends Controller
            $natureofloss = NatureOfLoss::orderby('id','asc')->get();
            $causeofloss = MasterCauseOfLoss::orderby('id','asc')->get();
 
-           $claimlist= Insured::where('statmodified','=',1)->whereNull('share_to')->Where('share_to','=',0)->get();
+           $claimlist= MainClaimEntryFAC::orderby('id','desc')->get();
+           $claimlist_ids = response()->json($claimlist->modelKeys());
 
-           return view('crm.transaction.claim.claim_index', compact('claimlist','costumer','causeofloss','natureofloss','surveyor','ocp','koc','currency','searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
+           return view('crm.transaction.claim.claim_index', compact('claimlist_ids','claimlist','costumer','causeofloss','natureofloss','surveyor','ocp','koc','currency','searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
            
        }
 
@@ -255,6 +257,29 @@ class Claim_controller extends Controller
             return back()->with($validator)->withInput();
         }
     }
+
+
+    public function destroy($id)
+    {
+        $claim = MainClaimEntryFAC::find($id);
+        if($claim->delete())
+        {
+            $notification = array(
+                'message' => 'Claim Data deleted successfully!',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }
+        else
+        {
+            $notification = array(
+                'message' => 'Contact admin!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+    }
+
 
 }
 
