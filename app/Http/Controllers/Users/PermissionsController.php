@@ -55,6 +55,17 @@ class PermissionsController extends Controller
         $marine_lookup_module =  Module::where(['module_name'=>'marine_lookup_module','role_id'=>$selected_role_id])->first();
         $property_type_module =  Module::where(['module_name'=>'property_type_module','role_id'=>$selected_role_id])->first();
         $condition_needed_module =  Module::where(['module_name'=>'condition_needed_module','role_id'=>$selected_role_id])->first();
+        $cause_of_loss_module =  Module::where(['module_name'=>'cause_of_loss_module','role_id'=>$selected_role_id])->first();
+        $company_type_module =  Module::where(['module_name'=>'company_type_module','role_id'=>$selected_role_id])->first();
+        $interest_insured_module =  Module::where(['module_name'=>'interest_insured_module','role_id'=>$selected_role_id])->first();
+        $prefix_insured_module =  Module::where(['module_name'=>'prefix_insured_module','role_id'=>$selected_role_id])->first();
+        $route_module =  Module::where(['module_name'=>'route_module','role_id'=>$selected_role_id])->first();
+        $ship_port_module =  Module::where(['module_name'=>'ship_port_module','role_id'=>$selected_role_id])->first();
+        $nature_of_loss_module =  Module::where(['module_name'=>'nature_of_loss_module','role_id'=>$selected_role_id])->first();
+        $surveyor_module =  Module::where(['module_name'=>'surveyor_module','role_id'=>$selected_role_id])->first();
+        
+
+
         $fire_engineering_slip_module =  Module::where(['module_name'=>'fire_engineering_slip_module','role_id'=>$selected_role_id])->first();
         $financial_lines_slip_module =  Module::where(['module_name'=>'financial_lines_slip_module','role_id'=>$selected_role_id])->first();
         $marine_slip_module =  Module::where(['module_name'=>'marine_slip_module','role_id'=>$selected_role_id])->first();
@@ -103,6 +114,14 @@ class PermissionsController extends Controller
                     'marine_lookup_module',
                     'property_type_module',
                     'condition_needed_module',
+                    'cause_of_loss_module',
+                    'company_type_module',
+                    'interest_insured_module',
+                    'prefix_insured_module',
+                    'route_module',
+                    'ship_port_module',
+                    'nature_of_loss_module',
+                    'surveyor_module',
                     'fire_engineering_slip_module',
                     'financial_lines_slip_module',
                     'marine_slip_module',
@@ -162,6 +181,17 @@ class PermissionsController extends Controller
         $marine_lookup_module =  Module::where(['module_name'=>'marine_lookup_module','role_id'=>$selected_role_id])->first();
         $property_type_module =  Module::where(['module_name'=>'property_type_module','role_id'=>$selected_role_id])->first();
         $condition_needed_module =  Module::where(['module_name'=>'condition_needed_module','role_id'=>$selected_role_id])->first();
+        $cause_of_loss_module =  Module::where(['module_name'=>'cause_of_loss_module','role_id'=>$selected_role_id])->first();
+        $company_type_module =  Module::where(['module_name'=>'company_type_module','role_id'=>$selected_role_id])->first();
+        $interest_insured_module =  Module::where(['module_name'=>'interest_insured_module','role_id'=>$selected_role_id])->first();
+        $prefix_insured_module =  Module::where(['module_name'=>'prefix_insured_module','role_id'=>$selected_role_id])->first();
+        $route_module =  Module::where(['module_name'=>'route_module','role_id'=>$selected_role_id])->first();
+        $ship_port_module =  Module::where(['module_name'=>'ship_port_module','role_id'=>$selected_role_id])->first();
+        $nature_of_loss_module =  Module::where(['module_name'=>'nature_of_loss_module','role_id'=>$selected_role_id])->first();
+        $surveyor_module =  Module::where(['module_name'=>'surveyor_module','role_id'=>$selected_role_id])->first();
+
+
+
         $fire_engineering_slip_module =  Module::where(['module_name'=>'fire_engineering_slip_module','role_id'=>$selected_role_id])->first();
         $financial_lines_slip_module =  Module::where(['module_name'=>'financial_lines_slip_module','role_id'=>$selected_role_id])->first();
         $marine_slip_module =  Module::where(['module_name'=>'marine_slip_module','role_id'=>$selected_role_id])->first();
@@ -211,6 +241,14 @@ class PermissionsController extends Controller
                     'marine_lookup_module',
                     'property_type_module',
                     'condition_needed_module',
+                    'cause_of_loss_module',
+                    'company_type_module',
+                    'interest_insured_module',
+                    'prefix_insured_module',
+                    'route_module',
+                    'ship_port_module',
+                    'nature_of_loss_module',
+                    'surveyor_module',
                     'fire_engineering_slip_module',
                     'financial_lines_slip_module',
                     'marine_slip_module',
@@ -271,6 +309,17 @@ class PermissionsController extends Controller
         $marine_lookup_module =  Module::where(['module_name'=>'marine_lookup_module','role_id'=>$selected_role_id])->first();
         $property_type_module =  Module::where(['module_name'=>'property_type_module','role_id'=>$selected_role_id])->first();
         $condition_needed_module =  Module::where(['module_name'=>'condition_needed_module','role_id'=>$selected_role_id])->first();
+        $cause_of_loss_module =  Module::where(['module_name'=>'cause_of_loss_module','role_id'=>$selected_role_id])->first();
+        $company_type_module =  Module::where(['module_name'=>'company_type_module','role_id'=>$selected_role_id])->first();
+        $interest_insured_module =  Module::where(['module_name'=>'interest_insured_module','role_id'=>$selected_role_id])->first();
+        $prefix_insured_module =  Module::where(['module_name'=>'prefix_insured_module','role_id'=>$selected_role_id])->first();
+        $route_module =  Module::where(['module_name'=>'route_module','role_id'=>$selected_role_id])->first();
+        $ship_port_module =  Module::where(['module_name'=>'ship_port_module','role_id'=>$selected_role_id])->first();
+        $nature_of_loss_module =  Module::where(['module_name'=>'nature_of_loss_module','role_id'=>$selected_role_id])->first();
+        $surveyor_module =  Module::where(['module_name'=>'surveyor_module','role_id'=>$selected_role_id])->first();
+
+
+
         $fire_engineering_slip_module =  Module::where(['module_name'=>'fire_engineering_slip_module','role_id'=>$selected_role_id])->first();
         $financial_lines_slip_module =  Module::where(['module_name'=>'financial_lines_slip_module','role_id'=>$selected_role_id])->first();
         $marine_slip_module =  Module::where(['module_name'=>'marine_slip_module','role_id'=>$selected_role_id])->first();
@@ -319,6 +368,14 @@ class PermissionsController extends Controller
                     'marine_lookup_module',
                     'property_type_module',
                     'condition_needed_module',
+                    'cause_of_loss_module',
+                    'company_type_module',
+                    'interest_insured_module',
+                    'prefix_insured_module',
+                    'route_module',
+                    'ship_port_module',
+                    'nature_of_loss_module',
+                    'surveyor_module',
                     'fire_engineering_slip_module',
                     'financial_lines_slip_module',
                     'marine_slip_module',

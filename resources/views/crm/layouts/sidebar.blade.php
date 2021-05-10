@@ -278,7 +278,7 @@
                                     </li>
                                 {{-- @endcan --}}
     
-                                {{-- @can('viewany-condition_needed', User::class) --}}
+                                @can('viewany-interest_insured', User::class)
                                     @if($route_active == 'Interest Insured Master')
                                         @php
                                             $ii_form = 'active';
@@ -290,7 +290,7 @@
                                             <p style="font-size: 90%;margin-left:2%;">{{__('INTEREST INSURED FORM')}}</p>
                                         </a>
                                     </li>
-                                {{-- @endcan --}}
+                                @endcan
     
                                 @if(
                                     @$route_active == 'Country Master' 
@@ -536,7 +536,7 @@
                                      @endcan 
     
 
-                                    {{-- @can('viewany-causeofloss', User::class) --}}
+                                    @can('viewany-cause_of_loss', User::class)
                                         @if($route_active == 'Cause Of Loss')
                                             @php
                                                 $causeofloss = 'active';
@@ -548,7 +548,7 @@
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('CAUSE OF LOSS FORM')}}</p>
                                             </a>
                                         </li>
-                                    {{-- @endcan --}}
+                                    @endcan
     
 
                                     @can('create-cob', User::class)
@@ -565,7 +565,7 @@
                                         </li>
                                     @endcan
     
-                                    {{-- @can('viewany-cedingbroker', User::class) --}}
+                                    @can('viewany-company_type', User::class)
                                         @if($route_active == 'Company Type Master')
                                             @php
                                                 $ctform = 'active';
@@ -577,7 +577,7 @@
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('COMPANY TYPE FORM')}}</p>
                                             </a>
                                         </li>
-                                    {{-- @endcan --}}
+                                    @endcan
     
                                     {{-- @can('viewany-condition_needed', User::class) --}}
                                         @if($route_active == 'Condition Needed Master')
@@ -691,7 +691,7 @@
                                             </li>
                                     {{-- @endcan --}}
     
-                                    {{-- @can('viewany-condition_needed', User::class) --}}
+                                    @can('viewany-interest_insured', User::class)
                                         @if($route_active == 'Interest Insured Master')
                                             @php
                                                 $ii_form = 'active';
@@ -703,7 +703,7 @@
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('INTEREST INSURED FORM')}}</p>
                                             </a>
                                         </li>
-                                    {{-- @endcan --}}
+                                    @endcan
     
                                     {{-- @can('viewany-koc', User::class) --}}
                                             @if($route_active == 'KOC Master')
@@ -883,7 +883,7 @@
                                         </ul>
                                     </li>
 
-                                    {{-- @can('viewany-masterprefix', User::class) --}}
+                                    @can('viewany-prefix_insured', User::class)
                                         @if($route_active == 'Prefix Insured Master')
                                             @php
                                                 $masterprefix = 'active';
@@ -895,7 +895,7 @@
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('PREFIX INSURED MASTER DATA')}}</p>
                                             </a>
                                         </li>
-                                    {{-- @endcan --}}
+                                    @endcan
     
     
                                     {{-- @can('viewany-occupation', User::class) --}}
@@ -926,7 +926,7 @@
                                         </li>
                                     {{-- @endcan --}}
 
-                                    {{-- @can('viewany-natureofloss', User::class) --}}
+                                    @can('viewany-nature_of_loss', User::class)
                                         @if($route_active == 'Nature Of Loss')
                                             @php
                                                 $natureofloss = 'active';
@@ -938,9 +938,9 @@
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('NATURE OF LOSS FORM')}}</p>
                                             </a>
                                         </li>
-                                    {{-- @endcan --}}
+                                    @endcan
     
-                                    {{-- @can('viewany-condition_needed', User::class) --}}
+                                    @can('viewany-route', User::class)
                                         @if($route_active == 'Route Form Master')
                                             @php
                                                 $rf_form = 'active';
@@ -952,9 +952,9 @@
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('ROUTE FORM')}}</p>
                                             </a>
                                         </li>
-                                    {{-- @endcan --}}
+                                    @endcan
     
-                                    {{-- @can('viewany-condition_needed', User::class) --}}
+                                    @can('viewany-ship_port', User::class)
                                         @if($route_active == 'Ship Port Master')
                                             @php
                                                 $sp_form = 'active';
@@ -966,9 +966,9 @@
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('SHIP PORT FORM')}}</p>
                                             </a>
                                         </li>
-                                    {{-- @endcan --}}
+                                    @endcan
 
-                                    {{-- @can('viewany-surveyor', User::class) --}}
+                                    @can('viewany-surveyor', User::class)
                                         @if($route_active == 'Surveyor')
                                             @php
                                                 $surveyor = 'active';
@@ -980,7 +980,7 @@
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('SURVEYOR')}}</p>
                                             </a>
                                         </li>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </ul>
                             </li>
                         {{-- @endcan --}}

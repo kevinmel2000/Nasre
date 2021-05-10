@@ -214,6 +214,72 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('update-condition_needed', 'App\Policies\ConditionNeededPolicy@update');
         Gate::define('delete-condition_needed', 'App\Policies\ConditionNeededPolicy@delete');
 
+
+        // ANCHOR Property Type Gates
+        Gate::define('viewany-condition_needed', 'App\Policies\ConditionNeededPolicy@viewany');
+        Gate::define('view-condition_needed', 'App\Policies\ConditionNeededPolicy@view');
+        Gate::define('create-condition_needed', 'App\Policies\ConditionNeededPolicy@create');
+        Gate::define('update-condition_needed', 'App\Policies\ConditionNeededPolicy@update');
+        Gate::define('delete-condition_needed', 'App\Policies\ConditionNeededPolicy@delete');
+
+        // ANCHOR Property Type Gates
+        Gate::define('viewany-cause_of_loss', 'App\Policies\CauseOfLossPolicy@viewany');
+        Gate::define('view-cause_of_loss', 'App\Policies\CauseOfLossPolicy@view');
+        Gate::define('create-cause_of_loss', 'App\Policies\CauseOfLossPolicy@create');
+        Gate::define('update-cause_of_loss', 'App\Policies\CauseOfLossPolicy@update');
+        Gate::define('delete-cause_of_loss', 'App\Policies\CauseOfLossPolicy@delete');
+
+        // ANCHOR Property Type Gates
+        Gate::define('viewany-company_type', 'App\Policies\CompanyTypePolicy@viewany');
+        Gate::define('view-company_type', 'App\Policies\CompanyTypePolicy@view');
+        Gate::define('create-company_type', 'App\Policies\CompanyTypePolicy@create');
+        Gate::define('update-company_type', 'App\Policies\CompanyTypePolicy@update');
+        Gate::define('delete-company_type', 'App\Policies\CompanyTypePolicy@delete');
+
+        // ANCHOR Property Type Gates
+        Gate::define('viewany-interest_insured', 'App\Policies\InterestInsuredPolicy@viewany');
+        Gate::define('view-interest_insured', 'App\Policies\InterestInsuredPolicy@view');
+        Gate::define('create-interest_insured', 'App\Policies\InterestInsuredPolicy@create');
+        Gate::define('update-interest_insured', 'App\Policies\InterestInsuredPolicy@update');
+        Gate::define('delete-interest_insured', 'App\Policies\InterestInsuredPolicy@delete');
+
+        // ANCHOR Property Type Gates
+        Gate::define('viewany-prefix_insured', 'App\Policies\PrefixInsuredPolicy@viewany');
+        Gate::define('view-prefix_insured', 'App\Policies\PrefixInsuredPolicy@view');
+        Gate::define('create-prefix_insured', 'App\Policies\PrefixInsuredPolicy@create');
+        Gate::define('update-prefix_insured', 'App\Policies\PrefixInsuredPolicy@update');
+        Gate::define('delete-prefix_insured', 'App\Policies\PrefixInsuredPolicy@delete');
+
+        // ANCHOR Property Type Gates
+        Gate::define('viewany-route', 'App\Policies\RoutePolicy@viewany');
+        Gate::define('view-route', 'App\Policies\RoutePolicy@view');
+        Gate::define('create-route', 'App\Policies\RoutePolicy@create');
+        Gate::define('update-route', 'App\Policies\RoutePolicy@update');
+        Gate::define('delete-route', 'App\Policies\RoutePolicy@delete');
+
+        // ANCHOR Property Type Gates
+        Gate::define('viewany-ship_port', 'App\Policies\ShipPortPolicy@viewany');
+        Gate::define('view-ship_port', 'App\Policies\ShipPortPolicy@view');
+        Gate::define('create-ship_port', 'App\Policies\ShipPortPolicy@create');
+        Gate::define('update-ship_port', 'App\Policies\ShipPortPolicy@update');
+        Gate::define('delete-ship_port', 'App\Policies\ShipPortPolicy@delete');
+
+        // ANCHOR Property Type Gates
+        Gate::define('viewany-nature_of_loss', 'App\Policies\NatureOfLossPolicy@viewany');
+        Gate::define('view-nature_of_loss', 'App\Policies\NatureOfLossPolicy@view');
+        Gate::define('create-nature_of_loss', 'App\Policies\NatureOfLossPolicy@create');
+        Gate::define('update-nature_of_loss', 'App\Policies\NatureOfLossPolicy@update');
+        Gate::define('delete-nature_of_loss', 'App\Policies\NatureOfLossPolicy@delete');
+
+        // ANCHOR Property Type Gates
+        Gate::define('viewany-surveyor', 'App\Policies\SurveyorPolicy@viewany');
+        Gate::define('view-surveyor', 'App\Policies\SurveyorPolicy@view');
+        Gate::define('create-surveyor', 'App\Policies\SurveyorPolicy@create');
+        Gate::define('update-surveyor', 'App\Policies\SurveyorPolicy@update');
+        Gate::define('delete-surveyor', 'App\Policies\SurveyorPolicy@delete');
+
+
+
         // ANCHOR FE Slip Gates
         Gate::define('viewany-fe_slip', 'App\Policies\FeSlipPolicy@viewany');
         Gate::define('view-fe_slip', 'App\Policies\FeSlipPolicy@view');

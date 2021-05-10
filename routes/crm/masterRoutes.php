@@ -215,7 +215,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::delete('/propertytype/destroy/{pt}', [MasterController::class, 'destroypropertytype']);
 
      // SECTION property Type Routes
-     Route::get('/companytype', [MasterController::class, 'indexcompanytype']);
+     Route::get('/companytype', [MasterController::class, 'indexcompanytype'])->middleware(['can:create-company_type']);
      Route::post('/companytype/store', [MasterController::class, 'storecompanytype']);
      Route::put('companytype/{ct}', [MasterController::class, 'updatecompanytype']);
      Route::delete('/companytype/destroy/{ct}', [MasterController::class, 'destroycompanytype']);
@@ -227,7 +227,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::delete('/conditionneeded/destroy/{cdn}', [MasterController::class, 'destroyconditionneeded']);
 
     // SECTION Interest Insured Routes
-    Route::get('/interestinsured', [MasterController::class, 'indexinterestinsured']);
+    Route::get('/interestinsured', [MasterController::class, 'indexinterestinsured'])->middleware(['can:create-interest_insured']);
     Route::post('/interestinsured/store', [MasterController::class, 'storeinterestinsured']);
     Route::put('interestinsured/{ii}', [MasterController::class, 'updateinterestinsured']);
     Route::delete('/interestinsured/destroy/{ii}', [MasterController::class, 'destroyinterestinsured']);
@@ -245,13 +245,13 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::delete('/extendedcoverage/destroy/{ec}', [MasterController::class, 'destroyextendedcoverage']);
 
     // SECTION Ship Port Routes
-    Route::get('/shipport', [MasterController::class, 'indexshipport']);
+    Route::get('/shipport', [MasterController::class, 'indexshipport'])->middleware(['can:create-ship_port']);
     Route::post('/shipport/store', [MasterController::class, 'storeshipport']);
     Route::put('shipport/{sp}', [MasterController::class, 'updateshipport']);
     Route::delete('/shipport/destroy/{sp}', [MasterController::class, 'destroyshipport']);
 
     // SECTION Route Form Routes
-    Route::get('/routeform', [MasterController::class, 'indexrouteform']);
+    Route::get('/routeform', [MasterController::class, 'indexrouteform'])->middleware(['can:create-route']);
     Route::post('/routeform/store', [MasterController::class, 'storerouteform']);
     Route::put('routeform/{rf}', [MasterController::class, 'updaterouteform']);
     Route::delete('/routeform/destroy/{rf}', [MasterController::class, 'destroyrouteform']);
@@ -260,14 +260,14 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::get('/import', [ ProductController::class, 'import'])->middleware(['can:create-product']);
     // Route::post('/import', [ ProductController::class, 'importStore'])->middleware(['can:create-product']);
     
-    Route::get('/causeofloss', [CauseOfLossController::class, 'index']);
+    Route::get('/causeofloss', [CauseOfLossController::class, 'index'])->middleware(['can:create-cause_of_loss']);
     Route::post('/causeofloss/store', [CauseOfLossController::class, 'store']);
     Route::put('/causeofloss/update/{causeofloss}', [CauseOfLossController::class, 'update']);
     Route::delete('/causeofloss/destroy/{causeofloss}', [CauseOfLossController::class, 'destroy']);
     Route::post('/causeofloss/destroy/{causeofloss}', [CauseOfLossController::class, 'destroy']);
 
     
-    Route::get('/natureofloss', [NatureOfLossController::class, 'index']);
+    Route::get('/natureofloss', [NatureOfLossController::class, 'index'])->middleware(['can:create-nature_of_loss']);
     Route::post('/natureofloss/store', [NatureOfLossController::class, 'store']);
     Route::post('/natureofloss/update/{natureofloss}', [NatureOfLossController::class, 'update']);
     Route::put('/natureofloss/update/{natureofloss}', [NatureOfLossController::class, 'update']);
@@ -275,13 +275,13 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::post('/natureofloss/destroy/{natureofloss}', [NatureOfLossController::class, 'destroy']);
 
 
-    Route::get('/surveyor', [SurveyorController::class, 'index']);
+    Route::get('/surveyor', [SurveyorController::class, 'index'])->middleware(['can:create-surveyor']);
     Route::post('/surveyor/store', [SurveyorController::class, 'store']);
     Route::put('/surveyor/update/{surveyor}', [SurveyorController::class, 'update']);
     Route::delete('/surveyor/destroy/{surveyor}', [SurveyorController::class, 'destroy']);
     Route::post('/surveyor/destroy/{surveyor}', [SurveyorController::class, 'destroy']);
 
-    Route::get('/prefixinsured', [MasterController::class, 'indexprefixinsured']);
+    Route::get('/prefixinsured', [MasterController::class, 'indexprefixinsured'])->middleware(['can:create-prefix_insured']);
     Route::post('/prefixinsured/store', [MasterController::class, 'storeprefixinsured']);
     Route::put('prefixinsured/{pi}', [MasterController::class, 'updateprefixinsured']);
     Route::delete('/prefixinsured/destroy/{pi}', [MasterController::class, 'destroyprefixinsured']);
