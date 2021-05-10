@@ -42,7 +42,7 @@ class PermissionsController extends Controller
         $currency_module =  Module::where(['module_name'=>'currency_module','role_id'=>$selected_role_id])->first();
         $exchange_module =  Module::where(['module_name'=>'exchange_module','role_id'=>$selected_role_id])->first();
         $koc_module =  Module::where(['module_name'=>'koc_module','role_id'=>$selected_role_id])->first();
-        $fe_lookup_module =  Module::where(['module_name'=>'fe_lookup_module','role_id'=>$selected_role_id])->first();
+        $lookup_location_module =  Module::where(['module_name'=>'lookup_location_module','role_id'=>$selected_role_id])->first();
         $ceding_broker_module =  Module::where(['module_name'=>'ceding_broker_module','role_id'=>$selected_role_id])->first();
         $golf_field_hole_module =  Module::where(['module_name'=>'golf_field_hole_module','role_id'=>$selected_role_id])->first();
         $city_module =  Module::where(['module_name'=>'city_module','role_id'=>$selected_role_id])->first();
@@ -86,7 +86,7 @@ class PermissionsController extends Controller
                     'koc_module',
                     'golf_field_hole_module',
                     'ceding_broker_module',
-                    'fe_lookup_module',
+                    'lookup_location_module',
                     'city_module',
                     'state_module',
                     'earthquake_zone_module',
@@ -137,7 +137,7 @@ class PermissionsController extends Controller
         $currency_module =  Module::where(['module_name'=>'currency_module','role_id'=>$selected_role_id])->first();
         $exchange_module =  Module::where(['module_name'=>'exchange_module','role_id'=>$selected_role_id])->first();
         $koc_module =  Module::where(['module_name'=>'koc_module','role_id'=>$selected_role_id])->first();
-        $fe_lookup_module =  Module::where(['module_name'=>'fe_lookup_module','role_id'=>$selected_role_id])->first();
+        $lookup_location_module =  Module::where(['module_name'=>'lookup_location_module','role_id'=>$selected_role_id])->first();
         $ceding_broker_module =  Module::where(['module_name'=>'ceding_broker_module','role_id'=>$selected_role_id])->first();
         $golf_field_hole_module =  Module::where(['module_name'=>'golf_field_hole_module','role_id'=>$selected_role_id])->first();
         $city_module =  Module::where(['module_name'=>'city_module','role_id'=>$selected_role_id])->first();
@@ -182,7 +182,7 @@ class PermissionsController extends Controller
                     'koc_module',
                     'golf_field_hole_module',
                     'ceding_broker_module',
-                    'fe_lookup_module',
+                    'lookup_location_module',
                     'city_module',
                     'state_module',
                     'earthquake_zone_module',
@@ -234,7 +234,7 @@ class PermissionsController extends Controller
         $currency_module =  Module::where(['module_name'=>'currency_module','role_id'=>$selected_role_id])->first();
         $exchange_module =  Module::where(['module_name'=>'exchange_module','role_id'=>$selected_role_id])->first();
         $koc_module =  Module::where(['module_name'=>'koc_module','role_id'=>$selected_role_id])->first();
-        $fe_lookup_module =  Module::where(['module_name'=>'fe_lookup_module','role_id'=>$selected_role_id])->first();
+        $lookup_location_module =  Module::where(['module_name'=>'lookup_location_module','role_id'=>$selected_role_id])->first();
         $ceding_broker_module =  Module::where(['module_name'=>'ceding_broker_module','role_id'=>$selected_role_id])->first();
         $golf_field_hole_module =  Module::where(['module_name'=>'golf_field_hole_module','role_id'=>$selected_role_id])->first();
         $city_module =  Module::where(['module_name'=>'city_module','role_id'=>$selected_role_id])->first();
@@ -278,7 +278,7 @@ class PermissionsController extends Controller
                     'koc_module',
                     'golf_field_hole_module',
                     'ceding_broker_module',
-                    'fe_lookup_module',
+                    'lookup_location_module',
                     'city_module',
                     'state_module',
                     'earthquake_zone_module',
