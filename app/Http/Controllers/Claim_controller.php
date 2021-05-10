@@ -48,6 +48,7 @@ class Claim_controller extends Controller
     	return view('crm.transaction.claim.index',compact('prefixinsured','causeofloss','natureofloss','surveyor','ceding','cedingbroker','currency','cob','koc','ocp','route_active'));
     }
 
+
     public function indexclaim(Request $request)
     {
         $user = Auth::user();
@@ -120,7 +121,7 @@ class Claim_controller extends Controller
            $surveyor = Surveyor::orderby('id','asc')->get();
            $natureofloss = NatureOfLoss::orderby('id','asc')->get();
            $causeofloss = MasterCauseOfLoss::orderby('id','asc')->get();
-
+           
            $claimlist= Insured::where('statmodified','=',1)->whereNull('share_to')->Where('share_to','=',0)->get();
 
            return view('crm.transaction.claim.claim_index', compact('claimlist','costumer','causeofloss','natureofloss','surveyor','ocp','koc','currency','searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
@@ -154,6 +155,7 @@ class Claim_controller extends Controller
 
     }
 
+    
     public function storeclaiminsured(Request $request)
     {
         

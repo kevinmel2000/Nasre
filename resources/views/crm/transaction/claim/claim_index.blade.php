@@ -36,104 +36,91 @@
                               <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="">{{__('Insured Number')}}</label>
-                                        {{ Form::text('search',@$search,['class'=>'form-control form-control-sm','placeholder'=>'Cari Number']) }}
+                                        <label for="">{{__('Doc Number')}}</label>
+                                        {{ Form::text('search',@$search,['class'=>'form-control form-control-sm','placeholder'=>'Cari Doc Number']) }}
                                     </div>
                                 </div>
                               </div>
-                              <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">{{__('Insured Name')}}</label>
-                                        {{ Form::text('searchinsured',@$searchinsured,['class'=>'form-control form-control-sm','placeholder'=>'Cari Insured']) }}
-                                    </div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">{{__('UY')}}</label>
-                                        {{ Form::text('searchuy',@$searchuy,['class'=>'form-control form-control-sm','placeholder'=>'Cari UY']) }}
-                                    </div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">{{__('Our Share')}}</label>
-                                        {{ Form::text('searchshare',@$searchshare,['class'=>'form-control form-control-sm','placeholder'=>'Our Share']) }}
-                                    </div>
-                                </div>
-                              </div>
+                              
                               <div class="row">
                                 <div class="col-md-12">
                                   <div class="form-group">
-                                      <label for="">{{__('Nasional RE Share')}}</label>
-                                       {{ Form::text('searchnre',@$searchnre,['class'=>'form-control form-control-sm','placeholder'=>'National Reinsurance']) }}
-                                  </div>
-                                </div>
-                              </div>
-                          </div>
-                          <div class="col-md-6">
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <div class="form-group">
-                                      <label for="">{{__('COB')}}</label><br>
-                                      <select id="searchcob" name="searchcob" class="e1 form-control form-control-sm ">
-                                          <option selected readonly  value='0'>{{__('COB list')}}</option>
-                                          @foreach($cob as $boc)
-                                            @if($boc->id  == @$searchcob)
-                                                <option value="{{ $boc->id }}" selected>{{ $boc->code }} - {{ $boc->description }}</option>
-                                            @else
-                                                <option value="{{ $boc->id }}">{{ $boc->code }} - {{ $boc->description }}</option>
-                                            @endif
+                                      <label for="">{{__('Cause Of Loss')}}</label><br>
+                                      <select id="searchcauseofloss" name="searchcauseofloss" class="e1 form-control form-control-sm ">
+                                          <option selected readonly  value='0'>{{__('Cause Of Loss')}}</option>
+                                          @foreach($causeofloss as $pi)
+                                            @if($pi->id  == @$searchcauseofloss)
+                                                <option value="{{ $pi->id }}" selected>{{ $pi->nama }} - {{ $pi->keterangan }}</option>
+								                            @else
+                                                <option value="{{ $pi->id }}">{{ $pi->nama }} - {{ $pi->keterangan }}</option>
+								                            @endif
                                           @endforeach
                                       </select>
                                   </div>
                                 </div>
                               </div>
+
                               <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="">{{__('Ceding / Broker')}}</label><br>
-                                        <select id="searchceding" name="searchceding" class="e1 form-control form-control-sm ">
-                                            <option value=""  selected disabled >Ceding or Broker</option>
-                                            @foreach($cedingbroker as $cb)
-                                                @if($cb->id  == @$searchceding)
-                                                <option value="{{ $cb->id }}" selected> {{ $cb->code }} - {{ $cb->name }}</option>
+                                        <label for="">{{__('Nature Of Loss')}}</label><br>
+                                        <select id="searchnatureofloss" name="searchnatureofloss" class="e1 form-control form-control-sm ">
+                                            <option value=""  selected disabled >Nature Of Loss</option>
+                                            @foreach($natureofloss as $pi)
+                                                @if($pi->id  == @$searchnatureofloss)
+                                                <option value="{{ $pi->id }}" selected> {{ $pi->accident }} - {{ $pi->keterangan }}</option>
                                                 @else
-                                                <option value="{{ $cb->id }}"> {{ $cb->code }} - {{ $cb->name }}</option>
+                                                <option value="{{ $pi->id }}"> {{ $pi->accident }} - {{ $pi->keterangan }}</option>
                                                  @endif
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                               </div>
-                              <div class="row">
+                              
+                             
+                          
+                          </div>
+
+                          <div class="col-md-6">
+                              
+                               <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="">{{__('Total Sum Insurance')}}</label>
-                                          {{ Form::text('searchtsi',@$searchtsi,['class'=>'form-control form-control-sm','placeholder'=>'Total Sum Insurance']) }}
+                                        <label for="">{{__('Reg Comp')}}</label>
+                                        {{ Form::text('regcompsearch',@$regcompsearch,['class'=>'form-control form-control-sm','placeholder'=>'Reg Comp']) }}
                                     </div>
                                 </div>
                               </div>
+                              
                               <div class="row">
                                 <div class="col-md-12">
                                   <div class="form-group">
-                                      <label for="">{{__('Endorsement')}}</label>
-                                        {{ Form::text('searchendorse',@$searchendorse,['class'=>'form-control form-control-sm','placeholder'=>'Endorsement Count']) }}
-                                  </div>
+                                      <label for="">{{__('Date Of Receipt ')}}</label><br>
+                                      {{ Form::text('searchdate',@$searchdate,['class'=>'form-control form-control-sm datepicker','placeholder'=>'Date Of Receipt']) }}
+                                   </div>
                                 </div>
-                                
                               </div>
+
                               <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="">{{__('Slip Number')}}</label>
-                                          {{ Form::text('searchslipnum',@$searchslipnum,['class'=>'form-control form-control-sm','placeholder'=>'Slip Number']) }}
+                                        <label for="">{{__('Surveyor')}}</label><br>
+                                        <select id="searchsurveyor" name="searchsurveyor" class="e1 form-control form-control-sm ">
+                                            <option value=""  selected disabled >Surveyor</option>
+                                            @foreach($surveyor as $pi)
+                                                @if($pi->id  == @$searchsurveyor)
+                                                <option value="{{ $pi->id }}" selected> {{ $pi->number }} - {{ $pi->keterangan }}</option>
+                                                @else
+                                                <option value="{{ $pi->id }}"> {{ $pi->number }} - {{ $pi->keterangan }}</option>
+                                                 @endif
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                               </div>
+
+                              
                           </div>
                       </div>
                       <div class="row">
