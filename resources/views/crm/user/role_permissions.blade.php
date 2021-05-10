@@ -268,7 +268,7 @@
                             <span for="create-{{$module2}}" class="label"> Create </span>
                             <input type="checkbox" name="create[]" id="create-{{$module2}}" 
                             class="submit"
-                            @if (@$$module->create == 'on')
+                            @if (@$$module2->create == 'on')
                                 checked
                             @endif>
                             <span class="switcher"></span>
@@ -289,7 +289,7 @@
                           <label class="cl-switch cl-switch-green">
                             <span for="read-{{$module2}}" class="label "> {{__('Read')}} </span>
                             <input type="checkbox" class="submit"  name="read[]" id="read-{{$module2}}"
-                            @if (@$$module->read == 'on')
+                            @if (@$$module2->read == 'on')
                                 checked
                             @endif>
                             <span class="switcher"></span>
@@ -311,7 +311,7 @@
                             <span for="update-{{$module2}}" class="label"> {{__('Update')}} </span>
                             <input type="checkbox" name="update[]" id="update-{{$module2}}"
                             class="submit"
-                            @if (@$$module->update == 'on')
+                            @if (@$$module2->update == 'on')
                                 checked
                             @endif>
                             <span class="switcher"></span>
@@ -333,7 +333,7 @@
                             <span for="delete-{{$module2}}" class="label"> {{__('Delete')}} </span>
                             <input type="checkbox" name="delete[]" id="delete-{{$module2}}"
                             class="submit"
-                            @if (@$$module->delete == 'on')
+                            @if (@$$module2->delete == 'on')
                                 checked
                             @endif>
                             <span class="switcher"></span>
