@@ -10,13 +10,7 @@ class FLSlipPolicy
 {
     use HandlesAuthorization;
 
-       /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return mixed
-     */
-    public function viewAny(User $user)
+     public function viewAny(User $user)
     {
         $module = Module::select(['read', 'create', 'update', 'delete'])->where(['module_name'=>'financial_lines_slip_module', 'role_id'=>$user->role->id])->first();
         if ($module->create == 'on' || $module->read == 'on' || $module->update == 'on' || $module->delete == 'on') {
