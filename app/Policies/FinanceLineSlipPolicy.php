@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Module;
 use App\Models\User;
+use App\Models\Module;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class FLSlipPolicy
+class FinanceLineSlipPolicy
 {
     use HandlesAuthorization;
 

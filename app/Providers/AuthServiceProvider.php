@@ -215,18 +215,18 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('delete-condition_needed', 'App\Policies\ConditionNeededPolicy@delete');
 
         // ANCHOR FE Slip Gates
-        Gate::define('viewany-fe_slip', 'App\Policies\FlSlipPolicy@viewany');
-        Gate::define('view-fe_slip', 'App\Policies\FlSlipPolicy@view');
-        Gate::define('create-fe_slip', 'App\Policies\FlSlipPolicy@create');
-        Gate::define('update-fe_slip', 'App\Policies\FlSlipPolicy@update');
-        Gate::define('delete-fe_slip', 'App\Policies\FlSlipPolicy@delete');
+        Gate::define('viewany-fe_slip', 'App\Policies\FeSlipPolicy@viewany');
+        Gate::define('view-fe_slip', 'App\Policies\FeSlipPolicy@view');
+        Gate::define('create-fe_slip', 'App\Policies\FeSlipPolicy@create');
+        Gate::define('update-fe_slip', 'App\Policies\FeSlipPolicy@update');
+        Gate::define('delete-fe_slip', 'App\Policies\FeSlipPolicy@delete');
 
         // ANCHOR FE Slip Gates
-        Gate::define('viewany-fl_slip', 'App\Policies\FeSlipPolicy@viewany');
-        Gate::define('view-fl_slip', 'App\Policies\FeSlipPolicy@view');
-        Gate::define('create-fl_slip', 'App\Policies\FeSlipPolicy@create');
-        Gate::define('update-fl_slip', 'App\Policies\FeSlipPolicy@update');
-        Gate::define('delete-fl_slip', 'App\Policies\FeSlipPolicy@delete');
+        Gate::define('viewany-fl_slip', 'App\Policies\FinanceLineSlipPolicy@viewany');
+        Gate::define('view-fl_slip', 'App\Policies\FinanceLineSlipPolicy@view');
+        Gate::define('create-fl_slip', 'App\Policies\FinanceLineSlipPolicy@create');
+        Gate::define('update-fl_slip', 'App\Policies\FinanceLineSlipPolicy@update');
+        Gate::define('delete-fl_slip', 'App\Policies\FinanceLineSlipPolicy@delete');
 
         // ANCHOR FE Slip Gates
         Gate::define('viewany-hio_slip', 'App\Policies\HIOSlipPolicy@viewany');
