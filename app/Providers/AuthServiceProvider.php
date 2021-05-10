@@ -222,11 +222,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('delete-fe_slip', 'App\Policies\FeSlipPolicy@delete');
 
         // ANCHOR FE Slip Gates
-        Gate::define('viewany-fl_slip', 'App\Policies\FLSlipPolicy@viewany');
-        Gate::define('view-fl_slip', 'App\Policies\FLSlipPolicy@view');
-        Gate::define('create-fl_slip', 'App\Policies\FLSlipPolicy@create');
-        Gate::define('update-fl_slip', 'App\Policies\FLSlipPolicy@update');
-        Gate::define('delete-fl_slip', 'App\Policies\FLSlipPolicy@delete');
+        Gate::define('viewany-fl_slip', 'App\Policies\FinanceLineSlipPolicy@viewany');
+        Gate::define('view-fl_slip', 'App\Policies\FinanceLineSlipPolicy@view');
+        Gate::define('create-fl_slip', 'App\Policies\FinanceLineSlipPolicy@create');
+        Gate::define('update-fl_slip', 'App\Policies\FinanceLineSlipPolicy@update');
+        Gate::define('delete-fl_slip', 'App\Policies\FinanceLineSlipPolicy@delete');
 
         // ANCHOR FE Slip Gates
         Gate::define('viewany-hio_slip', 'App\Policies\HIOSlipPolicy@viewany');
