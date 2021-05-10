@@ -183,19 +183,16 @@
                                 {{-- @endcan   --}}
 
                                   
-
-                                   {{-- @can('delete-felookup', User::class) --}}
-
-                                   {{--<span id="delbtn{{@$claimlistata->id}}"></span>
+                                  <span id="delbtn{{@$claimlistata->id}}"></span>
+                              
+                                  <form id="delete-claim-{{$claimlistata->id}}"
+                                      action="{{ url('claimtransaction-data/claim/destroy', $claimlistata->id) }}"
+                                      method="POST">
+                                      @method('DELETE')
+                                      @csrf
+                                  </form>
                                 
-                                    <form id="delete-felookuplocation-{{$claimlistata->id}}"
-                                        action="{{ url('claimtransaction-data/claim/destroy', $claimlistata->id) }}"
-                                        method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                    </form>>--}}
-                                  {{-- @endcan   --}}
-                                </span>
+                                  </span>
                               </td>
 
                             </tr>
