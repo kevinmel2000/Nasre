@@ -78,8 +78,8 @@ Route::get('/detailendorsementslip/{idm}', [FeSlipController::class, 'getdetailE
 Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
 
     // SECTION Marine Slip Group Routes
-    Route::get('/marine-slip', [TransactionController::class, 'indexmarineslip']);
-    Route::get('/marine-index', [TransactionController::class, 'indexmarine']);
+    Route::get('/marine-slip', [TransactionController::class, 'indexmarineslip'])->middleware(['can:create-marine_slip']);
+    Route::get('/marine-index', [TransactionController::class, 'indexmarine'])->middleware(['can:create-marine_slip']);
     Route::get('/marine-endorsement/{id}', [TransactionController::class, 'indexmarineendorsement']);
     Route::get('/marine-slip/{id}', [TransactionController::class, 'showslipdetails']);
     Route::get('/getmodal-marine-slip/{id}', [TransactionController::class, 'showslipmodaldetails']);
@@ -117,8 +117,8 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
 
     
     // SECTION Financial Lines Slip Group Routes
-    Route::get('/fl-slip', [FinancialLineSlipController::class, 'indexflslip']);
-    Route::get('/fl-slipindex', [FinancialLineSlipController::class, 'index']);
+    Route::get('/fl-slip', [FinancialLineSlipController::class, 'indexflslip'])->middleware(['can:create-fl_slip']);
+    Route::get('/fl-slipindex', [FinancialLineSlipController::class, 'index'])->middleware(['can:create-fl_slip']);
     Route::post('/fl-slipindex', [FinancialLineSlipController::class, 'index']);
     Route::post('/fl-insured/store', [FinancialLineSlipController::class, 'storeflinsured']);
     Route::post('/fl-slip/store', [FinancialLineSlipController::class, 'storeflslip']);
@@ -131,8 +131,8 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::delete('/fl-slip/destroy/{fe}', [FinancialLineSlipController::class, 'destroy']);
     
     // SECTION Moveable Property Slip Group Routes
-    Route::get('/mp-slip', [MovePropSlipController::class, 'indexmpslip']);
-    Route::get('/mp-slipindex', [MovePropSlipController::class, 'index']);
+    Route::get('/mp-slip', [MovePropSlipController::class, 'indexmpslip'])->middleware(['can:create-mp_slip']);
+    Route::get('/mp-slipindex', [MovePropSlipController::class, 'index'])->middleware(['can:create-mp_slip']);
     Route::post('/mp-slipindex', [MovePropSlipController::class, 'index']);
     Route::post('/mp-insured/store', [MovePropSlipController::class, 'storempinsured']);
     Route::post('/mp-slip/store', [MovePropSlipController::class, 'storempslip']);
@@ -146,8 +146,8 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     
 
     // SECTION HE & Motor Slip Group 
-    Route::get('/hem-slip', [HeMotorSlipController::class, 'indexhemslip']);
-    Route::get('/hem-slipindex', [HeMotorSlipController::class, 'index']);
+    Route::get('/hem-slip', [HeMotorSlipController::class, 'indexhemslip'])->middleware(['can:create-hem_slip']);
+    Route::get('/hem-slipindex', [HeMotorSlipController::class, 'index'])->middleware(['can:create-hem_slip']);
     Route::post('/hem-slipindex', [HeMotorSlipController::class, 'index']);
     Route::post('/hem-insured/store', [HeMotorSlipController::class, 'storeheminsured']);
     Route::post('/hem-slip/store', [HeMotorSlipController::class, 'storehemslip']);
@@ -161,8 +161,8 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     
 
     // SECTION Hole in Ones Slip Group Routes
-    Route::get('/hio-slip', [TransactionController::class, 'indexhioslip']);
-    Route::get('/hio-index', [TransactionController::class, 'indexhio']);
+    Route::get('/hio-slip', [TransactionController::class, 'indexhioslip'])->middleware(['can:create-hio_slip']);
+    Route::get('/hio-index', [TransactionController::class, 'indexhio'])->middleware(['can:create-hio_slip']);
     Route::get('/hio-slip/{id}', [TransactionController::class, 'showlocationdetails'])->name('locDetails');
     Route::post('/hio-insured', [TransactionController::class, 'storehioinsured']);
     Route::post('/hio-slip/store', [TransactionController::class, 'storehioslip']);
@@ -179,8 +179,8 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
 
 
     // SECTION Personal Accident Slip Group Routes
-    Route::get('/pa-slip', [TransactionController::class, 'indexpaslip']);
-    Route::get('/pa-index', [TransactionController::class, 'indexpa']);
+    Route::get('/pa-slip', [TransactionController::class, 'indexpaslip'])->middleware(['can:create-pa_slip']);
+    Route::get('/pa-index', [TransactionController::class, 'indexpa'])->middleware(['can:create-pa_slip']);
     Route::get('/pa-slip/{id}', [TransactionController::class, 'showlocationdetails'])->name('locDetails');
     Route::post('/pa-insured', [TransactionController::class, 'storepersonalaccidentinsured']);
     Route::post('/pa-endorsement', [TransactionController::class, 'storepersonalaccidentendorsement']);

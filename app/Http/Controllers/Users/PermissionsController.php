@@ -56,6 +56,12 @@ class PermissionsController extends Controller
         $property_type_module =  Module::where(['module_name'=>'property_type_module','role_id'=>$selected_role_id])->first();
         $condition_needed_module =  Module::where(['module_name'=>'condition_needed_module','role_id'=>$selected_role_id])->first();
         $fire_engineering_slip_module =  Module::where(['module_name'=>'fire_engineering_slip_module','role_id'=>$selected_role_id])->first();
+        $financial_lines_slip_module =  Module::where(['module_name'=>'financial_lines_slip_module','role_id'=>$selected_role_id])->first();
+        $marine_slip_module =  Module::where(['module_name'=>'marine_slip_module','role_id'=>$selected_role_id])->first();
+        $personal_accident_slip_module =  Module::where(['module_name'=>'personal_accident_slip_module','role_id'=>$selected_role_id])->first();
+        $hole_in_one_slip_module =  Module::where(['module_name'=>'hole_in_one_slip_module','role_id'=>$selected_role_id])->first();
+        $he_and_motor_slip_module =  Module::where(['module_name'=>'he_and_motor_slip_module','role_id'=>$selected_role_id])->first();
+        $moveable_property_slip_module =  Module::where(['module_name'=>'moveable_property_slip_module','role_id'=>$selected_role_id])->first();
         
         $route_active = 'permissions';
         return view('crm.user.role_permissions', 
@@ -98,6 +104,12 @@ class PermissionsController extends Controller
                     'property_type_module',
                     'condition_needed_module',
                     'fire_engineering_slip_module',
+                    'financial_lines_slip_module',
+                    'marine_slip_module',
+                    'personal_accident_slip_module',
+                    'hole_in_one_slip_module',
+                    'he_and_motor_slip_module',
+                    'moveable_property_slip_module',
                 ]));
     }
 
@@ -151,6 +163,12 @@ class PermissionsController extends Controller
         $property_type_module =  Module::where(['module_name'=>'property_type_module','role_id'=>$selected_role_id])->first();
         $condition_needed_module =  Module::where(['module_name'=>'condition_needed_module','role_id'=>$selected_role_id])->first();
         $fire_engineering_slip_module =  Module::where(['module_name'=>'fire_engineering_slip_module','role_id'=>$selected_role_id])->first();
+        $financial_lines_slip_module =  Module::where(['module_name'=>'financial_lines_slip_module','role_id'=>$selected_role_id])->first();
+        $marine_slip_module =  Module::where(['module_name'=>'marine_slip_module','role_id'=>$selected_role_id])->first();
+        $personal_accident_slip_module =  Module::where(['module_name'=>'personal_accident_slip_module','role_id'=>$selected_role_id])->first();
+        $hole_in_one_slip_module =  Module::where(['module_name'=>'hole_in_one_slip_module','role_id'=>$selected_role_id])->first();
+        $he_and_motor_slip_module =  Module::where(['module_name'=>'he_and_motor_slip_module','role_id'=>$selected_role_id])->first();
+        $moveable_property_slip_module =  Module::where(['module_name'=>'moveable_property_slip_module','role_id'=>$selected_role_id])->first();
         
 
         $route_active = 'permissions';
@@ -194,6 +212,12 @@ class PermissionsController extends Controller
                     'property_type_module',
                     'condition_needed_module',
                     'fire_engineering_slip_module',
+                    'financial_lines_slip_module',
+                    'marine_slip_module',
+                    'personal_accident_slip_module',
+                    'hole_in_one_slip_module',
+                    'he_and_motor_slip_module',
+                    'moveable_property_slip_module',
                 ]));
 
     }
@@ -248,6 +272,12 @@ class PermissionsController extends Controller
         $property_type_module =  Module::where(['module_name'=>'property_type_module','role_id'=>$selected_role_id])->first();
         $condition_needed_module =  Module::where(['module_name'=>'condition_needed_module','role_id'=>$selected_role_id])->first();
         $fire_engineering_slip_module =  Module::where(['module_name'=>'fire_engineering_slip_module','role_id'=>$selected_role_id])->first();
+        $financial_lines_slip_module =  Module::where(['module_name'=>'financial_lines_slip_module','role_id'=>$selected_role_id])->first();
+        $marine_slip_module =  Module::where(['module_name'=>'marine_slip_module','role_id'=>$selected_role_id])->first();
+        $personal_accident_slip_module =  Module::where(['module_name'=>'personal_accident_slip_module','role_id'=>$selected_role_id])->first();
+        $hole_in_one_slip_module =  Module::where(['module_name'=>'hole_in_one_slip_module','role_id'=>$selected_role_id])->first();
+        $he_and_motor_slip_module =  Module::where(['module_name'=>'he_and_motor_slip_module','role_id'=>$selected_role_id])->first();
+        $moveable_property_slip_module =  Module::where(['module_name'=>'moveable_property_slip_module','role_id'=>$selected_role_id])->first();
 
         $route_active = 'permissions';
         return view('crm.user.role_permissions', 
@@ -290,6 +320,12 @@ class PermissionsController extends Controller
                     'property_type_module',
                     'condition_needed_module',
                     'fire_engineering_slip_module',
+                    'financial_lines_slip_module',
+                    'marine_slip_module',
+                    'personal_accident_slip_module',
+                    'hole_in_one_slip_module',
+                    'he_and_motor_slip_module',
+                    'moveable_property_slip_module',
                 ]));
     }
 

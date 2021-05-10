@@ -1076,6 +1076,7 @@
                                 </li>
                                 @endcan
                                 
+                                @can('create-fl_slip', User::class)
                                 @if(
                                     @$route_active == 'Financial Lines - Slip Entry' 
                                     || @$route_active == 'Financial Lines - Index'  
@@ -1124,7 +1125,9 @@
                                             </li>
                                     </ul>
                                 </li>
+                                @endcan
     
+                                @can('create-hem_slip', User::class)
                                 @if(
                                     @$route_active == 'HE & Motor - Slip Entry' 
                                     || @$route_active == 'HE & Motor - Index'  
@@ -1173,7 +1176,9 @@
                                         </li>
                                     </ul>
                                 </li>
+                                @endcan
     
+                                @can('create-mp_slip', User::class)
                                 @if(
                                     @$route_active == 'Moveable Property - Slip Entry' 
                                     || @$route_active == 'Moveable Property - Index'  
@@ -1221,7 +1226,9 @@
                                             </li>
                                     </ul>
                                 </li>
+                                @endcan
     
+                                @can('create-marine_slip', User::class)
                                 @if(
                                     @$route_active == 'Marine - Slip Entry' 
                                     || @$route_active == 'Marine Slip - Index'  
@@ -1270,7 +1277,9 @@
                                             </li>
                                     </ul>
                                 </li>
+                                @endcan
                             
+                                @can('create-hio_slip', User::class)
                                 @if(
                                     @$route_active == 'Hole In One - Slip Entry' 
                                     || @$route_active == 'Hole In One - Index'  
@@ -1318,7 +1327,9 @@
                                             </li>
                                     </ul>
                                 </li>
+                                @endcan
     
+                                @can('create-pa_slip', User::class)
                                 @if(
                                     @$route_active == 'Personal Accident - Slip Entry' 
                                     || @$route_active == 'Personal Accident - Index'  
@@ -1366,6 +1377,7 @@
                                             </li>
                                     </ul>
                                 </li>
+                                @endcan
     
                             </ul>
                         </li>
