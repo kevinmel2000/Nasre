@@ -87,6 +87,23 @@
     var extracontract = $('#extracontract').val();
     var extrarecovery = $('#extrarecovery').val();
 
+    var facultativeliability = $('#facultativeliability').val();
+    var facultativeloss = $('#facultativeloss').val();
+    var facultativecontract = $('#facultativecontract').val();
+    var facultativerecovery = $('#facultativerecovery').val();
+
+    var arr2liability = $('#arr2liability').val();
+    var arr2loss = $('#arr2loss').val();
+    var arr2contract = $('#arr2contract').val();
+    var arr2recovery = $('#arr2recovery').val();
+
+    var arr3liability = $('#arr3liability').val();
+    var arr3loss = $('#arr3loss').val();
+    var arr3contract = $('#arr3contract').val();
+    var arr3recovery = $('#arr3recovery').val();
+
+  
+
     var token2 = $('input[name=_token]').val();
 
     if(regcomp == ''){
@@ -143,8 +160,20 @@
              extraliability:extraliability,
              extraloss:extraloss,
              extracontract:extracontract,
-             extrarecovery:extrarecovery
-             
+             extrarecovery:extrarecovery,
+             facultativeliability:facultativeliability,
+             facultativeloss:facultativeloss,
+             facultativecontract:facultativecontract,
+             facultativerecovery:facultativerecovery,
+             arr2liability:arr2liability,
+             arr2loss:arr2loss,
+             arr2contract:arr2contract,
+             arr2recovery:arr2recovery,
+             arr3liability:arr3liability,
+             arr3loss:arr3loss,
+             arr3contract:arr3contract,
+             arr3recovery:arr3recovery
+
          },
          beforeSend: function() { $("body").addClass("loading");  },
          complete: function() {  $("body").removeClass("loading"); },
@@ -225,6 +254,23 @@
     var extracontract = $('#extracontract').val();
     var extrarecovery = $('#extrarecovery').val();
 
+    var facultativeliability = $('#facultativeliability').val();
+    var facultativeloss = $('#facultativeloss').val();
+    var facultativecontract = $('#facultativecontract').val();
+    var facultativerecovery = $('#facultativerecovery').val();
+
+    var arr2liability = $('#arr2liability').val();
+    var arr2loss = $('#arr2loss').val();
+    var arr2contract = $('#arr2contract').val();
+    var arr2recovery = $('#arr2recovery').val();
+
+    var arr3liability = $('#arr3liability').val();
+    var arr3loss = $('#arr3loss').val();
+    var arr3contract = $('#arr3contract').val();
+    var arr3recovery = $('#arr3recovery').val();
+
+  
+
     var token2 = $('input[name=_token]').val();
  
     if(regcomp == ''){
@@ -281,7 +327,19 @@
              extraliability:extraliability,
              extraloss:extraloss,
              extracontract:extracontract,
-             extrarecovery:extrarecovery
+             extrarecovery:extrarecovery,
+             facultativeliability:facultativeliability,
+             facultativeloss:facultativeloss,
+             facultativecontract:facultativecontract,
+             facultativerecovery:facultativerecovery,
+             arr2liability:arr2liability,
+             arr2loss:arr2loss,
+             arr2contract:arr2contract,
+             arr2recovery:arr2recovery,
+             arr3liability:arr3liability,
+             arr3loss:arr3loss,
+             arr3contract:arr3contract,
+             arr3recovery:arr3recovery
 
 
          },

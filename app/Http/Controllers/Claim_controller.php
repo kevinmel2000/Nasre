@@ -215,6 +215,18 @@ class Claim_controller extends Controller
                 'extra_loss'=>$request->extraloss,
                 'extra_retro'=>$request->extracontract,
                 'extra_recovery'=>$request->extrarecovery,
+                'facultative_liability'=>$request->facultativeliability,
+                'facultative_loss'=>$request->facultativeloss,
+                'facultative_retro'=>$request->facultativecontract,
+                'facultative_recovery'=>$request->facultativerecovery,
+                'arr2_liability'=>$request->arr2liability,
+                'arr2_loss'=>$request->arr2loss,
+                'arr2_retro'=>$request->arr2contract,
+                'arr2_recovery'=>$request->arr2recovery,
+                'arr3_liability'=>$request->arr3liability,
+                'arr3_loss'=>$request->arr3loss,
+                'arr3_retro'=>$request->arr3contract,
+                'arr3_recovery'=>$request->arr3recovery
 
             ]);
 
