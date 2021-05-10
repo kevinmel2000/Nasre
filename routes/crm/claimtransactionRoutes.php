@@ -20,6 +20,7 @@ Route::group(['prefix'=>'/claimtransaction-data','middleware'=>['auth']], functi
     Route::get('claim',[Claim_controller::class,'index']);    
     Route::get('/claim-index', [Claim_controller::class, 'indexclaim']);
     Route::post('/claim/store', [Claim_controller::class, 'storeclaiminsured']);
+    Route::post('/claim/destroy', [Claim_controller::class, 'destroy']);
     
 
 });
