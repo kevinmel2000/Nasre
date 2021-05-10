@@ -138,59 +138,58 @@
                     <thead>
                     <tr>
                       <th>{{__('Number')}}</th>
-                      <th>{{__('Insured')}}</th>
-                      <th>{{__('UY')}}</th>
-                      <th>{{__('Our Share')}}</th>
-                      <th>{{__('National Reinsurance')}}</th>
-                      <th>{{__('Total Sum Insurance')}}</th>
-                      <th>{{__('Endorsement Count')}}</th>
+                      <th>{{__('Reg COmp')}}</th>
+                      <th>{{__('Date Receipt')}}</th>
+                      <th>{{__('Cause Of Loss')}}</th>
+                      <th>{{__('Natural Of Loss')}}</th>
+                      <th>{{__('Surveyor')}}</th>
+                      <th>{{__('Total Loss AMount')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach (@$claimlist as $insureddata)
+                        @foreach (@$claimlist as $claimlistata)
                             <tr>
-                              <td ><a href="{{  url('transaction-data/updatefeslip', $insureddata->id) }}">{{@$insureddata->number}}</a></td>
-                              <td> @php echo strtoupper($insureddata->insured_prefix); @endphp - 
-                                   @php echo strtoupper($insureddata->insured_name);    @endphp- 
-                                   @php echo strtoupper($insureddata->insured_suffix);  @endphp
+                              <td ><a href="{{  url('transaction-data/updatefeslip', $claimlistata->id) }}">{{@$claimlistata->number}}</a></td>
+                              <td> @php echo strtoupper($claimlistata->reg_comp); @endphp - 
+                                  
                               </td>
-                              <td>{{@$insureddata->uy }}</td>
-                              <td>{{ number_format($insureddata->share,0) }}</td>
-                              <td> {{ number_format($insureddata->share_from,0) }}</td>
-                              <td> {{ number_format($insureddata->share_to,0) }}</td>
-                              <td>{{@$insureddata->count_endorsement}}</td>
+                              <td>{{@$claimlistata->date_receipt }}</td>
+                              <td>{{@$claimlistata->desc_causeofloss }}</td>
+                              <td>{{@$claimlistata->descnatureofloss }}</td>
+                              <td>{{@$claimlistata->desc_surveyor }}</td>
+                              <td>{{@$claimlistata->total_loss_amount }}</td>
                               <td>
-                                <a href="#" data-toggle="tooltip" data-title="{{$insureddata->created_at}}" class="mr-3">
+                                <a href="#" data-toggle="tooltip" data-title="{{$claimlistata->created_at}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>
                                 </a>
-                                <a href="#" data-toggle="tooltip" data-title="{{$insureddata->updated_at}}" class="mr-3">
+                                <a href="#" data-toggle="tooltip" data-title="{{$claimlistata->updated_at}}" class="mr-3">
                                   <i class="fas fa-history text-primary"></i>
                                 </a>
                                 <span>
                                 
                                 {{-- @can('update-felookup', User::class) --}}
-                                {{--<a class="text-primary mr-3" href="{{ url('transaction-data/detailfeslip', $insureddata->id) }}">
+                                {{--<a class="text-primary mr-3" href="{{ url('transaction-data/detailfeslip', $claimlistata->id) }}">
                                   <i class="fas fa-file"></i>
                                 </a>--}}
-                                {{-- {!! link_to('transaction-data/detailfeslip/'.@$insureddata->id,'Detail Data',['class'=>'btn btn-primary']) !!} --}}
+                                {{-- {!! link_to('transaction-data/detailfeslip/'.@$claimlistata->id,'Detail Data',['class'=>'btn btn-primary']) !!} --}}
                                 {{-- @endcan   --}}
 
                                 {{-- @can('update-felookup', User::class) --}}
-                                {{--<a class="text-primary mr-3" href="{{ url('transaction-data/updatefeslip', $insureddata->id) }}">
+                                {{--<a class="text-primary mr-3" href="{{ url('transaction-data/updatefeslip', $claimlistata->id) }}">
                                   <i class="fas fa-edit"></i>
                                 </a>--}}
-                                {{-- {!! link_to('transaction-data/updatefeslip/'.@$insureddata->id,'Edit Data',['class'=>'btn btn-primary']) !!} --}}
+                                {{-- {!! link_to('transaction-data/updatefeslip/'.@$claimlistata->id,'Edit Data',['class'=>'btn btn-primary']) !!} --}}
                                 {{-- @endcan   --}}
 
                                   
 
                                    {{-- @can('delete-felookup', User::class) --}}
 
-                                   {{--<span id="delbtn{{@$insureddata->id}}"></span>
+                                   {{--<span id="delbtn{{@$claimlistata->id}}"></span>
                                 
-                                    <form id="delete-felookuplocation-{{$insureddata->id}}"
-                                        action="{{ url('transaction-data/fe-slip/destroy', $insureddata->id) }}"
+                                    <form id="delete-felookuplocation-{{$claimlistata->id}}"
+                                        action="{{ url('transaction-data/fe-slip/destroy', $claimlistata->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
