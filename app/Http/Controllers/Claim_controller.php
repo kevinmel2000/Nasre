@@ -226,7 +226,18 @@ class Claim_controller extends Controller
                 'arr3_liability'=>$request->arr3liability,
                 'arr3_loss'=>$request->arr3loss,
                 'arr3_retro'=>$request->arr3contract,
-                'arr3_recovery'=>$request->arr3recovery
+                'arr3_recovery'=>$request->arr3recovery,
+                'totalrecovery'=>$request->totalrecovery,
+                'nrsgrossret'=>$request->nrsgrossret,
+                'xol'=>$request->xol,
+                'cereffno'=>$request->cereffno,
+                'dateofprod'=>date("Y-m-d", strtotime($request->dateofprod)),
+                'ceno'=>$request->ceno,
+                'ceuser'=>$request->ceuser,
+                'description'=>$request->description,
+                'dateofentry'=>date("Y-m-d", strtotime($request->dateentry)),
+                'dateoftrans'=>date("Y-m-d", strtotime($request->datetrans)),
+                'dateofsupporting'=>date("Y-m-d", strtotime($request->datesupporting))
 
             ]);
 

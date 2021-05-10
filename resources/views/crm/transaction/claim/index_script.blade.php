@@ -102,6 +102,18 @@
     var arr3contract = $('#arr3contract').val();
     var arr3recovery = $('#arr3recovery').val();
 
+
+    var totalrecovery = $('#totalrecovery').val();
+    var nrsgrossret = $('#nrsgrossret').val();
+    var xol = $('#xol').val();
+    var cereffno = $('#cereffno').val();
+    var dateofprod = $('#dateofprod').val();
+    var ceno = $('#ceno').val();
+    var ceuser = $('#ceuser').val();
+    var description = $('#description').val();
+    var dateentry = $('#dateentry').val();
+    var datetrans = $('#datetrans').val();
+    var datesupporting = $('#datesupporting').val();
   
 
     var token2 = $('input[name=_token]').val();
@@ -172,7 +184,19 @@
              arr3liability:arr3liability,
              arr3loss:arr3loss,
              arr3contract:arr3contract,
-             arr3recovery:arr3recovery
+             arr3recovery:arr3recovery,
+             totalrecovery:totalrecovery,
+             nrsgrossret:nrsgrossret,
+             xol:xol,
+             cereffno:cereffno,
+             dateofprod:dateofprod,
+             ceno:ceno,
+             ceuser:ceuser,
+             description:description,
+             dateentry:dateentry,
+             datetrans:datetrans,
+             datesupporting:datesupporting
+
 
          },
          beforeSend: function() { $("body").addClass("loading");  },
@@ -269,7 +293,17 @@
     var arr3contract = $('#arr3contract').val();
     var arr3recovery = $('#arr3recovery').val();
 
-  
+    var totalrecovery = $('#totalrecovery').val();
+    var nrsgrossret = $('#nrsgrossret').val();
+    var xol = $('#xol').val();
+    var cereffno = $('#cereffno').val();
+    var dateofprod = $('#dateofprod').val();
+    var ceno = $('#ceno').val();
+    var ceuser = $('#ceuser').val();
+    var description = $('#description').val();
+    var dateentry = $('#dateentry').val();
+    var datetrans = $('#datetrans').val();
+    var datesupporting = $('#datesupporting').val();
 
     var token2 = $('input[name=_token]').val();
  
@@ -339,7 +373,18 @@
              arr3liability:arr3liability,
              arr3loss:arr3loss,
              arr3contract:arr3contract,
-             arr3recovery:arr3recovery
+             arr3recovery:arr3recovery,
+             totalrecovery:totalrecovery,
+             nrsgrossret:nrsgrossret,
+             xol:xol,
+             cereffno:cereffno,
+             dateofprod:dateofprod,
+             ceno:ceno,
+             ceuser:ceuser,
+             description:description,
+             dateentry:dateentry,
+             datetrans:datetrans,
+             datesupporting:datesupporting
 
 
          },

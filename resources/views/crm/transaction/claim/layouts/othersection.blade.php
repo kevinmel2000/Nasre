@@ -118,7 +118,7 @@
 					<tbody>
 						<tr>
 							<td>
-								<input type="text" name="dateofprod" id="dateofprod" class="form-control" autocomplete="off">
+								<input type="text" name="dateofprod" id="dateofprod" class="form-control datepicker" autocomplete="off">
 							</td>
 						</tr>
 					</tbody>
