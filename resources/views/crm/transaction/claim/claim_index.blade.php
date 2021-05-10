@@ -150,7 +150,7 @@
                     <tbody>
                         @foreach (@$claimlist as $claimlistata)
                             <tr>
-                              <td ><a href="{{  url('transaction-data/updatefeslip', $claimlistata->id) }}">{{@$claimlistata->number}}</a></td>
+                              <td ><a href="{{  url('claimtransaction-data/updateclaim', $claimlistata->id) }}">{{@$claimlistata->number}}</a></td>
                               <td> @php echo strtoupper($claimlistata->reg_comp); @endphp - 
                                   
                               </td>
@@ -169,14 +169,14 @@
                                 <span>
                                 
                                 {{-- @can('update-felookup', User::class) --}}
-                                {{--<a class="text-primary mr-3" href="{{ url('transaction-data/detailfeslip', $claimlistata->id) }}">
+                                {{--<a class="text-primary mr-3" href="{{ url('claimtransaction-data/detailclaim', $claimlistata->id) }}">
                                   <i class="fas fa-file"></i>
                                 </a>--}}
                                 {{-- {!! link_to('transaction-data/detailfeslip/'.@$claimlistata->id,'Detail Data',['class'=>'btn btn-primary']) !!} --}}
                                 {{-- @endcan   --}}
 
                                 {{-- @can('update-felookup', User::class) --}}
-                                {{--<a class="text-primary mr-3" href="{{ url('transaction-data/updatefeslip', $claimlistata->id) }}">
+                                {{--<a class="text-primary mr-3" href="{{ url('claimtransaction-data/updateclaim', $claimlistata->id) }}">
                                   <i class="fas fa-edit"></i>
                                 </a>--}}
                                 {{-- {!! link_to('transaction-data/updatefeslip/'.@$claimlistata->id,'Edit Data',['class'=>'btn btn-primary']) !!} --}}
@@ -189,7 +189,7 @@
                                    {{--<span id="delbtn{{@$claimlistata->id}}"></span>
                                 
                                     <form id="delete-felookuplocation-{{$claimlistata->id}}"
-                                        action="{{ url('transaction-data/fe-slip/destroy', $claimlistata->id) }}"
+                                        action="{{ url('claimtransaction-data/claim/destroy', $claimlistata->id) }}"
                                         method="POST">
                                         @method('DELETE')
                                         @csrf
