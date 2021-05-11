@@ -39,7 +39,7 @@ return [
 					'surveyor_module',
 					'location_master_module',
 					'marine_master_module',
-					'deductible_module',
+					'deductible_panel_module',
 					'extend_coverage_module',
 				],
 	'MODULES2'=>['fire_engineering_slip_module',

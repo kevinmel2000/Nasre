@@ -65,7 +65,7 @@ class PermissionsController extends Controller
         $surveyor_module =  Module::where(['module_name'=>'surveyor_module','role_id'=>$selected_role_id])->first();
         $location_master_module =  Module::where(['module_name'=>'location_master_module','role_id'=>$selected_role_id])->first();
         $marine_master_module =  Module::where(['module_name'=>'marine_master_module','role_id'=>$selected_role_id])->first();
-        $deductible_module =  Module::where(['module_name'=>'deductible_module','role_id'=>$selected_role_id])->first();
+        $deductible_module =  Module::where(['module_name'=>'deductible_panel_module','role_id'=>$selected_role_id])->first();
         $extend_coverage_module =  Module::where(['module_name'=>'extend_coverage_module','role_id'=>$selected_role_id])->first();
         
 
@@ -135,7 +135,7 @@ class PermissionsController extends Controller
                     'moveable_property_slip_module',
                     'location_master_module',
                     'marine_master_module',
-                    'deductible_module',
+                    'deductible_panel_module',
                     'extend_coverage_module',
                 ]));
     }
@@ -199,7 +199,7 @@ class PermissionsController extends Controller
         $surveyor_module =  Module::where(['module_name'=>'surveyor_module','role_id'=>$selected_role_id])->first();
         $location_master_module =  Module::where(['module_name'=>'location_master_module','role_id'=>$selected_role_id])->first();
         $marine_master_module =  Module::where(['module_name'=>'marine_master_module','role_id'=>$selected_role_id])->first();
-        $deductible_module =  Module::where(['module_name'=>'deductible_module','role_id'=>$selected_role_id])->first();
+        $deductible_module =  Module::where(['module_name'=>'deductible_panel_module','role_id'=>$selected_role_id])->first();
         $extend_coverage_module =  Module::where(['module_name'=>'extend_coverage_module','role_id'=>$selected_role_id])->first();
 
 
@@ -270,7 +270,7 @@ class PermissionsController extends Controller
                     'moveable_property_slip_module',
                     'location_master_module',
                     'marine_master_module',
-                    'deductible_module',
+                    'deductible_panel_module',
                     'extend_coverage_module',
                 ]));
 
@@ -335,7 +335,7 @@ class PermissionsController extends Controller
         $surveyor_module =  Module::where(['module_name'=>'surveyor_module','role_id'=>$selected_role_id])->first();
         $location_master_module =  Module::where(['module_name'=>'location_master_module','role_id'=>$selected_role_id])->first();
         $marine_master_module =  Module::where(['module_name'=>'marine_master_module','role_id'=>$selected_role_id])->first();
-        $deductible_module =  Module::where(['module_name'=>'deductible_module','role_id'=>$selected_role_id])->first();
+        $deductible_module =  Module::where(['module_name'=>'deductible_panel_module','role_id'=>$selected_role_id])->first();
         $extend_coverage_module =  Module::where(['module_name'=>'extend_coverage_module','role_id'=>$selected_role_id])->first();
 
 
@@ -405,7 +405,7 @@ class PermissionsController extends Controller
                     'moveable_property_slip_module',
                     'location_master_module',
                     'marine_master_module',
-                    'deductible_module',
+                    'deductible_panel_module',
                     'extend_coverage_module',
                 ]));
     }
