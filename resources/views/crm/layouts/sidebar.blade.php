@@ -1467,9 +1467,9 @@
 
                             
                     @endif
-    
+    <!-- 
                     {{-- ANCHOR Leads Menu Starts here --}}
-                    {{-- @can('viewany-lead', User::class) 
+                    {{-- @can('viewany-lead', User::class) --}}
                         @if(@$route_active == 'add_lead' || @$route_active == 'manage_lead' || @$route_active == 'lead_title'
                         || @$route_active == 'show_lead' || @$route_active == 'lead_source' || @$route_active == 'lead_status'
                         )
@@ -1548,7 +1548,7 @@
                             
                             </ul>
                         </li>
-                    @endcan --}}
+                   {{-- @endcan --}} -->
     
                     {{-- SECTION Product Menu  --}}
                     {{-- @can('viewany-product', User::class) 
