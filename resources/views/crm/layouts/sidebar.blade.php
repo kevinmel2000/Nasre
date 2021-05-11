@@ -1469,7 +1469,7 @@
                     @endif
     
                     {{-- ANCHOR Leads Menu Starts here --}}
-                    {{-- @can('viewany-lead', User::class) --}}
+                    {{-- @can('viewany-lead', User::class) 
                         @if(@$route_active == 'add_lead' || @$route_active == 'manage_lead' || @$route_active == 'lead_title'
                         || @$route_active == 'show_lead' || @$route_active == 'lead_source' || @$route_active == 'lead_status'
                         )
@@ -1494,64 +1494,64 @@
     
                             <ul class="nav nav-treeview">
     
-                            {{--    @can('create-lead', Auth::user()) --}}
-                                @if($route_active == 'add_lead')
-                                @php
-                                $add_lead = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('lead/create')}}" class="nav-link {{@$add_lead}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">{{__('NEW LEAD')}}</p>
-                                    </a>
-                                </li>
-                             {{--   @endcan --}}
-    
-                             {{--   @can('view-lead', Auth::user())
-                                @if($route_active == 'manage_lead' || $route_active == 'show_lead')
-                                @php
-                                $manage_lead = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('lead')}}" class="nav-link {{@$manage_lead}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">{{__('MANAGE LEADS')}}</p>
-                                    </a>
-                                </li>
-    
-    
-                                @if($route_active == 'lead_source')
+                                {{--    @can('create-lead', Auth::user()) --}}
+                                    @if($route_active == 'add_lead')
                                     @php
-                                        $lead_source = 'active';
+                                    $add_lead = 'active';
                                     @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('lead/source')}}" class="nav-link {{@$lead_source}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">{{__('LEAD SOURCES')}}</p>
-                                    </a>
-                                </li>
-    
-                                @if($route_active == 'lead_status')
-                                @php
-                                    $lead_status = 'active';
-                                @endphp
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{url('lead/status')}}" class="nav-link {{@$lead_status}}">
-                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
-                                        <p style="font-size: 90%;margin-left:2%;">{{__('LEAD STATUSESS')}}</p>
-                                    </a>
-                                </li>
-                            {{--    @endcan --}}
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('lead/create')}}" class="nav-link {{@$add_lead}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                            <p style="font-size: 90%;margin-left:2%;">{{__('NEW LEAD')}}</p>
+                                        </a>
+                                    </li>
+                                 {{--   @endcan --}}
+        
+                                 {{--   @can('view-lead', Auth::user()) --}}
+                                    @if($route_active == 'manage_lead' || $route_active == 'show_lead')
+                                    @php
+                                    $manage_lead = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('lead')}}" class="nav-link {{@$manage_lead}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                            <p style="font-size: 90%;margin-left:2%;">{{__('MANAGE LEADS')}}</p>
+                                        </a>
+                                    </li>
+                                {{-- @endcan --}}
+        
+                                    @if($route_active == 'lead_source')
+                                        @php
+                                            $lead_source = 'active';
+                                        @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('lead/source')}}" class="nav-link {{@$lead_source}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                            <p style="font-size: 90%;margin-left:2%;">{{__('LEAD SOURCES')}}</p>
+                                        </a>
+                                    </li>
+        
+                                    @if($route_active == 'lead_status')
+                                    @php
+                                        $lead_status = 'active';
+                                    @endphp
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{url('lead/status')}}" class="nav-link {{@$lead_status}}">
+                                            <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                            <p style="font-size: 90%;margin-left:2%;">{{__('LEAD STATUSESS')}}</p>
+                                        </a>
+                                    </li>
+                            
                             </ul>
                         </li>
-                 {{--   @endcan --}}
+                    @endcan --}}
     
                     {{-- SECTION Product Menu  --}}
-                    {{-- @can('viewany-product', User::class) --}}
+                    {{-- @can('viewany-product', User::class) 
                         @if(@$route_active == 'productCreate' || @$route_active == 'product' || @$route_active ==
                         'productgroup')
                             @php
@@ -1618,7 +1618,7 @@
                             {{--     @endcan --}}
                             </ul>
                         </li>
-                  {{--  @endcan --}}
+                   @endcan --}}
     
                     {{-- proposal --}}
                     {{-- @can('viewany-lead', User::class)
@@ -1674,7 +1674,7 @@
     
                             </ul>
                         </li>
-                   {{--  @endcan --}}
+                     @endcan --}}
     
                     {{-- SECTION ESTIMATES Menu  --}}
                         {{-- @can('viewany-lead', User::class)
