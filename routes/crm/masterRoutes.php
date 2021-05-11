@@ -54,7 +54,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::post('/occupation/store', [MasterController::class, 'storeoccupation'])->middleware(['can:create-occupation']);
     // Route::put('occupation/{ocp}', [MasterController::class, 'updateoccupation'])->middleware(['can:update-occupation']);
     // Route::delete('/occupation/destroy/{ocp}', [MasterController::class, 'destroyoccupation'])->middleware(['can:delete-occupation']);
-    Route::get('/occupation', [MasterController::class, 'indexoccupation']);
+    Route::get('/occupation', [MasterController::class, 'indexoccupation'])->middleware(['can:create-occupation']);
     Route::post('/occupation/store', [MasterController::class, 'storeoccupation']);
     Route::put('occupation/{ocp}', [MasterController::class, 'updateoccupation']);
     Route::delete('/occupation/destroy/{ocp}', [MasterController::class, 'destroyoccupation']);
@@ -65,7 +65,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::post('/currency/store', [MasterController::class, 'storecurrency'])->middleware(['can:create-currency']);
     // Route::put('currency/{crc}', [MasterController::class, 'updatecurrency'])->middleware(['can:update-currency']);
     // Route::delete('/currency/destroy/{crc}', [MasterController::class, 'destroycurrency'])->middleware(['can:delete-currency']);
-    Route::get('/currency', [MasterController::class, 'indexcurrency']);
+    Route::get('/currency', [MasterController::class, 'indexcurrency'])->middleware(['can:create-currency']);
     Route::post('/currency/store', [MasterController::class, 'storecurrency']);
     Route::put('currency/{crc}', [MasterController::class, 'updatecurrency']);
     Route::delete('/currency/destroy/{crc}', [MasterController::class, 'destroycurrency']);
@@ -76,7 +76,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::post('/exchange/store', [MasterController::class, 'storeexchange'])->middleware(['can:create-exchange']);
     // Route::put('exchange/{exc}', [MasterController::class, 'updateexchange'])->middleware(['can:update-exchange']);
     // Route::delete('/exchange/destroy/{exc}', [MasterController::class, 'destroyexchange'])->middleware(['can:delete-exchange']);
-    Route::get('/exchange', [MasterController::class, 'indexexchange']);
+    Route::get('/exchange', [MasterController::class, 'indexexchange'])->middleware(['can:create-exchange']);
     Route::post('/exchange/store', [MasterController::class, 'storeexchange']);
     Route::put('exchange/{exc}', [MasterController::class, 'updateexchange']);
     Route::delete('/exchange/destroy/{exc}', [MasterController::class, 'destroyexchange']);
@@ -88,7 +88,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::post('/felookuplocation/store', [FeLookupLocationController::class, 'store'])->middleware(['can:create-felookup']);
     // Route::put('/felookuplocation/update/{fl}', [FeLookupLocationController::class, 'update'])->middleware(['can:update-felookup']);
     // Route::delete('/felookuplocation/destroy/{fl}', [FeLookupLocationController::class, 'destroy'])->middleware(['can:delete-felookup']);
-    Route::get('/felookuplocation', [FeLookupLocationController::class, 'index']);
+    Route::get('/felookuplocation', [FeLookupLocationController::class, 'index'])->middleware(['can:create-felookup']);
     Route::get('/felookuplocationgetcountcode', [FeLookupLocationController::class, 'getCountCode']);
     Route::get('/felookuplocationgetloccountcode/{fl}', [FeLookupLocationController::class, 'getLocCountCode']);
     Route::post('/felookuplocation', [FeLookupLocationController::class, 'index']);
@@ -103,7 +103,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::put('/koc/update/{koc}', [KocController::class, 'update'])->middleware(['can:update-koc']);
     // Route::delete('/koc/destroy/{koc}', [KocController::class, 'destroy'])->middleware(['can:delete-koc']);
     
-    Route::get('/koc', [KocController::class, 'index']);
+    Route::get('/koc', [KocController::class, 'index'])->middleware(['can:create-koc']);
     Route::post('/koc/store', [KocController::class, 'store']);
     Route::put('/koc/update/{koc}', [KocController::class, 'update']);
     Route::delete('/koc/destroy/{koc}', [KocController::class, 'destroy']);
@@ -138,7 +138,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::post('/golffieldhole/store', [GolfFieldHoleController::class, 'store'])->middleware(['can:create-gfh']);
     // Route::put('/golffieldhole/update/{gfh}', [GolfFieldHoleController::class, 'update'])->middleware(['can:update-gfh']);
     // Route::delete('/golffieldhole/destroy/{gfh}', [GolfFieldHoleController::class, 'destroy'])->middleware(['can:delete-gfh']);
-    Route::get('/golffieldhole', [GolfFieldHoleController::class, 'index']);
+    Route::get('/golffieldhole', [GolfFieldHoleController::class, 'index'])->middleware(['can:create-gfh']);
     Route::post('/golffieldhole/store', [GolfFieldHoleController::class, 'store']);
     Route::put('/golffieldhole/update/{gfh}', [GolfFieldHoleController::class, 'update']);
     Route::delete('/golffieldhole/destroy/{gfh}', [GolfFieldHoleController::class, 'destroy']);
@@ -162,7 +162,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::put('/earthquakezone/update/{eq}', [EarthQuakeZoneController::class, 'update'])->middleware(['can:update-eqz']);
     // Route::delete('/earthquakezone/destroy/{eq}',  [EarthQuakeZoneController::class, 'destroy'])->middleware(['can:delete-eqz']);
 
-    Route::get('/earthquakezone', [EarthQuakeZoneController::class, 'index']);
+    Route::get('/earthquakezone', [EarthQuakeZoneController::class, 'index'])->middleware(['can:create-eqz']);
     Route::post('/earthquakezone', [EarthQuakeZoneController::class, 'index']);
     Route::post('/earthquakezone/store',  [EarthQuakeZoneController::class, 'store']);
     Route::put('/earthquakezone/update/{eq}', [EarthQuakeZoneController::class, 'update']);
@@ -174,7 +174,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::post('/floodzone/store',  [FloodZoneController::class, 'store'])->middleware(['can:create-fz']);
     // Route::put('/floodzone/update/{flood}', [FloodZoneController::class, 'update'])->middleware(['can:update-fz']);
     // Route::delete('/floodzone/destroy/{flood}',  [FloodZoneController::class, 'destroy'])->middleware(['can:delete-fz']);
-    Route::get('/floodzone', [FloodZoneController::class, 'index']);
+    Route::get('/floodzone', [FloodZoneController::class, 'index'])->middleware(['can:create-fz']);
     Route::post('/floodzone', [FloodZoneController::class, 'index']);
     Route::post('/floodzone/store',  [FloodZoneController::class, 'store']);
     Route::put('/floodzone/update/{flood}', [FloodZoneController::class, 'update']);
@@ -182,7 +182,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     
 
     // SECTION Ship Type Routes
-    Route::get('/shiptype', [MasterController::class, 'indexshiptype']);
+    Route::get('/shiptype', [MasterController::class, 'indexshiptype'])->middleware(['can:create-shiptype']);
     Route::post('/shiptype/store', [MasterController::class, 'storeshiptype']);
     Route::put('shiptype/{st}', [MasterController::class, 'updateshiptype']);
     Route::delete('/shiptype/destroy/{st}', [MasterController::class, 'destroyshiptype']);
@@ -204,7 +204,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::post('/marine-lookup/store', [MasterController::class, 'storemarinelookup'])->middleware(['can:create-marinelookup']);
     // Route::put('marine-lookup/{mlu}', [MasterController::class, 'updatemarinelookup'])->middleware(['can:update-marinelookup']);
     // Route::delete('/marine-lookup/destroy/{mlu}', [MasterController::class, 'destroymarinelookup'])->middleware(['can:delete-marinelookup']);
-    Route::get('/marine-lookup', [MasterController::class, 'indexmarinelookup']);
+    Route::get('/marine-lookup', [MasterController::class, 'indexmarinelookup'])->middleware(['can:create-marinelookup']);
     Route::post('/marine-lookup/store', [MasterController::class, 'storemarinelookup']);
     Route::put('marine-lookup/{mlu}', [MasterController::class, 'updatemarinelookup']);
     Route::delete('/marine-lookup/destroy/{mlu}', [MasterController::class, 'destroymarinelookup']);
@@ -221,7 +221,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
      Route::delete('/companytype/destroy/{ct}', [MasterController::class, 'destroycompanytype']);
 
     // SECTION condition Needed Routes
-    Route::get('/conditionneeded', [MasterController::class, 'indexconditionneeded']);
+    Route::get('/conditionneeded', [MasterController::class, 'indexconditionneeded'])->middleware(['can:create-condition_needed']);
     Route::post('/conditionneeded/store', [MasterController::class, 'storeconditionneeded']);
     Route::put('conditionneeded/{cdn}', [MasterController::class, 'updateconditionneeded']);
     Route::delete('/conditionneeded/destroy/{cdn}', [MasterController::class, 'destroyconditionneeded']);
