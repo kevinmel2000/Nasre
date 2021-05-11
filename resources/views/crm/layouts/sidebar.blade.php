@@ -1463,7 +1463,7 @@
                     @endif
     
                     {{-- ANCHOR Leads Menu Starts here --}}
-                    {{-- @can('viewany-lead', User::class)
+                    {{-- @can('viewany-lead', User::class) --}}
                         @if(@$route_active == 'add_lead' || @$route_active == 'manage_lead' || @$route_active == 'lead_title'
                         || @$route_active == 'show_lead' || @$route_active == 'lead_source' || @$route_active == 'lead_status'
                         )
@@ -1488,7 +1488,7 @@
     
                             <ul class="nav nav-treeview">
     
-                                @can('create-lead', Auth::user())
+                            {{--    @can('create-lead', Auth::user()) --}}
                                 @if($route_active == 'add_lead')
                                 @php
                                 $add_lead = 'active';
@@ -1500,9 +1500,9 @@
                                         <p style="font-size: 90%;margin-left:2%;">{{__('NEW LEAD')}}</p>
                                     </a>
                                 </li>
-                                @endcan
+                             {{--   @endcan --}}
     
-                                @can('view-lead', Auth::user())
+                             {{--   @can('view-lead', Auth::user())
                                 @if($route_active == 'manage_lead' || $route_active == 'show_lead')
                                 @php
                                 $manage_lead = 'active';
@@ -1517,9 +1517,9 @@
     
     
                                 @if($route_active == 'lead_source')
-                                @php
-                                $lead_source = 'active';
-                                @endphp
+                                    @php
+                                        $lead_source = 'active';
+                                    @endphp
                                 @endif
                                 <li class="nav-item">
                                     <a href="{{url('lead/source')}}" class="nav-link {{@$lead_source}}">
@@ -1530,7 +1530,7 @@
     
                                 @if($route_active == 'lead_status')
                                 @php
-                                $lead_status = 'active';
+                                    $lead_status = 'active';
                                 @endphp
                                 @endif
                                 <li class="nav-item">
@@ -1539,13 +1539,13 @@
                                         <p style="font-size: 90%;margin-left:2%;">{{__('LEAD STATUSESS')}}</p>
                                     </a>
                                 </li>
-                                @endcan
+                            {{--    @endcan --}}
                             </ul>
                         </li>
-                    @endcan --}}
+                 {{--   @endcan --}}
     
                     {{-- SECTION Product Menu  --}}
-                    {{-- @can('viewany-product', User::class)
+                    {{-- @can('viewany-product', User::class) --}}
                         @if(@$route_active == 'productCreate' || @$route_active == 'product' || @$route_active ==
                         'productgroup')
                             @php
@@ -1568,7 +1568,7 @@
                             </a>
     
                             <ul class="nav nav-treeview">
-                                @can('create-product', Auth::user())
+                            {{--    @can('create-product', Auth::user()) --}}
                                 @if($route_active == 'productCreate')
                                 @php
                                 $productCreate = 'active';
@@ -1580,9 +1580,9 @@
                                         <p style="font-size: 90%;margin-left:2%;">{{__('NEW PRODUCT')}}</p>
                                     </a>
                                 </li>
-                                @endcan
+                            {{--    @endcan --}}
     
-                                @can('view-product', Auth::user())
+                            {{--    @can('view-product', Auth::user()) --}}
                                 @if($route_active == 'product')
                                 @php
                                 $product = 'active';
@@ -1594,9 +1594,9 @@
                                         <p style="font-size: 90%;margin-left:2%;">{{__('PRODUCTS')}}</p>
                                     </a>
                                 </li>
-                                @endcan
+                            {{--    @endcan --}}
     
-                                @can('view-product', Auth::user())
+                            {{--    @can('view-product', Auth::user()) --}}
                                 @if($route_active == 'productgroup')
                                 @php
                                 $productgroup = 'active';
@@ -1609,10 +1609,10 @@
                                     </a>
                                 </li>
     
-                                @endcan
+                                @endcan --}}
                             </ul>
                         </li>
-                    @endcan --}}
+                  {{--  @endcan --}}
     
                     {{-- proposal --}}
                     {{-- @can('viewany-lead', User::class)
