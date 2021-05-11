@@ -1550,8 +1550,8 @@
                         </li>
                    {{-- @endcan --}} -->
     
-                    {{-- SECTION Product Menu  --}}
-                    {{-- @can('viewany-product', User::class) 
+                    <!-- {{-- SECTION Product Menu  --}}
+                    {{-- @can('viewany-product', User::class) --}}
                         @if(@$route_active == 'productCreate' || @$route_active == 'product' || @$route_active ==
                         'productgroup')
                             @php
@@ -1618,10 +1618,10 @@
                             {{--     @endcan --}}
                             </ul>
                         </li>
-                   @endcan --}}
+                 {{--  @endcan --}} -->
     
                     {{-- proposal --}}
-                    {{-- @can('viewany-lead', User::class)
+                    {{-- @can('viewany-lead', User::class) 
                         @if(@$route_active == 'proposal' || @$route_active == 'proposalCreate')
                             @php
                             $proposal_dd = 'active';
