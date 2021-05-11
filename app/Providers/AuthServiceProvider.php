@@ -214,14 +214,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('update-condition_needed', 'App\Policies\ConditionNeededPolicy@update');
         Gate::define('delete-condition_needed', 'App\Policies\ConditionNeededPolicy@delete');
 
-
-        // ANCHOR Property Type Gates
-        Gate::define('viewany-condition_needed', 'App\Policies\ConditionNeededPolicy@viewany');
-        Gate::define('view-condition_needed', 'App\Policies\ConditionNeededPolicy@view');
-        Gate::define('create-condition_needed', 'App\Policies\ConditionNeededPolicy@create');
-        Gate::define('update-condition_needed', 'App\Policies\ConditionNeededPolicy@update');
-        Gate::define('delete-condition_needed', 'App\Policies\ConditionNeededPolicy@delete');
-
         // ANCHOR Property Type Gates
         Gate::define('viewany-cause_of_loss', 'App\Policies\CauseOfLossPolicy@viewany');
         Gate::define('view-cause_of_loss', 'App\Policies\CauseOfLossPolicy@view');
@@ -277,6 +269,34 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-surveyor', 'App\Policies\SurveyorPolicy@create');
         Gate::define('update-surveyor', 'App\Policies\SurveyorPolicy@update');
         Gate::define('delete-surveyor', 'App\Policies\SurveyorPolicy@delete');
+
+        // ANCHOR Property Type Gates
+        Gate::define('viewany-location_master', 'App\Policies\LocationMasterPolicy@viewany');
+        Gate::define('view-location_master', 'App\Policies\LocationMasterPolicy@view');
+        Gate::define('create-location_master', 'App\Policies\LocationMasterPolicy@create');
+        Gate::define('update-location_master', 'App\Policies\LocationMasterPolicy@update');
+        Gate::define('delete-location_master', 'App\Policies\LocationMasterPolicy@delete');
+
+        // ANCHOR Property Type Gates
+        Gate::define('viewany-marine_master', 'App\Policies\MarineMasterPolicy@viewany');
+        Gate::define('view-marine_master', 'App\Policies\MarineMasterPolicy@view');
+        Gate::define('create-marine_master', 'App\Policies\MarineMasterPolicy@create');
+        Gate::define('update-marine_master', 'App\Policies\MarineMasterPolicy@update');
+        Gate::define('delete-marine_master', 'App\Policies\MarineMasterPolicy@delete');
+
+        // ANCHOR Property Type Gates
+        Gate::define('viewany-deductible', 'App\Policies\DeductiblePolicy@viewany');
+        Gate::define('view-deductible', 'App\Policies\DeductiblePolicy@view');
+        Gate::define('create-deductible', 'App\Policies\DeductiblePolicy@create');
+        Gate::define('update-deductible', 'App\Policies\DeductiblePolicy@update');
+        Gate::define('delete-deductible', 'App\Policies\DeductiblePolicy@delete');
+
+        // ANCHOR Property Type Gates
+        Gate::define('viewany-extend_coverage', 'App\Policies\ExtendCoveragePolicy@viewany');
+        Gate::define('view-extend_coverage', 'App\Policies\ExtendCoveragePolicy@view');
+        Gate::define('create-extend_coverage', 'App\Policies\ExtendCoveragePolicy@create');
+        Gate::define('update-extend_coverage', 'App\Policies\ExtendCoveragePolicy@update');
+        Gate::define('delete-extend_coverage', 'App\Policies\ExtendCoveragePolicy@delete');
 
 
 

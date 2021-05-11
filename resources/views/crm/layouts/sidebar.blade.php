@@ -292,6 +292,7 @@
                                     </li>
                                 @endcan
     
+                                @can('create-location_master', User::class)
                                 @if(
                                     @$route_active == 'Country Master' 
                                     || @$route_active == 'State Master' 
@@ -316,7 +317,7 @@
                                     </a>
     
                                     <ul class="nav nav-treeview">
-                                        {{-- @can('viewany-country', User::class) --}}
+                                        @can('create-country', User::class)
                                             @if($route_active == 'Country Master')
                                             @php
                                                 $countryform = 'active';
@@ -328,9 +329,9 @@
                                                     <p style="font-size: 80%;margin-left:2%;">{{__('COUNTRY FORM')}}</p>
                                                 </a>
                                             </li>
-                                        {{-- @endcan --}}
-                                            
-                                        {{-- @can('viewany-state', User::class) --}}
+                                        @endcan
+
+                                        @can('create-state', User::class)
                                             @if($route_active == 'State Master')
                                             @php
                                                 $state_form = 'active';
@@ -342,9 +343,9 @@
                                                     <p style="font-size: 80%;margin-left:2%;">{{__('PROVINCE FORM')}}</p>
                                                 </a>
                                             </li>
-                                        {{-- @endcan --}}
+                                        @endcan
             
-                                        {{-- @can('viewany-city', User::class) --}}
+                                        @can('create-city', User::class)
                                             @if($route_active == 'City Master')
                                                 @php
                                                     $city_form = 'active';
@@ -356,9 +357,10 @@
                                                     <p style="font-size: 80%;margin-left:2%;">{{__('CITY FORM')}}</p>
                                                 </a>
                                             </li>
-                                        {{-- @endcan --}}
+                                        @endcan
                                     </ul>
                                 </li>
+                                @endcan
     
                                 @can('create-felookup', User::class)
                                     @if($route_active == 'Fire & Engineering Lookup Location')
@@ -374,7 +376,7 @@
                                     </li>
                                 @endcan
     
-                                {{-- @can('viewany-property_type', User::class) --}}
+                                @can('create-property_type', User::class)
                                     @if($route_active == 'Property Type Master')
                                         @php
                                             $property_form = 'active';
@@ -386,7 +388,7 @@
                                             <p style="font-size: 90%;margin-left:2%;">{{__('PROPERTY TYPE FORM')}}</p>
                                         </a>
                                     </li>
-                                {{-- @endcan --}}
+                                @endcan
     
                             </ul>
                         </li>
@@ -621,7 +623,7 @@
                                         </li>
                                     @endcan
     
-                                    @can('create-condition_needed', User::class)
+                                    @can('create-deductible', User::class)
                                         @if($route_active == 'Deductible Type Master')
                                             @php
                                                 $dt_form = 'active';
@@ -649,7 +651,7 @@
                                         </li>
                                     @endcan
     
-                                    @can('create-condition_needed', User::class)
+                                    @can('create-extend_coverage', User::class)
                                         @if($route_active == 'Extend Coverage Master')
                                             @php
                                                 $ec_form = 'active';
@@ -719,6 +721,7 @@
                                             </li>
                                     @endcan
     
+                                    @can('create-location_master', User::class)
                                     @if(
                                         @$route_active == 'Country Master' 
                                         || @$route_active == 'State Master' 
@@ -743,7 +746,7 @@
                                         </a>
     
                                         <ul class="nav nav-treeview">
-                                            {{-- @can('viewany-country', User::class) --}}
+                                            @can('create-country', User::class)
                                                 @if($route_active == 'Country Master')
                                                     @php
                                                         $countryform = 'active';
@@ -755,9 +758,9 @@
                                                         <p style="font-size: 80%;margin-left:2%;">{{__('COUNTRY FORM')}}</p>
                                                     </a>
                                                 </li>
-                                            {{-- @endcan --}}
+                                            @endcan
                                                 
-                                            {{-- @can('viewany-state', User::class) --}}
+                                            @can('create-state', User::class)
                                                 @if($route_active == 'State Master')
                                                     @php
                                                         $state_form = 'active';
@@ -769,9 +772,9 @@
                                                         <p style="font-size: 80%;margin-left:2%;">{{__('PROVINCE FORM')}}</p>
                                                     </a>
                                                 </li>
-                                            {{-- @endcan --}}
+                                            @endcan
                 
-                                            {{-- @can('viewany-city', User::class) --}}
+                                            @can('viewany-city', User::class)
                                                 @if($route_active == 'City Master')
                                                     @php
                                                         $city_form = 'active';
@@ -783,9 +786,10 @@
                                                         <p style="font-size: 80%;margin-left:2%;">{{__('CITY FORM')}}</p>
                                                     </a>
                                                 </li>
-                                            {{-- @endcan --}}
+                                            @endcan
                                         </ul>
                                     </li>
+                                    @endcan
     
                                     @can('create-felookup', User::class)
                                         @if($route_active == 'Fire & Engineering Lookup Location')
@@ -815,6 +819,7 @@
                                         </li>
                                     @endcan
     
+                                    @can('create-marine_master', User::class)
                                     @if(
                                         @$route_active == 'Ship Type Master' 
                                         || @$route_active == 'Classification Master' 
@@ -839,7 +844,7 @@
                                         </a>
         
                                         <ul class="nav nav-treeview">
-                                            {{-- @can('viewany-shiptype', User::class) --}}
+                                            @can('create-shiptype', User::class)
                                                 @if($route_active == 'Ship Type Master')
                                                     @php
                                                         $shiptypeform = 'active';
@@ -851,9 +856,9 @@
                                                         <p style="font-size: 80%;margin-left:2%;">{{__('SHIP TYPE FORM')}}</p>
                                                     </a>
                                                 </li>
-                                            {{-- @endcan --}}
+                                            @endcan
                                                 
-                                            {{-- @can('viewany-classification', User::class) --}}
+                                            @can('create-classification', User::class)
                                                 @if($route_active == 'Classification Master')
                                                     @php
                                                         $classification_form = 'active';
@@ -865,9 +870,9 @@
                                                         <p style="font-size: 80%;margin-left:2%;">{{__('CLASSIFICATION FORM')}}</p>
                                                     </a>
                                                 </li>
-                                            {{-- @endcan --}}
+                                            @endcan
                 
-                                            {{-- @can('viewany-construction', User::class) --}}
+                                            @can('create-construction', User::class)
                                                 @if($route_active == 'Construction Master')
                                                     @php
                                                         $construction_form = 'active';
@@ -879,9 +884,10 @@
                                                         <p style="font-size: 80%;margin-left:2%;">{{__('CONSTRUCTION FORM')}}</p>
                                                     </a>
                                                 </li>
-                                            {{-- @endcan --}}
+                                            @endcan
                                         </ul>
                                     </li>
+                                    @endcan
 
                                     @can('create-prefix_insured', User::class)
                                         @if($route_active == 'Prefix Insured Master')
@@ -910,9 +916,9 @@
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('OCCUPATION FORM')}}</p>
                                             </a>
                                         </li>
-                                    {{-- @endcan --}}
+                                    @endcan
     
-                                    {{-- @can('viewany-property_type', User::class) --}}
+                                    @can('create-property_type', User::class)
                                         @if($route_active == 'Property Type Master')
                                             @php
                                                 $property_form = 'active';
@@ -924,7 +930,7 @@
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('PROPERTY TYPE FORM')}}</p>
                                             </a>
                                         </li>
-                                    {{-- @endcan --}}
+                                    @endcan
 
                                     @can('create-nature_of_loss', User::class)
                                         @if($route_active == 'Nature Of Loss')

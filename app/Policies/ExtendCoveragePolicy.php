@@ -6,7 +6,7 @@ use App\Models\Module;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class MarineMasterPolicy
+class ExtendCoveragePolicy
 {
     use HandlesAuthorization;
 
@@ -18,7 +18,7 @@ class MarineMasterPolicy
      */
     public function viewAny(User $user)
     {
-        $module = Module::select(['read', 'create', 'update', 'delete'])->where(['module_name'=>'marine_master_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['read', 'create', 'update', 'delete'])->where(['module_name'=>'extend_coverage_module', 'role_id'=>$user->role->id])->first();
         if ($module->create == 'on' || $module->read == 'on' || $module->update == 'on' || $module->delete == 'on') {
             return true;
         }else{
@@ -35,7 +35,7 @@ class MarineMasterPolicy
      */
     public function view(User $user)
     {
-        $module = Module::select(['read'])->where(['module_name'=>'marine_master_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['read'])->where(['module_name'=>'extend_coverage_module', 'role_id'=>$user->role->id])->first();
         return $module->read == 'on';
     }
 
@@ -47,7 +47,7 @@ class MarineMasterPolicy
      */
     public function create(User $user)
     {
-        $module = Module::select(['create'])->where(['module_name'=>'marine_master_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['create'])->where(['module_name'=>'extend_coverage_module', 'role_id'=>$user->role->id])->first();
         return $module->create == 'on';
     }
 
@@ -60,7 +60,7 @@ class MarineMasterPolicy
      */
     public function update(User $user)
     {
-        $module = Module::select(['update'])->where(['module_name'=>'marine_master_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['update'])->where(['module_name'=>'extend_coverage_module', 'role_id'=>$user->role->id])->first();
         return $module->update == 'on';
     }
 
@@ -73,7 +73,7 @@ class MarineMasterPolicy
      */
     public function delete(User $user)
     {
-        $module = Module::select(['delete'])->where(['module_name'=>'marine_master_module', 'role_id'=>$user->role->id])->first();
+        $module = Module::select(['delete'])->where(['module_name'=>'extend_coverage_module', 'role_id'=>$user->role->id])->first();
         return $module->delete == 'on';
     }
 }

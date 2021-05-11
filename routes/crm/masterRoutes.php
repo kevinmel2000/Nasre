@@ -33,10 +33,35 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     // Route::post('/country/store', [MasterController::class, 'storecountry'])->middleware(['can:create-country']);
     // Route::put('country/{country}', [MasterController::class, 'updatecountry'])->middleware(['can:update-country']);
     // Route::delete('/country/destroy/{country}', [MasterController::class, 'destroycountry'])->middleware(['can:delete-country']);
-    Route::get('/country', [MasterController::class, 'indexcountry']);
+    Route::get('/country', [MasterController::class, 'indexcountry'])->middleware(['can:create-country']);
     Route::post('/country/store', [MasterController::class, 'storecountry']);
     Route::put('country/{country}', [MasterController::class, 'updatecountry']);
     Route::delete('/country/destroy/{country}', [MasterController::class, 'destroycountry']);
+
+    // SECTION City Routes
+    // Route::get('/city',  [CityController::class, 'index'])->middleware(['can:view-city']);
+    // Route::post('/city',  [CityController::class, 'index'])->middleware(['can:view-city']);
+    // Route::post('/city/store', [CityController::class, 'store'])->middleware(['can:create-city']);
+    // Route::put('/city/update/{city}', [CityController::class, 'update'])->middleware(['can:update-city']);
+    // Route::delete('/city/destroy/{city}', [CityController::class, 'destroy'])->middleware(['can:delete-city']);
+    Route::get('/city',  [CityController::class, 'index'])->middleware(['can:create-city']);
+    Route::post('/city',  [CityController::class, 'index']);
+    Route::post('/city/store', [CityController::class, 'store']);
+    Route::put('/city/update/{city}', [CityController::class, 'update']);
+    Route::delete('/city/destroy/{city}', [CityController::class, 'destroy']);
+
+    // SECTION State Routes
+    // Route::get('/state',  [StateController::class, 'index'])->middleware(['can:view-state']);
+    // Route::post('/state',  [StateController::class, 'index'])->middleware(['can:view-state']);
+    // Route::post('/state/store', [StateController::class, 'store'])->middleware(['can:create-state']);
+    // Route::put('/state/update/{state}', [StateController::class, 'update'])->middleware(['can:update-state']);
+    // Route::delete('/state/destroy/{state}', [StateController::class, 'destroy'])->middleware(['can:delete-state']);
+    Route::get('/state',  [StateController::class, 'index'])->middleware(['can:create-state']);
+    Route::post('/state',  [StateController::class, 'index']);
+    Route::post('/state/store', [StateController::class, 'store']);
+    Route::put('/state/update/{state}', [StateController::class, 'update']);
+    Route::delete('/state/destroy/{state}', [StateController::class, 'destroy']);
+
 
     
     // SECTION COB Group Routes
@@ -109,29 +134,6 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::delete('/koc/destroy/{koc}', [KocController::class, 'destroy']);
 
 
-    // SECTION City Routes
-    // Route::get('/city',  [CityController::class, 'index'])->middleware(['can:view-city']);
-    // Route::post('/city',  [CityController::class, 'index'])->middleware(['can:view-city']);
-    // Route::post('/city/store', [CityController::class, 'store'])->middleware(['can:create-city']);
-    // Route::put('/city/update/{city}', [CityController::class, 'update'])->middleware(['can:update-city']);
-    // Route::delete('/city/destroy/{city}', [CityController::class, 'destroy'])->middleware(['can:delete-city']);
-    Route::get('/city',  [CityController::class, 'index']);
-    Route::post('/city',  [CityController::class, 'index']);
-    Route::post('/city/store', [CityController::class, 'store']);
-    Route::put('/city/update/{city}', [CityController::class, 'update']);
-    Route::delete('/city/destroy/{city}', [CityController::class, 'destroy']);
-
-    // SECTION State Routes
-    // Route::get('/state',  [StateController::class, 'index'])->middleware(['can:view-state']);
-    // Route::post('/state',  [StateController::class, 'index'])->middleware(['can:view-state']);
-    // Route::post('/state/store', [StateController::class, 'store'])->middleware(['can:create-state']);
-    // Route::put('/state/update/{state}', [StateController::class, 'update'])->middleware(['can:update-state']);
-    // Route::delete('/state/destroy/{state}', [StateController::class, 'destroy'])->middleware(['can:delete-state']);
-    Route::get('/state',  [StateController::class, 'index']);
-    Route::post('/state',  [StateController::class, 'index']);
-    Route::post('/state/store', [StateController::class, 'store']);
-    Route::put('/state/update/{state}', [StateController::class, 'update']);
-    Route::delete('/state/destroy/{state}', [StateController::class, 'destroy']);
 
     // SECTION Golf Hole Routes
     // Route::get('/golffieldhole', [GolfFieldHoleController::class, 'index'])->middleware(['can:view-gfh']);
@@ -188,13 +190,13 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::delete('/shiptype/destroy/{st}', [MasterController::class, 'destroyshiptype']);
 
     // SECTION Classification Routes
-    Route::get('/classification', [MasterController::class, 'indexclassification']);
+    Route::get('/classification', [MasterController::class, 'indexclassification'])->middleware(['can:view-classification']);
     Route::post('/classification/store', [MasterController::class, 'storeclassification']);
     Route::put('classification/{cs}', [MasterController::class, 'updateclassification']);
     Route::delete('/classification/destroy/{cs}', [MasterController::class, 'destroyclassification']);
 
     // SECTION Construction Routes
-    Route::get('/construction', [MasterController::class, 'indexconstruction']);
+    Route::get('/construction', [MasterController::class, 'indexconstruction'])->middleware(['can:view-construction']);
     Route::post('/construction/store', [MasterController::class, 'storeconstruction']);
     Route::put('construction/{cr}', [MasterController::class, 'updateconstruction']);
     Route::delete('/construction/destroy/{cr}', [MasterController::class, 'destroyconstruction']);
@@ -209,7 +211,7 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::put('marine-lookup/{mlu}', [MasterController::class, 'updatemarinelookup']);
     Route::delete('/marine-lookup/destroy/{mlu}', [MasterController::class, 'destroymarinelookup']);
     // SECTION property Type Routes
-    Route::get('/propertytype', [MasterController::class, 'indexpropertytype']);
+    Route::get('/propertytype', [MasterController::class, 'indexpropertytype'])->middleware(['can:create-property_type']);
     Route::post('/propertytype/store', [MasterController::class, 'storepropertytype']);
     Route::put('propertytype/{pt}', [MasterController::class, 'updatepropertytype']);
     Route::delete('/propertytype/destroy/{pt}', [MasterController::class, 'destroypropertytype']);
@@ -233,13 +235,13 @@ Route::group(['prefix'=>'/master-data','middleware'=>['auth']], function(){
     Route::delete('/interestinsured/destroy/{ii}', [MasterController::class, 'destroyinterestinsured']);
 
     // SECTION Deductible Type  Routes
-    Route::get('/deductibletype', [MasterController::class, 'indexdeductibletype']);
+    Route::get('/deductibletype', [MasterController::class, 'indexdeductibletype'])->middleware(['can:create-deductible']);
     Route::post('/deductibletype/store', [MasterController::class, 'storedeductibletype']);
     Route::put('deductibletype/{dt}', [MasterController::class, 'updatedeductibletype']);
     Route::delete('/deductibletype/destroy/{dt}', [MasterController::class, 'destroydeductibletype']);
 
     // SECTION Extended Coverage Routes
-    Route::get('/extendedcoverage', [MasterController::class, 'indexextendedcoverage']);
+    Route::get('/extendedcoverage', [MasterController::class, 'indexextendedcoverage'])->middleware(['can:create-extend_coverage']);
     Route::post('/extendedcoverage/store', [MasterController::class, 'storeextendedcoverage']);
     Route::put('extendedcoverage/{ec}', [MasterController::class, 'updateextendedcoverage']);
     Route::delete('/extendedcoverage/destroy/{ec}', [MasterController::class, 'destroyextendedcoverage']);
