@@ -1615,7 +1615,7 @@
                                     </a>
                                 </li>
     
-                                @endcan --}}
+                            {{--     @endcan --}}
                             </ul>
                         </li>
                   {{--  @endcan --}}
@@ -1674,7 +1674,7 @@
     
                             </ul>
                         </li>
-                    @endcan --}}
+                   {{--  @endcan --}}
     
                     {{-- SECTION ESTIMATES Menu  --}}
                         {{-- @can('viewany-lead', User::class)
