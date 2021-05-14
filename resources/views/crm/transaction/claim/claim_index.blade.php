@@ -144,6 +144,7 @@
                       <th>{{__('Natural Of Loss')}}</th>
                       <th>{{__('Surveyor')}}</th>
                       <th>{{__('Total Loss AMount')}}</th>
+                      <th>{{__('Status')}}</th>
                       <th width="20%">{{__('Actions')}}</th>
                     </tr>
                     </thead>
@@ -159,6 +160,13 @@
                               <td>{{@$claimlistata->descnatureofloss }}</td>
                               <td>{{@$claimlistata->desc_surveyor }}</td>
                               <td>{{@$claimlistata->total_loss_amount }}</td>
+                              
+                              <td>
+                                @if(@$claimlistata->status_flag==1)
+                                  {{__('PLA')}}
+                                @endif
+                              </td>
+
                               <td>
                                 <a href="#" data-toggle="tooltip" data-title="{{$claimlistata->created_at}}" class="mr-3">
                                   <i class="fas fa-clock text-info"></i>
