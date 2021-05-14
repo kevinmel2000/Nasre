@@ -122,7 +122,7 @@ class Claim_controller extends Controller
            $natureofloss = NatureOfLoss::orderby('id','asc')->get();
            $causeofloss = MasterCauseOfLoss::orderby('id','asc')->get();
 
-           $claimlist= MainClaimEntryFAC::orderby('id','desc')->get();
+           $claimlist= MainClaimEntryFAC::where('is_delete',0)->orderby('id','desc')->get();
            $claimlist_ids = response()->json($claimlist->modelKeys());
 
            return view('crm.transaction.claim.claim_index', compact('claimlist_ids','claimlist','costumer','causeofloss','natureofloss','surveyor','ocp','koc','currency','searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
@@ -148,7 +148,7 @@ class Claim_controller extends Controller
            $natureofloss = NatureOfLoss::orderby('id','asc')->get();
            $causeofloss = MasterCauseOfLoss::orderby('id','asc')->get();
 
-           $claimlist= MainClaimEntryFAC::orderby('id','desc')->get();
+           $claimlist= MainClaimEntryFAC::where('is_delete',0)->orderby('id','desc')->get();
            $claimlist_ids = response()->json($claimlist->modelKeys());
 
            return view('crm.transaction.claim.claim_index', compact('claimlist_ids','claimlist','costumer','causeofloss','natureofloss','surveyor','ocp','koc','currency','searchslipnum','searchcob','searchceding','search','searchinsured','searchuy','searchshare','searchnre','searchtsi','searchendorse','cob','cedingbroker','ceding','user','insured','insured_ids','route_active','country'))->with('i', ($request->input('page', 1) - 1) * 10);
@@ -262,7 +262,9 @@ class Claim_controller extends Controller
     public function destroy($id)
     {
         $claim = MainClaimEntryFAC::find($id);
-        if($claim->delete())
+        $claim->is_delete = 1;         
+           
+        if($claim->save())
         {
             $notification = array(
                 'message' => 'Claim Data deleted successfully!',
