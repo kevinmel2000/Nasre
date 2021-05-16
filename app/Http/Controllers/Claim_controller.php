@@ -265,42 +265,25 @@ class Claim_controller extends Controller
         $slipdata=MainClaimEntryFAC::where('number',$number)->orderby('id','DESC')->first();
     
 
-        $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
+        $datereceipt=  date("d/m/Y", strtotime($slipdata->date_receipt));
+
+        if($slipdata->date_document == null)
+        {
+            $datedocument = "";
+        }
+        else
+        {
+            $datedocument = date("d/m/Y", strtotime($slipdata->date_document));
+        }
            
         $statustable= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->get();
         $statuslist= $statustable->unique('status');
         $statuslist->values()->all();
-        
        
         $attachmenttable = collect(SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get());
         $attachmentlist = $attachmenttable->unique('filename');
         $attachmentlist->values()->all();
-        
-
-        $sum_permilec = DB::table('extended_coverage_detail')
-                            ->where('slip_id',$slipdata->number)
-                            ->where('insured_id','=',$slipdata->insured_id)
-                            ->where('slip_type','fe')
-                            ->where('count_endorsement',$slipdata->endorsment)
-                            ->sum('extended_coverage_detail.percentage');
-
-        $sum_inspanpercent = DB::table('installment_panel_detail')
-                            ->where('slip_id',$slipdata->number)
-                            ->where('insured_id','=',$slipdata->insured_id)
-                            ->where('slip_type','fe')
-                            ->where('count_endorsement',$slipdata->endorsment)
-                            ->sum('installment_panel_detail.percentage');
-
-
-        if($slipdata->date_transfer == null)
-        {
-            $datetransfer = "";
-        }
-        else
-        {
-            $datetransfer = date("d/m/Y", strtotime($slipdata->date_transfer));
-        }
-        
+                
         return response()->json(
             [
                 'id' => $slipdata->id,
