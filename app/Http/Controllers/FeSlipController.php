@@ -1977,6 +1977,238 @@ class FeSlipController extends Controller
 
     }
 
+
+    public function getdetailSlipNumber($number)
+    {
+        $user = Auth::user();
+        $slipdata=SlipTable::where('number',$number)->orderby('id','DESC')->first();
+    
+
+        if(!empty($slipdata->deductible_panel) && strlen($slipdata->deductible_panel)>10)
+        {
+            $deductibledata=json_decode($slipdata->deductible_panel);   
+        }
+        else
+        {
+            $deductibledata=null;
+        }
+
+        $newarraydeduct=[];
+        // dd($deductibledata);
+        if(!empty($deductibledata))
+        {
+            foreach($deductibledata as $mydata)
+            {
+                $deductdatadesc= DeductibleType::where('id','=',$mydata->deductibletype_id)->first();
+                if($deductdatadesc){
+                    $mydata->deductibletype=$deductdatadesc->description;
+                }
+               
+                
+                $currencydesc=Currency::where('id','=',$mydata->currency_id)->first();
+                if($currencydesc){
+                    $mydata->currencydata=$currencydesc->symbol_name;
+                }
+                array_push($newarraydeduct,$mydata);
+            }     
+        }  
+        $newdeductdata=json_encode($newarraydeduct);
+
+
+
+        if(!empty($slipdata->extend_coverage) && strlen($slipdata->extend_coverage)>=10)
+        {
+            $extendcoverdata=json_decode($slipdata->extend_coverage);   
+        }
+        else
+        {
+            $extendcoverdata=null;
+        }
+        // $extendcoverdata=json_decode($slipdata->extend_coverage);   
+        $newarrayextend=[];
+
+        if(!empty($extendcoverdata))
+        {
+            foreach($extendcoverdata as $mydata)
+            {
+                $extenddesc= ExtendedCoverage::where('id','=',$mydata->extendcoverage_id)->first();
+                if($extenddesc){
+                    $mydata->coveragetype=$extenddesc->description;
+                    $mydata->coveragename=$extenddesc->name;
+                    $mydata->coveragecode=$extenddesc->code;
+                }
+                
+                array_push($newarrayextend,$mydata);
+            }       
+        }
+        $newextenddata=json_encode($newarrayextend);
+
+
+        if(!empty($slipdata->installment_panel) && strlen($slipdata->installment_panel)>=10)
+        {
+            $installmentpdata=json_decode($slipdata->installment_panel);   
+        }
+        else
+        {
+            $installmentpdata=null;
+        }
+        // $extendcoverdata=json_decode($slipdata->extend_coverage);   
+        $newarrayinspan=[];
+
+        if(!empty($installmentpdata))
+        {
+            foreach($installmentpdata as $ipdata)
+            {
+                // $ipddesc= ExtendedCoverage::where('id','=',$ipdata->extendcoverage_id)->first();
+                // if($ipddesc){
+                //     $ipdata->coveragetype=$ipddesc->description;
+                // }
+                
+                array_push($newarrayinspan,$ipdata);
+            }       
+        }
+        $newarrayinspandata=json_encode($newarrayinspan);
+
+        // if($slipdata->prod_year == null){
+        //     $prodyeardata = strtotime(date("Y-m-d"));
+        //     $dateyeardata= date("d/m/Y", $prodyeardata);
+        // }else{
+        //     $prodyeardata = strtotime($slipdata->prod_year);
+        //     $dateyeardata= date("d/m/Y", $prodyeardata);
+        // }
+
+        $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
+        
+        // $currdate = date("d/m/Y");
+        
+
+
+        // $statuslist= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->get();
+        $statustable= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->get();
+        $statuslist= $statustable->unique('status');
+        $statuslist->values()->all();
+        
+       
+        $attachmenttable = collect(SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get());
+        $attachmentlist = $attachmenttable->unique('filename');
+        $attachmentlist->values()->all();
+        
+
+        $sum_permilec = DB::table('extended_coverage_detail')
+                            ->where('slip_id',$slipdata->number)
+                            ->where('insured_id','=',$slipdata->insured_id)
+                            ->where('slip_type','fe')
+                            ->where('count_endorsement',$slipdata->endorsment)
+                            ->sum('extended_coverage_detail.percentage');
+
+        $sum_inspanpercent = DB::table('installment_panel_detail')
+                            ->where('slip_id',$slipdata->number)
+                            ->where('insured_id','=',$slipdata->insured_id)
+                            ->where('slip_type','fe')
+                            ->where('count_endorsement',$slipdata->endorsment)
+                            ->sum('installment_panel_detail.percentage');
+
+
+        if($slipdata->build_const == "Building 1"){
+            $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
+            $building_rate_up = $building_rate->rate_batas_atas_building_class_1;
+            $building_rate_down = $building_rate->rate_batas_bawah_building_class_1;
+
+        }elseif($slipdata->build_const == "Building 2"){
+            $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
+            $building_rate_up = $building_rate->rate_batas_atas_building_class_2;
+            $building_rate_down = $building_rate->rate_batas_bawah_building_class_2;
+        }elseif($slipdata->build_const == "Building 3"){
+            $building_rate = Occupation::where('id',$slipdata->occupacy)->first(); 
+            $building_rate_up = $building_rate->rate_batas_atas_building_class_3;
+            $building_rate_down = $building_rate->rate_batas_bawah_building_class_3;
+        }
+      
+        if($slipdata->date_transfer == null){
+            $datetransfer = "";
+        }else{
+            $datetransfer = date("d/m/Y", strtotime($slipdata->date_transfer));
+        }
+        
+
+
+        return response()->json(
+            [
+                'id' => $slipdata->id,
+                'insured_id' => $slipdata->insured_id,
+                'slip_type' => $slipdata->slip_type,
+                'username' => $slipdata->username,
+                'prod_year' => $dateyeardata,
+                'number' => $slipdata->number,
+                'slipuy' => $slipdata->uy,
+                'date_transfer' => $datetransfer,
+                'status' => $slipdata->status,
+                'endorsment' => $slipdata->endorsment,
+                'selisih' => $slipdata->selisih,
+                'source' => $slipdata->source,
+                'source_2' => $slipdata->source_2,
+                'currency'=> $slipdata->currency,
+                'cob'=> $slipdata->cob,
+                'koc'=> $slipdata->koc,
+                'occupacy'=> $slipdata->occupacy,
+                'build_const'=> $slipdata->build_const,
+                'build_rate_up'=> $building_rate_up,
+                'build_rate_down'=> $building_rate_down,
+                'slip_no'=> $slipdata->slip_no,
+                'cn_dn'=> $slipdata->cn_dn,
+                'policy_no'=> $slipdata->policy_no,
+                'attacment_file'=> $attachmentlist,
+                'type_tsi'=> $slipdata->type_tsi,
+                'total_sum_insured'=> $slipdata->total_sum_insured,
+                'type_share_tsi'=> $slipdata->type_share_tsi,
+                'share_tsi'=> $slipdata->share_tsi,
+                'insured_type'=>$slipdata->insured_type,
+                'insured_pct'=>$slipdata->insured_pct,
+                'total_sum_pct'=>$slipdata->total_sum_pct,
+                'deductible_panel'=>$newdeductdata,
+                'extend_coverage'=>$newextenddata,
+                'insurance_period_from'=>date("d/m/Y", strtotime($slipdata->insurance_period_from)),
+                'insurance_period_to'=>date("d/m/Y", strtotime($slipdata->insurance_period_to)),
+                'reinsurance_period_from'=>date("d/m/Y", strtotime($slipdata->reinsurance_period_from)),
+                'reinsurance_period_to'=>date("d/m/Y", strtotime($slipdata->reinsurance_period_to)),
+                'proportional'=>$slipdata->proportional,
+                'layer_non_proportional'=>$slipdata->layer_non_proportional,
+                'rate'=>$slipdata->rate,
+                'sum_rate'=>$slipdata->sliptotalrate,
+                'share'=>$slipdata->share,
+                'sum_share'=>$slipdata->sum_share,
+                'basic_premium'=>$slipdata->basic_premium,
+                'commission'=>$slipdata->commission,
+                'grossprm_to_nr'=>$slipdata->grossprm_to_nr,
+                'netprm_to_nr'=>$slipdata->netprm_to_nr,
+                'installment_panel'=>$slipdata->installment_panel,
+                'sum_commission'=>$slipdata->sum_commission,
+                'retro_backup'=>$slipdata->retro_backup,
+                'own_retention'=>$slipdata->own_retention,
+                'sum_own_retention'=>$slipdata->sum_own_retention,
+                'retrocession_panel'=>$slipdata->retrocession_panel,
+                'endorsment'=>$slipdata->endorsment,
+                'prev_endorsement'=>$slipdata->prev_endorsement,
+                'condition_needed'=>$slipdata->condition_needed,
+                'created_at'=>$slipdata->created_at,
+                'updated_at'=>$slipdata->updated_at,
+                'wpc'=>$slipdata->wpc,
+                'remarks'=>$slipdata->remarks,
+                'v_broker'=>$slipdata->v_broker,
+                'sum_v_broker'=>$slipdata->sum_feebroker,
+                'total_day'=>$slipdata->total_day,
+                'total_year'=>$slipdata->total_year,
+                'sum_total_date'=>$slipdata->sum_total_date,
+                'coinsurance_slip'=>$slipdata->coinsurance_slip,
+                'status_log'=>$statuslist,
+                'sum_feebroker'=>$slipdata->sum_feebroker,
+                'sum_ec'=>$sum_permilec,
+                'sum_ippercent' =>$sum_inspanpercent
+            ]
+        );
+
+    }
+
     public function getdetailEndorsementSlip($idm)
     {
         $user = Auth::user();

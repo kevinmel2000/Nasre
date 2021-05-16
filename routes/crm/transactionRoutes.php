@@ -71,6 +71,8 @@ Route::delete('/delete-propertytype-list/{id}','TransactionController@destroypro
 Route::post('store-multi-file-ajax', [FeSlipController::class, 'storeMultiFile']);
 Route::get('/detailslip/{idm}', [FeSlipController::class, 'getdetailSlip']);
 
+Route::get('/detailslipnumber/{idm}', [FeSlipController::class, 'getdetailSlipNumber']);
+
 Route::get('/detailendorsementslip/{idm}', [FeSlipController::class, 'getdetailEndorsementSlip']);
 
 
@@ -108,6 +110,8 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::get('/fe-slip/updatefeslip/{fe}', [FeSlipController::class, 'updatefeslip']);
     Route::get('/updatefeslip/{fe}', [FeSlipController::class, 'updatefeslip']);
     Route::get('/detailslip/{idm}', [FeSlipController::class, 'getdetailSlip']);
+    Route::get('/detailslipnumber/{idm}', [FeSlipController::class, 'getdetailSlipNumber']);
+
     Route::get('/detailendorsementslip/{idm}', [FeSlipController::class, 'getdetailEndorsementSlip']);
     Route::get('/endorsementfeslip/{ms}/{sl}', [FeSlipController::class, 'endorsementfeslip']);
     Route::get('/fe-slip/detailfeslip/{fe}', [FeSlipController::class, 'detailfeslip']);

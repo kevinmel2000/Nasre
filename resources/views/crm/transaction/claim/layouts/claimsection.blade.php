@@ -58,6 +58,7 @@
 							</td>
 							<td>
 								<input type="text" name="dateofdocument" id="dateofdocument" class="form-control datepicker" autocomplete="off">
+															
 							</td>
 						</tr>
 					</tbody>

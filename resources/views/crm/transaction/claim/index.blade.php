@@ -18,7 +18,7 @@
 
 	<div class="container-fluid">
 
-		    <form id="multi-file-upload-ajaxsearch" method="POST" autocomplete="off"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
+		    <!--form id="multi-file-upload-ajaxsearch" method="POST" autocomplete="off"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
 
 				<div class="card">
 
@@ -34,7 +34,7 @@
 
 				</div>
 
-		   </form>
+		   </form-->
 
 			<form id="multi-file-upload-ajax" method="POST" autocomplete="off"  action="javascript:void(0)" accept-charset="utf-8" enctype="multipart/form-data">
 
@@ -57,8 +57,26 @@
 								<div class="card">
 
 									<div class="card-header bg-gray">
-										
+										<table style="position:left">
+											<tbody>
+												<tr>
+													<td>
+														<input type="text" name="slipnumberdata" id="slipnumberdata" class="form-control form-control-sm" autocomplete="off">					
+													</td>
+													<td>
+														<a class="text-primary mr-3 float-right " data-toggle="modal" data-target="#detailmodaldata" href="#detailmodaldata">
+														<button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#detailmodaldata2">{{__('Detail Slip')}}</button>
+														</a>
+													</td>
+													<td>
+														<button type="button" class="btn btn-sm btn-primary float-right" >{{__('Get Detail Claim')}}</button>
+													</td>
+												</tr>
+											</tbody>
+										</table>	
 									</div>
+
+									@include('crm.transaction.claim.layouts.claim_slipmodaldetail')
 
 									<div class="card-body bg-light-gray ">
 
