@@ -259,6 +259,126 @@ class Claim_controller extends Controller
     }
 
 
+    public function getdetailSlipClaim($number)
+    {
+        $user = Auth::user();
+        $slipdata=MainClaimEntryFAC::where('number',$number)->orderby('id','DESC')->first();
+    
+
+        $dateyeardata=  date("d/m/Y", strtotime($slipdata->prod_year));
+           
+        $statustable= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->get();
+        $statuslist= $statustable->unique('status');
+        $statuslist->values()->all();
+        
+       
+        $attachmenttable = collect(SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get());
+        $attachmentlist = $attachmenttable->unique('filename');
+        $attachmentlist->values()->all();
+        
+
+        $sum_permilec = DB::table('extended_coverage_detail')
+                            ->where('slip_id',$slipdata->number)
+                            ->where('insured_id','=',$slipdata->insured_id)
+                            ->where('slip_type','fe')
+                            ->where('count_endorsement',$slipdata->endorsment)
+                            ->sum('extended_coverage_detail.percentage');
+
+        $sum_inspanpercent = DB::table('installment_panel_detail')
+                            ->where('slip_id',$slipdata->number)
+                            ->where('insured_id','=',$slipdata->insured_id)
+                            ->where('slip_type','fe')
+                            ->where('count_endorsement',$slipdata->endorsment)
+                            ->sum('installment_panel_detail.percentage');
+
+
+        if($slipdata->date_transfer == null)
+        {
+            $datetransfer = "";
+        }
+        else
+        {
+            $datetransfer = date("d/m/Y", strtotime($slipdata->date_transfer));
+        }
+        
+        return response()->json(
+            [
+                'id' => $slipdata->id,
+                'insured_id' => $slipdata->insured_id,
+                'slip_type' => $slipdata->slip_type,
+                'username' => $slipdata->username,
+                'prod_year' => $dateyeardata,
+                'number' => $slipdata->number,
+                'slipuy' => $slipdata->uy,
+                'date_transfer' => $datetransfer,
+                'status' => $slipdata->status,
+                'endorsment' => $slipdata->endorsment,
+                'selisih' => $slipdata->selisih,
+                'source' => $slipdata->source,
+                'source_2' => $slipdata->source_2,
+                'currency'=> $slipdata->currency,
+                'cob'=> $slipdata->cob,
+                'koc'=> $slipdata->koc,
+                'occupacy'=> $slipdata->occupacy,
+                'build_const'=> $slipdata->build_const,
+                'build_rate_up'=> $building_rate_up,
+                'build_rate_down'=> $building_rate_down,
+                'slip_no'=> $slipdata->slip_no,
+                'cn_dn'=> $slipdata->cn_dn,
+                'policy_no'=> $slipdata->policy_no,
+                'attacment_file'=> $attachmentlist,
+                'type_tsi'=> $slipdata->type_tsi,
+                'total_sum_insured'=> $slipdata->total_sum_insured,
+                'type_share_tsi'=> $slipdata->type_share_tsi,
+                'share_tsi'=> $slipdata->share_tsi,
+                'insured_type'=>$slipdata->insured_type,
+                'insured_pct'=>$slipdata->insured_pct,
+                'total_sum_pct'=>$slipdata->total_sum_pct,
+                'deductible_panel'=>$newdeductdata,
+                'extend_coverage'=>$newextenddata,
+                'insurance_period_from'=>date("d/m/Y", strtotime($slipdata->insurance_period_from)),
+                'insurance_period_to'=>date("d/m/Y", strtotime($slipdata->insurance_period_to)),
+                'reinsurance_period_from'=>date("d/m/Y", strtotime($slipdata->reinsurance_period_from)),
+                'reinsurance_period_to'=>date("d/m/Y", strtotime($slipdata->reinsurance_period_to)),
+                'proportional'=>$slipdata->proportional,
+                'layer_non_proportional'=>$slipdata->layer_non_proportional,
+                'rate'=>$slipdata->rate,
+                'sum_rate'=>$slipdata->sliptotalrate,
+                'share'=>$slipdata->share,
+                'sum_share'=>$slipdata->sum_share,
+                'basic_premium'=>$slipdata->basic_premium,
+                'commission'=>$slipdata->commission,
+                'grossprm_to_nr'=>$slipdata->grossprm_to_nr,
+                'netprm_to_nr'=>$slipdata->netprm_to_nr,
+                'installment_panel'=>$slipdata->installment_panel,
+                'sum_commission'=>$slipdata->sum_commission,
+                'retro_backup'=>$slipdata->retro_backup,
+                'own_retention'=>$slipdata->own_retention,
+                'sum_own_retention'=>$slipdata->sum_own_retention,
+                'retrocession_panel'=>$slipdata->retrocession_panel,
+                'endorsment'=>$slipdata->endorsment,
+                'prev_endorsement'=>$slipdata->prev_endorsement,
+                'condition_needed'=>$slipdata->condition_needed,
+                'created_at'=>$slipdata->created_at,
+                'updated_at'=>$slipdata->updated_at,
+                'wpc'=>$slipdata->wpc,
+                'remarks'=>$slipdata->remarks,
+                'v_broker'=>$slipdata->v_broker,
+                'sum_v_broker'=>$slipdata->sum_feebroker,
+                'total_day'=>$slipdata->total_day,
+                'total_year'=>$slipdata->total_year,
+                'sum_total_date'=>$slipdata->sum_total_date,
+                'coinsurance_slip'=>$slipdata->coinsurance_slip,
+                'status_log'=>$statuslist,
+                'sum_feebroker'=>$slipdata->sum_feebroker,
+                'sum_ec'=>$sum_permilec,
+                'sum_ippercent' =>$sum_inspanpercent
+            ]
+        );
+
+    }
+
+
     public function destroy($id)
     {
         $claim = MainClaimEntryFAC::find($id);
