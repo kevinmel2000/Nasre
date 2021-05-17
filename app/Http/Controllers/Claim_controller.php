@@ -344,6 +344,20 @@ class Claim_controller extends Controller
                 'arr3_loss' =>$claimdata->arr3_loss,
                 'arr3_retro' =>$claimdata->arr3_retro,
                 'arr3_recovery' =>$claimdata->arr3_recovery,
+                'totalrecovery' =>$claimdata->totalrecovery,
+                'nrsgrossret' =>$claimdata->nrsgrossret,
+                'xol' =>$claimdata->xol,
+                'cereffno' =>$claimdata->cereffno,
+                'dateofprod' =>date("d/m/Y", strtotime($claimdata->dateofprod)),
+                'ceno' =>$claimdata->ceno,
+                'ceuser' =>$claimdata->ceuser,
+                'description' =>$claimdata->description,
+                'dateofentry' =>date("d/m/Y", strtotime($claimdata->dateofentry)),
+                'dateoftrans' =>date("d/m/Y", strtotime($claimdata->dateoftrans)),
+                'dateofsupporting' =>date("d/m/Y", strtotime($claimdata->dateofsupporting)),
+                'status_flag' =>$claimdata->status_flag,
+                'is_delete' =>$claimdata->is_delete,
+                'attacment_file' =>$claimdata->attacment_file
                 
             ]
         );
