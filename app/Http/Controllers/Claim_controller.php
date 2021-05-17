@@ -181,6 +181,7 @@ class Claim_controller extends Controller
             MainClaimEntryFAC::create([
                 'number'=>$request->number,
                 'reg_comp'=> $request->regcomp,
+                'doc_number'=> $request->number,
                 'date_receipt'=> date("Y-m-d", strtotime($request->dateofreceipt)),
                 'date_document'=> date("Y-m-d", strtotime($request->dateofdocument)),
                 'causeofloss_id'=> $request->causeofloss,
@@ -264,102 +265,117 @@ class Claim_controller extends Controller
         $user = Auth::user();
         $claimdata=MainClaimEntryFAC::where('number',$number)->orderby('id','DESC')->first();
     
-        $datereceipt=  date("d/m/Y", strtotime($slipdata->date_receipt));
-
-        if($claimdata->date_document == null)
+        if(!empty($claimdata))
         {
-            $datedocument = "";
+                $datereceipt=  date("d/m/Y", strtotime($claimdata->date_receipt));
+
+                if($claimdata->date_document == null)
+                {
+                    $datedocument = "";
+                }
+                else
+                {
+                    $datedocument = date("d/m/Y", strtotime($claimdata->date_document));
+                }
+                
+            // $statustable= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->get();
+            // $statuslist= $statustable->unique('status');
+            // $statuslist->values()->all();
+            
+            // $attachmenttable = collect(SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get());
+            // $attachmentlist = $attachmenttable->unique('filename');
+            // $attachmentlist->values()->all();
+                        
+                return response()->json(
+                    [
+                        'id' => $claimdata->id,
+                        'number' => $claimdata->number,
+                        'doc_number' => $claimdata->doc_number,
+                        'reg_comp' => $claimdata->reg_comp,
+                        'date_receipt'=>date("d/m/Y", strtotime($claimdata->date_receipt)),
+                        'date_document'=>date("d/m/Y", strtotime($claimdata->date_document)),
+                        'causeofloss_id' =>$claimdata->causeofloss_id,
+                        'desc_causeofloss' =>$claimdata->desc_causeofloss,
+                        'natureofloss_id' =>$claimdata->natureofloss_id,
+                        'descnatureofloss' =>$claimdata->descnatureofloss,
+                        'id_col' =>$claimdata->id_col,
+                        'id_nol' =>$claimdata->id_nol,
+                        'date_of_loss'=>date("d/m/Y", strtotime($claimdata->date_of_loss)),
+                        'curr_id_loss' =>$claimdata->curr_id_loss,
+                        'curr_lossdesc' =>$claimdata->curr_lossdesc,
+                        'surveyor_id' =>$claimdata->surveyor_id,
+                        'desc_surveyor' =>$claimdata->desc_surveyor,
+                        'nasre_liab' =>$claimdata->nasre_liab,
+                        'nasre_liabdesc' =>$claimdata->nasre_liabdesc,
+                        'nasre_share_loss' =>$claimdata->nasre_share_loss,
+                        'ced_share' =>$claimdata->ced_share,
+                        'total_loss_amount' =>$claimdata->total_loss_amount,
+                        'potential_recovery' =>$claimdata->potential_recovery,
+                        'route' =>$claimdata->route,
+                        'estimate_amount_subro' =>$claimdata->estimate_amount_subro,
+                        'desc_poten_rec' =>$claimdata->desc_poten_rec,
+                        'kronologi' =>$claimdata->kronologi,
+                        'staff_recomendation' =>$claimdata->staff_recomendation,
+                        'ass_man_recomen' =>$claimdata->ass_man_recomen,
+                        'route_from' =>$claimdata->route_from,
+                        'route_to' =>$claimdata->route_to,
+                        'pureor_liability' =>$claimdata->pureor_liability,
+                        'pureor_loss' =>$claimdata->pureor_loss,
+                        'pureor_retro' =>$claimdata->pureor_retro,
+                        'pureor_recovery' =>$claimdata->pureor_recovery,
+                        'qs_liability' =>$claimdata->qs_liability,
+                        'qs_loss' =>$claimdata->qs_loss,
+                        'qs_retro' =>$claimdata->qs_retro,
+                        'qs_recovery' =>$claimdata->qs_recovery,
+                        'arr1_liability' =>$claimdata->arr1_liability,
+                        'arr1_loss' =>$claimdata->arr1_loss,
+                        'arr1_retro' =>$claimdata->arr1_retro,
+                        'arr1_recovery' =>$claimdata->arr1_recovery,
+                        'extra_liability' =>$claimdata->extra_liability,
+                        'extra_loss' =>$claimdata->extra_loss,
+                        'extra_retro' =>$claimdata->extra_retro,
+                        'extra_recovery' =>$claimdata->extra_recovery,
+                        'facultative_liability' =>$claimdata->facultative_liability,
+                        'facultative_loss' =>$claimdata->facultative_loss,
+                        'facultative_retro' =>$claimdata->facultative_retro,
+                        'facultative_recovery' =>$claimdata->facultative_recovery,
+                        'arr2_liability' =>$claimdata->arr2_liability,
+                        'arr2_loss' =>$claimdata->arr2_loss,
+                        'arr2_retro' =>$claimdata->arr2_retro,
+                        'arr2_recovery' =>$claimdata->arr2_recovery,
+                        'arr3_liability' =>$claimdata->arr3_liability,
+                        'arr3_loss' =>$claimdata->arr3_loss,
+                        'arr3_retro' =>$claimdata->arr3_retro,
+                        'arr3_recovery' =>$claimdata->arr3_recovery,
+                        'totalrecovery' =>$claimdata->totalrecovery,
+                        'nrsgrossret' =>$claimdata->nrsgrossret,
+                        'xol' =>$claimdata->xol,
+                        'cereffno' =>$claimdata->cereffno,
+                        'dateofprod' =>date("d/m/Y", strtotime($claimdata->dateofprod)),
+                        'ceno' =>$claimdata->ceno,
+                        'ceuser' =>$claimdata->ceuser,
+                        'description' =>$claimdata->description,
+                        'dateofentry' =>date("d/m/Y", strtotime($claimdata->dateofentry)),
+                        'dateoftrans' =>date("d/m/Y", strtotime($claimdata->dateoftrans)),
+                        'dateofsupporting' =>date("d/m/Y", strtotime($claimdata->dateofsupporting)),
+                        'status_flag' =>$claimdata->status_flag,
+                        'is_delete' =>$claimdata->is_delete,
+                        'attacment_file' =>$claimdata->attacment_file,
+                        'status' =>200,
+                        'message'=>"Data Claim"
+                        
+                    ]
+                );
         }
         else
         {
-            $datedocument = date("d/m/Y", strtotime($claimdata->date_document));
+                return response()->json(
+                [
+                    'status' =>201,
+                    'message'=>"Slip Number, No Claim Data"
+                ]
+                );
         }
-           
-       // $statustable= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->get();
-       // $statuslist= $statustable->unique('status');
-       // $statuslist->values()->all();
-       
-       // $attachmenttable = collect(SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get());
-       // $attachmentlist = $attachmenttable->unique('filename');
-       // $attachmentlist->values()->all();
-                
-        return response()->json(
-            [
-                'id' => $claimdata->id,
-                'number' => $claimdata->number,
-                'reg_comp' => $claimdata->reg_comp,
-                'date_receipt'=>date("d/m/Y", strtotime($claimdata->date_receipt)),
-                'date_document'=>date("d/m/Y", strtotime($claimdata->date_document)),
-                'causeofloss_id' =>$claimdata->causeofloss_id,
-                'desc_causeofloss' =>$claimdata->desc_causeofloss,
-                'natureofloss_id' =>$claimdata->natureofloss_id,
-                'descnatureofloss' =>$claimdata->descnatureofloss,
-                'id_col' =>$claimdata->id_col,
-                'id_nol' =>$claimdata->id_nol,
-                'date_of_loss'=>date("d/m/Y", strtotime($claimdata->date_of_loss)),
-                'curr_id_loss' =>$claimdata->curr_id_loss,
-                'curr_lossdesc' =>$claimdata->curr_lossdesc,
-                'surveyor_id' =>$claimdata->surveyor_id,
-                'desc_surveyor' =>$claimdata->desc_surveyor,
-                'nasre_liab' =>$claimdata->nasre_liab,
-                'nasre_liabdesc' =>$claimdata->nasre_liabdesc,
-                'nasre_share_loss' =>$claimdata->nasre_share_loss,
-                'ced_share' =>$claimdata->ced_share,
-                'total_loss_amount' =>$claimdata->total_loss_amount,
-                'potential_recovery' =>$claimdata->potential_recovery,
-                'route' =>$claimdata->route,
-                'estimate_amount_subro' =>$claimdata->estimate_amount_subro,
-                'desc_poten_rec' =>$claimdata->desc_poten_rec,
-                'kronologi' =>$claimdata->kronologi,
-                'staff_recomendation' =>$claimdata->staff_recomendation,
-                'ass_man_recomen' =>$claimdata->ass_man_recomen,
-                'route_from' =>$claimdata->route_from,
-                'route_to' =>$claimdata->route_to,
-                'pureor_liability' =>$claimdata->pureor_liability,
-                'pureor_loss' =>$claimdata->pureor_loss,
-                'pureor_retro' =>$claimdata->pureor_retro,
-                'pureor_recovery' =>$claimdata->pureor_recovery,
-                'qs_liability' =>$claimdata->qs_liability,
-                'qs_loss' =>$claimdata->qs_loss,
-                'qs_retro' =>$claimdata->qs_retro,
-                'qs_recovery' =>$claimdata->qs_recovery,
-                'arr1_liability' =>$claimdata->arr1_liability,
-                'arr1_loss' =>$claimdata->arr1_loss,
-                'arr1_retro' =>$claimdata->arr1_retro,
-                'arr1_recovery' =>$claimdata->arr1_recovery,
-                'extra_liability' =>$claimdata->extra_liability,
-                'extra_loss' =>$claimdata->extra_loss,
-                'extra_retro' =>$claimdata->extra_retro,
-                'extra_recovery' =>$claimdata->extra_recovery,
-                'facultative_liability' =>$claimdata->facultative_liability,
-                'facultative_loss' =>$claimdata->facultative_loss,
-                'facultative_retro' =>$claimdata->facultative_retro,
-                'facultative_recovery' =>$claimdata->facultative_recovery,
-                'arr2_liability' =>$claimdata->arr2_liability,
-                'arr2_loss' =>$claimdata->arr2_loss,
-                'arr2_retro' =>$claimdata->arr2_retro,
-                'arr2_recovery' =>$claimdata->arr2_recovery,
-                'arr3_liability' =>$claimdata->arr3_liability,
-                'arr3_loss' =>$claimdata->arr3_loss,
-                'arr3_retro' =>$claimdata->arr3_retro,
-                'arr3_recovery' =>$claimdata->arr3_recovery,
-                'totalrecovery' =>$claimdata->totalrecovery,
-                'nrsgrossret' =>$claimdata->nrsgrossret,
-                'xol' =>$claimdata->xol,
-                'cereffno' =>$claimdata->cereffno,
-                'dateofprod' =>date("d/m/Y", strtotime($claimdata->dateofprod)),
-                'ceno' =>$claimdata->ceno,
-                'ceuser' =>$claimdata->ceuser,
-                'description' =>$claimdata->description,
-                'dateofentry' =>date("d/m/Y", strtotime($claimdata->dateofentry)),
-                'dateoftrans' =>date("d/m/Y", strtotime($claimdata->dateoftrans)),
-                'dateofsupporting' =>date("d/m/Y", strtotime($claimdata->dateofsupporting)),
-                'status_flag' =>$claimdata->status_flag,
-                'is_delete' =>$claimdata->is_delete,
-                'attacment_file' =>$claimdata->attacment_file
-                
-            ]
-        );
 
     }
 

@@ -480,14 +480,14 @@
        //alert('masuk');
        e.preventDefault();
        
-        alert('test');
+        //alert('test');
         
         var slipnumberdata =$('#slipnumberdata').val();
 
         if(slipnumberdata)
         {
             $.ajax({
-                url:'{{ url("/") }}/transaction-data/detailslipclaim/'+slipnumberdata,
+                url:'{{ url("/") }}/claimtransaction-data/detailslipclaim/'+slipnumberdata,
                 type:"GET",
                 beforeSend: function() { $("body").addClass("loading");  },
                 complete: function() {  $("body").removeClass("loading"); },
@@ -495,6 +495,92 @@
                 {
                     console.log('bisa tampil')
                     console.log(response);
+                    if(response.status==200)
+                    {
+                         $('#regcomp').val(response.reg_comp);
+                         $('#docnumber').val(response.doc_number);
+                         $('#dateofreceipt').val(response.date_receipt);
+                         $('#dateofdocument').val(response.date_document);
+                         $('#causeofloss').val(response.causeofloss_id).change();
+                         $('#desccauseofloss').val(response.desc_causeofloss);
+                         $('#natureofloss').val(response.natureofloss_id).change();
+                         $('#descnatureofloss').val(response.descnatureofloss);
+                         $('#dateofloss').val(response.date_of_loss);
+                         $('#currofloss').val(response.curr_id_loss).change();
+                         $('#desccurrofloss').val(response.curr_lossdesc);
+                         $('#surveyoradjuster').val(response.surveyor_id).change();
+                         $('#descsurveyoradjuster').val(response.desc_surveyor);
+                         $('#nationalresliab').val(response.nasre_liab);
+                         $('#descnationalresliab').val(response.nasre_liabdesc);
+                         $('#cedantshare').val(response.ced_share);
+                         $('#shareonloss').val(response.nasre_share_loss);
+                         $('#totallossamount').val(response.total_loss_amount);
+                         $('#potentialrecoverydecision').val(response.potential_recovery).change();
+                         $('#potentialrecovery').val(response.desc_poten_rec);
+                         $('#subrogasi').val(response.estimate_amount_subro);
+                         $('#kronologi').val(response.kronologi);
+                         $('#staffrecomend').val(response.staff_recomendation);
+                         $('#assistantmanagerrecomend').val(response.ass_man_recomen);
+
+                         $('#pureorliability').val(response.pureor_liability);
+                         $('#pureorloss').val(response.pureor_loss);
+                         $('#pureorcontract').val(response.pureor_retro).change();
+                         $('#pureorrecovery').val(response.pureor_recovery);
+
+                         $('#qsliability').val(response.qs_liability);
+                         $('#qsloss').val(response.qs_loss);
+                         $('#qscontract').val(response.qs_retro).change();
+                         $('#qsrecovery').val(response.qs_recovery);
+
+                         $('#arr1liability').val(response.arr1_liability);
+                         $('#arr1loss').val(response.arr1_loss);
+                         $('#arr1contract').val(response.arr1_retro).change();
+                         $('#arr1recovery').val(response.arr1_recovery);
+
+                         $('#extraliability').val(response.extra_liability);
+                         $('#extraloss').val(response.extra_loss);
+                         $('#extracontract').val(response.extra_retro).change();
+                         $('#extrarecovery').val(response.extra_recovery);
+
+
+                         $('#facultativeliability').val(response.facultative_liability);
+                         $('#facultativeloss').val(response.facultative_loss);
+                         $('#facultativecontract').val(response.facultative_retro).change();
+                         $('#facultativerecovery').val(response.facultative_recovery);
+
+
+                         $('#arr2liability').val(response.arr2_liability);
+                         $('#arr2loss').val(response.arr2_loss);
+                         $('#arr2contract').val(response.arr2_retro).change();
+                         $('#arr2recovery').val(response.arr2_recovery);
+
+                         $('#arr3liability').val(response.arr3_liability);
+                         $('#arr3loss').val(response.arr3_loss);
+                         $('#arr3contract').val(response.arr3_retro).change();
+                         $('#arr3recovery').val(response.arr3_recovery);
+
+
+                         $('#totalrecovery').val(response.totalrecovery);
+                         $('#nrsgrossret').val(response.nrsgrossret);
+                         $('#xol').val(response.xol);
+                         $('#cereffno').val(response.cereffno);
+                         $('#dateofprod').val(response.dateofprod);
+                         $('#ceuser').val(response.ceuser);
+                         $('#ceno').val(response.ceno);
+
+                         $('#description').val(response.description);
+                         $('#dateentry').val(response.dateofentry);
+                         $('#datetrans').val(response.dateoftrans);
+                         $('#datesupporting').val(response.dateofsupporting);
+
+                         
+                    }
+                    else
+                    {
+                        swal("Notice !", response.message, response.message);
+                    }
+
+
                 },
                 error: function (request, status, error) 
                 {
@@ -893,5 +979,26 @@
 </script>
 
 
+
+<style>
+   .overlay{
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1100 !important;
+        background: rgba(255,255,255,0.8) url("{{asset('loader.gif')}}") center no-repeat;
+    }
+    /* Turn off scrollbar when body element has the loading class */
+    body.loading{
+        overflow: hidden;   
+    }
+    /* Make spinner image visible when body element has the loading class */
+    body.loading .overlay{
+        display: block;
+    }
+</style>
 
 
