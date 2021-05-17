@@ -46,7 +46,8 @@
                                 </label>
                             </div>
                         </div> -->
-
+                        <br>
+                        <!-- <br> -->
                         <div class="form-group  mb-0">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('auth.login') }}
