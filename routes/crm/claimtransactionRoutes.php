@@ -22,7 +22,7 @@ Route::group(['prefix'=>'/claimtransaction-data','middleware'=>['auth']], functi
     Route::post('/claim/store', [Claim_controller::class, 'storeclaiminsured']);
     Route::post('/claim/destroy/{id}', [Claim_controller::class, 'destroy']);
     Route::delete('/claim/destroy/{id}', [Claim_controller::class, 'destroy']);
-    
+    Route::get('/detailslipclaim/{idm}', [Claim_controller::class, 'getdetailSlipClaim']);
 
 });
 ?>

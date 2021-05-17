@@ -262,100 +262,102 @@ class Claim_controller extends Controller
     public function getdetailSlipClaim($number)
     {
         $user = Auth::user();
-        $slipdata=MainClaimEntryFAC::where('number',$number)->orderby('id','DESC')->first();
+        $claimdata=MainClaimEntryFAC::where('number',$number)->orderby('id','DESC')->first();
     
-
         $datereceipt=  date("d/m/Y", strtotime($slipdata->date_receipt));
 
-        if($slipdata->date_document == null)
+        if($claimdata->date_document == null)
         {
             $datedocument = "";
         }
         else
         {
-            $datedocument = date("d/m/Y", strtotime($slipdata->date_document));
+            $datedocument = date("d/m/Y", strtotime($claimdata->date_document));
         }
            
-        $statustable= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->get();
-        $statuslist= $statustable->unique('status');
-        $statuslist->values()->all();
+       // $statustable= StatusLog::where('slip_id',$slipdata->number)->where('insured_id',$slipdata->insured_id)->where('count_endorsement',$slipdata->endorsment)->where('slip_type','fe')->orderby('created_at','DESC')->get();
+       // $statuslist= $statustable->unique('status');
+       // $statuslist->values()->all();
        
-        $attachmenttable = collect(SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get());
-        $attachmentlist = $attachmenttable->unique('filename');
-        $attachmentlist->values()->all();
+       // $attachmenttable = collect(SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->where('count_endorsement',$slipdata->endorsment)->orderby('id','DESC')->get());
+       // $attachmentlist = $attachmenttable->unique('filename');
+       // $attachmentlist->values()->all();
                 
         return response()->json(
             [
-                'id' => $slipdata->id,
-                'insured_id' => $slipdata->insured_id,
-                'slip_type' => $slipdata->slip_type,
-                'username' => $slipdata->username,
-                'prod_year' => $dateyeardata,
-                'number' => $slipdata->number,
-                'slipuy' => $slipdata->uy,
-                'date_transfer' => $datetransfer,
-                'status' => $slipdata->status,
-                'endorsment' => $slipdata->endorsment,
-                'selisih' => $slipdata->selisih,
-                'source' => $slipdata->source,
-                'source_2' => $slipdata->source_2,
-                'currency'=> $slipdata->currency,
-                'cob'=> $slipdata->cob,
-                'koc'=> $slipdata->koc,
-                'occupacy'=> $slipdata->occupacy,
-                'build_const'=> $slipdata->build_const,
-                'build_rate_up'=> $building_rate_up,
-                'build_rate_down'=> $building_rate_down,
-                'slip_no'=> $slipdata->slip_no,
-                'cn_dn'=> $slipdata->cn_dn,
-                'policy_no'=> $slipdata->policy_no,
-                'attacment_file'=> $attachmentlist,
-                'type_tsi'=> $slipdata->type_tsi,
-                'total_sum_insured'=> $slipdata->total_sum_insured,
-                'type_share_tsi'=> $slipdata->type_share_tsi,
-                'share_tsi'=> $slipdata->share_tsi,
-                'insured_type'=>$slipdata->insured_type,
-                'insured_pct'=>$slipdata->insured_pct,
-                'total_sum_pct'=>$slipdata->total_sum_pct,
-                'deductible_panel'=>$newdeductdata,
-                'extend_coverage'=>$newextenddata,
-                'insurance_period_from'=>date("d/m/Y", strtotime($slipdata->insurance_period_from)),
-                'insurance_period_to'=>date("d/m/Y", strtotime($slipdata->insurance_period_to)),
-                'reinsurance_period_from'=>date("d/m/Y", strtotime($slipdata->reinsurance_period_from)),
-                'reinsurance_period_to'=>date("d/m/Y", strtotime($slipdata->reinsurance_period_to)),
-                'proportional'=>$slipdata->proportional,
-                'layer_non_proportional'=>$slipdata->layer_non_proportional,
-                'rate'=>$slipdata->rate,
-                'sum_rate'=>$slipdata->sliptotalrate,
-                'share'=>$slipdata->share,
-                'sum_share'=>$slipdata->sum_share,
-                'basic_premium'=>$slipdata->basic_premium,
-                'commission'=>$slipdata->commission,
-                'grossprm_to_nr'=>$slipdata->grossprm_to_nr,
-                'netprm_to_nr'=>$slipdata->netprm_to_nr,
-                'installment_panel'=>$slipdata->installment_panel,
-                'sum_commission'=>$slipdata->sum_commission,
-                'retro_backup'=>$slipdata->retro_backup,
-                'own_retention'=>$slipdata->own_retention,
-                'sum_own_retention'=>$slipdata->sum_own_retention,
-                'retrocession_panel'=>$slipdata->retrocession_panel,
-                'endorsment'=>$slipdata->endorsment,
-                'prev_endorsement'=>$slipdata->prev_endorsement,
-                'condition_needed'=>$slipdata->condition_needed,
-                'created_at'=>$slipdata->created_at,
-                'updated_at'=>$slipdata->updated_at,
-                'wpc'=>$slipdata->wpc,
-                'remarks'=>$slipdata->remarks,
-                'v_broker'=>$slipdata->v_broker,
-                'sum_v_broker'=>$slipdata->sum_feebroker,
-                'total_day'=>$slipdata->total_day,
-                'total_year'=>$slipdata->total_year,
-                'sum_total_date'=>$slipdata->sum_total_date,
-                'coinsurance_slip'=>$slipdata->coinsurance_slip,
-                'status_log'=>$statuslist,
-                'sum_feebroker'=>$slipdata->sum_feebroker,
-                'sum_ec'=>$sum_permilec,
-                'sum_ippercent' =>$sum_inspanpercent
+                'id' => $claimdata->id,
+                'number' => $claimdata->number,
+                'reg_comp' => $claimdata->reg_comp,
+                'date_receipt'=>date("d/m/Y", strtotime($claimdata->date_receipt)),
+                'date_document'=>date("d/m/Y", strtotime($claimdata->date_document)),
+                'causeofloss_id' =>$claimdata->causeofloss_id,
+                'desc_causeofloss' =>$claimdata->desc_causeofloss,
+                'natureofloss_id' =>$claimdata->natureofloss_id,
+                'descnatureofloss' =>$claimdata->descnatureofloss,
+                'id_col' =>$claimdata->id_col,
+                'id_nol' =>$claimdata->id_nol,
+                'date_of_loss'=>date("d/m/Y", strtotime($claimdata->date_of_loss)),
+                'curr_id_loss' =>$claimdata->curr_id_loss,
+                'curr_lossdesc' =>$claimdata->curr_lossdesc,
+                'surveyor_id' =>$claimdata->surveyor_id,
+                'desc_surveyor' =>$claimdata->desc_surveyor,
+                'nasre_liab' =>$claimdata->nasre_liab,
+                'nasre_liabdesc' =>$claimdata->nasre_liabdesc,
+                'nasre_share_loss' =>$claimdata->nasre_share_loss,
+                'ced_share' =>$claimdata->ced_share,
+                'total_loss_amount' =>$claimdata->total_loss_amount,
+                'potential_recovery' =>$claimdata->potential_recovery,
+                'route' =>$claimdata->route,
+                'estimate_amount_subro' =>$claimdata->estimate_amount_subro,
+                'desc_poten_rec' =>$claimdata->desc_poten_rec,
+                'kronologi' =>$claimdata->kronologi,
+                'staff_recomendation' =>$claimdata->staff_recomendation,
+                'ass_man_recomen' =>$claimdata->ass_man_recomen,
+                'route_from' =>$claimdata->route_from,
+                'route_to' =>$claimdata->route_to,
+                'pureor_liability' =>$claimdata->pureor_liability,
+                'pureor_loss' =>$claimdata->pureor_loss,
+                'pureor_retro' =>$claimdata->pureor_retro,
+                'pureor_recovery' =>$claimdata->pureor_recovery,
+                'qs_liability' =>$claimdata->qs_liability,
+                'qs_loss' =>$claimdata->qs_loss,
+                'qs_retro' =>$claimdata->qs_retro,
+                'qs_recovery' =>$claimdata->qs_recovery,
+                'arr1_liability' =>$claimdata->arr1_liability,
+                'arr1_loss' =>$claimdata->arr1_loss,
+                'arr1_retro' =>$claimdata->arr1_retro,
+                'arr1_recovery' =>$claimdata->arr1_recovery,
+                'extra_liability' =>$claimdata->extra_liability,
+                'extra_loss' =>$claimdata->extra_loss,
+                'extra_retro' =>$claimdata->extra_retro,
+                'extra_recovery' =>$claimdata->extra_recovery,
+                'facultative_liability' =>$claimdata->facultative_liability,
+                'facultative_loss' =>$claimdata->facultative_loss,
+                'facultative_retro' =>$claimdata->facultative_retro,
+                'facultative_recovery' =>$claimdata->facultative_recovery,
+                'arr2_liability' =>$claimdata->arr2_liability,
+                'arr2_loss' =>$claimdata->arr2_loss,
+                'arr2_retro' =>$claimdata->arr2_retro,
+                'arr2_recovery' =>$claimdata->arr2_recovery,
+                'arr3_liability' =>$claimdata->arr3_liability,
+                'arr3_loss' =>$claimdata->arr3_loss,
+                'arr3_retro' =>$claimdata->arr3_retro,
+                'arr3_recovery' =>$claimdata->arr3_recovery,
+                'totalrecovery' =>$claimdata->totalrecovery,
+                'nrsgrossret' =>$claimdata->nrsgrossret,
+                'xol' =>$claimdata->xol,
+                'cereffno' =>$claimdata->cereffno,
+                'dateofprod' =>date("d/m/Y", strtotime($claimdata->dateofprod)),
+                'ceno' =>$claimdata->ceno,
+                'ceuser' =>$claimdata->ceuser,
+                'description' =>$claimdata->description,
+                'dateofentry' =>date("d/m/Y", strtotime($claimdata->dateofentry)),
+                'dateoftrans' =>date("d/m/Y", strtotime($claimdata->dateoftrans)),
+                'dateofsupporting' =>date("d/m/Y", strtotime($claimdata->dateofsupporting)),
+                'status_flag' =>$claimdata->status_flag,
+                'is_delete' =>$claimdata->is_delete,
+                'attacment_file' =>$claimdata->attacment_file
+                
             ]
         );
 

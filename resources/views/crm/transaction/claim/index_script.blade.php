@@ -476,6 +476,46 @@
 
 
 <script type='text/javascript'>
+    $('#detailclaimbutton').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+       
+        alert('test');
+        
+        var slipnumberdata =$('#slipnumberdata').val();
+
+        if(slipnumberdata)
+        {
+            $.ajax({
+                url:'{{ url("/") }}/transaction-data/detailslipclaim/'+slipnumberdata,
+                type:"GET",
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(response)
+                {
+                    console.log('bisa tampil')
+                    console.log(response);
+                },
+                error: function (request, status, error) 
+                {
+                        //alert(request.responseText);
+                        swal("Error!", "Get Slip Data Error", "Get Data Error");
+                }
+                
+            });
+
+        }
+        else
+        {
+            swal("Error!", "Get Slip Data Empty", "Get Data Error");
+     
+        }
+
+    });
+</script>
+
+
+<script type='text/javascript'>
     $('#addallclaiminsured-btn').click(function(e){
        //alert('masuk');
        e.preventDefault();
