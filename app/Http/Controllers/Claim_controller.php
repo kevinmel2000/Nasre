@@ -264,7 +264,6 @@ class Claim_controller extends Controller
         $user = Auth::user();
         $claimdata=MainClaimEntryFAC::where('number',$number)->orderby('id','DESC')->first();
     
-
         $datereceipt=  date("d/m/Y", strtotime($slipdata->date_receipt));
 
         if($claimdata->date_document == null)

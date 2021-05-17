@@ -476,6 +476,16 @@
 
 
 <script type='text/javascript'>
+    $('#detailclaimbutton').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+       
+        alert('test');
+    });
+</script>
+
+
+<script type='text/javascript'>
     $('#addallclaiminsured-btn').click(function(e){
        //alert('masuk');
        e.preventDefault();

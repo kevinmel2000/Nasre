@@ -69,7 +69,7 @@
 														</a>
 													</td>
 													<td>
-														<button type="button" class="btn btn-sm btn-primary float-right" >{{__('Get Detail Claim')}}</button>
+														<button type="button" id="detailclaimbutton" name="detailclaimbutton" class="btn btn-sm btn-primary float-right" >{{__('Get Detail Claim')}}</button>
 													</td>
 												</tr>
 											</tbody>
