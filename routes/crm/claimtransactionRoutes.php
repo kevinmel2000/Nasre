@@ -23,6 +23,8 @@ Route::group(['prefix'=>'/claimtransaction-data','middleware'=>['auth']], functi
     Route::post('/claim/destroy/{id}', [Claim_controller::class, 'destroy']);
     Route::delete('/claim/destroy/{id}', [Claim_controller::class, 'destroy']);
     Route::get('/detailslipclaim/{idm}', [Claim_controller::class, 'getdetailSlipClaim']);
+    Route::get('/updateclaim/{idm}', [Claim_controller::class, 'updateindex']);
+    
 
 });
 ?>
