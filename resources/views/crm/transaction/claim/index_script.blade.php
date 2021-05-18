@@ -8,7 +8,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 
-		$('.datepicker').datepicker();
+		$('.datepicker').datepicker({ dateFormat: 'dd/mm/yy' });
 		$(".e1").select2({ width: '100%' }); 
 
 	})
@@ -487,8 +487,56 @@
 
     });
 
+
+
 </script>
 
+
+<script type='text/javascript'>
+   
+    $(".datepickerloss").datepicker({
+
+        dateFormat: 'dd/mm/yy',
+        onSelect: function(dateText) {
+            //alert("Selected date: " + dateText + ", Current Selected Value= " + this.value);
+            $(this).change();
+        }
+
+    }).on("change", function() {
+            //alert("Change event");
+
+            var dateinsurance=$('#dateinsurance').val();
+            var datereinsurance=$('#datereinsurance').val();
+            var dateloss=$('#dateofloss').val();
+
+
+            var dateParts = dateinsurance.split("/");
+            var date1 = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]); 
+
+
+            var dateParts2 = datereinsurance.split("/");
+            var date2 = new Date(+dateParts2[2], dateParts2[1] - 1, +dateParts2[0]); 
+
+            var dateParts3 = dateloss.split("/");
+            var datelossdata = new Date(+dateParts3[2], dateParts3[0] - 1, +dateParts3[1]); 
+           
+        
+            //best to use .getTime() to compare dates
+            if(date1.getTime() === date2.getTime()){
+                //same date
+            }
+
+            if(datelossdata.getTime() > date2.getTime()){
+                //alert("Date Loss Melebihi Batas Waktu Polis");
+                swal("Error!", "Date Loss Melebihi Batas Waktu Polis", "Date Loss Melebihi Batas Waktu Polis");
+                $('#dateofloss').val();
+            }
+
+            //alert("change date2 "+dateloss+ " "+datelossdata);
+            //alert("change date2 "+datereinsurance+ " "+date2);
+    });
+
+</script>
 
 <script type='text/javascript'>
     $('#detailclaimbutton').click(function(e){
@@ -498,9 +546,34 @@
         //alert('test');
         
         var slipnumberdata =$('#slipnumberdata').val();
+        $dateinsurance="";
+        $datereinsurance="";
 
         if(slipnumberdata)
         {
+            //response.insurance_period_to
+            //response.reinsurance_period_to
+
+            $.ajax({
+                url:'{{ url("/") }}/transaction-data/detailslipnumber/'+slipnumberdata,
+                type:"GET",
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(response)
+                {
+                    $dateinsurance=response.insurance_period_to;
+                    $datereinsurance=response.reinsurance_period_to;
+
+                    $('#dateinsurance').val(response.insurance_period_to);
+                    $('#datereinsurance').val(response.reinsurance_period_to);
+                },
+                error: function (request, status, error) {
+                    //alert(request.responseText);
+                    swal("Error!", "Get Slip Data Error", "Get Data Error");
+                }
+            });
+
+
             $.ajax({
                 url:'{{ url("/") }}/claimtransaction-data/detailslipclaim/'+slipnumberdata,
                 type:"GET",

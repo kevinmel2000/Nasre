@@ -164,7 +164,10 @@
 					<tbody>
 						<tr>
 							<td>
-							<input type="text" name="dateofloss" id="dateofloss" class="form-control datepicker" autocomplete="off">					
+							<input type="hidden" name="dateinsurance" id="dateinsurance" class="form-control datepicker" autocomplete="off">					
+							<input type="hidden" name="datereinsurance" id="datereinsurance" class="form-control datepicker" autocomplete="off">					
+							
+							<input type="text" name="dateofloss" id="dateofloss" class="form-control datepickerloss" autocomplete="off">					
 							</td>
 						</tr>
 					</tbody>
