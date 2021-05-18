@@ -472,7 +472,8 @@
             $('#slipcndndetail').val(response.cn_dn);
             $('#slippolicy_nodetail').val(response.policy_no);
             if(response.total_sum_insured){
-                $('#sliptotalsumdetail').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                var conv_tsi = response.total_sum_insureda.toFixed(2);
+                $('#sliptotalsumdetail').val(conv_tsi.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
             else
             {
@@ -480,17 +481,24 @@
             }
 
             if(response.share_tsi){
-                $('#sharetotalsumdetail').val(response.share_tsi.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                var conv_share_tsi =  response.share_tsi.toFixed(2);
+                $('#sharetotalsumdetail').val(conv_share_tsi.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
             else
             {
                 $('#sharetotalsumdetail').val("0");
             }
 
+            if(response.insured_pct){
+                $('#slippctdetail').val(response.insured_pct.toFixed(2));
+            }else{
+                $('#slippctdetail').val("0");
+            }
             
-            $('#slippctdetail').val(response.insured_pct);
+
             if(response.total_sum_pct){
-                $('#sliptotalsumpctdetail').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                var conv_sum_pct = response.total_sum_pct.toFixed(2);
+                $('#sliptotalsumpctdetail').val(conv_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
             else{
                 $('#sliptotalsumpctdetail').val("0");
@@ -544,8 +552,9 @@
                 $('#slipsharedetail').val(response.share);
 
                 if(response.sum_share){
-                    $('#slipsumsharedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipsumsharedetail2').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    var conv_sshare = response.sum_share
+                    $('#slipsumsharedetail').val(conv_sshare.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumsharedetail2').val(conv_sshare.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }
                 else{
                     $('#slipsumsharedetail').val("0");
@@ -553,8 +562,9 @@
                 }
 
                 if(response.sum_rate){
-                    $('#sliptotalratedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#sliptotalratedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    var conv_srate = response.sum_rate.toFixed(2);
+                    $('#sliptotalratedetail').val(conv_srate.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#sliptotalratedetail').val(conv_srate.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }
                 else{
                     $('#slipsumsharedetail').val("0");
@@ -562,8 +572,9 @@
                 }
 
                 if(response.sum_feebroker){
-                    $('#slipsumfeedetail').val(response.sum_feebroker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipsumfeedetail2').val(response.sum_feebroker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    var conv_sf = response.sum_feebroker.toFixed(2);
+                    $('#slipsumfeedetail').val(conv_sf.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumfeedetail2').val(conv_sf.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }
                 else{
                     $('#slipsumfeedetail').val("0");
@@ -572,15 +583,17 @@
 
 
                 if(response.basic_premium){
-                    $('#slipbasicpremiumdetail').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    var conv_bp = response.basic_premium.toFixed(2);
+                    $('#slipbasicpremiumdetail').val(conv_bp.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }else
                 {
                     $('#slipbasicpremiumdetail').val("0");
                 }
                 
                 if(response.grossprm_to_nr){
-                    $('#slipgrossprmtonrdetail').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipgrossprmtonrdetail2').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    var conv_gprmtnr = response.grossprm_to_nr.toFixed(2);
+                    $('#slipgrossprmtonrdetail').val(conv_gprmtnr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipgrossprmtonrdetail2').val(conv_gprmtnr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 
                 }
                 else{
@@ -589,7 +602,7 @@
                 }
 
                 if(response.commission){
-                    $('#slipcommissiondetail').val(response.commission);
+                    $('#slipcommissiondetail').val(response.commission.toFixed(2));
                 }
                 else{
                     $('#slipcommissiondetail').val(0);
@@ -597,8 +610,9 @@
                 
 
                 if(response.sum_commission){
-                    $('#slipsumcommissiondetail').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipsumcommissiondetail2').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    var conv_sc = response.sum_commission.toFixed(2);
+                    $('#slipsumcommissiondetail').val(conv_sc.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumcommissiondetail2').val(conv_sc.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 
                 }
                 else{
@@ -608,8 +622,9 @@
                 }
 
                 if(response.netprm_to_nr){
-                    $('#slipnetprmtonrdetail').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipnetprmtonrdetail2').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
+                    var conv_nprmtonr = response.netprm_to_nr.toFixed(2);
+                    $('#slipnetprmtonrdetail').val(conv_nprmtonr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipnetprmtonrdetail2').val(conv_nprmtonr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
                 }
                 else{
                     $('#slipnetprmtonrdetail').val("0"); 
@@ -617,14 +632,16 @@
                 }
 
                 if(response.own_retention){
-                    $('#slipordetail').val(response.own_retention);
+                    var conv_or = response.own_retention.toFixed(2);
+                    $('#slipordetail').val(conv_or);
                 }
                 else{
                     $('#slipordetail').val(0);
                 }
 
                 if(response.sum_own_retention){
-                    $('#slipsumordetail').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    var conv_sor = response.sum_own_retention.toFixed(2);
+                    $('#slipsumordetail').val(conv_sor.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }
                 else{
                     $('#slipsumordetail').val("0");
