@@ -49,6 +49,26 @@ class Claim_controller extends Controller
     }
 
 
+    public function updateindex($idclaim)
+    {
+    	$route_active = 'CLAIM INSURED - Entry';
+
+        $currency = Currency::orderby('id','asc')->get();
+        $cob = COB::where('form','fe')->orderby('id','asc')->get();
+        $koc = Koc::where('parent_id',2)->orWhere('code', 'like',  02 . '%')->orderby('code','asc')->get();
+        $ocp = Occupation::orderby('id','asc')->get();
+        $cedingbroker = CedingBroker::orderby('id','asc')->get();
+        $ceding = CedingBroker::orderby('id','asc')->where('type','4')->get();
+        $surveyor = Surveyor::orderby('id','asc')->get();
+        $natureofloss = NatureOfLoss::orderby('id','asc')->get();
+        $causeofloss = MasterCauseOfLoss::orderby('id','asc')->get();
+        $prefixinsured = PrefixInsured::orderby('id','asc')->get();
+        $claimdata=MainClaimEntryFAC::where('id',$idclaim)->orderby('id','DESC')->first();
+    
+       
+    	return view('crm.transaction.claim.updateindex',compact('idclaim','claimdata','prefixinsured','causeofloss','natureofloss','surveyor','ceding','cedingbroker','currency','cob','koc','ocp','route_active'));
+    }
+
     public function indexclaim(Request $request)
     {
         $user = Auth::user();
@@ -176,82 +196,162 @@ class Claim_controller extends Controller
         {
             //dd($request);
             //exit();
-            
-            $user = Auth::user();
-            MainClaimEntryFAC::create([
-                'number'=>$request->number,
-                'reg_comp'=> $request->regcomp,
-                'doc_number'=> $request->number,
-                'date_receipt'=> date("Y-m-d", strtotime($request->dateofreceipt)),
-                'date_document'=> date("Y-m-d", strtotime($request->dateofdocument)),
-                'causeofloss_id'=> $request->causeofloss,
-                'desc_causeofloss'=> $request->desccauseofloss,
-                'natureofloss_id'=> $request->natureofloss,
-                'descnatureofloss'=> $request->descnatureofloss,
-                'date_of_loss'=> date("Y-m-d", strtotime($request->dateofloss)),
-                'curr_id_loss'=>$request->currofloss,
-                'curr_lossdesc'=>$request->desccurrofloss,
-                'surveyor_id'=>$request->surveyoradjuster,
-                'desc_surveyor'=>$request->descsurveyoradjuster,
-                'nasre_liab'=>$request->nationalresliab,
-                'nasre_liabdesc'=>$request->descnationalresliab,
-                'nasre_share_loss'=>$request->shareonloss,
-                'ced_share'=>$request->cedantshare,
-                'total_loss_amount'=>$request->totallossamount,
-                'potential_recovery'=>$request->potentialrecoverydecision,
-                'estimate_amount_subro'=>$request->subrogasi,
-                'desc_poten_rec'=>$request->potentialrecovery,
-                'kronologi'=>$request->kronologi,
-                'staff_recomendation'=>$request->staffrecomend,
-                'ass_man_recomen'=>$request->assistantmanagerrecomend,
-                'pureor_liability'=>$request->pureorliability,
-                'pureor_loss'=>$request->pureorloss,
-                'pureor_retro'=>$request->pureorcontract,
-                'pureor_recovery'=>$request->pureorrecovery,
-                'qs_liability'=>$request->qsliability,
-                'qs_loss'=>$request->qsloss,
-                'qs_retro'=>$request->qscontract,
-                'qs_recovery'=>$request->qsrecovery,
-                'arr1_liability'=>$request->arr1liability,
-                'arr1_loss'=>$request->arr1loss,
-                'arr1_retro'=>$request->arr1contract,
-                'arr1_recovery'=>$request->arr1recovery,
-                'extra_liability'=>$request->extraliability,
-                'extra_loss'=>$request->extraloss,
-                'extra_retro'=>$request->extracontract,
-                'extra_recovery'=>$request->extrarecovery,
-                'facultative_liability'=>$request->facultativeliability,
-                'facultative_loss'=>$request->facultativeloss,
-                'facultative_retro'=>$request->facultativecontract,
-                'facultative_recovery'=>$request->facultativerecovery,
-                'arr2_liability'=>$request->arr2liability,
-                'arr2_loss'=>$request->arr2loss,
-                'arr2_retro'=>$request->arr2contract,
-                'arr2_recovery'=>$request->arr2recovery,
-                'arr3_liability'=>$request->arr3liability,
-                'arr3_loss'=>$request->arr3loss,
-                'arr3_retro'=>$request->arr3contract,
-                'arr3_recovery'=>$request->arr3recovery,
-                'totalrecovery'=>$request->totalrecovery,
-                'nrsgrossret'=>$request->nrsgrossret,
-                'xol'=>$request->xol,
-                'cereffno'=>$request->cereffno,
-                'dateofprod'=>date("Y-m-d", strtotime($request->dateofprod)),
-                'ceno'=>$request->ceno,
-                'ceuser'=>$request->ceuser,
-                'description'=>$request->description,
-                'dateofentry'=>date("Y-m-d", strtotime($request->dateentry)),
-                'dateoftrans'=>date("Y-m-d", strtotime($request->datetrans)),
-                'dateofsupporting'=>date("Y-m-d", strtotime($request->datesupporting))
 
-            ]);
+            $claimdata=MainClaimEntryFAC::where('number',$request->number)->orderby('id','DESC')->first();
+    
+            if(!empty($claimdata))
+            {
+                $claimdata->number=$request->number;
+                $claimdata->reg_comp=$request->regcomp;
+                $claimdata->doc_number=$request->docnumber;
+                $claimdata->date_receipt=date("Y-m-d", strtotime($request->dateofreceipt));
+                $claimdata->date_document=date("Y-m-d", strtotime($request->dateofdocument));
+                $claimdata->causeofloss_id=$request->causeofloss;
+                $claimdata->desc_causeofloss=$request->desccauseofloss;
+                $claimdata->natureofloss_id=$request->natureofloss;
+                $claimdata->descnatureofloss=$request->descnatureofloss;
+                $claimdata->date_of_loss=date("Y-m-d", strtotime($request->dateofloss));
+                $claimdata->curr_id_loss=$request->currofloss;
+                $claimdata->curr_lossdesc=$request->desccurrofloss;
+                $claimdata->surveyor_id=$request->surveyoradjuster;
+                $claimdata->desc_surveyor=$request->descsurveyoradjuster;
+                $claimdata->nasre_liab=$request->nationalresliab;
+                $claimdata->nasre_liabdesc=$request->descnationalresliab;
+                $claimdata->nasre_share_loss=$request->shareonloss;
+                $claimdata->ced_share=$request->cedantshare;
+                $claimdata->total_loss_amount=$request->totallossamount;
+                $claimdata->potential_recovery=$request->potentialrecoverydecision;
+                $claimdata->estimate_amount_subro=$request->subrogasi;
+                $claimdata->desc_poten_rec=$request->potentialrecovery;
+                $claimdata->kronologi=$request->kronologi;
+                $claimdata->staff_recomendation=$request->staffrecomend;
+                $claimdata->ass_man_recomen=$request->assistantmanagerrecomend;
+                $claimdata->pureor_liability=$request->pureorliability;
+                $claimdata->pureor_loss=$request->pureorloss;
+                $claimdata->pureor_retro=$request->pureorcontract;
+                $claimdata->pureor_recovery=$request->pureorrecovery;
+                $claimdata->qs_liability=$request->qsliability;
+                $claimdata->qs_loss=$request->qsloss;
+                $claimdata->qs_retro=$request->qscontract;
+                $claimdata->qs_recovery=$request->qsrecovery;
+                $claimdata->arr1_liability=$request->arr1liability;
+                $claimdata->arr1_loss=$request->arr1loss;
+                $claimdata->arr1_retro=$request->arr1contract;
+                $claimdata->arr1_recovery=$request->arr1recovery;
+                $claimdata->extra_liability=$request->extraliability;
+                $claimdata->extra_loss=$request->extraloss;
+                $claimdata->extra_retro=$request->extracontract;
+                $claimdata->extra_recovery=$request->extrarecovery;
+                $claimdata->facultative_liability=$request->facultativeliability;
+                $claimdata->facultative_loss=$request->facultativeloss;
+                $claimdata->facultative_retro=$request->facultativecontract;
+                $claimdata->facultative_recovery=$request->facultativerecovery;
+                $claimdata->arr2_liability=$request->arr2liability;
+                $claimdata->arr2_loss=$request->arr2loss;
+                $claimdata->arr2_retro=$request->arr2contract;
+                $claimdata->arr2_recovery=$request->arr2recovery;
+                $claimdata->arr3_liability=$request->arr3liability;
+                $claimdata->arr3_loss=$request->arr3loss;
+                $claimdata->arr3_retro=$request->arr3contract;
+                $claimdata->arr3_recovery=$request->arr3recovery;
+                $claimdata->totalrecovery=$request->totalrecovery;
+                $claimdata->nrsgrossret=$request->nrsgrossret;
+                $claimdata->xol=$request->xol;
+                $claimdata->cereffno=$request->cereffno;
+                $claimdata->dateofprod=date("Y-m-d", strtotime($request->dateofprod));
+                $claimdata->ceno=$request->ceno;
+                $claimdata->ceuser=$request->ceuser;
+                $claimdata->description=$request->description;
+                $claimdata->dateofentry=date("Y-m-d", strtotime($request->dateentry));
+                $claimdata->dateoftrans=date("Y-m-d", strtotime($request->datetrans));
+                $claimdata->dateofsupporting=date("Y-m-d", strtotime($request->datesupporting));
+                $claimdata->save();
 
-            $notification = array(
-                'message' => 'Main Claim added successfully!',
-                'alert-type' => 'success'
-            );
+                $notification = array(
+                    'message' => 'Main Claim Update successfully!',
+                    'alert-type' => 'success'
+                );
 
-            return back()->with($notification);
+                return back()->with($notification);
+            }
+            else
+            {
+                    $user = Auth::user();
+                    MainClaimEntryFAC::create([
+                        'number'=>$request->number,
+                        'reg_comp'=> $request->regcomp,
+                        'doc_number'=> $request->docnumber,
+                        'date_receipt'=> date("Y-m-d", strtotime($request->dateofreceipt)),
+                        'date_document'=> date("Y-m-d", strtotime($request->dateofdocument)),
+                        'causeofloss_id'=> $request->causeofloss,
+                        'desc_causeofloss'=> $request->desccauseofloss,
+                        'natureofloss_id'=> $request->natureofloss,
+                        'descnatureofloss'=> $request->descnatureofloss,
+                        'date_of_loss'=> date("Y-m-d", strtotime($request->dateofloss)),
+                        'curr_id_loss'=>$request->currofloss,
+                        'curr_lossdesc'=>$request->desccurrofloss,
+                        'surveyor_id'=>$request->surveyoradjuster,
+                        'desc_surveyor'=>$request->descsurveyoradjuster,
+                        'nasre_liab'=>$request->nationalresliab,
+                        'nasre_liabdesc'=>$request->descnationalresliab,
+                        'nasre_share_loss'=>$request->shareonloss,
+                        'ced_share'=>$request->cedantshare,
+                        'total_loss_amount'=>$request->totallossamount,
+                        'potential_recovery'=>$request->potentialrecoverydecision,
+                        'estimate_amount_subro'=>$request->subrogasi,
+                        'desc_poten_rec'=>$request->potentialrecovery,
+                        'kronologi'=>$request->kronologi,
+                        'staff_recomendation'=>$request->staffrecomend,
+                        'ass_man_recomen'=>$request->assistantmanagerrecomend,
+                        'pureor_liability'=>$request->pureorliability,
+                        'pureor_loss'=>$request->pureorloss,
+                        'pureor_retro'=>$request->pureorcontract,
+                        'pureor_recovery'=>$request->pureorrecovery,
+                        'qs_liability'=>$request->qsliability,
+                        'qs_loss'=>$request->qsloss,
+                        'qs_retro'=>$request->qscontract,
+                        'qs_recovery'=>$request->qsrecovery,
+                        'arr1_liability'=>$request->arr1liability,
+                        'arr1_loss'=>$request->arr1loss,
+                        'arr1_retro'=>$request->arr1contract,
+                        'arr1_recovery'=>$request->arr1recovery,
+                        'extra_liability'=>$request->extraliability,
+                        'extra_loss'=>$request->extraloss,
+                        'extra_retro'=>$request->extracontract,
+                        'extra_recovery'=>$request->extrarecovery,
+                        'facultative_liability'=>$request->facultativeliability,
+                        'facultative_loss'=>$request->facultativeloss,
+                        'facultative_retro'=>$request->facultativecontract,
+                        'facultative_recovery'=>$request->facultativerecovery,
+                        'arr2_liability'=>$request->arr2liability,
+                        'arr2_loss'=>$request->arr2loss,
+                        'arr2_retro'=>$request->arr2contract,
+                        'arr2_recovery'=>$request->arr2recovery,
+                        'arr3_liability'=>$request->arr3liability,
+                        'arr3_loss'=>$request->arr3loss,
+                        'arr3_retro'=>$request->arr3contract,
+                        'arr3_recovery'=>$request->arr3recovery,
+                        'totalrecovery'=>$request->totalrecovery,
+                        'nrsgrossret'=>$request->nrsgrossret,
+                        'xol'=>$request->xol,
+                        'cereffno'=>$request->cereffno,
+                        'dateofprod'=>date("Y-m-d", strtotime($request->dateofprod)),
+                        'ceno'=>$request->ceno,
+                        'ceuser'=>$request->ceuser,
+                        'description'=>$request->description,
+                        'dateofentry'=>date("Y-m-d", strtotime($request->dateentry)),
+                        'dateoftrans'=>date("Y-m-d", strtotime($request->datetrans)),
+                        'dateofsupporting'=>date("Y-m-d", strtotime($request->datesupporting))
+
+                    ]);
+
+                    $notification = array(
+                        'message' => 'Main Claim added successfully!',
+                        'alert-type' => 'success'
+                    );
+
+                    return back()->with($notification);
+            }
         }
         else
         {
