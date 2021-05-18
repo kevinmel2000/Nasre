@@ -720,7 +720,7 @@
                 $('#slipslsupdate').val(response.selisih);
                 $('#wpcupdate').val(response.wpc);
                 $('#remarksupdate').val(response.remarks);
-                $('#slipvbrokerupdate').val(response.v_broker);
+                
                 $('#sliptotalnilaiecupdate').val(response.sum_ec);
                 $('#sliptotalpercentinspanupdate').val(response.sum_ippercent);
 
@@ -1057,6 +1057,13 @@
                     }else{
                         $('#slipshareupdate').val("0");
                     }
+
+
+                    if(response.v_broker){
+                        $('#slipvbrokerupdate').val(parseFloat(response.v_broker).toFixed(2));
+                    }else{
+                        $('#slipvbrokerupdate').val("0");
+                    }
                     
                     
                     
@@ -1212,7 +1219,7 @@
                     $('#slipedendorsement').val(response.endorsment);
                     $('#slipslsendorsement').val(response.selisih);
                     $('#wpcendorsement').val(response.wpc);
-                    $('#slipvbrokerendorsement').val(response.v_broker);
+                    
                     $('#sliptotalnilaiecendorsement').val(response.sum_ec);
                     $('#sliptotalpercentinspanendorsement').val(response.sum_ippercent);
 
@@ -1500,7 +1507,7 @@
 
             $('#sliprpfromendorsement').val(response.reinsurance_period_from);
             $('#sliprptoendorsement').val(response.reinsurance_period_to);
-            
+
             $('#switch-proportionalendorsement').val(response.proportional);
                     // if(response.proportional == ''){
                         $("#btnaddlayerendorsement").attr('hidden','true');
@@ -1509,29 +1516,36 @@
                         $("#labelnpendorsement").attr('hidden','true');
                     // }
 
-                    // if(response.rate){
-                    //     $('#sliprateendorsement').val(ParseFloat(response.rate).toFixed(3));
-                    // }else{
-                    //     $('#sliprateendorsement').val("0");
-                    // }
+                    if(response.rate){
+                        $('#sliprateendorsement').val(parseFloat(response.rate).toFixed(3));
+                    }else{
+                        $('#sliprateendorsement').val("0");
+                    }
 
-                    // if(response.share){
-                    //     $('#slipshareendorsement').val(ParseFloat(response.share).toFixed(2));
-                    // }else{
-                    //    $('#slipshareendorsement').val("0");
-                    // }
+                    if(response.share){
+                        $('#slipshareendorsement').val(parseFloat(response.share).toFixed(2));
+                    }else{
+                       $('#slipshareendorsement').val("0");
+                    }
 
-                    // if(response.own_retention){
-                    //    $('#sliporendorsement').val(ParseFloat(response.own_retention).toFixed(2));
-                    // }else{
-                    //    $('#sliporendorsement').val("0");
-                    // }
+                    if(response.own_retention){
+                       $('#sliporendorsement').val(parseFloat(response.own_retention).toFixed(2));
+                    }else{
+                       $('#sliporendorsement').val("0");
+                    }
 
-                    // if(response.commission){
-                    //     $('#slipcommissionendorsement').val(ParseFloat(response.commission).toFixed(2));
-                    // }else{
-                    //    $('#slipcommissionendorsement').val("0");
-                    // }
+                    if(response.commission){
+                        $('#slipcommissionendorsement').val(parseFloat(response.commission).toFixed(2));
+                    }else{
+                       $('#slipcommissionendorsement').val("0");
+                    }
+
+                    if(response.v_broker){
+                        $('#slipvbrokerendorsement').val(parseFloat(response.v_broker).toFixed(2));
+                    }else{
+                        $('#slipvbrokerendorsement').val("0");
+                    }
+                    
 
                     if(response.basic_premium){
                         var conv_bp = parseFloat(response.basic_premium).toFixed(2);
@@ -1577,37 +1591,37 @@
 
                     }
                     
-            //         if(response.sum_v_broker){
-            //             var conv_sumfee = parseFloat(response.sum_v_broker).toFixed(2);
-            //         $('#slipsumfeeendorsement').val(conv_sumfee.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //         $('#slipsumfeeendorsement2').val(conv_sumfee.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //         }
-            //         else{
-            //             $('#slipsumfeeendorsement').val("0");
-            //             $('#slipsumfeeendorsement2').val("0");
-            //         }
+                    if(response.sum_v_broker){
+                        var conv_sumfee = parseFloat(response.sum_v_broker).toFixed(2);
+                    $('#slipsumfeeendorsement').val(conv_sumfee.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumfeeendorsement2').val(conv_sumfee.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }
+                    else{
+                        $('#slipsumfeeendorsement').val("0");
+                        $('#slipsumfeeendorsement2').val("0");
+                    }
 
 
-            //         if(response.grossprm_to_nr){
-            //             var conv_gprmtnr = parseFloat(response.grossprm_to_nr).toFixed(2);
-            //             $('#slipgrossprmtonrendorsement').val(conv_gprmtnr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //             $('#slipgrossprmtonrendorsement2').val(conv_gprmtnr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    if(response.grossprm_to_nr){
+                        var conv_gprmtnr = parseFloat(response.grossprm_to_nr).toFixed(2);
+                        $('#slipgrossprmtonrendorsement').val(conv_gprmtnr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipgrossprmtonrendorsement2').val(conv_gprmtnr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     
-            //         }
-            //         else{
-            //             $('#slipgrossprmtonrendorsement').val("0");
-            //             $('#slipgrossprmtonrendorsement2').val("0");
-            //         }
+                    }
+                    else{
+                        $('#slipgrossprmtonrendorsement').val("0");
+                        $('#slipgrossprmtonrendorsement2').val("0");
+                    }
 
-            //         if(response.netprm_to_nr){
-            //             var conv_nprtnr = parseFloat(response.netprm_to_nr).toFixed(2);
-            //             $('#slipnetprmtonrendorsement').val(conv_nprtnr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //             $('#slipnetprmtonrendorsement2').val(conv_nprtnr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
-            //         }
-            //         else{
-            //             $('#slipnetprmtonrendorsement').val("0"); 
-            //             $('#slipnetprmtonrendorsement2').val("0"); 
-            //         }
+                    if(response.netprm_to_nr){
+                        var conv_nprtnr = parseFloat(response.netprm_to_nr).toFixed(2);
+                        $('#slipnetprmtonrendorsement').val(conv_nprtnr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipnetprmtonrendorsement2').val(conv_nprtnr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
+                    }
+                    else{
+                        $('#slipnetprmtonrendorsement').val("0"); 
+                        $('#slipnetprmtonrendorsement2').val("0"); 
+                    }
                     
                     swal("Success!", "Data Show")
                     console.log(response)
