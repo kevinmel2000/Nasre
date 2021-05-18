@@ -266,8 +266,9 @@
                         var str_minamount = conv_minamount.toString();
                         var curr_minamount = str_minamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         // var curr_minamount = obj.min_claimamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        var conv_percent = parseFloat(obj.percentage).toFixed(2);
                         
-                        $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td></td></tr>');
+                        $('#deductiblePaneldetail tbody').prepend('<tr id="iiddeductible'+obj.id+'" data-name="deductibledetailvalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+conv_percent+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td></td></tr>');
 
                     }
                 }
@@ -289,7 +290,7 @@
                         var str_amount = conv_amount.toString();
                         var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         // var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        var conv_percent = parseFloat(obj.percentage).toFixed(2);
+                        var conv_percent = parseFloat(obj.percentage).toFixed(3);
                         
                         $('#ExtendCoveragePaneldetail tbody').prepend('<tr id="iidextendcoveragedetail'+obj.id+'" data-name="extendcoveragedetailvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragecode + ' - ' + obj.coveragename+'</td><td data-name="'+obj.percentage+'">'+conv_percent+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
                         
@@ -342,12 +343,13 @@
                         var str_amount = conv_amount.toString();
                         var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         // var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        var conv_percent = parseFloat(obj.percentage).toFixed(2);
 
                         //console.log(obj.id);
                         //$('#interestInsuredTabledetail tbody').prepend('');
                         
                         
-                        $('#retrocessionPaneldetail tbody').prepend('<tr id="iidretrocessiondetail'+obj.id+'" data-name="retrocessiondetailvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
+                        $('#retrocessionPaneldetail tbody').prepend('<tr id="iidretrocessiondetail'+obj.id+'" data-name="retrocessiondetailvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+conv_percent+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>');
 
                     }
                 }
@@ -745,8 +747,10 @@
                             var str_minamount = conv_minamount.toString();
                             var curr_minamount = str_minamount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+                            var conv_percent = parseFloat(obj.percentage).toFixed(2);
+
                             
-                            $('#deductiblePanelupdate tbody').prepend('<tr id="iiddeductibleupdate'+obj.id+'" data-name="deductibleupdatevalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleupdate('+obj.id+')">delete</a></td></tr>');
+                            $('#deductiblePanelupdate tbody').prepend('<tr id="iiddeductibleupdate'+obj.id+'" data-name="deductibleupdatevalue[]"><td data-name="'+obj.deductibletype+'">'+obj.deductibletype+'</td><td data-name="'+obj.percentage+'">'+conv_percent+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td data-name="'+curr_minamount+'">'+curr_minamount+'</td><td><a href="javascript:void(0)" onclick="deletedeductibleupdate('+obj.id+')">delete</a></td></tr>');
 
                         }
                     }
@@ -766,10 +770,12 @@
                             var str_amount = conv_amount.toString();
                             var curr_amount =  str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+                            var conv_percent = parseFloat(obj.percentage).toFixed(3);
+
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
                             
-                            $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+obj.id+'" data-name="extendcoverageupdatevalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragecode + ' - ' + obj.coveragename+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageupdate('+obj.id+')">delete</a></td></tr>');
+                            $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+obj.id+'" data-name="extendcoverageupdatevalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragecode + ' - ' + obj.coveragename+'</td><td data-name="'+obj.percentage+'">'+conv_percent+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageupdate('+obj.id+')">delete</a></td></tr>');
                             
                         }
                     }
@@ -790,7 +796,9 @@
                             // var conv_amount = obj.amount.toFixed(2);
                             // var str_amount = conv_amount.toString();
                           // var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            var conv_amount = parseFloat(obj.amount).toFixed(2);
+
+                            var curr_amount = conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 
                             var currdate = obj.installment_date;
@@ -798,10 +806,12 @@
                             console.log('conv date ' + convdate)
                             var strdate = convdate.toString();
 
+                            var conv_percent = parseFloat(obj.percentage).toFixed(2);
+
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
                             
-                            $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+obj.id+'" data-name="installmentupdatevalue[]"><td data-name="'+obj.installment_date+'">'+strdate+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+obj.id+')">delete</a></td></tr>')
+                            $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+obj.id+'" data-name="installmentupdatevalue[]"><td data-name="'+obj.installment_date+'">'+strdate+'</td><td data-name="'+obj.percentage+'">'+conv_percent+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+obj.id+')">delete</a></td></tr>')
 
                         }
                     }
@@ -822,11 +832,13 @@
                             var str_amount = conv_amount.toString();
                             var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+                            var conv_percent = parseFloat(obj.percentage).toFixed(2);
+
                             //console.log(obj.id);
                             //$('#interestInsuredTabledetail tbody').prepend('');
                             
                             
-                            $('#retrocessionPanelupdate tbody').prepend('<tr id="iidretrocessionupdate'+obj.id+'" data-name="retrocessionupdatevalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessionupdate('+obj.id+')">delete</a></td></tr>');
+                            $('#retrocessionPanelupdate tbody').prepend('<tr id="iidretrocessionupdate'+obj.id+'" data-name="retrocessionupdatevalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+conv_percent+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessionupdate('+obj.id+')">delete</a></td></tr>');
 
                         }
                     }
@@ -948,16 +960,18 @@
 
                 if(response.total_sum_insured)
                 {
-                    $('#sliptotalsumupdate').val(response.total_sum_insured.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#sliptotalsumupdate2').val(response.total_sum_insured.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    var conv_tsi = parseFloat(response.total_sum_insured).toFixed(2);
+                    $('#sliptotalsumupdate').val(conv_tsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#sliptotalsumupdate2').val(conv_tsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }else{
                     $('#sliptotalsumupdate').val(0);
                     $('#sliptotalsumupdate2').val(0);
                 }
 
                 if(response.share_tsi){
-                    $('#sharetotalsumupdate').val(response.share_tsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#sharetotalsumupdate2').val(response.share_tsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    var conv_stsi = parseFloat(response.share_tsi).toFixed(2);
+                    $('#sharetotalsumupdate').val(conv_stsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#sharetotalsumupdate2').val(conv_stsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }
                 else
                 {
@@ -967,12 +981,19 @@
                 
                 $('#sliptdupdate').val(response.date_transfer);
                 $('#sliptdupdate2').val(response.date_transfer);
-                $('#slippctupdate').val(response.insured_pct);
+
+                if(response.insured_pct){
+                    $('#slippctupdate').val( parseFloat(response.insured_pct).toFixed(2));
+                }else{
+                    $('#slippctupdate').val("0");
+                }   
+                
 
                 if(response.total_sum_pct)
                 {
-                    $('#sliptotalsumpctupdate').val(response.total_sum_pct.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#sliptotalsumpctupdate2').val(response.total_sum_pct.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    var conv_tsp = parseFloat(response.total_sum_pct).toFixed(2);
+                    $('#sliptotalsumpctupdate').val(conv_tsp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#sliptotalsumpctupdate2').val(conv_tsp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }else{
                     $('#sliptotalsumpctupdate').val(0);
                     $('#sliptotalsumpctupdate2').val(0);
@@ -1024,11 +1045,23 @@
                         $("#labelnpupdate").attr('hidden','true');
                     // }
 
-                    $('#sliprateupdate').val(response.rate);
-                    $('#slipshareupdate').val(response.share);
+                    if(response.rate){
+                        $('#sliprateupdate').val(parseFloat(response.rate).toFixed(3));
+                    }else{
+                        $('#sliprateupdate').val("0");
+                    }
+                    
+
+                    if(response.share){
+                        $('#slipshareupdate').val(parseFloat(response.share).toFixed(2));
+                    }else{
+                        $('#slipshareupdate').val("0");
+                    }
+                    
                     
                     
                     if(response.sum_share){
+                        var conv_sshare = parseFloat(response.total_sum_pct).toFixed(2);
                         $('#slipsumshareupdate').val(response.sum_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                         $('#slipsumshareupdate2').val(response.sum_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                         $('#slipoldsumshareupdate2').val(response.sum_share.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -1040,38 +1073,54 @@
                         $('#slipoldsumshareupdate').val(0);
                     }
                     
-                    $('#slipbasicpremiumupdate').val(response.basic_premium.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    if(response.basic_premium){
+                        var conv_bp = parseFloat(response.total_sum_pct).toFixed(2);
+                        $('#slipbasicpremiumupdate').val(conv_bp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }else{
+                        $('#slipbasicpremiumupdate').val("0");
+                    }
+                    
                     
                     if(response.grossprm_to_nr){
-                        $('#slipgrossprmtonrupdate').val(response.grossprm_to_nr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                        $('#slipgrossprmtonrupdate2').val(response.grossprm_to_nr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        var gprmtnr = parseFloat(response.grossprm_to_nr).toFixed(2);
+                        $('#slipgrossprmtonrupdate').val(gprmtnr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipgrossprmtonrupdate2').val(gprmtnr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     }else{
                         $('#slipgrossprmtonrupdate').val(0);
                         $('#slipgrossprmtonrupdate2').val(0);
                     }
 
-                    $('#slipcommissionupdate').val(response.commission);
-                    $('#slipcommissionupdate2').val(response.commission);
+                    if(response.commission){
+                        $('#slipcommissionupdate').val(parseFloat(response.commission).toFixed(2));
+                        $('#slipcommissionupdate2').val(parseFloat(response.commission).toFixed(2));
+                    }else{
+                        $('#slipcommissionupdate').val("0");
+                        $('#slipcommissionupdate2').val("0");
+                    }
+                    
                     
                     if(response.sum_commission){
-                        $('#slipsumcommissionupdate').val(response.sum_commission.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                        $('#slipsumcommissionupdate2').val(response.sum_commission.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        var conv_sc = parseFloat(response.sum_commission).toFixed(2);
+                        $('#slipsumcommissionupdate').val(conv_sc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipsumcommissionupdate2').val(conv_sc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     }else{
                         $('#slipsumcommissionupdate').val(0);
                         $('#slipsumcommissionupdate2').val(0);                        
                     }
 
                     if(response.netprm_to_nr){
-                        $('#slipnetprmtonrupdate').val(response.netprm_to_nr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                        $('#slipnetprmtonrupdate2').val(response.netprm_to_nr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        var conv_nprtnr = parseFloat(response.netprm_to_nr).toFixed(2);
+                        $('#slipnetprmtonrupdate').val(conv_nprtnr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipnetprmtonrupdate2').val(conv_nprtnr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     }else{
                         $('#slipnetprmtonrupdate').val(0);
                         $('#slipnetprmtonrupdate2').val(0);
                     }
                     
                     if(response.sum_rate){
-                        $('#sliptotalrateupdate').val(response.sum_rate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                        $('#sliptotalrateupdate2').val(response.sum_rate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        var conv_srate = parseFloat(response.sum_rate).toFixed(2);
+                        $('#sliptotalrateupdate').val(conv_srate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#sliptotalrateupdate2').val(conv_srate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     }
                     else{
                         $('#sliptotalrateupdate').val("0");
@@ -1080,8 +1129,9 @@
                     }
 
                     if(response.sum_v_broker){
-                        $('#slipsumfeeupdate').val(response.sum_v_broker.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                        $('#slipsumfeeupdate2').val(response.sum_v_broker.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        var conv_sfee = parseFloat(response.sum_v_broker).toFixed(2);
+                        $('#slipsumfeeupdate').val(conv_sfee.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipsumfeeupdate2').val(conv_sfee.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     }
                     else{
                         $('#slipsumfeeupdate').val("0");
@@ -1089,12 +1139,17 @@
 
                     }
 
-
-                    $('#sliporupdate').val(response.own_retention);
+                    if(response.own_retention){
+                        $('#sliporupdate').val(parseFloat(response.own_retention).toFixed(2));
+                    }else{
+                        $('#sliporupdate').val("0");
+                    }
+                    
 
                     if(response.sum_own_retention){
-                        $('#slipsumorupdate').val(response.sum_own_retention.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                        $('#slipsumorupdate2').val(response.sum_own_retention.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        var conv_sor = parseFloat(response.sum_own_retention).toFixed(2);
+                        $('#slipsumorupdate').val(conv_sor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipsumorupdate2').val(conv_sor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     }else{
                         $('#slipsumorupdate').val(0);
                         $('#slipsumorupdate2').val(0);
