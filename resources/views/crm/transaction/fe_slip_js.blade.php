@@ -1591,8 +1591,8 @@
 
                     }
                     
-                    if(response.sum_v_broker){
-                        var conv_sumfee = parseFloat(response.sum_v_broker).toFixed(2);
+                    if(response.sum_feebroker){
+                        var conv_sumfee = parseFloat(response.sum_feebroker).toFixed(2);
                         console.log('sum fee broker' + conv_sumfee)
                         $('#slipsumfeeendorsement').val(conv_sumfee.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                         $('#slipsumfeeendorsement2').val(conv_sumfee.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
