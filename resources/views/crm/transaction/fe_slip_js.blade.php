@@ -481,8 +481,7 @@
             }
 
             if(response.share_tsi){
-                var conv_share_tsi =  response.share_tsi.toFixed(2);
-                $('#sharetotalsumdetail').val(conv_share_tsi.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#sharetotalsumdetail').val(response.share_tsi.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
             else
             {
@@ -490,15 +489,15 @@
             }
 
             if(response.insured_pct){
-                $('#slippctdetail').val(response.insured_pct.toFixed(2));
+                $('#slippctdetail').val(response.insured_pct);
             }else{
                 $('#slippctdetail').val("0");
             }
             
 
+
             if(response.total_sum_pct){
-                var conv_sum_pct = response.total_sum_pct.toFixed(2);
-                $('#sliptotalsumpctdetail').val(conv_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#sliptotalsumpctdetail').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
             else{
                 $('#sliptotalsumpctdetail').val("0");
@@ -552,9 +551,8 @@
                 $('#slipsharedetail').val(response.share);
 
                 if(response.sum_share){
-                    var conv_sshare = response.sum_share
-                    $('#slipsumsharedetail').val(conv_sshare.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipsumsharedetail2').val(conv_sshare.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumsharedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumsharedetail2').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }
                 else{
                     $('#slipsumsharedetail').val("0");
@@ -562,9 +560,8 @@
                 }
 
                 if(response.sum_rate){
-                    var conv_srate = response.sum_rate.toFixed(2);
-                    $('#sliptotalratedetail').val(conv_srate.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#sliptotalratedetail').val(conv_srate.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#sliptotalratedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#sliptotalratedetail').val(response.sum_share.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }
                 else{
                     $('#slipsumsharedetail').val("0");
@@ -572,9 +569,8 @@
                 }
 
                 if(response.sum_feebroker){
-                    var conv_sf = response.sum_feebroker.toFixed(2);
-                    $('#slipsumfeedetail').val(conv_sf.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipsumfeedetail2').val(conv_sf.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumfeedetail').val(response.sum_feebroker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumfeedetail2').val(response.sum_feebroker.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }
                 else{
                     $('#slipsumfeedetail').val("0");
@@ -583,17 +579,15 @@
 
 
                 if(response.basic_premium){
-                    var conv_bp = response.basic_premium.toFixed(2);
-                    $('#slipbasicpremiumdetail').val(conv_bp.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipbasicpremiumdetail').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }else
                 {
                     $('#slipbasicpremiumdetail').val("0");
                 }
                 
                 if(response.grossprm_to_nr){
-                    var conv_gprmtnr = response.grossprm_to_nr.toFixed(2);
-                    $('#slipgrossprmtonrdetail').val(conv_gprmtnr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipgrossprmtonrdetail2').val(conv_gprmtnr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipgrossprmtonrdetail').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipgrossprmtonrdetail2').val(response.grossprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 
                 }
                 else{
@@ -602,7 +596,7 @@
                 }
 
                 if(response.commission){
-                    $('#slipcommissiondetail').val(response.commission.toFixed(2));
+                    $('#slipcommissiondetail').val(response.commission);
                 }
                 else{
                     $('#slipcommissiondetail').val(0);
@@ -610,9 +604,8 @@
                 
 
                 if(response.sum_commission){
-                    var conv_sc = response.sum_commission.toFixed(2);
-                    $('#slipsumcommissiondetail').val(conv_sc.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipsumcommissiondetail2').val(conv_sc.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumcommissiondetail').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumcommissiondetail2').val(response.sum_commission.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 
                 }
                 else{
@@ -622,9 +615,8 @@
                 }
 
                 if(response.netprm_to_nr){
-                    var conv_nprmtonr = response.netprm_to_nr.toFixed(2);
-                    $('#slipnetprmtonrdetail').val(conv_nprmtonr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipnetprmtonrdetail2').val(conv_nprmtonr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
+                    $('#slipnetprmtonrdetail').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipnetprmtonrdetail2').val(response.netprm_to_nr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
                 }
                 else{
                     $('#slipnetprmtonrdetail').val("0"); 
@@ -632,16 +624,14 @@
                 }
 
                 if(response.own_retention){
-                    var conv_or = response.own_retention.toFixed(2);
-                    $('#slipordetail').val(conv_or);
+                    $('#slipordetail').val(response.own_retention);
                 }
                 else{
                     $('#slipordetail').val(0);
                 }
 
                 if(response.sum_own_retention){
-                    var conv_sor = response.sum_own_retention.toFixed(2);
-                    $('#slipsumordetail').val(conv_sor.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#slipsumordetail').val(response.sum_own_retention.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }
                 else{
                     $('#slipsumordetail').val("0");
