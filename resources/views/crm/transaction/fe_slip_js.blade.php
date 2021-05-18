@@ -722,7 +722,7 @@
                 $('#remarksupdate').val(response.remarks);
                 
                 $('#sliptotalnilaiecupdate').val(response.sum_ec);
-                
+
                 $('#sliptotalpercentinspanupdate').val(response.sum_ippercent);
 
 
@@ -9739,7 +9739,7 @@ function deletelocationriskdetail(id){
                  console.log(response)
                 //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
                 var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">' +response.coveragecode+ ' - ' +response.coveragename+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoveragedetail('+response.id+')">delete</a></td></tr>');
+                $('#ExtendCoveragePanelupdate tbody').prepend('<tr id="iidextendcoverageupdate'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">' +response.coveragecode+ ' - ' +response.coveragename+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageupdate('+response.id+')">delete</a></td></tr>');
                 
 
                 var total_percent =  $('#sliptotalnilaiecupdate').val();
@@ -9749,7 +9749,7 @@ function deletelocationriskdetail(id){
                     var sum_percent = isNaN(parseFloat(0) + parseFloat(response.percentage)) ? 0 :(parseFloat(0) + parseFloat(response.percentage)) ;
                     $('#sliptotalnilaiecupdate').val(sum_percent.toString());
                     console.log('total rate extend_coverage ' + $('#sliptotalnilaiecupdate').val())
-                    var total_rate = $('#sliptotalrateupdate').val();
+                    var total_rate = $('#sliptotalrate').val();
                     if(total_rate){
                         var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
                         $('#sliptotalrateupdate').val(sum_totalrate.toString());
@@ -9757,7 +9757,7 @@ function deletelocationriskdetail(id){
                     }
                 }else{
                     var sum_percent = isNaN(parseFloat(total_percent) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) + parseFloat(response.percentage))
-                    $('#sliptotalnilaiec').val(sum_percent.toString());
+                    $('#sliptotalnilaiecupdate').val(sum_percent.toString());
                     console.log('total rate extend_coverage ' + $('#sliptotalnilaiecupdate').val())
                     var total_rate = $('#sliptotalrateupdate').val();
                     if(total_rate){
@@ -9828,7 +9828,7 @@ function deletelocationriskdetail(id){
                  console.log(response)
                 //    var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
                 var curr_amount = response.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                $('#ExtendCoveragePanelendorsement tbody').prepend('<tr id="iidextendcoverageendorsement'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">' +response.coveragecode+ ' - ' +response.coveragename+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoveragedetail('+response.id+')">delete</a></td></tr>');
+                $('#ExtendCoveragePanelendorsement tbody').prepend('<tr id="iidextendcoverageendorsement'+response.id+'" data-name="extendcoveragevalue[]"><td data-name="'+response.coveragetype+'">' +response.coveragecode+ ' - ' +response.coveragename+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageendorsement('+response.id+')">delete</a></td></tr>');
                 
 
                 var total_percent =  $('#sliptotalnilaiecendorsement').val();
@@ -9838,7 +9838,7 @@ function deletelocationriskdetail(id){
                     var sum_percent = isNaN(parseFloat(0) + parseFloat(response.percentage)) ? 0 :(parseFloat(0) + parseFloat(response.percentage)) ;
                     $('#sliptotalnilaiecendorsement').val(sum_percent.toString());
                     console.log('total rate extend_coverage ' + $('#sliptotalnilaiecendorsement').val())
-                    var total_rate = $('#sliptotalrateendorsement').val();
+                    var total_rate = $('#sliptotalrate').val();
                     if(total_rate){
                         var sum_totalrate = isNaN(parseFloat(total_rate) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_rate) + parseFloat(response.percentage)) ;
                         $('#sliptotalrateendorsement').val(sum_totalrate.toString());
@@ -9846,7 +9846,7 @@ function deletelocationriskdetail(id){
                     }
                 }else{
                     var sum_percent = isNaN(parseFloat(total_percent) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) + parseFloat(response.percentage))
-                    $('#sliptotalnilaiec').val(sum_percent.toString());
+                    $('#sliptotalnilaiecendorsement').val(sum_percent.toString());
                     console.log('total rate extend_coverage ' + $('#sliptotalnilaiecendorsement').val())
                     var total_rate = $('#sliptotalrateendorsement').val();
                     if(total_rate){
