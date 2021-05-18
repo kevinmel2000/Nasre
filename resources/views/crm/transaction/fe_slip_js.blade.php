@@ -1515,11 +1515,11 @@
                     //     $('#sliprateendorsement').val("0");
                     // }
 
-                    if(response.share){
-                        $('#slipshareendorsement').val(ParseFloat(response.share).toFixed(2));
-                    }else{
-                       $('#slipshareendorsement').val("0");
-                    }
+                    // if(response.share){
+                    //     $('#slipshareendorsement').val(ParseFloat(response.share).toFixed(2));
+                    // }else{
+                    //    $('#slipshareendorsement').val("0");
+                    // }
 
                     // if(response.own_retention){
                     //    $('#sliporendorsement').val(ParseFloat(response.own_retention).toFixed(2));
