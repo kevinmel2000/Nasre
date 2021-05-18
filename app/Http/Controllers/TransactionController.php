@@ -2088,18 +2088,6 @@ class TransactionController extends Controller
                                     ]
                                 );
                         }
-                        else 
-                        {
-                            return response()->json(
-                                    [
-                                        'id' => $installmentlist->id,
-                                        'percentage' => $installmentlist->percentage,
-                                        'installment_date' => date("d/m/Y", strtotime($new_date)),
-                                        'amount' => $installmentlist->amount,
-                                        'slip_id' => $installmentlist->slip_id
-                                    ]
-                                );
-                        }
                         else
                         {
                             return response()->json(
@@ -2115,7 +2103,7 @@ class TransactionController extends Controller
 
                     }
                 }
-                elseif(floatval($totalpercent) > 100.10)
+                else
                 {
                     return response()->json(
                         [
