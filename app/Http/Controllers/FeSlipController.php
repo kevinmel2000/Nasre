@@ -1867,6 +1867,7 @@ class FeSlipController extends Controller
                             ->where('insured_id','=',$slipdata->insured_id)
                             ->where('slip_type','fe')
                             ->where('count_endorsement',$slipdata->endorsment)
+                            ->where('status','active')
                             ->sum('extended_coverage_detail.percentage');
 
         $sum_inspanpercent = DB::table('installment_panel_detail')
@@ -1874,6 +1875,7 @@ class FeSlipController extends Controller
                             ->where('insured_id','=',$slipdata->insured_id)
                             ->where('slip_type','fe')
                             ->where('count_endorsement',$slipdata->endorsment)
+                            ->where('status','active')
                             ->sum('installment_panel_detail.percentage');
 
 
@@ -2099,6 +2101,7 @@ class FeSlipController extends Controller
                             ->where('insured_id','=',$slipdata->insured_id)
                             ->where('slip_type','fe')
                             ->where('count_endorsement',$slipdata->endorsment)
+                            ->where('status','active')
                             ->sum('extended_coverage_detail.percentage');
 
         $sum_inspanpercent = DB::table('installment_panel_detail')
@@ -2106,6 +2109,7 @@ class FeSlipController extends Controller
                             ->where('insured_id','=',$slipdata->insured_id)
                             ->where('slip_type','fe')
                             ->where('count_endorsement',$slipdata->endorsment)
+                            ->where('status','active')
                             ->sum('installment_panel_detail.percentage');
 
 
@@ -2195,7 +2199,7 @@ class FeSlipController extends Controller
                 'wpc'=>$slipdata->wpc,
                 'remarks'=>$slipdata->remarks,
                 'v_broker'=>$slipdata->v_broker,
-                'sum_v_broker'=>$slipdata->sum_feebroker,
+                // 'sum_v_broker'=>$slipdata->sum_feebroker,
                 'total_day'=>$slipdata->total_day,
                 'total_year'=>$slipdata->total_year,
                 'sum_total_date'=>$slipdata->sum_total_date,

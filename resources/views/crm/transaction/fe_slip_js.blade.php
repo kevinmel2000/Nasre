@@ -722,6 +722,7 @@
                 $('#remarksupdate').val(response.remarks);
                 
                 $('#sliptotalnilaiecupdate').val(response.sum_ec);
+                
                 $('#sliptotalpercentinspanupdate').val(response.sum_ippercent);
 
 
