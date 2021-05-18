@@ -1304,132 +1304,132 @@
 
 
 
-            //         if(response.retrocession_panel && response.retrocession_panel.length > 10)
-            //         {
+                    if(response.retrocession_panel && response.retrocession_panel.length > 10)
+                    {
 
-            //             var retrocession_panel = JSON.parse(response.retrocession_panel); 
+                        var retrocession_panel = JSON.parse(response.retrocession_panel); 
 
-            //             $('#retrocessionPanelendorsement tbody').empty();
-            //             for(var i = 0; i < retrocession_panel.length; i++) 
-            //             {
-            //                 var obj = retrocession_panel[i];
-            //                 // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-            //                 var conv_amount = obj.amount.toFixed(2);
-            //                 var str_amount = conv_amount.toString();
-            //                 var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#retrocessionPanelendorsement tbody').empty();
+                        for(var i = 0; i < retrocession_panel.length; i++) 
+                        {
+                            var obj = retrocession_panel[i];
+                            // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
+                            var conv_amount = obj.amount.toFixed(2);
+                            var str_amount = conv_amount.toString();
+                            var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            //                 var conv_percent = parseFloat(obj.percentage).toFixed(2);
+                            var conv_percent = parseFloat(obj.percentage).toFixed(2);
 
-            //                 //console.log(obj.id);
-            //                 //$('#interestInsuredTabledetail tbody').prepend('');
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
                             
                             
-            //                 $('#retrocessionPanelendorsement tbody').prepend('<tr id="iidretrocessionendorsement'+obj.id+'" data-name="retrocessionendorsementvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+conv_percent+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessionendorsement('+obj.id+')">delete</a></td></tr>');
+                            $('#retrocessionPanelendorsement tbody').prepend('<tr id="iidretrocessionendorsement'+obj.id+'" data-name="retrocessionendorsementvalue[]"><td data-name="'+obj.type+'">'+obj.type+'</td><td data-name="'+obj.contract+'">'+obj.contract+'</td><td data-name="'+obj.percentage+'">'+conv_percent+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteretrocessionendorsement('+obj.id+')">delete</a></td></tr>');
 
-            //             }
-            //         }
+                        }
+                    }
                     
                     
-            //     if(response.status)
-            //     {
-            //         //$("#slipstatusendorsement option[value=" + response.status + "]:first")[0].selected = true;
-            //         $("#slipstatusendorsement").val(response.status);
-            //     }
+                if(response.status)
+                {
+                    //$("#slipstatusendorsement option[value=" + response.status + "]:first")[0].selected = true;
+                    $("#slipstatusendorsement").val(response.status);
+                }
 
-            //     if(response.source)
-            //     {
-            //         $("#slipcedingbrokerendorsement option[value=" + response.source + "]:first")[0].selected = true;
-            //     }
+                if(response.source)
+                {
+                    $("#slipcedingbrokerendorsement option[value=" + response.source + "]:first")[0].selected = true;
+                }
 
-            //     if(response.source_2)
-            //     {
-            //         $("#slipcedingendorsement option[value=" + response.source_2 + "]:first")[0].selected = true;
-            //     }
+                if(response.source_2)
+                {
+                    $("#slipcedingendorsement option[value=" + response.source_2 + "]:first")[0].selected = true;
+                }
 
-            //     if(response.currency)
-            //     {
-            //         $("#slipcurrencyendorsement option[value=" + response.currency + "]:first")[0].selected = true;
-            //     }
+                if(response.currency)
+                {
+                    $("#slipcurrencyendorsement option[value=" + response.currency + "]:first")[0].selected = true;
+                }
 
-            //     if(response.cob)
-            //     {
-            //         $("#slipcobendorsement option[value=" + response.cob + "]:first")[0].selected = true;
-            //     }
+                if(response.cob)
+                {
+                    $("#slipcobendorsement option[value=" + response.cob + "]:first")[0].selected = true;
+                }
 
-            //     if(response.koc)
-            //     {
-            //         $("#slipkocendorsement option[value=" + response.koc + "]:first")[0].selected = true;
-            //     }
+                if(response.koc)
+                {
+                    $("#slipkocendorsement option[value=" + response.koc + "]:first")[0].selected = true;
+                }
 
-            //     if(response.occupacy)
-            //     {
-            //         $("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
-            //     }
+                if(response.occupacy)
+                {
+                    $("#slipoccupacyendorsement option[value=" + response.occupacy + "]:first")[0].selected = true;
+                }
 
-            //     if(response.build_const)
-            //     {
-            //      $("#slipbld_constendorsement option[value='" + response.build_const + "']:first")[0].selected = true;
-            //      $("#slipbcuaendorsement").val(response.build_rate_up);
-            //      $("#slipbclaendorsement").val(response.build_rate_down);
-            //  }
+                if(response.build_const)
+                {
+                 $("#slipbld_constendorsement option[value='" + response.build_const + "']:first")[0].selected = true;
+                 $("#slipbcuaendorsement").val(response.build_rate_up);
+                 $("#slipbclaendorsement").val(response.build_rate_down);
+             }
 
-            // if(response.insured_type)
-            // {
-            //     $("#sliptypeendorsement option[value=" + response.insured_type + "]:first")[0].selected = true;
-            // }
+            if(response.insured_type)
+            {
+                $("#sliptypeendorsement option[value=" + response.insured_type + "]:first")[0].selected = true;
+            }
 
-            // if(response.type_tsi)
-            // {
-            //     $("#sliptypetsiendorsement option[value=" + response.type_tsi + "]:first")[0].selected = true;
-            // }
+            if(response.type_tsi)
+            {
+                $("#sliptypetsiendorsement option[value=" + response.type_tsi + "]:first")[0].selected = true;
+            }
 
-            // if(response.type_share_tsi)
-            // {
-            //     $("#sharetypetsiendorsement option[value=" + response.type_share_tsi + "]:first")[0].selected = true;
-            // }
+            if(response.type_share_tsi)
+            {
+                $("#sharetypetsiendorsement option[value=" + response.type_share_tsi + "]:first")[0].selected = true;
+            }
 
-            // if(response.layer_non_proportional)
-            // {
-            //     //$("#sliplayerproportionalendorsement option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
-            // }
+            if(response.layer_non_proportional)
+            {
+                //$("#sliplayerproportionalendorsement option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
+            }
 
-            // if(response.retro_backup)
-            // {
-            //     $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
+            if(response.retro_backup)
+            {
+                $("#sliprbendorsement option[value=" + response.retro_backup + "]:first")[0].selected = true;
                 
-            //     if(response.retro_backup == "NO")
-            //     {
-            //         $("#tabretroendorsement").attr('hidden');
-            //     }
-            //     else if(response.retro_backup == "YES"){
-            //         $("#tabretroendorsement").removeAttr('hidden');
-            //     }
-            // }
+                if(response.retro_backup == "NO")
+                {
+                    $("#tabretroendorsement").attr('hidden');
+                }
+                else if(response.retro_backup == "YES"){
+                    $("#tabretroendorsement").removeAttr('hidden');
+                }
+            }
 
-            // if(response.status_log){
-            //     var status_log = response.status_log;
-            //     $('#slipStatusTableendorsement tbody').empty();
-            //     for (var i = 0; i < 5; i++){
-            //         if(status_log[i])
-            //         {
-            //             var status = status_log[i].status;
-            //             var datetime = status_log[i].datetime;
-            //             var user = status_log[i].user;
+            if(response.status_log){
+                var status_log = response.status_log;
+                $('#slipStatusTableendorsement tbody').empty();
+                for (var i = 0; i < 5; i++){
+                    if(status_log[i])
+                    {
+                        var status = status_log[i].status;
+                        var datetime = status_log[i].datetime;
+                        var user = status_log[i].user;
                         
-            //             $('#slipStatusTableendorsement tbody').prepend('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
-            //         }
-            //     };
-            // }
+                        $('#slipStatusTableendorsement tbody').prepend('<tr id="stlid'+status_log[i].id+'" data-name="slipvalue[]"><td >'+status+'</td><td >'+datetime+'</td><td >'+user+'</td></tr>')
+                    }
+                };
+            }
 
-            // if(response.attacment_file){
-            //     $('#aidlistendorsement li').remove();
-            //     var attacment_file = response.attacment_file;
-            //     for (var i = 0; i < attacment_file.length; i++){
-            //         var filename = attacment_file[i].filename;
+            if(response.attacment_file){
+                $('#aidlistendorsement li').remove();
+                var attacment_file = response.attacment_file;
+                for (var i = 0; i < attacment_file.length; i++){
+                    var filename = attacment_file[i].filename;
 
-            //         $('#aidlistendorsement').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
-            //     };
-            // }
+                    $('#aidlistendorsement').append('<li><div class="control-group input-group" id="control-group2" style="margin-top:10px"><a href="{{ asset("files")}}/'+filename+'">'+filename+'</a></div></li>')
+                };
+            }
 
             // $('#slipnoendorsement').val(response.slip_no);
             // $('#slipcndnendorsement').val(response.cn_dn);
