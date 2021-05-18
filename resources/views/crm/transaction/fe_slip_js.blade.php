@@ -1246,61 +1246,61 @@
                     }
 
 
-            //         if(response.extend_coverage && response.extend_coverage.length > 10)
-            //         {
+                    if(response.extend_coverage && response.extend_coverage.length > 10)
+                    {
 
-            //             var extend_coverage = JSON.parse(response.extend_coverage); 
+                        var extend_coverage = JSON.parse(response.extend_coverage); 
 
-            //             $('#ExtendCoveragePanelendorsement tbody').empty();
-            //             for(var i = 0; i < extend_coverage.length; i++) 
-            //             {
-            //                 var obj = extend_coverage[i];
-            //                 // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-            //                 var conv_amount = obj.amount.toFixed(2);
-            //                 var str_amount = conv_amount.toString();
-            //                 var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#ExtendCoveragePanelendorsement tbody').empty();
+                        for(var i = 0; i < extend_coverage.length; i++) 
+                        {
+                            var obj = extend_coverage[i];
+                            // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
+                            var conv_amount = obj.amount.toFixed(2);
+                            var str_amount = conv_amount.toString();
+                            var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            //                 var conv_percent = parseFloat(obj.percentage).toFixed(3);
+                            var conv_percent = parseFloat(obj.percentage).toFixed(3);
 
-            //                 //console.log(obj.id);
-            //                 //$('#interestInsuredTabledetail tbody').prepend('');
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
                             
-            //                 $('#ExtendCoveragePanelendorsement tbody').prepend('<tr id="iidextendcoverageendorsement'+obj.id+'" data-name="extendcoverageendorsementvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragecode + ' - ' + obj.coveragename+'</td><td data-name="'+obj.percentage+'">'+conv_percent+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageendorsement('+obj.id+')">delete</a></td></tr>');
+                            $('#ExtendCoveragePanelendorsement tbody').prepend('<tr id="iidextendcoverageendorsement'+obj.id+'" data-name="extendcoverageendorsementvalue[]"><td data-name="'+obj.coveragetype+'">'+obj.coveragecode + ' - ' + obj.coveragename+'</td><td data-name="'+obj.percentage+'">'+conv_percent+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteextendcoverageendorsement('+obj.id+')">delete</a></td></tr>');
                             
-            //             }
-            //         }
+                        }
+                    }
 
 
-            //         if(response.installment_panel && response.installment_panel.length > 10)
-            //         {
+                    if(response.installment_panel && response.installment_panel.length > 10)
+                    {
                         
-            //             var installment_panel = JSON.parse(response.installment_panel); 
+                        var installment_panel = JSON.parse(response.installment_panel); 
 
-            //             $('#installmentPanelendorsement tbody').empty();
-            //             for(var i = 0; i < installment_panel.length; i++) 
-            //             {
-            //                 var obj = installment_panel[i];
-            //                 // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
-            //                 // var conv_amount = obj.amount.toFixed(2);
-            //                 // var str_amount = conv_amount.toString();
-            //                 // var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            //                 var conv_amount = parseFloat(obj.amount).toFixed(2);
-            //                 var curr_amount =  conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        $('#installmentPanelendorsement tbody').empty();
+                        for(var i = 0; i < installment_panel.length; i++) 
+                        {
+                            var obj = installment_panel[i];
+                            // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(obj.amount);
+                            // var conv_amount = obj.amount.toFixed(2);
+                            // var str_amount = conv_amount.toString();
+                            // var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            var conv_amount = parseFloat(obj.amount).toFixed(2);
+                            var curr_amount =  conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            //                var currdate = obj.installment_date;
-            //                 var convdate = currdate.split("-").reverse().join("/");
-            //                 console.log('conv date ' + convdate)
-            //                 var strdate = convdate.toString();
+                           var currdate = obj.installment_date;
+                            var convdate = currdate.split("-").reverse().join("/");
+                            console.log('conv date ' + convdate)
+                            var strdate = convdate.toString();
 
-            //                 var conv_percent = parseFloat(obj.percentage).toFixed(2);
+                            var conv_percent = parseFloat(obj.percentage).toFixed(2);
 
-            //                 //console.log(obj.id);
-            //                 //$('#interestInsuredTabledetail tbody').prepend('');
+                            //console.log(obj.id);
+                            //$('#interestInsuredTabledetail tbody').prepend('');
                             
-            //                 $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+obj.id+'" data-name="installmentendorsementvalue[]"><td data-name="'+obj.installment_date+'">'+strdate+'</td><td data-name="'+obj.percentage+'">'+conv_percent+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+obj.id+')">delete</a></td></tr>')
+                            $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+obj.id+'" data-name="installmentendorsementvalue[]"><td data-name="'+obj.installment_date+'">'+strdate+'</td><td data-name="'+obj.percentage+'">'+conv_percent+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+obj.id+')">delete</a></td></tr>')
 
-            //             }
-            //         }
+                        }
+                    }
 
 
 
