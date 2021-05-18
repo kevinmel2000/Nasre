@@ -472,8 +472,8 @@
             $('#slipcndndetail').val(response.cn_dn);
             $('#slippolicy_nodetail').val(response.policy_no);
             if(response.total_sum_insured){
-                var conv_tsi = response.total_sum_insured.toFixed(2);
-                $('#sliptotalsumdetail').val(conv_tsi.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                // var conv_tsi = response.total_sum_insured.toFixed(2);
+                $('#sliptotalsumdetail').val(response.total_sum_insured.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
             else
             {
