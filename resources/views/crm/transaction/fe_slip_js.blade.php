@@ -1435,31 +1435,31 @@
             // $('#slipcndnendorsement').val(response.cn_dn);
             // $('#slippolicy_noendorsement').val(response.policy_no);
 
-            // if(response.total_sum_insured){
-            //     var conv_tsi = parseFloat(response.total_sum_insured).toFixed(2);
-            //     $('#sliptotalsumendorsement').val(conv_tsi.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //     $('#sliptotalsumendorsement2').val(conv_tsi.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            // }else{
-            //     $('#sliptotalsumendorsement').val("0");
-            //     $('#sliptotalsumendorsement2').val("0");
-            // }
+            if(response.total_sum_insured){
+                var conv_tsi = parseFloat(response.total_sum_insured).toFixed(2);
+                $('#sliptotalsumendorsement').val(conv_tsi.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#sliptotalsumendorsement2').val(conv_tsi.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }else{
+                $('#sliptotalsumendorsement').val("0");
+                $('#sliptotalsumendorsement2').val("0");
+            }
 
-            // if(response.share_tsi){
-            //     var conv_stsi = parseFloat(response.share_tsi).toFixed(2);
-            //     $('#sharetotalsumendorsement').val(conv_stsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //     $('#sharetotalsumendorsement2').val(conv_stsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            // }
-            // else
-            // {
-            //     $('#sharetotalsumendorsement').val("0");
-            //     $('#sharetotalsumendorsement2').val("0");
-            // }
+            if(response.share_tsi){
+                var conv_stsi = parseFloat(response.share_tsi).toFixed(2);
+                $('#sharetotalsumendorsement').val(conv_stsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#sharetotalsumendorsement2').val(conv_stsi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }
+            else
+            {
+                $('#sharetotalsumendorsement').val("0");
+                $('#sharetotalsumendorsement2').val("0");
+            }
 
-            // if(response.insured_pct){
-            //     $('#slippctendorsement').val(parseFloat(response.insured_pct).toFixed(2));
-            // }else{
-            //     $('#slippctendorsement').val("0");
-            // }
+            if(response.insured_pct){
+                $('#slippctendorsement').val(parseFloat(response.insured_pct).toFixed(2));
+            }else{
+                $('#slippctendorsement').val("0");
+            }
             
 
             // if(response.total_sum_pct){
