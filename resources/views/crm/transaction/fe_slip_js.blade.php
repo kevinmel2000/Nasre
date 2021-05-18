@@ -1509,11 +1509,11 @@
                         $("#labelnpendorsement").attr('hidden','true');
                     // }
 
-                    if(response.rate){
-                        $('#sliprateendorsement').val(ParseFloat(response.rate).toFixed(3));
-                    }else{
-                        $('#sliprateendorsement').val("0");
-                    }
+                    // if(response.rate){
+                    //     $('#sliprateendorsement').val(ParseFloat(response.rate).toFixed(3));
+                    // }else{
+                    //     $('#sliprateendorsement').val("0");
+                    // }
 
                     if(response.share){
                         $('#slipshareendorsement').val(ParseFloat(response.share).toFixed(2));
