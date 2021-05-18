@@ -1558,24 +1558,24 @@
                         $('#sliptotalrateendorsement2').val("0");
                     }
                     
-            //         if(response.sum_commission){
-            //             var conv_scomm = parseFloat(response.sum_commission).toFixed(2);
-            //             $('#slipsumcommissionendorsement').val(conv_scomm.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //             $('#slipsumcommissionendorsement2').val(conv_scomm.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //         }else{
-            //             $('#slipsumcommissionendorsement').val("0");
-            //             $('#slipsumcommissionendorsement2').val("0");
-            //         }
+                    if(response.sum_commission){
+                        var conv_scomm = parseFloat(response.sum_commission).toFixed(2);
+                        $('#slipsumcommissionendorsement').val(conv_scomm.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipsumcommissionendorsement2').val(conv_scomm.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }else{
+                        $('#slipsumcommissionendorsement').val("0");
+                        $('#slipsumcommissionendorsement2').val("0");
+                    }
 
-            //         if(response.sum_own_retention){
-            //             var conv_sor = parseFloat(response.sum_own_retention).toFixed(2);
-            //             $('#slipsumorendorsement').val(conv_sor.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //             $('#slipsumorendorsement2').val(conv_sor.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //         }else{
-            //             $('#slipsumorendorsement').val("0");
-            //             $('#slipsumorendorsement2').val("0");
+                    if(response.sum_own_retention){
+                        var conv_sor = parseFloat(response.sum_own_retention).toFixed(2);
+                        $('#slipsumorendorsement').val(conv_sor.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipsumorendorsement2').val(conv_sor.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    }else{
+                        $('#slipsumorendorsement').val("0");
+                        $('#slipsumorendorsement2').val("0");
 
-            //         }
+                    }
                     
             //         if(response.sum_v_broker){
             //             var conv_sumfee = parseFloat(response.sum_v_broker).toFixed(2);
