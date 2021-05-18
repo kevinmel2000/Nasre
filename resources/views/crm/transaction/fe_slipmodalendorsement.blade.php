@@ -892,7 +892,8 @@
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
-                                                                        <input type="text" id="slipsumorendorsement" value=""   name="slipsumorendorsement" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly/>
+                                                                        <input type="hidden" id="slipsumorendorsement" value=""   name="slipsumorendorsement" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" />
+                                                                        <input type="text" id="slipsumorendorsement2" value=""   name="slipsumorendorsement2" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled/>
                                                                     </div>
                                                                 </div>
                                                             </div>

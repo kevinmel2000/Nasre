@@ -1463,8 +1463,8 @@
             
 
             if(response.total_sum_pct){
-                var conv_spct = parseFloat(response.total_sum_insured).toFixed(2);
-                $('#sliptotalsumpctendorsement').val(response.total_sum_pct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                var conv_spct = parseFloat(response.total_sum_pct).toFixed(2);
+                $('#sliptotalsumpctendorsement').val(conv_spct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }else{
                 $('#sliptotalsumpctendorsement').val("0");
             }
@@ -1534,7 +1534,7 @@
 
                     if(response.basic_premium){
                         var conv_bp = parseFloat(response.basic_premium).toFixed(2);
-                        $('#slipbasicpremiumendorsement').val(response.basic_premium.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipbasicpremiumendorsement').val(conv_bp.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     }else{
                         $('#slipbasicpremiumendorsement').val("0");
                     }
