@@ -8951,12 +8951,11 @@ function deletelocationriskdetail(id){
 
        var installmentdate = $('#slipipdateupdate').val();
        var percentage = $('#slipippercentageupdate').val();
-       var insured_id = $('#insuredIDtxt').val()
        var amount = $('#slipipamountupdate').val();
        var slip_id = $('#slipnumberupdate').val();
        var token2 = $('input[name=_token2]').val();
-       var sliptype = 'fe';
-
+       var code_ms = $('#insuredIDtxt').val();
+       var sliptype = 'fe'
 
        var conv_amount = amount.replace(/,/g, "");
        console.log(conv_amount)
@@ -9010,7 +9009,7 @@ function deletelocationriskdetail(id){
                  percentage:percentage,
                  slipamount:real_amount,
                  id_slip:slip_id,
-                 insured_id:insured_id,
+                 insured_id:code_ms,
                  sliptype:sliptype
              },
              beforeSend: function() { $("body").addClass("loading");  },
@@ -9021,22 +9020,20 @@ function deletelocationriskdetail(id){
                  console.log(response)
                  if(response.code_error){
                     swal("Error!", response.message , "Insert Error");
-                    // $('#addinstallmentinsuredupdate-btn').attr('hidden','true')
-                }else{
+                    // $('#addinstallmentinsured-btn').attr('hidden','true')
+                }
+                else
+                {
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
+                        
                         var str_amount = response.amount.toString();
                         var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-
                         var currdate = response.installment_date;
-                        var d=new Date(currdate.split("-").reverse().join("/"));
-                        var dd=d.getDate();
-                        var mm=d.getMonth()+1;
-                        var yy=d.getFullYear();
-                        var newdate=dd+"/"+mm+"/"+yy;
-
-                        var strdate = newdate.toString();
-
+                        var convdate = currdate.split("-").reverse().join("/");
+                        console.log('conv date ' + convdate)
+                        var strdate = convdate.toString();
+                        
                         $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+strdate+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+response.id+')">delete</a></td></tr>')
                         $('#dateinstallmentupdate').val('');
                         $('#slipippercentageupdate').val('');
@@ -9048,14 +9045,15 @@ function deletelocationriskdetail(id){
                         }       
                         
 
+
                         var total_percent =  $('#sliptotalpercentinspanupdate').val();
 
                         if(total_percent == ''){
-                            var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
+                            var sum_percent = isNaN(parseFloat(0) + parseFloat(response.percentage)) ? 0 :(parseFloat(0) + parseFloat(response.percentage)) ;
                             $('#sliptotalpercentinspanupdate').val(sum_percent.toString());
                             console.log($('#sliptotalpercentinspanupdate').val())
                         }else{
-                            var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
+                            var sum_percent = isNaN(parseFloat(total_percent) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) + parseFloat(response.percentage))
                             $('#sliptotalpercentinspanupdate').val(sum_percent.toString());
                             console.log($('#sliptotalpercentinspanupdate').val())
                             
@@ -9086,7 +9084,7 @@ function deletelocationriskdetail(id){
        var slip_id = $('#slipnumberendorsement').val();
        var token2 = $('input[name=_token2]').val();
        var code_ms = $('#insuredIDtxt').val();
-       var sliptype = 'fe';  
+       var sliptype = 'fe'
 
        var conv_amount = amount.replace(/,/g, "");
        console.log(conv_amount)
@@ -9142,7 +9140,6 @@ function deletelocationriskdetail(id){
                  id_slip:slip_id,
                  insured_id:code_ms,
                  sliptype:sliptype
-
              },
              beforeSend: function() { $("body").addClass("loading");  },
              complete: function() {  $("body").removeClass("loading"); },
@@ -9152,20 +9149,19 @@ function deletelocationriskdetail(id){
                  console.log(response)
                  if(response.code_error){
                     swal("Error!", response.message , "Insert Error");
-                    // $('#addinstallmentinsuredendorsement-btn').attr('hidden','true')
-                }else{
+                    // $('#addinstallmentinsured-btn').attr('hidden','true')
+                }
+                else
+                {
                         // var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(response.amount);
-                         var str_amount = response.amount.toString();
+                        
+                        var str_amount = response.amount.toString();
                         var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                         var currdate = response.installment_date;
-                        var d=new Date(currdate.split("-").reverse().join("/"));
-                        var dd=d.getDate();
-                        var mm=d.getMonth()+1;
-                        var yy=d.getFullYear();
-                        var newdate=dd+"/"+mm+"/"+yy;
-
-                        var strdate = newdate.toString();
+                        var convdate = currdate.split("-").reverse().join("/");
+                        console.log('conv date ' + convdate)
+                        var strdate = convdate.toString();
                         
                         $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+strdate+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+response.id+')">delete</a></td></tr>')
                         $('#dateinstallmentendorsement').val('');
@@ -9178,14 +9174,15 @@ function deletelocationriskdetail(id){
                         }       
                         
 
+
                         var total_percent =  $('#sliptotalpercentinspanendorsement').val();
 
                         if(total_percent == ''){
-                            var sum_percent = isNaN(parseInt(0) + parseInt(response.percentage)) ? 0 :(parseInt(0) + parseInt(response.percentage)) ;
+                            var sum_percent = isNaN(parseFloat(0) + parseFloat(response.percentage)) ? 0 :(parseFloat(0) + parseFloat(response.percentage)) ;
                             $('#sliptotalpercentinspanendorsement').val(sum_percent.toString());
                             console.log($('#sliptotalpercentinspanendorsement').val())
                         }else{
-                            var sum_percent = isNaN(parseInt(total_percent) + parseInt(response.percentage)) ? 0 :(parseInt(total_percent) + parseInt(response.percentage))
+                            var sum_percent = isNaN(parseFloat(total_percent) + parseFloat(response.percentage)) ? 0 :(parseFloat(total_percent) + parseFloat(response.percentage))
                             $('#sliptotalpercentinspanendorsement').val(sum_percent.toString());
                             console.log($('#sliptotalpercentinspanendorsement').val())
                             
