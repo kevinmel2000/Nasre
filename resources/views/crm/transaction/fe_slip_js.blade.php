@@ -1593,8 +1593,9 @@
                     
                     if(response.sum_v_broker){
                         var conv_sumfee = parseFloat(response.sum_v_broker).toFixed(2);
-                    $('#slipsumfeeendorsement').val(conv_sumfee.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    $('#slipsumfeeendorsement2').val(conv_sumfee.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        console.log('sum fee broker' + conv_sumfee)
+                        $('#slipsumfeeendorsement').val(conv_sumfee.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        $('#slipsumfeeendorsement2').val(conv_sumfee.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     }
                     else{
                         $('#slipsumfeeendorsement').val("0");
