@@ -1509,36 +1509,36 @@
                         $("#labelnpendorsement").attr('hidden','true');
                     // }
 
-            //         if(response.rate){
-            //             $('#sliprateendorsement').val(ParseFloat(response.rate).toFixed(3));
-            //         }else{
-            //             $('#sliprateendorsement').val("0");
-            //         }
+                    if(response.rate){
+                        $('#sliprateendorsement').val(ParseFloat(response.rate).toFixed(3));
+                    }else{
+                        $('#sliprateendorsement').val("0");
+                    }
 
-            //         if(response.share){
-            //             $('#slipshareendorsement').val(ParseFloat(response.share).toFixed(2));
-            //         }else{
-            //            $('#slipshareendorsement').val("0");
-            //         }
+                    if(response.share){
+                        $('#slipshareendorsement').val(ParseFloat(response.share).toFixed(2));
+                    }else{
+                       $('#slipshareendorsement').val("0");
+                    }
 
-            //         if(response.own_retention){
-            //            $('#sliporendorsement').val(ParseFloat(response.own_retention).toFixed(2));
-            //         }else{
-            //            $('#sliporendorsement').val("0");
-            //         }
+                    // if(response.own_retention){
+                    //    $('#sliporendorsement').val(ParseFloat(response.own_retention).toFixed(2));
+                    // }else{
+                    //    $('#sliporendorsement').val("0");
+                    // }
 
-            //         if(response.commission){
-            //             $('#slipcommissionendorsement').val(ParseFloat(response.commission).toFixed(2));
-            //         }else{
-            //            $('#slipcommissionendorsement').val("0");
-            //         }
+                    // if(response.commission){
+                    //     $('#slipcommissionendorsement').val(ParseFloat(response.commission).toFixed(2));
+                    // }else{
+                    //    $('#slipcommissionendorsement').val("0");
+                    // }
 
-            //         if(response.basic_premium){
-            //             var conv_bp = parseFloat(response.basic_premium).toFixed(2);
-            //             $('#slipbasicpremiumendorsement').val(conv_bp.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            //         }else{
-            //             $('#slipbasicpremiumendorsement').val("0");
-            //         }
+                    // if(response.basic_premium){
+                    //     var conv_bp = parseFloat(response.basic_premium).toFixed(2);
+                    //     $('#slipbasicpremiumendorsement').val(conv_bp.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    // }else{
+                    //     $('#slipbasicpremiumendorsement').val("0");
+                    // }
 
             //         if(response.sum_share){
             //             var conv_sshare = parseFloat(response.sum_share).toFixed(2);
