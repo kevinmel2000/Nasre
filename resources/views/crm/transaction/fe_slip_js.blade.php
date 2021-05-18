@@ -1390,7 +1390,7 @@
 
             if(response.layer_non_proportional)
             {
-                //$("#sliplayerproportionalendorsement option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
+                // $("#sliplayerproportionalendorsement option[value=" + response.layer_non_proportional + "]:first")[0].selected = true;
             }
 
             if(response.retro_backup)
@@ -1462,51 +1462,52 @@
             }
             
 
-            // if(response.total_sum_pct){
-            //     var conv_spct = parseFloat(response.total_sum_pct).toFixed(2);
-            //     $('#sliptotalsumpctendorsement').val(conv_spct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            // }else{
-            //     $('#sliptotalsumpctendorsement').val("0");
-            // }
+            if(response.total_sum_pct){
+                var conv_spct = parseFloat(response.total_sum_pct).toFixed(2);
+                $('#sliptotalsumpctendorsement').val(conv_spct.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }else{
+                $('#sliptotalsumpctendorsement').val("0");
+            }
 
-            // $('#sliptdendorsement').val(response.date_transfer);
-            // $('#slipipfromendorsement').val(response.insurance_period_from);
-            // $('#slipiptoendorsement').val(response.insurance_period_to);
+            $('#sliptdendorsement').val(response.date_transfer);
+            $('#slipipfromendorsement').val(response.insurance_period_from);
+            $('#slipiptoendorsement').val(response.insurance_period_to);
 
-            // var insurance_period_from2 = response.insurance_period_from.split("/").reverse().join("-");
-            // var insurance_period_to2 = response.insurance_period_to.split("/").reverse().join("-");
-            // var days=daysBetween(insurance_period_from2, insurance_period_to2);
-            // var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
-            // var constday = days.toString() + "/365";
-            // console.log(insurance_period_from2)
-            // console.log(insurance_period_to2)
-            // console.log(days)
-            // console.log(constday)
-            // console.log(parseFloat(sum))
+            var insurance_period_from2 = response.insurance_period_from.split("/").reverse().join("-");
+            var insurance_period_to2 = response.insurance_period_to.split("/").reverse().join("-");
+            var days=daysBetween(insurance_period_from2, insurance_period_to2);
+            var sum = isNaN(days / 365) ? 0 :(days / 365).toFixed(3);
+            var constday = days.toString() + "/365";
+            console.log(insurance_period_from2)
+            console.log(insurance_period_to2)
+            console.log(days)
+            console.log(constday)
+            console.log(parseFloat(sum))
 
-            // //$('#slipdaytotalendorsement').val(constday);
+            //$('#slipdaytotalendorsement').val(constday);
 
-            // $('#slipdaytotalendorsement').val(days);
-            // $('#slipdaytotalendorsement2').val(days);
-            // $('#slipdaytotalendorsement3').val("365");
-            // $('#slipdaytotalendorsement4').val("365");
+            $('#slipdaytotalendorsement').val(days);
+            $('#slipdaytotalendorsement2').val(days);
+            $('#slipdaytotalendorsement3').val("365");
+            $('#slipdaytotalendorsement4').val("365");
 
-            // $('#countendorsmentdata').val(response.endorsment);
-            // $('#countendorsmentdata2').val(response.endorsment);
-            // $('#remarksendorsement').val(response.remarks);
+            $('#countendorsmentdata').val(response.endorsment);
+            $('#countendorsmentdata2').val(response.endorsment);
+            $('#remarksendorsement').val(response.remarks);
                 
             
-            // $('#sliptotalsumdateendorsement').val(parseFloat(sum));
+            $('#sliptotalsumdateendorsement').val(parseFloat(sum));
 
-            // $('#sliprpfromendorsement').val(response.reinsurance_period_from);
-            // $('#sliprptoendorsement').val(response.reinsurance_period_to);
-            // $('#switch-proportionalendorsement').val(response.proportional);
-            //         // if(response.proportional == ''){
-            //             $("#btnaddlayerendorsement").attr('hidden','true');
-            //             $("#sliplayerproportionalendorsement").attr('hidden','true');
-            //             $("#labelnonpropendorsement").attr('hidden','true');
-            //             $("#labelnpendorsement").attr('hidden','true');
-            //         // }
+            $('#sliprpfromendorsement').val(response.reinsurance_period_from);
+            $('#sliprptoendorsement').val(response.reinsurance_period_to);
+            
+            $('#switch-proportionalendorsement').val(response.proportional);
+                    // if(response.proportional == ''){
+                        $("#btnaddlayerendorsement").attr('hidden','true');
+                        $("#sliplayerproportionalendorsement").attr('hidden','true');
+                        $("#labelnonpropendorsement").attr('hidden','true');
+                        $("#labelnpendorsement").attr('hidden','true');
+                    // }
 
             //         if(response.rate){
             //             $('#sliprateendorsement').val(ParseFloat(response.rate).toFixed(3));
