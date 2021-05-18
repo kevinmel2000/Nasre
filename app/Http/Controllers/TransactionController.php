@@ -2035,6 +2035,7 @@ class TransactionController extends Controller
             ->where('installment_panel_detail.slip_id',$slip_id)
             ->where('installment_panel_detail.insured_id',$insured_id)
             ->where('installment_panel_detail.slip_type',$request->sliptype)
+            ->where('installment_panel_detail.status','active')
             ->sum('installment_panel_detail.percentage');
             $totalpercent = $checkit + $percentage;
         
@@ -2044,64 +2045,52 @@ class TransactionController extends Controller
 
 
                 if(floatval($totalpercent) <= 100.00)
-                    {
-                        $old_date_timestamp = strtotime($installmentdate);
-                        $new_date = date('Y-m-d', $old_date_timestamp); 
-                        $checkdatesame = InstallmentTemp::where('insured_id',$insured_id)->where('slip_id',$slip_id)->where('slip_type',$slip_type)->where('installment_date',$new_date)->orderby('id','desc')->get();
-                        $count_datesame = count($checkdatesame);
+                {
+                    $old_date_timestamp = strtotime($installmentdate);
+                    $new_date = date('Y-m-d', $old_date_timestamp); 
+                    $checkdatesame = InstallmentTemp::where('insured_id',$insured_id)->where('slip_id',$slip_id)->where('slip_type',$slip_type)->where('installment_date',$new_date)->orderby('id','desc')->get();
+                    $count_datesame = count($checkdatesame);
 
-                        if($count_datesame > 0 ){
+                    if($count_datesame > 0 ){
+                        return response()->json(
+                            [
+                                'code_error' => '404',
+                                'message' => 'sorry date installment cannot same'
+                            ]
+                        );
+                    }else{
+
+                        $installmentlist = new InstallmentTemp();
+                        $installmentlist->installment_date  = $new_date;
+                        $installmentlist->percentage  = $percentage;
+                        $installmentlist->amount = $amount;
+                        $installmentlist->slip_id = $slip_id; 
+                        $installmentlist->insured_id = $insured_id; 
+                        $installmentlist->slip_type = $slip_type; 
+                        $installmentlist->status = $status; 
+                        $installmentlist->save();
+
+                        $checkit2 = DB::table('installment_panel_detail')->where('installment_panel_detail.slip_id',$installmentlist->slip_id)->sum('installment_panel_detail.percentage');
+                        $minpercent2 = 100 - $checkit2;
+
+
+
+                        if(floatval($checkit2) < 100.00)
+                        {
+                                return response()->json(
+                                    [
+                                        'id' => $installmentlist->id,
+                                        'percentage' => $installmentlist->percentage,
+                                        'installment_date' => date("d/m/Y", strtotime($new_date)),
+                                        'amount' => $installmentlist->amount,
+                                        'slip_id' => $installmentlist->slip_id,
+                                        'message' => 'sorry percent must 100%, your percent minus '. $minpercent2.'percent'
+                                    ]
+                                );
+                        }
+                        elseif (floatval($checkit2) == 100.00) 
+                        {
                             return response()->json(
-                                [
-                                    'code_error' => '404',
-                                    'message' => 'sorry date installment cannot same'
-                                ]
-                            );
-                        }else{
-
-                            $installmentlist = new InstallmentTemp();
-                            $installmentlist->installment_date  = $new_date;
-                            $installmentlist->percentage  = $percentage;
-                            $installmentlist->amount = $amount;
-                            $installmentlist->slip_id = $slip_id; 
-                            $installmentlist->insured_id = $insured_id; 
-                            $installmentlist->slip_type = $slip_type; 
-                            $installmentlist->status = $status; 
-                            $installmentlist->save();
-
-                            $checkit2 = DB::table('installment_panel_detail')->where('installment_panel_detail.slip_id',$installmentlist->slip_id)->sum('installment_panel_detail.percentage');
-                            $minpercent2 = 100 - $checkit2;
-
-
-
-                            if(floatval($checkit2) < 100.00)
-                            {
-                                    return response()->json(
-                                        [
-                                            'id' => $installmentlist->id,
-                                            'percentage' => $installmentlist->percentage,
-                                            'installment_date' => date("d/m/Y", strtotime($new_date)),
-                                            'amount' => $installmentlist->amount,
-                                            'slip_id' => $installmentlist->slip_id,
-                                            'message' => 'sorry percent must 100%, your percent minus '. $minpercent2.'percent'
-                                        ]
-                                    );
-                            }
-                            elseif (floatval($checkit2) == 100.00) 
-                            {
-                                return response()->json(
-                                        [
-                                            'id' => $installmentlist->id,
-                                            'percentage' => $installmentlist->percentage,
-                                            'installment_date' => date("d/m/Y", strtotime($new_date)),
-                                            'amount' => $installmentlist->amount,
-                                            'slip_id' => $installmentlist->slip_id
-                                        ]
-                                    );
-                            }
-                            else
-                            {
-                                return response()->json(
                                     [
                                         'id' => $installmentlist->id,
                                         'percentage' => $installmentlist->percentage,
@@ -2110,19 +2099,31 @@ class TransactionController extends Controller
                                         'slip_id' => $installmentlist->slip_id
                                     ]
                                 );
-                            }
-
                         }
+                        else
+                        {
+                            return response()->json(
+                                [
+                                    'id' => $installmentlist->id,
+                                    'percentage' => $installmentlist->percentage,
+                                    'installment_date' => date("d/m/Y", strtotime($new_date)),
+                                    'amount' => $installmentlist->amount,
+                                    'slip_id' => $installmentlist->slip_id
+                                ]
+                            );
+                        }
+
                     }
-                    elseif(floatval($totalpercent) > 100.10)
-                    {
-                        return response()->json(
-                            [
-                                'code_error' => '404',
-                                'message' => 'sorry percent cannot more than 100%'
-                            ]
-                        );
-                    }
+                }
+                elseif(floatval($totalpercent) > 100.10)
+                {
+                    return response()->json(
+                        [
+                            'code_error' => '404',
+                            'message' => 'sorry percent cannot more than 100%'
+                        ]
+                    );
+                }
         
             }
             else
