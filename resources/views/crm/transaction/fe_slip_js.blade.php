@@ -309,17 +309,20 @@
                         // var conv_amount = obj.amount.toFixed(2);
                         // var str_amount = conv_amount.toString();
                         // var curr_amount = str_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        var curr_amount = obj.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        var conv_amount = parseFloat(obj.amount).toFixed(2);
+                        var curr_amount = conv_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                         var currdate = obj.installment_date;
                         var convdate = currdate.split("-").reverse().join("/");
                         console.log('conv date ' + convdate)
                         var strdate = convdate.toString();
 
+                        var conv_percent = parseFloat(obj.percentage).toFixed(2);
+
                         //console.log(obj.id);
                         //$('#interestInsuredTabledetail tbody').prepend('');
                         
-                        $('#installmentPaneldetail tbody').prepend('<tr id="iidinstallmentdetail'+obj.id+'" data-name="installmentdetailvalue[]"><td data-name="'+obj.installment_date+'">'+strdate+'</td><td data-name="'+obj.percentage+'">'+obj.percentage+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>')
+                        $('#installmentPaneldetail tbody').prepend('<tr id="iidinstallmentdetail'+obj.id+'" data-name="installmentdetailvalue[]"><td data-name="'+obj.installment_date+'">'+strdate+'</td><td data-name="'+obj.percentage+'">'+conv_percent+'</td><td data-name="'+curr_amount+'">'+curr_amount+'</td><td></td></tr>')
 
                     }
                 }
@@ -549,9 +552,18 @@
                     $("#labelnonpropdetail").attr('hidden','true');
                     $("#labelnpdetail").attr('hidden','true');
                 // }
-
-                $('#slipratedetail').val(response.rate);
-                $('#slipsharedetail').val(response.share);
+                if(response.rate){
+                    $('#slipratedetail').val(parseFloat(response.rate).toFixed(3));
+                }else{
+                    $('#slipratedetail').val("0");
+                }
+                
+                if(response.share){
+                    $('#slipsharedetail').val(parseFloat(response.share).toFixed(2));
+                }else{
+                    $('#slipsharedetail').val("0");
+                }
+                
 
                 if(response.sum_share){
                     var conv_sshare = parseFloat(response.sum_share).toFixed(2);
@@ -564,7 +576,7 @@
                 }
 
                 if(response.sum_rate){
-                    var conv_srate = parseFloat(response.sum_rate).toFixed(2);
+                    var conv_srate = parseFloat(response.sum_rate).toFixed(3);
                     $('#sliptotalratedetail').val(conv_srate.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#sliptotalratedetail').val(conv_srate.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }
