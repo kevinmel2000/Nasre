@@ -7935,8 +7935,8 @@ function deletelocationriskdetail(id){
 
    $('#sliprateendorsement').keyup(function (e) {
         if(e.keyCode != 9){
-            var insurance_period_from2 = $('#sliprpfrom').val();
-            var insurance_period_to2 = $('#sliprpto').val();
+            var insurance_period_from2 = $('#sliprpfromendorsement').val();
+            var insurance_period_to2 = $('#sliprptoendorsement').val();
             var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
             var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
             var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
@@ -7988,8 +7988,8 @@ function deletelocationriskdetail(id){
                 }
 
             if(basic_premi){
-                var bpinsurance_period_from2 = $('#sliprpfrom').val();
-                var bpinsurance_period_to2 = $('#sliprpto').val();
+                var bpinsurance_period_from2 = $('#sliprpfromendorsement').val();
+                var bpinsurance_period_to2 = $('#sliprptoendorsement').val();
                 var bpnewinsurance_period_from2 = bpinsurance_period_from2.split("/").reverse().join("-");
                 var bpnewinsurance_period_to2 = bpinsurance_period_to2.split("/").reverse().join("-");
                 var bpdays=daysBetween(bpnewinsurance_period_from2, bpnewinsurance_period_to2);
@@ -8002,7 +8002,7 @@ function deletelocationriskdetail(id){
                 console.log(bpdays)
                 console.log(bpinsurance)
 
-                var bprateslip =  parseFloat($('#sliprateendorsement').val());
+                var bprateslip =  parseFloat($(this).val());
                 var bpsumrate = $("#sliptotalrateendorsement").val();
                 var bpconv_sumrate = parseFloat(bpsumrate.replace(/,/g, ""));
                 var bptsi = $("#sharetotalsumendorsement").val();
@@ -8014,8 +8014,8 @@ function deletelocationriskdetail(id){
             }
             
         }else{
-            var insurance_period_from2 = $('#sliprpfrom').val();
-            var insurance_period_to2 = $('#sliprpto').val();
+            var insurance_period_from2 = $('#sliprpfromendorsement').val();
+            var insurance_period_to2 = $('#sliprptoendorsement').val();
             var newinsurance_period_from2 = insurance_period_from2.split("/").reverse().join("-");
             var newinsurance_period_to2 = insurance_period_to2.split("/").reverse().join("-");
             var days=daysBetween(newinsurance_period_from2, newinsurance_period_to2);
@@ -8073,8 +8073,8 @@ function deletelocationriskdetail(id){
                 }
 
             if(basic_premi){
-                var bpinsurance_period_from2 = $('#sliprpfrom').val();
-                var bpinsurance_period_to2 = $('#sliprpto').val();
+                var bpinsurance_period_from2 = $('#sliprpfromendorsement').val();
+                var bpinsurance_period_to2 = $('#sliprptoendorsement').val();
                 var bpnewinsurance_period_from2 = bpinsurance_period_from2.split("/").reverse().join("-");
                 var bpnewinsurance_period_to2 = bpinsurance_period_to2.split("/").reverse().join("-");
                 var bpdays=daysBetween(bpnewinsurance_period_from2, bpnewinsurance_period_to2);
@@ -8099,6 +8099,8 @@ function deletelocationriskdetail(id){
             }
         }
     });
+
+
 
    $('#sliprateendorsement').change(function(){
         var rate_lower = $('#slipbclaendorsement').val();
