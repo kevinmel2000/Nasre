@@ -481,7 +481,7 @@
                                                                             <td>
                                                                                 <div class="form-group">
                                                                                     <input type="text" id="slipnilaiecendorsement" name="slipnilaiecendorsement" placeholder="y" class="form-control form-control-sm floatTextBox2"/>
-                                                                                    <input type="hidden" id="sliptotalnilaiecendorsement" name="sliptotalnilaiec" placeholder="sum y &permil;" class="form-control form-control-sm floatTextBox2"/>
+                                                                                    <input type="text" id="sliptotalnilaiecendorsement" name="sliptotalnilaiec" placeholder="sum y &permil;" class="form-control form-control-sm floatTextBox2"/>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
@@ -850,7 +850,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="form-group">
-                                                                                    <input type="text" id="sliptotalpercentinspanendorsement" name="sliptotalpercentinspanendorsement" hidden="true">
+                                                                                    <input type="text" id="sliptotalpercentinspanendorsement" name="sliptotalpercentinspanendorsement" hidden="false">
                                                                                     <button type="button" id="addinstallmentinsuredendorsement-btn"  class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
                                                                                 </div>
                                                                             </td>
