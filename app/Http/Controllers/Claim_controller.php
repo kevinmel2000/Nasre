@@ -412,6 +412,31 @@ class Claim_controller extends Controller
         }
     }
 
+    public function getdetailAmountSlip($number)
+    {
+        $user = Auth::user();
+        $claimamountdata=TransAmountClaimTemp::where('slip_number',$number)->orderby('id','DESC')->get();
+
+        if(!empty($claimamountdata))
+        {
+                return response()->json(
+                [
+                   'status' =>200,
+                   'message'=>"Amount Data",
+                   'data'=>$claimamountdata->toJSon()
+                ]
+               );
+        }
+        else
+        {
+                 return response()->json(
+                 [
+                    'status' =>201,
+                    'message'=>"Slip Number, No Amount Data"
+                 ]
+                );
+        }
+    }
 
     public function getdetailSlipClaim($number)
     {

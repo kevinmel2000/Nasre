@@ -306,7 +306,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>No</td>
+							<td>Input :</td>
 							<td>
 								<div class="form-group">
 									<select id="descripitontableselect" name="descripitontableselect" class="form-control form-control-sm ">

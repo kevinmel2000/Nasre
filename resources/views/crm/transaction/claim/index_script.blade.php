@@ -109,6 +109,37 @@
             });
 
 
+            
+            $.ajax({
+                url:'{{ url("/") }}/claimtransaction-data/detailslipclaimAmount/'+slipnumberdata,
+                type:"GET",
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(response)
+                {
+                    
+                    if(response.status==200)
+                    {
+                       //alert(response.data);
+                       // console.log(response.data);
+                        var jsonData = JSON.parse(response.data);
+                        console.log(jsonData);
+                        for (var i = 0; i < jsonData.length; i++) 
+                        {
+                            var counter = jsonData[i];
+                            $('#propertyTypePanelAmount tbody').prepend('<tr id="iidamountclaim'+counter.id+'" data-name="amounttypevalue[]"><td></td><td data-name="'+counter.descripiton+'">'+counter.descripiton+'</td><td data-name="'+counter.amount+'">'+counter.amount+'</td><td><a href="javascript:void(0)" onclick="deleteamountclaimdetail('+counter.id+')">delete</a></td></tr>');
+              
+                            //console.log(counter.counter_name);
+                        }
+                    }
+                },
+                error: function (request, status, error) {
+                    //alert(request.responseText);
+                    swal("Error!", "Get Slip Data Error", "Get Data Error");
+                }
+            });
+
+
             $.ajax({
                 url:'{{ url("/") }}/claimtransaction-data/detailslipclaim/'+slipnumberdata,
                 type:"GET",
