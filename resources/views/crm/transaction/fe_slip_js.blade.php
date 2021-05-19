@@ -6757,7 +6757,8 @@ function deletelocationriskdetail(id){
         if(e.keyCode != 9){
             if($(this).val() < -100 || $(this).val() > 100){
                 swal('warning','share cannot lower than -100% or greater than 100%','error')
-                $('#slipshare').empty();
+                $('#slipshare').val('');
+                $('#slipsumshare').val('');
             }
             else{
                 var rateslip =  parseFloat($('#sliprate').val());
@@ -7562,7 +7563,8 @@ function deletelocationriskdetail(id){
         if(e.keyCode != 9){
             if($(this).val() < -100 || $(this).val() > 100){
                 swal('warning','share cannot lower than -100% or greater than 100%','error')
-                $('#slipshareupdate').empty();
+                $('#slipshareupdate').val("");
+                $('#slipsumshareupdate').val("");
             }
             else{
                 var rateslip =  parseFloat($('#sliprateupdate').val()) ;
@@ -8369,7 +8371,8 @@ function deletelocationriskdetail(id){
         if(e.keyCode != 9){
             if($(this).val() < -100 || $(this).val() > 100){
                     swal('warning','share cannot lower than -100% or greater than 100%','error')
-                    $('#slipshareendorsement').empty();
+                    $('#slipshareendorsement').val('');
+                    $('#slipsumshareendorsement').val('');
             }
             else{
                 var rateslip =  parseFloat($('#sliprateendorsement').val());
