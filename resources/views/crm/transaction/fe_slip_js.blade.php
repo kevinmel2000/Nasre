@@ -10487,67 +10487,67 @@ function deletelocationriskdetail(id){
        console.log(code_ms)
        console.log(slipnumber)
        console.log(conv_sliptotalsum)
-       var real_sliptotalsum = parseInt(conv_sliptotalsum);
+       var real_sliptotalsum = parseFloat(conv_sliptotalsum);
        console.log(real_sliptotalsum)
 
        var conv_sliptotalsumpct = sliptotalsumpct.replace(/,/g, "");
        console.log(conv_sliptotalsumpct)
-       var real_sliptotalsumpct = parseInt(conv_sliptotalsumpct);
+       var real_sliptotalsumpct = parseFloat(conv_sliptotalsumpct);
        console.log(real_sliptotalsumpct)
 
        var conv_slipsumrate = sliptotalrate.replace(/,/g, "");
        console.log(conv_slipsumrate)
-       var real_slipsumrate = parseInt(conv_slipsumrate);
+       var real_slipsumrate = parseFloat(conv_slipsumrate);
        console.log(real_slipsumrate)
 
        var conv_slipsumshare = slipsumshare.replace(/,/g, "");
        console.log(conv_slipsumshare)
-       var real_slipsumshare = parseInt(conv_slipsumshare);
+       var real_slipsumshare = parseFloat(conv_slipsumshare);
        console.log(real_slipsumshare)
 
        var conv_slipbasicpremium = slipbasicpremium.replace(/,/g, "");
        console.log(conv_slipbasicpremium)
-       var real_slipbasicpremium = parseInt(conv_slipbasicpremium);
+       var real_slipbasicpremium = parseFloat(conv_slipbasicpremium);
        console.log(real_slipbasicpremium)
 
        var conv_slipgrossprmtonr = slipgrossprmtonr.replace(/,/g, "");
        console.log(conv_slipgrossprmtonr)
-       var real_slipgrossprmtonr = parseInt(conv_slipgrossprmtonr);
+       var real_slipgrossprmtonr = parseFloat(conv_slipgrossprmtonr);
        console.log(real_slipgrossprmtonr)
 
        var conv_slipsumcommission = slipsumcommission.replace(/,/g, "");
        console.log(conv_slipsumcommission)
-       var real_slipsumcommission = parseInt(conv_slipsumcommission);
+       var real_slipsumcommission = parseFloat(conv_slipsumcommission);
        console.log(real_slipsumcommission)
 
        var conv_slipsumvbroker = slipsumvbroker.replace(/,/g, "");
        console.log(conv_slipsumvbroker)
-       var real_slipsumvbroker = parseInt(conv_slipsumvbroker);
+       var real_slipsumvbroker = parseFloat(conv_slipsumvbroker);
        console.log(real_slipsumvbroker)
 
        var conv_slipnetprmtonr = slipnetprmtonr.replace(/,/g, "");
        console.log(conv_slipnetprmtonr)
-       var real_slipnetprmtonr = parseInt(conv_slipnetprmtonr);
+       var real_slipnetprmtonr = parseFloat(conv_slipnetprmtonr);
        console.log(real_slipnetprmtonr)
 
        var conv_slipsumor = slipsumor.replace(/,/g, "");
        console.log(conv_slipsumor)
-       var real_slipsumor = parseInt(conv_slipsumor);
+       var real_slipsumor = parseFloat(conv_slipsumor);
        console.log(real_slipsumor)
 
        var conv_slipsharetotalsum = slipsharetotalsum.replace(/,/g, "");
        console.log(conv_slipsharetotalsum)
-       var real_slipsharetotalsum = parseInt(conv_slipsharetotalsum);
+       var real_slipsharetotalsum = parseFloat(conv_slipsharetotalsum);
        console.log(real_slipsharetotalsum)
 
        var conv_slipdatesum = slipdatesum.replace(/,/g, "");
        console.log(conv_slipdatesum)
-       var real_slipdatesum = parseInt(conv_slipdatesum);
+       var real_slipdatesum = parseFloat(conv_slipdatesum);
        console.log(real_slipdatesum)
 
        var conv_insuredshare = insuredshare.replace(/,/g, "");
        console.log(conv_insuredshare)
-       var real_insuredshare = parseInt(conv_insuredshare);
+       var real_insuredshare = parseFloat(conv_insuredshare);
        console.log(real_insuredshare)
 
 
@@ -11337,57 +11337,57 @@ function deletelocationriskdetail(id){
 
        var conv_sliptotalsum = sliptotalsum.replace(/,/g, "");
        console.log(conv_sliptotalsum)
-       var real_sliptotalsum = parseInt(conv_sliptotalsum);
+       var real_sliptotalsum = parseFloat(conv_sliptotalsum);
        console.log(real_sliptotalsum)
 
        var conv_sharetotalsum = sharetotalsum.replace(/,/g, "");
        console.log(conv_sharetotalsum)
-       var real_sharetotalsum = parseInt(conv_sharetotalsum);
+       var real_sharetotalsum = parseFloat(conv_sharetotalsum);
        console.log(real_sharetotalsum)
        
        var conv_sliptotalsumpct = sliptotalsumpct.replace(/,/g, "");
        console.log(conv_sliptotalsumpct)
-       var real_sliptotalsumpct = parseInt(conv_sliptotalsumpct);
+       var real_sliptotalsumpct = parseFloat(conv_sliptotalsumpct);
        console.log(real_sliptotalsumpct)
 
        var conv_slipsumshare = slipsumshare.replace(/,/g, "");
        console.log(conv_slipsumshare)
-       var real_slipsumshare = parseInt(conv_slipsumshare);
+       var real_slipsumshare = parseFloat(conv_slipsumshare);
        console.log(real_slipsumshare)
 
        var conv_slipsumrate = slipsumrate.replace(/,/g, "");
        console.log(conv_slipsumrate)
-       var real_slipsumrate = parseInt(conv_slipsumrate);
+       var real_slipsumrate = parseFloat(conv_slipsumrate);
        console.log(real_slipsumrate)
 
        var conv_slipbasicpremium = slipbasicpremium.replace(/,/g, "");
        console.log(conv_slipbasicpremium)
-       var real_slipbasicpremium = parseInt(conv_slipbasicpremium);
+       var real_slipbasicpremium = parseFloat(conv_slipbasicpremium);
        console.log(real_slipbasicpremium)
 
        var conv_slipsumvbroker = slipsumvbroker.replace(/,/g, "");
        console.log(conv_slipsumvbroker)
-       var real_slipsumvbroker = parseInt(conv_slipsumvbroker);
+       var real_slipsumvbroker = parseFloat(conv_slipsumvbroker);
        console.log(real_slipsumvbroker)
 
        var conv_slipgrossprmtonr = slipgrossprmtonr.replace(/,/g, "");
        console.log(conv_slipgrossprmtonr)
-       var real_slipgrossprmtonr = parseInt(conv_slipgrossprmtonr);
+       var real_slipgrossprmtonr = parseFloat(conv_slipgrossprmtonr);
        console.log(real_slipgrossprmtonr)
 
        var conv_slipsumcommission = slipsumcommission.replace(/,/g, "");
        console.log(conv_slipsumcommission)
-       var real_slipsumcommission = parseInt(conv_slipsumcommission);
+       var real_slipsumcommission = parseFloat(conv_slipsumcommission);
        console.log(real_slipsumcommission)
 
        var conv_slipnetprmtonr = slipnetprmtonr.replace(/,/g, "");
        console.log(conv_slipnetprmtonr)
-       var real_slipnetprmtonr = parseInt(conv_slipnetprmtonr);
+       var real_slipnetprmtonr = parseFloat(conv_slipnetprmtonr);
        console.log(real_slipnetprmtonr)
 
        var conv_slipsumor = slipsumor.replace(/,/g, "");
        console.log(conv_slipsumor)
-       var real_slipsumor = parseInt(conv_slipsumor);
+       var real_slipsumor = parseFloat(conv_slipsumor);
        console.log(real_slipsumor)
        
        console.log('sudah tertekan button update')
@@ -11582,42 +11582,42 @@ function deletelocationriskdetail(id){
 
        var conv_sliptotalsum = sliptotalsum.replace(/,/g, "");
        console.log(conv_sliptotalsum)
-       var real_sliptotalsum = parseInt(conv_sliptotalsum);
+       var real_sliptotalsum = parseFloat(conv_sliptotalsum);
        console.log(real_sliptotalsum)
        
        var conv_sliptotalsumpct = sliptotalsumpct.replace(/,/g, "");
        console.log(conv_sliptotalsumpct)
-       var real_sliptotalsumpct = parseInt(conv_sliptotalsumpct);
+       var real_sliptotalsumpct = parseFloat(conv_sliptotalsumpct);
        console.log(real_sliptotalsumpct)
 
        var conv_slipsumshare = slipsumshare.replace(/,/g, "");
        console.log(conv_slipsumshare)
-       var real_slipsumshare = parseInt(conv_slipsumshare);
+       var real_slipsumshare = parseFloat(conv_slipsumshare);
        console.log(real_slipsumshare)
 
        var conv_slipbasicpremium = slipbasicpremium.replace(/,/g, "");
        console.log(conv_slipbasicpremium)
-       var real_slipbasicpremium = parseInt(conv_slipbasicpremium);
+       var real_slipbasicpremium = parseFloat(conv_slipbasicpremium);
        console.log(real_slipbasicpremium)
 
        var conv_slipgrossprmtonr = slipgrossprmtonr.replace(/,/g, "");
        console.log(conv_slipgrossprmtonr)
-       var real_slipgrossprmtonr = parseInt(conv_slipgrossprmtonr);
+       var real_slipgrossprmtonr = parseFloat(conv_slipgrossprmtonr);
        console.log(real_slipgrossprmtonr)
 
        var conv_slipsumcommission = slipsumcommission.replace(/,/g, "");
        console.log(conv_slipsumcommission)
-       var real_slipsumcommission = parseInt(conv_slipsumcommission);
+       var real_slipsumcommission = parseFloat(conv_slipsumcommission);
        console.log(real_slipsumcommission)
 
        var conv_slipnetprmtonr = slipnetprmtonr.replace(/,/g, "");
        console.log(conv_slipnetprmtonr)
-       var real_slipnetprmtonr = parseInt(conv_slipnetprmtonr);
+       var real_slipnetprmtonr = parseFloat(conv_slipnetprmtonr);
        console.log(real_slipnetprmtonr)
 
        var conv_slipsumor = slipsumor.replace(/,/g, "");
        console.log(conv_slipsumor)
-       var real_slipsumor = parseInt(conv_slipsumor);
+       var real_slipsumor = parseFloat(conv_slipsumor);
        console.log(real_slipsumor)
        
        //ajaxfilefunction(e);

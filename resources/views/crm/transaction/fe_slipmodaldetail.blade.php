@@ -302,7 +302,7 @@
                                                         </div>
                                                         <div class="col-md-6"> 
                                                             <div class="form-group">
-                                                                <label for="">{{__('Total Sum Insured') }}</label>
+                                                                <label for="">{{__('TSI/Ceding Share Value') }}</label>
                                                                 <input type="text" value="" id="sliptotalsumdetail"  name="sliptotalsumdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" readonly="readonly" placeholder="tsi(*total/sum from interest insured)" />
                                                             </div>
                                                         </div>
@@ -367,7 +367,6 @@
                                                                             <th>{{__('Percentage')}}</th>
                                                                             <th>{{__('Amount')}}</th>
                                                                             <th>{{__('Min Claim Amount')}}</th>
-                                                                            <th width="20%">{{__('Actions')}}</th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -397,7 +396,6 @@
                                                                             <th>{{__('Peril Code - Name')}}</th>
                                                                             <th>{{__('Nilai (permil %.)')}}</th>
                                                                             <th>{{__('Amount')}}</th>
-                                                                            <th width="20%">{{__('Actions')}}</th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -566,7 +564,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for=""  style="opacity: 0;" >{{__('Total Sum Insured') }}</label>
+                                                            <label for=""  >{{__('TSI/Ceding Share Value') }}</label>
                                                             <!-- /<input type="hidden" id="sharetotalsumdetail" value="" name="sharetotalsumdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="tsi(*total/sum from interest insured)" /> -->
                                                             <input type="text" id="sharetotalsumdetail" value="" name="sharetotalsumdetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="tsi(*total/sum from interest insured)" />
                                                         </div>
@@ -584,7 +582,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for=""  style="opacity: 0;" >{{__('Total Rate') }}</label>
+                                                            <label for=""  >{{__('Total Rate') }}</label>
                                                             <!-- <input type="hidden" id="sliptotalratedetail" value="" name="sliptotalratedetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  placeholder="= a &permil; * sum y &permil; " /> -->
                                                             <input type="text" id="sliptotalratedetail" value="" name="sliptotalratedetail" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled placeholder="= a &permil; * sum y &permil; " />
                                                         </div>
@@ -606,7 +604,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="">{{__('Share')}}</label>
+                                                            <label for="">{{__('Share to NR')}}</label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="input-group">
@@ -621,7 +619,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="" style="opacity: 0;">{{__('slip sum share')}}</label>
+                                                            <label for="" >{{__('Nasional RE Share')}}</label>
                                                             <input type="hidden" id="slipsumsharedetail" name="slipsumsharedetail" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  />
                                                             <input type="text" id="slipsumsharedetail2" name="slipsumsharedetail2" placeholder="= b% * tsi" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50" disabled/>
                                                         </div>
@@ -734,7 +732,6 @@
                                                                             <th>{{__('Installment Date')}}</th>
                                                                             <th>{{__('Percentage')}}</th>
                                                                             <th>{{__('Amount')}}</th>
-                                                                            <th width="20%">{{__('Actions')}}</th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -799,7 +796,6 @@
                                                                             <th>{{__('Retrocession Contract')}}</th>
                                                                             <th>{{__('Percentage')}}</th>
                                                                             <th>{{__('Amount')}}</th>
-                                                                            <th width="20%">{{__('Actions')}}</th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
