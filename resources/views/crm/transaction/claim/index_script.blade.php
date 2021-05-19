@@ -5,10 +5,51 @@
 <link href="{{asset('css/sweetalert2.min.css')}}" rel="stylesheet"/>
 <script src="{{asset('/js/sweetalert2.all.min.js')}}"></script>
 
+
+
+<script type='text/javascript'>
+    $('#addmanualclaim-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var slipnumber = $('#slipnumberdata').val();
+       var description = $('#descripitontableselect').val();
+       var amountmanual = $('#amounttablemanual').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('claimmanual.store') }}",
+           type:"POST",
+           data:{
+               slipnumber:slipnumber,
+               description:description,
+               amountmanual:amountmanual
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               $('#propertyTypePanelAmount tbody').prepend('<tr id="iidproperty'+response.id+'" data-name="propertytypevalue[]"><td data-name="'+response.propertydata+'">'+response.propertydata+'</td><td><a href="javascript:void(0)" onclick="deletepropertytypedetail('+response.id+')">delete</a></td></tr>');
+              
+           }
+       });
+
+   });
+</script>
+
+
 <script type="text/javascript">
 	$(document).ready(function(){
 
-        alert('test3');
+        //alert('test3');
        
 		$('.datepicker').datepicker({ dateFormat: 'dd/mm/yy' });
 		$(".e1").select2({ width: '100%' }); 
@@ -17,7 +58,7 @@
         $dateinsurance="";
         $datereinsurance="";
 		
-		alert(slipnumberdata);
+		//alert(slipnumberdata);
 
         if(slipnumberdata)
         {
@@ -151,8 +192,7 @@
         }
         else
         {
-            swal("Error!", "Get Slip Data Empty", "Get Data Error");
-     
+            //swal("Error!", "Get Slip Data Empty", "Get Data Error");
         }
         
 	});

@@ -24,6 +24,7 @@ use App\Models\InterestInsured;
 use App\Models\InstallmentTemp;
 use App\Models\PrefixInsured;
 use App\Models\MainClaimEntryFAC;
+use App\Models\TransAmountClaimTemp;
 use App\Models\InterestInsuredTemp;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,6 +47,52 @@ class Claim_controller extends Controller
         $prefixinsured = PrefixInsured::orderby('id','asc')->get();
        
     	return view('crm.transaction.claim.index',compact('prefixinsured','causeofloss','natureofloss','surveyor','ceding','cedingbroker','currency','cob','koc','ocp','route_active'));
+    }
+
+
+    public function storemanualamountlist(Request $request)
+    {
+        
+            $amountmanual = $request->amountmanual;
+            $slipnumber = $request->slipnumber;
+            $description = $request->description;
+        
+            if($slipnumber !='' && $amountmanual != '')
+            {
+            
+                $retrocessionlist = new TransAmountClaimTemp();
+                $retrocessionlist->property_type_id  = $property_type_id;
+                $retrocessionlist->slip_id = $slip_id; 
+                $retrocessionlist->insured_id = $insured_id; 
+                $retrocessionlist->save();
+
+                $retrocessionlist = new TransPropertyTemp();
+                $retrocessionlist->property_type_id  = $property_type_id;
+                $retrocessionlist->insured_id = $insured_id; 
+                $retrocessionlist->save();
+
+                return response()->json(
+                    [
+                        'id' => $retrocessionlist->id,
+                        'propertydata' => $retrocessionlist->propertytypedata->name,
+                        'property_type_id' => $retrocessionlist->property_type_id,
+                        'slip_id' => $retrocessionlist->slip_id
+                    ]
+                );
+        
+            }
+            else
+            {
+
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Fill all fields & Fill SLip Number First'
+                    ]
+                );
+
+            }
+        
     }
 
 

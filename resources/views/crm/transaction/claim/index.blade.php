@@ -57,7 +57,7 @@
 								<div class="card">
 
 									<div class="card-header bg-gray">
-										<table style="position:left">
+										<table style="position:left" id="propertyTypePanelAmount" class="table table-bordered table-striped">
 											<tbody>
 												<tr>
 													<td>

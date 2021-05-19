@@ -13,6 +13,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\Claim_controller;
 
 
+Route::post('/store-claimmanual-list','Claim_controller@storemanualamountlist')->name('claimmanual.store');
 
 Route::group(['prefix'=>'/claimtransaction-data','middleware'=>['auth']], function(){
  
