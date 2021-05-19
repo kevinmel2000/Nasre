@@ -8830,7 +8830,7 @@ function deletelocationriskdetail(id){
 
        var conv_amount = amount.replace(/,/g, "");
        console.log(conv_amount)
-       var real_amount = parseInt(conv_amount);
+       var real_amount = parseFloat(conv_amount);
        console.log(real_amount)
 
 
@@ -8904,8 +8904,10 @@ function deletelocationriskdetail(id){
                         var convdate = currdate.split("-").reverse().join("/");
                         console.log('conv date ' + convdate)
                         var strdate = convdate.toString();
+
+                        var conv_percent = parseFloat(response.percentage).toFixed(2);
                         
-                        $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+strdate+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
+                        $('#installmentPanel tbody').prepend('<tr id="iidinstallment'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+strdate+'</td><td data-name="'+response.percentage+'">'+conv_percent+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentdetail('+response.id+')">delete</a></td></tr>')
                         $('#dateinstallment').val('');
                         $('#slipippercentage').val('');
                         $('#slipipamount').val('');
@@ -8959,7 +8961,7 @@ function deletelocationriskdetail(id){
 
        var conv_amount = amount.replace(/,/g, "");
        console.log(conv_amount)
-       var real_amount = parseInt(conv_amount);
+       var real_amount = parseFloat(conv_amount);
        console.log(real_amount)
 
 
@@ -9033,8 +9035,10 @@ function deletelocationriskdetail(id){
                         var convdate = currdate.split("-").reverse().join("/");
                         console.log('conv date ' + convdate)
                         var strdate = convdate.toString();
+
+                        var conv_percent = parseFloat(response.percentage).toFixed(2);
                         
-                        $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+strdate+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+response.id+')">delete</a></td></tr>')
+                        $('#installmentPanelupdate tbody').prepend('<tr id="iidinstallmentupdate'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+strdate+'</td><td data-name="'+response.percentage+'">'+conv_percent+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentupdate('+response.id+')">delete</a></td></tr>')
                         $('#dateinstallmentupdate').val('');
                         $('#slipippercentageupdate').val('');
                         $('#slipipamountupdate').val('');
@@ -9088,7 +9092,7 @@ function deletelocationriskdetail(id){
 
        var conv_amount = amount.replace(/,/g, "");
        console.log(conv_amount)
-       var real_amount = parseInt(conv_amount);
+       var real_amount = parseFloat(conv_amount);
        console.log(real_amount)
 
 
@@ -9162,8 +9166,10 @@ function deletelocationriskdetail(id){
                         var convdate = currdate.split("-").reverse().join("/");
                         console.log('conv date ' + convdate)
                         var strdate = convdate.toString();
+
+                        var conv_percent = parseFloat(response.percentage).toFixed(2);
                         
-                        $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+strdate+'</td><td data-name="'+response.percentage+'">'+response.percentage+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+response.id+')">delete</a></td></tr>')
+                        $('#installmentPanelendorsement tbody').prepend('<tr id="iidinstallmentendorsement'+response.id+'" data-name="installmentvalue[]"><td data-name="'+response.installment_date+'">'+strdate+'</td><td data-name="'+response.percentage+'">'+conv_percent+'</td><td data-name="'+response.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteinstallmentendorsement('+response.id+')">delete</a></td></tr>')
                         $('#dateinstallmentendorsement').val('');
                         $('#slipippercentageendorsement').val('');
                         $('#slipipamountendorsement').val('');
