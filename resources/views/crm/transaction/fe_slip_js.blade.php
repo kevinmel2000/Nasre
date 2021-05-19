@@ -8826,7 +8826,7 @@ function deletelocationriskdetail(id){
        var slip_id = $('#slipnumber').val();
        var token2 = $('input[name=_token2]').val();
        var code_ms = $('#insuredIDtxt').val();
-       var sliptype = 'fe'
+       var sliptype = 'fe';
 
        var conv_amount = amount.replace(/,/g, "");
        console.log(conv_amount)
@@ -8955,7 +8955,7 @@ function deletelocationriskdetail(id){
        var slip_id = $('#slipnumberupdate').val();
        var token2 = $('input[name=_token2]').val();
        var code_ms = $('#insuredIDtxt').val();
-       var sliptype = 'fe'
+       var sliptype = 'fe';
 
        var conv_amount = amount.replace(/,/g, "");
        console.log(conv_amount)
@@ -9084,7 +9084,7 @@ function deletelocationriskdetail(id){
        var slip_id = $('#slipnumberendorsement').val();
        var token2 = $('input[name=_token2]').val();
        var code_ms = $('#insuredIDtxt').val();
-       var sliptype = 'fe'
+       var sliptype = 'fe';
 
        var conv_amount = amount.replace(/,/g, "");
        console.log(conv_amount)
