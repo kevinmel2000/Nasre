@@ -14,6 +14,8 @@ use App\Http\Controllers\Claim_controller;
 
 
 Route::post('/store-claimmanual-list','Claim_controller@storemanualamountlist')->name('claimmanual.store');
+Route::delete('/delete-claimmanual-list/{id}','Claim_controller@destroyamountmanuallist')->name('claimmanual.delete');
+
 
 Route::group(['prefix'=>'/claimtransaction-data','middleware'=>['auth']], function(){
  

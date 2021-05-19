@@ -49,6 +49,14 @@ class Claim_controller extends Controller
     	return view('crm.transaction.claim.index',compact('prefixinsured','causeofloss','natureofloss','surveyor','ceding','cedingbroker','currency','cob','koc','ocp','route_active'));
     }
 
+    public function destroyamountmanuallist($id)
+    {
+        $claimTemplist = TransAmountClaimTemp::find($id);
+        
+        $claimTemplist->delete();
+        
+        return response()->json(['success'=>'Data has been deleted']);
+    }
 
     public function storemanualamountlist(Request $request)
     {
@@ -61,22 +69,20 @@ class Claim_controller extends Controller
             {
             
                 $retrocessionlist = new TransAmountClaimTemp();
-                $retrocessionlist->property_type_id  = $property_type_id;
-                $retrocessionlist->slip_id = $slip_id; 
-                $retrocessionlist->insured_id = $insured_id; 
+                $retrocessionlist->descripiton  = $description;
+                $retrocessionlist->amount = $amountmanual; 
+                $retrocessionlist->slip_number = $slipnumber; 
+                //$retrocessionlist->slip_id = $slip_number; 
+                //$retrocessionlist->insured_id = $slip_number; 
                 $retrocessionlist->save();
 
-                $retrocessionlist = new TransPropertyTemp();
-                $retrocessionlist->property_type_id  = $property_type_id;
-                $retrocessionlist->insured_id = $insured_id; 
-                $retrocessionlist->save();
 
                 return response()->json(
                     [
                         'id' => $retrocessionlist->id,
-                        'propertydata' => $retrocessionlist->propertytypedata->name,
-                        'property_type_id' => $retrocessionlist->property_type_id,
-                        'slip_id' => $retrocessionlist->slip_id
+                        'descripiton' => $retrocessionlist->descripiton,
+                        'amount' => $retrocessionlist->amount,
+                        'slip_number' => $retrocessionlist->slip_number
                     ]
                 );
         

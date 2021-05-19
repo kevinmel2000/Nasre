@@ -37,12 +37,36 @@
            {
             
                console.log(response)
-               $('#propertyTypePanelAmount tbody').prepend('<tr id="iidproperty'+response.id+'" data-name="propertytypevalue[]"><td data-name="'+response.propertydata+'">'+response.propertydata+'</td><td><a href="javascript:void(0)" onclick="deletepropertytypedetail('+response.id+')">delete</a></td></tr>');
+               $('#propertyTypePanelAmount tbody').prepend('<tr id="iidamountclaim'+response.id+'" data-name="amounttypevalue[]"><td></td><td data-name="'+response.descripiton+'">'+response.descripiton+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteamountclaimdetail('+response.id+')">delete</a></td></tr>');
               
            }
        });
 
    });
+</script>
+
+
+
+<script type='text/javascript'>
+    function deleteamountclaimdetail(id)
+    {
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-claimmanual-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response){
+                
+                $('#iidamountclaim'+id).remove();
+                console.log(response);
+            }
+        });
+    }
 </script>
 
 
