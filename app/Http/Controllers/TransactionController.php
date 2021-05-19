@@ -2036,6 +2036,7 @@ class TransactionController extends Controller
             ->where('installment_panel_detail.insured_id',$insured_id)
             ->where('installment_panel_detail.slip_type',$request->sliptype)
             ->where('installment_panel_detail.status','active')
+            ->where('installment_panel_detail.deleted_at','')
             ->sum('installment_panel_detail.percentage');
             $totalpercent = $checkit + $percentage;
         
@@ -2044,7 +2045,7 @@ class TransactionController extends Controller
                 $checkdateins = InstallmentTemp::where('slip_id',$slip_id)->orderby('id','desc')->get();
 
 
-                if(floatval($totalpercent) <= 100.00)
+                if(floatval($totalpercent) <= 100.00 || floatval($totalpercent) <= 100)
                 {
                     $old_date_timestamp = strtotime($installmentdate);
                     $new_date = date('Y-m-d', $old_date_timestamp); 
@@ -2115,7 +2116,7 @@ class TransactionController extends Controller
 
                     }
                 }
-                elseif(floatval($totalpercent) > 100.00)
+                else
                 {
                     return response()->json(
                         [
