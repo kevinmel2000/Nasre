@@ -1868,7 +1868,7 @@ class FeSlipController extends Controller
                             ->where('slip_type','fe')
                             ->where('count_endorsement',$slipdata->endorsment)
                             ->where('status','active')
-                            ->where('deleted_at','')
+                            ->where('deleted_at', null)
                             ->sum('extended_coverage_detail.percentage');
 
         $sum_inspanpercent = DB::table('installment_panel_detail')
@@ -1877,7 +1877,7 @@ class FeSlipController extends Controller
                             ->where('slip_type','fe')
                             ->where('count_endorsement',$slipdata->endorsment)
                             ->where('status','active')
-                            ->where('deleted_at','')
+                            ->where('deleted_at', null)
                             ->sum('installment_panel_detail.percentage');
 
 
@@ -2104,6 +2104,7 @@ class FeSlipController extends Controller
                             ->where('slip_type','fe')
                             ->where('count_endorsement',$slipdata->endorsment)
                             ->where('status','active')
+                            ->where('deleted_at', null)
                             ->sum('extended_coverage_detail.percentage');
 
         $sum_inspanpercent = DB::table('installment_panel_detail')
@@ -2112,6 +2113,7 @@ class FeSlipController extends Controller
                             ->where('slip_type','fe')
                             ->where('count_endorsement',$slipdata->endorsment)
                             ->where('status','active')
+                            ->where('deleted_at', null)
                             ->sum('installment_panel_detail.percentage');
 
 
@@ -2361,7 +2363,7 @@ class FeSlipController extends Controller
                             ->where('slip_type','fe')
                             ->where('count_endorsement',$slipdata->endorsment)
                             ->where('status','active')
-                            ->where('deleted_at','')
+                            ->where('deleted_at', null)
                             ->sum('extended_coverage_detail.percentage');
 
         $sum_inspanpercent = DB::table('installment_panel_detail')
@@ -2370,7 +2372,7 @@ class FeSlipController extends Controller
                             ->where('slip_type','fe')
                             ->where('count_endorsement',$slipdata->endorsment)
                             ->where('status','active')
-                            ->where('deleted_at','')
+                            ->where('deleted_at', null)
                             ->sum('installment_panel_detail.percentage');
 
 
