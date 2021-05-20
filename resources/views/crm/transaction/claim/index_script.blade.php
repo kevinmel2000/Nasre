@@ -46,6 +46,45 @@
 </script>
 
 
+<script type='text/javascript'>
+    $('#addmanualclaim-btn2').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var slipnumber = $('#slipnumberdata').val();
+       var descripitonriskselect = $('#descripitonriskselect').val();
+       //var checkriskamount = $('#checkriskamount').val();
+       var amounttablerisk = $('#amounttablerisk').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('claimlocation.store') }}",
+           type:"POST",
+           data:{
+               slipnumber:slipnumber,
+               descripitonriskselect:descripitonriskselect,
+               amounttablerisk:amounttablerisk
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               $('#propertyTypePanelAmount tbody').prepend('<tr id="iidamountclaim'+response.id+'" data-name="amounttypevalue[]"><td></td><td data-name="'+response.descripiton+'">'+response.descripiton+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteamountclaimdetail('+response.id+')">delete</a></td></tr>');
+              
+           }
+       });
+
+   });
+</script>
+
 
 <script type='text/javascript'>
     function deleteamountclaimdetail(id)
@@ -74,6 +113,20 @@
 	$(document).ready(function(){
 
         //alert('test3');
+
+        $('#checkriskamount').click(function()
+        {
+            if($(this).prop("checked") == true)
+            {
+                console.log("Checkbox is checked.");
+                $('#amounttablerisk').attr('readonly', false);
+            }
+            else if($(this).prop("checked") == false)
+            {
+                console.log("Checkbox is unchecked.");
+                $('#amounttablerisk').attr('readonly', true);
+            }
+        });
        
 		$('.datepicker').datepicker({ dateFormat: 'dd/mm/yy' });
 		$(".e1").select2({ width: '100%' }); 

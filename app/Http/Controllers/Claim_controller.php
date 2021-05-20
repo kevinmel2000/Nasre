@@ -106,6 +106,67 @@ class Claim_controller extends Controller
     }
 
 
+    public function storelocationamountlist(Request $request)
+    {
+        
+            $descripitonriskselect = $request->descripitonriskselect;
+            $slipnumber = $request->slipnumber;
+            $amounttablerisk = $request->amounttablerisk;
+
+            if($slipnumber !='' && $descripitonriskselect!='')
+            {
+            
+                $risklocationdetaildata= RiskLocationDetail::where('id','=',$descripitonriskselect)->first();
+                
+                $retrocessionlist = new TransAmountClaimTemp();
+                
+                $interestdata=InterestInsured::where('id','=',$risklocationdetaildata->interest_id)->first();
+                $cedingdata=CedingBroker::where('id','=',$risklocationdetaildata->ceding_id)->first();
+            
+                $retrocessionlist->descripiton  = $interestdata->description." ".$cedingdata->name;
+
+                if(!empty($amounttablerisk))
+                {
+                    $retrocessionlist->amount = $amounttablerisk; 
+                }
+                else
+                {
+                    $retrocessionlist->amount = $risklocationdetaildata->amountlocation; 
+                }
+                
+                
+                $retrocessionlist->slip_number = $slipnumber; 
+                $retrocessionlist->risk_location_id = $descripitonriskselect; 
+                //$retrocessionlist->slip_id = $slip_number; 
+                //$retrocessionlist->insured_id = $slip_number; 
+                $retrocessionlist->save();
+
+
+                return response()->json(
+                    [
+                        'id' => $retrocessionlist->id,
+                        'descripiton' => $retrocessionlist->descripiton,
+                        'amount' => $retrocessionlist->amount,
+                        'slip_number' => $retrocessionlist->slip_number
+                    ]
+                );
+        
+            }
+            else
+            {
+
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Fill all fields & Fill SLip Number First'
+                    ]
+                );
+
+            }
+        
+    }
+
+
     public function updateindex($idclaim)
     {
     	$route_active = 'CLAIM INSURED - Entry';

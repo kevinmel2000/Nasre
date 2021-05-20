@@ -317,11 +317,12 @@
 								</div>  
 							</td>
 							<td>
-								<input type="number" id="amounttablemanual" name="amounttablemanual" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-12" />
+								<input type="number" id="amounttablemanual" name="amounttablemanual" placeholder="Amount Manual"  class="form-control form-control-sm " data-validation="length"  data-validation-length="0-12" />
                             </td>
 							<td>
 								<div class="form-group">
-									<button type="button" id="addmanualclaim-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+									<button type="button" id="addmanualclaim-btn" name="addmanualclaim-btn" class="btn btn-md btn-primary">{{__('Add')}}</button>
+									
 								</div>
 							</td>
 						</tr>
@@ -330,15 +331,22 @@
 							<td colspan='2'>
 								<div class="form-group">
 									<select id="descripitonriskselect" name="descripitonriskselect" class="form-control form-control-sm ">
+										<option value="" selected>Select Data</option>
 									</select>
 								</div>  
 							</td>
 							
 							<td>
 								<div class="form-group">
-									<button type="button" id="addriskclaim-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+									<button type="button" id="addmanualclaim-btn2" name="addmanualclaim-btn2" class="btn btn-md btn-primary">{{__('Add')}}</button>
 								</div>
 							</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" id="checkriskamount" name="checkriskamount" value="1"></td>
+							<td colspan='2'>
+								<input type="number" id="amounttablerisk" name="amounttablerisk" readonly="true" placeholder="Amount Location Manual" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-12" />
+        					</td>
 						</tr>
 					</tbody>
 				</table>
