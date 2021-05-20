@@ -153,6 +153,13 @@
                                                             <tr>
                                                                 <th>{{__('Ship Code')}}</th>
                                                                 <th>{{__('Ship Name')}}</th>
+                                                                <th>{{__('Ceding')}}</th>
+                                                                <th>{{__('CN/DN')}}</th>
+                                                                <th>{{__('Cert No')}}</th>
+                                                                <th>{{__('Slip No')}}</th>
+                                                                <th>{{__('Policy No')}}</th>
+                                                                <th>{{__('Percent')}}</th>
+                                                                <th>{{__('Amount')}}</th>
                                                                 <th width="20%">{{__('Actions')}}</th>
                                                             </tr>
                                                         </thead>
@@ -161,6 +168,13 @@
                                                              <tr id="sid{{ $slt->id }}" data-name="shiplistvalue[]">
                                                                     <td data-name="{{ $slt->ship_code }}">{{ $slt->ship_code }}</td>
                                                                     <td data-name="{{ $slt->ship_name }}">{{ $slt->ship_name }}</td>
+                                                                    <td data-name="{{ $slt->ceding_id }}">{{ $slt->cedingdata->name }}</td>
+                                                                    <td data-name="{{ $slt->cndn }}">$slt->cndn</td>
+                                                                    <td data-name="{{ $slt->certno }}">$slt->certno</td>
+                                                                    <td data-name="{{ $slt->slipno }}">$slt->slipno</td>
+                                                                    <td data-name="{{ $slt->policyno }}">$slt->policyno</td>
+                                                                    <td data-name="{{ $slt->percent }}">$slt->percent</td>
+                                                                    <td data-name="{{ $slt->amount }}">@currency($slt->amount)</td>
                                                                     <td><a href="javascript:void(0)" onclick="deleteshipdetail({{ $slt->id }})"><i class="fas fa-trash text-danger"></i></a></td>
                                                              </tr>   
                                                             @endforeach
@@ -169,61 +183,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card">
-                                            <div class="card-header bg-gray">
-                                                {{__('Interest Insured')}}
-                                                <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalAddInterestInsured">{{__('Add Interest Insured')}}</button>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="col-md-12 com-sm-12 mt-3">
-                                                            <input type="hidden" name="msitsi" id="msitsi" value="">
-                                                            <input type="hidden" name="msisharev" id="msisharev" value="">
-                                                            <input type="hidden" name="msisumsharev" id="msisumsharev" value="">
-
-                                                            <table id="interestInsuredTable" class="table table-bordered table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>{{__('Interest ID - Name')}}</th>
-                                                                        <th>{{__('Ceding')}}</th>
-                                                                        <th>{{__('CN/DN')}}</th>
-                                                                        <th>{{__('Cert No')}}</th>
-                                                                        <th>{{__('Slip No')}}</th>
-                                                                        <th>{{__('Policy No')}}</th>
-                                                                        <th>{{__('Ceding')}}</th>
-                                                                        <th>{{__('Percent')}}</th>
-                                                                        <th>{{__('Amount')}}</th>
-                                                                        <th width="20%">{{__('Actions')}}</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach($interestlist as $isl)
-                                                                        <tr id="iid{{ $isl->id }}" data-name="interestvalue[]">
-                                                                                <td data-name="{{ $isl->interest_id }}">{{ $isl->interestinsureddata->description }}</td>
-                                                                                <td data-name="{{ $isl->ceding_id }}">{{ $isl->cedingdata->name }}</td>
-                                                                                <td data-name="{{ $isl->cndn }}">$isl->cndn</td>
-                                                                                <td data-name="{{ $isl->certno }}">$isl->certno</td>
-                                                                                <td data-name="{{ $isl->slipno }}">$isl->slipno</td>
-                                                                                <td data-name="{{ $isl->policyno }}">$isl->policyno</td>
-                                                                                <td data-name="{{ $isl->percent }}">$isl->percent</td>
-                                                                                <td data-name="{{ $isl->amount }}">@currency($isl->amount)</td>
-                                                                                <td><a href="javascript:void(0)" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
-                                                                        </tr>   
-                                                                    @endforeach
-                                                                    
-                                                                </tbody>
-                                                            </table>
-                                                            </div>
-                                                        </div>
-                                                    </div> 
-                                                </div>
-                                            </div>
                                     </div>
                                 </div>
 
@@ -265,61 +224,26 @@
                 <form id="form-addship" >
                     @csrf
                     <div class="modal-body">
-                            <div class="col-md-12 col-md-12">
-                                <div class="form-group">
-                                    
-                                    <label for="">{{__('Ship Code')}}</label><br>
-                                    <select name="insshipcode" id="shipcodetxt" class="form-control form-control-sm e1">
-                                        <option selected disabled>{{__('Select Ship Code')}}</option>
-                                        @foreach($mlu as $mrnlu)
-                                            <option value="{{  $mrnlu->code }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
-    
-                                        @endforeach
-                                    </select>
-                                </div>
+                        <div class="col-md-12 col-md-12">
+                            <div class="form-group">
+                                
+                                <label for="">{{__('Ship Code')}}</label><br>
+                                <select name="insshipcode" id="shipcodetxt" class="form-control form-control-sm e1">
+                                    <option selected disabled>{{__('Select Ship Code')}}</option>
+                                    @foreach($mlu as $mrnlu)
+                                        <option value="{{  $mrnlu->code }}">{{  $mrnlu->code  }} - {{ $mrnlu->shipname }}</option>
+
+                                    @endforeach
+                                </select>
                             </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-12 col-md-12">
                                 <div class="form-group">
                                 <label for="">{{__('Ship Name')}}</label>
                                 <input type="text" name="insshipname" id="shipnametxt" class="form-control" value="" />
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
-                        <button type="submit" class="btn btn-info" id="addship-btn">Add Ship</button>
-                    </div>
-                </form>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="modal fade" id="ModalAddInterestInsured" tabindex="-1" user="dialog" aria-hidden="true">
-            <div class="modal-dialog" user="document">
-                <div class="modal-content bg-light-gray">
-                <div class="modal-header bg-gray">
-                    <h5 class="modal-title">{{__('Interest Insured Detail')}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="addinterestinsured" >
-                    @csrf
-                    <div class="modal-body">
-
-                        <div class="col-md-12 col-md-12">
-                            <div class="form-group">
-                                <label for="">{{__('Interest Insured')}}</label><br>
-                                <select id="slipinterestlist" name="slipinterestlist" class="form-control form-control-sm ">
-                                    <option selected disabled>{{__('Interest list')}}</option>
-                                    @foreach($interestinsured as $ii)
-                                        <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
-                                    @endforeach
-                                </select>
                             </div>
                         </div>
 
@@ -399,6 +323,7 @@
                             </div>
                         </div>
 
+
                     </div>
         
                     <div class="modal-footer">
@@ -409,6 +334,7 @@
                 </div>
             </div>
         </div>
+
 
 
 
