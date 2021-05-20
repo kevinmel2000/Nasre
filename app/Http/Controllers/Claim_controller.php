@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Models\Insured;
 use App\Models\CedingBroker;
 use App\Models\TransLocationTemp;
+use App\Models\SlipTable;
 use App\Models\EarthQuakeZone;
 use App\Models\FloodZone;
 use App\Models\NatureOfLoss;
@@ -25,6 +26,7 @@ use App\Models\InstallmentTemp;
 use App\Models\PrefixInsured;
 use App\Models\MainClaimEntryFAC;
 use App\Models\TransAmountClaimTemp;
+use App\Models\RiskLocationDetail;
 use App\Models\InterestInsuredTemp;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,6 +51,7 @@ class Claim_controller extends Controller
     	return view('crm.transaction.claim.index',compact('prefixinsured','causeofloss','natureofloss','surveyor','ceding','cedingbroker','currency','cob','koc','ocp','route_active'));
     }
 
+
     public function destroyamountmanuallist($id)
     {
         $claimTemplist = TransAmountClaimTemp::find($id);
@@ -57,6 +60,7 @@ class Claim_controller extends Controller
         
         return response()->json(['success'=>'Data has been deleted']);
     }
+
 
     public function storemanualamountlist(Request $request)
     {
@@ -121,6 +125,7 @@ class Claim_controller extends Controller
        
     	return view('crm.transaction.claim.updateindex',compact('idclaim','claimdata','prefixinsured','causeofloss','natureofloss','surveyor','ceding','cedingbroker','currency','cob','koc','ocp','route_active'));
     }
+
 
     public function indexclaim(Request $request)
     {
@@ -412,6 +417,7 @@ class Claim_controller extends Controller
         }
     }
 
+
     public function getdetailAmountSlip($number)
     {
         $user = Auth::user();
@@ -438,11 +444,14 @@ class Claim_controller extends Controller
         }
     }
 
+
     public function getRiskLocationSlip($number)
     {
         $user = Auth::user();
         
-        $locationlist2= TransLocationTemp::where('insured_id','=',$number)->where('slip_type','fe')->orderby('id','desc')->get();
+        $slipdata=SlipTable::where('number',$number)->first();
+        
+        $locationlist2= TransLocationTemp::where('insured_id','=',$slipdata->insured_id)->orderby('id','desc')->get();
          
         //dd($locationlist2);
         
@@ -476,13 +485,13 @@ class Claim_controller extends Controller
             }     
         }  
 
-        if(!empty($locationlist))
+        if(!empty($locationlist2))
         {
                 return response()->json(
                 [
                    'status' =>200,
                    'message'=>"Location Data",
-                   'data'=>$locationlist->toJSon()
+                   'data'=>json_encode($locationlist)
                 ]
                );
         }
@@ -497,6 +506,8 @@ class Claim_controller extends Controller
         }
 
     }
+
+
 
     public function getdetailSlipClaim($number)
     {

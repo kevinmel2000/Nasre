@@ -27,6 +27,7 @@ Route::group(['prefix'=>'/claimtransaction-data','middleware'=>['auth']], functi
     Route::delete('/claim/destroy/{id}', [Claim_controller::class, 'destroy']);
     Route::get('/detailslipclaim/{idm}', [Claim_controller::class, 'getdetailSlipClaim']);
     Route::get('/detailslipclaimAmount/{idm}', [Claim_controller::class, 'getdetailAmountSlip']);
+    Route::get('/detailslipclaimRiskLocation/{idm}', [Claim_controller::class, 'getRiskLocationSlip']);
     Route::get('/updateclaim/{idm}', [Claim_controller::class, 'updateindex']);
     
 
