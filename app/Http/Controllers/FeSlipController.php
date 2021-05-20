@@ -432,7 +432,7 @@ class FeSlipController extends Controller
         
         $currency = Currency::orderby('id','asc')->get();
         $cob = COB::where('form','fe')->orderby('id','asc')->get();
-        $koc = Koc::where('parent_id',2)->orWhere('code', 'like',  02 . '%')->orderby('code','asc')->get();
+        $koc = Koc::where('parent_id',2)->orWhere('code', 'like',  02 . '%')->orWhere('code', 'like',  0202 . '%')->orWhere('code', 'like', '%' .  02 . '%')->orWhere('code','02')->orderby('code','asc')->get();
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
         $ceding = CedingBroker::orderby('id','asc')->where('type','4')->get();
@@ -1133,7 +1133,7 @@ class FeSlipController extends Controller
         $slip = SlipTable::orderby('id','asc')->get();
         $currency = Currency::orderby('id','asc')->get();
         $cob = COB::orderby('id','asc')->get();
-        $koc = KOC::where('parent_id',2)->orWhere('id',2)->orderby('id','asc')->get();
+        $koc = KOC::where('parent_id',2)->orWhere('code', 'like',  02 . '%')->orWhere('code', 'like',  0202 . '%')->orWhere('code', 'like', '%' .  02 . '%')->orWhere('code','02')->orderby('id','asc')->get();
         $ocp = Occupation::orderby('id','asc')->get();
         $cedingbroker = CedingBroker::orderby('id','asc')->get();
         $ceding = CedingBroker::orderby('id','asc')->where('type',4)->get();
@@ -1341,10 +1341,10 @@ class FeSlipController extends Controller
                 $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
                 
                 $interestlist= InterestInsuredTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
-                $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
-                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
-                $deductiblelist= DeductibleTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
-                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->where('deleted_at', null)->orderby('id','desc')->get();
+                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->where('deleted_at', null)->orderby('id','desc')->get();
+                $deductiblelist= DeductibleTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->where('deleted_at', null)->orderby('id','desc')->get();
+                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->where('deleted_at', null)->orderby('id','desc')->get();
 
 
                 $currdate = date("Y-m-d");
@@ -2858,10 +2858,10 @@ class FeSlipController extends Controller
                 $slipdata= SlipTable::where('number','=',$request->slipnumber)->first();
             
                 $interestlist= InterestInsuredTemp::where('slip_id','=',$request->slipnumber)->orderby('id','desc')->get();
-                $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
-                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
-                $deductiblelist= DeductibleTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
-                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->orderby('id','desc')->get();
+                $installmentlist= InstallmentTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->where('deleted_at', null)->orderby('id','desc')->get();
+                $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->where('deleted_at', null)->orderby('id','desc')->get();
+                $deductiblelist= DeductibleTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->where('deleted_at', null)->orderby('id','desc')->get();
+                $retrocessionlist=RetrocessionTemp::where('slip_id','=',$request->slipnumber)->where('insured_id','=',$request->code_ms)->where('slip_type','=','fe')->where('deleted_at', null)->orderby('id','desc')->get();
 
 
                 if($slipdata==null)
@@ -3758,10 +3758,10 @@ class FeSlipController extends Controller
             $slipdatalast= SlipTable::where('endorsment',$id_ed)->where('id','=',$request->slipid)->first();
             // dd($slipdatalast);
             // $interestlist= InterestInsuredTemp::where('slip_id','=',$slipdata->number)->orderby('id','desc')->get();
-            $installmentlist= InstallmentTemp::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->orderby('id','desc')->get();
-            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->orderby('id','desc')->get();
-            $deductiblelist= DeductibleTemp::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->orderby('id','desc')->get();
-            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->orderby('id','desc')->get();
+            $installmentlist= InstallmentTemp::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->where('deleted_at', null)->orderby('id','desc')->get();
+            $extendcoveragelist= ExtendCoverageTemp::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->where('deleted_at', null)->orderby('id','desc')->get();
+            $deductiblelist= DeductibleTemp::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->where('deleted_at', null)->orderby('id','desc')->get();
+            $retrocessionlist=RetrocessionTemp::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->where('deleted_at', null)->orderby('id','desc')->get();
             $locationlist= TransLocationTemp::where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->orderby('id','desc')->get();
             $attachmentlist=SlipTableFile::where('slip_id','=',$slipdata->number)->where('insured_id','=',$slipdata->insured_id)->where('slip_type','=','fe')->orderby('id','desc')->get();
 
@@ -3867,7 +3867,7 @@ class FeSlipController extends Controller
                                 'count_endorsement' => ($dt->count_endorsement + 1)
                             ]);
 
-                            $jsondtlistup = DeductibleTemp::where('slip_id','=',$dtlistup->slip_id)->where('count_endorsement',$dtlistup->count_endorsement)->orderby('id','desc')->get();
+                            $jsondtlistup = DeductibleTemp::where('slip_id','=',$dtlistup->slip_id)->where('count_endorsement',$dtlistup->count_endorsement)->where('deleted_at', null)->orderby('id','desc')->get();
     
                             $dtdata =  DeductibleTemp::findOrFail($dt->id);
                             $dtdata->min_claimamount = ($dt->min_claimamount * (-1));
@@ -3895,7 +3895,7 @@ class FeSlipController extends Controller
                                 'status' => 'active'
                             ]);
 
-                            $jsonectlistup = ExtendCoverageTemp::where('slip_id','=',$ectlistup->slip_id)->where('count_endorsement',$ectlistup->count_endorsement)->orderby('id','desc')->get();
+                            $jsonectlistup = ExtendCoverageTemp::where('slip_id','=',$ectlistup->slip_id)->where('count_endorsement',$ectlistup->count_endorsement)->where('deleted_at', null)->orderby('id','desc')->get();
 
     
                             $ectdata =  ExtendCoverageTemp::findOrFail($ect->id);
@@ -3923,7 +3923,7 @@ class FeSlipController extends Controller
                                 'status' => 'active'
                             ]);
 
-                            $jsoniptlistup = InstallmentTemp::where('slip_id','=',$iptlistup->slip_id)->where('count_endorsement',$iptlistup->count_endorsement)->orderby('id','desc')->get();
+                            $jsoniptlistup = InstallmentTemp::where('slip_id','=',$iptlistup->slip_id)->where('count_endorsement',$iptlistup->count_endorsement)->where('deleted_at', null)->orderby('id','desc')->get();
 
     
                             $iptdata =  InstallmentTemp::findOrFail($ipt->id);
@@ -3961,7 +3961,7 @@ class FeSlipController extends Controller
                                 'status' => 'active'
                             ]);
 
-                            $jsonrctlistup = RetrocessionTemp::where('slip_id','=',$rctlistup->slip_id)->where('count_endorsement',$rctlistup->count_endorsement)->orderby('id','desc')->get();
+                            $jsonrctlistup = RetrocessionTemp::where('slip_id','=',$rctlistup->slip_id)->where('count_endorsement',$rctlistup->count_endorsement)->where('deleted_at', null)->orderby('id','desc')->get();
 
     
                             $rctdata =  RetrocessionTemp::findOrFail($rct->id);

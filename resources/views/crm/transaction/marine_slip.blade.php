@@ -420,7 +420,7 @@
                                                                     <select id="slipcedingbroker" name="slipcedingbroker" class="e1 form-control form-control-sm ">
                                                                         <option value="" disabled selected>Ceding or Broker</option>
                                                                         @foreach($cedingbroker as $cb)
-                                                                            <option value="{{ $cb->id }}">{{ $cb->companytype->name }} - {{ $cb->code }} - {{ $cb->name }}</option>
+                                                                            <option value="{{ $cb->id }}">{{ $cb->code }} - {{ $cb->name }}</option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>    
