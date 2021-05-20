@@ -295,7 +295,7 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<table  class="table table-bordered table-striped">
+				<table  id="propertyTypePanelAmount" class="table table-bordered table-striped">
 					<thead>
 						<tr>
 							<th>{{__('No')}}</th>
@@ -306,10 +306,24 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>No</td>
-							<td>Description</td>
-							<td>Amount</td>
-							<td>Action</td>
+							<td>Input :</td>
+							<td>
+								<div class="form-group">
+									<select id="descripitontableselect" name="descripitontableselect" class="form-control form-control-sm ">
+										<option value="Lawyer Fee" selected readonly>Lawyer Fee</option>
+										<option value="Surveyor Fee">Surveyor Fee</option>
+										<option value="Descripiton Fee">Descripiton Fee</option>
+									</select>
+								</div>  
+							</td>
+							<td>
+								<input type="number" id="amounttablemanual" name="amounttablemanual" class="form-control form-control-sm " data-validation="length"  data-validation-length="0-12" />
+                            </td>
+							<td>
+								<div class="form-group">
+									<button type="button" id="addmanualclaim-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+								</div>
+							</td>
 						</tr>
 					</tbody>
 				</table>

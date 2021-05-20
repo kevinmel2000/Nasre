@@ -12,7 +12,7 @@ class PropertyTypeTemp extends Model
 
     public function propertytypedata() 
     {
-		return $this->belongsTo('App\Models\PropertyType','property_type_id'); 
+		 return $this->belongsTo('App\Models\PropertyType','property_type_id'); 
     }
 }
 

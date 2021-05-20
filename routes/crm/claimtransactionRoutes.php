@@ -13,6 +13,9 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\Claim_controller;
 
 
+Route::post('/store-claimmanual-list','Claim_controller@storemanualamountlist')->name('claimmanual.store');
+Route::delete('/delete-claimmanual-list/{id}','Claim_controller@destroyamountmanuallist')->name('claimmanual.delete');
+
 
 Route::group(['prefix'=>'/claimtransaction-data','middleware'=>['auth']], function(){
  
@@ -23,6 +26,7 @@ Route::group(['prefix'=>'/claimtransaction-data','middleware'=>['auth']], functi
     Route::post('/claim/destroy/{id}', [Claim_controller::class, 'destroy']);
     Route::delete('/claim/destroy/{id}', [Claim_controller::class, 'destroy']);
     Route::get('/detailslipclaim/{idm}', [Claim_controller::class, 'getdetailSlipClaim']);
+    Route::get('/detailslipclaimAmount/{idm}', [Claim_controller::class, 'getdetailAmountSlip']);
     Route::get('/updateclaim/{idm}', [Claim_controller::class, 'updateindex']);
     
 

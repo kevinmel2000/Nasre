@@ -24,6 +24,7 @@ use App\Models\InterestInsured;
 use App\Models\InstallmentTemp;
 use App\Models\PrefixInsured;
 use App\Models\MainClaimEntryFAC;
+use App\Models\TransAmountClaimTemp;
 use App\Models\InterestInsuredTemp;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,6 +47,58 @@ class Claim_controller extends Controller
         $prefixinsured = PrefixInsured::orderby('id','asc')->get();
        
     	return view('crm.transaction.claim.index',compact('prefixinsured','causeofloss','natureofloss','surveyor','ceding','cedingbroker','currency','cob','koc','ocp','route_active'));
+    }
+
+    public function destroyamountmanuallist($id)
+    {
+        $claimTemplist = TransAmountClaimTemp::find($id);
+        
+        $claimTemplist->delete();
+        
+        return response()->json(['success'=>'Data has been deleted']);
+    }
+
+    public function storemanualamountlist(Request $request)
+    {
+        
+            $amountmanual = $request->amountmanual;
+            $slipnumber = $request->slipnumber;
+            $description = $request->description;
+        
+            if($slipnumber !='' && $amountmanual != '')
+            {
+            
+                $retrocessionlist = new TransAmountClaimTemp();
+                $retrocessionlist->descripiton  = $description;
+                $retrocessionlist->amount = $amountmanual; 
+                $retrocessionlist->slip_number = $slipnumber; 
+                //$retrocessionlist->slip_id = $slip_number; 
+                //$retrocessionlist->insured_id = $slip_number; 
+                $retrocessionlist->save();
+
+
+                return response()->json(
+                    [
+                        'id' => $retrocessionlist->id,
+                        'descripiton' => $retrocessionlist->descripiton,
+                        'amount' => $retrocessionlist->amount,
+                        'slip_number' => $retrocessionlist->slip_number
+                    ]
+                );
+        
+            }
+            else
+            {
+
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Fill all fields & Fill SLip Number First'
+                    ]
+                );
+
+            }
+        
     }
 
 
@@ -359,6 +412,31 @@ class Claim_controller extends Controller
         }
     }
 
+    public function getdetailAmountSlip($number)
+    {
+        $user = Auth::user();
+        $claimamountdata=TransAmountClaimTemp::where('slip_number',$number)->orderby('id','DESC')->get();
+
+        if(!empty($claimamountdata))
+        {
+                return response()->json(
+                [
+                   'status' =>200,
+                   'message'=>"Amount Data",
+                   'data'=>$claimamountdata->toJSon()
+                ]
+               );
+        }
+        else
+        {
+                 return response()->json(
+                 [
+                    'status' =>201,
+                    'message'=>"Slip Number, No Amount Data"
+                 ]
+                );
+        }
+    }
 
     public function getdetailSlipClaim($number)
     {

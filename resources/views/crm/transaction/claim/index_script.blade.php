@@ -5,10 +5,75 @@
 <link href="{{asset('css/sweetalert2.min.css')}}" rel="stylesheet"/>
 <script src="{{asset('/js/sweetalert2.all.min.js')}}"></script>
 
+
+
+<script type='text/javascript'>
+    $('#addmanualclaim-btn').click(function(e){
+       //alert('masuk');
+       e.preventDefault();
+
+       var slipnumber = $('#slipnumberdata').val();
+       var description = $('#descripitontableselect').val();
+       var amountmanual = $('#amounttablemanual').val();
+       var token2 = $('input[name=_token2]').val();
+       
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+       $.ajax({
+           url:"{{ route('claimmanual.store') }}",
+           type:"POST",
+           data:{
+               slipnumber:slipnumber,
+               description:description,
+               amountmanual:amountmanual
+           },
+           beforeSend: function() { $("body").addClass("loading");  },
+           complete: function() {  $("body").removeClass("loading"); },
+           success:function(response)
+           {
+            
+               console.log(response)
+               $('#propertyTypePanelAmount tbody').prepend('<tr id="iidamountclaim'+response.id+'" data-name="amounttypevalue[]"><td></td><td data-name="'+response.descripiton+'">'+response.descripiton+'</td><td data-name="'+response.amount+'">'+response.amount+'</td><td><a href="javascript:void(0)" onclick="deleteamountclaimdetail('+response.id+')">delete</a></td></tr>');
+              
+           }
+       });
+
+   });
+</script>
+
+
+
+<script type='text/javascript'>
+    function deleteamountclaimdetail(id)
+    {
+        var token2 = $('input[name=_token2]').val();
+
+        $.ajax({
+            url:'{{ url("/") }}/delete-claimmanual-list/'+id,
+            type:"DELETE",
+            data:{
+                _token:token2
+            },
+            beforeSend: function() { $("body").addClass("loading");  },
+            complete: function() {  $("body").removeClass("loading"); },
+            success:function(response){
+                
+                $('#iidamountclaim'+id).remove();
+                console.log(response);
+            }
+        });
+    }
+</script>
+
+
 <script type="text/javascript">
 	$(document).ready(function(){
 
-        alert('test3');
+        //alert('test3');
        
 		$('.datepicker').datepicker({ dateFormat: 'dd/mm/yy' });
 		$(".e1").select2({ width: '100%' }); 
@@ -17,7 +82,7 @@
         $dateinsurance="";
         $datereinsurance="";
 		
-		alert(slipnumberdata);
+		//alert(slipnumberdata);
 
         if(slipnumberdata)
         {
@@ -36,6 +101,37 @@
 
                     $('#dateinsurance').val(response.insurance_period_to);
                     $('#datereinsurance').val(response.reinsurance_period_to);
+                },
+                error: function (request, status, error) {
+                    //alert(request.responseText);
+                    swal("Error!", "Get Slip Data Error", "Get Data Error");
+                }
+            });
+
+
+            
+            $.ajax({
+                url:'{{ url("/") }}/claimtransaction-data/detailslipclaimAmount/'+slipnumberdata,
+                type:"GET",
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(response)
+                {
+                    
+                    if(response.status==200)
+                    {
+                       //alert(response.data);
+                       // console.log(response.data);
+                        var jsonData = JSON.parse(response.data);
+                        console.log(jsonData);
+                        for (var i = 0; i < jsonData.length; i++) 
+                        {
+                            var counter = jsonData[i];
+                            $('#propertyTypePanelAmount tbody').prepend('<tr id="iidamountclaim'+counter.id+'" data-name="amounttypevalue[]"><td></td><td data-name="'+counter.descripiton+'">'+counter.descripiton+'</td><td data-name="'+counter.amount+'">'+counter.amount+'</td><td><a href="javascript:void(0)" onclick="deleteamountclaimdetail('+counter.id+')">delete</a></td></tr>');
+              
+                            //console.log(counter.counter_name);
+                        }
+                    }
                 },
                 error: function (request, status, error) {
                     //alert(request.responseText);
@@ -151,8 +247,7 @@
         }
         else
         {
-            swal("Error!", "Get Slip Data Empty", "Get Data Error");
-     
+            //swal("Error!", "Get Slip Data Empty", "Get Data Error");
         }
         
 	});
