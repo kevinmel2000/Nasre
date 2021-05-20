@@ -159,7 +159,7 @@
                               <td>{{@$claimlistata->desc_causeofloss }}</td>
                               <td>{{@$claimlistata->descnatureofloss }}</td>
                               <td>{{@$claimlistata->desc_surveyor }}</td>
-                              <td>{{@$claimlistata->total_loss_amount }}</td>
+                              <td>{{number_format($claimlistata->total_loss_amount,0) }}</td>
                               
                               <td>
                                 @if(@$claimlistata->status_flag==1)

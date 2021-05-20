@@ -4,6 +4,58 @@
 
 <link href="{{asset('css/sweetalert2.min.css')}}" rel="stylesheet"/>
 <script src="{{asset('/js/sweetalert2.all.min.js')}}"></script>
+<style type="text/css">
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+      -moz-appearance: textfield;
+  }
+</style>
+
+<script type="text/javascript">
+
+
+    $('input.amount').keyup(function(event) {
+            // skip for arrow keys
+            if(event.which >= 37 && event.which <= 40) return;
+            console.log(event.which)
+            console.log($(this).val())
+                // format number
+                $(this).val(function(index, value) {
+                    return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                });
+            });
+
+    $('input.tanggal').mask("##/##/####",{
+        mask: "1/2/y", 
+        placeholder: "dd/mm/yyyy", 
+        leapday: "-02-29", 
+        separator: "/", 
+        alias: "dd/mm/yyyy"
+      });  
+
+
+    $(".money").click(function() {
+        var inputLength = $(".money").val().length;
+        setCaretToPos($(".money")[0], inputLength)
+    });
+
+
+    $(".uang").keyup(function() {
+        $('.uang').mask("#,##0.00", {reverse: true});
+        console.log($('#slipvbroker').val())
+
+    });
+
+
+</script>
+
 
 
 
@@ -181,7 +233,8 @@
                         for (var i = 0; i < jsonData.length; i++) 
                         {
                             var counter = jsonData[i];
-                            $('#propertyTypePanelAmount tbody').prepend('<tr id="iidamountclaim'+counter.id+'" data-name="amounttypevalue[]"><td></td><td data-name="'+counter.descripiton+'">'+counter.descripiton+'</td><td data-name="'+counter.amount+'">'+counter.amount+'</td><td><a href="javascript:void(0)" onclick="deleteamountclaimdetail('+counter.id+')">delete</a></td></tr>');
+                            var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(counter.amount);
+                            $('#propertyTypePanelAmount tbody').prepend('<tr id="iidamountclaim'+counter.id+'" data-name="amounttypevalue[]"><td></td><td data-name="'+counter.descripiton+'">'+counter.descripiton+'</td><td data-name="'+counter.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteamountclaimdetail('+counter.id+')">delete</a></td></tr>');
               
                             //console.log(counter.counter_name);
                         }
@@ -932,7 +985,9 @@
                         for (var i = 0; i < jsonData.length; i++) 
                         {
                             var counter = jsonData[i];
-                            $('#propertyTypePanelAmount tbody').prepend('<tr id="iidamountclaim'+counter.id+'" data-name="amounttypevalue[]"><td></td><td data-name="'+counter.descripiton+'">'+counter.descripiton+'</td><td data-name="'+counter.amount+'">'+counter.amount+'</td><td><a href="javascript:void(0)" onclick="deleteamountclaimdetail('+counter.id+')">delete</a></td></tr>');
+                            var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(counter.amount);
+                            
+                            $('#propertyTypePanelAmount tbody').prepend('<tr id="iidamountclaim'+counter.id+'" data-name="amounttypevalue[]"><td></td><td data-name="'+counter.descripiton+'">'+counter.descripiton+'</td><td data-name="'+counter.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteamountclaimdetail('+counter.id+')">delete</a></td></tr>');
               
                             //console.log(counter.counter_name);
                         }
