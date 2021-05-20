@@ -179,7 +179,7 @@
                                                 {{__('Interest Insured')}}
                                                 <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalAddInterestInsured">{{__('Add Interest Insured')}}</button>
                                             </div>
-                                            <div class="card-body bg-light-gray ">
+                                            <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="col-md-12 com-sm-12 mt-3">
@@ -189,18 +189,18 @@
 
                                                             <table id="interestInsuredTable" class="table table-bordered table-striped">
                                                                 <thead>
-                                                                <tr>
-                                                                <th>{{__('Interest ID - Name')}}</th>
-                                                                <th>{{__('Ceding')}}</th>
-                                                                <th>{{__('CN/DN')}}</th>
-                                                                <th>{{__('Cert No')}}</th>
-                                                                <th>{{__('Slip No')}}</th>
-                                                                <th>{{__('Policy No')}}</th>
-                                                                <th>{{__('Ceding')}}</th>
-                                                                <th>{{__('Percent')}}</th>
-                                                                <th>{{__('Amount')}}</th>
-                                                                <th width="20%">{{__('Actions')}}</th>
-                                                                </tr>
+                                                                    <tr>
+                                                                        <th>{{__('Interest ID - Name')}}</th>
+                                                                        <th>{{__('Ceding')}}</th>
+                                                                        <th>{{__('CN/DN')}}</th>
+                                                                        <th>{{__('Cert No')}}</th>
+                                                                        <th>{{__('Slip No')}}</th>
+                                                                        <th>{{__('Policy No')}}</th>
+                                                                        <th>{{__('Ceding')}}</th>
+                                                                        <th>{{__('Percent')}}</th>
+                                                                        <th>{{__('Amount')}}</th>
+                                                                        <th width="20%">{{__('Actions')}}</th>
+                                                                    </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     @foreach($interestlist as $isl)
