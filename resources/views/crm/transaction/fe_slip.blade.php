@@ -146,7 +146,8 @@
                                                             <td >{{ $slt->felookuplocation->loc_code }}<br>
                                                                <br>
                                                            </td>
-                                                           <td> {{ $slt->felookuplocation->address }}<br>
+                                                           <td> 
+                                                              {{ $slt->felookuplocation->address }}<br>
                                                               {{@$slt->felookuplocation->state->id}} - {{@$slt->felookuplocation->state->name}}<br>
                                                               {{@$slt->felookuplocation->city->id}} - {{@$slt->felookuplocation->city->name}}<br>
                                                               {{ $slt->felookuplocation->postal_code }}</td>

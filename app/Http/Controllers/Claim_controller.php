@@ -438,6 +438,66 @@ class Claim_controller extends Controller
         }
     }
 
+    public function getRiskLocationSlip($number)
+    {
+        $user = Auth::user();
+        
+        $locationlist2= TransLocationTemp::where('insured_id','=',$number)->where('slip_type','fe')->orderby('id','desc')->get();
+         
+        //dd($locationlist2);
+        
+        $locationlist=[];
+
+        if(!empty($locationlist2))
+        {
+            foreach($locationlist2 as $datadetail)
+            {
+                //$risklocationdetaildata= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->where('count_endorsement',$insureddata->count_endorsement)->get();
+                $risklocationdetaildata= RiskLocationDetail::where('translocation_id','=',$datadetail->id)->get();
+                
+                $riskdetaillist=[];
+
+                foreach($risklocationdetaildata as $stt)
+                {
+                    
+                    $interestdata=InterestInsured::where('id','=',$stt->interest_id)->first();
+                    $cedingdata=CedingBroker::where('id','=',$stt->ceding_id)->first();
+
+                    $stt->interestdetail=$interestdata;
+                    $stt->cedingdetail=$cedingdata;
+
+                    array_push($riskdetaillist,$stt);
+                }
+
+
+                $datadetail->risklocationdetail=$riskdetaillist;
+           
+                array_push($locationlist,$datadetail);
+            }     
+        }  
+
+        if(!empty($locationlist))
+        {
+                return response()->json(
+                [
+                   'status' =>200,
+                   'message'=>"Location Data",
+                   'data'=>$locationlist->toJSon()
+                ]
+               );
+        }
+        else
+        {
+                 return response()->json(
+                 [
+                    'status' =>201,
+                    'message'=>"No Location Data"
+                 ]
+                );
+        }
+
+    }
+
     public function getdetailSlipClaim($number)
     {
         $user = Auth::user();
