@@ -180,7 +180,7 @@
                                             </div>
                                             <div class="card-body bg-light-gray ">
                                                 <div class="row">
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-12">
                                                         <div class="col-md-12 com-sm-12 mt-3">
                                                             <input type="hidden" name="msitsi" id="msitsi" value="">
                                                             <input type="hidden" name="msisharev" id="msisharev" value="">
@@ -284,6 +284,18 @@
                                                     </div> 
                                                 </div>
                                             </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">{{__('UY')}}</label>
+                                            <select id="feuy" name="msuy" class="form-control form-control-sm ">
+                                                <option value="{{ date('Y') }}" selected>{{ date('Y') }}</option>
+                                                <option value="{{ (intval(date('Y')) - 1) }}">{{ (intval(date('Y')) - 1) }}</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
 
