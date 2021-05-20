@@ -69,6 +69,7 @@ class TransactionController extends Controller
             $ocp = Occupation::orderby('id','asc')->get();
             $cedingbroker = CedingBroker::orderby('id','asc')->get();
             $ceding = CedingBroker::orderby('id','asc')->where('type','4')->get();
+            $cedinginsured = CedingBroker::orderby('id','asc')->where('type','4')->get();
             $felookup = FelookupLocation::orderby('id','asc')->get();
             $cnd = ConditionNeeded::orderby('id','asc')->get();
             $mlu = MarineLookup::orderby('id','asc')->get();
@@ -200,13 +201,13 @@ class TransactionController extends Controller
             $currencymodal =  Currency::orderby('id','desc')->get();
 
 
-            return view('crm.transaction.marine_slip', compact(['user','kocmodal','ocpmodal','cedbrokmodal','cedingmodal','currencymodal','cobmodal','slipdata2','edslipid','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestinsured','routeship','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
+            return view('crm.transaction.marine_slip', compact(['user','kocmodal','ocpmodal','cedinginsured','cedbrokmodal','cedingmodal','currencymodal','cobmodal','slipdata2','edslipid','statuslist','retrocessiontemp','installmentpanel','conditionneededtemp','deductibletemp','deductibletype','interestinsured','routeship','customer','interestlist','shiplist','cnd','mlu','felookup','currency','cob','koc','ocp','ceding','cedingbroker','slip','insured','route_active','ms_ids','code_ms','code_sl','currdate']));     
          }
         else
         {
           $insured = Insured::where('number', 'LIKE', '%' . $search . '%')->orderBy('id','desc')->get();
           $ms_ids = response()->json($insured->modelKeys());
-          return view('crm.transaction.marine_slip', compact('user','customer','slip','insured','route_active','ms_ids','code_ms'))->with('i', ($request->input('page', 1) - 1) * 10);
+          return view('crm.transaction.marine_slip', compact('user','customer','slip','insured','cedinginsured','route_active','ms_ids','code_ms'))->with('i', ($request->input('page', 1) - 1) * 10);
         }
     }
 
