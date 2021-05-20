@@ -151,11 +151,32 @@
                     
                     if(response.status==200)
                     {
-                       //alert(response.data);
-                       // console.log(response.data);
+                        //alert(response.data);
+                        //console.log(response.data);
                         var jsonData = JSON.parse(response.data);
                         console.log(jsonData);
-                        alert(response.data);
+                        //alert(response.data);
+
+                        for (var i = 0; i < jsonData.length; i++) 
+                        {
+                            var counter = jsonData[i];
+                            
+                            var risklocationdata=counter.risklocationdetail;
+
+                            for (var j=0; j<risklocationdata.length; j++) 
+                            {
+
+                              var risklocationdatacounter = risklocationdata[j];
+                              //alert(risklocationdatacounter);
+
+                              $('#descripitonriskselect').append(`<option value="${risklocationdatacounter.id}">${risklocationdatacounter.interestdetail.description} - ${risklocationdatacounter.cedingdetail.name}  : ${risklocationdatacounter.amountlocation}</option>`);
+
+                              //$('#propertyTypePanelAmount tbody').prepend('<tr id="iidamountclaim'+counter.id+'" data-name="amounttypevalue[]"><td></td><td data-name="'+counter.descripiton+'">'+counter.descripiton+'</td><td data-name="'+counter.amount+'">'+counter.amount+'</td><td><a href="javascript:void(0)" onclick="deleteamountclaimdetail('+counter.id+')">delete</a></td></tr>');
+                            }
+                               
+
+                            //console.log(counter.counter_name);
+                        }
                         
                     }
                 },

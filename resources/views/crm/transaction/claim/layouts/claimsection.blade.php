@@ -306,7 +306,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>Input :</td>
+							<td>Input</td>
 							<td>
 								<div class="form-group">
 									<select id="descripitontableselect" name="descripitontableselect" class="form-control form-control-sm ">
@@ -322,6 +322,21 @@
 							<td>
 								<div class="form-group">
 									<button type="button" id="addmanualclaim-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>Input</td>
+							<td colspan='2'>
+								<div class="form-group">
+									<select id="descripitonriskselect" name="descripitonriskselect" class="form-control form-control-sm ">
+									</select>
+								</div>  
+							</td>
+							
+							<td>
+								<div class="form-group">
+									<button type="button" id="addriskclaim-btn" class="btn btn-md btn-primary" data-toggle="modal" data-target="#adduser">{{__('Add')}}</button>
 								</div>
 							</td>
 						</tr>
