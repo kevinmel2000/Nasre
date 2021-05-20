@@ -11,6 +11,7 @@ use App\Http\Controllers\HeMotorSlipController;
 use App\Http\Controllers\MovePropSlipController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\Claim_controller;
+use App\Http\Controllers\MarineHullController;
 
 Route::get('get-state-lookup','FeSlipController@getStateLookup');
 Route::get('get-city-lookup','FeSlipController@getCityLookup');
