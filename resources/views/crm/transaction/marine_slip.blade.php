@@ -44,11 +44,11 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 1')}}</label>
-                                                    <input type="text" id="autocomplete" name="msisuggestinsured" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="search for insured suggestion" required/>
+                                                    <input type="text" id="autocomplete" name="msisuggestinsured" class="form-control form-control-sm " data-validation="length" data-validation-length="0-350" placeholder="search for insured suggestion" required/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="" style="opacity: 0">{{__('insured 2')}}</label>
-                                                    <input type="text" name="msisuffix" id="autocomplete2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="suffix: QQ or TBk" />
+                                                    <input type="text" name="msisuffix" id="autocomplete2" class="form-control form-control-sm " data-validation="length" data-validation-length="0-350" placeholder="suffix: QQ or TBk" />
                                                 </div>
                                             </div>
                                         </div>
@@ -73,13 +73,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="" style="opacity: 0">{{__('b')}}</label>
-                                                    <input type="text" id="msiroutefrom" name="msiroutefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="*from" />
+                                                    <input type="text" id="msiroutefrom" name="msiroutefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-350" placeholder="*from" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="" style="opacity: 0">{{__('a')}}</label>
-                                                    <input type="text" id="msirouteto" name="msirouteto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" placeholder="*to" />
+                                                    <input type="text" id="msirouteto" name="msirouteto" class="form-control form-control-sm " data-validation="length" data-validation-length="0-350" placeholder="*to" />
 
                                                 </div>
                                             </div>
@@ -97,7 +97,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="input-group">
-                                                                <input type="text" id="msisharefrom" name="msisharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                                <input type="text" id="msisharefrom" name="msisharefrom" class="form-control form-control-sm " data-validation="length" data-validation-length="0-350" readonly="readonly" />
                                                                 
                                                             </div>
                                                         </div>
@@ -108,7 +108,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="">{{__('All Ceding Share')}}</label>
-                                                    <input type="text" id="msishare" name="msishare" class="form-control form-control-sm " placeholder="total nasre share" data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                    <input type="text" id="msishare" name="msishare" class="form-control form-control-sm " placeholder="total nasre share" data-validation="length" data-validation-length="0-350" readonly="readonly" />
                                                 </div>
                                             </div>
 
@@ -127,7 +127,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="">{{__('Total Sum Insured')}}</label>
-                                                    <input type="text" id="msishareto" name="msishareto" class="form-control form-control-sm amount" placeholder="total sum insured" data-validation="length" data-validation-length="0-50" readonly="readonly" />
+                                                    <input type="text" id="msishareto" name="msishareto" class="form-control form-control-sm amount" placeholder="total sum insured" data-validation="length" data-validation-length="0-350" />
                                                 </div>
                                             </div>
 
@@ -177,6 +177,7 @@
                                         <div class="card">
                                             <div class="card-header bg-gray">
                                                 {{__('Interest Insured')}}
+                                                <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#ModalAddInterestInsured">{{__('Add Interest Insured')}}</button>
                                             </div>
                                             <div class="card-body bg-light-gray ">
                                                 <div class="row">
@@ -194,6 +195,7 @@
                                                                 <th>{{__('CN/DN')}}</th>
                                                                 <th>{{__('Cert No')}}</th>
                                                                 <th>{{__('Slip No')}}</th>
+                                                                <th>{{__('Policy No')}}</th>
                                                                 <th>{{__('Ceding')}}</th>
                                                                 <th>{{__('Percent')}}</th>
                                                                 <th>{{__('Amount')}}</th>
@@ -204,79 +206,17 @@
                                                                     @foreach($interestlist as $isl)
                                                                         <tr id="iid{{ $isl->id }}" data-name="interestvalue[]">
                                                                                 <td data-name="{{ $isl->interest_id }}">{{ $isl->interestinsureddata->description }}</td>
+                                                                                <td data-name="{{ $isl->ceding_id }}">{{ $isl->cedingdata->name }}</td>
+                                                                                <td data-name="{{ $isl->cndn }}">$isl->cndn</td>
+                                                                                <td data-name="{{ $isl->certno }}">$isl->certno</td>
+                                                                                <td data-name="{{ $isl->slipno }}">$isl->slipno</td>
+                                                                                <td data-name="{{ $isl->policyno }}">$isl->policyno</td>
                                                                                 <td data-name="{{ $isl->percent }}">$isl->percent</td>
                                                                                 <td data-name="{{ $isl->amount }}">@currency($isl->amount)</td>
                                                                                 <td><a href="javascript:void(0)" onclick="deleteinterestdetail({{ $isl->id }})">delete</i></a></td>
                                                                         </tr>   
                                                                     @endforeach
-                                                                    <tr>
-                                                                        <form id="addinterestinsured">
-                                                                            @csrf
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <select id="slipinterestlist" name="slipinterestlist" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Interest list')}}</option>
-                                                                                        @foreach($interestinsured as $ii)
-                                                                                            <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
-                                                                                        @endforeach
-                                                                                    </select>
-                                                                                </div>  
-                                                                            </td>
-
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <select id="slipinterestlist" name="slipinterestlist" class="form-control form-control-sm ">
-                                                                                        <option selected disabled>{{__('Ceding list')}}</option>
-                                                                                        @foreach($cedinginsured as $cii)
-                                                                                            <option value="{{ $cii->id }}">{{ $cii->code }} - {{ $cii->name }}</option>
-                                                                                        @endforeach
-                                                                                    </select>
-                                                                                </div>  
-                                                                            </td>
-
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="text" id="cndn" name="cndn" class="form-control form-control-sm" value="" />
-                                                                                </div>
-                                                                            </td>
-
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                     <input type="text" id="certno" name="certno" class="form-control form-control-sm" value="" />
-                                                                                </div>
-                                                                            </td>
-
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                     <input type="text" id="slipno" name="slipno" class="form-control form-control-sm" value="" />
-                                                                                </div>
-                                                                            </td>
-
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                     <input type="text" id="policyno" name="policyno" class="form-control form-control-sm" value="" />
-                                                                                </div>
-                                                                            </td>
-
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="text"  value="" id="iimcpercent" name="iimcpercent" class="form-control form-control-sm floatTextBox" data-validation="length" data-validation-length="0-15" />
-                                                                                </div>
-                                                                            </td>
-
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <input type="text"  value="" id="iimcamount" name="iimcamount" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-15" />
-                                                                                </div>
-                                                                            </td>
-
-                                                                            <td>
-                                                                                <div class="form-group">
-                                                                                    <button type="button" id="addinterestinsured-btn" class="btn btn-md btn-primary ">{{__('Add')}}</button>
-                                                                                </div>
-                                                                            </td>
-                                                                        </form>
-                                                                    </tr>
+                                                                    
                                                                 </tbody>
                                                             </table>
                                                             </div>
@@ -356,6 +296,123 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="modal fade" id="ModalAddInterestInsured" tabindex="-1" user="dialog" aria-hidden="true">
+            <div class="modal-dialog" user="document">
+                <div class="modal-content bg-light-gray">
+                <div class="modal-header bg-gray">
+                    <h5 class="modal-title">{{__('Interest Insured Detail')}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="addinterestinsured" >
+                    @csrf
+                    <div class="modal-body">
+
+                        <div class="col-md-12 col-md-12">
+                            <div class="form-group">
+                                <label for="">{{__('Interest Insured')}}</label><br>
+                                <select id="slipinterestlist" name="slipinterestlist" class="form-control form-control-sm ">
+                                    <option selected disabled>{{__('Interest list')}}</option>
+                                    @foreach($interestinsured as $ii)
+                                        <option value="{{ $ii->id }}">{{ $ii->code }} - {{ $ii->description }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-md-12">
+                            <div class="form-group">
+                                <label for="">{{__('Ceding')}}</label><br>
+                                <select id="slipinterestlist" name="slipinterestlist" class="form-control form-control-sm ">
+                                    <option selected disabled>{{__('Ceding list')}}</option>
+                                    @foreach($cedinginsured as $cii)
+                                        <option value="{{ $cii->id }}">{{ $cii->code }} - {{ $cii->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="">{{__('CN/DN')}}</label>
+                                    <input type="text" id="cndn" name="cndn" class="form-control form-control-sm" value="" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="">{{__('Cert No')}}</label>
+                                    <input type="text" id="certno" name="certno" class="form-control form-control-sm" value="" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="">{{__('Slip No')}}</label>
+                                    <input type="text" id="slipno" name="slipno" class="form-control form-control-sm" value="" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="">{{__('Policy No')}}</label>
+                                    <input type="text" id="policyno" name="policyno" class="form-control form-control-sm" value="" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="">{{__('Percentage')}}</label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="input-group" lang="en-US">
+                                                <input type="text" id="iimcpercent" name="iimcpercent"  class="form-control form-control-sm floatTextBox2" data-validation="length" data-validation-length="0-50"  />
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text"><i class="fa fa-percent" aria-hidden="true"></i></div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <div class="row">
+                            <div class="col-md-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="">{{__('Amount')}}</label>
+                                    <input type="text" id="iimcamount" name="iimcamount" class="form-control form-control-sm amount" data-validation="length" data-validation-length="0-50"  />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+        
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                        <button type="submit" class="btn btn-info" id="addship-btn">Add Ship</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
 
         <div class="card card-primary" id="sliplistSection">
             <div class="card-header bg-gray">

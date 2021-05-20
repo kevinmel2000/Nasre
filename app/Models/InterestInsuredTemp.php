@@ -14,4 +14,10 @@ class InterestInsuredTemp extends Model
     {
         return $this->belongsTo('App\Models\InterestInsured', 'interest_id');
     }
+
+    public function cedingdata()
+    {
+        return $this->belongsTo('App\Models\CedingBroker', 'ceding_id');
+    }
+
 }
