@@ -22,15 +22,15 @@
 
 
     $('input.amount').keyup(function(event) {
-            // skip for arrow keys
-            if(event.which >= 37 && event.which <= 40) return;
-            console.log(event.which)
-            console.log($(this).val())
-                // format number
-                $(this).val(function(index, value) {
-                    return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                });
+        // skip for arrow keys
+        if(event.which >= 37 && event.which <= 40) return;
+        console.log(event.which)
+        console.log($(this).val())
+            // format number
+            $(this).val(function(index, value) {
+                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             });
+        });
 
     $('input.tanggal').mask("##/##/####",{
         mask: "1/2/y", 
@@ -213,9 +213,7 @@
                 }
             });
 
-            //$('#propertyTypePanelAmount tbody').empty();
 
-            
             $.ajax({
                 url:'{{ url("/") }}/claimtransaction-data/detailslipclaimAmount/'+slipnumberdata,
                 type:"GET",
@@ -223,22 +221,26 @@
                 complete: function() {  $("body").removeClass("loading"); },
                 success:function(response)
                 {
-                    
                     if(response.status==200)
                     {
                        //alert(response.data);
                        // console.log(response.data);
                         var jsonData = JSON.parse(response.data);
                         console.log(jsonData);
+                        
+
                         for (var i = 0; i < jsonData.length; i++) 
                         {
                             var counter = jsonData[i];
                             var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(counter.amount);
+                            
                             $('#propertyTypePanelAmount tbody').prepend('<tr id="iidamountclaim'+counter.id+'" data-name="amounttypevalue[]"><td></td><td data-name="'+counter.descripiton+'">'+counter.descripiton+'</td><td data-name="'+counter.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteamountclaimdetail('+counter.id+')">delete</a></td></tr>');
-              
-                            //console.log(counter.counter_name);
+                            
                         }
+
+                        $('#totallossamount').val(response.sumamount);
                     }
+
                 },
                 error: function (request, status, error) {
                     //alert(request.responseText);
@@ -273,15 +275,11 @@
                             {
 
                               var risklocationdatacounter = risklocationdata[j];
-                              //alert(risklocationdatacounter);
-
+                              
                               $('#descripitonriskselect').append(`<option value="${risklocationdatacounter.id}">${risklocationdatacounter.interestdetail.description} - ${risklocationdatacounter.cedingdetail.name}  : ${risklocationdatacounter.amountlocation}</option>`);
-
-                              //$('#propertyTypePanelAmount tbody').prepend('<tr id="iidamountclaim'+counter.id+'" data-name="amounttypevalue[]"><td></td><td data-name="'+counter.descripiton+'">'+counter.descripiton+'</td><td data-name="'+counter.amount+'">'+counter.amount+'</td><td><a href="javascript:void(0)" onclick="deleteamountclaimdetail('+counter.id+')">delete</a></td></tr>');
+                              
                             }
                                
-
-                            //console.log(counter.counter_name);
                         }
                         
                     }
@@ -291,7 +289,6 @@
                     swal("Error!", "Get Slip Data Error", "Get Data Error");
                 }
             });
-
 
             $.ajax({
                 url:'{{ url("/") }}/claimtransaction-data/detailslipclaim/'+slipnumberdata,
@@ -321,7 +318,7 @@
                          $('#descnationalresliab').val(response.nasre_liabdesc);
                          $('#cedantshare').val(response.ced_share);
                          $('#shareonloss').val(response.nasre_share_loss);
-                         $('#totallossamount').val(response.total_loss_amount);
+                         //$('#totallossamount').val(response.total_loss_amount);
                          $('#potentialrecoverydecision').val(response.potential_recovery).change();
                          $('#potentialrecovery').val(response.desc_poten_rec);
                          $('#subrogasi').val(response.estimate_amount_subro);
@@ -966,7 +963,8 @@
             });
 
             $('#propertyTypePanelAmount').empty();
-                       
+            
+          
             $.ajax({
                 url:'{{ url("/") }}/claimtransaction-data/detailslipclaimAmount/'+slipnumberdata,
                 type:"GET",
@@ -974,7 +972,6 @@
                 complete: function() {  $("body").removeClass("loading"); },
                 success:function(response)
                 {
-
                    
                     if(response.status==200)
                     {
@@ -988,10 +985,14 @@
                             var curr_amount = new Intl.NumberFormat('id-ID',  {style: 'currency',currency: 'IDR',}).format(counter.amount);
                             
                             $('#propertyTypePanelAmount tbody').prepend('<tr id="iidamountclaim'+counter.id+'" data-name="amounttypevalue[]"><td></td><td data-name="'+counter.descripiton+'">'+counter.descripiton+'</td><td data-name="'+counter.amount+'">'+curr_amount+'</td><td><a href="javascript:void(0)" onclick="deleteamountclaimdetail('+counter.id+')">delete</a></td></tr>');
-              
-                            //console.log(counter.counter_name);
+                            
+                            
                         }
+
+                        $('#totallossamount').val(response.sumamount);
+
                     }
+
                 },
                 error: function (request, status, error) {
                     //alert(request.responseText);
@@ -1000,6 +1001,47 @@
             });
 
 
+            $.ajax({
+                url:'{{ url("/") }}/claimtransaction-data/detailslipclaimRiskLocation/'+slipnumberdata,
+                type:"GET",
+                beforeSend: function() { $("body").addClass("loading");  },
+                complete: function() {  $("body").removeClass("loading"); },
+                success:function(response)
+                {
+                    
+                    if(response.status==200)
+                    {
+                        //alert(response.data);
+                        //console.log(response.data);
+                        var jsonData = JSON.parse(response.data);
+                        console.log(jsonData);
+                        //alert(response.data);
+
+                        for (var i = 0; i < jsonData.length; i++) 
+                        {
+                            var counter = jsonData[i];
+                            
+                            var risklocationdata=counter.risklocationdetail;
+
+                            for (var j=0; j<risklocationdata.length; j++) 
+                            {
+
+                              var risklocationdatacounter = risklocationdata[j];
+                              
+                              $('#descripitonriskselect').append(`<option value="${risklocationdatacounter.id}">${risklocationdatacounter.interestdetail.description} - ${risklocationdatacounter.cedingdetail.name}  : ${risklocationdatacounter.amountlocation}</option>`);
+                            }
+                               
+                        }
+                        
+                    }
+                },
+                error: function (request, status, error) {
+                    //alert(request.responseText);
+                    swal("Error!", "Get Slip Data Error", "Get Data Error");
+                }
+            });
+
+           
 
             $.ajax({
                 url:'{{ url("/") }}/claimtransaction-data/detailslipclaim/'+slipnumberdata,
@@ -1029,7 +1071,7 @@
                          $('#descnationalresliab').val(response.nasre_liabdesc);
                          $('#cedantshare').val(response.ced_share);
                          $('#shareonloss').val(response.nasre_share_loss);
-                         $('#totallossamount').val(response.total_loss_amount);
+                         //$('#totallossamount').val(response.total_loss_amount);
                          $('#potentialrecoverydecision').val(response.potential_recovery).change();
                          $('#potentialrecovery').val(response.desc_poten_rec);
                          $('#subrogasi').val(response.estimate_amount_subro);

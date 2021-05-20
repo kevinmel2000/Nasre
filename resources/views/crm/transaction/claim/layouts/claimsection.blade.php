@@ -317,7 +317,7 @@
 								</div>  
 							</td>
 							<td>
-								<input type="number" id="amounttablemanual" name="amounttablemanual" placeholder="Amount Manual"  class="form-control form-control-sm amount" data-validation="length"  data-validation-length="0-12" />
+								<input type="text" id="amounttablemanual" name="amounttablemanual" placeholder="Amount Manual"  class="form-control form-control-sm amount" data-validation="length"  data-validation-length="0" />
                             </td>
 							<td>
 								<div class="form-group">
@@ -345,7 +345,7 @@
 						<tr>
 							<td><input type="checkbox" id="checkriskamount" name="checkriskamount" value="1"></td>
 							<td colspan='2'>
-								<input type="number" id="amounttablerisk" name="amounttablerisk" readonly="true" placeholder="Amount Location Manual" class="form-control form-control-sm amount" data-validation="length"  data-validation-length="0-12" />
+								<input type="text" id="amounttablerisk" name="amounttablerisk" readonly="true" placeholder="Amount Location Manual" class="form-control form-control-sm amount" data-validation="length"  data-validation-length="0" />
         					</td>
 						</tr>
 					</tbody>
@@ -401,7 +401,7 @@
 						<tbody>
 							<tr>
 								<td>
-								<input type="text" name="totallossamount" id="totallossamount" class="form-control" autocomplete="off">					
+								<input type="text" name="totallossamount" id="totallossamount" class="form-control form-control-sm amount" autocomplete="off">					
 								</td>
 							</tr>
 						</tbody>

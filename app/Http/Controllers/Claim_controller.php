@@ -483,14 +483,17 @@ class Claim_controller extends Controller
     {
         $user = Auth::user();
         $claimamountdata=TransAmountClaimTemp::where('slip_number',$number)->orderby('id','DESC')->get();
+        $sumdata=TransAmountClaimTemp::where('slip_number',$number)->sum('amount');
 
+        
         if(!empty($claimamountdata))
         {
                 return response()->json(
                 [
                    'status' =>200,
                    'message'=>"Amount Data",
-                   'data'=>$claimamountdata->toJSon()
+                   'data'=>$claimamountdata->toJSon(),
+                   'sumamount'=>$sumdata,
                 ]
                );
         }
