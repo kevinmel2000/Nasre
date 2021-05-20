@@ -131,7 +131,7 @@
                                             <label for="">{{__('Source')}}</label>
                                             <select id="slipcedingbrokerupdate" name="slipcedingbrokerupdate" class="e1 form-control form-control-sm ">
                                                 @foreach($cedbrokmodal as $cb)
-                                                    <option value="{{ $cb->id }}" >{{ $cb->companytype->name }} - {{ $cb->code }} - {{ $cb->name }}</option>
+                                                    <option value="{{ $cb->id }}" > {{ $cb->code }} - {{ $cb->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>    
