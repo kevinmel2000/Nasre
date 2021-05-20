@@ -1236,7 +1236,7 @@
     
                                 @can('create-marine_slip', User::class)
                                 @if(
-                                    @$route_active == 'Marine - Slip Entry' 
+                                    @$route_active == 'Marine Cargo - Slip Entry' 
                                     || @$route_active == 'Marine Slip - Index'  
                                     || @$route_active == 'Marine - Slip and Insured Details'  
                                     )
@@ -1270,7 +1270,7 @@
                                                 </a>
                                             </li>
     
-                                            @if($route_active == 'Marine - Slip Entry')
+                                            @if($route_active == 'Marine Cargo - Slip Entry')
                                                 @php
                                                     $ms_form = 'active';
                                                 @endphp
@@ -1278,7 +1278,19 @@
                                             <li class="nav-item">
                                                 <a href="{{url('/transaction-data/marine-slip')}}" class="nav-link {{@$ms_form}}">
                                                         <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
-                                                    <p style="font-size: 80%;margin-left:2%;">{{__('MARINE - SLIP ENTRY')}}</p>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('MARINE CARGO - SLIP ENTRY')}}</p>
+                                                </a>
+                                            </li>
+
+                                             @if($route_active == 'Marine Hull - Slip Entry')
+                                                @php
+                                                    $mh_form = 'active';
+                                                @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/transaction-data/marine-hull-slip')}}" class="nav-link {{@$mh_form}}">
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
+                                                    <p style="font-size: 80%;margin-left:2%;">{{__('MARINE Hull - SLIP ENTRY')}}</p>
                                                 </a>
                                             </li>
                                     </ul>

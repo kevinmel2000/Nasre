@@ -53,7 +53,7 @@ class TransactionController extends Controller
     public function indexmarineslip(Request $request)
     {
         $user = Auth::user();
-        $route_active = 'Marine - Slip Entry';
+        $route_active = 'Marine Cargo - Slip Entry';
         $search = @$request->input('search');
         $mydate = date("Y").date("m").date("d");
         $currdate = date("d/m/Y");

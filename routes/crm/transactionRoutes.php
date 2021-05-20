@@ -97,6 +97,9 @@ Route::group(['prefix'=>'/transaction-data','middleware'=>['auth']], function(){
     Route::delete('/marine-insured/destroyinsured/{id}', [TransactionController::class, 'destroymarineinsured']);
     Route::delete('/marine-slip/destroyslip/{id}', [TransactionController::class, 'destroymarineslip']);
 
+    // SECTION Marine Hull Slip Group Routes
+    Route::get('/marine-hull-slip', [MarineHullController::class, 'index'])->middleware(['can:create-marine_slip']);
+
 
     // SECTION Fire Engineering Slip Group Routes
     Route::get('/fe-slip', [FeSlipController::class, 'indexfeslip'])->middleware(['can:create-fe_slip']);
