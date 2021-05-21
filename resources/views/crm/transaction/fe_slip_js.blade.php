@@ -10245,13 +10245,17 @@ function deletelocationriskdetail(id){
                         $('#sliptotalrate').val(sum_totalrate.toString());
                         $('#sliptotalrate2').val(sum_totalrate.toString());
 
-                        var sumrate = $("#sliptotalrate").val();
-                        var conv_sumrate = parseFloat(sumrate.replace(/,/g, ""));
-                        var sum = isNaN(((conv_sumrate / 1000) * conv_tsi) * insurance) ? 0 :(((conv_sumrate / 1000) * conv_tsi) * insurance).toFixed(2) ;
-                        var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        try {
+                            var sumrate = $("#sliptotalrate").val();
+                            var conv_sumrate = parseFloat(sumrate.replace(/,/g, ""));
+                            var sum = isNaN(((conv_sumrate / 1000) * conv_tsi) * insurance) ? 0 :(((conv_sumrate / 1000) * conv_tsi) * insurance).toFixed(2) ;
+                            var real_sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-                        $('#slipbasicpremium').val(real_sum);
-
+                            $('#slipbasicpremium').val(real_sum);
+                        }catch(err){
+                            console.log(err);
+                        }
+                        
                         var basic_premi = $('#slipbasicpremium').val();
 
                         // if(basic_premi){
