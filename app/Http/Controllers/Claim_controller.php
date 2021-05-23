@@ -479,6 +479,183 @@ class Claim_controller extends Controller
     }
 
 
+    public function changeSlipClaimInterim($number)
+    {
+        $user = Auth::user();
+        
+        if($number)
+        {
+           
+            $claimdata=MainClaimEntryFAC::where('number',$number)->orderby('id','DESC')->first();
+    
+            if(!empty($claimdata))
+            {
+                //operasi CLone 
+
+                $user = Auth::user();
+                MainClaimEntryFAC::create([
+                    'number'=>$claimdata->number,
+                    'reg_comp'=> $claimdata->regcomp,
+                    'doc_number'=> $claimdata->docnumber,
+                    'date_receipt'=> date("Y-m-d", strtotime($claimdata->dateofreceipt)),
+                    'date_document'=> date("Y-m-d", strtotime($claimdata->dateofdocument)),
+                    'causeofloss_id'=> $claimdata->causeofloss,
+                    'desc_causeofloss'=> $claimdata->desccauseofloss,
+                    'natureofloss_id'=> $claimdata->natureofloss,
+                    'descnatureofloss'=> $claimdata->descnatureofloss,
+                    'date_of_loss'=> date("Y-m-d", strtotime($claimdata->dateofloss)),
+                    'curr_id_loss'=>$claimdata->currofloss,
+                    'curr_lossdesc'=>$claimdata->desccurrofloss,
+                    'surveyor_id'=>$claimdata->surveyoradjuster,
+                    'desc_surveyor'=>$claimdata->descsurveyoradjuster,
+                    'nasre_liab'=>$claimdata->nationalresliab,
+                    'nasre_liabdesc'=>$claimdata->descnationalresliab,
+                    'nasre_share_loss'=>$claimdata->shareonloss,
+                    'ced_share'=>$claimdata->cedantshare,
+                    'total_loss_amount'=>$claimdata->totallossamount,
+                    'potential_recovery'=>$claimdata->potentialrecoverydecision,
+                    'estimate_amount_subro'=>$claimdata->subrogasi,
+                    'desc_poten_rec'=>$claimdata->potentialrecovery,
+                    'kronologi'=>$claimdata->kronologi,
+                    'staff_recomendation'=>$claimdata->staffrecomend,
+                    'ass_man_recomen'=>$claimdata->assistantmanagerrecomend,
+                    'pureor_liability'=>$claimdata->pureorliability,
+                    'pureor_loss'=>$claimdata->pureorloss,
+                    'pureor_retro'=>$claimdata->pureorcontract,
+                    'pureor_recovery'=>$claimdata->pureorrecovery,
+                    'qs_liability'=>$claimdata->qsliability,
+                    'qs_loss'=>$claimdata->qsloss,
+                    'qs_retro'=>$claimdata->qscontract,
+                    'qs_recovery'=>$claimdata->qsrecovery,
+                    'arr1_liability'=>$claimdata->arr1liability,
+                    'arr1_loss'=>$claimdata->arr1loss,
+                    'arr1_retro'=>$claimdata->arr1contract,
+                    'arr1_recovery'=>$claimdata->arr1recovery,
+                    'extra_liability'=>$claimdata->extraliability,
+                    'extra_loss'=>$claimdata->extraloss,
+                    'extra_retro'=>$claimdata->extracontract,
+                    'extra_recovery'=>$claimdata->extrarecovery,
+                    'facultative_liability'=>$claimdata->facultativeliability,
+                    'facultative_loss'=>$claimdata->facultativeloss,
+                    'facultative_retro'=>$claimdata->facultativecontract,
+                    'facultative_recovery'=>$claimdata->facultativerecovery,
+                    'arr2_liability'=>$claimdata->arr2liability,
+                    'arr2_loss'=>$claimdata->arr2loss,
+                    'arr2_retro'=>$claimdata->arr2contract,
+                    'arr2_recovery'=>$claimdata->arr2recovery,
+                    'arr3_liability'=>$claimdata->arr3liability,
+                    'arr3_loss'=>$claimdata->arr3loss,
+                    'arr3_retro'=>$claimdata->arr3contract,
+                    'arr3_recovery'=>$claimdata->arr3recovery,
+                    'totalrecovery'=>$claimdata->totalrecovery,
+                    'nrsgrossret'=>$claimdata->nrsgrossret,
+                    'xol'=>$claimdata->xol,
+                    'cereffno'=>$claimdata->cereffno,
+                    'dateofprod'=>date("Y-m-d", strtotime($claimdata->dateofprod)),
+                    'ceno'=>$claimdata->ceno,
+                    'ceuser'=>$claimdata->ceuser,
+                    'description'=>$claimdata->description,
+                    'dateofentry'=>date("Y-m-d", strtotime($claimdata->dateentry)),
+                    'dateoftrans'=>date("Y-m-d", strtotime($claimdata->datetrans)),
+                    'dateofsupporting'=>date("Y-m-d", strtotime($claimdata->datesupporting)),
+                    'status_flag'=>2
+                ]);
+
+                //operasi bikin 0
+                
+                $claimdata->nasre_liab=$claimdata->nasre_liab*-1;
+                $claimdata->nasre_share_loss= $claimdata->nasre_share_loss*-1;
+                $claimdata->ced_share= $claimdata->ced_share*-1;
+                $claimdata->total_loss_amount= $claimdata->total_loss_amount*-1;
+                $claimdata->potential_recovery=$claimdata->potential_recovery*-1;
+                $claimdata->estimate_amount_subro=$claimdata->estimate_amount_subro*-1;
+              
+                $claimdata->pureor_liability=$claimdata->pureor_liability*-1;
+                $claimdata->pureor_loss= $claimdata->pureor_loss*-1;
+                $claimdata->pureor_recovery=$claimdata->pureor_recovery*-1;
+                
+                $claimdata->qs_liability=$claimdata->qs_liability*-1;
+                $claimdata->qs_loss=$claimdata->qs_loss*-1;
+                $claimdata->qs_recovery=$claimdata->qs_recovery*-1;
+                
+                $claimdata->arr1_liability=$claimdata->arr1liability*-1;
+                $claimdata->arr1_loss=$claimdata->arr1loss*-1;
+                $claimdata->arr1_recovery=$claimdata->arr1recovery*-1;
+                
+                $claimdata->extra_liability=$claimdata->extraliability*-1;
+                $claimdata->extra_loss=$claimdata->extraloss*-1;
+                $claimdata->extra_recovery=$claimdata->extrarecovery*-1;
+                
+                $claimdata->facultative_liability=$claimdata->facultativeliability*-1;
+                $claimdata->facultative_loss=$claimdata->facultativeloss*-1;
+                $claimdata->facultative_recovery=$claimdata->facultativerecovery*-1;
+                
+                $claimdata->arr2_liability=$claimdata->arr2liability*-1;
+                $claimdata->arr2_loss=$claimdata->arr2loss*-1;
+                $claimdata->arr2_recovery=$claimdata->arr2recovery*-1;
+                
+                $claimdata->arr3_liability=$claimdata->arr3liability*-1;
+                $claimdata->arr3_loss=$claimdata->arr3loss*-1;
+                $claimdata->arr3_recovery=$claimdata->arr3recovery*-1;
+                
+                $claimdata->totalrecovery=$claimdata->totalrecovery*-1;
+                $claimdata->nrsgrossret=$claimdata->nrsgrossret*-1;
+                $claimdata->xol=$claimdata->xol*-1;
+                $claimdata->status_flag=2;
+                
+                $claimdata->save();
+
+            
+                $notification = array(
+                    'message' => 'Main Claim Update successfully!',
+                    'alert-type' => 'success'
+                );
+
+                return back()->with($notification);
+            }
+            
+        }
+        else
+        {
+            return back()->with($validator)->withInput();
+        }
+    }
+
+
+    
+    public function changeSlipClaimPLA($number)
+    {
+        $user = Auth::user();
+        
+        if($number)
+        {
+           
+            $claimdata=MainClaimEntryFAC::where('number',$number)->orderby('id','DESC')->first();
+    
+            if(!empty($claimdata))
+            {
+                
+                $claimdata->status_flag=3;
+                $claimdata->save();
+
+            
+                $notification = array(
+                    'message' => 'Main Claim Update successfully!',
+                    'alert-type' => 'success'
+                );
+
+                return back()->with($notification);
+            }
+            
+        }
+        else
+        {
+            return back()->with($validator)->withInput();
+        }
+    }
+
+
+
     public function getdetailAmountSlip($number)
     {
         $user = Auth::user();

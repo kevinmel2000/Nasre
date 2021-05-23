@@ -30,6 +30,8 @@ Route::group(['prefix'=>'/claimtransaction-data','middleware'=>['auth']], functi
     Route::get('/detailslipclaimAmount/{idm}', [Claim_controller::class, 'getdetailAmountSlip']);
     Route::get('/detailslipclaimRiskLocation/{idm}', [Claim_controller::class, 'getRiskLocationSlip']);
     Route::get('/updateclaim/{idm}', [Claim_controller::class, 'updateindex']);
+    Route::get('/changeinterimclaim/{idm}', [Claim_controller::class, 'changeSlipClaimInterim']);
+    Route::get('/changeplaclaim/{idm}', [Claim_controller::class, 'changeSlipClaimPLA']);
     
 
 });
