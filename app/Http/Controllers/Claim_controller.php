@@ -28,6 +28,8 @@ use App\Models\MainClaimEntryFAC;
 use App\Models\TransAmountClaimTemp;
 use App\Models\RiskLocationDetail;
 use App\Models\InterestInsuredTemp;
+use Session;
+use Mail;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -491,8 +493,9 @@ class Claim_controller extends Controller
             if(!empty($claimdata))
             {
                 //operasi CLone 
-
+                
                 $user = Auth::user();
+
                 MainClaimEntryFAC::create([
                     'number'=>$claimdata->number,
                     'reg_comp'=> $claimdata->regcomp,
@@ -561,6 +564,11 @@ class Claim_controller extends Controller
                     'status_flag'=>2
                 ]);
 
+
+                //$claimdataclone=MainClaimEntryFAC::where('id',$claimdatacloneid)->first();
+                //$retrocessionlist =TransAmountClaimTemp::where('slip_number',$number)->orderby('id','DESC')->get();
+                //$retrocessionlist = new TransAmountClaimTemp();
+                
                 //operasi bikin 0
                 
                 $claimdata->nasre_liab=$claimdata->nasre_liab*-1;
@@ -605,24 +613,23 @@ class Claim_controller extends Controller
                 
                 $claimdata->save();
 
-            
-                $notification = array(
-                    'message' => 'Main Claim Update successfully!',
-                    'alert-type' => 'success'
-                );
 
-                return back()->with($notification);
+                Session::flash('flash_message', 'Change Status To Interim successfully!');
+
+                return redirect()->route('claimindex');
             }
             
         }
         else
         {
-            return back()->with($validator)->withInput();
+            Session::flash('flash_message', 'Change Status To Interim Error!');
+
+            return redirect()->route('claimindex');
         }
     }
 
 
-    
+
     public function changeSlipClaimPLA($number)
     {
         $user = Auth::user();
@@ -639,18 +646,17 @@ class Claim_controller extends Controller
                 $claimdata->save();
 
             
-                $notification = array(
-                    'message' => 'Main Claim Update successfully!',
-                    'alert-type' => 'success'
-                );
+                Session::flash('flash_message', 'Change Status To DLA successfully!');
 
-                return back()->with($notification);
+                return redirect()->route('claimindex');
             }
             
         }
         else
         {
-            return back()->with($validator)->withInput();
+            Session::flash('flash_message', 'Change Status To DLA Error!');
+
+            return redirect()->route('claimindex');
         }
     }
 

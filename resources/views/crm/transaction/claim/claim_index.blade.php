@@ -164,7 +164,11 @@
                               <td>
                                 @if(@$claimlistata->status_flag==1)
                                   {{__('PLA')}}
-                                @endif
+                                @elseif(@$claimlistata->status_flag==2)
+                                  {{__('Interim')}}
+                                @elseif(@$claimlistata->status_flag==3)
+                                  {{__('DLA')}}
+                                @endif  
                               </td>
 
                               <td>
@@ -201,6 +205,17 @@
                                   </form>
                                 
                                   </span>
+
+                                  @if(@$claimlistata->status_flag==1 || @$claimlistata->status_flag==2)
+                                  
+                                    <a href="{{ url('claimtransaction-data/changeinterimclaim', $claimlistata->number) }}" class="mr-3">
+                                      <button class="btn btn-md btn-primary">{{__('Change To Interim')}}</button>
+                                    </a>
+                                    
+                                    <a href="{{ url('claimtransaction-data/changeplaclaim', $claimlistata->number) }}" class="mr-3">
+                                      <button class="btn btn-md btn-primary">{{__('Change To DLA')}}</button>
+                                    </a>
+                                  @endif  
                               </td>
 
                             </tr>
