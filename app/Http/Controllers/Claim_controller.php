@@ -495,9 +495,10 @@ class Claim_controller extends Controller
                 //operasi CLone 
                 
                 $user = Auth::user();
+                $id_ed = ($claimdata->interim_count + 1);
 
                 MainClaimEntryFAC::create([
-                    'number'=>$claimdata->number,
+                    'number'=>$claimdata->number."-interim-".$id_ed,
                     'reg_comp'=> $claimdata->regcomp,
                     'doc_number'=> $claimdata->docnumber,
                     'date_receipt'=> date("Y-m-d", strtotime($claimdata->dateofreceipt)),
@@ -565,10 +566,7 @@ class Claim_controller extends Controller
                 ]);
 
 
-                //$claimdataclone=MainClaimEntryFAC::where('id',$claimdatacloneid)->first();
-                //$retrocessionlist =TransAmountClaimTemp::where('slip_number',$number)->orderby('id','DESC')->get();
-                //$retrocessionlist = new TransAmountClaimTemp();
-                
+               
                 //operasi bikin 0
                 
                 $claimdata->nasre_liab=$claimdata->nasre_liab*-1;
@@ -613,6 +611,16 @@ class Claim_controller extends Controller
                 
                 $claimdata->save();
 
+
+                //$claimdataclone=MainClaimEntryFAC::where('id',$claimdatacloneid)->first();
+                $retrocessionlist =TransAmountClaimTemp::where('slip_number',$number)->orderby('id','DESC')->get();
+            
+                foreach($retrocessionlist as $amountdata)
+                {
+                    
+                    $retrocessionlist = new TransAmountClaimTemp();
+            
+                }
 
                 Session::flash('flash_message', 'Change Status To Interim successfully!');
 

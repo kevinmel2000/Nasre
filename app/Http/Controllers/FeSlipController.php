@@ -3750,8 +3750,6 @@ class FeSlipController extends Controller
             $slipdatalist= SlipTable::where('insured_id','=',$slipdata->insured_id)->where('slip_type','fe')->orderby('id','desc')->first();
             $insureddata = Insured::where('number','=',$slipdata->insured_id)->where('slip_type','=','fe')->where('count_endorsement',$slipdata->endorsment)->first();
 
-
-            
             // $id_ed = ($slipdata->id + 1);
             $id_ed = ($slipdata->endorsment + 1);
             
@@ -3854,6 +3852,7 @@ class FeSlipController extends Controller
 
                     if($deductiblelist != null){
                         foreach($deductiblelist as $dt){
+
                             $dtlistup = DeductibleTemp::create([
                                 'deductibletype_id'=>$dt->deductibletype_id,
                                 'currency_id'=>$dt->currency_id,
@@ -3881,6 +3880,7 @@ class FeSlipController extends Controller
                             'value' => ' '
                         ]);
                     }
+
 
                     if($extendcoveragelist != null){
                         foreach($extendcoveragelist as $ect){
@@ -4489,6 +4489,7 @@ class FeSlipController extends Controller
                 );
             }
     }
+
 
     public function storedetaillocation(Request $request)
     {
