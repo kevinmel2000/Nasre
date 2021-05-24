@@ -459,6 +459,7 @@ class Claim_controller extends Controller
                         'dateofprod'=>date("Y-m-d", strtotime($request->dateofprod)),
                         'ceno'=>$request->ceno,
                         'ceuser'=>$request->ceuser,
+                        'is_delete'=>0,
                         'description'=>$request->description,
                         'dateofentry'=>date("Y-m-d", strtotime($request->dateentry)),
                         'dateoftrans'=>date("Y-m-d", strtotime($request->datetrans)),
@@ -562,7 +563,9 @@ class Claim_controller extends Controller
                     'dateofentry'=>date("Y-m-d", strtotime($claimdata->dateentry)),
                     'dateoftrans'=>date("Y-m-d", strtotime($claimdata->datetrans)),
                     'dateofsupporting'=>date("Y-m-d", strtotime($claimdata->datesupporting)),
-                    'status_flag'=>2
+                    'status_flag'=>2,
+                    'is_delete'=>0,
+                    'interim_count'=>$id_ed
                 ]);
 
 
@@ -575,7 +578,7 @@ class Claim_controller extends Controller
                     $retrocessionlist = new TransAmountClaimTemp();
                     $retrocessionlist->descripiton  = $amountdata->descripiton;
                     $retrocessionlist->amount = $amountdata->amount; 
-                    $retrocessionlist->slip_number = $amountdata->slip_number; 
+                    $retrocessionlist->slip_number = $amountdata->slip_number."-interim-".$id_ed; 
                     $retrocessionlist->risk_location_id = $amountdata->risk_location_id; 
                     $retrocessionlist->save();
 
@@ -627,6 +630,7 @@ class Claim_controller extends Controller
                 $claimdata->nrsgrossret=$claimdata->nrsgrossret*-1;
                 $claimdata->xol=$claimdata->xol*-1;
                 $claimdata->status_flag=2;
+                $claimdata->interim_count=$id_ed;
                 
                 $claimdata->save();
 
