@@ -566,7 +566,26 @@ class Claim_controller extends Controller
                 ]);
 
 
+                //$claimdataclone=MainClaimEntryFAC::where('id',$claimdatacloneid)->first();
+                $retrocessionlist =TransAmountClaimTemp::where('slip_number',$number)->orderby('id','DESC')->get();
+                
+                foreach($retrocessionlist as $amountdata)
+                {
+                    
+                    $retrocessionlist = new TransAmountClaimTemp();
+                    $retrocessionlist->descripiton  = $amountdata->descripiton;
+                    $retrocessionlist->amount = $amountdata->amount; 
+                    $retrocessionlist->slip_number = $amountdata->slip_number; 
+                    $retrocessionlist->risk_location_id = $amountdata->risk_location_id; 
+                    $retrocessionlist->save();
+
+
+                    $datachange=TransAmountClaimTemp::where('id',$amountdata->id)->first();
+                    $datachange->amount = $amountdata->amount*-1; 
+                    $datachange->save();
+
                
+                }
                 //operasi bikin 0
                 
                 $claimdata->nasre_liab=$claimdata->nasre_liab*-1;
@@ -611,16 +630,6 @@ class Claim_controller extends Controller
                 
                 $claimdata->save();
 
-
-                //$claimdataclone=MainClaimEntryFAC::where('id',$claimdatacloneid)->first();
-                $retrocessionlist =TransAmountClaimTemp::where('slip_number',$number)->orderby('id','DESC')->get();
-            
-                foreach($retrocessionlist as $amountdata)
-                {
-                    
-                    $retrocessionlist = new TransAmountClaimTemp();
-            
-                }
 
                 Session::flash('flash_message', 'Change Status To Interim successfully!');
 
