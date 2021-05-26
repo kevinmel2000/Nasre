@@ -300,53 +300,5 @@ class AuthServiceProvider extends ServiceProvider
 
 
 
-        // ANCHOR FE Slip Gates
-        Gate::define('viewany-fe_slip', 'App\Policies\FeSlipPolicy@viewany');
-        Gate::define('view-fe_slip', 'App\Policies\FeSlipPolicy@view');
-        Gate::define('create-fe_slip', 'App\Policies\FeSlipPolicy@create');
-        Gate::define('update-fe_slip', 'App\Policies\FeSlipPolicy@update');
-        Gate::define('delete-fe_slip', 'App\Policies\FeSlipPolicy@delete');
-
-        // ANCHOR FE Slip Gates
-        Gate::define('viewany-fl_slip', 'App\Policies\FinanceLineSlipPolicy@viewany');
-        Gate::define('view-fl_slip', 'App\Policies\FinanceLineSlipPolicy@view');
-        Gate::define('create-fl_slip', 'App\Policies\FinanceLineSlipPolicy@create');
-        Gate::define('update-fl_slip', 'App\Policies\FinanceLineSlipPolicy@update');
-        Gate::define('delete-fl_slip', 'App\Policies\FinanceLineSlipPolicy@delete');
-
-        // ANCHOR FE Slip Gates
-        Gate::define('viewany-hio_slip', 'App\Policies\HIOSlipPolicy@viewany');
-        Gate::define('view-hio_slip', 'App\Policies\HIOSlipPolicy@view');
-        Gate::define('create-hio_slip', 'App\Policies\HIOSlipPolicy@create');
-        Gate::define('update-hio_slip', 'App\Policies\HIOSlipPolicy@update');
-        Gate::define('delete-hio_slip', 'App\Policies\HIOSlipPolicy@delete');
-
-        // ANCHOR FE Slip Gates
-        Gate::define('viewany-hem_slip', 'App\Policies\HEMSlipPolicy@viewany');
-        Gate::define('view-hem_slip', 'App\Policies\HEMSlipPolicy@view');
-        Gate::define('create-hem_slip', 'App\Policies\HEMSlipPolicy@create');
-        Gate::define('update-hem_slip', 'App\Policies\HEMSlipPolicy@update');
-        Gate::define('delete-hem_slip', 'App\Policies\HEMSlipPolicy@delete');
-
-        // ANCHOR FE Slip Gates
-        Gate::define('viewany-mp_slip', 'App\Policies\MPSlipPolicy@viewany');
-        Gate::define('view-mp_slip', 'App\Policies\MPSlipPolicy@view');
-        Gate::define('create-mp_slip', 'App\Policies\MPSlipPolicy@create');
-        Gate::define('update-mp_slip', 'App\Policies\MPSlipPolicy@update');
-        Gate::define('delete-mp_slip', 'App\Policies\MPSlipPolicy@delete');
-
-        // ANCHOR FE Slip Gates
-        Gate::define('viewany-pa_slip', 'App\Policies\PASlipPolicy@viewany');
-        Gate::define('view-pa_slip', 'App\Policies\PASlipPolicy@view');
-        Gate::define('create-pa_slip', 'App\Policies\PASlipPolicy@create');
-        Gate::define('update-pa_slip', 'App\Policies\PASlipPolicy@update');
-        Gate::define('delete-pa_slip', 'App\Policies\PASlipPolicy@delete');
-
-        // ANCHOR FE Slip Gates
-        Gate::define('viewany-marine_slip', 'App\Policies\MarineSlipPolicy@viewany');
-        Gate::define('view-marine_slip', 'App\Policies\MarineSlipPolicy@view');
-        Gate::define('create-marine_slip', 'App\Policies\MarineSlipPolicy@create');
-        Gate::define('update-marine_slip', 'App\Policies\MarineSlipPolicy@update');
-        Gate::define('delete-marine_slip', 'App\Policies\MarineSlipPolicy@delete');
     }
 }

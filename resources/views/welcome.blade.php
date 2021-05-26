@@ -35,11 +35,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    @if ($logo == null)
+                    <!-- @if ($logo == null)
                         <img src="{{asset('images/cover.png')}}" alt="crm-logo"  width="50%">
                     @else
                         <img src="{{asset('storage/adminfiles/'.$logo)}}" alt="crm-logo"  width="350">
-                    @endif
+                    @endif -->
                     <br>
                     @if(!file_exists(STORAGE_PATH('INSTALLED')))
                         <div class="row">

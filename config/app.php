@@ -2,7 +2,7 @@
 
 return [
 
-    'name' => env('APP_NAME', 'PT. REASURANSI NASIONAL INDONESIA'),
+    'name' => env('APP_NAME', 'CONTOH APLIKASI'),
     'file_path' => 'storage/mediafiles/',
  
     'env' => env('APP_ENV', 'production'),

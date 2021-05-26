@@ -42,14 +42,7 @@ return [
 					'deductible_panel_module',
 					'extend_coverage_module',
 				],
-	'MODULES2'=>['fire_engineering_slip_module',
-					'financial_lines_slip_module',
-                    'marine_slip_module',
-                    'personal_accident_slip_module',
-                    'hole_in_one_slip_module',
-                    'he_and_motor_slip_module',
-                    'moveable_property_slip_module',
-				],
+	
 	'CONTACT_TYPES' => ['Customer','Past-Customer','Non-Customer'],
 	'PROSPECTS' => ['Prospect','Lost-Prospect','Non-Prospect'],
 ];
