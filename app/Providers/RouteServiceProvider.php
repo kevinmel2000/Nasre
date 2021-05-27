@@ -44,6 +44,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
         $this->mapUserRoutes();
         $this->mapPublicRoutesRoutes();
+        $this->mapMasterRoutes();
     }
 
     protected function mapUserRoutes()
@@ -71,6 +72,13 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::namespace($this->namespace)
             ->group(base_path('routes/publicRoutes.php'));
+    }
+
+    protected function mapMasterRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/crm/masterRoutes.php'));
     }
 
   

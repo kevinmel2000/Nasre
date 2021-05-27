@@ -180,7 +180,7 @@
                                             @endphp
                                         @endif
                                         <li class="nav-item">
-                                            <a href="" class="nav-link {{@$cedingform}}">
+                                            <a href="{{url('/master-data/cedingbroker')}}" class="nav-link {{@$cedingform}}">
                                                     <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('CEDING/BROKER FORM')}}</p>
                                             </a>
@@ -210,7 +210,7 @@
                                             @endphp
                                         @endif
                                         <li class="nav-item">
-                                            <a href="" class="nav-link {{@$cob_form}}">
+                                            <a href="{{url('/master-data/cob')}}" class="nav-link {{@$cob_form}}">
                                                     <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('COB FORM')}}</p>
                                             </a>
@@ -224,7 +224,7 @@
                                             @endphp
                                         @endif
                                         <li class="nav-item">
-                                            <a href="" class="nav-link {{@$ctform}}">
+                                            <a href="{{url('/master-data/companytype')}}" class="nav-link {{@$ctform}}">
                                                     <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('COMPANY TYPE FORM')}}</p>
                                             </a>
@@ -252,7 +252,7 @@
                                             @endphp
                                         @endif
                                         <li class="nav-item">
-                                            <a href="" class="nav-link {{@$crc_form}}">
+                                            <a href="{{url('/master-data/currency')}}" class="nav-link {{@$crc_form}}">
                                                     <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('CURRENCY FORM')}}</p>
                                             </a>
@@ -364,7 +364,7 @@
                                                 @endphp
                                             @endif
                                             <li class="nav-item">
-                                                <a href="" class="nav-link {{@$koc_form}}">
+                                                <a href="{{url('/master-data/koc')}}" class="nav-link {{@$koc_form}}">
                                                         <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
                                                     <p style="font-size: 90%;margin-left:2%;">{{__('KIND OF CONTRACT')}}</p>
                                                 </a>
@@ -403,7 +403,7 @@
                                                     @endphp
                                                 @endif
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link {{@$countryform}}">
+                                                    <a href="{{url('/master-data/country')}}" class="nav-link {{@$countryform}}">
                                                         <i class="far fa-folder nav-icon text-secondary" style="margin-left:14%;"></i>
                                                         <p style="font-size: 80%;margin-left:2%;">{{__('COUNTRY FORM')}}</p>
                                                     </a>
