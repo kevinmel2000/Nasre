@@ -14,7 +14,7 @@
       padding: 10px;
       border-radius: 4px;
     }
-    
+
     #myBtn:hover {
       background-color: #555;
     }
@@ -25,7 +25,7 @@
           <a href="{{url('/')}}" class="brand-link">
               <span class="brand-text font-weight-light text-light"><b>{{config('app.name')}}</b></span>
           </a>
-    
+
           <!-- Sidebar -->
           <div class="sidebar">
             <nav class="mt-2">
@@ -41,7 +41,7 @@
                             $home_menu_open = '';
                         @endphp
                     @endif
-    
+
                     <li class="nav-item">
                         <a href="{{url('home')}}" class="nav-link {{@$home}}">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -50,8 +50,8 @@
                             </p>
                         </a>
                     </li>
-    
-    
+
+
                     {{-- roles --}}
                     @can('viewany-role', User::class)
                         {{-- ANCHOR Users Menu Starts here --}}
@@ -65,19 +65,19 @@
                                 $users_menu_open = '';
                             @endphp
                         @endif
-    
+
                         <li class="nav-item has-treeview {{@$users_menu_open }}">
-                        
+
                             <a href="#" class="nav-link {{@$users}}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    
+
                                     <i class="right fas fa-angle-left"></i>
                                     {{__('STAFF MAMAGEMENT')}}
                                     <span class="badge badge-primary">{{session('total_users')}}</span>
                                 </p>
                             </a>
-                            
+
                             <ul class="nav nav-treeview">
                                 @can('view-user', User::class)
                                 <li class="nav-item">
@@ -100,9 +100,9 @@
                                             <p style="font-size: 90%;margin-left:2%;">{{__('ROLES')}}</p>
                                         </a>
                                     </li>
-                                @endcan      
+                                @endcan
                                 {{-- Only Admin can access --}}
-                                @if (Auth::user()->role_id == '1')  
+                                @if (Auth::user()->role_id == '1')
                                     <li class="nav-item">
                                         @if($route_active == 'permissions')
                                         @php $manage_permissions = 'active'; @endphp
@@ -113,46 +113,46 @@
                                         </a>
                                     </li>
                                 @endif
-    
+
                             </ul>
                         </li>
                     @endcan
-    
-                    
-                
-                    
-    
+
+
+
+
+
                         {{-- @can('viewany-country', User::class) --}}
                             @if(
-                                @$route_active == 'Country Master' 
-                                || @$route_active == 'State Master' 
-                                || @$route_active == 'City Master' 
-                                || @$route_active == 'Currency Master' 
-                                || @$route_active == 'Currency Exchange Master' 
-                                || @$route_active == 'Fire & Engineering Lookup Location' 
-                                || @$route_active == 'Marine - Lookup Ship' 
-                                || @$route_active == 'Golf Field Hole' 
-                                || @$route_active == 'KOC Master' 
-                                || @$route_active == 'Ceding / Broker' 
-                                || @$route_active == 'COB Master' 
-                                || @$route_active == 'Occupation Master' 
-                                || @$route_active == 'Earthquake Zone' 
-                                || @$route_active == 'Flood Zone Master' 
-                                || @$route_active == 'Country Master' 
-                                || @$route_active == 'State Master' 
-                                || @$route_active == 'City Master' 
-                                || @$route_active == 'Ship Type Master' 
-                                || @$route_active == 'Classification Master' 
-                                || @$route_active == 'Construction Master' 
-                                || @$route_active == 'Company Type Master' 
-                                || @$route_active == 'Property Type Master' 
-                                || @$route_active == 'Condition Needed Master' 
-                                || @$route_active == 'Interest Insured Master' 
-                                || @$route_active == 'Extend Coverage Master' 
-                                || @$route_active == 'Deductible Type Master' 
-                                || @$route_active == 'Ship Port Master' 
-                                || @$route_active == 'Route Form Master' 
-                                || @$route_active == 'Prefix Insured Master' 
+                                @$route_active == 'Country Master'
+                                || @$route_active == 'State Master'
+                                || @$route_active == 'City Master'
+                                || @$route_active == 'Currency Master'
+                                || @$route_active == 'Currency Exchange Master'
+                                || @$route_active == 'Fire & Engineering Lookup Location'
+                                || @$route_active == 'Marine - Lookup Ship'
+                                || @$route_active == 'Golf Field Hole'
+                                || @$route_active == 'KOC Master'
+                                || @$route_active == 'Ceding / Broker'
+                                || @$route_active == 'COB Master'
+                                || @$route_active == 'Occupation Master'
+                                || @$route_active == 'Earthquake Zone'
+                                || @$route_active == 'Flood Zone Master'
+                                || @$route_active == 'Country Master'
+                                || @$route_active == 'State Master'
+                                || @$route_active == 'City Master'
+                                || @$route_active == 'Ship Type Master'
+                                || @$route_active == 'Classification Master'
+                                || @$route_active == 'Construction Master'
+                                || @$route_active == 'Company Type Master'
+                                || @$route_active == 'Property Type Master'
+                                || @$route_active == 'Condition Needed Master'
+                                || @$route_active == 'Interest Insured Master'
+                                || @$route_active == 'Extend Coverage Master'
+                                || @$route_active == 'Deductible Type Master'
+                                || @$route_active == 'Ship Port Master'
+                                || @$route_active == 'Route Form Master'
+                                || @$route_active == 'Prefix Insured Master'
                             )
                                 @php
                                 $master_dd = 'active';
@@ -171,9 +171,9 @@
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
-    
+
                                 <ul class="nav nav-treeview">
-                                    @can('create-cedingbroker', User::class) 
+                                    @can('create-cedingbroker', User::class)
                                         @if($route_active == 'Ceding / Broker')
                                             @php
                                                 $cedingform = 'active';
@@ -185,8 +185,7 @@
                                                 <p style="font-size: 90%;margin-left:2%;">{{__('CEDING/BROKER FORM')}}</p>
                                             </a>
                                         </li>
-                                     @endcan 
-    
+                                    @endcan
 
                                     @can('create-cause_of_loss', User::class)
                                         @if($route_active == 'Cause Of Loss')
@@ -201,7 +200,6 @@
                                             </a>
                                         </li>
                                     @endcan
-    
 
                                     @can('create-cob', User::class)
                                         @if($route_active == 'COB Master')
@@ -216,7 +214,7 @@
                                             </a>
                                         </li>
                                     @endcan
-    
+
                                     @can('create-company_type', User::class)
                                         @if($route_active == 'Company Type Master')
                                             @php
@@ -230,7 +228,7 @@
                                             </a>
                                         </li>
                                     @endcan
-    
+
                                     @can('create-condition_needed', User::class)
                                         @if($route_active == 'Condition Needed Master')
                                             @php
@@ -244,7 +242,7 @@
                                             </a>
                                         </li>
                                     @endcan
-    
+
                                     @can('create-currency', User::class)
                                         @if($route_active == 'Currency Master')
                                             @php
@@ -258,7 +256,7 @@
                                             </a>
                                         </li>
                                     @endcan
-    
+
                                     @can('create-exchange', User::class)
                                         @if($route_active == 'Currency Exchange Master')
                                             @php
@@ -272,7 +270,7 @@
                                             </a>
                                         </li>
                                     @endcan
-    
+
                                     @can('create-deductible', User::class)
                                         @if($route_active == 'Deductible Type Master')
                                             @php
@@ -286,7 +284,7 @@
                                             </a>
                                         </li>
                                     @endcan
-    
+
                                     @can('create-eqz', User::class)
                                         @if($route_active == 'Earthquake Zone')
                                             @php
@@ -300,7 +298,7 @@
                                             </a>
                                         </li>
                                     @endcan
-    
+
                                     @can('create-extend_coverage', User::class)
                                         @if($route_active == 'Extend Coverage Master')
                                             @php
@@ -314,7 +312,7 @@
                                             </a>
                                         </li>
                                     @endcan
-    
+
                                     @can('create-fz', User::class)
                                         @if($route_active == 'Flood Zone Master')
                                             @php
@@ -328,7 +326,7 @@
                                             </a>
                                         </li>
                                     @endcan
-    
+
                                     @can('create-gfh', User::class)
                                             @if($route_active == 'Golf Field Hole')
                                                 {{-- @php
@@ -342,7 +340,7 @@
                                                 </a>
                                             </li>
                                     @endcan
-    
+
                                     @can('create-interest_insured', User::class)
                                         @if($route_active == 'Interest Insured Master')
                                             @php
@@ -356,7 +354,7 @@
                                             </a>
                                         </li>
                                     @endcan
-    
+
                                     @can('create-koc', User::class)
                                             @if($route_active == 'KOC Master')
                                                 @php
@@ -370,12 +368,12 @@
                                                 </a>
                                             </li>
                                     @endcan
-    
+
                                     @can('create-location_master', User::class)
                                     @if(
-                                        @$route_active == 'Country Master' 
-                                        || @$route_active == 'State Master' 
-                                        || @$route_active == 'City Master' 
+                                        @$route_active == 'Country Master'
+                                        || @$route_active == 'State Master'
+                                        || @$route_active == 'City Master'
                                         )
                                         @php
                                             $location_dd = 'active';
@@ -394,7 +392,7 @@
                                                 <i class="right fas fa-angle-left"></i>
                                             </p>
                                         </a>
-    
+
                                         <ul class="nav nav-treeview">
                                             @can('create-country', User::class)
                                                 @if($route_active == 'Country Master')
@@ -409,7 +407,7 @@
                                                     </a>
                                                 </li>
                                             @endcan
-                                                
+
                                             @can('create-state', User::class)
                                                 @if($route_active == 'State Master')
                                                     @php
@@ -423,7 +421,7 @@
                                                     </a>
                                                 </li>
                                             @endcan
-                
+
                                             @can('viewany-city', User::class)
                                                 @if($route_active == 'City Master')
                                                     @php
@@ -440,7 +438,7 @@
                                         </ul>
                                     </li>
                                     @endcan
-    
+
                                     @can('create-felookup', User::class)
                                         @if($route_active == 'Fire & Engineering Lookup Location')
                                             @php
@@ -454,7 +452,7 @@
                                             </a>
                                         </li>
                                     @endcan
-    
+
                                     @can('create-marinelookup', User::class)
                                         @if($route_active == 'Marine - Lookup Ship')
                                             @php
@@ -468,12 +466,12 @@
                                             </a>
                                         </li>
                                     @endcan
-    
+
                                     @can('create-marine_master', User::class)
                                     @if(
-                                        @$route_active == 'Ship Type Master' 
-                                        || @$route_active == 'Classification Master' 
-                                        || @$route_active == 'Construction Master' 
+                                        @$route_active == 'Ship Type Master'
+                                        || @$route_active == 'Classification Master'
+                                        || @$route_active == 'Construction Master'
                                         )
                                             @php
                                             $marine_dd = 'active';
@@ -492,7 +490,7 @@
                                                 <i class="right fas fa-angle-left" ></i>
                                             </p>
                                         </a>
-        
+
                                         <ul class="nav nav-treeview">
                                             @can('create-shiptype', User::class)
                                                 @if($route_active == 'Ship Type Master')
@@ -507,7 +505,7 @@
                                                     </a>
                                                 </li>
                                             @endcan
-                                                
+
                                             @can('create-classification', User::class)
                                                 @if($route_active == 'Classification Master')
                                                     @php
@@ -521,7 +519,7 @@
                                                     </a>
                                                 </li>
                                             @endcan
-                
+
                                             @can('create-construction', User::class)
                                                 @if($route_active == 'Construction Master')
                                                     @php
@@ -552,8 +550,8 @@
                                             </a>
                                         </li>
                                     @endcan
-    
-    
+
+
                                     @can('create-occupation', User::class)
                                         @if($route_active == 'Occupation Master')
                                             @php
@@ -567,7 +565,7 @@
                                             </a>
                                         </li>
                                     @endcan
-    
+
                                     @can('create-property_type', User::class)
                                         @if($route_active == 'Property Type Master')
                                             @php
@@ -595,7 +593,7 @@
                                             </a>
                                         </li>
                                     @endcan
-    
+
                                     @can('create-route', User::class)
                                         @if($route_active == 'Route Form Master')
                                             @php
@@ -609,7 +607,7 @@
                                             </a>
                                         </li>
                                     @endcan
-    
+
                                     @can('create-ship_port', User::class)
                                         @if($route_active == 'Ship Port Master')
                                             @php
@@ -640,22 +638,115 @@
                                 </ul>
                             </li>
                         {{-- @endcan --}}
-                    
-    
+                        {{-- Menu Health --}}
+                        @if(
+                            @$route_active == 'Benefit'
+                            ||@$route_active == 'Product'
+                            ||@$route_active == 'Transaksi'
+                            ||@$route_active == 'health'
+                        )
+                            @php
+                            $health = 'active';
+                            $health_menu_open = 'menu-open';
+                            @endphp
+                        @else
+                            @php
+                            $health_menu_open = 'menu-close';
+                            @endphp
+                        @endif
+                        <li class="nav-item has-treeview {{@$health_menu_open }}">
+                            <a href="#" class="nav-link {{@$health}}">
+                                <i class="nav-icon fas fa-medkit"></i>
+                                <p>
+                                <i class="right fas fa-angle-left"></i>
+                                {{__('HEALTH')}}
+                                </p>
+                            </a>
+
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('DATA MAINTENANCE')}}
+                                        <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        @can('create-product', User::class)
+                                            @if($route_active == 'Product')
+                                                @php
+                                                    $product = 'active';
+                                                @endphp
+                                            @endif
+                                            <li class="nav-item">
+                                                <a href="{{url('/data-maintenance/product')}}" class="nav-link {{@$product}}">
+                                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:12%;"></i>
+                                                    <p style="font-size: 90%;margin-left:2%;">{{__('PRODUCT')}}</p>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        {{-- @can('create-product', User::class)
+                                        @if($route_active == 'Product')
+                                            @php
+                                                $product = 'active';
+                                            @endphp
+                                        @endif
+                                        <li class="nav-item">
+                                            <a href="{{url('data-maintenance/product')}}" class="nav-link {{@$product}}">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:12%;"></i>
+                                                <p style="font-size: 90%;margin-left:2%;">{{__('PRODUCT')}}</p>
+                                            </a>
+                                        </li>
+                                        @endcan --}}
+
+                                        <li class="nav-item">
+                                            <a href="{{url('data-maintenance/product_plan')}}" class="nav-link">
+                                                <i class="far fa-folder nav-icon text-secondary" style="margin-left:12%;"></i>
+                                                <p style="font-size: 90%;margin-left:2%;">{{__('PRODUCT PLAN')}}</p>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                @if($route_active == 'Transaksi')
+                                    @php
+                                        $transaksi = 'active';
+                                    @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/data-maintenance/transaksi')}}" class="nav-link {{@$transaksi}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('TRANSAKSI')}}</p>
+                                    </a>
+                                </li>
+                                @if($route_active == 'Inkuiri_data')
+                                    @php
+                                        $inkuiri_data = 'active';
+                                    @endphp
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{url('/data-maintenance/inkuiri_data')}}" class="nav-link {{@$inkuiri_data}}">
+                                        <i class="far fa-folder nav-icon text-secondary" style="margin-left:8%;"></i>
+                                        <p style="font-size: 90%;margin-left:2%;">{{__('INKURI DATA')}}</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {{-- EndMenu Health --}}
                 </ul>
-    
+
                 <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-arrow-up" aria-hidden="true" ></i><span style="font-family:Source Sans Pro;font-weight: bold;"> TOP</span></button>
-    
+
             </nav>
           </div>
       </aside>
       <script>
         //Get the button
         var mybutton = document.getElementById("myBtn");
-        
+
         // When the user scrolls down 20px from the top of the document, show the button
         window.onscroll = function() {scrollFunction()};
-        
+
         function scrollFunction() {
           if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
             mybutton.style.display = "block";
@@ -663,7 +754,7 @@
             mybutton.style.display = "none";
           }
         }
-        
+
         // When the user clicks on the button, scroll to the top of the document
         function topFunction() {
           document.body.scrollTop = 0;

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d99ef8c0749bb188433478fe69a0ffe",
+    "content-hash": "bb926f00da46f69a7e0120da5150c741",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -8700,6 +8700,53 @@
                 "source": "https://github.com/sebastianbergmann/version/tree/master"
             },
             "time": "2016-10-03T07:35:21+00:00"
+        },
+        {
+            "name": "theanik/laravel-more-command",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/theanik/laravel-more-command.git",
+                "reference": "b946bb8e166b12374020c24c1598f4269dc1812a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/theanik/laravel-more-command/zipball/b946bb8e166b12374020c24c1598f4269dc1812a",
+                "reference": "b946bb8e166b12374020c24c1598f4269dc1812a",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Theanik\\LaravelMoreCommand\\LaravelMoreCommandProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Theanik\\LaravelMoreCommand\\": "src/"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anwar Hossain Anik",
+                    "email": "anwar.anik33@gmail.com"
+                }
+            ],
+            "description": "Create a Repository and Service class and trait using Artisan CLI",
+            "support": {
+                "issues": "https://github.com/theanik/laravel-more-command/issues",
+                "source": "https://github.com/theanik/laravel-more-command/tree/1.1.0"
+            },
+            "time": "2021-03-30T17:59:36+00:00"
         },
         {
             "name": "theseer/tokenizer",

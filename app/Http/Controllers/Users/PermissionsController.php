@@ -14,14 +14,14 @@ class PermissionsController extends Controller
         // NOTE: $roles are the total user roles except admin
         $roles = Role::where('name','!=','admin')->get();
 
-        // NOTE: selected role is the role, which is currently selected to show the permissions on the page. 
+        // NOTE: selected role is the role, which is currently selected to show the permissions on the page.
         $selected_role = Role::where('default_role','yes')->first();
         $selected_role_id = $selected_role->id;
 
         // NOTE: all modules from the constant file
         $modules = config('constants.MODULES');
         $modules2 = config('constants.MODULES2');
-        
+
         $contact_module =  Module::where(['module_name'=>'contact_module','role_id'=>$selected_role_id])->first();
         $role_module =  Module::where(['module_name'=>'role_module','role_id'=>$selected_role_id])->first();
         $user_module =  Module::where(['module_name'=>'user_module','role_id'=>$selected_role_id])->first();
@@ -67,7 +67,7 @@ class PermissionsController extends Controller
         $marine_master_module =  Module::where(['module_name'=>'marine_master_module','role_id'=>$selected_role_id])->first();
         $deductible_panel_module =  Module::where(['module_name'=>'deductible_panel_module','role_id'=>$selected_role_id])->first();
         $extend_coverage_module =  Module::where(['module_name'=>'extend_coverage_module','role_id'=>$selected_role_id])->first();
-        
+
 
 
         $fire_engineering_slip_module =  Module::where(['module_name'=>'fire_engineering_slip_module','role_id'=>$selected_role_id])->first();
@@ -77,12 +77,15 @@ class PermissionsController extends Controller
         $hole_in_one_slip_module =  Module::where(['module_name'=>'hole_in_one_slip_module','role_id'=>$selected_role_id])->first();
         $he_and_motor_slip_module =  Module::where(['module_name'=>'he_and_motor_slip_module','role_id'=>$selected_role_id])->first();
         $moveable_property_slip_module =  Module::where(['module_name'=>'moveable_property_slip_module','role_id'=>$selected_role_id])->first();
-        
+
+        //Health
+        $health_product_module =  Module::where(['module_name'=>'health_product_module','role_id'=>$selected_role_id])->first();
+
         $route_active = 'permissions';
-        return view('crm.user.role_permissions', 
+        return view('crm.user.role_permissions',
         compact([   'route_active',
                     'roles',
-                    'selected_role_id', 
+                    'selected_role_id',
                     'modules',
                     'modules2',
                     'contact_module',
@@ -137,6 +140,7 @@ class PermissionsController extends Controller
                     'marine_master_module',
                     'deductible_panel_module',
                     'extend_coverage_module',
+                    'health_product_module',
                 ]));
     }
 
@@ -148,14 +152,14 @@ class PermissionsController extends Controller
         // NOTE: $roles are the total user roles except admin
         $roles = Role::where('name','!=','admin')->get();
 
-        // NOTE: selected role is the role, which is currently selected to show the permissions on the page. 
+        // NOTE: selected role is the role, which is currently selected to show the permissions on the page.
 
         $selected_role_id = $request->role_id;
         // NOTE: all modules from the constant file
         $modules = config('constants.MODULES');
         $modules2 = config('constants.MODULES2');
 
-       
+
         $contact_module =  Module::where(['module_name'=>'contact_module','role_id'=>$selected_role_id])->first();
         $role_module =  Module::where(['module_name'=>'role_module','role_id'=>$selected_role_id])->first();
         $user_module =  Module::where(['module_name'=>'user_module','role_id'=>$selected_role_id])->first();
@@ -211,13 +215,16 @@ class PermissionsController extends Controller
         $hole_in_one_slip_module =  Module::where(['module_name'=>'hole_in_one_slip_module','role_id'=>$selected_role_id])->first();
         $he_and_motor_slip_module =  Module::where(['module_name'=>'he_and_motor_slip_module','role_id'=>$selected_role_id])->first();
         $moveable_property_slip_module =  Module::where(['module_name'=>'moveable_property_slip_module','role_id'=>$selected_role_id])->first();
-        
+
+        //Health
+        $health_product_module =  Module::where(['module_name'=>'health_product_module','role_id'=>$selected_role_id])->first();
+
 
         $route_active = 'permissions';
-        return view('crm.user.role_permissions', 
+        return view('crm.user.role_permissions',
         compact([   'route_active',
                     'roles',
-                    'selected_role_id', 
+                    'selected_role_id',
                     'modules',
                     'modules2',
                     'contact_module',
@@ -272,6 +279,7 @@ class PermissionsController extends Controller
                     'marine_master_module',
                     'deductible_panel_module',
                     'extend_coverage_module',
+                    'health_product_module',
                 ]));
 
     }
@@ -284,14 +292,14 @@ class PermissionsController extends Controller
         // NOTE: $roles are the total user roles except admin
         $roles = Role::where('name','!=','admin')->get();
 
-        // NOTE: selected role is the role, which is currently selected to show the permissions on the page. 
+        // NOTE: selected role is the role, which is currently selected to show the permissions on the page.
 
         $selected_role_id = $role->id;
         // NOTE: all modules from the constant file
         $modules = config('constants.MODULES');
         $modules2 = config('constants.MODULES2');
 
-        
+
         $contact_module =  Module::where(['module_name'=>'contact_module','role_id'=>$selected_role_id])->first();
         $role_module =  Module::where(['module_name'=>'role_module','role_id'=>$selected_role_id])->first();
         $user_module =  Module::where(['module_name'=>'user_module','role_id'=>$selected_role_id])->first();
@@ -348,11 +356,14 @@ class PermissionsController extends Controller
         $he_and_motor_slip_module =  Module::where(['module_name'=>'he_and_motor_slip_module','role_id'=>$selected_role_id])->first();
         $moveable_property_slip_module =  Module::where(['module_name'=>'moveable_property_slip_module','role_id'=>$selected_role_id])->first();
 
+        //Health
+        $health_product_module =  Module::where(['module_name'=>'health_product_module','role_id'=>$selected_role_id])->first();
+
         $route_active = 'permissions';
-        return view('crm.user.role_permissions', 
+        return view('crm.user.role_permissions',
         compact([   'route_active',
                     'roles',
-                    'selected_role_id', 
+                    'selected_role_id',
                     'modules',
                     'modules2',
                     'contact_module',
@@ -407,6 +418,7 @@ class PermissionsController extends Controller
                     'marine_master_module',
                     'deductible_panel_module',
                     'extend_coverage_module',
+                    'health_product_module',
                 ]));
     }
 
@@ -462,7 +474,7 @@ class PermissionsController extends Controller
                 'message' => 'Role permissions updated successfully!',
                 'alert-type' => 'success'
             );
-            return redirect(route('permissions_role_id', $request->role_id))->with($notification);         
+            return redirect(route('permissions_role_id', $request->role_id))->with($notification);
         }else{
             $notification = array(
                 'message' => 'Please refresh the page and try again!',

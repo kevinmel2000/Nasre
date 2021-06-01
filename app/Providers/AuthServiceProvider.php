@@ -45,7 +45,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-contact', 'App\Policies\ContactPolicy@create');
         Gate::define('update-contact', 'App\Policies\ContactPolicy@update');
         Gate::define('delete-contact', 'App\Policies\ContactPolicy@delete');
-        
+
         // ANCHOR Role Gates
         Gate::define('viewany-user', 'App\Policies\UserPolicy@viewany');
         Gate::define('view-user', 'App\Policies\UserPolicy@view');
@@ -73,7 +73,7 @@ class AuthServiceProvider extends ServiceProvider
         // Gate::define('create-product', 'App\Policies\ProductPolicy@create');
         // Gate::define('update-product', 'App\Policies\ProductPolicy@update');
         // Gate::define('delete-product', 'App\Policies\ProductPolicy@delete');
-                
+
         // ANCHOR Project Gates
         // Gate::define('viewany-project', 'App\Policies\ProjectPolicy@viewany');
         // Gate::define('view-project', 'App\Policies\ProjectPolicy@view');
@@ -101,7 +101,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-cob', 'App\Policies\COBPolicy@create');
         Gate::define('update-cob', 'App\Policies\COBPolicy@update');
         Gate::define('delete-cob', 'App\Policies\COBPolicy@delete');
-                
+
         // ANCHOR Currency Gates
         Gate::define('viewany-currency', 'App\Policies\CurrencyPolicy@viewany');
         Gate::define('view-currency', 'App\Policies\CurrencyPolicy@view');
@@ -115,7 +115,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-exchange', 'App\Policies\CurrencyExchangePolicy@create');
         Gate::define('update-exchange', 'App\Policies\CurrencyExchangePolicy@update');
         Gate::define('delete-exchange', 'App\Policies\CurrencyExchangePolicy@delete');
-    
+
         // ANCHOR KOC Gates
         Gate::define('viewany-koc', 'App\Policies\KOCPolicy@viewany');
         Gate::define('view-koc', 'App\Policies\KOCPolicy@view');
@@ -298,7 +298,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('update-extend_coverage', 'App\Policies\ExtendCoveragePolicy@update');
         Gate::define('delete-extend_coverage', 'App\Policies\ExtendCoveragePolicy@delete');
 
-
-
+        // Health Product
+        Gate::define('viewany-product', 'App\Policies\HealthProductPolicy@viewany');
+        Gate::define('view-product', 'App\Policies\HealthProductPolicy@view');
+        Gate::define('create-product', 'App\Policies\HealthProductPolicy@create');
+        Gate::define('update-product', 'App\Policies\HealthProductPolicy@update');
+        Gate::define('delete-product', 'App\Policies\HealthProductPolicy@delete');
     }
 }

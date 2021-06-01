@@ -1,14 +1,14 @@
 <?php
 return [
-	// whenever you add a new module name in the MODULES array, remember to add its functionality in the 
+	// whenever you add a new module name in the MODULES array, remember to add its functionality in the
 	// PermissionsController index, permissionsByUser and getPermissionsByUser methods
-	// and respective middleware route in the routes.  
+	// and respective middleware route in the routes.
 	'MODULES'=>[
-					'contact_module', 
-					'role_module', 
-					'user_module', 
-					// 'lead_module', 
-					// 'product_module', 
+					'contact_module',
+					'role_module',
+					'user_module',
+					// 'lead_module',
+					// 'product_module',
 					// 'office_module',
 					'country_module',
 					'occupation_module',
@@ -41,8 +41,9 @@ return [
 					'marine_master_module',
 					'deductible_panel_module',
 					'extend_coverage_module',
+                    'health_product_module', //tambah baru
 				],
-	
+
 	'CONTACT_TYPES' => ['Customer','Past-Customer','Non-Customer'],
 	'PROSPECTS' => ['Prospect','Lost-Prospect','Non-Prospect'],
 ];

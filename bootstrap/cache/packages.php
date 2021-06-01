@@ -115,4 +115,11 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
+  'theanik/laravel-more-command' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Theanik\\LaravelMoreCommand\\LaravelMoreCommandProvider',
+    ),
+  ),
 );
